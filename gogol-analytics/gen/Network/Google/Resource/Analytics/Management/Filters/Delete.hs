@@ -55,7 +55,7 @@ type ManagementFiltersDeleteResource =
 -- | Delete a filter.
 --
 -- /See:/ 'managementFiltersDelete' smart constructor.
-data ManagementFiltersDelete = ManagementFiltersDelete
+data ManagementFiltersDelete = ManagementFiltersDelete'
     { _mfdFilterId  :: !Text
     , _mfdAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementFiltersDelete
     -> Text -- ^ 'mfdAccountId'
     -> ManagementFiltersDelete
 managementFiltersDelete pMfdFilterId_ pMfdAccountId_ =
-    ManagementFiltersDelete
+    ManagementFiltersDelete'
     { _mfdFilterId = pMfdFilterId_
     , _mfdAccountId = pMfdAccountId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ManagementFiltersDelete where
         type Rs ManagementFiltersDelete = Filter
         type Scopes ManagementFiltersDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementFiltersDelete{..}
+        requestClient ManagementFiltersDelete'{..}
           = go _mfdAccountId _mfdFilterId (Just AltJSON)
               analyticsService
           where go

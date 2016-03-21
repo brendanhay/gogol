@@ -57,7 +57,7 @@ type OrgUnitsPatchResource =
 -- | Update Organization Unit. This method supports patch semantics.
 --
 -- /See:/ 'orgUnitsPatch' smart constructor.
-data OrgUnitsPatch = OrgUnitsPatch
+data OrgUnitsPatch = OrgUnitsPatch'
     { _oupPayload     :: !OrgUnit
     , _oupOrgUnitPath :: ![Text]
     , _oupCustomerId  :: !Text
@@ -78,7 +78,7 @@ orgUnitsPatch
     -> Text -- ^ 'oupCustomerId'
     -> OrgUnitsPatch
 orgUnitsPatch pOupPayload_ pOupOrgUnitPath_ pOupCustomerId_ =
-    OrgUnitsPatch
+    OrgUnitsPatch'
     { _oupPayload = pOupPayload_
     , _oupOrgUnitPath = _Coerce # pOupOrgUnitPath_
     , _oupCustomerId = pOupCustomerId_
@@ -106,7 +106,7 @@ instance GoogleRequest OrgUnitsPatch where
         type Rs OrgUnitsPatch = OrgUnit
         type Scopes OrgUnitsPatch =
              '["https://www.googleapis.com/auth/admin.directory.orgunit"]
-        requestClient OrgUnitsPatch{..}
+        requestClient OrgUnitsPatch'{..}
           = go _oupCustomerId _oupOrgUnitPath (Just AltJSON)
               _oupPayload
               directoryService

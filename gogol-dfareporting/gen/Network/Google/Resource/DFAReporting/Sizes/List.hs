@@ -61,7 +61,7 @@ type SizesListResource =
 -- | Retrieves a list of sizes, possibly filtered.
 --
 -- /See:/ 'sizesList' smart constructor.
-data SizesList = SizesList
+data SizesList = SizesList'
     { _slHeight      :: !(Maybe (Textual Int32))
     , _slIds         :: !(Maybe [Textual Int64])
     , _slWidth       :: !(Maybe (Textual Int32))
@@ -86,7 +86,7 @@ sizesList
     :: Int64 -- ^ 'slProFileId'
     -> SizesList
 sizesList pSlProFileId_ =
-    SizesList
+    SizesList'
     { _slHeight = Nothing
     , _slIds = Nothing
     , _slWidth = Nothing
@@ -128,7 +128,7 @@ instance GoogleRequest SizesList where
         type Rs SizesList = SizesListResponse
         type Scopes SizesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SizesList{..}
+        requestClient SizesList'{..}
           = go _slProFileId _slHeight (_slIds ^. _Default)
               _slWidth
               _slIabStandard

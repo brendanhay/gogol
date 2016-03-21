@@ -58,7 +58,7 @@ type AccountshippingListResource =
 -- account.
 --
 -- /See:/ 'accountshippingList' smart constructor.
-data AccountshippingList = AccountshippingList
+data AccountshippingList = AccountshippingList'
     { _al1MerchantId :: !(Textual Word64)
     , _al1PageToken  :: !(Maybe Text)
     , _al1MaxResults :: !(Maybe (Textual Word32))
@@ -77,7 +77,7 @@ accountshippingList
     :: Word64 -- ^ 'al1MerchantId'
     -> AccountshippingList
 accountshippingList pAl1MerchantId_ =
-    AccountshippingList
+    AccountshippingList'
     { _al1MerchantId = _Coerce # pAl1MerchantId_
     , _al1PageToken = Nothing
     , _al1MaxResults = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest AccountshippingList where
              AccountshippingListResponse
         type Scopes AccountshippingList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountshippingList{..}
+        requestClient AccountshippingList'{..}
           = go _al1MerchantId _al1PageToken _al1MaxResults
               (Just AltJSON)
               shoppingContentService

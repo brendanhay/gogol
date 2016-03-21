@@ -52,20 +52,20 @@ type BillingInfoListResource =
 --
 -- /See:/ 'billingInfoList'' smart constructor.
 data BillingInfoList' =
-    BillingInfoList'
+    BillingInfoList''
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoList'' with the minimum fields required to make a request.
 --
 billingInfoList'
     :: BillingInfoList'
-billingInfoList' = BillingInfoList'
+billingInfoList' = BillingInfoList''
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
         type Scopes BillingInfoList' =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient BillingInfoList'{}
+        requestClient BillingInfoList''{}
           = go (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient

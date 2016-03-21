@@ -56,7 +56,7 @@ type I18nLanguagesListResource =
 -- supports.
 --
 -- /See:/ 'i18nLanguagesList' smart constructor.
-data I18nLanguagesList = I18nLanguagesList
+data I18nLanguagesList = I18nLanguagesList'
     { _illPart :: !Text
     , _illHl   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ i18nLanguagesList
     :: Text -- ^ 'illPart'
     -> I18nLanguagesList
 i18nLanguagesList pIllPart_ =
-    I18nLanguagesList
+    I18nLanguagesList'
     { _illPart = pIllPart_
     , _illHl = "en_US"
     }
@@ -94,7 +94,7 @@ instance GoogleRequest I18nLanguagesList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient I18nLanguagesList{..}
+        requestClient I18nLanguagesList'{..}
           = go (Just _illPart) (Just _illHl) (Just AltJSON)
               youTubeService
           where go

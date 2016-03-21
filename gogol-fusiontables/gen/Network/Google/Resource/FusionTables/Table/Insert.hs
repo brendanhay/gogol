@@ -51,7 +51,7 @@ type TableInsertResource =
 -- | Creates a new table.
 --
 -- /See:/ 'tableInsert' smart constructor.
-newtype TableInsert = TableInsert
+newtype TableInsert = TableInsert'
     { _tiPayload :: Table
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tableInsert
     :: Table -- ^ 'tiPayload'
     -> TableInsert
 tableInsert pTiPayload_ =
-    TableInsert
+    TableInsert'
     { _tiPayload = pTiPayload_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest TableInsert where
         type Rs TableInsert = Table
         type Scopes TableInsert =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TableInsert{..}
+        requestClient TableInsert'{..}
           = go (Just AltJSON) _tiPayload fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableInsertResource)

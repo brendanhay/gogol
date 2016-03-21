@@ -22,7 +22,7 @@ import           Network.Google.URLShortener.Types.Sum
 
 --
 -- /See:/ 'url' smart constructor.
-data URL = URL
+data URL = URL'
     { _uStatus    :: !(Maybe Text)
     , _uKind      :: !Text
     , _uCreated   :: !(Maybe Text)
@@ -49,7 +49,7 @@ data URL = URL
 url
     :: URL
 url =
-    URL
+    URL'
     { _uStatus = Nothing
     , _uKind = "urlshortener#url"
     , _uCreated = Nothing
@@ -93,7 +93,7 @@ instance FromJSON URL where
         parseJSON
           = withObject "URL"
               (\ o ->
-                 URL <$>
+                 URL' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "urlshortener#url")
                      <*> (o .:? "created")
@@ -102,7 +102,7 @@ instance FromJSON URL where
                      <*> (o .:? "id"))
 
 instance ToJSON URL where
-        toJSON URL{..}
+        toJSON URL'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _uStatus, Just ("kind" .= _uKind),
@@ -112,7 +112,7 @@ instance ToJSON URL where
 
 --
 -- /See:/ 'stringCount' smart constructor.
-data StringCount = StringCount
+data StringCount = StringCount'
     { _scCount :: !(Maybe (Textual Int64))
     , _scId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -127,7 +127,7 @@ data StringCount = StringCount
 stringCount
     :: StringCount
 stringCount =
-    StringCount
+    StringCount'
     { _scCount = Nothing
     , _scId = Nothing
     }
@@ -147,17 +147,17 @@ instance FromJSON StringCount where
         parseJSON
           = withObject "StringCount"
               (\ o ->
-                 StringCount <$> (o .:? "count") <*> (o .:? "id"))
+                 StringCount' <$> (o .:? "count") <*> (o .:? "id"))
 
 instance ToJSON StringCount where
-        toJSON StringCount{..}
+        toJSON StringCount'{..}
           = object
               (catMaybes
                  [("count" .=) <$> _scCount, ("id" .=) <$> _scId])
 
 --
 -- /See:/ 'analyticsSnapshot' smart constructor.
-data AnalyticsSnapshot = AnalyticsSnapshot
+data AnalyticsSnapshot = AnalyticsSnapshot'
     { _asPlatforms      :: !(Maybe [StringCount])
     , _asShortURLClicks :: !(Maybe (Textual Int64))
     , _asReferrers      :: !(Maybe [StringCount])
@@ -184,7 +184,7 @@ data AnalyticsSnapshot = AnalyticsSnapshot
 analyticsSnapshot
     :: AnalyticsSnapshot
 analyticsSnapshot =
-    AnalyticsSnapshot
+    AnalyticsSnapshot'
     { _asPlatforms = Nothing
     , _asShortURLClicks = Nothing
     , _asReferrers = Nothing
@@ -244,7 +244,7 @@ instance FromJSON AnalyticsSnapshot where
         parseJSON
           = withObject "AnalyticsSnapshot"
               (\ o ->
-                 AnalyticsSnapshot <$>
+                 AnalyticsSnapshot' <$>
                    (o .:? "platforms" .!= mempty) <*>
                      (o .:? "shortUrlClicks")
                      <*> (o .:? "referrers" .!= mempty)
@@ -253,7 +253,7 @@ instance FromJSON AnalyticsSnapshot where
                      <*> (o .:? "browsers" .!= mempty))
 
 instance ToJSON AnalyticsSnapshot where
-        toJSON AnalyticsSnapshot{..}
+        toJSON AnalyticsSnapshot'{..}
           = object
               (catMaybes
                  [("platforms" .=) <$> _asPlatforms,
@@ -265,7 +265,7 @@ instance ToJSON AnalyticsSnapshot where
 
 --
 -- /See:/ 'analyticsSummary' smart constructor.
-data AnalyticsSummary = AnalyticsSummary
+data AnalyticsSummary = AnalyticsSummary'
     { _asWeek     :: !(Maybe AnalyticsSnapshot)
     , _asAllTime  :: !(Maybe AnalyticsSnapshot)
     , _asDay      :: !(Maybe AnalyticsSnapshot)
@@ -289,7 +289,7 @@ data AnalyticsSummary = AnalyticsSummary
 analyticsSummary
     :: AnalyticsSummary
 analyticsSummary =
-    AnalyticsSummary
+    AnalyticsSummary'
     { _asWeek = Nothing
     , _asAllTime = Nothing
     , _asDay = Nothing
@@ -323,14 +323,14 @@ instance FromJSON AnalyticsSummary where
         parseJSON
           = withObject "AnalyticsSummary"
               (\ o ->
-                 AnalyticsSummary <$>
+                 AnalyticsSummary' <$>
                    (o .:? "week") <*> (o .:? "allTime") <*>
                      (o .:? "day")
                      <*> (o .:? "twoHours")
                      <*> (o .:? "month"))
 
 instance ToJSON AnalyticsSummary where
-        toJSON AnalyticsSummary{..}
+        toJSON AnalyticsSummary'{..}
           = object
               (catMaybes
                  [("week" .=) <$> _asWeek,
@@ -340,7 +340,7 @@ instance ToJSON AnalyticsSummary where
 
 --
 -- /See:/ 'urlHistory' smart constructor.
-data URLHistory = URLHistory
+data URLHistory = URLHistory'
     { _uhTotalItems    :: !(Maybe (Textual Int32))
     , _uhNextPageToken :: !(Maybe Text)
     , _uhItemsPerPage  :: !(Maybe (Textual Int32))
@@ -364,7 +364,7 @@ data URLHistory = URLHistory
 urlHistory
     :: URLHistory
 urlHistory =
-    URLHistory
+    URLHistory'
     { _uhTotalItems = Nothing
     , _uhNextPageToken = Nothing
     , _uhItemsPerPage = Nothing
@@ -407,14 +407,14 @@ instance FromJSON URLHistory where
         parseJSON
           = withObject "URLHistory"
               (\ o ->
-                 URLHistory <$>
+                 URLHistory' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "itemsPerPage")
                      <*> (o .:? "kind" .!= "urlshortener#urlHistory")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON URLHistory where
-        toJSON URLHistory{..}
+        toJSON URLHistory'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _uhTotalItems,

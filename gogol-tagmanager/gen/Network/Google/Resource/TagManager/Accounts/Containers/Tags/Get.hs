@@ -57,7 +57,7 @@ type AccountsContainersTagsGetResource =
 -- | Gets a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsGet' smart constructor.
-data AccountsContainersTagsGet = AccountsContainersTagsGet
+data AccountsContainersTagsGet = AccountsContainersTagsGet'
     { _actgContainerId :: !Text
     , _actgAccountId   :: !Text
     , _actgTagId       :: !Text
@@ -78,7 +78,7 @@ accountsContainersTagsGet
     -> Text -- ^ 'actgTagId'
     -> AccountsContainersTagsGet
 accountsContainersTagsGet pActgContainerId_ pActgAccountId_ pActgTagId_ =
-    AccountsContainersTagsGet
+    AccountsContainersTagsGet'
     { _actgContainerId = pActgContainerId_
     , _actgAccountId = pActgAccountId_
     , _actgTagId = pActgTagId_
@@ -107,7 +107,7 @@ instance GoogleRequest AccountsContainersTagsGet
         type Scopes AccountsContainersTagsGet =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersTagsGet{..}
+        requestClient AccountsContainersTagsGet'{..}
           = go _actgAccountId _actgContainerId _actgTagId
               (Just AltJSON)
               tagManagerService

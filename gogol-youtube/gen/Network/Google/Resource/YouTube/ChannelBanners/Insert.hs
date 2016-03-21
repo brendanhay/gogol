@@ -83,7 +83,7 @@ type ChannelBannersInsertResource =
 -- obtained in step 2.
 --
 -- /See:/ 'channelBannersInsert' smart constructor.
-data ChannelBannersInsert = ChannelBannersInsert
+data ChannelBannersInsert = ChannelBannersInsert'
     { _cbiPayload                :: !ChannelBannerResource
     , _cbiOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -99,7 +99,7 @@ channelBannersInsert
     :: ChannelBannerResource -- ^ 'cbiPayload'
     -> ChannelBannersInsert
 channelBannersInsert pCbiPayload_ =
-    ChannelBannersInsert
+    ChannelBannersInsert'
     { _cbiPayload = pCbiPayload_
     , _cbiOnBehalfOfContentOwner = Nothing
     }
@@ -130,7 +130,7 @@ instance GoogleRequest ChannelBannersInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.upload"]
-        requestClient ChannelBannersInsert{..}
+        requestClient ChannelBannersInsert'{..}
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               _cbiPayload
               youTubeService
@@ -146,7 +146,7 @@ instance GoogleRequest
         type Scopes (MediaUpload ChannelBannersInsert) =
              Scopes ChannelBannersInsert
         requestClient
-          (MediaUpload ChannelBannersInsert{..} body)
+          (MediaUpload ChannelBannersInsert'{..} body)
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
               (Just AltMedia)
               _cbiPayload

@@ -54,7 +54,7 @@ type TemplateDeleteResource =
 -- | Deletes a template
 --
 -- /See:/ 'templateDelete' smart constructor.
-data TemplateDelete = TemplateDelete
+data TemplateDelete = TemplateDelete'
     { _tTemplateId :: !(Textual Int32)
     , _tTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ templateDelete
     -> Text -- ^ 'tTableId'
     -> TemplateDelete
 templateDelete pTTemplateId_ pTTableId_ =
-    TemplateDelete
+    TemplateDelete'
     { _tTemplateId = _Coerce # pTTemplateId_
     , _tTableId = pTTableId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest TemplateDelete where
         type Rs TemplateDelete = ()
         type Scopes TemplateDelete =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TemplateDelete{..}
+        requestClient TemplateDelete'{..}
           = go _tTableId _tTemplateId (Just AltJSON)
               fusionTablesService
           where go

@@ -57,7 +57,7 @@ type AccounttaxCustombatchResource =
 -- request.
 --
 -- /See:/ 'accounttaxCustombatch' smart constructor.
-data AccounttaxCustombatch = AccounttaxCustombatch
+data AccounttaxCustombatch = AccounttaxCustombatch'
     { _acccPayload :: !AccounttaxCustomBatchRequest
     , _acccDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accounttaxCustombatch
     :: AccounttaxCustomBatchRequest -- ^ 'acccPayload'
     -> AccounttaxCustombatch
 accounttaxCustombatch pAcccPayload_ =
-    AccounttaxCustombatch
+    AccounttaxCustombatch'
     { _acccPayload = pAcccPayload_
     , _acccDryRun = Nothing
     }
@@ -93,7 +93,7 @@ instance GoogleRequest AccounttaxCustombatch where
              AccounttaxCustomBatchResponse
         type Scopes AccounttaxCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccounttaxCustombatch{..}
+        requestClient AccounttaxCustombatch'{..}
           = go _acccDryRun (Just AltJSON) _acccPayload
               shoppingContentService
           where go

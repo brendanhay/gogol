@@ -60,7 +60,7 @@ type StatesUpdateResource =
 -- face of concurrent writes. Maximum per-key size is 128KB.
 --
 -- /See:/ 'statesUpdate' smart constructor.
-data StatesUpdate = StatesUpdate
+data StatesUpdate = StatesUpdate'
     { _suCurrentStateVersion :: !(Maybe Text)
     , _suStateKey            :: !(Textual Int32)
     , _suPayload             :: !UpdateRequest
@@ -80,7 +80,7 @@ statesUpdate
     -> UpdateRequest -- ^ 'suPayload'
     -> StatesUpdate
 statesUpdate pSuStateKey_ pSuPayload_ =
-    StatesUpdate
+    StatesUpdate'
     { _suCurrentStateVersion = Nothing
     , _suStateKey = _Coerce # pSuStateKey_
     , _suPayload = pSuPayload_
@@ -110,7 +110,7 @@ instance GoogleRequest StatesUpdate where
         type Rs StatesUpdate = WriteResult
         type Scopes StatesUpdate =
              '["https://www.googleapis.com/auth/appstate"]
-        requestClient StatesUpdate{..}
+        requestClient StatesUpdate'{..}
           = go _suStateKey _suCurrentStateVersion
               (Just AltJSON)
               _suPayload

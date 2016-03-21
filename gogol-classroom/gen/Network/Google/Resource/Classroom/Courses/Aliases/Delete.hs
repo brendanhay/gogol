@@ -73,7 +73,7 @@ type CoursesAliasesDeleteResource =
 -- does not exist.
 --
 -- /See:/ 'coursesAliasesDelete' smart constructor.
-data CoursesAliasesDelete = CoursesAliasesDelete
+data CoursesAliasesDelete = CoursesAliasesDelete'
     { _cadXgafv          :: !(Maybe Text)
     , _cadUploadProtocol :: !(Maybe Text)
     , _cadPp             :: !Bool
@@ -111,7 +111,7 @@ coursesAliasesDelete
     -> Text -- ^ 'cadAlias'
     -> CoursesAliasesDelete
 coursesAliasesDelete pCadCourseId_ pCadAlias_ =
-    CoursesAliasesDelete
+    CoursesAliasesDelete'
     { _cadXgafv = Nothing
     , _cadUploadProtocol = Nothing
     , _cadPp = True
@@ -174,7 +174,7 @@ instance GoogleRequest CoursesAliasesDelete where
         type Rs CoursesAliasesDelete = Empty
         type Scopes CoursesAliasesDelete =
              '["https://www.googleapis.com/auth/classroom.courses"]
-        requestClient CoursesAliasesDelete{..}
+        requestClient CoursesAliasesDelete'{..}
           = go _cadCourseId _cadAlias _cadXgafv
               _cadUploadProtocol
               (Just _cadPp)

@@ -145,7 +145,7 @@ type SearchMethod =
 -- | Search Freebase open data.
 --
 -- /See:/ 'search' smart constructor.
-data Search = Search
+data Search = Search'
     { _sWithout   :: !(Maybe [Text])
     , _sCursor    :: !(Maybe (Textual Int32))
     , _sWith      :: !(Maybe [Text])
@@ -223,7 +223,7 @@ data Search = Search
 search
     :: Search
 search =
-    Search
+    Search'
     { _sWithout = Nothing
     , _sCursor = Nothing
     , _sWith = Nothing
@@ -367,7 +367,7 @@ sCallback
 instance GoogleRequest Search where
         type Rs Search = ()
         type Scopes Search = '[]
-        requestClient Search{..}
+        requestClient Search'{..}
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)
@@ -398,7 +398,7 @@ instance GoogleRequest Search where
 instance GoogleRequest (MediaDownload Search) where
         type Rs (MediaDownload Search) = Stream
         type Scopes (MediaDownload Search) = Scopes Search
-        requestClient (MediaDownload Search{..})
+        requestClient (MediaDownload Search'{..})
           = go (_sWithout ^. _Default) _sCursor
               (_sWith ^. _Default)
               (_sDomain ^. _Default)

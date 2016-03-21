@@ -53,7 +53,7 @@ type TransfersInsertResource =
 -- | Inserts a data transfer request.
 --
 -- /See:/ 'transfersInsert' smart constructor.
-newtype TransfersInsert = TransfersInsert
+newtype TransfersInsert = TransfersInsert'
     { _tiPayload :: DataTransfer
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ transfersInsert
     :: DataTransfer -- ^ 'tiPayload'
     -> TransfersInsert
 transfersInsert pTiPayload_ =
-    TransfersInsert
+    TransfersInsert'
     { _tiPayload = pTiPayload_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest TransfersInsert where
         type Rs TransfersInsert = DataTransfer
         type Scopes TransfersInsert =
              '["https://www.googleapis.com/auth/admin.datatransfer"]
-        requestClient TransfersInsert{..}
+        requestClient TransfersInsert'{..}
           = go (Just AltJSON) _tiPayload dataTransferService
           where go
                   = buildClient

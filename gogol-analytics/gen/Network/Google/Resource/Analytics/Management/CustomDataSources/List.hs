@@ -61,7 +61,7 @@ type ManagementCustomDataSourcesListResource =
 -- | List custom data sources to which the user has access.
 --
 -- /See:/ 'managementCustomDataSourcesList' smart constructor.
-data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList
+data ManagementCustomDataSourcesList = ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId :: !Text
     , _mcdslAccountId     :: !Text
     , _mcdslStartIndex    :: !(Maybe (Textual Int32))
@@ -84,7 +84,7 @@ managementCustomDataSourcesList
     -> Text -- ^ 'mcdslAccountId'
     -> ManagementCustomDataSourcesList
 managementCustomDataSourcesList pMcdslWebPropertyId_ pMcdslAccountId_ =
-    ManagementCustomDataSourcesList
+    ManagementCustomDataSourcesList'
     { _mcdslWebPropertyId = pMcdslWebPropertyId_
     , _mcdslAccountId = pMcdslAccountId_
     , _mcdslStartIndex = Nothing
@@ -127,7 +127,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementCustomDataSourcesList{..}
+        requestClient ManagementCustomDataSourcesList'{..}
           = go _mcdslAccountId _mcdslWebPropertyId
               _mcdslStartIndex
               _mcdslMaxResults

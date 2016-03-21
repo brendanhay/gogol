@@ -52,7 +52,7 @@ type DictionaryListOfflineMetadataResource =
 -- | Returns a list of offline dictionary metadata available
 --
 -- /See:/ 'dictionaryListOfflineMetadata' smart constructor.
-newtype DictionaryListOfflineMetadata = DictionaryListOfflineMetadata
+newtype DictionaryListOfflineMetadata = DictionaryListOfflineMetadata'
     { _dlomCpksver :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ dictionaryListOfflineMetadata
     :: Text -- ^ 'dlomCpksver'
     -> DictionaryListOfflineMetadata
 dictionaryListOfflineMetadata pDlomCpksver_ =
-    DictionaryListOfflineMetadata
+    DictionaryListOfflineMetadata'
     { _dlomCpksver = pDlomCpksver_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest DictionaryListOfflineMetadata
         type Rs DictionaryListOfflineMetadata = Metadata
         type Scopes DictionaryListOfflineMetadata =
              '["https://www.googleapis.com/auth/books"]
-        requestClient DictionaryListOfflineMetadata{..}
+        requestClient DictionaryListOfflineMetadata'{..}
           = go (Just _dlomCpksver) (Just AltJSON) booksService
           where go
                   = buildClient

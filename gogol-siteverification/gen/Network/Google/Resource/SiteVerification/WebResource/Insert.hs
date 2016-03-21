@@ -54,7 +54,7 @@ type WebResourceInsertResource =
 -- | Attempt verification of a website or domain.
 --
 -- /See:/ 'webResourceInsert' smart constructor.
-data WebResourceInsert = WebResourceInsert
+data WebResourceInsert = WebResourceInsert'
     { _wriPayload            :: !SiteVerificationWebResourceResource
     , _wriVerificationMethod :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ webResourceInsert
     -> Text -- ^ 'wriVerificationMethod'
     -> WebResourceInsert
 webResourceInsert pWriPayload_ pWriVerificationMethod_ =
-    WebResourceInsert
+    WebResourceInsert'
     { _wriPayload = pWriPayload_
     , _wriVerificationMethod = pWriVerificationMethod_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest WebResourceInsert where
         type Scopes WebResourceInsert =
              '["https://www.googleapis.com/auth/siteverification",
                "https://www.googleapis.com/auth/siteverification.verify_only"]
-        requestClient WebResourceInsert{..}
+        requestClient WebResourceInsert'{..}
           = go (Just _wriVerificationMethod) (Just AltJSON)
               _wriPayload
               siteVerificationService

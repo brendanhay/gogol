@@ -54,7 +54,7 @@ type WatermarksUnSetResource =
 -- | Deletes a channel\'s watermark image.
 --
 -- /See:/ 'watermarksUnSet' smart constructor.
-data WatermarksUnSet = WatermarksUnSet
+data WatermarksUnSet = WatermarksUnSet'
     { _wusChannelId              :: !Text
     , _wusOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ watermarksUnSet
     :: Text -- ^ 'wusChannelId'
     -> WatermarksUnSet
 watermarksUnSet pWusChannelId_ =
-    WatermarksUnSet
+    WatermarksUnSet'
     { _wusChannelId = pWusChannelId_
     , _wusOnBehalfOfContentOwner = Nothing
     }
@@ -102,7 +102,7 @@ instance GoogleRequest WatermarksUnSet where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient WatermarksUnSet{..}
+        requestClient WatermarksUnSet'{..}
           = go (Just _wusChannelId) _wusOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

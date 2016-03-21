@@ -60,7 +60,7 @@ type InstancesExportResource =
 -- as a MySQL dump file.
 --
 -- /See:/ 'instancesExport' smart constructor.
-data InstancesExport = InstancesExport
+data InstancesExport = InstancesExport'
     { _ieProject  :: !Text
     , _iePayload  :: !InstancesExportRequest
     , _ieInstance :: !Text
@@ -81,7 +81,7 @@ instancesExport
     -> Text -- ^ 'ieInstance'
     -> InstancesExport
 instancesExport pIeProject_ pIePayload_ pIeInstance_ =
-    InstancesExport
+    InstancesExport'
     { _ieProject = pIeProject_
     , _iePayload = pIePayload_
     , _ieInstance = pIeInstance_
@@ -106,7 +106,7 @@ instance GoogleRequest InstancesExport where
         type Rs InstancesExport = Operation
         type Scopes InstancesExport =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient InstancesExport{..}
+        requestClient InstancesExport'{..}
           = go _ieProject _ieInstance (Just AltJSON) _iePayload
               sQLAdminService
           where go

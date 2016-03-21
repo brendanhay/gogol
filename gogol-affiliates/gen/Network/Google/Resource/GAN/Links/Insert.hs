@@ -55,7 +55,7 @@ type LinksInsertResource =
 -- | Inserts a new link.
 --
 -- /See:/ 'linksInsert' smart constructor.
-data LinksInsert = LinksInsert
+data LinksInsert = LinksInsert'
     { _liPayload :: !Link
     , _liRoleId  :: !Text
     , _liRole    :: !LinksInsertRole
@@ -76,7 +76,7 @@ linksInsert
     -> LinksInsertRole -- ^ 'liRole'
     -> LinksInsert
 linksInsert pLiPayload_ pLiRoleId_ pLiRole_ =
-    LinksInsert
+    LinksInsert'
     { _liPayload = pLiPayload_
     , _liRoleId = pLiRoleId_
     , _liRole = pLiRole_
@@ -99,7 +99,7 @@ liRole = lens _liRole (\ s a -> s{_liRole = a})
 instance GoogleRequest LinksInsert where
         type Rs LinksInsert = Link
         type Scopes LinksInsert = '[]
-        requestClient LinksInsert{..}
+        requestClient LinksInsert'{..}
           = go _liRole _liRoleId (Just AltJSON) _liPayload
               affiliatesService
           where go

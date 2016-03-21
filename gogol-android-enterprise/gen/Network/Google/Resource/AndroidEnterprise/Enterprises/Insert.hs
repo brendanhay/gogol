@@ -55,7 +55,7 @@ type EnterprisesInsertResource =
 -- deprecated; use enroll instead.
 --
 -- /See:/ 'enterprisesInsert' smart constructor.
-data EnterprisesInsert = EnterprisesInsert
+data EnterprisesInsert = EnterprisesInsert'
     { _eiToken   :: !Text
     , _eiPayload :: !Enterprise
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ enterprisesInsert
     -> Enterprise -- ^ 'eiPayload'
     -> EnterprisesInsert
 enterprisesInsert pEiToken_ pEiPayload_ =
-    EnterprisesInsert
+    EnterprisesInsert'
     { _eiToken = pEiToken_
     , _eiPayload = pEiPayload_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest EnterprisesInsert where
         type Rs EnterprisesInsert = Enterprise
         type Scopes EnterprisesInsert =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesInsert{..}
+        requestClient EnterprisesInsert'{..}
           = go (Just _eiToken) (Just AltJSON) _eiPayload
               androidEnterpriseService
           where go

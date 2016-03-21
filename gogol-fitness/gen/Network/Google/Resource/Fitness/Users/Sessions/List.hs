@@ -61,7 +61,7 @@ type UsersSessionsListResource =
 -- | Lists sessions previously created.
 --
 -- /See:/ 'usersSessionsList' smart constructor.
-data UsersSessionsList = UsersSessionsList
+data UsersSessionsList = UsersSessionsList'
     { _uslStartTime      :: !(Maybe Text)
     , _uslUserId         :: !Text
     , _uslEndTime        :: !(Maybe Text)
@@ -86,7 +86,7 @@ usersSessionsList
     :: Text -- ^ 'uslUserId'
     -> UsersSessionsList
 usersSessionsList pUslUserId_ =
-    UsersSessionsList
+    UsersSessionsList'
     { _uslStartTime = Nothing
     , _uslUserId = pUslUserId_
     , _uslEndTime = Nothing
@@ -136,7 +136,7 @@ instance GoogleRequest UsersSessionsList where
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersSessionsList{..}
+        requestClient UsersSessionsList'{..}
           = go _uslUserId _uslStartTime _uslEndTime
               _uslPageToken
               _uslIncludeDeleted

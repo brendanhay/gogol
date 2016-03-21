@@ -61,7 +61,7 @@ type CitiesListResource =
 -- | Retrieves a list of cities, possibly filtered.
 --
 -- /See:/ 'citiesList' smart constructor.
-data CitiesList = CitiesList
+data CitiesList = CitiesList'
     { _citRegionDartIds  :: !(Maybe [Textual Int64])
     , _citProFileId      :: !(Textual Int64)
     , _citNamePrefix     :: !(Maybe Text)
@@ -86,7 +86,7 @@ citiesList
     :: Int64 -- ^ 'citProFileId'
     -> CitiesList
 citiesList pCitProFileId_ =
-    CitiesList
+    CitiesList'
     { _citRegionDartIds = Nothing
     , _citProFileId = _Coerce # pCitProFileId_
     , _citNamePrefix = Nothing
@@ -133,7 +133,7 @@ instance GoogleRequest CitiesList where
         type Rs CitiesList = CitiesListResponse
         type Scopes CitiesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CitiesList{..}
+        requestClient CitiesList'{..}
           = go _citProFileId (_citRegionDartIds ^. _Default)
               _citNamePrefix
               (_citCountryDartIds ^. _Default)

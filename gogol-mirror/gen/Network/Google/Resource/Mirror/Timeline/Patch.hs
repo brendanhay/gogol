@@ -54,7 +54,7 @@ type TimelinePatchResource =
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
 -- /See:/ 'timelinePatch' smart constructor.
-data TimelinePatch = TimelinePatch
+data TimelinePatch = TimelinePatch'
     { _tpPayload :: !TimelineItem
     , _tpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ timelinePatch
     -> Text -- ^ 'tpId'
     -> TimelinePatch
 timelinePatch pTpPayload_ pTpId_ =
-    TimelinePatch
+    TimelinePatch'
     { _tpPayload = pTpPayload_
     , _tpId = pTpId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest TimelinePatch where
         type Scopes TimelinePatch =
              '["https://www.googleapis.com/auth/glass.location",
                "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelinePatch{..}
+        requestClient TimelinePatch'{..}
           = go _tpId (Just AltJSON) _tpPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelinePatchResource)

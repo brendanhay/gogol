@@ -60,7 +60,7 @@ type CommentsListResource =
 -- | Lists a file\'s comments.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+data CommentsList = CommentsList'
     { _cStartModifiedTime :: !(Maybe Text)
     , _cPageToken         :: !(Maybe Text)
     , _cFileId            :: !Text
@@ -85,7 +85,7 @@ commentsList
     :: Text -- ^ 'cFileId'
     -> CommentsList
 commentsList pCFileId_ =
-    CommentsList
+    CommentsList'
     { _cStartModifiedTime = Nothing
     , _cPageToken = Nothing
     , _cFileId = pCFileId_
@@ -130,7 +130,7 @@ instance GoogleRequest CommentsList where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient CommentsList{..}
+        requestClient CommentsList'{..}
           = go _cFileId _cStartModifiedTime _cPageToken
               (Just _cPageSize)
               (Just _cIncludeDeleted)

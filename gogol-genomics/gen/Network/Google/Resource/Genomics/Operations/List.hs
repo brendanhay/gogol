@@ -70,7 +70,7 @@ type OperationsListResource =
 -- | Lists operations that match the specified filter in the request.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+data OperationsList = OperationsList'
     { _olXgafv          :: !(Maybe Text)
     , _olUploadProtocol :: !(Maybe Text)
     , _olPp             :: !Bool
@@ -113,7 +113,7 @@ operationsList
     :: Text -- ^ 'olName'
     -> OperationsList
 operationsList pOlName_ =
-    OperationsList
+    OperationsList'
     { _olXgafv = Nothing
     , _olUploadProtocol = Nothing
     , _olPp = True
@@ -194,7 +194,7 @@ instance GoogleRequest OperationsList where
         type Scopes OperationsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient OperationsList{..}
+        requestClient OperationsList'{..}
           = go _olName _olXgafv _olUploadProtocol (Just _olPp)
               _olAccessToken
               _olUploadType

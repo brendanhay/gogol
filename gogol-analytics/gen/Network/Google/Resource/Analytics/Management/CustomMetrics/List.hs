@@ -60,7 +60,7 @@ type ManagementCustomMetricsListResource =
 -- | Lists custom metrics to which the user has access.
 --
 -- /See:/ 'managementCustomMetricsList' smart constructor.
-data ManagementCustomMetricsList = ManagementCustomMetricsList
+data ManagementCustomMetricsList = ManagementCustomMetricsList'
     { _mcmlWebPropertyId :: !Text
     , _mcmlAccountId     :: !Text
     , _mcmlStartIndex    :: !(Maybe (Textual Int32))
@@ -83,7 +83,7 @@ managementCustomMetricsList
     -> Text -- ^ 'mcmlAccountId'
     -> ManagementCustomMetricsList
 managementCustomMetricsList pMcmlWebPropertyId_ pMcmlAccountId_ =
-    ManagementCustomMetricsList
+    ManagementCustomMetricsList'
     { _mcmlWebPropertyId = pMcmlWebPropertyId_
     , _mcmlAccountId = pMcmlAccountId_
     , _mcmlStartIndex = Nothing
@@ -123,7 +123,7 @@ instance GoogleRequest ManagementCustomMetricsList
         type Scopes ManagementCustomMetricsList =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementCustomMetricsList{..}
+        requestClient ManagementCustomMetricsList'{..}
           = go _mcmlAccountId _mcmlWebPropertyId
               _mcmlStartIndex
               _mcmlMaxResults

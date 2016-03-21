@@ -68,7 +68,7 @@ type AppsServicesDeleteResource =
 -- | Deletes a service and all enclosed versions.
 --
 -- /See:/ 'appsServicesDelete' smart constructor.
-data AppsServicesDelete = AppsServicesDelete
+data AppsServicesDelete = AppsServicesDelete'
     { _asdXgafv          :: !(Maybe Text)
     , _asdUploadProtocol :: !(Maybe Text)
     , _asdPp             :: !Bool
@@ -106,7 +106,7 @@ appsServicesDelete
     -> Text -- ^ 'asdServicesId'
     -> AppsServicesDelete
 appsServicesDelete pAsdAppsId_ pAsdServicesId_ =
-    AppsServicesDelete
+    AppsServicesDelete'
     { _asdXgafv = Nothing
     , _asdUploadProtocol = Nothing
     , _asdPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest AppsServicesDelete where
         type Rs AppsServicesDelete = Operation
         type Scopes AppsServicesDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesDelete{..}
+        requestClient AppsServicesDelete'{..}
           = go _asdAppsId _asdServicesId _asdXgafv
               _asdUploadProtocol
               (Just _asdPp)

@@ -62,7 +62,7 @@ type BackendServicesUpdateResource =
 -- backend service. Read Restrictions and Guidelines for more information.
 --
 -- /See:/ 'backendServicesUpdate' smart constructor.
-data BackendServicesUpdate = BackendServicesUpdate
+data BackendServicesUpdate = BackendServicesUpdate'
     { _bsuProject        :: !Text
     , _bsuPayload        :: !BackendService
     , _bsuBackendService :: !Text
@@ -83,7 +83,7 @@ backendServicesUpdate
     -> Text -- ^ 'bsuBackendService'
     -> BackendServicesUpdate
 backendServicesUpdate pBsuProject_ pBsuPayload_ pBsuBackendService_ =
-    BackendServicesUpdate
+    BackendServicesUpdate'
     { _bsuProject = pBsuProject_
     , _bsuPayload = pBsuPayload_
     , _bsuBackendService = pBsuBackendService_
@@ -110,7 +110,7 @@ instance GoogleRequest BackendServicesUpdate where
         type Scopes BackendServicesUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient BackendServicesUpdate{..}
+        requestClient BackendServicesUpdate'{..}
           = go _bsuProject _bsuBackendService (Just AltJSON)
               _bsuPayload
               computeService

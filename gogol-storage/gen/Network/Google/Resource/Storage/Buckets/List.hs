@@ -59,7 +59,7 @@ type BucketsListResource =
 -- | Retrieves a list of buckets for a given project.
 --
 -- /See:/ 'bucketsList' smart constructor.
-data BucketsList = BucketsList
+data BucketsList = BucketsList'
     { _blProject    :: !Text
     , _blPrefix     :: !(Maybe Text)
     , _blProjection :: !(Maybe BucketsListProjection)
@@ -84,7 +84,7 @@ bucketsList
     :: Text -- ^ 'blProject'
     -> BucketsList
 bucketsList pBlProject_ =
-    BucketsList
+    BucketsList'
     { _blProject = pBlProject_
     , _blPrefix = Nothing
     , _blProjection = Nothing
@@ -126,7 +126,7 @@ instance GoogleRequest BucketsList where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient BucketsList{..}
+        requestClient BucketsList'{..}
           = go (Just _blProject) _blPrefix _blProjection
               _blPageToken
               _blMaxResults

@@ -76,7 +76,7 @@ type AssetsListResource =
 -- | Return all assets readable by the current user.
 --
 -- /See:/ 'assetsList' smart constructor.
-data AssetsList = AssetsList
+data AssetsList = AssetsList'
     { _alCreatedAfter   :: !(Maybe DateTime')
     , _alCreatorEmail   :: !(Maybe Text)
     , _alRole           :: !(Maybe AssetsListRole)
@@ -124,7 +124,7 @@ data AssetsList = AssetsList
 assetsList
     :: AssetsList
 assetsList =
-    AssetsList
+    AssetsList'
     { _alCreatedAfter = Nothing
     , _alCreatorEmail = Nothing
     , _alRole = Nothing
@@ -232,7 +232,7 @@ instance GoogleRequest AssetsList where
         type Scopes AssetsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient AssetsList{..}
+        requestClient AssetsList'{..}
           = go _alCreatedAfter _alCreatorEmail _alRole _alBbox
               _alModifiedAfter
               _alModifiedBefore

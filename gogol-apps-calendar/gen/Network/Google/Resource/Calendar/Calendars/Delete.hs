@@ -53,7 +53,7 @@ type CalendarsDeleteResource =
 -- events on primary calendars.
 --
 -- /See:/ 'calendarsDelete' smart constructor.
-newtype CalendarsDelete = CalendarsDelete
+newtype CalendarsDelete = CalendarsDelete'
     { _cdCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ calendarsDelete
     :: Text -- ^ 'cdCalendarId'
     -> CalendarsDelete
 calendarsDelete pCdCalendarId_ =
-    CalendarsDelete
+    CalendarsDelete'
     { _cdCalendarId = pCdCalendarId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest CalendarsDelete where
         type Rs CalendarsDelete = ()
         type Scopes CalendarsDelete =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarsDelete{..}
+        requestClient CalendarsDelete'{..}
           = go _cdCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient

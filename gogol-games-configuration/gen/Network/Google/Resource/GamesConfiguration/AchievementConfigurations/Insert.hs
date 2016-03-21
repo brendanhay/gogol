@@ -55,7 +55,7 @@ type AchievementConfigurationsInsertResource =
 -- | Insert a new achievement configuration in this application.
 --
 -- /See:/ 'achievementConfigurationsInsert' smart constructor.
-data AchievementConfigurationsInsert = AchievementConfigurationsInsert
+data AchievementConfigurationsInsert = AchievementConfigurationsInsert'
     { _aciPayload       :: !AchievementConfiguration
     , _aciApplicationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ achievementConfigurationsInsert
     -> Text -- ^ 'aciApplicationId'
     -> AchievementConfigurationsInsert
 achievementConfigurationsInsert pAciPayload_ pAciApplicationId_ =
-    AchievementConfigurationsInsert
+    AchievementConfigurationsInsert'
     { _aciPayload = pAciPayload_
     , _aciApplicationId = pAciApplicationId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest
              AchievementConfiguration
         type Scopes AchievementConfigurationsInsert =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient AchievementConfigurationsInsert{..}
+        requestClient AchievementConfigurationsInsert'{..}
           = go _aciApplicationId (Just AltJSON) _aciPayload
               gamesConfigurationService
           where go

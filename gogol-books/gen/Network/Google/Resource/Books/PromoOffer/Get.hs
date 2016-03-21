@@ -62,7 +62,7 @@ type PromoOfferGetResource =
 -- | Returns a list of promo offers available to the user
 --
 -- /See:/ 'promoOfferGet' smart constructor.
-data PromoOfferGet = PromoOfferGet
+data PromoOfferGet = PromoOfferGet'
     { _pogManufacturer :: !(Maybe Text)
     , _pogSerial       :: !(Maybe Text)
     , _pogDevice       :: !(Maybe Text)
@@ -89,7 +89,7 @@ data PromoOfferGet = PromoOfferGet
 promoOfferGet
     :: PromoOfferGet
 promoOfferGet =
-    PromoOfferGet
+    PromoOfferGet'
     { _pogManufacturer = Nothing
     , _pogSerial = Nothing
     , _pogDevice = Nothing
@@ -132,7 +132,7 @@ instance GoogleRequest PromoOfferGet where
         type Rs PromoOfferGet = Offers
         type Scopes PromoOfferGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient PromoOfferGet{..}
+        requestClient PromoOfferGet'{..}
           = go _pogManufacturer _pogSerial _pogDevice _pogModel
               _pogProduct
               _pogAndroidId

@@ -56,7 +56,7 @@ type VideoAbuseReportReasonsListResource =
 -- videos.
 --
 -- /See:/ 'videoAbuseReportReasonsList' smart constructor.
-data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList
+data VideoAbuseReportReasonsList = VideoAbuseReportReasonsList'
     { _varrlPart :: !Text
     , _varrlHl   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ videoAbuseReportReasonsList
     :: Text -- ^ 'varrlPart'
     -> VideoAbuseReportReasonsList
 videoAbuseReportReasonsList pVarrlPart_ =
-    VideoAbuseReportReasonsList
+    VideoAbuseReportReasonsList'
     { _varrlPart = pVarrlPart_
     , _varrlHl = "en_US"
     }
@@ -96,7 +96,7 @@ instance GoogleRequest VideoAbuseReportReasonsList
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient VideoAbuseReportReasonsList{..}
+        requestClient VideoAbuseReportReasonsList'{..}
           = go (Just _varrlPart) (Just _varrlHl) (Just AltJSON)
               youTubeService
           where go

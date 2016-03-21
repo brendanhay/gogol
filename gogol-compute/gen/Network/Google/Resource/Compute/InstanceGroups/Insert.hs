@@ -60,7 +60,7 @@ type InstanceGroupsInsertResource =
 -- that are included in the request.
 --
 -- /See:/ 'instanceGroupsInsert' smart constructor.
-data InstanceGroupsInsert = InstanceGroupsInsert
+data InstanceGroupsInsert = InstanceGroupsInsert'
     { _igiProject :: !Text
     , _igiZone    :: !Text
     , _igiPayload :: !InstanceGroup
@@ -81,7 +81,7 @@ instanceGroupsInsert
     -> InstanceGroup -- ^ 'igiPayload'
     -> InstanceGroupsInsert
 instanceGroupsInsert pIgiProject_ pIgiZone_ pIgiPayload_ =
-    InstanceGroupsInsert
+    InstanceGroupsInsert'
     { _igiProject = pIgiProject_
     , _igiZone = pIgiZone_
     , _igiPayload = pIgiPayload_
@@ -106,7 +106,7 @@ instance GoogleRequest InstanceGroupsInsert where
         type Scopes InstanceGroupsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupsInsert{..}
+        requestClient InstanceGroupsInsert'{..}
           = go _igiProject _igiZone (Just AltJSON) _igiPayload
               computeService
           where go

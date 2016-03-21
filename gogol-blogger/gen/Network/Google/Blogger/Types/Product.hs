@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'postUserInfo' smart constructor.
-data PostUserInfo = PostUserInfo
+data PostUserInfo = PostUserInfo'
     { _puiPostUserInfo :: !(Maybe PostPerUserInfo)
     , _puiPost         :: !(Maybe Post')
     , _puiKind         :: !Text
@@ -40,7 +40,7 @@ data PostUserInfo = PostUserInfo
 postUserInfo
     :: PostUserInfo
 postUserInfo =
-    PostUserInfo
+    PostUserInfo'
     { _puiPostUserInfo = Nothing
     , _puiPost = Nothing
     , _puiKind = "blogger#postUserInfo"
@@ -64,12 +64,12 @@ instance FromJSON PostUserInfo where
         parseJSON
           = withObject "PostUserInfo"
               (\ o ->
-                 PostUserInfo <$>
+                 PostUserInfo' <$>
                    (o .:? "post_user_info") <*> (o .:? "post") <*>
                      (o .:? "kind" .!= "blogger#postUserInfo"))
 
 instance ToJSON PostUserInfo where
-        toJSON PostUserInfo{..}
+        toJSON PostUserInfo'{..}
           = object
               (catMaybes
                  [("post_user_info" .=) <$> _puiPostUserInfo,
@@ -78,7 +78,7 @@ instance ToJSON PostUserInfo where
 -- | The Post author\'s avatar.
 --
 -- /See:/ 'postAuthorImage' smart constructor.
-newtype PostAuthorImage = PostAuthorImage
+newtype PostAuthorImage = PostAuthorImage'
     { _paiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -90,7 +90,7 @@ newtype PostAuthorImage = PostAuthorImage
 postAuthorImage
     :: PostAuthorImage
 postAuthorImage =
-    PostAuthorImage
+    PostAuthorImage'
     { _paiURL = Nothing
     }
 
@@ -101,15 +101,15 @@ paiURL = lens _paiURL (\ s a -> s{_paiURL = a})
 instance FromJSON PostAuthorImage where
         parseJSON
           = withObject "PostAuthorImage"
-              (\ o -> PostAuthorImage <$> (o .:? "url"))
+              (\ o -> PostAuthorImage' <$> (o .:? "url"))
 
 instance ToJSON PostAuthorImage where
-        toJSON PostAuthorImage{..}
+        toJSON PostAuthorImage'{..}
           = object (catMaybes [("url" .=) <$> _paiURL])
 
 --
 -- /See:/ 'postList' smart constructor.
-data PostList = PostList
+data PostList = PostList'
     { _plEtag          :: !(Maybe Text)
     , _plNextPageToken :: !(Maybe Text)
     , _plKind          :: !Text
@@ -130,7 +130,7 @@ data PostList = PostList
 postList
     :: PostList
 postList =
-    PostList
+    PostList'
     { _plEtag = Nothing
     , _plNextPageToken = Nothing
     , _plKind = "blogger#postList"
@@ -161,13 +161,13 @@ instance FromJSON PostList where
         parseJSON
           = withObject "PostList"
               (\ o ->
-                 PostList <$>
+                 PostList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "blogger#postList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PostList where
-        toJSON PostList{..}
+        toJSON PostList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _plEtag,
@@ -177,7 +177,7 @@ instance ToJSON PostList where
 -- | Data about the comment this is in reply to.
 --
 -- /See:/ 'commentInReplyTo' smart constructor.
-newtype CommentInReplyTo = CommentInReplyTo
+newtype CommentInReplyTo = CommentInReplyTo'
     { _cirtId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -189,7 +189,7 @@ newtype CommentInReplyTo = CommentInReplyTo
 commentInReplyTo
     :: CommentInReplyTo
 commentInReplyTo =
-    CommentInReplyTo
+    CommentInReplyTo'
     { _cirtId = Nothing
     }
 
@@ -200,16 +200,16 @@ cirtId = lens _cirtId (\ s a -> s{_cirtId = a})
 instance FromJSON CommentInReplyTo where
         parseJSON
           = withObject "CommentInReplyTo"
-              (\ o -> CommentInReplyTo <$> (o .:? "id"))
+              (\ o -> CommentInReplyTo' <$> (o .:? "id"))
 
 instance ToJSON CommentInReplyTo where
-        toJSON CommentInReplyTo{..}
+        toJSON CommentInReplyTo'{..}
           = object (catMaybes [("id" .=) <$> _cirtId])
 
 -- | Data about the blog containing this comment.
 --
 -- /See:/ 'commentBlog' smart constructor.
-newtype CommentBlog = CommentBlog
+newtype CommentBlog = CommentBlog'
     { _cbId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -221,7 +221,7 @@ newtype CommentBlog = CommentBlog
 commentBlog
     :: CommentBlog
 commentBlog =
-    CommentBlog
+    CommentBlog'
     { _cbId = Nothing
     }
 
@@ -232,15 +232,15 @@ cbId = lens _cbId (\ s a -> s{_cbId = a})
 instance FromJSON CommentBlog where
         parseJSON
           = withObject "CommentBlog"
-              (\ o -> CommentBlog <$> (o .:? "id"))
+              (\ o -> CommentBlog' <$> (o .:? "id"))
 
 instance ToJSON CommentBlog where
-        toJSON CommentBlog{..}
+        toJSON CommentBlog'{..}
           = object (catMaybes [("id" .=) <$> _cbId])
 
 --
 -- /See:/ 'pageviews' smart constructor.
-data Pageviews = Pageviews
+data Pageviews = Pageviews'
     { _pKind   :: !Text
     , _pCounts :: !(Maybe [PageviewsCountsItem])
     , _pBlogId :: !(Maybe Text)
@@ -258,7 +258,7 @@ data Pageviews = Pageviews
 pageviews
     :: Pageviews
 pageviews =
-    Pageviews
+    Pageviews'
     { _pKind = "blogger#page_views"
     , _pCounts = Nothing
     , _pBlogId = Nothing
@@ -282,13 +282,13 @@ instance FromJSON Pageviews where
         parseJSON
           = withObject "Pageviews"
               (\ o ->
-                 Pageviews <$>
+                 Pageviews' <$>
                    (o .:? "kind" .!= "blogger#page_views") <*>
                      (o .:? "counts" .!= mempty)
                      <*> (o .:? "blogId"))
 
 instance ToJSON Pageviews where
-        toJSON Pageviews{..}
+        toJSON Pageviews'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pKind), ("counts" .=) <$> _pCounts,
@@ -297,7 +297,7 @@ instance ToJSON Pageviews where
 -- | The location for geotagged posts.
 --
 -- /See:/ 'postLocation' smart constructor.
-data PostLocation = PostLocation
+data PostLocation = PostLocation'
     { _plSpan :: !(Maybe Text)
     , _plLat  :: !(Maybe (Textual Double))
     , _plName :: !(Maybe Text)
@@ -318,7 +318,7 @@ data PostLocation = PostLocation
 postLocation
     :: PostLocation
 postLocation =
-    PostLocation
+    PostLocation'
     { _plSpan = Nothing
     , _plLat = Nothing
     , _plName = Nothing
@@ -349,12 +349,12 @@ instance FromJSON PostLocation where
         parseJSON
           = withObject "PostLocation"
               (\ o ->
-                 PostLocation <$>
+                 PostLocation' <$>
                    (o .:? "span") <*> (o .:? "lat") <*> (o .:? "name")
                      <*> (o .:? "lng"))
 
 instance ToJSON PostLocation where
-        toJSON PostLocation{..}
+        toJSON PostLocation'{..}
           = object
               (catMaybes
                  [("span" .=) <$> _plSpan, ("lat" .=) <$> _plLat,
@@ -363,7 +363,7 @@ instance ToJSON PostLocation where
 -- | The container of posts in this blog.
 --
 -- /See:/ 'blogPosts' smart constructor.
-data BlogPosts = BlogPosts
+data BlogPosts = BlogPosts'
     { _bpTotalItems :: !(Maybe (Textual Int32))
     , _bpItems      :: !(Maybe [Post'])
     , _bpSelfLink   :: !(Maybe Text)
@@ -381,7 +381,7 @@ data BlogPosts = BlogPosts
 blogPosts
     :: BlogPosts
 blogPosts =
-    BlogPosts
+    BlogPosts'
     { _bpTotalItems = Nothing
     , _bpItems = Nothing
     , _bpSelfLink = Nothing
@@ -408,12 +408,12 @@ instance FromJSON BlogPosts where
         parseJSON
           = withObject "BlogPosts"
               (\ o ->
-                 BlogPosts <$>
+                 BlogPosts' <$>
                    (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "selfLink"))
 
 instance ToJSON BlogPosts where
-        toJSON BlogPosts{..}
+        toJSON BlogPosts'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _bpTotalItems,
@@ -422,7 +422,7 @@ instance ToJSON BlogPosts where
 
 --
 -- /See:/ 'post' smart constructor.
-data Post' = Post'
+data Post' = Post''
     { _posImages         :: !(Maybe [PostImagesItem])
     , _posStatus         :: !(Maybe Text)
     , _posEtag           :: !(Maybe Text)
@@ -488,7 +488,7 @@ data Post' = Post'
 post
     :: Post'
 post =
-    Post'
+    Post''
     { _posImages = Nothing
     , _posStatus = Nothing
     , _posEtag = Nothing
@@ -611,7 +611,7 @@ instance FromJSON Post' where
         parseJSON
           = withObject "Post"
               (\ o ->
-                 Post' <$>
+                 Post'' <$>
                    (o .:? "images" .!= mempty) <*> (o .:? "status") <*>
                      (o .:? "etag")
                      <*> (o .:? "readerComments")
@@ -632,7 +632,7 @@ instance FromJSON Post' where
                      <*> (o .:? "title"))
 
 instance ToJSON Post' where
-        toJSON Post'{..}
+        toJSON Post''{..}
           = object
               (catMaybes
                  [("images" .=) <$> _posImages,
@@ -655,7 +655,7 @@ instance ToJSON Post' where
 
 --
 -- /See:/ 'page' smart constructor.
-data Page = Page
+data Page = Page'
     { _pagStatus    :: !(Maybe Text)
     , _pagEtag      :: !(Maybe Text)
     , _pagKind      :: !Text
@@ -700,7 +700,7 @@ data Page = Page
 page
     :: Page
 page =
-    Page
+    Page'
     { _pagStatus = Nothing
     , _pagEtag = Nothing
     , _pagKind = "blogger#page"
@@ -776,7 +776,7 @@ instance FromJSON Page where
         parseJSON
           = withObject "Page"
               (\ o ->
-                 Page <$>
+                 Page' <$>
                    (o .:? "status") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "blogger#page")
                      <*> (o .:? "published")
@@ -790,7 +790,7 @@ instance FromJSON Page where
                      <*> (o .:? "title"))
 
 instance ToJSON Page where
-        toJSON Page{..}
+        toJSON Page'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _pagStatus,
@@ -806,7 +806,7 @@ instance ToJSON Page where
 -- | The locale this Blog is set to.
 --
 -- /See:/ 'blogLocale' smart constructor.
-data BlogLocale = BlogLocale
+data BlogLocale = BlogLocale'
     { _blVariant  :: !(Maybe Text)
     , _blCountry  :: !(Maybe Text)
     , _blLanguage :: !(Maybe Text)
@@ -824,7 +824,7 @@ data BlogLocale = BlogLocale
 blogLocale
     :: BlogLocale
 blogLocale =
-    BlogLocale
+    BlogLocale'
     { _blVariant = Nothing
     , _blCountry = Nothing
     , _blLanguage = Nothing
@@ -849,12 +849,12 @@ instance FromJSON BlogLocale where
         parseJSON
           = withObject "BlogLocale"
               (\ o ->
-                 BlogLocale <$>
+                 BlogLocale' <$>
                    (o .:? "variant") <*> (o .:? "country") <*>
                      (o .:? "language"))
 
 instance ToJSON BlogLocale where
-        toJSON BlogLocale{..}
+        toJSON BlogLocale'{..}
           = object
               (catMaybes
                  [("variant" .=) <$> _blVariant,
@@ -864,7 +864,7 @@ instance ToJSON BlogLocale where
 -- | The author of this Page.
 --
 -- /See:/ 'pageAuthor' smart constructor.
-data PageAuthor = PageAuthor
+data PageAuthor = PageAuthor'
     { _paImage       :: !(Maybe PageAuthorImage)
     , _paURL         :: !(Maybe Text)
     , _paDisplayName :: !(Maybe Text)
@@ -885,7 +885,7 @@ data PageAuthor = PageAuthor
 pageAuthor
     :: PageAuthor
 pageAuthor =
-    PageAuthor
+    PageAuthor'
     { _paImage = Nothing
     , _paURL = Nothing
     , _paDisplayName = Nothing
@@ -914,13 +914,13 @@ instance FromJSON PageAuthor where
         parseJSON
           = withObject "PageAuthor"
               (\ o ->
-                 PageAuthor <$>
+                 PageAuthor' <$>
                    (o .:? "image") <*> (o .:? "url") <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON PageAuthor where
-        toJSON PageAuthor{..}
+        toJSON PageAuthor'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _paImage, ("url" .=) <$> _paURL,
@@ -929,7 +929,7 @@ instance ToJSON PageAuthor where
 
 --
 -- /See:/ 'blog' smart constructor.
-data Blog = Blog
+data Blog = Blog'
     { _bStatus         :: !(Maybe Text)
     , _bKind           :: !Text
     , _bPages          :: !(Maybe BlogPages)
@@ -977,7 +977,7 @@ data Blog = Blog
 blog
     :: Blog
 blog =
-    Blog
+    Blog'
     { _bStatus = Nothing
     , _bKind = "blogger#blog"
     , _bPages = Nothing
@@ -1057,7 +1057,7 @@ instance FromJSON Blog where
         parseJSON
           = withObject "Blog"
               (\ o ->
-                 Blog <$>
+                 Blog' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "blogger#blog")
                      <*> (o .:? "pages")
@@ -1073,7 +1073,7 @@ instance FromJSON Blog where
                      <*> (o .:? "description"))
 
 instance ToJSON Blog where
-        toJSON Blog{..}
+        toJSON Blog'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _bStatus, Just ("kind" .= _bKind),
@@ -1090,7 +1090,7 @@ instance ToJSON Blog where
 -- | The container of pages in this blog.
 --
 -- /See:/ 'blogPages' smart constructor.
-data BlogPages = BlogPages
+data BlogPages = BlogPages'
     { _bpsTotalItems :: !(Maybe (Textual Int32))
     , _bpsSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1105,7 +1105,7 @@ data BlogPages = BlogPages
 blogPages
     :: BlogPages
 blogPages =
-    BlogPages
+    BlogPages'
     { _bpsTotalItems = Nothing
     , _bpsSelfLink = Nothing
     }
@@ -1126,11 +1126,11 @@ instance FromJSON BlogPages where
         parseJSON
           = withObject "BlogPages"
               (\ o ->
-                 BlogPages <$>
+                 BlogPages' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON BlogPages where
-        toJSON BlogPages{..}
+        toJSON BlogPages'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _bpsTotalItems,
@@ -1139,7 +1139,7 @@ instance ToJSON BlogPages where
 -- | Data about the blog containing this Post.
 --
 -- /See:/ 'postBlog' smart constructor.
-newtype PostBlog = PostBlog
+newtype PostBlog = PostBlog'
     { _pbId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1151,7 +1151,7 @@ newtype PostBlog = PostBlog
 postBlog
     :: PostBlog
 postBlog =
-    PostBlog
+    PostBlog'
     { _pbId = Nothing
     }
 
@@ -1162,15 +1162,15 @@ pbId = lens _pbId (\ s a -> s{_pbId = a})
 instance FromJSON PostBlog where
         parseJSON
           = withObject "PostBlog"
-              (\ o -> PostBlog <$> (o .:? "id"))
+              (\ o -> PostBlog' <$> (o .:? "id"))
 
 instance ToJSON PostBlog where
-        toJSON PostBlog{..}
+        toJSON PostBlog'{..}
           = object (catMaybes [("id" .=) <$> _pbId])
 
 --
 -- /See:/ 'pageList' smart constructor.
-data PageList = PageList
+data PageList = PageList'
     { _pllEtag          :: !(Maybe Text)
     , _pllNextPageToken :: !(Maybe Text)
     , _pllKind          :: !Text
@@ -1191,7 +1191,7 @@ data PageList = PageList
 pageList
     :: PageList
 pageList =
-    PageList
+    PageList'
     { _pllEtag = Nothing
     , _pllNextPageToken = Nothing
     , _pllKind = "blogger#pageList"
@@ -1223,13 +1223,13 @@ instance FromJSON PageList where
         parseJSON
           = withObject "PageList"
               (\ o ->
-                 PageList <$>
+                 PageList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "blogger#pageList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PageList where
-        toJSON PageList{..}
+        toJSON PageList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _pllEtag,
@@ -1240,7 +1240,7 @@ instance ToJSON PageList where
 -- | This user\'s locale
 --
 -- /See:/ 'userLocale' smart constructor.
-data UserLocale = UserLocale
+data UserLocale = UserLocale'
     { _ulVariant  :: !(Maybe Text)
     , _ulCountry  :: !(Maybe Text)
     , _ulLanguage :: !(Maybe Text)
@@ -1258,7 +1258,7 @@ data UserLocale = UserLocale
 userLocale
     :: UserLocale
 userLocale =
-    UserLocale
+    UserLocale'
     { _ulVariant = Nothing
     , _ulCountry = Nothing
     , _ulLanguage = Nothing
@@ -1283,12 +1283,12 @@ instance FromJSON UserLocale where
         parseJSON
           = withObject "UserLocale"
               (\ o ->
-                 UserLocale <$>
+                 UserLocale' <$>
                    (o .:? "variant") <*> (o .:? "country") <*>
                      (o .:? "language"))
 
 instance ToJSON UserLocale where
-        toJSON UserLocale{..}
+        toJSON UserLocale'{..}
           = object
               (catMaybes
                  [("variant" .=) <$> _ulVariant,
@@ -1298,7 +1298,7 @@ instance ToJSON UserLocale where
 -- | The comment creator\'s avatar.
 --
 -- /See:/ 'commentAuthorImage' smart constructor.
-newtype CommentAuthorImage = CommentAuthorImage
+newtype CommentAuthorImage = CommentAuthorImage'
     { _caiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1310,7 +1310,7 @@ newtype CommentAuthorImage = CommentAuthorImage
 commentAuthorImage
     :: CommentAuthorImage
 commentAuthorImage =
-    CommentAuthorImage
+    CommentAuthorImage'
     { _caiURL = Nothing
     }
 
@@ -1321,15 +1321,15 @@ caiURL = lens _caiURL (\ s a -> s{_caiURL = a})
 instance FromJSON CommentAuthorImage where
         parseJSON
           = withObject "CommentAuthorImage"
-              (\ o -> CommentAuthorImage <$> (o .:? "url"))
+              (\ o -> CommentAuthorImage' <$> (o .:? "url"))
 
 instance ToJSON CommentAuthorImage where
-        toJSON CommentAuthorImage{..}
+        toJSON CommentAuthorImage'{..}
           = object (catMaybes [("url" .=) <$> _caiURL])
 
 --
 -- /See:/ 'user' smart constructor.
-data User = User
+data User = User'
     { _uBlogs       :: !(Maybe UserBlogs)
     , _uKind        :: !Text
     , _uCreated     :: !(Maybe DateTime')
@@ -1365,7 +1365,7 @@ data User = User
 user
     :: User
 user =
-    User
+    User'
     { _uBlogs = Nothing
     , _uKind = "blogger#user"
     , _uCreated = Nothing
@@ -1421,7 +1421,7 @@ instance FromJSON User where
         parseJSON
           = withObject "User"
               (\ o ->
-                 User <$>
+                 User' <$>
                    (o .:? "blogs") <*> (o .:? "kind" .!= "blogger#user")
                      <*> (o .:? "created")
                      <*> (o .:? "locale")
@@ -1432,7 +1432,7 @@ instance FromJSON User where
                      <*> (o .:? "id"))
 
 instance ToJSON User where
-        toJSON User{..}
+        toJSON User'{..}
           = object
               (catMaybes
                  [("blogs" .=) <$> _uBlogs, Just ("kind" .= _uKind),
@@ -1446,7 +1446,7 @@ instance ToJSON User where
 -- | The container of blogs for this user.
 --
 -- /See:/ 'userBlogs' smart constructor.
-newtype UserBlogs = UserBlogs
+newtype UserBlogs = UserBlogs'
     { _ubSelfLink :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1458,7 +1458,7 @@ newtype UserBlogs = UserBlogs
 userBlogs
     :: UserBlogs
 userBlogs =
-    UserBlogs
+    UserBlogs'
     { _ubSelfLink = Nothing
     }
 
@@ -1470,17 +1470,17 @@ ubSelfLink
 instance FromJSON UserBlogs where
         parseJSON
           = withObject "UserBlogs"
-              (\ o -> UserBlogs <$> (o .:? "selfLink"))
+              (\ o -> UserBlogs' <$> (o .:? "selfLink"))
 
 instance ToJSON UserBlogs where
-        toJSON UserBlogs{..}
+        toJSON UserBlogs'{..}
           = object
               (catMaybes [("selfLink" .=) <$> _ubSelfLink])
 
 -- | The container of comments on this Post.
 --
 -- /See:/ 'postReplies' smart constructor.
-data PostReplies = PostReplies
+data PostReplies = PostReplies'
     { _prTotalItems :: !(Maybe (Textual Int64))
     , _prItems      :: !(Maybe [Comment])
     , _prSelfLink   :: !(Maybe Text)
@@ -1498,7 +1498,7 @@ data PostReplies = PostReplies
 postReplies
     :: PostReplies
 postReplies =
-    PostReplies
+    PostReplies'
     { _prTotalItems = Nothing
     , _prItems = Nothing
     , _prSelfLink = Nothing
@@ -1525,12 +1525,12 @@ instance FromJSON PostReplies where
         parseJSON
           = withObject "PostReplies"
               (\ o ->
-                 PostReplies <$>
+                 PostReplies' <$>
                    (o .:? "totalItems") <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "selfLink"))
 
 instance ToJSON PostReplies where
-        toJSON PostReplies{..}
+        toJSON PostReplies'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _prTotalItems,
@@ -1539,7 +1539,7 @@ instance ToJSON PostReplies where
 
 --
 -- /See:/ 'blogList' smart constructor.
-data BlogList = BlogList
+data BlogList = BlogList'
     { _blKind          :: !Text
     , _blItems         :: !(Maybe [Blog])
     , _blBlogUserInfos :: !(Maybe [BlogUserInfo])
@@ -1557,7 +1557,7 @@ data BlogList = BlogList
 blogList
     :: BlogList
 blogList =
-    BlogList
+    BlogList'
     { _blKind = "blogger#blogList"
     , _blItems = Nothing
     , _blBlogUserInfos = Nothing
@@ -1585,13 +1585,13 @@ instance FromJSON BlogList where
         parseJSON
           = withObject "BlogList"
               (\ o ->
-                 BlogList <$>
+                 BlogList' <$>
                    (o .:? "kind" .!= "blogger#blogList") <*>
                      (o .:? "items" .!= mempty)
                      <*> (o .:? "blogUserInfos" .!= mempty))
 
 instance ToJSON BlogList where
-        toJSON BlogList{..}
+        toJSON BlogList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _blKind), ("items" .=) <$> _blItems,
@@ -1600,7 +1600,7 @@ instance ToJSON BlogList where
 -- | Data about the blog containing this Page.
 --
 -- /See:/ 'pageBlog' smart constructor.
-newtype PageBlog = PageBlog
+newtype PageBlog = PageBlog'
     { _pId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1612,7 +1612,7 @@ newtype PageBlog = PageBlog
 pageBlog
     :: PageBlog
 pageBlog =
-    PageBlog
+    PageBlog'
     { _pId = Nothing
     }
 
@@ -1623,16 +1623,16 @@ pId = lens _pId (\ s a -> s{_pId = a})
 instance FromJSON PageBlog where
         parseJSON
           = withObject "PageBlog"
-              (\ o -> PageBlog <$> (o .:? "id"))
+              (\ o -> PageBlog' <$> (o .:? "id"))
 
 instance ToJSON PageBlog where
-        toJSON PageBlog{..}
+        toJSON PageBlog'{..}
           = object (catMaybes [("id" .=) <$> _pId])
 
 -- | The author of this Post.
 --
 -- /See:/ 'postAuthor' smart constructor.
-data PostAuthor = PostAuthor
+data PostAuthor = PostAuthor'
     { _paaImage       :: !(Maybe PostAuthorImage)
     , _paaURL         :: !(Maybe Text)
     , _paaDisplayName :: !(Maybe Text)
@@ -1653,7 +1653,7 @@ data PostAuthor = PostAuthor
 postAuthor
     :: PostAuthor
 postAuthor =
-    PostAuthor
+    PostAuthor'
     { _paaImage = Nothing
     , _paaURL = Nothing
     , _paaDisplayName = Nothing
@@ -1682,13 +1682,13 @@ instance FromJSON PostAuthor where
         parseJSON
           = withObject "PostAuthor"
               (\ o ->
-                 PostAuthor <$>
+                 PostAuthor' <$>
                    (o .:? "image") <*> (o .:? "url") <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON PostAuthor where
-        toJSON PostAuthor{..}
+        toJSON PostAuthor'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _paaImage, ("url" .=) <$> _paaURL,
@@ -1697,7 +1697,7 @@ instance ToJSON PostAuthor where
 
 --
 -- /See:/ 'postPerUserInfo' smart constructor.
-data PostPerUserInfo = PostPerUserInfo
+data PostPerUserInfo = PostPerUserInfo'
     { _ppuiKind          :: !Text
     , _ppuiBlogId        :: !(Maybe Text)
     , _ppuiUserId        :: !(Maybe Text)
@@ -1721,7 +1721,7 @@ data PostPerUserInfo = PostPerUserInfo
 postPerUserInfo
     :: PostPerUserInfo
 postPerUserInfo =
-    PostPerUserInfo
+    PostPerUserInfo'
     { _ppuiKind = "blogger#postPerUserInfo"
     , _ppuiBlogId = Nothing
     , _ppuiUserId = Nothing
@@ -1758,7 +1758,7 @@ instance FromJSON PostPerUserInfo where
         parseJSON
           = withObject "PostPerUserInfo"
               (\ o ->
-                 PostPerUserInfo <$>
+                 PostPerUserInfo' <$>
                    (o .:? "kind" .!= "blogger#postPerUserInfo") <*>
                      (o .:? "blogId")
                      <*> (o .:? "userId")
@@ -1766,7 +1766,7 @@ instance FromJSON PostPerUserInfo where
                      <*> (o .:? "postId"))
 
 instance ToJSON PostPerUserInfo where
-        toJSON PostPerUserInfo{..}
+        toJSON PostPerUserInfo'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ppuiKind),
@@ -1777,7 +1777,7 @@ instance ToJSON PostPerUserInfo where
 
 --
 -- /See:/ 'pageviewsCountsItem' smart constructor.
-data PageviewsCountsItem = PageviewsCountsItem
+data PageviewsCountsItem = PageviewsCountsItem'
     { _pciTimeRange :: !(Maybe Text)
     , _pciCount     :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1792,7 +1792,7 @@ data PageviewsCountsItem = PageviewsCountsItem
 pageviewsCountsItem
     :: PageviewsCountsItem
 pageviewsCountsItem =
-    PageviewsCountsItem
+    PageviewsCountsItem'
     { _pciTimeRange = Nothing
     , _pciCount = Nothing
     }
@@ -1812,11 +1812,11 @@ instance FromJSON PageviewsCountsItem where
         parseJSON
           = withObject "PageviewsCountsItem"
               (\ o ->
-                 PageviewsCountsItem <$>
+                 PageviewsCountsItem' <$>
                    (o .:? "timeRange") <*> (o .:? "count"))
 
 instance ToJSON PageviewsCountsItem where
-        toJSON PageviewsCountsItem{..}
+        toJSON PageviewsCountsItem'{..}
           = object
               (catMaybes
                  [("timeRange" .=) <$> _pciTimeRange,
@@ -1824,7 +1824,7 @@ instance ToJSON PageviewsCountsItem where
 
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment
+data Comment = Comment'
     { _cStatus    :: !(Maybe Text)
     , _cPost      :: !(Maybe CommentPost)
     , _cKind      :: !Text
@@ -1866,7 +1866,7 @@ data Comment = Comment
 comment
     :: Comment
 comment =
-    Comment
+    Comment'
     { _cStatus = Nothing
     , _cPost = Nothing
     , _cKind = "blogger#comment"
@@ -1934,7 +1934,7 @@ instance FromJSON Comment where
         parseJSON
           = withObject "Comment"
               (\ o ->
-                 Comment <$>
+                 Comment' <$>
                    (o .:? "status") <*> (o .:? "post") <*>
                      (o .:? "kind" .!= "blogger#comment")
                      <*> (o .:? "published")
@@ -1947,7 +1947,7 @@ instance FromJSON Comment where
                      <*> (o .:? "inReplyTo"))
 
 instance ToJSON Comment where
-        toJSON Comment{..}
+        toJSON Comment'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _cStatus, ("post" .=) <$> _cPost,
@@ -1962,7 +1962,7 @@ instance ToJSON Comment where
 -- | Data about the post containing this comment.
 --
 -- /See:/ 'commentPost' smart constructor.
-newtype CommentPost = CommentPost
+newtype CommentPost = CommentPost'
     { _cpId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1974,7 +1974,7 @@ newtype CommentPost = CommentPost
 commentPost
     :: CommentPost
 commentPost =
-    CommentPost
+    CommentPost'
     { _cpId = Nothing
     }
 
@@ -1985,15 +1985,15 @@ cpId = lens _cpId (\ s a -> s{_cpId = a})
 instance FromJSON CommentPost where
         parseJSON
           = withObject "CommentPost"
-              (\ o -> CommentPost <$> (o .:? "id"))
+              (\ o -> CommentPost' <$> (o .:? "id"))
 
 instance ToJSON CommentPost where
-        toJSON CommentPost{..}
+        toJSON CommentPost'{..}
           = object (catMaybes [("id" .=) <$> _cpId])
 
 --
 -- /See:/ 'blogPerUserInfo' smart constructor.
-data BlogPerUserInfo = BlogPerUserInfo
+data BlogPerUserInfo = BlogPerUserInfo'
     { _bpuiPhotosAlbumKey :: !(Maybe Text)
     , _bpuiKind           :: !Text
     , _bpuiBlogId         :: !(Maybe Text)
@@ -2020,7 +2020,7 @@ data BlogPerUserInfo = BlogPerUserInfo
 blogPerUserInfo
     :: BlogPerUserInfo
 blogPerUserInfo =
-    BlogPerUserInfo
+    BlogPerUserInfo'
     { _bpuiPhotosAlbumKey = Nothing
     , _bpuiKind = "blogger#blogPerUserInfo"
     , _bpuiBlogId = Nothing
@@ -2064,7 +2064,7 @@ instance FromJSON BlogPerUserInfo where
         parseJSON
           = withObject "BlogPerUserInfo"
               (\ o ->
-                 BlogPerUserInfo <$>
+                 BlogPerUserInfo' <$>
                    (o .:? "photosAlbumKey") <*>
                      (o .:? "kind" .!= "blogger#blogPerUserInfo")
                      <*> (o .:? "blogId")
@@ -2073,7 +2073,7 @@ instance FromJSON BlogPerUserInfo where
                      <*> (o .:? "hasAdminAccess"))
 
 instance ToJSON BlogPerUserInfo where
-        toJSON BlogPerUserInfo{..}
+        toJSON BlogPerUserInfo'{..}
           = object
               (catMaybes
                  [("photosAlbumKey" .=) <$> _bpuiPhotosAlbumKey,
@@ -2085,7 +2085,7 @@ instance ToJSON BlogPerUserInfo where
 
 --
 -- /See:/ 'postUserInfosList' smart constructor.
-data PostUserInfosList = PostUserInfosList
+data PostUserInfosList = PostUserInfosList'
     { _puilNextPageToken :: !(Maybe Text)
     , _puilKind          :: !Text
     , _puilItems         :: !(Maybe [PostUserInfo])
@@ -2103,7 +2103,7 @@ data PostUserInfosList = PostUserInfosList
 postUserInfosList
     :: PostUserInfosList
 postUserInfosList =
-    PostUserInfosList
+    PostUserInfosList'
     { _puilNextPageToken = Nothing
     , _puilKind = "blogger#postUserInfosList"
     , _puilItems = Nothing
@@ -2130,13 +2130,13 @@ instance FromJSON PostUserInfosList where
         parseJSON
           = withObject "PostUserInfosList"
               (\ o ->
-                 PostUserInfosList <$>
+                 PostUserInfosList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "blogger#postUserInfosList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PostUserInfosList where
-        toJSON PostUserInfosList{..}
+        toJSON PostUserInfosList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _puilNextPageToken,
@@ -2146,7 +2146,7 @@ instance ToJSON PostUserInfosList where
 -- | The author of this Comment.
 --
 -- /See:/ 'commentAuthor' smart constructor.
-data CommentAuthor = CommentAuthor
+data CommentAuthor = CommentAuthor'
     { _caImage       :: !(Maybe CommentAuthorImage)
     , _caURL         :: !(Maybe Text)
     , _caDisplayName :: !(Maybe Text)
@@ -2167,7 +2167,7 @@ data CommentAuthor = CommentAuthor
 commentAuthor
     :: CommentAuthor
 commentAuthor =
-    CommentAuthor
+    CommentAuthor'
     { _caImage = Nothing
     , _caURL = Nothing
     , _caDisplayName = Nothing
@@ -2196,13 +2196,13 @@ instance FromJSON CommentAuthor where
         parseJSON
           = withObject "CommentAuthor"
               (\ o ->
-                 CommentAuthor <$>
+                 CommentAuthor' <$>
                    (o .:? "image") <*> (o .:? "url") <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON CommentAuthor where
-        toJSON CommentAuthor{..}
+        toJSON CommentAuthor'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _caImage, ("url" .=) <$> _caURL,
@@ -2211,7 +2211,7 @@ instance ToJSON CommentAuthor where
 
 --
 -- /See:/ 'blogUserInfo' smart constructor.
-data BlogUserInfo = BlogUserInfo
+data BlogUserInfo = BlogUserInfo'
     { _buiKind         :: !Text
     , _buiBlog         :: !(Maybe Blog)
     , _buiBlogUserInfo :: !(Maybe BlogPerUserInfo)
@@ -2229,7 +2229,7 @@ data BlogUserInfo = BlogUserInfo
 blogUserInfo
     :: BlogUserInfo
 blogUserInfo =
-    BlogUserInfo
+    BlogUserInfo'
     { _buiKind = "blogger#blogUserInfo"
     , _buiBlog = Nothing
     , _buiBlogUserInfo = Nothing
@@ -2253,13 +2253,13 @@ instance FromJSON BlogUserInfo where
         parseJSON
           = withObject "BlogUserInfo"
               (\ o ->
-                 BlogUserInfo <$>
+                 BlogUserInfo' <$>
                    (o .:? "kind" .!= "blogger#blogUserInfo") <*>
                      (o .:? "blog")
                      <*> (o .:? "blog_user_info"))
 
 instance ToJSON BlogUserInfo where
-        toJSON BlogUserInfo{..}
+        toJSON BlogUserInfo'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _buiKind), ("blog" .=) <$> _buiBlog,
@@ -2268,7 +2268,7 @@ instance ToJSON BlogUserInfo where
 -- | The page author\'s avatar.
 --
 -- /See:/ 'pageAuthorImage' smart constructor.
-newtype PageAuthorImage = PageAuthorImage
+newtype PageAuthorImage = PageAuthorImage'
     { _pURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2280,7 +2280,7 @@ newtype PageAuthorImage = PageAuthorImage
 pageAuthorImage
     :: PageAuthorImage
 pageAuthorImage =
-    PageAuthorImage
+    PageAuthorImage'
     { _pURL = Nothing
     }
 
@@ -2291,15 +2291,15 @@ pURL = lens _pURL (\ s a -> s{_pURL = a})
 instance FromJSON PageAuthorImage where
         parseJSON
           = withObject "PageAuthorImage"
-              (\ o -> PageAuthorImage <$> (o .:? "url"))
+              (\ o -> PageAuthorImage' <$> (o .:? "url"))
 
 instance ToJSON PageAuthorImage where
-        toJSON PageAuthorImage{..}
+        toJSON PageAuthorImage'{..}
           = object (catMaybes [("url" .=) <$> _pURL])
 
 --
 -- /See:/ 'commentList' smart constructor.
-data CommentList = CommentList
+data CommentList = CommentList'
     { _clEtag          :: !(Maybe Text)
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
@@ -2323,7 +2323,7 @@ data CommentList = CommentList
 commentList
     :: CommentList
 commentList =
-    CommentList
+    CommentList'
     { _clEtag = Nothing
     , _clNextPageToken = Nothing
     , _clKind = "blogger#commentList"
@@ -2361,14 +2361,14 @@ instance FromJSON CommentList where
         parseJSON
           = withObject "CommentList"
               (\ o ->
-                 CommentList <$>
+                 CommentList' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "blogger#commentList")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "prevPageToken"))
 
 instance ToJSON CommentList where
-        toJSON CommentList{..}
+        toJSON CommentList'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _clEtag,
@@ -2378,7 +2378,7 @@ instance ToJSON CommentList where
 
 --
 -- /See:/ 'postImagesItem' smart constructor.
-newtype PostImagesItem = PostImagesItem
+newtype PostImagesItem = PostImagesItem'
     { _piiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2390,7 +2390,7 @@ newtype PostImagesItem = PostImagesItem
 postImagesItem
     :: PostImagesItem
 postImagesItem =
-    PostImagesItem
+    PostImagesItem'
     { _piiURL = Nothing
     }
 
@@ -2400,8 +2400,8 @@ piiURL = lens _piiURL (\ s a -> s{_piiURL = a})
 instance FromJSON PostImagesItem where
         parseJSON
           = withObject "PostImagesItem"
-              (\ o -> PostImagesItem <$> (o .:? "url"))
+              (\ o -> PostImagesItem' <$> (o .:? "url"))
 
 instance ToJSON PostImagesItem where
-        toJSON PostImagesItem{..}
+        toJSON PostImagesItem'{..}
           = object (catMaybes [("url" .=) <$> _piiURL])

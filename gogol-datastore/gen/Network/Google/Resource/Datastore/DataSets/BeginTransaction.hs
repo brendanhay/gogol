@@ -55,7 +55,7 @@ type DataSetsBeginTransactionResource =
 -- | Begin a new transaction.
 --
 -- /See:/ 'dataSetsBeginTransaction' smart constructor.
-data DataSetsBeginTransaction = DataSetsBeginTransaction
+data DataSetsBeginTransaction = DataSetsBeginTransaction'
     { _dsbtPayload   :: !BeginTransactionRequest
     , _dsbtDataSetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ dataSetsBeginTransaction
     -> Text -- ^ 'dsbtDataSetId'
     -> DataSetsBeginTransaction
 dataSetsBeginTransaction pDsbtPayload_ pDsbtDataSetId_ =
-    DataSetsBeginTransaction
+    DataSetsBeginTransaction'
     { _dsbtPayload = pDsbtPayload_
     , _dsbtDataSetId = pDsbtDataSetId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest DataSetsBeginTransaction where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient DataSetsBeginTransaction{..}
+        requestClient DataSetsBeginTransaction'{..}
           = go _dsbtDataSetId (Just AltJSON) _dsbtPayload
               datastoreService
           where go

@@ -63,7 +63,7 @@ type TablesUpdateResource =
 -- that are provided in the submitted table resource.
 --
 -- /See:/ 'tablesUpdate' smart constructor.
-data TablesUpdate = TablesUpdate
+data TablesUpdate = TablesUpdate'
     { _tuPayload   :: !Table
     , _tuDataSetId :: !Text
     , _tuProjectId :: !Text
@@ -88,7 +88,7 @@ tablesUpdate
     -> Text -- ^ 'tuTableId'
     -> TablesUpdate
 tablesUpdate pTuPayload_ pTuDataSetId_ pTuProjectId_ pTuTableId_ =
-    TablesUpdate
+    TablesUpdate'
     { _tuPayload = pTuPayload_
     , _tuDataSetId = pTuDataSetId_
     , _tuProjectId = pTuProjectId_
@@ -120,7 +120,7 @@ instance GoogleRequest TablesUpdate where
         type Scopes TablesUpdate =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TablesUpdate{..}
+        requestClient TablesUpdate'{..}
           = go _tuProjectId _tuDataSetId _tuTableId
               (Just AltJSON)
               _tuPayload

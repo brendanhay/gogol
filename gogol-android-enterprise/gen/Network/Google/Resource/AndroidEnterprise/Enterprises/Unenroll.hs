@@ -52,7 +52,7 @@ type EnterprisesUnenrollResource =
 -- | Unenrolls an enterprise from the calling EMM.
 --
 -- /See:/ 'enterprisesUnenroll' smart constructor.
-newtype EnterprisesUnenroll = EnterprisesUnenroll
+newtype EnterprisesUnenroll = EnterprisesUnenroll'
     { _euuEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ enterprisesUnenroll
     :: Text -- ^ 'euuEnterpriseId'
     -> EnterprisesUnenroll
 enterprisesUnenroll pEuuEnterpriseId_ =
-    EnterprisesUnenroll
+    EnterprisesUnenroll'
     { _euuEnterpriseId = pEuuEnterpriseId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest EnterprisesUnenroll where
         type Rs EnterprisesUnenroll = ()
         type Scopes EnterprisesUnenroll =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesUnenroll{..}
+        requestClient EnterprisesUnenroll'{..}
           = go _euuEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

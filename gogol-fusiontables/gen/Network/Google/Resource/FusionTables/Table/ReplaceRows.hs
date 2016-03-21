@@ -80,7 +80,7 @@ type TableReplaceRowsResource =
 -- all replacement rows are ready.
 --
 -- /See:/ 'tableReplaceRows' smart constructor.
-data TableReplaceRows = TableReplaceRows
+data TableReplaceRows = TableReplaceRows'
     { _trrStartLine :: !(Maybe (Textual Int32))
     , _trrEndLine   :: !(Maybe (Textual Int32))
     , _trrTableId   :: !Text
@@ -108,7 +108,7 @@ tableReplaceRows
     :: Text -- ^ 'trrTableId'
     -> TableReplaceRows
 tableReplaceRows pTrrTableId_ =
-    TableReplaceRows
+    TableReplaceRows'
     { _trrStartLine = Nothing
     , _trrEndLine = Nothing
     , _trrTableId = pTrrTableId_
@@ -162,7 +162,7 @@ instance GoogleRequest TableReplaceRows where
         type Rs TableReplaceRows = Task
         type Scopes TableReplaceRows =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TableReplaceRows{..}
+        requestClient TableReplaceRows'{..}
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding
@@ -179,7 +179,8 @@ instance GoogleRequest (MediaUpload TableReplaceRows)
         type Rs (MediaUpload TableReplaceRows) = Task
         type Scopes (MediaUpload TableReplaceRows) =
              Scopes TableReplaceRows
-        requestClient (MediaUpload TableReplaceRows{..} body)
+        requestClient
+          (MediaUpload TableReplaceRows'{..} body)
           = go _trrTableId _trrStartLine _trrEndLine
               _trrDelimiter
               _trrEncoding

@@ -64,7 +64,7 @@ type InstanceGroupManagersListResource =
 -- the specified project and zone.
 --
 -- /See:/ 'instanceGroupManagersList' smart constructor.
-data InstanceGroupManagersList = InstanceGroupManagersList
+data InstanceGroupManagersList = InstanceGroupManagersList'
     { _igmlProject    :: !Text
     , _igmlZone       :: !Text
     , _igmlFilter     :: !(Maybe Text)
@@ -90,7 +90,7 @@ instanceGroupManagersList
     -> Text -- ^ 'igmlZone'
     -> InstanceGroupManagersList
 instanceGroupManagersList pIgmlProject_ pIgmlZone_ =
-    InstanceGroupManagersList
+    InstanceGroupManagersList'
     { _igmlProject = pIgmlProject_
     , _igmlZone = pIgmlZone_
     , _igmlFilter = Nothing
@@ -158,7 +158,7 @@ instance GoogleRequest InstanceGroupManagersList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupManagersList{..}
+        requestClient InstanceGroupManagersList'{..}
           = go _igmlProject _igmlZone _igmlFilter
               _igmlPageToken
               (Just _igmlMaxResults)

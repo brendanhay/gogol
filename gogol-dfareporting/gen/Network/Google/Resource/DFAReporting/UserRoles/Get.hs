@@ -54,7 +54,7 @@ type UserRolesGetResource =
 -- | Gets one user role by ID.
 --
 -- /See:/ 'userRolesGet' smart constructor.
-data UserRolesGet = UserRolesGet
+data UserRolesGet = UserRolesGet'
     { _urgProFileId :: !(Textual Int64)
     , _urgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolesGet
     -> Int64 -- ^ 'urgId'
     -> UserRolesGet
 userRolesGet pUrgProFileId_ pUrgId_ =
-    UserRolesGet
+    UserRolesGet'
     { _urgProFileId = _Coerce # pUrgProFileId_
     , _urgId = _Coerce # pUrgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UserRolesGet where
         type Rs UserRolesGet = UserRole
         type Scopes UserRolesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolesGet{..}
+        requestClient UserRolesGet'{..}
           = go _urgProFileId _urgId (Just AltJSON)
               dFAReportingService
           where go

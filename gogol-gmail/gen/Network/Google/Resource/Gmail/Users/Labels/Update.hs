@@ -56,7 +56,7 @@ type UsersLabelsUpdateResource =
 -- | Updates the specified label.
 --
 -- /See:/ 'usersLabelsUpdate' smart constructor.
-data UsersLabelsUpdate = UsersLabelsUpdate
+data UsersLabelsUpdate = UsersLabelsUpdate'
     { _uluPayload :: !Label
     , _uluUserId  :: !Text
     , _uluId      :: !Text
@@ -76,7 +76,7 @@ usersLabelsUpdate
     -> Text -- ^ 'uluId'
     -> UsersLabelsUpdate
 usersLabelsUpdate pUluPayload_ pUluId_ =
-    UsersLabelsUpdate
+    UsersLabelsUpdate'
     { _uluPayload = pUluPayload_
     , _uluUserId = "me"
     , _uluId = pUluId_
@@ -103,7 +103,7 @@ instance GoogleRequest UsersLabelsUpdate where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.labels",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersLabelsUpdate{..}
+        requestClient UsersLabelsUpdate'{..}
           = go _uluUserId _uluId (Just AltJSON) _uluPayload
               gmailService
           where go

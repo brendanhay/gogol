@@ -65,7 +65,7 @@ type ProjectsLogsDeleteResource =
 -- receives new entries.
 --
 -- /See:/ 'projectsLogsDelete' smart constructor.
-data ProjectsLogsDelete = ProjectsLogsDelete
+data ProjectsLogsDelete = ProjectsLogsDelete'
     { _pldXgafv          :: !(Maybe Text)
     , _pldUploadProtocol :: !(Maybe Text)
     , _pldPp             :: !Bool
@@ -99,7 +99,7 @@ projectsLogsDelete
     :: Text -- ^ 'pldLogName'
     -> ProjectsLogsDelete
 projectsLogsDelete pPldLogName_ =
-    ProjectsLogsDelete
+    ProjectsLogsDelete'
     { _pldXgafv = Nothing
     , _pldUploadProtocol = Nothing
     , _pldPp = True
@@ -158,7 +158,7 @@ instance GoogleRequest ProjectsLogsDelete where
         type Scopes ProjectsLogsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
-        requestClient ProjectsLogsDelete{..}
+        requestClient ProjectsLogsDelete'{..}
           = go _pldLogName _pldXgafv _pldUploadProtocol
               (Just _pldPp)
               _pldAccessToken

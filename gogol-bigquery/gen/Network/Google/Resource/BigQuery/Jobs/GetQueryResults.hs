@@ -63,7 +63,7 @@ type JobsGetQueryResultsResource =
 -- | Retrieves the results of a query job.
 --
 -- /See:/ 'jobsGetQueryResults' smart constructor.
-data JobsGetQueryResults = JobsGetQueryResults
+data JobsGetQueryResults = JobsGetQueryResults'
     { _jgqrJobId      :: !Text
     , _jgqrTimeoutMs  :: !(Maybe (Textual Word32))
     , _jgqrPageToken  :: !(Maybe Text)
@@ -92,7 +92,7 @@ jobsGetQueryResults
     -> Text -- ^ 'jgqrProjectId'
     -> JobsGetQueryResults
 jobsGetQueryResults pJgqrJobId_ pJgqrProjectId_ =
-    JobsGetQueryResults
+    JobsGetQueryResults'
     { _jgqrJobId = pJgqrJobId_
     , _jgqrTimeoutMs = Nothing
     , _jgqrPageToken = Nothing
@@ -148,7 +148,7 @@ instance GoogleRequest JobsGetQueryResults where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient JobsGetQueryResults{..}
+        requestClient JobsGetQueryResults'{..}
           = go _jgqrProjectId _jgqrJobId _jgqrTimeoutMs
               _jgqrPageToken
               _jgqrStartIndex

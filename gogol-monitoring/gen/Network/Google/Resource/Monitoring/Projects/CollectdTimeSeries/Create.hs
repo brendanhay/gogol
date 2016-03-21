@@ -73,7 +73,7 @@ type ProjectsCollectdTimeSeriesCreateResource =
 -- [google.monitoring.v3.MetricService.CreateTimeSeries] instead.
 --
 -- /See:/ 'projectsCollectdTimeSeriesCreate' smart constructor.
-data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate
+data ProjectsCollectdTimeSeriesCreate = ProjectsCollectdTimeSeriesCreate'
     { _pctscXgafv          :: !(Maybe Text)
     , _pctscUploadProtocol :: !(Maybe Text)
     , _pctscPp             :: !Bool
@@ -111,7 +111,7 @@ projectsCollectdTimeSeriesCreate
     -> Text -- ^ 'pctscName'
     -> ProjectsCollectdTimeSeriesCreate
 projectsCollectdTimeSeriesCreate pPctscPayload_ pPctscName_ =
-    ProjectsCollectdTimeSeriesCreate
+    ProjectsCollectdTimeSeriesCreate'
     { _pctscXgafv = Nothing
     , _pctscUploadProtocol = Nothing
     , _pctscPp = True
@@ -180,7 +180,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.write"]
-        requestClient ProjectsCollectdTimeSeriesCreate{..}
+        requestClient ProjectsCollectdTimeSeriesCreate'{..}
           = go _pctscName _pctscXgafv _pctscUploadProtocol
               (Just _pctscPp)
               _pctscAccessToken

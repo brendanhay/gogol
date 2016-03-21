@@ -61,7 +61,7 @@ type UsersListResource =
 -- | Retrieves a list of users contained within the specified project.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulOrderBy    :: !(Maybe Text)
     , _ulProject    :: !Text
     , _ulFilter     :: !(Maybe Text)
@@ -86,7 +86,7 @@ usersList
     :: Text -- ^ 'ulProject'
     -> UsersList
 usersList pUlProject_ =
-    UsersList
+    UsersList'
     { _ulOrderBy = Nothing
     , _ulProject = pUlProject_
     , _ulFilter = Nothing
@@ -158,7 +158,7 @@ instance GoogleRequest UsersList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/cloud.useraccounts",
                "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-        requestClient UsersList{..}
+        requestClient UsersList'{..}
           = go _ulProject _ulOrderBy _ulFilter _ulPageToken
               (Just _ulMaxResults)
               (Just AltJSON)

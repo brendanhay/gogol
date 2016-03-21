@@ -57,7 +57,7 @@ type AccountshippingCustombatchResource =
 -- single request.
 --
 -- /See:/ 'accountshippingCustombatch' smart constructor.
-data AccountshippingCustombatch = AccountshippingCustombatch
+data AccountshippingCustombatch = AccountshippingCustombatch'
     { _acPayload :: !AccountshippingCustomBatchRequest
     , _acDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountshippingCustombatch
     :: AccountshippingCustomBatchRequest -- ^ 'acPayload'
     -> AccountshippingCustombatch
 accountshippingCustombatch pAcPayload_ =
-    AccountshippingCustombatch
+    AccountshippingCustombatch'
     { _acPayload = pAcPayload_
     , _acDryRun = Nothing
     }
@@ -93,7 +93,7 @@ instance GoogleRequest AccountshippingCustombatch
              AccountshippingCustomBatchResponse
         type Scopes AccountshippingCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountshippingCustombatch{..}
+        requestClient AccountshippingCustombatch'{..}
           = go _acDryRun (Just AltJSON) _acPayload
               shoppingContentService
           where go

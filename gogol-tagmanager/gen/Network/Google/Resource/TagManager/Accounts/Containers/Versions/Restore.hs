@@ -65,7 +65,7 @@ type AccountsContainersVersionsRestoreResource =
 -- (i.e. the published version).
 --
 -- /See:/ 'accountsContainersVersionsRestore' smart constructor.
-data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore
+data AccountsContainersVersionsRestore = AccountsContainersVersionsRestore'
     { _acvrContainerId        :: !Text
     , _acvrContainerVersionId :: !Text
     , _acvrAccountId          :: !Text
@@ -86,7 +86,7 @@ accountsContainersVersionsRestore
     -> Text -- ^ 'acvrAccountId'
     -> AccountsContainersVersionsRestore
 accountsContainersVersionsRestore pAcvrContainerId_ pAcvrContainerVersionId_ pAcvrAccountId_ =
-    AccountsContainersVersionsRestore
+    AccountsContainersVersionsRestore'
     { _acvrContainerId = pAcvrContainerId_
     , _acvrContainerVersionId = pAcvrContainerVersionId_
     , _acvrAccountId = pAcvrAccountId_
@@ -116,7 +116,7 @@ instance GoogleRequest
              ContainerVersion
         type Scopes AccountsContainersVersionsRestore =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersVersionsRestore{..}
+        requestClient AccountsContainersVersionsRestore'{..}
           = go _acvrAccountId _acvrContainerId
               _acvrContainerVersionId
               (Just AltJSON)

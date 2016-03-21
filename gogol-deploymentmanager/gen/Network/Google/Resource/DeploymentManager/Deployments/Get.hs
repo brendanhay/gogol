@@ -55,7 +55,7 @@ type DeploymentsGetResource =
 -- | Gets information about a specific deployment.
 --
 -- /See:/ 'deploymentsGet' smart constructor.
-data DeploymentsGet = DeploymentsGet
+data DeploymentsGet = DeploymentsGet'
     { _dgProject    :: !Text
     , _dgDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ deploymentsGet
     -> Text -- ^ 'dgDeployment'
     -> DeploymentsGet
 deploymentsGet pDgProject_ pDgDeployment_ =
-    DeploymentsGet
+    DeploymentsGet'
     { _dgProject = pDgProject_
     , _dgDeployment = pDgDeployment_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest DeploymentsGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient DeploymentsGet{..}
+        requestClient DeploymentsGet'{..}
           = go _dgProject _dgDeployment (Just AltJSON)
               deploymentManagerService
           where go

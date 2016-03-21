@@ -55,7 +55,7 @@ type PostsRevertResource =
 -- | Revert a published or scheduled post to draft state.
 --
 -- /See:/ 'postsRevert' smart constructor.
-data PostsRevert = PostsRevert
+data PostsRevert = PostsRevert'
     { _prBlogId :: !Text
     , _prPostId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ postsRevert
     -> Text -- ^ 'prPostId'
     -> PostsRevert
 postsRevert pPrBlogId_ pPrPostId_ =
-    PostsRevert
+    PostsRevert'
     { _prBlogId = pPrBlogId_
     , _prPostId = pPrPostId_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest PostsRevert where
         type Rs PostsRevert = Post'
         type Scopes PostsRevert =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PostsRevert{..}
+        requestClient PostsRevert'{..}
           = go _prBlogId _prPostId (Just AltJSON)
               bloggerService
           where go

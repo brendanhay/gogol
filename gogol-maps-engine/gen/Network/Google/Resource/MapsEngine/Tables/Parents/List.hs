@@ -57,7 +57,7 @@ type TablesParentsListResource =
 -- | Return all parent ids of the specified table.
 --
 -- /See:/ 'tablesParentsList' smart constructor.
-data TablesParentsList = TablesParentsList
+data TablesParentsList = TablesParentsList'
     { _tId         :: !Text
     , _tPageToken  :: !(Maybe Text)
     , _tMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ tablesParentsList
     :: Text -- ^ 'tId'
     -> TablesParentsList
 tablesParentsList pTId_ =
-    TablesParentsList
+    TablesParentsList'
     { _tId = pTId_
     , _tPageToken = Nothing
     , _tMaxResults = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest TablesParentsList where
         type Scopes TablesParentsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient TablesParentsList{..}
+        requestClient TablesParentsList'{..}
           = go _tId _tPageToken _tMaxResults (Just AltJSON)
               mapsEngineService
           where go

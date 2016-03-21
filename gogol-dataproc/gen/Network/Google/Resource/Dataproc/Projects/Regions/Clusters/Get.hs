@@ -70,7 +70,7 @@ type ProjectsRegionsClustersGetResource =
 -- | Gets the resource representation for a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersGet' smart constructor.
-data ProjectsRegionsClustersGet = ProjectsRegionsClustersGet
+data ProjectsRegionsClustersGet = ProjectsRegionsClustersGet'
     { _prcgXgafv          :: !(Maybe Text)
     , _prcgUploadProtocol :: !(Maybe Text)
     , _prcgPp             :: !Bool
@@ -112,7 +112,7 @@ projectsRegionsClustersGet
     -> Text -- ^ 'prcgProjectId'
     -> ProjectsRegionsClustersGet
 projectsRegionsClustersGet pPrcgClusterName_ pPrcgRegion_ pPrcgProjectId_ =
-    ProjectsRegionsClustersGet
+    ProjectsRegionsClustersGet'
     { _prcgXgafv = Nothing
     , _prcgUploadProtocol = Nothing
     , _prcgPp = True
@@ -186,7 +186,7 @@ instance GoogleRequest ProjectsRegionsClustersGet
         type Rs ProjectsRegionsClustersGet = Cluster
         type Scopes ProjectsRegionsClustersGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsClustersGet{..}
+        requestClient ProjectsRegionsClustersGet'{..}
           = go _prcgProjectId _prcgRegion _prcgClusterName
               _prcgXgafv
               _prcgUploadProtocol

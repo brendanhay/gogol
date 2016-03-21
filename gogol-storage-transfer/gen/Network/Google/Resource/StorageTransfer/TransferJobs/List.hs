@@ -69,7 +69,7 @@ type TransferJobsListResource =
 -- | Lists transfer jobs.
 --
 -- /See:/ 'transferJobsList' smart constructor.
-data TransferJobsList = TransferJobsList
+data TransferJobsList = TransferJobsList'
     { _tjlXgafv          :: !(Maybe Text)
     , _tjlUploadProtocol :: !(Maybe Text)
     , _tjlPp             :: !Bool
@@ -108,7 +108,7 @@ data TransferJobsList = TransferJobsList
 transferJobsList
     :: TransferJobsList
 transferJobsList =
-    TransferJobsList
+    TransferJobsList'
     { _tjlXgafv = Nothing
     , _tjlUploadProtocol = Nothing
     , _tjlPp = True
@@ -185,7 +185,7 @@ instance GoogleRequest TransferJobsList where
         type Rs TransferJobsList = ListTransferJobsResponse
         type Scopes TransferJobsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferJobsList{..}
+        requestClient TransferJobsList'{..}
           = go _tjlXgafv _tjlUploadProtocol (Just _tjlPp)
               _tjlAccessToken
               _tjlUploadType

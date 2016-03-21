@@ -60,7 +60,7 @@ type ObjectAccessControlsGetResource =
 -- | Returns the ACL entry for the specified entity on the specified object.
 --
 -- /See:/ 'objectAccessControlsGet' smart constructor.
-data ObjectAccessControlsGet = ObjectAccessControlsGet
+data ObjectAccessControlsGet = ObjectAccessControlsGet'
     { _oacgBucket     :: !Text
     , _oacgObject     :: !Text
     , _oacgEntity     :: !Text
@@ -84,7 +84,7 @@ objectAccessControlsGet
     -> Text -- ^ 'oacgEntity'
     -> ObjectAccessControlsGet
 objectAccessControlsGet pOacgBucket_ pOacgObject_ pOacgEntity_ =
-    ObjectAccessControlsGet
+    ObjectAccessControlsGet'
     { _oacgBucket = pOacgBucket_
     , _oacgObject = pOacgObject_
     , _oacgEntity = pOacgEntity_
@@ -122,7 +122,7 @@ instance GoogleRequest ObjectAccessControlsGet where
         type Scopes ObjectAccessControlsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient ObjectAccessControlsGet{..}
+        requestClient ObjectAccessControlsGet'{..}
           = go _oacgBucket _oacgObject _oacgEntity
               _oacgGeneration
               (Just AltJSON)

@@ -56,7 +56,7 @@ type DevicesListResource =
 -- | Retrieves the IDs of all of a user\'s devices.
 --
 -- /See:/ 'devicesList' smart constructor.
-data DevicesList = DevicesList
+data DevicesList = DevicesList'
     { _dlEnterpriseId :: !Text
     , _dlUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ devicesList
     -> Text -- ^ 'dlUserId'
     -> DevicesList
 devicesList pDlEnterpriseId_ pDlUserId_ =
-    DevicesList
+    DevicesList'
     { _dlEnterpriseId = pDlEnterpriseId_
     , _dlUserId = pDlUserId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest DevicesList where
         type Rs DevicesList = DevicesListResponse
         type Scopes DevicesList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient DevicesList{..}
+        requestClient DevicesList'{..}
           = go _dlEnterpriseId _dlUserId (Just AltJSON)
               androidEnterpriseService
           where go

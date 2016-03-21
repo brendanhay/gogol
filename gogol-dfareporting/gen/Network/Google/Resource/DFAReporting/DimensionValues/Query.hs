@@ -60,7 +60,7 @@ type DimensionValuesQueryResource =
 -- | Retrieves list of report dimension values for a list of filters.
 --
 -- /See:/ 'dimensionValuesQuery' smart constructor.
-data DimensionValuesQuery = DimensionValuesQuery
+data DimensionValuesQuery = DimensionValuesQuery'
     { _dvqProFileId  :: !(Textual Int64)
     , _dvqPayload    :: !DimensionValueRequest
     , _dvqPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ dimensionValuesQuery
     -> DimensionValueRequest -- ^ 'dvqPayload'
     -> DimensionValuesQuery
 dimensionValuesQuery pDvqProFileId_ pDvqPayload_ =
-    DimensionValuesQuery
+    DimensionValuesQuery'
     { _dvqProFileId = _Coerce # pDvqProFileId_
     , _dvqPayload = pDvqPayload_
     , _dvqPageToken = Nothing
@@ -117,7 +117,7 @@ instance GoogleRequest DimensionValuesQuery where
         type Rs DimensionValuesQuery = DimensionValueList
         type Scopes DimensionValuesQuery =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient DimensionValuesQuery{..}
+        requestClient DimensionValuesQuery'{..}
           = go _dvqProFileId _dvqPageToken _dvqMaxResults
               (Just AltJSON)
               _dvqPayload

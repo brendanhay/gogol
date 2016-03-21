@@ -79,7 +79,7 @@ type FloodlightActivityGroupsListResource =
 -- | Retrieves a list of floodlight activity groups, possibly filtered.
 --
 -- /See:/ 'floodlightActivityGroupsList' smart constructor.
-data FloodlightActivityGroupsList = FloodlightActivityGroupsList
+data FloodlightActivityGroupsList = FloodlightActivityGroupsList'
     { _faglFloodlightConfigurationId :: !(Maybe (Textual Int64))
     , _faglAdvertiserId              :: !(Maybe (Textual Int64))
     , _faglSearchString              :: !(Maybe Text)
@@ -119,7 +119,7 @@ floodlightActivityGroupsList
     :: Int64 -- ^ 'faglProFileId'
     -> FloodlightActivityGroupsList
 floodlightActivityGroupsList pFaglProFileId_ =
-    FloodlightActivityGroupsList
+    FloodlightActivityGroupsList'
     { _faglFloodlightConfigurationId = Nothing
     , _faglAdvertiserId = Nothing
     , _faglSearchString = Nothing
@@ -215,7 +215,7 @@ instance GoogleRequest FloodlightActivityGroupsList
              FloodlightActivityGroupsListResponse
         type Scopes FloodlightActivityGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivityGroupsList{..}
+        requestClient FloodlightActivityGroupsList'{..}
           = go _faglProFileId _faglFloodlightConfigurationId
               _faglAdvertiserId
               _faglSearchString

@@ -80,7 +80,7 @@ type InvitationsCreateResource =
 -- specified user and course already exists.
 --
 -- /See:/ 'invitationsCreate' smart constructor.
-data InvitationsCreate = InvitationsCreate
+data InvitationsCreate = InvitationsCreate'
     { _icXgafv          :: !(Maybe Text)
     , _icUploadProtocol :: !(Maybe Text)
     , _icPp             :: !Bool
@@ -114,7 +114,7 @@ invitationsCreate
     :: Invitation -- ^ 'icPayload'
     -> InvitationsCreate
 invitationsCreate pIcPayload_ =
-    InvitationsCreate
+    InvitationsCreate'
     { _icXgafv = Nothing
     , _icUploadProtocol = Nothing
     , _icPp = True
@@ -170,7 +170,7 @@ instance GoogleRequest InvitationsCreate where
         type Rs InvitationsCreate = Invitation
         type Scopes InvitationsCreate =
              '["https://www.googleapis.com/auth/classroom.rosters"]
-        requestClient InvitationsCreate{..}
+        requestClient InvitationsCreate'{..}
           = go _icXgafv _icUploadProtocol (Just _icPp)
               _icAccessToken
               _icUploadType

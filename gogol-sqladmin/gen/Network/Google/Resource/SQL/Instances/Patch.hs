@@ -63,7 +63,7 @@ type InstancesPatchResource =
 -- semantics.
 --
 -- /See:/ 'instancesPatch' smart constructor.
-data InstancesPatch = InstancesPatch
+data InstancesPatch = InstancesPatch'
     { _ipProject  :: !Text
     , _ipPayload  :: !DatabaseInstance
     , _ipInstance :: !Text
@@ -84,7 +84,7 @@ instancesPatch
     -> Text -- ^ 'ipInstance'
     -> InstancesPatch
 instancesPatch pIpProject_ pIpPayload_ pIpInstance_ =
-    InstancesPatch
+    InstancesPatch'
     { _ipProject = pIpProject_
     , _ipPayload = pIpPayload_
     , _ipInstance = pIpInstance_
@@ -110,7 +110,7 @@ instance GoogleRequest InstancesPatch where
         type Scopes InstancesPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesPatch{..}
+        requestClient InstancesPatch'{..}
           = go _ipProject _ipInstance (Just AltJSON) _ipPayload
               sQLAdminService
           where go

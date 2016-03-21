@@ -59,7 +59,7 @@ type InstancesListResource =
 -- instance name.
 --
 -- /See:/ 'instancesList' smart constructor.
-data InstancesList = InstancesList
+data InstancesList = InstancesList'
     { _ilProject    :: !Text
     , _ilPageToken  :: !(Maybe Text)
     , _ilMaxResults :: !(Maybe (Textual Word32))
@@ -78,7 +78,7 @@ instancesList
     :: Text -- ^ 'ilProject'
     -> InstancesList
 instancesList pIlProject_ =
-    InstancesList
+    InstancesList'
     { _ilProject = pIlProject_
     , _ilPageToken = Nothing
     , _ilMaxResults = Nothing
@@ -106,7 +106,7 @@ instance GoogleRequest InstancesList where
         type Scopes InstancesList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesList{..}
+        requestClient InstancesList'{..}
           = go _ilProject _ilPageToken _ilMaxResults
               (Just AltJSON)
               sQLAdminService

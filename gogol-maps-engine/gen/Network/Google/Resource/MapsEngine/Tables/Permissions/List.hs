@@ -53,7 +53,7 @@ type TablesPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'tablesPermissionsList' smart constructor.
-newtype TablesPermissionsList = TablesPermissionsList
+newtype TablesPermissionsList = TablesPermissionsList'
     { _tplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ tablesPermissionsList
     :: Text -- ^ 'tplId'
     -> TablesPermissionsList
 tablesPermissionsList pTplId_ =
-    TablesPermissionsList
+    TablesPermissionsList'
     { _tplId = pTplId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest TablesPermissionsList where
         type Scopes TablesPermissionsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient TablesPermissionsList{..}
+        requestClient TablesPermissionsList'{..}
           = go _tplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

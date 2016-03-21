@@ -54,7 +54,7 @@ type GroupsDeleteResource =
 -- | Deletes a group.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+data GroupsDelete = GroupsDelete'
     { _gdOnBehalfOfContentOwner :: !(Maybe Text)
     , _gdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsDelete
     :: Text -- ^ 'gdId'
     -> GroupsDelete
 groupsDelete pGdId_ =
-    GroupsDelete
+    GroupsDelete'
     { _gdOnBehalfOfContentOwner = Nothing
     , _gdId = pGdId_
     }
@@ -100,7 +100,7 @@ instance GoogleRequest GroupsDelete where
         type Scopes GroupsDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient GroupsDelete{..}
+        requestClient GroupsDelete'{..}
           = go (Just _gdId) _gdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

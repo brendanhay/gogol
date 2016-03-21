@@ -62,7 +62,7 @@ type SSLCertsInsertResource =
 -- until the instance is restarted.
 --
 -- /See:/ 'sslCertsInsert' smart constructor.
-data SSLCertsInsert = SSLCertsInsert
+data SSLCertsInsert = SSLCertsInsert'
     { _sciProject  :: !Text
     , _sciPayload  :: !SSLCertsInsertRequest
     , _sciInstance :: !Text
@@ -83,7 +83,7 @@ sslCertsInsert
     -> Text -- ^ 'sciInstance'
     -> SSLCertsInsert
 sslCertsInsert pSciProject_ pSciPayload_ pSciInstance_ =
-    SSLCertsInsert
+    SSLCertsInsert'
     { _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     , _sciInstance = pSciInstance_
@@ -110,7 +110,7 @@ instance GoogleRequest SSLCertsInsert where
         type Scopes SSLCertsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient SSLCertsInsert{..}
+        requestClient SSLCertsInsert'{..}
           = go _sciProject _sciInstance (Just AltJSON)
               _sciPayload
               sQLAdminService

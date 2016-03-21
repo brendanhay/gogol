@@ -53,7 +53,7 @@ type AccountPermissionGroupsListResource =
 -- | Retrieves the list of account permission groups.
 --
 -- /See:/ 'accountPermissionGroupsList' smart constructor.
-newtype AccountPermissionGroupsList = AccountPermissionGroupsList
+newtype AccountPermissionGroupsList = AccountPermissionGroupsList'
     { _apglProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountPermissionGroupsList
     :: Int64 -- ^ 'apglProFileId'
     -> AccountPermissionGroupsList
 accountPermissionGroupsList pApglProFileId_ =
-    AccountPermissionGroupsList
+    AccountPermissionGroupsList'
     { _apglProFileId = _Coerce # pApglProFileId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest AccountPermissionGroupsList
              AccountPermissionGroupsListResponse
         type Scopes AccountPermissionGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountPermissionGroupsList{..}
+        requestClient AccountPermissionGroupsList'{..}
           = go _apglProFileId (Just AltJSON)
               dFAReportingService
           where go

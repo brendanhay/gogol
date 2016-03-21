@@ -74,7 +74,7 @@ type VariantSetsCreateResource =
 -- is assigned by the server.
 --
 -- /See:/ 'variantSetsCreate' smart constructor.
-data VariantSetsCreate = VariantSetsCreate
+data VariantSetsCreate = VariantSetsCreate'
     { _vscXgafv          :: !(Maybe Text)
     , _vscUploadProtocol :: !(Maybe Text)
     , _vscPp             :: !Bool
@@ -108,7 +108,7 @@ variantSetsCreate
     :: VariantSet -- ^ 'vscPayload'
     -> VariantSetsCreate
 variantSetsCreate pVscPayload_ =
-    VariantSetsCreate
+    VariantSetsCreate'
     { _vscXgafv = Nothing
     , _vscUploadProtocol = Nothing
     , _vscPp = True
@@ -166,7 +166,7 @@ instance GoogleRequest VariantSetsCreate where
         type Scopes VariantSetsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantSetsCreate{..}
+        requestClient VariantSetsCreate'{..}
           = go _vscXgafv _vscUploadProtocol (Just _vscPp)
               _vscAccessToken
               _vscUploadType

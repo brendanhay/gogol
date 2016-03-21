@@ -51,7 +51,7 @@ type SitesAddResource =
 -- | Adds a site to the set of the user\'s sites in Search Console.
 --
 -- /See:/ 'sitesAdd' smart constructor.
-newtype SitesAdd = SitesAdd
+newtype SitesAdd = SitesAdd'
     { _saSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ sitesAdd
     :: Text -- ^ 'saSiteURL'
     -> SitesAdd
 sitesAdd pSaSiteURL_ =
-    SitesAdd
+    SitesAdd'
     { _saSiteURL = pSaSiteURL_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest SitesAdd where
         type Rs SitesAdd = ()
         type Scopes SitesAdd =
              '["https://www.googleapis.com/auth/webmasters"]
-        requestClient SitesAdd{..}
+        requestClient SitesAdd'{..}
           = go _saSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesAddResource)

@@ -57,7 +57,7 @@ type ManagementWebPropertiesListResource =
 -- | Lists web properties to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesList' smart constructor.
-data ManagementWebPropertiesList = ManagementWebPropertiesList
+data ManagementWebPropertiesList = ManagementWebPropertiesList'
     { _mwplAccountId  :: !Text
     , _mwplStartIndex :: !(Maybe (Textual Int32))
     , _mwplMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ managementWebPropertiesList
     :: Text -- ^ 'mwplAccountId'
     -> ManagementWebPropertiesList
 managementWebPropertiesList pMwplAccountId_ =
-    ManagementWebPropertiesList
+    ManagementWebPropertiesList'
     { _mwplAccountId = pMwplAccountId_
     , _mwplStartIndex = Nothing
     , _mwplMaxResults = Nothing
@@ -112,7 +112,7 @@ instance GoogleRequest ManagementWebPropertiesList
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementWebPropertiesList{..}
+        requestClient ManagementWebPropertiesList'{..}
           = go _mwplAccountId _mwplStartIndex _mwplMaxResults
               (Just AltJSON)
               analyticsService

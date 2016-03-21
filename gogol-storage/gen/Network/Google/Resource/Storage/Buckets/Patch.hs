@@ -67,7 +67,7 @@ type BucketsPatchResource =
 -- | Updates a bucket. This method supports patch semantics.
 --
 -- /See:/ 'bucketsPatch' smart constructor.
-data BucketsPatch = BucketsPatch
+data BucketsPatch = BucketsPatch'
     { _bpIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _bpPredefinedACL              :: !(Maybe BucketsPatchPredefinedACL)
     , _bpBucket                     :: !Text
@@ -99,7 +99,7 @@ bucketsPatch
     -> Bucket -- ^ 'bpPayload'
     -> BucketsPatch
 bucketsPatch pBpBucket_ pBpPayload_ =
-    BucketsPatch
+    BucketsPatch'
     { _bpIfMetagenerationMatch = Nothing
     , _bpPredefinedACL = Nothing
     , _bpBucket = pBpBucket_
@@ -157,7 +157,7 @@ instance GoogleRequest BucketsPatch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient BucketsPatch{..}
+        requestClient BucketsPatch'{..}
           = go _bpBucket _bpIfMetagenerationMatch
               _bpPredefinedACL
               _bpPredefinedDefaultObjectACL

@@ -65,7 +65,7 @@ type RollingUpdatesListInstanceUpdatesResource =
 -- | Lists the current status for each instance within a given update.
 --
 -- /See:/ 'rollingUpdatesListInstanceUpdates' smart constructor.
-data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates
+data RollingUpdatesListInstanceUpdates = RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate :: !Text
     , _ruliuProject       :: !Text
     , _ruliuZone          :: !Text
@@ -95,7 +95,7 @@ rollingUpdatesListInstanceUpdates
     -> Text -- ^ 'ruliuZone'
     -> RollingUpdatesListInstanceUpdates
 rollingUpdatesListInstanceUpdates pRuliuRollingUpdate_ pRuliuProject_ pRuliuZone_ =
-    RollingUpdatesListInstanceUpdates
+    RollingUpdatesListInstanceUpdates'
     { _ruliuRollingUpdate = pRuliuRollingUpdate_
     , _ruliuProject = pRuliuProject_
     , _ruliuZone = pRuliuZone_
@@ -149,7 +149,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/replicapool",
                "https://www.googleapis.com/auth/replicapool.readonly"]
-        requestClient RollingUpdatesListInstanceUpdates{..}
+        requestClient RollingUpdatesListInstanceUpdates'{..}
           = go _ruliuProject _ruliuZone _ruliuRollingUpdate
               _ruliuFilter
               _ruliuPageToken

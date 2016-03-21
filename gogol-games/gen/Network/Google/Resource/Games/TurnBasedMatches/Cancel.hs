@@ -52,7 +52,7 @@ type TurnBasedMatchesCancelResource =
 -- | Cancel a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesCancel' smart constructor.
-newtype TurnBasedMatchesCancel = TurnBasedMatchesCancel
+newtype TurnBasedMatchesCancel = TurnBasedMatchesCancel'
     { _tbmcMatchId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ turnBasedMatchesCancel
     :: Text -- ^ 'tbmcMatchId'
     -> TurnBasedMatchesCancel
 turnBasedMatchesCancel pTbmcMatchId_ =
-    TurnBasedMatchesCancel
+    TurnBasedMatchesCancel'
     { _tbmcMatchId = pTbmcMatchId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest TurnBasedMatchesCancel where
         type Scopes TurnBasedMatchesCancel =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesCancel{..}
+        requestClient TurnBasedMatchesCancel'{..}
           = go _tbmcMatchId (Just AltJSON) gamesService
           where go
                   = buildClient

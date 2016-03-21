@@ -57,7 +57,7 @@ type RolesUpdateResource =
 -- | Updates a role.
 --
 -- /See:/ 'rolesUpdate' smart constructor.
-data RolesUpdate = RolesUpdate
+data RolesUpdate = RolesUpdate'
     { _ruPayload  :: !Role
     , _ruRoleId   :: !Text
     , _ruCustomer :: !Text
@@ -78,7 +78,7 @@ rolesUpdate
     -> Text -- ^ 'ruCustomer'
     -> RolesUpdate
 rolesUpdate pRuPayload_ pRuRoleId_ pRuCustomer_ =
-    RolesUpdate
+    RolesUpdate'
     { _ruPayload = pRuPayload_
     , _ruRoleId = pRuRoleId_
     , _ruCustomer = pRuCustomer_
@@ -102,7 +102,7 @@ instance GoogleRequest RolesUpdate where
         type Rs RolesUpdate = Role
         type Scopes RolesUpdate =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
-        requestClient RolesUpdate{..}
+        requestClient RolesUpdate'{..}
           = go _ruCustomer _ruRoleId (Just AltJSON) _ruPayload
               directoryService
           where go

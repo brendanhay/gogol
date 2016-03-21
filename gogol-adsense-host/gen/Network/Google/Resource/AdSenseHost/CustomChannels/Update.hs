@@ -55,7 +55,7 @@ type CustomChannelsUpdateResource =
 -- | Update a custom channel in the host AdSense account.
 --
 -- /See:/ 'customChannelsUpdate' smart constructor.
-data CustomChannelsUpdate = CustomChannelsUpdate
+data CustomChannelsUpdate = CustomChannelsUpdate'
     { _ccuPayload    :: !CustomChannel
     , _ccuAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ customChannelsUpdate
     -> Text -- ^ 'ccuAdClientId'
     -> CustomChannelsUpdate
 customChannelsUpdate pCcuPayload_ pCcuAdClientId_ =
-    CustomChannelsUpdate
+    CustomChannelsUpdate'
     { _ccuPayload = pCcuPayload_
     , _ccuAdClientId = pCcuAdClientId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CustomChannelsUpdate where
         type Rs CustomChannelsUpdate = CustomChannel
         type Scopes CustomChannelsUpdate =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient CustomChannelsUpdate{..}
+        requestClient CustomChannelsUpdate'{..}
           = go _ccuAdClientId (Just AltJSON) _ccuPayload
               adSenseHostService
           where go

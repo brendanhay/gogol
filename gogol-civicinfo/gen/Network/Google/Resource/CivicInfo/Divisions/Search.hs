@@ -52,7 +52,7 @@ type DivisionsSearchResource =
 -- | Searches for political divisions by their natural name or OCD ID.
 --
 -- /See:/ 'divisionsSearch' smart constructor.
-newtype DivisionsSearch = DivisionsSearch
+newtype DivisionsSearch = DivisionsSearch'
     { _dsQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ newtype DivisionsSearch = DivisionsSearch
 divisionsSearch
     :: DivisionsSearch
 divisionsSearch =
-    DivisionsSearch
+    DivisionsSearch'
     { _dsQuery = Nothing
     }
 
@@ -79,7 +79,7 @@ dsQuery = lens _dsQuery (\ s a -> s{_dsQuery = a})
 instance GoogleRequest DivisionsSearch where
         type Rs DivisionsSearch = DivisionSearchResponse
         type Scopes DivisionsSearch = '[]
-        requestClient DivisionsSearch{..}
+        requestClient DivisionsSearch'{..}
           = go _dsQuery (Just AltJSON) civicInfoService
           where go
                   = buildClient

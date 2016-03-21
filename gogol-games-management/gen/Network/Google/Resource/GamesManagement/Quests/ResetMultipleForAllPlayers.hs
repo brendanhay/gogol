@@ -57,7 +57,7 @@ type QuestsResetMultipleForAllPlayersResource =
 -- may be reset.
 --
 -- /See:/ 'questsResetMultipleForAllPlayers' smart constructor.
-newtype QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers
+newtype QuestsResetMultipleForAllPlayers = QuestsResetMultipleForAllPlayers'
     { _qrmfapPayload :: QuestsResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ questsResetMultipleForAllPlayers
     :: QuestsResetMultipleForAllRequest -- ^ 'qrmfapPayload'
     -> QuestsResetMultipleForAllPlayers
 questsResetMultipleForAllPlayers pQrmfapPayload_ =
-    QuestsResetMultipleForAllPlayers
+    QuestsResetMultipleForAllPlayers'
     { _qrmfapPayload = pQrmfapPayload_
     }
 
@@ -86,7 +86,7 @@ instance GoogleRequest
         type Scopes QuestsResetMultipleForAllPlayers =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestsResetMultipleForAllPlayers{..}
+        requestClient QuestsResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _qrmfapPayload
               gamesManagementService
           where go

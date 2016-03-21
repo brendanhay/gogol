@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | ListOperationsResponse is the result of ListOperationsRequest.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-newtype ListOperationsResponse = ListOperationsResponse
+newtype ListOperationsResponse = ListOperationsResponse'
     { _lorOperations :: Maybe [Operation]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype ListOperationsResponse = ListOperationsResponse
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse
+    ListOperationsResponse'
     { _lorOperations = Nothing
     }
 
@@ -51,18 +51,18 @@ instance FromJSON ListOperationsResponse where
         parseJSON
           = withObject "ListOperationsResponse"
               (\ o ->
-                 ListOperationsResponse <$>
+                 ListOperationsResponse' <$>
                    (o .:? "operations" .!= mempty))
 
 instance ToJSON ListOperationsResponse where
-        toJSON ListOperationsResponse{..}
+        toJSON ListOperationsResponse'{..}
           = object
               (catMaybes [("operations" .=) <$> _lorOperations])
 
 -- | CreateClusterRequest creates a cluster.
 --
 -- /See:/ 'createClusterRequest' smart constructor.
-newtype CreateClusterRequest = CreateClusterRequest
+newtype CreateClusterRequest = CreateClusterRequest'
     { _ccrCluster :: Maybe Cluster
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -74,7 +74,7 @@ newtype CreateClusterRequest = CreateClusterRequest
 createClusterRequest
     :: CreateClusterRequest
 createClusterRequest =
-    CreateClusterRequest
+    CreateClusterRequest'
     { _ccrCluster = Nothing
     }
 
@@ -87,16 +87,16 @@ ccrCluster
 instance FromJSON CreateClusterRequest where
         parseJSON
           = withObject "CreateClusterRequest"
-              (\ o -> CreateClusterRequest <$> (o .:? "cluster"))
+              (\ o -> CreateClusterRequest' <$> (o .:? "cluster"))
 
 instance ToJSON CreateClusterRequest where
-        toJSON CreateClusterRequest{..}
+        toJSON CreateClusterRequest'{..}
           = object (catMaybes [("cluster" .=) <$> _ccrCluster])
 
 -- | A Google Container Engine cluster.
 --
 -- /See:/ 'cluster' smart constructor.
-data Cluster = Cluster
+data Cluster = Cluster'
     { _cStatus                :: !(Maybe Text)
     , _cNodeConfig            :: !(Maybe NodeConfig)
     , _cNodeIPv4CIdRSize      :: !(Maybe (Textual Int32))
@@ -168,7 +168,7 @@ data Cluster = Cluster
 cluster
     :: Cluster
 cluster =
-    Cluster
+    Cluster'
     { _cStatus = Nothing
     , _cNodeConfig = Nothing
     , _cNodeIPv4CIdRSize = Nothing
@@ -350,7 +350,7 @@ instance FromJSON Cluster where
         parseJSON
           = withObject "Cluster"
               (\ o ->
-                 Cluster <$>
+                 Cluster' <$>
                    (o .:? "status") <*> (o .:? "nodeConfig") <*>
                      (o .:? "nodeIpv4CidrSize")
                      <*> (o .:? "clusterIpv4Cidr")
@@ -373,7 +373,7 @@ instance FromJSON Cluster where
                      <*> (o .:? "createTime"))
 
 instance ToJSON Cluster where
-        toJSON Cluster{..}
+        toJSON Cluster'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _cStatus,
@@ -403,7 +403,7 @@ instance ToJSON Cluster where
 -- | UpdateClusterRequest updates a cluster.
 --
 -- /See:/ 'updateClusterRequest' smart constructor.
-newtype UpdateClusterRequest = UpdateClusterRequest
+newtype UpdateClusterRequest = UpdateClusterRequest'
     { _ucrUpdate :: Maybe ClusterUpdate
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -415,7 +415,7 @@ newtype UpdateClusterRequest = UpdateClusterRequest
 updateClusterRequest
     :: UpdateClusterRequest
 updateClusterRequest =
-    UpdateClusterRequest
+    UpdateClusterRequest'
     { _ucrUpdate = Nothing
     }
 
@@ -427,16 +427,16 @@ ucrUpdate
 instance FromJSON UpdateClusterRequest where
         parseJSON
           = withObject "UpdateClusterRequest"
-              (\ o -> UpdateClusterRequest <$> (o .:? "update"))
+              (\ o -> UpdateClusterRequest' <$> (o .:? "update"))
 
 instance ToJSON UpdateClusterRequest where
-        toJSON UpdateClusterRequest{..}
+        toJSON UpdateClusterRequest'{..}
           = object (catMaybes [("update" .=) <$> _ucrUpdate])
 
 -- | Per-node parameters.
 --
 -- /See:/ 'nodeConfig' smart constructor.
-data NodeConfig = NodeConfig
+data NodeConfig = NodeConfig'
     { _ncDiskSizeGb  :: !(Maybe (Textual Int32))
     , _ncOAuthScopes :: !(Maybe [Text])
     , _ncMachineType :: !(Maybe Text)
@@ -454,7 +454,7 @@ data NodeConfig = NodeConfig
 nodeConfig
     :: NodeConfig
 nodeConfig =
-    NodeConfig
+    NodeConfig'
     { _ncDiskSizeGb = Nothing
     , _ncOAuthScopes = Nothing
     , _ncMachineType = Nothing
@@ -494,13 +494,13 @@ instance FromJSON NodeConfig where
         parseJSON
           = withObject "NodeConfig"
               (\ o ->
-                 NodeConfig <$>
+                 NodeConfig' <$>
                    (o .:? "diskSizeGb") <*>
                      (o .:? "oauthScopes" .!= mempty)
                      <*> (o .:? "machineType"))
 
 instance ToJSON NodeConfig where
-        toJSON NodeConfig{..}
+        toJSON NodeConfig'{..}
           = object
               (catMaybes
                  [("diskSizeGb" .=) <$> _ncDiskSizeGb,
@@ -510,7 +510,7 @@ instance ToJSON NodeConfig where
 -- | Defines the operation resource. All fields are output only.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oStatus        :: !(Maybe Text)
     , _oZone          :: !(Maybe Text)
     , _oSelfLink      :: !(Maybe Text)
@@ -540,7 +540,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oStatus = Nothing
     , _oZone = Nothing
     , _oSelfLink = Nothing
@@ -590,7 +590,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "status") <*> (o .:? "zone") <*>
                      (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -599,7 +599,7 @@ instance FromJSON Operation where
                      <*> (o .:? "targetLink"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _oStatus, ("zone" .=) <$> _oZone,
@@ -614,7 +614,7 @@ instance ToJSON Operation where
 -- certificates.
 --
 -- /See:/ 'masterAuth' smart constructor.
-data MasterAuth = MasterAuth
+data MasterAuth = MasterAuth'
     { _maClientKey            :: !(Maybe Text)
     , _maUsername             :: !(Maybe Text)
     , _maClientCertificate    :: !(Maybe Text)
@@ -638,7 +638,7 @@ data MasterAuth = MasterAuth
 masterAuth
     :: MasterAuth
 masterAuth =
-    MasterAuth
+    MasterAuth'
     { _maClientKey = Nothing
     , _maUsername = Nothing
     , _maClientCertificate = Nothing
@@ -683,14 +683,14 @@ instance FromJSON MasterAuth where
         parseJSON
           = withObject "MasterAuth"
               (\ o ->
-                 MasterAuth <$>
+                 MasterAuth' <$>
                    (o .:? "clientKey") <*> (o .:? "username") <*>
                      (o .:? "clientCertificate")
                      <*> (o .:? "password")
                      <*> (o .:? "clusterCaCertificate"))
 
 instance ToJSON MasterAuth where
-        toJSON MasterAuth{..}
+        toJSON MasterAuth'{..}
           = object
               (catMaybes
                  [("clientKey" .=) <$> _maClientKey,
@@ -703,7 +703,7 @@ instance ToJSON MasterAuth where
 -- | Container Engine Server configuration.
 --
 -- /See:/ 'serverConfig' smart constructor.
-data ServerConfig = ServerConfig
+data ServerConfig = ServerConfig'
     { _scValidNodeVersions     :: !(Maybe [Text])
     , _scDefaultClusterVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -718,7 +718,7 @@ data ServerConfig = ServerConfig
 serverConfig
     :: ServerConfig
 serverConfig =
-    ServerConfig
+    ServerConfig'
     { _scValidNodeVersions = Nothing
     , _scDefaultClusterVersion = Nothing
     }
@@ -741,12 +741,12 @@ instance FromJSON ServerConfig where
         parseJSON
           = withObject "ServerConfig"
               (\ o ->
-                 ServerConfig <$>
+                 ServerConfig' <$>
                    (o .:? "validNodeVersions" .!= mempty) <*>
                      (o .:? "defaultClusterVersion"))
 
 instance ToJSON ServerConfig where
-        toJSON ServerConfig{..}
+        toJSON ServerConfig'{..}
           = object
               (catMaybes
                  [("validNodeVersions" .=) <$> _scValidNodeVersions,
@@ -756,7 +756,7 @@ instance ToJSON ServerConfig where
 -- | ListClustersResponse is the result of ListClustersRequest.
 --
 -- /See:/ 'listClustersResponse' smart constructor.
-newtype ListClustersResponse = ListClustersResponse
+newtype ListClustersResponse = ListClustersResponse'
     { _lcrClusters :: Maybe [Cluster]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -768,7 +768,7 @@ newtype ListClustersResponse = ListClustersResponse
 listClustersResponse
     :: ListClustersResponse
 listClustersResponse =
-    ListClustersResponse
+    ListClustersResponse'
     { _lcrClusters = Nothing
     }
 
@@ -784,18 +784,18 @@ instance FromJSON ListClustersResponse where
         parseJSON
           = withObject "ListClustersResponse"
               (\ o ->
-                 ListClustersResponse <$>
+                 ListClustersResponse' <$>
                    (o .:? "clusters" .!= mempty))
 
 instance ToJSON ListClustersResponse where
-        toJSON ListClustersResponse{..}
+        toJSON ListClustersResponse'{..}
           = object
               (catMaybes [("clusters" .=) <$> _lcrClusters])
 
 -- | ClusterUpdate describes an update to the cluster.
 --
 -- /See:/ 'clusterUpdate' smart constructor.
-newtype ClusterUpdate = ClusterUpdate
+newtype ClusterUpdate = ClusterUpdate'
     { _cuDesiredNodeVersion :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -807,7 +807,7 @@ newtype ClusterUpdate = ClusterUpdate
 clusterUpdate
     :: ClusterUpdate
 clusterUpdate =
-    ClusterUpdate
+    ClusterUpdate'
     { _cuDesiredNodeVersion = Nothing
     }
 
@@ -822,10 +822,10 @@ instance FromJSON ClusterUpdate where
         parseJSON
           = withObject "ClusterUpdate"
               (\ o ->
-                 ClusterUpdate <$> (o .:? "desiredNodeVersion"))
+                 ClusterUpdate' <$> (o .:? "desiredNodeVersion"))
 
 instance ToJSON ClusterUpdate where
-        toJSON ClusterUpdate{..}
+        toJSON ClusterUpdate'{..}
           = object
               (catMaybes
                  [("desiredNodeVersion" .=) <$>

@@ -57,7 +57,7 @@ type MyConfigUpdateUserSettingsResource =
 -- sub-objects will retain the existing value.
 --
 -- /See:/ 'myConfigUpdateUserSettings' smart constructor.
-newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings
+newtype MyConfigUpdateUserSettings = MyConfigUpdateUserSettings'
     { _mcuusPayload :: UserSettings
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ myConfigUpdateUserSettings
     :: UserSettings -- ^ 'mcuusPayload'
     -> MyConfigUpdateUserSettings
 myConfigUpdateUserSettings pMcuusPayload_ =
-    MyConfigUpdateUserSettings
+    MyConfigUpdateUserSettings'
     { _mcuusPayload = pMcuusPayload_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest MyConfigUpdateUserSettings
         type Rs MyConfigUpdateUserSettings = UserSettings
         type Scopes MyConfigUpdateUserSettings =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyConfigUpdateUserSettings{..}
+        requestClient MyConfigUpdateUserSettings'{..}
           = go (Just AltJSON) _mcuusPayload booksService
           where go
                   = buildClient

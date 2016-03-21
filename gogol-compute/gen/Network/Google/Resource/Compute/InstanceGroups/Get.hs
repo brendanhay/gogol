@@ -59,7 +59,7 @@ type InstanceGroupsGetResource =
 -- groups by making a list() request.
 --
 -- /See:/ 'instanceGroupsGet' smart constructor.
-data InstanceGroupsGet = InstanceGroupsGet
+data InstanceGroupsGet = InstanceGroupsGet'
     { _iggProject       :: !Text
     , _iggZone          :: !Text
     , _iggInstanceGroup :: !Text
@@ -80,7 +80,7 @@ instanceGroupsGet
     -> Text -- ^ 'iggInstanceGroup'
     -> InstanceGroupsGet
 instanceGroupsGet pIggProject_ pIggZone_ pIggInstanceGroup_ =
-    InstanceGroupsGet
+    InstanceGroupsGet'
     { _iggProject = pIggProject_
     , _iggZone = pIggZone_
     , _iggInstanceGroup = pIggInstanceGroup_
@@ -107,7 +107,7 @@ instance GoogleRequest InstanceGroupsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupsGet{..}
+        requestClient InstanceGroupsGet'{..}
           = go _iggProject _iggZone _iggInstanceGroup
               (Just AltJSON)
               computeService

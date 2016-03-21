@@ -57,7 +57,7 @@ type ChangesCreateResource =
 -- | Atomically update the ResourceRecordSet collection.
 --
 -- /See:/ 'changesCreate' smart constructor.
-data ChangesCreate = ChangesCreate
+data ChangesCreate = ChangesCreate'
     { _ccProject     :: !Text
     , _ccPayload     :: !Change
     , _ccManagedZone :: !Text
@@ -78,7 +78,7 @@ changesCreate
     -> Text -- ^ 'ccManagedZone'
     -> ChangesCreate
 changesCreate pCcProject_ pCcPayload_ pCcManagedZone_ =
-    ChangesCreate
+    ChangesCreate'
     { _ccProject = pCcProject_
     , _ccPayload = pCcPayload_
     , _ccManagedZone = pCcManagedZone_
@@ -106,7 +106,7 @@ instance GoogleRequest ChangesCreate where
         type Scopes ChangesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ChangesCreate{..}
+        requestClient ChangesCreate'{..}
           = go _ccProject _ccManagedZone (Just AltJSON)
               _ccPayload
               dNSService

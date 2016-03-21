@@ -53,7 +53,7 @@ type GroupsPatchResource =
 -- | Updates an existing resource. This method supports patch semantics.
 --
 -- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch
+data GroupsPatch = GroupsPatch'
     { _gpPayload       :: !Groups
     , _gpGroupUniqueId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsPatch
     -> Text -- ^ 'gpGroupUniqueId'
     -> GroupsPatch
 groupsPatch pGpPayload_ pGpGroupUniqueId_ =
-    GroupsPatch
+    GroupsPatch'
     { _gpPayload = pGpPayload_
     , _gpGroupUniqueId = pGpGroupUniqueId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Groups
         type Scopes GroupsPatch =
              '["https://www.googleapis.com/auth/apps.groups.settings"]
-        requestClient GroupsPatch{..}
+        requestClient GroupsPatch'{..}
           = go _gpGroupUniqueId (Just AltJSON) _gpPayload
               groupsSettingsService
           where go

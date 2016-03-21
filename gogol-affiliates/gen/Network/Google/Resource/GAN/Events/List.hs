@@ -88,7 +88,7 @@ type EventsListResource =
 -- | Retrieves event data for a given advertiser\/publisher.
 --
 -- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList
+data EventsList = EventsList'
     { _elStatus          :: !(Maybe EventsListStatus)
     , _elEventDateMin    :: !(Maybe Text)
     , _elChargeType      :: !(Maybe EventsListChargeType)
@@ -153,7 +153,7 @@ eventsList
     -> EventsListRole -- ^ 'elRole'
     -> EventsList
 eventsList pElRoleId_ pElRole_ =
-    EventsList
+    EventsList'
     { _elStatus = Nothing
     , _elEventDateMin = Nothing
     , _elChargeType = Nothing
@@ -290,7 +290,7 @@ elMaxResults
 instance GoogleRequest EventsList where
         type Rs EventsList = Events
         type Scopes EventsList = '[]
-        requestClient EventsList{..}
+        requestClient EventsList'{..}
           = go _elRole _elRoleId _elStatus _elEventDateMin
               _elChargeType
               _elMemberId

@@ -56,7 +56,7 @@ type RelyingPartySignOutUserResource =
 -- | Sign out user.
 --
 -- /See:/ 'relyingPartySignOutUser' smart constructor.
-newtype RelyingPartySignOutUser = RelyingPartySignOutUser
+newtype RelyingPartySignOutUser = RelyingPartySignOutUser'
     { _rpsouPayload :: IdentitytoolkitRelyingPartySignOutUserRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ relyingPartySignOutUser
     :: IdentitytoolkitRelyingPartySignOutUserRequest -- ^ 'rpsouPayload'
     -> RelyingPartySignOutUser
 relyingPartySignOutUser pRpsouPayload_ =
-    RelyingPartySignOutUser
+    RelyingPartySignOutUser'
     { _rpsouPayload = pRpsouPayload_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest RelyingPartySignOutUser where
         type Rs RelyingPartySignOutUser =
              IdentitytoolkitRelyingPartySignOutUserResponse
         type Scopes RelyingPartySignOutUser = '[]
-        requestClient RelyingPartySignOutUser{..}
+        requestClient RelyingPartySignOutUser'{..}
           = go (Just AltJSON) _rpsouPayload
               identityToolkitService
           where go

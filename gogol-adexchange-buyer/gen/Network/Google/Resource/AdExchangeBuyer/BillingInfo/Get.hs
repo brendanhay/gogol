@@ -51,7 +51,7 @@ type BillingInfoGetResource =
 -- | Returns the billing information for one account specified by account ID.
 --
 -- /See:/ 'billingInfoGet' smart constructor.
-newtype BillingInfoGet = BillingInfoGet
+newtype BillingInfoGet = BillingInfoGet'
     { _bigAccountId :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ billingInfoGet
     :: Int32 -- ^ 'bigAccountId'
     -> BillingInfoGet
 billingInfoGet pBigAccountId_ =
-    BillingInfoGet
+    BillingInfoGet'
     { _bigAccountId = _Coerce # pBigAccountId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest BillingInfoGet where
         type Rs BillingInfoGet = BillingInfo
         type Scopes BillingInfoGet =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient BillingInfoGet{..}
+        requestClient BillingInfoGet'{..}
           = go _bigAccountId (Just AltJSON)
               adExchangeBuyerService
           where go

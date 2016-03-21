@@ -54,7 +54,7 @@ type UsersLabelsCreateResource =
 -- | Creates a new label.
 --
 -- /See:/ 'usersLabelsCreate' smart constructor.
-data UsersLabelsCreate = UsersLabelsCreate
+data UsersLabelsCreate = UsersLabelsCreate'
     { _ulcPayload :: !Label
     , _ulcUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ usersLabelsCreate
     :: Label -- ^ 'ulcPayload'
     -> UsersLabelsCreate
 usersLabelsCreate pUlcPayload_ =
-    UsersLabelsCreate
+    UsersLabelsCreate'
     { _ulcPayload = pUlcPayload_
     , _ulcUserId = "me"
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersLabelsCreate where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.labels",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersLabelsCreate{..}
+        requestClient UsersLabelsCreate'{..}
           = go _ulcUserId (Just AltJSON) _ulcPayload
               gmailService
           where go

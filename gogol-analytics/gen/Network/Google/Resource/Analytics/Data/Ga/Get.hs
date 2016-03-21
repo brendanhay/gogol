@@ -77,7 +77,7 @@ type DataGaGetResource =
 -- | Returns Analytics data for a view (profile).
 --
 -- /See:/ 'dataGaGet' smart constructor.
-data DataGaGet = DataGaGet
+data DataGaGet = DataGaGet'
     { _dggMetrics          :: !Text
     , _dggSamplingLevel    :: !(Maybe DataGaGetSamplingLevel)
     , _dggFilters          :: !(Maybe Text)
@@ -129,7 +129,7 @@ dataGaGet
     -> Text -- ^ 'dggStartDate'
     -> DataGaGet
 dataGaGet pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
-    DataGaGet
+    DataGaGet'
     { _dggMetrics = pDggMetrics_
     , _dggSamplingLevel = Nothing
     , _dggFilters = Nothing
@@ -231,7 +231,7 @@ instance GoogleRequest DataGaGet where
         type Scopes DataGaGet =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient DataGaGet{..}
+        requestClient DataGaGet'{..}
           = go (Just _dggIds) (Just _dggStartDate)
               (Just _dggEndDate)
               (Just _dggMetrics)

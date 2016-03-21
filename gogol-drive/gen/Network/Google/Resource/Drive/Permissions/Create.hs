@@ -60,7 +60,7 @@ type PermissionsCreateResource =
 -- | Creates a permission for a file.
 --
 -- /See:/ 'permissionsCreate' smart constructor.
-data PermissionsCreate = PermissionsCreate
+data PermissionsCreate = PermissionsCreate'
     { _pcSendNotificationEmail :: !(Maybe Bool)
     , _pcPayload               :: !Permission
     , _pcEmailMessage          :: !(Maybe Text)
@@ -86,7 +86,7 @@ permissionsCreate
     -> Text -- ^ 'pcFileId'
     -> PermissionsCreate
 permissionsCreate pPcPayload_ pPcFileId_ =
-    PermissionsCreate
+    PermissionsCreate'
     { _pcSendNotificationEmail = Nothing
     , _pcPayload = pPcPayload_
     , _pcEmailMessage = Nothing
@@ -130,7 +130,7 @@ instance GoogleRequest PermissionsCreate where
         type Scopes PermissionsCreate =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient PermissionsCreate{..}
+        requestClient PermissionsCreate'{..}
           = go _pcFileId _pcSendNotificationEmail
               _pcEmailMessage
               (Just _pcTransferOwnership)

@@ -78,7 +78,7 @@ type VideosInsertResource =
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
 -- /See:/ 'videosInsert' smart constructor.
-data VideosInsert = VideosInsert
+data VideosInsert = VideosInsert'
     { _viPart                          :: !Text
     , _viStabilize                     :: !(Maybe Bool)
     , _viPayload                       :: !Video
@@ -110,7 +110,7 @@ videosInsert
     -> Video -- ^ 'viPayload'
     -> VideosInsert
 videosInsert pViPart_ pViPayload_ =
-    VideosInsert
+    VideosInsert'
     { _viPart = pViPart_
     , _viStabilize = Nothing
     , _viPayload = pViPayload_
@@ -203,7 +203,7 @@ instance GoogleRequest VideosInsert where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.upload",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosInsert{..}
+        requestClient VideosInsert'{..}
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel
@@ -221,7 +221,7 @@ instance GoogleRequest (MediaUpload VideosInsert)
         type Rs (MediaUpload VideosInsert) = Video
         type Scopes (MediaUpload VideosInsert) =
              Scopes VideosInsert
-        requestClient (MediaUpload VideosInsert{..} body)
+        requestClient (MediaUpload VideosInsert'{..} body)
           = go (Just _viPart) _viStabilize
               _viOnBehalfOfContentOwner
               _viOnBehalfOfContentOwnerChannel

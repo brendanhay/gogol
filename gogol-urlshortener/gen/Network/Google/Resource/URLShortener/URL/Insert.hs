@@ -51,7 +51,7 @@ type URLInsertResource =
 -- | Creates a new short URL.
 --
 -- /See:/ 'urlInsert' smart constructor.
-newtype URLInsert = URLInsert
+newtype URLInsert = URLInsert'
     { _uiPayload :: URL
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ urlInsert
     :: URL -- ^ 'uiPayload'
     -> URLInsert
 urlInsert pUiPayload_ =
-    URLInsert
+    URLInsert'
     { _uiPayload = pUiPayload_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest URLInsert where
         type Rs URLInsert = URL
         type Scopes URLInsert =
              '["https://www.googleapis.com/auth/urlshortener"]
-        requestClient URLInsert{..}
+        requestClient URLInsert'{..}
           = go (Just AltJSON) _uiPayload uRLShortenerService
           where go
                   = buildClient (Proxy :: Proxy URLInsertResource)

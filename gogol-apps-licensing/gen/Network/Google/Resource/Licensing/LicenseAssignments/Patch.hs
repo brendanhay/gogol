@@ -61,7 +61,7 @@ type LicenseAssignmentsPatchResource =
 -- | Assign License. This method supports patch semantics.
 --
 -- /See:/ 'licenseAssignmentsPatch' smart constructor.
-data LicenseAssignmentsPatch = LicenseAssignmentsPatch
+data LicenseAssignmentsPatch = LicenseAssignmentsPatch'
     { _lapSKUId     :: !Text
     , _lapPayload   :: !LicenseAssignment
     , _lapUserId    :: !Text
@@ -86,7 +86,7 @@ licenseAssignmentsPatch
     -> Text -- ^ 'lapProductId'
     -> LicenseAssignmentsPatch
 licenseAssignmentsPatch pLapSKUId_ pLapPayload_ pLapUserId_ pLapProductId_ =
-    LicenseAssignmentsPatch
+    LicenseAssignmentsPatch'
     { _lapSKUId = pLapSKUId_
     , _lapPayload = pLapPayload_
     , _lapUserId = pLapUserId_
@@ -116,7 +116,7 @@ instance GoogleRequest LicenseAssignmentsPatch where
         type Rs LicenseAssignmentsPatch = LicenseAssignment
         type Scopes LicenseAssignmentsPatch =
              '["https://www.googleapis.com/auth/apps.licensing"]
-        requestClient LicenseAssignmentsPatch{..}
+        requestClient LicenseAssignmentsPatch'{..}
           = go _lapProductId _lapSKUId _lapUserId
               (Just AltJSON)
               _lapPayload

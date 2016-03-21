@@ -53,7 +53,7 @@ type MapsPatchResource =
 -- | Mutate a map asset.
 --
 -- /See:/ 'mapsPatch' smart constructor.
-data MapsPatch = MapsPatch
+data MapsPatch = MapsPatch'
     { _mpPayload :: !Map
     , _mpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ mapsPatch
     -> Text -- ^ 'mpId'
     -> MapsPatch
 mapsPatch pMpPayload_ pMpId_ =
-    MapsPatch
+    MapsPatch'
     { _mpPayload = pMpPayload_
     , _mpId = pMpId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest MapsPatch where
         type Rs MapsPatch = ()
         type Scopes MapsPatch =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient MapsPatch{..}
+        requestClient MapsPatch'{..}
           = go _mpId (Just AltJSON) _mpPayload
               mapsEngineService
           where go

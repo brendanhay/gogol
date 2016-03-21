@@ -64,7 +64,7 @@ type PromoOfferDismissResource =
 -- |
 --
 -- /See:/ 'promoOfferDismiss' smart constructor.
-data PromoOfferDismiss = PromoOfferDismiss
+data PromoOfferDismiss = PromoOfferDismiss'
     { _podManufacturer :: !(Maybe Text)
     , _podSerial       :: !(Maybe Text)
     , _podDevice       :: !(Maybe Text)
@@ -94,7 +94,7 @@ data PromoOfferDismiss = PromoOfferDismiss
 promoOfferDismiss
     :: PromoOfferDismiss
 promoOfferDismiss =
-    PromoOfferDismiss
+    PromoOfferDismiss'
     { _podManufacturer = Nothing
     , _podSerial = Nothing
     , _podDevice = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest PromoOfferDismiss where
         type Rs PromoOfferDismiss = ()
         type Scopes PromoOfferDismiss =
              '["https://www.googleapis.com/auth/books"]
-        requestClient PromoOfferDismiss{..}
+        requestClient PromoOfferDismiss'{..}
           = go _podManufacturer _podSerial _podDevice _podModel
               _podOfferId
               _podProduct

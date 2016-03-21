@@ -54,7 +54,7 @@ type CustomersInsertResource =
 -- | Creates a customer resource if one does not already exist.
 --
 -- /See:/ 'customersInsert' smart constructor.
-data CustomersInsert = CustomersInsert
+data CustomersInsert = CustomersInsert'
     { _ciPayload           :: !Customer
     , _ciCustomerAuthToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ customersInsert
     :: Customer -- ^ 'ciPayload'
     -> CustomersInsert
 customersInsert pCiPayload_ =
-    CustomersInsert
+    CustomersInsert'
     { _ciPayload = pCiPayload_
     , _ciCustomerAuthToken = Nothing
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CustomersInsert where
         type Rs CustomersInsert = Customer
         type Scopes CustomersInsert =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient CustomersInsert{..}
+        requestClient CustomersInsert'{..}
           = go _ciCustomerAuthToken (Just AltJSON) _ciPayload
               appsResellerService
           where go

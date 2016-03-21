@@ -52,7 +52,7 @@ type GroupsInsertResource =
 -- | Create Group
 --
 -- /See:/ 'groupsInsert' smart constructor.
-newtype GroupsInsert = GroupsInsert
+newtype GroupsInsert = GroupsInsert'
     { _giPayload :: Group
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ groupsInsert
     :: Group -- ^ 'giPayload'
     -> GroupsInsert
 groupsInsert pGiPayload_ =
-    GroupsInsert
+    GroupsInsert'
     { _giPayload = pGiPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest GroupsInsert where
         type Rs GroupsInsert = Group
         type Scopes GroupsInsert =
              '["https://www.googleapis.com/auth/admin.directory.group"]
-        requestClient GroupsInsert{..}
+        requestClient GroupsInsert'{..}
           = go (Just AltJSON) _giPayload directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsInsertResource)

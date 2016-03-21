@@ -57,7 +57,7 @@ type EnterprisesSetAccountResource =
 -- enterprise.
 --
 -- /See:/ 'enterprisesSetAccount' smart constructor.
-data EnterprisesSetAccount = EnterprisesSetAccount
+data EnterprisesSetAccount = EnterprisesSetAccount'
     { _esaEnterpriseId :: !Text
     , _esaPayload      :: !EnterpriseAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ enterprisesSetAccount
     -> EnterpriseAccount -- ^ 'esaPayload'
     -> EnterprisesSetAccount
 enterprisesSetAccount pEsaEnterpriseId_ pEsaPayload_ =
-    EnterprisesSetAccount
+    EnterprisesSetAccount'
     { _esaEnterpriseId = pEsaEnterpriseId_
     , _esaPayload = pEsaPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest EnterprisesSetAccount where
         type Rs EnterprisesSetAccount = EnterpriseAccount
         type Scopes EnterprisesSetAccount =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesSetAccount{..}
+        requestClient EnterprisesSetAccount'{..}
           = go _esaEnterpriseId (Just AltJSON) _esaPayload
               androidEnterpriseService
           where go

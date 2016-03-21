@@ -63,7 +63,7 @@ type ProjectsSinksGetResource =
 -- | Gets a sink.
 --
 -- /See:/ 'projectsSinksGet' smart constructor.
-data ProjectsSinksGet = ProjectsSinksGet
+data ProjectsSinksGet = ProjectsSinksGet'
     { _psgXgafv          :: !(Maybe Text)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
@@ -97,7 +97,7 @@ projectsSinksGet
     :: Text -- ^ 'psgSinkName'
     -> ProjectsSinksGet
 projectsSinksGet pPsgSinkName_ =
-    ProjectsSinksGet
+    ProjectsSinksGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
     , _psgPp = True
@@ -158,7 +158,7 @@ instance GoogleRequest ProjectsSinksGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
-        requestClient ProjectsSinksGet{..}
+        requestClient ProjectsSinksGet'{..}
           = go _psgSinkName _psgXgafv _psgUploadProtocol
               (Just _psgPp)
               _psgAccessToken

@@ -58,7 +58,7 @@ type StatesClearResource =
 -- in a conflict error on version mismatch.
 --
 -- /See:/ 'statesClear' smart constructor.
-data StatesClear = StatesClear
+data StatesClear = StatesClear'
     { _scStateKey           :: !(Textual Int32)
     , _scCurrentDataVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ statesClear
     :: Int32 -- ^ 'scStateKey'
     -> StatesClear
 statesClear pScStateKey_ =
-    StatesClear
+    StatesClear'
     { _scStateKey = _Coerce # pScStateKey_
     , _scCurrentDataVersion = Nothing
     }
@@ -96,7 +96,7 @@ instance GoogleRequest StatesClear where
         type Rs StatesClear = WriteResult
         type Scopes StatesClear =
              '["https://www.googleapis.com/auth/appstate"]
-        requestClient StatesClear{..}
+        requestClient StatesClear'{..}
           = go _scStateKey _scCurrentDataVersion (Just AltJSON)
               appStateService
           where go

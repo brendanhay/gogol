@@ -69,7 +69,7 @@ type PlacementStrategiesListResource =
 -- | Retrieves a list of placement strategies, possibly filtered.
 --
 -- /See:/ 'placementStrategiesList' smart constructor.
-data PlacementStrategiesList = PlacementStrategiesList
+data PlacementStrategiesList = PlacementStrategiesList'
     { _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe [Textual Int64])
     , _pslProFileId    :: !(Textual Int64)
@@ -100,7 +100,7 @@ placementStrategiesList
     :: Int64 -- ^ 'pslProFileId'
     -> PlacementStrategiesList
 placementStrategiesList pPslProFileId_ =
-    PlacementStrategiesList
+    PlacementStrategiesList'
     { _pslSearchString = Nothing
     , _pslIds = Nothing
     , _pslProFileId = _Coerce # pPslProFileId_
@@ -162,7 +162,7 @@ instance GoogleRequest PlacementStrategiesList where
              PlacementStrategiesListResponse
         type Scopes PlacementStrategiesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementStrategiesList{..}
+        requestClient PlacementStrategiesList'{..}
           = go _pslProFileId _pslSearchString
               (_pslIds ^. _Default)
               _pslSortOrder

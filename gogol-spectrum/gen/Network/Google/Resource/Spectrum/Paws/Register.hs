@@ -55,7 +55,7 @@ type PawsRegisterResource =
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsRegister' smart constructor.
-newtype PawsRegister = PawsRegister
+newtype PawsRegister = PawsRegister'
     { _prPayload :: PawsRegisterRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ pawsRegister
     :: PawsRegisterRequest -- ^ 'prPayload'
     -> PawsRegister
 pawsRegister pPrPayload_ =
-    PawsRegister
+    PawsRegister'
     { _prPayload = pPrPayload_
     }
 
@@ -80,7 +80,7 @@ prPayload
 instance GoogleRequest PawsRegister where
         type Rs PawsRegister = PawsRegisterResponse
         type Scopes PawsRegister = '[]
-        requestClient PawsRegister{..}
+        requestClient PawsRegister'{..}
           = go (Just AltJSON) _prPayload spectrumService
           where go
                   = buildClient (Proxy :: Proxy PawsRegisterResource)

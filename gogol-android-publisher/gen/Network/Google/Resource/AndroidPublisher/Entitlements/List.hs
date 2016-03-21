@@ -61,7 +61,7 @@ type EntitlementsListResource =
 -- | Lists the user\'s current inapp item or subscription entitlements
 --
 -- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList
+data EntitlementsList = EntitlementsList'
     { _elPackageName :: !Text
     , _elToken       :: !(Maybe Text)
     , _elStartIndex  :: !(Maybe (Textual Word32))
@@ -86,7 +86,7 @@ entitlementsList
     :: Text -- ^ 'elPackageName'
     -> EntitlementsList
 entitlementsList pElPackageName_ =
-    EntitlementsList
+    EntitlementsList'
     { _elPackageName = pElPackageName_
     , _elToken = Nothing
     , _elStartIndex = Nothing
@@ -123,7 +123,7 @@ elMaxResults
 instance GoogleRequest EntitlementsList where
         type Rs EntitlementsList = EntitlementsListResponse
         type Scopes EntitlementsList = '[]
-        requestClient EntitlementsList{..}
+        requestClient EntitlementsList'{..}
           = go _elPackageName _elToken _elStartIndex
               _elProductId
               _elMaxResults

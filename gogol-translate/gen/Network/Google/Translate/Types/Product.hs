@@ -22,7 +22,7 @@ import           Network.Google.Translate.Types.Sum
 
 --
 -- /See:/ 'translationsResource' smart constructor.
-data TranslationsResource = TranslationsResource
+data TranslationsResource = TranslationsResource'
     { _trDetectedSourceLanguage :: !(Maybe Text)
     , _trTranslatedText         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data TranslationsResource = TranslationsResource
 translationsResource
     :: TranslationsResource
 translationsResource =
-    TranslationsResource
+    TranslationsResource'
     { _trDetectedSourceLanguage = Nothing
     , _trTranslatedText = Nothing
     }
@@ -58,12 +58,12 @@ instance FromJSON TranslationsResource where
         parseJSON
           = withObject "TranslationsResource"
               (\ o ->
-                 TranslationsResource <$>
+                 TranslationsResource' <$>
                    (o .:? "detectedSourceLanguage") <*>
                      (o .:? "translatedText"))
 
 instance ToJSON TranslationsResource where
-        toJSON TranslationsResource{..}
+        toJSON TranslationsResource'{..}
           = object
               (catMaybes
                  [("detectedSourceLanguage" .=) <$>
@@ -72,7 +72,7 @@ instance ToJSON TranslationsResource where
 
 --
 -- /See:/ 'detectionsListResponse' smart constructor.
-newtype DetectionsListResponse = DetectionsListResponse
+newtype DetectionsListResponse = DetectionsListResponse'
     { _dlrDetections :: Maybe [[DetectionsResourceItem]]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -84,7 +84,7 @@ newtype DetectionsListResponse = DetectionsListResponse
 detectionsListResponse
     :: DetectionsListResponse
 detectionsListResponse =
-    DetectionsListResponse
+    DetectionsListResponse'
     { _dlrDetections = Nothing
     }
 
@@ -100,17 +100,17 @@ instance FromJSON DetectionsListResponse where
         parseJSON
           = withObject "DetectionsListResponse"
               (\ o ->
-                 DetectionsListResponse <$>
+                 DetectionsListResponse' <$>
                    (o .:? "detections" .!= mempty))
 
 instance ToJSON DetectionsListResponse where
-        toJSON DetectionsListResponse{..}
+        toJSON DetectionsListResponse'{..}
           = object
               (catMaybes [("detections" .=) <$> _dlrDetections])
 
 --
 -- /See:/ 'languagesListResponse' smart constructor.
-newtype LanguagesListResponse = LanguagesListResponse
+newtype LanguagesListResponse = LanguagesListResponse'
     { _llrLanguages :: Maybe [LanguagesResource]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -122,7 +122,7 @@ newtype LanguagesListResponse = LanguagesListResponse
 languagesListResponse
     :: LanguagesListResponse
 languagesListResponse =
-    LanguagesListResponse
+    LanguagesListResponse'
     { _llrLanguages = Nothing
     }
 
@@ -141,17 +141,17 @@ instance FromJSON LanguagesListResponse where
         parseJSON
           = withObject "LanguagesListResponse"
               (\ o ->
-                 LanguagesListResponse <$>
+                 LanguagesListResponse' <$>
                    (o .:? "languages" .!= mempty))
 
 instance ToJSON LanguagesListResponse where
-        toJSON LanguagesListResponse{..}
+        toJSON LanguagesListResponse'{..}
           = object
               (catMaybes [("languages" .=) <$> _llrLanguages])
 
 --
 -- /See:/ 'detectionsResourceItem' smart constructor.
-data DetectionsResourceItem = DetectionsResourceItem
+data DetectionsResourceItem = DetectionsResourceItem'
     { _driConfidence :: !(Maybe (Textual Double))
     , _driIsReliable :: !(Maybe Bool)
     , _driLanguage   :: !(Maybe Text)
@@ -169,7 +169,7 @@ data DetectionsResourceItem = DetectionsResourceItem
 detectionsResourceItem
     :: DetectionsResourceItem
 detectionsResourceItem =
-    DetectionsResourceItem
+    DetectionsResourceItem'
     { _driConfidence = Nothing
     , _driIsReliable = Nothing
     , _driLanguage = Nothing
@@ -197,12 +197,12 @@ instance FromJSON DetectionsResourceItem where
         parseJSON
           = withObject "DetectionsResourceItem"
               (\ o ->
-                 DetectionsResourceItem <$>
+                 DetectionsResourceItem' <$>
                    (o .:? "confidence") <*> (o .:? "isReliable") <*>
                      (o .:? "language"))
 
 instance ToJSON DetectionsResourceItem where
-        toJSON DetectionsResourceItem{..}
+        toJSON DetectionsResourceItem'{..}
           = object
               (catMaybes
                  [("confidence" .=) <$> _driConfidence,
@@ -211,7 +211,7 @@ instance ToJSON DetectionsResourceItem where
 
 --
 -- /See:/ 'languagesResource' smart constructor.
-data LanguagesResource = LanguagesResource
+data LanguagesResource = LanguagesResource'
     { _lrName     :: !(Maybe Text)
     , _lrLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -226,7 +226,7 @@ data LanguagesResource = LanguagesResource
 languagesResource
     :: LanguagesResource
 languagesResource =
-    LanguagesResource
+    LanguagesResource'
     { _lrName = Nothing
     , _lrLanguage = Nothing
     }
@@ -244,11 +244,11 @@ instance FromJSON LanguagesResource where
         parseJSON
           = withObject "LanguagesResource"
               (\ o ->
-                 LanguagesResource <$>
+                 LanguagesResource' <$>
                    (o .:? "name") <*> (o .:? "language"))
 
 instance ToJSON LanguagesResource where
-        toJSON LanguagesResource{..}
+        toJSON LanguagesResource'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _lrName,
@@ -256,7 +256,7 @@ instance ToJSON LanguagesResource where
 
 --
 -- /See:/ 'translationsListResponse' smart constructor.
-newtype TranslationsListResponse = TranslationsListResponse
+newtype TranslationsListResponse = TranslationsListResponse'
     { _tlrTranslations :: Maybe [TranslationsResource]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -268,7 +268,7 @@ newtype TranslationsListResponse = TranslationsListResponse
 translationsListResponse
     :: TranslationsListResponse
 translationsListResponse =
-    TranslationsListResponse
+    TranslationsListResponse'
     { _tlrTranslations = Nothing
     }
 
@@ -284,11 +284,11 @@ instance FromJSON TranslationsListResponse where
         parseJSON
           = withObject "TranslationsListResponse"
               (\ o ->
-                 TranslationsListResponse <$>
+                 TranslationsListResponse' <$>
                    (o .:? "translations" .!= mempty))
 
 instance ToJSON TranslationsListResponse where
-        toJSON TranslationsListResponse{..}
+        toJSON TranslationsListResponse'{..}
           = object
               (catMaybes
                  [("translations" .=) <$> _tlrTranslations])

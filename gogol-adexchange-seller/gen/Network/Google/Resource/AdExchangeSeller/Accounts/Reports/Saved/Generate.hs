@@ -62,7 +62,7 @@ type AccountsReportsSavedGenerateResource =
 -- query parameters.
 --
 -- /See:/ 'accountsReportsSavedGenerate' smart constructor.
-data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate
+data AccountsReportsSavedGenerate = AccountsReportsSavedGenerate'
     { _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
@@ -88,7 +88,7 @@ accountsReportsSavedGenerate
     -> Text -- ^ 'arsgAccountId'
     -> AccountsReportsSavedGenerate
 accountsReportsSavedGenerate pArsgSavedReportId_ pArsgAccountId_ =
-    AccountsReportsSavedGenerate
+    AccountsReportsSavedGenerate'
     { _arsgLocale = Nothing
     , _arsgSavedReportId = pArsgSavedReportId_
     , _arsgAccountId = pArsgAccountId_
@@ -134,7 +134,7 @@ instance GoogleRequest AccountsReportsSavedGenerate
         type Scopes AccountsReportsSavedGenerate =
              '["https://www.googleapis.com/auth/adexchange.seller",
                "https://www.googleapis.com/auth/adexchange.seller.readonly"]
-        requestClient AccountsReportsSavedGenerate{..}
+        requestClient AccountsReportsSavedGenerate'{..}
           = go _arsgAccountId _arsgSavedReportId _arsgLocale
               _arsgStartIndex
               _arsgMaxResults

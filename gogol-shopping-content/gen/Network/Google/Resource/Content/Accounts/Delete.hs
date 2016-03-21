@@ -55,7 +55,7 @@ type AccountsDeleteResource =
 -- | Deletes a Merchant Center sub-account.
 --
 -- /See:/ 'accountsDelete' smart constructor.
-data AccountsDelete = AccountsDelete
+data AccountsDelete = AccountsDelete'
     { _adMerchantId :: !(Textual Word64)
     , _adAccountId  :: !(Textual Word64)
     , _adDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ accountsDelete
     -> Word64 -- ^ 'adAccountId'
     -> AccountsDelete
 accountsDelete pAdMerchantId_ pAdAccountId_ =
-    AccountsDelete
+    AccountsDelete'
     { _adMerchantId = _Coerce # pAdMerchantId_
     , _adAccountId = _Coerce # pAdAccountId_
     , _adDryRun = Nothing
@@ -101,7 +101,7 @@ instance GoogleRequest AccountsDelete where
         type Rs AccountsDelete = ()
         type Scopes AccountsDelete =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountsDelete{..}
+        requestClient AccountsDelete'{..}
           = go _adMerchantId _adAccountId _adDryRun
               (Just AltJSON)
               shoppingContentService

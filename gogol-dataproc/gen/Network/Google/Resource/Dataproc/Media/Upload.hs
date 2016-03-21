@@ -84,7 +84,7 @@ type MediaUploadResource =
 -- \`\/upload\/v1\/media\/{+name}\`.
 --
 -- /See:/ 'mediaUpload' smart constructor.
-data MediaUpload' = MediaUpload'
+data MediaUpload' = MediaUpload''
     { _muXgafv          :: !(Maybe Text)
     , _muUploadProtocol :: !(Maybe Text)
     , _muResourceName   :: !Text
@@ -122,7 +122,7 @@ mediaUpload
     -> Media -- ^ 'muPayload'
     -> MediaUpload'
 mediaUpload pMuResourceName_ pMuPayload_ =
-    MediaUpload'
+    MediaUpload''
     { _muXgafv = Nothing
     , _muUploadProtocol = Nothing
     , _muResourceName = pMuResourceName_
@@ -189,7 +189,7 @@ instance GoogleRequest MediaUpload' where
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read",
                "https://www.googleapis.com/auth/logging.write"]
-        requestClient MediaUpload'{..}
+        requestClient MediaUpload''{..}
           = go _muResourceName _muXgafv _muUploadProtocol
               (Just _muPp)
               _muAccessToken
@@ -208,7 +208,7 @@ instance GoogleRequest (MediaUpload MediaUpload')
         type Rs (MediaUpload MediaUpload') = Media
         type Scopes (MediaUpload MediaUpload') =
              Scopes MediaUpload'
-        requestClient (MediaUpload MediaUpload'{..} body)
+        requestClient (MediaUpload MediaUpload''{..} body)
           = go _muResourceName _muXgafv _muUploadProtocol
               (Just _muPp)
               _muAccessToken

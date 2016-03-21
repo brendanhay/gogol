@@ -55,7 +55,7 @@ type UsersRevokeTokenResource =
 -- | Revokes a previously generated token (activation code) for the user.
 --
 -- /See:/ 'usersRevokeToken' smart constructor.
-data UsersRevokeToken = UsersRevokeToken
+data UsersRevokeToken = UsersRevokeToken'
     { _urtEnterpriseId :: !Text
     , _urtUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersRevokeToken
     -> Text -- ^ 'urtUserId'
     -> UsersRevokeToken
 usersRevokeToken pUrtEnterpriseId_ pUrtUserId_ =
-    UsersRevokeToken
+    UsersRevokeToken'
     { _urtEnterpriseId = pUrtEnterpriseId_
     , _urtUserId = pUrtUserId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersRevokeToken where
         type Rs UsersRevokeToken = ()
         type Scopes UsersRevokeToken =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient UsersRevokeToken{..}
+        requestClient UsersRevokeToken'{..}
           = go _urtEnterpriseId _urtUserId (Just AltJSON)
               androidEnterpriseService
           where go

@@ -57,7 +57,7 @@ type AutoscalersInsertResource =
 -- | Adds new Autoscaler resource.
 --
 -- /See:/ 'autoscalersInsert' smart constructor.
-data AutoscalersInsert = AutoscalersInsert
+data AutoscalersInsert = AutoscalersInsert'
     { _aiProject :: !Text
     , _aiZone    :: !Text
     , _aiPayload :: !Autoscaler
@@ -78,7 +78,7 @@ autoscalersInsert
     -> Autoscaler -- ^ 'aiPayload'
     -> AutoscalersInsert
 autoscalersInsert pAiProject_ pAiZone_ pAiPayload_ =
-    AutoscalersInsert
+    AutoscalersInsert'
     { _aiProject = pAiProject_
     , _aiZone = pAiZone_
     , _aiPayload = pAiPayload_
@@ -102,7 +102,7 @@ instance GoogleRequest AutoscalersInsert where
         type Rs AutoscalersInsert = Operation
         type Scopes AutoscalersInsert =
              '["https://www.googleapis.com/auth/compute"]
-        requestClient AutoscalersInsert{..}
+        requestClient AutoscalersInsert'{..}
           = go _aiProject _aiZone (Just AltJSON) _aiPayload
               autoscalerService
           where go

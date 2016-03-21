@@ -26,7 +26,7 @@ import           Network.Google.Prelude
 -- one dataset.
 --
 -- /See:/ 'dataSet' smart constructor.
-data DataSet = DataSet
+data DataSet = DataSet'
     { _dsNextPageToken  :: !(Maybe Text)
     , _dsDataSourceId   :: !(Maybe Text)
     , _dsPoint          :: !(Maybe [DataPoint])
@@ -50,7 +50,7 @@ data DataSet = DataSet
 dataSet
     :: DataSet
 dataSet =
-    DataSet
+    DataSet'
     { _dsNextPageToken = Nothing
     , _dsDataSourceId = Nothing
     , _dsPoint = Nothing
@@ -105,14 +105,14 @@ instance FromJSON DataSet where
         parseJSON
           = withObject "DataSet"
               (\ o ->
-                 DataSet <$>
+                 DataSet' <$>
                    (o .:? "nextPageToken") <*> (o .:? "dataSourceId")
                      <*> (o .:? "point" .!= mempty)
                      <*> (o .:? "minStartTimeNs")
                      <*> (o .:? "maxEndTimeNs"))
 
 instance ToJSON DataSet where
-        toJSON DataSet{..}
+        toJSON DataSet'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dsNextPageToken,
@@ -125,7 +125,7 @@ instance ToJSON DataSet where
 -- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/Application.java
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application
+data Application = Application'
     { _aPackageName :: !(Maybe Text)
     , _aName        :: !(Maybe Text)
     , _aVersion     :: !(Maybe Text)
@@ -146,7 +146,7 @@ data Application = Application
 application
     :: Application
 application =
-    Application
+    Application'
     { _aPackageName = Nothing
     , _aName = Nothing
     , _aVersion = Nothing
@@ -182,13 +182,13 @@ instance FromJSON Application where
         parseJSON
           = withObject "Application"
               (\ o ->
-                 Application <$>
+                 Application' <$>
                    (o .:? "packageName") <*> (o .:? "name") <*>
                      (o .:? "version")
                      <*> (o .:? "detailsUrl"))
 
 instance ToJSON Application where
-        toJSON Application{..}
+        toJSON Application'{..}
           = object
               (catMaybes
                  [("packageName" .=) <$> _aPackageName,
@@ -197,7 +197,7 @@ instance ToJSON Application where
 
 --
 -- /See:/ 'aggregateResponse' smart constructor.
-newtype AggregateResponse = AggregateResponse
+newtype AggregateResponse = AggregateResponse'
     { _arBucket :: Maybe [AggregateBucket]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -209,7 +209,7 @@ newtype AggregateResponse = AggregateResponse
 aggregateResponse
     :: AggregateResponse
 aggregateResponse =
-    AggregateResponse
+    AggregateResponse'
     { _arBucket = Nothing
     }
 
@@ -224,16 +224,16 @@ instance FromJSON AggregateResponse where
         parseJSON
           = withObject "AggregateResponse"
               (\ o ->
-                 AggregateResponse <$> (o .:? "bucket" .!= mempty))
+                 AggregateResponse' <$> (o .:? "bucket" .!= mempty))
 
 instance ToJSON AggregateResponse where
-        toJSON AggregateResponse{..}
+        toJSON AggregateResponse'{..}
           = object (catMaybes [("bucket" .=) <$> _arBucket])
 
 -- | The specification of which data to aggregate.
 --
 -- /See:/ 'aggregateBy' smart constructor.
-data AggregateBy = AggregateBy
+data AggregateBy = AggregateBy'
     { _abDataTypeName :: !(Maybe Text)
     , _abDataSourceId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -248,7 +248,7 @@ data AggregateBy = AggregateBy
 aggregateBy
     :: AggregateBy
 aggregateBy =
-    AggregateBy
+    AggregateBy'
     { _abDataTypeName = Nothing
     , _abDataSourceId = Nothing
     }
@@ -275,11 +275,11 @@ instance FromJSON AggregateBy where
         parseJSON
           = withObject "AggregateBy"
               (\ o ->
-                 AggregateBy <$>
+                 AggregateBy' <$>
                    (o .:? "dataTypeName") <*> (o .:? "dataSourceId"))
 
 instance ToJSON AggregateBy where
-        toJSON AggregateBy{..}
+        toJSON AggregateBy'{..}
           = object
               (catMaybes
                  [("dataTypeName" .=) <$> _abDataTypeName,
@@ -287,7 +287,7 @@ instance ToJSON AggregateBy where
 
 --
 -- /See:/ 'bucketByActivity' smart constructor.
-data BucketByActivity = BucketByActivity
+data BucketByActivity = BucketByActivity'
     { _bbaMinDurationMillis    :: !(Maybe (Textual Int64))
     , _bbaActivityDataSourceId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -302,7 +302,7 @@ data BucketByActivity = BucketByActivity
 bucketByActivity
     :: BucketByActivity
 bucketByActivity =
-    BucketByActivity
+    BucketByActivity'
     { _bbaMinDurationMillis = Nothing
     , _bbaActivityDataSourceId = Nothing
     }
@@ -327,12 +327,12 @@ instance FromJSON BucketByActivity where
         parseJSON
           = withObject "BucketByActivity"
               (\ o ->
-                 BucketByActivity <$>
+                 BucketByActivity' <$>
                    (o .:? "minDurationMillis") <*>
                      (o .:? "activityDataSourceId"))
 
 instance ToJSON BucketByActivity where
-        toJSON BucketByActivity{..}
+        toJSON BucketByActivity'{..}
           = object
               (catMaybes
                  [("minDurationMillis" .=) <$> _bbaMinDurationMillis,
@@ -341,7 +341,7 @@ instance ToJSON BucketByActivity where
 
 --
 -- /See:/ 'aggregateRequest' smart constructor.
-data AggregateRequest = AggregateRequest
+data AggregateRequest = AggregateRequest'
     { _arEndTimeMillis           :: !(Maybe (Textual Int64))
     , _arAggregateBy             :: !(Maybe [AggregateBy])
     , _arBucketBySession         :: !(Maybe BucketBySession)
@@ -371,7 +371,7 @@ data AggregateRequest = AggregateRequest
 aggregateRequest
     :: AggregateRequest
 aggregateRequest =
-    AggregateRequest
+    AggregateRequest'
     { _arEndTimeMillis = Nothing
     , _arAggregateBy = Nothing
     , _arBucketBySession = Nothing
@@ -448,7 +448,7 @@ instance FromJSON AggregateRequest where
         parseJSON
           = withObject "AggregateRequest"
               (\ o ->
-                 AggregateRequest <$>
+                 AggregateRequest' <$>
                    (o .:? "endTimeMillis") <*>
                      (o .:? "aggregateBy" .!= mempty)
                      <*> (o .:? "bucketBySession")
@@ -458,7 +458,7 @@ instance FromJSON AggregateRequest where
                      <*> (o .:? "bucketByActivitySegment"))
 
 instance ToJSON AggregateRequest where
-        toJSON AggregateRequest{..}
+        toJSON AggregateRequest'{..}
           = object
               (catMaybes
                  [("endTimeMillis" .=) <$> _arEndTimeMillis,
@@ -483,7 +483,7 @@ instance ToJSON AggregateRequest where
 -- different analysis models for each device\/version.
 --
 -- /See:/ 'device' smart constructor.
-data Device = Device
+data Device = Device'
     { _dManufacturer :: !(Maybe Text)
     , _dUid          :: !(Maybe Text)
     , _dModel        :: !(Maybe Text)
@@ -507,7 +507,7 @@ data Device = Device
 device
     :: Device
 device =
-    Device
+    Device'
     { _dManufacturer = Nothing
     , _dUid = Nothing
     , _dModel = Nothing
@@ -544,14 +544,14 @@ instance FromJSON Device where
         parseJSON
           = withObject "Device"
               (\ o ->
-                 Device <$>
+                 Device' <$>
                    (o .:? "manufacturer") <*> (o .:? "uid") <*>
                      (o .:? "model")
                      <*> (o .:? "version")
                      <*> (o .:? "type"))
 
 instance ToJSON Device where
-        toJSON Device{..}
+        toJSON Device'{..}
           = object
               (catMaybes
                  [("manufacturer" .=) <$> _dManufacturer,
@@ -564,7 +564,7 @@ instance ToJSON Device where
 -- or a floating point value.
 --
 -- /See:/ 'value' smart constructor.
-data Value = Value
+data Value = Value'
     { _vMapVal    :: !(Maybe [ValueMapValEntry])
     , _vFpVal     :: !(Maybe (Textual Double))
     , _vIntVal    :: !(Maybe (Textual Int32))
@@ -585,7 +585,7 @@ data Value = Value
 value
     :: Value
 value =
-    Value
+    Value'
     { _vMapVal = Nothing
     , _vFpVal = Nothing
     , _vIntVal = Nothing
@@ -624,13 +624,13 @@ instance FromJSON Value where
         parseJSON
           = withObject "Value"
               (\ o ->
-                 Value <$>
+                 Value' <$>
                    (o .:? "mapVal" .!= mempty) <*> (o .:? "fpVal") <*>
                      (o .:? "intVal")
                      <*> (o .:? "stringVal"))
 
 instance ToJSON Value where
-        toJSON Value{..}
+        toJSON Value'{..}
           = object
               (catMaybes
                  [("mapVal" .=) <$> _vMapVal,
@@ -639,7 +639,7 @@ instance ToJSON Value where
 
 --
 -- /See:/ 'bucketBySession' smart constructor.
-newtype BucketBySession = BucketBySession
+newtype BucketBySession = BucketBySession'
     { _bbsMinDurationMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -651,7 +651,7 @@ newtype BucketBySession = BucketBySession
 bucketBySession
     :: BucketBySession
 bucketBySession =
-    BucketBySession
+    BucketBySession'
     { _bbsMinDurationMillis = Nothing
     }
 
@@ -667,10 +667,10 @@ instance FromJSON BucketBySession where
         parseJSON
           = withObject "BucketBySession"
               (\ o ->
-                 BucketBySession <$> (o .:? "minDurationMillis"))
+                 BucketBySession' <$> (o .:? "minDurationMillis"))
 
 instance ToJSON BucketBySession where
-        toJSON BucketBySession{..}
+        toJSON BucketBySession'{..}
           = object
               (catMaybes
                  [("minDurationMillis" .=) <$> _bbsMinDurationMillis])
@@ -686,7 +686,7 @@ instance ToJSON BucketBySession where
 -- field of the data type.
 --
 -- /See:/ 'dataPoint' smart constructor.
-data DataPoint = DataPoint
+data DataPoint = DataPoint'
     { _dpOriginDataSourceId    :: !(Maybe Text)
     , _dpRawTimestampNanos     :: !(Maybe (Textual Int64))
     , _dpDataTypeName          :: !(Maybe Text)
@@ -719,7 +719,7 @@ data DataPoint = DataPoint
 dataPoint
     :: DataPoint
 dataPoint =
-    DataPoint
+    DataPoint'
     { _dpOriginDataSourceId = Nothing
     , _dpRawTimestampNanos = Nothing
     , _dpDataTypeName = Nothing
@@ -799,7 +799,7 @@ instance FromJSON DataPoint where
         parseJSON
           = withObject "DataPoint"
               (\ o ->
-                 DataPoint <$>
+                 DataPoint' <$>
                    (o .:? "originDataSourceId") <*>
                      (o .:? "rawTimestampNanos")
                      <*> (o .:? "dataTypeName")
@@ -810,7 +810,7 @@ instance FromJSON DataPoint where
                      <*> (o .:? "startTimeNanos"))
 
 instance ToJSON DataPoint where
-        toJSON DataPoint{..}
+        toJSON DataPoint'{..}
           = object
               (catMaybes
                  [("originDataSourceId" .=) <$> _dpOriginDataSourceId,
@@ -825,7 +825,7 @@ instance ToJSON DataPoint where
 
 --
 -- /See:/ 'listSessionsResponse' smart constructor.
-data ListSessionsResponse = ListSessionsResponse
+data ListSessionsResponse = ListSessionsResponse'
     { _lsrNextPageToken  :: !(Maybe Text)
     , _lsrDeletedSession :: !(Maybe [Session])
     , _lsrSession        :: !(Maybe [Session])
@@ -843,7 +843,7 @@ data ListSessionsResponse = ListSessionsResponse
 listSessionsResponse
     :: ListSessionsResponse
 listSessionsResponse =
-    ListSessionsResponse
+    ListSessionsResponse'
     { _lsrNextPageToken = Nothing
     , _lsrDeletedSession = Nothing
     , _lsrSession = Nothing
@@ -879,13 +879,13 @@ instance FromJSON ListSessionsResponse where
         parseJSON
           = withObject "ListSessionsResponse"
               (\ o ->
-                 ListSessionsResponse <$>
+                 ListSessionsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "deletedSession" .!= mempty)
                      <*> (o .:? "session" .!= mempty))
 
 instance ToJSON ListSessionsResponse where
-        toJSON ListSessionsResponse{..}
+        toJSON ListSessionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
@@ -894,7 +894,7 @@ instance ToJSON ListSessionsResponse where
 
 --
 -- /See:/ 'aggregateBucket' smart constructor.
-data AggregateBucket = AggregateBucket
+data AggregateBucket = AggregateBucket'
     { _abEndTimeMillis   :: !(Maybe (Textual Int64))
     , _abDataSet         :: !(Maybe [DataSet])
     , _abActivity        :: !(Maybe (Textual Int32))
@@ -921,7 +921,7 @@ data AggregateBucket = AggregateBucket
 aggregateBucket
     :: AggregateBucket
 aggregateBucket =
-    AggregateBucket
+    AggregateBucket'
     { _abEndTimeMillis = Nothing
     , _abDataSet = Nothing
     , _abActivity = Nothing
@@ -973,7 +973,7 @@ instance FromJSON AggregateBucket where
         parseJSON
           = withObject "AggregateBucket"
               (\ o ->
-                 AggregateBucket <$>
+                 AggregateBucket' <$>
                    (o .:? "endTimeMillis") <*>
                      (o .:? "dataset" .!= mempty)
                      <*> (o .:? "activity")
@@ -982,7 +982,7 @@ instance FromJSON AggregateBucket where
                      <*> (o .:? "session"))
 
 instance ToJSON AggregateBucket where
-        toJSON AggregateBucket{..}
+        toJSON AggregateBucket'{..}
           = object
               (catMaybes
                  [("endTimeMillis" .=) <$> _abEndTimeMillis,
@@ -997,7 +997,7 @@ instance ToJSON AggregateBucket where
 -- supports.
 --
 -- /See:/ 'mapValue' smart constructor.
-newtype MapValue = MapValue
+newtype MapValue = MapValue'
     { _mvFpVal :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1009,7 +1009,7 @@ newtype MapValue = MapValue
 mapValue
     :: MapValue
 mapValue =
-    MapValue
+    MapValue'
     { _mvFpVal = Nothing
     }
 
@@ -1022,15 +1022,15 @@ mvFpVal
 instance FromJSON MapValue where
         parseJSON
           = withObject "MapValue"
-              (\ o -> MapValue <$> (o .:? "fpVal"))
+              (\ o -> MapValue' <$> (o .:? "fpVal"))
 
 instance ToJSON MapValue where
-        toJSON MapValue{..}
+        toJSON MapValue'{..}
           = object (catMaybes [("fpVal" .=) <$> _mvFpVal])
 
 --
 -- /See:/ 'listDataSourcesResponse' smart constructor.
-newtype ListDataSourcesResponse = ListDataSourcesResponse
+newtype ListDataSourcesResponse = ListDataSourcesResponse'
     { _ldsrDataSource :: Maybe [DataSource]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1042,7 +1042,7 @@ newtype ListDataSourcesResponse = ListDataSourcesResponse
 listDataSourcesResponse
     :: ListDataSourcesResponse
 listDataSourcesResponse =
-    ListDataSourcesResponse
+    ListDataSourcesResponse'
     { _ldsrDataSource = Nothing
     }
 
@@ -1058,11 +1058,11 @@ instance FromJSON ListDataSourcesResponse where
         parseJSON
           = withObject "ListDataSourcesResponse"
               (\ o ->
-                 ListDataSourcesResponse <$>
+                 ListDataSourcesResponse' <$>
                    (o .:? "dataSource" .!= mempty))
 
 instance ToJSON ListDataSourcesResponse where
-        toJSON ListDataSourcesResponse{..}
+        toJSON ListDataSourcesResponse'{..}
           = object
               (catMaybes [("dataSource" .=) <$> _ldsrDataSource])
 
@@ -1073,7 +1073,7 @@ instance ToJSON ListDataSourcesResponse where
 -- code and not used for wire comms or stored in any way.
 --
 -- /See:/ 'dataTypeField' smart constructor.
-data DataTypeField = DataTypeField
+data DataTypeField = DataTypeField'
     { _dtfFormat   :: !(Maybe DataTypeFieldFormat)
     , _dtfName     :: !(Maybe Text)
     , _dtfOptional :: !(Maybe Bool)
@@ -1091,7 +1091,7 @@ data DataTypeField = DataTypeField
 dataTypeField
     :: DataTypeField
 dataTypeField =
-    DataTypeField
+    DataTypeField'
     { _dtfFormat = Nothing
     , _dtfName = Nothing
     , _dtfOptional = Nothing
@@ -1115,12 +1115,12 @@ instance FromJSON DataTypeField where
         parseJSON
           = withObject "DataTypeField"
               (\ o ->
-                 DataTypeField <$>
+                 DataTypeField' <$>
                    (o .:? "format") <*> (o .:? "name") <*>
                      (o .:? "optional"))
 
 instance ToJSON DataTypeField where
-        toJSON DataTypeField{..}
+        toJSON DataTypeField'{..}
           = object
               (catMaybes
                  [("format" .=) <$> _dtfFormat,
@@ -1143,7 +1143,7 @@ instance ToJSON DataTypeField where
 -- stream.
 --
 -- /See:/ 'dataSource' smart constructor.
-data DataSource = DataSource
+data DataSource = DataSource'
     { _dsApplication    :: !(Maybe Application)
     , _dsDevice         :: !(Maybe Device)
     , _dsName           :: !(Maybe Text)
@@ -1173,7 +1173,7 @@ data DataSource = DataSource
 dataSource
     :: DataSource
 dataSource =
-    DataSource
+    DataSource'
     { _dsApplication = Nothing
     , _dsDevice = Nothing
     , _dsName = Nothing
@@ -1253,7 +1253,7 @@ instance FromJSON DataSource where
         parseJSON
           = withObject "DataSource"
               (\ o ->
-                 DataSource <$>
+                 DataSource' <$>
                    (o .:? "application") <*> (o .:? "device") <*>
                      (o .:? "name")
                      <*> (o .:? "dataType")
@@ -1262,7 +1262,7 @@ instance FromJSON DataSource where
                      <*> (o .:? "dataStreamId"))
 
 instance ToJSON DataSource where
-        toJSON DataSource{..}
+        toJSON DataSource'{..}
           = object
               (catMaybes
                  [("application" .=) <$> _dsApplication,
@@ -1274,7 +1274,7 @@ instance ToJSON DataSource where
 
 --
 -- /See:/ 'valueMapValEntry' smart constructor.
-data ValueMapValEntry = ValueMapValEntry
+data ValueMapValEntry = ValueMapValEntry'
     { _vmveValue :: !(Maybe MapValue)
     , _vmveKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1289,7 +1289,7 @@ data ValueMapValEntry = ValueMapValEntry
 valueMapValEntry
     :: ValueMapValEntry
 valueMapValEntry =
-    ValueMapValEntry
+    ValueMapValEntry'
     { _vmveValue = Nothing
     , _vmveKey = Nothing
     }
@@ -1305,11 +1305,11 @@ instance FromJSON ValueMapValEntry where
         parseJSON
           = withObject "ValueMapValEntry"
               (\ o ->
-                 ValueMapValEntry <$>
+                 ValueMapValEntry' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON ValueMapValEntry where
-        toJSON ValueMapValEntry{..}
+        toJSON ValueMapValEntry'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _vmveValue,
@@ -1317,7 +1317,7 @@ instance ToJSON ValueMapValEntry where
 
 --
 -- /See:/ 'bucketByTime' smart constructor.
-newtype BucketByTime = BucketByTime
+newtype BucketByTime = BucketByTime'
     { _bbtDurationMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1329,7 +1329,7 @@ newtype BucketByTime = BucketByTime
 bucketByTime
     :: BucketByTime
 bucketByTime =
-    BucketByTime
+    BucketByTime'
     { _bbtDurationMillis = Nothing
     }
 
@@ -1345,10 +1345,10 @@ bbtDurationMillis
 instance FromJSON BucketByTime where
         parseJSON
           = withObject "BucketByTime"
-              (\ o -> BucketByTime <$> (o .:? "durationMillis"))
+              (\ o -> BucketByTime' <$> (o .:? "durationMillis"))
 
 instance ToJSON BucketByTime where
-        toJSON BucketByTime{..}
+        toJSON BucketByTime'{..}
           = object
               (catMaybes
                  [("durationMillis" .=) <$> _bbtDurationMillis])
@@ -1357,7 +1357,7 @@ instance ToJSON BucketByTime where
 -- google3\/java\/com\/google\/android\/apps\/heart\/platform\/api\/DataType.java
 --
 -- /See:/ 'dataType' smart constructor.
-data DataType = DataType
+data DataType = DataType'
     { _dtField :: !(Maybe [DataTypeField])
     , _dtName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1372,7 +1372,7 @@ data DataType = DataType
 dataType
     :: DataType
 dataType =
-    DataType
+    DataType'
     { _dtField = Nothing
     , _dtName = Nothing
     }
@@ -1392,11 +1392,11 @@ instance FromJSON DataType where
         parseJSON
           = withObject "DataType"
               (\ o ->
-                 DataType <$>
+                 DataType' <$>
                    (o .:? "field" .!= mempty) <*> (o .:? "name"))
 
 instance ToJSON DataType where
-        toJSON DataType{..}
+        toJSON DataType'{..}
           = object
               (catMaybes
                  [("field" .=) <$> _dtField, ("name" .=) <$> _dtName])
@@ -1405,7 +1405,7 @@ instance ToJSON DataType where
 -- interval information.
 --
 -- /See:/ 'session' smart constructor.
-data Session = Session
+data Session = Session'
     { _sEndTimeMillis      :: !(Maybe (Textual Int64))
     , _sActiveTimeMillis   :: !(Maybe (Textual Int64))
     , _sApplication        :: !(Maybe Application)
@@ -1441,7 +1441,7 @@ data Session = Session
 session
     :: Session
 session =
-    Session
+    Session'
     { _sEndTimeMillis = Nothing
     , _sActiveTimeMillis = Nothing
     , _sApplication = Nothing
@@ -1515,7 +1515,7 @@ instance FromJSON Session where
         parseJSON
           = withObject "Session"
               (\ o ->
-                 Session <$>
+                 Session' <$>
                    (o .:? "endTimeMillis") <*>
                      (o .:? "activeTimeMillis")
                      <*> (o .:? "application")
@@ -1527,7 +1527,7 @@ instance FromJSON Session where
                      <*> (o .:? "description"))
 
 instance ToJSON Session where
-        toJSON Session{..}
+        toJSON Session'{..}
           = object
               (catMaybes
                  [("endTimeMillis" .=) <$> _sEndTimeMillis,

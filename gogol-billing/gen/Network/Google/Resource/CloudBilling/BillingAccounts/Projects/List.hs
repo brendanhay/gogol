@@ -73,7 +73,7 @@ type BillingAccountsProjectsListResource =
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ 'billingAccountsProjectsList' smart constructor.
-data BillingAccountsProjectsList = BillingAccountsProjectsList
+data BillingAccountsProjectsList = BillingAccountsProjectsList'
     { _baplXgafv          :: !(Maybe Text)
     , _baplUploadProtocol :: !(Maybe Text)
     , _baplPp             :: !Bool
@@ -113,7 +113,7 @@ billingAccountsProjectsList
     :: Text -- ^ 'baplName'
     -> BillingAccountsProjectsList
 billingAccountsProjectsList pBaplName_ =
-    BillingAccountsProjectsList
+    BillingAccountsProjectsList'
     { _baplXgafv = Nothing
     , _baplUploadProtocol = Nothing
     , _baplPp = True
@@ -192,7 +192,7 @@ instance GoogleRequest BillingAccountsProjectsList
              ListProjectBillingInfoResponse
         type Scopes BillingAccountsProjectsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient BillingAccountsProjectsList{..}
+        requestClient BillingAccountsProjectsList'{..}
           = go _baplName _baplXgafv _baplUploadProtocol
               (Just _baplPp)
               _baplAccessToken

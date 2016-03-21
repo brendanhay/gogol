@@ -59,7 +59,7 @@ type FirewallsUpdateResource =
 -- request.
 --
 -- /See:/ 'firewallsUpdate' smart constructor.
-data FirewallsUpdate = FirewallsUpdate
+data FirewallsUpdate = FirewallsUpdate'
     { _fuProject  :: !Text
     , _fuPayload  :: !Firewall
     , _fuFirewall :: !Text
@@ -80,7 +80,7 @@ firewallsUpdate
     -> Text -- ^ 'fuFirewall'
     -> FirewallsUpdate
 firewallsUpdate pFuProject_ pFuPayload_ pFuFirewall_ =
-    FirewallsUpdate
+    FirewallsUpdate'
     { _fuProject = pFuProject_
     , _fuPayload = pFuPayload_
     , _fuFirewall = pFuFirewall_
@@ -106,7 +106,7 @@ instance GoogleRequest FirewallsUpdate where
         type Scopes FirewallsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient FirewallsUpdate{..}
+        requestClient FirewallsUpdate'{..}
           = go _fuProject _fuFirewall (Just AltJSON) _fuPayload
               computeService
           where go

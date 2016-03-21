@@ -64,7 +64,7 @@ type ProjectsMetricDescriptorsGetResource =
 -- | Gets a single metric descriptor.
 --
 -- /See:/ 'projectsMetricDescriptorsGet' smart constructor.
-data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet
+data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet'
     { _pmdgXgafv          :: !(Maybe Text)
     , _pmdgUploadProtocol :: !(Maybe Text)
     , _pmdgPp             :: !Bool
@@ -98,7 +98,7 @@ projectsMetricDescriptorsGet
     :: Text -- ^ 'pmdgName'
     -> ProjectsMetricDescriptorsGet
 projectsMetricDescriptorsGet pPmdgName_ =
-    ProjectsMetricDescriptorsGet
+    ProjectsMetricDescriptorsGet'
     { _pmdgXgafv = Nothing
     , _pmdgUploadProtocol = Nothing
     , _pmdgPp = True
@@ -162,7 +162,7 @@ instance GoogleRequest ProjectsMetricDescriptorsGet
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.read",
                "https://www.googleapis.com/auth/monitoring.write"]
-        requestClient ProjectsMetricDescriptorsGet{..}
+        requestClient ProjectsMetricDescriptorsGet'{..}
           = go _pmdgName _pmdgXgafv _pmdgUploadProtocol
               (Just _pmdgPp)
               _pmdgAccessToken

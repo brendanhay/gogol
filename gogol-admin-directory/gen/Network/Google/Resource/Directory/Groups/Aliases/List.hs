@@ -53,7 +53,7 @@ type GroupsAliasesListResource =
 -- | List all aliases for a group
 --
 -- /See:/ 'groupsAliasesList' smart constructor.
-newtype GroupsAliasesList = GroupsAliasesList
+newtype GroupsAliasesList = GroupsAliasesList'
     { _galGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ groupsAliasesList
     :: Text -- ^ 'galGroupKey'
     -> GroupsAliasesList
 groupsAliasesList pGalGroupKey_ =
-    GroupsAliasesList
+    GroupsAliasesList'
     { _galGroupKey = pGalGroupKey_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest GroupsAliasesList where
         type Scopes GroupsAliasesList =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
-        requestClient GroupsAliasesList{..}
+        requestClient GroupsAliasesList'{..}
           = go _galGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient

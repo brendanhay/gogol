@@ -54,7 +54,7 @@ type AdvertisersInsertResource =
 -- | Inserts a new advertiser.
 --
 -- /See:/ 'advertisersInsert' smart constructor.
-data AdvertisersInsert = AdvertisersInsert
+data AdvertisersInsert = AdvertisersInsert'
     { _aiiProFileId :: !(Textual Int64)
     , _aiiPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertisersInsert
     -> Advertiser -- ^ 'aiiPayload'
     -> AdvertisersInsert
 advertisersInsert pAiiProFileId_ pAiiPayload_ =
-    AdvertisersInsert
+    AdvertisersInsert'
     { _aiiProFileId = _Coerce # pAiiProFileId_
     , _aiiPayload = pAiiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AdvertisersInsert where
         type Rs AdvertisersInsert = Advertiser
         type Scopes AdvertisersInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertisersInsert{..}
+        requestClient AdvertisersInsert'{..}
           = go _aiiProFileId (Just AltJSON) _aiiPayload
               dFAReportingService
           where go

@@ -61,7 +61,7 @@ type TargetPoolsAddInstanceResource =
 -- | Adds an instance to a target pool.
 --
 -- /See:/ 'targetPoolsAddInstance' smart constructor.
-data TargetPoolsAddInstance = TargetPoolsAddInstance
+data TargetPoolsAddInstance = TargetPoolsAddInstance'
     { _tpaiProject    :: !Text
     , _tpaiTargetPool :: !Text
     , _tpaiPayload    :: !TargetPoolsAddInstanceRequest
@@ -86,7 +86,7 @@ targetPoolsAddInstance
     -> Text -- ^ 'tpaiRegion'
     -> TargetPoolsAddInstance
 targetPoolsAddInstance pTpaiProject_ pTpaiTargetPool_ pTpaiPayload_ pTpaiRegion_ =
-    TargetPoolsAddInstance
+    TargetPoolsAddInstance'
     { _tpaiProject = pTpaiProject_
     , _tpaiTargetPool = pTpaiTargetPool_
     , _tpaiPayload = pTpaiPayload_
@@ -119,7 +119,7 @@ instance GoogleRequest TargetPoolsAddInstance where
         type Scopes TargetPoolsAddInstance =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsAddInstance{..}
+        requestClient TargetPoolsAddInstance'{..}
           = go _tpaiProject _tpaiRegion _tpaiTargetPool
               (Just AltJSON)
               _tpaiPayload

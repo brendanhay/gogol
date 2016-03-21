@@ -54,7 +54,7 @@ type AccountsContainersCreateResource =
 -- | Creates a Container.
 --
 -- /See:/ 'accountsContainersCreate' smart constructor.
-data AccountsContainersCreate = AccountsContainersCreate
+data AccountsContainersCreate = AccountsContainersCreate'
     { _accPayload   :: !Container
     , _accAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsContainersCreate
     -> Text -- ^ 'accAccountId'
     -> AccountsContainersCreate
 accountsContainersCreate pAccPayload_ pAccAccountId_ =
-    AccountsContainersCreate
+    AccountsContainersCreate'
     { _accPayload = pAccPayload_
     , _accAccountId = pAccAccountId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest AccountsContainersCreate where
         type Rs AccountsContainersCreate = Container
         type Scopes AccountsContainersCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersCreate{..}
+        requestClient AccountsContainersCreate'{..}
           = go _accAccountId (Just AltJSON) _accPayload
               tagManagerService
           where go

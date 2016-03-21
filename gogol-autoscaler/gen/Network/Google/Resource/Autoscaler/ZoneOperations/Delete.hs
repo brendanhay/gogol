@@ -56,7 +56,7 @@ type ZoneOperationsDeleteResource =
 -- | Deletes the specified zone-specific operation resource.
 --
 -- /See:/ 'zoneOperationsDelete' smart constructor.
-data ZoneOperationsDelete = ZoneOperationsDelete
+data ZoneOperationsDelete = ZoneOperationsDelete'
     { _zodProject   :: !Text
     , _zodOperation :: !Text
     , _zodZone      :: !Text
@@ -77,7 +77,7 @@ zoneOperationsDelete
     -> Text -- ^ 'zodZone'
     -> ZoneOperationsDelete
 zoneOperationsDelete pZodProject_ pZodOperation_ pZodZone_ =
-    ZoneOperationsDelete
+    ZoneOperationsDelete'
     { _zodProject = pZodProject_
     , _zodOperation = pZodOperation_
     , _zodZone = pZodZone_
@@ -98,7 +98,7 @@ instance GoogleRequest ZoneOperationsDelete where
         type Rs ZoneOperationsDelete = ()
         type Scopes ZoneOperationsDelete =
              '["https://www.googleapis.com/auth/compute"]
-        requestClient ZoneOperationsDelete{..}
+        requestClient ZoneOperationsDelete'{..}
           = go _zodProject _zodZone _zodOperation
               (Just AltJSON)
               autoscalerService

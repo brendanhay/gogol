@@ -69,7 +69,7 @@ type UsersDataSourcesDataSetsGetResource =
 -- or equal to the dataset start time.
 --
 -- /See:/ 'usersDataSourcesDataSetsGet' smart constructor.
-data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet
+data UsersDataSourcesDataSetsGet = UsersDataSourcesDataSetsGet'
     { _udsdsgDataSourceId :: !Text
     , _udsdsgUserId       :: !Text
     , _udsdsgDataSetId    :: !Text
@@ -96,7 +96,7 @@ usersDataSourcesDataSetsGet
     -> Text -- ^ 'udsdsgDataSetId'
     -> UsersDataSourcesDataSetsGet
 usersDataSourcesDataSetsGet pUdsdsgDataSourceId_ pUdsdsgUserId_ pUdsdsgDataSetId_ =
-    UsersDataSourcesDataSetsGet
+    UsersDataSourcesDataSetsGet'
     { _udsdsgDataSourceId = pUdsdsgDataSourceId_
     , _udsdsgUserId = pUdsdsgUserId_
     , _udsdsgDataSetId = pUdsdsgDataSetId_
@@ -153,7 +153,7 @@ instance GoogleRequest UsersDataSourcesDataSetsGet
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesDataSetsGet{..}
+        requestClient UsersDataSourcesDataSetsGet'{..}
           = go _udsdsgUserId _udsdsgDataSourceId
               _udsdsgDataSetId
               _udsdsgLimit

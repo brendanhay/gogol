@@ -23,7 +23,7 @@ import           Network.Google.YouTubeReporting.Types.Sum
 -- | Response message for ReportingService.ListReports.
 --
 -- /See:/ 'listReportsResponse' smart constructor.
-data ListReportsResponse = ListReportsResponse
+data ListReportsResponse = ListReportsResponse'
     { _lrrNextPageToken :: !(Maybe Text)
     , _lrrReports       :: !(Maybe [Report])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data ListReportsResponse = ListReportsResponse
 listReportsResponse
     :: ListReportsResponse
 listReportsResponse =
-    ListReportsResponse
+    ListReportsResponse'
     { _lrrNextPageToken = Nothing
     , _lrrReports = Nothing
     }
@@ -62,12 +62,12 @@ instance FromJSON ListReportsResponse where
         parseJSON
           = withObject "ListReportsResponse"
               (\ o ->
-                 ListReportsResponse <$>
+                 ListReportsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "reports" .!= mempty))
 
 instance ToJSON ListReportsResponse where
-        toJSON ListReportsResponse{..}
+        toJSON ListReportsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lrrNextPageToken,
@@ -81,17 +81,17 @@ instance ToJSON ListReportsResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -100,7 +100,7 @@ instance ToJSON Empty where
 -- be downloaded.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rJobId       :: !(Maybe Text)
     , _rStartTime   :: !(Maybe Text)
     , _rDownloadURL :: !(Maybe Text)
@@ -127,7 +127,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rJobId = Nothing
     , _rStartTime = Nothing
     , _rDownloadURL = Nothing
@@ -169,7 +169,7 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "jobId") <*> (o .:? "startTime") <*>
                      (o .:? "downloadUrl")
                      <*> (o .:? "endTime")
@@ -177,7 +177,7 @@ instance FromJSON Report where
                      <*> (o .:? "createTime"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [("jobId" .=) <$> _rJobId,
@@ -189,7 +189,7 @@ instance ToJSON Report where
 -- | Response message for ReportingService.ListReportTypes.
 --
 -- /See:/ 'listReportTypesResponse' smart constructor.
-data ListReportTypesResponse = ListReportTypesResponse
+data ListReportTypesResponse = ListReportTypesResponse'
     { _lrtrNextPageToken :: !(Maybe Text)
     , _lrtrReportTypes   :: !(Maybe [ReportType])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -204,7 +204,7 @@ data ListReportTypesResponse = ListReportTypesResponse
 listReportTypesResponse
     :: ListReportTypesResponse
 listReportTypesResponse =
-    ListReportTypesResponse
+    ListReportTypesResponse'
     { _lrtrNextPageToken = Nothing
     , _lrtrReportTypes = Nothing
     }
@@ -229,12 +229,12 @@ instance FromJSON ListReportTypesResponse where
         parseJSON
           = withObject "ListReportTypesResponse"
               (\ o ->
-                 ListReportTypesResponse <$>
+                 ListReportTypesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "reportTypes" .!= mempty))
 
 instance ToJSON ListReportTypesResponse where
-        toJSON ListReportTypesResponse{..}
+        toJSON ListReportTypesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lrtrNextPageToken,
@@ -243,7 +243,7 @@ instance ToJSON ListReportTypesResponse where
 -- | Media resource.
 --
 -- /See:/ 'media' smart constructor.
-newtype Media = Media
+newtype Media = Media'
     { _mResourceName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -255,7 +255,7 @@ newtype Media = Media
 media
     :: Media
 media =
-    Media
+    Media'
     { _mResourceName = Nothing
     }
 
@@ -268,17 +268,17 @@ mResourceName
 instance FromJSON Media where
         parseJSON
           = withObject "Media"
-              (\ o -> Media <$> (o .:? "resourceName"))
+              (\ o -> Media' <$> (o .:? "resourceName"))
 
 instance ToJSON Media where
-        toJSON Media{..}
+        toJSON Media'{..}
           = object
               (catMaybes [("resourceName" .=) <$> _mResourceName])
 
 -- | A job creating reports of a specific type.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job
+data Job = Job'
     { _jName          :: !(Maybe Text)
     , _jId            :: !(Maybe Text)
     , _jSystemManaged :: !(Maybe Bool)
@@ -302,7 +302,7 @@ data Job = Job
 job
     :: Job
 job =
-    Job
+    Job'
     { _jName = Nothing
     , _jId = Nothing
     , _jSystemManaged = Nothing
@@ -341,14 +341,14 @@ instance FromJSON Job where
         parseJSON
           = withObject "Job"
               (\ o ->
-                 Job <$>
+                 Job' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "systemManaged")
                      <*> (o .:? "reportTypeId")
                      <*> (o .:? "createTime"))
 
 instance ToJSON Job where
-        toJSON Job{..}
+        toJSON Job'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _jName, ("id" .=) <$> _jId,
@@ -359,7 +359,7 @@ instance ToJSON Job where
 -- | Response message for ReportingService.ListJobs.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse
+data ListJobsResponse = ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -374,7 +374,7 @@ data ListJobsResponse = ListJobsResponse
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse
+    ListJobsResponse'
     { _ljrNextPageToken = Nothing
     , _ljrJobs = Nothing
     }
@@ -397,12 +397,12 @@ instance FromJSON ListJobsResponse where
         parseJSON
           = withObject "ListJobsResponse"
               (\ o ->
-                 ListJobsResponse <$>
+                 ListJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "jobs" .!= mempty))
 
 instance ToJSON ListJobsResponse where
-        toJSON ListJobsResponse{..}
+        toJSON ListJobsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
@@ -411,7 +411,7 @@ instance ToJSON ListJobsResponse where
 -- | A report type.
 --
 -- /See:/ 'reportType' smart constructor.
-data ReportType = ReportType
+data ReportType = ReportType'
     { _rtName          :: !(Maybe Text)
     , _rtId            :: !(Maybe Text)
     , _rtSystemManaged :: !(Maybe Bool)
@@ -429,7 +429,7 @@ data ReportType = ReportType
 reportType
     :: ReportType
 reportType =
-    ReportType
+    ReportType'
     { _rtName = Nothing
     , _rtId = Nothing
     , _rtSystemManaged = Nothing
@@ -455,12 +455,12 @@ instance FromJSON ReportType where
         parseJSON
           = withObject "ReportType"
               (\ o ->
-                 ReportType <$>
+                 ReportType' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "systemManaged"))
 
 instance ToJSON ReportType where
-        toJSON ReportType{..}
+        toJSON ReportType'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rtName, ("id" .=) <$> _rtId,

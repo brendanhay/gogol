@@ -55,7 +55,7 @@ type PlayersGetResource =
 -- for the currently authenticated user, set playerId to me.
 --
 -- /See:/ 'playersGet' smart constructor.
-data PlayersGet = PlayersGet
+data PlayersGet = PlayersGet'
     { _pgLanguage :: !(Maybe Text)
     , _pgPlayerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ playersGet
     :: Text -- ^ 'pgPlayerId'
     -> PlayersGet
 playersGet pPgPlayerId_ =
-    PlayersGet
+    PlayersGet'
     { _pgLanguage = Nothing
     , _pgPlayerId = pPgPlayerId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PlayersGet where
         type Scopes PlayersGet =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PlayersGet{..}
+        requestClient PlayersGet'{..}
           = go _pgPlayerId _pgLanguage (Just AltJSON)
               gamesService
           where go

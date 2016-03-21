@@ -62,7 +62,7 @@ type ReportsListResource =
 -- | Retrieves list of reports.
 --
 -- /See:/ 'reportsList' smart constructor.
-data ReportsList = ReportsList
+data ReportsList = ReportsList'
     { _rlProFileId  :: !(Textual Int64)
     , _rlSortOrder  :: !ReportsListSortOrder
     , _rlScope      :: !ReportsListScope
@@ -90,7 +90,7 @@ reportsList
     :: Int64 -- ^ 'rlProFileId'
     -> ReportsList
 reportsList pRlProFileId_ =
-    ReportsList
+    ReportsList'
     { _rlProFileId = _Coerce # pRlProFileId_
     , _rlSortOrder = RLSODescending
     , _rlScope = Mine
@@ -134,7 +134,7 @@ instance GoogleRequest ReportsList where
         type Rs ReportsList = ReportList
         type Scopes ReportsList =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsList{..}
+        requestClient ReportsList'{..}
           = go _rlProFileId (Just _rlSortOrder) (Just _rlScope)
               _rlPageToken
               (Just _rlSortField)

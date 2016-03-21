@@ -64,7 +64,7 @@ type ManagementExperimentsUpdateResource =
 -- | Update an existing experiment.
 --
 -- /See:/ 'managementExperimentsUpdate' smart constructor.
-data ManagementExperimentsUpdate = ManagementExperimentsUpdate
+data ManagementExperimentsUpdate = ManagementExperimentsUpdate'
     { _meuWebPropertyId :: !Text
     , _meuProFileId     :: !Text
     , _meuPayload       :: !Experiment
@@ -93,7 +93,7 @@ managementExperimentsUpdate
     -> Text -- ^ 'meuExperimentId'
     -> ManagementExperimentsUpdate
 managementExperimentsUpdate pMeuWebPropertyId_ pMeuProFileId_ pMeuPayload_ pMeuAccountId_ pMeuExperimentId_ =
-    ManagementExperimentsUpdate
+    ManagementExperimentsUpdate'
     { _meuWebPropertyId = pMeuWebPropertyId_
     , _meuProFileId = pMeuProFileId_
     , _meuPayload = pMeuPayload_
@@ -134,7 +134,7 @@ instance GoogleRequest ManagementExperimentsUpdate
         type Scopes ManagementExperimentsUpdate =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementExperimentsUpdate{..}
+        requestClient ManagementExperimentsUpdate'{..}
           = go _meuAccountId _meuWebPropertyId _meuProFileId
               _meuExperimentId
               (Just AltJSON)

@@ -56,7 +56,7 @@ type CampaignsPatchResource =
 -- | Updates an existing campaign. This method supports patch semantics.
 --
 -- /See:/ 'campaignsPatch' smart constructor.
-data CampaignsPatch = CampaignsPatch
+data CampaignsPatch = CampaignsPatch'
     { _cpProFileId :: !(Textual Int64)
     , _cpPayload   :: !Campaign
     , _cpId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ campaignsPatch
     -> Int64 -- ^ 'cpId'
     -> CampaignsPatch
 campaignsPatch pCpProFileId_ pCpPayload_ pCpId_ =
-    CampaignsPatch
+    CampaignsPatch'
     { _cpProFileId = _Coerce # pCpProFileId_
     , _cpPayload = pCpPayload_
     , _cpId = _Coerce # pCpId_
@@ -102,7 +102,7 @@ instance GoogleRequest CampaignsPatch where
         type Rs CampaignsPatch = Campaign
         type Scopes CampaignsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignsPatch{..}
+        requestClient CampaignsPatch'{..}
           = go _cpProFileId (Just _cpId) (Just AltJSON)
               _cpPayload
               dFAReportingService

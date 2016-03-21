@@ -55,7 +55,7 @@ type DomainsDeleteResource =
 -- | Deletes a domain of the customer.
 --
 -- /See:/ 'domainsDelete' smart constructor.
-data DomainsDelete = DomainsDelete
+data DomainsDelete = DomainsDelete'
     { _ddCustomer   :: !Text
     , _ddDomainName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainsDelete
     -> Text -- ^ 'ddDomainName'
     -> DomainsDelete
 domainsDelete pDdCustomer_ pDdDomainName_ =
-    DomainsDelete
+    DomainsDelete'
     { _ddCustomer = pDdCustomer_
     , _ddDomainName = pDdDomainName_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest DomainsDelete where
         type Rs DomainsDelete = ()
         type Scopes DomainsDelete =
              '["https://www.googleapis.com/auth/admin.directory.domain"]
-        requestClient DomainsDelete{..}
+        requestClient DomainsDelete'{..}
           = go _ddCustomer _ddDomainName (Just AltJSON)
               directoryService
           where go

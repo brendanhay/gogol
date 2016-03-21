@@ -52,7 +52,7 @@ type EnterprisesGetStoreLayoutResource =
 -- | Returns the store layout resource.
 --
 -- /See:/ 'enterprisesGetStoreLayout' smart constructor.
-newtype EnterprisesGetStoreLayout = EnterprisesGetStoreLayout
+newtype EnterprisesGetStoreLayout = EnterprisesGetStoreLayout'
     { _egslEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ enterprisesGetStoreLayout
     :: Text -- ^ 'egslEnterpriseId'
     -> EnterprisesGetStoreLayout
 enterprisesGetStoreLayout pEgslEnterpriseId_ =
-    EnterprisesGetStoreLayout
+    EnterprisesGetStoreLayout'
     { _egslEnterpriseId = pEgslEnterpriseId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest EnterprisesGetStoreLayout
         type Rs EnterprisesGetStoreLayout = StoreLayout
         type Scopes EnterprisesGetStoreLayout =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesGetStoreLayout{..}
+        requestClient EnterprisesGetStoreLayout'{..}
           = go _egslEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

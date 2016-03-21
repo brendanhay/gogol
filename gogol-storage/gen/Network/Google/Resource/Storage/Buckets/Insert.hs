@@ -62,7 +62,7 @@ type BucketsInsertResource =
 -- | Creates a new bucket.
 --
 -- /See:/ 'bucketsInsert' smart constructor.
-data BucketsInsert = BucketsInsert
+data BucketsInsert = BucketsInsert'
     { _biProject                    :: !Text
     , _biPredefinedACL              :: !(Maybe BucketsInsertPredefinedACL)
     , _biPayload                    :: !Bucket
@@ -88,7 +88,7 @@ bucketsInsert
     -> Bucket -- ^ 'biPayload'
     -> BucketsInsert
 bucketsInsert pBiProject_ pBiPayload_ =
-    BucketsInsert
+    BucketsInsert'
     { _biProject = pBiProject_
     , _biPredefinedACL = Nothing
     , _biPayload = pBiPayload_
@@ -131,7 +131,7 @@ instance GoogleRequest BucketsInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient BucketsInsert{..}
+        requestClient BucketsInsert'{..}
           = go (Just _biProject) _biPredefinedACL
               _biPredefinedDefaultObjectACL
               _biProjection

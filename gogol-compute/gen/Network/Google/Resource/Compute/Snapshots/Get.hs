@@ -57,7 +57,7 @@ type SnapshotsGetResource =
 -- snapshots by making a list() request.
 --
 -- /See:/ 'snapshotsGet' smart constructor.
-data SnapshotsGet = SnapshotsGet
+data SnapshotsGet = SnapshotsGet'
     { _sggSnapshot :: !Text
     , _sggProject  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ snapshotsGet
     -> Text -- ^ 'sggProject'
     -> SnapshotsGet
 snapshotsGet pSggSnapshot_ pSggProject_ =
-    SnapshotsGet
+    SnapshotsGet'
     { _sggSnapshot = pSggSnapshot_
     , _sggProject = pSggProject_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest SnapshotsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SnapshotsGet{..}
+        requestClient SnapshotsGet'{..}
           = go _sggProject _sggSnapshot (Just AltJSON)
               computeService
           where go

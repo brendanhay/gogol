@@ -66,7 +66,7 @@ type URLCrawlErrorscountsQueryResource =
 -- category and platform.
 --
 -- /See:/ 'urlCrawlErrorscountsQuery' smart constructor.
-data URLCrawlErrorscountsQuery = URLCrawlErrorscountsQuery
+data URLCrawlErrorscountsQuery = URLCrawlErrorscountsQuery'
     { _uceqPlatform         :: !(Maybe URLCrawlErrorscountsQueryPlatform)
     , _uceqCategory         :: !(Maybe URLCrawlErrorscountsQueryCategory)
     , _uceqSiteURL          :: !Text
@@ -88,7 +88,7 @@ urlCrawlErrorscountsQuery
     :: Text -- ^ 'uceqSiteURL'
     -> URLCrawlErrorscountsQuery
 urlCrawlErrorscountsQuery pUceqSiteURL_ =
-    URLCrawlErrorscountsQuery
+    URLCrawlErrorscountsQuery'
     { _uceqPlatform = Nothing
     , _uceqCategory = Nothing
     , _uceqSiteURL = pUceqSiteURL_
@@ -126,7 +126,7 @@ instance GoogleRequest URLCrawlErrorscountsQuery
         type Scopes URLCrawlErrorscountsQuery =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient URLCrawlErrorscountsQuery{..}
+        requestClient URLCrawlErrorscountsQuery'{..}
           = go _uceqSiteURL _uceqPlatform _uceqCategory
               (Just _uceqLatestCountsOnly)
               (Just AltJSON)

@@ -58,7 +58,7 @@ type SeriesMembershipGetResource =
 -- | Returns Series membership data given the series id.
 --
 -- /See:/ 'seriesMembershipGet' smart constructor.
-data SeriesMembershipGet = SeriesMembershipGet
+data SeriesMembershipGet = SeriesMembershipGet'
     { _smgPageToken :: !(Maybe Text)
     , _smgPageSize  :: !(Maybe (Textual Word32))
     , _smgSeriesId  :: !Text
@@ -77,7 +77,7 @@ seriesMembershipGet
     :: Text -- ^ 'smgSeriesId'
     -> SeriesMembershipGet
 seriesMembershipGet pSmgSeriesId_ =
-    SeriesMembershipGet
+    SeriesMembershipGet'
     { _smgPageToken = Nothing
     , _smgPageSize = Nothing
     , _smgSeriesId = pSmgSeriesId_
@@ -103,7 +103,7 @@ instance GoogleRequest SeriesMembershipGet where
         type Rs SeriesMembershipGet = Seriesmembership
         type Scopes SeriesMembershipGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient SeriesMembershipGet{..}
+        requestClient SeriesMembershipGet'{..}
           = go (Just _smgSeriesId) _smgPageToken _smgPageSize
               (Just AltJSON)
               booksService

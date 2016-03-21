@@ -57,7 +57,7 @@ type OrdersAdvancetestOrderResource =
 -- \"pendingShipment\".
 --
 -- /See:/ 'ordersAdvancetestOrder' smart constructor.
-data OrdersAdvancetestOrder = OrdersAdvancetestOrder
+data OrdersAdvancetestOrder = OrdersAdvancetestOrder'
     { _oaoMerchantId :: !(Textual Word64)
     , _oaoOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ ordersAdvancetestOrder
     -> Text -- ^ 'oaoOrderId'
     -> OrdersAdvancetestOrder
 ordersAdvancetestOrder pOaoMerchantId_ pOaoOrderId_ =
-    OrdersAdvancetestOrder
+    OrdersAdvancetestOrder'
     { _oaoMerchantId = _Coerce # pOaoMerchantId_
     , _oaoOrderId = pOaoOrderId_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest OrdersAdvancetestOrder where
              OrdersAdvanceTestOrderResponse
         type Scopes OrdersAdvancetestOrder =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersAdvancetestOrder{..}
+        requestClient OrdersAdvancetestOrder'{..}
           = go _oaoMerchantId _oaoOrderId (Just AltJSON)
               shoppingContentService
           where go

@@ -62,7 +62,7 @@ type GlobalForwardingRulesListResource =
 -- project.
 --
 -- /See:/ 'globalForwardingRulesList' smart constructor.
-data GlobalForwardingRulesList = GlobalForwardingRulesList
+data GlobalForwardingRulesList = GlobalForwardingRulesList'
     { _gfrlProject    :: !Text
     , _gfrlFilter     :: !(Maybe Text)
     , _gfrlPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ globalForwardingRulesList
     :: Text -- ^ 'gfrlProject'
     -> GlobalForwardingRulesList
 globalForwardingRulesList pGfrlProject_ =
-    GlobalForwardingRulesList
+    GlobalForwardingRulesList'
     { _gfrlProject = pGfrlProject_
     , _gfrlFilter = Nothing
     , _gfrlPageToken = Nothing
@@ -147,7 +147,7 @@ instance GoogleRequest GlobalForwardingRulesList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient GlobalForwardingRulesList{..}
+        requestClient GlobalForwardingRulesList'{..}
           = go _gfrlProject _gfrlFilter _gfrlPageToken
               (Just _gfrlMaxResults)
               (Just AltJSON)

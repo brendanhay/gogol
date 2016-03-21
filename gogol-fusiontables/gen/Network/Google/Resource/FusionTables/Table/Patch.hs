@@ -59,7 +59,7 @@ type TablePatchResource =
 -- semantics.
 --
 -- /See:/ 'tablePatch' smart constructor.
-data TablePatch = TablePatch
+data TablePatch = TablePatch'
     { _tpPayload               :: !Table
     , _tpReplaceViewDefinition :: !(Maybe Bool)
     , _tpTableId               :: !Text
@@ -79,7 +79,7 @@ tablePatch
     -> Text -- ^ 'tpTableId'
     -> TablePatch
 tablePatch pTpPayload_ pTpTableId_ =
-    TablePatch
+    TablePatch'
     { _tpPayload = pTpPayload_
     , _tpReplaceViewDefinition = Nothing
     , _tpTableId = pTpTableId_
@@ -107,7 +107,7 @@ instance GoogleRequest TablePatch where
         type Rs TablePatch = Table
         type Scopes TablePatch =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TablePatch{..}
+        requestClient TablePatch'{..}
           = go _tpTableId _tpReplaceViewDefinition
               (Just AltJSON)
               _tpPayload

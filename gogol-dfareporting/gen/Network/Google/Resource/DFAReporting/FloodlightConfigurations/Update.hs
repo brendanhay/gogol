@@ -55,7 +55,7 @@ type FloodlightConfigurationsUpdateResource =
 -- | Updates an existing floodlight configuration.
 --
 -- /See:/ 'floodlightConfigurationsUpdate' smart constructor.
-data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate
+data FloodlightConfigurationsUpdate = FloodlightConfigurationsUpdate'
     { _fcuProFileId :: !(Textual Int64)
     , _fcuPayload   :: !FloodlightConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightConfigurationsUpdate
     -> FloodlightConfiguration -- ^ 'fcuPayload'
     -> FloodlightConfigurationsUpdate
 floodlightConfigurationsUpdate pFcuProFileId_ pFcuPayload_ =
-    FloodlightConfigurationsUpdate
+    FloodlightConfigurationsUpdate'
     { _fcuProFileId = _Coerce # pFcuProFileId_
     , _fcuPayload = pFcuPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest FloodlightConfigurationsUpdate
              FloodlightConfiguration
         type Scopes FloodlightConfigurationsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightConfigurationsUpdate{..}
+        requestClient FloodlightConfigurationsUpdate'{..}
           = go _fcuProFileId (Just AltJSON) _fcuPayload
               dFAReportingService
           where go

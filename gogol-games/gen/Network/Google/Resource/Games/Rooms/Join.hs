@@ -58,7 +58,7 @@ type RoomsJoinResource =
 -- directly is unsupported.
 --
 -- /See:/ 'roomsJoin' smart constructor.
-data RoomsJoin = RoomsJoin
+data RoomsJoin = RoomsJoin'
     { _rjPayload  :: !RoomJoinRequest
     , _rjRoomId   :: !Text
     , _rjLanguage :: !(Maybe Text)
@@ -78,7 +78,7 @@ roomsJoin
     -> Text -- ^ 'rjRoomId'
     -> RoomsJoin
 roomsJoin pRjPayload_ pRjRoomId_ =
-    RoomsJoin
+    RoomsJoin'
     { _rjPayload = pRjPayload_
     , _rjRoomId = pRjRoomId_
     , _rjLanguage = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest RoomsJoin where
         type Scopes RoomsJoin =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsJoin{..}
+        requestClient RoomsJoin'{..}
           = go _rjRoomId _rjLanguage (Just AltJSON) _rjPayload
               gamesService
           where go

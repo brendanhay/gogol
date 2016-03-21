@@ -55,7 +55,7 @@ type ManagementWebPropertiesGetResource =
 -- | Gets a web property to which the user has access.
 --
 -- /See:/ 'managementWebPropertiesGet' smart constructor.
-data ManagementWebPropertiesGet = ManagementWebPropertiesGet
+data ManagementWebPropertiesGet = ManagementWebPropertiesGet'
     { _mwpgWebPropertyId :: !Text
     , _mwpgAccountId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementWebPropertiesGet
     -> Text -- ^ 'mwpgAccountId'
     -> ManagementWebPropertiesGet
 managementWebPropertiesGet pMwpgWebPropertyId_ pMwpgAccountId_ =
-    ManagementWebPropertiesGet
+    ManagementWebPropertiesGet'
     { _mwpgWebPropertyId = pMwpgWebPropertyId_
     , _mwpgAccountId = pMwpgAccountId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest ManagementWebPropertiesGet
         type Scopes ManagementWebPropertiesGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementWebPropertiesGet{..}
+        requestClient ManagementWebPropertiesGet'{..}
           = go _mwpgAccountId _mwpgWebPropertyId (Just AltJSON)
               analyticsService
           where go

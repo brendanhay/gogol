@@ -54,7 +54,7 @@ type SizesGetResource =
 -- | Gets one size by ID.
 --
 -- /See:/ 'sizesGet' smart constructor.
-data SizesGet = SizesGet
+data SizesGet = SizesGet'
     { _sgProFileId :: !(Textual Int64)
     , _sgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sizesGet
     -> Int64 -- ^ 'sgId'
     -> SizesGet
 sizesGet pSgProFileId_ pSgId_ =
-    SizesGet
+    SizesGet'
     { _sgProFileId = _Coerce # pSgProFileId_
     , _sgId = _Coerce # pSgId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest SizesGet where
         type Rs SizesGet = Size
         type Scopes SizesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SizesGet{..}
+        requestClient SizesGet'{..}
           = go _sgProFileId _sgId (Just AltJSON)
               dFAReportingService
           where go

@@ -56,7 +56,7 @@ type AccountsContainersVariablesListResource =
 -- | Lists all GTM Variables of a Container.
 --
 -- /See:/ 'accountsContainersVariablesList' smart constructor.
-data AccountsContainersVariablesList = AccountsContainersVariablesList
+data AccountsContainersVariablesList = AccountsContainersVariablesList'
     { _acvlcContainerId :: !Text
     , _acvlcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersVariablesList
     -> Text -- ^ 'acvlcAccountId'
     -> AccountsContainersVariablesList
 accountsContainersVariablesList pAcvlcContainerId_ pAcvlcAccountId_ =
-    AccountsContainersVariablesList
+    AccountsContainersVariablesList'
     { _acvlcContainerId = pAcvlcContainerId_
     , _acvlcAccountId = pAcvlcAccountId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest
         type Scopes AccountsContainersVariablesList =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersVariablesList{..}
+        requestClient AccountsContainersVariablesList'{..}
           = go _acvlcAccountId _acvlcContainerId (Just AltJSON)
               tagManagerService
           where go

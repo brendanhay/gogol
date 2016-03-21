@@ -61,7 +61,7 @@ type PurchasesSubscriptionsGetResource =
 -- expiry time.
 --
 -- /See:/ 'purchasesSubscriptionsGet' smart constructor.
-data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet
+data PurchasesSubscriptionsGet = PurchasesSubscriptionsGet'
     { _psgPackageName    :: !Text
     , _psgToken          :: !Text
     , _psgSubscriptionId :: !Text
@@ -82,7 +82,7 @@ purchasesSubscriptionsGet
     -> Text -- ^ 'psgSubscriptionId'
     -> PurchasesSubscriptionsGet
 purchasesSubscriptionsGet pPsgPackageName_ pPsgToken_ pPsgSubscriptionId_ =
-    PurchasesSubscriptionsGet
+    PurchasesSubscriptionsGet'
     { _psgPackageName = pPsgPackageName_
     , _psgToken = pPsgToken_
     , _psgSubscriptionId = pPsgSubscriptionId_
@@ -112,7 +112,7 @@ instance GoogleRequest PurchasesSubscriptionsGet
              SubscriptionPurchase
         type Scopes PurchasesSubscriptionsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient PurchasesSubscriptionsGet{..}
+        requestClient PurchasesSubscriptionsGet'{..}
           = go _psgPackageName _psgSubscriptionId _psgToken
               (Just AltJSON)
               androidPublisherService

@@ -53,7 +53,7 @@ type CustomFieldDefListResource =
 -- | Retrieves a list of custom field definitions for a team.
 --
 -- /See:/ 'customFieldDefList' smart constructor.
-newtype CustomFieldDefList = CustomFieldDefList
+newtype CustomFieldDefList = CustomFieldDefList'
     { _cfdlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ customFieldDefList
     :: Text -- ^ 'cfdlTeamId'
     -> CustomFieldDefList
 customFieldDefList pCfdlTeamId_ =
-    CustomFieldDefList
+    CustomFieldDefList'
     { _cfdlTeamId = pCfdlTeamId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest CustomFieldDefList where
         type Scopes CustomFieldDefList =
              '["https://www.googleapis.com/auth/coordinate",
                "https://www.googleapis.com/auth/coordinate.readonly"]
-        requestClient CustomFieldDefList{..}
+        requestClient CustomFieldDefList'{..}
           = go _cfdlTeamId (Just AltJSON) mapsCoordinateService
           where go
                   = buildClient

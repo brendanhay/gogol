@@ -61,7 +61,7 @@ type TargetPoolsRemoveHealthCheckResource =
 -- | Removes health check URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveHealthCheck' smart constructor.
-data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck
+data TargetPoolsRemoveHealthCheck = TargetPoolsRemoveHealthCheck'
     { _tprhcProject    :: !Text
     , _tprhcTargetPool :: !Text
     , _tprhcPayload    :: !TargetPoolsRemoveHealthCheckRequest
@@ -86,7 +86,7 @@ targetPoolsRemoveHealthCheck
     -> Text -- ^ 'tprhcRegion'
     -> TargetPoolsRemoveHealthCheck
 targetPoolsRemoveHealthCheck pTprhcProject_ pTprhcTargetPool_ pTprhcPayload_ pTprhcRegion_ =
-    TargetPoolsRemoveHealthCheck
+    TargetPoolsRemoveHealthCheck'
     { _tprhcProject = pTprhcProject_
     , _tprhcTargetPool = pTprhcTargetPool_
     , _tprhcPayload = pTprhcPayload_
@@ -120,7 +120,7 @@ instance GoogleRequest TargetPoolsRemoveHealthCheck
         type Scopes TargetPoolsRemoveHealthCheck =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsRemoveHealthCheck{..}
+        requestClient TargetPoolsRemoveHealthCheck'{..}
           = go _tprhcProject _tprhcRegion _tprhcTargetPool
               (Just AltJSON)
               _tprhcPayload

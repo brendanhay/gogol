@@ -51,7 +51,7 @@ type ActivitiesGetResource =
 -- | Get an activity.
 --
 -- /See:/ 'activitiesGet' smart constructor.
-newtype ActivitiesGet = ActivitiesGet
+newtype ActivitiesGet = ActivitiesGet'
     { _agActivityId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ activitiesGet
     :: Text -- ^ 'agActivityId'
     -> ActivitiesGet
 activitiesGet pAgActivityId_ =
-    ActivitiesGet
+    ActivitiesGet'
     { _agActivityId = pAgActivityId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest ActivitiesGet where
         type Scopes ActivitiesGet =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient ActivitiesGet{..}
+        requestClient ActivitiesGet'{..}
           = go _agActivityId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy ActivitiesGetResource)

@@ -65,7 +65,7 @@ type MailInsertResource =
 -- | Insert Mail into Google\'s Gmail backends
 --
 -- /See:/ 'mailInsert' smart constructor.
-data MailInsert = MailInsert
+data MailInsert = MailInsert'
     { _miPayload :: !MailItem
     , _miUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ mailInsert
     -> Text -- ^ 'miUserKey'
     -> MailInsert
 mailInsert pMiPayload_ pMiUserKey_ =
-    MailInsert
+    MailInsert'
     { _miPayload = pMiPayload_
     , _miUserKey = pMiUserKey_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest MailInsert where
         type Rs MailInsert = ()
         type Scopes MailInsert =
              '["https://www.googleapis.com/auth/email.migration"]
-        requestClient MailInsert{..}
+        requestClient MailInsert'{..}
           = go _miUserKey (Just AltJSON) _miPayload
               emailMigrationService
           where go :<|> _
@@ -112,7 +112,7 @@ instance GoogleRequest (MediaUpload MailInsert) where
         type Rs (MediaUpload MailInsert) = ()
         type Scopes (MediaUpload MailInsert) =
              Scopes MailInsert
-        requestClient (MediaUpload MailInsert{..} body)
+        requestClient (MediaUpload MailInsert'{..} body)
           = go _miUserKey (Just AltJSON) (Just AltMedia)
               _miPayload
               body

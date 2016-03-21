@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Encapsulates the full scoping used to reference a job.
 --
 -- /See:/ 'jobReference' smart constructor.
-data JobReference = JobReference
+data JobReference = JobReference'
     { _jrJobId     :: !(Maybe Text)
     , _jrProjectId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data JobReference = JobReference
 jobReference
     :: JobReference
 jobReference =
-    JobReference
+    JobReference'
     { _jrJobId = Nothing
     , _jrProjectId = Nothing
     }
@@ -61,11 +61,11 @@ instance FromJSON JobReference where
         parseJSON
           = withObject "JobReference"
               (\ o ->
-                 JobReference <$>
+                 JobReference' <$>
                    (o .:? "jobId") <*> (o .:? "projectId"))
 
 instance ToJSON JobReference where
-        toJSON JobReference{..}
+        toJSON JobReference'{..}
           = object
               (catMaybes
                  [("jobId" .=) <$> _jrJobId,
@@ -108,7 +108,7 @@ instance ToJSON JobReference where
 -- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -126,7 +126,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -156,12 +156,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -174,7 +174,7 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema
+newtype OperationSchema = OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -187,7 +187,7 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema
+    OperationSchema'
     { _osAddtional = _Coerce # pOsAddtional_
     }
 
@@ -200,7 +200,7 @@ osAddtional
 instance FromJSON OperationSchema where
         parseJSON
           = withObject "OperationSchema"
-              (\ o -> OperationSchema <$> (parseJSONObject o))
+              (\ o -> OperationSchema' <$> (parseJSONObject o))
 
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
@@ -211,7 +211,7 @@ instance ToJSON OperationSchema where
 -- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
 --
 -- /See:/ 'pySparkJobProperties' smart constructor.
-newtype PySparkJobProperties = PySparkJobProperties
+newtype PySparkJobProperties = PySparkJobProperties'
     { _psjpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -224,7 +224,7 @@ pySparkJobProperties
     :: HashMap Text Text -- ^ 'psjpAddtional'
     -> PySparkJobProperties
 pySparkJobProperties pPsjpAddtional_ =
-    PySparkJobProperties
+    PySparkJobProperties'
     { _psjpAddtional = _Coerce # pPsjpAddtional_
     }
 
@@ -237,7 +237,8 @@ psjpAddtional
 instance FromJSON PySparkJobProperties where
         parseJSON
           = withObject "PySparkJobProperties"
-              (\ o -> PySparkJobProperties <$> (parseJSONObject o))
+              (\ o ->
+                 PySparkJobProperties' <$> (parseJSONObject o))
 
 instance ToJSON PySparkJobProperties where
         toJSON = toJSON . _psjpAddtional
@@ -245,7 +246,7 @@ instance ToJSON PySparkJobProperties where
 -- | The location of diagnostic output.
 --
 -- /See:/ 'diagnoseClusterResults' smart constructor.
-newtype DiagnoseClusterResults = DiagnoseClusterResults
+newtype DiagnoseClusterResults = DiagnoseClusterResults'
     { _dcrOutputURI :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -257,7 +258,7 @@ newtype DiagnoseClusterResults = DiagnoseClusterResults
 diagnoseClusterResults
     :: DiagnoseClusterResults
 diagnoseClusterResults =
-    DiagnoseClusterResults
+    DiagnoseClusterResults'
     { _dcrOutputURI = Nothing
     }
 
@@ -271,10 +272,10 @@ instance FromJSON DiagnoseClusterResults where
         parseJSON
           = withObject "DiagnoseClusterResults"
               (\ o ->
-                 DiagnoseClusterResults <$> (o .:? "outputUri"))
+                 DiagnoseClusterResults' <$> (o .:? "outputUri"))
 
 instance ToJSON DiagnoseClusterResults where
-        toJSON DiagnoseClusterResults{..}
+        toJSON DiagnoseClusterResults'{..}
           = object
               (catMaybes [("outputUri" .=) <$> _dcrOutputURI])
 
@@ -282,7 +283,7 @@ instance ToJSON DiagnoseClusterResults where
 -- group, such as a master or worker group.
 --
 -- /See:/ 'instanceGroupConfig' smart constructor.
-data InstanceGroupConfig = InstanceGroupConfig
+data InstanceGroupConfig = InstanceGroupConfig'
     { _igcNumInstances       :: !(Maybe (Textual Int32))
     , _igcDiskConfig         :: !(Maybe DiskConfig)
     , _igcIsPreemptible      :: !(Maybe Bool)
@@ -312,7 +313,7 @@ data InstanceGroupConfig = InstanceGroupConfig
 instanceGroupConfig
     :: InstanceGroupConfig
 instanceGroupConfig =
-    InstanceGroupConfig
+    InstanceGroupConfig'
     { _igcNumInstances = Nothing
     , _igcDiskConfig = Nothing
     , _igcIsPreemptible = Nothing
@@ -378,7 +379,7 @@ instance FromJSON InstanceGroupConfig where
         parseJSON
           = withObject "InstanceGroupConfig"
               (\ o ->
-                 InstanceGroupConfig <$>
+                 InstanceGroupConfig' <$>
                    (o .:? "numInstances") <*> (o .:? "diskConfig") <*>
                      (o .:? "isPreemptible")
                      <*> (o .:? "imageUri")
@@ -387,7 +388,7 @@ instance FromJSON InstanceGroupConfig where
                      <*> (o .:? "machineTypeUri"))
 
 instance ToJSON InstanceGroupConfig where
-        toJSON InstanceGroupConfig{..}
+        toJSON InstanceGroupConfig'{..}
           = object
               (catMaybes
                  [("numInstances" .=) <$> _igcNumInstances,
@@ -401,7 +402,7 @@ instance ToJSON InstanceGroupConfig where
 -- | A Cloud Dataproc job for running Spark applications on YARN.
 --
 -- /See:/ 'sparkJob' smart constructor.
-data SparkJob = SparkJob
+data SparkJob = SparkJob'
     { _sjArgs           :: !(Maybe [Text])
     , _sjMainJarFileURI :: !(Maybe Text)
     , _sjJarFileURIs    :: !(Maybe [Text])
@@ -434,7 +435,7 @@ data SparkJob = SparkJob
 sparkJob
     :: SparkJob
 sparkJob =
-    SparkJob
+    SparkJob'
     { _sjArgs = Nothing
     , _sjMainJarFileURI = Nothing
     , _sjJarFileURIs = Nothing
@@ -511,7 +512,7 @@ instance FromJSON SparkJob where
         parseJSON
           = withObject "SparkJob"
               (\ o ->
-                 SparkJob <$>
+                 SparkJob' <$>
                    (o .:? "args" .!= mempty) <*>
                      (o .:? "mainJarFileUri")
                      <*> (o .:? "jarFileUris" .!= mempty)
@@ -522,7 +523,7 @@ instance FromJSON SparkJob where
                      <*> (o .:? "properties"))
 
 instance ToJSON SparkJob where
-        toJSON SparkJob{..}
+        toJSON SparkJob'{..}
           = object
               (catMaybes
                  [("args" .=) <$> _sjArgs,
@@ -542,7 +543,7 @@ instance ToJSON SparkJob where
 -- * pig: \`pig.properties\` * spark: \`spark-defaults.conf\`
 --
 -- /See:/ 'softwareConfigProperties' smart constructor.
-newtype SoftwareConfigProperties = SoftwareConfigProperties
+newtype SoftwareConfigProperties = SoftwareConfigProperties'
     { _scpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -555,7 +556,7 @@ softwareConfigProperties
     :: HashMap Text Text -- ^ 'scpAddtional'
     -> SoftwareConfigProperties
 softwareConfigProperties pScpAddtional_ =
-    SoftwareConfigProperties
+    SoftwareConfigProperties'
     { _scpAddtional = _Coerce # pScpAddtional_
     }
 
@@ -568,7 +569,7 @@ instance FromJSON SoftwareConfigProperties where
         parseJSON
           = withObject "SoftwareConfigProperties"
               (\ o ->
-                 SoftwareConfigProperties <$> (parseJSONObject o))
+                 SoftwareConfigProperties' <$> (parseJSONObject o))
 
 instance ToJSON SoftwareConfigProperties where
         toJSON = toJSON . _scpAddtional
@@ -576,7 +577,7 @@ instance ToJSON SoftwareConfigProperties where
 -- | Specifies the config of disk options for a group of VM instances.
 --
 -- /See:/ 'diskConfig' smart constructor.
-data DiskConfig = DiskConfig
+data DiskConfig = DiskConfig'
     { _dcNumLocalSsds   :: !(Maybe (Textual Int32))
     , _dcBootDiskSizeGb :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -591,7 +592,7 @@ data DiskConfig = DiskConfig
 diskConfig
     :: DiskConfig
 diskConfig =
-    DiskConfig
+    DiskConfig'
     { _dcNumLocalSsds = Nothing
     , _dcBootDiskSizeGb = Nothing
     }
@@ -618,11 +619,11 @@ instance FromJSON DiskConfig where
         parseJSON
           = withObject "DiskConfig"
               (\ o ->
-                 DiskConfig <$>
+                 DiskConfig' <$>
                    (o .:? "numLocalSsds") <*> (o .:? "bootDiskSizeGb"))
 
 instance ToJSON DiskConfig where
-        toJSON DiskConfig{..}
+        toJSON DiskConfig'{..}
           = object
               (catMaybes
                  [("numLocalSsds" .=) <$> _dcNumLocalSsds,
@@ -631,7 +632,7 @@ instance ToJSON DiskConfig where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse
+data ListOperationsResponse = ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -646,7 +647,7 @@ data ListOperationsResponse = ListOperationsResponse
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse
+    ListOperationsResponse'
     { _lorNextPageToken = Nothing
     , _lorOperations = Nothing
     }
@@ -669,12 +670,12 @@ instance FromJSON ListOperationsResponse where
         parseJSON
           = withObject "ListOperationsResponse"
               (\ o ->
-                 ListOperationsResponse <$>
+                 ListOperationsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON ListOperationsResponse where
-        toJSON ListOperationsResponse{..}
+        toJSON ListOperationsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lorNextPageToken,
@@ -684,7 +685,7 @@ instance ToJSON ListOperationsResponse where
 -- Hive command: \`SET name=\"value\";\`).
 --
 -- /See:/ 'hiveJobScriptVariables' smart constructor.
-newtype HiveJobScriptVariables = HiveJobScriptVariables
+newtype HiveJobScriptVariables = HiveJobScriptVariables'
     { _hjsvAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -697,7 +698,7 @@ hiveJobScriptVariables
     :: HashMap Text Text -- ^ 'hjsvAddtional'
     -> HiveJobScriptVariables
 hiveJobScriptVariables pHjsvAddtional_ =
-    HiveJobScriptVariables
+    HiveJobScriptVariables'
     { _hjsvAddtional = _Coerce # pHjsvAddtional_
     }
 
@@ -711,7 +712,7 @@ instance FromJSON HiveJobScriptVariables where
         parseJSON
           = withObject "HiveJobScriptVariables"
               (\ o ->
-                 HiveJobScriptVariables <$> (parseJSONObject o))
+                 HiveJobScriptVariables' <$> (parseJSONObject o))
 
 instance ToJSON HiveJobScriptVariables where
         toJSON = toJSON . _hjsvAddtional
@@ -720,7 +721,7 @@ instance ToJSON HiveJobScriptVariables where
 -- of Google Compute Engine instances.
 --
 -- /See:/ 'cluster' smart constructor.
-data Cluster = Cluster
+data Cluster = Cluster'
     { _cStatus        :: !(Maybe ClusterStatus)
     , _cClusterUuid   :: !(Maybe Text)
     , _cConfig        :: !(Maybe ClusterConfig)
@@ -747,7 +748,7 @@ data Cluster = Cluster
 cluster
     :: Cluster
 cluster =
-    Cluster
+    Cluster'
     { _cStatus = Nothing
     , _cClusterUuid = Nothing
     , _cConfig = Nothing
@@ -795,7 +796,7 @@ instance FromJSON Cluster where
         parseJSON
           = withObject "Cluster"
               (\ o ->
-                 Cluster <$>
+                 Cluster' <$>
                    (o .:? "status") <*> (o .:? "clusterUuid") <*>
                      (o .:? "config")
                      <*> (o .:? "clusterName")
@@ -803,7 +804,7 @@ instance FromJSON Cluster where
                      <*> (o .:? "statusHistory" .!= mempty))
 
 instance ToJSON Cluster where
-        toJSON Cluster{..}
+        toJSON Cluster'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _cStatus,
@@ -816,7 +817,7 @@ instance ToJSON Cluster where
 -- | A request to submit a job.
 --
 -- /See:/ 'submitJobRequest' smart constructor.
-newtype SubmitJobRequest = SubmitJobRequest
+newtype SubmitJobRequest = SubmitJobRequest'
     { _sjrJob :: Maybe Job
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -828,7 +829,7 @@ newtype SubmitJobRequest = SubmitJobRequest
 submitJobRequest
     :: SubmitJobRequest
 submitJobRequest =
-    SubmitJobRequest
+    SubmitJobRequest'
     { _sjrJob = Nothing
     }
 
@@ -839,17 +840,17 @@ sjrJob = lens _sjrJob (\ s a -> s{_sjrJob = a})
 instance FromJSON SubmitJobRequest where
         parseJSON
           = withObject "SubmitJobRequest"
-              (\ o -> SubmitJobRequest <$> (o .:? "job"))
+              (\ o -> SubmitJobRequest' <$> (o .:? "job"))
 
 instance ToJSON SubmitJobRequest where
-        toJSON SubmitJobRequest{..}
+        toJSON SubmitJobRequest'{..}
           = object (catMaybes [("job" .=) <$> _sjrJob])
 
 -- | This resource represents a long-running operation that is the result of
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
@@ -873,7 +874,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -921,14 +922,14 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "done") <*> (o .:? "error") <*>
                      (o .:? "response")
                      <*> (o .:? "name")
                      <*> (o .:? "metadata"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
@@ -944,17 +945,17 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -962,7 +963,7 @@ instance ToJSON Empty where
 -- | A Cloud Dataproc job for running Hive queries on YARN.
 --
 -- /See:/ 'hiveJob' smart constructor.
-data HiveJob = HiveJob
+data HiveJob = HiveJob'
     { _hjQueryFileURI      :: !(Maybe Text)
     , _hjJarFileURIs       :: !(Maybe [Text])
     , _hjScriptVariables   :: !(Maybe HiveJobScriptVariables)
@@ -989,7 +990,7 @@ data HiveJob = HiveJob
 hiveJob
     :: HiveJob
 hiveJob =
-    HiveJob
+    HiveJob'
     { _hjQueryFileURI = Nothing
     , _hjJarFileURIs = Nothing
     , _hjScriptVariables = Nothing
@@ -1047,7 +1048,7 @@ instance FromJSON HiveJob where
         parseJSON
           = withObject "HiveJob"
               (\ o ->
-                 HiveJob <$>
+                 HiveJob' <$>
                    (o .:? "queryFileUri") <*>
                      (o .:? "jarFileUris" .!= mempty)
                      <*> (o .:? "scriptVariables")
@@ -1056,7 +1057,7 @@ instance FromJSON HiveJob where
                      <*> (o .:? "properties"))
 
 instance ToJSON HiveJob where
-        toJSON HiveJob{..}
+        toJSON HiveJob'{..}
           = object
               (catMaybes
                  [("queryFileUri" .=) <$> _hjQueryFileURI,
@@ -1070,7 +1071,7 @@ instance ToJSON HiveJob where
 -- Spark SQL command: SET \`name=\"value\";\`).
 --
 -- /See:/ 'sparkSQLJobScriptVariables' smart constructor.
-newtype SparkSQLJobScriptVariables = SparkSQLJobScriptVariables
+newtype SparkSQLJobScriptVariables = SparkSQLJobScriptVariables'
     { _ssqljsvAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1083,7 +1084,7 @@ sparkSQLJobScriptVariables
     :: HashMap Text Text -- ^ 'ssqljsvAddtional'
     -> SparkSQLJobScriptVariables
 sparkSQLJobScriptVariables pSsqljsvAddtional_ =
-    SparkSQLJobScriptVariables
+    SparkSQLJobScriptVariables'
     { _ssqljsvAddtional = _Coerce # pSsqljsvAddtional_
     }
 
@@ -1097,7 +1098,7 @@ instance FromJSON SparkSQLJobScriptVariables where
         parseJSON
           = withObject "SparkSQLJobScriptVariables"
               (\ o ->
-                 SparkSQLJobScriptVariables <$> (parseJSONObject o))
+                 SparkSQLJobScriptVariables' <$> (parseJSONObject o))
 
 instance ToJSON SparkSQLJobScriptVariables where
         toJSON = toJSON . _ssqljsvAddtional
@@ -1109,7 +1110,7 @@ instance ToJSON SparkSQLJobScriptVariables where
 -- classes in user code.
 --
 -- /See:/ 'pigJobProperties' smart constructor.
-newtype PigJobProperties = PigJobProperties
+newtype PigJobProperties = PigJobProperties'
     { _pjpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1122,7 +1123,7 @@ pigJobProperties
     :: HashMap Text Text -- ^ 'pjpAddtional'
     -> PigJobProperties
 pigJobProperties pPjpAddtional_ =
-    PigJobProperties
+    PigJobProperties'
     { _pjpAddtional = _Coerce # pPjpAddtional_
     }
 
@@ -1134,7 +1135,7 @@ pjpAddtional
 instance FromJSON PigJobProperties where
         parseJSON
           = withObject "PigJobProperties"
-              (\ o -> PigJobProperties <$> (parseJSONObject o))
+              (\ o -> PigJobProperties' <$> (parseJSONObject o))
 
 instance ToJSON PigJobProperties where
         toJSON = toJSON . _pjpAddtional
@@ -1142,7 +1143,7 @@ instance ToJSON PigJobProperties where
 -- | The cluster config.
 --
 -- /See:/ 'clusterConfig' smart constructor.
-data ClusterConfig = ClusterConfig
+data ClusterConfig = ClusterConfig'
     { _ccWorkerConfig          :: !(Maybe InstanceGroupConfig)
     , _ccInitializationActions :: !(Maybe [NodeInitializationAction])
     , _ccMasterConfig          :: !(Maybe InstanceGroupConfig)
@@ -1172,7 +1173,7 @@ data ClusterConfig = ClusterConfig
 clusterConfig
     :: ClusterConfig
 clusterConfig =
-    ClusterConfig
+    ClusterConfig'
     { _ccWorkerConfig = Nothing
     , _ccInitializationActions = Nothing
     , _ccMasterConfig = Nothing
@@ -1245,7 +1246,7 @@ instance FromJSON ClusterConfig where
         parseJSON
           = withObject "ClusterConfig"
               (\ o ->
-                 ClusterConfig <$>
+                 ClusterConfig' <$>
                    (o .:? "workerConfig") <*>
                      (o .:? "initializationActions" .!= mempty)
                      <*> (o .:? "masterConfig")
@@ -1255,7 +1256,7 @@ instance FromJSON ClusterConfig where
                      <*> (o .:? "secondaryWorkerConfig"))
 
 instance ToJSON ClusterConfig where
-        toJSON ClusterConfig{..}
+        toJSON ClusterConfig'{..}
           = object
               (catMaybes
                  [("workerConfig" .=) <$> _ccWorkerConfig,
@@ -1274,7 +1275,7 @@ instance ToJSON ClusterConfig where
 -- \/etc\/hadoop\/conf\/*-site and classes in user code.
 --
 -- /See:/ 'hadoopJobProperties' smart constructor.
-newtype HadoopJobProperties = HadoopJobProperties
+newtype HadoopJobProperties = HadoopJobProperties'
     { _hjpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1287,7 +1288,7 @@ hadoopJobProperties
     :: HashMap Text Text -- ^ 'hjpAddtional'
     -> HadoopJobProperties
 hadoopJobProperties pHjpAddtional_ =
-    HadoopJobProperties
+    HadoopJobProperties'
     { _hjpAddtional = _Coerce # pHjpAddtional_
     }
 
@@ -1299,7 +1300,7 @@ hjpAddtional
 instance FromJSON HadoopJobProperties where
         parseJSON
           = withObject "HadoopJobProperties"
-              (\ o -> HadoopJobProperties <$> (parseJSONObject o))
+              (\ o -> HadoopJobProperties' <$> (parseJSONObject o))
 
 instance ToJSON HadoopJobProperties where
         toJSON = toJSON . _hjpAddtional
@@ -1307,7 +1308,7 @@ instance ToJSON HadoopJobProperties where
 -- | The status of the operation.
 --
 -- /See:/ 'clusterOperationStatus' smart constructor.
-data ClusterOperationStatus = ClusterOperationStatus
+data ClusterOperationStatus = ClusterOperationStatus'
     { _cosState          :: !(Maybe Text)
     , _cosInnerState     :: !(Maybe Text)
     , _cosStateStartTime :: !(Maybe Text)
@@ -1328,7 +1329,7 @@ data ClusterOperationStatus = ClusterOperationStatus
 clusterOperationStatus
     :: ClusterOperationStatus
 clusterOperationStatus =
-    ClusterOperationStatus
+    ClusterOperationStatus'
     { _cosState = Nothing
     , _cosInnerState = Nothing
     , _cosStateStartTime = Nothing
@@ -1360,13 +1361,13 @@ instance FromJSON ClusterOperationStatus where
         parseJSON
           = withObject "ClusterOperationStatus"
               (\ o ->
-                 ClusterOperationStatus <$>
+                 ClusterOperationStatus' <$>
                    (o .:? "state") <*> (o .:? "innerState") <*>
                      (o .:? "stateStartTime")
                      <*> (o .:? "details"))
 
 instance ToJSON ClusterOperationStatus where
-        toJSON ClusterOperationStatus{..}
+        toJSON ClusterOperationStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _cosState,
@@ -1376,7 +1377,7 @@ instance ToJSON ClusterOperationStatus where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1389,7 +1390,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -1402,7 +1403,7 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
@@ -1412,7 +1413,7 @@ instance ToJSON StatusDetailsItem where
 -- Cloud Dataproc API may be overwritten.
 --
 -- /See:/ 'sparkSQLJobProperties' smart constructor.
-newtype SparkSQLJobProperties = SparkSQLJobProperties
+newtype SparkSQLJobProperties = SparkSQLJobProperties'
     { _ssqljpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1425,7 +1426,7 @@ sparkSQLJobProperties
     :: HashMap Text Text -- ^ 'ssqljpAddtional'
     -> SparkSQLJobProperties
 sparkSQLJobProperties pSsqljpAddtional_ =
-    SparkSQLJobProperties
+    SparkSQLJobProperties'
     { _ssqljpAddtional = _Coerce # pSsqljpAddtional_
     }
 
@@ -1439,7 +1440,7 @@ instance FromJSON SparkSQLJobProperties where
         parseJSON
           = withObject "SparkSQLJobProperties"
               (\ o ->
-                 SparkSQLJobProperties <$> (parseJSONObject o))
+                 SparkSQLJobProperties' <$> (parseJSONObject o))
 
 instance ToJSON SparkSQLJobProperties where
         toJSON = toJSON . _ssqljpAddtional
@@ -1448,7 +1449,7 @@ instance ToJSON SparkSQLJobProperties where
 -- period for executable completion.
 --
 -- /See:/ 'nodeInitializationAction' smart constructor.
-data NodeInitializationAction = NodeInitializationAction
+data NodeInitializationAction = NodeInitializationAction'
     { _niaExecutionTimeout :: !(Maybe Text)
     , _niaExecutableFile   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1463,7 +1464,7 @@ data NodeInitializationAction = NodeInitializationAction
 nodeInitializationAction
     :: NodeInitializationAction
 nodeInitializationAction =
-    NodeInitializationAction
+    NodeInitializationAction'
     { _niaExecutionTimeout = Nothing
     , _niaExecutableFile = Nothing
     }
@@ -1487,12 +1488,12 @@ instance FromJSON NodeInitializationAction where
         parseJSON
           = withObject "NodeInitializationAction"
               (\ o ->
-                 NodeInitializationAction <$>
+                 NodeInitializationAction' <$>
                    (o .:? "executionTimeout") <*>
                      (o .:? "executableFile"))
 
 instance ToJSON NodeInitializationAction where
-        toJSON NodeInitializationAction{..}
+        toJSON NodeInitializationAction'{..}
           = object
               (catMaybes
                  [("executionTimeout" .=) <$> _niaExecutionTimeout,
@@ -1501,7 +1502,7 @@ instance ToJSON NodeInitializationAction where
 -- | Cloud Dataproc job config.
 --
 -- /See:/ 'jobPlacement' smart constructor.
-data JobPlacement = JobPlacement
+data JobPlacement = JobPlacement'
     { _jpClusterUuid :: !(Maybe Text)
     , _jpClusterName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1516,7 +1517,7 @@ data JobPlacement = JobPlacement
 jobPlacement
     :: JobPlacement
 jobPlacement =
-    JobPlacement
+    JobPlacement'
     { _jpClusterUuid = Nothing
     , _jpClusterName = Nothing
     }
@@ -1538,11 +1539,11 @@ instance FromJSON JobPlacement where
         parseJSON
           = withObject "JobPlacement"
               (\ o ->
-                 JobPlacement <$>
+                 JobPlacement' <$>
                    (o .:? "clusterUuid") <*> (o .:? "clusterName"))
 
 instance ToJSON JobPlacement where
-        toJSON JobPlacement{..}
+        toJSON JobPlacement'{..}
           = object
               (catMaybes
                  [("clusterUuid" .=) <$> _jpClusterUuid,
@@ -1552,7 +1553,7 @@ instance ToJSON JobPlacement where
 -- instances, applicable to all instances in the cluster.
 --
 -- /See:/ 'gceClusterConfig' smart constructor.
-data GceClusterConfig = GceClusterConfig
+data GceClusterConfig = GceClusterConfig'
     { _gccSubnetworkURI        :: !(Maybe Text)
     , _gccNetworkURI           :: !(Maybe Text)
     , _gccZoneURI              :: !(Maybe Text)
@@ -1579,7 +1580,7 @@ data GceClusterConfig = GceClusterConfig
 gceClusterConfig
     :: GceClusterConfig
 gceClusterConfig =
-    GceClusterConfig
+    GceClusterConfig'
     { _gccSubnetworkURI = Nothing
     , _gccNetworkURI = Nothing
     , _gccZoneURI = Nothing
@@ -1647,7 +1648,7 @@ instance FromJSON GceClusterConfig where
         parseJSON
           = withObject "GceClusterConfig"
               (\ o ->
-                 GceClusterConfig <$>
+                 GceClusterConfig' <$>
                    (o .:? "subnetworkUri") <*> (o .:? "networkUri") <*>
                      (o .:? "zoneUri")
                      <*> (o .:? "metadata")
@@ -1655,7 +1656,7 @@ instance FromJSON GceClusterConfig where
                      <*> (o .:? "tags" .!= mempty))
 
 instance ToJSON GceClusterConfig where
-        toJSON GceClusterConfig{..}
+        toJSON GceClusterConfig'{..}
           = object
               (catMaybes
                  [("subnetworkUri" .=) <$> _gccSubnetworkURI,
@@ -1669,7 +1670,7 @@ instance ToJSON GceClusterConfig where
 -- | The status of the operation.
 --
 -- /See:/ 'operationStatus' smart constructor.
-data OperationStatus = OperationStatus
+data OperationStatus = OperationStatus'
     { _osState          :: !(Maybe Text)
     , _osInnerState     :: !(Maybe Text)
     , _osStateStartTime :: !(Maybe Text)
@@ -1690,7 +1691,7 @@ data OperationStatus = OperationStatus
 operationStatus
     :: OperationStatus
 operationStatus =
-    OperationStatus
+    OperationStatus'
     { _osState = Nothing
     , _osInnerState = Nothing
     , _osStateStartTime = Nothing
@@ -1721,13 +1722,13 @@ instance FromJSON OperationStatus where
         parseJSON
           = withObject "OperationStatus"
               (\ o ->
-                 OperationStatus <$>
+                 OperationStatus' <$>
                    (o .:? "state") <*> (o .:? "innerState") <*>
                      (o .:? "stateStartTime")
                      <*> (o .:? "details"))
 
 instance ToJSON OperationStatus where
-        toJSON OperationStatus{..}
+        toJSON OperationStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _osState,
@@ -1738,7 +1739,7 @@ instance ToJSON OperationStatus where
 -- | The Google Compute Engine metadata entries to add to all instances.
 --
 -- /See:/ 'gceClusterConfigMetadata' smart constructor.
-newtype GceClusterConfigMetadata = GceClusterConfigMetadata
+newtype GceClusterConfigMetadata = GceClusterConfigMetadata'
     { _gccmAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1751,7 +1752,7 @@ gceClusterConfigMetadata
     :: HashMap Text Text -- ^ 'gccmAddtional'
     -> GceClusterConfigMetadata
 gceClusterConfigMetadata pGccmAddtional_ =
-    GceClusterConfigMetadata
+    GceClusterConfigMetadata'
     { _gccmAddtional = _Coerce # pGccmAddtional_
     }
 
@@ -1765,7 +1766,7 @@ instance FromJSON GceClusterConfigMetadata where
         parseJSON
           = withObject "GceClusterConfigMetadata"
               (\ o ->
-                 GceClusterConfigMetadata <$> (parseJSONObject o))
+                 GceClusterConfigMetadata' <$> (parseJSONObject o))
 
 instance ToJSON GceClusterConfigMetadata where
         toJSON = toJSON . _gccmAddtional
@@ -1777,7 +1778,7 @@ instance ToJSON GceClusterConfigMetadata where
 -- classes in user code.
 --
 -- /See:/ 'hiveJobProperties' smart constructor.
-newtype HiveJobProperties = HiveJobProperties
+newtype HiveJobProperties = HiveJobProperties'
     { _hAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1790,7 +1791,7 @@ hiveJobProperties
     :: HashMap Text Text -- ^ 'hAddtional'
     -> HiveJobProperties
 hiveJobProperties pHAddtional_ =
-    HiveJobProperties
+    HiveJobProperties'
     { _hAddtional = _Coerce # pHAddtional_
     }
 
@@ -1802,7 +1803,7 @@ hAddtional
 instance FromJSON HiveJobProperties where
         parseJSON
           = withObject "HiveJobProperties"
-              (\ o -> HiveJobProperties <$> (parseJSONObject o))
+              (\ o -> HiveJobProperties' <$> (parseJSONObject o))
 
 instance ToJSON HiveJobProperties where
         toJSON = toJSON . _hAddtional
@@ -1810,7 +1811,7 @@ instance ToJSON HiveJobProperties where
 -- | Media resource.
 --
 -- /See:/ 'media' smart constructor.
-newtype Media = Media
+newtype Media = Media'
     { _mResourceName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1822,7 +1823,7 @@ newtype Media = Media
 media
     :: Media
 media =
-    Media
+    Media'
     { _mResourceName = Nothing
     }
 
@@ -1835,17 +1836,17 @@ mResourceName
 instance FromJSON Media where
         parseJSON
           = withObject "Media"
-              (\ o -> Media <$> (o .:? "resourceName"))
+              (\ o -> Media' <$> (o .:? "resourceName"))
 
 instance ToJSON Media where
-        toJSON Media{..}
+        toJSON Media'{..}
           = object
               (catMaybes [("resourceName" .=) <$> _mResourceName])
 
 -- | The location where output from diagnostic command can be found.
 --
 -- /See:/ 'diagnoseClusterOutputLocation' smart constructor.
-newtype DiagnoseClusterOutputLocation = DiagnoseClusterOutputLocation
+newtype DiagnoseClusterOutputLocation = DiagnoseClusterOutputLocation'
     { _dcolOutputURI :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1857,7 +1858,7 @@ newtype DiagnoseClusterOutputLocation = DiagnoseClusterOutputLocation
 diagnoseClusterOutputLocation
     :: DiagnoseClusterOutputLocation
 diagnoseClusterOutputLocation =
-    DiagnoseClusterOutputLocation
+    DiagnoseClusterOutputLocation'
     { _dcolOutputURI = Nothing
     }
 
@@ -1872,18 +1873,18 @@ instance FromJSON DiagnoseClusterOutputLocation where
         parseJSON
           = withObject "DiagnoseClusterOutputLocation"
               (\ o ->
-                 DiagnoseClusterOutputLocation <$>
+                 DiagnoseClusterOutputLocation' <$>
                    (o .:? "outputUri"))
 
 instance ToJSON DiagnoseClusterOutputLocation where
-        toJSON DiagnoseClusterOutputLocation{..}
+        toJSON DiagnoseClusterOutputLocation'{..}
           = object
               (catMaybes [("outputUri" .=) <$> _dcolOutputURI])
 
 -- | A Cloud Dataproc job resource.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job
+data Job = Job'
     { _jSparkJob                :: !(Maybe SparkJob)
     , _jStatus                  :: !(Maybe JobStatus)
     , _jDriverControlFilesURI   :: !(Maybe Text)
@@ -1928,7 +1929,7 @@ data Job = Job
 job
     :: Job
 job =
-    Job
+    Job'
     { _jSparkJob = Nothing
     , _jStatus = Nothing
     , _jDriverControlFilesURI = Nothing
@@ -2018,7 +2019,7 @@ instance FromJSON Job where
         parseJSON
           = withObject "Job"
               (\ o ->
-                 Job <$>
+                 Job' <$>
                    (o .:? "sparkJob") <*> (o .:? "status") <*>
                      (o .:? "driverControlFilesUri")
                      <*> (o .:? "hiveJob")
@@ -2032,7 +2033,7 @@ instance FromJSON Job where
                      <*> (o .:? "pigJob"))
 
 instance ToJSON Job where
-        toJSON Job{..}
+        toJSON Job'{..}
           = object
               (catMaybes
                  [("sparkJob" .=) <$> _jSparkJob,
@@ -2054,19 +2055,19 @@ instance ToJSON Job where
 --
 -- /See:/ 'diagnoseClusterRequest' smart constructor.
 data DiagnoseClusterRequest =
-    DiagnoseClusterRequest
+    DiagnoseClusterRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiagnoseClusterRequest' with the minimum fields required to make a request.
 --
 diagnoseClusterRequest
     :: DiagnoseClusterRequest
-diagnoseClusterRequest = DiagnoseClusterRequest
+diagnoseClusterRequest = DiagnoseClusterRequest'
 
 instance FromJSON DiagnoseClusterRequest where
         parseJSON
           = withObject "DiagnoseClusterRequest"
-              (\ o -> pure DiagnoseClusterRequest)
+              (\ o -> pure DiagnoseClusterRequest')
 
 instance ToJSON DiagnoseClusterRequest where
         toJSON = const emptyObject
@@ -2074,7 +2075,7 @@ instance ToJSON DiagnoseClusterRequest where
 -- | A Cloud Dataproc job for running Hadoop MapReduce jobs on YARN.
 --
 -- /See:/ 'hadoopJob' smart constructor.
-data HadoopJob = HadoopJob
+data HadoopJob = HadoopJob'
     { _hArgs           :: !(Maybe [Text])
     , _hMainJarFileURI :: !(Maybe Text)
     , _hJarFileURIs    :: !(Maybe [Text])
@@ -2107,7 +2108,7 @@ data HadoopJob = HadoopJob
 hadoopJob
     :: HadoopJob
 hadoopJob =
-    HadoopJob
+    HadoopJob'
     { _hArgs = Nothing
     , _hMainJarFileURI = Nothing
     , _hJarFileURIs = Nothing
@@ -2186,7 +2187,7 @@ instance FromJSON HadoopJob where
         parseJSON
           = withObject "HadoopJob"
               (\ o ->
-                 HadoopJob <$>
+                 HadoopJob' <$>
                    (o .:? "args" .!= mempty) <*>
                      (o .:? "mainJarFileUri")
                      <*> (o .:? "jarFileUris" .!= mempty)
@@ -2197,7 +2198,7 @@ instance FromJSON HadoopJob where
                      <*> (o .:? "properties"))
 
 instance ToJSON HadoopJob where
-        toJSON HadoopJob{..}
+        toJSON HadoopJob'{..}
           = object
               (catMaybes
                  [("args" .=) <$> _hArgs,
@@ -2212,7 +2213,7 @@ instance ToJSON HadoopJob where
 -- | Metadata describing the operation.
 --
 -- /See:/ 'clusterOperationMetadata' smart constructor.
-data ClusterOperationMetadata = ClusterOperationMetadata
+data ClusterOperationMetadata = ClusterOperationMetadata'
     { _comStatus        :: !(Maybe ClusterOperationStatus)
     , _comClusterUuid   :: !(Maybe Text)
     , _comClusterName   :: !(Maybe Text)
@@ -2239,7 +2240,7 @@ data ClusterOperationMetadata = ClusterOperationMetadata
 clusterOperationMetadata
     :: ClusterOperationMetadata
 clusterOperationMetadata =
-    ClusterOperationMetadata
+    ClusterOperationMetadata'
     { _comStatus = Nothing
     , _comClusterUuid = Nothing
     , _comClusterName = Nothing
@@ -2289,7 +2290,7 @@ instance FromJSON ClusterOperationMetadata where
         parseJSON
           = withObject "ClusterOperationMetadata"
               (\ o ->
-                 ClusterOperationMetadata <$>
+                 ClusterOperationMetadata' <$>
                    (o .:? "status") <*> (o .:? "clusterUuid") <*>
                      (o .:? "clusterName")
                      <*> (o .:? "operationType")
@@ -2297,7 +2298,7 @@ instance FromJSON ClusterOperationMetadata where
                      <*> (o .:? "description"))
 
 instance ToJSON ClusterOperationMetadata where
-        toJSON ClusterOperationMetadata{..}
+        toJSON ClusterOperationMetadata'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _comStatus,
@@ -2310,7 +2311,7 @@ instance ToJSON ClusterOperationMetadata where
 -- | A Cloud Dataproc job for running Spark SQL queries.
 --
 -- /See:/ 'sparkSQLJob' smart constructor.
-data SparkSQLJob = SparkSQLJob
+data SparkSQLJob = SparkSQLJob'
     { _ssqljQueryFileURI    :: !(Maybe Text)
     , _ssqljJarFileURIs     :: !(Maybe [Text])
     , _ssqljScriptVariables :: !(Maybe SparkSQLJobScriptVariables)
@@ -2337,7 +2338,7 @@ data SparkSQLJob = SparkSQLJob
 sparkSQLJob
     :: SparkSQLJob
 sparkSQLJob =
-    SparkSQLJob
+    SparkSQLJob'
     { _ssqljQueryFileURI = Nothing
     , _ssqljJarFileURIs = Nothing
     , _ssqljScriptVariables = Nothing
@@ -2391,7 +2392,7 @@ instance FromJSON SparkSQLJob where
         parseJSON
           = withObject "SparkSQLJob"
               (\ o ->
-                 SparkSQLJob <$>
+                 SparkSQLJob' <$>
                    (o .:? "queryFileUri") <*>
                      (o .:? "jarFileUris" .!= mempty)
                      <*> (o .:? "scriptVariables")
@@ -2400,7 +2401,7 @@ instance FromJSON SparkSQLJob where
                      <*> (o .:? "properties"))
 
 instance ToJSON SparkSQLJob where
-        toJSON SparkSQLJob{..}
+        toJSON SparkSQLJob'{..}
           = object
               (catMaybes
                  [("queryFileUri" .=) <$> _ssqljQueryFileURI,
@@ -2413,7 +2414,7 @@ instance ToJSON SparkSQLJob where
 -- | Specifies the selection and config of software inside the cluster.
 --
 -- /See:/ 'softwareConfig' smart constructor.
-data SoftwareConfig = SoftwareConfig
+data SoftwareConfig = SoftwareConfig'
     { _scImageVersion :: !(Maybe Text)
     , _scProperties   :: !(Maybe SoftwareConfigProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2428,7 +2429,7 @@ data SoftwareConfig = SoftwareConfig
 softwareConfig
     :: SoftwareConfig
 softwareConfig =
-    SoftwareConfig
+    SoftwareConfig'
     { _scImageVersion = Nothing
     , _scProperties = Nothing
     }
@@ -2456,11 +2457,11 @@ instance FromJSON SoftwareConfig where
         parseJSON
           = withObject "SoftwareConfig"
               (\ o ->
-                 SoftwareConfig <$>
+                 SoftwareConfig' <$>
                    (o .:? "imageVersion") <*> (o .:? "properties"))
 
 instance ToJSON SoftwareConfig where
-        toJSON SoftwareConfig{..}
+        toJSON SoftwareConfig'{..}
           = object
               (catMaybes
                  [("imageVersion" .=) <$> _scImageVersion,
@@ -2469,7 +2470,7 @@ instance ToJSON SoftwareConfig where
 -- | A list of jobs in a project.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse
+data ListJobsResponse = ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2484,7 +2485,7 @@ data ListJobsResponse = ListJobsResponse
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse
+    ListJobsResponse'
     { _ljrNextPageToken = Nothing
     , _ljrJobs = Nothing
     }
@@ -2507,12 +2508,12 @@ instance FromJSON ListJobsResponse where
         parseJSON
           = withObject "ListJobsResponse"
               (\ o ->
-                 ListJobsResponse <$>
+                 ListJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "jobs" .!= mempty))
 
 instance ToJSON ListJobsResponse where
-        toJSON ListJobsResponse{..}
+        toJSON ListJobsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
@@ -2524,7 +2525,7 @@ instance ToJSON ListJobsResponse where
 -- \/etc\/spark\/conf\/spark-defaults.conf and classes in user code.
 --
 -- /See:/ 'sparkJobProperties' smart constructor.
-newtype SparkJobProperties = SparkJobProperties
+newtype SparkJobProperties = SparkJobProperties'
     { _sjpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2537,7 +2538,7 @@ sparkJobProperties
     :: HashMap Text Text -- ^ 'sjpAddtional'
     -> SparkJobProperties
 sparkJobProperties pSjpAddtional_ =
-    SparkJobProperties
+    SparkJobProperties'
     { _sjpAddtional = _Coerce # pSjpAddtional_
     }
 
@@ -2549,7 +2550,7 @@ sjpAddtional
 instance FromJSON SparkJobProperties where
         parseJSON
           = withObject "SparkJobProperties"
-              (\ o -> SparkJobProperties <$> (parseJSONObject o))
+              (\ o -> SparkJobProperties' <$> (parseJSONObject o))
 
 instance ToJSON SparkJobProperties where
         toJSON = toJSON . _sjpAddtional
@@ -2557,7 +2558,7 @@ instance ToJSON SparkJobProperties where
 -- | A Cloud Dataproc job for running PySpark applications on YARN.
 --
 -- /See:/ 'pySparkJob' smart constructor.
-data PySparkJob = PySparkJob
+data PySparkJob = PySparkJob'
     { _psjPythonFileURIs    :: !(Maybe [Text])
     , _psjMainPythonFileURI :: !(Maybe Text)
     , _psjArgs              :: !(Maybe [Text])
@@ -2590,7 +2591,7 @@ data PySparkJob = PySparkJob
 pySparkJob
     :: PySparkJob
 pySparkJob =
-    PySparkJob
+    PySparkJob'
     { _psjPythonFileURIs = Nothing
     , _psjMainPythonFileURI = Nothing
     , _psjArgs = Nothing
@@ -2670,7 +2671,7 @@ instance FromJSON PySparkJob where
         parseJSON
           = withObject "PySparkJob"
               (\ o ->
-                 PySparkJob <$>
+                 PySparkJob' <$>
                    (o .:? "pythonFileUris" .!= mempty) <*>
                      (o .:? "mainPythonFileUri")
                      <*> (o .:? "args" .!= mempty)
@@ -2681,7 +2682,7 @@ instance FromJSON PySparkJob where
                      <*> (o .:? "properties"))
 
 instance ToJSON PySparkJob where
-        toJSON PySparkJob{..}
+        toJSON PySparkJob'{..}
           = object
               (catMaybes
                  [("pythonFileUris" .=) <$> _psjPythonFileURIs,
@@ -2696,7 +2697,7 @@ instance ToJSON PySparkJob where
 -- | Specifies the resources used to actively manage an instance group.
 --
 -- /See:/ 'managedGroupConfig' smart constructor.
-data ManagedGroupConfig = ManagedGroupConfig
+data ManagedGroupConfig = ManagedGroupConfig'
     { _mgcInstanceTemplateName     :: !(Maybe Text)
     , _mgcInstanceGroupManagerName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2711,7 +2712,7 @@ data ManagedGroupConfig = ManagedGroupConfig
 managedGroupConfig
     :: ManagedGroupConfig
 managedGroupConfig =
-    ManagedGroupConfig
+    ManagedGroupConfig'
     { _mgcInstanceTemplateName = Nothing
     , _mgcInstanceGroupManagerName = Nothing
     }
@@ -2733,12 +2734,12 @@ instance FromJSON ManagedGroupConfig where
         parseJSON
           = withObject "ManagedGroupConfig"
               (\ o ->
-                 ManagedGroupConfig <$>
+                 ManagedGroupConfig' <$>
                    (o .:? "instanceTemplateName") <*>
                      (o .:? "instanceGroupManagerName"))
 
 instance ToJSON ManagedGroupConfig where
-        toJSON ManagedGroupConfig{..}
+        toJSON ManagedGroupConfig'{..}
           = object
               (catMaybes
                  [("instanceTemplateName" .=) <$>
@@ -2749,7 +2750,7 @@ instance ToJSON ManagedGroupConfig where
 -- | The list of all clusters in a project.
 --
 -- /See:/ 'listClustersResponse' smart constructor.
-data ListClustersResponse = ListClustersResponse
+data ListClustersResponse = ListClustersResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrClusters      :: !(Maybe [Cluster])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2764,7 +2765,7 @@ data ListClustersResponse = ListClustersResponse
 listClustersResponse
     :: ListClustersResponse
 listClustersResponse =
-    ListClustersResponse
+    ListClustersResponse'
     { _lcrNextPageToken = Nothing
     , _lcrClusters = Nothing
     }
@@ -2788,12 +2789,12 @@ instance FromJSON ListClustersResponse where
         parseJSON
           = withObject "ListClustersResponse"
               (\ o ->
-                 ListClustersResponse <$>
+                 ListClustersResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "clusters" .!= mempty))
 
 instance ToJSON ListClustersResponse where
-        toJSON ListClustersResponse{..}
+        toJSON ListClustersResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lcrNextPageToken,
@@ -2803,19 +2804,19 @@ instance ToJSON ListClustersResponse where
 --
 -- /See:/ 'cancelJobRequest' smart constructor.
 data CancelJobRequest =
-    CancelJobRequest
+    CancelJobRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CancelJobRequest' with the minimum fields required to make a request.
 --
 cancelJobRequest
     :: CancelJobRequest
-cancelJobRequest = CancelJobRequest
+cancelJobRequest = CancelJobRequest'
 
 instance FromJSON CancelJobRequest where
         parseJSON
           = withObject "CancelJobRequest"
-              (\ o -> pure CancelJobRequest)
+              (\ o -> pure CancelJobRequest')
 
 instance ToJSON CancelJobRequest where
         toJSON = const emptyObject
@@ -2823,7 +2824,7 @@ instance ToJSON CancelJobRequest where
 -- | A list of queries to run on a cluster.
 --
 -- /See:/ 'queryList' smart constructor.
-newtype QueryList = QueryList
+newtype QueryList = QueryList'
     { _qlQueries :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2835,7 +2836,7 @@ newtype QueryList = QueryList
 queryList
     :: QueryList
 queryList =
-    QueryList
+    QueryList'
     { _qlQueries = Nothing
     }
 
@@ -2854,16 +2855,16 @@ qlQueries
 instance FromJSON QueryList where
         parseJSON
           = withObject "QueryList"
-              (\ o -> QueryList <$> (o .:? "queries" .!= mempty))
+              (\ o -> QueryList' <$> (o .:? "queries" .!= mempty))
 
 instance ToJSON QueryList where
-        toJSON QueryList{..}
+        toJSON QueryList'{..}
           = object (catMaybes [("queries" .=) <$> _qlQueries])
 
 -- | Metadata describing the operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata
+data OperationMetadata = OperationMetadata'
     { _omStatus        :: !(Maybe OperationStatus)
     , _omState         :: !(Maybe Text)
     , _omClusterUuid   :: !(Maybe Text)
@@ -2908,7 +2909,7 @@ data OperationMetadata = OperationMetadata
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata
+    OperationMetadata'
     { _omStatus = Nothing
     , _omState = Nothing
     , _omClusterUuid = Nothing
@@ -2992,7 +2993,7 @@ instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
               (\ o ->
-                 OperationMetadata <$>
+                 OperationMetadata' <$>
                    (o .:? "status") <*> (o .:? "state") <*>
                      (o .:? "clusterUuid")
                      <*> (o .:? "insertTime")
@@ -3006,7 +3007,7 @@ instance FromJSON OperationMetadata where
                      <*> (o .:? "description"))
 
 instance ToJSON OperationMetadata where
-        toJSON OperationMetadata{..}
+        toJSON OperationMetadata'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _omStatus,
@@ -3025,7 +3026,7 @@ instance ToJSON OperationMetadata where
 -- | Cloud Dataproc job status.
 --
 -- /See:/ 'jobStatus' smart constructor.
-data JobStatus = JobStatus
+data JobStatus = JobStatus'
     { _jsState          :: !(Maybe Text)
     , _jsStateStartTime :: !(Maybe Text)
     , _jsDetails        :: !(Maybe Text)
@@ -3043,7 +3044,7 @@ data JobStatus = JobStatus
 jobStatus
     :: JobStatus
 jobStatus =
-    JobStatus
+    JobStatus'
     { _jsState = Nothing
     , _jsStateStartTime = Nothing
     , _jsDetails = Nothing
@@ -3069,12 +3070,12 @@ instance FromJSON JobStatus where
         parseJSON
           = withObject "JobStatus"
               (\ o ->
-                 JobStatus <$>
+                 JobStatus' <$>
                    (o .:? "state") <*> (o .:? "stateStartTime") <*>
                      (o .:? "details"))
 
 instance ToJSON JobStatus where
-        toJSON JobStatus{..}
+        toJSON JobStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _jsState,
@@ -3085,7 +3086,7 @@ instance ToJSON JobStatus where
 -- Pig command: \`name=[value]\`).
 --
 -- /See:/ 'pigJobScriptVariables' smart constructor.
-newtype PigJobScriptVariables = PigJobScriptVariables
+newtype PigJobScriptVariables = PigJobScriptVariables'
     { _pjsvAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3098,7 +3099,7 @@ pigJobScriptVariables
     :: HashMap Text Text -- ^ 'pjsvAddtional'
     -> PigJobScriptVariables
 pigJobScriptVariables pPjsvAddtional_ =
-    PigJobScriptVariables
+    PigJobScriptVariables'
     { _pjsvAddtional = _Coerce # pPjsvAddtional_
     }
 
@@ -3112,7 +3113,7 @@ instance FromJSON PigJobScriptVariables where
         parseJSON
           = withObject "PigJobScriptVariables"
               (\ o ->
-                 PigJobScriptVariables <$> (parseJSONObject o))
+                 PigJobScriptVariables' <$> (parseJSONObject o))
 
 instance ToJSON PigJobScriptVariables where
         toJSON = toJSON . _pjsvAddtional
@@ -3127,7 +3128,7 @@ instance ToJSON PigJobScriptVariables where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse
+newtype OperationResponse = OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3140,7 +3141,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse
+    OperationResponse'
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
@@ -3153,7 +3154,7 @@ orAddtional
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> OperationResponse <$> (parseJSONObject o))
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
@@ -3163,7 +3164,7 @@ instance ToJSON OperationResponse where
 -- \'root = INFO\', \'org.apache = DEBUG\'
 --
 -- /See:/ 'loggingConfigDriverLogLevels' smart constructor.
-newtype LoggingConfigDriverLogLevels = LoggingConfigDriverLogLevels
+newtype LoggingConfigDriverLogLevels = LoggingConfigDriverLogLevels'
     { _lcdllAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3176,7 +3177,7 @@ loggingConfigDriverLogLevels
     :: HashMap Text Text -- ^ 'lcdllAddtional'
     -> LoggingConfigDriverLogLevels
 loggingConfigDriverLogLevels pLcdllAddtional_ =
-    LoggingConfigDriverLogLevels
+    LoggingConfigDriverLogLevels'
     { _lcdllAddtional = _Coerce # pLcdllAddtional_
     }
 
@@ -3190,7 +3191,8 @@ instance FromJSON LoggingConfigDriverLogLevels where
         parseJSON
           = withObject "LoggingConfigDriverLogLevels"
               (\ o ->
-                 LoggingConfigDriverLogLevels <$> (parseJSONObject o))
+                 LoggingConfigDriverLogLevels' <$>
+                   (parseJSONObject o))
 
 instance ToJSON LoggingConfigDriverLogLevels where
         toJSON = toJSON . _lcdllAddtional
@@ -3198,7 +3200,7 @@ instance ToJSON LoggingConfigDriverLogLevels where
 -- | The status of a cluster and its instances.
 --
 -- /See:/ 'clusterStatus' smart constructor.
-data ClusterStatus = ClusterStatus
+data ClusterStatus = ClusterStatus'
     { _csState          :: !(Maybe Text)
     , _csStateStartTime :: !(Maybe Text)
     , _csDetail         :: !(Maybe Text)
@@ -3216,7 +3218,7 @@ data ClusterStatus = ClusterStatus
 clusterStatus
     :: ClusterStatus
 clusterStatus =
-    ClusterStatus
+    ClusterStatus'
     { _csState = Nothing
     , _csStateStartTime = Nothing
     , _csDetail = Nothing
@@ -3240,12 +3242,12 @@ instance FromJSON ClusterStatus where
         parseJSON
           = withObject "ClusterStatus"
               (\ o ->
-                 ClusterStatus <$>
+                 ClusterStatus' <$>
                    (o .:? "state") <*> (o .:? "stateStartTime") <*>
                      (o .:? "detail"))
 
 instance ToJSON ClusterStatus where
-        toJSON ClusterStatus{..}
+        toJSON ClusterStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _csState,
@@ -3255,7 +3257,7 @@ instance ToJSON ClusterStatus where
 -- | A Cloud Dataproc job for running Pig queries on YARN.
 --
 -- /See:/ 'pigJob' smart constructor.
-data PigJob = PigJob
+data PigJob = PigJob'
     { _pjQueryFileURI      :: !(Maybe Text)
     , _pjJarFileURIs       :: !(Maybe [Text])
     , _pjScriptVariables   :: !(Maybe PigJobScriptVariables)
@@ -3285,7 +3287,7 @@ data PigJob = PigJob
 pigJob
     :: PigJob
 pigJob =
-    PigJob
+    PigJob'
     { _pjQueryFileURI = Nothing
     , _pjJarFileURIs = Nothing
     , _pjScriptVariables = Nothing
@@ -3349,7 +3351,7 @@ instance FromJSON PigJob where
         parseJSON
           = withObject "PigJob"
               (\ o ->
-                 PigJob <$>
+                 PigJob' <$>
                    (o .:? "queryFileUri") <*>
                      (o .:? "jarFileUris" .!= mempty)
                      <*> (o .:? "scriptVariables")
@@ -3359,7 +3361,7 @@ instance FromJSON PigJob where
                      <*> (o .:? "properties"))
 
 instance ToJSON PigJob where
-        toJSON PigJob{..}
+        toJSON PigJob'{..}
           = object
               (catMaybes
                  [("queryFileUri" .=) <$> _pjQueryFileURI,
@@ -3373,7 +3375,7 @@ instance ToJSON PigJob where
 -- | The runtime logging config of the job.
 --
 -- /See:/ 'loggingConfig' smart constructor.
-newtype LoggingConfig = LoggingConfig
+newtype LoggingConfig = LoggingConfig'
     { _lcDriverLogLevels :: Maybe LoggingConfigDriverLogLevels
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3385,7 +3387,7 @@ newtype LoggingConfig = LoggingConfig
 loggingConfig
     :: LoggingConfig
 loggingConfig =
-    LoggingConfig
+    LoggingConfig'
     { _lcDriverLogLevels = Nothing
     }
 
@@ -3400,10 +3402,10 @@ lcDriverLogLevels
 instance FromJSON LoggingConfig where
         parseJSON
           = withObject "LoggingConfig"
-              (\ o -> LoggingConfig <$> (o .:? "driverLogLevels"))
+              (\ o -> LoggingConfig' <$> (o .:? "driverLogLevels"))
 
 instance ToJSON LoggingConfig where
-        toJSON LoggingConfig{..}
+        toJSON LoggingConfig'{..}
           = object
               (catMaybes
                  [("driverLogLevels" .=) <$> _lcDriverLogLevels])

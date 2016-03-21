@@ -59,7 +59,7 @@ type ManagementCustomMetricsInsertResource =
 -- | Create a new custom metric.
 --
 -- /See:/ 'managementCustomMetricsInsert' smart constructor.
-data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert
+data ManagementCustomMetricsInsert = ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId :: !Text
     , _mcmiPayload       :: !CustomMetric
     , _mcmiAccountId     :: !Text
@@ -80,7 +80,7 @@ managementCustomMetricsInsert
     -> Text -- ^ 'mcmiAccountId'
     -> ManagementCustomMetricsInsert
 managementCustomMetricsInsert pMcmiWebPropertyId_ pMcmiPayload_ pMcmiAccountId_ =
-    ManagementCustomMetricsInsert
+    ManagementCustomMetricsInsert'
     { _mcmiWebPropertyId = pMcmiWebPropertyId_
     , _mcmiPayload = pMcmiPayload_
     , _mcmiAccountId = pMcmiAccountId_
@@ -108,7 +108,7 @@ instance GoogleRequest ManagementCustomMetricsInsert
         type Rs ManagementCustomMetricsInsert = CustomMetric
         type Scopes ManagementCustomMetricsInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementCustomMetricsInsert{..}
+        requestClient ManagementCustomMetricsInsert'{..}
           = go _mcmiAccountId _mcmiWebPropertyId (Just AltJSON)
               _mcmiPayload
               analyticsService

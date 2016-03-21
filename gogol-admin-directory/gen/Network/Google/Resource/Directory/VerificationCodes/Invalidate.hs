@@ -54,7 +54,7 @@ type VerificationCodesInvalidateResource =
 -- | Invalidate the current backup verification codes for the user.
 --
 -- /See:/ 'verificationCodesInvalidate' smart constructor.
-newtype VerificationCodesInvalidate = VerificationCodesInvalidate
+newtype VerificationCodesInvalidate = VerificationCodesInvalidate'
     { _vciUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ verificationCodesInvalidate
     :: Text -- ^ 'vciUserKey'
     -> VerificationCodesInvalidate
 verificationCodesInvalidate pVciUserKey_ =
-    VerificationCodesInvalidate
+    VerificationCodesInvalidate'
     { _vciUserKey = pVciUserKey_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest VerificationCodesInvalidate
         type Rs VerificationCodesInvalidate = ()
         type Scopes VerificationCodesInvalidate =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient VerificationCodesInvalidate{..}
+        requestClient VerificationCodesInvalidate'{..}
           = go _vciUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

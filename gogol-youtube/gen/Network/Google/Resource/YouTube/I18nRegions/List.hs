@@ -54,7 +54,7 @@ type I18nRegionsListResource =
 -- | Returns a list of content regions that the YouTube website supports.
 --
 -- /See:/ 'i18nRegionsList' smart constructor.
-data I18nRegionsList = I18nRegionsList
+data I18nRegionsList = I18nRegionsList'
     { _irlPart :: !Text
     , _irlHl   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ i18nRegionsList
     :: Text -- ^ 'irlPart'
     -> I18nRegionsList
 i18nRegionsList pIrlPart_ =
-    I18nRegionsList
+    I18nRegionsList'
     { _irlPart = pIrlPart_
     , _irlHl = "en_US"
     }
@@ -92,7 +92,7 @@ instance GoogleRequest I18nRegionsList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient I18nRegionsList{..}
+        requestClient I18nRegionsList'{..}
           = go (Just _irlPart) (Just _irlHl) (Just AltJSON)
               youTubeService
           where go

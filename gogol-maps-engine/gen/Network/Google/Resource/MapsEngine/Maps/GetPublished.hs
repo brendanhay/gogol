@@ -52,7 +52,7 @@ type MapsGetPublishedResource =
 -- | Return the published metadata for a particular map.
 --
 -- /See:/ 'mapsGetPublished' smart constructor.
-newtype MapsGetPublished = MapsGetPublished
+newtype MapsGetPublished = MapsGetPublished'
     { _mgpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ mapsGetPublished
     :: Text -- ^ 'mgpId'
     -> MapsGetPublished
 mapsGetPublished pMgpId_ =
-    MapsGetPublished
+    MapsGetPublished'
     { _mgpId = pMgpId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest MapsGetPublished where
         type Scopes MapsGetPublished =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient MapsGetPublished{..}
+        requestClient MapsGetPublished'{..}
           = go _mgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

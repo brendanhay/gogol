@@ -58,7 +58,7 @@ type InstanceTemplatesGetResource =
 -- instance templates by making a list() request.
 --
 -- /See:/ 'instanceTemplatesGet' smart constructor.
-data InstanceTemplatesGet = InstanceTemplatesGet
+data InstanceTemplatesGet = InstanceTemplatesGet'
     { _itgProject          :: !Text
     , _itgInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ instanceTemplatesGet
     -> Text -- ^ 'itgInstanceTemplate'
     -> InstanceTemplatesGet
 instanceTemplatesGet pItgProject_ pItgInstanceTemplate_ =
-    InstanceTemplatesGet
+    InstanceTemplatesGet'
     { _itgProject = pItgProject_
     , _itgInstanceTemplate = pItgInstanceTemplate_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest InstanceTemplatesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceTemplatesGet{..}
+        requestClient InstanceTemplatesGet'{..}
           = go _itgProject _itgInstanceTemplate (Just AltJSON)
               computeService
           where go

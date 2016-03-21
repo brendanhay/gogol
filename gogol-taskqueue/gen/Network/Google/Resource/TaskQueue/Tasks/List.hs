@@ -55,7 +55,7 @@ type TasksListResource =
 -- | List Tasks in a TaskQueue
 --
 -- /See:/ 'tasksList' smart constructor.
-data TasksList = TasksList
+data TasksList = TasksList'
     { _tTaskqueue :: !Text
     , _tProject   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ tasksList
     -> Text -- ^ 'tProject'
     -> TasksList
 tasksList pTTaskqueue_ pTProject_ =
-    TasksList
+    TasksList'
     { _tTaskqueue = pTTaskqueue_
     , _tProject = pTProject_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TasksList where
         type Scopes TasksList =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksList{..}
+        requestClient TasksList'{..}
           = go _tProject _tTaskqueue (Just AltJSON)
               taskQueueService
           where go

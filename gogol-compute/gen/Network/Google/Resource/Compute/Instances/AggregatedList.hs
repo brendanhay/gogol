@@ -60,7 +60,7 @@ type InstancesAggregatedListResource =
 -- | Retrieves aggregated list of instances.
 --
 -- /See:/ 'instancesAggregatedList' smart constructor.
-data InstancesAggregatedList = InstancesAggregatedList
+data InstancesAggregatedList = InstancesAggregatedList'
     { _ialProject    :: !Text
     , _ialFilter     :: !(Maybe Text)
     , _ialPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ instancesAggregatedList
     :: Text -- ^ 'ialProject'
     -> InstancesAggregatedList
 instancesAggregatedList pIalProject_ =
-    InstancesAggregatedList
+    InstancesAggregatedList'
     { _ialProject = pIalProject_
     , _ialFilter = Nothing
     , _ialPageToken = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest InstancesAggregatedList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstancesAggregatedList{..}
+        requestClient InstancesAggregatedList'{..}
           = go _ialProject _ialFilter _ialPageToken
               (Just _ialMaxResults)
               (Just AltJSON)

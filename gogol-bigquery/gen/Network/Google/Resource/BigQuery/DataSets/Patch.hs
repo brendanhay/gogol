@@ -62,7 +62,7 @@ type DataSetsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
-data DataSetsPatch = DataSetsPatch
+data DataSetsPatch = DataSetsPatch'
     { _dspPayload   :: !DataSet
     , _dspDataSetId :: !Text
     , _dspProjectId :: !Text
@@ -83,7 +83,7 @@ dataSetsPatch
     -> Text -- ^ 'dspProjectId'
     -> DataSetsPatch
 dataSetsPatch pDspPayload_ pDspDataSetId_ pDspProjectId_ =
-    DataSetsPatch
+    DataSetsPatch'
     { _dspPayload = pDspPayload_
     , _dspDataSetId = pDspDataSetId_
     , _dspProjectId = pDspProjectId_
@@ -109,7 +109,7 @@ instance GoogleRequest DataSetsPatch where
         type Scopes DataSetsPatch =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient DataSetsPatch{..}
+        requestClient DataSetsPatch'{..}
           = go _dspProjectId _dspDataSetId (Just AltJSON)
               _dspPayload
               bigQueryService

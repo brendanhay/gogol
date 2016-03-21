@@ -53,7 +53,7 @@ type EditsAPKsListResource =
 
 --
 -- /See:/ 'editsAPKsList' smart constructor.
-data EditsAPKsList = EditsAPKsList
+data EditsAPKsList = EditsAPKsList'
     { _eapklPackageName :: !Text
     , _eapklEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ editsAPKsList
     -> Text -- ^ 'eapklEditId'
     -> EditsAPKsList
 editsAPKsList pEapklPackageName_ pEapklEditId_ =
-    EditsAPKsList
+    EditsAPKsList'
     { _eapklPackageName = pEapklPackageName_
     , _eapklEditId = pEapklEditId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest EditsAPKsList where
         type Rs EditsAPKsList = APKsListResponse
         type Scopes EditsAPKsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKsList{..}
+        requestClient EditsAPKsList'{..}
           = go _eapklPackageName _eapklEditId (Just AltJSON)
               androidPublisherService
           where go

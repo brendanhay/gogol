@@ -54,7 +54,7 @@ type RelyingPartyVerifyPasswordResource =
 -- | Verifies the user entered password.
 --
 -- /See:/ 'relyingPartyVerifyPassword' smart constructor.
-newtype RelyingPartyVerifyPassword = RelyingPartyVerifyPassword
+newtype RelyingPartyVerifyPassword = RelyingPartyVerifyPassword'
     { _rpvpPayload :: IdentitytoolkitRelyingPartyVerifyPasswordRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyVerifyPassword
     :: IdentitytoolkitRelyingPartyVerifyPasswordRequest -- ^ 'rpvpPayload'
     -> RelyingPartyVerifyPassword
 relyingPartyVerifyPassword pRpvpPayload_ =
-    RelyingPartyVerifyPassword
+    RelyingPartyVerifyPassword'
     { _rpvpPayload = pRpvpPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyVerifyPassword
         type Rs RelyingPartyVerifyPassword =
              VerifyPasswordResponse
         type Scopes RelyingPartyVerifyPassword = '[]
-        requestClient RelyingPartyVerifyPassword{..}
+        requestClient RelyingPartyVerifyPassword'{..}
           = go (Just AltJSON) _rpvpPayload
               identityToolkitService
           where go

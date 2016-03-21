@@ -60,7 +60,7 @@ type MapsPermissionsBatchUpdateResource =
 -- is atomic.
 --
 -- /See:/ 'mapsPermissionsBatchUpdate' smart constructor.
-data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate
+data MapsPermissionsBatchUpdate = MapsPermissionsBatchUpdate'
     { _mpbuPayload :: !PermissionsBatchUpdateRequest
     , _mpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ mapsPermissionsBatchUpdate
     -> Text -- ^ 'mpbuId'
     -> MapsPermissionsBatchUpdate
 mapsPermissionsBatchUpdate pMpbuPayload_ pMpbuId_ =
-    MapsPermissionsBatchUpdate
+    MapsPermissionsBatchUpdate'
     { _mpbuPayload = pMpbuPayload_
     , _mpbuId = pMpbuId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest MapsPermissionsBatchUpdate
              PermissionsBatchUpdateResponse
         type Scopes MapsPermissionsBatchUpdate =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient MapsPermissionsBatchUpdate{..}
+        requestClient MapsPermissionsBatchUpdate'{..}
           = go _mpbuId (Just AltJSON) _mpbuPayload
               mapsEngineService
           where go

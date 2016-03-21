@@ -63,7 +63,7 @@ type FilesGetResource =
 -- | Retrieves a report file by its report ID and file ID.
 --
 -- /See:/ 'filesGet' smart constructor.
-data FilesGet = FilesGet
+data FilesGet = FilesGet'
     { _fgReportId :: !(Textual Int64)
     , _fgFileId   :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ filesGet
     -> Int64 -- ^ 'fgFileId'
     -> FilesGet
 filesGet pFgReportId_ pFgFileId_ =
-    FilesGet
+    FilesGet'
     { _fgReportId = _Coerce # pFgReportId_
     , _fgFileId = _Coerce # pFgFileId_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest FilesGet where
         type Rs FilesGet = File
         type Scopes FilesGet =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient FilesGet{..}
+        requestClient FilesGet'{..}
           = go _fgReportId _fgFileId (Just AltJSON)
               dFAReportingService
           where go :<|> _
@@ -112,7 +112,7 @@ instance GoogleRequest (MediaDownload FilesGet) where
         type Rs (MediaDownload FilesGet) = Stream
         type Scopes (MediaDownload FilesGet) =
              Scopes FilesGet
-        requestClient (MediaDownload FilesGet{..})
+        requestClient (MediaDownload FilesGet'{..})
           = go _fgReportId _fgFileId (Just AltMedia)
               dFAReportingService
           where _ :<|> go

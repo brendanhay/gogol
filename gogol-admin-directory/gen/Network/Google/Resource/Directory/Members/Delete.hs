@@ -55,7 +55,7 @@ type MembersDeleteResource =
 -- | Remove membership.
 --
 -- /See:/ 'membersDelete' smart constructor.
-data MembersDelete = MembersDelete
+data MembersDelete = MembersDelete'
     { _mdMemberKey :: !Text
     , _mdGroupKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ membersDelete
     -> Text -- ^ 'mdGroupKey'
     -> MembersDelete
 membersDelete pMdMemberKey_ pMdGroupKey_ =
-    MembersDelete
+    MembersDelete'
     { _mdMemberKey = pMdMemberKey_
     , _mdGroupKey = pMdGroupKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest MembersDelete where
         type Scopes MembersDelete =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.member"]
-        requestClient MembersDelete{..}
+        requestClient MembersDelete'{..}
           = go _mdGroupKey _mdMemberKey (Just AltJSON)
               directoryService
           where go

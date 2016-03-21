@@ -55,7 +55,7 @@ type TokensGetResource =
 -- | Get information about an access token issued by a user.
 --
 -- /See:/ 'tokensGet' smart constructor.
-data TokensGet = TokensGet
+data TokensGet = TokensGet'
     { _tgClientId :: !Text
     , _tgUserKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ tokensGet
     -> Text -- ^ 'tgUserKey'
     -> TokensGet
 tokensGet pTgClientId_ pTgUserKey_ =
-    TokensGet
+    TokensGet'
     { _tgClientId = pTgClientId_
     , _tgUserKey = pTgUserKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest TokensGet where
         type Rs TokensGet = Token
         type Scopes TokensGet =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient TokensGet{..}
+        requestClient TokensGet'{..}
           = go _tgUserKey _tgClientId (Just AltJSON)
               directoryService
           where go

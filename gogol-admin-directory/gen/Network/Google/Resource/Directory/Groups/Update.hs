@@ -54,7 +54,7 @@ type GroupsUpdateResource =
 -- | Update Group
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+data GroupsUpdate = GroupsUpdate'
     { _guGroupKey :: !Text
     , _guPayload  :: !Group
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ groupsUpdate
     -> Group -- ^ 'guPayload'
     -> GroupsUpdate
 groupsUpdate pGuGroupKey_ pGuPayload_ =
-    GroupsUpdate
+    GroupsUpdate'
     { _guGroupKey = pGuGroupKey_
     , _guPayload = pGuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Group
         type Scopes GroupsUpdate =
              '["https://www.googleapis.com/auth/admin.directory.group"]
-        requestClient GroupsUpdate{..}
+        requestClient GroupsUpdate'{..}
           = go _guGroupKey (Just AltJSON) _guPayload
               directoryService
           where go

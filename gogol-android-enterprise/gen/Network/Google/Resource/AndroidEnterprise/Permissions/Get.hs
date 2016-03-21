@@ -55,7 +55,7 @@ type PermissionsGetResource =
 -- enterprise admin.
 --
 -- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet
+data PermissionsGet = PermissionsGet'
     { _pgLanguage     :: !(Maybe Text)
     , _pgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ permissionsGet
     :: Text -- ^ 'pgPermissionId'
     -> PermissionsGet
 permissionsGet pPgPermissionId_ =
-    PermissionsGet
+    PermissionsGet'
     { _pgLanguage = Nothing
     , _pgPermissionId = pPgPermissionId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PermissionsGet where
         type Rs PermissionsGet = Permission
         type Scopes PermissionsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient PermissionsGet{..}
+        requestClient PermissionsGet'{..}
           = go _pgPermissionId _pgLanguage (Just AltJSON)
               androidEnterpriseService
           where go

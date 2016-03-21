@@ -54,7 +54,7 @@ type SubAccountsUpdateResource =
 -- | Updates an existing subaccount.
 --
 -- /See:/ 'subAccountsUpdate' smart constructor.
-data SubAccountsUpdate = SubAccountsUpdate
+data SubAccountsUpdate = SubAccountsUpdate'
     { _sauProFileId :: !(Textual Int64)
     , _sauPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subAccountsUpdate
     -> SubAccount -- ^ 'sauPayload'
     -> SubAccountsUpdate
 subAccountsUpdate pSauProFileId_ pSauPayload_ =
-    SubAccountsUpdate
+    SubAccountsUpdate'
     { _sauProFileId = _Coerce # pSauProFileId_
     , _sauPayload = pSauPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SubAccountsUpdate where
         type Rs SubAccountsUpdate = SubAccount
         type Scopes SubAccountsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SubAccountsUpdate{..}
+        requestClient SubAccountsUpdate'{..}
           = go _sauProFileId (Just AltJSON) _sauPayload
               dFAReportingService
           where go

@@ -53,7 +53,7 @@ type RasterCollectionsPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'rasterCollectionsPermissionsList' smart constructor.
-newtype RasterCollectionsPermissionsList = RasterCollectionsPermissionsList
+newtype RasterCollectionsPermissionsList = RasterCollectionsPermissionsList'
     { _rcplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rasterCollectionsPermissionsList
     :: Text -- ^ 'rcplId'
     -> RasterCollectionsPermissionsList
 rasterCollectionsPermissionsList pRcplId_ =
-    RasterCollectionsPermissionsList
+    RasterCollectionsPermissionsList'
     { _rcplId = pRcplId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest
         type Scopes RasterCollectionsPermissionsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient RasterCollectionsPermissionsList{..}
+        requestClient RasterCollectionsPermissionsList'{..}
           = go _rcplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

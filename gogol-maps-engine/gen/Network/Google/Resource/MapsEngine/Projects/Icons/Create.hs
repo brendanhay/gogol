@@ -65,7 +65,7 @@ type ProjectsIconsCreateResource =
 -- | Create an icon.
 --
 -- /See:/ 'projectsIconsCreate' smart constructor.
-data ProjectsIconsCreate = ProjectsIconsCreate
+data ProjectsIconsCreate = ProjectsIconsCreate'
     { _picPayload   :: !Icon
     , _picProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ projectsIconsCreate
     -> Text -- ^ 'picProjectId'
     -> ProjectsIconsCreate
 projectsIconsCreate pPicPayload_ pPicProjectId_ =
-    ProjectsIconsCreate
+    ProjectsIconsCreate'
     { _picPayload = pPicPayload_
     , _picProjectId = pPicProjectId_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest ProjectsIconsCreate where
         type Rs ProjectsIconsCreate = Icon
         type Scopes ProjectsIconsCreate =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient ProjectsIconsCreate{..}
+        requestClient ProjectsIconsCreate'{..}
           = go _picProjectId (Just AltJSON) _picPayload
               mapsEngineService
           where go :<|> _
@@ -115,7 +115,7 @@ instance GoogleRequest
         type Scopes (MediaUpload ProjectsIconsCreate) =
              Scopes ProjectsIconsCreate
         requestClient
-          (MediaUpload ProjectsIconsCreate{..} body)
+          (MediaUpload ProjectsIconsCreate'{..} body)
           = go _picProjectId (Just AltJSON) (Just AltMedia)
               _picPayload
               body

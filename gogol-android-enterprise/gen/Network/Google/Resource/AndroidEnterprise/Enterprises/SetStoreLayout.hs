@@ -55,7 +55,7 @@ type EnterprisesSetStoreLayoutResource =
 -- | Sets the store layout resource.
 --
 -- /See:/ 'enterprisesSetStoreLayout' smart constructor.
-data EnterprisesSetStoreLayout = EnterprisesSetStoreLayout
+data EnterprisesSetStoreLayout = EnterprisesSetStoreLayout'
     { _esslEnterpriseId :: !Text
     , _esslPayload      :: !StoreLayout
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ enterprisesSetStoreLayout
     -> StoreLayout -- ^ 'esslPayload'
     -> EnterprisesSetStoreLayout
 enterprisesSetStoreLayout pEsslEnterpriseId_ pEsslPayload_ =
-    EnterprisesSetStoreLayout
+    EnterprisesSetStoreLayout'
     { _esslEnterpriseId = pEsslEnterpriseId_
     , _esslPayload = pEsslPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest EnterprisesSetStoreLayout
         type Rs EnterprisesSetStoreLayout = StoreLayout
         type Scopes EnterprisesSetStoreLayout =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesSetStoreLayout{..}
+        requestClient EnterprisesSetStoreLayout'{..}
           = go _esslEnterpriseId (Just AltJSON) _esslPayload
               androidEnterpriseService
           where go

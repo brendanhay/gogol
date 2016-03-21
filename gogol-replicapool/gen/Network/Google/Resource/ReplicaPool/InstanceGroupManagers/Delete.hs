@@ -61,7 +61,7 @@ type InstanceGroupManagersDeleteResource =
 -- must first abandon the instances to remove them from the group.
 --
 -- /See:/ 'instanceGroupManagersDelete' smart constructor.
-data InstanceGroupManagersDelete = InstanceGroupManagersDelete
+data InstanceGroupManagersDelete = InstanceGroupManagersDelete'
     { _igmdProject              :: !Text
     , _igmdInstanceGroupManager :: !Text
     , _igmdZone                 :: !Text
@@ -82,7 +82,7 @@ instanceGroupManagersDelete
     -> Text -- ^ 'igmdZone'
     -> InstanceGroupManagersDelete
 instanceGroupManagersDelete pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_ =
-    InstanceGroupManagersDelete
+    InstanceGroupManagersDelete'
     { _igmdProject = pIgmdProject_
     , _igmdInstanceGroupManager = pIgmdInstanceGroupManager_
     , _igmdZone = pIgmdZone_
@@ -109,7 +109,7 @@ instance GoogleRequest InstanceGroupManagersDelete
         type Scopes InstanceGroupManagersDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupManagersDelete{..}
+        requestClient InstanceGroupManagersDelete'{..}
           = go _igmdProject _igmdZone _igmdInstanceGroupManager
               (Just AltJSON)
               replicaPoolService

@@ -65,7 +65,7 @@ type MyConfigRequestAccessResource =
 -- | Request concurrent and download access restrictions.
 --
 -- /See:/ 'myConfigRequestAccess' smart constructor.
-data MyConfigRequestAccess = MyConfigRequestAccess
+data MyConfigRequestAccess = MyConfigRequestAccess'
     { _mcraCpksver      :: !Text
     , _mcraLocale       :: !(Maybe Text)
     , _mcraLicenseTypes :: !(Maybe MyConfigRequestAccessLicenseTypes)
@@ -96,7 +96,7 @@ myConfigRequestAccess
     -> Text -- ^ 'mcraNonce'
     -> MyConfigRequestAccess
 myConfigRequestAccess pMcraCpksver_ pMcraVolumeId_ pMcraSource_ pMcraNonce_ =
-    MyConfigRequestAccess
+    MyConfigRequestAccess'
     { _mcraCpksver = pMcraCpksver_
     , _mcraLocale = Nothing
     , _mcraLicenseTypes = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest MyConfigRequestAccess where
         type Rs MyConfigRequestAccess = RequestAccess
         type Scopes MyConfigRequestAccess =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyConfigRequestAccess{..}
+        requestClient MyConfigRequestAccess'{..}
           = go (Just _mcraSource) (Just _mcraVolumeId)
               (Just _mcraNonce)
               (Just _mcraCpksver)

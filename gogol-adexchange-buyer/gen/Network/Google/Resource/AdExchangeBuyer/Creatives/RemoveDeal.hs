@@ -56,7 +56,7 @@ type CreativesRemoveDealResource =
 -- | Remove a deal id associated with the creative.
 --
 -- /See:/ 'creativesRemoveDeal' smart constructor.
-data CreativesRemoveDeal = CreativesRemoveDeal
+data CreativesRemoveDeal = CreativesRemoveDeal'
     { _crdBuyerCreativeId :: !Text
     , _crdDealId          :: !(Textual Int64)
     , _crdAccountId       :: !(Textual Int32)
@@ -77,7 +77,7 @@ creativesRemoveDeal
     -> Int32 -- ^ 'crdAccountId'
     -> CreativesRemoveDeal
 creativesRemoveDeal pCrdBuyerCreativeId_ pCrdDealId_ pCrdAccountId_ =
-    CreativesRemoveDeal
+    CreativesRemoveDeal'
     { _crdBuyerCreativeId = pCrdBuyerCreativeId_
     , _crdDealId = _Coerce # pCrdDealId_
     , _crdAccountId = _Coerce # pCrdAccountId_
@@ -105,7 +105,7 @@ instance GoogleRequest CreativesRemoveDeal where
         type Rs CreativesRemoveDeal = ()
         type Scopes CreativesRemoveDeal =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient CreativesRemoveDeal{..}
+        requestClient CreativesRemoveDeal'{..}
           = go _crdAccountId _crdBuyerCreativeId _crdDealId
               (Just AltJSON)
               adExchangeBuyerService

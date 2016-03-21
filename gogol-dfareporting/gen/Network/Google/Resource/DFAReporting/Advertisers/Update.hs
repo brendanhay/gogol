@@ -54,7 +54,7 @@ type AdvertisersUpdateResource =
 -- | Updates an existing advertiser.
 --
 -- /See:/ 'advertisersUpdate' smart constructor.
-data AdvertisersUpdate = AdvertisersUpdate
+data AdvertisersUpdate = AdvertisersUpdate'
     { _auProFileId :: !(Textual Int64)
     , _auPayload   :: !Advertiser
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertisersUpdate
     -> Advertiser -- ^ 'auPayload'
     -> AdvertisersUpdate
 advertisersUpdate pAuProFileId_ pAuPayload_ =
-    AdvertisersUpdate
+    AdvertisersUpdate'
     { _auProFileId = _Coerce # pAuProFileId_
     , _auPayload = pAuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AdvertisersUpdate where
         type Rs AdvertisersUpdate = Advertiser
         type Scopes AdvertisersUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertisersUpdate{..}
+        requestClient AdvertisersUpdate'{..}
           = go _auProFileId (Just AltJSON) _auPayload
               dFAReportingService
           where go

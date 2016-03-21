@@ -53,7 +53,7 @@ type AccountsMetadataMetricsListResource =
 -- | List the metadata for the metrics available to this AdExchange account.
 --
 -- /See:/ 'accountsMetadataMetricsList' smart constructor.
-newtype AccountsMetadataMetricsList = AccountsMetadataMetricsList
+newtype AccountsMetadataMetricsList = AccountsMetadataMetricsList'
     { _ammlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsMetadataMetricsList
     :: Text -- ^ 'ammlAccountId'
     -> AccountsMetadataMetricsList
 accountsMetadataMetricsList pAmmlAccountId_ =
-    AccountsMetadataMetricsList
+    AccountsMetadataMetricsList'
     { _ammlAccountId = pAmmlAccountId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest AccountsMetadataMetricsList
         type Scopes AccountsMetadataMetricsList =
              '["https://www.googleapis.com/auth/adexchange.seller",
                "https://www.googleapis.com/auth/adexchange.seller.readonly"]
-        requestClient AccountsMetadataMetricsList{..}
+        requestClient AccountsMetadataMetricsList'{..}
           = go _ammlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

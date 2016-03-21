@@ -70,7 +70,7 @@ type DataMcfGetResource =
 -- | Returns Analytics Multi-Channel Funnels data for a view (profile).
 --
 -- /See:/ 'dataMcfGet' smart constructor.
-data DataMcfGet = DataMcfGet
+data DataMcfGet = DataMcfGet'
     { _dmgMetrics       :: !Text
     , _dmgSamplingLevel :: !(Maybe DataMcfGetSamplingLevel)
     , _dmgFilters       :: !(Maybe Text)
@@ -113,7 +113,7 @@ dataMcfGet
     -> Text -- ^ 'dmgStartDate'
     -> DataMcfGet
 dataMcfGet pDmgMetrics_ pDmgIds_ pDmgEndDate_ pDmgStartDate_ =
-    DataMcfGet
+    DataMcfGet'
     { _dmgMetrics = pDmgMetrics_
     , _dmgSamplingLevel = Nothing
     , _dmgFilters = Nothing
@@ -196,7 +196,7 @@ instance GoogleRequest DataMcfGet where
         type Scopes DataMcfGet =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient DataMcfGet{..}
+        requestClient DataMcfGet'{..}
           = go (Just _dmgIds) (Just _dmgStartDate)
               (Just _dmgEndDate)
               (Just _dmgMetrics)

@@ -55,7 +55,7 @@ type AspsDeleteResource =
 -- | Delete an ASP issued by a user.
 --
 -- /See:/ 'aspsDelete' smart constructor.
-data AspsDelete = AspsDelete
+data AspsDelete = AspsDelete'
     { _adCodeId  :: !(Textual Int32)
     , _adUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ aspsDelete
     -> Text -- ^ 'adUserKey'
     -> AspsDelete
 aspsDelete pAdCodeId_ pAdUserKey_ =
-    AspsDelete
+    AspsDelete'
     { _adCodeId = _Coerce # pAdCodeId_
     , _adUserKey = pAdUserKey_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest AspsDelete where
         type Rs AspsDelete = ()
         type Scopes AspsDelete =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient AspsDelete{..}
+        requestClient AspsDelete'{..}
           = go _adUserKey _adCodeId (Just AltJSON)
               directoryService
           where go

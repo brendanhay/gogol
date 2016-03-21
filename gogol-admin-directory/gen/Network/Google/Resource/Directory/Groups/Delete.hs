@@ -52,7 +52,7 @@ type GroupsDeleteResource =
 -- | Delete Group
 --
 -- /See:/ 'groupsDelete' smart constructor.
-newtype GroupsDelete = GroupsDelete
+newtype GroupsDelete = GroupsDelete'
     { _gdGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ groupsDelete
     :: Text -- ^ 'gdGroupKey'
     -> GroupsDelete
 groupsDelete pGdGroupKey_ =
-    GroupsDelete
+    GroupsDelete'
     { _gdGroupKey = pGdGroupKey_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest GroupsDelete where
         type Rs GroupsDelete = ()
         type Scopes GroupsDelete =
              '["https://www.googleapis.com/auth/admin.directory.group"]
-        requestClient GroupsDelete{..}
+        requestClient GroupsDelete'{..}
           = go _gdGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsDeleteResource)

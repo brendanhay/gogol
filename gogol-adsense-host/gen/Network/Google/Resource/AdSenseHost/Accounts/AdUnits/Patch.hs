@@ -61,7 +61,7 @@ type AccountsAdUnitsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'accountsAdUnitsPatch' smart constructor.
-data AccountsAdUnitsPatch = AccountsAdUnitsPatch
+data AccountsAdUnitsPatch = AccountsAdUnitsPatch'
     { _aaupAdUnitId   :: !Text
     , _aaupPayload    :: !AdUnit
     , _aaupAdClientId :: !Text
@@ -86,7 +86,7 @@ accountsAdUnitsPatch
     -> Text -- ^ 'aaupAccountId'
     -> AccountsAdUnitsPatch
 accountsAdUnitsPatch pAaupAdUnitId_ pAaupPayload_ pAaupAdClientId_ pAaupAccountId_ =
-    AccountsAdUnitsPatch
+    AccountsAdUnitsPatch'
     { _aaupAdUnitId = pAaupAdUnitId_
     , _aaupPayload = pAaupPayload_
     , _aaupAdClientId = pAaupAdClientId_
@@ -119,7 +119,7 @@ instance GoogleRequest AccountsAdUnitsPatch where
         type Rs AccountsAdUnitsPatch = AdUnit
         type Scopes AccountsAdUnitsPatch =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsAdUnitsPatch{..}
+        requestClient AccountsAdUnitsPatch'{..}
           = go _aaupAccountId _aaupAdClientId
               (Just _aaupAdUnitId)
               (Just AltJSON)

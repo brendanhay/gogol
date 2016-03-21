@@ -54,7 +54,7 @@ type ACLDeleteResource =
 -- | Deletes an access control rule.
 --
 -- /See:/ 'aclDelete' smart constructor.
-data ACLDelete = ACLDelete
+data ACLDelete = ACLDelete'
     { _adCalendarId :: !Text
     , _adRuleId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ aclDelete
     -> Text -- ^ 'adRuleId'
     -> ACLDelete
 aclDelete pAdCalendarId_ pAdRuleId_ =
-    ACLDelete
+    ACLDelete'
     { _adCalendarId = pAdCalendarId_
     , _adRuleId = pAdRuleId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ACLDelete where
         type Rs ACLDelete = ()
         type Scopes ACLDelete =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient ACLDelete{..}
+        requestClient ACLDelete'{..}
           = go _adCalendarId _adRuleId (Just AltJSON)
               appsCalendarService
           where go

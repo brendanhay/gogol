@@ -66,7 +66,7 @@ type JobsGetResource =
 -- | Gets a job.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+data JobsGet = JobsGet'
     { _jgXgafv                  :: !(Maybe Text)
     , _jgJobId                  :: !Text
     , _jgUploadProtocol         :: !(Maybe Text)
@@ -103,7 +103,7 @@ jobsGet
     :: Text -- ^ 'jgJobId'
     -> JobsGet
 jobsGet pJgJobId_ =
-    JobsGet
+    JobsGet'
     { _jgXgafv = Nothing
     , _jgJobId = pJgJobId_
     , _jgUploadProtocol = Nothing
@@ -167,7 +167,7 @@ instance GoogleRequest JobsGet where
         type Scopes JobsGet =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient JobsGet{..}
+        requestClient JobsGet'{..}
           = go _jgJobId _jgXgafv _jgUploadProtocol (Just _jgPp)
               _jgAccessToken
               _jgUploadType

@@ -58,7 +58,7 @@ type TargetHTTPSProxiesGetResource =
 -- target HTTPS proxies by making a list() request.
 --
 -- /See:/ 'targetHTTPSProxiesGet' smart constructor.
-data TargetHTTPSProxiesGet = TargetHTTPSProxiesGet
+data TargetHTTPSProxiesGet = TargetHTTPSProxiesGet'
     { _thpgProject          :: !Text
     , _thpgTargetHTTPSProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ targetHTTPSProxiesGet
     -> Text -- ^ 'thpgTargetHTTPSProxy'
     -> TargetHTTPSProxiesGet
 targetHTTPSProxiesGet pThpgProject_ pThpgTargetHTTPSProxy_ =
-    TargetHTTPSProxiesGet
+    TargetHTTPSProxiesGet'
     { _thpgProject = pThpgProject_
     , _thpgTargetHTTPSProxy = pThpgTargetHTTPSProxy_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest TargetHTTPSProxiesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetHTTPSProxiesGet{..}
+        requestClient TargetHTTPSProxiesGet'{..}
           = go _thpgProject _thpgTargetHTTPSProxy
               (Just AltJSON)
               computeService

@@ -63,7 +63,7 @@ type ChromeosDevicesPatchResource =
 -- | Update Chrome OS Device. This method supports patch semantics.
 --
 -- /See:/ 'chromeosDevicesPatch' smart constructor.
-data ChromeosDevicesPatch = ChromeosDevicesPatch
+data ChromeosDevicesPatch = ChromeosDevicesPatch'
     { _cdpPayload    :: !ChromeOSDevice
     , _cdpCustomerId :: !Text
     , _cdpDeviceId   :: !Text
@@ -87,7 +87,7 @@ chromeosDevicesPatch
     -> Text -- ^ 'cdpDeviceId'
     -> ChromeosDevicesPatch
 chromeosDevicesPatch pCdpPayload_ pCdpCustomerId_ pCdpDeviceId_ =
-    ChromeosDevicesPatch
+    ChromeosDevicesPatch'
     { _cdpPayload = pCdpPayload_
     , _cdpCustomerId = pCdpCustomerId_
     , _cdpDeviceId = pCdpDeviceId_
@@ -120,7 +120,7 @@ instance GoogleRequest ChromeosDevicesPatch where
         type Rs ChromeosDevicesPatch = ChromeOSDevice
         type Scopes ChromeosDevicesPatch =
              '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
-        requestClient ChromeosDevicesPatch{..}
+        requestClient ChromeosDevicesPatch'{..}
           = go _cdpCustomerId _cdpDeviceId _cdpProjection
               (Just AltJSON)
               _cdpPayload

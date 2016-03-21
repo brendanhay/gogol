@@ -69,7 +69,7 @@ type ScoresListWindowResource =
 -- score.
 --
 -- /See:/ 'scoresListWindow' smart constructor.
-data ScoresListWindow = ScoresListWindow
+data ScoresListWindow = ScoresListWindow'
     { _slwCollection        :: !ScoresListWindowCollection
     , _slwTimeSpan          :: !ScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
@@ -105,7 +105,7 @@ scoresListWindow
     -> Text -- ^ 'slwLeaderboardId'
     -> ScoresListWindow
 scoresListWindow pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
-    ScoresListWindow
+    ScoresListWindow'
     { _slwCollection = pSlwCollection_
     , _slwTimeSpan = pSlwTimeSpan_
     , _slwReturnTopIfAbsent = Nothing
@@ -174,7 +174,7 @@ instance GoogleRequest ScoresListWindow where
         type Scopes ScoresListWindow =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresListWindow{..}
+        requestClient ScoresListWindow'{..}
           = go _slwLeaderboardId _slwCollection
               (Just _slwTimeSpan)
               _slwReturnTopIfAbsent

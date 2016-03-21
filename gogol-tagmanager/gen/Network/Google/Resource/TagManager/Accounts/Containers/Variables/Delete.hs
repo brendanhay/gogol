@@ -57,7 +57,7 @@ type AccountsContainersVariablesDeleteResource =
 -- | Deletes a GTM Variable.
 --
 -- /See:/ 'accountsContainersVariablesDelete' smart constructor.
-data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete
+data AccountsContainersVariablesDelete = AccountsContainersVariablesDelete'
     { _acvdContainerId :: !Text
     , _acvdVariableId  :: !Text
     , _acvdAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersVariablesDelete
     -> Text -- ^ 'acvdAccountId'
     -> AccountsContainersVariablesDelete
 accountsContainersVariablesDelete pAcvdContainerId_ pAcvdVariableId_ pAcvdAccountId_ =
-    AccountsContainersVariablesDelete
+    AccountsContainersVariablesDelete'
     { _acvdContainerId = pAcvdContainerId_
     , _acvdVariableId = pAcvdVariableId_
     , _acvdAccountId = pAcvdAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest
         type Rs AccountsContainersVariablesDelete = ()
         type Scopes AccountsContainersVariablesDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersVariablesDelete{..}
+        requestClient AccountsContainersVariablesDelete'{..}
           = go _acvdAccountId _acvdContainerId _acvdVariableId
               (Just AltJSON)
               tagManagerService

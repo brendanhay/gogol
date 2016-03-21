@@ -57,7 +57,7 @@ type RollingUpdatesGetResource =
 -- | Returns information about an update.
 --
 -- /See:/ 'rollingUpdatesGet' smart constructor.
-data RollingUpdatesGet = RollingUpdatesGet
+data RollingUpdatesGet = RollingUpdatesGet'
     { _rugRollingUpdate :: !Text
     , _rugProject       :: !Text
     , _rugZone          :: !Text
@@ -78,7 +78,7 @@ rollingUpdatesGet
     -> Text -- ^ 'rugZone'
     -> RollingUpdatesGet
 rollingUpdatesGet pRugRollingUpdate_ pRugProject_ pRugZone_ =
-    RollingUpdatesGet
+    RollingUpdatesGet'
     { _rugRollingUpdate = pRugRollingUpdate_
     , _rugProject = pRugProject_
     , _rugZone = pRugZone_
@@ -106,7 +106,7 @@ instance GoogleRequest RollingUpdatesGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/replicapool",
                "https://www.googleapis.com/auth/replicapool.readonly"]
-        requestClient RollingUpdatesGet{..}
+        requestClient RollingUpdatesGet'{..}
           = go _rugProject _rugZone _rugRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

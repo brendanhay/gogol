@@ -67,7 +67,7 @@ type LiveBroadcastsControlResource =
 -- stream.
 --
 -- /See:/ 'liveBroadcastsControl' smart constructor.
-data LiveBroadcastsControl = LiveBroadcastsControl
+data LiveBroadcastsControl = LiveBroadcastsControl'
     { _lbcPart                          :: !Text
     , _lbcOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbcOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -99,7 +99,7 @@ liveBroadcastsControl
     -> Text -- ^ 'lbcId'
     -> LiveBroadcastsControl
 liveBroadcastsControl pLbcPart_ pLbcId_ =
-    LiveBroadcastsControl
+    LiveBroadcastsControl'
     { _lbcPart = pLbcPart_
     , _lbcOnBehalfOfContentOwner = Nothing
     , _lbcOnBehalfOfContentOwnerChannel = Nothing
@@ -193,7 +193,7 @@ instance GoogleRequest LiveBroadcastsControl where
         type Scopes LiveBroadcastsControl =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveBroadcastsControl{..}
+        requestClient LiveBroadcastsControl'{..}
           = go (Just _lbcId) (Just _lbcPart)
               _lbcOnBehalfOfContentOwner
               _lbcOnBehalfOfContentOwnerChannel

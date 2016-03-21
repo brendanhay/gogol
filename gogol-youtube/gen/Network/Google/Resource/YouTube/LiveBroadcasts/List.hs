@@ -74,7 +74,7 @@ type LiveBroadcastsListResource =
 -- parameters.
 --
 -- /See:/ 'liveBroadcastsList' smart constructor.
-data LiveBroadcastsList = LiveBroadcastsList
+data LiveBroadcastsList = LiveBroadcastsList'
     { _lblPart                          :: !Text
     , _lblMine                          :: !(Maybe Bool)
     , _lblBroadcastStatus               :: !(Maybe LiveBroadcastsListBroadcastStatus)
@@ -111,7 +111,7 @@ liveBroadcastsList
     :: Text -- ^ 'lblPart'
     -> LiveBroadcastsList
 liveBroadcastsList pLblPart_ =
-    LiveBroadcastsList
+    LiveBroadcastsList'
     { _lblPart = pLblPart_
     , _lblMine = Nothing
     , _lblBroadcastStatus = Nothing
@@ -215,7 +215,7 @@ instance GoogleRequest LiveBroadcastsList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient LiveBroadcastsList{..}
+        requestClient LiveBroadcastsList'{..}
           = go (Just _lblPart) _lblMine _lblBroadcastStatus
               _lblOnBehalfOfContentOwner
               (Just _lblBroadcastType)

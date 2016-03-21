@@ -57,7 +57,7 @@ type NetworksGetResource =
 -- making a list() request.
 --
 -- /See:/ 'networksGet' smart constructor.
-data NetworksGet = NetworksGet
+data NetworksGet = NetworksGet'
     { _ngProject :: !Text
     , _ngNetwork :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ networksGet
     -> Text -- ^ 'ngNetwork'
     -> NetworksGet
 networksGet pNgProject_ pNgNetwork_ =
-    NetworksGet
+    NetworksGet'
     { _ngProject = pNgProject_
     , _ngNetwork = pNgNetwork_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest NetworksGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient NetworksGet{..}
+        requestClient NetworksGet'{..}
           = go _ngProject _ngNetwork (Just AltJSON)
               computeService
           where go

@@ -59,7 +59,7 @@ type AccountsAdUnitsDeleteResource =
 -- account.
 --
 -- /See:/ 'accountsAdUnitsDelete' smart constructor.
-data AccountsAdUnitsDelete = AccountsAdUnitsDelete
+data AccountsAdUnitsDelete = AccountsAdUnitsDelete'
     { _aaudAdUnitId   :: !Text
     , _aaudAdClientId :: !Text
     , _aaudAccountId  :: !Text
@@ -80,7 +80,7 @@ accountsAdUnitsDelete
     -> Text -- ^ 'aaudAccountId'
     -> AccountsAdUnitsDelete
 accountsAdUnitsDelete pAaudAdUnitId_ pAaudAdClientId_ pAaudAccountId_ =
-    AccountsAdUnitsDelete
+    AccountsAdUnitsDelete'
     { _aaudAdUnitId = pAaudAdUnitId_
     , _aaudAdClientId = pAaudAdClientId_
     , _aaudAccountId = pAaudAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest AccountsAdUnitsDelete where
         type Rs AccountsAdUnitsDelete = AdUnit
         type Scopes AccountsAdUnitsDelete =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsAdUnitsDelete{..}
+        requestClient AccountsAdUnitsDelete'{..}
           = go _aaudAccountId _aaudAdClientId _aaudAdUnitId
               (Just AltJSON)
               adSenseHostService

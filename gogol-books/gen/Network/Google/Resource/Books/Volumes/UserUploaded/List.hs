@@ -64,7 +64,7 @@ type VolumesUserUploadedListResource =
 -- | Return a list of books uploaded by the current user.
 --
 -- /See:/ 'volumesUserUploadedList' smart constructor.
-data VolumesUserUploadedList = VolumesUserUploadedList
+data VolumesUserUploadedList = VolumesUserUploadedList'
     { _vuulProcessingState :: !(Maybe [VolumesUserUploadedListProcessingState])
     , _vuulLocale          :: !(Maybe Text)
     , _vuulVolumeId        :: !(Maybe [Text])
@@ -91,7 +91,7 @@ data VolumesUserUploadedList = VolumesUserUploadedList
 volumesUserUploadedList
     :: VolumesUserUploadedList
 volumesUserUploadedList =
-    VolumesUserUploadedList
+    VolumesUserUploadedList'
     { _vuulProcessingState = Nothing
     , _vuulLocale = Nothing
     , _vuulVolumeId = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest VolumesUserUploadedList where
         type Rs VolumesUserUploadedList = Volumes
         type Scopes VolumesUserUploadedList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesUserUploadedList{..}
+        requestClient VolumesUserUploadedList'{..}
           = go (_vuulProcessingState ^. _Default) _vuulLocale
               (_vuulVolumeId ^. _Default)
               _vuulSource

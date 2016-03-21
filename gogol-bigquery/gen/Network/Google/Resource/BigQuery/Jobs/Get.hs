@@ -58,7 +58,7 @@ type JobsGetResource =
 -- who ran the job, or have the Is Owner project role.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+data JobsGet = JobsGet'
     { _jgJobId     :: !Text
     , _jgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ jobsGet
     -> Text -- ^ 'jgProjectId'
     -> JobsGet
 jobsGet pJgJobId_ pJgProjectId_ =
-    JobsGet
+    JobsGet'
     { _jgJobId = pJgJobId_
     , _jgProjectId = pJgProjectId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest JobsGet where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient JobsGet{..}
+        requestClient JobsGet'{..}
           = go _jgProjectId _jgJobId (Just AltJSON)
               bigQueryService
           where go

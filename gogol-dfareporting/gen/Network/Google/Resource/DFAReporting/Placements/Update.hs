@@ -54,7 +54,7 @@ type PlacementsUpdateResource =
 -- | Updates an existing placement.
 --
 -- /See:/ 'placementsUpdate' smart constructor.
-data PlacementsUpdate = PlacementsUpdate
+data PlacementsUpdate = PlacementsUpdate'
     { _puProFileId :: !(Textual Int64)
     , _puPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementsUpdate
     -> Placement -- ^ 'puPayload'
     -> PlacementsUpdate
 placementsUpdate pPuProFileId_ pPuPayload_ =
-    PlacementsUpdate
+    PlacementsUpdate'
     { _puProFileId = _Coerce # pPuProFileId_
     , _puPayload = pPuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PlacementsUpdate where
         type Rs PlacementsUpdate = Placement
         type Scopes PlacementsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementsUpdate{..}
+        requestClient PlacementsUpdate'{..}
           = go _puProFileId (Just AltJSON) _puPayload
               dFAReportingService
           where go

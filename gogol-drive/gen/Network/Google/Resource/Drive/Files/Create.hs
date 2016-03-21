@@ -72,7 +72,7 @@ type FilesCreateResource =
 -- | Creates a new file.
 --
 -- /See:/ 'filesCreate' smart constructor.
-data FilesCreate = FilesCreate
+data FilesCreate = FilesCreate'
     { _fcPayload                   :: !File
     , _fcUseContentAsIndexableText :: !Bool
     , _fcOCRLanguage               :: !(Maybe Text)
@@ -97,7 +97,7 @@ filesCreate
     :: File -- ^ 'fcPayload'
     -> FilesCreate
 filesCreate pFcPayload_ =
-    FilesCreate
+    FilesCreate'
     { _fcPayload = pFcPayload_
     , _fcUseContentAsIndexableText = False
     , _fcOCRLanguage = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest FilesCreate where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient FilesCreate{..}
+        requestClient FilesCreate'{..}
           = go (Just _fcUseContentAsIndexableText)
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)
@@ -162,7 +162,7 @@ instance GoogleRequest (MediaUpload FilesCreate)
         type Rs (MediaUpload FilesCreate) = File
         type Scopes (MediaUpload FilesCreate) =
              Scopes FilesCreate
-        requestClient (MediaUpload FilesCreate{..} body)
+        requestClient (MediaUpload FilesCreate'{..} body)
           = go (Just _fcUseContentAsIndexableText)
               _fcOCRLanguage
               (Just _fcKeepRevisionForever)

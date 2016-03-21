@@ -54,7 +54,7 @@ type EventTagsDeleteResource =
 -- | Deletes an existing event tag.
 --
 -- /See:/ 'eventTagsDelete' smart constructor.
-data EventTagsDelete = EventTagsDelete
+data EventTagsDelete = EventTagsDelete'
     { _etdProFileId :: !(Textual Int64)
     , _etdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsDelete
     -> Int64 -- ^ 'etdId'
     -> EventTagsDelete
 eventTagsDelete pEtdProFileId_ pEtdId_ =
-    EventTagsDelete
+    EventTagsDelete'
     { _etdProFileId = _Coerce # pEtdProFileId_
     , _etdId = _Coerce # pEtdId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest EventTagsDelete where
         type Rs EventTagsDelete = ()
         type Scopes EventTagsDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient EventTagsDelete{..}
+        requestClient EventTagsDelete'{..}
           = go _etdProFileId _etdId (Just AltJSON)
               dFAReportingService
           where go

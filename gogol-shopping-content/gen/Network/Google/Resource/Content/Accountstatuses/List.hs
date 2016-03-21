@@ -56,7 +56,7 @@ type AccountstatusesListResource =
 -- | Lists the statuses of the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountstatusesList' smart constructor.
-data AccountstatusesList = AccountstatusesList
+data AccountstatusesList = AccountstatusesList'
     { _acc3MerchantId :: !(Textual Word64)
     , _acc3PageToken  :: !(Maybe Text)
     , _acc3MaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ accountstatusesList
     :: Word64 -- ^ 'acc3MerchantId'
     -> AccountstatusesList
 accountstatusesList pAcc3MerchantId_ =
-    AccountstatusesList
+    AccountstatusesList'
     { _acc3MerchantId = _Coerce # pAcc3MerchantId_
     , _acc3PageToken = Nothing
     , _acc3MaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest AccountstatusesList where
              AccountstatusesListResponse
         type Scopes AccountstatusesList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountstatusesList{..}
+        requestClient AccountstatusesList'{..}
           = go _acc3MerchantId _acc3PageToken _acc3MaxResults
               (Just AltJSON)
               shoppingContentService

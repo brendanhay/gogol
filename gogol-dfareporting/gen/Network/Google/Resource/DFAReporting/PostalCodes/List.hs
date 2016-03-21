@@ -53,7 +53,7 @@ type PostalCodesListResource =
 -- | Retrieves a list of postal codes.
 --
 -- /See:/ 'postalCodesList' smart constructor.
-newtype PostalCodesList = PostalCodesList
+newtype PostalCodesList = PostalCodesList'
     { _pclProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ postalCodesList
     :: Int64 -- ^ 'pclProFileId'
     -> PostalCodesList
 postalCodesList pPclProFileId_ =
-    PostalCodesList
+    PostalCodesList'
     { _pclProFileId = _Coerce # pPclProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest PostalCodesList where
         type Rs PostalCodesList = PostalCodesListResponse
         type Scopes PostalCodesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PostalCodesList{..}
+        requestClient PostalCodesList'{..}
           = go _pclProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

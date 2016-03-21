@@ -53,7 +53,7 @@ type CollectionsListResource =
 -- | Retrieves the IDs of all the collections for an enterprise.
 --
 -- /See:/ 'collectionsList' smart constructor.
-newtype CollectionsList = CollectionsList
+newtype CollectionsList = CollectionsList'
     { _clEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ collectionsList
     :: Text -- ^ 'clEnterpriseId'
     -> CollectionsList
 collectionsList pClEnterpriseId_ =
-    CollectionsList
+    CollectionsList'
     { _clEnterpriseId = pClEnterpriseId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest CollectionsList where
         type Rs CollectionsList = CollectionsListResponse
         type Scopes CollectionsList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionsList{..}
+        requestClient CollectionsList'{..}
           = go _clEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

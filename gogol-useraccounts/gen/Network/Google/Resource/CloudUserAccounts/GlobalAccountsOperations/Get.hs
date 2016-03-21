@@ -55,7 +55,7 @@ type GlobalAccountsOperationsGetResource =
 -- | Retrieves the specified operation resource.
 --
 -- /See:/ 'globalAccountsOperationsGet' smart constructor.
-data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet
+data GlobalAccountsOperationsGet = GlobalAccountsOperationsGet'
     { _gaogProject   :: !Text
     , _gaogOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalAccountsOperationsGet
     -> Text -- ^ 'gaogOperation'
     -> GlobalAccountsOperationsGet
 globalAccountsOperationsGet pGaogProject_ pGaogOperation_ =
-    GlobalAccountsOperationsGet
+    GlobalAccountsOperationsGet'
     { _gaogProject = pGaogProject_
     , _gaogOperation = pGaogOperation_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest GlobalAccountsOperationsGet
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/cloud.useraccounts",
                "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-        requestClient GlobalAccountsOperationsGet{..}
+        requestClient GlobalAccountsOperationsGet'{..}
           = go _gaogProject _gaogOperation (Just AltJSON)
               userAccountsService
           where go

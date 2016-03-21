@@ -52,7 +52,7 @@ type TransfersGetResource =
 -- | Retrieves a data transfer request by its resource ID.
 --
 -- /See:/ 'transfersGet' smart constructor.
-newtype TransfersGet = TransfersGet
+newtype TransfersGet = TransfersGet'
     { _tgDataTransferId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ transfersGet
     :: Text -- ^ 'tgDataTransferId'
     -> TransfersGet
 transfersGet pTgDataTransferId_ =
-    TransfersGet
+    TransfersGet'
     { _tgDataTransferId = pTgDataTransferId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest TransfersGet where
         type Scopes TransfersGet =
              '["https://www.googleapis.com/auth/admin.datatransfer",
                "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
-        requestClient TransfersGet{..}
+        requestClient TransfersGet'{..}
           = go _tgDataTransferId (Just AltJSON)
               dataTransferService
           where go

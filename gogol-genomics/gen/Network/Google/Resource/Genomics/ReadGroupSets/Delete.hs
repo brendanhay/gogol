@@ -68,7 +68,7 @@ type ReadGroupSetsDeleteResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSetsDelete' smart constructor.
-data ReadGroupSetsDelete = ReadGroupSetsDelete
+data ReadGroupSetsDelete = ReadGroupSetsDelete'
     { _rgsdXgafv          :: !(Maybe Text)
     , _rgsdReadGroupSetId :: !Text
     , _rgsdUploadProtocol :: !(Maybe Text)
@@ -102,7 +102,7 @@ readGroupSetsDelete
     :: Text -- ^ 'rgsdReadGroupSetId'
     -> ReadGroupSetsDelete
 readGroupSetsDelete pRgsdReadGroupSetId_ =
-    ReadGroupSetsDelete
+    ReadGroupSetsDelete'
     { _rgsdXgafv = Nothing
     , _rgsdReadGroupSetId = pRgsdReadGroupSetId_
     , _rgsdUploadProtocol = Nothing
@@ -163,7 +163,7 @@ instance GoogleRequest ReadGroupSetsDelete where
         type Scopes ReadGroupSetsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient ReadGroupSetsDelete{..}
+        requestClient ReadGroupSetsDelete'{..}
           = go _rgsdReadGroupSetId _rgsdXgafv
               _rgsdUploadProtocol
               (Just _rgsdPp)

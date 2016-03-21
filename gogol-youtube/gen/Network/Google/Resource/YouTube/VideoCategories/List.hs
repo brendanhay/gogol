@@ -58,7 +58,7 @@ type VideoCategoriesListResource =
 -- | Returns a list of categories that can be associated with YouTube videos.
 --
 -- /See:/ 'videoCategoriesList' smart constructor.
-data VideoCategoriesList = VideoCategoriesList
+data VideoCategoriesList = VideoCategoriesList'
     { _vclPart       :: !Text
     , _vclRegionCode :: !(Maybe Text)
     , _vclHl         :: !Text
@@ -80,7 +80,7 @@ videoCategoriesList
     :: Text -- ^ 'vclPart'
     -> VideoCategoriesList
 videoCategoriesList pVclPart_ =
-    VideoCategoriesList
+    VideoCategoriesList'
     { _vclPart = pVclPart_
     , _vclRegionCode = Nothing
     , _vclHl = "en_US"
@@ -118,7 +118,7 @@ instance GoogleRequest VideoCategoriesList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideoCategoriesList{..}
+        requestClient VideoCategoriesList'{..}
           = go (Just _vclPart) _vclRegionCode (Just _vclHl)
               _vclId
               (Just AltJSON)

@@ -63,7 +63,7 @@ type VolumesGetResource =
 -- | Gets volume information for a single volume.
 --
 -- /See:/ 'volumesGet' smart constructor.
-data VolumesGet = VolumesGet
+data VolumesGet = VolumesGet'
     { _vgCountry                   :: !(Maybe Text)
     , _vgIncludeNonComicsSeries    :: !(Maybe Bool)
     , _vgPartner                   :: !(Maybe Text)
@@ -94,7 +94,7 @@ volumesGet
     :: Text -- ^ 'vgVolumeId'
     -> VolumesGet
 volumesGet pVgVolumeId_ =
-    VolumesGet
+    VolumesGet'
     { _vgCountry = Nothing
     , _vgIncludeNonComicsSeries = Nothing
     , _vgPartner = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest VolumesGet where
         type Rs VolumesGet = Volume
         type Scopes VolumesGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesGet{..}
+        requestClient VolumesGet'{..}
           = go _vgVolumeId _vgCountry _vgIncludeNonComicsSeries
               _vgPartner
               _vgSource

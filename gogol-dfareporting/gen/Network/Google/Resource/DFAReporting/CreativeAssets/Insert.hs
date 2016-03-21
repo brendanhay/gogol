@@ -72,7 +72,7 @@ type CreativeAssetsInsertResource =
 -- | Inserts a new creative asset.
 --
 -- /See:/ 'creativeAssetsInsert' smart constructor.
-data CreativeAssetsInsert = CreativeAssetsInsert
+data CreativeAssetsInsert = CreativeAssetsInsert'
     { _caiAdvertiserId :: !(Textual Int64)
     , _caiProFileId    :: !(Textual Int64)
     , _caiPayload      :: !CreativeAssetMetadata
@@ -93,7 +93,7 @@ creativeAssetsInsert
     -> CreativeAssetMetadata -- ^ 'caiPayload'
     -> CreativeAssetsInsert
 creativeAssetsInsert pCaiAdvertiserId_ pCaiProFileId_ pCaiPayload_ =
-    CreativeAssetsInsert
+    CreativeAssetsInsert'
     { _caiAdvertiserId = _Coerce # pCaiAdvertiserId_
     , _caiProFileId = _Coerce # pCaiProFileId_
     , _caiPayload = pCaiPayload_
@@ -121,7 +121,7 @@ instance GoogleRequest CreativeAssetsInsert where
         type Rs CreativeAssetsInsert = CreativeAssetMetadata
         type Scopes CreativeAssetsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeAssetsInsert{..}
+        requestClient CreativeAssetsInsert'{..}
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               _caiPayload
               dFAReportingService
@@ -137,7 +137,7 @@ instance GoogleRequest
         type Scopes (MediaUpload CreativeAssetsInsert) =
              Scopes CreativeAssetsInsert
         requestClient
-          (MediaUpload CreativeAssetsInsert{..} body)
+          (MediaUpload CreativeAssetsInsert'{..} body)
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
               (Just AltMedia)
               _caiPayload

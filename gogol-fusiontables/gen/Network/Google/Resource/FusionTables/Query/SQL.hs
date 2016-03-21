@@ -66,7 +66,7 @@ type QuerySQLResource =
 -- INSERT - UPDATE - DELETE - SHOW - DESCRIBE - CREATE statement.
 --
 -- /See:/ 'querySQL' smart constructor.
-data QuerySQL = QuerySQL
+data QuerySQL = QuerySQL'
     { _qsqlTyped :: !(Maybe Bool)
     , _qsqlHdrs  :: !(Maybe Bool)
     , _qsqlSQL   :: !Text
@@ -85,7 +85,7 @@ querySQL
     :: Text -- ^ 'qsqlSQL'
     -> QuerySQL
 querySQL pQsqlSQL_ =
-    QuerySQL
+    QuerySQL'
     { _qsqlTyped = Nothing
     , _qsqlHdrs = Nothing
     , _qsqlSQL = pQsqlSQL_
@@ -111,7 +111,7 @@ instance GoogleRequest QuerySQL where
         type Scopes QuerySQL =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient QuerySQL{..}
+        requestClient QuerySQL'{..}
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltJSON)
               fusionTablesService
@@ -123,7 +123,7 @@ instance GoogleRequest (MediaDownload QuerySQL) where
         type Rs (MediaDownload QuerySQL) = Stream
         type Scopes (MediaDownload QuerySQL) =
              Scopes QuerySQL
-        requestClient (MediaDownload QuerySQL{..})
+        requestClient (MediaDownload QuerySQL'{..})
           = go (Just _qsqlSQL) _qsqlTyped _qsqlHdrs
               (Just AltMedia)
               fusionTablesService

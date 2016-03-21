@@ -56,7 +56,7 @@ type EventsDeleteResource =
 -- | Deletes an event.
 --
 -- /See:/ 'eventsDelete' smart constructor.
-data EventsDelete = EventsDelete
+data EventsDelete = EventsDelete'
     { _edCalendarId        :: !Text
     , _edSendNotifications :: !(Maybe Bool)
     , _edEventId           :: !Text
@@ -76,7 +76,7 @@ eventsDelete
     -> Text -- ^ 'edEventId'
     -> EventsDelete
 eventsDelete pEdCalendarId_ pEdEventId_ =
-    EventsDelete
+    EventsDelete'
     { _edCalendarId = pEdCalendarId_
     , _edSendNotifications = Nothing
     , _edEventId = pEdEventId_
@@ -105,7 +105,7 @@ instance GoogleRequest EventsDelete where
         type Rs EventsDelete = ()
         type Scopes EventsDelete =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsDelete{..}
+        requestClient EventsDelete'{..}
           = go _edCalendarId _edEventId _edSendNotifications
               (Just AltJSON)
               appsCalendarService

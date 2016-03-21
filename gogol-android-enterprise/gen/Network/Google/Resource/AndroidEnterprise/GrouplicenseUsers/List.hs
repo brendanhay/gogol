@@ -58,7 +58,7 @@ type GrouplicenseUsersListResource =
 -- the license.
 --
 -- /See:/ 'grouplicenseUsersList' smart constructor.
-data GrouplicenseUsersList = GrouplicenseUsersList
+data GrouplicenseUsersList = GrouplicenseUsersList'
     { _gulEnterpriseId   :: !Text
     , _gulGroupLicenseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ grouplicenseUsersList
     -> Text -- ^ 'gulGroupLicenseId'
     -> GrouplicenseUsersList
 grouplicenseUsersList pGulEnterpriseId_ pGulGroupLicenseId_ =
-    GrouplicenseUsersList
+    GrouplicenseUsersList'
     { _gulEnterpriseId = pGulEnterpriseId_
     , _gulGroupLicenseId = pGulGroupLicenseId_
     }
@@ -98,7 +98,7 @@ instance GoogleRequest GrouplicenseUsersList where
              GroupLicenseUsersListResponse
         type Scopes GrouplicenseUsersList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient GrouplicenseUsersList{..}
+        requestClient GrouplicenseUsersList'{..}
           = go _gulEnterpriseId _gulGroupLicenseId
               (Just AltJSON)
               androidEnterpriseService

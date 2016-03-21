@@ -68,7 +68,7 @@ type UsersDraftsUpdateResource =
 -- | Replaces a draft\'s content.
 --
 -- /See:/ 'usersDraftsUpdate' smart constructor.
-data UsersDraftsUpdate = UsersDraftsUpdate
+data UsersDraftsUpdate = UsersDraftsUpdate'
     { _uduPayload :: !Draft
     , _uduUserId  :: !Text
     , _uduId      :: !Text
@@ -88,7 +88,7 @@ usersDraftsUpdate
     -> Text -- ^ 'uduId'
     -> UsersDraftsUpdate
 usersDraftsUpdate pUduPayload_ pUduId_ =
-    UsersDraftsUpdate
+    UsersDraftsUpdate'
     { _uduPayload = pUduPayload_
     , _uduUserId = "me"
     , _uduId = pUduId_
@@ -115,7 +115,7 @@ instance GoogleRequest UsersDraftsUpdate where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersDraftsUpdate{..}
+        requestClient UsersDraftsUpdate'{..}
           = go _uduUserId _uduId (Just AltJSON) _uduPayload
               gmailService
           where go :<|> _
@@ -129,7 +129,7 @@ instance GoogleRequest
         type Scopes (MediaUpload UsersDraftsUpdate) =
              Scopes UsersDraftsUpdate
         requestClient
-          (MediaUpload UsersDraftsUpdate{..} body)
+          (MediaUpload UsersDraftsUpdate'{..} body)
           = go _uduUserId _uduId (Just AltJSON) (Just AltMedia)
               _uduPayload
               body

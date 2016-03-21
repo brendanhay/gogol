@@ -55,7 +55,7 @@ type FloodlightActivityGroupsUpdateResource =
 -- | Updates an existing floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsUpdate' smart constructor.
-data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate
+data FloodlightActivityGroupsUpdate = FloodlightActivityGroupsUpdate'
     { _faguProFileId :: !(Textual Int64)
     , _faguPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivityGroupsUpdate
     -> FloodlightActivityGroup -- ^ 'faguPayload'
     -> FloodlightActivityGroupsUpdate
 floodlightActivityGroupsUpdate pFaguProFileId_ pFaguPayload_ =
-    FloodlightActivityGroupsUpdate
+    FloodlightActivityGroupsUpdate'
     { _faguProFileId = _Coerce # pFaguProFileId_
     , _faguPayload = pFaguPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest FloodlightActivityGroupsUpdate
              FloodlightActivityGroup
         type Scopes FloodlightActivityGroupsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivityGroupsUpdate{..}
+        requestClient FloodlightActivityGroupsUpdate'{..}
           = go _faguProFileId (Just AltJSON) _faguPayload
               dFAReportingService
           where go

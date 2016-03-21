@@ -61,7 +61,7 @@ type FilesGetResource =
 -- | Gets a file\'s metadata or content by ID.
 --
 -- /See:/ 'filesGet' smart constructor.
-data FilesGet = FilesGet
+data FilesGet = FilesGet'
     { _fgAcknowledgeAbuse :: !Bool
     , _fgFileId           :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ filesGet
     :: Text -- ^ 'fgFileId'
     -> FilesGet
 filesGet pFgFileId_ =
-    FilesGet
+    FilesGet'
     { _fgAcknowledgeAbuse = False
     , _fgFileId = pFgFileId_
     }
@@ -103,7 +103,7 @@ instance GoogleRequest FilesGet where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient FilesGet{..}
+        requestClient FilesGet'{..}
           = go _fgFileId (Just _fgAcknowledgeAbuse)
               (Just AltJSON)
               driveService
@@ -115,7 +115,7 @@ instance GoogleRequest (MediaDownload FilesGet) where
         type Rs (MediaDownload FilesGet) = Stream
         type Scopes (MediaDownload FilesGet) =
              Scopes FilesGet
-        requestClient (MediaDownload FilesGet{..})
+        requestClient (MediaDownload FilesGet'{..})
           = go _fgFileId (Just _fgAcknowledgeAbuse)
               (Just AltMedia)
               driveService

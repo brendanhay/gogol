@@ -62,7 +62,7 @@ type CampaignCreativeAssociationsInsertResource =
 -- a default ad does not exist already.
 --
 -- /See:/ 'campaignCreativeAssociationsInsert' smart constructor.
-data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert
+data CampaignCreativeAssociationsInsert = CampaignCreativeAssociationsInsert'
     { _ccaiCampaignId :: !(Textual Int64)
     , _ccaiProFileId  :: !(Textual Int64)
     , _ccaiPayload    :: !CampaignCreativeAssociation
@@ -83,7 +83,7 @@ campaignCreativeAssociationsInsert
     -> CampaignCreativeAssociation -- ^ 'ccaiPayload'
     -> CampaignCreativeAssociationsInsert
 campaignCreativeAssociationsInsert pCcaiCampaignId_ pCcaiProFileId_ pCcaiPayload_ =
-    CampaignCreativeAssociationsInsert
+    CampaignCreativeAssociationsInsert'
     { _ccaiCampaignId = _Coerce # pCcaiCampaignId_
     , _ccaiProFileId = _Coerce # pCcaiProFileId_
     , _ccaiPayload = pCcaiPayload_
@@ -114,7 +114,7 @@ instance GoogleRequest
              CampaignCreativeAssociation
         type Scopes CampaignCreativeAssociationsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignCreativeAssociationsInsert{..}
+        requestClient CampaignCreativeAssociationsInsert'{..}
           = go _ccaiProFileId _ccaiCampaignId (Just AltJSON)
               _ccaiPayload
               dFAReportingService

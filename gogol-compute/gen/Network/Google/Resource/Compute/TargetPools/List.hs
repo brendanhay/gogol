@@ -64,7 +64,7 @@ type TargetPoolsListResource =
 -- region.
 --
 -- /See:/ 'targetPoolsList' smart constructor.
-data TargetPoolsList = TargetPoolsList
+data TargetPoolsList = TargetPoolsList'
     { _tplProject    :: !Text
     , _tplFilter     :: !(Maybe Text)
     , _tplRegion     :: !Text
@@ -90,7 +90,7 @@ targetPoolsList
     -> Text -- ^ 'tplRegion'
     -> TargetPoolsList
 targetPoolsList pTplProject_ pTplRegion_ =
-    TargetPoolsList
+    TargetPoolsList'
     { _tplProject = pTplProject_
     , _tplFilter = Nothing
     , _tplRegion = pTplRegion_
@@ -156,7 +156,7 @@ instance GoogleRequest TargetPoolsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetPoolsList{..}
+        requestClient TargetPoolsList'{..}
           = go _tplProject _tplRegion _tplFilter _tplPageToken
               (Just _tplMaxResults)
               (Just AltJSON)

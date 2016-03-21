@@ -58,7 +58,7 @@ type InstancesRestoreBackupResource =
 -- | Restores a backup of a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestoreBackup' smart constructor.
-data InstancesRestoreBackup = InstancesRestoreBackup
+data InstancesRestoreBackup = InstancesRestoreBackup'
     { _irbProject  :: !Text
     , _irbPayload  :: !InstancesRestoreBackupRequest
     , _irbInstance :: !Text
@@ -79,7 +79,7 @@ instancesRestoreBackup
     -> Text -- ^ 'irbInstance'
     -> InstancesRestoreBackup
 instancesRestoreBackup pIrbProject_ pIrbPayload_ pIrbInstance_ =
-    InstancesRestoreBackup
+    InstancesRestoreBackup'
     { _irbProject = pIrbProject_
     , _irbPayload = pIrbPayload_
     , _irbInstance = pIrbInstance_
@@ -105,7 +105,7 @@ instance GoogleRequest InstancesRestoreBackup where
         type Scopes InstancesRestoreBackup =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesRestoreBackup{..}
+        requestClient InstancesRestoreBackup'{..}
           = go _irbProject _irbInstance (Just AltJSON)
               _irbPayload
               sQLAdminService

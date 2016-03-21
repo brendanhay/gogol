@@ -55,7 +55,7 @@ type URLMapsDeleteResource =
 -- | Deletes the specified UrlMap resource.
 --
 -- /See:/ 'urlMapsDelete' smart constructor.
-data URLMapsDelete = URLMapsDelete
+data URLMapsDelete = URLMapsDelete'
     { _umdURLMap  :: !Text
     , _umdProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ urlMapsDelete
     -> Text -- ^ 'umdProject'
     -> URLMapsDelete
 urlMapsDelete pUmdURLMap_ pUmdProject_ =
-    URLMapsDelete
+    URLMapsDelete'
     { _umdURLMap = pUmdURLMap_
     , _umdProject = pUmdProject_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest URLMapsDelete where
         type Scopes URLMapsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient URLMapsDelete{..}
+        requestClient URLMapsDelete'{..}
           = go _umdProject _umdURLMap (Just AltJSON)
               computeService
           where go

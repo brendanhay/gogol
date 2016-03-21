@@ -55,7 +55,7 @@ type FirewallsDeleteResource =
 -- | Deletes the specified firewall.
 --
 -- /See:/ 'firewallsDelete' smart constructor.
-data FirewallsDelete = FirewallsDelete
+data FirewallsDelete = FirewallsDelete'
     { _fdProject  :: !Text
     , _fdFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ firewallsDelete
     -> Text -- ^ 'fdFirewall'
     -> FirewallsDelete
 firewallsDelete pFdProject_ pFdFirewall_ =
-    FirewallsDelete
+    FirewallsDelete'
     { _fdProject = pFdProject_
     , _fdFirewall = pFdFirewall_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest FirewallsDelete where
         type Scopes FirewallsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient FirewallsDelete{..}
+        requestClient FirewallsDelete'{..}
           = go _fdProject _fdFirewall (Just AltJSON)
               computeService
           where go

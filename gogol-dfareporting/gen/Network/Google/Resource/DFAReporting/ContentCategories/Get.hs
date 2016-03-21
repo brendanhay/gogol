@@ -55,7 +55,7 @@ type ContentCategoriesGetResource =
 -- | Gets one content category by ID.
 --
 -- /See:/ 'contentCategoriesGet' smart constructor.
-data ContentCategoriesGet = ContentCategoriesGet
+data ContentCategoriesGet = ContentCategoriesGet'
     { _ccgProFileId :: !(Textual Int64)
     , _ccgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ contentCategoriesGet
     -> Int64 -- ^ 'ccgId'
     -> ContentCategoriesGet
 contentCategoriesGet pCcgProFileId_ pCcgId_ =
-    ContentCategoriesGet
+    ContentCategoriesGet'
     { _ccgProFileId = _Coerce # pCcgProFileId_
     , _ccgId = _Coerce # pCcgId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ContentCategoriesGet where
         type Rs ContentCategoriesGet = ContentCategory
         type Scopes ContentCategoriesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ContentCategoriesGet{..}
+        requestClient ContentCategoriesGet'{..}
           = go _ccgProFileId _ccgId (Just AltJSON)
               dFAReportingService
           where go

@@ -55,7 +55,7 @@ type OperatingSystemsGetResource =
 -- | Gets one operating system by DART ID.
 --
 -- /See:/ 'operatingSystemsGet' smart constructor.
-data OperatingSystemsGet = OperatingSystemsGet
+data OperatingSystemsGet = OperatingSystemsGet'
     { _osgProFileId :: !(Textual Int64)
     , _osgDartId    :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ operatingSystemsGet
     -> Int64 -- ^ 'osgDartId'
     -> OperatingSystemsGet
 operatingSystemsGet pOsgProFileId_ pOsgDartId_ =
-    OperatingSystemsGet
+    OperatingSystemsGet'
     { _osgProFileId = _Coerce # pOsgProFileId_
     , _osgDartId = _Coerce # pOsgDartId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest OperatingSystemsGet where
         type Rs OperatingSystemsGet = OperatingSystem
         type Scopes OperatingSystemsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OperatingSystemsGet{..}
+        requestClient OperatingSystemsGet'{..}
           = go _osgProFileId _osgDartId (Just AltJSON)
               dFAReportingService
           where go

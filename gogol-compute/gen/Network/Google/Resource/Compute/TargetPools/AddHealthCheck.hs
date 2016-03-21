@@ -61,7 +61,7 @@ type TargetPoolsAddHealthCheckResource =
 -- | Adds health check URLs to a target pool.
 --
 -- /See:/ 'targetPoolsAddHealthCheck' smart constructor.
-data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck
+data TargetPoolsAddHealthCheck = TargetPoolsAddHealthCheck'
     { _tpahcProject    :: !Text
     , _tpahcTargetPool :: !Text
     , _tpahcPayload    :: !TargetPoolsAddHealthCheckRequest
@@ -86,7 +86,7 @@ targetPoolsAddHealthCheck
     -> Text -- ^ 'tpahcRegion'
     -> TargetPoolsAddHealthCheck
 targetPoolsAddHealthCheck pTpahcProject_ pTpahcTargetPool_ pTpahcPayload_ pTpahcRegion_ =
-    TargetPoolsAddHealthCheck
+    TargetPoolsAddHealthCheck'
     { _tpahcProject = pTpahcProject_
     , _tpahcTargetPool = pTpahcTargetPool_
     , _tpahcPayload = pTpahcPayload_
@@ -120,7 +120,7 @@ instance GoogleRequest TargetPoolsAddHealthCheck
         type Scopes TargetPoolsAddHealthCheck =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsAddHealthCheck{..}
+        requestClient TargetPoolsAddHealthCheck'{..}
           = go _tpahcProject _tpahcRegion _tpahcTargetPool
               (Just AltJSON)
               _tpahcPayload

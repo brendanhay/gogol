@@ -59,7 +59,7 @@ type AchievementsIncrementResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsIncrement' smart constructor.
-data AchievementsIncrement = AchievementsIncrement
+data AchievementsIncrement = AchievementsIncrement'
     { _aiRequestId        :: !(Maybe (Textual Int64))
     , _aiAchievementId    :: !Text
     , _aiStepsToIncrement :: !(Textual Int32)
@@ -79,7 +79,7 @@ achievementsIncrement
     -> Int32 -- ^ 'aiStepsToIncrement'
     -> AchievementsIncrement
 achievementsIncrement pAiAchievementId_ pAiStepsToIncrement_ =
-    AchievementsIncrement
+    AchievementsIncrement'
     { _aiRequestId = Nothing
     , _aiAchievementId = pAiAchievementId_
     , _aiStepsToIncrement = _Coerce # pAiStepsToIncrement_
@@ -112,7 +112,7 @@ instance GoogleRequest AchievementsIncrement where
         type Scopes AchievementsIncrement =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsIncrement{..}
+        requestClient AchievementsIncrement'{..}
           = go _aiAchievementId (Just _aiStepsToIncrement)
               _aiRequestId
               (Just AltJSON)

@@ -53,7 +53,7 @@ type ProductsGetResource =
 -- | Retrieves a product from your Merchant Center account.
 --
 -- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet
+data ProductsGet = ProductsGet'
     { _pggMerchantId :: !(Textual Word64)
     , _pggProductId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ productsGet
     -> Text -- ^ 'pggProductId'
     -> ProductsGet
 productsGet pPggMerchantId_ pPggProductId_ =
-    ProductsGet
+    ProductsGet'
     { _pggMerchantId = _Coerce # pPggMerchantId_
     , _pggProductId = pPggProductId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
         type Scopes ProductsGet =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductsGet{..}
+        requestClient ProductsGet'{..}
           = go _pggMerchantId _pggProductId (Just AltJSON)
               shoppingContentService
           where go

@@ -57,7 +57,7 @@ type AccountsPatchResource =
 -- | Updates a Merchant Center account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+data AccountsPatch = AccountsPatch'
     { _apMerchantId :: !(Textual Word64)
     , _apPayload    :: !Account
     , _apAccountId  :: !(Textual Word64)
@@ -81,7 +81,7 @@ accountsPatch
     -> Word64 -- ^ 'apAccountId'
     -> AccountsPatch
 accountsPatch pApMerchantId_ pApPayload_ pApAccountId_ =
-    AccountsPatch
+    AccountsPatch'
     { _apMerchantId = _Coerce # pApMerchantId_
     , _apPayload = pApPayload_
     , _apAccountId = _Coerce # pApAccountId_
@@ -113,7 +113,7 @@ instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
         type Scopes AccountsPatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountsPatch{..}
+        requestClient AccountsPatch'{..}
           = go _apMerchantId _apAccountId _apDryRun
               (Just AltJSON)
               _apPayload

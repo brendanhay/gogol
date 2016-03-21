@@ -55,7 +55,7 @@ type FloodlightActivitiesInsertResource =
 -- | Inserts a new floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesInsert' smart constructor.
-data FloodlightActivitiesInsert = FloodlightActivitiesInsert
+data FloodlightActivitiesInsert = FloodlightActivitiesInsert'
     { _faiProFileId :: !(Textual Int64)
     , _faiPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesInsert
     -> FloodlightActivity -- ^ 'faiPayload'
     -> FloodlightActivitiesInsert
 floodlightActivitiesInsert pFaiProFileId_ pFaiPayload_ =
-    FloodlightActivitiesInsert
+    FloodlightActivitiesInsert'
     { _faiProFileId = _Coerce # pFaiProFileId_
     , _faiPayload = pFaiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest FloodlightActivitiesInsert
              FloodlightActivity
         type Scopes FloodlightActivitiesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivitiesInsert{..}
+        requestClient FloodlightActivitiesInsert'{..}
           = go _faiProFileId (Just AltJSON) _faiPayload
               dFAReportingService
           where go

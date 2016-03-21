@@ -54,7 +54,7 @@ type OrdersGetbymerchantOrderidResource =
 -- | Retrieves an order using merchant order id.
 --
 -- /See:/ 'ordersGetbymerchantOrderid' smart constructor.
-data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid
+data OrdersGetbymerchantOrderid = OrdersGetbymerchantOrderid'
     { _ogogMerchantId      :: !(Textual Word64)
     , _ogogMerchantOrderId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ ordersGetbymerchantOrderid
     -> Text -- ^ 'ogogMerchantOrderId'
     -> OrdersGetbymerchantOrderid
 ordersGetbymerchantOrderid pOgogMerchantId_ pOgogMerchantOrderId_ =
-    OrdersGetbymerchantOrderid
+    OrdersGetbymerchantOrderid'
     { _ogogMerchantId = _Coerce # pOgogMerchantId_
     , _ogogMerchantOrderId = pOgogMerchantOrderId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest OrdersGetbymerchantOrderid
              OrdersGetByMerchantOrderIdResponse
         type Scopes OrdersGetbymerchantOrderid =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersGetbymerchantOrderid{..}
+        requestClient OrdersGetbymerchantOrderid'{..}
           = go _ogogMerchantId _ogogMerchantOrderId
               (Just AltJSON)
               shoppingContentService

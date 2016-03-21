@@ -60,7 +60,7 @@ type RegionsListResource =
 -- project.
 --
 -- /See:/ 'regionsList' smart constructor.
-data RegionsList = RegionsList
+data RegionsList = RegionsList'
     { _rProject    :: !Text
     , _rFilter     :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ regionsList
     :: Text -- ^ 'rProject'
     -> RegionsList
 regionsList pRProject_ =
-    RegionsList
+    RegionsList'
     { _rProject = pRProject_
     , _rFilter = Nothing
     , _rPageToken = Nothing
@@ -139,7 +139,7 @@ instance GoogleRequest RegionsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RegionsList{..}
+        requestClient RegionsList'{..}
           = go _rProject _rFilter _rPageToken
               (Just _rMaxResults)
               (Just AltJSON)

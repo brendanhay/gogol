@@ -57,7 +57,7 @@ type VideosGetRatingResource =
 -- specified videos.
 --
 -- /See:/ 'videosGetRating' smart constructor.
-data VideosGetRating = VideosGetRating
+data VideosGetRating = VideosGetRating'
     { _vgrOnBehalfOfContentOwner :: !(Maybe Text)
     , _vgrId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ videosGetRating
     :: Text -- ^ 'vgrId'
     -> VideosGetRating
 videosGetRating pVgrId_ =
-    VideosGetRating
+    VideosGetRating'
     { _vgrOnBehalfOfContentOwner = Nothing
     , _vgrId = pVgrId_
     }
@@ -105,7 +105,7 @@ instance GoogleRequest VideosGetRating where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosGetRating{..}
+        requestClient VideosGetRating'{..}
           = go (Just _vgrId) _vgrOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

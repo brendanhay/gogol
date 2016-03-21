@@ -65,7 +65,7 @@ type FilesWatchResource =
 -- | Subscribes to changes to a file
 --
 -- /See:/ 'filesWatch' smart constructor.
-data FilesWatch = FilesWatch
+data FilesWatch = FilesWatch'
     { _fwPayload          :: !Channel
     , _fwAcknowledgeAbuse :: !Bool
     , _fwFileId           :: !Text
@@ -85,7 +85,7 @@ filesWatch
     -> Text -- ^ 'fwFileId'
     -> FilesWatch
 filesWatch pFwPayload_ pFwFileId_ =
-    FilesWatch
+    FilesWatch'
     { _fwPayload = pFwPayload_
     , _fwAcknowledgeAbuse = False
     , _fwFileId = pFwFileId_
@@ -117,7 +117,7 @@ instance GoogleRequest FilesWatch where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient FilesWatch{..}
+        requestClient FilesWatch'{..}
           = go _fwFileId (Just _fwAcknowledgeAbuse)
               (Just AltJSON)
               _fwPayload
@@ -131,7 +131,7 @@ instance GoogleRequest (MediaDownload FilesWatch)
         type Rs (MediaDownload FilesWatch) = Stream
         type Scopes (MediaDownload FilesWatch) =
              Scopes FilesWatch
-        requestClient (MediaDownload FilesWatch{..})
+        requestClient (MediaDownload FilesWatch'{..})
           = go _fwFileId (Just _fwAcknowledgeAbuse)
               (Just AltMedia)
               driveService

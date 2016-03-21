@@ -58,7 +58,7 @@ type SubscriptionsInsertResource =
 -- | Creates\/Transfers a subscription for the customer.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+data SubscriptionsInsert = SubscriptionsInsert'
     { _siPayload           :: !Subscription
     , _siCustomerId        :: !Text
     , _siCustomerAuthToken :: !(Maybe Text)
@@ -78,7 +78,7 @@ subscriptionsInsert
     -> Text -- ^ 'siCustomerId'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPayload_ pSiCustomerId_ =
-    SubscriptionsInsert
+    SubscriptionsInsert'
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     , _siCustomerAuthToken = Nothing
@@ -106,7 +106,7 @@ instance GoogleRequest SubscriptionsInsert where
         type Rs SubscriptionsInsert = Subscription
         type Scopes SubscriptionsInsert =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsInsert{..}
+        requestClient SubscriptionsInsert'{..}
           = go _siCustomerId _siCustomerAuthToken
               (Just AltJSON)
               _siPayload

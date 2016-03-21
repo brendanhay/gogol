@@ -51,7 +51,7 @@ type CirclesGetResource =
 -- | Get a circle.
 --
 -- /See:/ 'circlesGet' smart constructor.
-newtype CirclesGet = CirclesGet
+newtype CirclesGet = CirclesGet'
     { _cgCircleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ circlesGet
     :: Text -- ^ 'cgCircleId'
     -> CirclesGet
 circlesGet pCgCircleId_ =
-    CirclesGet
+    CirclesGet'
     { _cgCircleId = pCgCircleId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest CirclesGet where
         type Scopes CirclesGet =
              '["https://www.googleapis.com/auth/plus.circles.read",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient CirclesGet{..}
+        requestClient CirclesGet'{..}
           = go _cgCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesGetResource)

@@ -55,7 +55,7 @@ type LiveChatModeratorsInsertResource =
 -- | Adds a new moderator for the chat.
 --
 -- /See:/ 'liveChatModeratorsInsert' smart constructor.
-data LiveChatModeratorsInsert = LiveChatModeratorsInsert
+data LiveChatModeratorsInsert = LiveChatModeratorsInsert'
     { _lPart    :: !Text
     , _lPayload :: !LiveChatModerator
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ liveChatModeratorsInsert
     -> LiveChatModerator -- ^ 'lPayload'
     -> LiveChatModeratorsInsert
 liveChatModeratorsInsert pLPart_ pLPayload_ =
-    LiveChatModeratorsInsert
+    LiveChatModeratorsInsert'
     { _lPart = pLPart_
     , _lPayload = pLPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest LiveChatModeratorsInsert where
         type Scopes LiveChatModeratorsInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveChatModeratorsInsert{..}
+        requestClient LiveChatModeratorsInsert'{..}
           = go (Just _lPart) (Just AltJSON) _lPayload
               youTubeService
           where go

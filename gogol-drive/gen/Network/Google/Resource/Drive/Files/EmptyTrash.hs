@@ -50,20 +50,20 @@ type FilesEmptyTrashResource =
 --
 -- /See:/ 'filesEmptyTrash' smart constructor.
 data FilesEmptyTrash =
-    FilesEmptyTrash
+    FilesEmptyTrash'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesEmptyTrash' with the minimum fields required to make a request.
 --
 filesEmptyTrash
     :: FilesEmptyTrash
-filesEmptyTrash = FilesEmptyTrash
+filesEmptyTrash = FilesEmptyTrash'
 
 instance GoogleRequest FilesEmptyTrash where
         type Rs FilesEmptyTrash = ()
         type Scopes FilesEmptyTrash =
              '["https://www.googleapis.com/auth/drive"]
-        requestClient FilesEmptyTrash{}
+        requestClient FilesEmptyTrash'{}
           = go (Just AltJSON) driveService
           where go
                   = buildClient

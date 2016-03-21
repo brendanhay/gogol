@@ -51,7 +51,7 @@ type RastersDeleteResource =
 -- | Delete a raster.
 --
 -- /See:/ 'rastersDelete' smart constructor.
-newtype RastersDelete = RastersDelete
+newtype RastersDelete = RastersDelete'
     { _rdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ rastersDelete
     :: Text -- ^ 'rdId'
     -> RastersDelete
 rastersDelete pRdId_ =
-    RastersDelete
+    RastersDelete'
     { _rdId = pRdId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest RastersDelete where
         type Rs RastersDelete = ()
         type Scopes RastersDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RastersDelete{..}
+        requestClient RastersDelete'{..}
           = go _rdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersDeleteResource)

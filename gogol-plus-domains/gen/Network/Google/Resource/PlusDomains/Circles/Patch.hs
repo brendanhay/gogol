@@ -53,7 +53,7 @@ type CirclesPatchResource =
 -- | Update a circle\'s description. This method supports patch semantics.
 --
 -- /See:/ 'circlesPatch' smart constructor.
-data CirclesPatch = CirclesPatch
+data CirclesPatch = CirclesPatch'
     { _cpPayload  :: !Circle
     , _cpCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ circlesPatch
     -> Text -- ^ 'cpCircleId'
     -> CirclesPatch
 circlesPatch pCpPayload_ pCpCircleId_ =
-    CirclesPatch
+    CirclesPatch'
     { _cpPayload = pCpPayload_
     , _cpCircleId = pCpCircleId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest CirclesPatch where
         type Scopes CirclesPatch =
              '["https://www.googleapis.com/auth/plus.circles.write",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient CirclesPatch{..}
+        requestClient CirclesPatch'{..}
           = go _cpCircleId (Just AltJSON) _cpPayload
               plusDomainsService
           where go

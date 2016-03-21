@@ -56,7 +56,7 @@ type AccountsContainersEnvironmentsListResource =
 -- | Lists all GTM Environments of a GTM Container.
 --
 -- /See:/ 'accountsContainersEnvironmentsList' smart constructor.
-data AccountsContainersEnvironmentsList = AccountsContainersEnvironmentsList
+data AccountsContainersEnvironmentsList = AccountsContainersEnvironmentsList'
     { _acelContainerId :: !Text
     , _acelAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersEnvironmentsList
     -> Text -- ^ 'acelAccountId'
     -> AccountsContainersEnvironmentsList
 accountsContainersEnvironmentsList pAcelContainerId_ pAcelAccountId_ =
-    AccountsContainersEnvironmentsList
+    AccountsContainersEnvironmentsList'
     { _acelContainerId = pAcelContainerId_
     , _acelAccountId = pAcelAccountId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest
         type Scopes AccountsContainersEnvironmentsList =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersEnvironmentsList{..}
+        requestClient AccountsContainersEnvironmentsList'{..}
           = go _acelAccountId _acelContainerId (Just AltJSON)
               tagManagerService
           where go

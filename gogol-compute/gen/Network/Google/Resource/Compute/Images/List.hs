@@ -71,7 +71,7 @@ type ImagesListResource =
 -- Accessing images for more information.
 --
 -- /See:/ 'imagesList' smart constructor.
-data ImagesList = ImagesList
+data ImagesList = ImagesList'
     { _illProject    :: !Text
     , _illFilter     :: !(Maybe Text)
     , _illPageToken  :: !(Maybe Text)
@@ -93,7 +93,7 @@ imagesList
     :: Text -- ^ 'illProject'
     -> ImagesList
 imagesList pIllProject_ =
-    ImagesList
+    ImagesList'
     { _illProject = pIllProject_
     , _illFilter = Nothing
     , _illPageToken = Nothing
@@ -153,7 +153,7 @@ instance GoogleRequest ImagesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ImagesList{..}
+        requestClient ImagesList'{..}
           = go _illProject _illFilter _illPageToken
               (Just _illMaxResults)
               (Just AltJSON)

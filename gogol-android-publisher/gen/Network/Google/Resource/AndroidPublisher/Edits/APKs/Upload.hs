@@ -65,7 +65,7 @@ type EditsAPKsUploadResource =
 
 --
 -- /See:/ 'editsAPKsUpload' smart constructor.
-data EditsAPKsUpload = EditsAPKsUpload
+data EditsAPKsUpload = EditsAPKsUpload'
     { _eapkuPackageName :: !Text
     , _eapkuEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ editsAPKsUpload
     -> Text -- ^ 'eapkuEditId'
     -> EditsAPKsUpload
 editsAPKsUpload pEapkuPackageName_ pEapkuEditId_ =
-    EditsAPKsUpload
+    EditsAPKsUpload'
     { _eapkuPackageName = pEapkuPackageName_
     , _eapkuEditId = pEapkuEditId_
     }
@@ -103,7 +103,7 @@ instance GoogleRequest EditsAPKsUpload where
         type Rs EditsAPKsUpload = APK
         type Scopes EditsAPKsUpload =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKsUpload{..}
+        requestClient EditsAPKsUpload'{..}
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               androidPublisherService
           where go :<|> _
@@ -116,7 +116,7 @@ instance GoogleRequest (MediaUpload EditsAPKsUpload)
         type Rs (MediaUpload EditsAPKsUpload) = APK
         type Scopes (MediaUpload EditsAPKsUpload) =
              Scopes EditsAPKsUpload
-        requestClient (MediaUpload EditsAPKsUpload{..} body)
+        requestClient (MediaUpload EditsAPKsUpload'{..} body)
           = go _eapkuPackageName _eapkuEditId (Just AltJSON)
               (Just AltMedia)
               body

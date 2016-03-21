@@ -67,7 +67,7 @@ type ProjectsListResource =
 -- | Retrieves a list of projects, possibly filtered.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+data ProjectsList = ProjectsList'
     { _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe [Textual Int64])
     , _plProFileId     :: !(Textual Int64)
@@ -101,7 +101,7 @@ projectsList
     :: Int64 -- ^ 'plProFileId'
     -> ProjectsList
 projectsList pPlProFileId_ =
-    ProjectsList
+    ProjectsList'
     { _plSearchString = Nothing
     , _plIds = Nothing
     , _plProFileId = _Coerce # pPlProFileId_
@@ -169,7 +169,7 @@ instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
         type Scopes ProjectsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ProjectsList{..}
+        requestClient ProjectsList'{..}
           = go _plProFileId _plSearchString
               (_plIds ^. _Default)
               _plSortOrder

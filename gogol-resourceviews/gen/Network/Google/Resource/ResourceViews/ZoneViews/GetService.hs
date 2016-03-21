@@ -61,7 +61,7 @@ type ZoneViewsGetServiceResource =
 -- | Get the service information of a resource view or a resource.
 --
 -- /See:/ 'zoneViewsGetService' smart constructor.
-data ZoneViewsGetService = ZoneViewsGetService
+data ZoneViewsGetService = ZoneViewsGetService'
     { _zvgsResourceView :: !Text
     , _zvgsResourceName :: !(Maybe Text)
     , _zvgsProject      :: !Text
@@ -85,7 +85,7 @@ zoneViewsGetService
     -> Text -- ^ 'zvgsZone'
     -> ZoneViewsGetService
 zoneViewsGetService pZvgsResourceView_ pZvgsProject_ pZvgsZone_ =
-    ZoneViewsGetService
+    ZoneViewsGetService'
     { _zvgsResourceView = pZvgsResourceView_
     , _zvgsResourceName = Nothing
     , _zvgsProject = pZvgsProject_
@@ -121,7 +121,7 @@ instance GoogleRequest ZoneViewsGetService where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient ZoneViewsGetService{..}
+        requestClient ZoneViewsGetService'{..}
           = go _zvgsProject _zvgsZone _zvgsResourceView
               _zvgsResourceName
               (Just AltJSON)

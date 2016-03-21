@@ -54,7 +54,7 @@ type InstancesDeleteResource =
 -- | Deletes a Cloud SQL instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete
+data InstancesDelete = InstancesDelete'
     { _idProject  :: !Text
     , _idInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdInstance_ =
-    InstancesDelete
+    InstancesDelete'
     { _idProject = pIdProject_
     , _idInstance = pIdInstance_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest InstancesDelete where
         type Scopes InstancesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesDelete{..}
+        requestClient InstancesDelete'{..}
           = go _idProject _idInstance (Just AltJSON)
               sQLAdminService
           where go

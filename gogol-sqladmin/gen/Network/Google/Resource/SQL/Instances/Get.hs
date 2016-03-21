@@ -55,7 +55,7 @@ type InstancesGetResource =
 -- | Retrieves a resource containing information about a Cloud SQL instance.
 --
 -- /See:/ 'instancesGet' smart constructor.
-data InstancesGet = InstancesGet
+data InstancesGet = InstancesGet'
     { _igProject  :: !Text
     , _igInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesGet
     -> Text -- ^ 'igInstance'
     -> InstancesGet
 instancesGet pIgProject_ pIgInstance_ =
-    InstancesGet
+    InstancesGet'
     { _igProject = pIgProject_
     , _igInstance = pIgInstance_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest InstancesGet where
         type Scopes InstancesGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesGet{..}
+        requestClient InstancesGet'{..}
           = go _igProject _igInstance (Just AltJSON)
               sQLAdminService
           where go

@@ -69,7 +69,7 @@ type ProjectsTopicsSubscriptionsListResource =
 -- | Lists the name of the subscriptions for this topic.
 --
 -- /See:/ 'projectsTopicsSubscriptionsList' smart constructor.
-data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList
+data ProjectsTopicsSubscriptionsList = ProjectsTopicsSubscriptionsList'
     { _ptslXgafv          :: !(Maybe Text)
     , _ptslUploadProtocol :: !(Maybe Text)
     , _ptslPp             :: !Bool
@@ -109,7 +109,7 @@ projectsTopicsSubscriptionsList
     :: Text -- ^ 'ptslTopic'
     -> ProjectsTopicsSubscriptionsList
 projectsTopicsSubscriptionsList pPtslTopic_ =
-    ProjectsTopicsSubscriptionsList
+    ProjectsTopicsSubscriptionsList'
     { _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
     , _ptslPp = True
@@ -187,7 +187,7 @@ instance GoogleRequest
         type Scopes ProjectsTopicsSubscriptionsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsTopicsSubscriptionsList{..}
+        requestClient ProjectsTopicsSubscriptionsList'{..}
           = go _ptslTopic _ptslXgafv _ptslUploadProtocol
               (Just _ptslPp)
               _ptslAccessToken

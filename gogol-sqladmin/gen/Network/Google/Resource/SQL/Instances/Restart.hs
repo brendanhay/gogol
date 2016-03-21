@@ -55,7 +55,7 @@ type InstancesRestartResource =
 -- | Restarts a Cloud SQL instance.
 --
 -- /See:/ 'instancesRestart' smart constructor.
-data InstancesRestart = InstancesRestart
+data InstancesRestart = InstancesRestart'
     { _irProject  :: !Text
     , _irInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesRestart
     -> Text -- ^ 'irInstance'
     -> InstancesRestart
 instancesRestart pIrProject_ pIrInstance_ =
-    InstancesRestart
+    InstancesRestart'
     { _irProject = pIrProject_
     , _irInstance = pIrInstance_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest InstancesRestart where
         type Scopes InstancesRestart =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesRestart{..}
+        requestClient InstancesRestart'{..}
           = go _irProject _irInstance (Just AltJSON)
               sQLAdminService
           where go

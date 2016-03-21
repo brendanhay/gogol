@@ -64,7 +64,7 @@ type ManagementExperimentsPatchResource =
 -- | Update an existing experiment. This method supports patch semantics.
 --
 -- /See:/ 'managementExperimentsPatch' smart constructor.
-data ManagementExperimentsPatch = ManagementExperimentsPatch
+data ManagementExperimentsPatch = ManagementExperimentsPatch'
     { _mepWebPropertyId :: !Text
     , _mepProFileId     :: !Text
     , _mepPayload       :: !Experiment
@@ -93,7 +93,7 @@ managementExperimentsPatch
     -> Text -- ^ 'mepExperimentId'
     -> ManagementExperimentsPatch
 managementExperimentsPatch pMepWebPropertyId_ pMepProFileId_ pMepPayload_ pMepAccountId_ pMepExperimentId_ =
-    ManagementExperimentsPatch
+    ManagementExperimentsPatch'
     { _mepWebPropertyId = pMepWebPropertyId_
     , _mepProFileId = pMepProFileId_
     , _mepPayload = pMepPayload_
@@ -134,7 +134,7 @@ instance GoogleRequest ManagementExperimentsPatch
         type Scopes ManagementExperimentsPatch =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementExperimentsPatch{..}
+        requestClient ManagementExperimentsPatch'{..}
           = go _mepAccountId _mepWebPropertyId _mepProFileId
               _mepExperimentId
               (Just AltJSON)

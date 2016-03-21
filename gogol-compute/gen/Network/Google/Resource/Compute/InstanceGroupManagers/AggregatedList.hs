@@ -60,7 +60,7 @@ type InstanceGroupManagersAggregatedListResource =
 -- | Retrieves the list of managed instance groups and groups them by zone.
 --
 -- /See:/ 'instanceGroupManagersAggregatedList' smart constructor.
-data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList
+data InstanceGroupManagersAggregatedList = InstanceGroupManagersAggregatedList'
     { _igmalProject    :: !Text
     , _igmalFilter     :: !(Maybe Text)
     , _igmalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ instanceGroupManagersAggregatedList
     :: Text -- ^ 'igmalProject'
     -> InstanceGroupManagersAggregatedList
 instanceGroupManagersAggregatedList pIgmalProject_ =
-    InstanceGroupManagersAggregatedList
+    InstanceGroupManagersAggregatedList'
     { _igmalProject = pIgmalProject_
     , _igmalFilter = Nothing
     , _igmalPageToken = Nothing
@@ -145,7 +145,8 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupManagersAggregatedList{..}
+        requestClient
+          InstanceGroupManagersAggregatedList'{..}
           = go _igmalProject _igmalFilter _igmalPageToken
               (Just _igmalMaxResults)
               (Just AltJSON)

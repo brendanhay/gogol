@@ -59,7 +59,7 @@ type StatesDeleteResource =
 -- can result in data loss and data corruption.
 --
 -- /See:/ 'statesDelete' smart constructor.
-newtype StatesDelete = StatesDelete
+newtype StatesDelete = StatesDelete'
     { _sdStateKey :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -72,7 +72,7 @@ statesDelete
     :: Int32 -- ^ 'sdStateKey'
     -> StatesDelete
 statesDelete pSdStateKey_ =
-    StatesDelete
+    StatesDelete'
     { _sdStateKey = _Coerce # pSdStateKey_
     }
 
@@ -86,7 +86,7 @@ instance GoogleRequest StatesDelete where
         type Rs StatesDelete = ()
         type Scopes StatesDelete =
              '["https://www.googleapis.com/auth/appstate"]
-        requestClient StatesDelete{..}
+        requestClient StatesDelete'{..}
           = go _sdStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesDeleteResource)

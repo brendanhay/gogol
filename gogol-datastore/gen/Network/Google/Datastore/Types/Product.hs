@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'rollbackRequest' smart constructor.
-newtype RollbackRequest = RollbackRequest
+newtype RollbackRequest = RollbackRequest'
     { _rrTransaction :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -34,7 +34,7 @@ newtype RollbackRequest = RollbackRequest
 rollbackRequest
     :: RollbackRequest
 rollbackRequest =
-    RollbackRequest
+    RollbackRequest'
     { _rrTransaction = Nothing
     }
 
@@ -48,17 +48,17 @@ rrTransaction
 instance FromJSON RollbackRequest where
         parseJSON
           = withObject "RollbackRequest"
-              (\ o -> RollbackRequest <$> (o .:? "transaction"))
+              (\ o -> RollbackRequest' <$> (o .:? "transaction"))
 
 instance ToJSON RollbackRequest where
-        toJSON RollbackRequest{..}
+        toJSON RollbackRequest'{..}
           = object
               (catMaybes [("transaction" .=) <$> _rrTransaction])
 
 -- | An entity property.
 --
 -- /See:/ 'property' smart constructor.
-data Property = Property
+data Property = Property'
     { _pKeyValue      :: !(Maybe Key)
     , _pBlobKeyValue  :: !(Maybe Text)
     , _pDateTimeValue :: !(Maybe DateTime')
@@ -103,7 +103,7 @@ data Property = Property
 property
     :: Property
 property =
-    Property
+    Property'
     { _pKeyValue = Nothing
     , _pBlobKeyValue = Nothing
     , _pDateTimeValue = Nothing
@@ -202,7 +202,7 @@ instance FromJSON Property where
         parseJSON
           = withObject "Property"
               (\ o ->
-                 Property <$>
+                 Property' <$>
                    (o .:? "keyValue") <*> (o .:? "blobKeyValue") <*>
                      (o .:? "dateTimeValue")
                      <*> (o .:? "integerValue")
@@ -216,7 +216,7 @@ instance FromJSON Property where
                      <*> (o .:? "blobValue"))
 
 instance ToJSON Property where
-        toJSON Property{..}
+        toJSON Property'{..}
           = object
               (catMaybes
                  [("keyValue" .=) <$> _pKeyValue,
@@ -237,7 +237,7 @@ instance ToJSON Property where
 -- different namespaces within a dataset and so forth.
 --
 -- /See:/ 'partitionId' smart constructor.
-data PartitionId = PartitionId
+data PartitionId = PartitionId'
     { _piNamespace :: !(Maybe Text)
     , _piDataSetId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -252,7 +252,7 @@ data PartitionId = PartitionId
 partitionId
     :: PartitionId
 partitionId =
-    PartitionId
+    PartitionId'
     { _piNamespace = Nothing
     , _piDataSetId = Nothing
     }
@@ -271,11 +271,11 @@ instance FromJSON PartitionId where
         parseJSON
           = withObject "PartitionId"
               (\ o ->
-                 PartitionId <$>
+                 PartitionId' <$>
                    (o .:? "namespace") <*> (o .:? "datasetId"))
 
 instance ToJSON PartitionId where
-        toJSON PartitionId{..}
+        toJSON PartitionId'{..}
           = object
               (catMaybes
                  [("namespace" .=) <$> _piNamespace,
@@ -284,7 +284,7 @@ instance ToJSON PartitionId where
 -- | A batch of results produced by a query.
 --
 -- /See:/ 'queryResultBatch' smart constructor.
-data QueryResultBatch = QueryResultBatch
+data QueryResultBatch = QueryResultBatch'
     { _qrbSkippedResults   :: !(Maybe (Textual Int32))
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbEntityResults    :: !(Maybe [EntityResult])
@@ -308,7 +308,7 @@ data QueryResultBatch = QueryResultBatch
 queryResultBatch
     :: QueryResultBatch
 queryResultBatch =
-    QueryResultBatch
+    QueryResultBatch'
     { _qrbSkippedResults = Nothing
     , _qrbEntityResultType = Nothing
     , _qrbEntityResults = Nothing
@@ -358,7 +358,7 @@ instance FromJSON QueryResultBatch where
         parseJSON
           = withObject "QueryResultBatch"
               (\ o ->
-                 QueryResultBatch <$>
+                 QueryResultBatch' <$>
                    (o .:? "skippedResults") <*>
                      (o .:? "entityResultType")
                      <*> (o .:? "entityResults" .!= mempty)
@@ -366,7 +366,7 @@ instance FromJSON QueryResultBatch where
                      <*> (o .:? "endCursor"))
 
 instance ToJSON QueryResultBatch where
-        toJSON QueryResultBatch{..}
+        toJSON QueryResultBatch'{..}
           = object
               (catMaybes
                  [("skippedResults" .=) <$> _qrbSkippedResults,
@@ -378,7 +378,7 @@ instance ToJSON QueryResultBatch where
 -- | The entity\'s properties.
 --
 -- /See:/ 'entityProperties' smart constructor.
-newtype EntityProperties = EntityProperties
+newtype EntityProperties = EntityProperties'
     { _epAddtional :: HashMap Text Property
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -391,7 +391,7 @@ entityProperties
     :: HashMap Text Property -- ^ 'epAddtional'
     -> EntityProperties
 entityProperties pEpAddtional_ =
-    EntityProperties
+    EntityProperties'
     { _epAddtional = _Coerce # pEpAddtional_
     }
 
@@ -407,14 +407,14 @@ epAddtional
 instance FromJSON EntityProperties where
         parseJSON
           = withObject "EntityProperties"
-              (\ o -> EntityProperties <$> (parseJSONObject o))
+              (\ o -> EntityProperties' <$> (parseJSONObject o))
 
 instance ToJSON EntityProperties where
         toJSON = toJSON . _epAddtional
 
 --
 -- /See:/ 'beginTransactionRequest' smart constructor.
-newtype BeginTransactionRequest = BeginTransactionRequest
+newtype BeginTransactionRequest = BeginTransactionRequest'
     { _btrIsolationLevel :: Maybe BeginTransactionRequestIsolationLevel
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -426,7 +426,7 @@ newtype BeginTransactionRequest = BeginTransactionRequest
 beginTransactionRequest
     :: BeginTransactionRequest
 beginTransactionRequest =
-    BeginTransactionRequest
+    BeginTransactionRequest'
     { _btrIsolationLevel = Nothing
     }
 
@@ -445,17 +445,18 @@ instance FromJSON BeginTransactionRequest where
         parseJSON
           = withObject "BeginTransactionRequest"
               (\ o ->
-                 BeginTransactionRequest <$> (o .:? "isolationLevel"))
+                 BeginTransactionRequest' <$>
+                   (o .:? "isolationLevel"))
 
 instance ToJSON BeginTransactionRequest where
-        toJSON BeginTransactionRequest{..}
+        toJSON BeginTransactionRequest'{..}
           = object
               (catMaybes
                  [("isolationLevel" .=) <$> _btrIsolationLevel])
 
 --
 -- /See:/ 'runQueryRequest' smart constructor.
-data RunQueryRequest = RunQueryRequest
+data RunQueryRequest = RunQueryRequest'
     { _rqrPartitionId :: !(Maybe PartitionId)
     , _rqrGqlQuery    :: !(Maybe GqlQuery)
     , _rqrQuery       :: !(Maybe Query)
@@ -476,7 +477,7 @@ data RunQueryRequest = RunQueryRequest
 runQueryRequest
     :: RunQueryRequest
 runQueryRequest =
-    RunQueryRequest
+    RunQueryRequest'
     { _rqrPartitionId = Nothing
     , _rqrGqlQuery = Nothing
     , _rqrQuery = Nothing
@@ -515,13 +516,13 @@ instance FromJSON RunQueryRequest where
         parseJSON
           = withObject "RunQueryRequest"
               (\ o ->
-                 RunQueryRequest <$>
+                 RunQueryRequest' <$>
                    (o .:? "partitionId") <*> (o .:? "gqlQuery") <*>
                      (o .:? "query")
                      <*> (o .:? "readOptions"))
 
 instance ToJSON RunQueryRequest where
-        toJSON RunQueryRequest{..}
+        toJSON RunQueryRequest'{..}
           = object
               (catMaybes
                  [("partitionId" .=) <$> _rqrPartitionId,
@@ -531,7 +532,7 @@ instance ToJSON RunQueryRequest where
 
 --
 -- /See:/ 'allocateIdsRequest' smart constructor.
-newtype AllocateIdsRequest = AllocateIdsRequest
+newtype AllocateIdsRequest = AllocateIdsRequest'
     { _airKeys :: Maybe [Key]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -543,7 +544,7 @@ newtype AllocateIdsRequest = AllocateIdsRequest
 allocateIdsRequest
     :: AllocateIdsRequest
 allocateIdsRequest =
-    AllocateIdsRequest
+    AllocateIdsRequest'
     { _airKeys = Nothing
     }
 
@@ -558,17 +559,17 @@ instance FromJSON AllocateIdsRequest where
         parseJSON
           = withObject "AllocateIdsRequest"
               (\ o ->
-                 AllocateIdsRequest <$> (o .:? "keys" .!= mempty))
+                 AllocateIdsRequest' <$> (o .:? "keys" .!= mempty))
 
 instance ToJSON AllocateIdsRequest where
-        toJSON AllocateIdsRequest{..}
+        toJSON AllocateIdsRequest'{..}
           = object (catMaybes [("keys" .=) <$> _airKeys])
 
 -- | A filter that merges the multiple other filters using the given
 -- operation.
 --
 -- /See:/ 'compositeFilter' smart constructor.
-data CompositeFilter = CompositeFilter
+data CompositeFilter = CompositeFilter'
     { _cfOperator :: !(Maybe CompositeFilterOperator)
     , _cfFilters  :: !(Maybe [Filter])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -583,7 +584,7 @@ data CompositeFilter = CompositeFilter
 compositeFilter
     :: CompositeFilter
 compositeFilter =
-    CompositeFilter
+    CompositeFilter'
     { _cfOperator = Nothing
     , _cfFilters = Nothing
     }
@@ -605,11 +606,11 @@ instance FromJSON CompositeFilter where
         parseJSON
           = withObject "CompositeFilter"
               (\ o ->
-                 CompositeFilter <$>
+                 CompositeFilter' <$>
                    (o .:? "operator") <*> (o .:? "filters" .!= mempty))
 
 instance ToJSON CompositeFilter where
-        toJSON CompositeFilter{..}
+        toJSON CompositeFilter'{..}
           = object
               (catMaybes
                  [("operator" .=) <$> _cfOperator,
@@ -617,7 +618,7 @@ instance ToJSON CompositeFilter where
 
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
-data BeginTransactionResponse = BeginTransactionResponse
+data BeginTransactionResponse = BeginTransactionResponse'
     { _btrTransaction :: !(Maybe (Textual Word8))
     , _btrHeader      :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -632,7 +633,7 @@ data BeginTransactionResponse = BeginTransactionResponse
 beginTransactionResponse
     :: BeginTransactionResponse
 beginTransactionResponse =
-    BeginTransactionResponse
+    BeginTransactionResponse'
     { _btrTransaction = Nothing
     , _btrHeader = Nothing
     }
@@ -652,11 +653,11 @@ instance FromJSON BeginTransactionResponse where
         parseJSON
           = withObject "BeginTransactionResponse"
               (\ o ->
-                 BeginTransactionResponse <$>
+                 BeginTransactionResponse' <$>
                    (o .:? "transaction") <*> (o .:? "header"))
 
 instance ToJSON BeginTransactionResponse where
-        toJSON BeginTransactionResponse{..}
+        toJSON BeginTransactionResponse'{..}
           = object
               (catMaybes
                  [("transaction" .=) <$> _btrTransaction,
@@ -664,7 +665,7 @@ instance ToJSON BeginTransactionResponse where
 
 --
 -- /See:/ 'mutationResult' smart constructor.
-data MutationResult = MutationResult
+data MutationResult = MutationResult'
     { _mrInsertAutoIdKeys :: !(Maybe [Key])
     , _mrIndexUpdates     :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -679,7 +680,7 @@ data MutationResult = MutationResult
 mutationResult
     :: MutationResult
 mutationResult =
-    MutationResult
+    MutationResult'
     { _mrInsertAutoIdKeys = Nothing
     , _mrIndexUpdates = Nothing
     }
@@ -704,12 +705,12 @@ instance FromJSON MutationResult where
         parseJSON
           = withObject "MutationResult"
               (\ o ->
-                 MutationResult <$>
+                 MutationResult' <$>
                    (o .:? "insertAutoIdKeys" .!= mempty) <*>
                      (o .:? "indexUpdates"))
 
 instance ToJSON MutationResult where
-        toJSON MutationResult{..}
+        toJSON MutationResult'{..}
           = object
               (catMaybes
                  [("insertAutoIdKeys" .=) <$> _mrInsertAutoIdKeys,
@@ -717,7 +718,7 @@ instance ToJSON MutationResult where
 
 --
 -- /See:/ 'allocateIdsResponse' smart constructor.
-data AllocateIdsResponse = AllocateIdsResponse
+data AllocateIdsResponse = AllocateIdsResponse'
     { _aKeys   :: !(Maybe [Key])
     , _aHeader :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -732,7 +733,7 @@ data AllocateIdsResponse = AllocateIdsResponse
 allocateIdsResponse
     :: AllocateIdsResponse
 allocateIdsResponse =
-    AllocateIdsResponse
+    AllocateIdsResponse'
     { _aKeys = Nothing
     , _aHeader = Nothing
     }
@@ -751,11 +752,11 @@ instance FromJSON AllocateIdsResponse where
         parseJSON
           = withObject "AllocateIdsResponse"
               (\ o ->
-                 AllocateIdsResponse <$>
+                 AllocateIdsResponse' <$>
                    (o .:? "keys" .!= mempty) <*> (o .:? "header"))
 
 instance ToJSON AllocateIdsResponse where
-        toJSON AllocateIdsResponse{..}
+        toJSON AllocateIdsResponse'{..}
           = object
               (catMaybes
                  [("keys" .=) <$> _aKeys, ("header" .=) <$> _aHeader])
@@ -763,7 +764,7 @@ instance ToJSON AllocateIdsResponse where
 -- | A GQL query.
 --
 -- /See:/ 'gqlQuery' smart constructor.
-data GqlQuery = GqlQuery
+data GqlQuery = GqlQuery'
     { _gqAllowLiteral :: !(Maybe Bool)
     , _gqNumberArgs   :: !(Maybe [GqlQueryArg])
     , _gqQueryString  :: !(Maybe Text)
@@ -784,7 +785,7 @@ data GqlQuery = GqlQuery
 gqlQuery
     :: GqlQuery
 gqlQuery =
-    GqlQuery
+    GqlQuery'
     { _gqAllowLiteral = Nothing
     , _gqNumberArgs = Nothing
     , _gqQueryString = Nothing
@@ -828,14 +829,14 @@ instance FromJSON GqlQuery where
         parseJSON
           = withObject "GqlQuery"
               (\ o ->
-                 GqlQuery <$>
+                 GqlQuery' <$>
                    (o .:? "allowLiteral") <*>
                      (o .:? "numberArgs" .!= mempty)
                      <*> (o .:? "queryString")
                      <*> (o .:? "nameArgs" .!= mempty))
 
 instance ToJSON GqlQuery where
-        toJSON GqlQuery{..}
+        toJSON GqlQuery'{..}
           = object
               (catMaybes
                  [("allowLiteral" .=) <$> _gqAllowLiteral,
@@ -845,7 +846,7 @@ instance ToJSON GqlQuery where
 
 --
 -- /See:/ 'runQueryResponse' smart constructor.
-data RunQueryResponse = RunQueryResponse
+data RunQueryResponse = RunQueryResponse'
     { _rqrBatch  :: !(Maybe QueryResultBatch)
     , _rqrHeader :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -860,7 +861,7 @@ data RunQueryResponse = RunQueryResponse
 runQueryResponse
     :: RunQueryResponse
 runQueryResponse =
-    RunQueryResponse
+    RunQueryResponse'
     { _rqrBatch = Nothing
     , _rqrHeader = Nothing
     }
@@ -877,11 +878,11 @@ instance FromJSON RunQueryResponse where
         parseJSON
           = withObject "RunQueryResponse"
               (\ o ->
-                 RunQueryResponse <$>
+                 RunQueryResponse' <$>
                    (o .:? "batch") <*> (o .:? "header"))
 
 instance ToJSON RunQueryResponse where
-        toJSON RunQueryResponse{..}
+        toJSON RunQueryResponse'{..}
           = object
               (catMaybes
                  [("batch" .=) <$> _rqrBatch,
@@ -891,7 +892,7 @@ instance ToJSON RunQueryResponse where
 -- metadata.
 --
 -- /See:/ 'value' smart constructor.
-data Value = Value
+data Value = Value'
     { _vKeyValue      :: !(Maybe Key)
     , _vBlobKeyValue  :: !(Maybe Text)
     , _vDateTimeValue :: !(Maybe DateTime')
@@ -936,7 +937,7 @@ data Value = Value
 value
     :: Value
 value =
-    Value
+    Value'
     { _vKeyValue = Nothing
     , _vBlobKeyValue = Nothing
     , _vDateTimeValue = Nothing
@@ -1035,7 +1036,7 @@ instance FromJSON Value where
         parseJSON
           = withObject "Value"
               (\ o ->
-                 Value <$>
+                 Value' <$>
                    (o .:? "keyValue") <*> (o .:? "blobKeyValue") <*>
                      (o .:? "dateTimeValue")
                      <*> (o .:? "integerValue")
@@ -1049,7 +1050,7 @@ instance FromJSON Value where
                      <*> (o .:? "blobValue"))
 
 instance ToJSON Value where
-        toJSON Value{..}
+        toJSON Value'{..}
           = object
               (catMaybes
                  [("keyValue" .=) <$> _vKeyValue,
@@ -1067,7 +1068,7 @@ instance ToJSON Value where
 
 --
 -- /See:/ 'lookupRequest' smart constructor.
-data LookupRequest = LookupRequest
+data LookupRequest = LookupRequest'
     { _lrKeys        :: !(Maybe [Key])
     , _lrReadOptions :: !(Maybe ReadOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1082,7 +1083,7 @@ data LookupRequest = LookupRequest
 lookupRequest
     :: LookupRequest
 lookupRequest =
-    LookupRequest
+    LookupRequest'
     { _lrKeys = Nothing
     , _lrReadOptions = Nothing
     }
@@ -1103,11 +1104,11 @@ instance FromJSON LookupRequest where
         parseJSON
           = withObject "LookupRequest"
               (\ o ->
-                 LookupRequest <$>
+                 LookupRequest' <$>
                    (o .:? "keys" .!= mempty) <*> (o .:? "readOptions"))
 
 instance ToJSON LookupRequest where
-        toJSON LookupRequest{..}
+        toJSON LookupRequest'{..}
           = object
               (catMaybes
                  [("keys" .=) <$> _lrKeys,
@@ -1116,7 +1117,7 @@ instance ToJSON LookupRequest where
 -- | A set of changes to apply.
 --
 -- /See:/ 'mutation' smart constructor.
-data Mutation = Mutation
+data Mutation = Mutation'
     { _mInsert       :: !(Maybe [Entity])
     , _mForce        :: !(Maybe Bool)
     , _mInsertAutoId :: !(Maybe [Entity])
@@ -1143,7 +1144,7 @@ data Mutation = Mutation
 mutation
     :: Mutation
 mutation =
-    Mutation
+    Mutation'
     { _mInsert = Nothing
     , _mForce = Nothing
     , _mInsertAutoId = Nothing
@@ -1198,7 +1199,7 @@ instance FromJSON Mutation where
         parseJSON
           = withObject "Mutation"
               (\ o ->
-                 Mutation <$>
+                 Mutation' <$>
                    (o .:? "insert" .!= mempty) <*> (o .:? "force") <*>
                      (o .:? "insertAutoId" .!= mempty)
                      <*> (o .:? "upsert" .!= mempty)
@@ -1206,7 +1207,7 @@ instance FromJSON Mutation where
                      <*> (o .:? "update" .!= mempty))
 
 instance ToJSON Mutation where
-        toJSON Mutation{..}
+        toJSON Mutation'{..}
           = object
               (catMaybes
                  [("insert" .=) <$> _mInsert,
@@ -1218,7 +1219,7 @@ instance ToJSON Mutation where
 
 --
 -- /See:/ 'responseHeader' smart constructor.
-newtype ResponseHeader = ResponseHeader
+newtype ResponseHeader = ResponseHeader'
     { _rhKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1230,7 +1231,7 @@ newtype ResponseHeader = ResponseHeader
 responseHeader
     :: ResponseHeader
 responseHeader =
-    ResponseHeader
+    ResponseHeader'
     { _rhKind = "datastore#responseHeader"
     }
 
@@ -1243,11 +1244,11 @@ instance FromJSON ResponseHeader where
         parseJSON
           = withObject "ResponseHeader"
               (\ o ->
-                 ResponseHeader <$>
+                 ResponseHeader' <$>
                    (o .:? "kind" .!= "datastore#responseHeader"))
 
 instance ToJSON ResponseHeader where
-        toJSON ResponseHeader{..}
+        toJSON ResponseHeader'{..}
           = object (catMaybes [Just ("kind" .= _rhKind)])
 
 -- | A (kind, ID\/name) pair used to construct a key path. At most one of
@@ -1255,7 +1256,7 @@ instance ToJSON ResponseHeader where
 -- neither is set, the element is incomplete.
 --
 -- /See:/ 'keyPathElement' smart constructor.
-data KeyPathElement = KeyPathElement
+data KeyPathElement = KeyPathElement'
     { _kpeKind :: !(Maybe Text)
     , _kpeName :: !(Maybe Text)
     , _kpeId   :: !(Maybe (Textual Int64))
@@ -1273,7 +1274,7 @@ data KeyPathElement = KeyPathElement
 keyPathElement
     :: KeyPathElement
 keyPathElement =
-    KeyPathElement
+    KeyPathElement'
     { _kpeKind = Nothing
     , _kpeName = Nothing
     , _kpeId = Nothing
@@ -1302,11 +1303,11 @@ instance FromJSON KeyPathElement where
         parseJSON
           = withObject "KeyPathElement"
               (\ o ->
-                 KeyPathElement <$>
+                 KeyPathElement' <$>
                    (o .:? "kind") <*> (o .:? "name") <*> (o .:? "id"))
 
 instance ToJSON KeyPathElement where
-        toJSON KeyPathElement{..}
+        toJSON KeyPathElement'{..}
           = object
               (catMaybes
                  [("kind" .=) <$> _kpeKind, ("name" .=) <$> _kpeName,
@@ -1315,7 +1316,7 @@ instance ToJSON KeyPathElement where
 -- | A reference to a property relative to the kind expressions.
 --
 -- /See:/ 'propertyReference' smart constructor.
-newtype PropertyReference = PropertyReference
+newtype PropertyReference = PropertyReference'
     { _prName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1327,7 +1328,7 @@ newtype PropertyReference = PropertyReference
 propertyReference
     :: PropertyReference
 propertyReference =
-    PropertyReference
+    PropertyReference'
     { _prName = Nothing
     }
 
@@ -1338,16 +1339,16 @@ prName = lens _prName (\ s a -> s{_prName = a})
 instance FromJSON PropertyReference where
         parseJSON
           = withObject "PropertyReference"
-              (\ o -> PropertyReference <$> (o .:? "name"))
+              (\ o -> PropertyReference' <$> (o .:? "name"))
 
 instance ToJSON PropertyReference where
-        toJSON PropertyReference{..}
+        toJSON PropertyReference'{..}
           = object (catMaybes [("name" .=) <$> _prName])
 
 -- | A binding argument for a GQL query.
 --
 -- /See:/ 'gqlQueryArg' smart constructor.
-data GqlQueryArg = GqlQueryArg
+data GqlQueryArg = GqlQueryArg'
     { _gqaCursor :: !(Maybe (Textual Word8))
     , _gqaValue  :: !(Maybe Value)
     , _gqaName   :: !(Maybe Text)
@@ -1365,7 +1366,7 @@ data GqlQueryArg = GqlQueryArg
 gqlQueryArg
     :: GqlQueryArg
 gqlQueryArg =
-    GqlQueryArg
+    GqlQueryArg'
     { _gqaCursor = Nothing
     , _gqaValue = Nothing
     , _gqaName = Nothing
@@ -1388,12 +1389,12 @@ instance FromJSON GqlQueryArg where
         parseJSON
           = withObject "GqlQueryArg"
               (\ o ->
-                 GqlQueryArg <$>
+                 GqlQueryArg' <$>
                    (o .:? "cursor") <*> (o .:? "value") <*>
                      (o .:? "name"))
 
 instance ToJSON GqlQueryArg where
-        toJSON GqlQueryArg{..}
+        toJSON GqlQueryArg'{..}
           = object
               (catMaybes
                  [("cursor" .=) <$> _gqaCursor,
@@ -1403,7 +1404,7 @@ instance ToJSON GqlQueryArg where
 -- | A unique identifier for an entity.
 --
 -- /See:/ 'key' smart constructor.
-data Key = Key
+data Key = Key'
     { _kPartitionId :: !(Maybe PartitionId)
     , _kPath        :: !(Maybe [KeyPathElement])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1418,7 +1419,7 @@ data Key = Key
 key
     :: Key
 key =
-    Key
+    Key'
     { _kPartitionId = Nothing
     , _kPath = Nothing
     }
@@ -1450,11 +1451,11 @@ instance FromJSON Key where
         parseJSON
           = withObject "Key"
               (\ o ->
-                 Key <$>
+                 Key' <$>
                    (o .:? "partitionId") <*> (o .:? "path" .!= mempty))
 
 instance ToJSON Key where
-        toJSON Key{..}
+        toJSON Key'{..}
           = object
               (catMaybes
                  [("partitionId" .=) <$> _kPartitionId,
@@ -1463,7 +1464,7 @@ instance ToJSON Key where
 -- | A filter on a specific property.
 --
 -- /See:/ 'propertyFilter' smart constructor.
-data PropertyFilter = PropertyFilter
+data PropertyFilter = PropertyFilter'
     { _pfProperty :: !(Maybe PropertyReference)
     , _pfOperator :: !(Maybe PropertyFilterOperator)
     , _pfValue    :: !(Maybe Value)
@@ -1481,7 +1482,7 @@ data PropertyFilter = PropertyFilter
 propertyFilter
     :: PropertyFilter
 propertyFilter =
-    PropertyFilter
+    PropertyFilter'
     { _pfProperty = Nothing
     , _pfOperator = Nothing
     , _pfValue = Nothing
@@ -1506,12 +1507,12 @@ instance FromJSON PropertyFilter where
         parseJSON
           = withObject "PropertyFilter"
               (\ o ->
-                 PropertyFilter <$>
+                 PropertyFilter' <$>
                    (o .:? "property") <*> (o .:? "operator") <*>
                      (o .:? "value"))
 
 instance ToJSON PropertyFilter where
-        toJSON PropertyFilter{..}
+        toJSON PropertyFilter'{..}
           = object
               (catMaybes
                  [("property" .=) <$> _pfProperty,
@@ -1521,7 +1522,7 @@ instance ToJSON PropertyFilter where
 -- | A query.
 --
 -- /See:/ 'query' smart constructor.
-data Query = Query
+data Query = Query'
     { _qGroupBy     :: !(Maybe [PropertyReference])
     , _qStartCursor :: !(Maybe (Textual Word8))
     , _qOffSet      :: !(Maybe (Textual Int32))
@@ -1557,7 +1558,7 @@ data Query = Query
 query
     :: Query
 query =
-    Query
+    Query'
     { _qGroupBy = Nothing
     , _qStartCursor = Nothing
     , _qOffSet = Nothing
@@ -1633,7 +1634,7 @@ instance FromJSON Query where
         parseJSON
           = withObject "Query"
               (\ o ->
-                 Query <$>
+                 Query' <$>
                    (o .:? "groupBy" .!= mempty) <*>
                      (o .:? "startCursor")
                      <*> (o .:? "offset")
@@ -1645,7 +1646,7 @@ instance FromJSON Query where
                      <*> (o .:? "order" .!= mempty))
 
 instance ToJSON Query where
-        toJSON Query{..}
+        toJSON Query'{..}
           = object
               (catMaybes
                  [("groupBy" .=) <$> _qGroupBy,
@@ -1660,7 +1661,7 @@ instance ToJSON Query where
 -- | The result of fetching an entity from the datastore.
 --
 -- /See:/ 'entityResult' smart constructor.
-newtype EntityResult = EntityResult
+newtype EntityResult = EntityResult'
     { _erEntity :: Maybe Entity
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1672,7 +1673,7 @@ newtype EntityResult = EntityResult
 entityResult
     :: EntityResult
 entityResult =
-    EntityResult
+    EntityResult'
     { _erEntity = Nothing
     }
 
@@ -1683,15 +1684,15 @@ erEntity = lens _erEntity (\ s a -> s{_erEntity = a})
 instance FromJSON EntityResult where
         parseJSON
           = withObject "EntityResult"
-              (\ o -> EntityResult <$> (o .:? "entity"))
+              (\ o -> EntityResult' <$> (o .:? "entity"))
 
 instance ToJSON EntityResult where
-        toJSON EntityResult{..}
+        toJSON EntityResult'{..}
           = object (catMaybes [("entity" .=) <$> _erEntity])
 
 --
 -- /See:/ 'commitResponse' smart constructor.
-data CommitResponse = CommitResponse
+data CommitResponse = CommitResponse'
     { _crMutationResult :: !(Maybe MutationResult)
     , _crHeader         :: !(Maybe ResponseHeader)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1706,7 +1707,7 @@ data CommitResponse = CommitResponse
 commitResponse
     :: CommitResponse
 commitResponse =
-    CommitResponse
+    CommitResponse'
     { _crMutationResult = Nothing
     , _crHeader = Nothing
     }
@@ -1724,11 +1725,11 @@ instance FromJSON CommitResponse where
         parseJSON
           = withObject "CommitResponse"
               (\ o ->
-                 CommitResponse <$>
+                 CommitResponse' <$>
                    (o .:? "mutationResult") <*> (o .:? "header"))
 
 instance ToJSON CommitResponse where
-        toJSON CommitResponse{..}
+        toJSON CommitResponse'{..}
           = object
               (catMaybes
                  [("mutationResult" .=) <$> _crMutationResult,
@@ -1737,7 +1738,7 @@ instance ToJSON CommitResponse where
 -- | A representation of a kind.
 --
 -- /See:/ 'kindExpression' smart constructor.
-newtype KindExpression = KindExpression
+newtype KindExpression = KindExpression'
     { _keName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1749,7 +1750,7 @@ newtype KindExpression = KindExpression
 kindExpression
     :: KindExpression
 kindExpression =
-    KindExpression
+    KindExpression'
     { _keName = Nothing
     }
 
@@ -1760,15 +1761,15 @@ keName = lens _keName (\ s a -> s{_keName = a})
 instance FromJSON KindExpression where
         parseJSON
           = withObject "KindExpression"
-              (\ o -> KindExpression <$> (o .:? "name"))
+              (\ o -> KindExpression' <$> (o .:? "name"))
 
 instance ToJSON KindExpression where
-        toJSON KindExpression{..}
+        toJSON KindExpression'{..}
           = object (catMaybes [("name" .=) <$> _keName])
 
 --
 -- /See:/ 'readOptions' smart constructor.
-data ReadOptions = ReadOptions
+data ReadOptions = ReadOptions'
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
     , _roTransaction     :: !(Maybe (Textual Word8))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1783,7 +1784,7 @@ data ReadOptions = ReadOptions
 readOptions
     :: ReadOptions
 readOptions =
-    ReadOptions
+    ReadOptions'
     { _roReadConsistency = Nothing
     , _roTransaction = Nothing
     }
@@ -1808,11 +1809,11 @@ instance FromJSON ReadOptions where
         parseJSON
           = withObject "ReadOptions"
               (\ o ->
-                 ReadOptions <$>
+                 ReadOptions' <$>
                    (o .:? "readConsistency") <*> (o .:? "transaction"))
 
 instance ToJSON ReadOptions where
-        toJSON ReadOptions{..}
+        toJSON ReadOptions'{..}
           = object
               (catMaybes
                  [("readConsistency" .=) <$> _roReadConsistency,
@@ -1820,7 +1821,7 @@ instance ToJSON ReadOptions where
 
 --
 -- /See:/ 'rollbackResponse' smart constructor.
-newtype RollbackResponse = RollbackResponse
+newtype RollbackResponse = RollbackResponse'
     { _rrHeader :: Maybe ResponseHeader
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1832,7 +1833,7 @@ newtype RollbackResponse = RollbackResponse
 rollbackResponse
     :: RollbackResponse
 rollbackResponse =
-    RollbackResponse
+    RollbackResponse'
     { _rrHeader = Nothing
     }
 
@@ -1842,16 +1843,16 @@ rrHeader = lens _rrHeader (\ s a -> s{_rrHeader = a})
 instance FromJSON RollbackResponse where
         parseJSON
           = withObject "RollbackResponse"
-              (\ o -> RollbackResponse <$> (o .:? "header"))
+              (\ o -> RollbackResponse' <$> (o .:? "header"))
 
 instance ToJSON RollbackResponse where
-        toJSON RollbackResponse{..}
+        toJSON RollbackResponse'{..}
           = object (catMaybes [("header" .=) <$> _rrHeader])
 
 -- | A representation of a property in a projection.
 --
 -- /See:/ 'propertyExpression' smart constructor.
-data PropertyExpression = PropertyExpression
+data PropertyExpression = PropertyExpression'
     { _peProperty            :: !(Maybe PropertyReference)
     , _peAggregationFunction :: !(Maybe PropertyExpressionAggregationFunction)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1866,7 +1867,7 @@ data PropertyExpression = PropertyExpression
 propertyExpression
     :: PropertyExpression
 propertyExpression =
-    PropertyExpression
+    PropertyExpression'
     { _peProperty = Nothing
     , _peAggregationFunction = Nothing
     }
@@ -1890,11 +1891,11 @@ instance FromJSON PropertyExpression where
         parseJSON
           = withObject "PropertyExpression"
               (\ o ->
-                 PropertyExpression <$>
+                 PropertyExpression' <$>
                    (o .:? "property") <*> (o .:? "aggregationFunction"))
 
 instance ToJSON PropertyExpression where
-        toJSON PropertyExpression{..}
+        toJSON PropertyExpression'{..}
           = object
               (catMaybes
                  [("property" .=) <$> _peProperty,
@@ -1904,7 +1905,7 @@ instance ToJSON PropertyExpression where
 -- | A holder for any type of filter. Exactly one field should be specified.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter
+data Filter = Filter'
     { _fCompositeFilter :: !(Maybe CompositeFilter)
     , _fPropertyFilter  :: !(Maybe PropertyFilter)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1919,7 +1920,7 @@ data Filter = Filter
 filter'
     :: Filter
 filter' =
-    Filter
+    Filter'
     { _fCompositeFilter = Nothing
     , _fPropertyFilter = Nothing
     }
@@ -1940,12 +1941,12 @@ instance FromJSON Filter where
         parseJSON
           = withObject "Filter"
               (\ o ->
-                 Filter <$>
+                 Filter' <$>
                    (o .:? "compositeFilter") <*>
                      (o .:? "propertyFilter"))
 
 instance ToJSON Filter where
-        toJSON Filter{..}
+        toJSON Filter'{..}
           = object
               (catMaybes
                  [("compositeFilter" .=) <$> _fCompositeFilter,
@@ -1953,7 +1954,7 @@ instance ToJSON Filter where
 
 --
 -- /See:/ 'commitRequest' smart constructor.
-data CommitRequest = CommitRequest
+data CommitRequest = CommitRequest'
     { _crMode           :: !(Maybe CommitRequestMode)
     , _crMutation       :: !(Maybe Mutation)
     , _crTransaction    :: !(Maybe (Textual Word8))
@@ -1974,7 +1975,7 @@ data CommitRequest = CommitRequest
 commitRequest
     :: CommitRequest
 commitRequest =
-    CommitRequest
+    CommitRequest'
     { _crMode = Nothing
     , _crMutation = Nothing
     , _crTransaction = Nothing
@@ -2008,13 +2009,13 @@ instance FromJSON CommitRequest where
         parseJSON
           = withObject "CommitRequest"
               (\ o ->
-                 CommitRequest <$>
+                 CommitRequest' <$>
                    (o .:? "mode") <*> (o .:? "mutation") <*>
                      (o .:? "transaction")
                      <*> (o .:? "ignoreReadOnly"))
 
 instance ToJSON CommitRequest where
-        toJSON CommitRequest{..}
+        toJSON CommitRequest'{..}
           = object
               (catMaybes
                  [("mode" .=) <$> _crMode,
@@ -2025,7 +2026,7 @@ instance ToJSON CommitRequest where
 -- | An entity.
 --
 -- /See:/ 'entity' smart constructor.
-data Entity = Entity
+data Entity = Entity'
     { _eKey        :: !(Maybe Key)
     , _eProperties :: !(Maybe EntityProperties)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2040,7 +2041,7 @@ data Entity = Entity
 entity
     :: Entity
 entity =
-    Entity
+    Entity'
     { _eKey = Nothing
     , _eProperties = Nothing
     }
@@ -2061,10 +2062,10 @@ instance FromJSON Entity where
         parseJSON
           = withObject "Entity"
               (\ o ->
-                 Entity <$> (o .:? "key") <*> (o .:? "properties"))
+                 Entity' <$> (o .:? "key") <*> (o .:? "properties"))
 
 instance ToJSON Entity where
-        toJSON Entity{..}
+        toJSON Entity'{..}
           = object
               (catMaybes
                  [("key" .=) <$> _eKey,
@@ -2072,7 +2073,7 @@ instance ToJSON Entity where
 
 --
 -- /See:/ 'lookupResponse' smart constructor.
-data LookupResponse = LookupResponse
+data LookupResponse = LookupResponse'
     { _lrDeferred :: !(Maybe [Key])
     , _lrFound    :: !(Maybe [EntityResult])
     , _lrMissing  :: !(Maybe [EntityResult])
@@ -2093,7 +2094,7 @@ data LookupResponse = LookupResponse
 lookupResponse
     :: LookupResponse
 lookupResponse =
-    LookupResponse
+    LookupResponse'
     { _lrDeferred = Nothing
     , _lrFound = Nothing
     , _lrMissing = Nothing
@@ -2127,14 +2128,14 @@ instance FromJSON LookupResponse where
         parseJSON
           = withObject "LookupResponse"
               (\ o ->
-                 LookupResponse <$>
+                 LookupResponse' <$>
                    (o .:? "deferred" .!= mempty) <*>
                      (o .:? "found" .!= mempty)
                      <*> (o .:? "missing" .!= mempty)
                      <*> (o .:? "header"))
 
 instance ToJSON LookupResponse where
-        toJSON LookupResponse{..}
+        toJSON LookupResponse'{..}
           = object
               (catMaybes
                  [("deferred" .=) <$> _lrDeferred,
@@ -2145,7 +2146,7 @@ instance ToJSON LookupResponse where
 -- | The desired order for a specific property.
 --
 -- /See:/ 'propertyOrder' smart constructor.
-data PropertyOrder = PropertyOrder
+data PropertyOrder = PropertyOrder'
     { _poProperty  :: !(Maybe PropertyReference)
     , _poDirection :: !(Maybe PropertyOrderDirection)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2160,7 +2161,7 @@ data PropertyOrder = PropertyOrder
 propertyOrder
     :: PropertyOrder
 propertyOrder =
-    PropertyOrder
+    PropertyOrder'
     { _poProperty = Nothing
     , _poDirection = Nothing
     }
@@ -2180,11 +2181,11 @@ instance FromJSON PropertyOrder where
         parseJSON
           = withObject "PropertyOrder"
               (\ o ->
-                 PropertyOrder <$>
+                 PropertyOrder' <$>
                    (o .:? "property") <*> (o .:? "direction"))
 
 instance ToJSON PropertyOrder where
-        toJSON PropertyOrder{..}
+        toJSON PropertyOrder'{..}
           = object
               (catMaybes
                  [("property" .=) <$> _poProperty,

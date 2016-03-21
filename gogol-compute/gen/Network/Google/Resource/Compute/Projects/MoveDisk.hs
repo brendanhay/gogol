@@ -55,7 +55,7 @@ type ProjectsMoveDiskResource =
 -- | Moves a persistent disk from one zone to another.
 --
 -- /See:/ 'projectsMoveDisk' smart constructor.
-data ProjectsMoveDisk = ProjectsMoveDisk
+data ProjectsMoveDisk = ProjectsMoveDisk'
     { _pmdProject :: !Text
     , _pmdPayload :: !DiskMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ projectsMoveDisk
     -> DiskMoveRequest -- ^ 'pmdPayload'
     -> ProjectsMoveDisk
 projectsMoveDisk pPmdProject_ pPmdPayload_ =
-    ProjectsMoveDisk
+    ProjectsMoveDisk'
     { _pmdProject = pPmdProject_
     , _pmdPayload = pPmdPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ProjectsMoveDisk where
         type Scopes ProjectsMoveDisk =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient ProjectsMoveDisk{..}
+        requestClient ProjectsMoveDisk'{..}
           = go _pmdProject (Just AltJSON) _pmdPayload
               computeService
           where go

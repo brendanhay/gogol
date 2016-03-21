@@ -54,7 +54,7 @@ type ManagementAccountsListResource =
 -- | Lists all accounts to which the user has access.
 --
 -- /See:/ 'managementAccountsList' smart constructor.
-data ManagementAccountsList = ManagementAccountsList
+data ManagementAccountsList = ManagementAccountsList'
     { _malStartIndex :: !(Maybe (Textual Int32))
     , _malMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data ManagementAccountsList = ManagementAccountsList
 managementAccountsList
     :: ManagementAccountsList
 managementAccountsList =
-    ManagementAccountsList
+    ManagementAccountsList'
     { _malStartIndex = Nothing
     , _malMaxResults = Nothing
     }
@@ -95,7 +95,7 @@ instance GoogleRequest ManagementAccountsList where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementAccountsList{..}
+        requestClient ManagementAccountsList'{..}
           = go _malStartIndex _malMaxResults (Just AltJSON)
               analyticsService
           where go

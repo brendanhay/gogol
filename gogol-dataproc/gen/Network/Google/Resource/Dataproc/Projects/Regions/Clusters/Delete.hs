@@ -71,7 +71,7 @@ type ProjectsRegionsClustersDeleteResource =
 -- | Deletes a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersDelete' smart constructor.
-data ProjectsRegionsClustersDelete = ProjectsRegionsClustersDelete
+data ProjectsRegionsClustersDelete = ProjectsRegionsClustersDelete'
     { _prcdXgafv          :: !(Maybe Text)
     , _prcdUploadProtocol :: !(Maybe Text)
     , _prcdPp             :: !Bool
@@ -113,7 +113,7 @@ projectsRegionsClustersDelete
     -> Text -- ^ 'prcdProjectId'
     -> ProjectsRegionsClustersDelete
 projectsRegionsClustersDelete pPrcdClusterName_ pPrcdRegion_ pPrcdProjectId_ =
-    ProjectsRegionsClustersDelete
+    ProjectsRegionsClustersDelete'
     { _prcdXgafv = Nothing
     , _prcdUploadProtocol = Nothing
     , _prcdPp = True
@@ -187,7 +187,7 @@ instance GoogleRequest ProjectsRegionsClustersDelete
         type Rs ProjectsRegionsClustersDelete = Operation
         type Scopes ProjectsRegionsClustersDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsClustersDelete{..}
+        requestClient ProjectsRegionsClustersDelete'{..}
           = go _prcdProjectId _prcdRegion _prcdClusterName
               _prcdXgafv
               _prcdUploadProtocol

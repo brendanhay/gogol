@@ -51,7 +51,7 @@ type SavedadstylesGetResource =
 -- | Get a specific saved ad style from the user\'s account.
 --
 -- /See:/ 'savedadstylesGet' smart constructor.
-newtype SavedadstylesGet = SavedadstylesGet
+newtype SavedadstylesGet = SavedadstylesGet'
     { _sgSavedAdStyleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ savedadstylesGet
     :: Text -- ^ 'sgSavedAdStyleId'
     -> SavedadstylesGet
 savedadstylesGet pSgSavedAdStyleId_ =
-    SavedadstylesGet
+    SavedadstylesGet'
     { _sgSavedAdStyleId = pSgSavedAdStyleId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest SavedadstylesGet where
         type Scopes SavedadstylesGet =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient SavedadstylesGet{..}
+        requestClient SavedadstylesGet'{..}
           = go _sgSavedAdStyleId (Just AltJSON) adSenseService
           where go
                   = buildClient

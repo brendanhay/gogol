@@ -76,7 +76,7 @@ type ReferencesetsSearchResource =
 -- [GlobalAllianceApi.searchReferenceSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L71)
 --
 -- /See:/ 'referencesetsSearch' smart constructor.
-data ReferencesetsSearch = ReferencesetsSearch
+data ReferencesetsSearch = ReferencesetsSearch'
     { _rsXgafv          :: !(Maybe Text)
     , _rsUploadProtocol :: !(Maybe Text)
     , _rsPp             :: !Bool
@@ -110,7 +110,7 @@ referencesetsSearch
     :: SearchReferenceSetsRequest -- ^ 'rsPayload'
     -> ReferencesetsSearch
 referencesetsSearch pRsPayload_ =
-    ReferencesetsSearch
+    ReferencesetsSearch'
     { _rsXgafv = Nothing
     , _rsUploadProtocol = Nothing
     , _rsPp = True
@@ -169,7 +169,7 @@ instance GoogleRequest ReferencesetsSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReferencesetsSearch{..}
+        requestClient ReferencesetsSearch'{..}
           = go _rsXgafv _rsUploadProtocol (Just _rsPp)
               _rsAccessToken
               _rsUploadType

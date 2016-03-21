@@ -78,7 +78,7 @@ type TablesListResource =
 -- | Return all tables readable by the current user.
 --
 -- /See:/ 'tablesList' smart constructor.
-data TablesList = TablesList
+data TablesList = TablesList'
     { _tlCreatedAfter     :: !(Maybe DateTime')
     , _tlCreatorEmail     :: !(Maybe Text)
     , _tlRole             :: !(Maybe TablesListRole)
@@ -126,7 +126,7 @@ data TablesList = TablesList
 tablesList
     :: TablesList
 tablesList =
-    TablesList
+    TablesList'
     { _tlCreatedAfter = Nothing
     , _tlCreatorEmail = Nothing
     , _tlRole = Nothing
@@ -233,7 +233,7 @@ instance GoogleRequest TablesList where
         type Scopes TablesList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient TablesList{..}
+        requestClient TablesList'{..}
           = go _tlCreatedAfter _tlCreatorEmail _tlRole _tlBbox
               _tlProcessingStatus
               _tlModifiedAfter

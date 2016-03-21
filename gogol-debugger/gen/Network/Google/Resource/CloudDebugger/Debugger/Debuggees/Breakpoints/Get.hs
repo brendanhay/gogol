@@ -71,7 +71,7 @@ type DebuggerDebuggeesBreakpointsGetResource =
 -- | Gets breakpoint information.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsGet' smart constructor.
-data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet
+data DebuggerDebuggeesBreakpointsGet = DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv          :: !(Maybe Text)
     , _ddbgUploadProtocol :: !(Maybe Text)
     , _ddbgPp             :: !Bool
@@ -112,7 +112,7 @@ debuggerDebuggeesBreakpointsGet
     -> Text -- ^ 'ddbgDebuggeeId'
     -> DebuggerDebuggeesBreakpointsGet
 debuggerDebuggeesBreakpointsGet pDdbgBreakpointId_ pDdbgDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsGet
+    DebuggerDebuggeesBreakpointsGet'
     { _ddbgXgafv = Nothing
     , _ddbgUploadProtocol = Nothing
     , _ddbgPp = True
@@ -189,7 +189,7 @@ instance GoogleRequest
         type Scopes DebuggerDebuggeesBreakpointsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugger"]
-        requestClient DebuggerDebuggeesBreakpointsGet{..}
+        requestClient DebuggerDebuggeesBreakpointsGet'{..}
           = go _ddbgDebuggeeId _ddbgBreakpointId _ddbgXgafv
               _ddbgUploadProtocol
               (Just _ddbgPp)

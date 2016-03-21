@@ -57,7 +57,7 @@ type TasksDeleteResource =
 -- | Delete a task from a TaskQueue.
 --
 -- /See:/ 'tasksDelete' smart constructor.
-data TasksDelete = TasksDelete
+data TasksDelete = TasksDelete'
     { _tdTaskqueue :: !Text
     , _tdProject   :: !Text
     , _tdTask      :: !Text
@@ -78,7 +78,7 @@ tasksDelete
     -> Text -- ^ 'tdTask'
     -> TasksDelete
 tasksDelete pTdTaskqueue_ pTdProject_ pTdTask_ =
-    TasksDelete
+    TasksDelete'
     { _tdTaskqueue = pTdTaskqueue_
     , _tdProject = pTdProject_
     , _tdTask = pTdTask_
@@ -103,7 +103,7 @@ instance GoogleRequest TasksDelete where
         type Scopes TasksDelete =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksDelete{..}
+        requestClient TasksDelete'{..}
           = go _tdProject _tdTaskqueue _tdTask (Just AltJSON)
               taskQueueService
           where go

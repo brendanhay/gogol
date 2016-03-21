@@ -53,7 +53,7 @@ type AccountsContainersListResource =
 -- | Lists all Containers that belongs to a GTM Account.
 --
 -- /See:/ 'accountsContainersList' smart constructor.
-newtype AccountsContainersList = AccountsContainersList
+newtype AccountsContainersList = AccountsContainersList'
     { _aclAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsContainersList
     :: Text -- ^ 'aclAccountId'
     -> AccountsContainersList
 accountsContainersList pAclAccountId_ =
-    AccountsContainersList
+    AccountsContainersList'
     { _aclAccountId = pAclAccountId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest AccountsContainersList where
         type Scopes AccountsContainersList =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersList{..}
+        requestClient AccountsContainersList'{..}
           = go _aclAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient

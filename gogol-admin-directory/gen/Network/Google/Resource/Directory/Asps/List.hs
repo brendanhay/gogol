@@ -53,7 +53,7 @@ type AspsListResource =
 -- | List the ASPs issued by a user.
 --
 -- /See:/ 'aspsList' smart constructor.
-newtype AspsList = AspsList
+newtype AspsList = AspsList'
     { _alUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ aspsList
     :: Text -- ^ 'alUserKey'
     -> AspsList
 aspsList pAlUserKey_ =
-    AspsList
+    AspsList'
     { _alUserKey = pAlUserKey_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest AspsList where
         type Rs AspsList = Asps
         type Scopes AspsList =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient AspsList{..}
+        requestClient AspsList'{..}
           = go _alUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy AspsListResource)

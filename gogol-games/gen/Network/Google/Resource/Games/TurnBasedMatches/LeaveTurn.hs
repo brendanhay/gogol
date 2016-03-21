@@ -61,7 +61,7 @@ type TurnBasedMatchesLeaveTurnResource =
 -- canceling the match.
 --
 -- /See:/ 'turnBasedMatchesLeaveTurn' smart constructor.
-data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn
+data TurnBasedMatchesLeaveTurn = TurnBasedMatchesLeaveTurn'
     { _tbmltLanguage             :: !(Maybe Text)
     , _tbmltPendingParticipantId :: !(Maybe Text)
     , _tbmltMatchId              :: !Text
@@ -84,7 +84,7 @@ turnBasedMatchesLeaveTurn
     -> Int32 -- ^ 'tbmltMatchVersion'
     -> TurnBasedMatchesLeaveTurn
 turnBasedMatchesLeaveTurn pTbmltMatchId_ pTbmltMatchVersion_ =
-    TurnBasedMatchesLeaveTurn
+    TurnBasedMatchesLeaveTurn'
     { _tbmltLanguage = Nothing
     , _tbmltPendingParticipantId = Nothing
     , _tbmltMatchId = pTbmltMatchId_
@@ -124,7 +124,7 @@ instance GoogleRequest TurnBasedMatchesLeaveTurn
         type Scopes TurnBasedMatchesLeaveTurn =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesLeaveTurn{..}
+        requestClient TurnBasedMatchesLeaveTurn'{..}
           = go _tbmltMatchId (Just _tbmltMatchVersion)
               _tbmltLanguage
               _tbmltPendingParticipantId

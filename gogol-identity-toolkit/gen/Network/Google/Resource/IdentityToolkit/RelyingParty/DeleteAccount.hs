@@ -54,7 +54,7 @@ type RelyingPartyDeleteAccountResource =
 -- | Delete user account.
 --
 -- /See:/ 'relyingPartyDeleteAccount' smart constructor.
-newtype RelyingPartyDeleteAccount = RelyingPartyDeleteAccount
+newtype RelyingPartyDeleteAccount = RelyingPartyDeleteAccount'
     { _rPayload :: IdentitytoolkitRelyingPartyDeleteAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyDeleteAccount
     :: IdentitytoolkitRelyingPartyDeleteAccountRequest -- ^ 'rPayload'
     -> RelyingPartyDeleteAccount
 relyingPartyDeleteAccount pRPayload_ =
-    RelyingPartyDeleteAccount
+    RelyingPartyDeleteAccount'
     { _rPayload = pRPayload_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest RelyingPartyDeleteAccount
         type Rs RelyingPartyDeleteAccount =
              DeleteAccountResponse
         type Scopes RelyingPartyDeleteAccount = '[]
-        requestClient RelyingPartyDeleteAccount{..}
+        requestClient RelyingPartyDeleteAccount'{..}
           = go (Just AltJSON) _rPayload identityToolkitService
           where go
                   = buildClient

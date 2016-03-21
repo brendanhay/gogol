@@ -60,7 +60,7 @@ type OperationsListResource =
 -- | Lists all operations for a project.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+data OperationsList = OperationsList'
     { _olProject    :: !Text
     , _olFilter     :: !(Maybe Text)
     , _olPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ operationsList
     :: Text -- ^ 'olProject'
     -> OperationsList
 operationsList pOlProject_ =
-    OperationsList
+    OperationsList'
     { _olProject = pOlProject_
     , _olFilter = Nothing
     , _olPageToken = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest OperationsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient OperationsList{..}
+        requestClient OperationsList'{..}
           = go _olProject _olFilter _olPageToken
               (Just _olMaxResults)
               (Just AltJSON)

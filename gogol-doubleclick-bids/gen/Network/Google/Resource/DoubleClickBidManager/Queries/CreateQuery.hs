@@ -51,7 +51,7 @@ type QueriesCreateQueryResource =
 -- | Creates a query.
 --
 -- /See:/ 'queriesCreateQuery' smart constructor.
-newtype QueriesCreateQuery = QueriesCreateQuery
+newtype QueriesCreateQuery = QueriesCreateQuery'
     { _qcqPayload :: Query
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ queriesCreateQuery
     :: Query -- ^ 'qcqPayload'
     -> QueriesCreateQuery
 queriesCreateQuery pQcqPayload_ =
-    QueriesCreateQuery
+    QueriesCreateQuery'
     { _qcqPayload = pQcqPayload_
     }
 
@@ -76,7 +76,7 @@ qcqPayload
 instance GoogleRequest QueriesCreateQuery where
         type Rs QueriesCreateQuery = Query
         type Scopes QueriesCreateQuery = '[]
-        requestClient QueriesCreateQuery{..}
+        requestClient QueriesCreateQuery'{..}
           = go (Just AltJSON) _qcqPayload
               doubleClickBidsService
           where go

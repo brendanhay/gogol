@@ -71,7 +71,7 @@ type InstanceGroupManagersListManagedInstancesResource
 -- failed action.
 --
 -- /See:/ 'instanceGroupManagersListManagedInstances' smart constructor.
-data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances
+data InstanceGroupManagersListManagedInstances = InstanceGroupManagersListManagedInstances'
     { _igmlmiProject              :: !Text
     , _igmlmiInstanceGroupManager :: !Text
     , _igmlmiZone                 :: !Text
@@ -92,7 +92,7 @@ instanceGroupManagersListManagedInstances
     -> Text -- ^ 'igmlmiZone'
     -> InstanceGroupManagersListManagedInstances
 instanceGroupManagersListManagedInstances pIgmlmiProject_ pIgmlmiInstanceGroupManager_ pIgmlmiZone_ =
-    InstanceGroupManagersListManagedInstances
+    InstanceGroupManagersListManagedInstances'
     { _igmlmiProject = pIgmlmiProject_
     , _igmlmiInstanceGroupManager = pIgmlmiInstanceGroupManager_
     , _igmlmiZone = pIgmlmiZone_
@@ -125,7 +125,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
         requestClient
-          InstanceGroupManagersListManagedInstances{..}
+          InstanceGroupManagersListManagedInstances'{..}
           = go _igmlmiProject _igmlmiZone
               _igmlmiInstanceGroupManager
               (Just AltJSON)

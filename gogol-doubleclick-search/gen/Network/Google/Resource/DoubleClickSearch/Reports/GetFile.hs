@@ -63,7 +63,7 @@ type ReportsGetFileResource =
 -- | Downloads a report file encoded in UTF-8.
 --
 -- /See:/ 'reportsGetFile' smart constructor.
-data ReportsGetFile = ReportsGetFile
+data ReportsGetFile = ReportsGetFile'
     { _rgfReportId       :: !Text
     , _rgfReportFragment :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ reportsGetFile
     -> Int32 -- ^ 'rgfReportFragment'
     -> ReportsGetFile
 reportsGetFile pRgfReportId_ pRgfReportFragment_ =
-    ReportsGetFile
+    ReportsGetFile'
     { _rgfReportId = pRgfReportId_
     , _rgfReportFragment = _Coerce # pRgfReportFragment_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest ReportsGetFile where
         type Rs ReportsGetFile = ()
         type Scopes ReportsGetFile =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ReportsGetFile{..}
+        requestClient ReportsGetFile'{..}
           = go _rgfReportId _rgfReportFragment (Just AltJSON)
               doubleClickSearchService
           where go :<|> _
@@ -113,7 +113,7 @@ instance GoogleRequest (MediaDownload ReportsGetFile)
         type Rs (MediaDownload ReportsGetFile) = Stream
         type Scopes (MediaDownload ReportsGetFile) =
              Scopes ReportsGetFile
-        requestClient (MediaDownload ReportsGetFile{..})
+        requestClient (MediaDownload ReportsGetFile'{..})
           = go _rgfReportId _rgfReportFragment (Just AltMedia)
               doubleClickSearchService
           where _ :<|> go

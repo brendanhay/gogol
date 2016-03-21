@@ -55,7 +55,7 @@ type OrgUnitsGetResource =
 -- | Retrieve Organization Unit
 --
 -- /See:/ 'orgUnitsGet' smart constructor.
-data OrgUnitsGet = OrgUnitsGet
+data OrgUnitsGet = OrgUnitsGet'
     { _ougOrgUnitPath :: ![Text]
     , _ougCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ orgUnitsGet
     -> Text -- ^ 'ougCustomerId'
     -> OrgUnitsGet
 orgUnitsGet pOugOrgUnitPath_ pOugCustomerId_ =
-    OrgUnitsGet
+    OrgUnitsGet'
     { _ougOrgUnitPath = _Coerce # pOugOrgUnitPath_
     , _ougCustomerId = pOugCustomerId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest OrgUnitsGet where
         type Scopes OrgUnitsGet =
              '["https://www.googleapis.com/auth/admin.directory.orgunit",
                "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
-        requestClient OrgUnitsGet{..}
+        requestClient OrgUnitsGet'{..}
           = go _ougCustomerId _ougOrgUnitPath (Just AltJSON)
               directoryService
           where go

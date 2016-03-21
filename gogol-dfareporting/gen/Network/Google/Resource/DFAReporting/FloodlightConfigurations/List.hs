@@ -55,7 +55,7 @@ type FloodlightConfigurationsListResource =
 -- | Retrieves a list of floodlight configurations, possibly filtered.
 --
 -- /See:/ 'floodlightConfigurationsList' smart constructor.
-data FloodlightConfigurationsList = FloodlightConfigurationsList
+data FloodlightConfigurationsList = FloodlightConfigurationsList'
     { _fclIds       :: !(Maybe [Textual Int64])
     , _fclProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ floodlightConfigurationsList
     :: Int64 -- ^ 'fclProFileId'
     -> FloodlightConfigurationsList
 floodlightConfigurationsList pFclProFileId_ =
-    FloodlightConfigurationsList
+    FloodlightConfigurationsList'
     { _fclIds = Nothing
     , _fclProFileId = _Coerce # pFclProFileId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest FloodlightConfigurationsList
              FloodlightConfigurationsListResponse
         type Scopes FloodlightConfigurationsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightConfigurationsList{..}
+        requestClient FloodlightConfigurationsList'{..}
           = go _fclProFileId (_fclIds ^. _Default)
               (Just AltJSON)
               dFAReportingService

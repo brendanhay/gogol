@@ -75,7 +75,7 @@ type ProjectsGroupsMembersListResource =
 -- | Lists the monitored resources that are members of a group.
 --
 -- /See:/ 'projectsGroupsMembersList' smart constructor.
-data ProjectsGroupsMembersList = ProjectsGroupsMembersList
+data ProjectsGroupsMembersList = ProjectsGroupsMembersList'
     { _pgmlIntervalStartTime :: !(Maybe Text)
     , _pgmlXgafv             :: !(Maybe Text)
     , _pgmlUploadProtocol    :: !(Maybe Text)
@@ -124,7 +124,7 @@ projectsGroupsMembersList
     :: Text -- ^ 'pgmlName'
     -> ProjectsGroupsMembersList
 projectsGroupsMembersList pPgmlName_ =
-    ProjectsGroupsMembersList
+    ProjectsGroupsMembersList'
     { _pgmlIntervalStartTime = Nothing
     , _pgmlXgafv = Nothing
     , _pgmlUploadProtocol = Nothing
@@ -230,7 +230,7 @@ instance GoogleRequest ProjectsGroupsMembersList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.read"]
-        requestClient ProjectsGroupsMembersList{..}
+        requestClient ProjectsGroupsMembersList'{..}
           = go _pgmlName _pgmlIntervalStartTime _pgmlXgafv
               _pgmlUploadProtocol
               (Just _pgmlPp)

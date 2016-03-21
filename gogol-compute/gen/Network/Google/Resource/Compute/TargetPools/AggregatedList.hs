@@ -60,7 +60,7 @@ type TargetPoolsAggregatedListResource =
 -- | Retrieves an aggregated list of target pools.
 --
 -- /See:/ 'targetPoolsAggregatedList' smart constructor.
-data TargetPoolsAggregatedList = TargetPoolsAggregatedList
+data TargetPoolsAggregatedList = TargetPoolsAggregatedList'
     { _tpalProject    :: !Text
     , _tpalFilter     :: !(Maybe Text)
     , _tpalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ targetPoolsAggregatedList
     :: Text -- ^ 'tpalProject'
     -> TargetPoolsAggregatedList
 targetPoolsAggregatedList pTpalProject_ =
-    TargetPoolsAggregatedList
+    TargetPoolsAggregatedList'
     { _tpalProject = pTpalProject_
     , _tpalFilter = Nothing
     , _tpalPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest TargetPoolsAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetPoolsAggregatedList{..}
+        requestClient TargetPoolsAggregatedList'{..}
           = go _tpalProject _tpalFilter _tpalPageToken
               (Just _tpalMaxResults)
               (Just AltJSON)

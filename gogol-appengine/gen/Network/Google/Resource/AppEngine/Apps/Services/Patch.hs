@@ -74,7 +74,7 @@ type AppsServicesPatchResource =
 -- | Updates the configuration of the specified service.
 --
 -- /See:/ 'appsServicesPatch' smart constructor.
-data AppsServicesPatch = AppsServicesPatch
+data AppsServicesPatch = AppsServicesPatch'
     { _aspXgafv          :: !(Maybe Text)
     , _aspUploadProtocol :: !(Maybe Text)
     , _aspPp             :: !Bool
@@ -122,7 +122,7 @@ appsServicesPatch
     -> Text -- ^ 'aspServicesId'
     -> AppsServicesPatch
 appsServicesPatch pAspPayload_ pAspAppsId_ pAspServicesId_ =
-    AppsServicesPatch
+    AppsServicesPatch'
     { _aspXgafv = Nothing
     , _aspUploadProtocol = Nothing
     , _aspPp = True
@@ -206,7 +206,7 @@ instance GoogleRequest AppsServicesPatch where
         type Rs AppsServicesPatch = Operation
         type Scopes AppsServicesPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesPatch{..}
+        requestClient AppsServicesPatch'{..}
           = go _aspAppsId _aspServicesId _aspXgafv
               _aspUploadProtocol
               (Just _aspPp)

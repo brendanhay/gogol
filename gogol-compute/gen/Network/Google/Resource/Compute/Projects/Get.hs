@@ -51,7 +51,7 @@ type ProjectsGetResource =
 -- | Returns the specified Project resource.
 --
 -- /See:/ 'projectsGet' smart constructor.
-newtype ProjectsGet = ProjectsGet
+newtype ProjectsGet = ProjectsGet'
     { _pgProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
 projectsGet pPgProject_ =
-    ProjectsGet
+    ProjectsGet'
     { _pgProject = pPgProject_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest ProjectsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ProjectsGet{..}
+        requestClient ProjectsGet'{..}
           = go _pgProject (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)

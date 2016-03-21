@@ -75,7 +75,7 @@ type BeaconsDiagnosticsListResource =
 -- using the beacon name \`beacons\/-\`.
 --
 -- /See:/ 'beaconsDiagnosticsList' smart constructor.
-data BeaconsDiagnosticsList = BeaconsDiagnosticsList
+data BeaconsDiagnosticsList = BeaconsDiagnosticsList'
     { _bdlXgafv          :: !(Maybe Text)
     , _bdlUploadProtocol :: !(Maybe Text)
     , _bdlPp             :: !Bool
@@ -118,7 +118,7 @@ beaconsDiagnosticsList
     :: Text -- ^ 'bdlBeaconName'
     -> BeaconsDiagnosticsList
 beaconsDiagnosticsList pBdlBeaconName_ =
-    BeaconsDiagnosticsList
+    BeaconsDiagnosticsList'
     { _bdlXgafv = Nothing
     , _bdlUploadProtocol = Nothing
     , _bdlPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest BeaconsDiagnosticsList where
         type Rs BeaconsDiagnosticsList =
              ListDiagnosticsResponse
         type Scopes BeaconsDiagnosticsList = '[]
-        requestClient BeaconsDiagnosticsList{..}
+        requestClient BeaconsDiagnosticsList'{..}
           = go _bdlBeaconName _bdlXgafv _bdlUploadProtocol
               (Just _bdlPp)
               _bdlAccessToken

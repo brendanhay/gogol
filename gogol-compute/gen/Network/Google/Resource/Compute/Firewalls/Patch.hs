@@ -59,7 +59,7 @@ type FirewallsPatchResource =
 -- request. This method supports patch semantics.
 --
 -- /See:/ 'firewallsPatch' smart constructor.
-data FirewallsPatch = FirewallsPatch
+data FirewallsPatch = FirewallsPatch'
     { _fpProject  :: !Text
     , _fpPayload  :: !Firewall
     , _fpFirewall :: !Text
@@ -80,7 +80,7 @@ firewallsPatch
     -> Text -- ^ 'fpFirewall'
     -> FirewallsPatch
 firewallsPatch pFpProject_ pFpPayload_ pFpFirewall_ =
-    FirewallsPatch
+    FirewallsPatch'
     { _fpProject = pFpProject_
     , _fpPayload = pFpPayload_
     , _fpFirewall = pFpFirewall_
@@ -106,7 +106,7 @@ instance GoogleRequest FirewallsPatch where
         type Scopes FirewallsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient FirewallsPatch{..}
+        requestClient FirewallsPatch'{..}
           = go _fpProject _fpFirewall (Just AltJSON) _fpPayload
               computeService
           where go

@@ -81,7 +81,7 @@ type VariantsMergeResource =
 -- discarded.
 --
 -- /See:/ 'variantsMerge' smart constructor.
-data VariantsMerge = VariantsMerge
+data VariantsMerge = VariantsMerge'
     { _vmXgafv          :: !(Maybe Text)
     , _vmUploadProtocol :: !(Maybe Text)
     , _vmPp             :: !Bool
@@ -115,7 +115,7 @@ variantsMerge
     :: MergeVariantsRequest -- ^ 'vmPayload'
     -> VariantsMerge
 variantsMerge pVmPayload_ =
-    VariantsMerge
+    VariantsMerge'
     { _vmXgafv = Nothing
     , _vmUploadProtocol = Nothing
     , _vmPp = True
@@ -172,7 +172,7 @@ instance GoogleRequest VariantsMerge where
         type Scopes VariantsMerge =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantsMerge{..}
+        requestClient VariantsMerge'{..}
           = go _vmXgafv _vmUploadProtocol (Just _vmPp)
               _vmAccessToken
               _vmUploadType

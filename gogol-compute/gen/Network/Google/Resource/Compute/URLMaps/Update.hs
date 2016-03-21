@@ -57,7 +57,7 @@ type URLMapsUpdateResource =
 -- | Updates the entire content of the UrlMap resource.
 --
 -- /See:/ 'urlMapsUpdate' smart constructor.
-data URLMapsUpdate = URLMapsUpdate
+data URLMapsUpdate = URLMapsUpdate'
     { _umuURLMap  :: !Text
     , _umuProject :: !Text
     , _umuPayload :: !URLMap
@@ -78,7 +78,7 @@ urlMapsUpdate
     -> URLMap -- ^ 'umuPayload'
     -> URLMapsUpdate
 urlMapsUpdate pUmuURLMap_ pUmuProject_ pUmuPayload_ =
-    URLMapsUpdate
+    URLMapsUpdate'
     { _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
     , _umuPayload = pUmuPayload_
@@ -104,7 +104,7 @@ instance GoogleRequest URLMapsUpdate where
         type Scopes URLMapsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient URLMapsUpdate{..}
+        requestClient URLMapsUpdate'{..}
           = go _umuProject _umuURLMap (Just AltJSON)
               _umuPayload
               computeService

@@ -57,7 +57,7 @@ type InventoryItemsGetResource =
 -- | Gets one inventory item by ID.
 --
 -- /See:/ 'inventoryItemsGet' smart constructor.
-data InventoryItemsGet = InventoryItemsGet
+data InventoryItemsGet = InventoryItemsGet'
     { _iigProFileId :: !(Textual Int64)
     , _iigId        :: !(Textual Int64)
     , _iigProjectId :: !(Textual Int64)
@@ -78,7 +78,7 @@ inventoryItemsGet
     -> Int64 -- ^ 'iigProjectId'
     -> InventoryItemsGet
 inventoryItemsGet pIigProFileId_ pIigId_ pIigProjectId_ =
-    InventoryItemsGet
+    InventoryItemsGet'
     { _iigProFileId = _Coerce # pIigProFileId_
     , _iigId = _Coerce # pIigId_
     , _iigProjectId = _Coerce # pIigProjectId_
@@ -105,7 +105,7 @@ instance GoogleRequest InventoryItemsGet where
         type Rs InventoryItemsGet = InventoryItem
         type Scopes InventoryItemsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient InventoryItemsGet{..}
+        requestClient InventoryItemsGet'{..}
           = go _iigProFileId _iigProjectId _iigId
               (Just AltJSON)
               dFAReportingService

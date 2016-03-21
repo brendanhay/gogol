@@ -58,7 +58,7 @@ type AccounttaxListResource =
 -- account.
 --
 -- /See:/ 'accounttaxList' smart constructor.
-data AccounttaxList = AccounttaxList
+data AccounttaxList = AccounttaxList'
     { _allMerchantId :: !(Textual Word64)
     , _allPageToken  :: !(Maybe Text)
     , _allMaxResults :: !(Maybe (Textual Word32))
@@ -77,7 +77,7 @@ accounttaxList
     :: Word64 -- ^ 'allMerchantId'
     -> AccounttaxList
 accounttaxList pAllMerchantId_ =
-    AccounttaxList
+    AccounttaxList'
     { _allMerchantId = _Coerce # pAllMerchantId_
     , _allPageToken = Nothing
     , _allMaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest AccounttaxList where
         type Rs AccounttaxList = AccounttaxListResponse
         type Scopes AccounttaxList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccounttaxList{..}
+        requestClient AccounttaxList'{..}
           = go _allMerchantId _allPageToken _allMaxResults
               (Just AltJSON)
               shoppingContentService

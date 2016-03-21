@@ -56,7 +56,7 @@ type AccountsContainersTriggersListResource =
 -- | Lists all GTM Triggers of a Container.
 --
 -- /See:/ 'accountsContainersTriggersList' smart constructor.
-data AccountsContainersTriggersList = AccountsContainersTriggersList
+data AccountsContainersTriggersList = AccountsContainersTriggersList'
     { _actlcContainerId :: !Text
     , _actlcAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsContainersTriggersList
     -> Text -- ^ 'actlcAccountId'
     -> AccountsContainersTriggersList
 accountsContainersTriggersList pActlcContainerId_ pActlcAccountId_ =
-    AccountsContainersTriggersList
+    AccountsContainersTriggersList'
     { _actlcContainerId = pActlcContainerId_
     , _actlcAccountId = pActlcAccountId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest AccountsContainersTriggersList
         type Scopes AccountsContainersTriggersList =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersTriggersList{..}
+        requestClient AccountsContainersTriggersList'{..}
           = go _actlcAccountId _actlcContainerId (Just AltJSON)
               tagManagerService
           where go

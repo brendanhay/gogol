@@ -55,7 +55,7 @@ type BackendServicesDeleteResource =
 -- | Deletes the specified BackendService resource.
 --
 -- /See:/ 'backendServicesDelete' smart constructor.
-data BackendServicesDelete = BackendServicesDelete
+data BackendServicesDelete = BackendServicesDelete'
     { _bsdProject        :: !Text
     , _bsdBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ backendServicesDelete
     -> Text -- ^ 'bsdBackendService'
     -> BackendServicesDelete
 backendServicesDelete pBsdProject_ pBsdBackendService_ =
-    BackendServicesDelete
+    BackendServicesDelete'
     { _bsdProject = pBsdProject_
     , _bsdBackendService = pBsdBackendService_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest BackendServicesDelete where
         type Scopes BackendServicesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient BackendServicesDelete{..}
+        requestClient BackendServicesDelete'{..}
           = go _bsdProject _bsdBackendService (Just AltJSON)
               computeService
           where go

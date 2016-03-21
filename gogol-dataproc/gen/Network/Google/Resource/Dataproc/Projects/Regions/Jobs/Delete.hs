@@ -73,7 +73,7 @@ type ProjectsRegionsJobsDeleteResource =
 -- fails, and the response returns \`FAILED_PRECONDITION\`.
 --
 -- /See:/ 'projectsRegionsJobsDelete' smart constructor.
-data ProjectsRegionsJobsDelete = ProjectsRegionsJobsDelete
+data ProjectsRegionsJobsDelete = ProjectsRegionsJobsDelete'
     { _prjdXgafv          :: !(Maybe Text)
     , _prjdJobId          :: !Text
     , _prjdUploadProtocol :: !(Maybe Text)
@@ -115,7 +115,7 @@ projectsRegionsJobsDelete
     -> Text -- ^ 'prjdProjectId'
     -> ProjectsRegionsJobsDelete
 projectsRegionsJobsDelete pPrjdJobId_ pPrjdRegion_ pPrjdProjectId_ =
-    ProjectsRegionsJobsDelete
+    ProjectsRegionsJobsDelete'
     { _prjdXgafv = Nothing
     , _prjdJobId = pPrjdJobId_
     , _prjdUploadProtocol = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest ProjectsRegionsJobsDelete
         type Rs ProjectsRegionsJobsDelete = Empty
         type Scopes ProjectsRegionsJobsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsJobsDelete{..}
+        requestClient ProjectsRegionsJobsDelete'{..}
           = go _prjdProjectId _prjdRegion _prjdJobId _prjdXgafv
               _prjdUploadProtocol
               (Just _prjdPp)

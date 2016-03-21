@@ -73,7 +73,7 @@ type ProjectsListResource =
 -- Projects do not necessarily appear at the end of the list.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+data ProjectsList = ProjectsList'
     { _plXgafv          :: !(Maybe Text)
     , _plUploadProtocol :: !(Maybe Text)
     , _plPp             :: !Bool
@@ -112,7 +112,7 @@ data ProjectsList = ProjectsList
 projectsList
     :: ProjectsList
 projectsList =
-    ProjectsList
+    ProjectsList'
     { _plXgafv = Nothing
     , _plUploadProtocol = Nothing
     , _plPp = True
@@ -194,7 +194,7 @@ instance GoogleRequest ProjectsList where
         type Scopes ProjectsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient ProjectsList{..}
+        requestClient ProjectsList'{..}
           = go _plXgafv _plUploadProtocol (Just _plPp)
               _plAccessToken
               _plUploadType

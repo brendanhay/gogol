@@ -65,7 +65,7 @@ type UsersDraftsCreateResource =
 -- | Creates a new draft with the DRAFT label.
 --
 -- /See:/ 'usersDraftsCreate' smart constructor.
-data UsersDraftsCreate = UsersDraftsCreate
+data UsersDraftsCreate = UsersDraftsCreate'
     { _udcPayload :: !Draft
     , _udcUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -81,7 +81,7 @@ usersDraftsCreate
     :: Draft -- ^ 'udcPayload'
     -> UsersDraftsCreate
 usersDraftsCreate pUdcPayload_ =
-    UsersDraftsCreate
+    UsersDraftsCreate'
     { _udcPayload = pUdcPayload_
     , _udcUserId = "me"
     }
@@ -103,7 +103,7 @@ instance GoogleRequest UsersDraftsCreate where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersDraftsCreate{..}
+        requestClient UsersDraftsCreate'{..}
           = go _udcUserId (Just AltJSON) _udcPayload
               gmailService
           where go :<|> _
@@ -117,7 +117,7 @@ instance GoogleRequest
         type Scopes (MediaUpload UsersDraftsCreate) =
              Scopes UsersDraftsCreate
         requestClient
-          (MediaUpload UsersDraftsCreate{..} body)
+          (MediaUpload UsersDraftsCreate'{..} body)
           = go _udcUserId (Just AltJSON) (Just AltMedia)
               _udcPayload
               body

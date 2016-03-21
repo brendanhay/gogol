@@ -61,7 +61,7 @@ type TurnBasedMatchesFinishResource =
 -- call to Finish, and can pass in the final match state.
 --
 -- /See:/ 'turnBasedMatchesFinish' smart constructor.
-data TurnBasedMatchesFinish = TurnBasedMatchesFinish
+data TurnBasedMatchesFinish = TurnBasedMatchesFinish'
     { _tbmfPayload  :: !TurnBasedMatchResults
     , _tbmfLanguage :: !(Maybe Text)
     , _tbmfMatchId  :: !Text
@@ -81,7 +81,7 @@ turnBasedMatchesFinish
     -> Text -- ^ 'tbmfMatchId'
     -> TurnBasedMatchesFinish
 turnBasedMatchesFinish pTbmfPayload_ pTbmfMatchId_ =
-    TurnBasedMatchesFinish
+    TurnBasedMatchesFinish'
     { _tbmfPayload = pTbmfPayload_
     , _tbmfLanguage = Nothing
     , _tbmfMatchId = pTbmfMatchId_
@@ -107,7 +107,7 @@ instance GoogleRequest TurnBasedMatchesFinish where
         type Scopes TurnBasedMatchesFinish =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesFinish{..}
+        requestClient TurnBasedMatchesFinish'{..}
           = go _tbmfMatchId _tbmfLanguage (Just AltJSON)
               _tbmfPayload
               gamesService

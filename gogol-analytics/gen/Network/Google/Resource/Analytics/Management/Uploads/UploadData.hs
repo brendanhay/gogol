@@ -75,7 +75,7 @@ type ManagementUploadsUploadDataResource =
 -- | Upload data for a custom data source.
 --
 -- /See:/ 'managementUploadsUploadData' smart constructor.
-data ManagementUploadsUploadData = ManagementUploadsUploadData
+data ManagementUploadsUploadData = ManagementUploadsUploadData'
     { _muudWebPropertyId      :: !Text
     , _muudCustomDataSourceId :: !Text
     , _muudAccountId          :: !Text
@@ -96,7 +96,7 @@ managementUploadsUploadData
     -> Text -- ^ 'muudAccountId'
     -> ManagementUploadsUploadData
 managementUploadsUploadData pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
-    ManagementUploadsUploadData
+    ManagementUploadsUploadData'
     { _muudWebPropertyId = pMuudWebPropertyId_
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
     , _muudAccountId = pMuudAccountId_
@@ -126,7 +126,7 @@ instance GoogleRequest ManagementUploadsUploadData
         type Scopes ManagementUploadsUploadData =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementUploadsUploadData{..}
+        requestClient ManagementUploadsUploadData'{..}
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)
@@ -143,7 +143,7 @@ instance GoogleRequest
         type Scopes (MediaUpload ManagementUploadsUploadData)
              = Scopes ManagementUploadsUploadData
         requestClient
-          (MediaUpload ManagementUploadsUploadData{..} body)
+          (MediaUpload ManagementUploadsUploadData'{..} body)
           = go _muudAccountId _muudWebPropertyId
               _muudCustomDataSourceId
               (Just AltJSON)

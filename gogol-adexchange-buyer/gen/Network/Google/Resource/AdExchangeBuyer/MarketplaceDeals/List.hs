@@ -53,7 +53,7 @@ type MarketplaceDealsListResource =
 -- | List all the deals for a given proposal
 --
 -- /See:/ 'marketplaceDealsList' smart constructor.
-newtype MarketplaceDealsList = MarketplaceDealsList
+newtype MarketplaceDealsList = MarketplaceDealsList'
     { _mdlProposalId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ marketplaceDealsList
     :: Text -- ^ 'mdlProposalId'
     -> MarketplaceDealsList
 marketplaceDealsList pMdlProposalId_ =
-    MarketplaceDealsList
+    MarketplaceDealsList'
     { _mdlProposalId = pMdlProposalId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest MarketplaceDealsList where
         type Rs MarketplaceDealsList = GetOrderDealsResponse
         type Scopes MarketplaceDealsList =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient MarketplaceDealsList{..}
+        requestClient MarketplaceDealsList'{..}
           = go _mdlProposalId (Just AltJSON)
               adExchangeBuyerService
           where go

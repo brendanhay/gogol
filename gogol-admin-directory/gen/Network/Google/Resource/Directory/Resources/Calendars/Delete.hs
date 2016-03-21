@@ -56,7 +56,7 @@ type ResourcesCalendarsDeleteResource =
 -- | Deletes a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsDelete' smart constructor.
-data ResourcesCalendarsDelete = ResourcesCalendarsDelete
+data ResourcesCalendarsDelete = ResourcesCalendarsDelete'
     { _rcdCustomer           :: !Text
     , _rcdCalendarResourceId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ resourcesCalendarsDelete
     -> Text -- ^ 'rcdCalendarResourceId'
     -> ResourcesCalendarsDelete
 resourcesCalendarsDelete pRcdCustomer_ pRcdCalendarResourceId_ =
-    ResourcesCalendarsDelete
+    ResourcesCalendarsDelete'
     { _rcdCustomer = pRcdCustomer_
     , _rcdCalendarResourceId = pRcdCalendarResourceId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest ResourcesCalendarsDelete where
         type Rs ResourcesCalendarsDelete = ()
         type Scopes ResourcesCalendarsDelete =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
-        requestClient ResourcesCalendarsDelete{..}
+        requestClient ResourcesCalendarsDelete'{..}
           = go _rcdCustomer _rcdCalendarResourceId
               (Just AltJSON)
               directoryService

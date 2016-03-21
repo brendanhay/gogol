@@ -57,7 +57,7 @@ type AutoscalersDeleteResource =
 -- | Deletes the specified autoscaler.
 --
 -- /See:/ 'autoscalersDelete' smart constructor.
-data AutoscalersDelete = AutoscalersDelete
+data AutoscalersDelete = AutoscalersDelete'
     { _adProject    :: !Text
     , _adZone       :: !Text
     , _adAutoscaler :: !Text
@@ -78,7 +78,7 @@ autoscalersDelete
     -> Text -- ^ 'adAutoscaler'
     -> AutoscalersDelete
 autoscalersDelete pAdProject_ pAdZone_ pAdAutoscaler_ =
-    AutoscalersDelete
+    AutoscalersDelete'
     { _adProject = pAdProject_
     , _adZone = pAdZone_
     , _adAutoscaler = pAdAutoscaler_
@@ -103,7 +103,7 @@ instance GoogleRequest AutoscalersDelete where
         type Scopes AutoscalersDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient AutoscalersDelete{..}
+        requestClient AutoscalersDelete'{..}
           = go _adProject _adZone _adAutoscaler (Just AltJSON)
               computeService
           where go

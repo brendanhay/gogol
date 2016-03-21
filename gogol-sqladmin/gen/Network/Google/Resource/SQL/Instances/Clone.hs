@@ -60,7 +60,7 @@ type InstancesCloneResource =
 -- is not ready for Second Generation instances yet.
 --
 -- /See:/ 'instancesClone' smart constructor.
-data InstancesClone = InstancesClone
+data InstancesClone = InstancesClone'
     { _icProject  :: !Text
     , _icPayload  :: !InstancesCloneRequest
     , _icInstance :: !Text
@@ -81,7 +81,7 @@ instancesClone
     -> Text -- ^ 'icInstance'
     -> InstancesClone
 instancesClone pIcProject_ pIcPayload_ pIcInstance_ =
-    InstancesClone
+    InstancesClone'
     { _icProject = pIcProject_
     , _icPayload = pIcPayload_
     , _icInstance = pIcInstance_
@@ -108,7 +108,7 @@ instance GoogleRequest InstancesClone where
         type Scopes InstancesClone =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesClone{..}
+        requestClient InstancesClone'{..}
           = go _icProject _icInstance (Just AltJSON) _icPayload
               sQLAdminService
           where go

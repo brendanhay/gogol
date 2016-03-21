@@ -55,7 +55,7 @@ type AccountsMetadataDimensionsListResource =
 -- account.
 --
 -- /See:/ 'accountsMetadataDimensionsList' smart constructor.
-newtype AccountsMetadataDimensionsList = AccountsMetadataDimensionsList
+newtype AccountsMetadataDimensionsList = AccountsMetadataDimensionsList'
     { _amdlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ accountsMetadataDimensionsList
     :: Text -- ^ 'amdlAccountId'
     -> AccountsMetadataDimensionsList
 accountsMetadataDimensionsList pAmdlAccountId_ =
-    AccountsMetadataDimensionsList
+    AccountsMetadataDimensionsList'
     { _amdlAccountId = pAmdlAccountId_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest AccountsMetadataDimensionsList
         type Scopes AccountsMetadataDimensionsList =
              '["https://www.googleapis.com/auth/adexchange.seller",
                "https://www.googleapis.com/auth/adexchange.seller.readonly"]
-        requestClient AccountsMetadataDimensionsList{..}
+        requestClient AccountsMetadataDimensionsList'{..}
           = go _amdlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

@@ -63,7 +63,7 @@ type VolumesAssociatedListResource =
 -- | Return a list of associated books.
 --
 -- /See:/ 'volumesAssociatedList' smart constructor.
-data VolumesAssociatedList = VolumesAssociatedList
+data VolumesAssociatedList = VolumesAssociatedList'
     { _valLocale                   :: !(Maybe Text)
     , _valMaxAllowedMaturityRating :: !(Maybe VolumesAssociatedListMaxAllowedMaturityRating)
     , _valVolumeId                 :: !Text
@@ -88,7 +88,7 @@ volumesAssociatedList
     :: Text -- ^ 'valVolumeId'
     -> VolumesAssociatedList
 volumesAssociatedList pValVolumeId_ =
-    VolumesAssociatedList
+    VolumesAssociatedList'
     { _valLocale = Nothing
     , _valMaxAllowedMaturityRating = Nothing
     , _valVolumeId = pValVolumeId_
@@ -129,7 +129,7 @@ instance GoogleRequest VolumesAssociatedList where
         type Rs VolumesAssociatedList = Volumes
         type Scopes VolumesAssociatedList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesAssociatedList{..}
+        requestClient VolumesAssociatedList'{..}
           = go _valVolumeId _valLocale
               _valMaxAllowedMaturityRating
               _valSource

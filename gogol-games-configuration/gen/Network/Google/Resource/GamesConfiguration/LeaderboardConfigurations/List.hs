@@ -57,7 +57,7 @@ type LeaderboardConfigurationsListResource =
 -- | Returns a list of the leaderboard configurations in this application.
 --
 -- /See:/ 'leaderboardConfigurationsList' smart constructor.
-data LeaderboardConfigurationsList = LeaderboardConfigurationsList
+data LeaderboardConfigurationsList = LeaderboardConfigurationsList'
     { _lclApplicationId :: !Text
     , _lclPageToken     :: !(Maybe Text)
     , _lclMaxResults    :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ leaderboardConfigurationsList
     :: Text -- ^ 'lclApplicationId'
     -> LeaderboardConfigurationsList
 leaderboardConfigurationsList pLclApplicationId_ =
-    LeaderboardConfigurationsList
+    LeaderboardConfigurationsList'
     { _lclApplicationId = pLclApplicationId_
     , _lclPageToken = Nothing
     , _lclMaxResults = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest LeaderboardConfigurationsList
              LeaderboardConfigurationListResponse
         type Scopes LeaderboardConfigurationsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient LeaderboardConfigurationsList{..}
+        requestClient LeaderboardConfigurationsList'{..}
           = go _lclApplicationId _lclPageToken _lclMaxResults
               (Just AltJSON)
               gamesConfigurationService

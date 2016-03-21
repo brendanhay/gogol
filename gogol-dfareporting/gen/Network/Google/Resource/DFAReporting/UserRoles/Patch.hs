@@ -56,7 +56,7 @@ type UserRolesPatchResource =
 -- | Updates an existing user role. This method supports patch semantics.
 --
 -- /See:/ 'userRolesPatch' smart constructor.
-data UserRolesPatch = UserRolesPatch
+data UserRolesPatch = UserRolesPatch'
     { _urpProFileId :: !(Textual Int64)
     , _urpPayload   :: !UserRole
     , _urpId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ userRolesPatch
     -> Int64 -- ^ 'urpId'
     -> UserRolesPatch
 userRolesPatch pUrpProFileId_ pUrpPayload_ pUrpId_ =
-    UserRolesPatch
+    UserRolesPatch'
     { _urpProFileId = _Coerce # pUrpProFileId_
     , _urpPayload = pUrpPayload_
     , _urpId = _Coerce # pUrpId_
@@ -103,7 +103,7 @@ instance GoogleRequest UserRolesPatch where
         type Rs UserRolesPatch = UserRole
         type Scopes UserRolesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolesPatch{..}
+        requestClient UserRolesPatch'{..}
           = go _urpProFileId (Just _urpId) (Just AltJSON)
               _urpPayload
               dFAReportingService

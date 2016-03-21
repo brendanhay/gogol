@@ -59,7 +59,7 @@ type PawsNotifySpectrumUseResource =
 -- require notification, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsNotifySpectrumUse' smart constructor.
-newtype PawsNotifySpectrumUse = PawsNotifySpectrumUse
+newtype PawsNotifySpectrumUse = PawsNotifySpectrumUse'
     { _pnsuPayload :: PawsNotifySpectrumUseRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -72,7 +72,7 @@ pawsNotifySpectrumUse
     :: PawsNotifySpectrumUseRequest -- ^ 'pnsuPayload'
     -> PawsNotifySpectrumUse
 pawsNotifySpectrumUse pPnsuPayload_ =
-    PawsNotifySpectrumUse
+    PawsNotifySpectrumUse'
     { _pnsuPayload = pPnsuPayload_
     }
 
@@ -85,7 +85,7 @@ instance GoogleRequest PawsNotifySpectrumUse where
         type Rs PawsNotifySpectrumUse =
              PawsNotifySpectrumUseResponse
         type Scopes PawsNotifySpectrumUse = '[]
-        requestClient PawsNotifySpectrumUse{..}
+        requestClient PawsNotifySpectrumUse'{..}
           = go (Just AltJSON) _pnsuPayload spectrumService
           where go
                   = buildClient

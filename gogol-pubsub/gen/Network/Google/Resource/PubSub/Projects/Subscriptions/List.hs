@@ -69,7 +69,7 @@ type ProjectsSubscriptionsListResource =
 -- | Lists matching subscriptions.
 --
 -- /See:/ 'projectsSubscriptionsList' smart constructor.
-data ProjectsSubscriptionsList = ProjectsSubscriptionsList
+data ProjectsSubscriptionsList = ProjectsSubscriptionsList'
     { _pslXgafv          :: !(Maybe Text)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslProject        :: !Text
@@ -109,7 +109,7 @@ projectsSubscriptionsList
     :: Text -- ^ 'pslProject'
     -> ProjectsSubscriptionsList
 projectsSubscriptionsList pPslProject_ =
-    ProjectsSubscriptionsList
+    ProjectsSubscriptionsList'
     { _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslProject = pPslProject_
@@ -184,7 +184,7 @@ instance GoogleRequest ProjectsSubscriptionsList
         type Scopes ProjectsSubscriptionsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsList{..}
+        requestClient ProjectsSubscriptionsList'{..}
           = go _pslProject _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken

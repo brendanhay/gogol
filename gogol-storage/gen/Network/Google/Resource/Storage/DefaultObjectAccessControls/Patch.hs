@@ -59,7 +59,7 @@ type DefaultObjectAccessControlsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'defaultObjectAccessControlsPatch' smart constructor.
-data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch
+data DefaultObjectAccessControlsPatch = DefaultObjectAccessControlsPatch'
     { _doacpBucket  :: !Text
     , _doacpPayload :: !ObjectAccessControl
     , _doacpEntity  :: !Text
@@ -80,7 +80,7 @@ defaultObjectAccessControlsPatch
     -> Text -- ^ 'doacpEntity'
     -> DefaultObjectAccessControlsPatch
 defaultObjectAccessControlsPatch pDoacpBucket_ pDoacpPayload_ pDoacpEntity_ =
-    DefaultObjectAccessControlsPatch
+    DefaultObjectAccessControlsPatch'
     { _doacpBucket = pDoacpBucket_
     , _doacpPayload = pDoacpPayload_
     , _doacpEntity = pDoacpEntity_
@@ -110,7 +110,7 @@ instance GoogleRequest
         type Scopes DefaultObjectAccessControlsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient DefaultObjectAccessControlsPatch{..}
+        requestClient DefaultObjectAccessControlsPatch'{..}
           = go _doacpBucket _doacpEntity (Just AltJSON)
               _doacpPayload
               storageService

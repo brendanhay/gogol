@@ -54,7 +54,7 @@ type RelyingPartySignupNewUserResource =
 -- | Signup new user.
 --
 -- /See:/ 'relyingPartySignupNewUser' smart constructor.
-newtype RelyingPartySignupNewUser = RelyingPartySignupNewUser
+newtype RelyingPartySignupNewUser = RelyingPartySignupNewUser'
     { _rpsnuPayload :: IdentitytoolkitRelyingPartySignupNewUserRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartySignupNewUser
     :: IdentitytoolkitRelyingPartySignupNewUserRequest -- ^ 'rpsnuPayload'
     -> RelyingPartySignupNewUser
 relyingPartySignupNewUser pRpsnuPayload_ =
-    RelyingPartySignupNewUser
+    RelyingPartySignupNewUser'
     { _rpsnuPayload = pRpsnuPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartySignupNewUser
         type Rs RelyingPartySignupNewUser =
              SignupNewUserResponse
         type Scopes RelyingPartySignupNewUser = '[]
-        requestClient RelyingPartySignupNewUser{..}
+        requestClient RelyingPartySignupNewUser'{..}
           = go (Just AltJSON) _rpsnuPayload
               identityToolkitService
           where go

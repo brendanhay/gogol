@@ -60,7 +60,7 @@ type ChromeosDevicesGetResource =
 -- | Retrieve Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesGet' smart constructor.
-data ChromeosDevicesGet = ChromeosDevicesGet
+data ChromeosDevicesGet = ChromeosDevicesGet'
     { _cdgCustomerId :: !Text
     , _cdgDeviceId   :: !Text
     , _cdgProjection :: !(Maybe ChromeosDevicesGetProjection)
@@ -80,7 +80,7 @@ chromeosDevicesGet
     -> Text -- ^ 'cdgDeviceId'
     -> ChromeosDevicesGet
 chromeosDevicesGet pCdgCustomerId_ pCdgDeviceId_ =
-    ChromeosDevicesGet
+    ChromeosDevicesGet'
     { _cdgCustomerId = pCdgCustomerId_
     , _cdgDeviceId = pCdgDeviceId_
     , _cdgProjection = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest ChromeosDevicesGet where
         type Scopes ChromeosDevicesGet =
              '["https://www.googleapis.com/auth/admin.directory.device.chromeos",
                "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"]
-        requestClient ChromeosDevicesGet{..}
+        requestClient ChromeosDevicesGet'{..}
           = go _cdgCustomerId _cdgDeviceId _cdgProjection
               (Just AltJSON)
               directoryService

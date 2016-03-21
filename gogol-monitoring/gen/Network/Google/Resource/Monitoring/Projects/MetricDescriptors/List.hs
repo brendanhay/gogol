@@ -71,7 +71,7 @@ type ProjectsMetricDescriptorsListResource =
 -- | Lists metric descriptors that match a filter.
 --
 -- /See:/ 'projectsMetricDescriptorsList' smart constructor.
-data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList
+data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
     { _pmdlXgafv          :: !(Maybe Text)
     , _pmdlUploadProtocol :: !(Maybe Text)
     , _pmdlPp             :: !Bool
@@ -114,7 +114,7 @@ projectsMetricDescriptorsList
     :: Text -- ^ 'pmdlName'
     -> ProjectsMetricDescriptorsList
 projectsMetricDescriptorsList pPmdlName_ =
-    ProjectsMetricDescriptorsList
+    ProjectsMetricDescriptorsList'
     { _pmdlXgafv = Nothing
     , _pmdlUploadProtocol = Nothing
     , _pmdlPp = True
@@ -205,7 +205,7 @@ instance GoogleRequest ProjectsMetricDescriptorsList
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.read",
                "https://www.googleapis.com/auth/monitoring.write"]
-        requestClient ProjectsMetricDescriptorsList{..}
+        requestClient ProjectsMetricDescriptorsList'{..}
           = go _pmdlName _pmdlXgafv _pmdlUploadProtocol
               (Just _pmdlPp)
               _pmdlAccessToken

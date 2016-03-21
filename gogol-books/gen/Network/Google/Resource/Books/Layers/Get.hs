@@ -58,7 +58,7 @@ type LayersGetResource =
 -- | Gets the layer summary for a volume.
 --
 -- /See:/ 'layersGet' smart constructor.
-data LayersGet = LayersGet
+data LayersGet = LayersGet'
     { _lgContentVersion :: !(Maybe Text)
     , _lgVolumeId       :: !Text
     , _lgSource         :: !(Maybe Text)
@@ -81,7 +81,7 @@ layersGet
     -> Text -- ^ 'lgSummaryId'
     -> LayersGet
 layersGet pLgVolumeId_ pLgSummaryId_ =
-    LayersGet
+    LayersGet'
     { _lgContentVersion = Nothing
     , _lgVolumeId = pLgVolumeId_
     , _lgSource = Nothing
@@ -112,7 +112,7 @@ instance GoogleRequest LayersGet where
         type Rs LayersGet = Layersummary
         type Scopes LayersGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient LayersGet{..}
+        requestClient LayersGet'{..}
           = go _lgVolumeId _lgSummaryId _lgContentVersion
               _lgSource
               (Just AltJSON)

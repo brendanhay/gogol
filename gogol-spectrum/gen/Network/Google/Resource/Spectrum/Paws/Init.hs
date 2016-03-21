@@ -55,7 +55,7 @@ type PawsInitResource =
 -- database.
 --
 -- /See:/ 'pawsInit' smart constructor.
-newtype PawsInit = PawsInit
+newtype PawsInit = PawsInit'
     { _piPayload :: PawsInitRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ pawsInit
     :: PawsInitRequest -- ^ 'piPayload'
     -> PawsInit
 pawsInit pPiPayload_ =
-    PawsInit
+    PawsInit'
     { _piPayload = pPiPayload_
     }
 
@@ -80,7 +80,7 @@ piPayload
 instance GoogleRequest PawsInit where
         type Rs PawsInit = PawsInitResponse
         type Scopes PawsInit = '[]
-        requestClient PawsInit{..}
+        requestClient PawsInit'{..}
           = go (Just AltJSON) _piPayload spectrumService
           where go
                   = buildClient (Proxy :: Proxy PawsInitResource)

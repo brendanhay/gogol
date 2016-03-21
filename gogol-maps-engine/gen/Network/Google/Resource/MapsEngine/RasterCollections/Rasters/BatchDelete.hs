@@ -63,7 +63,7 @@ type RasterCollectionsRastersBatchDeleteResource =
 -- atomic.
 --
 -- /See:/ 'rasterCollectionsRastersBatchDelete' smart constructor.
-data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete
+data RasterCollectionsRastersBatchDelete = RasterCollectionsRastersBatchDelete'
     { _rcrbdPayload :: !RasterCollectionsRasterBatchDeleteRequest
     , _rcrbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ rasterCollectionsRastersBatchDelete
     -> Text -- ^ 'rcrbdId'
     -> RasterCollectionsRastersBatchDelete
 rasterCollectionsRastersBatchDelete pRcrbdPayload_ pRcrbdId_ =
-    RasterCollectionsRastersBatchDelete
+    RasterCollectionsRastersBatchDelete'
     { _rcrbdPayload = pRcrbdPayload_
     , _rcrbdId = pRcrbdId_
     }
@@ -100,7 +100,8 @@ instance GoogleRequest
              RasterCollectionsRastersBatchDeleteResponse
         type Scopes RasterCollectionsRastersBatchDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RasterCollectionsRastersBatchDelete{..}
+        requestClient
+          RasterCollectionsRastersBatchDelete'{..}
           = go _rcrbdId (Just AltJSON) _rcrbdPayload
               mapsEngineService
           where go

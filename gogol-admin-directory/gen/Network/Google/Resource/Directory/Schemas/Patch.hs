@@ -57,7 +57,7 @@ type SchemasPatchResource =
 -- | Update schema. This method supports patch semantics.
 --
 -- /See:/ 'schemasPatch' smart constructor.
-data SchemasPatch = SchemasPatch
+data SchemasPatch = SchemasPatch'
     { _spPayload    :: !Schema
     , _spCustomerId :: !Text
     , _spSchemaKey  :: !Text
@@ -78,7 +78,7 @@ schemasPatch
     -> Text -- ^ 'spSchemaKey'
     -> SchemasPatch
 schemasPatch pSpPayload_ pSpCustomerId_ pSpSchemaKey_ =
-    SchemasPatch
+    SchemasPatch'
     { _spPayload = pSpPayload_
     , _spCustomerId = pSpCustomerId_
     , _spSchemaKey = pSpSchemaKey_
@@ -103,7 +103,7 @@ instance GoogleRequest SchemasPatch where
         type Rs SchemasPatch = Schema
         type Scopes SchemasPatch =
              '["https://www.googleapis.com/auth/admin.directory.userschema"]
-        requestClient SchemasPatch{..}
+        requestClient SchemasPatch'{..}
           = go _spCustomerId _spSchemaKey (Just AltJSON)
               _spPayload
               directoryService

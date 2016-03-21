@@ -73,7 +73,7 @@ type ProjectsSubscriptionsDeleteResource =
 -- specified.
 --
 -- /See:/ 'projectsSubscriptionsDelete' smart constructor.
-data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete
+data ProjectsSubscriptionsDelete = ProjectsSubscriptionsDelete'
     { _psdXgafv          :: !(Maybe Text)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
@@ -107,7 +107,7 @@ projectsSubscriptionsDelete
     :: Text -- ^ 'psdSubscription'
     -> ProjectsSubscriptionsDelete
 projectsSubscriptionsDelete pPsdSubscription_ =
-    ProjectsSubscriptionsDelete
+    ProjectsSubscriptionsDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdPp = True
@@ -167,7 +167,7 @@ instance GoogleRequest ProjectsSubscriptionsDelete
         type Scopes ProjectsSubscriptionsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsDelete{..}
+        requestClient ProjectsSubscriptionsDelete'{..}
           = go _psdSubscription _psdXgafv _psdUploadProtocol
               (Just _psdPp)
               _psdAccessToken

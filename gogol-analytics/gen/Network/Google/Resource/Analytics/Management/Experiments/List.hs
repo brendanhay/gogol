@@ -63,7 +63,7 @@ type ManagementExperimentsListResource =
 -- | Lists experiments to which the user has access.
 --
 -- /See:/ 'managementExperimentsList' smart constructor.
-data ManagementExperimentsList = ManagementExperimentsList
+data ManagementExperimentsList = ManagementExperimentsList'
     { _melWebPropertyId :: !Text
     , _melProFileId     :: !Text
     , _melAccountId     :: !Text
@@ -90,7 +90,7 @@ managementExperimentsList
     -> Text -- ^ 'melAccountId'
     -> ManagementExperimentsList
 managementExperimentsList pMelWebPropertyId_ pMelProFileId_ pMelAccountId_ =
-    ManagementExperimentsList
+    ManagementExperimentsList'
     { _melWebPropertyId = pMelWebPropertyId_
     , _melProFileId = pMelProFileId_
     , _melAccountId = pMelAccountId_
@@ -136,7 +136,7 @@ instance GoogleRequest ManagementExperimentsList
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementExperimentsList{..}
+        requestClient ManagementExperimentsList'{..}
           = go _melAccountId _melWebPropertyId _melProFileId
               _melStartIndex
               _melMaxResults

@@ -61,7 +61,7 @@ type SnapshotsListResource =
 -- project.
 --
 -- /See:/ 'snapshotsList' smart constructor.
-data SnapshotsList = SnapshotsList
+data SnapshotsList = SnapshotsList'
     { _sProject    :: !Text
     , _sFilter     :: !(Maybe Text)
     , _sPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ snapshotsList
     :: Text -- ^ 'sProject'
     -> SnapshotsList
 snapshotsList pSProject_ =
-    SnapshotsList
+    SnapshotsList'
     { _sProject = pSProject_
     , _sFilter = Nothing
     , _sPageToken = Nothing
@@ -140,7 +140,7 @@ instance GoogleRequest SnapshotsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SnapshotsList{..}
+        requestClient SnapshotsList'{..}
           = go _sProject _sFilter _sPageToken
               (Just _sMaxResults)
               (Just AltJSON)

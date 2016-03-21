@@ -73,7 +73,7 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 -- processing was interrupted.
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline' smart constructor.
-data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline
+data ProjectsSubscriptionsModifyAckDeadline = ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv          :: !(Maybe Text)
     , _psmadUploadProtocol :: !(Maybe Text)
     , _psmadPp             :: !Bool
@@ -111,7 +111,7 @@ projectsSubscriptionsModifyAckDeadline
     -> Text -- ^ 'psmadSubscription'
     -> ProjectsSubscriptionsModifyAckDeadline
 projectsSubscriptionsModifyAckDeadline pPsmadPayload_ pPsmadSubscription_ =
-    ProjectsSubscriptionsModifyAckDeadline
+    ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadUploadProtocol = Nothing
     , _psmadPp = True
@@ -181,7 +181,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
         requestClient
-          ProjectsSubscriptionsModifyAckDeadline{..}
+          ProjectsSubscriptionsModifyAckDeadline'{..}
           = go _psmadSubscription _psmadXgafv
               _psmadUploadProtocol
               (Just _psmadPp)

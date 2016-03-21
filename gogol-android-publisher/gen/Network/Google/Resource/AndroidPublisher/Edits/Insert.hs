@@ -54,7 +54,7 @@ type EditsInsertResource =
 -- | Creates a new edit for an app, populated with the app\'s current state.
 --
 -- /See:/ 'editsInsert' smart constructor.
-data EditsInsert = EditsInsert
+data EditsInsert = EditsInsert'
     { _eiPackageName :: !Text
     , _eiPayload     :: !AppEdit
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ editsInsert
     -> AppEdit -- ^ 'eiPayload'
     -> EditsInsert
 editsInsert pEiPackageName_ pEiPayload_ =
-    EditsInsert
+    EditsInsert'
     { _eiPackageName = pEiPackageName_
     , _eiPayload = pEiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest EditsInsert where
         type Rs EditsInsert = AppEdit
         type Scopes EditsInsert =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsInsert{..}
+        requestClient EditsInsert'{..}
           = go _eiPackageName (Just AltJSON) _eiPayload
               androidPublisherService
           where go

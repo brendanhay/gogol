@@ -54,7 +54,7 @@ type PostalCodesGetResource =
 -- | Gets one postal code by ID.
 --
 -- /See:/ 'postalCodesGet' smart constructor.
-data PostalCodesGet = PostalCodesGet
+data PostalCodesGet = PostalCodesGet'
     { _pcgProFileId :: !(Textual Int64)
     , _pcgCode      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ postalCodesGet
     -> Text -- ^ 'pcgCode'
     -> PostalCodesGet
 postalCodesGet pPcgProFileId_ pPcgCode_ =
-    PostalCodesGet
+    PostalCodesGet'
     { _pcgProFileId = _Coerce # pPcgProFileId_
     , _pcgCode = pPcgCode_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest PostalCodesGet where
         type Rs PostalCodesGet = PostalCode
         type Scopes PostalCodesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PostalCodesGet{..}
+        requestClient PostalCodesGet'{..}
           = go _pcgProFileId _pcgCode (Just AltJSON)
               dFAReportingService
           where go

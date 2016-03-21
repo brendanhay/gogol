@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'resultFormattedResultsRuleResultsAdditionalURLBlocksItem' smart constructor.
-data ResultFormattedResultsRuleResultsAdditionalURLBlocksItem = ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
+data ResultFormattedResultsRuleResultsAdditionalURLBlocksItem = ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'
     { _rfrrraubiURLs   :: !(Maybe [ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem])
     , _rfrrraubiHeader :: !(Maybe PagespeedAPIFormatStringV2)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data ResultFormattedResultsRuleResultsAdditionalURLBlocksItem = ResultFormattedR
 resultFormattedResultsRuleResultsAdditionalURLBlocksItem
     :: ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
 resultFormattedResultsRuleResultsAdditionalURLBlocksItem =
-    ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
+    ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'
     { _rfrrraubiURLs = Nothing
     , _rfrrraubiHeader = Nothing
     }
@@ -64,14 +64,14 @@ instance FromJSON
           = withObject
               "ResultFormattedResultsRuleResultsAdditionalURLBlocksItem"
               (\ o ->
-                 ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
+                 ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'
                    <$> (o .:? "urls" .!= mempty) <*> (o .:? "header"))
 
 instance ToJSON
          ResultFormattedResultsRuleResultsAdditionalURLBlocksItem
          where
         toJSON
-          ResultFormattedResultsRuleResultsAdditionalURLBlocksItem{..}
+          ResultFormattedResultsRuleResultsAdditionalURLBlocksItem'{..}
           = object
               (catMaybes
                  [("urls" .=) <$> _rfrrraubiURLs,
@@ -79,7 +79,7 @@ instance ToJSON
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem' smart constructor.
-data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
+data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'
     { _pafsvaisiHeight :: !(Maybe (Textual Int32))
     , _pafsvaisiLeft   :: !(Maybe (Textual Int32))
     , _pafsvaisiWidth  :: !(Maybe (Textual Int32))
@@ -100,7 +100,7 @@ data PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem = PagespeedAPIFormatS
 pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
     :: PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
 pagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem =
-    PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
+    PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'
     { _pafsvaisiHeight = Nothing
     , _pafsvaisiLeft = Nothing
     , _pafsvaisiWidth = Nothing
@@ -141,7 +141,7 @@ instance FromJSON
           = withObject
               "PagespeedAPIFormatStringV2ArgsItemSecondaryRectsItem"
               (\ o ->
-                 PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
+                 PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'
                    <$>
                    (o .:? "height") <*> (o .:? "left") <*>
                      (o .:? "width")
@@ -151,7 +151,7 @@ instance ToJSON
          PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem
          where
         toJSON
-          PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem{..}
+          PagespeedAPIFormatStringV2ArgsItemSecondary_rectsItem'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _pafsvaisiHeight,
@@ -161,7 +161,7 @@ instance ToJSON
 
 --
 -- /See:/ 'pagespeedAPIImageV2' smart constructor.
-data PagespeedAPIImageV2 = PagespeedAPIImageV2
+data PagespeedAPIImageV2 = PagespeedAPIImageV2'
     { _paivHeight   :: !(Maybe (Textual Int32))
     , _paivData     :: !(Maybe (Textual Word8))
     , _paivMimeType :: !(Maybe Text)
@@ -188,7 +188,7 @@ data PagespeedAPIImageV2 = PagespeedAPIImageV2
 pagespeedAPIImageV2
     :: PagespeedAPIImageV2
 pagespeedAPIImageV2 =
-    PagespeedAPIImageV2
+    PagespeedAPIImageV2'
     { _paivHeight = Nothing
     , _paivData = Nothing
     , _paivMimeType = Nothing
@@ -234,7 +234,7 @@ instance FromJSON PagespeedAPIImageV2 where
         parseJSON
           = withObject "PagespeedAPIImageV2"
               (\ o ->
-                 PagespeedAPIImageV2 <$>
+                 PagespeedAPIImageV2' <$>
                    (o .:? "height") <*> (o .:? "data") <*>
                      (o .:? "mime_type")
                      <*> (o .:? "width")
@@ -242,7 +242,7 @@ instance FromJSON PagespeedAPIImageV2 where
                      <*> (o .:? "key"))
 
 instance ToJSON PagespeedAPIImageV2 where
-        toJSON PagespeedAPIImageV2{..}
+        toJSON PagespeedAPIImageV2'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _paivHeight,
@@ -254,7 +254,7 @@ instance ToJSON PagespeedAPIImageV2 where
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItemRectsItem' smart constructor.
-data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2ArgsItemRectsItem
+data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2ArgsItemRectsItem'
     { _pafsvairiHeight :: !(Maybe (Textual Int32))
     , _pafsvairiLeft   :: !(Maybe (Textual Int32))
     , _pafsvairiWidth  :: !(Maybe (Textual Int32))
@@ -275,7 +275,7 @@ data PagespeedAPIFormatStringV2ArgsItemRectsItem = PagespeedAPIFormatStringV2Arg
 pagespeedAPIFormatStringV2ArgsItemRectsItem
     :: PagespeedAPIFormatStringV2ArgsItemRectsItem
 pagespeedAPIFormatStringV2ArgsItemRectsItem =
-    PagespeedAPIFormatStringV2ArgsItemRectsItem
+    PagespeedAPIFormatStringV2ArgsItemRectsItem'
     { _pafsvairiHeight = Nothing
     , _pafsvairiLeft = Nothing
     , _pafsvairiWidth = Nothing
@@ -315,7 +315,7 @@ instance FromJSON
           = withObject
               "PagespeedAPIFormatStringV2ArgsItemRectsItem"
               (\ o ->
-                 PagespeedAPIFormatStringV2ArgsItemRectsItem <$>
+                 PagespeedAPIFormatStringV2ArgsItemRectsItem' <$>
                    (o .:? "height") <*> (o .:? "left") <*>
                      (o .:? "width")
                      <*> (o .:? "top"))
@@ -323,7 +323,7 @@ instance FromJSON
 instance ToJSON
          PagespeedAPIFormatStringV2ArgsItemRectsItem where
         toJSON
-          PagespeedAPIFormatStringV2ArgsItemRectsItem{..}
+          PagespeedAPIFormatStringV2ArgsItemRectsItem'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _pafsvairiHeight,
@@ -334,7 +334,7 @@ instance ToJSON
 -- | The version of PageSpeed used to generate these results.
 --
 -- /See:/ 'resultVersion' smart constructor.
-data ResultVersion = ResultVersion
+data ResultVersion = ResultVersion'
     { _rvMinor :: !(Maybe (Textual Int32))
     , _rvMajor :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -349,7 +349,7 @@ data ResultVersion = ResultVersion
 resultVersion
     :: ResultVersion
 resultVersion =
-    ResultVersion
+    ResultVersion'
     { _rvMinor = Nothing
     , _rvMajor = Nothing
     }
@@ -370,11 +370,11 @@ instance FromJSON ResultVersion where
         parseJSON
           = withObject "ResultVersion"
               (\ o ->
-                 ResultVersion <$>
+                 ResultVersion' <$>
                    (o .:? "minor") <*> (o .:? "major"))
 
 instance ToJSON ResultVersion where
-        toJSON ResultVersion{..}
+        toJSON ResultVersion'{..}
           = object
               (catMaybes
                  [("minor" .=) <$> _rvMinor,
@@ -384,7 +384,7 @@ instance ToJSON ResultVersion where
 -- number of HTML bytes, etc.
 --
 -- /See:/ 'resultPageStats' smart constructor.
-data ResultPageStats = ResultPageStats
+data ResultPageStats = ResultPageStats'
     { _rpsHTMLResponseBytes       :: !(Maybe (Textual Int64))
     , _rpsTotalRequestBytes       :: !(Maybe (Textual Int64))
     , _rpsNumberResources         :: !(Maybe (Textual Int32))
@@ -432,7 +432,7 @@ data ResultPageStats = ResultPageStats
 resultPageStats
     :: ResultPageStats
 resultPageStats =
-    ResultPageStats
+    ResultPageStats'
     { _rpsHTMLResponseBytes = Nothing
     , _rpsTotalRequestBytes = Nothing
     , _rpsNumberResources = Nothing
@@ -546,7 +546,7 @@ instance FromJSON ResultPageStats where
         parseJSON
           = withObject "ResultPageStats"
               (\ o ->
-                 ResultPageStats <$>
+                 ResultPageStats' <$>
                    (o .:? "htmlResponseBytes") <*>
                      (o .:? "totalRequestBytes")
                      <*> (o .:? "numberResources")
@@ -562,7 +562,7 @@ instance FromJSON ResultPageStats where
                      <*> (o .:? "cssResponseBytes"))
 
 instance ToJSON ResultPageStats where
-        toJSON ResultPageStats{..}
+        toJSON ResultPageStats'{..}
           = object
               (catMaybes
                  [("htmlResponseBytes" .=) <$> _rpsHTMLResponseBytes,
@@ -585,7 +585,7 @@ instance ToJSON ResultPageStats where
 -- measured in CSS pixels.
 --
 -- /See:/ 'pagespeedAPIImageV2Page_rect' smart constructor.
-data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
+data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect'
     { _paivpHeight :: !(Maybe (Textual Int32))
     , _paivpLeft   :: !(Maybe (Textual Int32))
     , _paivpWidth  :: !(Maybe (Textual Int32))
@@ -606,7 +606,7 @@ data PagespeedAPIImageV2Page_rect = PagespeedAPIImageV2Page_rect
 pagespeedAPIImageV2Page_rect
     :: PagespeedAPIImageV2Page_rect
 pagespeedAPIImageV2Page_rect =
-    PagespeedAPIImageV2Page_rect
+    PagespeedAPIImageV2Page_rect'
     { _paivpHeight = Nothing
     , _paivpLeft = Nothing
     , _paivpWidth = Nothing
@@ -641,13 +641,13 @@ instance FromJSON PagespeedAPIImageV2Page_rect where
         parseJSON
           = withObject "PagespeedAPIImageV2PageRect"
               (\ o ->
-                 PagespeedAPIImageV2Page_rect <$>
+                 PagespeedAPIImageV2Page_rect' <$>
                    (o .:? "height") <*> (o .:? "left") <*>
                      (o .:? "width")
                      <*> (o .:? "top"))
 
 instance ToJSON PagespeedAPIImageV2Page_rect where
-        toJSON PagespeedAPIImageV2Page_rect{..}
+        toJSON PagespeedAPIImageV2Page_rect'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _paivpHeight,
@@ -657,7 +657,7 @@ instance ToJSON PagespeedAPIImageV2Page_rect where
 
 --
 -- /See:/ 'result' smart constructor.
-data Result = Result
+data Result = Result'
     { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
     , _rKind             :: !Text
     , _rResponseCode     :: !(Maybe (Textual Int32))
@@ -696,7 +696,7 @@ data Result = Result
 result
     :: Result
 result =
-    Result
+    Result'
     { _rScreenshot = Nothing
     , _rKind = "pagespeedonline#result"
     , _rResponseCode = Nothing
@@ -770,7 +770,7 @@ instance FromJSON Result where
         parseJSON
           = withObject "Result"
               (\ o ->
-                 Result <$>
+                 Result' <$>
                    (o .:? "screenshot") <*>
                      (o .:? "kind" .!= "pagespeedonline#result")
                      <*> (o .:? "responseCode")
@@ -783,7 +783,7 @@ instance FromJSON Result where
                      <*> (o .:? "title"))
 
 instance ToJSON Result where
-        toJSON Result{..}
+        toJSON Result'{..}
           = object
               (catMaybes
                  [("screenshot" .=) <$> _rScreenshot,
@@ -798,7 +798,7 @@ instance ToJSON Result where
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2ArgsItem' smart constructor.
-data PagespeedAPIFormatStringV2ArgsItem = PagespeedAPIFormatStringV2ArgsItem
+data PagespeedAPIFormatStringV2ArgsItem = PagespeedAPIFormatStringV2ArgsItem'
     { _pafsvaiValue          :: !(Maybe Text)
     , _pafsvaiRects          :: !(Maybe [PagespeedAPIFormatStringV2ArgsItemRectsItem])
     , _pafsvaiKey            :: !(Maybe Text)
@@ -822,7 +822,7 @@ data PagespeedAPIFormatStringV2ArgsItem = PagespeedAPIFormatStringV2ArgsItem
 pagespeedAPIFormatStringV2ArgsItem
     :: PagespeedAPIFormatStringV2ArgsItem
 pagespeedAPIFormatStringV2ArgsItem =
-    PagespeedAPIFormatStringV2ArgsItem
+    PagespeedAPIFormatStringV2ArgsItem'
     { _pafsvaiValue = Nothing
     , _pafsvaiRects = Nothing
     , _pafsvaiKey = Nothing
@@ -870,7 +870,7 @@ instance FromJSON PagespeedAPIFormatStringV2ArgsItem
         parseJSON
           = withObject "PagespeedAPIFormatStringV2ArgsItem"
               (\ o ->
-                 PagespeedAPIFormatStringV2ArgsItem <$>
+                 PagespeedAPIFormatStringV2ArgsItem' <$>
                    (o .:? "value") <*> (o .:? "rects" .!= mempty) <*>
                      (o .:? "key")
                      <*> (o .:? "type")
@@ -878,7 +878,7 @@ instance FromJSON PagespeedAPIFormatStringV2ArgsItem
 
 instance ToJSON PagespeedAPIFormatStringV2ArgsItem
          where
-        toJSON PagespeedAPIFormatStringV2ArgsItem{..}
+        toJSON PagespeedAPIFormatStringV2ArgsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pafsvaiValue,
@@ -890,7 +890,7 @@ instance ToJSON PagespeedAPIFormatStringV2ArgsItem
 -- | The name of this rule group: one of \"SPEED\" or \"USABILITY\".
 --
 -- /See:/ 'resultRuleGroupsAdditional' smart constructor.
-newtype ResultRuleGroupsAdditional = ResultRuleGroupsAdditional
+newtype ResultRuleGroupsAdditional = ResultRuleGroupsAdditional'
     { _rrgaScore :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -902,7 +902,7 @@ newtype ResultRuleGroupsAdditional = ResultRuleGroupsAdditional
 resultRuleGroupsAdditional
     :: ResultRuleGroupsAdditional
 resultRuleGroupsAdditional =
-    ResultRuleGroupsAdditional
+    ResultRuleGroupsAdditional'
     { _rrgaScore = Nothing
     }
 
@@ -919,17 +919,17 @@ instance FromJSON ResultRuleGroupsAdditional where
         parseJSON
           = withObject "ResultRuleGroupsAdditional"
               (\ o ->
-                 ResultRuleGroupsAdditional <$> (o .:? "score"))
+                 ResultRuleGroupsAdditional' <$> (o .:? "score"))
 
 instance ToJSON ResultRuleGroupsAdditional where
-        toJSON ResultRuleGroupsAdditional{..}
+        toJSON ResultRuleGroupsAdditional'{..}
           = object (catMaybes [("score" .=) <$> _rrgaScore])
 
 -- | Localized PageSpeed results. Contains a ruleResults entry for each
 -- PageSpeed rule instantiated and run by the server.
 --
 -- /See:/ 'resultFormattedResults' smart constructor.
-data ResultFormattedResults = ResultFormattedResults
+data ResultFormattedResults = ResultFormattedResults'
     { _rfrLocale      :: !(Maybe Text)
     , _rfrRuleResults :: !(Maybe ResultFormattedResultsRuleResults)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -944,7 +944,7 @@ data ResultFormattedResults = ResultFormattedResults
 resultFormattedResults
     :: ResultFormattedResults
 resultFormattedResults =
-    ResultFormattedResults
+    ResultFormattedResults'
     { _rfrLocale = Nothing
     , _rfrRuleResults = Nothing
     }
@@ -965,11 +965,11 @@ instance FromJSON ResultFormattedResults where
         parseJSON
           = withObject "ResultFormattedResults"
               (\ o ->
-                 ResultFormattedResults <$>
+                 ResultFormattedResults' <$>
                    (o .:? "locale") <*> (o .:? "ruleResults"))
 
 instance ToJSON ResultFormattedResults where
-        toJSON ResultFormattedResults{..}
+        toJSON ResultFormattedResults'{..}
           = object
               (catMaybes
                  [("locale" .=) <$> _rfrLocale,
@@ -979,7 +979,7 @@ instance ToJSON ResultFormattedResults where
 -- or \"AvoidCssImport\". Not localized.
 --
 -- /See:/ 'resultFormattedResultsRuleResultsAdditional' smart constructor.
-data ResultFormattedResultsRuleResultsAdditional = ResultFormattedResultsRuleResultsAdditional
+data ResultFormattedResultsRuleResultsAdditional = ResultFormattedResultsRuleResultsAdditional'
     { _rfrrraSummary           :: !(Maybe PagespeedAPIFormatStringV2)
     , _rfrrraRuleImpact        :: !(Maybe (Textual Double))
     , _rfrrraGroups            :: !(Maybe [Text])
@@ -1003,7 +1003,7 @@ data ResultFormattedResultsRuleResultsAdditional = ResultFormattedResultsRuleRes
 resultFormattedResultsRuleResultsAdditional
     :: ResultFormattedResultsRuleResultsAdditional
 resultFormattedResultsRuleResultsAdditional =
-    ResultFormattedResultsRuleResultsAdditional
+    ResultFormattedResultsRuleResultsAdditional'
     { _rfrrraSummary = Nothing
     , _rfrrraRuleImpact = Nothing
     , _rfrrraGroups = Nothing
@@ -1061,7 +1061,7 @@ instance FromJSON
           = withObject
               "ResultFormattedResultsRuleResultsAdditional"
               (\ o ->
-                 ResultFormattedResultsRuleResultsAdditional <$>
+                 ResultFormattedResultsRuleResultsAdditional' <$>
                    (o .:? "summary") <*> (o .:? "ruleImpact") <*>
                      (o .:? "groups" .!= mempty)
                      <*> (o .:? "localizedRuleName")
@@ -1070,7 +1070,7 @@ instance FromJSON
 instance ToJSON
          ResultFormattedResultsRuleResultsAdditional where
         toJSON
-          ResultFormattedResultsRuleResultsAdditional{..}
+          ResultFormattedResultsRuleResultsAdditional'{..}
           = object
               (catMaybes
                  [("summary" .=) <$> _rfrrraSummary,
@@ -1083,7 +1083,7 @@ instance ToJSON
 -- | A map with one entry for each rule group in these results.
 --
 -- /See:/ 'resultRuleGroups' smart constructor.
-newtype ResultRuleGroups = ResultRuleGroups
+newtype ResultRuleGroups = ResultRuleGroups'
     { _rrgAddtional :: HashMap Text ResultRuleGroupsAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1096,7 +1096,7 @@ resultRuleGroups
     :: HashMap Text ResultRuleGroupsAdditional -- ^ 'rrgAddtional'
     -> ResultRuleGroups
 resultRuleGroups pRrgAddtional_ =
-    ResultRuleGroups
+    ResultRuleGroups'
     { _rrgAddtional = _Coerce # pRrgAddtional_
     }
 
@@ -1109,14 +1109,14 @@ rrgAddtional
 instance FromJSON ResultRuleGroups where
         parseJSON
           = withObject "ResultRuleGroups"
-              (\ o -> ResultRuleGroups <$> (parseJSONObject o))
+              (\ o -> ResultRuleGroups' <$> (parseJSONObject o))
 
 instance ToJSON ResultRuleGroups where
         toJSON = toJSON . _rrgAddtional
 
 --
 -- /See:/ 'pagespeedAPIFormatStringV2' smart constructor.
-data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2
+data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2'
     { _pafsvArgs   :: !(Maybe [PagespeedAPIFormatStringV2ArgsItem])
     , _pafsvFormat :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1131,7 +1131,7 @@ data PagespeedAPIFormatStringV2 = PagespeedAPIFormatStringV2
 pagespeedAPIFormatStringV2
     :: PagespeedAPIFormatStringV2
 pagespeedAPIFormatStringV2 =
-    PagespeedAPIFormatStringV2
+    PagespeedAPIFormatStringV2'
     { _pafsvArgs = Nothing
     , _pafsvFormat = Nothing
     }
@@ -1155,11 +1155,11 @@ instance FromJSON PagespeedAPIFormatStringV2 where
         parseJSON
           = withObject "PagespeedAPIFormatStringV2"
               (\ o ->
-                 PagespeedAPIFormatStringV2 <$>
+                 PagespeedAPIFormatStringV2' <$>
                    (o .:? "args" .!= mempty) <*> (o .:? "format"))
 
 instance ToJSON PagespeedAPIFormatStringV2 where
-        toJSON PagespeedAPIFormatStringV2{..}
+        toJSON PagespeedAPIFormatStringV2'{..}
           = object
               (catMaybes
                  [("args" .=) <$> _pafsvArgs,
@@ -1169,7 +1169,7 @@ instance ToJSON PagespeedAPIFormatStringV2 where
 -- rule instantiated and run by the server.
 --
 -- /See:/ 'resultFormattedResultsRuleResults' smart constructor.
-newtype ResultFormattedResultsRuleResults = ResultFormattedResultsRuleResults
+newtype ResultFormattedResultsRuleResults = ResultFormattedResultsRuleResults'
     { _rfrrrAddtional :: HashMap Text ResultFormattedResultsRuleResultsAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1182,7 +1182,7 @@ resultFormattedResultsRuleResults
     :: HashMap Text ResultFormattedResultsRuleResultsAdditional -- ^ 'rfrrrAddtional'
     -> ResultFormattedResultsRuleResults
 resultFormattedResultsRuleResults pRfrrrAddtional_ =
-    ResultFormattedResultsRuleResults
+    ResultFormattedResultsRuleResults'
     { _rfrrrAddtional = _Coerce # pRfrrrAddtional_
     }
 
@@ -1199,7 +1199,7 @@ instance FromJSON ResultFormattedResultsRuleResults
         parseJSON
           = withObject "ResultFormattedResultsRuleResults"
               (\ o ->
-                 ResultFormattedResultsRuleResults <$>
+                 ResultFormattedResultsRuleResults' <$>
                    (parseJSONObject o))
 
 instance ToJSON ResultFormattedResultsRuleResults
@@ -1208,7 +1208,7 @@ instance ToJSON ResultFormattedResultsRuleResults
 
 --
 -- /See:/ 'resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem' smart constructor.
-data ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem = ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+data ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem = ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'
     { _rfrrraubiuiResult  :: !(Maybe PagespeedAPIFormatStringV2)
     , _rfrrraubiuiDetails :: !(Maybe [PagespeedAPIFormatStringV2])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1223,7 +1223,7 @@ data ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem = ResultFo
 resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
     :: ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
 resultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem =
-    ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+    ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'
     { _rfrrraubiuiResult = Nothing
     , _rfrrraubiuiDetails = Nothing
     }
@@ -1251,7 +1251,7 @@ instance FromJSON
           = withObject
               "ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem"
               (\ o ->
-                 ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
+                 ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'
                    <$>
                    (o .:? "result") <*> (o .:? "details" .!= mempty))
 
@@ -1259,7 +1259,7 @@ instance ToJSON
          ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem
          where
         toJSON
-          ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem{..}
+          ResultFormattedResultsRuleResultsAdditionalURLBlocksItemURLsItem'{..}
           = object
               (catMaybes
                  [("result" .=) <$> _rfrrraubiuiResult,

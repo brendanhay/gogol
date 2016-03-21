@@ -53,7 +53,7 @@ type WorkerListResource =
 -- | Retrieves a list of workers in a team.
 --
 -- /See:/ 'workerList' smart constructor.
-newtype WorkerList = WorkerList
+newtype WorkerList = WorkerList'
     { _wlTeamId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ workerList
     :: Text -- ^ 'wlTeamId'
     -> WorkerList
 workerList pWlTeamId_ =
-    WorkerList
+    WorkerList'
     { _wlTeamId = pWlTeamId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest WorkerList where
         type Scopes WorkerList =
              '["https://www.googleapis.com/auth/coordinate",
                "https://www.googleapis.com/auth/coordinate.readonly"]
-        requestClient WorkerList{..}
+        requestClient WorkerList'{..}
           = go _wlTeamId (Just AltJSON) mapsCoordinateService
           where go
                   = buildClient (Proxy :: Proxy WorkerListResource)

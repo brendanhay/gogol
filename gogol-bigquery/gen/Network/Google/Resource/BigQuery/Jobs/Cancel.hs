@@ -60,7 +60,7 @@ type JobsCancelResource =
 -- completed successfully. Cancelled jobs may still incur costs.
 --
 -- /See:/ 'jobsCancel' smart constructor.
-data JobsCancel = JobsCancel
+data JobsCancel = JobsCancel'
     { _jcJobId     :: !Text
     , _jcProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ jobsCancel
     -> Text -- ^ 'jcProjectId'
     -> JobsCancel
 jobsCancel pJcJobId_ pJcProjectId_ =
-    JobsCancel
+    JobsCancel'
     { _jcJobId = pJcJobId_
     , _jcProjectId = pJcProjectId_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest JobsCancel where
         type Scopes JobsCancel =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient JobsCancel{..}
+        requestClient JobsCancel'{..}
           = go _jcProjectId _jcJobId (Just AltJSON)
               bigQueryService
           where go

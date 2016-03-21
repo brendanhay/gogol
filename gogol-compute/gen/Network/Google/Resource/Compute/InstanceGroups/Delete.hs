@@ -61,7 +61,7 @@ type InstanceGroupsDeleteResource =
 -- Read Deleting an instance group for more information.
 --
 -- /See:/ 'instanceGroupsDelete' smart constructor.
-data InstanceGroupsDelete = InstanceGroupsDelete
+data InstanceGroupsDelete = InstanceGroupsDelete'
     { _igdProject       :: !Text
     , _igdZone          :: !Text
     , _igdInstanceGroup :: !Text
@@ -82,7 +82,7 @@ instanceGroupsDelete
     -> Text -- ^ 'igdInstanceGroup'
     -> InstanceGroupsDelete
 instanceGroupsDelete pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
-    InstanceGroupsDelete
+    InstanceGroupsDelete'
     { _igdProject = pIgdProject_
     , _igdZone = pIgdZone_
     , _igdInstanceGroup = pIgdInstanceGroup_
@@ -108,7 +108,7 @@ instance GoogleRequest InstanceGroupsDelete where
         type Scopes InstanceGroupsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupsDelete{..}
+        requestClient InstanceGroupsDelete'{..}
           = go _igdProject _igdZone _igdInstanceGroup
               (Just AltJSON)
               computeService

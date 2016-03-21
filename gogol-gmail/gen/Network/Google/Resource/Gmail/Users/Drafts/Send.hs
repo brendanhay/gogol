@@ -69,7 +69,7 @@ type UsersDraftsSendResource =
 -- Bcc headers.
 --
 -- /See:/ 'usersDraftsSend' smart constructor.
-data UsersDraftsSend = UsersDraftsSend
+data UsersDraftsSend = UsersDraftsSend'
     { _udsPayload :: !Draft
     , _udsUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,7 +85,7 @@ usersDraftsSend
     :: Draft -- ^ 'udsPayload'
     -> UsersDraftsSend
 usersDraftsSend pUdsPayload_ =
-    UsersDraftsSend
+    UsersDraftsSend'
     { _udsPayload = pUdsPayload_
     , _udsUserId = "me"
     }
@@ -107,7 +107,7 @@ instance GoogleRequest UsersDraftsSend where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersDraftsSend{..}
+        requestClient UsersDraftsSend'{..}
           = go _udsUserId (Just AltJSON) _udsPayload
               gmailService
           where go :<|> _
@@ -120,7 +120,7 @@ instance GoogleRequest (MediaUpload UsersDraftsSend)
         type Rs (MediaUpload UsersDraftsSend) = Message
         type Scopes (MediaUpload UsersDraftsSend) =
              Scopes UsersDraftsSend
-        requestClient (MediaUpload UsersDraftsSend{..} body)
+        requestClient (MediaUpload UsersDraftsSend'{..} body)
           = go _udsUserId (Just AltJSON) (Just AltMedia)
               _udsPayload
               body

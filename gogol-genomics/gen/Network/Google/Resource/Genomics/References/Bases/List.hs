@@ -84,7 +84,7 @@ type ReferencesBasesListResource =
 -- [GlobalAllianceApi.getReferenceBases](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L221).
 --
 -- /See:/ 'referencesBasesList' smart constructor.
-data ReferencesBasesList = ReferencesBasesList
+data ReferencesBasesList = ReferencesBasesList'
     { _rblXgafv          :: !(Maybe Text)
     , _rblUploadProtocol :: !(Maybe Text)
     , _rblPp             :: !Bool
@@ -130,7 +130,7 @@ referencesBasesList
     :: Text -- ^ 'rblReferenceId'
     -> ReferencesBasesList
 referencesBasesList pRblReferenceId_ =
-    ReferencesBasesList
+    ReferencesBasesList'
     { _rblXgafv = Nothing
     , _rblUploadProtocol = Nothing
     , _rblPp = True
@@ -222,7 +222,7 @@ instance GoogleRequest ReferencesBasesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReferencesBasesList{..}
+        requestClient ReferencesBasesList'{..}
           = go _rblReferenceId _rblXgafv _rblUploadProtocol
               (Just _rblPp)
               _rblAccessToken

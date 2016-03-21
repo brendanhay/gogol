@@ -66,7 +66,7 @@ type InstanceGroupManagersResizeResource =
 -- instance group.
 --
 -- /See:/ 'instanceGroupManagersResize' smart constructor.
-data InstanceGroupManagersResize = InstanceGroupManagersResize
+data InstanceGroupManagersResize = InstanceGroupManagersResize'
     { _igmrProject              :: !Text
     , _igmrSize                 :: !(Textual Int32)
     , _igmrInstanceGroupManager :: !Text
@@ -91,7 +91,7 @@ instanceGroupManagersResize
     -> Text -- ^ 'igmrZone'
     -> InstanceGroupManagersResize
 instanceGroupManagersResize pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_ pIgmrZone_ =
-    InstanceGroupManagersResize
+    InstanceGroupManagersResize'
     { _igmrProject = pIgmrProject_
     , _igmrSize = _Coerce # pIgmrSize_
     , _igmrInstanceGroupManager = pIgmrInstanceGroupManager_
@@ -125,7 +125,7 @@ instance GoogleRequest InstanceGroupManagersResize
         type Scopes InstanceGroupManagersResize =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupManagersResize{..}
+        requestClient InstanceGroupManagersResize'{..}
           = go _igmrProject _igmrZone _igmrInstanceGroupManager
               (Just _igmrSize)
               (Just AltJSON)

@@ -73,7 +73,7 @@ type ProjectsZonesClustersUpdateResource =
 -- | Update settings of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersUpdate' smart constructor.
-data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate
+data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate'
     { _pzcuXgafv          :: !(Maybe Text)
     , _pzcuUploadProtocol :: !(Maybe Text)
     , _pzcuPp             :: !Bool
@@ -119,7 +119,7 @@ projectsZonesClustersUpdate
     -> Text -- ^ 'pzcuProjectId'
     -> ProjectsZonesClustersUpdate
 projectsZonesClustersUpdate pPzcuZone_ pPzcuPayload_ pPzcuClusterId_ pPzcuProjectId_ =
-    ProjectsZonesClustersUpdate
+    ProjectsZonesClustersUpdate'
     { _pzcuXgafv = Nothing
     , _pzcuUploadProtocol = Nothing
     , _pzcuPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest ProjectsZonesClustersUpdate
         type Rs ProjectsZonesClustersUpdate = Operation
         type Scopes ProjectsZonesClustersUpdate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesClustersUpdate{..}
+        requestClient ProjectsZonesClustersUpdate'{..}
           = go _pzcuProjectId _pzcuZone _pzcuClusterId
               _pzcuXgafv
               _pzcuUploadProtocol

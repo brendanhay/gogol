@@ -60,7 +60,7 @@ type RollingUpdatesRollbackResource =
 -- effect if invoked when the state of the update is ROLLED_BACK.
 --
 -- /See:/ 'rollingUpdatesRollback' smart constructor.
-data RollingUpdatesRollback = RollingUpdatesRollback
+data RollingUpdatesRollback = RollingUpdatesRollback'
     { _rurRollingUpdate :: !Text
     , _rurProject       :: !Text
     , _rurZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesRollback
     -> Text -- ^ 'rurZone'
     -> RollingUpdatesRollback
 rollingUpdatesRollback pRurRollingUpdate_ pRurProject_ pRurZone_ =
-    RollingUpdatesRollback
+    RollingUpdatesRollback'
     { _rurRollingUpdate = pRurRollingUpdate_
     , _rurProject = pRurProject_
     , _rurZone = pRurZone_
@@ -107,7 +107,7 @@ instance GoogleRequest RollingUpdatesRollback where
         type Scopes RollingUpdatesRollback =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/replicapool"]
-        requestClient RollingUpdatesRollback{..}
+        requestClient RollingUpdatesRollback'{..}
           = go _rurProject _rurZone _rurRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

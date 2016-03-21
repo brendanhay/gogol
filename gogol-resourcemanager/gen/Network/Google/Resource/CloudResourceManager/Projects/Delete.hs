@@ -88,7 +88,7 @@ type ProjectsDeleteResource =
 -- Project.
 --
 -- /See:/ 'projectsDelete' smart constructor.
-data ProjectsDelete = ProjectsDelete
+data ProjectsDelete = ProjectsDelete'
     { _pdXgafv          :: !(Maybe Text)
     , _pdUploadProtocol :: !(Maybe Text)
     , _pdPp             :: !Bool
@@ -122,7 +122,7 @@ projectsDelete
     :: Text -- ^ 'pdProjectId'
     -> ProjectsDelete
 projectsDelete pPdProjectId_ =
-    ProjectsDelete
+    ProjectsDelete'
     { _pdXgafv = Nothing
     , _pdUploadProtocol = Nothing
     , _pdPp = True
@@ -178,7 +178,7 @@ instance GoogleRequest ProjectsDelete where
         type Rs ProjectsDelete = Empty
         type Scopes ProjectsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsDelete{..}
+        requestClient ProjectsDelete'{..}
           = go _pdProjectId _pdXgafv _pdUploadProtocol
               (Just _pdPp)
               _pdAccessToken

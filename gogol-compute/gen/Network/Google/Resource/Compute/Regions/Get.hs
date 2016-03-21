@@ -56,7 +56,7 @@ type RegionsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'regionsGet' smart constructor.
-data RegionsGet = RegionsGet
+data RegionsGet = RegionsGet'
     { _rgProject :: !Text
     , _rgRegion  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ regionsGet
     -> Text -- ^ 'rgRegion'
     -> RegionsGet
 regionsGet pRgProject_ pRgRegion_ =
-    RegionsGet
+    RegionsGet'
     { _rgProject = pRgProject_
     , _rgRegion = pRgRegion_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest RegionsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RegionsGet{..}
+        requestClient RegionsGet'{..}
           = go _rgProject _rgRegion (Just AltJSON)
               computeService
           where go

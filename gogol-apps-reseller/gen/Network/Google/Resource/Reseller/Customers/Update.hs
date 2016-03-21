@@ -56,7 +56,7 @@ type CustomersUpdateResource =
 -- reseller.
 --
 -- /See:/ 'customersUpdate' smart constructor.
-data CustomersUpdate = CustomersUpdate
+data CustomersUpdate = CustomersUpdate'
     { _cuPayload    :: !Customer
     , _cuCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ customersUpdate
     -> Text -- ^ 'cuCustomerId'
     -> CustomersUpdate
 customersUpdate pCuPayload_ pCuCustomerId_ =
-    CustomersUpdate
+    CustomersUpdate'
     { _cuPayload = pCuPayload_
     , _cuCustomerId = pCuCustomerId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CustomersUpdate where
         type Rs CustomersUpdate = Customer
         type Scopes CustomersUpdate =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient CustomersUpdate{..}
+        requestClient CustomersUpdate'{..}
           = go _cuCustomerId (Just AltJSON) _cuPayload
               appsResellerService
           where go

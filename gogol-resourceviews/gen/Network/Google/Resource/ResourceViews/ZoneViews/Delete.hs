@@ -57,7 +57,7 @@ type ZoneViewsDeleteResource =
 -- | Delete a resource view.
 --
 -- /See:/ 'zoneViewsDelete' smart constructor.
-data ZoneViewsDelete = ZoneViewsDelete
+data ZoneViewsDelete = ZoneViewsDelete'
     { _zvdResourceView :: !Text
     , _zvdProject      :: !Text
     , _zvdZone         :: !Text
@@ -78,7 +78,7 @@ zoneViewsDelete
     -> Text -- ^ 'zvdZone'
     -> ZoneViewsDelete
 zoneViewsDelete pZvdResourceView_ pZvdProject_ pZvdZone_ =
-    ZoneViewsDelete
+    ZoneViewsDelete'
     { _zvdResourceView = pZvdResourceView_
     , _zvdProject = pZvdProject_
     , _zvdZone = pZvdZone_
@@ -105,7 +105,7 @@ instance GoogleRequest ZoneViewsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient ZoneViewsDelete{..}
+        requestClient ZoneViewsDelete'{..}
           = go _zvdProject _zvdZone _zvdResourceView
               (Just AltJSON)
               resourceViewsService

@@ -68,7 +68,7 @@ type UsersDataSourcesCreateResource =
 -- when read by any other developer reading public data types.
 --
 -- /See:/ 'usersDataSourcesCreate' smart constructor.
-data UsersDataSourcesCreate = UsersDataSourcesCreate
+data UsersDataSourcesCreate = UsersDataSourcesCreate'
     { _udscPayload :: !DataSource
     , _udscUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,7 +85,7 @@ usersDataSourcesCreate
     -> Text -- ^ 'udscUserId'
     -> UsersDataSourcesCreate
 usersDataSourcesCreate pUdscPayload_ pUdscUserId_ =
-    UsersDataSourcesCreate
+    UsersDataSourcesCreate'
     { _udscPayload = pUdscPayload_
     , _udscUserId = pUdscUserId_
     }
@@ -107,7 +107,7 @@ instance GoogleRequest UsersDataSourcesCreate where
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesCreate{..}
+        requestClient UsersDataSourcesCreate'{..}
           = go _udscUserId (Just AltJSON) _udscPayload
               fitnessService
           where go

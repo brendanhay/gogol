@@ -51,7 +51,7 @@ type UsersGetResource =
 -- | Gets one user by ID.
 --
 -- /See:/ 'usersGet' smart constructor.
-newtype UsersGet = UsersGet
+newtype UsersGet = UsersGet'
     { _ugUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ usersGet
     :: Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgUserId_ =
-    UsersGet
+    UsersGet'
     { _ugUserId = pUgUserId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest UsersGet where
         type Scopes UsersGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient UsersGet{..}
+        requestClient UsersGet'{..}
           = go _ugUserId (Just AltJSON) bloggerService
           where go
                   = buildClient (Proxy :: Proxy UsersGetResource)

@@ -51,7 +51,7 @@ type ProjectsGetResource =
 -- | Fetch the representation of an existing Project.
 --
 -- /See:/ 'projectsGet' smart constructor.
-newtype ProjectsGet = ProjectsGet
+newtype ProjectsGet = ProjectsGet'
     { _pgProject :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ projectsGet
     :: Text -- ^ 'pgProject'
     -> ProjectsGet
 projectsGet pPgProject_ =
-    ProjectsGet
+    ProjectsGet'
     { _pgProject = pPgProject_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest ProjectsGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ProjectsGet{..}
+        requestClient ProjectsGet'{..}
           = go _pgProject (Just AltJSON) dNSService
           where go
                   = buildClient (Proxy :: Proxy ProjectsGetResource)

@@ -55,7 +55,7 @@ type InstancesInsertResource =
 -- | Creates a new Cloud SQL instance.
 --
 -- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert
+data InstancesInsert = InstancesInsert'
     { _insProject :: !Text
     , _insPayload :: !DatabaseInstance
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesInsert
     -> DatabaseInstance -- ^ 'insPayload'
     -> InstancesInsert
 instancesInsert pInsProject_ pInsPayload_ =
-    InstancesInsert
+    InstancesInsert'
     { _insProject = pInsProject_
     , _insPayload = pInsPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest InstancesInsert where
         type Scopes InstancesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesInsert{..}
+        requestClient InstancesInsert'{..}
           = go _insProject (Just AltJSON) _insPayload
               sQLAdminService
           where go

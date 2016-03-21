@@ -57,7 +57,7 @@ type OrdersRefundResource =
 -- | Refund a portion of the order, up to the full amount paid.
 --
 -- /See:/ 'ordersRefund' smart constructor.
-data OrdersRefund = OrdersRefund
+data OrdersRefund = OrdersRefund'
     { _orMerchantId :: !(Textual Word64)
     , _orPayload    :: !OrdersRefundRequest
     , _orOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersRefund
     -> Text -- ^ 'orOrderId'
     -> OrdersRefund
 ordersRefund pOrMerchantId_ pOrPayload_ pOrOrderId_ =
-    OrdersRefund
+    OrdersRefund'
     { _orMerchantId = _Coerce # pOrMerchantId_
     , _orPayload = pOrPayload_
     , _orOrderId = pOrOrderId_
@@ -104,7 +104,7 @@ instance GoogleRequest OrdersRefund where
         type Rs OrdersRefund = OrdersRefundResponse
         type Scopes OrdersRefund =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersRefund{..}
+        requestClient OrdersRefund'{..}
           = go _orMerchantId _orOrderId (Just AltJSON)
               _orPayload
               shoppingContentService

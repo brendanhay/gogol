@@ -56,7 +56,7 @@ type UsersLabelsDeleteResource =
 -- from any messages and threads that it is applied to.
 --
 -- /See:/ 'usersLabelsDelete' smart constructor.
-data UsersLabelsDelete = UsersLabelsDelete
+data UsersLabelsDelete = UsersLabelsDelete'
     { _uldUserId :: !Text
     , _uldId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersLabelsDelete
     :: Text -- ^ 'uldId'
     -> UsersLabelsDelete
 usersLabelsDelete pUldId_ =
-    UsersLabelsDelete
+    UsersLabelsDelete'
     { _uldUserId = "me"
     , _uldId = pUldId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest UsersLabelsDelete where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.labels",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersLabelsDelete{..}
+        requestClient UsersLabelsDelete'{..}
           = go _uldUserId _uldId (Just AltJSON) gmailService
           where go
                   = buildClient

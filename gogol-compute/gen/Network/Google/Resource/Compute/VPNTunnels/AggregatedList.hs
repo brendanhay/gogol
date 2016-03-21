@@ -60,7 +60,7 @@ type VPNTunnelsAggregatedListResource =
 -- | Retrieves an aggregated list of VPN tunnels.
 --
 -- /See:/ 'vpnTunnelsAggregatedList' smart constructor.
-data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList
+data VPNTunnelsAggregatedList = VPNTunnelsAggregatedList'
     { _vtalProject    :: !Text
     , _vtalFilter     :: !(Maybe Text)
     , _vtalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ vpnTunnelsAggregatedList
     :: Text -- ^ 'vtalProject'
     -> VPNTunnelsAggregatedList
 vpnTunnelsAggregatedList pVtalProject_ =
-    VPNTunnelsAggregatedList
+    VPNTunnelsAggregatedList'
     { _vtalProject = pVtalProject_
     , _vtalFilter = Nothing
     , _vtalPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest VPNTunnelsAggregatedList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient VPNTunnelsAggregatedList{..}
+        requestClient VPNTunnelsAggregatedList'{..}
           = go _vtalProject _vtalFilter _vtalPageToken
               (Just _vtalMaxResults)
               (Just AltJSON)

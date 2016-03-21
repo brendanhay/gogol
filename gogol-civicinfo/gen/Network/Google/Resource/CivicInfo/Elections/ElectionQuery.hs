@@ -50,20 +50,20 @@ type ElectionsElectionQueryResource =
 --
 -- /See:/ 'electionsElectionQuery' smart constructor.
 data ElectionsElectionQuery =
-    ElectionsElectionQuery
+    ElectionsElectionQuery'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsElectionQuery' with the minimum fields required to make a request.
 --
 electionsElectionQuery
     :: ElectionsElectionQuery
-electionsElectionQuery = ElectionsElectionQuery
+electionsElectionQuery = ElectionsElectionQuery'
 
 instance GoogleRequest ElectionsElectionQuery where
         type Rs ElectionsElectionQuery =
              ElectionsQueryResponse
         type Scopes ElectionsElectionQuery = '[]
-        requestClient ElectionsElectionQuery{}
+        requestClient ElectionsElectionQuery'{}
           = go (Just AltJSON) civicInfoService
           where go
                   = buildClient

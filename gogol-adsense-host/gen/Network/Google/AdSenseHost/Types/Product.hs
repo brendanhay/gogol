@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'adClients' smart constructor.
-data AdClients = AdClients
+data AdClients = AdClients'
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
@@ -43,7 +43,7 @@ data AdClients = AdClients
 adClients
     :: AdClients
 adClients =
-    AdClients
+    AdClients'
     { _acEtag = Nothing
     , _acNextPageToken = Nothing
     , _acKind = "adsensehost#adClients"
@@ -75,13 +75,13 @@ instance FromJSON AdClients where
         parseJSON
           = withObject "AdClients"
               (\ o ->
-                 AdClients <$>
+                 AdClients' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adsensehost#adClients")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AdClients where
-        toJSON AdClients{..}
+        toJSON AdClients'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _acEtag,
@@ -90,7 +90,7 @@ instance ToJSON AdClients where
 
 --
 -- /See:/ 'associationSession' smart constructor.
-data AssociationSession = AssociationSession
+data AssociationSession = AssociationSession'
     { _asStatus        :: !(Maybe Text)
     , _asKind          :: !Text
     , _asWebsiteLocale :: !(Maybe Text)
@@ -126,7 +126,7 @@ data AssociationSession = AssociationSession
 associationSession
     :: AssociationSession
 associationSession =
-    AssociationSession
+    AssociationSession'
     { _asStatus = Nothing
     , _asKind = "adsensehost#associationSession"
     , _asWebsiteLocale = Nothing
@@ -194,7 +194,7 @@ instance FromJSON AssociationSession where
         parseJSON
           = withObject "AssociationSession"
               (\ o ->
-                 AssociationSession <$>
+                 AssociationSession' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "adsensehost#associationSession")
                      <*> (o .:? "websiteLocale")
@@ -206,7 +206,7 @@ instance FromJSON AssociationSession where
                      <*> (o .:? "redirectUrl"))
 
 instance ToJSON AssociationSession where
-        toJSON AssociationSession{..}
+        toJSON AssociationSession'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _asStatus,
@@ -221,7 +221,7 @@ instance ToJSON AssociationSession where
 
 --
 -- /See:/ 'accounts' smart constructor.
-data Accounts = Accounts
+data Accounts = Accounts'
     { _aEtag  :: !(Maybe Text)
     , _aKind  :: !Text
     , _aItems :: !(Maybe [Account])
@@ -239,7 +239,7 @@ data Accounts = Accounts
 accounts
     :: Accounts
 accounts =
-    Accounts
+    Accounts'
     { _aEtag = Nothing
     , _aKind = "adsensehost#accounts"
     , _aItems = Nothing
@@ -263,13 +263,13 @@ instance FromJSON Accounts where
         parseJSON
           = withObject "Accounts"
               (\ o ->
-                 Accounts <$>
+                 Accounts' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "adsensehost#accounts")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Accounts where
-        toJSON Accounts{..}
+        toJSON Accounts'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aEtag, Just ("kind" .= _aKind),
@@ -277,7 +277,7 @@ instance ToJSON Accounts where
 
 --
 -- /See:/ 'adUnits' smart constructor.
-data AdUnits = AdUnits
+data AdUnits = AdUnits'
     { _auEtag          :: !(Maybe Text)
     , _auNextPageToken :: !(Maybe Text)
     , _auKind          :: !Text
@@ -298,7 +298,7 @@ data AdUnits = AdUnits
 adUnits
     :: AdUnits
 adUnits =
-    AdUnits
+    AdUnits'
     { _auEtag = Nothing
     , _auNextPageToken = Nothing
     , _auKind = "adsensehost#adUnits"
@@ -330,13 +330,13 @@ instance FromJSON AdUnits where
         parseJSON
           = withObject "AdUnits"
               (\ o ->
-                 AdUnits <$>
+                 AdUnits' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adsensehost#adUnits")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AdUnits where
-        toJSON AdUnits{..}
+        toJSON AdUnits'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _auEtag,
@@ -345,7 +345,7 @@ instance ToJSON AdUnits where
 
 --
 -- /See:/ 'urlChannels' smart constructor.
-data URLChannels = URLChannels
+data URLChannels = URLChannels'
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
@@ -366,7 +366,7 @@ data URLChannels = URLChannels
 urlChannels
     :: URLChannels
 urlChannels =
-    URLChannels
+    URLChannels'
     { _ucEtag = Nothing
     , _ucNextPageToken = Nothing
     , _ucKind = "adsensehost#urlChannels"
@@ -399,13 +399,13 @@ instance FromJSON URLChannels where
         parseJSON
           = withObject "URLChannels"
               (\ o ->
-                 URLChannels <$>
+                 URLChannels' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adsensehost#urlChannels")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON URLChannels where
-        toJSON URLChannels{..}
+        toJSON URLChannels'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _ucEtag,
@@ -414,7 +414,7 @@ instance ToJSON URLChannels where
 
 --
 -- /See:/ 'customChannels' smart constructor.
-data CustomChannels = CustomChannels
+data CustomChannels = CustomChannels'
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
@@ -435,7 +435,7 @@ data CustomChannels = CustomChannels
 customChannels
     :: CustomChannels
 customChannels =
-    CustomChannels
+    CustomChannels'
     { _ccEtag = Nothing
     , _ccNextPageToken = Nothing
     , _ccKind = "adsensehost#customChannels"
@@ -468,13 +468,13 @@ instance FromJSON CustomChannels where
         parseJSON
           = withObject "CustomChannels"
               (\ o ->
-                 CustomChannels <$>
+                 CustomChannels' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adsensehost#customChannels")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON CustomChannels where
-        toJSON CustomChannels{..}
+        toJSON CustomChannels'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _ccEtag,
@@ -483,7 +483,7 @@ instance ToJSON CustomChannels where
 
 --
 -- /See:/ 'adUnit' smart constructor.
-data AdUnit = AdUnit
+data AdUnit = AdUnit'
     { _auuStatus                   :: !(Maybe Text)
     , _auuMobileContentAdsSettings :: !(Maybe AdUnitMobileContentAdsSettings)
     , _auuKind                     :: !Text
@@ -516,7 +516,7 @@ data AdUnit = AdUnit
 adUnit
     :: AdUnit
 adUnit =
-    AdUnit
+    AdUnit'
     { _auuStatus = Nothing
     , _auuMobileContentAdsSettings = Nothing
     , _auuKind = "adsensehost#adUnit"
@@ -576,7 +576,7 @@ instance FromJSON AdUnit where
         parseJSON
           = withObject "AdUnit"
               (\ o ->
-                 AdUnit <$>
+                 AdUnit' <$>
                    (o .:? "status") <*>
                      (o .:? "mobileContentAdsSettings")
                      <*> (o .:? "kind" .!= "adsensehost#adUnit")
@@ -587,7 +587,7 @@ instance FromJSON AdUnit where
                      <*> (o .:? "id"))
 
 instance ToJSON AdUnit where
-        toJSON AdUnit{..}
+        toJSON AdUnit'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _auuStatus,
@@ -601,7 +601,7 @@ instance ToJSON AdUnit where
 
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rKind             :: !Text
     , _rAverages         :: !(Maybe [Text])
     , _rWarnings         :: !(Maybe [Text])
@@ -631,7 +631,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rKind = "adsensehost#report"
     , _rAverages = Nothing
     , _rWarnings = Nothing
@@ -698,7 +698,7 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "kind" .!= "adsensehost#report") <*>
                      (o .:? "averages" .!= mempty)
                      <*> (o .:? "warnings" .!= mempty)
@@ -708,7 +708,7 @@ instance FromJSON Report where
                      <*> (o .:? "totalMatchedRows"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rKind),
@@ -721,7 +721,7 @@ instance ToJSON Report where
 -- | The font which is included in the style.
 --
 -- /See:/ 'adStyleFont' smart constructor.
-data AdStyleFont = AdStyleFont
+data AdStyleFont = AdStyleFont'
     { _asfSize   :: !(Maybe Text)
     , _asfFamily :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -736,7 +736,7 @@ data AdStyleFont = AdStyleFont
 adStyleFont
     :: AdStyleFont
 adStyleFont =
-    AdStyleFont
+    AdStyleFont'
     { _asfSize = Nothing
     , _asfFamily = Nothing
     }
@@ -756,10 +756,10 @@ instance FromJSON AdStyleFont where
         parseJSON
           = withObject "AdStyleFont"
               (\ o ->
-                 AdStyleFont <$> (o .:? "size") <*> (o .:? "family"))
+                 AdStyleFont' <$> (o .:? "size") <*> (o .:? "family"))
 
 instance ToJSON AdStyleFont where
-        toJSON AdStyleFont{..}
+        toJSON AdStyleFont'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _asfSize,
@@ -767,7 +767,7 @@ instance ToJSON AdStyleFont where
 
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _accStatus :: !(Maybe Text)
     , _accKind   :: !Text
     , _accName   :: !(Maybe Text)
@@ -788,7 +788,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _accStatus = Nothing
     , _accKind = "adsensehost#account"
     , _accName = Nothing
@@ -816,14 +816,14 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "adsensehost#account")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _accStatus,
@@ -833,7 +833,7 @@ instance ToJSON Account where
 -- | Settings specific to WAP mobile content ads (AFMC - deprecated).
 --
 -- /See:/ 'adUnitMobileContentAdsSettings' smart constructor.
-data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings
+data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings'
     { _aumcasSize              :: !(Maybe Text)
     , _aumcasScriptingLanguage :: !(Maybe Text)
     , _aumcasMarkupLanguage    :: !(Maybe Text)
@@ -854,7 +854,7 @@ data AdUnitMobileContentAdsSettings = AdUnitMobileContentAdsSettings
 adUnitMobileContentAdsSettings
     :: AdUnitMobileContentAdsSettings
 adUnitMobileContentAdsSettings =
-    AdUnitMobileContentAdsSettings
+    AdUnitMobileContentAdsSettings'
     { _aumcasSize = Nothing
     , _aumcasScriptingLanguage = Nothing
     , _aumcasMarkupLanguage = Nothing
@@ -888,13 +888,13 @@ instance FromJSON AdUnitMobileContentAdsSettings
         parseJSON
           = withObject "AdUnitMobileContentAdsSettings"
               (\ o ->
-                 AdUnitMobileContentAdsSettings <$>
+                 AdUnitMobileContentAdsSettings' <$>
                    (o .:? "size") <*> (o .:? "scriptingLanguage") <*>
                      (o .:? "markupLanguage")
                      <*> (o .:? "type"))
 
 instance ToJSON AdUnitMobileContentAdsSettings where
-        toJSON AdUnitMobileContentAdsSettings{..}
+        toJSON AdUnitMobileContentAdsSettings'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _aumcasSize,
@@ -908,7 +908,7 @@ instance ToJSON AdUnitMobileContentAdsSettings where
 -- leading hash.
 --
 -- /See:/ 'adStyleColors' smart constructor.
-data AdStyleColors = AdStyleColors
+data AdStyleColors = AdStyleColors'
     { _ascText       :: !(Maybe Text)
     , _ascURL        :: !(Maybe Text)
     , _ascBOrder     :: !(Maybe Text)
@@ -932,7 +932,7 @@ data AdStyleColors = AdStyleColors
 adStyleColors
     :: AdStyleColors
 adStyleColors =
-    AdStyleColors
+    AdStyleColors'
     { _ascText = Nothing
     , _ascURL = Nothing
     , _ascBOrder = Nothing
@@ -967,13 +967,13 @@ instance FromJSON AdStyleColors where
         parseJSON
           = withObject "AdStyleColors"
               (\ o ->
-                 AdStyleColors <$>
+                 AdStyleColors' <$>
                    (o .:? "text") <*> (o .:? "url") <*> (o .:? "border")
                      <*> (o .:? "title")
                      <*> (o .:? "background"))
 
 instance ToJSON AdStyleColors where
-        toJSON AdStyleColors{..}
+        toJSON AdStyleColors'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _ascText, ("url" .=) <$> _ascURL,
@@ -984,7 +984,7 @@ instance ToJSON AdStyleColors where
 -- | The backup option to be used in instances where no ad is available.
 --
 -- /See:/ 'adUnitContentAdsSettingsBackupOption' smart constructor.
-data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
+data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption'
     { _aucasboColor :: !(Maybe Text)
     , _aucasboURL   :: !(Maybe Text)
     , _aucasboType  :: !(Maybe Text)
@@ -1002,7 +1002,7 @@ data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption
     :: AdUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption =
-    AdUnitContentAdsSettingsBackupOption
+    AdUnitContentAdsSettingsBackupOption'
     { _aucasboColor = Nothing
     , _aucasboURL = Nothing
     , _aucasboType = Nothing
@@ -1030,12 +1030,12 @@ instance FromJSON
         parseJSON
           = withObject "AdUnitContentAdsSettingsBackupOption"
               (\ o ->
-                 AdUnitContentAdsSettingsBackupOption <$>
+                 AdUnitContentAdsSettingsBackupOption' <$>
                    (o .:? "color") <*> (o .:? "url") <*> (o .:? "type"))
 
 instance ToJSON AdUnitContentAdsSettingsBackupOption
          where
-        toJSON AdUnitContentAdsSettingsBackupOption{..}
+        toJSON AdUnitContentAdsSettingsBackupOption'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _aucasboColor,
@@ -1044,7 +1044,7 @@ instance ToJSON AdUnitContentAdsSettingsBackupOption
 
 --
 -- /See:/ 'adClient' smart constructor.
-data AdClient = AdClient
+data AdClient = AdClient'
     { _adKind              :: !Text
     , _adArcOptIn          :: !(Maybe Bool)
     , _adSupportsReporting :: !(Maybe Bool)
@@ -1068,7 +1068,7 @@ data AdClient = AdClient
 adClient
     :: AdClient
 adClient =
-    AdClient
+    AdClient'
     { _adKind = "adsensehost#adClient"
     , _adArcOptIn = Nothing
     , _adSupportsReporting = Nothing
@@ -1106,7 +1106,7 @@ instance FromJSON AdClient where
         parseJSON
           = withObject "AdClient"
               (\ o ->
-                 AdClient <$>
+                 AdClient' <$>
                    (o .:? "kind" .!= "adsensehost#adClient") <*>
                      (o .:? "arcOptIn")
                      <*> (o .:? "supportsReporting")
@@ -1114,7 +1114,7 @@ instance FromJSON AdClient where
                      <*> (o .:? "productCode"))
 
 instance ToJSON AdClient where
-        toJSON AdClient{..}
+        toJSON AdClient'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _adKind),
@@ -1125,7 +1125,7 @@ instance ToJSON AdClient where
 
 --
 -- /See:/ 'reportHeadersItem' smart constructor.
-data ReportHeadersItem = ReportHeadersItem
+data ReportHeadersItem = ReportHeadersItem'
     { _rhiName     :: !(Maybe Text)
     , _rhiCurrency :: !(Maybe Text)
     , _rhiType     :: !(Maybe Text)
@@ -1143,7 +1143,7 @@ data ReportHeadersItem = ReportHeadersItem
 reportHeadersItem
     :: ReportHeadersItem
 reportHeadersItem =
-    ReportHeadersItem
+    ReportHeadersItem'
     { _rhiName = Nothing
     , _rhiCurrency = Nothing
     , _rhiType = Nothing
@@ -1168,12 +1168,12 @@ instance FromJSON ReportHeadersItem where
         parseJSON
           = withObject "ReportHeadersItem"
               (\ o ->
-                 ReportHeadersItem <$>
+                 ReportHeadersItem' <$>
                    (o .:? "name") <*> (o .:? "currency") <*>
                      (o .:? "type"))
 
 instance ToJSON ReportHeadersItem where
-        toJSON ReportHeadersItem{..}
+        toJSON ReportHeadersItem'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rhiName,
@@ -1182,7 +1182,7 @@ instance ToJSON ReportHeadersItem where
 
 --
 -- /See:/ 'adStyle' smart constructor.
-data AdStyle = AdStyle
+data AdStyle = AdStyle'
     { _assCorners :: !(Maybe Text)
     , _assKind    :: !Text
     , _assFont    :: !(Maybe AdStyleFont)
@@ -1203,7 +1203,7 @@ data AdStyle = AdStyle
 adStyle
     :: AdStyle
 adStyle =
-    AdStyle
+    AdStyle'
     { _assCorners = Nothing
     , _assKind = "adsensehost#adStyle"
     , _assFont = Nothing
@@ -1235,14 +1235,14 @@ instance FromJSON AdStyle where
         parseJSON
           = withObject "AdStyle"
               (\ o ->
-                 AdStyle <$>
+                 AdStyle' <$>
                    (o .:? "corners") <*>
                      (o .:? "kind" .!= "adsensehost#adStyle")
                      <*> (o .:? "font")
                      <*> (o .:? "colors"))
 
 instance ToJSON AdStyle where
-        toJSON AdStyle{..}
+        toJSON AdStyle'{..}
           = object
               (catMaybes
                  [("corners" .=) <$> _assCorners,
@@ -1251,7 +1251,7 @@ instance ToJSON AdStyle where
 
 --
 -- /See:/ 'customChannel' smart constructor.
-data CustomChannel = CustomChannel
+data CustomChannel = CustomChannel'
     { _cKind :: !Text
     , _cName :: !(Maybe Text)
     , _cCode :: !(Maybe Text)
@@ -1272,7 +1272,7 @@ data CustomChannel = CustomChannel
 customChannel
     :: CustomChannel
 customChannel =
-    CustomChannel
+    CustomChannel'
     { _cKind = "adsensehost#customChannel"
     , _cName = Nothing
     , _cCode = Nothing
@@ -1301,14 +1301,14 @@ instance FromJSON CustomChannel where
         parseJSON
           = withObject "CustomChannel"
               (\ o ->
-                 CustomChannel <$>
+                 CustomChannel' <$>
                    (o .:? "kind" .!= "adsensehost#customChannel") <*>
                      (o .:? "name")
                      <*> (o .:? "code")
                      <*> (o .:? "id"))
 
 instance ToJSON CustomChannel where
-        toJSON CustomChannel{..}
+        toJSON CustomChannel'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cKind), ("name" .=) <$> _cName,
@@ -1316,7 +1316,7 @@ instance ToJSON CustomChannel where
 
 --
 -- /See:/ 'urlChannel' smart constructor.
-data URLChannel = URLChannel
+data URLChannel = URLChannel'
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
     , _urlcURLPattern :: !(Maybe Text)
@@ -1334,7 +1334,7 @@ data URLChannel = URLChannel
 urlChannel
     :: URLChannel
 urlChannel =
-    URLChannel
+    URLChannel'
     { _urlcKind = "adsensehost#urlChannel"
     , _urlcId = Nothing
     , _urlcURLPattern = Nothing
@@ -1361,13 +1361,13 @@ instance FromJSON URLChannel where
         parseJSON
           = withObject "URLChannel"
               (\ o ->
-                 URLChannel <$>
+                 URLChannel' <$>
                    (o .:? "kind" .!= "adsensehost#urlChannel") <*>
                      (o .:? "id")
                      <*> (o .:? "urlPattern"))
 
 instance ToJSON URLChannel where
-        toJSON URLChannel{..}
+        toJSON URLChannel'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _urlcKind), ("id" .=) <$> _urlcId,
@@ -1375,7 +1375,7 @@ instance ToJSON URLChannel where
 
 --
 -- /See:/ 'adCode' smart constructor.
-data AdCode = AdCode
+data AdCode = AdCode'
     { _aaKind   :: !Text
     , _aaAdCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1390,7 +1390,7 @@ data AdCode = AdCode
 adCode
     :: AdCode
 adCode =
-    AdCode
+    AdCode'
     { _aaKind = "adsensehost#adCode"
     , _aaAdCode = Nothing
     }
@@ -1407,12 +1407,12 @@ instance FromJSON AdCode where
         parseJSON
           = withObject "AdCode"
               (\ o ->
-                 AdCode <$>
+                 AdCode' <$>
                    (o .:? "kind" .!= "adsensehost#adCode") <*>
                      (o .:? "adCode"))
 
 instance ToJSON AdCode where
-        toJSON AdCode{..}
+        toJSON AdCode'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aaKind),
@@ -1422,7 +1422,7 @@ instance ToJSON AdCode where
 -- (AFMC - deprecated).
 --
 -- /See:/ 'adUnitContentAdsSettings' smart constructor.
-data AdUnitContentAdsSettings = AdUnitContentAdsSettings
+data AdUnitContentAdsSettings = AdUnitContentAdsSettings'
     { _aucasBackupOption :: !(Maybe AdUnitContentAdsSettingsBackupOption)
     , _aucasSize         :: !(Maybe Text)
     , _aucasType         :: !(Maybe Text)
@@ -1440,7 +1440,7 @@ data AdUnitContentAdsSettings = AdUnitContentAdsSettings
 adUnitContentAdsSettings
     :: AdUnitContentAdsSettings
 adUnitContentAdsSettings =
-    AdUnitContentAdsSettings
+    AdUnitContentAdsSettings'
     { _aucasBackupOption = Nothing
     , _aucasSize = Nothing
     , _aucasType = Nothing
@@ -1467,12 +1467,12 @@ instance FromJSON AdUnitContentAdsSettings where
         parseJSON
           = withObject "AdUnitContentAdsSettings"
               (\ o ->
-                 AdUnitContentAdsSettings <$>
+                 AdUnitContentAdsSettings' <$>
                    (o .:? "backupOption") <*> (o .:? "size") <*>
                      (o .:? "type"))
 
 instance ToJSON AdUnitContentAdsSettings where
-        toJSON AdUnitContentAdsSettings{..}
+        toJSON AdUnitContentAdsSettings'{..}
           = object
               (catMaybes
                  [("backupOption" .=) <$> _aucasBackupOption,

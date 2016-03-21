@@ -74,7 +74,7 @@ type DataSetsSetIAMPolicyResource =
 -- See Setting a Policy for more information.
 --
 -- /See:/ 'dataSetsSetIAMPolicy' smart constructor.
-data DataSetsSetIAMPolicy = DataSetsSetIAMPolicy
+data DataSetsSetIAMPolicy = DataSetsSetIAMPolicy'
     { _dssipXgafv          :: !(Maybe Text)
     , _dssipUploadProtocol :: !(Maybe Text)
     , _dssipPp             :: !Bool
@@ -112,7 +112,7 @@ dataSetsSetIAMPolicy
     -> Text -- ^ 'dssipResource'
     -> DataSetsSetIAMPolicy
 dataSetsSetIAMPolicy pDssipPayload_ pDssipResource_ =
-    DataSetsSetIAMPolicy
+    DataSetsSetIAMPolicy'
     { _dssipXgafv = Nothing
     , _dssipUploadProtocol = Nothing
     , _dssipPp = True
@@ -180,7 +180,7 @@ instance GoogleRequest DataSetsSetIAMPolicy where
         type Scopes DataSetsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsSetIAMPolicy{..}
+        requestClient DataSetsSetIAMPolicy'{..}
           = go _dssipResource _dssipXgafv _dssipUploadProtocol
               (Just _dssipPp)
               _dssipAccessToken

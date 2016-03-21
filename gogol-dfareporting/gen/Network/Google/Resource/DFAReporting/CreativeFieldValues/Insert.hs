@@ -58,7 +58,7 @@ type CreativeFieldValuesInsertResource =
 -- | Inserts a new creative field value.
 --
 -- /See:/ 'creativeFieldValuesInsert' smart constructor.
-data CreativeFieldValuesInsert = CreativeFieldValuesInsert
+data CreativeFieldValuesInsert = CreativeFieldValuesInsert'
     { _cfviCreativeFieldId :: !(Textual Int64)
     , _cfviProFileId       :: !(Textual Int64)
     , _cfviPayload         :: !CreativeFieldValue
@@ -79,7 +79,7 @@ creativeFieldValuesInsert
     -> CreativeFieldValue -- ^ 'cfviPayload'
     -> CreativeFieldValuesInsert
 creativeFieldValuesInsert pCfviCreativeFieldId_ pCfviProFileId_ pCfviPayload_ =
-    CreativeFieldValuesInsert
+    CreativeFieldValuesInsert'
     { _cfviCreativeFieldId = _Coerce # pCfviCreativeFieldId_
     , _cfviProFileId = _Coerce # pCfviProFileId_
     , _cfviPayload = pCfviPayload_
@@ -110,7 +110,7 @@ instance GoogleRequest CreativeFieldValuesInsert
              CreativeFieldValue
         type Scopes CreativeFieldValuesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldValuesInsert{..}
+        requestClient CreativeFieldValuesInsert'{..}
           = go _cfviProFileId _cfviCreativeFieldId
               (Just AltJSON)
               _cfviPayload

@@ -62,7 +62,7 @@ type AccountsContainersEnvironmentsPatchResource =
 -- | Updates a GTM Environment. This method supports patch semantics.
 --
 -- /See:/ 'accountsContainersEnvironmentsPatch' smart constructor.
-data AccountsContainersEnvironmentsPatch = AccountsContainersEnvironmentsPatch
+data AccountsContainersEnvironmentsPatch = AccountsContainersEnvironmentsPatch'
     { _acepContainerId   :: !Text
     , _acepFingerprint   :: !(Maybe Text)
     , _acepPayload       :: !Environment
@@ -90,7 +90,7 @@ accountsContainersEnvironmentsPatch
     -> Text -- ^ 'acepEnvironmentId'
     -> AccountsContainersEnvironmentsPatch
 accountsContainersEnvironmentsPatch pAcepContainerId_ pAcepPayload_ pAcepAccountId_ pAcepEnvironmentId_ =
-    AccountsContainersEnvironmentsPatch
+    AccountsContainersEnvironmentsPatch'
     { _acepContainerId = pAcepContainerId_
     , _acepFingerprint = Nothing
     , _acepPayload = pAcepPayload_
@@ -134,7 +134,8 @@ instance GoogleRequest
              Environment
         type Scopes AccountsContainersEnvironmentsPatch =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersEnvironmentsPatch{..}
+        requestClient
+          AccountsContainersEnvironmentsPatch'{..}
           = go _acepAccountId _acepContainerId
               _acepEnvironmentId
               _acepFingerprint

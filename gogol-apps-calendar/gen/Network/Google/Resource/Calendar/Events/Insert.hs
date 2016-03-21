@@ -60,7 +60,7 @@ type EventsInsertResource =
 -- | Creates an event.
 --
 -- /See:/ 'eventsInsert' smart constructor.
-data EventsInsert = EventsInsert
+data EventsInsert = EventsInsert'
     { _eveCalendarId          :: !Text
     , _evePayload             :: !Event
     , _eveMaxAttendees        :: !(Maybe (Textual Int32))
@@ -86,7 +86,7 @@ eventsInsert
     -> Event -- ^ 'evePayload'
     -> EventsInsert
 eventsInsert pEveCalendarId_ pEvePayload_ =
-    EventsInsert
+    EventsInsert'
     { _eveCalendarId = pEveCalendarId_
     , _evePayload = pEvePayload_
     , _eveMaxAttendees = Nothing
@@ -134,7 +134,7 @@ instance GoogleRequest EventsInsert where
         type Rs EventsInsert = Event
         type Scopes EventsInsert =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsInsert{..}
+        requestClient EventsInsert'{..}
           = go _eveCalendarId _eveMaxAttendees
               _eveSendNotifications
               _eveSupportsAttachments

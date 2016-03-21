@@ -54,7 +54,7 @@ type ColumnInsertResource =
 -- | Adds a new column to the table.
 --
 -- /See:/ 'columnInsert' smart constructor.
-data ColumnInsert = ColumnInsert
+data ColumnInsert = ColumnInsert'
     { _ciPayload :: !Column
     , _ciTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ columnInsert
     -> Text -- ^ 'ciTableId'
     -> ColumnInsert
 columnInsert pCiPayload_ pCiTableId_ =
-    ColumnInsert
+    ColumnInsert'
     { _ciPayload = pCiPayload_
     , _ciTableId = pCiTableId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest ColumnInsert where
         type Rs ColumnInsert = Column
         type Scopes ColumnInsert =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient ColumnInsert{..}
+        requestClient ColumnInsert'{..}
           = go _ciTableId (Just AltJSON) _ciPayload
               fusionTablesService
           where go

@@ -58,7 +58,7 @@ type HTTPSHealthChecksGetResource =
 -- HTTPS health checks by making a list() request.
 --
 -- /See:/ 'httpsHealthChecksGet' smart constructor.
-data HTTPSHealthChecksGet = HTTPSHealthChecksGet
+data HTTPSHealthChecksGet = HTTPSHealthChecksGet'
     { _hhcgProject          :: !Text
     , _hhcgHTTPSHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ httpsHealthChecksGet
     -> Text -- ^ 'hhcgHTTPSHealthCheck'
     -> HTTPSHealthChecksGet
 httpsHealthChecksGet pHhcgProject_ pHhcgHTTPSHealthCheck_ =
-    HTTPSHealthChecksGet
+    HTTPSHealthChecksGet'
     { _hhcgProject = pHhcgProject_
     , _hhcgHTTPSHealthCheck = pHhcgHTTPSHealthCheck_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest HTTPSHealthChecksGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient HTTPSHealthChecksGet{..}
+        requestClient HTTPSHealthChecksGet'{..}
           = go _hhcgProject _hhcgHTTPSHealthCheck
               (Just AltJSON)
               computeService

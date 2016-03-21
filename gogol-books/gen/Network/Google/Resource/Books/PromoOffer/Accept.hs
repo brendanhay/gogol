@@ -66,7 +66,7 @@ type PromoOfferAcceptResource =
 -- |
 --
 -- /See:/ 'promoOfferAccept' smart constructor.
-data PromoOfferAccept = PromoOfferAccept
+data PromoOfferAccept = PromoOfferAccept'
     { _poaManufacturer :: !(Maybe Text)
     , _poaSerial       :: !(Maybe Text)
     , _poaDevice       :: !(Maybe Text)
@@ -99,7 +99,7 @@ data PromoOfferAccept = PromoOfferAccept
 promoOfferAccept
     :: PromoOfferAccept
 promoOfferAccept =
-    PromoOfferAccept
+    PromoOfferAccept'
     { _poaManufacturer = Nothing
     , _poaSerial = Nothing
     , _poaDevice = Nothing
@@ -153,7 +153,7 @@ instance GoogleRequest PromoOfferAccept where
         type Rs PromoOfferAccept = ()
         type Scopes PromoOfferAccept =
              '["https://www.googleapis.com/auth/books"]
-        requestClient PromoOfferAccept{..}
+        requestClient PromoOfferAccept'{..}
           = go _poaManufacturer _poaSerial _poaDevice _poaModel
               _poaVolumeId
               _poaOfferId

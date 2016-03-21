@@ -69,7 +69,7 @@ type EditsExpansionFilesPatchResource =
 -- method. This method supports patch semantics.
 --
 -- /See:/ 'editsExpansionFilesPatch' smart constructor.
-data EditsExpansionFilesPatch = EditsExpansionFilesPatch
+data EditsExpansionFilesPatch = EditsExpansionFilesPatch'
     { _eefpPackageName       :: !Text
     , _eefpAPKVersionCode    :: !(Textual Int32)
     , _eefpPayload           :: !ExpansionFile
@@ -98,7 +98,7 @@ editsExpansionFilesPatch
     -> Text -- ^ 'eefpEditId'
     -> EditsExpansionFilesPatch
 editsExpansionFilesPatch pEefpPackageName_ pEefpAPKVersionCode_ pEefpPayload_ pEefpExpansionFileType_ pEefpEditId_ =
-    EditsExpansionFilesPatch
+    EditsExpansionFilesPatch'
     { _eefpPackageName = pEefpPackageName_
     , _eefpAPKVersionCode = _Coerce # pEefpAPKVersionCode_
     , _eefpPayload = pEefpPayload_
@@ -140,7 +140,7 @@ instance GoogleRequest EditsExpansionFilesPatch where
         type Rs EditsExpansionFilesPatch = ExpansionFile
         type Scopes EditsExpansionFilesPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsExpansionFilesPatch{..}
+        requestClient EditsExpansionFilesPatch'{..}
           = go _eefpPackageName _eefpEditId _eefpAPKVersionCode
               _eefpExpansionFileType
               (Just AltJSON)

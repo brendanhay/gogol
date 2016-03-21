@@ -53,7 +53,7 @@ type TablesGetResource =
 -- | Return metadata for a particular table, including the schema.
 --
 -- /See:/ 'tablesGet' smart constructor.
-data TablesGet = TablesGet
+data TablesGet = TablesGet'
     { _tgVersion :: !(Maybe TablesGetVersion)
     , _tgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ tablesGet
     :: Text -- ^ 'tgId'
     -> TablesGet
 tablesGet pTgId_ =
-    TablesGet
+    TablesGet'
     { _tgVersion = Nothing
     , _tgId = pTgId_
     }
@@ -87,7 +87,7 @@ instance GoogleRequest TablesGet where
         type Scopes TablesGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient TablesGet{..}
+        requestClient TablesGet'{..}
           = go _tgId _tgVersion (Just AltJSON)
               mapsEngineService
           where go

@@ -64,7 +64,7 @@ type InstanceGroupsListResource =
 -- project and zone.
 --
 -- /See:/ 'instanceGroupsList' smart constructor.
-data InstanceGroupsList = InstanceGroupsList
+data InstanceGroupsList = InstanceGroupsList'
     { _iglProject    :: !Text
     , _iglZone       :: !Text
     , _iglFilter     :: !(Maybe Text)
@@ -90,7 +90,7 @@ instanceGroupsList
     -> Text -- ^ 'iglZone'
     -> InstanceGroupsList
 instanceGroupsList pIglProject_ pIglZone_ =
-    InstanceGroupsList
+    InstanceGroupsList'
     { _iglProject = pIglProject_
     , _iglZone = pIglZone_
     , _iglFilter = Nothing
@@ -155,7 +155,7 @@ instance GoogleRequest InstanceGroupsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupsList{..}
+        requestClient InstanceGroupsList'{..}
           = go _iglProject _iglZone _iglFilter _iglPageToken
               (Just _iglMaxResults)
               (Just AltJSON)

@@ -71,7 +71,7 @@ type ProjectsRegionsJobsSubmitResource =
 -- | Submits a job to a cluster.
 --
 -- /See:/ 'projectsRegionsJobsSubmit' smart constructor.
-data ProjectsRegionsJobsSubmit = ProjectsRegionsJobsSubmit
+data ProjectsRegionsJobsSubmit = ProjectsRegionsJobsSubmit'
     { _prjsXgafv          :: !(Maybe Text)
     , _prjsUploadProtocol :: !(Maybe Text)
     , _prjsPp             :: !Bool
@@ -113,7 +113,7 @@ projectsRegionsJobsSubmit
     -> Text -- ^ 'prjsProjectId'
     -> ProjectsRegionsJobsSubmit
 projectsRegionsJobsSubmit pPrjsPayload_ pPrjsRegion_ pPrjsProjectId_ =
-    ProjectsRegionsJobsSubmit
+    ProjectsRegionsJobsSubmit'
     { _prjsXgafv = Nothing
     , _prjsUploadProtocol = Nothing
     , _prjsPp = True
@@ -186,7 +186,7 @@ instance GoogleRequest ProjectsRegionsJobsSubmit
         type Rs ProjectsRegionsJobsSubmit = Job
         type Scopes ProjectsRegionsJobsSubmit =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsJobsSubmit{..}
+        requestClient ProjectsRegionsJobsSubmit'{..}
           = go _prjsProjectId _prjsRegion _prjsXgafv
               _prjsUploadProtocol
               (Just _prjsPp)

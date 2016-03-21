@@ -58,7 +58,7 @@ type InstancesFailoverResource =
 -- | Failover the instance to its failover replica instance.
 --
 -- /See:/ 'instancesFailover' smart constructor.
-data InstancesFailover = InstancesFailover
+data InstancesFailover = InstancesFailover'
     { _ifProject  :: !Text
     , _ifPayload  :: !InstancesFailoverRequest
     , _ifInstance :: !Text
@@ -79,7 +79,7 @@ instancesFailover
     -> Text -- ^ 'ifInstance'
     -> InstancesFailover
 instancesFailover pIfProject_ pIfPayload_ pIfInstance_ =
-    InstancesFailover
+    InstancesFailover'
     { _ifProject = pIfProject_
     , _ifPayload = pIfPayload_
     , _ifInstance = pIfInstance_
@@ -105,7 +105,7 @@ instance GoogleRequest InstancesFailover where
         type Scopes InstancesFailover =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesFailover{..}
+        requestClient InstancesFailover'{..}
           = go _ifProject _ifInstance (Just AltJSON) _ifPayload
               sQLAdminService
           where go

@@ -60,7 +60,7 @@ type EventsGetResource =
 -- | Returns an event.
 --
 -- /See:/ 'eventsGet' smart constructor.
-data EventsGet = EventsGet
+data EventsGet = EventsGet'
     { _egCalendarId         :: !Text
     , _egMaxAttendees       :: !(Maybe (Textual Int32))
     , _egTimeZone           :: !(Maybe Text)
@@ -86,7 +86,7 @@ eventsGet
     -> Text -- ^ 'egEventId'
     -> EventsGet
 eventsGet pEgCalendarId_ pEgEventId_ =
-    EventsGet
+    EventsGet'
     { _egCalendarId = pEgCalendarId_
     , _egMaxAttendees = Nothing
     , _egTimeZone = Nothing
@@ -137,7 +137,7 @@ instance GoogleRequest EventsGet where
         type Scopes EventsGet =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient EventsGet{..}
+        requestClient EventsGet'{..}
           = go _egCalendarId _egEventId _egMaxAttendees
               _egTimeZone
               _egAlwaysIncludeEmail

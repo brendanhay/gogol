@@ -56,7 +56,7 @@ type CommentsGetResource =
 -- | Gets a comment by ID.
 --
 -- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
+data CommentsGet = CommentsGet'
     { _cgFileId         :: !Text
     , _cgCommentId      :: !Text
     , _cgIncludeDeleted :: !Bool
@@ -76,7 +76,7 @@ commentsGet
     -> Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgFileId_ pCgCommentId_ =
-    CommentsGet
+    CommentsGet'
     { _cgFileId = pCgFileId_
     , _cgCommentId = pCgCommentId_
     , _cgIncludeDeleted = False
@@ -104,7 +104,7 @@ instance GoogleRequest CommentsGet where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient CommentsGet{..}
+        requestClient CommentsGet'{..}
           = go _cgFileId _cgCommentId (Just _cgIncludeDeleted)
               (Just AltJSON)
               driveService

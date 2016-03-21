@@ -56,7 +56,7 @@ type DomainAliasesInsertResource =
 -- | Inserts a Domain alias of the customer.
 --
 -- /See:/ 'domainAliasesInsert' smart constructor.
-data DomainAliasesInsert = DomainAliasesInsert
+data DomainAliasesInsert = DomainAliasesInsert'
     { _daiPayload  :: !DomainAlias
     , _daiCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ domainAliasesInsert
     -> Text -- ^ 'daiCustomer'
     -> DomainAliasesInsert
 domainAliasesInsert pDaiPayload_ pDaiCustomer_ =
-    DomainAliasesInsert
+    DomainAliasesInsert'
     { _daiPayload = pDaiPayload_
     , _daiCustomer = pDaiCustomer_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest DomainAliasesInsert where
         type Rs DomainAliasesInsert = DomainAlias
         type Scopes DomainAliasesInsert =
              '["https://www.googleapis.com/auth/admin.directory.domain"]
-        requestClient DomainAliasesInsert{..}
+        requestClient DomainAliasesInsert'{..}
           = go _daiCustomer (Just AltJSON) _daiPayload
               directoryService
           where go

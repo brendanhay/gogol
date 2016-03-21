@@ -66,7 +66,7 @@ type ProjectsSinksCreateResource =
 -- | Creates a sink.
 --
 -- /See:/ 'projectsSinksCreate' smart constructor.
-data ProjectsSinksCreate = ProjectsSinksCreate
+data ProjectsSinksCreate = ProjectsSinksCreate'
     { _pscXgafv          :: !(Maybe Text)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
@@ -104,7 +104,7 @@ projectsSinksCreate
     -> Text -- ^ 'pscProjectName'
     -> ProjectsSinksCreate
 projectsSinksCreate pPscPayload_ pPscProjectName_ =
-    ProjectsSinksCreate
+    ProjectsSinksCreate'
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest ProjectsSinksCreate where
         type Scopes ProjectsSinksCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
-        requestClient ProjectsSinksCreate{..}
+        requestClient ProjectsSinksCreate'{..}
           = go _pscProjectName _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken

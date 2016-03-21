@@ -60,7 +60,7 @@ type InstancesImportResource =
 -- Cloud Storage.
 --
 -- /See:/ 'instancesImport' smart constructor.
-data InstancesImport = InstancesImport
+data InstancesImport = InstancesImport'
     { _iiProject  :: !Text
     , _iiPayload  :: !InstancesImportRequest
     , _iiInstance :: !Text
@@ -81,7 +81,7 @@ instancesImport
     -> Text -- ^ 'iiInstance'
     -> InstancesImport
 instancesImport pIiProject_ pIiPayload_ pIiInstance_ =
-    InstancesImport
+    InstancesImport'
     { _iiProject = pIiProject_
     , _iiPayload = pIiPayload_
     , _iiInstance = pIiInstance_
@@ -106,7 +106,7 @@ instance GoogleRequest InstancesImport where
         type Rs InstancesImport = Operation
         type Scopes InstancesImport =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient InstancesImport{..}
+        requestClient InstancesImport'{..}
           = go _iiProject _iiInstance (Just AltJSON) _iiPayload
               sQLAdminService
           where go

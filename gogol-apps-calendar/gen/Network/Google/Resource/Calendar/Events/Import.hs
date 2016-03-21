@@ -59,7 +59,7 @@ type EventsImportResource =
 -- existing event to a calendar.
 --
 -- /See:/ 'eventsImport' smart constructor.
-data EventsImport = EventsImport
+data EventsImport = EventsImport'
     { _eiCalendarId          :: !Text
     , _eiPayload             :: !Event
     , _eiSupportsAttachments :: !(Maybe Bool)
@@ -79,7 +79,7 @@ eventsImport
     -> Event -- ^ 'eiPayload'
     -> EventsImport
 eventsImport pEiCalendarId_ pEiPayload_ =
-    EventsImport
+    EventsImport'
     { _eiCalendarId = pEiCalendarId_
     , _eiPayload = pEiPayload_
     , _eiSupportsAttachments = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest EventsImport where
         type Rs EventsImport = Event
         type Scopes EventsImport =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsImport{..}
+        requestClient EventsImport'{..}
           = go _eiCalendarId _eiSupportsAttachments
               (Just AltJSON)
               _eiPayload

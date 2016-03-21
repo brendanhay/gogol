@@ -55,7 +55,7 @@ type OperatingSystemVersionsGetResource =
 -- | Gets one operating system version by ID.
 --
 -- /See:/ 'operatingSystemVersionsGet' smart constructor.
-data OperatingSystemVersionsGet = OperatingSystemVersionsGet
+data OperatingSystemVersionsGet = OperatingSystemVersionsGet'
     { _osvgProFileId :: !(Textual Int64)
     , _osvgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ operatingSystemVersionsGet
     -> Int64 -- ^ 'osvgId'
     -> OperatingSystemVersionsGet
 operatingSystemVersionsGet pOsvgProFileId_ pOsvgId_ =
-    OperatingSystemVersionsGet
+    OperatingSystemVersionsGet'
     { _osvgProFileId = _Coerce # pOsvgProFileId_
     , _osvgId = _Coerce # pOsvgId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest OperatingSystemVersionsGet
              OperatingSystemVersion
         type Scopes OperatingSystemVersionsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OperatingSystemVersionsGet{..}
+        requestClient OperatingSystemVersionsGet'{..}
           = go _osvgProFileId _osvgId (Just AltJSON)
               dFAReportingService
           where go

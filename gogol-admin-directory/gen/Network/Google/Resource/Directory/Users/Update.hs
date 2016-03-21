@@ -54,7 +54,7 @@ type UsersUpdateResource =
 -- | update user
 --
 -- /See:/ 'usersUpdate' smart constructor.
-data UsersUpdate = UsersUpdate
+data UsersUpdate = UsersUpdate'
     { _uPayload :: !User
     , _uUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersUpdate
     -> Text -- ^ 'uUserKey'
     -> UsersUpdate
 usersUpdate pUPayload_ pUUserKey_ =
-    UsersUpdate
+    UsersUpdate'
     { _uPayload = pUPayload_
     , _uUserKey = pUUserKey_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest UsersUpdate where
         type Rs UsersUpdate = User
         type Scopes UsersUpdate =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersUpdate{..}
+        requestClient UsersUpdate'{..}
           = go _uUserKey (Just AltJSON) _uPayload
               directoryService
           where go

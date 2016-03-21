@@ -74,7 +74,7 @@ type InventoryItemsListResource =
 -- | Retrieves a list of inventory items, possibly filtered.
 --
 -- /See:/ 'inventoryItemsList' smart constructor.
-data InventoryItemsList = InventoryItemsList
+data InventoryItemsList = InventoryItemsList'
     { _iilIds        :: !(Maybe [Textual Int64])
     , _iilProFileId  :: !(Textual Int64)
     , _iilSortOrder  :: !(Maybe InventoryItemsListSortOrder)
@@ -118,7 +118,7 @@ inventoryItemsList
     -> Int64 -- ^ 'iilProjectId'
     -> InventoryItemsList
 inventoryItemsList pIilProFileId_ pIilProjectId_ =
-    InventoryItemsList
+    InventoryItemsList'
     { _iilIds = Nothing
     , _iilProFileId = _Coerce # pIilProFileId_
     , _iilSortOrder = Nothing
@@ -200,7 +200,7 @@ instance GoogleRequest InventoryItemsList where
              InventoryItemsListResponse
         type Scopes InventoryItemsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient InventoryItemsList{..}
+        requestClient InventoryItemsList'{..}
           = go _iilProFileId _iilProjectId
               (_iilIds ^. _Default)
               _iilSortOrder

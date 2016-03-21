@@ -67,7 +67,7 @@ type OperationsGetResource =
 -- API service.
 --
 -- /See:/ 'operationsGet' smart constructor.
-data OperationsGet = OperationsGet
+data OperationsGet = OperationsGet'
     { _ogXgafv          :: !(Maybe Text)
     , _ogUploadProtocol :: !(Maybe Text)
     , _ogPp             :: !Bool
@@ -101,7 +101,7 @@ operationsGet
     :: Text -- ^ 'ogName'
     -> OperationsGet
 operationsGet pOgName_ =
-    OperationsGet
+    OperationsGet'
     { _ogXgafv = Nothing
     , _ogUploadProtocol = Nothing
     , _ogPp = True
@@ -157,7 +157,7 @@ instance GoogleRequest OperationsGet where
         type Scopes OperationsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient OperationsGet{..}
+        requestClient OperationsGet'{..}
           = go _ogName _ogXgafv _ogUploadProtocol (Just _ogPp)
               _ogAccessToken
               _ogUploadType

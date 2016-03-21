@@ -65,7 +65,7 @@ type TransferJobsGetResource =
 -- | Gets a transfer job.
 --
 -- /See:/ 'transferJobsGet' smart constructor.
-data TransferJobsGet = TransferJobsGet
+data TransferJobsGet = TransferJobsGet'
     { _tjgXgafv          :: !(Maybe Text)
     , _tjgUploadProtocol :: !(Maybe Text)
     , _tjgPp             :: !Bool
@@ -102,7 +102,7 @@ transferJobsGet
     :: Text -- ^ 'tjgJobName'
     -> TransferJobsGet
 transferJobsGet pTjgJobName_ =
-    TransferJobsGet
+    TransferJobsGet'
     { _tjgXgafv = Nothing
     , _tjgUploadProtocol = Nothing
     , _tjgPp = True
@@ -166,7 +166,7 @@ instance GoogleRequest TransferJobsGet where
         type Rs TransferJobsGet = TransferJob
         type Scopes TransferJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferJobsGet{..}
+        requestClient TransferJobsGet'{..}
           = go _tjgJobName _tjgXgafv _tjgUploadProtocol
               (Just _tjgPp)
               _tjgAccessToken

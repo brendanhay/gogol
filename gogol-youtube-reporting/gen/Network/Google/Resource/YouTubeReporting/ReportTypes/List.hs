@@ -71,7 +71,7 @@ type ReportTypesListResource =
 -- | Lists report types.
 --
 -- /See:/ 'reportTypesList' smart constructor.
-data ReportTypesList = ReportTypesList
+data ReportTypesList = ReportTypesList'
     { _rtlXgafv                  :: !(Maybe Text)
     , _rtlUploadProtocol         :: !(Maybe Text)
     , _rtlPp                     :: !Bool
@@ -113,7 +113,7 @@ data ReportTypesList = ReportTypesList
 reportTypesList
     :: ReportTypesList
 reportTypesList =
-    ReportTypesList
+    ReportTypesList'
     { _rtlXgafv = Nothing
     , _rtlUploadProtocol = Nothing
     , _rtlPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest ReportTypesList where
         type Scopes ReportTypesList =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient ReportTypesList{..}
+        requestClient ReportTypesList'{..}
           = go _rtlXgafv _rtlUploadProtocol (Just _rtlPp)
               _rtlAccessToken
               _rtlUploadType

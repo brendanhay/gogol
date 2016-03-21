@@ -59,7 +59,7 @@ type InstancesDeleteResource =
 -- Stopping or Deleting an Instance.
 --
 -- /See:/ 'instancesDelete' smart constructor.
-data InstancesDelete = InstancesDelete
+data InstancesDelete = InstancesDelete'
     { _idProject  :: !Text
     , _idZone     :: !Text
     , _idInstance :: !Text
@@ -80,7 +80,7 @@ instancesDelete
     -> Text -- ^ 'idInstance'
     -> InstancesDelete
 instancesDelete pIdProject_ pIdZone_ pIdInstance_ =
-    InstancesDelete
+    InstancesDelete'
     { _idProject = pIdProject_
     , _idZone = pIdZone_
     , _idInstance = pIdInstance_
@@ -105,7 +105,7 @@ instance GoogleRequest InstancesDelete where
         type Scopes InstancesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesDelete{..}
+        requestClient InstancesDelete'{..}
           = go _idProject _idZone _idInstance (Just AltJSON)
               computeService
           where go

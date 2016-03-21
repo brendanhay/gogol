@@ -69,7 +69,7 @@ type BillingAccountsListResource =
 -- [owns](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ 'billingAccountsList' smart constructor.
-data BillingAccountsList = BillingAccountsList
+data BillingAccountsList = BillingAccountsList'
     { _balXgafv          :: !(Maybe Text)
     , _balUploadProtocol :: !(Maybe Text)
     , _balPp             :: !Bool
@@ -105,7 +105,7 @@ data BillingAccountsList = BillingAccountsList
 billingAccountsList
     :: BillingAccountsList
 billingAccountsList =
-    BillingAccountsList
+    BillingAccountsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balPp = True
@@ -174,7 +174,7 @@ instance GoogleRequest BillingAccountsList where
              ListBillingAccountsResponse
         type Scopes BillingAccountsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient BillingAccountsList{..}
+        requestClient BillingAccountsList'{..}
           = go _balXgafv _balUploadProtocol (Just _balPp)
               _balAccessToken
               _balUploadType

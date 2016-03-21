@@ -69,7 +69,7 @@ type UsersMessagesSendResource =
 -- headers.
 --
 -- /See:/ 'usersMessagesSend' smart constructor.
-data UsersMessagesSend = UsersMessagesSend
+data UsersMessagesSend = UsersMessagesSend'
     { _umsPayload :: !Message
     , _umsUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,7 +85,7 @@ usersMessagesSend
     :: Message -- ^ 'umsPayload'
     -> UsersMessagesSend
 usersMessagesSend pUmsPayload_ =
-    UsersMessagesSend
+    UsersMessagesSend'
     { _umsPayload = pUmsPayload_
     , _umsUserId = "me"
     }
@@ -108,7 +108,7 @@ instance GoogleRequest UsersMessagesSend where
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.send"]
-        requestClient UsersMessagesSend{..}
+        requestClient UsersMessagesSend'{..}
           = go _umsUserId (Just AltJSON) _umsPayload
               gmailService
           where go :<|> _
@@ -122,7 +122,7 @@ instance GoogleRequest
         type Scopes (MediaUpload UsersMessagesSend) =
              Scopes UsersMessagesSend
         requestClient
-          (MediaUpload UsersMessagesSend{..} body)
+          (MediaUpload UsersMessagesSend'{..} body)
           = go _umsUserId (Just AltJSON) (Just AltMedia)
               _umsPayload
               body

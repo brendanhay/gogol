@@ -58,7 +58,7 @@ type UsersGetResource =
 -- | retrieve user
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+data UsersGet = UsersGet'
     { _ugViewType        :: !UsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
     , _ugProjection      :: !UsersGetProjection
@@ -80,7 +80,7 @@ usersGet
     :: Text -- ^ 'ugUserKey'
     -> UsersGet
 usersGet pUgUserKey_ =
-    UsersGet
+    UsersGet'
     { _ugViewType = UGVTAdminView
     , _ugCustomFieldMask = Nothing
     , _ugProjection = UGPBasic
@@ -114,7 +114,7 @@ instance GoogleRequest UsersGet where
         type Scopes UsersGet =
              '["https://www.googleapis.com/auth/admin.directory.user",
                "https://www.googleapis.com/auth/admin.directory.user.readonly"]
-        requestClient UsersGet{..}
+        requestClient UsersGet'{..}
           = go _ugUserKey (Just _ugViewType) _ugCustomFieldMask
               (Just _ugProjection)
               (Just AltJSON)

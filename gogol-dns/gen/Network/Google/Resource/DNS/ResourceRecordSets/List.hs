@@ -64,7 +64,7 @@ type ResourceRecordSetsListResource =
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
 --
 -- /See:/ 'resourceRecordSetsList' smart constructor.
-data ResourceRecordSetsList = ResourceRecordSetsList
+data ResourceRecordSetsList = ResourceRecordSetsList'
     { _rrslProject     :: !Text
     , _rrslName        :: !(Maybe Text)
     , _rrslPageToken   :: !(Maybe Text)
@@ -93,7 +93,7 @@ resourceRecordSetsList
     -> Text -- ^ 'rrslManagedZone'
     -> ResourceRecordSetsList
 resourceRecordSetsList pRrslProject_ pRrslManagedZone_ =
-    ResourceRecordSetsList
+    ResourceRecordSetsList'
     { _rrslProject = pRrslProject_
     , _rrslName = Nothing
     , _rrslPageToken = Nothing
@@ -147,7 +147,7 @@ instance GoogleRequest ResourceRecordSetsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ResourceRecordSetsList{..}
+        requestClient ResourceRecordSetsList'{..}
           = go _rrslProject _rrslManagedZone _rrslName
               _rrslPageToken
               _rrslType

@@ -57,7 +57,7 @@ type InAppProductsInsertResource =
 -- | Creates a new in-app product for an app.
 --
 -- /See:/ 'inAppProductsInsert' smart constructor.
-data InAppProductsInsert = InAppProductsInsert
+data InAppProductsInsert = InAppProductsInsert'
     { _iapiAutoConvertMissingPrices :: !(Maybe Bool)
     , _iapiPackageName              :: !Text
     , _iapiPayload                  :: !InAppProduct
@@ -77,7 +77,7 @@ inAppProductsInsert
     -> InAppProduct -- ^ 'iapiPayload'
     -> InAppProductsInsert
 inAppProductsInsert pIapiPackageName_ pIapiPayload_ =
-    InAppProductsInsert
+    InAppProductsInsert'
     { _iapiAutoConvertMissingPrices = Nothing
     , _iapiPackageName = pIapiPackageName_
     , _iapiPayload = pIapiPayload_
@@ -107,7 +107,7 @@ instance GoogleRequest InAppProductsInsert where
         type Rs InAppProductsInsert = InAppProduct
         type Scopes InAppProductsInsert =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient InAppProductsInsert{..}
+        requestClient InAppProductsInsert'{..}
           = go _iapiPackageName _iapiAutoConvertMissingPrices
               (Just AltJSON)
               _iapiPayload

@@ -62,7 +62,7 @@ type ChangesWatchResource =
 -- | Subscribes to changes for a user.
 --
 -- /See:/ 'changesWatch' smart constructor.
-data ChangesWatch = ChangesWatch
+data ChangesWatch = ChangesWatch'
     { _cwPayload           :: !Channel
     , _cwRestrictToMyDrive :: !Bool
     , _cwSpaces            :: !Text
@@ -91,7 +91,7 @@ changesWatch
     -> Text -- ^ 'cwPageToken'
     -> ChangesWatch
 changesWatch pCwPayload_ pCwPageToken_ =
-    ChangesWatch
+    ChangesWatch'
     { _cwPayload = pCwPayload_
     , _cwRestrictToMyDrive = False
     , _cwSpaces = "drive"
@@ -148,7 +148,7 @@ instance GoogleRequest ChangesWatch where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient ChangesWatch{..}
+        requestClient ChangesWatch'{..}
           = go (Just _cwPageToken) (Just _cwRestrictToMyDrive)
               (Just _cwSpaces)
               (Just _cwPageSize)

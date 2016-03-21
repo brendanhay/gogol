@@ -59,7 +59,7 @@ type ResourcesCalendarsPatchResource =
 -- | Updates a calendar resource. This method supports patch semantics.
 --
 -- /See:/ 'resourcesCalendarsPatch' smart constructor.
-data ResourcesCalendarsPatch = ResourcesCalendarsPatch
+data ResourcesCalendarsPatch = ResourcesCalendarsPatch'
     { _rcpPayload            :: !CalendarResource
     , _rcpCustomer           :: !Text
     , _rcpCalendarResourceId :: !Text
@@ -80,7 +80,7 @@ resourcesCalendarsPatch
     -> Text -- ^ 'rcpCalendarResourceId'
     -> ResourcesCalendarsPatch
 resourcesCalendarsPatch pRcpPayload_ pRcpCustomer_ pRcpCalendarResourceId_ =
-    ResourcesCalendarsPatch
+    ResourcesCalendarsPatch'
     { _rcpPayload = pRcpPayload_
     , _rcpCustomer = pRcpCustomer_
     , _rcpCalendarResourceId = pRcpCalendarResourceId_
@@ -108,7 +108,7 @@ instance GoogleRequest ResourcesCalendarsPatch where
         type Rs ResourcesCalendarsPatch = CalendarResource
         type Scopes ResourcesCalendarsPatch =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
-        requestClient ResourcesCalendarsPatch{..}
+        requestClient ResourcesCalendarsPatch'{..}
           = go _rcpCustomer _rcpCalendarResourceId
               (Just AltJSON)
               _rcpPayload

@@ -58,7 +58,7 @@ type SSLCertificatesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'sslCertificatesInsert' smart constructor.
-data SSLCertificatesInsert = SSLCertificatesInsert
+data SSLCertificatesInsert = SSLCertificatesInsert'
     { _sciProject :: !Text
     , _sciPayload :: !SSLCertificate
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ sslCertificatesInsert
     -> SSLCertificate -- ^ 'sciPayload'
     -> SSLCertificatesInsert
 sslCertificatesInsert pSciProject_ pSciPayload_ =
-    SSLCertificatesInsert
+    SSLCertificatesInsert'
     { _sciProject = pSciProject_
     , _sciPayload = pSciPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest SSLCertificatesInsert where
         type Scopes SSLCertificatesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient SSLCertificatesInsert{..}
+        requestClient SSLCertificatesInsert'{..}
           = go _sciProject (Just AltJSON) _sciPayload
               computeService
           where go

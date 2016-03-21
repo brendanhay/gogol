@@ -55,7 +55,7 @@ type OperationsGetResource =
 -- | Gets information about a specific operation.
 --
 -- /See:/ 'operationsGet' smart constructor.
-data OperationsGet = OperationsGet
+data OperationsGet = OperationsGet'
     { _ogProject   :: !Text
     , _ogOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ operationsGet
     -> Text -- ^ 'ogOperation'
     -> OperationsGet
 operationsGet pOgProject_ pOgOperation_ =
-    OperationsGet
+    OperationsGet'
     { _ogProject = pOgProject_
     , _ogOperation = pOgOperation_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest OperationsGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient OperationsGet{..}
+        requestClient OperationsGet'{..}
           = go _ogProject _ogOperation (Just AltJSON)
               deploymentManagerService
           where go

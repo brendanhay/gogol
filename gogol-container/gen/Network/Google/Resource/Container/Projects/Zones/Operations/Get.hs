@@ -71,7 +71,7 @@ type ProjectsZonesOperationsGetResource =
 -- | Gets the specified operation.
 --
 -- /See:/ 'projectsZonesOperationsGet' smart constructor.
-data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet
+data ProjectsZonesOperationsGet = ProjectsZonesOperationsGet'
     { _pzogXgafv          :: !(Maybe Text)
     , _pzogUploadProtocol :: !(Maybe Text)
     , _pzogPp             :: !Bool
@@ -113,7 +113,7 @@ projectsZonesOperationsGet
     -> Text -- ^ 'pzogOperationId'
     -> ProjectsZonesOperationsGet
 projectsZonesOperationsGet pPzogZone_ pPzogProjectId_ pPzogOperationId_ =
-    ProjectsZonesOperationsGet
+    ProjectsZonesOperationsGet'
     { _pzogXgafv = Nothing
     , _pzogUploadProtocol = Nothing
     , _pzogPp = True
@@ -187,7 +187,7 @@ instance GoogleRequest ProjectsZonesOperationsGet
         type Rs ProjectsZonesOperationsGet = Operation
         type Scopes ProjectsZonesOperationsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesOperationsGet{..}
+        requestClient ProjectsZonesOperationsGet'{..}
           = go _pzogProjectId _pzogZone _pzogOperationId
               _pzogXgafv
               _pzogUploadProtocol

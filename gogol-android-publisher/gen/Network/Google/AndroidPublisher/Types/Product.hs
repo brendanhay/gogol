@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | List of localized title and description data.
 --
 -- /See:/ 'inAppProductListings' smart constructor.
-newtype InAppProductListings = InAppProductListings
+newtype InAppProductListings = InAppProductListings'
     { _iaplAddtional :: HashMap Text InAppProductListing
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -36,7 +36,7 @@ inAppProductListings
     :: HashMap Text InAppProductListing -- ^ 'iaplAddtional'
     -> InAppProductListings
 inAppProductListings pIaplAddtional_ =
-    InAppProductListings
+    InAppProductListings'
     { _iaplAddtional = _Coerce # pIaplAddtional_
     }
 
@@ -51,14 +51,15 @@ iaplAddtional
 instance FromJSON InAppProductListings where
         parseJSON
           = withObject "InAppProductListings"
-              (\ o -> InAppProductListings <$> (parseJSONObject o))
+              (\ o ->
+                 InAppProductListings' <$> (parseJSONObject o))
 
 instance ToJSON InAppProductListings where
         toJSON = toJSON . _iaplAddtional
 
 --
 -- /See:/ 'inAppProductsUpdateResponse' smart constructor.
-newtype InAppProductsUpdateResponse = InAppProductsUpdateResponse
+newtype InAppProductsUpdateResponse = InAppProductsUpdateResponse'
     { _iapurInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +71,7 @@ newtype InAppProductsUpdateResponse = InAppProductsUpdateResponse
 inAppProductsUpdateResponse
     :: InAppProductsUpdateResponse
 inAppProductsUpdateResponse =
-    InAppProductsUpdateResponse
+    InAppProductsUpdateResponse'
     { _iapurInAppProduct = Nothing
     }
 
@@ -83,18 +84,18 @@ instance FromJSON InAppProductsUpdateResponse where
         parseJSON
           = withObject "InAppProductsUpdateResponse"
               (\ o ->
-                 InAppProductsUpdateResponse <$>
+                 InAppProductsUpdateResponse' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsUpdateResponse where
-        toJSON InAppProductsUpdateResponse{..}
+        toJSON InAppProductsUpdateResponse'{..}
           = object
               (catMaybes
                  [("inappproduct" .=) <$> _iapurInAppProduct])
 
 --
 -- /See:/ 'monthDay' smart constructor.
-data MonthDay = MonthDay
+data MonthDay = MonthDay'
     { _mdDay   :: !(Maybe (Textual Word32))
     , _mdMonth :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -109,7 +110,7 @@ data MonthDay = MonthDay
 monthDay
     :: MonthDay
 monthDay =
-    MonthDay
+    MonthDay'
     { _mdDay = Nothing
     , _mdMonth = Nothing
     }
@@ -131,17 +132,17 @@ instance FromJSON MonthDay where
         parseJSON
           = withObject "MonthDay"
               (\ o ->
-                 MonthDay <$> (o .:? "day") <*> (o .:? "month"))
+                 MonthDay' <$> (o .:? "day") <*> (o .:? "month"))
 
 instance ToJSON MonthDay where
-        toJSON MonthDay{..}
+        toJSON MonthDay'{..}
           = object
               (catMaybes
                  [("day" .=) <$> _mdDay, ("month" .=) <$> _mdMonth])
 
 --
 -- /See:/ 'track' smart constructor.
-data Track = Track
+data Track = Track'
     { _tVersionCodes :: !(Maybe [Textual Int32])
     , _tTrack        :: !(Maybe Text)
     , _tUserFraction :: !(Maybe (Textual Double))
@@ -159,7 +160,7 @@ data Track = Track
 track
     :: Track
 track =
-    Track
+    Track'
     { _tVersionCodes = Nothing
     , _tTrack = Nothing
     , _tUserFraction = Nothing
@@ -185,12 +186,12 @@ instance FromJSON Track where
         parseJSON
           = withObject "Track"
               (\ o ->
-                 Track <$>
+                 Track' <$>
                    (o .:? "versionCodes" .!= mempty) <*> (o .:? "track")
                      <*> (o .:? "userFraction"))
 
 instance ToJSON Track where
-        toJSON Track{..}
+        toJSON Track'{..}
           = object
               (catMaybes
                  [("versionCodes" .=) <$> _tVersionCodes,
@@ -199,7 +200,7 @@ instance ToJSON Track where
 
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image
+data Image = Image'
     { _iURL  :: !(Maybe Text)
     , _iSha1 :: !(Maybe Text)
     , _iId   :: !(Maybe Text)
@@ -217,7 +218,7 @@ data Image = Image
 image
     :: Image
 image =
-    Image
+    Image'
     { _iURL = Nothing
     , _iSha1 = Nothing
     , _iId = Nothing
@@ -239,11 +240,11 @@ instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
-                 Image <$>
+                 Image' <$>
                    (o .:? "url") <*> (o .:? "sha1") <*> (o .:? "id"))
 
 instance ToJSON Image where
-        toJSON Image{..}
+        toJSON Image'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _iURL, ("sha1" .=) <$> _iSha1,
@@ -251,7 +252,7 @@ instance ToJSON Image where
 
 --
 -- /See:/ 'inAppProductsBatchRequestEntry' smart constructor.
-data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry
+data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry'
     { _iapbreMethodName                 :: !(Maybe Text)
     , _iapbreInAppProductsinsertrequest :: !(Maybe InAppProductsInsertRequest)
     , _iapbreInAppProductsupdaterequest :: !(Maybe InAppProductsUpdateRequest)
@@ -272,7 +273,7 @@ data InAppProductsBatchRequestEntry = InAppProductsBatchRequestEntry
 inAppProductsBatchRequestEntry
     :: InAppProductsBatchRequestEntry
 inAppProductsBatchRequestEntry =
-    InAppProductsBatchRequestEntry
+    InAppProductsBatchRequestEntry'
     { _iapbreMethodName = Nothing
     , _iapbreInAppProductsinsertrequest = Nothing
     , _iapbreInAppProductsupdaterequest = Nothing
@@ -305,14 +306,14 @@ instance FromJSON InAppProductsBatchRequestEntry
         parseJSON
           = withObject "InAppProductsBatchRequestEntry"
               (\ o ->
-                 InAppProductsBatchRequestEntry <$>
+                 InAppProductsBatchRequestEntry' <$>
                    (o .:? "methodName") <*>
                      (o .:? "inappproductsinsertrequest")
                      <*> (o .:? "inappproductsupdaterequest")
                      <*> (o .:? "batchId"))
 
 instance ToJSON InAppProductsBatchRequestEntry where
-        toJSON InAppProductsBatchRequestEntry{..}
+        toJSON InAppProductsBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("methodName" .=) <$> _iapbreMethodName,
@@ -324,7 +325,7 @@ instance ToJSON InAppProductsBatchRequestEntry where
 
 --
 -- /See:/ 'inAppProductListing' smart constructor.
-data InAppProductListing = InAppProductListing
+data InAppProductListing = InAppProductListing'
     { _iaplTitle       :: !(Maybe Text)
     , _iaplDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -339,7 +340,7 @@ data InAppProductListing = InAppProductListing
 inAppProductListing
     :: InAppProductListing
 inAppProductListing =
-    InAppProductListing
+    InAppProductListing'
     { _iaplTitle = Nothing
     , _iaplDescription = Nothing
     }
@@ -357,11 +358,11 @@ instance FromJSON InAppProductListing where
         parseJSON
           = withObject "InAppProductListing"
               (\ o ->
-                 InAppProductListing <$>
+                 InAppProductListing' <$>
                    (o .:? "title") <*> (o .:? "description"))
 
 instance ToJSON InAppProductListing where
-        toJSON InAppProductListing{..}
+        toJSON InAppProductListing'{..}
           = object
               (catMaybes
                  [("title" .=) <$> _iaplTitle,
@@ -369,7 +370,7 @@ instance ToJSON InAppProductListing where
 
 --
 -- /See:/ 'imagesDeleteAllResponse' smart constructor.
-newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
+newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse'
     { _idarDeleted :: Maybe [Image]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -381,7 +382,7 @@ newtype ImagesDeleteAllResponse = ImagesDeleteAllResponse
 imagesDeleteAllResponse
     :: ImagesDeleteAllResponse
 imagesDeleteAllResponse =
-    ImagesDeleteAllResponse
+    ImagesDeleteAllResponse'
     { _idarDeleted = Nothing
     }
 
@@ -395,17 +396,17 @@ instance FromJSON ImagesDeleteAllResponse where
         parseJSON
           = withObject "ImagesDeleteAllResponse"
               (\ o ->
-                 ImagesDeleteAllResponse <$>
+                 ImagesDeleteAllResponse' <$>
                    (o .:? "deleted" .!= mempty))
 
 instance ToJSON ImagesDeleteAllResponse where
-        toJSON ImagesDeleteAllResponse{..}
+        toJSON ImagesDeleteAllResponse'{..}
           = object
               (catMaybes [("deleted" .=) <$> _idarDeleted])
 
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination
+data TokenPagination = TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpPreviousPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -420,7 +421,7 @@ data TokenPagination = TokenPagination
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination
+    TokenPagination'
     { _tpNextPageToken = Nothing
     , _tpPreviousPageToken = Nothing
     }
@@ -439,12 +440,12 @@ instance FromJSON TokenPagination where
         parseJSON
           = withObject "TokenPagination"
               (\ o ->
-                 TokenPagination <$>
+                 TokenPagination' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "previousPageToken"))
 
 instance ToJSON TokenPagination where
-        toJSON TokenPagination{..}
+        toJSON TokenPagination'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tpNextPageToken,
@@ -452,7 +453,7 @@ instance ToJSON TokenPagination where
 
 --
 -- /See:/ 'expansionFile' smart constructor.
-data ExpansionFile = ExpansionFile
+data ExpansionFile = ExpansionFile'
     { _efFileSize          :: !(Maybe (Textual Int64))
     , _efReferencesVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -467,7 +468,7 @@ data ExpansionFile = ExpansionFile
 expansionFile
     :: ExpansionFile
 expansionFile =
-    ExpansionFile
+    ExpansionFile'
     { _efFileSize = Nothing
     , _efReferencesVersion = Nothing
     }
@@ -492,11 +493,11 @@ instance FromJSON ExpansionFile where
         parseJSON
           = withObject "ExpansionFile"
               (\ o ->
-                 ExpansionFile <$>
+                 ExpansionFile' <$>
                    (o .:? "fileSize") <*> (o .:? "referencesVersion"))
 
 instance ToJSON ExpansionFile where
-        toJSON ExpansionFile{..}
+        toJSON ExpansionFile'{..}
           = object
               (catMaybes
                  [("fileSize" .=) <$> _efFileSize,
@@ -504,7 +505,7 @@ instance ToJSON ExpansionFile where
 
 --
 -- /See:/ 'testers' smart constructor.
-data Testers = Testers
+data Testers = Testers'
     { _tGooglePlusCommUnities :: !(Maybe [Text])
     , _tGoogleGroups          :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -519,7 +520,7 @@ data Testers = Testers
 testers
     :: Testers
 testers =
-    Testers
+    Testers'
     { _tGooglePlusCommUnities = Nothing
     , _tGoogleGroups = Nothing
     }
@@ -542,12 +543,12 @@ instance FromJSON Testers where
         parseJSON
           = withObject "Testers"
               (\ o ->
-                 Testers <$>
+                 Testers' <$>
                    (o .:? "googlePlusCommunities" .!= mempty) <*>
                      (o .:? "googleGroups" .!= mempty))
 
 instance ToJSON Testers where
-        toJSON Testers{..}
+        toJSON Testers'{..}
           = object
               (catMaybes
                  [("googlePlusCommunities" .=) <$>
@@ -556,7 +557,7 @@ instance ToJSON Testers where
 
 --
 -- /See:/ 'listing' smart constructor.
-data Listing = Listing
+data Listing = Listing'
     { _lFullDescription  :: !(Maybe Text)
     , _lVideo            :: !(Maybe Text)
     , _lShortDescription :: !(Maybe Text)
@@ -580,7 +581,7 @@ data Listing = Listing
 listing
     :: Listing
 listing =
-    Listing
+    Listing'
     { _lFullDescription = Nothing
     , _lVideo = Nothing
     , _lShortDescription = Nothing
@@ -619,14 +620,14 @@ instance FromJSON Listing where
         parseJSON
           = withObject "Listing"
               (\ o ->
-                 Listing <$>
+                 Listing' <$>
                    (o .:? "fullDescription") <*> (o .:? "video") <*>
                      (o .:? "shortDescription")
                      <*> (o .:? "language")
                      <*> (o .:? "title"))
 
 instance ToJSON Listing where
-        toJSON Listing{..}
+        toJSON Listing'{..}
           = object
               (catMaybes
                  [("fullDescription" .=) <$> _lFullDescription,
@@ -637,7 +638,7 @@ instance ToJSON Listing where
 
 --
 -- /See:/ 'aPK' smart constructor.
-data APK = APK
+data APK = APK'
     { _aVersionCode :: !(Maybe (Textual Int32))
     , _aBinary      :: !(Maybe APKBinary)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -652,7 +653,7 @@ data APK = APK
 aPK
     :: APK
 aPK =
-    APK
+    APK'
     { _aVersionCode = Nothing
     , _aBinary = Nothing
     }
@@ -671,10 +672,10 @@ instance FromJSON APK where
         parseJSON
           = withObject "APK"
               (\ o ->
-                 APK <$> (o .:? "versionCode") <*> (o .:? "binary"))
+                 APK' <$> (o .:? "versionCode") <*> (o .:? "binary"))
 
 instance ToJSON APK where
-        toJSON APK{..}
+        toJSON APK'{..}
           = object
               (catMaybes
                  [("versionCode" .=) <$> _aVersionCode,
@@ -682,7 +683,7 @@ instance ToJSON APK where
 
 --
 -- /See:/ 'subscriptionPurchasesDeferRequest' smart constructor.
-newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
+newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest'
     { _spdrDeferralInfo :: Maybe SubscriptionDeferralInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -694,7 +695,7 @@ newtype SubscriptionPurchasesDeferRequest = SubscriptionPurchasesDeferRequest
 subscriptionPurchasesDeferRequest
     :: SubscriptionPurchasesDeferRequest
 subscriptionPurchasesDeferRequest =
-    SubscriptionPurchasesDeferRequest
+    SubscriptionPurchasesDeferRequest'
     { _spdrDeferralInfo = Nothing
     }
 
@@ -709,19 +710,19 @@ instance FromJSON SubscriptionPurchasesDeferRequest
         parseJSON
           = withObject "SubscriptionPurchasesDeferRequest"
               (\ o ->
-                 SubscriptionPurchasesDeferRequest <$>
+                 SubscriptionPurchasesDeferRequest' <$>
                    (o .:? "deferralInfo"))
 
 instance ToJSON SubscriptionPurchasesDeferRequest
          where
-        toJSON SubscriptionPurchasesDeferRequest{..}
+        toJSON SubscriptionPurchasesDeferRequest'{..}
           = object
               (catMaybes
                  [("deferralInfo" .=) <$> _spdrDeferralInfo])
 
 --
 -- /See:/ 'tracksListResponse' smart constructor.
-data TracksListResponse = TracksListResponse
+data TracksListResponse = TracksListResponse'
     { _tlrTracks :: !(Maybe [Track])
     , _tlrKind   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -736,7 +737,7 @@ data TracksListResponse = TracksListResponse
 tracksListResponse
     :: TracksListResponse
 tracksListResponse =
-    TracksListResponse
+    TracksListResponse'
     { _tlrTracks = Nothing
     , _tlrKind = "androidpublisher#tracksListResponse"
     }
@@ -756,13 +757,13 @@ instance FromJSON TracksListResponse where
         parseJSON
           = withObject "TracksListResponse"
               (\ o ->
-                 TracksListResponse <$>
+                 TracksListResponse' <$>
                    (o .:? "tracks" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "androidpublisher#tracksListResponse"))
 
 instance ToJSON TracksListResponse where
-        toJSON TracksListResponse{..}
+        toJSON TracksListResponse'{..}
           = object
               (catMaybes
                  [("tracks" .=) <$> _tlrTracks,
@@ -770,7 +771,7 @@ instance ToJSON TracksListResponse where
 
 --
 -- /See:/ 'season' smart constructor.
-data Season = Season
+data Season = Season'
     { _sStart      :: !(Maybe MonthDay)
     , _sEnd        :: !(Maybe MonthDay)
     , _sProrations :: !(Maybe [Prorate])
@@ -788,7 +789,7 @@ data Season = Season
 season
     :: Season
 season =
-    Season
+    Season'
     { _sStart = Nothing
     , _sEnd = Nothing
     , _sProrations = Nothing
@@ -816,12 +817,12 @@ instance FromJSON Season where
         parseJSON
           = withObject "Season"
               (\ o ->
-                 Season <$>
+                 Season' <$>
                    (o .:? "start") <*> (o .:? "end") <*>
                      (o .:? "prorations" .!= mempty))
 
 instance ToJSON Season where
-        toJSON Season{..}
+        toJSON Season'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _sStart, ("end" .=) <$> _sEnd,
@@ -829,7 +830,7 @@ instance ToJSON Season where
 
 --
 -- /See:/ 'pageInfo' smart constructor.
-data PageInfo = PageInfo
+data PageInfo = PageInfo'
     { _piResultPerPage :: !(Maybe (Textual Int32))
     , _piTotalResults  :: !(Maybe (Textual Int32))
     , _piStartIndex    :: !(Maybe (Textual Int32))
@@ -847,7 +848,7 @@ data PageInfo = PageInfo
 pageInfo
     :: PageInfo
 pageInfo =
-    PageInfo
+    PageInfo'
     { _piResultPerPage = Nothing
     , _piTotalResults = Nothing
     , _piStartIndex = Nothing
@@ -874,12 +875,12 @@ instance FromJSON PageInfo where
         parseJSON
           = withObject "PageInfo"
               (\ o ->
-                 PageInfo <$>
+                 PageInfo' <$>
                    (o .:? "resultPerPage") <*> (o .:? "totalResults")
                      <*> (o .:? "startIndex"))
 
 instance ToJSON PageInfo where
-        toJSON PageInfo{..}
+        toJSON PageInfo'{..}
           = object
               (catMaybes
                  [("resultPerPage" .=) <$> _piResultPerPage,
@@ -888,7 +889,7 @@ instance ToJSON PageInfo where
 
 --
 -- /See:/ 'imagesListResponse' smart constructor.
-newtype ImagesListResponse = ImagesListResponse
+newtype ImagesListResponse = ImagesListResponse'
     { _ilrImages :: Maybe [Image]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -900,7 +901,7 @@ newtype ImagesListResponse = ImagesListResponse
 imagesListResponse
     :: ImagesListResponse
 imagesListResponse =
-    ImagesListResponse
+    ImagesListResponse'
     { _ilrImages = Nothing
     }
 
@@ -914,17 +915,17 @@ instance FromJSON ImagesListResponse where
         parseJSON
           = withObject "ImagesListResponse"
               (\ o ->
-                 ImagesListResponse <$> (o .:? "images" .!= mempty))
+                 ImagesListResponse' <$> (o .:? "images" .!= mempty))
 
 instance ToJSON ImagesListResponse where
-        toJSON ImagesListResponse{..}
+        toJSON ImagesListResponse'{..}
           = object (catMaybes [("images" .=) <$> _ilrImages])
 
 -- | Represents an edit of an app. An edit allows clients to make multiple
 -- changes before committing them in one operation.
 --
 -- /See:/ 'appEdit' smart constructor.
-data AppEdit = AppEdit
+data AppEdit = AppEdit'
     { _aeId                :: !(Maybe Text)
     , _aeExpiryTimeSeconds :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -939,7 +940,7 @@ data AppEdit = AppEdit
 appEdit
     :: AppEdit
 appEdit =
-    AppEdit
+    AppEdit'
     { _aeId = Nothing
     , _aeExpiryTimeSeconds = Nothing
     }
@@ -959,11 +960,11 @@ instance FromJSON AppEdit where
         parseJSON
           = withObject "AppEdit"
               (\ o ->
-                 AppEdit <$>
+                 AppEdit' <$>
                    (o .:? "id") <*> (o .:? "expiryTimeSeconds"))
 
 instance ToJSON AppEdit where
-        toJSON AppEdit{..}
+        toJSON AppEdit'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _aeId,
@@ -973,7 +974,7 @@ instance ToJSON AppEdit where
 -- product purchase.
 --
 -- /See:/ 'productPurchase' smart constructor.
-data ProductPurchase = ProductPurchase
+data ProductPurchase = ProductPurchase'
     { _ppPurchaseState      :: !(Maybe (Textual Int32))
     , _ppConsumptionState   :: !(Maybe (Textual Int32))
     , _ppKind               :: !Text
@@ -997,7 +998,7 @@ data ProductPurchase = ProductPurchase
 productPurchase
     :: ProductPurchase
 productPurchase =
-    ProductPurchase
+    ProductPurchase'
     { _ppPurchaseState = Nothing
     , _ppConsumptionState = Nothing
     , _ppKind = "androidpublisher#productPurchase"
@@ -1045,7 +1046,7 @@ instance FromJSON ProductPurchase where
         parseJSON
           = withObject "ProductPurchase"
               (\ o ->
-                 ProductPurchase <$>
+                 ProductPurchase' <$>
                    (o .:? "purchaseState") <*>
                      (o .:? "consumptionState")
                      <*>
@@ -1054,7 +1055,7 @@ instance FromJSON ProductPurchase where
                      <*> (o .:? "developerPayload"))
 
 instance ToJSON ProductPurchase where
-        toJSON ProductPurchase{..}
+        toJSON ProductPurchase'{..}
           = object
               (catMaybes
                  [("purchaseState" .=) <$> _ppPurchaseState,
@@ -1065,7 +1066,7 @@ instance ToJSON ProductPurchase where
 
 --
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
-newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
+newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse'
     { _spdrNewExpiryTimeMillis :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1077,7 +1078,7 @@ newtype SubscriptionPurchasesDeferResponse = SubscriptionPurchasesDeferResponse
 subscriptionPurchasesDeferResponse
     :: SubscriptionPurchasesDeferResponse
 subscriptionPurchasesDeferResponse =
-    SubscriptionPurchasesDeferResponse
+    SubscriptionPurchasesDeferResponse'
     { _spdrNewExpiryTimeMillis = Nothing
     }
 
@@ -1094,12 +1095,12 @@ instance FromJSON SubscriptionPurchasesDeferResponse
         parseJSON
           = withObject "SubscriptionPurchasesDeferResponse"
               (\ o ->
-                 SubscriptionPurchasesDeferResponse <$>
+                 SubscriptionPurchasesDeferResponse' <$>
                    (o .:? "newExpiryTimeMillis"))
 
 instance ToJSON SubscriptionPurchasesDeferResponse
          where
-        toJSON SubscriptionPurchasesDeferResponse{..}
+        toJSON SubscriptionPurchasesDeferResponse'{..}
           = object
               (catMaybes
                  [("newExpiryTimeMillis" .=) <$>
@@ -1107,7 +1108,7 @@ instance ToJSON SubscriptionPurchasesDeferResponse
 
 --
 -- /See:/ 'aPKListing' smart constructor.
-data APKListing = APKListing
+data APKListing = APKListing'
     { _apklLanguage      :: !(Maybe Text)
     , _apklRecentChanges :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1122,7 +1123,7 @@ data APKListing = APKListing
 aPKListing
     :: APKListing
 aPKListing =
-    APKListing
+    APKListing'
     { _apklLanguage = Nothing
     , _apklRecentChanges = Nothing
     }
@@ -1142,11 +1143,11 @@ instance FromJSON APKListing where
         parseJSON
           = withObject "APKListing"
               (\ o ->
-                 APKListing <$>
+                 APKListing' <$>
                    (o .:? "language") <*> (o .:? "recentChanges"))
 
 instance ToJSON APKListing where
-        toJSON APKListing{..}
+        toJSON APKListing'{..}
           = object
               (catMaybes
                  [("language" .=) <$> _apklLanguage,
@@ -1156,7 +1157,7 @@ instance ToJSON APKListing where
 -- subscription purchase.
 --
 -- /See:/ 'subscriptionPurchase' smart constructor.
-data SubscriptionPurchase = SubscriptionPurchase
+data SubscriptionPurchase = SubscriptionPurchase'
     { _spKind             :: !Text
     , _spExpiryTimeMillis :: !(Maybe (Textual Int64))
     , _spAutoRenewing     :: !(Maybe Bool)
@@ -1177,7 +1178,7 @@ data SubscriptionPurchase = SubscriptionPurchase
 subscriptionPurchase
     :: SubscriptionPurchase
 subscriptionPurchase =
-    SubscriptionPurchase
+    SubscriptionPurchase'
     { _spKind = "androidpublisher#subscriptionPurchase"
     , _spExpiryTimeMillis = Nothing
     , _spAutoRenewing = Nothing
@@ -1214,7 +1215,7 @@ instance FromJSON SubscriptionPurchase where
         parseJSON
           = withObject "SubscriptionPurchase"
               (\ o ->
-                 SubscriptionPurchase <$>
+                 SubscriptionPurchase' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#subscriptionPurchase")
                      <*> (o .:? "expiryTimeMillis")
@@ -1222,7 +1223,7 @@ instance FromJSON SubscriptionPurchase where
                      <*> (o .:? "startTimeMillis"))
 
 instance ToJSON SubscriptionPurchase where
-        toJSON SubscriptionPurchase{..}
+        toJSON SubscriptionPurchase'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _spKind),
@@ -1232,7 +1233,7 @@ instance ToJSON SubscriptionPurchase where
 
 --
 -- /See:/ 'appDetails' smart constructor.
-data AppDetails = AppDetails
+data AppDetails = AppDetails'
     { _adContactPhone    :: !(Maybe Text)
     , _adContactEmail    :: !(Maybe Text)
     , _adContactWebsite  :: !(Maybe Text)
@@ -1253,7 +1254,7 @@ data AppDetails = AppDetails
 appDetails
     :: AppDetails
 appDetails =
-    AppDetails
+    AppDetails'
     { _adContactPhone = Nothing
     , _adContactEmail = Nothing
     , _adContactWebsite = Nothing
@@ -1288,13 +1289,13 @@ instance FromJSON AppDetails where
         parseJSON
           = withObject "AppDetails"
               (\ o ->
-                 AppDetails <$>
+                 AppDetails' <$>
                    (o .:? "contactPhone") <*> (o .:? "contactEmail") <*>
                      (o .:? "contactWebsite")
                      <*> (o .:? "defaultLanguage"))
 
 instance ToJSON AppDetails where
-        toJSON AppDetails{..}
+        toJSON AppDetails'{..}
           = object
               (catMaybes
                  [("contactPhone" .=) <$> _adContactPhone,
@@ -1306,7 +1307,7 @@ instance ToJSON AppDetails where
 -- products can never be free.
 --
 -- /See:/ 'inAppProductPrices' smart constructor.
-newtype InAppProductPrices = InAppProductPrices
+newtype InAppProductPrices = InAppProductPrices'
     { _iAppAddtional :: HashMap Text Price
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1319,7 +1320,7 @@ inAppProductPrices
     :: HashMap Text Price -- ^ 'iAppAddtional'
     -> InAppProductPrices
 inAppProductPrices pIAppAddtional_ =
-    InAppProductPrices
+    InAppProductPrices'
     { _iAppAddtional = _Coerce # pIAppAddtional_
     }
 
@@ -1333,14 +1334,14 @@ iAppAddtional
 instance FromJSON InAppProductPrices where
         parseJSON
           = withObject "InAppProductPrices"
-              (\ o -> InAppProductPrices <$> (parseJSONObject o))
+              (\ o -> InAppProductPrices' <$> (parseJSONObject o))
 
 instance ToJSON InAppProductPrices where
         toJSON = toJSON . _iAppAddtional
 
 --
 -- /See:/ 'inAppProductsBatchRequest' smart constructor.
-newtype InAppProductsBatchRequest = InAppProductsBatchRequest
+newtype InAppProductsBatchRequest = InAppProductsBatchRequest'
     { _iapbrEntrys :: Maybe [InAppProductsBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1352,7 +1353,7 @@ newtype InAppProductsBatchRequest = InAppProductsBatchRequest
 inAppProductsBatchRequest
     :: InAppProductsBatchRequest
 inAppProductsBatchRequest =
-    InAppProductsBatchRequest
+    InAppProductsBatchRequest'
     { _iapbrEntrys = Nothing
     }
 
@@ -1366,11 +1367,11 @@ instance FromJSON InAppProductsBatchRequest where
         parseJSON
           = withObject "InAppProductsBatchRequest"
               (\ o ->
-                 InAppProductsBatchRequest <$>
+                 InAppProductsBatchRequest' <$>
                    (o .:? "entrys" .!= mempty))
 
 instance ToJSON InAppProductsBatchRequest where
-        toJSON InAppProductsBatchRequest{..}
+        toJSON InAppProductsBatchRequest'{..}
           = object (catMaybes [("entrys" .=) <$> _iapbrEntrys])
 
 -- | Defines an APK available for this application that is hosted externally
@@ -1379,7 +1380,7 @@ instance ToJSON InAppProductsBatchRequest where
 -- restricted to the enterprise private channel
 --
 -- /See:/ 'externallyHostedAPK' smart constructor.
-data ExternallyHostedAPK = ExternallyHostedAPK
+data ExternallyHostedAPK = ExternallyHostedAPK'
     { _ehapkApplicationLabel    :: !(Maybe Text)
     , _ehapkMaximumSdk          :: !(Maybe (Textual Int32))
     , _ehapkNATiveCodes         :: !(Maybe [Text])
@@ -1433,7 +1434,7 @@ data ExternallyHostedAPK = ExternallyHostedAPK
 externallyHostedAPK
     :: ExternallyHostedAPK
 externallyHostedAPK =
-    ExternallyHostedAPK
+    ExternallyHostedAPK'
     { _ehapkApplicationLabel = Nothing
     , _ehapkMaximumSdk = Nothing
     , _ehapkNATiveCodes = Nothing
@@ -1560,7 +1561,7 @@ instance FromJSON ExternallyHostedAPK where
         parseJSON
           = withObject "ExternallyHostedAPK"
               (\ o ->
-                 ExternallyHostedAPK <$>
+                 ExternallyHostedAPK' <$>
                    (o .:? "applicationLabel") <*> (o .:? "maximumSdk")
                      <*> (o .:? "nativeCodes" .!= mempty)
                      <*> (o .:? "versionCode")
@@ -1577,7 +1578,7 @@ instance FromJSON ExternallyHostedAPK where
                      <*> (o .:? "certificateBase64s" .!= mempty))
 
 instance ToJSON ExternallyHostedAPK where
-        toJSON ExternallyHostedAPK{..}
+        toJSON ExternallyHostedAPK'{..}
           = object
               (catMaybes
                  [("applicationLabel" .=) <$> _ehapkApplicationLabel,
@@ -1600,7 +1601,7 @@ instance ToJSON ExternallyHostedAPK where
 
 --
 -- /See:/ 'expansionFilesUploadResponse' smart constructor.
-newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
+newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse'
     { _efurExpansionFile :: Maybe ExpansionFile
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1612,7 +1613,7 @@ newtype ExpansionFilesUploadResponse = ExpansionFilesUploadResponse
 expansionFilesUploadResponse
     :: ExpansionFilesUploadResponse
 expansionFilesUploadResponse =
-    ExpansionFilesUploadResponse
+    ExpansionFilesUploadResponse'
     { _efurExpansionFile = Nothing
     }
 
@@ -1625,18 +1626,18 @@ instance FromJSON ExpansionFilesUploadResponse where
         parseJSON
           = withObject "ExpansionFilesUploadResponse"
               (\ o ->
-                 ExpansionFilesUploadResponse <$>
+                 ExpansionFilesUploadResponse' <$>
                    (o .:? "expansionFile"))
 
 instance ToJSON ExpansionFilesUploadResponse where
-        toJSON ExpansionFilesUploadResponse{..}
+        toJSON ExpansionFilesUploadResponse'{..}
           = object
               (catMaybes
                  [("expansionFile" .=) <$> _efurExpansionFile])
 
 --
 -- /See:/ 'imagesUploadResponse' smart constructor.
-newtype ImagesUploadResponse = ImagesUploadResponse
+newtype ImagesUploadResponse = ImagesUploadResponse'
     { _iurImage :: Maybe Image
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1648,7 +1649,7 @@ newtype ImagesUploadResponse = ImagesUploadResponse
 imagesUploadResponse
     :: ImagesUploadResponse
 imagesUploadResponse =
-    ImagesUploadResponse
+    ImagesUploadResponse'
     { _iurImage = Nothing
     }
 
@@ -1658,15 +1659,15 @@ iurImage = lens _iurImage (\ s a -> s{_iurImage = a})
 instance FromJSON ImagesUploadResponse where
         parseJSON
           = withObject "ImagesUploadResponse"
-              (\ o -> ImagesUploadResponse <$> (o .:? "image"))
+              (\ o -> ImagesUploadResponse' <$> (o .:? "image"))
 
 instance ToJSON ImagesUploadResponse where
-        toJSON ImagesUploadResponse{..}
+        toJSON ImagesUploadResponse'{..}
           = object (catMaybes [("image" .=) <$> _iurImage])
 
 --
 -- /See:/ 'prorate' smart constructor.
-data Prorate = Prorate
+data Prorate = Prorate'
     { _pStart        :: !(Maybe MonthDay)
     , _pDefaultPrice :: !(Maybe Price)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1681,7 +1682,7 @@ data Prorate = Prorate
 prorate
     :: Prorate
 prorate =
-    Prorate
+    Prorate'
     { _pStart = Nothing
     , _pDefaultPrice = Nothing
     }
@@ -1703,11 +1704,11 @@ instance FromJSON Prorate where
         parseJSON
           = withObject "Prorate"
               (\ o ->
-                 Prorate <$>
+                 Prorate' <$>
                    (o .:? "start") <*> (o .:? "defaultPrice"))
 
 instance ToJSON Prorate where
-        toJSON Prorate{..}
+        toJSON Prorate'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _pStart,
@@ -1715,7 +1716,7 @@ instance ToJSON Prorate where
 
 --
 -- /See:/ 'inAppProductsListResponse' smart constructor.
-data InAppProductsListResponse = InAppProductsListResponse
+data InAppProductsListResponse = InAppProductsListResponse'
     { _iaplrTokenPagination :: !(Maybe TokenPagination)
     , _iaplrPageInfo        :: !(Maybe PageInfo)
     , _iaplrKind            :: !Text
@@ -1736,7 +1737,7 @@ data InAppProductsListResponse = InAppProductsListResponse
 inAppProductsListResponse
     :: InAppProductsListResponse
 inAppProductsListResponse =
-    InAppProductsListResponse
+    InAppProductsListResponse'
     { _iaplrTokenPagination = Nothing
     , _iaplrPageInfo = Nothing
     , _iaplrKind = "androidpublisher#inappproductsListResponse"
@@ -1770,14 +1771,14 @@ instance FromJSON InAppProductsListResponse where
         parseJSON
           = withObject "InAppProductsListResponse"
               (\ o ->
-                 InAppProductsListResponse <$>
+                 InAppProductsListResponse' <$>
                    (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
                      (o .:? "kind" .!=
                         "androidpublisher#inappproductsListResponse")
                      <*> (o .:? "inappproduct" .!= mempty))
 
 instance ToJSON InAppProductsListResponse where
-        toJSON InAppProductsListResponse{..}
+        toJSON InAppProductsListResponse'{..}
           = object
               (catMaybes
                  [("tokenPagination" .=) <$> _iaplrTokenPagination,
@@ -1787,7 +1788,7 @@ instance ToJSON InAppProductsListResponse where
 
 --
 -- /See:/ 'aPKListingsListResponse' smart constructor.
-data APKListingsListResponse = APKListingsListResponse
+data APKListingsListResponse = APKListingsListResponse'
     { _apkllrKind     :: !Text
     , _apkllrListings :: !(Maybe [APKListing])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1802,7 +1803,7 @@ data APKListingsListResponse = APKListingsListResponse
 aPKListingsListResponse
     :: APKListingsListResponse
 aPKListingsListResponse =
-    APKListingsListResponse
+    APKListingsListResponse'
     { _apkllrKind = "androidpublisher#apkListingsListResponse"
     , _apkllrListings = Nothing
     }
@@ -1824,13 +1825,13 @@ instance FromJSON APKListingsListResponse where
         parseJSON
           = withObject "APKListingsListResponse"
               (\ o ->
-                 APKListingsListResponse <$>
+                 APKListingsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#apkListingsListResponse")
                      <*> (o .:? "listings" .!= mempty))
 
 instance ToJSON APKListingsListResponse where
-        toJSON APKListingsListResponse{..}
+        toJSON APKListingsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _apkllrKind),
@@ -1838,7 +1839,7 @@ instance ToJSON APKListingsListResponse where
 
 --
 -- /See:/ 'inAppProductsInsertResponse' smart constructor.
-newtype InAppProductsInsertResponse = InAppProductsInsertResponse
+newtype InAppProductsInsertResponse = InAppProductsInsertResponse'
     { _iapirInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1850,7 +1851,7 @@ newtype InAppProductsInsertResponse = InAppProductsInsertResponse
 inAppProductsInsertResponse
     :: InAppProductsInsertResponse
 inAppProductsInsertResponse =
-    InAppProductsInsertResponse
+    InAppProductsInsertResponse'
     { _iapirInAppProduct = Nothing
     }
 
@@ -1863,18 +1864,18 @@ instance FromJSON InAppProductsInsertResponse where
         parseJSON
           = withObject "InAppProductsInsertResponse"
               (\ o ->
-                 InAppProductsInsertResponse <$>
+                 InAppProductsInsertResponse' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsInsertResponse where
-        toJSON InAppProductsInsertResponse{..}
+        toJSON InAppProductsInsertResponse'{..}
           = object
               (catMaybes
                  [("inappproduct" .=) <$> _iapirInAppProduct])
 
 --
 -- /See:/ 'aPKsAddExternallyHostedResponse' smart constructor.
-newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse
+newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse'
     { _apkaehrExternallyHostedAPK :: Maybe ExternallyHostedAPK
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1886,7 +1887,7 @@ newtype APKsAddExternallyHostedResponse = APKsAddExternallyHostedResponse
 aPKsAddExternallyHostedResponse
     :: APKsAddExternallyHostedResponse
 aPKsAddExternallyHostedResponse =
-    APKsAddExternallyHostedResponse
+    APKsAddExternallyHostedResponse'
     { _apkaehrExternallyHostedAPK = Nothing
     }
 
@@ -1901,11 +1902,11 @@ instance FromJSON APKsAddExternallyHostedResponse
         parseJSON
           = withObject "APKsAddExternallyHostedResponse"
               (\ o ->
-                 APKsAddExternallyHostedResponse <$>
+                 APKsAddExternallyHostedResponse' <$>
                    (o .:? "externallyHostedApk"))
 
 instance ToJSON APKsAddExternallyHostedResponse where
-        toJSON APKsAddExternallyHostedResponse{..}
+        toJSON APKsAddExternallyHostedResponse'{..}
           = object
               (catMaybes
                  [("externallyHostedApk" .=) <$>
@@ -1915,7 +1916,7 @@ instance ToJSON APKsAddExternallyHostedResponse where
 -- subscription purchase to a future expiry time.
 --
 -- /See:/ 'subscriptionDeferralInfo' smart constructor.
-data SubscriptionDeferralInfo = SubscriptionDeferralInfo
+data SubscriptionDeferralInfo = SubscriptionDeferralInfo'
     { _sdiDesiredExpiryTimeMillis  :: !(Maybe (Textual Int64))
     , _sdiExpectedExpiryTimeMillis :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1930,7 +1931,7 @@ data SubscriptionDeferralInfo = SubscriptionDeferralInfo
 subscriptionDeferralInfo
     :: SubscriptionDeferralInfo
 subscriptionDeferralInfo =
-    SubscriptionDeferralInfo
+    SubscriptionDeferralInfo'
     { _sdiDesiredExpiryTimeMillis = Nothing
     , _sdiExpectedExpiryTimeMillis = Nothing
     }
@@ -1957,12 +1958,12 @@ instance FromJSON SubscriptionDeferralInfo where
         parseJSON
           = withObject "SubscriptionDeferralInfo"
               (\ o ->
-                 SubscriptionDeferralInfo <$>
+                 SubscriptionDeferralInfo' <$>
                    (o .:? "desiredExpiryTimeMillis") <*>
                      (o .:? "expectedExpiryTimeMillis"))
 
 instance ToJSON SubscriptionDeferralInfo where
-        toJSON SubscriptionDeferralInfo{..}
+        toJSON SubscriptionDeferralInfo'{..}
           = object
               (catMaybes
                  [("desiredExpiryTimeMillis" .=) <$>
@@ -1972,7 +1973,7 @@ instance ToJSON SubscriptionDeferralInfo where
 
 --
 -- /See:/ 'inAppProduct' smart constructor.
-data InAppProduct = InAppProduct
+data InAppProduct = InAppProduct'
     { _iapStatus             :: !(Maybe Text)
     , _iapTrialPeriod        :: !(Maybe Text)
     , _iapPackageName        :: !(Maybe Text)
@@ -2014,7 +2015,7 @@ data InAppProduct = InAppProduct
 inAppProduct
     :: InAppProduct
 inAppProduct =
-    InAppProduct
+    InAppProduct'
     { _iapStatus = Nothing
     , _iapTrialPeriod = Nothing
     , _iapPackageName = Nothing
@@ -2099,7 +2100,7 @@ instance FromJSON InAppProduct where
         parseJSON
           = withObject "InAppProduct"
               (\ o ->
-                 InAppProduct <$>
+                 InAppProduct' <$>
                    (o .:? "status") <*> (o .:? "trialPeriod") <*>
                      (o .:? "packageName")
                      <*> (o .:? "season")
@@ -2112,7 +2113,7 @@ instance FromJSON InAppProduct where
                      <*> (o .:? "defaultLanguage"))
 
 instance ToJSON InAppProduct where
-        toJSON InAppProduct{..}
+        toJSON InAppProduct'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iapStatus,
@@ -2128,7 +2129,7 @@ instance ToJSON InAppProduct where
 
 --
 -- /See:/ 'inAppProductsBatchResponseEntry' smart constructor.
-data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry
+data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry'
     { _iInAppProductsupdateresponse :: !(Maybe InAppProductsUpdateResponse)
     , _iInAppProductsinsertresponse :: !(Maybe InAppProductsInsertResponse)
     , _iBatchId                     :: !(Maybe (Textual Word32))
@@ -2146,7 +2147,7 @@ data InAppProductsBatchResponseEntry = InAppProductsBatchResponseEntry
 inAppProductsBatchResponseEntry
     :: InAppProductsBatchResponseEntry
 inAppProductsBatchResponseEntry =
-    InAppProductsBatchResponseEntry
+    InAppProductsBatchResponseEntry'
     { _iInAppProductsupdateresponse = Nothing
     , _iInAppProductsinsertresponse = Nothing
     , _iBatchId = Nothing
@@ -2172,13 +2173,13 @@ instance FromJSON InAppProductsBatchResponseEntry
         parseJSON
           = withObject "InAppProductsBatchResponseEntry"
               (\ o ->
-                 InAppProductsBatchResponseEntry <$>
+                 InAppProductsBatchResponseEntry' <$>
                    (o .:? "inappproductsupdateresponse") <*>
                      (o .:? "inappproductsinsertresponse")
                      <*> (o .:? "batchId"))
 
 instance ToJSON InAppProductsBatchResponseEntry where
-        toJSON InAppProductsBatchResponseEntry{..}
+        toJSON InAppProductsBatchResponseEntry'{..}
           = object
               (catMaybes
                  [("inappproductsupdateresponse" .=) <$>
@@ -2189,7 +2190,7 @@ instance ToJSON InAppProductsBatchResponseEntry where
 
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price
+data Price = Price'
     { _pPriceMicros :: !(Maybe Text)
     , _pCurrency    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2204,7 +2205,7 @@ data Price = Price
 price
     :: Price
 price =
-    Price
+    Price'
     { _pPriceMicros = Nothing
     , _pCurrency = Nothing
     }
@@ -2224,11 +2225,11 @@ instance FromJSON Price where
         parseJSON
           = withObject "Price"
               (\ o ->
-                 Price <$>
+                 Price' <$>
                    (o .:? "priceMicros") <*> (o .:? "currency"))
 
 instance ToJSON Price where
-        toJSON Price{..}
+        toJSON Price'{..}
           = object
               (catMaybes
                  [("priceMicros" .=) <$> _pPriceMicros,
@@ -2237,7 +2238,7 @@ instance ToJSON Price where
 -- | Represents the binary payload of an APK.
 --
 -- /See:/ 'aPKBinary' smart constructor.
-newtype APKBinary = APKBinary
+newtype APKBinary = APKBinary'
     { _apkbSha1 :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2249,7 +2250,7 @@ newtype APKBinary = APKBinary
 aPKBinary
     :: APKBinary
 aPKBinary =
-    APKBinary
+    APKBinary'
     { _apkbSha1 = Nothing
     }
 
@@ -2261,15 +2262,15 @@ apkbSha1 = lens _apkbSha1 (\ s a -> s{_apkbSha1 = a})
 instance FromJSON APKBinary where
         parseJSON
           = withObject "APKBinary"
-              (\ o -> APKBinary <$> (o .:? "sha1"))
+              (\ o -> APKBinary' <$> (o .:? "sha1"))
 
 instance ToJSON APKBinary where
-        toJSON APKBinary{..}
+        toJSON APKBinary'{..}
           = object (catMaybes [("sha1" .=) <$> _apkbSha1])
 
 --
 -- /See:/ 'aPKsListResponse' smart constructor.
-data APKsListResponse = APKsListResponse
+data APKsListResponse = APKsListResponse'
     { _apklrKind :: !Text
     , _apklrAPKs :: !(Maybe [APK])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2284,7 +2285,7 @@ data APKsListResponse = APKsListResponse
 aPKsListResponse
     :: APKsListResponse
 aPKsListResponse =
-    APKsListResponse
+    APKsListResponse'
     { _apklrKind = "androidpublisher#apksListResponse"
     , _apklrAPKs = Nothing
     }
@@ -2305,13 +2306,13 @@ instance FromJSON APKsListResponse where
         parseJSON
           = withObject "APKsListResponse"
               (\ o ->
-                 APKsListResponse <$>
+                 APKsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#apksListResponse")
                      <*> (o .:? "apks" .!= mempty))
 
 instance ToJSON APKsListResponse where
-        toJSON APKsListResponse{..}
+        toJSON APKsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _apklrKind),
@@ -2320,7 +2321,7 @@ instance ToJSON APKsListResponse where
 -- | A permission used by this APK.
 --
 -- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
-data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
+data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission'
     { _ehapkupName          :: !(Maybe Text)
     , _ehapkupMaxSdkVersion :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2335,7 +2336,7 @@ data ExternallyHostedAPKUsesPermission = ExternallyHostedAPKUsesPermission
 externallyHostedAPKUsesPermission
     :: ExternallyHostedAPKUsesPermission
 externallyHostedAPKUsesPermission =
-    ExternallyHostedAPKUsesPermission
+    ExternallyHostedAPKUsesPermission'
     { _ehapkupName = Nothing
     , _ehapkupMaxSdkVersion = Nothing
     }
@@ -2358,12 +2359,12 @@ instance FromJSON ExternallyHostedAPKUsesPermission
         parseJSON
           = withObject "ExternallyHostedAPKUsesPermission"
               (\ o ->
-                 ExternallyHostedAPKUsesPermission <$>
+                 ExternallyHostedAPKUsesPermission' <$>
                    (o .:? "name") <*> (o .:? "maxSdkVersion"))
 
 instance ToJSON ExternallyHostedAPKUsesPermission
          where
-        toJSON ExternallyHostedAPKUsesPermission{..}
+        toJSON ExternallyHostedAPKUsesPermission'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _ehapkupName,
@@ -2371,7 +2372,7 @@ instance ToJSON ExternallyHostedAPKUsesPermission
 
 --
 -- /See:/ 'listingsListResponse' smart constructor.
-data ListingsListResponse = ListingsListResponse
+data ListingsListResponse = ListingsListResponse'
     { _llrKind     :: !Text
     , _llrListings :: !(Maybe [Listing])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2386,7 +2387,7 @@ data ListingsListResponse = ListingsListResponse
 listingsListResponse
     :: ListingsListResponse
 listingsListResponse =
-    ListingsListResponse
+    ListingsListResponse'
     { _llrKind = "androidpublisher#listingsListResponse"
     , _llrListings = Nothing
     }
@@ -2406,13 +2407,13 @@ instance FromJSON ListingsListResponse where
         parseJSON
           = withObject "ListingsListResponse"
               (\ o ->
-                 ListingsListResponse <$>
+                 ListingsListResponse' <$>
                    (o .:? "kind" .!=
                       "androidpublisher#listingsListResponse")
                      <*> (o .:? "listings" .!= mempty))
 
 instance ToJSON ListingsListResponse where
-        toJSON ListingsListResponse{..}
+        toJSON ListingsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _llrKind),
@@ -2420,7 +2421,7 @@ instance ToJSON ListingsListResponse where
 
 --
 -- /See:/ 'aPKsAddExternallyHostedRequest' smart constructor.
-newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest
+newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest'
     { _aExternallyHostedAPK :: Maybe ExternallyHostedAPK
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2432,7 +2433,7 @@ newtype APKsAddExternallyHostedRequest = APKsAddExternallyHostedRequest
 aPKsAddExternallyHostedRequest
     :: APKsAddExternallyHostedRequest
 aPKsAddExternallyHostedRequest =
-    APKsAddExternallyHostedRequest
+    APKsAddExternallyHostedRequest'
     { _aExternallyHostedAPK = Nothing
     }
 
@@ -2447,11 +2448,11 @@ instance FromJSON APKsAddExternallyHostedRequest
         parseJSON
           = withObject "APKsAddExternallyHostedRequest"
               (\ o ->
-                 APKsAddExternallyHostedRequest <$>
+                 APKsAddExternallyHostedRequest' <$>
                    (o .:? "externallyHostedApk"))
 
 instance ToJSON APKsAddExternallyHostedRequest where
-        toJSON APKsAddExternallyHostedRequest{..}
+        toJSON APKsAddExternallyHostedRequest'{..}
           = object
               (catMaybes
                  [("externallyHostedApk" .=) <$>
@@ -2459,7 +2460,7 @@ instance ToJSON APKsAddExternallyHostedRequest where
 
 --
 -- /See:/ 'inAppProductsInsertRequest' smart constructor.
-newtype InAppProductsInsertRequest = InAppProductsInsertRequest
+newtype InAppProductsInsertRequest = InAppProductsInsertRequest'
     { _iInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2471,7 +2472,7 @@ newtype InAppProductsInsertRequest = InAppProductsInsertRequest
 inAppProductsInsertRequest
     :: InAppProductsInsertRequest
 inAppProductsInsertRequest =
-    InAppProductsInsertRequest
+    InAppProductsInsertRequest'
     { _iInAppProduct = Nothing
     }
 
@@ -2484,17 +2485,17 @@ instance FromJSON InAppProductsInsertRequest where
         parseJSON
           = withObject "InAppProductsInsertRequest"
               (\ o ->
-                 InAppProductsInsertRequest <$>
+                 InAppProductsInsertRequest' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsInsertRequest where
-        toJSON InAppProductsInsertRequest{..}
+        toJSON InAppProductsInsertRequest'{..}
           = object
               (catMaybes [("inappproduct" .=) <$> _iInAppProduct])
 
 --
 -- /See:/ 'entitlementsListResponse' smart constructor.
-data EntitlementsListResponse = EntitlementsListResponse
+data EntitlementsListResponse = EntitlementsListResponse'
     { _elrTokenPagination :: !(Maybe TokenPagination)
     , _elrPageInfo        :: !(Maybe PageInfo)
     , _elrResources       :: !(Maybe [Entitlement])
@@ -2512,7 +2513,7 @@ data EntitlementsListResponse = EntitlementsListResponse
 entitlementsListResponse
     :: EntitlementsListResponse
 entitlementsListResponse =
-    EntitlementsListResponse
+    EntitlementsListResponse'
     { _elrTokenPagination = Nothing
     , _elrPageInfo = Nothing
     , _elrResources = Nothing
@@ -2537,12 +2538,12 @@ instance FromJSON EntitlementsListResponse where
         parseJSON
           = withObject "EntitlementsListResponse"
               (\ o ->
-                 EntitlementsListResponse <$>
+                 EntitlementsListResponse' <$>
                    (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
                      (o .:? "resources" .!= mempty))
 
 instance ToJSON EntitlementsListResponse where
-        toJSON EntitlementsListResponse{..}
+        toJSON EntitlementsListResponse'{..}
           = object
               (catMaybes
                  [("tokenPagination" .=) <$> _elrTokenPagination,
@@ -2551,7 +2552,7 @@ instance ToJSON EntitlementsListResponse where
 
 --
 -- /See:/ 'inAppProductsUpdateRequest' smart constructor.
-newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest
+newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest'
     { _inInAppProduct :: Maybe InAppProduct
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2563,7 +2564,7 @@ newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest
 inAppProductsUpdateRequest
     :: InAppProductsUpdateRequest
 inAppProductsUpdateRequest =
-    InAppProductsUpdateRequest
+    InAppProductsUpdateRequest'
     { _inInAppProduct = Nothing
     }
 
@@ -2576,11 +2577,11 @@ instance FromJSON InAppProductsUpdateRequest where
         parseJSON
           = withObject "InAppProductsUpdateRequest"
               (\ o ->
-                 InAppProductsUpdateRequest <$>
+                 InAppProductsUpdateRequest' <$>
                    (o .:? "inappproduct"))
 
 instance ToJSON InAppProductsUpdateRequest where
-        toJSON InAppProductsUpdateRequest{..}
+        toJSON InAppProductsUpdateRequest'{..}
           = object
               (catMaybes [("inappproduct" .=) <$> _inInAppProduct])
 
@@ -2588,7 +2589,7 @@ instance ToJSON InAppProductsUpdateRequest where
 -- inapp item or subscription.
 --
 -- /See:/ 'entitlement' smart constructor.
-data Entitlement = Entitlement
+data Entitlement = Entitlement'
     { _eKind        :: !Text
     , _eProductType :: !(Maybe Text)
     , _eToken       :: !(Maybe Text)
@@ -2609,7 +2610,7 @@ data Entitlement = Entitlement
 entitlement
     :: Entitlement
 entitlement =
-    Entitlement
+    Entitlement'
     { _eKind = "androidpublisher#entitlement"
     , _eProductType = Nothing
     , _eToken = Nothing
@@ -2640,14 +2641,14 @@ instance FromJSON Entitlement where
         parseJSON
           = withObject "Entitlement"
               (\ o ->
-                 Entitlement <$>
+                 Entitlement' <$>
                    (o .:? "kind" .!= "androidpublisher#entitlement") <*>
                      (o .:? "productType")
                      <*> (o .:? "token")
                      <*> (o .:? "productId"))
 
 instance ToJSON Entitlement where
-        toJSON Entitlement{..}
+        toJSON Entitlement'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eKind),
@@ -2657,7 +2658,7 @@ instance ToJSON Entitlement where
 
 --
 -- /See:/ 'inAppProductsBatchResponse' smart constructor.
-data InAppProductsBatchResponse = InAppProductsBatchResponse
+data InAppProductsBatchResponse = InAppProductsBatchResponse'
     { _iEntrys :: !(Maybe [InAppProductsBatchResponseEntry])
     , _iKind   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2672,7 +2673,7 @@ data InAppProductsBatchResponse = InAppProductsBatchResponse
 inAppProductsBatchResponse
     :: InAppProductsBatchResponse
 inAppProductsBatchResponse =
-    InAppProductsBatchResponse
+    InAppProductsBatchResponse'
     { _iEntrys = Nothing
     , _iKind = "androidpublisher#inappproductsBatchResponse"
     }
@@ -2691,13 +2692,13 @@ instance FromJSON InAppProductsBatchResponse where
         parseJSON
           = withObject "InAppProductsBatchResponse"
               (\ o ->
-                 InAppProductsBatchResponse <$>
+                 InAppProductsBatchResponse' <$>
                    (o .:? "entrys" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "androidpublisher#inappproductsBatchResponse"))
 
 instance ToJSON InAppProductsBatchResponse where
-        toJSON InAppProductsBatchResponse{..}
+        toJSON InAppProductsBatchResponse'{..}
           = object
               (catMaybes
                  [("entrys" .=) <$> _iEntrys,

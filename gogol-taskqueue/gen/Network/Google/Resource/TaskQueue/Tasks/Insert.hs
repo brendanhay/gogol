@@ -57,7 +57,7 @@ type TasksInsertResource =
 -- | Insert a new task in a TaskQueue
 --
 -- /See:/ 'tasksInsert' smart constructor.
-data TasksInsert = TasksInsert
+data TasksInsert = TasksInsert'
     { _tiTaskqueue :: !Text
     , _tiProject   :: !Text
     , _tiPayload   :: !Task
@@ -78,7 +78,7 @@ tasksInsert
     -> Task -- ^ 'tiPayload'
     -> TasksInsert
 tasksInsert pTiTaskqueue_ pTiProject_ pTiPayload_ =
-    TasksInsert
+    TasksInsert'
     { _tiTaskqueue = pTiTaskqueue_
     , _tiProject = pTiProject_
     , _tiPayload = pTiPayload_
@@ -104,7 +104,7 @@ instance GoogleRequest TasksInsert where
         type Scopes TasksInsert =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksInsert{..}
+        requestClient TasksInsert'{..}
           = go _tiProject _tiTaskqueue (Just AltJSON)
               _tiPayload
               taskQueueService

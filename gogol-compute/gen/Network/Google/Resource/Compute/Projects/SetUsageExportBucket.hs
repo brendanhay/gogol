@@ -59,7 +59,7 @@ type ProjectsSetUsageExportBucketResource =
 -- method, the usage export feature will be disabled.
 --
 -- /See:/ 'projectsSetUsageExportBucket' smart constructor.
-data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket
+data ProjectsSetUsageExportBucket = ProjectsSetUsageExportBucket'
     { _psuebProject :: !Text
     , _psuebPayload :: !UsageExportLocation
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ projectsSetUsageExportBucket
     -> UsageExportLocation -- ^ 'psuebPayload'
     -> ProjectsSetUsageExportBucket
 projectsSetUsageExportBucket pPsuebProject_ pPsuebPayload_ =
-    ProjectsSetUsageExportBucket
+    ProjectsSetUsageExportBucket'
     { _psuebProject = pPsuebProject_
     , _psuebPayload = pPsuebPayload_
     }
@@ -100,7 +100,7 @@ instance GoogleRequest ProjectsSetUsageExportBucket
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ProjectsSetUsageExportBucket{..}
+        requestClient ProjectsSetUsageExportBucket'{..}
           = go _psuebProject (Just AltJSON) _psuebPayload
               computeService
           where go

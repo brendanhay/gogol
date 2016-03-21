@@ -54,7 +54,7 @@ type FilesGenerateIdsResource =
 -- | Generates a set of file IDs which can be provided in create requests.
 --
 -- /See:/ 'filesGenerateIds' smart constructor.
-data FilesGenerateIds = FilesGenerateIds
+data FilesGenerateIds = FilesGenerateIds'
     { _fgiSpace :: !Text
     , _fgiCount :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data FilesGenerateIds = FilesGenerateIds
 filesGenerateIds
     :: FilesGenerateIds
 filesGenerateIds =
-    FilesGenerateIds
+    FilesGenerateIds'
     { _fgiSpace = "drive"
     , _fgiCount = 10
     }
@@ -91,7 +91,7 @@ instance GoogleRequest FilesGenerateIds where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient FilesGenerateIds{..}
+        requestClient FilesGenerateIds'{..}
           = go (Just _fgiSpace) (Just _fgiCount) (Just AltJSON)
               driveService
           where go

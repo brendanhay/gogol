@@ -61,7 +61,7 @@ type AccountsAdUnitsListResource =
 -- | List all ad units in the specified publisher\'s AdSense account.
 --
 -- /See:/ 'accountsAdUnitsList' smart constructor.
-data AccountsAdUnitsList = AccountsAdUnitsList
+data AccountsAdUnitsList = AccountsAdUnitsList'
     { _aaulIncludeInactive :: !(Maybe Bool)
     , _aaulAdClientId      :: !Text
     , _aaulAccountId       :: !Text
@@ -87,7 +87,7 @@ accountsAdUnitsList
     -> Text -- ^ 'aaulAccountId'
     -> AccountsAdUnitsList
 accountsAdUnitsList pAaulAdClientId_ pAaulAccountId_ =
-    AccountsAdUnitsList
+    AccountsAdUnitsList'
     { _aaulIncludeInactive = Nothing
     , _aaulAdClientId = pAaulAdClientId_
     , _aaulAccountId = pAaulAccountId_
@@ -133,7 +133,7 @@ instance GoogleRequest AccountsAdUnitsList where
         type Rs AccountsAdUnitsList = AdUnits
         type Scopes AccountsAdUnitsList =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsAdUnitsList{..}
+        requestClient AccountsAdUnitsList'{..}
           = go _aaulAccountId _aaulAdClientId
               _aaulIncludeInactive
               _aaulPageToken

@@ -54,7 +54,7 @@ type CommentsMarkAsSpamResource =
 -- flagged as spam.
 --
 -- /See:/ 'commentsMarkAsSpam' smart constructor.
-newtype CommentsMarkAsSpam = CommentsMarkAsSpam
+newtype CommentsMarkAsSpam = CommentsMarkAsSpam'
     { _cmasId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ commentsMarkAsSpam
     :: Text -- ^ 'cmasId'
     -> CommentsMarkAsSpam
 commentsMarkAsSpam pCmasId_ =
-    CommentsMarkAsSpam
+    CommentsMarkAsSpam'
     { _cmasId = pCmasId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest CommentsMarkAsSpam where
         type Rs CommentsMarkAsSpam = ()
         type Scopes CommentsMarkAsSpam =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentsMarkAsSpam{..}
+        requestClient CommentsMarkAsSpam'{..}
           = go (Just _cmasId) (Just AltJSON) youTubeService
           where go
                   = buildClient

@@ -55,7 +55,7 @@ type StorelayoutpagesInsertResource =
 -- | Inserts a new store page.
 --
 -- /See:/ 'storelayoutpagesInsert' smart constructor.
-data StorelayoutpagesInsert = StorelayoutpagesInsert
+data StorelayoutpagesInsert = StorelayoutpagesInsert'
     { _siEnterpriseId :: !Text
     , _siPayload      :: !StorePage
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ storelayoutpagesInsert
     -> StorePage -- ^ 'siPayload'
     -> StorelayoutpagesInsert
 storelayoutpagesInsert pSiEnterpriseId_ pSiPayload_ =
-    StorelayoutpagesInsert
+    StorelayoutpagesInsert'
     { _siEnterpriseId = pSiEnterpriseId_
     , _siPayload = pSiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest StorelayoutpagesInsert where
         type Rs StorelayoutpagesInsert = StorePage
         type Scopes StorelayoutpagesInsert =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutpagesInsert{..}
+        requestClient StorelayoutpagesInsert'{..}
           = go _siEnterpriseId (Just AltJSON) _siPayload
               androidEnterpriseService
           where go

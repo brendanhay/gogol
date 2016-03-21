@@ -53,7 +53,7 @@ type AccountsGetResource =
 -- | Get information about the selected AdSense account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+data AccountsGet = AccountsGet'
     { _agTree      :: !(Maybe Bool)
     , _agAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgAccountId_ =
-    AccountsGet
+    AccountsGet'
     { _agTree = Nothing
     , _agAccountId = pAgAccountId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest AccountsGet where
         type Scopes AccountsGet =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsGet{..}
+        requestClient AccountsGet'{..}
           = go _agAccountId _agTree (Just AltJSON)
               adSenseService
           where go

@@ -59,7 +59,7 @@ type RemarketingListsPatchResource =
 -- semantics.
 --
 -- /See:/ 'remarketingListsPatch' smart constructor.
-data RemarketingListsPatch = RemarketingListsPatch
+data RemarketingListsPatch = RemarketingListsPatch'
     { _rlpProFileId :: !(Textual Int64)
     , _rlpPayload   :: !RemarketingList
     , _rlpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ remarketingListsPatch
     -> Int64 -- ^ 'rlpId'
     -> RemarketingListsPatch
 remarketingListsPatch pRlpProFileId_ pRlpPayload_ pRlpId_ =
-    RemarketingListsPatch
+    RemarketingListsPatch'
     { _rlpProFileId = _Coerce # pRlpProFileId_
     , _rlpPayload = pRlpPayload_
     , _rlpId = _Coerce # pRlpId_
@@ -106,7 +106,7 @@ instance GoogleRequest RemarketingListsPatch where
         type Rs RemarketingListsPatch = RemarketingList
         type Scopes RemarketingListsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListsPatch{..}
+        requestClient RemarketingListsPatch'{..}
           = go _rlpProFileId (Just _rlpId) (Just AltJSON)
               _rlpPayload
               dFAReportingService

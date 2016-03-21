@@ -66,7 +66,7 @@ type ProjectsServiceAccountsSignBlobResource =
 -- | Signs a blob using a service account.
 --
 -- /See:/ 'projectsServiceAccountsSignBlob' smart constructor.
-data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob
+data ProjectsServiceAccountsSignBlob = ProjectsServiceAccountsSignBlob'
     { _psasbXgafv          :: !(Maybe Text)
     , _psasbUploadProtocol :: !(Maybe Text)
     , _psasbPp             :: !Bool
@@ -104,7 +104,7 @@ projectsServiceAccountsSignBlob
     -> Text -- ^ 'psasbName'
     -> ProjectsServiceAccountsSignBlob
 projectsServiceAccountsSignBlob pPsasbPayload_ pPsasbName_ =
-    ProjectsServiceAccountsSignBlob
+    ProjectsServiceAccountsSignBlob'
     { _psasbXgafv = Nothing
     , _psasbUploadProtocol = Nothing
     , _psasbPp = True
@@ -175,7 +175,7 @@ instance GoogleRequest
              SignBlobResponse
         type Scopes ProjectsServiceAccountsSignBlob =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsSignBlob{..}
+        requestClient ProjectsServiceAccountsSignBlob'{..}
           = go _psasbName _psasbXgafv _psasbUploadProtocol
               (Just _psasbPp)
               _psasbAccessToken

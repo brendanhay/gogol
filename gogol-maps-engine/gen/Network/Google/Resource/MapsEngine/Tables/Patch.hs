@@ -53,7 +53,7 @@ type TablesPatchResource =
 -- | Mutate a table asset.
 --
 -- /See:/ 'tablesPatch' smart constructor.
-data TablesPatch = TablesPatch
+data TablesPatch = TablesPatch'
     { _tpPayload :: !Table
     , _tpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ tablesPatch
     -> Text -- ^ 'tpId'
     -> TablesPatch
 tablesPatch pTpPayload_ pTpId_ =
-    TablesPatch
+    TablesPatch'
     { _tpPayload = pTpPayload_
     , _tpId = pTpId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest TablesPatch where
         type Rs TablesPatch = ()
         type Scopes TablesPatch =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesPatch{..}
+        requestClient TablesPatch'{..}
           = go _tpId (Just AltJSON) _tpPayload
               mapsEngineService
           where go

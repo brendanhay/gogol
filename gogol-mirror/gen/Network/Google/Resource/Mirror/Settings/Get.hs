@@ -51,7 +51,7 @@ type SettingsGetResource =
 -- | Gets a single setting by ID.
 --
 -- /See:/ 'settingsGet' smart constructor.
-newtype SettingsGet = SettingsGet
+newtype SettingsGet = SettingsGet'
     { _sgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ settingsGet
     :: Text -- ^ 'sgId'
     -> SettingsGet
 settingsGet pSgId_ =
-    SettingsGet
+    SettingsGet'
     { _sgId = pSgId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest SettingsGet where
         type Rs SettingsGet = Setting
         type Scopes SettingsGet =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient SettingsGet{..}
+        requestClient SettingsGet'{..}
           = go _sgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)

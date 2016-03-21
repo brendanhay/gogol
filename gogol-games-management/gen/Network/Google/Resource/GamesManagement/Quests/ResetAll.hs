@@ -54,21 +54,21 @@ type QuestsResetAllResource =
 --
 -- /See:/ 'questsResetAll' smart constructor.
 data QuestsResetAll =
-    QuestsResetAll
+    QuestsResetAll'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetAll' with the minimum fields required to make a request.
 --
 questsResetAll
     :: QuestsResetAll
-questsResetAll = QuestsResetAll
+questsResetAll = QuestsResetAll'
 
 instance GoogleRequest QuestsResetAll where
         type Rs QuestsResetAll = ()
         type Scopes QuestsResetAll =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestsResetAll{}
+        requestClient QuestsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetAllResource)

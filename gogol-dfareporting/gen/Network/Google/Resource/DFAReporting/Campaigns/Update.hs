@@ -54,7 +54,7 @@ type CampaignsUpdateResource =
 -- | Updates an existing campaign.
 --
 -- /See:/ 'campaignsUpdate' smart constructor.
-data CampaignsUpdate = CampaignsUpdate
+data CampaignsUpdate = CampaignsUpdate'
     { _cuProFileId :: !(Textual Int64)
     , _cuPayload   :: !Campaign
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ campaignsUpdate
     -> Campaign -- ^ 'cuPayload'
     -> CampaignsUpdate
 campaignsUpdate pCuProFileId_ pCuPayload_ =
-    CampaignsUpdate
+    CampaignsUpdate'
     { _cuProFileId = _Coerce # pCuProFileId_
     , _cuPayload = pCuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CampaignsUpdate where
         type Rs CampaignsUpdate = Campaign
         type Scopes CampaignsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignsUpdate{..}
+        requestClient CampaignsUpdate'{..}
           = go _cuProFileId (Just AltJSON) _cuPayload
               dFAReportingService
           where go

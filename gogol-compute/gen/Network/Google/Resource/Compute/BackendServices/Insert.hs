@@ -62,7 +62,7 @@ type BackendServicesInsertResource =
 -- Restrictions and Guidelines for more information.
 --
 -- /See:/ 'backendServicesInsert' smart constructor.
-data BackendServicesInsert = BackendServicesInsert
+data BackendServicesInsert = BackendServicesInsert'
     { _bsiProject :: !Text
     , _bsiPayload :: !BackendService
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -79,7 +79,7 @@ backendServicesInsert
     -> BackendService -- ^ 'bsiPayload'
     -> BackendServicesInsert
 backendServicesInsert pBsiProject_ pBsiPayload_ =
-    BackendServicesInsert
+    BackendServicesInsert'
     { _bsiProject = pBsiProject_
     , _bsiPayload = pBsiPayload_
     }
@@ -99,7 +99,7 @@ instance GoogleRequest BackendServicesInsert where
         type Scopes BackendServicesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient BackendServicesInsert{..}
+        requestClient BackendServicesInsert'{..}
           = go _bsiProject (Just AltJSON) _bsiPayload
               computeService
           where go

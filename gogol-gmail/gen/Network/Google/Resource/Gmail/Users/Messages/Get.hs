@@ -58,7 +58,7 @@ type UsersMessagesGetResource =
 -- | Gets the specified message.
 --
 -- /See:/ 'usersMessagesGet' smart constructor.
-data UsersMessagesGet = UsersMessagesGet
+data UsersMessagesGet = UsersMessagesGet'
     { _umgFormat          :: !UsersMessagesGetFormat
     , _umgUserId          :: !Text
     , _umgId              :: !Text
@@ -80,7 +80,7 @@ usersMessagesGet
     :: Text -- ^ 'umgId'
     -> UsersMessagesGet
 usersMessagesGet pUmgId_ =
-    UsersMessagesGet
+    UsersMessagesGet'
     { _umgFormat = Full
     , _umgUserId = "me"
     , _umgId = pUmgId_
@@ -116,7 +116,7 @@ instance GoogleRequest UsersMessagesGet where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersMessagesGet{..}
+        requestClient UsersMessagesGet'{..}
           = go _umgUserId _umgId (Just _umgFormat)
               (_umgMetadataHeaders ^. _Default)
               (Just AltJSON)

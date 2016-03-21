@@ -92,7 +92,7 @@ type EventsListResource =
 -- | Returns events on the specified calendar.
 --
 -- /See:/ 'eventsList' smart constructor.
-data EventsList = EventsList
+data EventsList = EventsList'
     { _elSyncToken               :: !(Maybe Text)
     , _elCalendarId              :: !Text
     , _elTimeMin                 :: !(Maybe DateTime')
@@ -156,7 +156,7 @@ eventsList
     :: Text -- ^ 'elCalendarId'
     -> EventsList
 eventsList pElCalendarId_ =
-    EventsList
+    EventsList'
     { _elSyncToken = Nothing
     , _elCalendarId = pElCalendarId_
     , _elTimeMin = Nothing
@@ -336,7 +336,7 @@ instance GoogleRequest EventsList where
         type Scopes EventsList =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient EventsList{..}
+        requestClient EventsList'{..}
           = go _elCalendarId _elSyncToken _elTimeMin _elOrderBy
               _elSingleEvents
               (_elPrivateExtendedProperty ^. _Default)

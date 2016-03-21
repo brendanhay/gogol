@@ -63,7 +63,7 @@ type ACLWatchResource =
 -- | Watch for changes to ACL resources.
 --
 -- /See:/ 'aclWatch' smart constructor.
-data ACLWatch = ACLWatch
+data ACLWatch = ACLWatch'
     { _awSyncToken   :: !(Maybe Text)
     , _awCalendarId  :: !Text
     , _awShowDeleted :: !(Maybe Bool)
@@ -92,7 +92,7 @@ aclWatch
     -> Channel -- ^ 'awPayload'
     -> ACLWatch
 aclWatch pAwCalendarId_ pAwPayload_ =
-    ACLWatch
+    ACLWatch'
     { _awSyncToken = Nothing
     , _awCalendarId = pAwCalendarId_
     , _awShowDeleted = Nothing
@@ -151,7 +151,7 @@ instance GoogleRequest ACLWatch where
         type Rs ACLWatch = Channel
         type Scopes ACLWatch =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient ACLWatch{..}
+        requestClient ACLWatch'{..}
           = go _awCalendarId _awSyncToken _awShowDeleted
               _awPageToken
               _awMaxResults

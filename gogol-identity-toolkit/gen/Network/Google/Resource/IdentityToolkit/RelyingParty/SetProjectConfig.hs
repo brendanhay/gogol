@@ -56,7 +56,7 @@ type RelyingPartySetProjectConfigResource =
 -- | Set project configuration.
 --
 -- /See:/ 'relyingPartySetProjectConfig' smart constructor.
-newtype RelyingPartySetProjectConfig = RelyingPartySetProjectConfig
+newtype RelyingPartySetProjectConfig = RelyingPartySetProjectConfig'
     { _rpspcPayload :: IdentitytoolkitRelyingPartySetProjectConfigRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ relyingPartySetProjectConfig
     :: IdentitytoolkitRelyingPartySetProjectConfigRequest -- ^ 'rpspcPayload'
     -> RelyingPartySetProjectConfig
 relyingPartySetProjectConfig pRpspcPayload_ =
-    RelyingPartySetProjectConfig
+    RelyingPartySetProjectConfig'
     { _rpspcPayload = pRpspcPayload_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest RelyingPartySetProjectConfig
         type Rs RelyingPartySetProjectConfig =
              IdentitytoolkitRelyingPartySetProjectConfigResponse
         type Scopes RelyingPartySetProjectConfig = '[]
-        requestClient RelyingPartySetProjectConfig{..}
+        requestClient RelyingPartySetProjectConfig'{..}
           = go (Just AltJSON) _rpspcPayload
               identityToolkitService
           where go

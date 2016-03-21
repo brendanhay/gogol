@@ -55,7 +55,7 @@ type UsersDeleteResource =
 -- | Deletes the specified User resource.
 --
 -- /See:/ 'usersDelete' smart constructor.
-data UsersDelete = UsersDelete
+data UsersDelete = UsersDelete'
     { _udProject :: !Text
     , _udUser    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersDelete
     -> Text -- ^ 'udUser'
     -> UsersDelete
 usersDelete pUdProject_ pUdUser_ =
-    UsersDelete
+    UsersDelete'
     { _udProject = pUdProject_
     , _udUser = pUdUser_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersDelete where
         type Scopes UsersDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient UsersDelete{..}
+        requestClient UsersDelete'{..}
           = go _udProject _udUser (Just AltJSON)
               userAccountsService
           where go

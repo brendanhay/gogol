@@ -58,7 +58,7 @@ type StorelayoutclustersDeleteResource =
 -- | Deletes a cluster.
 --
 -- /See:/ 'storelayoutclustersDelete' smart constructor.
-data StorelayoutclustersDelete = StorelayoutclustersDelete
+data StorelayoutclustersDelete = StorelayoutclustersDelete'
     { _sddEnterpriseId :: !Text
     , _sddPageId       :: !Text
     , _sddClusterId    :: !Text
@@ -79,7 +79,7 @@ storelayoutclustersDelete
     -> Text -- ^ 'sddClusterId'
     -> StorelayoutclustersDelete
 storelayoutclustersDelete pSddEnterpriseId_ pSddPageId_ pSddClusterId_ =
-    StorelayoutclustersDelete
+    StorelayoutclustersDelete'
     { _sddEnterpriseId = pSddEnterpriseId_
     , _sddPageId = pSddPageId_
     , _sddClusterId = pSddClusterId_
@@ -106,7 +106,7 @@ instance GoogleRequest StorelayoutclustersDelete
         type Rs StorelayoutclustersDelete = ()
         type Scopes StorelayoutclustersDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutclustersDelete{..}
+        requestClient StorelayoutclustersDelete'{..}
           = go _sddEnterpriseId _sddPageId _sddClusterId
               (Just AltJSON)
               androidEnterpriseService

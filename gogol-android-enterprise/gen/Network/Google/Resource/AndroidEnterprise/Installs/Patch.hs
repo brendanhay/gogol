@@ -66,7 +66,7 @@ type InstallsPatchResource =
 -- necessary. This method supports patch semantics.
 --
 -- /See:/ 'installsPatch' smart constructor.
-data InstallsPatch = InstallsPatch
+data InstallsPatch = InstallsPatch'
     { _ipEnterpriseId :: !Text
     , _ipPayload      :: !Install
     , _ipUserId       :: !Text
@@ -95,7 +95,7 @@ installsPatch
     -> Text -- ^ 'ipDeviceId'
     -> InstallsPatch
 installsPatch pIpEnterpriseId_ pIpPayload_ pIpUserId_ pIpInstallId_ pIpDeviceId_ =
-    InstallsPatch
+    InstallsPatch'
     { _ipEnterpriseId = pIpEnterpriseId_
     , _ipPayload = pIpPayload_
     , _ipUserId = pIpUserId_
@@ -133,7 +133,7 @@ instance GoogleRequest InstallsPatch where
         type Rs InstallsPatch = Install
         type Scopes InstallsPatch =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient InstallsPatch{..}
+        requestClient InstallsPatch'{..}
           = go _ipEnterpriseId _ipUserId _ipDeviceId
               _ipInstallId
               (Just AltJSON)

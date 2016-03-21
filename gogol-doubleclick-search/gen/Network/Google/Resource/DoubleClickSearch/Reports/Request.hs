@@ -51,7 +51,7 @@ type ReportsRequestResource =
 -- | Inserts a report request into the reporting system.
 --
 -- /See:/ 'reportsRequest' smart constructor.
-newtype ReportsRequest = ReportsRequest
+newtype ReportsRequest = ReportsRequest'
     { _rrPayload :: ReportRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ reportsRequest
     :: ReportRequest -- ^ 'rrPayload'
     -> ReportsRequest
 reportsRequest pRrPayload_ =
-    ReportsRequest
+    ReportsRequest'
     { _rrPayload = pRrPayload_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest ReportsRequest where
         type Rs ReportsRequest = Report
         type Scopes ReportsRequest =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ReportsRequest{..}
+        requestClient ReportsRequest'{..}
           = go (Just AltJSON) _rrPayload
               doubleClickSearchService
           where go

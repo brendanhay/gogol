@@ -57,7 +57,7 @@ type RegionOperationsDeleteResource =
 -- | Deletes the specified region-specific Operations resource.
 --
 -- /See:/ 'regionOperationsDelete' smart constructor.
-data RegionOperationsDelete = RegionOperationsDelete
+data RegionOperationsDelete = RegionOperationsDelete'
     { _rodProject   :: !Text
     , _rodOperation :: !Text
     , _rodRegion    :: !Text
@@ -78,7 +78,7 @@ regionOperationsDelete
     -> Text -- ^ 'rodRegion'
     -> RegionOperationsDelete
 regionOperationsDelete pRodProject_ pRodOperation_ pRodRegion_ =
-    RegionOperationsDelete
+    RegionOperationsDelete'
     { _rodProject = pRodProject_
     , _rodOperation = pRodOperation_
     , _rodRegion = pRodRegion_
@@ -104,7 +104,7 @@ instance GoogleRequest RegionOperationsDelete where
         type Scopes RegionOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient RegionOperationsDelete{..}
+        requestClient RegionOperationsDelete'{..}
           = go _rodProject _rodRegion _rodOperation
               (Just AltJSON)
               computeService

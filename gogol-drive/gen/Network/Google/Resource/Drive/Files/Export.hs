@@ -65,7 +65,7 @@ type FilesExportResource =
 -- content.
 --
 -- /See:/ 'filesExport' smart constructor.
-data FilesExport = FilesExport
+data FilesExport = FilesExport'
     { _feMimeType :: !Text
     , _feFileId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ filesExport
     -> Text -- ^ 'feFileId'
     -> FilesExport
 filesExport pFeMimeType_ pFeFileId_ =
-    FilesExport
+    FilesExport'
     { _feMimeType = pFeMimeType_
     , _feFileId = pFeFileId_
     }
@@ -102,7 +102,7 @@ instance GoogleRequest FilesExport where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient FilesExport{..}
+        requestClient FilesExport'{..}
           = go _feFileId (Just _feMimeType) (Just AltJSON)
               driveService
           where go :<|> _
@@ -114,7 +114,7 @@ instance GoogleRequest (MediaDownload FilesExport)
         type Rs (MediaDownload FilesExport) = Stream
         type Scopes (MediaDownload FilesExport) =
              Scopes FilesExport
-        requestClient (MediaDownload FilesExport{..})
+        requestClient (MediaDownload FilesExport'{..})
           = go _feFileId (Just _feMimeType) (Just AltMedia)
               driveService
           where _ :<|> go

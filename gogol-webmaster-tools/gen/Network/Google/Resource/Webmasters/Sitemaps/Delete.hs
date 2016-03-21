@@ -54,7 +54,7 @@ type SitemapsDeleteResource =
 -- | Deletes a sitemap from this site.
 --
 -- /See:/ 'sitemapsDelete' smart constructor.
-data SitemapsDelete = SitemapsDelete
+data SitemapsDelete = SitemapsDelete'
     { _sdFeedpath :: !Text
     , _sdSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitemapsDelete
     -> Text -- ^ 'sdSiteURL'
     -> SitemapsDelete
 sitemapsDelete pSdFeedpath_ pSdSiteURL_ =
-    SitemapsDelete
+    SitemapsDelete'
     { _sdFeedpath = pSdFeedpath_
     , _sdSiteURL = pSdSiteURL_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest SitemapsDelete where
         type Rs SitemapsDelete = ()
         type Scopes SitemapsDelete =
              '["https://www.googleapis.com/auth/webmasters"]
-        requestClient SitemapsDelete{..}
+        requestClient SitemapsDelete'{..}
           = go _sdSiteURL _sdFeedpath (Just AltJSON)
               webmasterToolsService
           where go

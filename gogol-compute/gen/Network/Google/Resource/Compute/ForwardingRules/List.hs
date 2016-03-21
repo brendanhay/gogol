@@ -64,7 +64,7 @@ type ForwardingRulesListResource =
 -- project and region.
 --
 -- /See:/ 'forwardingRulesList' smart constructor.
-data ForwardingRulesList = ForwardingRulesList
+data ForwardingRulesList = ForwardingRulesList'
     { _frlProject    :: !Text
     , _frlFilter     :: !(Maybe Text)
     , _frlRegion     :: !Text
@@ -90,7 +90,7 @@ forwardingRulesList
     -> Text -- ^ 'frlRegion'
     -> ForwardingRulesList
 forwardingRulesList pFrlProject_ pFrlRegion_ =
-    ForwardingRulesList
+    ForwardingRulesList'
     { _frlProject = pFrlProject_
     , _frlFilter = Nothing
     , _frlRegion = pFrlRegion_
@@ -156,7 +156,7 @@ instance GoogleRequest ForwardingRulesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ForwardingRulesList{..}
+        requestClient ForwardingRulesList'{..}
           = go _frlProject _frlRegion _frlFilter _frlPageToken
               (Just _frlMaxResults)
               (Just AltJSON)

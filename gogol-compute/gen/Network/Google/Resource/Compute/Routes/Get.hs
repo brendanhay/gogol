@@ -57,7 +57,7 @@ type RoutesGetResource =
 -- making a list() request.
 --
 -- /See:/ 'routesGet' smart constructor.
-data RoutesGet = RoutesGet
+data RoutesGet = RoutesGet'
     { _rouProject :: !Text
     , _rouRoute   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ routesGet
     -> Text -- ^ 'rouRoute'
     -> RoutesGet
 routesGet pRouProject_ pRouRoute_ =
-    RoutesGet
+    RoutesGet'
     { _rouProject = pRouProject_
     , _rouRoute = pRouRoute_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest RoutesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RoutesGet{..}
+        requestClient RoutesGet'{..}
           = go _rouProject _rouRoute (Just AltJSON)
               computeService
           where go

@@ -69,7 +69,7 @@ type ProjectsZonesOperationsListResource =
 -- | Lists all operations in a project in a specific zone or all zones.
 --
 -- /See:/ 'projectsZonesOperationsList' smart constructor.
-data ProjectsZonesOperationsList = ProjectsZonesOperationsList
+data ProjectsZonesOperationsList = ProjectsZonesOperationsList'
     { _pzolXgafv          :: !(Maybe Text)
     , _pzolUploadProtocol :: !(Maybe Text)
     , _pzolPp             :: !Bool
@@ -107,7 +107,7 @@ projectsZonesOperationsList
     -> Text -- ^ 'pzolProjectId'
     -> ProjectsZonesOperationsList
 projectsZonesOperationsList pPzolZone_ pPzolProjectId_ =
-    ProjectsZonesOperationsList
+    ProjectsZonesOperationsList'
     { _pzolXgafv = Nothing
     , _pzolUploadProtocol = Nothing
     , _pzolPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest ProjectsZonesOperationsList
              ListOperationsResponse
         type Scopes ProjectsZonesOperationsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesOperationsList{..}
+        requestClient ProjectsZonesOperationsList'{..}
           = go _pzolProjectId _pzolZone _pzolXgafv
               _pzolUploadProtocol
               (Just _pzolPp)

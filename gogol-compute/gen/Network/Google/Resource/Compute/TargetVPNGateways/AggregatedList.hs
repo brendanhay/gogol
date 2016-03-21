@@ -60,7 +60,7 @@ type TargetVPNGatewaysAggregatedListResource =
 -- | Retrieves an aggregated list of target VPN gateways.
 --
 -- /See:/ 'targetVPNGatewaysAggregatedList' smart constructor.
-data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList
+data TargetVPNGatewaysAggregatedList = TargetVPNGatewaysAggregatedList'
     { _tvgalProject    :: !Text
     , _tvgalFilter     :: !(Maybe Text)
     , _tvgalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ targetVPNGatewaysAggregatedList
     :: Text -- ^ 'tvgalProject'
     -> TargetVPNGatewaysAggregatedList
 targetVPNGatewaysAggregatedList pTvgalProject_ =
-    TargetVPNGatewaysAggregatedList
+    TargetVPNGatewaysAggregatedList'
     { _tvgalProject = pTvgalProject_
     , _tvgalFilter = Nothing
     , _tvgalPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetVPNGatewaysAggregatedList{..}
+        requestClient TargetVPNGatewaysAggregatedList'{..}
           = go _tvgalProject _tvgalFilter _tvgalPageToken
               (Just _tvgalMaxResults)
               (Just AltJSON)

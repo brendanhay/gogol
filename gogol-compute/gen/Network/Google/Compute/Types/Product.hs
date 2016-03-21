@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Contains a list of TargetHttpsProxy resources.
 --
 -- /See:/ 'targetHTTPSProxyList' smart constructor.
-data TargetHTTPSProxyList = TargetHTTPSProxyList
+data TargetHTTPSProxyList = TargetHTTPSProxyList'
     { _thplNextPageToken :: !(Maybe Text)
     , _thplKind          :: !Text
     , _thplItems         :: !(Maybe [TargetHTTPSProxy])
@@ -47,7 +47,7 @@ data TargetHTTPSProxyList = TargetHTTPSProxyList
 targetHTTPSProxyList
     :: TargetHTTPSProxyList
 targetHTTPSProxyList =
-    TargetHTTPSProxyList
+    TargetHTTPSProxyList'
     { _thplNextPageToken = Nothing
     , _thplKind = "compute#targetHttpsProxyList"
     , _thplItems = Nothing
@@ -91,7 +91,7 @@ instance FromJSON TargetHTTPSProxyList where
         parseJSON
           = withObject "TargetHTTPSProxyList"
               (\ o ->
-                 TargetHTTPSProxyList <$>
+                 TargetHTTPSProxyList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetHttpsProxyList")
                      <*> (o .:? "items" .!= mempty)
@@ -99,7 +99,7 @@ instance FromJSON TargetHTTPSProxyList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetHTTPSProxyList where
-        toJSON TargetHTTPSProxyList{..}
+        toJSON TargetHTTPSProxyList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _thplNextPageToken,
@@ -110,7 +110,7 @@ instance ToJSON TargetHTTPSProxyList where
 
 --
 -- /See:/ 'addressesScopedList' smart constructor.
-data AddressesScopedList = AddressesScopedList
+data AddressesScopedList = AddressesScopedList'
     { _aslAddresses :: !(Maybe [Address])
     , _aslWarning   :: !(Maybe AddressesScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -125,7 +125,7 @@ data AddressesScopedList = AddressesScopedList
 addressesScopedList
     :: AddressesScopedList
 addressesScopedList =
-    AddressesScopedList
+    AddressesScopedList'
     { _aslAddresses = Nothing
     , _aslWarning = Nothing
     }
@@ -147,11 +147,11 @@ instance FromJSON AddressesScopedList where
         parseJSON
           = withObject "AddressesScopedList"
               (\ o ->
-                 AddressesScopedList <$>
+                 AddressesScopedList' <$>
                    (o .:? "addresses" .!= mempty) <*> (o .:? "warning"))
 
 instance ToJSON AddressesScopedList where
-        toJSON AddressesScopedList{..}
+        toJSON AddressesScopedList'{..}
           = object
               (catMaybes
                  [("addresses" .=) <$> _aslAddresses,
@@ -159,7 +159,7 @@ instance ToJSON AddressesScopedList where
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -174,7 +174,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -198,11 +198,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -210,7 +210,7 @@ instance ToJSON OperationWarningsItemDataItem where
 
 --
 -- /See:/ 'instanceGroupManagersAbandonInstancesRequest' smart constructor.
-newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest
+newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -222,7 +222,7 @@ newtype InstanceGroupManagersAbandonInstancesRequest = InstanceGroupManagersAban
 instanceGroupManagersAbandonInstancesRequest
     :: InstanceGroupManagersAbandonInstancesRequest
 instanceGroupManagersAbandonInstancesRequest =
-    InstanceGroupManagersAbandonInstancesRequest
+    InstanceGroupManagersAbandonInstancesRequest'
     { _igmairInstances = Nothing
     }
 
@@ -241,20 +241,20 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersAbandonInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersAbandonInstancesRequest <$>
+                 InstanceGroupManagersAbandonInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersAbandonInstancesRequest where
         toJSON
-          InstanceGroupManagersAbandonInstancesRequest{..}
+          InstanceGroupManagersAbandonInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmairInstances])
 
 -- | [Output Only] A map of scoped machine type lists.
 --
 -- /See:/ 'machineTypeAggregatedListItems' smart constructor.
-newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems
+newtype MachineTypeAggregatedListItems = MachineTypeAggregatedListItems'
     { _mtaliAddtional :: HashMap Text MachineTypesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -267,7 +267,7 @@ machineTypeAggregatedListItems
     :: HashMap Text MachineTypesScopedList -- ^ 'mtaliAddtional'
     -> MachineTypeAggregatedListItems
 machineTypeAggregatedListItems pMtaliAddtional_ =
-    MachineTypeAggregatedListItems
+    MachineTypeAggregatedListItems'
     { _mtaliAddtional = _Coerce # pMtaliAddtional_
     }
 
@@ -283,7 +283,7 @@ instance FromJSON MachineTypeAggregatedListItems
         parseJSON
           = withObject "MachineTypeAggregatedListItems"
               (\ o ->
-                 MachineTypeAggregatedListItems <$>
+                 MachineTypeAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON MachineTypeAggregatedListItems where
@@ -292,7 +292,7 @@ instance ToJSON MachineTypeAggregatedListItems where
 -- | [Output Only] A map of scoped disk type lists.
 --
 -- /See:/ 'diskTypeAggregatedListItems' smart constructor.
-newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems
+newtype DiskTypeAggregatedListItems = DiskTypeAggregatedListItems'
     { _dtaliAddtional :: HashMap Text DiskTypesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -305,7 +305,7 @@ diskTypeAggregatedListItems
     :: HashMap Text DiskTypesScopedList -- ^ 'dtaliAddtional'
     -> DiskTypeAggregatedListItems
 diskTypeAggregatedListItems pDtaliAddtional_ =
-    DiskTypeAggregatedListItems
+    DiskTypeAggregatedListItems'
     { _dtaliAddtional = _Coerce # pDtaliAddtional_
     }
 
@@ -320,7 +320,7 @@ instance FromJSON DiskTypeAggregatedListItems where
         parseJSON
           = withObject "DiskTypeAggregatedListItems"
               (\ o ->
-                 DiskTypeAggregatedListItems <$> (parseJSONObject o))
+                 DiskTypeAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON DiskTypeAggregatedListItems where
         toJSON = toJSON . _dtaliAddtional
@@ -328,7 +328,7 @@ instance ToJSON DiskTypeAggregatedListItems where
 -- | Contains a list of firewalls.
 --
 -- /See:/ 'firewallList' smart constructor.
-data FirewallList = FirewallList
+data FirewallList = FirewallList'
     { _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
     , _flItems         :: !(Maybe [Firewall])
@@ -352,7 +352,7 @@ data FirewallList = FirewallList
 firewallList
     :: FirewallList
 firewallList =
-    FirewallList
+    FirewallList'
     { _flNextPageToken = Nothing
     , _flKind = "compute#firewallList"
     , _flItems = Nothing
@@ -395,7 +395,7 @@ instance FromJSON FirewallList where
         parseJSON
           = withObject "FirewallList"
               (\ o ->
-                 FirewallList <$>
+                 FirewallList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#firewallList")
                      <*> (o .:? "items" .!= mempty)
@@ -403,7 +403,7 @@ instance FromJSON FirewallList where
                      <*> (o .:? "id"))
 
 instance ToJSON FirewallList where
-        toJSON FirewallList{..}
+        toJSON FirewallList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _flNextPageToken,
@@ -415,7 +415,7 @@ instance ToJSON FirewallList where
 -- when the list is empty.
 --
 -- /See:/ 'instancesScopedListWarning' smart constructor.
-data InstancesScopedListWarning = InstancesScopedListWarning
+data InstancesScopedListWarning = InstancesScopedListWarning'
     { _islwData    :: !(Maybe [InstancesScopedListWarningDataItem])
     , _islwCode    :: !(Maybe InstancesScopedListWarningCode)
     , _islwMessage :: !(Maybe Text)
@@ -433,7 +433,7 @@ data InstancesScopedListWarning = InstancesScopedListWarning
 instancesScopedListWarning
     :: InstancesScopedListWarning
 instancesScopedListWarning =
-    InstancesScopedListWarning
+    InstancesScopedListWarning'
     { _islwData = Nothing
     , _islwCode = Nothing
     , _islwMessage = Nothing
@@ -462,12 +462,12 @@ instance FromJSON InstancesScopedListWarning where
         parseJSON
           = withObject "InstancesScopedListWarning"
               (\ o ->
-                 InstancesScopedListWarning <$>
+                 InstancesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON InstancesScopedListWarning where
-        toJSON InstancesScopedListWarning{..}
+        toJSON InstancesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _islwData,
@@ -477,7 +477,7 @@ instance ToJSON InstancesScopedListWarning where
 -- | A list of InstanceGroup resources.
 --
 -- /See:/ 'instanceGroupList' smart constructor.
-data InstanceGroupList = InstanceGroupList
+data InstanceGroupList = InstanceGroupList'
     { _iglNextPageToken :: !(Maybe Text)
     , _iglKind          :: !Text
     , _iglItems         :: !(Maybe [InstanceGroup])
@@ -501,7 +501,7 @@ data InstanceGroupList = InstanceGroupList
 instanceGroupList
     :: InstanceGroupList
 instanceGroupList =
-    InstanceGroupList
+    InstanceGroupList'
     { _iglNextPageToken = Nothing
     , _iglKind = "compute#instanceGroupList"
     , _iglItems = Nothing
@@ -546,7 +546,7 @@ instance FromJSON InstanceGroupList where
         parseJSON
           = withObject "InstanceGroupList"
               (\ o ->
-                 InstanceGroupList <$>
+                 InstanceGroupList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceGroupList")
                      <*> (o .:? "items" .!= mempty)
@@ -554,7 +554,7 @@ instance FromJSON InstanceGroupList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupList where
-        toJSON InstanceGroupList{..}
+        toJSON InstanceGroupList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _iglNextPageToken,
@@ -565,7 +565,7 @@ instance ToJSON InstanceGroupList where
 
 --
 -- /See:/ 'instancesSetMachineTypeRequest' smart constructor.
-newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest
+newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest'
     { _ismtrMachineType :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -577,7 +577,7 @@ newtype InstancesSetMachineTypeRequest = InstancesSetMachineTypeRequest
 instancesSetMachineTypeRequest
     :: InstancesSetMachineTypeRequest
 instancesSetMachineTypeRequest =
-    InstancesSetMachineTypeRequest
+    InstancesSetMachineTypeRequest'
     { _ismtrMachineType = Nothing
     }
 
@@ -594,11 +594,11 @@ instance FromJSON InstancesSetMachineTypeRequest
         parseJSON
           = withObject "InstancesSetMachineTypeRequest"
               (\ o ->
-                 InstancesSetMachineTypeRequest <$>
+                 InstancesSetMachineTypeRequest' <$>
                    (o .:? "machineType"))
 
 instance ToJSON InstancesSetMachineTypeRequest where
-        toJSON InstancesSetMachineTypeRequest{..}
+        toJSON InstancesSetMachineTypeRequest'{..}
           = object
               (catMaybes
                  [("machineType" .=) <$> _ismtrMachineType])
@@ -606,7 +606,7 @@ instance ToJSON InstancesSetMachineTypeRequest where
 -- | A map of scoped autoscaler lists.
 --
 -- /See:/ 'autoscalerAggregatedListItems' smart constructor.
-newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems
+newtype AutoscalerAggregatedListItems = AutoscalerAggregatedListItems'
     { _aaliAddtional :: HashMap Text AutoscalersScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -619,7 +619,7 @@ autoscalerAggregatedListItems
     :: HashMap Text AutoscalersScopedList -- ^ 'aaliAddtional'
     -> AutoscalerAggregatedListItems
 autoscalerAggregatedListItems pAaliAddtional_ =
-    AutoscalerAggregatedListItems
+    AutoscalerAggregatedListItems'
     { _aaliAddtional = _Coerce # pAaliAddtional_
     }
 
@@ -634,7 +634,7 @@ instance FromJSON AutoscalerAggregatedListItems where
         parseJSON
           = withObject "AutoscalerAggregatedListItems"
               (\ o ->
-                 AutoscalerAggregatedListItems <$>
+                 AutoscalerAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON AutoscalerAggregatedListItems where
@@ -642,7 +642,7 @@ instance ToJSON AutoscalerAggregatedListItems where
 
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplateRequest' smart constructor.
-newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest
+newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -654,7 +654,7 @@ newtype InstanceGroupManagersSetInstanceTemplateRequest = InstanceGroupManagersS
 instanceGroupManagersSetInstanceTemplateRequest
     :: InstanceGroupManagersSetInstanceTemplateRequest
 instanceGroupManagersSetInstanceTemplateRequest =
-    InstanceGroupManagersSetInstanceTemplateRequest
+    InstanceGroupManagersSetInstanceTemplateRequest'
     { _igmsitrInstanceTemplate = Nothing
     }
 
@@ -672,13 +672,13 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersSetInstanceTemplateRequest"
               (\ o ->
-                 InstanceGroupManagersSetInstanceTemplateRequest <$>
+                 InstanceGroupManagersSetInstanceTemplateRequest' <$>
                    (o .:? "instanceTemplate"))
 
 instance ToJSON
          InstanceGroupManagersSetInstanceTemplateRequest where
         toJSON
-          InstanceGroupManagersSetInstanceTemplateRequest{..}
+          InstanceGroupManagersSetInstanceTemplateRequest'{..}
           = object
               (catMaybes
                  [("instanceTemplate" .=) <$>
@@ -687,7 +687,7 @@ instance ToJSON
 -- | Deprecation status for a public resource.
 --
 -- /See:/ 'deprecationStatus' smart constructor.
-data DeprecationStatus = DeprecationStatus
+data DeprecationStatus = DeprecationStatus'
     { _dsState       :: !(Maybe DeprecationStatusState)
     , _dsDeleted     :: !(Maybe Text)
     , _dsReplacement :: !(Maybe Text)
@@ -711,7 +711,7 @@ data DeprecationStatus = DeprecationStatus
 deprecationStatus
     :: DeprecationStatus
 deprecationStatus =
-    DeprecationStatus
+    DeprecationStatus'
     { _dsState = Nothing
     , _dsDeleted = Nothing
     , _dsReplacement = Nothing
@@ -758,14 +758,14 @@ instance FromJSON DeprecationStatus where
         parseJSON
           = withObject "DeprecationStatus"
               (\ o ->
-                 DeprecationStatus <$>
+                 DeprecationStatus' <$>
                    (o .:? "state") <*> (o .:? "deleted") <*>
                      (o .:? "replacement")
                      <*> (o .:? "obsolete")
                      <*> (o .:? "deprecated"))
 
 instance ToJSON DeprecationStatus where
-        toJSON DeprecationStatus{..}
+        toJSON DeprecationStatus'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _dsState,
@@ -777,7 +777,7 @@ instance ToJSON DeprecationStatus where
 -- | A persistent disk snapshot resource.
 --
 -- /See:/ 'snapshot' smart constructor.
-data Snapshot = Snapshot
+data Snapshot = Snapshot'
     { _sStorageBytesStatus :: !(Maybe SnapshotStorageBytesStatus)
     , _sStatus             :: !(Maybe SnapshotStatus)
     , _sDiskSizeGb         :: !(Maybe (Textual Int64))
@@ -825,7 +825,7 @@ data Snapshot = Snapshot
 snapshot
     :: Snapshot
 snapshot =
-    Snapshot
+    Snapshot'
     { _sStorageBytesStatus = Nothing
     , _sStatus = Nothing
     , _sDiskSizeGb = Nothing
@@ -934,7 +934,7 @@ instance FromJSON Snapshot where
         parseJSON
           = withObject "Snapshot"
               (\ o ->
-                 Snapshot <$>
+                 Snapshot' <$>
                    (o .:? "storageBytesStatus") <*> (o .:? "status") <*>
                      (o .:? "diskSizeGb")
                      <*> (o .:? "sourceDiskId")
@@ -949,7 +949,7 @@ instance FromJSON Snapshot where
                      <*> (o .:? "description"))
 
 instance ToJSON Snapshot where
-        toJSON Snapshot{..}
+        toJSON Snapshot'{..}
           = object
               (catMaybes
                  [("storageBytesStatus" .=) <$> _sStorageBytesStatus,
@@ -968,7 +968,7 @@ instance ToJSON Snapshot where
 -- | Custom utilization metric policy.
 --
 -- /See:/ 'autoscalingPolicyCustomMetricUtilization' smart constructor.
-data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization
+data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget     :: !(Maybe (Textual Double))
     , _apcmuMetric                :: !(Maybe Text)
     , _apcmuUtilizationTargetType :: !(Maybe AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType)
@@ -986,7 +986,7 @@ data AutoscalingPolicyCustomMetricUtilization = AutoscalingPolicyCustomMetricUti
 autoscalingPolicyCustomMetricUtilization
     :: AutoscalingPolicyCustomMetricUtilization
 autoscalingPolicyCustomMetricUtilization =
-    AutoscalingPolicyCustomMetricUtilization
+    AutoscalingPolicyCustomMetricUtilization'
     { _apcmuUtilizationTarget = Nothing
     , _apcmuMetric = Nothing
     , _apcmuUtilizationTargetType = Nothing
@@ -1028,13 +1028,13 @@ instance FromJSON
           = withObject
               "AutoscalingPolicyCustomMetricUtilization"
               (\ o ->
-                 AutoscalingPolicyCustomMetricUtilization <$>
+                 AutoscalingPolicyCustomMetricUtilization' <$>
                    (o .:? "utilizationTarget") <*> (o .:? "metric") <*>
                      (o .:? "utilizationTargetType"))
 
 instance ToJSON
          AutoscalingPolicyCustomMetricUtilization where
-        toJSON AutoscalingPolicyCustomMetricUtilization{..}
+        toJSON AutoscalingPolicyCustomMetricUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -1046,7 +1046,7 @@ instance ToJSON
 -- | Contains a list of ForwardingRule resources.
 --
 -- /See:/ 'forwardingRuleList' smart constructor.
-data ForwardingRuleList = ForwardingRuleList
+data ForwardingRuleList = ForwardingRuleList'
     { _frlNextPageToken :: !(Maybe Text)
     , _frlKind          :: !Text
     , _frlItems         :: !(Maybe [ForwardingRule])
@@ -1070,7 +1070,7 @@ data ForwardingRuleList = ForwardingRuleList
 forwardingRuleList
     :: ForwardingRuleList
 forwardingRuleList =
-    ForwardingRuleList
+    ForwardingRuleList'
     { _frlNextPageToken = Nothing
     , _frlKind = "compute#forwardingRuleList"
     , _frlItems = Nothing
@@ -1112,7 +1112,7 @@ instance FromJSON ForwardingRuleList where
         parseJSON
           = withObject "ForwardingRuleList"
               (\ o ->
-                 ForwardingRuleList <$>
+                 ForwardingRuleList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#forwardingRuleList")
                      <*> (o .:? "items" .!= mempty)
@@ -1120,7 +1120,7 @@ instance FromJSON ForwardingRuleList where
                      <*> (o .:? "id"))
 
 instance ToJSON ForwardingRuleList where
-        toJSON ForwardingRuleList{..}
+        toJSON ForwardingRuleList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _frlNextPageToken,
@@ -1131,7 +1131,7 @@ instance ToJSON ForwardingRuleList where
 
 --
 -- /See:/ 'vpnTunnelsScopedList' smart constructor.
-data VPNTunnelsScopedList = VPNTunnelsScopedList
+data VPNTunnelsScopedList = VPNTunnelsScopedList'
     { _vtslVPNTunnels :: !(Maybe [VPNTunnel])
     , _vtslWarning    :: !(Maybe VPNTunnelsScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1146,7 +1146,7 @@ data VPNTunnelsScopedList = VPNTunnelsScopedList
 vpnTunnelsScopedList
     :: VPNTunnelsScopedList
 vpnTunnelsScopedList =
-    VPNTunnelsScopedList
+    VPNTunnelsScopedList'
     { _vtslVPNTunnels = Nothing
     , _vtslWarning = Nothing
     }
@@ -1169,12 +1169,12 @@ instance FromJSON VPNTunnelsScopedList where
         parseJSON
           = withObject "VPNTunnelsScopedList"
               (\ o ->
-                 VPNTunnelsScopedList <$>
+                 VPNTunnelsScopedList' <$>
                    (o .:? "vpnTunnels" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON VPNTunnelsScopedList where
-        toJSON VPNTunnelsScopedList{..}
+        toJSON VPNTunnelsScopedList'{..}
           = object
               (catMaybes
                  [("vpnTunnels" .=) <$> _vtslVPNTunnels,
@@ -1182,7 +1182,7 @@ instance ToJSON VPNTunnelsScopedList where
 
 --
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
-data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
+data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest'
     { _igsnprFingerprint :: !(Maybe (Textual Word8))
     , _igsnprNamedPorts  :: !(Maybe [NamedPort])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1197,7 +1197,7 @@ data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
 instanceGroupsSetNamedPortsRequest
     :: InstanceGroupsSetNamedPortsRequest
 instanceGroupsSetNamedPortsRequest =
-    InstanceGroupsSetNamedPortsRequest
+    InstanceGroupsSetNamedPortsRequest'
     { _igsnprFingerprint = Nothing
     , _igsnprNamedPorts = Nothing
     }
@@ -1227,13 +1227,13 @@ instance FromJSON InstanceGroupsSetNamedPortsRequest
         parseJSON
           = withObject "InstanceGroupsSetNamedPortsRequest"
               (\ o ->
-                 InstanceGroupsSetNamedPortsRequest <$>
+                 InstanceGroupsSetNamedPortsRequest' <$>
                    (o .:? "fingerprint") <*>
                      (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroupsSetNamedPortsRequest
          where
-        toJSON InstanceGroupsSetNamedPortsRequest{..}
+        toJSON InstanceGroupsSetNamedPortsRequest'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _igsnprFingerprint,
@@ -1242,7 +1242,7 @@ instance ToJSON InstanceGroupsSetNamedPortsRequest
 -- | Contains a list of Operation resources.
 --
 -- /See:/ 'operationList' smart constructor.
-data OperationList = OperationList
+data OperationList = OperationList'
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
     , _olItems         :: !(Maybe [Operation])
@@ -1266,7 +1266,7 @@ data OperationList = OperationList
 operationList
     :: OperationList
 operationList =
-    OperationList
+    OperationList'
     { _olNextPageToken = Nothing
     , _olKind = "compute#operationList"
     , _olItems = Nothing
@@ -1309,7 +1309,7 @@ instance FromJSON OperationList where
         parseJSON
           = withObject "OperationList"
               (\ o ->
-                 OperationList <$>
+                 OperationList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#operationList")
                      <*> (o .:? "items" .!= mempty)
@@ -1317,7 +1317,7 @@ instance FromJSON OperationList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationList where
-        toJSON OperationList{..}
+        toJSON OperationList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olNextPageToken,
@@ -1328,7 +1328,7 @@ instance ToJSON OperationList where
 -- | A list of Disk resources.
 --
 -- /See:/ 'diskList' smart constructor.
-data DiskList = DiskList
+data DiskList = DiskList'
     { _dlNextPageToken :: !(Maybe Text)
     , _dlKind          :: !Text
     , _dlItems         :: !(Maybe [Disk])
@@ -1352,7 +1352,7 @@ data DiskList = DiskList
 diskList
     :: DiskList
 diskList =
-    DiskList
+    DiskList'
     { _dlNextPageToken = Nothing
     , _dlKind = "compute#diskList"
     , _dlItems = Nothing
@@ -1395,7 +1395,7 @@ instance FromJSON DiskList where
         parseJSON
           = withObject "DiskList"
               (\ o ->
-                 DiskList <$>
+                 DiskList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskList")
                      <*> (o .:? "items" .!= mempty)
@@ -1403,7 +1403,7 @@ instance FromJSON DiskList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskList where
-        toJSON DiskList{..}
+        toJSON DiskList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dlNextPageToken,
@@ -1413,7 +1413,7 @@ instance ToJSON DiskList where
 
 --
 -- /See:/ 'targetPoolsAddInstanceRequest' smart constructor.
-newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest
+newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest'
     { _tpairInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1425,7 +1425,7 @@ newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest
 targetPoolsAddInstanceRequest
     :: TargetPoolsAddInstanceRequest
 targetPoolsAddInstanceRequest =
-    TargetPoolsAddInstanceRequest
+    TargetPoolsAddInstanceRequest'
     { _tpairInstances = Nothing
     }
 
@@ -1446,17 +1446,17 @@ instance FromJSON TargetPoolsAddInstanceRequest where
         parseJSON
           = withObject "TargetPoolsAddInstanceRequest"
               (\ o ->
-                 TargetPoolsAddInstanceRequest <$>
+                 TargetPoolsAddInstanceRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON TargetPoolsAddInstanceRequest where
-        toJSON TargetPoolsAddInstanceRequest{..}
+        toJSON TargetPoolsAddInstanceRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _tpairInstances])
 
 --
 -- /See:/ 'instanceGroupsAddInstancesRequest' smart constructor.
-newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest
+newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest'
     { _igairInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1468,7 +1468,7 @@ newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest
 instanceGroupsAddInstancesRequest
     :: InstanceGroupsAddInstancesRequest
 instanceGroupsAddInstancesRequest =
-    InstanceGroupsAddInstancesRequest
+    InstanceGroupsAddInstancesRequest'
     { _igairInstances = Nothing
     }
 
@@ -1485,19 +1485,19 @@ instance FromJSON InstanceGroupsAddInstancesRequest
         parseJSON
           = withObject "InstanceGroupsAddInstancesRequest"
               (\ o ->
-                 InstanceGroupsAddInstancesRequest <$>
+                 InstanceGroupsAddInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON InstanceGroupsAddInstancesRequest
          where
-        toJSON InstanceGroupsAddInstancesRequest{..}
+        toJSON InstanceGroupsAddInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igairInstances])
 
 -- | [Output Only] A list of managed instance groups.
 --
 -- /See:/ 'instanceGroupManagerList' smart constructor.
-data InstanceGroupManagerList = InstanceGroupManagerList
+data InstanceGroupManagerList = InstanceGroupManagerList'
     { _igmlNextPageToken :: !(Maybe Text)
     , _igmlKind          :: !Text
     , _igmlItems         :: !(Maybe [InstanceGroupManager])
@@ -1521,7 +1521,7 @@ data InstanceGroupManagerList = InstanceGroupManagerList
 instanceGroupManagerList
     :: InstanceGroupManagerList
 instanceGroupManagerList =
-    InstanceGroupManagerList
+    InstanceGroupManagerList'
     { _igmlNextPageToken = Nothing
     , _igmlKind = "compute#instanceGroupManagerList"
     , _igmlItems = Nothing
@@ -1566,7 +1566,7 @@ instance FromJSON InstanceGroupManagerList where
         parseJSON
           = withObject "InstanceGroupManagerList"
               (\ o ->
-                 InstanceGroupManagerList <$>
+                 InstanceGroupManagerList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceGroupManagerList")
                      <*> (o .:? "items" .!= mempty)
@@ -1574,7 +1574,7 @@ instance FromJSON InstanceGroupManagerList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupManagerList where
-        toJSON InstanceGroupManagerList{..}
+        toJSON InstanceGroupManagerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igmlNextPageToken,
@@ -1587,7 +1587,7 @@ instance ToJSON InstanceGroupManagerList where
 -- empty.
 --
 -- /See:/ 'subnetworksScopedListWarning' smart constructor.
-data SubnetworksScopedListWarning = SubnetworksScopedListWarning
+data SubnetworksScopedListWarning = SubnetworksScopedListWarning'
     { _sslwData    :: !(Maybe [SubnetworksScopedListWarningDataItem])
     , _sslwCode    :: !(Maybe SubnetworksScopedListWarningCode)
     , _sslwMessage :: !(Maybe Text)
@@ -1605,7 +1605,7 @@ data SubnetworksScopedListWarning = SubnetworksScopedListWarning
 subnetworksScopedListWarning
     :: SubnetworksScopedListWarning
 subnetworksScopedListWarning =
-    SubnetworksScopedListWarning
+    SubnetworksScopedListWarning'
     { _sslwData = Nothing
     , _sslwCode = Nothing
     , _sslwMessage = Nothing
@@ -1634,12 +1634,12 @@ instance FromJSON SubnetworksScopedListWarning where
         parseJSON
           = withObject "SubnetworksScopedListWarning"
               (\ o ->
-                 SubnetworksScopedListWarning <$>
+                 SubnetworksScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON SubnetworksScopedListWarning where
-        toJSON SubnetworksScopedListWarning{..}
+        toJSON SubnetworksScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _sslwData,
@@ -1649,7 +1649,7 @@ instance ToJSON SubnetworksScopedListWarning where
 -- | An Image resource.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image
+data Image = Image'
     { _iStatus            :: !(Maybe ImageStatus)
     , _iDiskSizeGb        :: !(Maybe (Textual Int64))
     , _iSourceType        :: !ImageSourceType
@@ -1703,7 +1703,7 @@ data Image = Image
 image
     :: Image
 image =
-    Image
+    Image'
     { _iStatus = Nothing
     , _iDiskSizeGb = Nothing
     , _iSourceType = Raw
@@ -1823,7 +1823,7 @@ instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
-                 Image <$>
+                 Image' <$>
                    (o .:? "status") <*> (o .:? "diskSizeGb") <*>
                      (o .:? "sourceType" .!= Raw)
                      <*> (o .:? "sourceDiskId")
@@ -1840,7 +1840,7 @@ instance FromJSON Image where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Image where
-        toJSON Image{..}
+        toJSON Image'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iStatus,
@@ -1863,7 +1863,7 @@ instance ToJSON Image where
 -- host and path.
 --
 -- /See:/ 'urlMap' smart constructor.
-data URLMap = URLMap
+data URLMap = URLMap'
     { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
     , _umFingerprint       :: !(Maybe (Textual Word8))
@@ -1905,7 +1905,7 @@ data URLMap = URLMap
 urlMap
     :: URLMap
 urlMap =
-    URLMap
+    URLMap'
     { _umTests = Nothing
     , _umKind = "compute#urlMap"
     , _umFingerprint = Nothing
@@ -2000,7 +2000,7 @@ instance FromJSON URLMap where
         parseJSON
           = withObject "URLMap"
               (\ o ->
-                 URLMap <$>
+                 URLMap' <$>
                    (o .:? "tests" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#urlMap")
                      <*> (o .:? "fingerprint")
@@ -2014,7 +2014,7 @@ instance FromJSON URLMap where
                      <*> (o .:? "description"))
 
 instance ToJSON URLMap where
-        toJSON URLMap{..}
+        toJSON URLMap'{..}
           = object
               (catMaybes
                  [("tests" .=) <$> _umTests, Just ("kind" .= _umKind),
@@ -2031,7 +2031,7 @@ instance ToJSON URLMap where
 -- | A map of scoped instance group lists.
 --
 -- /See:/ 'instanceGroupAggregatedListItems' smart constructor.
-newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems
+newtype InstanceGroupAggregatedListItems = InstanceGroupAggregatedListItems'
     { _igaliAddtional :: HashMap Text InstanceGroupsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2044,7 +2044,7 @@ instanceGroupAggregatedListItems
     :: HashMap Text InstanceGroupsScopedList -- ^ 'igaliAddtional'
     -> InstanceGroupAggregatedListItems
 instanceGroupAggregatedListItems pIgaliAddtional_ =
-    InstanceGroupAggregatedListItems
+    InstanceGroupAggregatedListItems'
     { _igaliAddtional = _Coerce # pIgaliAddtional_
     }
 
@@ -2060,7 +2060,7 @@ instance FromJSON InstanceGroupAggregatedListItems
         parseJSON
           = withObject "InstanceGroupAggregatedListItems"
               (\ o ->
-                 InstanceGroupAggregatedListItems <$>
+                 InstanceGroupAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON InstanceGroupAggregatedListItems
@@ -2070,7 +2070,7 @@ instance ToJSON InstanceGroupAggregatedListItems
 -- | Contains a list of TargetPool resources.
 --
 -- /See:/ 'targetPoolList' smart constructor.
-data TargetPoolList = TargetPoolList
+data TargetPoolList = TargetPoolList'
     { _tplNextPageToken :: !(Maybe Text)
     , _tplKind          :: !Text
     , _tplItems         :: !(Maybe [TargetPool])
@@ -2094,7 +2094,7 @@ data TargetPoolList = TargetPoolList
 targetPoolList
     :: TargetPoolList
 targetPoolList =
-    TargetPoolList
+    TargetPoolList'
     { _tplNextPageToken = Nothing
     , _tplKind = "compute#targetPoolList"
     , _tplItems = Nothing
@@ -2137,7 +2137,7 @@ instance FromJSON TargetPoolList where
         parseJSON
           = withObject "TargetPoolList"
               (\ o ->
-                 TargetPoolList <$>
+                 TargetPoolList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetPoolList")
                      <*> (o .:? "items" .!= mempty)
@@ -2145,7 +2145,7 @@ instance FromJSON TargetPoolList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetPoolList where
-        toJSON TargetPoolList{..}
+        toJSON TargetPoolList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tplNextPageToken,
@@ -2156,7 +2156,7 @@ instance ToJSON TargetPoolList where
 
 --
 -- /See:/ 'targetInstanceAggregatedList' smart constructor.
-data TargetInstanceAggregatedList = TargetInstanceAggregatedList
+data TargetInstanceAggregatedList = TargetInstanceAggregatedList'
     { _tialNextPageToken :: !(Maybe Text)
     , _tialKind          :: !Text
     , _tialItems         :: !(Maybe TargetInstanceAggregatedListItems)
@@ -2180,7 +2180,7 @@ data TargetInstanceAggregatedList = TargetInstanceAggregatedList
 targetInstanceAggregatedList
     :: TargetInstanceAggregatedList
 targetInstanceAggregatedList =
-    TargetInstanceAggregatedList
+    TargetInstanceAggregatedList'
     { _tialNextPageToken = Nothing
     , _tialKind = "compute#targetInstanceAggregatedList"
     , _tialItems = Nothing
@@ -2220,7 +2220,7 @@ instance FromJSON TargetInstanceAggregatedList where
         parseJSON
           = withObject "TargetInstanceAggregatedList"
               (\ o ->
-                 TargetInstanceAggregatedList <$>
+                 TargetInstanceAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#targetInstanceAggregatedList")
@@ -2229,7 +2229,7 @@ instance FromJSON TargetInstanceAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetInstanceAggregatedList where
-        toJSON TargetInstanceAggregatedList{..}
+        toJSON TargetInstanceAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tialNextPageToken,
@@ -2240,7 +2240,7 @@ instance ToJSON TargetInstanceAggregatedList where
 
 --
 -- /See:/ 'disksScopedList' smart constructor.
-data DisksScopedList = DisksScopedList
+data DisksScopedList = DisksScopedList'
     { _dslWarning :: !(Maybe DisksScopedListWarning)
     , _dslDisks   :: !(Maybe [Disk])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2255,7 +2255,7 @@ data DisksScopedList = DisksScopedList
 disksScopedList
     :: DisksScopedList
 disksScopedList =
-    DisksScopedList
+    DisksScopedList'
     { _dslWarning = Nothing
     , _dslDisks = Nothing
     }
@@ -2277,11 +2277,11 @@ instance FromJSON DisksScopedList where
         parseJSON
           = withObject "DisksScopedList"
               (\ o ->
-                 DisksScopedList <$>
+                 DisksScopedList' <$>
                    (o .:? "warning") <*> (o .:? "disks" .!= mempty))
 
 instance ToJSON DisksScopedList where
-        toJSON DisksScopedList{..}
+        toJSON DisksScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _dslWarning,
@@ -2289,7 +2289,7 @@ instance ToJSON DisksScopedList where
 
 --
 -- /See:/ 'instanceGroupManagersScopedList' smart constructor.
-data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList
+data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList'
     { _igmslWarning               :: !(Maybe InstanceGroupManagersScopedListWarning)
     , _igmslInstanceGroupManagers :: !(Maybe [InstanceGroupManager])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2304,7 +2304,7 @@ data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList
 instanceGroupManagersScopedList
     :: InstanceGroupManagersScopedList
 instanceGroupManagersScopedList =
-    InstanceGroupManagersScopedList
+    InstanceGroupManagersScopedList'
     { _igmslWarning = Nothing
     , _igmslInstanceGroupManagers = Nothing
     }
@@ -2329,12 +2329,12 @@ instance FromJSON InstanceGroupManagersScopedList
         parseJSON
           = withObject "InstanceGroupManagersScopedList"
               (\ o ->
-                 InstanceGroupManagersScopedList <$>
+                 InstanceGroupManagersScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "instanceGroupManagers" .!= mempty))
 
 instance ToJSON InstanceGroupManagersScopedList where
-        toJSON InstanceGroupManagersScopedList{..}
+        toJSON InstanceGroupManagersScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _igmslWarning,
@@ -2343,7 +2343,7 @@ instance ToJSON InstanceGroupManagersScopedList where
 
 --
 -- /See:/ 'diskAggregatedList' smart constructor.
-data DiskAggregatedList = DiskAggregatedList
+data DiskAggregatedList = DiskAggregatedList'
     { _dalNextPageToken :: !(Maybe Text)
     , _dalKind          :: !Text
     , _dalItems         :: !(Maybe DiskAggregatedListItems)
@@ -2367,7 +2367,7 @@ data DiskAggregatedList = DiskAggregatedList
 diskAggregatedList
     :: DiskAggregatedList
 diskAggregatedList =
-    DiskAggregatedList
+    DiskAggregatedList'
     { _dalNextPageToken = Nothing
     , _dalKind = "compute#diskAggregatedList"
     , _dalItems = Nothing
@@ -2408,7 +2408,7 @@ instance FromJSON DiskAggregatedList where
         parseJSON
           = withObject "DiskAggregatedList"
               (\ o ->
-                 DiskAggregatedList <$>
+                 DiskAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskAggregatedList")
                      <*> (o .:? "items")
@@ -2416,7 +2416,7 @@ instance FromJSON DiskAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskAggregatedList where
-        toJSON DiskAggregatedList{..}
+        toJSON DiskAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dalNextPageToken,
@@ -2427,7 +2427,7 @@ instance ToJSON DiskAggregatedList where
 
 --
 -- /See:/ 'instanceWithNamedPorts' smart constructor.
-data InstanceWithNamedPorts = InstanceWithNamedPorts
+data InstanceWithNamedPorts = InstanceWithNamedPorts'
     { _iwnpStatus     :: !(Maybe InstanceWithNamedPortsStatus)
     , _iwnpNamedPorts :: !(Maybe [NamedPort])
     , _iwnpInstance   :: !(Maybe Text)
@@ -2445,7 +2445,7 @@ data InstanceWithNamedPorts = InstanceWithNamedPorts
 instanceWithNamedPorts
     :: InstanceWithNamedPorts
 instanceWithNamedPorts =
-    InstanceWithNamedPorts
+    InstanceWithNamedPorts'
     { _iwnpStatus = Nothing
     , _iwnpNamedPorts = Nothing
     , _iwnpInstance = Nothing
@@ -2473,12 +2473,12 @@ instance FromJSON InstanceWithNamedPorts where
         parseJSON
           = withObject "InstanceWithNamedPorts"
               (\ o ->
-                 InstanceWithNamedPorts <$>
+                 InstanceWithNamedPorts' <$>
                    (o .:? "status") <*> (o .:? "namedPorts" .!= mempty)
                      <*> (o .:? "instance"))
 
 instance ToJSON InstanceWithNamedPorts where
-        toJSON InstanceWithNamedPorts{..}
+        toJSON InstanceWithNamedPorts'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _iwnpStatus,
@@ -2487,7 +2487,7 @@ instance ToJSON InstanceWithNamedPorts where
 
 --
 -- /See:/ 'forwardingRulesScopedList' smart constructor.
-data ForwardingRulesScopedList = ForwardingRulesScopedList
+data ForwardingRulesScopedList = ForwardingRulesScopedList'
     { _frslWarning         :: !(Maybe ForwardingRulesScopedListWarning)
     , _frslForwardingRules :: !(Maybe [ForwardingRule])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2502,7 +2502,7 @@ data ForwardingRulesScopedList = ForwardingRulesScopedList
 forwardingRulesScopedList
     :: ForwardingRulesScopedList
 forwardingRulesScopedList =
-    ForwardingRulesScopedList
+    ForwardingRulesScopedList'
     { _frslWarning = Nothing
     , _frslForwardingRules = Nothing
     }
@@ -2525,12 +2525,12 @@ instance FromJSON ForwardingRulesScopedList where
         parseJSON
           = withObject "ForwardingRulesScopedList"
               (\ o ->
-                 ForwardingRulesScopedList <$>
+                 ForwardingRulesScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "forwardingRules" .!= mempty))
 
 instance ToJSON ForwardingRulesScopedList where
-        toJSON ForwardingRulesScopedList{..}
+        toJSON ForwardingRulesScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _frslWarning,
@@ -2538,7 +2538,7 @@ instance ToJSON ForwardingRulesScopedList where
 
 --
 -- /See:/ 'instanceReference' smart constructor.
-newtype InstanceReference = InstanceReference
+newtype InstanceReference = InstanceReference'
     { _iInstance :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2550,7 +2550,7 @@ newtype InstanceReference = InstanceReference
 instanceReference
     :: InstanceReference
 instanceReference =
-    InstanceReference
+    InstanceReference'
     { _iInstance = Nothing
     }
 
@@ -2562,15 +2562,15 @@ iInstance
 instance FromJSON InstanceReference where
         parseJSON
           = withObject "InstanceReference"
-              (\ o -> InstanceReference <$> (o .:? "instance"))
+              (\ o -> InstanceReference' <$> (o .:? "instance"))
 
 instance ToJSON InstanceReference where
-        toJSON InstanceReference{..}
+        toJSON InstanceReference'{..}
           = object (catMaybes [("instance" .=) <$> _iInstance])
 
 --
 -- /See:/ 'operationAggregatedList' smart constructor.
-data OperationAggregatedList = OperationAggregatedList
+data OperationAggregatedList = OperationAggregatedList'
     { _oalNextPageToken :: !(Maybe Text)
     , _oalKind          :: !Text
     , _oalItems         :: !(Maybe OperationAggregatedListItems)
@@ -2594,7 +2594,7 @@ data OperationAggregatedList = OperationAggregatedList
 operationAggregatedList
     :: OperationAggregatedList
 operationAggregatedList =
-    OperationAggregatedList
+    OperationAggregatedList'
     { _oalNextPageToken = Nothing
     , _oalKind = "compute#operationAggregatedList"
     , _oalItems = Nothing
@@ -2635,7 +2635,7 @@ instance FromJSON OperationAggregatedList where
         parseJSON
           = withObject "OperationAggregatedList"
               (\ o ->
-                 OperationAggregatedList <$>
+                 OperationAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#operationAggregatedList")
                      <*> (o .:? "items")
@@ -2643,7 +2643,7 @@ instance FromJSON OperationAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON OperationAggregatedList where
-        toJSON OperationAggregatedList{..}
+        toJSON OperationAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _oalNextPageToken,
@@ -2654,7 +2654,7 @@ instance ToJSON OperationAggregatedList where
 
 --
 -- /See:/ 'operationsScopedList' smart constructor.
-data OperationsScopedList = OperationsScopedList
+data OperationsScopedList = OperationsScopedList'
     { _oslWarning    :: !(Maybe OperationsScopedListWarning)
     , _oslOperations :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2669,7 +2669,7 @@ data OperationsScopedList = OperationsScopedList
 operationsScopedList
     :: OperationsScopedList
 operationsScopedList =
-    OperationsScopedList
+    OperationsScopedList'
     { _oslWarning = Nothing
     , _oslOperations = Nothing
     }
@@ -2692,12 +2692,12 @@ instance FromJSON OperationsScopedList where
         parseJSON
           = withObject "OperationsScopedList"
               (\ o ->
-                 OperationsScopedList <$>
+                 OperationsScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON OperationsScopedList where
-        toJSON OperationsScopedList{..}
+        toJSON OperationsScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _oslWarning,
@@ -2706,7 +2706,7 @@ instance ToJSON OperationsScopedList where
 -- | The named port. For example: .
 --
 -- /See:/ 'namedPort' smart constructor.
-data NamedPort = NamedPort
+data NamedPort = NamedPort'
     { _npName :: !(Maybe Text)
     , _npPort :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2721,7 +2721,7 @@ data NamedPort = NamedPort
 namedPort
     :: NamedPort
 namedPort =
-    NamedPort
+    NamedPort'
     { _npName = Nothing
     , _npPort = Nothing
     }
@@ -2741,10 +2741,10 @@ instance FromJSON NamedPort where
         parseJSON
           = withObject "NamedPort"
               (\ o ->
-                 NamedPort <$> (o .:? "name") <*> (o .:? "port"))
+                 NamedPort' <$> (o .:? "name") <*> (o .:? "port"))
 
 instance ToJSON NamedPort where
-        toJSON NamedPort{..}
+        toJSON NamedPort'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _npName, ("port" .=) <$> _npPort])
@@ -2752,7 +2752,7 @@ instance ToJSON NamedPort where
 -- | Contains a list of TargetInstance resources.
 --
 -- /See:/ 'targetInstanceList' smart constructor.
-data TargetInstanceList = TargetInstanceList
+data TargetInstanceList = TargetInstanceList'
     { _tilNextPageToken :: !(Maybe Text)
     , _tilKind          :: !Text
     , _tilItems         :: !(Maybe [TargetInstance])
@@ -2776,7 +2776,7 @@ data TargetInstanceList = TargetInstanceList
 targetInstanceList
     :: TargetInstanceList
 targetInstanceList =
-    TargetInstanceList
+    TargetInstanceList'
     { _tilNextPageToken = Nothing
     , _tilKind = "compute#targetInstanceList"
     , _tilItems = Nothing
@@ -2819,7 +2819,7 @@ instance FromJSON TargetInstanceList where
         parseJSON
           = withObject "TargetInstanceList"
               (\ o ->
-                 TargetInstanceList <$>
+                 TargetInstanceList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetInstanceList")
                      <*> (o .:? "items" .!= mempty)
@@ -2827,7 +2827,7 @@ instance FromJSON TargetInstanceList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetInstanceList where
-        toJSON TargetInstanceList{..}
+        toJSON TargetInstanceList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tilNextPageToken,
@@ -2838,7 +2838,7 @@ instance ToJSON TargetInstanceList where
 
 --
 -- /See:/ 'instanceGroupManagerAggregatedList' smart constructor.
-data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList
+data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList'
     { _igmalNextPageToken :: !(Maybe Text)
     , _igmalKind          :: !Text
     , _igmalItems         :: !(Maybe InstanceGroupManagerAggregatedListItems)
@@ -2862,7 +2862,7 @@ data InstanceGroupManagerAggregatedList = InstanceGroupManagerAggregatedList
 instanceGroupManagerAggregatedList
     :: InstanceGroupManagerAggregatedList
 instanceGroupManagerAggregatedList =
-    InstanceGroupManagerAggregatedList
+    InstanceGroupManagerAggregatedList'
     { _igmalNextPageToken = Nothing
     , _igmalKind = "compute#instanceGroupManagerAggregatedList"
     , _igmalItems = Nothing
@@ -2909,7 +2909,7 @@ instance FromJSON InstanceGroupManagerAggregatedList
         parseJSON
           = withObject "InstanceGroupManagerAggregatedList"
               (\ o ->
-                 InstanceGroupManagerAggregatedList <$>
+                 InstanceGroupManagerAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#instanceGroupManagerAggregatedList")
@@ -2919,7 +2919,7 @@ instance FromJSON InstanceGroupManagerAggregatedList
 
 instance ToJSON InstanceGroupManagerAggregatedList
          where
-        toJSON InstanceGroupManagerAggregatedList{..}
+        toJSON InstanceGroupManagerAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igmalNextPageToken,
@@ -2930,7 +2930,7 @@ instance ToJSON InstanceGroupManagerAggregatedList
 
 --
 -- /See:/ 'targetPoolsScopedList' smart constructor.
-data TargetPoolsScopedList = TargetPoolsScopedList
+data TargetPoolsScopedList = TargetPoolsScopedList'
     { _tpslWarning     :: !(Maybe TargetPoolsScopedListWarning)
     , _tpslTargetPools :: !(Maybe [TargetPool])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2945,7 +2945,7 @@ data TargetPoolsScopedList = TargetPoolsScopedList
 targetPoolsScopedList
     :: TargetPoolsScopedList
 targetPoolsScopedList =
-    TargetPoolsScopedList
+    TargetPoolsScopedList'
     { _tpslWarning = Nothing
     , _tpslTargetPools = Nothing
     }
@@ -2968,12 +2968,12 @@ instance FromJSON TargetPoolsScopedList where
         parseJSON
           = withObject "TargetPoolsScopedList"
               (\ o ->
-                 TargetPoolsScopedList <$>
+                 TargetPoolsScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON TargetPoolsScopedList where
-        toJSON TargetPoolsScopedList{..}
+        toJSON TargetPoolsScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _tpslWarning,
@@ -2981,7 +2981,7 @@ instance ToJSON TargetPoolsScopedList where
 
 --
 -- /See:/ 'forwardingRuleAggregatedList' smart constructor.
-data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList
+data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList'
     { _fralNextPageToken :: !(Maybe Text)
     , _fralKind          :: !Text
     , _fralItems         :: !(Maybe ForwardingRuleAggregatedListItems)
@@ -3005,7 +3005,7 @@ data ForwardingRuleAggregatedList = ForwardingRuleAggregatedList
 forwardingRuleAggregatedList
     :: ForwardingRuleAggregatedList
 forwardingRuleAggregatedList =
-    ForwardingRuleAggregatedList
+    ForwardingRuleAggregatedList'
     { _fralNextPageToken = Nothing
     , _fralKind = "compute#forwardingRuleAggregatedList"
     , _fralItems = Nothing
@@ -3047,7 +3047,7 @@ instance FromJSON ForwardingRuleAggregatedList where
         parseJSON
           = withObject "ForwardingRuleAggregatedList"
               (\ o ->
-                 ForwardingRuleAggregatedList <$>
+                 ForwardingRuleAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#forwardingRuleAggregatedList")
@@ -3056,7 +3056,7 @@ instance FromJSON ForwardingRuleAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON ForwardingRuleAggregatedList where
-        toJSON ForwardingRuleAggregatedList{..}
+        toJSON ForwardingRuleAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _fralNextPageToken,
@@ -3067,7 +3067,7 @@ instance ToJSON ForwardingRuleAggregatedList where
 
 --
 -- /See:/ 'targetReference' smart constructor.
-newtype TargetReference = TargetReference
+newtype TargetReference = TargetReference'
     { _trTarget :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3079,7 +3079,7 @@ newtype TargetReference = TargetReference
 targetReference
     :: TargetReference
 targetReference =
-    TargetReference
+    TargetReference'
     { _trTarget = Nothing
     }
 
@@ -3089,15 +3089,15 @@ trTarget = lens _trTarget (\ s a -> s{_trTarget = a})
 instance FromJSON TargetReference where
         parseJSON
           = withObject "TargetReference"
-              (\ o -> TargetReference <$> (o .:? "target"))
+              (\ o -> TargetReference' <$> (o .:? "target"))
 
 instance ToJSON TargetReference where
-        toJSON TargetReference{..}
+        toJSON TargetReference'{..}
           = object (catMaybes [("target" .=) <$> _trTarget])
 
 --
 -- /See:/ 'targetPoolAggregatedList' smart constructor.
-data TargetPoolAggregatedList = TargetPoolAggregatedList
+data TargetPoolAggregatedList = TargetPoolAggregatedList'
     { _tpalNextPageToken :: !(Maybe Text)
     , _tpalKind          :: !Text
     , _tpalItems         :: !(Maybe TargetPoolAggregatedListItems)
@@ -3121,7 +3121,7 @@ data TargetPoolAggregatedList = TargetPoolAggregatedList
 targetPoolAggregatedList
     :: TargetPoolAggregatedList
 targetPoolAggregatedList =
-    TargetPoolAggregatedList
+    TargetPoolAggregatedList'
     { _tpalNextPageToken = Nothing
     , _tpalKind = "compute#targetPoolAggregatedList"
     , _tpalItems = Nothing
@@ -3162,7 +3162,7 @@ instance FromJSON TargetPoolAggregatedList where
         parseJSON
           = withObject "TargetPoolAggregatedList"
               (\ o ->
-                 TargetPoolAggregatedList <$>
+                 TargetPoolAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetPoolAggregatedList")
                      <*> (o .:? "items")
@@ -3170,7 +3170,7 @@ instance FromJSON TargetPoolAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetPoolAggregatedList where
-        toJSON TargetPoolAggregatedList{..}
+        toJSON TargetPoolAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tpalNextPageToken,
@@ -3181,7 +3181,7 @@ instance ToJSON TargetPoolAggregatedList where
 
 --
 -- /See:/ 'operationsScopedListWarningDataItem' smart constructor.
-data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem
+data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem'
     { _oslwdiValue :: !(Maybe Text)
     , _oslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3196,7 +3196,7 @@ data OperationsScopedListWarningDataItem = OperationsScopedListWarningDataItem
 operationsScopedListWarningDataItem
     :: OperationsScopedListWarningDataItem
 operationsScopedListWarningDataItem =
-    OperationsScopedListWarningDataItem
+    OperationsScopedListWarningDataItem'
     { _oslwdiValue = Nothing
     , _oslwdiKey = Nothing
     }
@@ -3222,12 +3222,12 @@ instance FromJSON OperationsScopedListWarningDataItem
         parseJSON
           = withObject "OperationsScopedListWarningDataItem"
               (\ o ->
-                 OperationsScopedListWarningDataItem <$>
+                 OperationsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationsScopedListWarningDataItem
          where
-        toJSON OperationsScopedListWarningDataItem{..}
+        toJSON OperationsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _oslwdiValue,
@@ -3237,7 +3237,7 @@ instance ToJSON OperationsScopedListWarningDataItem
 -- associated HttpHealthCheck resources, and the fallback target pool.
 --
 -- /See:/ 'targetPool' smart constructor.
-data TargetPool = TargetPool
+data TargetPool = TargetPool'
     { _tpSessionAffinity   :: !(Maybe TargetPoolSessionAffinity)
     , _tpBackupPool        :: !(Maybe Text)
     , _tpKind              :: !Text
@@ -3282,7 +3282,7 @@ data TargetPool = TargetPool
 targetPool
     :: TargetPool
 targetPool =
-    TargetPool
+    TargetPool'
     { _tpSessionAffinity = Nothing
     , _tpBackupPool = Nothing
     , _tpKind = "compute#targetPool"
@@ -3409,7 +3409,7 @@ instance FromJSON TargetPool where
         parseJSON
           = withObject "TargetPool"
               (\ o ->
-                 TargetPool <$>
+                 TargetPool' <$>
                    (o .:? "sessionAffinity") <*> (o .:? "backupPool")
                      <*> (o .:? "kind" .!= "compute#targetPool")
                      <*> (o .:? "selfLink")
@@ -3423,7 +3423,7 @@ instance FromJSON TargetPool where
                      <*> (o .:? "healthChecks" .!= mempty))
 
 instance ToJSON TargetPool where
-        toJSON TargetPool{..}
+        toJSON TargetPool'{..}
           = object
               (catMaybes
                  [("sessionAffinity" .=) <$> _tpSessionAffinity,
@@ -3442,7 +3442,7 @@ instance ToJSON TargetPool where
 -- | Contains a list of images.
 --
 -- /See:/ 'imageList' smart constructor.
-data ImageList = ImageList
+data ImageList = ImageList'
     { _ilNextPageToken :: !(Maybe Text)
     , _ilKind          :: !Text
     , _ilItems         :: !(Maybe [Image])
@@ -3466,7 +3466,7 @@ data ImageList = ImageList
 imageList
     :: ImageList
 imageList =
-    ImageList
+    ImageList'
     { _ilNextPageToken = Nothing
     , _ilKind = "compute#imageList"
     , _ilItems = Nothing
@@ -3508,7 +3508,7 @@ instance FromJSON ImageList where
         parseJSON
           = withObject "ImageList"
               (\ o ->
-                 ImageList <$>
+                 ImageList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#imageList")
                      <*> (o .:? "items" .!= mempty)
@@ -3516,7 +3516,7 @@ instance FromJSON ImageList where
                      <*> (o .:? "id"))
 
 instance ToJSON ImageList where
-        toJSON ImageList{..}
+        toJSON ImageList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ilNextPageToken,
@@ -3528,7 +3528,7 @@ instance ToJSON ImageList where
 -- is empty.
 --
 -- /See:/ 'vpnTunnelsScopedListWarning' smart constructor.
-data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
+data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning'
     { _vtslwData    :: !(Maybe [VPNTunnelsScopedListWarningDataItem])
     , _vtslwCode    :: !(Maybe VPNTunnelsScopedListWarningCode)
     , _vtslwMessage :: !(Maybe Text)
@@ -3546,7 +3546,7 @@ data VPNTunnelsScopedListWarning = VPNTunnelsScopedListWarning
 vpnTunnelsScopedListWarning
     :: VPNTunnelsScopedListWarning
 vpnTunnelsScopedListWarning =
-    VPNTunnelsScopedListWarning
+    VPNTunnelsScopedListWarning'
     { _vtslwData = Nothing
     , _vtslwCode = Nothing
     , _vtslwMessage = Nothing
@@ -3576,12 +3576,12 @@ instance FromJSON VPNTunnelsScopedListWarning where
         parseJSON
           = withObject "VPNTunnelsScopedListWarning"
               (\ o ->
-                 VPNTunnelsScopedListWarning <$>
+                 VPNTunnelsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON VPNTunnelsScopedListWarning where
-        toJSON VPNTunnelsScopedListWarning{..}
+        toJSON VPNTunnelsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _vtslwData,
@@ -3593,7 +3593,7 @@ instance ToJSON VPNTunnelsScopedListWarning where
 -- given [IPAddress, IPProtocol, portRange] tuple.
 --
 -- /See:/ 'forwardingRule' smart constructor.
-data ForwardingRule = ForwardingRule
+data ForwardingRule = ForwardingRule'
     { _frIPAddress         :: !(Maybe Text)
     , _frKind              :: !Text
     , _frPortRange         :: !(Maybe Text)
@@ -3635,7 +3635,7 @@ data ForwardingRule = ForwardingRule
 forwardingRule
     :: ForwardingRule
 forwardingRule =
-    ForwardingRule
+    ForwardingRule'
     { _frIPAddress = Nothing
     , _frKind = "compute#forwardingRule"
     , _frPortRange = Nothing
@@ -3731,7 +3731,7 @@ instance FromJSON ForwardingRule where
         parseJSON
           = withObject "ForwardingRule"
               (\ o ->
-                 ForwardingRule <$>
+                 ForwardingRule' <$>
                    (o .:? "IPAddress") <*>
                      (o .:? "kind" .!= "compute#forwardingRule")
                      <*> (o .:? "portRange")
@@ -3745,7 +3745,7 @@ instance FromJSON ForwardingRule where
                      <*> (o .:? "target"))
 
 instance ToJSON ForwardingRule where
-        toJSON ForwardingRule{..}
+        toJSON ForwardingRule'{..}
           = object
               (catMaybes
                  [("IPAddress" .=) <$> _frIPAddress,
@@ -3762,7 +3762,7 @@ instance ToJSON ForwardingRule where
 -- | Contains a list of UrlMap resources.
 --
 -- /See:/ 'urlMapList' smart constructor.
-data URLMapList = URLMapList
+data URLMapList = URLMapList'
     { _umlNextPageToken :: !(Maybe Text)
     , _umlKind          :: !Text
     , _umlItems         :: !(Maybe [URLMap])
@@ -3786,7 +3786,7 @@ data URLMapList = URLMapList
 urlMapList
     :: URLMapList
 urlMapList =
-    URLMapList
+    URLMapList'
     { _umlNextPageToken = Nothing
     , _umlKind = "compute#urlMapList"
     , _umlItems = Nothing
@@ -3828,7 +3828,7 @@ instance FromJSON URLMapList where
         parseJSON
           = withObject "URLMapList"
               (\ o ->
-                 URLMapList <$>
+                 URLMapList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#urlMapList")
                      <*> (o .:? "items" .!= mempty)
@@ -3836,7 +3836,7 @@ instance FromJSON URLMapList where
                      <*> (o .:? "id"))
 
 instance ToJSON URLMapList where
-        toJSON URLMapList{..}
+        toJSON URLMapList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _umlNextPageToken,
@@ -3847,7 +3847,7 @@ instance ToJSON URLMapList where
 
 --
 -- /See:/ 'forwardingRulesScopedListWarningDataItem' smart constructor.
-data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarningDataItem
+data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarningDataItem'
     { _frslwdiValue :: !(Maybe Text)
     , _frslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3862,7 +3862,7 @@ data ForwardingRulesScopedListWarningDataItem = ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarningDataItem
     :: ForwardingRulesScopedListWarningDataItem
 forwardingRulesScopedListWarningDataItem =
-    ForwardingRulesScopedListWarningDataItem
+    ForwardingRulesScopedListWarningDataItem'
     { _frslwdiValue = Nothing
     , _frslwdiKey = Nothing
     }
@@ -3889,12 +3889,12 @@ instance FromJSON
           = withObject
               "ForwardingRulesScopedListWarningDataItem"
               (\ o ->
-                 ForwardingRulesScopedListWarningDataItem <$>
+                 ForwardingRulesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          ForwardingRulesScopedListWarningDataItem where
-        toJSON ForwardingRulesScopedListWarningDataItem{..}
+        toJSON ForwardingRulesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _frslwdiValue,
@@ -3902,7 +3902,7 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupManagersScopedListWarningDataItem' smart constructor.
-data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScopedListWarningDataItem
+data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScopedListWarningDataItem'
     { _igmslwdiValue :: !(Maybe Text)
     , _igmslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3917,7 +3917,7 @@ data InstanceGroupManagersScopedListWarningDataItem = InstanceGroupManagersScope
 instanceGroupManagersScopedListWarningDataItem
     :: InstanceGroupManagersScopedListWarningDataItem
 instanceGroupManagersScopedListWarningDataItem =
-    InstanceGroupManagersScopedListWarningDataItem
+    InstanceGroupManagersScopedListWarningDataItem'
     { _igmslwdiValue = Nothing
     , _igmslwdiKey = Nothing
     }
@@ -3945,13 +3945,13 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersScopedListWarningDataItem"
               (\ o ->
-                 InstanceGroupManagersScopedListWarningDataItem <$>
+                 InstanceGroupManagersScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          InstanceGroupManagersScopedListWarningDataItem where
         toJSON
-          InstanceGroupManagersScopedListWarningDataItem{..}
+          InstanceGroupManagersScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _igmslwdiValue,
@@ -3959,7 +3959,7 @@ instance ToJSON
 
 --
 -- /See:/ 'subnetworksScopedList' smart constructor.
-data SubnetworksScopedList = SubnetworksScopedList
+data SubnetworksScopedList = SubnetworksScopedList'
     { _sslSubnetworks :: !(Maybe [Subnetwork])
     , _sslWarning     :: !(Maybe SubnetworksScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3974,7 +3974,7 @@ data SubnetworksScopedList = SubnetworksScopedList
 subnetworksScopedList
     :: SubnetworksScopedList
 subnetworksScopedList =
-    SubnetworksScopedList
+    SubnetworksScopedList'
     { _sslSubnetworks = Nothing
     , _sslWarning = Nothing
     }
@@ -3997,12 +3997,12 @@ instance FromJSON SubnetworksScopedList where
         parseJSON
           = withObject "SubnetworksScopedList"
               (\ o ->
-                 SubnetworksScopedList <$>
+                 SubnetworksScopedList' <$>
                    (o .:? "subnetworks" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON SubnetworksScopedList where
-        toJSON SubnetworksScopedList{..}
+        toJSON SubnetworksScopedList'{..}
           = object
               (catMaybes
                  [("subnetworks" .=) <$> _sslSubnetworks,
@@ -4013,7 +4013,7 @@ instance ToJSON SubnetworksScopedList where
 -- in the console.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project
+data Project = Project'
     { _pKind                   :: !Text
     , _pUsageExportLocation    :: !(Maybe UsageExportLocation)
     , _pSelfLink               :: !(Maybe Text)
@@ -4052,7 +4052,7 @@ data Project = Project
 project
     :: Project
 project =
-    Project
+    Project'
     { _pKind = "compute#project"
     , _pUsageExportLocation = Nothing
     , _pSelfLink = Nothing
@@ -4129,7 +4129,7 @@ instance FromJSON Project where
         parseJSON
           = withObject "Project"
               (\ o ->
-                 Project <$>
+                 Project' <$>
                    (o .:? "kind" .!= "compute#project") <*>
                      (o .:? "usageExportLocation")
                      <*> (o .:? "selfLink")
@@ -4142,7 +4142,7 @@ instance FromJSON Project where
                      <*> (o .:? "commonInstanceMetadata"))
 
 instance ToJSON Project where
-        toJSON Project{..}
+        toJSON Project'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pKind),
@@ -4159,7 +4159,7 @@ instance ToJSON Project where
 -- | An Operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe OperationStatus)
     , _oInsertTime          :: !(Maybe Text)
@@ -4237,7 +4237,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -4407,7 +4407,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -4432,7 +4432,7 @@ instance FromJSON Operation where
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -4459,7 +4459,7 @@ instance ToJSON Operation where
 
 --
 -- /See:/ 'disksScopedListWarningDataItem' smart constructor.
-data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem
+data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem'
     { _dslwdiValue :: !(Maybe Text)
     , _dslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4474,7 +4474,7 @@ data DisksScopedListWarningDataItem = DisksScopedListWarningDataItem
 disksScopedListWarningDataItem
     :: DisksScopedListWarningDataItem
 disksScopedListWarningDataItem =
-    DisksScopedListWarningDataItem
+    DisksScopedListWarningDataItem'
     { _dslwdiValue = Nothing
     , _dslwdiKey = Nothing
     }
@@ -4500,11 +4500,11 @@ instance FromJSON DisksScopedListWarningDataItem
         parseJSON
           = withObject "DisksScopedListWarningDataItem"
               (\ o ->
-                 DisksScopedListWarningDataItem <$>
+                 DisksScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON DisksScopedListWarningDataItem where
-        toJSON DisksScopedListWarningDataItem{..}
+        toJSON DisksScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dslwdiValue,
@@ -4513,7 +4513,7 @@ instance ToJSON DisksScopedListWarningDataItem where
 -- | A Disk resource.
 --
 -- /See:/ 'disk' smart constructor.
-data Disk = Disk
+data Disk = Disk'
     { _dStatus              :: !(Maybe DiskStatus)
     , _dSourceSnapshotId    :: !(Maybe Text)
     , _dLastAttachTimestamp :: !(Maybe Text)
@@ -4579,7 +4579,7 @@ data Disk = Disk
 disk
     :: Disk
 disk =
-    Disk
+    Disk'
     { _dStatus = Nothing
     , _dSourceSnapshotId = Nothing
     , _dLastAttachTimestamp = Nothing
@@ -4750,7 +4750,7 @@ instance FromJSON Disk where
         parseJSON
           = withObject "Disk"
               (\ o ->
-                 Disk <$>
+                 Disk' <$>
                    (o .:? "status") <*> (o .:? "sourceSnapshotId") <*>
                      (o .:? "lastAttachTimestamp")
                      <*> (o .:? "users" .!= mempty)
@@ -4771,7 +4771,7 @@ instance FromJSON Disk where
                      <*> (o .:? "sourceSnapshot"))
 
 instance ToJSON Disk where
-        toJSON Disk{..}
+        toJSON Disk'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _dStatus,
@@ -4793,7 +4793,7 @@ instance ToJSON Disk where
 
 --
 -- /See:/ 'diskMoveRequest' smart constructor.
-data DiskMoveRequest = DiskMoveRequest
+data DiskMoveRequest = DiskMoveRequest'
     { _dmrTargetDisk      :: !(Maybe Text)
     , _dmrDestinationZone :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4808,7 +4808,7 @@ data DiskMoveRequest = DiskMoveRequest
 diskMoveRequest
     :: DiskMoveRequest
 diskMoveRequest =
-    DiskMoveRequest
+    DiskMoveRequest'
     { _dmrTargetDisk = Nothing
     , _dmrDestinationZone = Nothing
     }
@@ -4835,11 +4835,11 @@ instance FromJSON DiskMoveRequest where
         parseJSON
           = withObject "DiskMoveRequest"
               (\ o ->
-                 DiskMoveRequest <$>
+                 DiskMoveRequest' <$>
                    (o .:? "targetDisk") <*> (o .:? "destinationZone"))
 
 instance ToJSON DiskMoveRequest where
-        toJSON DiskMoveRequest{..}
+        toJSON DiskMoveRequest'{..}
           = object
               (catMaybes
                  [("targetDisk" .=) <$> _dmrTargetDisk,
@@ -4848,7 +4848,7 @@ instance ToJSON DiskMoveRequest where
 -- | Configuration parameters of autoscaling based on load balancing.
 --
 -- /See:/ 'autoscalingPolicyLoadBalancingUtilization' smart constructor.
-newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization
+newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4860,7 +4860,7 @@ newtype AutoscalingPolicyLoadBalancingUtilization = AutoscalingPolicyLoadBalanci
 autoscalingPolicyLoadBalancingUtilization
     :: AutoscalingPolicyLoadBalancingUtilization
 autoscalingPolicyLoadBalancingUtilization =
-    AutoscalingPolicyLoadBalancingUtilization
+    AutoscalingPolicyLoadBalancingUtilization'
     { _aplbuUtilizationTarget = Nothing
     }
 
@@ -4879,12 +4879,12 @@ instance FromJSON
           = withObject
               "AutoscalingPolicyLoadBalancingUtilization"
               (\ o ->
-                 AutoscalingPolicyLoadBalancingUtilization <$>
+                 AutoscalingPolicyLoadBalancingUtilization' <$>
                    (o .:? "utilizationTarget"))
 
 instance ToJSON
          AutoscalingPolicyLoadBalancingUtilization where
-        toJSON AutoscalingPolicyLoadBalancingUtilization{..}
+        toJSON AutoscalingPolicyLoadBalancingUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -4892,7 +4892,7 @@ instance ToJSON
 
 --
 -- /See:/ 'targetPoolsScopedListWarningDataItem' smart constructor.
-data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem
+data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem'
     { _tpslwdiValue :: !(Maybe Text)
     , _tpslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4907,7 +4907,7 @@ data TargetPoolsScopedListWarningDataItem = TargetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem
     :: TargetPoolsScopedListWarningDataItem
 targetPoolsScopedListWarningDataItem =
-    TargetPoolsScopedListWarningDataItem
+    TargetPoolsScopedListWarningDataItem'
     { _tpslwdiValue = Nothing
     , _tpslwdiKey = Nothing
     }
@@ -4933,12 +4933,12 @@ instance FromJSON
         parseJSON
           = withObject "TargetPoolsScopedListWarningDataItem"
               (\ o ->
-                 TargetPoolsScopedListWarningDataItem <$>
+                 TargetPoolsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON TargetPoolsScopedListWarningDataItem
          where
-        toJSON TargetPoolsScopedListWarningDataItem{..}
+        toJSON TargetPoolsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tpslwdiValue,
@@ -4946,7 +4946,7 @@ instance ToJSON TargetPoolsScopedListWarningDataItem
 
 --
 -- /See:/ 'instanceGroupManager' smart constructor.
-data InstanceGroupManager = InstanceGroupManager
+data InstanceGroupManager = InstanceGroupManager'
     { _igmKind              :: !Text
     , _igmFingerprint       :: !(Maybe (Textual Word8))
     , _igmBaseInstanceName  :: !(Maybe Text)
@@ -5000,7 +5000,7 @@ data InstanceGroupManager = InstanceGroupManager
 instanceGroupManager
     :: InstanceGroupManager
 instanceGroupManager =
-    InstanceGroupManager
+    InstanceGroupManager'
     { _igmKind = "compute#instanceGroupManager"
     , _igmFingerprint = Nothing
     , _igmBaseInstanceName = Nothing
@@ -5131,7 +5131,7 @@ instance FromJSON InstanceGroupManager where
         parseJSON
           = withObject "InstanceGroupManager"
               (\ o ->
-                 InstanceGroupManager <$>
+                 InstanceGroupManager' <$>
                    (o .:? "kind" .!= "compute#instanceGroupManager") <*>
                      (o .:? "fingerprint")
                      <*> (o .:? "baseInstanceName")
@@ -5149,7 +5149,7 @@ instance FromJSON InstanceGroupManager where
                      <*> (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroupManager where
-        toJSON InstanceGroupManager{..}
+        toJSON InstanceGroupManager'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _igmKind),
@@ -5170,7 +5170,7 @@ instance ToJSON InstanceGroupManager where
 
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
-newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest
+newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest'
     { _igrirInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5182,7 +5182,7 @@ newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequ
 instanceGroupsRemoveInstancesRequest
     :: InstanceGroupsRemoveInstancesRequest
 instanceGroupsRemoveInstancesRequest =
-    InstanceGroupsRemoveInstancesRequest
+    InstanceGroupsRemoveInstancesRequest'
     { _igrirInstances = Nothing
     }
 
@@ -5199,18 +5199,18 @@ instance FromJSON
         parseJSON
           = withObject "InstanceGroupsRemoveInstancesRequest"
               (\ o ->
-                 InstanceGroupsRemoveInstancesRequest <$>
+                 InstanceGroupsRemoveInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON InstanceGroupsRemoveInstancesRequest
          where
-        toJSON InstanceGroupsRemoveInstancesRequest{..}
+        toJSON InstanceGroupsRemoveInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igrirInstances])
 
 --
 -- /See:/ 'routeWarningsItemDataItem' smart constructor.
-data RouteWarningsItemDataItem = RouteWarningsItemDataItem
+data RouteWarningsItemDataItem = RouteWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
     , _rwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5225,7 +5225,7 @@ data RouteWarningsItemDataItem = RouteWarningsItemDataItem
 routeWarningsItemDataItem
     :: RouteWarningsItemDataItem
 routeWarningsItemDataItem =
-    RouteWarningsItemDataItem
+    RouteWarningsItemDataItem'
     { _rwidiValue = Nothing
     , _rwidiKey = Nothing
     }
@@ -5249,11 +5249,11 @@ instance FromJSON RouteWarningsItemDataItem where
         parseJSON
           = withObject "RouteWarningsItemDataItem"
               (\ o ->
-                 RouteWarningsItemDataItem <$>
+                 RouteWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON RouteWarningsItemDataItem where
-        toJSON RouteWarningsItemDataItem{..}
+        toJSON RouteWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rwidiValue,
@@ -5262,7 +5262,7 @@ instance ToJSON RouteWarningsItemDataItem where
 -- | [Output Only] A map of scoped instance lists.
 --
 -- /See:/ 'instanceAggregatedListItems' smart constructor.
-newtype InstanceAggregatedListItems = InstanceAggregatedListItems
+newtype InstanceAggregatedListItems = InstanceAggregatedListItems'
     { _ialiAddtional :: HashMap Text InstancesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5275,7 +5275,7 @@ instanceAggregatedListItems
     :: HashMap Text InstancesScopedList -- ^ 'ialiAddtional'
     -> InstanceAggregatedListItems
 instanceAggregatedListItems pIaliAddtional_ =
-    InstanceAggregatedListItems
+    InstanceAggregatedListItems'
     { _ialiAddtional = _Coerce # pIaliAddtional_
     }
 
@@ -5290,7 +5290,7 @@ instance FromJSON InstanceAggregatedListItems where
         parseJSON
           = withObject "InstanceAggregatedListItems"
               (\ o ->
-                 InstanceAggregatedListItems <$> (parseJSONObject o))
+                 InstanceAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON InstanceAggregatedListItems where
         toJSON = toJSON . _ialiAddtional
@@ -5299,7 +5299,7 @@ instance ToJSON InstanceAggregatedListItems where
 -- autoscalers when the list is empty.
 --
 -- /See:/ 'autoscalersScopedListWarning' smart constructor.
-data AutoscalersScopedListWarning = AutoscalersScopedListWarning
+data AutoscalersScopedListWarning = AutoscalersScopedListWarning'
     { _aslwData    :: !(Maybe [AutoscalersScopedListWarningDataItem])
     , _aslwCode    :: !(Maybe AutoscalersScopedListWarningCode)
     , _aslwMessage :: !(Maybe Text)
@@ -5317,7 +5317,7 @@ data AutoscalersScopedListWarning = AutoscalersScopedListWarning
 autoscalersScopedListWarning
     :: AutoscalersScopedListWarning
 autoscalersScopedListWarning =
-    AutoscalersScopedListWarning
+    AutoscalersScopedListWarning'
     { _aslwData = Nothing
     , _aslwCode = Nothing
     , _aslwMessage = Nothing
@@ -5346,12 +5346,12 @@ instance FromJSON AutoscalersScopedListWarning where
         parseJSON
           = withObject "AutoscalersScopedListWarning"
               (\ o ->
-                 AutoscalersScopedListWarning <$>
+                 AutoscalersScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON AutoscalersScopedListWarning where
-        toJSON AutoscalersScopedListWarning{..}
+        toJSON AutoscalersScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _aslwData,
@@ -5362,7 +5362,7 @@ instance ToJSON AutoscalersScopedListWarning where
 -- delete the instance.
 --
 -- /See:/ 'managedInstanceLastAttemptErrors' smart constructor.
-newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors
+newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors'
     { _milaeErrors :: Maybe [ManagedInstanceLastAttemptErrorsErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5374,7 +5374,7 @@ newtype ManagedInstanceLastAttemptErrors = ManagedInstanceLastAttemptErrors
 managedInstanceLastAttemptErrors
     :: ManagedInstanceLastAttemptErrors
 managedInstanceLastAttemptErrors =
-    ManagedInstanceLastAttemptErrors
+    ManagedInstanceLastAttemptErrors'
     { _milaeErrors = Nothing
     }
 
@@ -5391,17 +5391,17 @@ instance FromJSON ManagedInstanceLastAttemptErrors
         parseJSON
           = withObject "ManagedInstanceLastAttemptErrors"
               (\ o ->
-                 ManagedInstanceLastAttemptErrors <$>
+                 ManagedInstanceLastAttemptErrors' <$>
                    (o .:? "errors" .!= mempty))
 
 instance ToJSON ManagedInstanceLastAttemptErrors
          where
-        toJSON ManagedInstanceLastAttemptErrors{..}
+        toJSON ManagedInstanceLastAttemptErrors'{..}
           = object (catMaybes [("errors" .=) <$> _milaeErrors])
 
 --
 -- /See:/ 'targetPoolsRemoveInstanceRequest' smart constructor.
-newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest
+newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest'
     { _tprirInstances :: Maybe [InstanceReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5413,7 +5413,7 @@ newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest
 targetPoolsRemoveInstanceRequest
     :: TargetPoolsRemoveInstanceRequest
 targetPoolsRemoveInstanceRequest =
-    TargetPoolsRemoveInstanceRequest
+    TargetPoolsRemoveInstanceRequest'
     { _tprirInstances = Nothing
     }
 
@@ -5430,18 +5430,18 @@ instance FromJSON TargetPoolsRemoveInstanceRequest
         parseJSON
           = withObject "TargetPoolsRemoveInstanceRequest"
               (\ o ->
-                 TargetPoolsRemoveInstanceRequest <$>
+                 TargetPoolsRemoveInstanceRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON TargetPoolsRemoveInstanceRequest
          where
-        toJSON TargetPoolsRemoveInstanceRequest{..}
+        toJSON TargetPoolsRemoveInstanceRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _tprirInstances])
 
 --
 -- /See:/ 'targetInstancesScopedListWarningDataItem' smart constructor.
-data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarningDataItem
+data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarningDataItem'
     { _tislwdiValue :: !(Maybe Text)
     , _tislwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5456,7 +5456,7 @@ data TargetInstancesScopedListWarningDataItem = TargetInstancesScopedListWarning
 targetInstancesScopedListWarningDataItem
     :: TargetInstancesScopedListWarningDataItem
 targetInstancesScopedListWarningDataItem =
-    TargetInstancesScopedListWarningDataItem
+    TargetInstancesScopedListWarningDataItem'
     { _tislwdiValue = Nothing
     , _tislwdiKey = Nothing
     }
@@ -5483,12 +5483,12 @@ instance FromJSON
           = withObject
               "TargetInstancesScopedListWarningDataItem"
               (\ o ->
-                 TargetInstancesScopedListWarningDataItem <$>
+                 TargetInstancesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          TargetInstancesScopedListWarningDataItem where
-        toJSON TargetInstancesScopedListWarningDataItem{..}
+        toJSON TargetInstancesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tislwdiValue,
@@ -5498,7 +5498,7 @@ instance ToJSON
 -- types list is empty.
 --
 -- /See:/ 'machineTypesScopedListWarning' smart constructor.
-data MachineTypesScopedListWarning = MachineTypesScopedListWarning
+data MachineTypesScopedListWarning = MachineTypesScopedListWarning'
     { _mtslwData    :: !(Maybe [MachineTypesScopedListWarningDataItem])
     , _mtslwCode    :: !(Maybe MachineTypesScopedListWarningCode)
     , _mtslwMessage :: !(Maybe Text)
@@ -5516,7 +5516,7 @@ data MachineTypesScopedListWarning = MachineTypesScopedListWarning
 machineTypesScopedListWarning
     :: MachineTypesScopedListWarning
 machineTypesScopedListWarning =
-    MachineTypesScopedListWarning
+    MachineTypesScopedListWarning'
     { _mtslwData = Nothing
     , _mtslwCode = Nothing
     , _mtslwMessage = Nothing
@@ -5546,12 +5546,12 @@ instance FromJSON MachineTypesScopedListWarning where
         parseJSON
           = withObject "MachineTypesScopedListWarning"
               (\ o ->
-                 MachineTypesScopedListWarning <$>
+                 MachineTypesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON MachineTypesScopedListWarning where
-        toJSON MachineTypesScopedListWarning{..}
+        toJSON MachineTypesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _mtslwData,
@@ -5562,7 +5562,7 @@ instance ToJSON MachineTypesScopedListWarning where
 -- that terminates traffic of certain protocols.
 --
 -- /See:/ 'targetInstance' smart constructor.
-data TargetInstance = TargetInstance
+data TargetInstance = TargetInstance'
     { _tiKind              :: !Text
     , _tiNATPolicy         :: !(Maybe TargetInstanceNATPolicy)
     , _tiZone              :: !(Maybe Text)
@@ -5598,7 +5598,7 @@ data TargetInstance = TargetInstance
 targetInstance
     :: TargetInstance
 targetInstance =
-    TargetInstance
+    TargetInstance'
     { _tiKind = "compute#targetInstance"
     , _tiNATPolicy = Nothing
     , _tiZone = Nothing
@@ -5675,7 +5675,7 @@ instance FromJSON TargetInstance where
         parseJSON
           = withObject "TargetInstance"
               (\ o ->
-                 TargetInstance <$>
+                 TargetInstance' <$>
                    (o .:? "kind" .!= "compute#targetInstance") <*>
                      (o .:? "natPolicy")
                      <*> (o .:? "zone")
@@ -5687,7 +5687,7 @@ instance FromJSON TargetInstance where
                      <*> (o .:? "instance"))
 
 instance ToJSON TargetInstance where
-        toJSON TargetInstance{..}
+        toJSON TargetInstance'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tiKind),
@@ -5702,7 +5702,7 @@ instance ToJSON TargetInstance where
 
 --
 -- /See:/ 'targetPoolInstanceHealth' smart constructor.
-data TargetPoolInstanceHealth = TargetPoolInstanceHealth
+data TargetPoolInstanceHealth = TargetPoolInstanceHealth'
     { _tpihKind         :: !Text
     , _tpihHealthStatus :: !(Maybe [HealthStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5717,7 +5717,7 @@ data TargetPoolInstanceHealth = TargetPoolInstanceHealth
 targetPoolInstanceHealth
     :: TargetPoolInstanceHealth
 targetPoolInstanceHealth =
-    TargetPoolInstanceHealth
+    TargetPoolInstanceHealth'
     { _tpihKind = "compute#targetPoolInstanceHealth"
     , _tpihHealthStatus = Nothing
     }
@@ -5738,12 +5738,12 @@ instance FromJSON TargetPoolInstanceHealth where
         parseJSON
           = withObject "TargetPoolInstanceHealth"
               (\ o ->
-                 TargetPoolInstanceHealth <$>
+                 TargetPoolInstanceHealth' <$>
                    (o .:? "kind" .!= "compute#targetPoolInstanceHealth")
                      <*> (o .:? "healthStatus" .!= mempty))
 
 instance ToJSON TargetPoolInstanceHealth where
-        toJSON TargetPoolInstanceHealth{..}
+        toJSON TargetPoolInstanceHealth'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tpihKind),
@@ -5751,7 +5751,7 @@ instance ToJSON TargetPoolInstanceHealth where
 
 --
 -- /See:/ 'instanceGroupManagersListManagedInstancesResponse' smart constructor.
-newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse
+newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse'
     { _igmlmirManagedInstances :: Maybe [ManagedInstance]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5763,7 +5763,7 @@ newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManager
 instanceGroupManagersListManagedInstancesResponse
     :: InstanceGroupManagersListManagedInstancesResponse
 instanceGroupManagersListManagedInstancesResponse =
-    InstanceGroupManagersListManagedInstancesResponse
+    InstanceGroupManagersListManagedInstancesResponse'
     { _igmlmirManagedInstances = Nothing
     }
 
@@ -5782,14 +5782,14 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersListManagedInstancesResponse"
               (\ o ->
-                 InstanceGroupManagersListManagedInstancesResponse <$>
-                   (o .:? "managedInstances" .!= mempty))
+                 InstanceGroupManagersListManagedInstancesResponse'
+                   <$> (o .:? "managedInstances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersListManagedInstancesResponse
          where
         toJSON
-          InstanceGroupManagersListManagedInstancesResponse{..}
+          InstanceGroupManagersListManagedInstancesResponse'{..}
           = object
               (catMaybes
                  [("managedInstances" .=) <$>
@@ -5798,7 +5798,7 @@ instance ToJSON
 -- |
 --
 -- /See:/ 'instanceProperties' smart constructor.
-data InstanceProperties = InstanceProperties
+data InstanceProperties = InstanceProperties'
     { _ipServiceAccounts   :: !(Maybe [ServiceAccount])
     , _ipNetworkInterfaces :: !(Maybe [NetworkInterface])
     , _ipMachineType       :: !(Maybe Text)
@@ -5834,7 +5834,7 @@ data InstanceProperties = InstanceProperties
 instanceProperties
     :: InstanceProperties
 instanceProperties =
-    InstanceProperties
+    InstanceProperties'
     { _ipServiceAccounts = Nothing
     , _ipNetworkInterfaces = Nothing
     , _ipMachineType = Nothing
@@ -5921,7 +5921,7 @@ instance FromJSON InstanceProperties where
         parseJSON
           = withObject "InstanceProperties"
               (\ o ->
-                 InstanceProperties <$>
+                 InstanceProperties' <$>
                    (o .:? "serviceAccounts" .!= mempty) <*>
                      (o .:? "networkInterfaces" .!= mempty)
                      <*> (o .:? "machineType")
@@ -5933,7 +5933,7 @@ instance FromJSON InstanceProperties where
                      <*> (o .:? "tags"))
 
 instance ToJSON InstanceProperties where
-        toJSON InstanceProperties{..}
+        toJSON InstanceProperties'{..}
           = object
               (catMaybes
                  [("serviceAccounts" .=) <$> _ipServiceAccounts,
@@ -5950,7 +5950,7 @@ instance ToJSON InstanceProperties where
 -- types when the list is empty.
 --
 -- /See:/ 'diskTypesScopedListWarning' smart constructor.
-data DiskTypesScopedListWarning = DiskTypesScopedListWarning
+data DiskTypesScopedListWarning = DiskTypesScopedListWarning'
     { _dtslwData    :: !(Maybe [DiskTypesScopedListWarningDataItem])
     , _dtslwCode    :: !(Maybe DiskTypesScopedListWarningCode)
     , _dtslwMessage :: !(Maybe Text)
@@ -5968,7 +5968,7 @@ data DiskTypesScopedListWarning = DiskTypesScopedListWarning
 diskTypesScopedListWarning
     :: DiskTypesScopedListWarning
 diskTypesScopedListWarning =
-    DiskTypesScopedListWarning
+    DiskTypesScopedListWarning'
     { _dtslwData = Nothing
     , _dtslwCode = Nothing
     , _dtslwMessage = Nothing
@@ -5998,12 +5998,12 @@ instance FromJSON DiskTypesScopedListWarning where
         parseJSON
           = withObject "DiskTypesScopedListWarning"
               (\ o ->
-                 DiskTypesScopedListWarning <$>
+                 DiskTypesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON DiskTypesScopedListWarning where
-        toJSON DiskTypesScopedListWarning{..}
+        toJSON DiskTypesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _dtslwData,
@@ -6017,7 +6017,7 @@ instance ToJSON DiskTypesScopedListWarning where
 -- define one or the other, but not both.
 --
 -- /See:/ 'attachedDiskInitializeParams' smart constructor.
-data AttachedDiskInitializeParams = AttachedDiskInitializeParams
+data AttachedDiskInitializeParams = AttachedDiskInitializeParams'
     { _adipSourceImage :: !(Maybe Text)
     , _adipDiskSizeGb  :: !(Maybe (Textual Int64))
     , _adipDiskName    :: !(Maybe Text)
@@ -6038,7 +6038,7 @@ data AttachedDiskInitializeParams = AttachedDiskInitializeParams
 attachedDiskInitializeParams
     :: AttachedDiskInitializeParams
 attachedDiskInitializeParams =
-    AttachedDiskInitializeParams
+    AttachedDiskInitializeParams'
     { _adipSourceImage = Nothing
     , _adipDiskSizeGb = Nothing
     , _adipDiskName = Nothing
@@ -6089,13 +6089,13 @@ instance FromJSON AttachedDiskInitializeParams where
         parseJSON
           = withObject "AttachedDiskInitializeParams"
               (\ o ->
-                 AttachedDiskInitializeParams <$>
+                 AttachedDiskInitializeParams' <$>
                    (o .:? "sourceImage") <*> (o .:? "diskSizeGb") <*>
                      (o .:? "diskName")
                      <*> (o .:? "diskType"))
 
 instance ToJSON AttachedDiskInitializeParams where
-        toJSON AttachedDiskInitializeParams{..}
+        toJSON AttachedDiskInitializeParams'{..}
           = object
               (catMaybes
                  [("sourceImage" .=) <$> _adipSourceImage,
@@ -6105,7 +6105,7 @@ instance ToJSON AttachedDiskInitializeParams where
 
 --
 -- /See:/ 'addressesScopedListWarningDataItem' smart constructor.
-data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem
+data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem'
     { _aslwdiValue :: !(Maybe Text)
     , _aslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6120,7 +6120,7 @@ data AddressesScopedListWarningDataItem = AddressesScopedListWarningDataItem
 addressesScopedListWarningDataItem
     :: AddressesScopedListWarningDataItem
 addressesScopedListWarningDataItem =
-    AddressesScopedListWarningDataItem
+    AddressesScopedListWarningDataItem'
     { _aslwdiValue = Nothing
     , _aslwdiKey = Nothing
     }
@@ -6146,12 +6146,12 @@ instance FromJSON AddressesScopedListWarningDataItem
         parseJSON
           = withObject "AddressesScopedListWarningDataItem"
               (\ o ->
-                 AddressesScopedListWarningDataItem <$>
+                 AddressesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON AddressesScopedListWarningDataItem
          where
-        toJSON AddressesScopedListWarningDataItem{..}
+        toJSON AddressesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _aslwdiValue,
@@ -6160,7 +6160,7 @@ instance ToJSON AddressesScopedListWarningDataItem
 -- | A network interface resource attached to an instance.
 --
 -- /See:/ 'networkInterface' smart constructor.
-data NetworkInterface = NetworkInterface
+data NetworkInterface = NetworkInterface'
     { _niNetwork       :: !(Maybe Text)
     , _niName          :: !(Maybe Text)
     , _niNetworkIP     :: !(Maybe Text)
@@ -6184,7 +6184,7 @@ data NetworkInterface = NetworkInterface
 networkInterface
     :: NetworkInterface
 networkInterface =
-    NetworkInterface
+    NetworkInterface'
     { _niNetwork = Nothing
     , _niName = Nothing
     , _niNetworkIP = Nothing
@@ -6242,14 +6242,14 @@ instance FromJSON NetworkInterface where
         parseJSON
           = withObject "NetworkInterface"
               (\ o ->
-                 NetworkInterface <$>
+                 NetworkInterface' <$>
                    (o .:? "network") <*> (o .:? "name") <*>
                      (o .:? "networkIP")
                      <*> (o .:? "subnetwork")
                      <*> (o .:? "accessConfigs" .!= mempty))
 
 instance ToJSON NetworkInterface where
-        toJSON NetworkInterface{..}
+        toJSON NetworkInterface'{..}
           = object
               (catMaybes
                  [("network" .=) <$> _niNetwork,
@@ -6260,7 +6260,7 @@ instance ToJSON NetworkInterface where
 
 --
 -- /See:/ 'targetPoolsRemoveHealthCheckRequest' smart constructor.
-newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest
+newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest'
     { _tprhcrHealthChecks :: Maybe [HealthCheckReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6272,7 +6272,7 @@ newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckReques
 targetPoolsRemoveHealthCheckRequest
     :: TargetPoolsRemoveHealthCheckRequest
 targetPoolsRemoveHealthCheckRequest =
-    TargetPoolsRemoveHealthCheckRequest
+    TargetPoolsRemoveHealthCheckRequest'
     { _tprhcrHealthChecks = Nothing
     }
 
@@ -6293,12 +6293,12 @@ instance FromJSON TargetPoolsRemoveHealthCheckRequest
         parseJSON
           = withObject "TargetPoolsRemoveHealthCheckRequest"
               (\ o ->
-                 TargetPoolsRemoveHealthCheckRequest <$>
+                 TargetPoolsRemoveHealthCheckRequest' <$>
                    (o .:? "healthChecks" .!= mempty))
 
 instance ToJSON TargetPoolsRemoveHealthCheckRequest
          where
-        toJSON TargetPoolsRemoveHealthCheckRequest{..}
+        toJSON TargetPoolsRemoveHealthCheckRequest'{..}
           = object
               (catMaybes
                  [("healthChecks" .=) <$> _tprhcrHealthChecks])
@@ -6306,7 +6306,7 @@ instance ToJSON TargetPoolsRemoveHealthCheckRequest
 -- | A list of instance templates.
 --
 -- /See:/ 'instanceTemplateList' smart constructor.
-data InstanceTemplateList = InstanceTemplateList
+data InstanceTemplateList = InstanceTemplateList'
     { _itlNextPageToken :: !(Maybe Text)
     , _itlKind          :: !Text
     , _itlItems         :: !(Maybe [InstanceTemplate])
@@ -6330,7 +6330,7 @@ data InstanceTemplateList = InstanceTemplateList
 instanceTemplateList
     :: InstanceTemplateList
 instanceTemplateList =
-    InstanceTemplateList
+    InstanceTemplateList'
     { _itlNextPageToken = Nothing
     , _itlKind = "compute#instanceTemplateList"
     , _itlItems = Nothing
@@ -6375,7 +6375,7 @@ instance FromJSON InstanceTemplateList where
         parseJSON
           = withObject "InstanceTemplateList"
               (\ o ->
-                 InstanceTemplateList <$>
+                 InstanceTemplateList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceTemplateList")
                      <*> (o .:? "items" .!= mempty)
@@ -6383,7 +6383,7 @@ instance FromJSON InstanceTemplateList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceTemplateList where
-        toJSON InstanceTemplateList{..}
+        toJSON InstanceTemplateList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _itlNextPageToken,
@@ -6395,7 +6395,7 @@ instance ToJSON InstanceTemplateList where
 -- | Contains a list of Route resources.
 --
 -- /See:/ 'routeList' smart constructor.
-data RouteList = RouteList
+data RouteList = RouteList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlItems         :: !(Maybe [Route])
@@ -6419,7 +6419,7 @@ data RouteList = RouteList
 routeList
     :: RouteList
 routeList =
-    RouteList
+    RouteList'
     { _rlNextPageToken = Nothing
     , _rlKind = "compute#routeList"
     , _rlItems = Nothing
@@ -6460,7 +6460,7 @@ instance FromJSON RouteList where
         parseJSON
           = withObject "RouteList"
               (\ o ->
-                 RouteList <$>
+                 RouteList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#routeList")
                      <*> (o .:? "items" .!= mempty)
@@ -6468,7 +6468,7 @@ instance FromJSON RouteList where
                      <*> (o .:? "id"))
 
 instance ToJSON RouteList where
-        toJSON RouteList{..}
+        toJSON RouteList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlNextPageToken,
@@ -6479,7 +6479,7 @@ instance ToJSON RouteList where
 -- | Contains a list of TargetVpnGateway resources.
 --
 -- /See:/ 'targetVPNGatewayList' smart constructor.
-data TargetVPNGatewayList = TargetVPNGatewayList
+data TargetVPNGatewayList = TargetVPNGatewayList'
     { _tvglNextPageToken :: !(Maybe Text)
     , _tvglKind          :: !Text
     , _tvglItems         :: !(Maybe [TargetVPNGateway])
@@ -6503,7 +6503,7 @@ data TargetVPNGatewayList = TargetVPNGatewayList
 targetVPNGatewayList
     :: TargetVPNGatewayList
 targetVPNGatewayList =
-    TargetVPNGatewayList
+    TargetVPNGatewayList'
     { _tvglNextPageToken = Nothing
     , _tvglKind = "compute#targetVpnGatewayList"
     , _tvglItems = Nothing
@@ -6547,7 +6547,7 @@ instance FromJSON TargetVPNGatewayList where
         parseJSON
           = withObject "TargetVPNGatewayList"
               (\ o ->
-                 TargetVPNGatewayList <$>
+                 TargetVPNGatewayList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetVpnGatewayList")
                      <*> (o .:? "items" .!= mempty)
@@ -6555,7 +6555,7 @@ instance FromJSON TargetVPNGatewayList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetVPNGatewayList where
-        toJSON TargetVPNGatewayList{..}
+        toJSON TargetVPNGatewayList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tvglNextPageToken,
@@ -6567,7 +6567,7 @@ instance ToJSON TargetVPNGatewayList where
 -- | Contains a list of SslCertificate resources.
 --
 -- /See:/ 'sslCertificateList' smart constructor.
-data SSLCertificateList = SSLCertificateList
+data SSLCertificateList = SSLCertificateList'
     { _sclNextPageToken :: !(Maybe Text)
     , _sclKind          :: !Text
     , _sclItems         :: !(Maybe [SSLCertificate])
@@ -6591,7 +6591,7 @@ data SSLCertificateList = SSLCertificateList
 sslCertificateList
     :: SSLCertificateList
 sslCertificateList =
-    SSLCertificateList
+    SSLCertificateList'
     { _sclNextPageToken = Nothing
     , _sclKind = "compute#sslCertificateList"
     , _sclItems = Nothing
@@ -6633,7 +6633,7 @@ instance FromJSON SSLCertificateList where
         parseJSON
           = withObject "SSLCertificateList"
               (\ o ->
-                 SSLCertificateList <$>
+                 SSLCertificateList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#sslCertificateList")
                      <*> (o .:? "items" .!= mempty)
@@ -6641,7 +6641,7 @@ instance FromJSON SSLCertificateList where
                      <*> (o .:? "id"))
 
 instance ToJSON SSLCertificateList where
-        toJSON SSLCertificateList{..}
+        toJSON SSLCertificateList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _sclNextPageToken,
@@ -6652,7 +6652,7 @@ instance ToJSON SSLCertificateList where
 
 --
 -- /See:/ 'firewallAllowedItem' smart constructor.
-data FirewallAllowedItem = FirewallAllowedItem
+data FirewallAllowedItem = FirewallAllowedItem'
     { _faiIPProtocol :: !(Maybe Text)
     , _faiPorts      :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6667,7 +6667,7 @@ data FirewallAllowedItem = FirewallAllowedItem
 firewallAllowedItem
     :: FirewallAllowedItem
 firewallAllowedItem =
-    FirewallAllowedItem
+    FirewallAllowedItem'
     { _faiIPProtocol = Nothing
     , _faiPorts = Nothing
     }
@@ -6696,11 +6696,11 @@ instance FromJSON FirewallAllowedItem where
         parseJSON
           = withObject "FirewallAllowedItem"
               (\ o ->
-                 FirewallAllowedItem <$>
+                 FirewallAllowedItem' <$>
                    (o .:? "IPProtocol") <*> (o .:? "ports" .!= mempty))
 
 instance ToJSON FirewallAllowedItem where
-        toJSON FirewallAllowedItem{..}
+        toJSON FirewallAllowedItem'{..}
           = object
               (catMaybes
                  [("IPProtocol" .=) <$> _faiIPProtocol,
@@ -6710,7 +6710,7 @@ instance ToJSON FirewallAllowedItem where
 -- information.
 --
 -- /See:/ 'network' smart constructor.
-data Network = Network
+data Network = Network'
     { _nAutoCreateSubnetworks :: !(Maybe Bool)
     , _nKind                  :: !Text
     , _nSubnetworks           :: !(Maybe [Text])
@@ -6749,7 +6749,7 @@ data Network = Network
 network
     :: Network
 network =
-    Network
+    Network'
     { _nAutoCreateSubnetworks = Nothing
     , _nKind = "compute#network"
     , _nSubnetworks = Nothing
@@ -6834,7 +6834,7 @@ instance FromJSON Network where
         parseJSON
           = withObject "Network"
               (\ o ->
-                 Network <$>
+                 Network' <$>
                    (o .:? "autoCreateSubnetworks") <*>
                      (o .:? "kind" .!= "compute#network")
                      <*> (o .:? "subnetworks" .!= mempty)
@@ -6847,7 +6847,7 @@ instance FromJSON Network where
                      <*> (o .:? "description"))
 
 instance ToJSON Network where
-        toJSON Network{..}
+        toJSON Network'{..}
           = object
               (catMaybes
                  [("autoCreateSubnetworks" .=) <$>
@@ -6866,7 +6866,7 @@ instance ToJSON Network where
 -- when the list is empty.
 --
 -- /See:/ 'addressesScopedListWarning' smart constructor.
-data AddressesScopedListWarning = AddressesScopedListWarning
+data AddressesScopedListWarning = AddressesScopedListWarning'
     { _aData    :: !(Maybe [AddressesScopedListWarningDataItem])
     , _aCode    :: !(Maybe AddressesScopedListWarningCode)
     , _aMessage :: !(Maybe Text)
@@ -6884,7 +6884,7 @@ data AddressesScopedListWarning = AddressesScopedListWarning
 addressesScopedListWarning
     :: AddressesScopedListWarning
 addressesScopedListWarning =
-    AddressesScopedListWarning
+    AddressesScopedListWarning'
     { _aData = Nothing
     , _aCode = Nothing
     , _aMessage = Nothing
@@ -6911,12 +6911,12 @@ instance FromJSON AddressesScopedListWarning where
         parseJSON
           = withObject "AddressesScopedListWarning"
               (\ o ->
-                 AddressesScopedListWarning <$>
+                 AddressesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON AddressesScopedListWarning where
-        toJSON AddressesScopedListWarning{..}
+        toJSON AddressesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _aData, ("code" .=) <$> _aCode,
@@ -6925,7 +6925,7 @@ instance ToJSON AddressesScopedListWarning where
 -- | The parameters of the raw disk image.
 --
 -- /See:/ 'imageRawDisk' smart constructor.
-data ImageRawDisk = ImageRawDisk
+data ImageRawDisk = ImageRawDisk'
     { _irdContainerType :: !(Maybe ImageRawDiskContainerType)
     , _irdSource        :: !(Maybe Text)
     , _irdSha1Checksum  :: !(Maybe Text)
@@ -6943,7 +6943,7 @@ data ImageRawDisk = ImageRawDisk
 imageRawDisk
     :: ImageRawDisk
 imageRawDisk =
-    ImageRawDisk
+    ImageRawDisk'
     { _irdContainerType = Nothing
     , _irdSource = Nothing
     , _irdSha1Checksum = Nothing
@@ -6975,12 +6975,12 @@ instance FromJSON ImageRawDisk where
         parseJSON
           = withObject "ImageRawDisk"
               (\ o ->
-                 ImageRawDisk <$>
+                 ImageRawDisk' <$>
                    (o .:? "containerType") <*> (o .:? "source") <*>
                      (o .:? "sha1Checksum"))
 
 instance ToJSON ImageRawDisk where
-        toJSON ImageRawDisk{..}
+        toJSON ImageRawDisk'{..}
           = object
               (catMaybes
                  [("containerType" .=) <$> _irdContainerType,
@@ -6989,7 +6989,7 @@ instance ToJSON ImageRawDisk where
 
 --
 -- /See:/ 'instanceAggregatedList' smart constructor.
-data InstanceAggregatedList = InstanceAggregatedList
+data InstanceAggregatedList = InstanceAggregatedList'
     { _ialNextPageToken :: !(Maybe Text)
     , _ialKind          :: !Text
     , _ialItems         :: !(Maybe InstanceAggregatedListItems)
@@ -7013,7 +7013,7 @@ data InstanceAggregatedList = InstanceAggregatedList
 instanceAggregatedList
     :: InstanceAggregatedList
 instanceAggregatedList =
-    InstanceAggregatedList
+    InstanceAggregatedList'
     { _ialNextPageToken = Nothing
     , _ialKind = "compute#instanceAggregatedList"
     , _ialItems = Nothing
@@ -7054,7 +7054,7 @@ instance FromJSON InstanceAggregatedList where
         parseJSON
           = withObject "InstanceAggregatedList"
               (\ o ->
-                 InstanceAggregatedList <$>
+                 InstanceAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceAggregatedList")
                      <*> (o .:? "items")
@@ -7062,7 +7062,7 @@ instance FromJSON InstanceAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceAggregatedList where
-        toJSON InstanceAggregatedList{..}
+        toJSON InstanceAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ialNextPageToken,
@@ -7074,7 +7074,7 @@ instance ToJSON InstanceAggregatedList where
 -- | A reserved address resource.
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address
+data Address = Address'
     { _aStatus            :: !(Maybe AddressStatus)
     , _aUsers             :: !(Maybe [Text])
     , _aKind              :: !Text
@@ -7113,7 +7113,7 @@ data Address = Address
 address
     :: Address
 address =
-    Address
+    Address'
     { _aStatus = Nothing
     , _aUsers = Nothing
     , _aKind = "compute#address"
@@ -7190,7 +7190,7 @@ instance FromJSON Address where
         parseJSON
           = withObject "Address"
               (\ o ->
-                 Address <$>
+                 Address' <$>
                    (o .:? "status") <*> (o .:? "users" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#address")
                      <*> (o .:? "address")
@@ -7202,7 +7202,7 @@ instance FromJSON Address where
                      <*> (o .:? "description"))
 
 instance ToJSON Address where
-        toJSON Address{..}
+        toJSON Address'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _aStatus,
@@ -7217,7 +7217,7 @@ instance ToJSON Address where
 -- | A Zone resource.
 --
 -- /See:/ 'zone' smart constructor.
-data Zone = Zone
+data Zone = Zone'
     { _zStatus             :: !(Maybe ZoneStatus)
     , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
     , _zKind               :: !Text
@@ -7256,7 +7256,7 @@ data Zone = Zone
 zone
     :: Zone
 zone =
-    Zone
+    Zone'
     { _zStatus = Nothing
     , _zMaintenanceWindows = Nothing
     , _zKind = "compute#zone"
@@ -7326,7 +7326,7 @@ instance FromJSON Zone where
         parseJSON
           = withObject "Zone"
               (\ o ->
-                 Zone <$>
+                 Zone' <$>
                    (o .:? "status") <*>
                      (o .:? "maintenanceWindows" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#zone")
@@ -7339,7 +7339,7 @@ instance FromJSON Zone where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Zone where
-        toJSON Zone{..}
+        toJSON Zone'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _zStatus,
@@ -7354,7 +7354,7 @@ instance ToJSON Zone where
 
 --
 -- /See:/ 'instanceGroupManagersRecreateInstancesRequest' smart constructor.
-newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest
+newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7366,7 +7366,7 @@ newtype InstanceGroupManagersRecreateInstancesRequest = InstanceGroupManagersRec
 instanceGroupManagersRecreateInstancesRequest
     :: InstanceGroupManagersRecreateInstancesRequest
 instanceGroupManagersRecreateInstancesRequest =
-    InstanceGroupManagersRecreateInstancesRequest
+    InstanceGroupManagersRecreateInstancesRequest'
     { _igmrirInstances = Nothing
     }
 
@@ -7384,19 +7384,19 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersRecreateInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersRecreateInstancesRequest <$>
+                 InstanceGroupManagersRecreateInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersRecreateInstancesRequest where
         toJSON
-          InstanceGroupManagersRecreateInstancesRequest{..}
+          InstanceGroupManagersRecreateInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmrirInstances])
 
 --
 -- /See:/ 'instancesScopedList' smart constructor.
-data InstancesScopedList = InstancesScopedList
+data InstancesScopedList = InstancesScopedList'
     { _islWarning   :: !(Maybe InstancesScopedListWarning)
     , _islInstances :: !(Maybe [Instance])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7411,7 +7411,7 @@ data InstancesScopedList = InstancesScopedList
 instancesScopedList
     :: InstancesScopedList
 instancesScopedList =
-    InstancesScopedList
+    InstancesScopedList'
     { _islWarning = Nothing
     , _islInstances = Nothing
     }
@@ -7433,11 +7433,11 @@ instance FromJSON InstancesScopedList where
         parseJSON
           = withObject "InstancesScopedList"
               (\ o ->
-                 InstancesScopedList <$>
+                 InstancesScopedList' <$>
                    (o .:? "warning") <*> (o .:? "instances" .!= mempty))
 
 instance ToJSON InstancesScopedList where
-        toJSON InstancesScopedList{..}
+        toJSON InstancesScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _islWarning,
@@ -7450,7 +7450,7 @@ instance ToJSON InstancesScopedList where
 -- global\/httpHealthChecks\/health-check
 --
 -- /See:/ 'healthCheckReference' smart constructor.
-newtype HealthCheckReference = HealthCheckReference
+newtype HealthCheckReference = HealthCheckReference'
     { _hcrHealthCheck :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7462,7 +7462,7 @@ newtype HealthCheckReference = HealthCheckReference
 healthCheckReference
     :: HealthCheckReference
 healthCheckReference =
-    HealthCheckReference
+    HealthCheckReference'
     { _hcrHealthCheck = Nothing
     }
 
@@ -7475,17 +7475,17 @@ instance FromJSON HealthCheckReference where
         parseJSON
           = withObject "HealthCheckReference"
               (\ o ->
-                 HealthCheckReference <$> (o .:? "healthCheck"))
+                 HealthCheckReference' <$> (o .:? "healthCheck"))
 
 instance ToJSON HealthCheckReference where
-        toJSON HealthCheckReference{..}
+        toJSON HealthCheckReference'{..}
           = object
               (catMaybes [("healthCheck" .=) <$> _hcrHealthCheck])
 
 -- | A map of scoped target instance lists.
 --
 -- /See:/ 'targetInstanceAggregatedListItems' smart constructor.
-newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems
+newtype TargetInstanceAggregatedListItems = TargetInstanceAggregatedListItems'
     { _tialiAddtional :: HashMap Text TargetInstancesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7498,7 +7498,7 @@ targetInstanceAggregatedListItems
     :: HashMap Text TargetInstancesScopedList -- ^ 'tialiAddtional'
     -> TargetInstanceAggregatedListItems
 targetInstanceAggregatedListItems pTialiAddtional_ =
-    TargetInstanceAggregatedListItems
+    TargetInstanceAggregatedListItems'
     { _tialiAddtional = _Coerce # pTialiAddtional_
     }
 
@@ -7514,7 +7514,7 @@ instance FromJSON TargetInstanceAggregatedListItems
         parseJSON
           = withObject "TargetInstanceAggregatedListItems"
               (\ o ->
-                 TargetInstanceAggregatedListItems <$>
+                 TargetInstanceAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON TargetInstanceAggregatedListItems
@@ -7523,7 +7523,7 @@ instance ToJSON TargetInstanceAggregatedListItems
 
 --
 -- /See:/ 'instanceGroupAggregatedList' smart constructor.
-data InstanceGroupAggregatedList = InstanceGroupAggregatedList
+data InstanceGroupAggregatedList = InstanceGroupAggregatedList'
     { _igalNextPageToken :: !(Maybe Text)
     , _igalKind          :: !Text
     , _igalItems         :: !(Maybe InstanceGroupAggregatedListItems)
@@ -7547,7 +7547,7 @@ data InstanceGroupAggregatedList = InstanceGroupAggregatedList
 instanceGroupAggregatedList
     :: InstanceGroupAggregatedList
 instanceGroupAggregatedList =
-    InstanceGroupAggregatedList
+    InstanceGroupAggregatedList'
     { _igalNextPageToken = Nothing
     , _igalKind = "compute#instanceGroupAggregatedList"
     , _igalItems = Nothing
@@ -7591,7 +7591,7 @@ instance FromJSON InstanceGroupAggregatedList where
         parseJSON
           = withObject "InstanceGroupAggregatedList"
               (\ o ->
-                 InstanceGroupAggregatedList <$>
+                 InstanceGroupAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#instanceGroupAggregatedList")
@@ -7600,7 +7600,7 @@ instance FromJSON InstanceGroupAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupAggregatedList where
-        toJSON InstanceGroupAggregatedList{..}
+        toJSON InstanceGroupAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igalNextPageToken,
@@ -7625,7 +7625,7 @@ instance ToJSON InstanceGroupAggregatedList where
 -- routing table are dropped.
 --
 -- /See:/ 'route' smart constructor.
-data Route = Route
+data Route = Route'
     { _rPriority          :: !(Maybe (Textual Word32))
     , _rKind              :: !Text
     , _rNextHopGateway    :: !(Maybe Text)
@@ -7682,7 +7682,7 @@ data Route = Route
 route
     :: Route
 route =
-    Route
+    Route'
     { _rPriority = Nothing
     , _rKind = "compute#route"
     , _rNextHopGateway = Nothing
@@ -7810,7 +7810,7 @@ instance FromJSON Route where
         parseJSON
           = withObject "Route"
               (\ o ->
-                 Route <$>
+                 Route' <$>
                    (o .:? "priority") <*>
                      (o .:? "kind" .!= "compute#route")
                      <*> (o .:? "nextHopGateway")
@@ -7829,7 +7829,7 @@ instance FromJSON Route where
                      <*> (o .:? "nextHopInstance"))
 
 instance ToJSON Route where
-        toJSON Route{..}
+        toJSON Route'{..}
           = object
               (catMaybes
                  [("priority" .=) <$> _rPriority,
@@ -7851,7 +7851,7 @@ instance ToJSON Route where
 
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarningDataItem' smart constructor.
-data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWarningDataItem
+data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWarningDataItem'
     { _tvgslwdiValue :: !(Maybe Text)
     , _tvgslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7866,7 +7866,7 @@ data TargetVPNGatewaysScopedListWarningDataItem = TargetVPNGatewaysScopedListWar
 targetVPNGatewaysScopedListWarningDataItem
     :: TargetVPNGatewaysScopedListWarningDataItem
 targetVPNGatewaysScopedListWarningDataItem =
-    TargetVPNGatewaysScopedListWarningDataItem
+    TargetVPNGatewaysScopedListWarningDataItem'
     { _tvgslwdiValue = Nothing
     , _tvgslwdiKey = Nothing
     }
@@ -7894,12 +7894,13 @@ instance FromJSON
           = withObject
               "TargetVPNGatewaysScopedListWarningDataItem"
               (\ o ->
-                 TargetVPNGatewaysScopedListWarningDataItem <$>
+                 TargetVPNGatewaysScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          TargetVPNGatewaysScopedListWarningDataItem where
-        toJSON TargetVPNGatewaysScopedListWarningDataItem{..}
+        toJSON
+          TargetVPNGatewaysScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tvgslwdiValue,
@@ -7907,7 +7908,7 @@ instance ToJSON
 
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificatesRequest' smart constructor.
-newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCertificatesRequest
+newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCertificatesRequest'
     { _thpsscrSSLCertificates :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -7919,7 +7920,7 @@ newtype TargetHTTPSProxiesSetSSLCertificatesRequest = TargetHTTPSProxiesSetSSLCe
 targetHTTPSProxiesSetSSLCertificatesRequest
     :: TargetHTTPSProxiesSetSSLCertificatesRequest
 targetHTTPSProxiesSetSSLCertificatesRequest =
-    TargetHTTPSProxiesSetSSLCertificatesRequest
+    TargetHTTPSProxiesSetSSLCertificatesRequest'
     { _thpsscrSSLCertificates = Nothing
     }
 
@@ -7939,13 +7940,13 @@ instance FromJSON
           = withObject
               "TargetHTTPSProxiesSetSSLCertificatesRequest"
               (\ o ->
-                 TargetHTTPSProxiesSetSSLCertificatesRequest <$>
+                 TargetHTTPSProxiesSetSSLCertificatesRequest' <$>
                    (o .:? "sslCertificates" .!= mempty))
 
 instance ToJSON
          TargetHTTPSProxiesSetSSLCertificatesRequest where
         toJSON
-          TargetHTTPSProxiesSetSSLCertificatesRequest{..}
+          TargetHTTPSProxiesSetSSLCertificatesRequest'{..}
           = object
               (catMaybes
                  [("sslCertificates" .=) <$> _thpsscrSSLCertificates])
@@ -7953,7 +7954,7 @@ instance ToJSON
 -- | An Instance Template resource.
 --
 -- /See:/ 'instanceTemplate' smart constructor.
-data InstanceTemplate = InstanceTemplate
+data InstanceTemplate = InstanceTemplate'
     { _itKind              :: !Text
     , _itSelfLink          :: !(Maybe Text)
     , _itName              :: !(Maybe Text)
@@ -7983,7 +7984,7 @@ data InstanceTemplate = InstanceTemplate
 instanceTemplate
     :: InstanceTemplate
 instanceTemplate =
-    InstanceTemplate
+    InstanceTemplate'
     { _itKind = "compute#instanceTemplate"
     , _itSelfLink = Nothing
     , _itName = Nothing
@@ -8044,7 +8045,7 @@ instance FromJSON InstanceTemplate where
         parseJSON
           = withObject "InstanceTemplate"
               (\ o ->
-                 InstanceTemplate <$>
+                 InstanceTemplate' <$>
                    (o .:? "kind" .!= "compute#instanceTemplate") <*>
                      (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -8054,7 +8055,7 @@ instance FromJSON InstanceTemplate where
                      <*> (o .:? "properties"))
 
 instance ToJSON InstanceTemplate where
-        toJSON InstanceTemplate{..}
+        toJSON InstanceTemplate'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _itKind),
@@ -8067,7 +8068,7 @@ instance ToJSON InstanceTemplate where
 
 --
 -- /See:/ 'zoneMaintenanceWindowsItem' smart constructor.
-data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem
+data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem'
     { _zmwiBeginTime   :: !(Maybe Text)
     , _zmwiName        :: !(Maybe Text)
     , _zmwiEndTime     :: !(Maybe Text)
@@ -8088,7 +8089,7 @@ data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem
 zoneMaintenanceWindowsItem
     :: ZoneMaintenanceWindowsItem
 zoneMaintenanceWindowsItem =
-    ZoneMaintenanceWindowsItem
+    ZoneMaintenanceWindowsItem'
     { _zmwiBeginTime = Nothing
     , _zmwiName = Nothing
     , _zmwiEndTime = Nothing
@@ -8121,13 +8122,13 @@ instance FromJSON ZoneMaintenanceWindowsItem where
         parseJSON
           = withObject "ZoneMaintenanceWindowsItem"
               (\ o ->
-                 ZoneMaintenanceWindowsItem <$>
+                 ZoneMaintenanceWindowsItem' <$>
                    (o .:? "beginTime") <*> (o .:? "name") <*>
                      (o .:? "endTime")
                      <*> (o .:? "description"))
 
 instance ToJSON ZoneMaintenanceWindowsItem where
-        toJSON ZoneMaintenanceWindowsItem{..}
+        toJSON ZoneMaintenanceWindowsItem'{..}
           = object
               (catMaybes
                  [("beginTime" .=) <$> _zmwiBeginTime,
@@ -8138,7 +8139,7 @@ instance ToJSON ZoneMaintenanceWindowsItem where
 -- | Represents a Target VPN gateway resource.
 --
 -- /See:/ 'targetVPNGateway' smart constructor.
-data TargetVPNGateway = TargetVPNGateway
+data TargetVPNGateway = TargetVPNGateway'
     { _tvgStatus            :: !(Maybe TargetVPNGatewayStatus)
     , _tvgKind              :: !Text
     , _tvgNetwork           :: !(Maybe Text)
@@ -8180,7 +8181,7 @@ data TargetVPNGateway = TargetVPNGateway
 targetVPNGateway
     :: TargetVPNGateway
 targetVPNGateway =
-    TargetVPNGateway
+    TargetVPNGateway'
     { _tvgStatus = Nothing
     , _tvgKind = "compute#targetVpnGateway"
     , _tvgNetwork = Nothing
@@ -8273,7 +8274,7 @@ instance FromJSON TargetVPNGateway where
         parseJSON
           = withObject "TargetVPNGateway"
               (\ o ->
-                 TargetVPNGateway <$>
+                 TargetVPNGateway' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "compute#targetVpnGateway")
                      <*> (o .:? "network")
@@ -8287,7 +8288,7 @@ instance FromJSON TargetVPNGateway where
                      <*> (o .:? "forwardingRules" .!= mempty))
 
 instance ToJSON TargetVPNGateway where
-        toJSON TargetVPNGateway{..}
+        toJSON TargetVPNGateway'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _tvgStatus,
@@ -8303,7 +8304,7 @@ instance ToJSON TargetVPNGateway where
 
 --
 -- /See:/ 'urlMapsValidateResponse' smart constructor.
-newtype URLMapsValidateResponse = URLMapsValidateResponse
+newtype URLMapsValidateResponse = URLMapsValidateResponse'
     { _umvrResult :: Maybe URLMapValidationResult
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8315,7 +8316,7 @@ newtype URLMapsValidateResponse = URLMapsValidateResponse
 urlMapsValidateResponse
     :: URLMapsValidateResponse
 urlMapsValidateResponse =
-    URLMapsValidateResponse
+    URLMapsValidateResponse'
     { _umvrResult = Nothing
     }
 
@@ -8326,10 +8327,11 @@ umvrResult
 instance FromJSON URLMapsValidateResponse where
         parseJSON
           = withObject "URLMapsValidateResponse"
-              (\ o -> URLMapsValidateResponse <$> (o .:? "result"))
+              (\ o ->
+                 URLMapsValidateResponse' <$> (o .:? "result"))
 
 instance ToJSON URLMapsValidateResponse where
-        toJSON URLMapsValidateResponse{..}
+        toJSON URLMapsValidateResponse'{..}
           = object (catMaybes [("result" .=) <$> _umvrResult])
 
 -- | An SslCertificate resource. This resource provides a mechanism to upload
@@ -8337,7 +8339,7 @@ instance ToJSON URLMapsValidateResponse where
 -- connections from the user.
 --
 -- /See:/ 'sslCertificate' smart constructor.
-data SSLCertificate = SSLCertificate
+data SSLCertificate = SSLCertificate'
     { _scPrivateKey        :: !(Maybe Text)
     , _scKind              :: !Text
     , _scSelfLink          :: !(Maybe Text)
@@ -8370,7 +8372,7 @@ data SSLCertificate = SSLCertificate
 sslCertificate
     :: SSLCertificate
 sslCertificate =
-    SSLCertificate
+    SSLCertificate'
     { _scPrivateKey = Nothing
     , _scKind = "compute#sslCertificate"
     , _scSelfLink = Nothing
@@ -8439,7 +8441,7 @@ instance FromJSON SSLCertificate where
         parseJSON
           = withObject "SSLCertificate"
               (\ o ->
-                 SSLCertificate <$>
+                 SSLCertificate' <$>
                    (o .:? "privateKey") <*>
                      (o .:? "kind" .!= "compute#sslCertificate")
                      <*> (o .:? "selfLink")
@@ -8450,7 +8452,7 @@ instance FromJSON SSLCertificate where
                      <*> (o .:? "description"))
 
 instance ToJSON SSLCertificate where
-        toJSON SSLCertificate{..}
+        toJSON SSLCertificate'{..}
           = object
               (catMaybes
                  [("privateKey" .=) <$> _scPrivateKey,
@@ -8464,7 +8466,7 @@ instance ToJSON SSLCertificate where
 
 --
 -- /See:/ 'urlMapReference' smart constructor.
-newtype URLMapReference = URLMapReference
+newtype URLMapReference = URLMapReference'
     { _umrURLMap :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8476,7 +8478,7 @@ newtype URLMapReference = URLMapReference
 urlMapReference
     :: URLMapReference
 urlMapReference =
-    URLMapReference
+    URLMapReference'
     { _umrURLMap = Nothing
     }
 
@@ -8487,15 +8489,15 @@ umrURLMap
 instance FromJSON URLMapReference where
         parseJSON
           = withObject "URLMapReference"
-              (\ o -> URLMapReference <$> (o .:? "urlMap"))
+              (\ o -> URLMapReference' <$> (o .:? "urlMap"))
 
 instance ToJSON URLMapReference where
-        toJSON URLMapReference{..}
+        toJSON URLMapReference'{..}
           = object (catMaybes [("urlMap" .=) <$> _umrURLMap])
 
 --
 -- /See:/ 'targetPoolsAddHealthCheckRequest' smart constructor.
-newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest
+newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest'
     { _tpahcrHealthChecks :: Maybe [HealthCheckReference]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8507,7 +8509,7 @@ newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest
 targetPoolsAddHealthCheckRequest
     :: TargetPoolsAddHealthCheckRequest
 targetPoolsAddHealthCheckRequest =
-    TargetPoolsAddHealthCheckRequest
+    TargetPoolsAddHealthCheckRequest'
     { _tpahcrHealthChecks = Nothing
     }
 
@@ -8524,12 +8526,12 @@ instance FromJSON TargetPoolsAddHealthCheckRequest
         parseJSON
           = withObject "TargetPoolsAddHealthCheckRequest"
               (\ o ->
-                 TargetPoolsAddHealthCheckRequest <$>
+                 TargetPoolsAddHealthCheckRequest' <$>
                    (o .:? "healthChecks" .!= mempty))
 
 instance ToJSON TargetPoolsAddHealthCheckRequest
          where
-        toJSON TargetPoolsAddHealthCheckRequest{..}
+        toJSON TargetPoolsAddHealthCheckRequest'{..}
           = object
               (catMaybes
                  [("healthChecks" .=) <$> _tpahcrHealthChecks])
@@ -8537,7 +8539,7 @@ instance ToJSON TargetPoolsAddHealthCheckRequest
 -- | [Output Only] A map of scoped disk lists.
 --
 -- /See:/ 'diskAggregatedListItems' smart constructor.
-newtype DiskAggregatedListItems = DiskAggregatedListItems
+newtype DiskAggregatedListItems = DiskAggregatedListItems'
     { _daliAddtional :: HashMap Text DisksScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8550,7 +8552,7 @@ diskAggregatedListItems
     :: HashMap Text DisksScopedList -- ^ 'daliAddtional'
     -> DiskAggregatedListItems
 diskAggregatedListItems pDaliAddtional_ =
-    DiskAggregatedListItems
+    DiskAggregatedListItems'
     { _daliAddtional = _Coerce # pDaliAddtional_
     }
 
@@ -8565,7 +8567,7 @@ instance FromJSON DiskAggregatedListItems where
         parseJSON
           = withObject "DiskAggregatedListItems"
               (\ o ->
-                 DiskAggregatedListItems <$> (parseJSONObject o))
+                 DiskAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON DiskAggregatedListItems where
         toJSON = toJSON . _daliAddtional
@@ -8574,7 +8576,7 @@ instance ToJSON DiskAggregatedListItems where
 -- report. Contains bucket_name and report_name prefix.
 --
 -- /See:/ 'usageExportLocation' smart constructor.
-data UsageExportLocation = UsageExportLocation
+data UsageExportLocation = UsageExportLocation'
     { _uelReportNamePrefix :: !(Maybe Text)
     , _uelBucketName       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8589,7 +8591,7 @@ data UsageExportLocation = UsageExportLocation
 usageExportLocation
     :: UsageExportLocation
 usageExportLocation =
-    UsageExportLocation
+    UsageExportLocation'
     { _uelReportNamePrefix = Nothing
     , _uelBucketName = Nothing
     }
@@ -8619,11 +8621,11 @@ instance FromJSON UsageExportLocation where
         parseJSON
           = withObject "UsageExportLocation"
               (\ o ->
-                 UsageExportLocation <$>
+                 UsageExportLocation' <$>
                    (o .:? "reportNamePrefix") <*> (o .:? "bucketName"))
 
 instance ToJSON UsageExportLocation where
-        toJSON UsageExportLocation{..}
+        toJSON UsageExportLocation'{..}
           = object
               (catMaybes
                  [("reportNamePrefix" .=) <$> _uelReportNamePrefix,
@@ -8632,7 +8634,7 @@ instance ToJSON UsageExportLocation where
 -- | Contains a list of zone resources.
 --
 -- /See:/ 'zoneList' smart constructor.
-data ZoneList = ZoneList
+data ZoneList = ZoneList'
     { _zlNextPageToken :: !(Maybe Text)
     , _zlKind          :: !Text
     , _zlItems         :: !(Maybe [Zone])
@@ -8656,7 +8658,7 @@ data ZoneList = ZoneList
 zoneList
     :: ZoneList
 zoneList =
-    ZoneList
+    ZoneList'
     { _zlNextPageToken = Nothing
     , _zlKind = "compute#zoneList"
     , _zlItems = Nothing
@@ -8697,7 +8699,7 @@ instance FromJSON ZoneList where
         parseJSON
           = withObject "ZoneList"
               (\ o ->
-                 ZoneList <$>
+                 ZoneList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#zoneList")
                      <*> (o .:? "items" .!= mempty)
@@ -8705,7 +8707,7 @@ instance FromJSON ZoneList where
                      <*> (o .:? "id"))
 
 instance ToJSON ZoneList where
-        toJSON ZoneList{..}
+        toJSON ZoneList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _zlNextPageToken,
@@ -8715,7 +8717,7 @@ instance ToJSON ZoneList where
 
 --
 -- /See:/ 'managedInstance' smart constructor.
-data ManagedInstance = ManagedInstance
+data ManagedInstance = ManagedInstance'
     { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
     , _miId             :: !(Maybe (Textual Word64))
@@ -8739,7 +8741,7 @@ data ManagedInstance = ManagedInstance
 managedInstance
     :: ManagedInstance
 managedInstance =
-    ManagedInstance
+    ManagedInstance'
     { _miLastAttempt = Nothing
     , _miCurrentAction = Nothing
     , _miId = Nothing
@@ -8801,14 +8803,14 @@ instance FromJSON ManagedInstance where
         parseJSON
           = withObject "ManagedInstance"
               (\ o ->
-                 ManagedInstance <$>
+                 ManagedInstance' <$>
                    (o .:? "lastAttempt") <*> (o .:? "currentAction") <*>
                      (o .:? "id")
                      <*> (o .:? "instanceStatus")
                      <*> (o .:? "instance"))
 
 instance ToJSON ManagedInstance where
-        toJSON ManagedInstance{..}
+        toJSON ManagedInstance'{..}
           = object
               (catMaybes
                  [("lastAttempt" .=) <$> _miLastAttempt,
@@ -8820,7 +8822,7 @@ instance ToJSON ManagedInstance where
 -- | [Output Only] A map of filtered managed instance group lists.
 --
 -- /See:/ 'instanceGroupManagerAggregatedListItems' smart constructor.
-newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems
+newtype InstanceGroupManagerAggregatedListItems = InstanceGroupManagerAggregatedListItems'
     { _igmaliAddtional :: HashMap Text InstanceGroupManagersScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8833,7 +8835,7 @@ instanceGroupManagerAggregatedListItems
     :: HashMap Text InstanceGroupManagersScopedList -- ^ 'igmaliAddtional'
     -> InstanceGroupManagerAggregatedListItems
 instanceGroupManagerAggregatedListItems pIgmaliAddtional_ =
-    InstanceGroupManagerAggregatedListItems
+    InstanceGroupManagerAggregatedListItems'
     { _igmaliAddtional = _Coerce # pIgmaliAddtional_
     }
 
@@ -8851,7 +8853,7 @@ instance FromJSON
           = withObject
               "InstanceGroupManagerAggregatedListItems"
               (\ o ->
-                 InstanceGroupManagerAggregatedListItems <$>
+                 InstanceGroupManagerAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -8860,7 +8862,7 @@ instance ToJSON
 
 --
 -- /See:/ 'instanceGroupManagersDeleteInstancesRequest' smart constructor.
-newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest
+newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8872,7 +8874,7 @@ newtype InstanceGroupManagersDeleteInstancesRequest = InstanceGroupManagersDelet
 instanceGroupManagersDeleteInstancesRequest
     :: InstanceGroupManagersDeleteInstancesRequest
 instanceGroupManagersDeleteInstancesRequest =
-    InstanceGroupManagersDeleteInstancesRequest
+    InstanceGroupManagersDeleteInstancesRequest'
     { _igmdirInstances = Nothing
     }
 
@@ -8891,20 +8893,20 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersDeleteInstancesRequest"
               (\ o ->
-                 InstanceGroupManagersDeleteInstancesRequest <$>
+                 InstanceGroupManagersDeleteInstancesRequest' <$>
                    (o .:? "instances" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersDeleteInstancesRequest where
         toJSON
-          InstanceGroupManagersDeleteInstancesRequest{..}
+          InstanceGroupManagersDeleteInstancesRequest'{..}
           = object
               (catMaybes [("instances" .=) <$> _igmdirInstances])
 
 -- | Message containing information of one individual backend.
 --
 -- /See:/ 'backend' smart constructor.
-data Backend = Backend
+data Backend = Backend'
     { _bGroup              :: !(Maybe Text)
     , _bBalancingMode      :: !(Maybe BackendBalancingMode)
     , _bMaxUtilization     :: !(Maybe (Textual Double))
@@ -8934,7 +8936,7 @@ data Backend = Backend
 backend
     :: Backend
 backend =
-    Backend
+    Backend'
     { _bGroup = Nothing
     , _bBalancingMode = Nothing
     , _bMaxUtilization = Nothing
@@ -9010,7 +9012,7 @@ instance FromJSON Backend where
         parseJSON
           = withObject "Backend"
               (\ o ->
-                 Backend <$>
+                 Backend' <$>
                    (o .:? "group") <*> (o .:? "balancingMode") <*>
                      (o .:? "maxUtilization")
                      <*> (o .:? "maxRate")
@@ -9019,7 +9021,7 @@ instance FromJSON Backend where
                      <*> (o .:? "capacityScaler"))
 
 instance ToJSON Backend where
-        toJSON Backend{..}
+        toJSON Backend'{..}
           = object
               (catMaybes
                  [("group" .=) <$> _bGroup,
@@ -9034,7 +9036,7 @@ instance ToJSON Backend where
 -- when the list is empty.
 --
 -- /See:/ 'targetVPNGatewaysScopedListWarning' smart constructor.
-data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning
+data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning'
     { _tvgslwData    :: !(Maybe [TargetVPNGatewaysScopedListWarningDataItem])
     , _tvgslwCode    :: !(Maybe TargetVPNGatewaysScopedListWarningCode)
     , _tvgslwMessage :: !(Maybe Text)
@@ -9052,7 +9054,7 @@ data TargetVPNGatewaysScopedListWarning = TargetVPNGatewaysScopedListWarning
 targetVPNGatewaysScopedListWarning
     :: TargetVPNGatewaysScopedListWarning
 targetVPNGatewaysScopedListWarning =
-    TargetVPNGatewaysScopedListWarning
+    TargetVPNGatewaysScopedListWarning'
     { _tvgslwData = Nothing
     , _tvgslwCode = Nothing
     , _tvgslwMessage = Nothing
@@ -9084,13 +9086,13 @@ instance FromJSON TargetVPNGatewaysScopedListWarning
         parseJSON
           = withObject "TargetVPNGatewaysScopedListWarning"
               (\ o ->
-                 TargetVPNGatewaysScopedListWarning <$>
+                 TargetVPNGatewaysScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON TargetVPNGatewaysScopedListWarning
          where
-        toJSON TargetVPNGatewaysScopedListWarning{..}
+        toJSON TargetVPNGatewaysScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _tvgslwData,
@@ -9100,7 +9102,7 @@ instance ToJSON TargetVPNGatewaysScopedListWarning
 -- | Contains a list of addresses.
 --
 -- /See:/ 'addressList' smart constructor.
-data AddressList = AddressList
+data AddressList = AddressList'
     { _alNextPageToken :: !(Maybe Text)
     , _alKind          :: !Text
     , _alItems         :: !(Maybe [Address])
@@ -9124,7 +9126,7 @@ data AddressList = AddressList
 addressList
     :: AddressList
 addressList =
-    AddressList
+    AddressList'
     { _alNextPageToken = Nothing
     , _alKind = "compute#addressList"
     , _alItems = Nothing
@@ -9167,7 +9169,7 @@ instance FromJSON AddressList where
         parseJSON
           = withObject "AddressList"
               (\ o ->
-                 AddressList <$>
+                 AddressList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#addressList")
                      <*> (o .:? "items" .!= mempty)
@@ -9175,7 +9177,7 @@ instance FromJSON AddressList where
                      <*> (o .:? "id"))
 
 instance ToJSON AddressList where
-        toJSON AddressList{..}
+        toJSON AddressList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alNextPageToken,
@@ -9186,7 +9188,7 @@ instance ToJSON AddressList where
 -- | A map of scoped forwarding rule lists.
 --
 -- /See:/ 'forwardingRuleAggregatedListItems' smart constructor.
-newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems
+newtype ForwardingRuleAggregatedListItems = ForwardingRuleAggregatedListItems'
     { _fraliAddtional :: HashMap Text ForwardingRulesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9199,7 +9201,7 @@ forwardingRuleAggregatedListItems
     :: HashMap Text ForwardingRulesScopedList -- ^ 'fraliAddtional'
     -> ForwardingRuleAggregatedListItems
 forwardingRuleAggregatedListItems pFraliAddtional_ =
-    ForwardingRuleAggregatedListItems
+    ForwardingRuleAggregatedListItems'
     { _fraliAddtional = _Coerce # pFraliAddtional_
     }
 
@@ -9215,7 +9217,7 @@ instance FromJSON ForwardingRuleAggregatedListItems
         parseJSON
           = withObject "ForwardingRuleAggregatedListItems"
               (\ o ->
-                 ForwardingRuleAggregatedListItems <$>
+                 ForwardingRuleAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON ForwardingRuleAggregatedListItems
@@ -9225,7 +9227,7 @@ instance ToJSON ForwardingRuleAggregatedListItems
 -- | [Output Only] A map of scoped operation lists.
 --
 -- /See:/ 'operationAggregatedListItems' smart constructor.
-newtype OperationAggregatedListItems = OperationAggregatedListItems
+newtype OperationAggregatedListItems = OperationAggregatedListItems'
     { _oaliAddtional :: HashMap Text OperationsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9238,7 +9240,7 @@ operationAggregatedListItems
     :: HashMap Text OperationsScopedList -- ^ 'oaliAddtional'
     -> OperationAggregatedListItems
 operationAggregatedListItems pOaliAddtional_ =
-    OperationAggregatedListItems
+    OperationAggregatedListItems'
     { _oaliAddtional = _Coerce # pOaliAddtional_
     }
 
@@ -9253,14 +9255,15 @@ instance FromJSON OperationAggregatedListItems where
         parseJSON
           = withObject "OperationAggregatedListItems"
               (\ o ->
-                 OperationAggregatedListItems <$> (parseJSONObject o))
+                 OperationAggregatedListItems' <$>
+                   (parseJSONObject o))
 
 instance ToJSON OperationAggregatedListItems where
         toJSON = toJSON . _oaliAddtional
 
 --
 -- /See:/ 'instanceGroupManagerActionsSummary' smart constructor.
-data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
+data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary'
     { _igmasDeleting   :: !(Maybe (Textual Int32))
     , _igmasRestarting :: !(Maybe (Textual Int32))
     , _igmasNone       :: !(Maybe (Textual Int32))
@@ -9290,7 +9293,7 @@ data InstanceGroupManagerActionsSummary = InstanceGroupManagerActionsSummary
 instanceGroupManagerActionsSummary
     :: InstanceGroupManagerActionsSummary
 instanceGroupManagerActionsSummary =
-    InstanceGroupManagerActionsSummary
+    InstanceGroupManagerActionsSummary'
     { _igmasDeleting = Nothing
     , _igmasRestarting = Nothing
     , _igmasNone = Nothing
@@ -9368,7 +9371,7 @@ instance FromJSON InstanceGroupManagerActionsSummary
         parseJSON
           = withObject "InstanceGroupManagerActionsSummary"
               (\ o ->
-                 InstanceGroupManagerActionsSummary <$>
+                 InstanceGroupManagerActionsSummary' <$>
                    (o .:? "deleting") <*> (o .:? "restarting") <*>
                      (o .:? "none")
                      <*> (o .:? "creating")
@@ -9378,7 +9381,7 @@ instance FromJSON InstanceGroupManagerActionsSummary
 
 instance ToJSON InstanceGroupManagerActionsSummary
          where
-        toJSON InstanceGroupManagerActionsSummary{..}
+        toJSON InstanceGroupManagerActionsSummary'{..}
           = object
               (catMaybes
                  [("deleting" .=) <$> _igmasDeleting,
@@ -9392,7 +9395,7 @@ instance ToJSON InstanceGroupManagerActionsSummary
 -- | A service account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount
+data ServiceAccount = ServiceAccount'
     { _saEmail  :: !(Maybe Text)
     , _saScopes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9407,7 +9410,7 @@ data ServiceAccount = ServiceAccount
 serviceAccount
     :: ServiceAccount
 serviceAccount =
-    ServiceAccount
+    ServiceAccount'
     { _saEmail = Nothing
     , _saScopes = Nothing
     }
@@ -9427,11 +9430,11 @@ instance FromJSON ServiceAccount where
         parseJSON
           = withObject "ServiceAccount"
               (\ o ->
-                 ServiceAccount <$>
+                 ServiceAccount' <$>
                    (o .:? "email") <*> (o .:? "scopes" .!= mempty))
 
 instance ToJSON ServiceAccount where
-        toJSON ServiceAccount{..}
+        toJSON ServiceAccount'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _saEmail,
@@ -9440,7 +9443,7 @@ instance ToJSON ServiceAccount where
 -- | Contains a list of networks.
 --
 -- /See:/ 'networkList' smart constructor.
-data NetworkList = NetworkList
+data NetworkList = NetworkList'
     { _nlNextPageToken :: !(Maybe Text)
     , _nlKind          :: !Text
     , _nlItems         :: !(Maybe [Network])
@@ -9464,7 +9467,7 @@ data NetworkList = NetworkList
 networkList
     :: NetworkList
 networkList =
-    NetworkList
+    NetworkList'
     { _nlNextPageToken = Nothing
     , _nlKind = "compute#networkList"
     , _nlItems = Nothing
@@ -9507,7 +9510,7 @@ instance FromJSON NetworkList where
         parseJSON
           = withObject "NetworkList"
               (\ o ->
-                 NetworkList <$>
+                 NetworkList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#networkList")
                      <*> (o .:? "items" .!= mempty)
@@ -9515,7 +9518,7 @@ instance FromJSON NetworkList where
                      <*> (o .:? "id"))
 
 instance ToJSON NetworkList where
-        toJSON NetworkList{..}
+        toJSON NetworkList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _nlNextPageToken,
@@ -9525,7 +9528,7 @@ instance ToJSON NetworkList where
 
 --
 -- /See:/ 'instanceGroupsListInstancesRequest' smart constructor.
-newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
+newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest'
     { _iglirInstanceState :: Maybe InstanceGroupsListInstancesRequestInstanceState
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9537,7 +9540,7 @@ newtype InstanceGroupsListInstancesRequest = InstanceGroupsListInstancesRequest
 instanceGroupsListInstancesRequest
     :: InstanceGroupsListInstancesRequest
 instanceGroupsListInstancesRequest =
-    InstanceGroupsListInstancesRequest
+    InstanceGroupsListInstancesRequest'
     { _iglirInstanceState = Nothing
     }
 
@@ -9554,12 +9557,12 @@ instance FromJSON InstanceGroupsListInstancesRequest
         parseJSON
           = withObject "InstanceGroupsListInstancesRequest"
               (\ o ->
-                 InstanceGroupsListInstancesRequest <$>
+                 InstanceGroupsListInstancesRequest' <$>
                    (o .:? "instanceState"))
 
 instance ToJSON InstanceGroupsListInstancesRequest
          where
-        toJSON InstanceGroupsListInstancesRequest{..}
+        toJSON InstanceGroupsListInstancesRequest'{..}
           = object
               (catMaybes
                  [("instanceState" .=) <$> _iglirInstanceState])
@@ -9567,7 +9570,7 @@ instance ToJSON InstanceGroupsListInstancesRequest
 -- | [Output Only] A map of scoped target pool lists.
 --
 -- /See:/ 'targetPoolAggregatedListItems' smart constructor.
-newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems
+newtype TargetPoolAggregatedListItems = TargetPoolAggregatedListItems'
     { _tpaliAddtional :: HashMap Text TargetPoolsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9580,7 +9583,7 @@ targetPoolAggregatedListItems
     :: HashMap Text TargetPoolsScopedList -- ^ 'tpaliAddtional'
     -> TargetPoolAggregatedListItems
 targetPoolAggregatedListItems pTpaliAddtional_ =
-    TargetPoolAggregatedListItems
+    TargetPoolAggregatedListItems'
     { _tpaliAddtional = _Coerce # pTpaliAddtional_
     }
 
@@ -9595,7 +9598,7 @@ instance FromJSON TargetPoolAggregatedListItems where
         parseJSON
           = withObject "TargetPoolAggregatedListItems"
               (\ o ->
-                 TargetPoolAggregatedListItems <$>
+                 TargetPoolAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON TargetPoolAggregatedListItems where
@@ -9603,7 +9606,7 @@ instance ToJSON TargetPoolAggregatedListItems where
 
 --
 -- /See:/ 'targetInstancesScopedList' smart constructor.
-data TargetInstancesScopedList = TargetInstancesScopedList
+data TargetInstancesScopedList = TargetInstancesScopedList'
     { _tislWarning         :: !(Maybe TargetInstancesScopedListWarning)
     , _tislTargetInstances :: !(Maybe [TargetInstance])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9618,7 +9621,7 @@ data TargetInstancesScopedList = TargetInstancesScopedList
 targetInstancesScopedList
     :: TargetInstancesScopedList
 targetInstancesScopedList =
-    TargetInstancesScopedList
+    TargetInstancesScopedList'
     { _tislWarning = Nothing
     , _tislTargetInstances = Nothing
     }
@@ -9641,12 +9644,12 @@ instance FromJSON TargetInstancesScopedList where
         parseJSON
           = withObject "TargetInstancesScopedList"
               (\ o ->
-                 TargetInstancesScopedList <$>
+                 TargetInstancesScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "targetInstances" .!= mempty))
 
 instance ToJSON TargetInstancesScopedList where
-        toJSON TargetInstancesScopedList{..}
+        toJSON TargetInstancesScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _tislWarning,
@@ -9655,7 +9658,7 @@ instance ToJSON TargetInstancesScopedList where
 -- | [Output Only] A map of scoped address lists.
 --
 -- /See:/ 'addressAggregatedListItems' smart constructor.
-newtype AddressAggregatedListItems = AddressAggregatedListItems
+newtype AddressAggregatedListItems = AddressAggregatedListItems'
     { _aAddtional :: HashMap Text AddressesScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9668,7 +9671,7 @@ addressAggregatedListItems
     :: HashMap Text AddressesScopedList -- ^ 'aAddtional'
     -> AddressAggregatedListItems
 addressAggregatedListItems pAAddtional_ =
-    AddressAggregatedListItems
+    AddressAggregatedListItems'
     { _aAddtional = _Coerce # pAAddtional_
     }
 
@@ -9682,7 +9685,7 @@ instance FromJSON AddressAggregatedListItems where
         parseJSON
           = withObject "AddressAggregatedListItems"
               (\ o ->
-                 AddressAggregatedListItems <$> (parseJSONObject o))
+                 AddressAggregatedListItems' <$> (parseJSONObject o))
 
 instance ToJSON AddressAggregatedListItems where
         toJSON = toJSON . _aAddtional
@@ -9690,7 +9693,7 @@ instance ToJSON AddressAggregatedListItems where
 -- | Contains a list of Autoscaler resources.
 --
 -- /See:/ 'autoscalerList' smart constructor.
-data AutoscalerList = AutoscalerList
+data AutoscalerList = AutoscalerList'
     { _autNextPageToken :: !(Maybe Text)
     , _autKind          :: !Text
     , _autItems         :: !(Maybe [Autoscaler])
@@ -9714,7 +9717,7 @@ data AutoscalerList = AutoscalerList
 autoscalerList
     :: AutoscalerList
 autoscalerList =
-    AutoscalerList
+    AutoscalerList'
     { _autNextPageToken = Nothing
     , _autKind = "compute#autoscalerList"
     , _autItems = Nothing
@@ -9758,7 +9761,7 @@ instance FromJSON AutoscalerList where
         parseJSON
           = withObject "AutoscalerList"
               (\ o ->
-                 AutoscalerList <$>
+                 AutoscalerList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#autoscalerList")
                      <*> (o .:? "items" .!= mempty)
@@ -9766,7 +9769,7 @@ instance FromJSON AutoscalerList where
                      <*> (o .:? "id"))
 
 instance ToJSON AutoscalerList where
-        toJSON AutoscalerList{..}
+        toJSON AutoscalerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _autNextPageToken,
@@ -9777,7 +9780,7 @@ instance ToJSON AutoscalerList where
 
 --
 -- /See:/ 'vpnTunnelAggregatedList' smart constructor.
-data VPNTunnelAggregatedList = VPNTunnelAggregatedList
+data VPNTunnelAggregatedList = VPNTunnelAggregatedList'
     { _vtalNextPageToken :: !(Maybe Text)
     , _vtalKind          :: !Text
     , _vtalItems         :: !(Maybe VPNTunnelAggregatedListItems)
@@ -9801,7 +9804,7 @@ data VPNTunnelAggregatedList = VPNTunnelAggregatedList
 vpnTunnelAggregatedList
     :: VPNTunnelAggregatedList
 vpnTunnelAggregatedList =
-    VPNTunnelAggregatedList
+    VPNTunnelAggregatedList'
     { _vtalNextPageToken = Nothing
     , _vtalKind = "compute#vpnTunnelAggregatedList"
     , _vtalItems = Nothing
@@ -9843,7 +9846,7 @@ instance FromJSON VPNTunnelAggregatedList where
         parseJSON
           = withObject "VPNTunnelAggregatedList"
               (\ o ->
-                 VPNTunnelAggregatedList <$>
+                 VPNTunnelAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#vpnTunnelAggregatedList")
                      <*> (o .:? "items")
@@ -9851,7 +9854,7 @@ instance FromJSON VPNTunnelAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON VPNTunnelAggregatedList where
-        toJSON VPNTunnelAggregatedList{..}
+        toJSON VPNTunnelAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _vtalNextPageToken,
@@ -9863,7 +9866,7 @@ instance ToJSON VPNTunnelAggregatedList where
 -- | An instance-attached disk resource.
 --
 -- /See:/ 'attachedDisk' smart constructor.
-data AttachedDisk = AttachedDisk
+data AttachedDisk = AttachedDisk'
     { _adKind             :: !Text
     , _adMode             :: !(Maybe AttachedDiskMode)
     , _adBoot             :: !(Maybe Bool)
@@ -9905,7 +9908,7 @@ data AttachedDisk = AttachedDisk
 attachedDisk
     :: AttachedDisk
 attachedDisk =
-    AttachedDisk
+    AttachedDisk'
     { _adKind = "compute#attachedDisk"
     , _adMode = Nothing
     , _adBoot = Nothing
@@ -10002,7 +10005,7 @@ instance FromJSON AttachedDisk where
         parseJSON
           = withObject "AttachedDisk"
               (\ o ->
-                 AttachedDisk <$>
+                 AttachedDisk' <$>
                    (o .:? "kind" .!= "compute#attachedDisk") <*>
                      (o .:? "mode")
                      <*> (o .:? "boot")
@@ -10016,7 +10019,7 @@ instance FromJSON AttachedDisk where
                      <*> (o .:? "index"))
 
 instance ToJSON AttachedDisk where
-        toJSON AttachedDisk{..}
+        toJSON AttachedDisk'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _adKind), ("mode" .=) <$> _adMode,
@@ -10032,7 +10035,7 @@ instance ToJSON AttachedDisk where
 -- | Contains a list of disk types.
 --
 -- /See:/ 'diskTypeList' smart constructor.
-data DiskTypeList = DiskTypeList
+data DiskTypeList = DiskTypeList'
     { _dtlNextPageToken :: !(Maybe Text)
     , _dtlKind          :: !Text
     , _dtlItems         :: !(Maybe [DiskType])
@@ -10056,7 +10059,7 @@ data DiskTypeList = DiskTypeList
 diskTypeList
     :: DiskTypeList
 diskTypeList =
-    DiskTypeList
+    DiskTypeList'
     { _dtlNextPageToken = Nothing
     , _dtlKind = "compute#diskTypeList"
     , _dtlItems = Nothing
@@ -10100,7 +10103,7 @@ instance FromJSON DiskTypeList where
         parseJSON
           = withObject "DiskTypeList"
               (\ o ->
-                 DiskTypeList <$>
+                 DiskTypeList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskTypeList")
                      <*> (o .:? "items" .!= mempty)
@@ -10108,7 +10111,7 @@ instance FromJSON DiskTypeList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskTypeList where
-        toJSON DiskTypeList{..}
+        toJSON DiskTypeList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dtlNextPageToken,
@@ -10120,7 +10123,7 @@ instance ToJSON DiskTypeList where
 -- | Contains a list of machine types.
 --
 -- /See:/ 'machineTypeList' smart constructor.
-data MachineTypeList = MachineTypeList
+data MachineTypeList = MachineTypeList'
     { _mtlNextPageToken :: !(Maybe Text)
     , _mtlKind          :: !Text
     , _mtlItems         :: !(Maybe [MachineType])
@@ -10144,7 +10147,7 @@ data MachineTypeList = MachineTypeList
 machineTypeList
     :: MachineTypeList
 machineTypeList =
-    MachineTypeList
+    MachineTypeList'
     { _mtlNextPageToken = Nothing
     , _mtlKind = "compute#machineTypeList"
     , _mtlItems = Nothing
@@ -10188,7 +10191,7 @@ instance FromJSON MachineTypeList where
         parseJSON
           = withObject "MachineTypeList"
               (\ o ->
-                 MachineTypeList <$>
+                 MachineTypeList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#machineTypeList")
                      <*> (o .:? "items" .!= mempty)
@@ -10196,7 +10199,7 @@ instance FromJSON MachineTypeList where
                      <*> (o .:? "id"))
 
 instance ToJSON MachineTypeList where
-        toJSON MachineTypeList{..}
+        toJSON MachineTypeList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mtlNextPageToken,
@@ -10208,7 +10211,7 @@ instance ToJSON MachineTypeList where
 -- | A list of TargetHttpProxy resources.
 --
 -- /See:/ 'targetHTTPProxyList' smart constructor.
-data TargetHTTPProxyList = TargetHTTPProxyList
+data TargetHTTPProxyList = TargetHTTPProxyList'
     { _thttpplNextPageToken :: !(Maybe Text)
     , _thttpplKind          :: !Text
     , _thttpplItems         :: !(Maybe [TargetHTTPProxy])
@@ -10232,7 +10235,7 @@ data TargetHTTPProxyList = TargetHTTPProxyList
 targetHTTPProxyList
     :: TargetHTTPProxyList
 targetHTTPProxyList =
-    TargetHTTPProxyList
+    TargetHTTPProxyList'
     { _thttpplNextPageToken = Nothing
     , _thttpplKind = "compute#targetHttpProxyList"
     , _thttpplItems = Nothing
@@ -10279,7 +10282,7 @@ instance FromJSON TargetHTTPProxyList where
         parseJSON
           = withObject "TargetHTTPProxyList"
               (\ o ->
-                 TargetHTTPProxyList <$>
+                 TargetHTTPProxyList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#targetHttpProxyList")
                      <*> (o .:? "items" .!= mempty)
@@ -10287,7 +10290,7 @@ instance FromJSON TargetHTTPProxyList where
                      <*> (o .:? "id"))
 
 instance ToJSON TargetHTTPProxyList where
-        toJSON TargetHTTPProxyList{..}
+        toJSON TargetHTTPProxyList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _thttpplNextPageToken,
@@ -10298,7 +10301,7 @@ instance ToJSON TargetHTTPProxyList where
 
 --
 -- /See:/ 'diskTypesScopedList' smart constructor.
-data DiskTypesScopedList = DiskTypesScopedList
+data DiskTypesScopedList = DiskTypesScopedList'
     { _dtslDiskTypes :: !(Maybe [DiskType])
     , _dtslWarning   :: !(Maybe DiskTypesScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10313,7 +10316,7 @@ data DiskTypesScopedList = DiskTypesScopedList
 diskTypesScopedList
     :: DiskTypesScopedList
 diskTypesScopedList =
-    DiskTypesScopedList
+    DiskTypesScopedList'
     { _dtslDiskTypes = Nothing
     , _dtslWarning = Nothing
     }
@@ -10336,11 +10339,11 @@ instance FromJSON DiskTypesScopedList where
         parseJSON
           = withObject "DiskTypesScopedList"
               (\ o ->
-                 DiskTypesScopedList <$>
+                 DiskTypesScopedList' <$>
                    (o .:? "diskTypes" .!= mempty) <*> (o .:? "warning"))
 
 instance ToJSON DiskTypesScopedList where
-        toJSON DiskTypesScopedList{..}
+        toJSON DiskTypesScopedList'{..}
           = object
               (catMaybes
                  [("diskTypes" .=) <$> _dtslDiskTypes,
@@ -10348,7 +10351,7 @@ instance ToJSON DiskTypesScopedList where
 
 --
 -- /See:/ 'diskTypeAggregatedList' smart constructor.
-data DiskTypeAggregatedList = DiskTypeAggregatedList
+data DiskTypeAggregatedList = DiskTypeAggregatedList'
     { _dtalNextPageToken :: !(Maybe Text)
     , _dtalKind          :: !Text
     , _dtalItems         :: !(Maybe DiskTypeAggregatedListItems)
@@ -10372,7 +10375,7 @@ data DiskTypeAggregatedList = DiskTypeAggregatedList
 diskTypeAggregatedList
     :: DiskTypeAggregatedList
 diskTypeAggregatedList =
-    DiskTypeAggregatedList
+    DiskTypeAggregatedList'
     { _dtalNextPageToken = Nothing
     , _dtalKind = "compute#diskTypeAggregatedList"
     , _dtalItems = Nothing
@@ -10413,7 +10416,7 @@ instance FromJSON DiskTypeAggregatedList where
         parseJSON
           = withObject "DiskTypeAggregatedList"
               (\ o ->
-                 DiskTypeAggregatedList <$>
+                 DiskTypeAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#diskTypeAggregatedList")
                      <*> (o .:? "items")
@@ -10421,7 +10424,7 @@ instance FromJSON DiskTypeAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON DiskTypeAggregatedList where
-        toJSON DiskTypeAggregatedList{..}
+        toJSON DiskTypeAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dtalNextPageToken,
@@ -10434,7 +10437,7 @@ instance ToJSON DiskTypeAggregatedList where
 -- individual instances should be checked for health, via HTTP.
 --
 -- /See:/ 'hTTPHealthCheck' smart constructor.
-data HTTPHealthCheck = HTTPHealthCheck
+data HTTPHealthCheck = HTTPHealthCheck'
     { _httphcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _httphcKind               :: !Text
     , _httphcRequestPath        :: !(Maybe Text)
@@ -10482,7 +10485,7 @@ data HTTPHealthCheck = HTTPHealthCheck
 hTTPHealthCheck
     :: HTTPHealthCheck
 hTTPHealthCheck =
-    HTTPHealthCheck
+    HTTPHealthCheck'
     { _httphcHealthyThreshold = Nothing
     , _httphcKind = "compute#httpHealthCheck"
     , _httphcRequestPath = Nothing
@@ -10599,7 +10602,7 @@ instance FromJSON HTTPHealthCheck where
         parseJSON
           = withObject "HTTPHealthCheck"
               (\ o ->
-                 HTTPHealthCheck <$>
+                 HTTPHealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "kind" .!= "compute#httpHealthCheck")
                      <*> (o .:? "requestPath")
@@ -10615,7 +10618,7 @@ instance FromJSON HTTPHealthCheck where
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPHealthCheck where
-        toJSON HTTPHealthCheck{..}
+        toJSON HTTPHealthCheck'{..}
           = object
               (catMaybes
                  [("healthyThreshold" .=) <$> _httphcHealthyThreshold,
@@ -10635,7 +10638,7 @@ instance ToJSON HTTPHealthCheck where
 
 --
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
-data BackendServiceGroupHealth = BackendServiceGroupHealth
+data BackendServiceGroupHealth = BackendServiceGroupHealth'
     { _bsghKind         :: !Text
     , _bsghHealthStatus :: !(Maybe [HealthStatus])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10650,7 +10653,7 @@ data BackendServiceGroupHealth = BackendServiceGroupHealth
 backendServiceGroupHealth
     :: BackendServiceGroupHealth
 backendServiceGroupHealth =
-    BackendServiceGroupHealth
+    BackendServiceGroupHealth'
     { _bsghKind = "compute#backendServiceGroupHealth"
     , _bsghHealthStatus = Nothing
     }
@@ -10671,13 +10674,13 @@ instance FromJSON BackendServiceGroupHealth where
         parseJSON
           = withObject "BackendServiceGroupHealth"
               (\ o ->
-                 BackendServiceGroupHealth <$>
+                 BackendServiceGroupHealth' <$>
                    (o .:? "kind" .!=
                       "compute#backendServiceGroupHealth")
                      <*> (o .:? "healthStatus" .!= mempty))
 
 instance ToJSON BackendServiceGroupHealth where
-        toJSON BackendServiceGroupHealth{..}
+        toJSON BackendServiceGroupHealth'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _bsghKind),
@@ -10685,7 +10688,7 @@ instance ToJSON BackendServiceGroupHealth where
 
 --
 -- /See:/ 'autoscalersScopedList' smart constructor.
-data AutoscalersScopedList = AutoscalersScopedList
+data AutoscalersScopedList = AutoscalersScopedList'
     { _aAutoscalers :: !(Maybe [Autoscaler])
     , _aWarning     :: !(Maybe AutoscalersScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10700,7 +10703,7 @@ data AutoscalersScopedList = AutoscalersScopedList
 autoscalersScopedList
     :: AutoscalersScopedList
 autoscalersScopedList =
-    AutoscalersScopedList
+    AutoscalersScopedList'
     { _aAutoscalers = Nothing
     , _aWarning = Nothing
     }
@@ -10721,12 +10724,12 @@ instance FromJSON AutoscalersScopedList where
         parseJSON
           = withObject "AutoscalersScopedList"
               (\ o ->
-                 AutoscalersScopedList <$>
+                 AutoscalersScopedList' <$>
                    (o .:? "autoscalers" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON AutoscalersScopedList where
-        toJSON AutoscalersScopedList{..}
+        toJSON AutoscalersScopedList'{..}
           = object
               (catMaybes
                  [("autoscalers" .=) <$> _aAutoscalers,
@@ -10734,7 +10737,7 @@ instance ToJSON AutoscalersScopedList where
 
 --
 -- /See:/ 'autoscalerAggregatedList' smart constructor.
-data AutoscalerAggregatedList = AutoscalerAggregatedList
+data AutoscalerAggregatedList = AutoscalerAggregatedList'
     { _aalNextPageToken :: !(Maybe Text)
     , _aalKind          :: !Text
     , _aalItems         :: !(Maybe AutoscalerAggregatedListItems)
@@ -10758,7 +10761,7 @@ data AutoscalerAggregatedList = AutoscalerAggregatedList
 autoscalerAggregatedList
     :: AutoscalerAggregatedList
 autoscalerAggregatedList =
-    AutoscalerAggregatedList
+    AutoscalerAggregatedList'
     { _aalNextPageToken = Nothing
     , _aalKind = "compute#autoscalerAggregatedList"
     , _aalItems = Nothing
@@ -10799,7 +10802,7 @@ instance FromJSON AutoscalerAggregatedList where
         parseJSON
           = withObject "AutoscalerAggregatedList"
               (\ o ->
-                 AutoscalerAggregatedList <$>
+                 AutoscalerAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#autoscalerAggregatedList")
                      <*> (o .:? "items")
@@ -10807,7 +10810,7 @@ instance FromJSON AutoscalerAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON AutoscalerAggregatedList where
-        toJSON AutoscalerAggregatedList{..}
+        toJSON AutoscalerAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aalNextPageToken,
@@ -10819,7 +10822,7 @@ instance ToJSON AutoscalerAggregatedList where
 -- | Cloud Autoscaler policy.
 --
 -- /See:/ 'autoscalingPolicy' smart constructor.
-data AutoscalingPolicy = AutoscalingPolicy
+data AutoscalingPolicy = AutoscalingPolicy'
     { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
     , _apMaxNumReplicas           :: !(Maybe (Textual Int32))
     , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
@@ -10846,7 +10849,7 @@ data AutoscalingPolicy = AutoscalingPolicy
 autoscalingPolicy
     :: AutoscalingPolicy
 autoscalingPolicy =
-    AutoscalingPolicy
+    AutoscalingPolicy'
     { _apCustomMetricUtilizations = Nothing
     , _apMaxNumReplicas = Nothing
     , _apCPUUtilization = Nothing
@@ -10912,7 +10915,7 @@ instance FromJSON AutoscalingPolicy where
         parseJSON
           = withObject "AutoscalingPolicy"
               (\ o ->
-                 AutoscalingPolicy <$>
+                 AutoscalingPolicy' <$>
                    (o .:? "customMetricUtilizations" .!= mempty) <*>
                      (o .:? "maxNumReplicas")
                      <*> (o .:? "cpuUtilization")
@@ -10921,7 +10924,7 @@ instance FromJSON AutoscalingPolicy where
                      <*> (o .:? "coolDownPeriodSec"))
 
 instance ToJSON AutoscalingPolicy where
-        toJSON AutoscalingPolicy{..}
+        toJSON AutoscalingPolicy'{..}
           = object
               (catMaybes
                  [("customMetricUtilizations" .=) <$>
@@ -10936,7 +10939,7 @@ instance ToJSON AutoscalingPolicy where
 -- | Contains a list of region resources.
 --
 -- /See:/ 'regionList' smart constructor.
-data RegionList = RegionList
+data RegionList = RegionList'
     { _regNextPageToken :: !(Maybe Text)
     , _regKind          :: !Text
     , _regItems         :: !(Maybe [Region])
@@ -10960,7 +10963,7 @@ data RegionList = RegionList
 regionList
     :: RegionList
 regionList =
-    RegionList
+    RegionList'
     { _regNextPageToken = Nothing
     , _regKind = "compute#regionList"
     , _regItems = Nothing
@@ -11004,7 +11007,7 @@ instance FromJSON RegionList where
         parseJSON
           = withObject "RegionList"
               (\ o ->
-                 RegionList <$>
+                 RegionList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#regionList")
                      <*> (o .:? "items" .!= mempty)
@@ -11012,7 +11015,7 @@ instance FromJSON RegionList where
                      <*> (o .:? "id"))
 
 instance ToJSON RegionList where
-        toJSON RegionList{..}
+        toJSON RegionList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _regNextPageToken,
@@ -11024,7 +11027,7 @@ instance ToJSON RegionList where
 -- | Contains a list of VpnTunnel resources.
 --
 -- /See:/ 'vpnTunnelList' smart constructor.
-data VPNTunnelList = VPNTunnelList
+data VPNTunnelList = VPNTunnelList'
     { _vtlNextPageToken :: !(Maybe Text)
     , _vtlKind          :: !Text
     , _vtlItems         :: !(Maybe [VPNTunnel])
@@ -11048,7 +11051,7 @@ data VPNTunnelList = VPNTunnelList
 vpnTunnelList
     :: VPNTunnelList
 vpnTunnelList =
-    VPNTunnelList
+    VPNTunnelList'
     { _vtlNextPageToken = Nothing
     , _vtlKind = "compute#vpnTunnelList"
     , _vtlItems = Nothing
@@ -11092,7 +11095,7 @@ instance FromJSON VPNTunnelList where
         parseJSON
           = withObject "VPNTunnelList"
               (\ o ->
-                 VPNTunnelList <$>
+                 VPNTunnelList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#vpnTunnelList")
                      <*> (o .:? "items" .!= mempty)
@@ -11100,7 +11103,7 @@ instance FromJSON VPNTunnelList where
                      <*> (o .:? "id"))
 
 instance ToJSON VPNTunnelList where
-        toJSON VPNTunnelList{..}
+        toJSON VPNTunnelList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _vtlNextPageToken,
@@ -11111,7 +11114,7 @@ instance ToJSON VPNTunnelList where
 
 --
 -- /See:/ 'machineTypeScratchDisksItem' smart constructor.
-newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem
+newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem'
     { _mtsdiDiskGb :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -11123,7 +11126,7 @@ newtype MachineTypeScratchDisksItem = MachineTypeScratchDisksItem
 machineTypeScratchDisksItem
     :: MachineTypeScratchDisksItem
 machineTypeScratchDisksItem =
-    MachineTypeScratchDisksItem
+    MachineTypeScratchDisksItem'
     { _mtsdiDiskGb = Nothing
     }
 
@@ -11137,15 +11140,15 @@ instance FromJSON MachineTypeScratchDisksItem where
         parseJSON
           = withObject "MachineTypeScratchDisksItem"
               (\ o ->
-                 MachineTypeScratchDisksItem <$> (o .:? "diskGb"))
+                 MachineTypeScratchDisksItem' <$> (o .:? "diskGb"))
 
 instance ToJSON MachineTypeScratchDisksItem where
-        toJSON MachineTypeScratchDisksItem{..}
+        toJSON MachineTypeScratchDisksItem'{..}
           = object (catMaybes [("diskGb" .=) <$> _mtsdiDiskGb])
 
 --
 -- /See:/ 'subnetworksScopedListWarningDataItem' smart constructor.
-data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem
+data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem'
     { _sslwdiValue :: !(Maybe Text)
     , _sslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11160,7 +11163,7 @@ data SubnetworksScopedListWarningDataItem = SubnetworksScopedListWarningDataItem
 subnetworksScopedListWarningDataItem
     :: SubnetworksScopedListWarningDataItem
 subnetworksScopedListWarningDataItem =
-    SubnetworksScopedListWarningDataItem
+    SubnetworksScopedListWarningDataItem'
     { _sslwdiValue = Nothing
     , _sslwdiKey = Nothing
     }
@@ -11186,12 +11189,12 @@ instance FromJSON
         parseJSON
           = withObject "SubnetworksScopedListWarningDataItem"
               (\ o ->
-                 SubnetworksScopedListWarningDataItem <$>
+                 SubnetworksScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON SubnetworksScopedListWarningDataItem
          where
-        toJSON SubnetworksScopedListWarningDataItem{..}
+        toJSON SubnetworksScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _sslwdiValue,
@@ -11199,7 +11202,7 @@ instance ToJSON SubnetworksScopedListWarningDataItem
 
 --
 -- /See:/ 'machineTypesScopedList' smart constructor.
-data MachineTypesScopedList = MachineTypesScopedList
+data MachineTypesScopedList = MachineTypesScopedList'
     { _mtslMachineTypes :: !(Maybe [MachineType])
     , _mtslWarning      :: !(Maybe MachineTypesScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11214,7 +11217,7 @@ data MachineTypesScopedList = MachineTypesScopedList
 machineTypesScopedList
     :: MachineTypesScopedList
 machineTypesScopedList =
-    MachineTypesScopedList
+    MachineTypesScopedList'
     { _mtslMachineTypes = Nothing
     , _mtslWarning = Nothing
     }
@@ -11237,12 +11240,12 @@ instance FromJSON MachineTypesScopedList where
         parseJSON
           = withObject "MachineTypesScopedList"
               (\ o ->
-                 MachineTypesScopedList <$>
+                 MachineTypesScopedList' <$>
                    (o .:? "machineTypes" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON MachineTypesScopedList where
-        toJSON MachineTypesScopedList{..}
+        toJSON MachineTypesScopedList'{..}
           = object
               (catMaybes
                  [("machineTypes" .=) <$> _mtslMachineTypes,
@@ -11251,7 +11254,7 @@ instance ToJSON MachineTypesScopedList where
 -- | A Subnetwork resource.
 --
 -- /See:/ 'subnetwork' smart constructor.
-data Subnetwork = Subnetwork
+data Subnetwork = Subnetwork'
     { _subKind              :: !Text
     , _subNetwork           :: !(Maybe Text)
     , _subGatewayAddress    :: !(Maybe Text)
@@ -11290,7 +11293,7 @@ data Subnetwork = Subnetwork
 subnetwork
     :: Subnetwork
 subnetwork =
-    Subnetwork
+    Subnetwork'
     { _subKind = "compute#subnetwork"
     , _subNetwork = Nothing
     , _subGatewayAddress = Nothing
@@ -11375,7 +11378,7 @@ instance FromJSON Subnetwork where
         parseJSON
           = withObject "Subnetwork"
               (\ o ->
-                 Subnetwork <$>
+                 Subnetwork' <$>
                    (o .:? "kind" .!= "compute#subnetwork") <*>
                      (o .:? "network")
                      <*> (o .:? "gatewayAddress")
@@ -11388,7 +11391,7 @@ instance FromJSON Subnetwork where
                      <*> (o .:? "description"))
 
 instance ToJSON Subnetwork where
-        toJSON Subnetwork{..}
+        toJSON Subnetwork'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _subKind),
@@ -11403,7 +11406,7 @@ instance ToJSON Subnetwork where
 
 --
 -- /See:/ 'machineTypeAggregatedList' smart constructor.
-data MachineTypeAggregatedList = MachineTypeAggregatedList
+data MachineTypeAggregatedList = MachineTypeAggregatedList'
     { _mtalNextPageToken :: !(Maybe Text)
     , _mtalKind          :: !Text
     , _mtalItems         :: !(Maybe MachineTypeAggregatedListItems)
@@ -11427,7 +11430,7 @@ data MachineTypeAggregatedList = MachineTypeAggregatedList
 machineTypeAggregatedList
     :: MachineTypeAggregatedList
 machineTypeAggregatedList =
-    MachineTypeAggregatedList
+    MachineTypeAggregatedList'
     { _mtalNextPageToken = Nothing
     , _mtalKind = "compute#machineTypeAggregatedList"
     , _mtalItems = Nothing
@@ -11469,7 +11472,7 @@ instance FromJSON MachineTypeAggregatedList where
         parseJSON
           = withObject "MachineTypeAggregatedList"
               (\ o ->
-                 MachineTypeAggregatedList <$>
+                 MachineTypeAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#machineTypeAggregatedList")
@@ -11478,7 +11481,7 @@ instance FromJSON MachineTypeAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON MachineTypeAggregatedList where
-        toJSON MachineTypeAggregatedList{..}
+        toJSON MachineTypeAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mtalNextPageToken,
@@ -11490,7 +11493,7 @@ instance ToJSON MachineTypeAggregatedList where
 -- | A DiskType resource.
 --
 -- /See:/ 'diskType' smart constructor.
-data DiskType = DiskType
+data DiskType = DiskType'
     { _dtKind              :: !Text
     , _dtZone              :: !(Maybe Text)
     , _dtSelfLink          :: !(Maybe Text)
@@ -11529,7 +11532,7 @@ data DiskType = DiskType
 diskType
     :: DiskType
 diskType =
-    DiskType
+    DiskType'
     { _dtKind = "compute#diskType"
     , _dtZone = Nothing
     , _dtSelfLink = Nothing
@@ -11602,7 +11605,7 @@ instance FromJSON DiskType where
         parseJSON
           = withObject "DiskType"
               (\ o ->
-                 DiskType <$>
+                 DiskType' <$>
                    (o .:? "kind" .!= "compute#diskType") <*>
                      (o .:? "zone")
                      <*> (o .:? "selfLink")
@@ -11615,7 +11618,7 @@ instance FromJSON DiskType where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON DiskType where
-        toJSON DiskType{..}
+        toJSON DiskType'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dtKind), ("zone" .=) <$> _dtZone,
@@ -11631,7 +11634,7 @@ instance ToJSON DiskType where
 -- | Message representing the validation result for a UrlMap.
 --
 -- /See:/ 'urlMapValidationResult' smart constructor.
-data URLMapValidationResult = URLMapValidationResult
+data URLMapValidationResult = URLMapValidationResult'
     { _umvrLoadErrors    :: !(Maybe [Text])
     , _umvrLoadSucceeded :: !(Maybe Bool)
     , _umvrTestPassed    :: !(Maybe Bool)
@@ -11652,7 +11655,7 @@ data URLMapValidationResult = URLMapValidationResult
 urlMapValidationResult
     :: URLMapValidationResult
 urlMapValidationResult =
-    URLMapValidationResult
+    URLMapValidationResult'
     { _umvrLoadErrors = Nothing
     , _umvrLoadSucceeded = Nothing
     , _umvrTestPassed = Nothing
@@ -11691,14 +11694,14 @@ instance FromJSON URLMapValidationResult where
         parseJSON
           = withObject "URLMapValidationResult"
               (\ o ->
-                 URLMapValidationResult <$>
+                 URLMapValidationResult' <$>
                    (o .:? "loadErrors" .!= mempty) <*>
                      (o .:? "loadSucceeded")
                      <*> (o .:? "testPassed")
                      <*> (o .:? "testFailures" .!= mempty))
 
 instance ToJSON URLMapValidationResult where
-        toJSON URLMapValidationResult{..}
+        toJSON URLMapValidationResult'{..}
           = object
               (catMaybes
                  [("loadErrors" .=) <$> _umvrLoadErrors,
@@ -11709,7 +11712,7 @@ instance ToJSON URLMapValidationResult where
 -- | A metadata key\/value entry.
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata
+data Metadata = Metadata'
     { _mKind        :: !Text
     , _mFingerprint :: !(Maybe (Textual Word8))
     , _mItems       :: !(Maybe [MetadataItemsItem])
@@ -11727,7 +11730,7 @@ data Metadata = Metadata
 metadata
     :: Metadata
 metadata =
-    Metadata
+    Metadata'
     { _mKind = "compute#metadata"
     , _mFingerprint = Nothing
     , _mItems = Nothing
@@ -11759,13 +11762,13 @@ instance FromJSON Metadata where
         parseJSON
           = withObject "Metadata"
               (\ o ->
-                 Metadata <$>
+                 Metadata' <$>
                    (o .:? "kind" .!= "compute#metadata") <*>
                      (o .:? "fingerprint")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Metadata where
-        toJSON Metadata{..}
+        toJSON Metadata'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mKind),
@@ -11774,7 +11777,7 @@ instance ToJSON Metadata where
 
 --
 -- /See:/ 'routeWarningsItem' smart constructor.
-data RouteWarningsItem = RouteWarningsItem
+data RouteWarningsItem = RouteWarningsItem'
     { _rwiData    :: !(Maybe [RouteWarningsItemDataItem])
     , _rwiCode    :: !(Maybe RouteWarningsItemCode)
     , _rwiMessage :: !(Maybe Text)
@@ -11792,7 +11795,7 @@ data RouteWarningsItem = RouteWarningsItem
 routeWarningsItem
     :: RouteWarningsItem
 routeWarningsItem =
-    RouteWarningsItem
+    RouteWarningsItem'
     { _rwiData = Nothing
     , _rwiCode = Nothing
     , _rwiMessage = Nothing
@@ -11820,12 +11823,12 @@ instance FromJSON RouteWarningsItem where
         parseJSON
           = withObject "RouteWarningsItem"
               (\ o ->
-                 RouteWarningsItem <$>
+                 RouteWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON RouteWarningsItem where
-        toJSON RouteWarningsItem{..}
+        toJSON RouteWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
@@ -11833,7 +11836,7 @@ instance ToJSON RouteWarningsItem where
 
 --
 -- /See:/ 'machineTypesScopedListWarningDataItem' smart constructor.
-data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataItem
+data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataItem'
     { _mtslwdiValue :: !(Maybe Text)
     , _mtslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11848,7 +11851,7 @@ data MachineTypesScopedListWarningDataItem = MachineTypesScopedListWarningDataIt
 machineTypesScopedListWarningDataItem
     :: MachineTypesScopedListWarningDataItem
 machineTypesScopedListWarningDataItem =
-    MachineTypesScopedListWarningDataItem
+    MachineTypesScopedListWarningDataItem'
     { _mtslwdiValue = Nothing
     , _mtslwdiKey = Nothing
     }
@@ -11874,12 +11877,12 @@ instance FromJSON
         parseJSON
           = withObject "MachineTypesScopedListWarningDataItem"
               (\ o ->
-                 MachineTypesScopedListWarningDataItem <$>
+                 MachineTypesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON MachineTypesScopedListWarningDataItem
          where
-        toJSON MachineTypesScopedListWarningDataItem{..}
+        toJSON MachineTypesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _mtslwdiValue,
@@ -11887,7 +11890,7 @@ instance ToJSON MachineTypesScopedListWarningDataItem
 
 --
 -- /See:/ 'diskTypesScopedListWarningDataItem' smart constructor.
-data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem
+data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem'
     { _dtslwdiValue :: !(Maybe Text)
     , _dtslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11902,7 +11905,7 @@ data DiskTypesScopedListWarningDataItem = DiskTypesScopedListWarningDataItem
 diskTypesScopedListWarningDataItem
     :: DiskTypesScopedListWarningDataItem
 diskTypesScopedListWarningDataItem =
-    DiskTypesScopedListWarningDataItem
+    DiskTypesScopedListWarningDataItem'
     { _dtslwdiValue = Nothing
     , _dtslwdiKey = Nothing
     }
@@ -11928,12 +11931,12 @@ instance FromJSON DiskTypesScopedListWarningDataItem
         parseJSON
           = withObject "DiskTypesScopedListWarningDataItem"
               (\ o ->
-                 DiskTypesScopedListWarningDataItem <$>
+                 DiskTypesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON DiskTypesScopedListWarningDataItem
          where
-        toJSON DiskTypesScopedListWarningDataItem{..}
+        toJSON DiskTypesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dtslwdiValue,
@@ -11942,7 +11945,7 @@ instance ToJSON DiskTypesScopedListWarningDataItem
 -- | A TargetHttpProxy resource. This resource defines an HTTP proxy.
 --
 -- /See:/ 'targetHTTPProxy' smart constructor.
-data TargetHTTPProxy = TargetHTTPProxy
+data TargetHTTPProxy = TargetHTTPProxy'
     { _thttppURLMap            :: !(Maybe Text)
     , _thttppKind              :: !Text
     , _thttppSelfLink          :: !(Maybe Text)
@@ -11972,7 +11975,7 @@ data TargetHTTPProxy = TargetHTTPProxy
 targetHTTPProxy
     :: TargetHTTPProxy
 targetHTTPProxy =
-    TargetHTTPProxy
+    TargetHTTPProxy'
     { _thttppURLMap = Nothing
     , _thttppKind = "compute#targetHttpProxy"
     , _thttppSelfLink = Nothing
@@ -12035,7 +12038,7 @@ instance FromJSON TargetHTTPProxy where
         parseJSON
           = withObject "TargetHTTPProxy"
               (\ o ->
-                 TargetHTTPProxy <$>
+                 TargetHTTPProxy' <$>
                    (o .:? "urlMap") <*>
                      (o .:? "kind" .!= "compute#targetHttpProxy")
                      <*> (o .:? "selfLink")
@@ -12045,7 +12048,7 @@ instance FromJSON TargetHTTPProxy where
                      <*> (o .:? "description"))
 
 instance ToJSON TargetHTTPProxy where
-        toJSON TargetHTTPProxy{..}
+        toJSON TargetHTTPProxy'{..}
           = object
               (catMaybes
                  [("urlMap" .=) <$> _thttppURLMap,
@@ -12060,7 +12063,7 @@ instance ToJSON TargetHTTPProxy where
 -- | A Machine Type resource.
 --
 -- /See:/ 'machineType' smart constructor.
-data MachineType = MachineType
+data MachineType = MachineType'
     { _mtKind                         :: !Text
     , _mtImageSpaceGb                 :: !(Maybe (Textual Int32))
     , _mtZone                         :: !(Maybe Text)
@@ -12111,7 +12114,7 @@ data MachineType = MachineType
 machineType
     :: MachineType
 machineType =
-    MachineType
+    MachineType'
     { _mtKind = "compute#machineType"
     , _mtImageSpaceGb = Nothing
     , _mtZone = Nothing
@@ -12219,7 +12222,7 @@ instance FromJSON MachineType where
         parseJSON
           = withObject "MachineType"
               (\ o ->
-                 MachineType <$>
+                 MachineType' <$>
                    (o .:? "kind" .!= "compute#machineType") <*>
                      (o .:? "imageSpaceGb")
                      <*> (o .:? "zone")
@@ -12236,7 +12239,7 @@ instance FromJSON MachineType where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON MachineType where
-        toJSON MachineType{..}
+        toJSON MachineType'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mtKind),
@@ -12260,7 +12263,7 @@ instance ToJSON MachineType where
 -- operation, this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12272,7 +12275,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -12288,17 +12291,17 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | Informational warning which replaces the list of addresses when the list
 -- is empty.
 --
 -- /See:/ 'targetInstancesScopedListWarning' smart constructor.
-data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning
+data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning'
     { _tislwData    :: !(Maybe [TargetInstancesScopedListWarningDataItem])
     , _tislwCode    :: !(Maybe TargetInstancesScopedListWarningCode)
     , _tislwMessage :: !(Maybe Text)
@@ -12316,7 +12319,7 @@ data TargetInstancesScopedListWarning = TargetInstancesScopedListWarning
 targetInstancesScopedListWarning
     :: TargetInstancesScopedListWarning
 targetInstancesScopedListWarning =
-    TargetInstancesScopedListWarning
+    TargetInstancesScopedListWarning'
     { _tislwData = Nothing
     , _tislwCode = Nothing
     , _tislwMessage = Nothing
@@ -12347,13 +12350,13 @@ instance FromJSON TargetInstancesScopedListWarning
         parseJSON
           = withObject "TargetInstancesScopedListWarning"
               (\ o ->
-                 TargetInstancesScopedListWarning <$>
+                 TargetInstancesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON TargetInstancesScopedListWarning
          where
-        toJSON TargetInstancesScopedListWarning{..}
+        toJSON TargetInstancesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _tislwData,
@@ -12362,7 +12365,7 @@ instance ToJSON TargetInstancesScopedListWarning
 
 --
 -- /See:/ 'subnetworkAggregatedList' smart constructor.
-data SubnetworkAggregatedList = SubnetworkAggregatedList
+data SubnetworkAggregatedList = SubnetworkAggregatedList'
     { _salNextPageToken :: !(Maybe Text)
     , _salKind          :: !Text
     , _salItems         :: !(Maybe SubnetworkAggregatedListItems)
@@ -12386,7 +12389,7 @@ data SubnetworkAggregatedList = SubnetworkAggregatedList
 subnetworkAggregatedList
     :: SubnetworkAggregatedList
 subnetworkAggregatedList =
-    SubnetworkAggregatedList
+    SubnetworkAggregatedList'
     { _salNextPageToken = Nothing
     , _salKind = "compute#subnetworkAggregatedList"
     , _salItems = Nothing
@@ -12427,7 +12430,7 @@ instance FromJSON SubnetworkAggregatedList where
         parseJSON
           = withObject "SubnetworkAggregatedList"
               (\ o ->
-                 SubnetworkAggregatedList <$>
+                 SubnetworkAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#subnetworkAggregatedList")
                      <*> (o .:? "items")
@@ -12435,7 +12438,7 @@ instance FromJSON SubnetworkAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON SubnetworkAggregatedList where
-        toJSON SubnetworkAggregatedList{..}
+        toJSON SubnetworkAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _salNextPageToken,
@@ -12446,7 +12449,7 @@ instance ToJSON SubnetworkAggregatedList where
 
 --
 -- /See:/ 'autoscalersScopedListWarningDataItem' smart constructor.
-data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem
+data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem'
     { _aValue :: !(Maybe Text)
     , _aKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -12461,7 +12464,7 @@ data AutoscalersScopedListWarningDataItem = AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem
     :: AutoscalersScopedListWarningDataItem
 autoscalersScopedListWarningDataItem =
-    AutoscalersScopedListWarningDataItem
+    AutoscalersScopedListWarningDataItem'
     { _aValue = Nothing
     , _aKey = Nothing
     }
@@ -12485,19 +12488,19 @@ instance FromJSON
         parseJSON
           = withObject "AutoscalersScopedListWarningDataItem"
               (\ o ->
-                 AutoscalersScopedListWarningDataItem <$>
+                 AutoscalersScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON AutoscalersScopedListWarningDataItem
          where
-        toJSON AutoscalersScopedListWarningDataItem{..}
+        toJSON AutoscalersScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _aValue, ("key" .=) <$> _aKey])
 
 --
 -- /See:/ 'instanceGroupsListInstances' smart constructor.
-data InstanceGroupsListInstances = InstanceGroupsListInstances
+data InstanceGroupsListInstances = InstanceGroupsListInstances'
     { _igliNextPageToken :: !(Maybe Text)
     , _igliKind          :: !Text
     , _igliItems         :: !(Maybe [InstanceWithNamedPorts])
@@ -12521,7 +12524,7 @@ data InstanceGroupsListInstances = InstanceGroupsListInstances
 instanceGroupsListInstances
     :: InstanceGroupsListInstances
 instanceGroupsListInstances =
-    InstanceGroupsListInstances
+    InstanceGroupsListInstances'
     { _igliNextPageToken = Nothing
     , _igliKind = "compute#instanceGroupsListInstances"
     , _igliItems = Nothing
@@ -12567,7 +12570,7 @@ instance FromJSON InstanceGroupsListInstances where
         parseJSON
           = withObject "InstanceGroupsListInstances"
               (\ o ->
-                 InstanceGroupsListInstances <$>
+                 InstanceGroupsListInstances' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#instanceGroupsListInstances")
@@ -12576,7 +12579,7 @@ instance FromJSON InstanceGroupsListInstances where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceGroupsListInstances where
-        toJSON InstanceGroupsListInstances{..}
+        toJSON InstanceGroupsListInstances'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _igliNextPageToken,
@@ -12591,7 +12594,7 @@ instance ToJSON InstanceGroupsListInstances where
 -- information, read Autoscaling Groups of Instances.
 --
 -- /See:/ 'autoscaler' smart constructor.
-data Autoscaler = Autoscaler
+data Autoscaler = Autoscaler'
     { _aaKind              :: !Text
     , _aaZone              :: !(Maybe Text)
     , _aaSelfLink          :: !(Maybe Text)
@@ -12627,7 +12630,7 @@ data Autoscaler = Autoscaler
 autoscaler
     :: Autoscaler
 autoscaler =
-    Autoscaler
+    Autoscaler'
     { _aaKind = "compute#autoscaler"
     , _aaZone = Nothing
     , _aaSelfLink = Nothing
@@ -12701,7 +12704,7 @@ instance FromJSON Autoscaler where
         parseJSON
           = withObject "Autoscaler"
               (\ o ->
-                 Autoscaler <$>
+                 Autoscaler' <$>
                    (o .:? "kind" .!= "compute#autoscaler") <*>
                      (o .:? "zone")
                      <*> (o .:? "selfLink")
@@ -12713,7 +12716,7 @@ instance FromJSON Autoscaler where
                      <*> (o .:? "target"))
 
 instance ToJSON Autoscaler where
-        toJSON Autoscaler{..}
+        toJSON Autoscaler'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aaKind), ("zone" .=) <$> _aaZone,
@@ -12729,7 +12732,7 @@ instance ToJSON Autoscaler where
 -- when the list is empty.
 --
 -- /See:/ 'disksScopedListWarning' smart constructor.
-data DisksScopedListWarning = DisksScopedListWarning
+data DisksScopedListWarning = DisksScopedListWarning'
     { _dslwData    :: !(Maybe [DisksScopedListWarningDataItem])
     , _dslwCode    :: !(Maybe DisksScopedListWarningCode)
     , _dslwMessage :: !(Maybe Text)
@@ -12747,7 +12750,7 @@ data DisksScopedListWarning = DisksScopedListWarning
 disksScopedListWarning
     :: DisksScopedListWarning
 disksScopedListWarning =
-    DisksScopedListWarning
+    DisksScopedListWarning'
     { _dslwData = Nothing
     , _dslwCode = Nothing
     , _dslwMessage = Nothing
@@ -12776,12 +12779,12 @@ instance FromJSON DisksScopedListWarning where
         parseJSON
           = withObject "DisksScopedListWarning"
               (\ o ->
-                 DisksScopedListWarning <$>
+                 DisksScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON DisksScopedListWarning where
-        toJSON DisksScopedListWarning{..}
+        toJSON DisksScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _dslwData,
@@ -12791,7 +12794,7 @@ instance ToJSON DisksScopedListWarning where
 -- | A map of scoped target vpn gateway lists.
 --
 -- /See:/ 'targetVPNGatewayAggregatedListItems' smart constructor.
-newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems
+newtype TargetVPNGatewayAggregatedListItems = TargetVPNGatewayAggregatedListItems'
     { _tvgaliAddtional :: HashMap Text TargetVPNGatewaysScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -12804,7 +12807,7 @@ targetVPNGatewayAggregatedListItems
     :: HashMap Text TargetVPNGatewaysScopedList -- ^ 'tvgaliAddtional'
     -> TargetVPNGatewayAggregatedListItems
 targetVPNGatewayAggregatedListItems pTvgaliAddtional_ =
-    TargetVPNGatewayAggregatedListItems
+    TargetVPNGatewayAggregatedListItems'
     { _tvgaliAddtional = _Coerce # pTvgaliAddtional_
     }
 
@@ -12821,7 +12824,7 @@ instance FromJSON TargetVPNGatewayAggregatedListItems
         parseJSON
           = withObject "TargetVPNGatewayAggregatedListItems"
               (\ o ->
-                 TargetVPNGatewayAggregatedListItems <$>
+                 TargetVPNGatewayAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON TargetVPNGatewayAggregatedListItems
@@ -12832,7 +12835,7 @@ instance ToJSON TargetVPNGatewayAggregatedListItems
 -- is empty.
 --
 -- /See:/ 'targetPoolsScopedListWarning' smart constructor.
-data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning
+data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning'
     { _tpslwData    :: !(Maybe [TargetPoolsScopedListWarningDataItem])
     , _tpslwCode    :: !(Maybe TargetPoolsScopedListWarningCode)
     , _tpslwMessage :: !(Maybe Text)
@@ -12850,7 +12853,7 @@ data TargetPoolsScopedListWarning = TargetPoolsScopedListWarning
 targetPoolsScopedListWarning
     :: TargetPoolsScopedListWarning
 targetPoolsScopedListWarning =
-    TargetPoolsScopedListWarning
+    TargetPoolsScopedListWarning'
     { _tpslwData = Nothing
     , _tpslwCode = Nothing
     , _tpslwMessage = Nothing
@@ -12880,12 +12883,12 @@ instance FromJSON TargetPoolsScopedListWarning where
         parseJSON
           = withObject "TargetPoolsScopedListWarning"
               (\ o ->
-                 TargetPoolsScopedListWarning <$>
+                 TargetPoolsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON TargetPoolsScopedListWarning where
-        toJSON TargetPoolsScopedListWarning{..}
+        toJSON TargetPoolsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _tpslwData,
@@ -12894,7 +12897,7 @@ instance ToJSON TargetPoolsScopedListWarning where
 
 --
 -- /See:/ 'healthStatus' smart constructor.
-data HealthStatus = HealthStatus
+data HealthStatus = HealthStatus'
     { _hsIPAddress   :: !(Maybe Text)
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
     , _hsPort        :: !(Maybe (Textual Int32))
@@ -12915,7 +12918,7 @@ data HealthStatus = HealthStatus
 healthStatus
     :: HealthStatus
 healthStatus =
-    HealthStatus
+    HealthStatus'
     { _hsIPAddress = Nothing
     , _hsHealthState = Nothing
     , _hsPort = Nothing
@@ -12948,13 +12951,13 @@ instance FromJSON HealthStatus where
         parseJSON
           = withObject "HealthStatus"
               (\ o ->
-                 HealthStatus <$>
+                 HealthStatus' <$>
                    (o .:? "ipAddress") <*> (o .:? "healthState") <*>
                      (o .:? "port")
                      <*> (o .:? "instance"))
 
 instance ToJSON HealthStatus where
-        toJSON HealthStatus{..}
+        toJSON HealthStatus'{..}
           = object
               (catMaybes
                  [("ipAddress" .=) <$> _hsIPAddress,
@@ -12965,7 +12968,7 @@ instance ToJSON HealthStatus where
 -- | Region resource.
 --
 -- /See:/ 'region' smart constructor.
-data Region = Region
+data Region = Region'
     { _rrStatus            :: !(Maybe RegionStatus)
     , _rrZones             :: !(Maybe [Text])
     , _rrKind              :: !Text
@@ -13004,7 +13007,7 @@ data Region = Region
 region
     :: Region
 region =
-    Region
+    Region'
     { _rrStatus = Nothing
     , _rrZones = Nothing
     , _rrKind = "compute#region"
@@ -13076,7 +13079,7 @@ instance FromJSON Region where
         parseJSON
           = withObject "Region"
               (\ o ->
-                 Region <$>
+                 Region' <$>
                    (o .:? "status") <*> (o .:? "zones" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#region")
                      <*> (o .:? "selfLink")
@@ -13088,7 +13091,7 @@ instance FromJSON Region where
                      <*> (o .:? "deprecated"))
 
 instance ToJSON Region where
-        toJSON Region{..}
+        toJSON Region'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _rrStatus,
@@ -13102,7 +13105,7 @@ instance ToJSON Region where
 
 --
 -- /See:/ 'vpnTunnel' smart constructor.
-data VPNTunnel = VPNTunnel
+data VPNTunnel = VPNTunnel'
     { _vtDetailedStatus       :: !(Maybe Text)
     , _vtStatus               :: !(Maybe VPNTunnelStatus)
     , _vtLocalTrafficSelector :: !(Maybe [Text])
@@ -13156,7 +13159,7 @@ data VPNTunnel = VPNTunnel
 vpnTunnel
     :: VPNTunnel
 vpnTunnel =
-    VPNTunnel
+    VPNTunnel'
     { _vtDetailedStatus = Nothing
     , _vtStatus = Nothing
     , _vtLocalTrafficSelector = Nothing
@@ -13273,7 +13276,7 @@ instance FromJSON VPNTunnel where
         parseJSON
           = withObject "VPNTunnel"
               (\ o ->
-                 VPNTunnel <$>
+                 VPNTunnel' <$>
                    (o .:? "detailedStatus") <*> (o .:? "status") <*>
                      (o .:? "localTrafficSelector" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#vpnTunnel")
@@ -13290,7 +13293,7 @@ instance FromJSON VPNTunnel where
                      <*> (o .:? "description"))
 
 instance ToJSON VPNTunnel where
-        toJSON VPNTunnel{..}
+        toJSON VPNTunnel'{..}
           = object
               (catMaybes
                  [("detailedStatus" .=) <$> _vtDetailedStatus,
@@ -13314,7 +13317,7 @@ instance ToJSON VPNTunnel where
 -- operations when the list is empty.
 --
 -- /See:/ 'operationsScopedListWarning' smart constructor.
-data OperationsScopedListWarning = OperationsScopedListWarning
+data OperationsScopedListWarning = OperationsScopedListWarning'
     { _oslwData    :: !(Maybe [OperationsScopedListWarningDataItem])
     , _oslwCode    :: !(Maybe OperationsScopedListWarningCode)
     , _oslwMessage :: !(Maybe Text)
@@ -13332,7 +13335,7 @@ data OperationsScopedListWarning = OperationsScopedListWarning
 operationsScopedListWarning
     :: OperationsScopedListWarning
 operationsScopedListWarning =
-    OperationsScopedListWarning
+    OperationsScopedListWarning'
     { _oslwData = Nothing
     , _oslwCode = Nothing
     , _oslwMessage = Nothing
@@ -13361,12 +13364,12 @@ instance FromJSON OperationsScopedListWarning where
         parseJSON
           = withObject "OperationsScopedListWarning"
               (\ o ->
-                 OperationsScopedListWarning <$>
+                 OperationsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationsScopedListWarning where
-        toJSON OperationsScopedListWarning{..}
+        toJSON OperationsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _oslwData,
@@ -13376,7 +13379,7 @@ instance ToJSON OperationsScopedListWarning where
 -- | Sets the scheduling options for an Instance.
 --
 -- /See:/ 'scheduling' smart constructor.
-data Scheduling = Scheduling
+data Scheduling = Scheduling'
     { _sAutomaticRestart  :: !(Maybe Bool)
     , _sOnHostMaintenance :: !(Maybe SchedulingOnHostMaintenance)
     , _sPreemptible       :: !(Maybe Bool)
@@ -13394,7 +13397,7 @@ data Scheduling = Scheduling
 scheduling
     :: Scheduling
 scheduling =
-    Scheduling
+    Scheduling'
     { _sAutomaticRestart = Nothing
     , _sOnHostMaintenance = Nothing
     , _sPreemptible = Nothing
@@ -13427,13 +13430,13 @@ instance FromJSON Scheduling where
         parseJSON
           = withObject "Scheduling"
               (\ o ->
-                 Scheduling <$>
+                 Scheduling' <$>
                    (o .:? "automaticRestart") <*>
                      (o .:? "onHostMaintenance")
                      <*> (o .:? "preemptible"))
 
 instance ToJSON Scheduling where
-        toJSON Scheduling{..}
+        toJSON Scheduling'{..}
           = object
               (catMaybes
                  [("automaticRestart" .=) <$> _sAutomaticRestart,
@@ -13442,7 +13445,7 @@ instance ToJSON Scheduling where
 
 --
 -- /See:/ 'vpnTunnelsScopedListWarningDataItem' smart constructor.
-data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem
+data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem'
     { _vtslwdiValue :: !(Maybe Text)
     , _vtslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13457,7 +13460,7 @@ data VPNTunnelsScopedListWarningDataItem = VPNTunnelsScopedListWarningDataItem
 vpnTunnelsScopedListWarningDataItem
     :: VPNTunnelsScopedListWarningDataItem
 vpnTunnelsScopedListWarningDataItem =
-    VPNTunnelsScopedListWarningDataItem
+    VPNTunnelsScopedListWarningDataItem'
     { _vtslwdiValue = Nothing
     , _vtslwdiKey = Nothing
     }
@@ -13483,12 +13486,12 @@ instance FromJSON VPNTunnelsScopedListWarningDataItem
         parseJSON
           = withObject "VPNTunnelsScopedListWarningDataItem"
               (\ o ->
-                 VPNTunnelsScopedListWarningDataItem <$>
+                 VPNTunnelsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON VPNTunnelsScopedListWarningDataItem
          where
-        toJSON VPNTunnelsScopedListWarningDataItem{..}
+        toJSON VPNTunnelsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _vtslwdiValue,
@@ -13497,7 +13500,7 @@ instance ToJSON VPNTunnelsScopedListWarningDataItem
 -- | Contains a list of Subnetwork resources.
 --
 -- /See:/ 'subnetworkList' smart constructor.
-data SubnetworkList = SubnetworkList
+data SubnetworkList = SubnetworkList'
     { _slNextPageToken :: !(Maybe Text)
     , _slKind          :: !Text
     , _slItems         :: !(Maybe [Subnetwork])
@@ -13521,7 +13524,7 @@ data SubnetworkList = SubnetworkList
 subnetworkList
     :: SubnetworkList
 subnetworkList =
-    SubnetworkList
+    SubnetworkList'
     { _slNextPageToken = Nothing
     , _slKind = "compute#subnetworkList"
     , _slItems = Nothing
@@ -13564,7 +13567,7 @@ instance FromJSON SubnetworkList where
         parseJSON
           = withObject "SubnetworkList"
               (\ o ->
-                 SubnetworkList <$>
+                 SubnetworkList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#subnetworkList")
                      <*> (o .:? "items" .!= mempty)
@@ -13572,7 +13575,7 @@ instance FromJSON SubnetworkList where
                      <*> (o .:? "id"))
 
 instance ToJSON SubnetworkList where
-        toJSON SubnetworkList{..}
+        toJSON SubnetworkList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _slNextPageToken,
@@ -13584,7 +13587,7 @@ instance ToJSON SubnetworkList where
 -- the list is empty.
 --
 -- /See:/ 'forwardingRulesScopedListWarning' smart constructor.
-data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning
+data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning'
     { _frslwData    :: !(Maybe [ForwardingRulesScopedListWarningDataItem])
     , _frslwCode    :: !(Maybe ForwardingRulesScopedListWarningCode)
     , _frslwMessage :: !(Maybe Text)
@@ -13602,7 +13605,7 @@ data ForwardingRulesScopedListWarning = ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarning
     :: ForwardingRulesScopedListWarning
 forwardingRulesScopedListWarning =
-    ForwardingRulesScopedListWarning
+    ForwardingRulesScopedListWarning'
     { _frslwData = Nothing
     , _frslwCode = Nothing
     , _frslwMessage = Nothing
@@ -13633,13 +13636,13 @@ instance FromJSON ForwardingRulesScopedListWarning
         parseJSON
           = withObject "ForwardingRulesScopedListWarning"
               (\ o ->
-                 ForwardingRulesScopedListWarning <$>
+                 ForwardingRulesScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ForwardingRulesScopedListWarning
          where
-        toJSON ForwardingRulesScopedListWarning{..}
+        toJSON ForwardingRulesScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _frslwData,
@@ -13649,7 +13652,7 @@ instance ToJSON ForwardingRulesScopedListWarning
 -- | Contains a list of HttpHealthCheck resources.
 --
 -- /See:/ 'hTTPHealthCheckList' smart constructor.
-data HTTPHealthCheckList = HTTPHealthCheckList
+data HTTPHealthCheckList = HTTPHealthCheckList'
     { _httphclNextPageToken :: !(Maybe Text)
     , _httphclKind          :: !Text
     , _httphclItems         :: !(Maybe [HTTPHealthCheck])
@@ -13673,7 +13676,7 @@ data HTTPHealthCheckList = HTTPHealthCheckList
 hTTPHealthCheckList
     :: HTTPHealthCheckList
 hTTPHealthCheckList =
-    HTTPHealthCheckList
+    HTTPHealthCheckList'
     { _httphclNextPageToken = Nothing
     , _httphclKind = "compute#httpHealthCheckList"
     , _httphclItems = Nothing
@@ -13718,7 +13721,7 @@ instance FromJSON HTTPHealthCheckList where
         parseJSON
           = withObject "HTTPHealthCheckList"
               (\ o ->
-                 HTTPHealthCheckList <$>
+                 HTTPHealthCheckList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#httpHealthCheckList")
                      <*> (o .:? "items" .!= mempty)
@@ -13726,7 +13729,7 @@ instance FromJSON HTTPHealthCheckList where
                      <*> (o .:? "id"))
 
 instance ToJSON HTTPHealthCheckList where
-        toJSON HTTPHealthCheckList{..}
+        toJSON HTTPHealthCheckList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _httphclNextPageToken,
@@ -13739,7 +13742,7 @@ instance ToJSON HTTPHealthCheckList where
 -- groups when the list is empty.
 --
 -- /See:/ 'instanceGroupManagersScopedListWarning' smart constructor.
-data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWarning
+data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWarning'
     { _igmslwData    :: !(Maybe [InstanceGroupManagersScopedListWarningDataItem])
     , _igmslwCode    :: !(Maybe InstanceGroupManagersScopedListWarningCode)
     , _igmslwMessage :: !(Maybe Text)
@@ -13757,7 +13760,7 @@ data InstanceGroupManagersScopedListWarning = InstanceGroupManagersScopedListWar
 instanceGroupManagersScopedListWarning
     :: InstanceGroupManagersScopedListWarning
 instanceGroupManagersScopedListWarning =
-    InstanceGroupManagersScopedListWarning
+    InstanceGroupManagersScopedListWarning'
     { _igmslwData = Nothing
     , _igmslwCode = Nothing
     , _igmslwMessage = Nothing
@@ -13789,13 +13792,13 @@ instance FromJSON
         parseJSON
           = withObject "InstanceGroupManagersScopedListWarning"
               (\ o ->
-                 InstanceGroupManagersScopedListWarning <$>
+                 InstanceGroupManagersScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON
          InstanceGroupManagersScopedListWarning where
-        toJSON InstanceGroupManagersScopedListWarning{..}
+        toJSON InstanceGroupManagersScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _igmslwData,
@@ -13804,7 +13807,7 @@ instance ToJSON
 
 --
 -- /See:/ 'urlMapsValidateRequest' smart constructor.
-newtype URLMapsValidateRequest = URLMapsValidateRequest
+newtype URLMapsValidateRequest = URLMapsValidateRequest'
     { _umvrResource :: Maybe URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -13816,7 +13819,7 @@ newtype URLMapsValidateRequest = URLMapsValidateRequest
 urlMapsValidateRequest
     :: URLMapsValidateRequest
 urlMapsValidateRequest =
-    URLMapsValidateRequest
+    URLMapsValidateRequest'
     { _umvrResource = Nothing
     }
 
@@ -13829,16 +13832,16 @@ instance FromJSON URLMapsValidateRequest where
         parseJSON
           = withObject "URLMapsValidateRequest"
               (\ o ->
-                 URLMapsValidateRequest <$> (o .:? "resource"))
+                 URLMapsValidateRequest' <$> (o .:? "resource"))
 
 instance ToJSON URLMapsValidateRequest where
-        toJSON URLMapsValidateRequest{..}
+        toJSON URLMapsValidateRequest'{..}
           = object
               (catMaybes [("resource" .=) <$> _umvrResource])
 
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
-data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest
+data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
     { _igmstprFingerprint :: !(Maybe (Textual Word8))
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -13853,7 +13856,7 @@ data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTarget
 instanceGroupManagersSetTargetPoolsRequest
     :: InstanceGroupManagersSetTargetPoolsRequest
 instanceGroupManagersSetTargetPoolsRequest =
-    InstanceGroupManagersSetTargetPoolsRequest
+    InstanceGroupManagersSetTargetPoolsRequest'
     { _igmstprFingerprint = Nothing
     , _igmstprTargetPools = Nothing
     }
@@ -13887,13 +13890,14 @@ instance FromJSON
           = withObject
               "InstanceGroupManagersSetTargetPoolsRequest"
               (\ o ->
-                 InstanceGroupManagersSetTargetPoolsRequest <$>
+                 InstanceGroupManagersSetTargetPoolsRequest' <$>
                    (o .:? "fingerprint") <*>
                      (o .:? "targetPools" .!= mempty))
 
 instance ToJSON
          InstanceGroupManagersSetTargetPoolsRequest where
-        toJSON InstanceGroupManagersSetTargetPoolsRequest{..}
+        toJSON
+          InstanceGroupManagersSetTargetPoolsRequest'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _igmstprFingerprint,
@@ -13902,7 +13906,7 @@ instance ToJSON
 -- | Contains a list of HttpsHealthCheck resources.
 --
 -- /See:/ 'httpsHealthCheckList' smart constructor.
-data HTTPSHealthCheckList = HTTPSHealthCheckList
+data HTTPSHealthCheckList = HTTPSHealthCheckList'
     { _hhclNextPageToken :: !(Maybe Text)
     , _hhclKind          :: !Text
     , _hhclItems         :: !(Maybe [HTTPSHealthCheck])
@@ -13926,7 +13930,7 @@ data HTTPSHealthCheckList = HTTPSHealthCheckList
 httpsHealthCheckList
     :: HTTPSHealthCheckList
 httpsHealthCheckList =
-    HTTPSHealthCheckList
+    HTTPSHealthCheckList'
     { _hhclNextPageToken = Nothing
     , _hhclKind = "compute#httpsHealthCheckList"
     , _hhclItems = Nothing
@@ -13968,7 +13972,7 @@ instance FromJSON HTTPSHealthCheckList where
         parseJSON
           = withObject "HTTPSHealthCheckList"
               (\ o ->
-                 HTTPSHealthCheckList <$>
+                 HTTPSHealthCheckList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#httpsHealthCheckList")
                      <*> (o .:? "items" .!= mempty)
@@ -13976,7 +13980,7 @@ instance FromJSON HTTPSHealthCheckList where
                      <*> (o .:? "id"))
 
 instance ToJSON HTTPSHealthCheckList where
-        toJSON HTTPSHealthCheckList{..}
+        toJSON HTTPSHealthCheckList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _hhclNextPageToken,
@@ -13987,7 +13991,7 @@ instance ToJSON HTTPSHealthCheckList where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -14005,7 +14009,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
@@ -14030,12 +14034,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -14045,7 +14049,7 @@ instance ToJSON OperationErrorErrorsItem where
 -- | A license resource.
 --
 -- /See:/ 'license' smart constructor.
-data License = License
+data License = License'
     { _lChargesUseFee :: !(Maybe Bool)
     , _lKind          :: !Text
     , _lSelfLink      :: !(Maybe Text)
@@ -14066,7 +14070,7 @@ data License = License
 license
     :: License
 license =
-    License
+    License'
     { _lChargesUseFee = Nothing
     , _lKind = "compute#license"
     , _lSelfLink = Nothing
@@ -14098,14 +14102,14 @@ instance FromJSON License where
         parseJSON
           = withObject "License"
               (\ o ->
-                 License <$>
+                 License' <$>
                    (o .:? "chargesUseFee") <*>
                      (o .:? "kind" .!= "compute#license")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name"))
 
 instance ToJSON License where
-        toJSON License{..}
+        toJSON License'{..}
           = object
               (catMaybes
                  [("chargesUseFee" .=) <$> _lChargesUseFee,
@@ -14117,7 +14121,7 @@ instance ToJSON License where
 -- BackendService to handle the traffic arriving at this URL.
 --
 -- /See:/ 'pathRule' smart constructor.
-data PathRule = PathRule
+data PathRule = PathRule'
     { _prService :: !(Maybe Text)
     , _prPaths   :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14132,7 +14136,7 @@ data PathRule = PathRule
 pathRule
     :: PathRule
 pathRule =
-    PathRule
+    PathRule'
     { _prService = Nothing
     , _prPaths = Nothing
     }
@@ -14155,11 +14159,11 @@ instance FromJSON PathRule where
         parseJSON
           = withObject "PathRule"
               (\ o ->
-                 PathRule <$>
+                 PathRule' <$>
                    (o .:? "service") <*> (o .:? "paths" .!= mempty))
 
 instance ToJSON PathRule where
-        toJSON PathRule{..}
+        toJSON PathRule'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _prService,
@@ -14168,7 +14172,7 @@ instance ToJSON PathRule where
 -- | Contains a list of instances.
 --
 -- /See:/ 'instanceList' smart constructor.
-data InstanceList = InstanceList
+data InstanceList = InstanceList'
     { _insNextPageToken :: !(Maybe Text)
     , _insKind          :: !Text
     , _insItems         :: !(Maybe [Instance])
@@ -14192,7 +14196,7 @@ data InstanceList = InstanceList
 instanceList
     :: InstanceList
 instanceList =
-    InstanceList
+    InstanceList'
     { _insNextPageToken = Nothing
     , _insKind = "compute#instanceList"
     , _insItems = Nothing
@@ -14236,7 +14240,7 @@ instance FromJSON InstanceList where
         parseJSON
           = withObject "InstanceList"
               (\ o ->
-                 InstanceList <$>
+                 InstanceList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#instanceList")
                      <*> (o .:? "items" .!= mempty)
@@ -14244,7 +14248,7 @@ instance FromJSON InstanceList where
                      <*> (o .:? "id"))
 
 instance ToJSON InstanceList where
-        toJSON InstanceList{..}
+        toJSON InstanceList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _insNextPageToken,
@@ -14256,7 +14260,7 @@ instance ToJSON InstanceList where
 -- | [Output] A map of scoped Subnetwork lists.
 --
 -- /See:/ 'subnetworkAggregatedListItems' smart constructor.
-newtype SubnetworkAggregatedListItems = SubnetworkAggregatedListItems
+newtype SubnetworkAggregatedListItems = SubnetworkAggregatedListItems'
     { _saliAddtional :: HashMap Text SubnetworksScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14269,7 +14273,7 @@ subnetworkAggregatedListItems
     :: HashMap Text SubnetworksScopedList -- ^ 'saliAddtional'
     -> SubnetworkAggregatedListItems
 subnetworkAggregatedListItems pSaliAddtional_ =
-    SubnetworkAggregatedListItems
+    SubnetworkAggregatedListItems'
     { _saliAddtional = _Coerce # pSaliAddtional_
     }
 
@@ -14284,7 +14288,7 @@ instance FromJSON SubnetworkAggregatedListItems where
         parseJSON
           = withObject "SubnetworkAggregatedListItems"
               (\ o ->
-                 SubnetworkAggregatedListItems <$>
+                 SubnetworkAggregatedListItems' <$>
                    (parseJSONObject o))
 
 instance ToJSON SubnetworkAggregatedListItems where
@@ -14292,7 +14296,7 @@ instance ToJSON SubnetworkAggregatedListItems where
 
 --
 -- /See:/ 'managedInstanceLastAttempt' smart constructor.
-newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt
+newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt'
     { _milaErrors :: Maybe ManagedInstanceLastAttemptErrors
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14304,7 +14308,7 @@ newtype ManagedInstanceLastAttempt = ManagedInstanceLastAttempt
 managedInstanceLastAttempt
     :: ManagedInstanceLastAttempt
 managedInstanceLastAttempt =
-    ManagedInstanceLastAttempt
+    ManagedInstanceLastAttempt'
     { _milaErrors = Nothing
     }
 
@@ -14318,16 +14322,16 @@ instance FromJSON ManagedInstanceLastAttempt where
         parseJSON
           = withObject "ManagedInstanceLastAttempt"
               (\ o ->
-                 ManagedInstanceLastAttempt <$> (o .:? "errors"))
+                 ManagedInstanceLastAttempt' <$> (o .:? "errors"))
 
 instance ToJSON ManagedInstanceLastAttempt where
-        toJSON ManagedInstanceLastAttempt{..}
+        toJSON ManagedInstanceLastAttempt'{..}
           = object (catMaybes [("errors" .=) <$> _milaErrors])
 
 -- | Contains a list of BackendService resources.
 --
 -- /See:/ 'backendServiceList' smart constructor.
-data BackendServiceList = BackendServiceList
+data BackendServiceList = BackendServiceList'
     { _bslNextPageToken :: !(Maybe Text)
     , _bslKind          :: !Text
     , _bslItems         :: !(Maybe [BackendService])
@@ -14351,7 +14355,7 @@ data BackendServiceList = BackendServiceList
 backendServiceList
     :: BackendServiceList
 backendServiceList =
-    BackendServiceList
+    BackendServiceList'
     { _bslNextPageToken = Nothing
     , _bslKind = "compute#backendServiceList"
     , _bslItems = Nothing
@@ -14395,7 +14399,7 @@ instance FromJSON BackendServiceList where
         parseJSON
           = withObject "BackendServiceList"
               (\ o ->
-                 BackendServiceList <$>
+                 BackendServiceList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#backendServiceList")
                      <*> (o .:? "items" .!= mempty)
@@ -14403,7 +14407,7 @@ instance FromJSON BackendServiceList where
                      <*> (o .:? "id"))
 
 instance ToJSON BackendServiceList where
-        toJSON BackendServiceList{..}
+        toJSON BackendServiceList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _bslNextPageToken,
@@ -14416,7 +14420,7 @@ instance ToJSON BackendServiceList where
 -- instance groups when the list is empty.
 --
 -- /See:/ 'instanceGroupsScopedListWarning' smart constructor.
-data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning
+data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning'
     { _igslwData    :: !(Maybe [InstanceGroupsScopedListWarningDataItem])
     , _igslwCode    :: !(Maybe InstanceGroupsScopedListWarningCode)
     , _igslwMessage :: !(Maybe Text)
@@ -14434,7 +14438,7 @@ data InstanceGroupsScopedListWarning = InstanceGroupsScopedListWarning
 instanceGroupsScopedListWarning
     :: InstanceGroupsScopedListWarning
 instanceGroupsScopedListWarning =
-    InstanceGroupsScopedListWarning
+    InstanceGroupsScopedListWarning'
     { _igslwData = Nothing
     , _igslwCode = Nothing
     , _igslwMessage = Nothing
@@ -14465,12 +14469,12 @@ instance FromJSON InstanceGroupsScopedListWarning
         parseJSON
           = withObject "InstanceGroupsScopedListWarning"
               (\ o ->
-                 InstanceGroupsScopedListWarning <$>
+                 InstanceGroupsScopedListWarning' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON InstanceGroupsScopedListWarning where
-        toJSON InstanceGroupsScopedListWarning{..}
+        toJSON InstanceGroupsScopedListWarning'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _igslwData,
@@ -14480,7 +14484,7 @@ instance ToJSON InstanceGroupsScopedListWarning where
 -- | CPU utilization policy.
 --
 -- /See:/ 'autoscalingPolicyCPUUtilization' smart constructor.
-newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
+newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget :: Maybe (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14492,7 +14496,7 @@ newtype AutoscalingPolicyCPUUtilization = AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization
     :: AutoscalingPolicyCPUUtilization
 autoscalingPolicyCPUUtilization =
-    AutoscalingPolicyCPUUtilization
+    AutoscalingPolicyCPUUtilization'
     { _apcuUtilizationTarget = Nothing
     }
 
@@ -14516,11 +14520,11 @@ instance FromJSON AutoscalingPolicyCPUUtilization
         parseJSON
           = withObject "AutoscalingPolicyCPUUtilization"
               (\ o ->
-                 AutoscalingPolicyCPUUtilization <$>
+                 AutoscalingPolicyCPUUtilization' <$>
                    (o .:? "utilizationTarget"))
 
 instance ToJSON AutoscalingPolicyCPUUtilization where
-        toJSON AutoscalingPolicyCPUUtilization{..}
+        toJSON AutoscalingPolicyCPUUtilization'{..}
           = object
               (catMaybes
                  [("utilizationTarget" .=) <$>
@@ -14528,7 +14532,7 @@ instance ToJSON AutoscalingPolicyCPUUtilization where
 
 --
 -- /See:/ 'instanceGroupsScopedListWarningDataItem' smart constructor.
-data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDataItem
+data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDataItem'
     { _igslwdiValue :: !(Maybe Text)
     , _igslwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -14543,7 +14547,7 @@ data InstanceGroupsScopedListWarningDataItem = InstanceGroupsScopedListWarningDa
 instanceGroupsScopedListWarningDataItem
     :: InstanceGroupsScopedListWarningDataItem
 instanceGroupsScopedListWarningDataItem =
-    InstanceGroupsScopedListWarningDataItem
+    InstanceGroupsScopedListWarningDataItem'
     { _igslwdiValue = Nothing
     , _igslwdiKey = Nothing
     }
@@ -14570,12 +14574,12 @@ instance FromJSON
           = withObject
               "InstanceGroupsScopedListWarningDataItem"
               (\ o ->
-                 InstanceGroupsScopedListWarningDataItem <$>
+                 InstanceGroupsScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON
          InstanceGroupsScopedListWarningDataItem where
-        toJSON InstanceGroupsScopedListWarningDataItem{..}
+        toJSON InstanceGroupsScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _igslwdiValue,
@@ -14583,7 +14587,7 @@ instance ToJSON
 
 --
 -- /See:/ 'resourceGroupReference' smart constructor.
-newtype ResourceGroupReference = ResourceGroupReference
+newtype ResourceGroupReference = ResourceGroupReference'
     { _rgrGroup :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -14595,7 +14599,7 @@ newtype ResourceGroupReference = ResourceGroupReference
 resourceGroupReference
     :: ResourceGroupReference
 resourceGroupReference =
-    ResourceGroupReference
+    ResourceGroupReference'
     { _rgrGroup = Nothing
     }
 
@@ -14607,16 +14611,16 @@ rgrGroup = lens _rgrGroup (\ s a -> s{_rgrGroup = a})
 instance FromJSON ResourceGroupReference where
         parseJSON
           = withObject "ResourceGroupReference"
-              (\ o -> ResourceGroupReference <$> (o .:? "group"))
+              (\ o -> ResourceGroupReference' <$> (o .:? "group"))
 
 instance ToJSON ResourceGroupReference where
-        toJSON ResourceGroupReference{..}
+        toJSON ResourceGroupReference'{..}
           = object (catMaybes [("group" .=) <$> _rgrGroup])
 
 -- | Represents a Firewall resource.
 --
 -- /See:/ 'firewall' smart constructor.
-data Firewall = Firewall
+data Firewall = Firewall'
     { _fSourceTags        :: !(Maybe [Text])
     , _fKind              :: !Text
     , _fTargetTags        :: !(Maybe [Text])
@@ -14658,7 +14662,7 @@ data Firewall = Firewall
 firewall
     :: Firewall
 firewall =
-    Firewall
+    Firewall'
     { _fSourceTags = Nothing
     , _fKind = "compute#firewall"
     , _fTargetTags = Nothing
@@ -14766,7 +14770,7 @@ instance FromJSON Firewall where
         parseJSON
           = withObject "Firewall"
               (\ o ->
-                 Firewall <$>
+                 Firewall' <$>
                    (o .:? "sourceTags" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#firewall")
                      <*> (o .:? "targetTags" .!= mempty)
@@ -14780,7 +14784,7 @@ instance FromJSON Firewall where
                      <*> (o .:? "description"))
 
 instance ToJSON Firewall where
-        toJSON Firewall{..}
+        toJSON Firewall'{..}
           = object
               (catMaybes
                  [("sourceTags" .=) <$> _fSourceTags,
@@ -14798,7 +14802,7 @@ instance ToJSON Firewall where
 -- PathMatcher to select the BackendService.
 --
 -- /See:/ 'hostRule' smart constructor.
-data HostRule = HostRule
+data HostRule = HostRule'
     { _hrHosts       :: !(Maybe [Text])
     , _hrDescription :: !(Maybe Text)
     , _hrPathMatcher :: !(Maybe Text)
@@ -14816,7 +14820,7 @@ data HostRule = HostRule
 hostRule
     :: HostRule
 hostRule =
-    HostRule
+    HostRule'
     { _hrHosts = Nothing
     , _hrDescription = Nothing
     , _hrPathMatcher = Nothing
@@ -14848,12 +14852,12 @@ instance FromJSON HostRule where
         parseJSON
           = withObject "HostRule"
               (\ o ->
-                 HostRule <$>
+                 HostRule' <$>
                    (o .:? "hosts" .!= mempty) <*> (o .:? "description")
                      <*> (o .:? "pathMatcher"))
 
 instance ToJSON HostRule where
-        toJSON HostRule{..}
+        toJSON HostRule'{..}
           = object
               (catMaybes
                  [("hosts" .=) <$> _hrHosts,
@@ -14863,7 +14867,7 @@ instance ToJSON HostRule where
 -- | A quotas entry.
 --
 -- /See:/ 'quota' smart constructor.
-data Quota = Quota
+data Quota = Quota'
     { _qMetric :: !(Maybe QuotaMetric)
     , _qLimit  :: !(Maybe (Textual Double))
     , _qUsage  :: !(Maybe (Textual Double))
@@ -14881,7 +14885,7 @@ data Quota = Quota
 quota
     :: Quota
 quota =
-    Quota
+    Quota'
     { _qMetric = Nothing
     , _qLimit = Nothing
     , _qUsage = Nothing
@@ -14907,12 +14911,12 @@ instance FromJSON Quota where
         parseJSON
           = withObject "Quota"
               (\ o ->
-                 Quota <$>
+                 Quota' <$>
                    (o .:? "metric") <*> (o .:? "limit") <*>
                      (o .:? "usage"))
 
 instance ToJSON Quota where
-        toJSON Quota{..}
+        toJSON Quota'{..}
           = object
               (catMaybes
                  [("metric" .=) <$> _qMetric,
@@ -14920,7 +14924,7 @@ instance ToJSON Quota where
 
 --
 -- /See:/ 'instanceGroup' smart constructor.
-data InstanceGroup = InstanceGroup
+data InstanceGroup = InstanceGroup'
     { _iiSize              :: !(Maybe (Textual Int32))
     , _iiKind              :: !Text
     , _iiFingerprint       :: !(Maybe (Textual Word8))
@@ -14965,7 +14969,7 @@ data InstanceGroup = InstanceGroup
 instanceGroup
     :: InstanceGroup
 instanceGroup =
-    InstanceGroup
+    InstanceGroup'
     { _iiSize = Nothing
     , _iiKind = "compute#instanceGroup"
     , _iiFingerprint = Nothing
@@ -15063,7 +15067,7 @@ instance FromJSON InstanceGroup where
         parseJSON
           = withObject "InstanceGroup"
               (\ o ->
-                 InstanceGroup <$>
+                 InstanceGroup' <$>
                    (o .:? "size") <*>
                      (o .:? "kind" .!= "compute#instanceGroup")
                      <*> (o .:? "fingerprint")
@@ -15078,7 +15082,7 @@ instance FromJSON InstanceGroup where
                      <*> (o .:? "namedPorts" .!= mempty))
 
 instance ToJSON InstanceGroup where
-        toJSON InstanceGroup{..}
+        toJSON InstanceGroup'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _iiSize, Just ("kind" .= _iiKind),
@@ -15096,7 +15100,7 @@ instance ToJSON InstanceGroup where
 -- | Contains a list of Snapshot resources.
 --
 -- /See:/ 'snapshotList' smart constructor.
-data SnapshotList = SnapshotList
+data SnapshotList = SnapshotList'
     { _snaNextPageToken :: !(Maybe Text)
     , _snaKind          :: !Text
     , _snaItems         :: !(Maybe [Snapshot])
@@ -15120,7 +15124,7 @@ data SnapshotList = SnapshotList
 snapshotList
     :: SnapshotList
 snapshotList =
-    SnapshotList
+    SnapshotList'
     { _snaNextPageToken = Nothing
     , _snaKind = "compute#snapshotList"
     , _snaItems = Nothing
@@ -15163,7 +15167,7 @@ instance FromJSON SnapshotList where
         parseJSON
           = withObject "SnapshotList"
               (\ o ->
-                 SnapshotList <$>
+                 SnapshotList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#snapshotList")
                      <*> (o .:? "items" .!= mempty)
@@ -15171,7 +15175,7 @@ instance FromJSON SnapshotList where
                      <*> (o .:? "id"))
 
 instance ToJSON SnapshotList where
-        toJSON SnapshotList{..}
+        toJSON SnapshotList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _snaNextPageToken,
@@ -15182,7 +15186,7 @@ instance ToJSON SnapshotList where
 
 --
 -- /See:/ 'testFailure' smart constructor.
-data TestFailure = TestFailure
+data TestFailure = TestFailure'
     { _tfPath            :: !(Maybe Text)
     , _tfExpectedService :: !(Maybe Text)
     , _tfHost            :: !(Maybe Text)
@@ -15203,7 +15207,7 @@ data TestFailure = TestFailure
 testFailure
     :: TestFailure
 testFailure =
-    TestFailure
+    TestFailure'
     { _tfPath = Nothing
     , _tfExpectedService = Nothing
     , _tfHost = Nothing
@@ -15230,13 +15234,13 @@ instance FromJSON TestFailure where
         parseJSON
           = withObject "TestFailure"
               (\ o ->
-                 TestFailure <$>
+                 TestFailure' <$>
                    (o .:? "path") <*> (o .:? "expectedService") <*>
                      (o .:? "host")
                      <*> (o .:? "actualService"))
 
 instance ToJSON TestFailure where
-        toJSON TestFailure{..}
+        toJSON TestFailure'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _tfPath,
@@ -15247,7 +15251,7 @@ instance ToJSON TestFailure where
 -- | An instance\'s serial console output.
 --
 -- /See:/ 'serialPortOutput' smart constructor.
-data SerialPortOutput = SerialPortOutput
+data SerialPortOutput = SerialPortOutput'
     { _spoContents :: !(Maybe Text)
     , _spoKind     :: !Text
     , _spoSelfLink :: !(Maybe Text)
@@ -15265,7 +15269,7 @@ data SerialPortOutput = SerialPortOutput
 serialPortOutput
     :: SerialPortOutput
 serialPortOutput =
-    SerialPortOutput
+    SerialPortOutput'
     { _spoContents = Nothing
     , _spoKind = "compute#serialPortOutput"
     , _spoSelfLink = Nothing
@@ -15290,13 +15294,13 @@ instance FromJSON SerialPortOutput where
         parseJSON
           = withObject "SerialPortOutput"
               (\ o ->
-                 SerialPortOutput <$>
+                 SerialPortOutput' <$>
                    (o .:? "contents") <*>
                      (o .:? "kind" .!= "compute#serialPortOutput")
                      <*> (o .:? "selfLink"))
 
 instance ToJSON SerialPortOutput where
-        toJSON SerialPortOutput{..}
+        toJSON SerialPortOutput'{..}
           = object
               (catMaybes
                  [("contents" .=) <$> _spoContents,
@@ -15305,7 +15309,7 @@ instance ToJSON SerialPortOutput where
 
 --
 -- /See:/ 'targetVPNGatewayAggregatedList' smart constructor.
-data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList
+data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList'
     { _tvgalNextPageToken :: !(Maybe Text)
     , _tvgalKind          :: !Text
     , _tvgalItems         :: !(Maybe TargetVPNGatewayAggregatedListItems)
@@ -15329,7 +15333,7 @@ data TargetVPNGatewayAggregatedList = TargetVPNGatewayAggregatedList
 targetVPNGatewayAggregatedList
     :: TargetVPNGatewayAggregatedList
 targetVPNGatewayAggregatedList =
-    TargetVPNGatewayAggregatedList
+    TargetVPNGatewayAggregatedList'
     { _tvgalNextPageToken = Nothing
     , _tvgalKind = "compute#targetVpnGatewayAggregatedList"
     , _tvgalItems = Nothing
@@ -15374,7 +15378,7 @@ instance FromJSON TargetVPNGatewayAggregatedList
         parseJSON
           = withObject "TargetVPNGatewayAggregatedList"
               (\ o ->
-                 TargetVPNGatewayAggregatedList <$>
+                 TargetVPNGatewayAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "compute#targetVpnGatewayAggregatedList")
@@ -15383,7 +15387,7 @@ instance FromJSON TargetVPNGatewayAggregatedList
                      <*> (o .:? "id"))
 
 instance ToJSON TargetVPNGatewayAggregatedList where
-        toJSON TargetVPNGatewayAggregatedList{..}
+        toJSON TargetVPNGatewayAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tvgalNextPageToken,
@@ -15394,7 +15398,7 @@ instance ToJSON TargetVPNGatewayAggregatedList where
 
 --
 -- /See:/ 'metadataItemsItem' smart constructor.
-data MetadataItemsItem = MetadataItemsItem
+data MetadataItemsItem = MetadataItemsItem'
     { _miiValue :: !(Maybe Text)
     , _miiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -15409,7 +15413,7 @@ data MetadataItemsItem = MetadataItemsItem
 metadataItemsItem
     :: MetadataItemsItem
 metadataItemsItem =
-    MetadataItemsItem
+    MetadataItemsItem'
     { _miiValue = Nothing
     , _miiKey = Nothing
     }
@@ -15433,11 +15437,11 @@ instance FromJSON MetadataItemsItem where
         parseJSON
           = withObject "MetadataItemsItem"
               (\ o ->
-                 MetadataItemsItem <$>
+                 MetadataItemsItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON MetadataItemsItem where
-        toJSON MetadataItemsItem{..}
+        toJSON MetadataItemsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _miiValue, ("key" .=) <$> _miiKey])
@@ -15445,7 +15449,7 @@ instance ToJSON MetadataItemsItem where
 -- | A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
 --
 -- /See:/ 'targetHTTPSProxy' smart constructor.
-data TargetHTTPSProxy = TargetHTTPSProxy
+data TargetHTTPSProxy = TargetHTTPSProxy'
     { _thpURLMap            :: !(Maybe Text)
     , _thpSSLCertificates   :: !(Maybe [Text])
     , _thpKind              :: !Text
@@ -15478,7 +15482,7 @@ data TargetHTTPSProxy = TargetHTTPSProxy
 targetHTTPSProxy
     :: TargetHTTPSProxy
 targetHTTPSProxy =
-    TargetHTTPSProxy
+    TargetHTTPSProxy'
     { _thpURLMap = Nothing
     , _thpSSLCertificates = Nothing
     , _thpKind = "compute#targetHttpsProxy"
@@ -15552,7 +15556,7 @@ instance FromJSON TargetHTTPSProxy where
         parseJSON
           = withObject "TargetHTTPSProxy"
               (\ o ->
-                 TargetHTTPSProxy <$>
+                 TargetHTTPSProxy' <$>
                    (o .:? "urlMap") <*>
                      (o .:? "sslCertificates" .!= mempty)
                      <*> (o .:? "kind" .!= "compute#targetHttpsProxy")
@@ -15563,7 +15567,7 @@ instance FromJSON TargetHTTPSProxy where
                      <*> (o .:? "description"))
 
 instance ToJSON TargetHTTPSProxy where
-        toJSON TargetHTTPSProxy{..}
+        toJSON TargetHTTPSProxy'{..}
           = object
               (catMaybes
                  [("urlMap" .=) <$> _thpURLMap,
@@ -15577,7 +15581,7 @@ instance ToJSON TargetHTTPSProxy where
 
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
-data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList
+data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList'
     { _tvgslTargetVPNGateways :: !(Maybe [TargetVPNGateway])
     , _tvgslWarning           :: !(Maybe TargetVPNGatewaysScopedListWarning)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -15592,7 +15596,7 @@ data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList
 targetVPNGatewaysScopedList
     :: TargetVPNGatewaysScopedList
 targetVPNGatewaysScopedList =
-    TargetVPNGatewaysScopedList
+    TargetVPNGatewaysScopedList'
     { _tvgslTargetVPNGateways = Nothing
     , _tvgslWarning = Nothing
     }
@@ -15615,12 +15619,12 @@ instance FromJSON TargetVPNGatewaysScopedList where
         parseJSON
           = withObject "TargetVPNGatewaysScopedList"
               (\ o ->
-                 TargetVPNGatewaysScopedList <$>
+                 TargetVPNGatewaysScopedList' <$>
                    (o .:? "targetVpnGateways" .!= mempty) <*>
                      (o .:? "warning"))
 
 instance ToJSON TargetVPNGatewaysScopedList where
-        toJSON TargetVPNGatewaysScopedList{..}
+        toJSON TargetVPNGatewaysScopedList'{..}
           = object
               (catMaybes
                  [("targetVpnGateways" .=) <$>
@@ -15630,7 +15634,7 @@ instance ToJSON TargetVPNGatewaysScopedList where
 -- | An access configuration attached to an instance\'s network interface.
 --
 -- /See:/ 'accessConfig' smart constructor.
-data AccessConfig = AccessConfig
+data AccessConfig = AccessConfig'
     { _acKind  :: !Text
     , _acName  :: !(Maybe Text)
     , _acNATIP :: !(Maybe Text)
@@ -15651,7 +15655,7 @@ data AccessConfig = AccessConfig
 accessConfig
     :: AccessConfig
 accessConfig =
-    AccessConfig
+    AccessConfig'
     { _acKind = "compute#accessConfig"
     , _acName = Nothing
     , _acNATIP = Nothing
@@ -15684,14 +15688,14 @@ instance FromJSON AccessConfig where
         parseJSON
           = withObject "AccessConfig"
               (\ o ->
-                 AccessConfig <$>
+                 AccessConfig' <$>
                    (o .:? "kind" .!= "compute#accessConfig") <*>
                      (o .:? "name")
                      <*> (o .:? "natIP")
                      <*> (o .:? "type" .!= OneToOneNAT))
 
 instance ToJSON AccessConfig where
-        toJSON AccessConfig{..}
+        toJSON AccessConfig'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _acKind), ("name" .=) <$> _acName,
@@ -15699,7 +15703,7 @@ instance ToJSON AccessConfig where
 
 --
 -- /See:/ 'managedInstanceLastAttemptErrorsErrorsItem' smart constructor.
-data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErrorsErrorsItem
+data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErrorsErrorsItem'
     { _milaeeiLocation :: !(Maybe Text)
     , _milaeeiCode     :: !(Maybe Text)
     , _milaeeiMessage  :: !(Maybe Text)
@@ -15717,7 +15721,7 @@ data ManagedInstanceLastAttemptErrorsErrorsItem = ManagedInstanceLastAttemptErro
 managedInstanceLastAttemptErrorsErrorsItem
     :: ManagedInstanceLastAttemptErrorsErrorsItem
 managedInstanceLastAttemptErrorsErrorsItem =
-    ManagedInstanceLastAttemptErrorsErrorsItem
+    ManagedInstanceLastAttemptErrorsErrorsItem'
     { _milaeeiLocation = Nothing
     , _milaeeiCode = Nothing
     , _milaeeiMessage = Nothing
@@ -15747,13 +15751,14 @@ instance FromJSON
           = withObject
               "ManagedInstanceLastAttemptErrorsErrorsItem"
               (\ o ->
-                 ManagedInstanceLastAttemptErrorsErrorsItem <$>
+                 ManagedInstanceLastAttemptErrorsErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON
          ManagedInstanceLastAttemptErrorsErrorsItem where
-        toJSON ManagedInstanceLastAttemptErrorsErrorsItem{..}
+        toJSON
+          ManagedInstanceLastAttemptErrorsErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _milaeeiLocation,
@@ -15762,7 +15767,7 @@ instance ToJSON
 
 --
 -- /See:/ 'instancesScopedListWarningDataItem' smart constructor.
-data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem
+data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem'
     { _islwdiValue :: !(Maybe Text)
     , _islwdiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -15777,7 +15782,7 @@ data InstancesScopedListWarningDataItem = InstancesScopedListWarningDataItem
 instancesScopedListWarningDataItem
     :: InstancesScopedListWarningDataItem
 instancesScopedListWarningDataItem =
-    InstancesScopedListWarningDataItem
+    InstancesScopedListWarningDataItem'
     { _islwdiValue = Nothing
     , _islwdiKey = Nothing
     }
@@ -15803,12 +15808,12 @@ instance FromJSON InstancesScopedListWarningDataItem
         parseJSON
           = withObject "InstancesScopedListWarningDataItem"
               (\ o ->
-                 InstancesScopedListWarningDataItem <$>
+                 InstancesScopedListWarningDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON InstancesScopedListWarningDataItem
          where
-        toJSON InstancesScopedListWarningDataItem{..}
+        toJSON InstancesScopedListWarningDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _islwdiValue,
@@ -15818,7 +15823,7 @@ instance ToJSON InstancesScopedListWarningDataItem
 -- virtual machines and their serving capacity.
 --
 -- /See:/ 'backendService' smart constructor.
-data BackendService = BackendService
+data BackendService = BackendService'
     { _bsBackends          :: !(Maybe [Backend])
     , _bsKind              :: !Text
     , _bsFingerprint       :: !(Maybe (Textual Word8))
@@ -15866,7 +15871,7 @@ data BackendService = BackendService
 backendService
     :: BackendService
 backendService =
-    BackendService
+    BackendService'
     { _bsBackends = Nothing
     , _bsKind = "compute#backendService"
     , _bsFingerprint = Nothing
@@ -15979,7 +15984,7 @@ instance FromJSON BackendService where
         parseJSON
           = withObject "BackendService"
               (\ o ->
-                 BackendService <$>
+                 BackendService' <$>
                    (o .:? "backends" .!= mempty) <*>
                      (o .:? "kind" .!= "compute#backendService")
                      <*> (o .:? "fingerprint")
@@ -15995,7 +16000,7 @@ instance FromJSON BackendService where
                      <*> (o .:? "port"))
 
 instance ToJSON BackendService where
-        toJSON BackendService{..}
+        toJSON BackendService'{..}
           = object
               (catMaybes
                  [("backends" .=) <$> _bsBackends,
@@ -16014,7 +16019,7 @@ instance ToJSON BackendService where
 
 --
 -- /See:/ 'instanceMoveRequest' smart constructor.
-data InstanceMoveRequest = InstanceMoveRequest
+data InstanceMoveRequest = InstanceMoveRequest'
     { _imrTargetInstance  :: !(Maybe Text)
     , _imrDestinationZone :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -16029,7 +16034,7 @@ data InstanceMoveRequest = InstanceMoveRequest
 instanceMoveRequest
     :: InstanceMoveRequest
 instanceMoveRequest =
-    InstanceMoveRequest
+    InstanceMoveRequest'
     { _imrTargetInstance = Nothing
     , _imrDestinationZone = Nothing
     }
@@ -16058,12 +16063,12 @@ instance FromJSON InstanceMoveRequest where
         parseJSON
           = withObject "InstanceMoveRequest"
               (\ o ->
-                 InstanceMoveRequest <$>
+                 InstanceMoveRequest' <$>
                    (o .:? "targetInstance") <*>
                      (o .:? "destinationZone"))
 
 instance ToJSON InstanceMoveRequest where
-        toJSON InstanceMoveRequest{..}
+        toJSON InstanceMoveRequest'{..}
           = object
               (catMaybes
                  [("targetInstance" .=) <$> _imrTargetInstance,
@@ -16071,7 +16076,7 @@ instance ToJSON InstanceMoveRequest where
 
 --
 -- /See:/ 'instanceGroupsScopedList' smart constructor.
-data InstanceGroupsScopedList = InstanceGroupsScopedList
+data InstanceGroupsScopedList = InstanceGroupsScopedList'
     { _igslWarning        :: !(Maybe InstanceGroupsScopedListWarning)
     , _igslInstanceGroups :: !(Maybe [InstanceGroup])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -16086,7 +16091,7 @@ data InstanceGroupsScopedList = InstanceGroupsScopedList
 instanceGroupsScopedList
     :: InstanceGroupsScopedList
 instanceGroupsScopedList =
-    InstanceGroupsScopedList
+    InstanceGroupsScopedList'
     { _igslWarning = Nothing
     , _igslInstanceGroups = Nothing
     }
@@ -16110,12 +16115,12 @@ instance FromJSON InstanceGroupsScopedList where
         parseJSON
           = withObject "InstanceGroupsScopedList"
               (\ o ->
-                 InstanceGroupsScopedList <$>
+                 InstanceGroupsScopedList' <$>
                    (o .:? "warning") <*>
                      (o .:? "instanceGroups" .!= mempty))
 
 instance ToJSON InstanceGroupsScopedList where
-        toJSON InstanceGroupsScopedList{..}
+        toJSON InstanceGroupsScopedList'{..}
           = object
               (catMaybes
                  [("warning" .=) <$> _igslWarning,
@@ -16125,7 +16130,7 @@ instance ToJSON InstanceGroupsScopedList where
 -- individual instances should be checked for health, via HTTPS.
 --
 -- /See:/ 'httpsHealthCheck' smart constructor.
-data HTTPSHealthCheck = HTTPSHealthCheck
+data HTTPSHealthCheck = HTTPSHealthCheck'
     { _hhcHealthyThreshold   :: !(Maybe (Textual Int32))
     , _hhcKind               :: !Text
     , _hhcRequestPath        :: !(Maybe Text)
@@ -16173,7 +16178,7 @@ data HTTPSHealthCheck = HTTPSHealthCheck
 httpsHealthCheck
     :: HTTPSHealthCheck
 httpsHealthCheck =
-    HTTPSHealthCheck
+    HTTPSHealthCheck'
     { _hhcHealthyThreshold = Nothing
     , _hhcKind = "compute#httpsHealthCheck"
     , _hhcRequestPath = Nothing
@@ -16285,7 +16290,7 @@ instance FromJSON HTTPSHealthCheck where
         parseJSON
           = withObject "HTTPSHealthCheck"
               (\ o ->
-                 HTTPSHealthCheck <$>
+                 HTTPSHealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "kind" .!= "compute#httpsHealthCheck")
                      <*> (o .:? "requestPath")
@@ -16301,7 +16306,7 @@ instance FromJSON HTTPSHealthCheck where
                      <*> (o .:? "port"))
 
 instance ToJSON HTTPSHealthCheck where
-        toJSON HTTPSHealthCheck{..}
+        toJSON HTTPSHealthCheck'{..}
           = object
               (catMaybes
                  [("healthyThreshold" .=) <$> _hhcHealthyThreshold,
@@ -16320,7 +16325,7 @@ instance ToJSON HTTPSHealthCheck where
 -- | [Output Only] A map of scoped vpn tunnel lists.
 --
 -- /See:/ 'vpnTunnelAggregatedListItems' smart constructor.
-newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems
+newtype VPNTunnelAggregatedListItems = VPNTunnelAggregatedListItems'
     { _vtaliAddtional :: HashMap Text VPNTunnelsScopedList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -16333,7 +16338,7 @@ vpnTunnelAggregatedListItems
     :: HashMap Text VPNTunnelsScopedList -- ^ 'vtaliAddtional'
     -> VPNTunnelAggregatedListItems
 vpnTunnelAggregatedListItems pVtaliAddtional_ =
-    VPNTunnelAggregatedListItems
+    VPNTunnelAggregatedListItems'
     { _vtaliAddtional = _Coerce # pVtaliAddtional_
     }
 
@@ -16348,7 +16353,8 @@ instance FromJSON VPNTunnelAggregatedListItems where
         parseJSON
           = withObject "VPNTunnelAggregatedListItems"
               (\ o ->
-                 VPNTunnelAggregatedListItems <$> (parseJSONObject o))
+                 VPNTunnelAggregatedListItems' <$>
+                   (parseJSONObject o))
 
 instance ToJSON VPNTunnelAggregatedListItems where
         toJSON = toJSON . _vtaliAddtional
@@ -16356,7 +16362,7 @@ instance ToJSON VPNTunnelAggregatedListItems where
 -- | A set of instance tags.
 --
 -- /See:/ 'tags' smart constructor.
-data Tags = Tags
+data Tags = Tags'
     { _tFingerprint :: !(Maybe (Textual Word8))
     , _tItems       :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -16371,7 +16377,7 @@ data Tags = Tags
 tags
     :: Tags
 tags =
-    Tags
+    Tags'
     { _tFingerprint = Nothing
     , _tItems = Nothing
     }
@@ -16398,11 +16404,11 @@ instance FromJSON Tags where
         parseJSON
           = withObject "Tags"
               (\ o ->
-                 Tags <$>
+                 Tags' <$>
                    (o .:? "fingerprint") <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Tags where
-        toJSON Tags{..}
+        toJSON Tags'{..}
           = object
               (catMaybes
                  [("fingerprint" .=) <$> _tFingerprint,
@@ -16410,7 +16416,7 @@ instance ToJSON Tags where
 
 --
 -- /See:/ 'addressAggregatedList' smart constructor.
-data AddressAggregatedList = AddressAggregatedList
+data AddressAggregatedList = AddressAggregatedList'
     { _addNextPageToken :: !(Maybe Text)
     , _addKind          :: !Text
     , _addItems         :: !(Maybe AddressAggregatedListItems)
@@ -16434,7 +16440,7 @@ data AddressAggregatedList = AddressAggregatedList
 addressAggregatedList
     :: AddressAggregatedList
 addressAggregatedList =
-    AddressAggregatedList
+    AddressAggregatedList'
     { _addNextPageToken = Nothing
     , _addKind = "compute#addressAggregatedList"
     , _addItems = Nothing
@@ -16474,7 +16480,7 @@ instance FromJSON AddressAggregatedList where
         parseJSON
           = withObject "AddressAggregatedList"
               (\ o ->
-                 AddressAggregatedList <$>
+                 AddressAggregatedList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "compute#addressAggregatedList")
                      <*> (o .:? "items")
@@ -16482,7 +16488,7 @@ instance FromJSON AddressAggregatedList where
                      <*> (o .:? "id"))
 
 instance ToJSON AddressAggregatedList where
-        toJSON AddressAggregatedList{..}
+        toJSON AddressAggregatedList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _addNextPageToken,
@@ -16493,7 +16499,7 @@ instance ToJSON AddressAggregatedList where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe OperationWarningsItemCode)
     , _owiMessage :: !(Maybe Text)
@@ -16511,7 +16517,7 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
@@ -16539,12 +16545,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
@@ -16553,7 +16559,7 @@ instance ToJSON OperationWarningsItem where
 -- | Message for the expected URL mappings.
 --
 -- /See:/ 'urlMapTest' smart constructor.
-data URLMapTest = URLMapTest
+data URLMapTest = URLMapTest'
     { _umtPath        :: !(Maybe Text)
     , _umtService     :: !(Maybe Text)
     , _umtHost        :: !(Maybe Text)
@@ -16574,7 +16580,7 @@ data URLMapTest = URLMapTest
 urlMapTest
     :: URLMapTest
 urlMapTest =
-    URLMapTest
+    URLMapTest'
     { _umtPath = Nothing
     , _umtService = Nothing
     , _umtHost = Nothing
@@ -16604,13 +16610,13 @@ instance FromJSON URLMapTest where
         parseJSON
           = withObject "URLMapTest"
               (\ o ->
-                 URLMapTest <$>
+                 URLMapTest' <$>
                    (o .:? "path") <*> (o .:? "service") <*>
                      (o .:? "host")
                      <*> (o .:? "description"))
 
 instance ToJSON URLMapTest where
-        toJSON URLMapTest{..}
+        toJSON URLMapTest'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _umtPath,
@@ -16621,7 +16627,7 @@ instance ToJSON URLMapTest where
 -- | An Instance resource.
 --
 -- /See:/ 'instance'' smart constructor.
-data Instance = Instance
+data Instance = Instance'
     { _insnStatus            :: !(Maybe InstanceStatus)
     , _insnServiceAccounts   :: !(Maybe [ServiceAccount])
     , _insnNetworkInterfaces :: !(Maybe [NetworkInterface])
@@ -16684,7 +16690,7 @@ data Instance = Instance
 instance'
     :: Instance
 instance' =
-    Instance
+    Instance'
     { _insnStatus = Nothing
     , _insnServiceAccounts = Nothing
     , _insnNetworkInterfaces = Nothing
@@ -16846,7 +16852,7 @@ instance FromJSON Instance where
         parseJSON
           = withObject "Instance"
               (\ o ->
-                 Instance <$>
+                 Instance' <$>
                    (o .:? "status") <*>
                      (o .:? "serviceAccounts" .!= mempty)
                      <*> (o .:? "networkInterfaces" .!= mempty)
@@ -16867,7 +16873,7 @@ instance FromJSON Instance where
                      <*> (o .:? "tags"))
 
 instance ToJSON Instance where
-        toJSON Instance{..}
+        toJSON Instance'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _insnStatus,
@@ -16894,7 +16900,7 @@ instance ToJSON Instance where
 -- default service will be used.
 --
 -- /See:/ 'pathMatcher' smart constructor.
-data PathMatcher = PathMatcher
+data PathMatcher = PathMatcher'
     { _pmDefaultService :: !(Maybe Text)
     , _pmName           :: !(Maybe Text)
     , _pmPathRules      :: !(Maybe [PathRule])
@@ -16915,7 +16921,7 @@ data PathMatcher = PathMatcher
 pathMatcher
     :: PathMatcher
 pathMatcher =
-    PathMatcher
+    PathMatcher'
     { _pmDefaultService = Nothing
     , _pmName = Nothing
     , _pmPathRules = Nothing
@@ -16957,13 +16963,13 @@ instance FromJSON PathMatcher where
         parseJSON
           = withObject "PathMatcher"
               (\ o ->
-                 PathMatcher <$>
+                 PathMatcher' <$>
                    (o .:? "defaultService") <*> (o .:? "name") <*>
                      (o .:? "pathRules" .!= mempty)
                      <*> (o .:? "description"))
 
 instance ToJSON PathMatcher where
-        toJSON PathMatcher{..}
+        toJSON PathMatcher'{..}
           = object
               (catMaybes
                  [("defaultService" .=) <$> _pmDefaultService,

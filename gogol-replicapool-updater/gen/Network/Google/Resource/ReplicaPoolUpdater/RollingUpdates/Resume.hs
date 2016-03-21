@@ -60,7 +60,7 @@ type RollingUpdatesResumeResource =
 -- state of the update is ROLLED_OUT.
 --
 -- /See:/ 'rollingUpdatesResume' smart constructor.
-data RollingUpdatesResume = RollingUpdatesResume
+data RollingUpdatesResume = RollingUpdatesResume'
     { _rRollingUpdate :: !Text
     , _rProject       :: !Text
     , _rZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesResume
     -> Text -- ^ 'rZone'
     -> RollingUpdatesResume
 rollingUpdatesResume pRRollingUpdate_ pRProject_ pRZone_ =
-    RollingUpdatesResume
+    RollingUpdatesResume'
     { _rRollingUpdate = pRRollingUpdate_
     , _rProject = pRProject_
     , _rZone = pRZone_
@@ -106,7 +106,7 @@ instance GoogleRequest RollingUpdatesResume where
         type Scopes RollingUpdatesResume =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/replicapool"]
-        requestClient RollingUpdatesResume{..}
+        requestClient RollingUpdatesResume'{..}
           = go _rProject _rZone _rRollingUpdate (Just AltJSON)
               replicaPoolUpdaterService
           where go

@@ -53,7 +53,7 @@ type UserRolePermissionGroupsListResource =
 -- | Gets a list of all supported user role permission groups.
 --
 -- /See:/ 'userRolePermissionGroupsList' smart constructor.
-newtype UserRolePermissionGroupsList = UserRolePermissionGroupsList
+newtype UserRolePermissionGroupsList = UserRolePermissionGroupsList'
     { _urpglProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ userRolePermissionGroupsList
     :: Int64 -- ^ 'urpglProFileId'
     -> UserRolePermissionGroupsList
 userRolePermissionGroupsList pUrpglProFileId_ =
-    UserRolePermissionGroupsList
+    UserRolePermissionGroupsList'
     { _urpglProFileId = _Coerce # pUrpglProFileId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest UserRolePermissionGroupsList
              UserRolePermissionGroupsListResponse
         type Scopes UserRolePermissionGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolePermissionGroupsList{..}
+        requestClient UserRolePermissionGroupsList'{..}
           = go _urpglProFileId (Just AltJSON)
               dFAReportingService
           where go

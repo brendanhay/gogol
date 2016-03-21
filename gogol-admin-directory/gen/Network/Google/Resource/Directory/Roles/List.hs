@@ -57,7 +57,7 @@ type RolesListResource =
 -- | Retrieves a paginated list of all the roles in a domain.
 --
 -- /See:/ 'rolesList' smart constructor.
-data RolesList = RolesList
+data RolesList = RolesList'
     { _rlCustomer   :: !Text
     , _rlPageToken  :: !(Maybe Text)
     , _rlMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ rolesList
     :: Text -- ^ 'rlCustomer'
     -> RolesList
 rolesList pRlCustomer_ =
-    RolesList
+    RolesList'
     { _rlCustomer = pRlCustomer_
     , _rlPageToken = Nothing
     , _rlMaxResults = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest RolesList where
         type Scopes RolesList =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
-        requestClient RolesList{..}
+        requestClient RolesList'{..}
           = go _rlCustomer _rlPageToken _rlMaxResults
               (Just AltJSON)
               directoryService

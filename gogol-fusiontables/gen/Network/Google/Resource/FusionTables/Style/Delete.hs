@@ -54,7 +54,7 @@ type StyleDeleteResource =
 -- | Deletes a style.
 --
 -- /See:/ 'styleDelete' smart constructor.
-data StyleDelete = StyleDelete
+data StyleDelete = StyleDelete'
     { _sdStyleId :: !(Textual Int32)
     , _sdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ styleDelete
     -> Text -- ^ 'sdTableId'
     -> StyleDelete
 styleDelete pSdStyleId_ pSdTableId_ =
-    StyleDelete
+    StyleDelete'
     { _sdStyleId = _Coerce # pSdStyleId_
     , _sdTableId = pSdTableId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest StyleDelete where
         type Rs StyleDelete = ()
         type Scopes StyleDelete =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient StyleDelete{..}
+        requestClient StyleDelete'{..}
           = go _sdTableId _sdStyleId (Just AltJSON)
               fusionTablesService
           where go

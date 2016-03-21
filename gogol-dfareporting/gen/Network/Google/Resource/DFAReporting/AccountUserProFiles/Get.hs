@@ -55,7 +55,7 @@ type AccountUserProFilesGetResource =
 -- | Gets one account user profile by ID.
 --
 -- /See:/ 'accountUserProFilesGet' smart constructor.
-data AccountUserProFilesGet = AccountUserProFilesGet
+data AccountUserProFilesGet = AccountUserProFilesGet'
     { _aupfgProFileId :: !(Textual Int64)
     , _aupfgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountUserProFilesGet
     -> Int64 -- ^ 'aupfgId'
     -> AccountUserProFilesGet
 accountUserProFilesGet pAupfgProFileId_ pAupfgId_ =
-    AccountUserProFilesGet
+    AccountUserProFilesGet'
     { _aupfgProFileId = _Coerce # pAupfgProFileId_
     , _aupfgId = _Coerce # pAupfgId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest AccountUserProFilesGet where
         type Rs AccountUserProFilesGet = AccountUserProFile
         type Scopes AccountUserProFilesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountUserProFilesGet{..}
+        requestClient AccountUserProFilesGet'{..}
           = go _aupfgProFileId _aupfgId (Just AltJSON)
               dFAReportingService
           where go

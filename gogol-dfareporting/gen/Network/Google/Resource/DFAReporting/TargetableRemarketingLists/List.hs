@@ -72,7 +72,7 @@ type TargetableRemarketingListsListResource =
 -- | Retrieves a list of targetable remarketing lists, possibly filtered.
 --
 -- /See:/ 'targetableRemarketingListsList' smart constructor.
-data TargetableRemarketingListsList = TargetableRemarketingListsList
+data TargetableRemarketingListsList = TargetableRemarketingListsList'
     { _trllAdvertiserId :: !(Textual Int64)
     , _trllProFileId    :: !(Textual Int64)
     , _trllSortOrder    :: !(Maybe TargetableRemarketingListsListSortOrder)
@@ -107,7 +107,7 @@ targetableRemarketingListsList
     -> Int64 -- ^ 'trllProFileId'
     -> TargetableRemarketingListsList
 targetableRemarketingListsList pTrllAdvertiserId_ pTrllProFileId_ =
-    TargetableRemarketingListsList
+    TargetableRemarketingListsList'
     { _trllAdvertiserId = _Coerce # pTrllAdvertiserId_
     , _trllProFileId = _Coerce # pTrllProFileId_
     , _trllSortOrder = Nothing
@@ -180,7 +180,7 @@ instance GoogleRequest TargetableRemarketingListsList
              TargetableRemarketingListsListResponse
         type Scopes TargetableRemarketingListsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient TargetableRemarketingListsList{..}
+        requestClient TargetableRemarketingListsList'{..}
           = go _trllProFileId (Just _trllAdvertiserId)
               _trllSortOrder
               _trllActive

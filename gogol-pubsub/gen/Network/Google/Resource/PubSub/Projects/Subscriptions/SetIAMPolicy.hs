@@ -68,7 +68,7 @@ type ProjectsSubscriptionsSetIAMPolicyResource =
 -- existing policy.
 --
 -- /See:/ 'projectsSubscriptionsSetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy
+data ProjectsSubscriptionsSetIAMPolicy = ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv          :: !(Maybe Text)
     , _pssipUploadProtocol :: !(Maybe Text)
     , _pssipPp             :: !Bool
@@ -106,7 +106,7 @@ projectsSubscriptionsSetIAMPolicy
     -> Text -- ^ 'pssipResource'
     -> ProjectsSubscriptionsSetIAMPolicy
 projectsSubscriptionsSetIAMPolicy pPssipPayload_ pPssipResource_ =
-    ProjectsSubscriptionsSetIAMPolicy
+    ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv = Nothing
     , _pssipUploadProtocol = Nothing
     , _pssipPp = True
@@ -178,7 +178,7 @@ instance GoogleRequest
         type Scopes ProjectsSubscriptionsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsSetIAMPolicy{..}
+        requestClient ProjectsSubscriptionsSetIAMPolicy'{..}
           = go _pssipResource _pssipXgafv _pssipUploadProtocol
               (Just _pssipPp)
               _pssipAccessToken

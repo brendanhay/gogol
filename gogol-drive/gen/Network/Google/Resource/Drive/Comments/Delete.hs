@@ -54,7 +54,7 @@ type CommentsDeleteResource =
 -- | Deletes a comment.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-data CommentsDelete = CommentsDelete
+data CommentsDelete = CommentsDelete'
     { _cdFileId    :: !Text
     , _cdCommentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentsDelete
     -> Text -- ^ 'cdCommentId'
     -> CommentsDelete
 commentsDelete pCdFileId_ pCdCommentId_ =
-    CommentsDelete
+    CommentsDelete'
     { _cdFileId = pCdFileId_
     , _cdCommentId = pCdCommentId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest CommentsDelete where
         type Scopes CommentsDelete =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient CommentsDelete{..}
+        requestClient CommentsDelete'{..}
           = go _cdFileId _cdCommentId (Just AltJSON)
               driveService
           where go

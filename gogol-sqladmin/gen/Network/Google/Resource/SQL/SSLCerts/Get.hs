@@ -61,7 +61,7 @@ type SSLCertsGetResource =
 -- initial creation.
 --
 -- /See:/ 'sslCertsGet' smart constructor.
-data SSLCertsGet = SSLCertsGet
+data SSLCertsGet = SSLCertsGet'
     { _scgProject         :: !Text
     , _scgSha1Fingerprint :: !Text
     , _scgInstance        :: !Text
@@ -82,7 +82,7 @@ sslCertsGet
     -> Text -- ^ 'scgInstance'
     -> SSLCertsGet
 sslCertsGet pScgProject_ pScgSha1Fingerprint_ pScgInstance_ =
-    SSLCertsGet
+    SSLCertsGet'
     { _scgProject = pScgProject_
     , _scgSha1Fingerprint = pScgSha1Fingerprint_
     , _scgInstance = pScgInstance_
@@ -109,7 +109,7 @@ instance GoogleRequest SSLCertsGet where
         type Scopes SSLCertsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient SSLCertsGet{..}
+        requestClient SSLCertsGet'{..}
           = go _scgProject _scgInstance _scgSha1Fingerprint
               (Just AltJSON)
               sQLAdminService

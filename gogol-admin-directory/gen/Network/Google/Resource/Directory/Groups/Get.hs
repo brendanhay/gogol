@@ -52,7 +52,7 @@ type GroupsGetResource =
 -- | Retrieve Group
 --
 -- /See:/ 'groupsGet' smart constructor.
-newtype GroupsGet = GroupsGet
+newtype GroupsGet = GroupsGet'
     { _ggGroupKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ groupsGet
     :: Text -- ^ 'ggGroupKey'
     -> GroupsGet
 groupsGet pGgGroupKey_ =
-    GroupsGet
+    GroupsGet'
     { _ggGroupKey = pGgGroupKey_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest GroupsGet where
         type Scopes GroupsGet =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
-        requestClient GroupsGet{..}
+        requestClient GroupsGet'{..}
           = go _ggGroupKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy GroupsGetResource)

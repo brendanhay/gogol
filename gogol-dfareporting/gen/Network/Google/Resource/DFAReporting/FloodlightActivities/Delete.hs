@@ -54,7 +54,7 @@ type FloodlightActivitiesDeleteResource =
 -- | Deletes an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesDelete' smart constructor.
-data FloodlightActivitiesDelete = FloodlightActivitiesDelete
+data FloodlightActivitiesDelete = FloodlightActivitiesDelete'
     { _fadProFileId :: !(Textual Int64)
     , _fadId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ floodlightActivitiesDelete
     -> Int64 -- ^ 'fadId'
     -> FloodlightActivitiesDelete
 floodlightActivitiesDelete pFadProFileId_ pFadId_ =
-    FloodlightActivitiesDelete
+    FloodlightActivitiesDelete'
     { _fadProFileId = _Coerce # pFadProFileId_
     , _fadId = _Coerce # pFadId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest FloodlightActivitiesDelete
         type Rs FloodlightActivitiesDelete = ()
         type Scopes FloodlightActivitiesDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivitiesDelete{..}
+        requestClient FloodlightActivitiesDelete'{..}
           = go _fadProFileId _fadId (Just AltJSON)
               dFAReportingService
           where go

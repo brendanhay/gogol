@@ -55,7 +55,7 @@ type RemarketingListSharesUpdateResource =
 -- | Updates an existing remarketing list share.
 --
 -- /See:/ 'remarketingListSharesUpdate' smart constructor.
-data RemarketingListSharesUpdate = RemarketingListSharesUpdate
+data RemarketingListSharesUpdate = RemarketingListSharesUpdate'
     { _rlsuProFileId :: !(Textual Int64)
     , _rlsuPayload   :: !RemarketingListShare
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListSharesUpdate
     -> RemarketingListShare -- ^ 'rlsuPayload'
     -> RemarketingListSharesUpdate
 remarketingListSharesUpdate pRlsuProFileId_ pRlsuPayload_ =
-    RemarketingListSharesUpdate
+    RemarketingListSharesUpdate'
     { _rlsuProFileId = _Coerce # pRlsuProFileId_
     , _rlsuPayload = pRlsuPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest RemarketingListSharesUpdate
              RemarketingListShare
         type Scopes RemarketingListSharesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListSharesUpdate{..}
+        requestClient RemarketingListSharesUpdate'{..}
           = go _rlsuProFileId (Just AltJSON) _rlsuPayload
               dFAReportingService
           where go

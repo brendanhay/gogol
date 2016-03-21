@@ -77,7 +77,7 @@ type CoursesTeachersDeleteResource =
 -- primary teacher of this course.
 --
 -- /See:/ 'coursesTeachersDelete' smart constructor.
-data CoursesTeachersDelete = CoursesTeachersDelete
+data CoursesTeachersDelete = CoursesTeachersDelete'
     { _ctdXgafv          :: !(Maybe Text)
     , _ctdUploadProtocol :: !(Maybe Text)
     , _ctdPp             :: !Bool
@@ -115,7 +115,7 @@ coursesTeachersDelete
     -> Text -- ^ 'ctdUserId'
     -> CoursesTeachersDelete
 coursesTeachersDelete pCtdCourseId_ pCtdUserId_ =
-    CoursesTeachersDelete
+    CoursesTeachersDelete'
     { _ctdXgafv = Nothing
     , _ctdUploadProtocol = Nothing
     , _ctdPp = True
@@ -181,7 +181,7 @@ instance GoogleRequest CoursesTeachersDelete where
         type Rs CoursesTeachersDelete = Empty
         type Scopes CoursesTeachersDelete =
              '["https://www.googleapis.com/auth/classroom.rosters"]
-        requestClient CoursesTeachersDelete{..}
+        requestClient CoursesTeachersDelete'{..}
           = go _ctdCourseId _ctdUserId _ctdXgafv
               _ctdUploadProtocol
               (Just _ctdPp)

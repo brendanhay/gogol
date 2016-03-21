@@ -58,7 +58,7 @@ type ManagementWebPropertiesPatchResource =
 -- | Updates an existing web property. This method supports patch semantics.
 --
 -- /See:/ 'managementWebPropertiesPatch' smart constructor.
-data ManagementWebPropertiesPatch = ManagementWebPropertiesPatch
+data ManagementWebPropertiesPatch = ManagementWebPropertiesPatch'
     { _mwppWebPropertyId :: !Text
     , _mwppPayload       :: !WebProperty
     , _mwppAccountId     :: !Text
@@ -79,7 +79,7 @@ managementWebPropertiesPatch
     -> Text -- ^ 'mwppAccountId'
     -> ManagementWebPropertiesPatch
 managementWebPropertiesPatch pMwppWebPropertyId_ pMwppPayload_ pMwppAccountId_ =
-    ManagementWebPropertiesPatch
+    ManagementWebPropertiesPatch'
     { _mwppWebPropertyId = pMwppWebPropertyId_
     , _mwppPayload = pMwppPayload_
     , _mwppAccountId = pMwppAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest ManagementWebPropertiesPatch
         type Rs ManagementWebPropertiesPatch = WebProperty
         type Scopes ManagementWebPropertiesPatch =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementWebPropertiesPatch{..}
+        requestClient ManagementWebPropertiesPatch'{..}
           = go _mwppAccountId _mwppWebPropertyId (Just AltJSON)
               _mwppPayload
               analyticsService

@@ -61,7 +61,7 @@ type ImagesDeprecateResource =
 -- given, clears the deprecation status instead.
 --
 -- /See:/ 'imagesDeprecate' smart constructor.
-data ImagesDeprecate = ImagesDeprecate
+data ImagesDeprecate = ImagesDeprecate'
     { _imamImage   :: !Text
     , _imamProject :: !Text
     , _imamPayload :: !DeprecationStatus
@@ -82,7 +82,7 @@ imagesDeprecate
     -> DeprecationStatus -- ^ 'imamPayload'
     -> ImagesDeprecate
 imagesDeprecate pImamImage_ pImamProject_ pImamPayload_ =
-    ImagesDeprecate
+    ImagesDeprecate'
     { _imamImage = pImamImage_
     , _imamProject = pImamProject_
     , _imamPayload = pImamPayload_
@@ -108,7 +108,7 @@ instance GoogleRequest ImagesDeprecate where
         type Scopes ImagesDeprecate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient ImagesDeprecate{..}
+        requestClient ImagesDeprecate'{..}
           = go _imamProject _imamImage (Just AltJSON)
               _imamPayload
               computeService

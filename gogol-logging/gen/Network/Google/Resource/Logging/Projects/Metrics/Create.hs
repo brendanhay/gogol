@@ -66,7 +66,7 @@ type ProjectsMetricsCreateResource =
 -- | Creates a logs-based metric.
 --
 -- /See:/ 'projectsMetricsCreate' smart constructor.
-data ProjectsMetricsCreate = ProjectsMetricsCreate
+data ProjectsMetricsCreate = ProjectsMetricsCreate'
     { _pmcXgafv          :: !(Maybe Text)
     , _pmcUploadProtocol :: !(Maybe Text)
     , _pmcPp             :: !Bool
@@ -104,7 +104,7 @@ projectsMetricsCreate
     -> Text -- ^ 'pmcProjectName'
     -> ProjectsMetricsCreate
 projectsMetricsCreate pPmcPayload_ pPmcProjectName_ =
-    ProjectsMetricsCreate
+    ProjectsMetricsCreate'
     { _pmcXgafv = Nothing
     , _pmcUploadProtocol = Nothing
     , _pmcPp = True
@@ -172,7 +172,7 @@ instance GoogleRequest ProjectsMetricsCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.write"]
-        requestClient ProjectsMetricsCreate{..}
+        requestClient ProjectsMetricsCreate'{..}
           = go _pmcProjectName _pmcXgafv _pmcUploadProtocol
               (Just _pmcPp)
               _pmcAccessToken

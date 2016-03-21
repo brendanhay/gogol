@@ -69,7 +69,7 @@ type UserRolesListResource =
 -- | Retrieves a list of user roles, possibly filtered.
 --
 -- /See:/ 'userRolesList' smart constructor.
-data UserRolesList = UserRolesList
+data UserRolesList = UserRolesList'
     { _urlSearchString        :: !(Maybe Text)
     , _urlIds                 :: !(Maybe [Textual Int64])
     , _urlProFileId           :: !(Textual Int64)
@@ -106,7 +106,7 @@ userRolesList
     :: Int64 -- ^ 'urlProFileId'
     -> UserRolesList
 userRolesList pUrlProFileId_ =
-    UserRolesList
+    UserRolesList'
     { _urlSearchString = Nothing
     , _urlIds = Nothing
     , _urlProFileId = _Coerce # pUrlProFileId_
@@ -182,7 +182,7 @@ instance GoogleRequest UserRolesList where
         type Rs UserRolesList = UserRolesListResponse
         type Scopes UserRolesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolesList{..}
+        requestClient UserRolesList'{..}
           = go _urlProFileId _urlSearchString
               (_urlIds ^. _Default)
               _urlSortOrder

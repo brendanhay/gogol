@@ -56,7 +56,7 @@ type MyLibraryAnnotationsUpdateResource =
 -- | Updates an existing annotation.
 --
 -- /See:/ 'myLibraryAnnotationsUpdate' smart constructor.
-data MyLibraryAnnotationsUpdate = MyLibraryAnnotationsUpdate
+data MyLibraryAnnotationsUpdate = MyLibraryAnnotationsUpdate'
     { _mlauPayload      :: !Annotation
     , _mlauAnnotationId :: !Text
     , _mlauSource       :: !(Maybe Text)
@@ -76,7 +76,7 @@ myLibraryAnnotationsUpdate
     -> Text -- ^ 'mlauAnnotationId'
     -> MyLibraryAnnotationsUpdate
 myLibraryAnnotationsUpdate pMlauPayload_ pMlauAnnotationId_ =
-    MyLibraryAnnotationsUpdate
+    MyLibraryAnnotationsUpdate'
     { _mlauPayload = pMlauPayload_
     , _mlauAnnotationId = pMlauAnnotationId_
     , _mlauSource = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest MyLibraryAnnotationsUpdate
         type Rs MyLibraryAnnotationsUpdate = Annotation
         type Scopes MyLibraryAnnotationsUpdate =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryAnnotationsUpdate{..}
+        requestClient MyLibraryAnnotationsUpdate'{..}
           = go _mlauAnnotationId _mlauSource (Just AltJSON)
               _mlauPayload
               booksService

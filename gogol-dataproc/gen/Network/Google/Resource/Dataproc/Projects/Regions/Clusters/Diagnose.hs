@@ -75,7 +75,7 @@ type ProjectsRegionsClustersDiagnoseResource =
 -- Operation.response field contains \`DiagnoseClusterOutputLocation\`.
 --
 -- /See:/ 'projectsRegionsClustersDiagnose' smart constructor.
-data ProjectsRegionsClustersDiagnose = ProjectsRegionsClustersDiagnose
+data ProjectsRegionsClustersDiagnose = ProjectsRegionsClustersDiagnose'
     { _pXgafv          :: !(Maybe Text)
     , _pUploadProtocol :: !(Maybe Text)
     , _pPp             :: !Bool
@@ -121,7 +121,7 @@ projectsRegionsClustersDiagnose
     -> Text -- ^ 'pProjectId'
     -> ProjectsRegionsClustersDiagnose
 projectsRegionsClustersDiagnose pPPayload_ pPClusterName_ pPRegion_ pPProjectId_ =
-    ProjectsRegionsClustersDiagnose
+    ProjectsRegionsClustersDiagnose'
     { _pXgafv = Nothing
     , _pUploadProtocol = Nothing
     , _pPp = True
@@ -193,7 +193,7 @@ instance GoogleRequest
         type Rs ProjectsRegionsClustersDiagnose = Operation
         type Scopes ProjectsRegionsClustersDiagnose =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsClustersDiagnose{..}
+        requestClient ProjectsRegionsClustersDiagnose'{..}
           = go _pProjectId _pRegion _pClusterName _pXgafv
               _pUploadProtocol
               (Just _pPp)

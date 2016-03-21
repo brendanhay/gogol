@@ -56,7 +56,7 @@ type PlacementsPatchResource =
 -- | Updates an existing placement. This method supports patch semantics.
 --
 -- /See:/ 'placementsPatch' smart constructor.
-data PlacementsPatch = PlacementsPatch
+data PlacementsPatch = PlacementsPatch'
     { _ppProFileId :: !(Textual Int64)
     , _ppPayload   :: !Placement
     , _ppId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ placementsPatch
     -> Int64 -- ^ 'ppId'
     -> PlacementsPatch
 placementsPatch pPpProFileId_ pPpPayload_ pPpId_ =
-    PlacementsPatch
+    PlacementsPatch'
     { _ppProFileId = _Coerce # pPpProFileId_
     , _ppPayload = pPpPayload_
     , _ppId = _Coerce # pPpId_
@@ -102,7 +102,7 @@ instance GoogleRequest PlacementsPatch where
         type Rs PlacementsPatch = Placement
         type Scopes PlacementsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementsPatch{..}
+        requestClient PlacementsPatch'{..}
           = go _ppProFileId (Just _ppId) (Just AltJSON)
               _ppPayload
               dFAReportingService

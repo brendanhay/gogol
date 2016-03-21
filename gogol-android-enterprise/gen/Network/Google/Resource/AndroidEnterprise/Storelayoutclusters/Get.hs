@@ -58,7 +58,7 @@ type StorelayoutclustersGetResource =
 -- | Retrieves details of a cluster.
 --
 -- /See:/ 'storelayoutclustersGet' smart constructor.
-data StorelayoutclustersGet = StorelayoutclustersGet
+data StorelayoutclustersGet = StorelayoutclustersGet'
     { _stoEnterpriseId :: !Text
     , _stoPageId       :: !Text
     , _stoClusterId    :: !Text
@@ -79,7 +79,7 @@ storelayoutclustersGet
     -> Text -- ^ 'stoClusterId'
     -> StorelayoutclustersGet
 storelayoutclustersGet pStoEnterpriseId_ pStoPageId_ pStoClusterId_ =
-    StorelayoutclustersGet
+    StorelayoutclustersGet'
     { _stoEnterpriseId = pStoEnterpriseId_
     , _stoPageId = pStoPageId_
     , _stoClusterId = pStoClusterId_
@@ -105,7 +105,7 @@ instance GoogleRequest StorelayoutclustersGet where
         type Rs StorelayoutclustersGet = StoreCluster
         type Scopes StorelayoutclustersGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutclustersGet{..}
+        requestClient StorelayoutclustersGet'{..}
           = go _stoEnterpriseId _stoPageId _stoClusterId
               (Just AltJSON)
               androidEnterpriseService

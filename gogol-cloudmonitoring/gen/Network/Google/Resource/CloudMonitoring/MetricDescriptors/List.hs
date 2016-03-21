@@ -69,7 +69,7 @@ type MetricDescriptorsListResource =
 -- parameter to the value of the nextPageToken.
 --
 -- /See:/ 'metricDescriptorsList' smart constructor.
-data MetricDescriptorsList = MetricDescriptorsList
+data MetricDescriptorsList = MetricDescriptorsList'
     { _mdlProject   :: !Text
     , _mdlCount     :: !(Textual Int32)
     , _mdlPayload   :: !ListMetricDescriptorsRequest
@@ -95,7 +95,7 @@ metricDescriptorsList
     -> ListMetricDescriptorsRequest -- ^ 'mdlPayload'
     -> MetricDescriptorsList
 metricDescriptorsList pMdlProject_ pMdlPayload_ =
-    MetricDescriptorsList
+    MetricDescriptorsList'
     { _mdlProject = pMdlProject_
     , _mdlCount = 100
     , _mdlPayload = pMdlPayload_
@@ -142,7 +142,7 @@ instance GoogleRequest MetricDescriptorsList where
         type Scopes MetricDescriptorsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient MetricDescriptorsList{..}
+        requestClient MetricDescriptorsList'{..}
           = go _mdlProject (Just _mdlCount) _mdlQuery
               _mdlPageToken
               (Just AltJSON)

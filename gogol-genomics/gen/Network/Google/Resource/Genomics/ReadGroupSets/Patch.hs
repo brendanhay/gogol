@@ -75,7 +75,7 @@ type ReadGroupSetsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'readGroupSetsPatch' smart constructor.
-data ReadGroupSetsPatch = ReadGroupSetsPatch
+data ReadGroupSetsPatch = ReadGroupSetsPatch'
     { _rgspXgafv          :: !(Maybe Text)
     , _rgspReadGroupSetId :: !Text
     , _rgspUploadProtocol :: !(Maybe Text)
@@ -116,7 +116,7 @@ readGroupSetsPatch
     -> ReadGroupSet -- ^ 'rgspPayload'
     -> ReadGroupSetsPatch
 readGroupSetsPatch pRgspReadGroupSetId_ pRgspPayload_ =
-    ReadGroupSetsPatch
+    ReadGroupSetsPatch'
     { _rgspXgafv = Nothing
     , _rgspReadGroupSetId = pRgspReadGroupSetId_
     , _rgspUploadProtocol = Nothing
@@ -192,7 +192,7 @@ instance GoogleRequest ReadGroupSetsPatch where
         type Scopes ReadGroupSetsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient ReadGroupSetsPatch{..}
+        requestClient ReadGroupSetsPatch'{..}
           = go _rgspReadGroupSetId _rgspXgafv
               _rgspUploadProtocol
               _rgspUpdateMask

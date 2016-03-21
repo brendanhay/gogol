@@ -78,7 +78,7 @@ type TransferOperationsListResource =
 -- \`users\/*\/operations\`.
 --
 -- /See:/ 'transferOperationsList' smart constructor.
-data TransferOperationsList = TransferOperationsList
+data TransferOperationsList = TransferOperationsList'
     { _tolXgafv          :: !(Maybe Text)
     , _tolUploadProtocol :: !(Maybe Text)
     , _tolPp             :: !Bool
@@ -121,7 +121,7 @@ transferOperationsList
     :: Text -- ^ 'tolName'
     -> TransferOperationsList
 transferOperationsList pTolName_ =
-    TransferOperationsList
+    TransferOperationsList'
     { _tolXgafv = Nothing
     , _tolUploadProtocol = Nothing
     , _tolPp = True
@@ -197,7 +197,7 @@ instance GoogleRequest TransferOperationsList where
              ListOperationsResponse
         type Scopes TransferOperationsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferOperationsList{..}
+        requestClient TransferOperationsList'{..}
           = go _tolName _tolXgafv _tolUploadProtocol
               (Just _tolPp)
               _tolAccessToken

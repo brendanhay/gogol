@@ -55,7 +55,7 @@ type AccountActiveAdSummariesGetResource =
 -- | Gets the account\'s active ad summary by account ID.
 --
 -- /See:/ 'accountActiveAdSummariesGet' smart constructor.
-data AccountActiveAdSummariesGet = AccountActiveAdSummariesGet
+data AccountActiveAdSummariesGet = AccountActiveAdSummariesGet'
     { _aaasgProFileId        :: !(Textual Int64)
     , _aaasgSummaryAccountId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountActiveAdSummariesGet
     -> Int64 -- ^ 'aaasgSummaryAccountId'
     -> AccountActiveAdSummariesGet
 accountActiveAdSummariesGet pAaasgProFileId_ pAaasgSummaryAccountId_ =
-    AccountActiveAdSummariesGet
+    AccountActiveAdSummariesGet'
     { _aaasgProFileId = _Coerce # pAaasgProFileId_
     , _aaasgSummaryAccountId = _Coerce # pAaasgSummaryAccountId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest AccountActiveAdSummariesGet
              AccountActiveAdSummary
         type Scopes AccountActiveAdSummariesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountActiveAdSummariesGet{..}
+        requestClient AccountActiveAdSummariesGet'{..}
           = go _aaasgProFileId _aaasgSummaryAccountId
               (Just AltJSON)
               dFAReportingService

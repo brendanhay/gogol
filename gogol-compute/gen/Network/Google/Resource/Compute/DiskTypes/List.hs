@@ -61,7 +61,7 @@ type DiskTypesListResource =
 -- | Retrieves a list of disk types available to the specified project.
 --
 -- /See:/ 'diskTypesList' smart constructor.
-data DiskTypesList = DiskTypesList
+data DiskTypesList = DiskTypesList'
     { _dtlProject    :: !Text
     , _dtlZone       :: !Text
     , _dtlFilter     :: !(Maybe Text)
@@ -87,7 +87,7 @@ diskTypesList
     -> Text -- ^ 'dtlZone'
     -> DiskTypesList
 diskTypesList pDtlProject_ pDtlZone_ =
-    DiskTypesList
+    DiskTypesList'
     { _dtlProject = pDtlProject_
     , _dtlZone = pDtlZone_
     , _dtlFilter = Nothing
@@ -152,7 +152,7 @@ instance GoogleRequest DiskTypesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient DiskTypesList{..}
+        requestClient DiskTypesList'{..}
           = go _dtlProject _dtlZone _dtlFilter _dtlPageToken
               (Just _dtlMaxResults)
               (Just AltJSON)

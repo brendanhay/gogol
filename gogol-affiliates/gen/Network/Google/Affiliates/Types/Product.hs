@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | An EventResource.
 --
 -- /See:/ 'event' smart constructor.
-data Event = Event
+data Event = Event'
     { _eModifyDate          :: !(Maybe DateTime')
     , _eStatus              :: !(Maybe Text)
     , _eCommissionableSales :: !(Maybe Money)
@@ -86,7 +86,7 @@ data Event = Event
 event
     :: Event
 event =
-    Event
+    Event'
     { _eModifyDate = Nothing
     , _eStatus = Nothing
     , _eCommissionableSales = Nothing
@@ -214,7 +214,7 @@ instance FromJSON Event where
         parseJSON
           = withObject "Event"
               (\ o ->
-                 Event <$>
+                 Event' <$>
                    (o .:? "modifyDate") <*> (o .:? "status") <*>
                      (o .:? "commissionableSales")
                      <*> (o .:? "chargeId")
@@ -234,7 +234,7 @@ instance FromJSON Event where
                      <*> (o .:? "publisherName"))
 
 instance ToJSON Event where
-        toJSON Event{..}
+        toJSON Event'{..}
           = object
               (catMaybes
                  [("modifyDate" .=) <$> _eModifyDate,
@@ -258,7 +258,7 @@ instance ToJSON Event where
 -- | An ApiMoneyProto.
 --
 -- /See:/ 'money' smart constructor.
-data Money = Money
+data Money = Money'
     { _mAmount       :: !(Maybe (Textual Double))
     , _mCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -273,7 +273,7 @@ data Money = Money
 money
     :: Money
 money =
-    Money
+    Money'
     { _mAmount = Nothing
     , _mCurrencyCode = Nothing
     }
@@ -294,11 +294,11 @@ instance FromJSON Money where
         parseJSON
           = withObject "Money"
               (\ o ->
-                 Money <$>
+                 Money' <$>
                    (o .:? "amount") <*> (o .:? "currencyCode"))
 
 instance ToJSON Money where
-        toJSON Money{..}
+        toJSON Money'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _mAmount,
@@ -307,7 +307,7 @@ instance ToJSON Money where
 -- | A LinkResource.
 --
 -- /See:/ 'link' smart constructor.
-data Link = Link
+data Link = Link'
     { _lAuthorship            :: !(Maybe Text)
     , _lDestinationURL        :: !(Maybe Text)
     , _lClickTrackingURL      :: !(Maybe Text)
@@ -379,7 +379,7 @@ data Link = Link
 link
     :: Link
 link =
-    Link
+    Link'
     { _lAuthorship = Nothing
     , _lDestinationURL = Nothing
     , _lClickTrackingURL = Nothing
@@ -528,7 +528,7 @@ instance FromJSON Link where
         parseJSON
           = withObject "Link"
               (\ o ->
-                 Link <$>
+                 Link' <$>
                    (o .:? "authorship") <*> (o .:? "destinationUrl") <*>
                      (o .:? "clickTrackingUrl")
                      <*> (o .:? "createDate")
@@ -551,7 +551,7 @@ instance FromJSON Link where
                      <*> (o .:? "description"))
 
 instance ToJSON Link where
-        toJSON Link{..}
+        toJSON Link'{..}
           = object
               (catMaybes
                  [("authorship" .=) <$> _lAuthorship,
@@ -579,7 +579,7 @@ instance ToJSON Link where
 
 --
 -- /See:/ 'ccOffers' smart constructor.
-data CcOffers = CcOffers
+data CcOffers = CcOffers'
     { _coKind  :: !Text
     , _coItems :: !(Maybe [CcOffer])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -594,7 +594,7 @@ data CcOffers = CcOffers
 ccOffers
     :: CcOffers
 ccOffers =
-    CcOffers
+    CcOffers'
     { _coKind = "gan#ccOffers"
     , _coItems = Nothing
     }
@@ -613,12 +613,12 @@ instance FromJSON CcOffers where
         parseJSON
           = withObject "CcOffers"
               (\ o ->
-                 CcOffers <$>
+                 CcOffers' <$>
                    (o .:? "kind" .!= "gan#ccOffers") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON CcOffers where
-        toJSON CcOffers{..}
+        toJSON CcOffers'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _coKind),
@@ -626,7 +626,7 @@ instance ToJSON CcOffers where
 
 --
 -- /See:/ 'ccOfferDefaultFeesItem' smart constructor.
-data CcOfferDefaultFeesItem = CcOfferDefaultFeesItem
+data CcOfferDefaultFeesItem = CcOfferDefaultFeesItem'
     { _codfiRateType :: !(Maybe Text)
     , _codfiMinRate  :: !(Maybe (Textual Double))
     , _codfiCategory :: !(Maybe Text)
@@ -647,7 +647,7 @@ data CcOfferDefaultFeesItem = CcOfferDefaultFeesItem
 ccOfferDefaultFeesItem
     :: CcOfferDefaultFeesItem
 ccOfferDefaultFeesItem =
-    CcOfferDefaultFeesItem
+    CcOfferDefaultFeesItem'
     { _codfiRateType = Nothing
     , _codfiMinRate = Nothing
     , _codfiCategory = Nothing
@@ -684,13 +684,13 @@ instance FromJSON CcOfferDefaultFeesItem where
         parseJSON
           = withObject "CcOfferDefaultFeesItem"
               (\ o ->
-                 CcOfferDefaultFeesItem <$>
+                 CcOfferDefaultFeesItem' <$>
                    (o .:? "rateType") <*> (o .:? "minRate") <*>
                      (o .:? "category")
                      <*> (o .:? "maxRate"))
 
 instance ToJSON CcOfferDefaultFeesItem where
-        toJSON CcOfferDefaultFeesItem{..}
+        toJSON CcOfferDefaultFeesItem'{..}
           = object
               (catMaybes
                  [("rateType" .=) <$> _codfiRateType,
@@ -702,7 +702,7 @@ instance ToJSON CcOfferDefaultFeesItem where
 -- advertiser or publisher.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rEndDate          :: !(Maybe Text)
     , _rTotalsRows       :: !(Maybe [[JSONValue]])
     , _rKind             :: !Text
@@ -735,7 +735,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rEndDate = Nothing
     , _rTotalsRows = Nothing
     , _rKind = "gan#report"
@@ -794,7 +794,7 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "end_date") <*>
                      (o .:? "totals_rows" .!= mempty)
                      <*> (o .:? "kind" .!= "gan#report")
@@ -805,7 +805,7 @@ instance FromJSON Report where
                      <*> (o .:? "type"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [("end_date" .=) <$> _rEndDate,
@@ -819,7 +819,7 @@ instance ToJSON Report where
 
 --
 -- /See:/ 'advertisers' smart constructor.
-data Advertisers = Advertisers
+data Advertisers = Advertisers'
     { _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
     , _aItems         :: !(Maybe [Advertiser])
@@ -837,7 +837,7 @@ data Advertisers = Advertisers
 advertisers
     :: Advertisers
 advertisers =
-    Advertisers
+    Advertisers'
     { _aNextPageToken = Nothing
     , _aKind = "gan#advertisers"
     , _aItems = Nothing
@@ -864,13 +864,13 @@ instance FromJSON Advertisers where
         parseJSON
           = withObject "Advertisers"
               (\ o ->
-                 Advertisers <$>
+                 Advertisers' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "gan#advertisers")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Advertisers where
-        toJSON Advertisers{..}
+        toJSON Advertisers'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aNextPageToken,
@@ -878,7 +878,7 @@ instance ToJSON Advertisers where
 
 --
 -- /See:/ 'eventProductsItem' smart constructor.
-data EventProductsItem = EventProductsItem
+data EventProductsItem = EventProductsItem'
     { _epiSKUName      :: !(Maybe Text)
     , _epiNetworkFee   :: !(Maybe Money)
     , _epiQuantity     :: !(Maybe (Textual Int64))
@@ -914,7 +914,7 @@ data EventProductsItem = EventProductsItem
 eventProductsItem
     :: EventProductsItem
 eventProductsItem =
-    EventProductsItem
+    EventProductsItem'
     { _epiSKUName = Nothing
     , _epiNetworkFee = Nothing
     , _epiQuantity = Nothing
@@ -980,7 +980,7 @@ instance FromJSON EventProductsItem where
         parseJSON
           = withObject "EventProductsItem"
               (\ o ->
-                 EventProductsItem <$>
+                 EventProductsItem' <$>
                    (o .:? "skuName") <*> (o .:? "networkFee") <*>
                      (o .:? "quantity")
                      <*> (o .:? "categoryName")
@@ -991,7 +991,7 @@ instance FromJSON EventProductsItem where
                      <*> (o .:? "earnings"))
 
 instance ToJSON EventProductsItem where
-        toJSON EventProductsItem{..}
+        toJSON EventProductsItem'{..}
           = object
               (catMaybes
                  [("skuName" .=) <$> _epiSKUName,
@@ -1006,7 +1006,7 @@ instance ToJSON EventProductsItem where
 
 --
 -- /See:/ 'ccOfferBonusRewardsItem' smart constructor.
-data CcOfferBonusRewardsItem = CcOfferBonusRewardsItem
+data CcOfferBonusRewardsItem = CcOfferBonusRewardsItem'
     { _cobriAmount  :: !(Maybe (Textual Double))
     , _cobriDetails :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1021,7 +1021,7 @@ data CcOfferBonusRewardsItem = CcOfferBonusRewardsItem
 ccOfferBonusRewardsItem
     :: CcOfferBonusRewardsItem
 ccOfferBonusRewardsItem =
-    CcOfferBonusRewardsItem
+    CcOfferBonusRewardsItem'
     { _cobriAmount = Nothing
     , _cobriDetails = Nothing
     }
@@ -1042,11 +1042,11 @@ instance FromJSON CcOfferBonusRewardsItem where
         parseJSON
           = withObject "CcOfferBonusRewardsItem"
               (\ o ->
-                 CcOfferBonusRewardsItem <$>
+                 CcOfferBonusRewardsItem' <$>
                    (o .:? "amount") <*> (o .:? "details"))
 
 instance ToJSON CcOfferBonusRewardsItem where
-        toJSON CcOfferBonusRewardsItem{..}
+        toJSON CcOfferBonusRewardsItem'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _cobriAmount,
@@ -1054,7 +1054,7 @@ instance ToJSON CcOfferBonusRewardsItem where
 
 --
 -- /See:/ 'events' smart constructor.
-data Events = Events
+data Events = Events'
     { _eveNextPageToken :: !(Maybe Text)
     , _eveKind          :: !Text
     , _eveItems         :: !(Maybe [Event])
@@ -1072,7 +1072,7 @@ data Events = Events
 events
     :: Events
 events =
-    Events
+    Events'
     { _eveNextPageToken = Nothing
     , _eveKind = "gan#events"
     , _eveItems = Nothing
@@ -1100,13 +1100,13 @@ instance FromJSON Events where
         parseJSON
           = withObject "Events"
               (\ o ->
-                 Events <$>
+                 Events' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "gan#events")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Events where
-        toJSON Events{..}
+        toJSON Events'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _eveNextPageToken,
@@ -1116,7 +1116,7 @@ instance ToJSON Events where
 -- | Special offers on the link.
 --
 -- /See:/ 'linkSpecialOffers' smart constructor.
-data LinkSpecialOffers = LinkSpecialOffers
+data LinkSpecialOffers = LinkSpecialOffers'
     { _lsoFreeShippingMin :: !(Maybe Money)
     , _lsoPercentOff      :: !(Maybe (Textual Double))
     , _lsoPriceCut        :: !(Maybe Money)
@@ -1149,7 +1149,7 @@ data LinkSpecialOffers = LinkSpecialOffers
 linkSpecialOffers
     :: LinkSpecialOffers
 linkSpecialOffers =
-    LinkSpecialOffers
+    LinkSpecialOffers'
     { _lsoFreeShippingMin = Nothing
     , _lsoPercentOff = Nothing
     , _lsoPriceCut = Nothing
@@ -1213,7 +1213,7 @@ instance FromJSON LinkSpecialOffers where
         parseJSON
           = withObject "LinkSpecialOffers"
               (\ o ->
-                 LinkSpecialOffers <$>
+                 LinkSpecialOffers' <$>
                    (o .:? "freeShippingMin") <*> (o .:? "percentOff")
                      <*> (o .:? "priceCut")
                      <*> (o .:? "priceCutMin")
@@ -1223,7 +1223,7 @@ instance FromJSON LinkSpecialOffers where
                      <*> (o .:? "freeGift"))
 
 instance ToJSON LinkSpecialOffers where
-        toJSON LinkSpecialOffers{..}
+        toJSON LinkSpecialOffers'{..}
           = object
               (catMaybes
                  [("freeShippingMin" .=) <$> _lsoFreeShippingMin,
@@ -1237,7 +1237,7 @@ instance ToJSON LinkSpecialOffers where
 
 --
 -- /See:/ 'publishers' smart constructor.
-data Publishers = Publishers
+data Publishers = Publishers'
     { _pNextPageToken :: !(Maybe Text)
     , _pKind          :: !Text
     , _pItems         :: !(Maybe [Publisher])
@@ -1255,7 +1255,7 @@ data Publishers = Publishers
 publishers
     :: Publishers
 publishers =
-    Publishers
+    Publishers'
     { _pNextPageToken = Nothing
     , _pKind = "gan#publishers"
     , _pItems = Nothing
@@ -1282,13 +1282,13 @@ instance FromJSON Publishers where
         parseJSON
           = withObject "Publishers"
               (\ o ->
-                 Publishers <$>
+                 Publishers' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "gan#publishers")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Publishers where
-        toJSON Publishers{..}
+        toJSON Publishers'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _pNextPageToken,
@@ -1297,7 +1297,7 @@ instance ToJSON Publishers where
 -- | An AdvertiserResource.
 --
 -- /See:/ 'advertiser' smart constructor.
-data Advertiser = Advertiser
+data Advertiser = Advertiser'
     { _advAllowPublisherCreatedLinks :: !(Maybe Bool)
     , _advContactPhone               :: !(Maybe Text)
     , _advContactEmail               :: !(Maybe Text)
@@ -1369,7 +1369,7 @@ data Advertiser = Advertiser
 advertiser
     :: Advertiser
 advertiser =
-    Advertiser
+    Advertiser'
     { _advAllowPublisherCreatedLinks = Nothing
     , _advContactPhone = Nothing
     , _advContactEmail = Nothing
@@ -1529,7 +1529,7 @@ instance FromJSON Advertiser where
         parseJSON
           = withObject "Advertiser"
               (\ o ->
-                 Advertiser <$>
+                 Advertiser' <$>
                    (o .:? "allowPublisherCreatedLinks") <*>
                      (o .:? "contactPhone")
                      <*> (o .:? "contactEmail")
@@ -1553,7 +1553,7 @@ instance FromJSON Advertiser where
                      <*> (o .:? "description"))
 
 instance ToJSON Advertiser where
-        toJSON Advertiser{..}
+        toJSON Advertiser'{..}
           = object
               (catMaybes
                  [("allowPublisherCreatedLinks" .=) <$>
@@ -1588,7 +1588,7 @@ instance ToJSON Advertiser where
 -- descriptions.
 --
 -- /See:/ 'ccOffer' smart constructor.
-data CcOffer = CcOffer
+data CcOffer = CcOffer'
     { _cMinimumFinanceCharge          :: !(Maybe Text)
     , _cTrackingURL                   :: !(Maybe Text)
     , _cProhibitedCategories          :: !(Maybe [Text])
@@ -1786,7 +1786,7 @@ data CcOffer = CcOffer
 ccOffer
     :: CcOffer
 ccOffer =
-    CcOffer
+    CcOffer'
     { _cMinimumFinanceCharge = Nothing
     , _cTrackingURL = Nothing
     , _cProhibitedCategories = Nothing
@@ -2271,7 +2271,7 @@ instance FromJSON CcOffer where
         parseJSON
           = withObject "CcOffer"
               (\ o ->
-                 CcOffer <$>
+                 CcOffer' <$>
                    (o .:? "minimumFinanceCharge") <*>
                      (o .:? "trackingUrl")
                      <*> (o .:? "prohibitedCategories" .!= mempty)
@@ -2337,7 +2337,7 @@ instance FromJSON CcOffer where
                      <*> (o .:? "purchaseRateType"))
 
 instance ToJSON CcOffer where
-        toJSON CcOffer{..}
+        toJSON CcOffer'{..}
           = object
               (catMaybes
                  [("minimumFinanceCharge" .=) <$>
@@ -2423,7 +2423,7 @@ instance ToJSON CcOffer where
 
 --
 -- /See:/ 'links' smart constructor.
-data Links = Links
+data Links = Links'
     { _linNextPageToken :: !(Maybe Text)
     , _linKind          :: !Text
     , _linItems         :: !(Maybe [Link])
@@ -2441,7 +2441,7 @@ data Links = Links
 links
     :: Links
 links =
-    Links
+    Links'
     { _linNextPageToken = Nothing
     , _linKind = "gan#links"
     , _linItems = Nothing
@@ -2468,13 +2468,13 @@ instance FromJSON Links where
         parseJSON
           = withObject "Links"
               (\ o ->
-                 Links <$>
+                 Links' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "gan#links")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Links where
-        toJSON Links{..}
+        toJSON Links'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _linNextPageToken,
@@ -2484,7 +2484,7 @@ instance ToJSON Links where
 -- | A PublisherResource.
 --
 -- /See:/ 'publisher' smart constructor.
-data Publisher = Publisher
+data Publisher = Publisher'
     { _pubStatus              :: !(Maybe Text)
     , _pubKind                :: !Text
     , _pubPayoutRank          :: !(Maybe Text)
@@ -2526,7 +2526,7 @@ data Publisher = Publisher
 publisher
     :: Publisher
 publisher =
-    Publisher
+    Publisher'
     { _pubStatus = Nothing
     , _pubKind = "gan#publisher"
     , _pubPayoutRank = Nothing
@@ -2614,7 +2614,7 @@ instance FromJSON Publisher where
         parseJSON
           = withObject "Publisher"
               (\ o ->
-                 Publisher <$>
+                 Publisher' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "gan#publisher")
                      <*> (o .:? "payoutRank")
@@ -2628,7 +2628,7 @@ instance FromJSON Publisher where
                      <*> (o .:? "sites" .!= mempty))
 
 instance ToJSON Publisher where
-        toJSON Publisher{..}
+        toJSON Publisher'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _pubStatus,
@@ -2645,7 +2645,7 @@ instance ToJSON Publisher where
 
 --
 -- /See:/ 'ccOfferRewardsItem' smart constructor.
-data CcOfferRewardsItem = CcOfferRewardsItem
+data CcOfferRewardsItem = CcOfferRewardsItem'
     { _coriAmount            :: !(Maybe (Textual Double))
     , _coriExpirationMonths  :: !(Maybe (Textual Double))
     , _coriCategory          :: !(Maybe Text)
@@ -2672,7 +2672,7 @@ data CcOfferRewardsItem = CcOfferRewardsItem
 ccOfferRewardsItem
     :: CcOfferRewardsItem
 ccOfferRewardsItem =
-    CcOfferRewardsItem
+    CcOfferRewardsItem'
     { _coriAmount = Nothing
     , _coriExpirationMonths = Nothing
     , _coriCategory = Nothing
@@ -2726,7 +2726,7 @@ instance FromJSON CcOfferRewardsItem where
         parseJSON
           = withObject "CcOfferRewardsItem"
               (\ o ->
-                 CcOfferRewardsItem <$>
+                 CcOfferRewardsItem' <$>
                    (o .:? "amount") <*> (o .:? "expirationMonths") <*>
                      (o .:? "category")
                      <*> (o .:? "additionalDetails")
@@ -2734,7 +2734,7 @@ instance FromJSON CcOfferRewardsItem where
                      <*> (o .:? "minRewardTier"))
 
 instance ToJSON CcOfferRewardsItem where
-        toJSON CcOfferRewardsItem{..}
+        toJSON CcOfferRewardsItem'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _coriAmount,

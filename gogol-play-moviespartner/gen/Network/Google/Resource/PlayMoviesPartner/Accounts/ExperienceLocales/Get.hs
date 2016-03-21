@@ -72,7 +72,7 @@ type AccountsExperienceLocalesGetResource =
 -- this method.
 --
 -- /See:/ 'accountsExperienceLocalesGet' smart constructor.
-data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet
+data AccountsExperienceLocalesGet = AccountsExperienceLocalesGet'
     { _aelgXgafv          :: !(Maybe Text)
     , _aelgUploadProtocol :: !(Maybe Text)
     , _aelgPp             :: !Bool
@@ -110,7 +110,7 @@ accountsExperienceLocalesGet
     -> Text -- ^ 'aelgAccountId'
     -> AccountsExperienceLocalesGet
 accountsExperienceLocalesGet pAelgElId_ pAelgAccountId_ =
-    AccountsExperienceLocalesGet
+    AccountsExperienceLocalesGet'
     { _aelgXgafv = Nothing
     , _aelgUploadProtocol = Nothing
     , _aelgPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest AccountsExperienceLocalesGet
              ExperienceLocale
         type Scopes AccountsExperienceLocalesGet =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsExperienceLocalesGet{..}
+        requestClient AccountsExperienceLocalesGet'{..}
           = go _aelgAccountId _aelgElId _aelgXgafv
               _aelgUploadProtocol
               (Just _aelgPp)

@@ -66,7 +66,7 @@ type PostsPatchResource =
 -- | Update a post. This method supports patch semantics.
 --
 -- /See:/ 'postsPatch' smart constructor.
-data PostsPatch = PostsPatch
+data PostsPatch = PostsPatch'
     { _posoFetchBody   :: !Bool
     , _posoFetchImages :: !(Maybe Bool)
     , _posoBlogId      :: !Text
@@ -102,7 +102,7 @@ postsPatch
     -> Text -- ^ 'posoPostId'
     -> PostsPatch
 postsPatch pPosoBlogId_ pPosoPayload_ pPosoPostId_ =
-    PostsPatch
+    PostsPatch'
     { _posoFetchBody = True
     , _posoFetchImages = Nothing
     , _posoBlogId = pPosoBlogId_
@@ -165,7 +165,7 @@ instance GoogleRequest PostsPatch where
         type Rs PostsPatch = Post'
         type Scopes PostsPatch =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PostsPatch{..}
+        requestClient PostsPatch'{..}
           = go _posoBlogId _posoPostId (Just _posoFetchBody)
               _posoFetchImages
               _posoMaxComments

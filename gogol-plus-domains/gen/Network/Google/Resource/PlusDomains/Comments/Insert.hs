@@ -54,7 +54,7 @@ type CommentsInsertResource =
 -- | Create a new comment in reply to an activity.
 --
 -- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert
+data CommentsInsert = CommentsInsert'
     { _cActivityId :: !Text
     , _cPayload    :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentsInsert
     -> Comment -- ^ 'cPayload'
     -> CommentsInsert
 commentsInsert pCActivityId_ pCPayload_ =
-    CommentsInsert
+    CommentsInsert'
     { _cActivityId = pCActivityId_
     , _cPayload = pCPayload_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest CommentsInsert where
         type Scopes CommentsInsert =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.stream.write"]
-        requestClient CommentsInsert{..}
+        requestClient CommentsInsert'{..}
           = go _cActivityId (Just AltJSON) _cPayload
               plusDomainsService
           where go

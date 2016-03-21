@@ -68,7 +68,7 @@ type VariantSetsGetResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsGet' smart constructor.
-data VariantSetsGet = VariantSetsGet
+data VariantSetsGet = VariantSetsGet'
     { _vsgXgafv          :: !(Maybe Text)
     , _vsgUploadProtocol :: !(Maybe Text)
     , _vsgPp             :: !Bool
@@ -102,7 +102,7 @@ variantSetsGet
     :: Text -- ^ 'vsgVariantSetId'
     -> VariantSetsGet
 variantSetsGet pVsgVariantSetId_ =
-    VariantSetsGet
+    VariantSetsGet'
     { _vsgXgafv = Nothing
     , _vsgUploadProtocol = Nothing
     , _vsgPp = True
@@ -162,7 +162,7 @@ instance GoogleRequest VariantSetsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient VariantSetsGet{..}
+        requestClient VariantSetsGet'{..}
           = go _vsgVariantSetId _vsgXgafv _vsgUploadProtocol
               (Just _vsgPp)
               _vsgAccessToken

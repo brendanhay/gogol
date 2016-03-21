@@ -72,7 +72,7 @@ type ReferencesGetResource =
 -- [GlobalAllianceApi.getReference](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L158).
 --
 -- /See:/ 'referencesGet' smart constructor.
-data ReferencesGet = ReferencesGet
+data ReferencesGet = ReferencesGet'
     { _rXgafv          :: !(Maybe Text)
     , _rUploadProtocol :: !(Maybe Text)
     , _rPp             :: !Bool
@@ -106,7 +106,7 @@ referencesGet
     :: Text -- ^ 'rReferenceId'
     -> ReferencesGet
 referencesGet pRReferenceId_ =
-    ReferencesGet
+    ReferencesGet'
     { _rXgafv = Nothing
     , _rUploadProtocol = Nothing
     , _rPp = True
@@ -162,7 +162,7 @@ instance GoogleRequest ReferencesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReferencesGet{..}
+        requestClient ReferencesGet'{..}
           = go _rReferenceId _rXgafv _rUploadProtocol
               (Just _rPp)
               _rAccessToken

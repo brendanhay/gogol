@@ -55,7 +55,7 @@ type ProductsInsertResource =
 -- | Uploads a product to your Merchant Center account.
 --
 -- /See:/ 'productsInsert' smart constructor.
-data ProductsInsert = ProductsInsert
+data ProductsInsert = ProductsInsert'
     { _piMerchantId :: !(Textual Word64)
     , _piPayload    :: !Product
     , _piDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ productsInsert
     -> Product -- ^ 'piPayload'
     -> ProductsInsert
 productsInsert pPiMerchantId_ pPiPayload_ =
-    ProductsInsert
+    ProductsInsert'
     { _piMerchantId = _Coerce # pPiMerchantId_
     , _piPayload = pPiPayload_
     , _piDryRun = Nothing
@@ -100,7 +100,7 @@ instance GoogleRequest ProductsInsert where
         type Rs ProductsInsert = Product
         type Scopes ProductsInsert =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductsInsert{..}
+        requestClient ProductsInsert'{..}
           = go _piMerchantId _piDryRun (Just AltJSON)
               _piPayload
               shoppingContentService

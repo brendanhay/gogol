@@ -73,7 +73,7 @@ type PostsListResource =
 -- | Retrieves a list of posts, possibly filtered.
 --
 -- /See:/ 'postsList' smart constructor.
-data PostsList = PostsList
+data PostsList = PostsList'
     { _pllStatus      :: !(Maybe [PostsListStatus])
     , _pllOrderBy     :: !PostsListOrderBy
     , _pllFetchImages :: !(Maybe Bool)
@@ -116,7 +116,7 @@ postsList
     :: Text -- ^ 'pllBlogId'
     -> PostsList
 postsList pPllBlogId_ =
-    PostsList
+    PostsList'
     { _pllStatus = Nothing
     , _pllOrderBy = Published
     , _pllFetchImages = Nothing
@@ -200,7 +200,7 @@ instance GoogleRequest PostsList where
         type Scopes PostsList =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PostsList{..}
+        requestClient PostsList'{..}
           = go _pllBlogId (_pllStatus ^. _Default)
               (Just _pllOrderBy)
               _pllFetchImages

@@ -53,7 +53,7 @@ type CalendarsPatchResource =
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --
 -- /See:/ 'calendarsPatch' smart constructor.
-data CalendarsPatch = CalendarsPatch
+data CalendarsPatch = CalendarsPatch'
     { _cpCalendarId :: !Text
     , _cpPayload    :: !Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ calendarsPatch
     -> Calendar -- ^ 'cpPayload'
     -> CalendarsPatch
 calendarsPatch pCpCalendarId_ pCpPayload_ =
-    CalendarsPatch
+    CalendarsPatch'
     { _cpCalendarId = pCpCalendarId_
     , _cpPayload = pCpPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CalendarsPatch where
         type Rs CalendarsPatch = Calendar
         type Scopes CalendarsPatch =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarsPatch{..}
+        requestClient CalendarsPatch'{..}
           = go _cpCalendarId (Just AltJSON) _cpPayload
               appsCalendarService
           where go

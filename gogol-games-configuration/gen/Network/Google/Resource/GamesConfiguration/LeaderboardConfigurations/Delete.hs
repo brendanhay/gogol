@@ -51,7 +51,7 @@ type LeaderboardConfigurationsDeleteResource =
 -- | Delete the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsDelete' smart constructor.
-newtype LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete
+newtype LeaderboardConfigurationsDelete = LeaderboardConfigurationsDelete'
     { _lcdLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ leaderboardConfigurationsDelete
     :: Text -- ^ 'lcdLeaderboardId'
     -> LeaderboardConfigurationsDelete
 leaderboardConfigurationsDelete pLcdLeaderboardId_ =
-    LeaderboardConfigurationsDelete
+    LeaderboardConfigurationsDelete'
     { _lcdLeaderboardId = pLcdLeaderboardId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest
         type Rs LeaderboardConfigurationsDelete = ()
         type Scopes LeaderboardConfigurationsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient LeaderboardConfigurationsDelete{..}
+        requestClient LeaderboardConfigurationsDelete'{..}
           = go _lcdLeaderboardId (Just AltJSON)
               gamesConfigurationService
           where go

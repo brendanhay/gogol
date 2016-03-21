@@ -72,7 +72,7 @@ type JobsInsertResource =
 -- | Inserts a new job. Only the state field of the job should be set.
 --
 -- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert
+data JobsInsert = JobsInsert'
     { _jiNote                :: !(Maybe Text)
     , _jiTeamId              :: !Text
     , _jiCustomerPhoneNumber :: !(Maybe Text)
@@ -120,7 +120,7 @@ jobsInsert
     -> Text -- ^ 'jiTitle'
     -> JobsInsert
 jobsInsert pJiTeamId_ pJiAddress_ pJiPayload_ pJiLat_ pJiLng_ pJiTitle_ =
-    JobsInsert
+    JobsInsert'
     { _jiNote = Nothing
     , _jiTeamId = pJiTeamId_
     , _jiCustomerPhoneNumber = Nothing
@@ -200,7 +200,7 @@ instance GoogleRequest JobsInsert where
         type Rs JobsInsert = Job
         type Scopes JobsInsert =
              '["https://www.googleapis.com/auth/coordinate"]
-        requestClient JobsInsert{..}
+        requestClient JobsInsert'{..}
           = go _jiTeamId (Just _jiAddress) (Just _jiLat)
               (Just _jiLng)
               (Just _jiTitle)

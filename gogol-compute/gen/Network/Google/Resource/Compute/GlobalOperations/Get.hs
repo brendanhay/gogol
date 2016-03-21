@@ -57,7 +57,7 @@ type GlobalOperationsGetResource =
 -- making a list() request.
 --
 -- /See:/ 'globalOperationsGet' smart constructor.
-data GlobalOperationsGet = GlobalOperationsGet
+data GlobalOperationsGet = GlobalOperationsGet'
     { _gogProject   :: !Text
     , _gogOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ globalOperationsGet
     -> Text -- ^ 'gogOperation'
     -> GlobalOperationsGet
 globalOperationsGet pGogProject_ pGogOperation_ =
-    GlobalOperationsGet
+    GlobalOperationsGet'
     { _gogProject = pGogProject_
     , _gogOperation = pGogOperation_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest GlobalOperationsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient GlobalOperationsGet{..}
+        requestClient GlobalOperationsGet'{..}
           = go _gogProject _gogOperation (Just AltJSON)
               computeService
           where go

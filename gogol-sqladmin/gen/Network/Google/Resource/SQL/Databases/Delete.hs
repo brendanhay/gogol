@@ -57,7 +57,7 @@ type DatabasesDeleteResource =
 -- | Deletes a database from a Cloud SQL instance.
 --
 -- /See:/ 'databasesDelete' smart constructor.
-data DatabasesDelete = DatabasesDelete
+data DatabasesDelete = DatabasesDelete'
     { _ddProject  :: !Text
     , _ddDatabase :: !Text
     , _ddInstance :: !Text
@@ -78,7 +78,7 @@ databasesDelete
     -> Text -- ^ 'ddInstance'
     -> DatabasesDelete
 databasesDelete pDdProject_ pDdDatabase_ pDdInstance_ =
-    DatabasesDelete
+    DatabasesDelete'
     { _ddProject = pDdProject_
     , _ddDatabase = pDdDatabase_
     , _ddInstance = pDdInstance_
@@ -104,7 +104,7 @@ instance GoogleRequest DatabasesDelete where
         type Scopes DatabasesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient DatabasesDelete{..}
+        requestClient DatabasesDelete'{..}
           = go _ddProject _ddInstance _ddDatabase
               (Just AltJSON)
               sQLAdminService

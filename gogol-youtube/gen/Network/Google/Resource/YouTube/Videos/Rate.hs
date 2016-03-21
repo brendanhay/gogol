@@ -54,7 +54,7 @@ type VideosRateResource =
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --
 -- /See:/ 'videosRate' smart constructor.
-data VideosRate = VideosRate
+data VideosRate = VideosRate'
     { _vrRating :: !VideosRateRating
     , _vrId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ videosRate
     -> Text -- ^ 'vrId'
     -> VideosRate
 videosRate pVrRating_ pVrId_ =
-    VideosRate
+    VideosRate'
     { _vrRating = pVrRating_
     , _vrId = pVrId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest VideosRate where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosRate{..}
+        requestClient VideosRate'{..}
           = go (Just _vrId) (Just _vrRating) (Just AltJSON)
               youTubeService
           where go

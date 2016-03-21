@@ -74,7 +74,7 @@ type OrderDocumentsListResource =
 -- | Retrieves a list of order documents, possibly filtered.
 --
 -- /See:/ 'orderDocumentsList' smart constructor.
-data OrderDocumentsList = OrderDocumentsList
+data OrderDocumentsList = OrderDocumentsList'
     { _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe [Textual Int64])
     , _odlProFileId    :: !(Textual Int64)
@@ -118,7 +118,7 @@ orderDocumentsList
     -> Int64 -- ^ 'odlProjectId'
     -> OrderDocumentsList
 orderDocumentsList pOdlProFileId_ pOdlProjectId_ =
-    OrderDocumentsList
+    OrderDocumentsList'
     { _odlSearchString = Nothing
     , _odlIds = Nothing
     , _odlProFileId = _Coerce # pOdlProFileId_
@@ -210,7 +210,7 @@ instance GoogleRequest OrderDocumentsList where
              OrderDocumentsListResponse
         type Scopes OrderDocumentsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OrderDocumentsList{..}
+        requestClient OrderDocumentsList'{..}
           = go _odlProFileId _odlProjectId _odlSearchString
               (_odlIds ^. _Default)
               _odlSortOrder

@@ -61,7 +61,7 @@ type RasterCollectionsPermissionsBatchUpdateResource
 -- is atomic.
 --
 -- /See:/ 'rasterCollectionsPermissionsBatchUpdate' smart constructor.
-data RasterCollectionsPermissionsBatchUpdate = RasterCollectionsPermissionsBatchUpdate
+data RasterCollectionsPermissionsBatchUpdate = RasterCollectionsPermissionsBatchUpdate'
     { _rcpbuPayload :: !PermissionsBatchUpdateRequest
     , _rcpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ rasterCollectionsPermissionsBatchUpdate
     -> Text -- ^ 'rcpbuId'
     -> RasterCollectionsPermissionsBatchUpdate
 rasterCollectionsPermissionsBatchUpdate pRcpbuPayload_ pRcpbuId_ =
-    RasterCollectionsPermissionsBatchUpdate
+    RasterCollectionsPermissionsBatchUpdate'
     { _rcpbuPayload = pRcpbuPayload_
     , _rcpbuId = pRcpbuId_
     }
@@ -99,7 +99,7 @@ instance GoogleRequest
         type Scopes RasterCollectionsPermissionsBatchUpdate =
              '["https://www.googleapis.com/auth/mapsengine"]
         requestClient
-          RasterCollectionsPermissionsBatchUpdate{..}
+          RasterCollectionsPermissionsBatchUpdate'{..}
           = go _rcpbuId (Just AltJSON) _rcpbuPayload
               mapsEngineService
           where go

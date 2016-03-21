@@ -89,7 +89,7 @@ type ReadGroupSetsImportResource =
 -- name and position)
 --
 -- /See:/ 'readGroupSetsImport' smart constructor.
-data ReadGroupSetsImport = ReadGroupSetsImport
+data ReadGroupSetsImport = ReadGroupSetsImport'
     { _rgsiXgafv          :: !(Maybe Text)
     , _rgsiUploadProtocol :: !(Maybe Text)
     , _rgsiPp             :: !Bool
@@ -123,7 +123,7 @@ readGroupSetsImport
     :: ImportReadGroupSetsRequest -- ^ 'rgsiPayload'
     -> ReadGroupSetsImport
 readGroupSetsImport pRgsiPayload_ =
-    ReadGroupSetsImport
+    ReadGroupSetsImport'
     { _rgsiXgafv = Nothing
     , _rgsiUploadProtocol = Nothing
     , _rgsiPp = True
@@ -183,7 +183,7 @@ instance GoogleRequest ReadGroupSetsImport where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.read_write",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient ReadGroupSetsImport{..}
+        requestClient ReadGroupSetsImport'{..}
           = go _rgsiXgafv _rgsiUploadProtocol (Just _rgsiPp)
               _rgsiAccessToken
               _rgsiUploadType

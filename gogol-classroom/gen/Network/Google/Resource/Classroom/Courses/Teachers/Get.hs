@@ -75,7 +75,7 @@ type CoursesTeachersGetResource =
 -- exist.
 --
 -- /See:/ 'coursesTeachersGet' smart constructor.
-data CoursesTeachersGet = CoursesTeachersGet
+data CoursesTeachersGet = CoursesTeachersGet'
     { _ctgXgafv          :: !(Maybe Text)
     , _ctgUploadProtocol :: !(Maybe Text)
     , _ctgPp             :: !Bool
@@ -113,7 +113,7 @@ coursesTeachersGet
     -> Text -- ^ 'ctgUserId'
     -> CoursesTeachersGet
 coursesTeachersGet pCtgCourseId_ pCtgUserId_ =
-    CoursesTeachersGet
+    CoursesTeachersGet'
     { _ctgXgafv = Nothing
     , _ctgUploadProtocol = Nothing
     , _ctgPp = True
@@ -182,7 +182,7 @@ instance GoogleRequest CoursesTeachersGet where
                "https://www.googleapis.com/auth/classroom.profile.photos",
                "https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
-        requestClient CoursesTeachersGet{..}
+        requestClient CoursesTeachersGet'{..}
           = go _ctgCourseId _ctgUserId _ctgXgafv
               _ctgUploadProtocol
               (Just _ctgPp)

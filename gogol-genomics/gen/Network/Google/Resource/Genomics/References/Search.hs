@@ -76,7 +76,7 @@ type ReferencesSearchResource =
 -- [GlobalAllianceApi.searchReferences](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L146).
 --
 -- /See:/ 'referencesSearch' smart constructor.
-data ReferencesSearch = ReferencesSearch
+data ReferencesSearch = ReferencesSearch'
     { _refXgafv          :: !(Maybe Text)
     , _refUploadProtocol :: !(Maybe Text)
     , _refPp             :: !Bool
@@ -110,7 +110,7 @@ referencesSearch
     :: SearchReferencesRequest -- ^ 'refPayload'
     -> ReferencesSearch
 referencesSearch pRefPayload_ =
-    ReferencesSearch
+    ReferencesSearch'
     { _refXgafv = Nothing
     , _refUploadProtocol = Nothing
     , _refPp = True
@@ -169,7 +169,7 @@ instance GoogleRequest ReferencesSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReferencesSearch{..}
+        requestClient ReferencesSearch'{..}
           = go _refXgafv _refUploadProtocol (Just _refPp)
               _refAccessToken
               _refUploadType

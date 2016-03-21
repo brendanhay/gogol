@@ -51,7 +51,7 @@ type QueriesDeleteQueryResource =
 -- | Deletes a stored query as well as the associated stored reports.
 --
 -- /See:/ 'queriesDeleteQuery' smart constructor.
-newtype QueriesDeleteQuery = QueriesDeleteQuery
+newtype QueriesDeleteQuery = QueriesDeleteQuery'
     { _qdqQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ queriesDeleteQuery
     :: Int64 -- ^ 'qdqQueryId'
     -> QueriesDeleteQuery
 queriesDeleteQuery pQdqQueryId_ =
-    QueriesDeleteQuery
+    QueriesDeleteQuery'
     { _qdqQueryId = _Coerce # pQdqQueryId_
     }
 
@@ -77,7 +77,7 @@ qdqQueryId
 instance GoogleRequest QueriesDeleteQuery where
         type Rs QueriesDeleteQuery = ()
         type Scopes QueriesDeleteQuery = '[]
-        requestClient QueriesDeleteQuery{..}
+        requestClient QueriesDeleteQuery'{..}
           = go _qdqQueryId (Just AltJSON)
               doubleClickBidsService
           where go

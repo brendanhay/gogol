@@ -54,7 +54,7 @@ type SizesInsertResource =
 -- | Inserts a new size.
 --
 -- /See:/ 'sizesInsert' smart constructor.
-data SizesInsert = SizesInsert
+data SizesInsert = SizesInsert'
     { _siProFileId :: !(Textual Int64)
     , _siPayload   :: !Size
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sizesInsert
     -> Size -- ^ 'siPayload'
     -> SizesInsert
 sizesInsert pSiProFileId_ pSiPayload_ =
-    SizesInsert
+    SizesInsert'
     { _siProFileId = _Coerce # pSiProFileId_
     , _siPayload = pSiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SizesInsert where
         type Rs SizesInsert = Size
         type Scopes SizesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SizesInsert{..}
+        requestClient SizesInsert'{..}
           = go _siProFileId (Just AltJSON) _siPayload
               dFAReportingService
           where go

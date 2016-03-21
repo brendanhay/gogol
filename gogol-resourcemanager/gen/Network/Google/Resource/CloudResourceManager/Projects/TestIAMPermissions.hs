@@ -67,7 +67,7 @@ type ProjectsTestIAMPermissionsResource =
 -- | Returns permissions that a caller has on the specified Project.
 --
 -- /See:/ 'projectsTestIAMPermissions' smart constructor.
-data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions
+data ProjectsTestIAMPermissions = ProjectsTestIAMPermissions'
     { _ptipXgafv          :: !(Maybe Text)
     , _ptipUploadProtocol :: !(Maybe Text)
     , _ptipPp             :: !Bool
@@ -105,7 +105,7 @@ projectsTestIAMPermissions
     -> Text -- ^ 'ptipResource'
     -> ProjectsTestIAMPermissions
 projectsTestIAMPermissions pPtipPayload_ pPtipResource_ =
-    ProjectsTestIAMPermissions
+    ProjectsTestIAMPermissions'
     { _ptipXgafv = Nothing
     , _ptipUploadProtocol = Nothing
     , _ptipPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest ProjectsTestIAMPermissions
         type Scopes ProjectsTestIAMPermissions =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient ProjectsTestIAMPermissions{..}
+        requestClient ProjectsTestIAMPermissions'{..}
           = go _ptipResource _ptipXgafv _ptipUploadProtocol
               (Just _ptipPp)
               _ptipAccessToken

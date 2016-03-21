@@ -76,7 +76,7 @@ type CoursesAliasesListResource =
 -- if the course does not exist.
 --
 -- /See:/ 'coursesAliasesList' smart constructor.
-data CoursesAliasesList = CoursesAliasesList
+data CoursesAliasesList = CoursesAliasesList'
     { _calXgafv          :: !(Maybe Text)
     , _calUploadProtocol :: !(Maybe Text)
     , _calPp             :: !Bool
@@ -116,7 +116,7 @@ coursesAliasesList
     :: Text -- ^ 'calCourseId'
     -> CoursesAliasesList
 coursesAliasesList pCalCourseId_ =
-    CoursesAliasesList
+    CoursesAliasesList'
     { _calXgafv = Nothing
     , _calUploadProtocol = Nothing
     , _calPp = True
@@ -193,7 +193,7 @@ instance GoogleRequest CoursesAliasesList where
         type Scopes CoursesAliasesList =
              '["https://www.googleapis.com/auth/classroom.courses",
                "https://www.googleapis.com/auth/classroom.courses.readonly"]
-        requestClient CoursesAliasesList{..}
+        requestClient CoursesAliasesList'{..}
           = go _calCourseId _calXgafv _calUploadProtocol
               (Just _calPp)
               _calAccessToken

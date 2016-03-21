@@ -56,7 +56,7 @@ type TemplatePatchResource =
 -- | Updates an existing template. This method supports patch semantics.
 --
 -- /See:/ 'templatePatch' smart constructor.
-data TemplatePatch = TemplatePatch
+data TemplatePatch = TemplatePatch'
     { _tppTemplateId :: !(Textual Int32)
     , _tppPayload    :: !Template
     , _tppTableId    :: !Text
@@ -77,7 +77,7 @@ templatePatch
     -> Text -- ^ 'tppTableId'
     -> TemplatePatch
 templatePatch pTppTemplateId_ pTppPayload_ pTppTableId_ =
-    TemplatePatch
+    TemplatePatch'
     { _tppTemplateId = _Coerce # pTppTemplateId_
     , _tppPayload = pTppPayload_
     , _tppTableId = pTppTableId_
@@ -104,7 +104,7 @@ instance GoogleRequest TemplatePatch where
         type Rs TemplatePatch = Template
         type Scopes TemplatePatch =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TemplatePatch{..}
+        requestClient TemplatePatch'{..}
           = go _tppTableId _tppTemplateId (Just AltJSON)
               _tppPayload
               fusionTablesService

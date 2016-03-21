@@ -71,7 +71,7 @@ type ReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-data ReportsGenerate = ReportsGenerate
+data ReportsGenerate = ReportsGenerate'
     { _rgDimension  :: !(Maybe [Text])
     , _rgLocale     :: !(Maybe Text)
     , _rgEndDate    :: !Text
@@ -109,7 +109,7 @@ reportsGenerate
     -> Text -- ^ 'rgStartDate'
     -> ReportsGenerate
 reportsGenerate pRgEndDate_ pRgStartDate_ =
-    ReportsGenerate
+    ReportsGenerate'
     { _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -182,7 +182,7 @@ instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
         type Scopes ReportsGenerate =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient ReportsGenerate{..}
+        requestClient ReportsGenerate'{..}
           = go (Just _rgStartDate) (Just _rgEndDate)
               (_rgDimension ^. _Default)
               _rgLocale

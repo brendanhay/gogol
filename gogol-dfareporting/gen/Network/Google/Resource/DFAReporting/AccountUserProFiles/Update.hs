@@ -55,7 +55,7 @@ type AccountUserProFilesUpdateResource =
 -- | Updates an existing account user profile.
 --
 -- /See:/ 'accountUserProFilesUpdate' smart constructor.
-data AccountUserProFilesUpdate = AccountUserProFilesUpdate
+data AccountUserProFilesUpdate = AccountUserProFilesUpdate'
     { _aupfuProFileId :: !(Textual Int64)
     , _aupfuPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountUserProFilesUpdate
     -> AccountUserProFile -- ^ 'aupfuPayload'
     -> AccountUserProFilesUpdate
 accountUserProFilesUpdate pAupfuProFileId_ pAupfuPayload_ =
-    AccountUserProFilesUpdate
+    AccountUserProFilesUpdate'
     { _aupfuProFileId = _Coerce # pAupfuProFileId_
     , _aupfuPayload = pAupfuPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest AccountUserProFilesUpdate
              AccountUserProFile
         type Scopes AccountUserProFilesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountUserProFilesUpdate{..}
+        requestClient AccountUserProFilesUpdate'{..}
           = go _aupfuProFileId (Just AltJSON) _aupfuPayload
               dFAReportingService
           where go

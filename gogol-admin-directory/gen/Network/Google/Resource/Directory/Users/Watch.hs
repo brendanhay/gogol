@@ -78,7 +78,7 @@ type UsersWatchResource =
 -- | Watch for changes in users list
 --
 -- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch
+data UsersWatch = UsersWatch'
     { _uwEvent           :: !(Maybe UsersWatchEvent)
     , _uwOrderBy         :: !(Maybe UsersWatchOrderBy)
     , _uwViewType        :: !UsersWatchViewType
@@ -127,7 +127,7 @@ usersWatch
     :: Channel -- ^ 'uwPayload'
     -> UsersWatch
 usersWatch pUwPayload_ =
-    UsersWatch
+    UsersWatch'
     { _uwEvent = Nothing
     , _uwOrderBy = Nothing
     , _uwViewType = UWVTAdminView
@@ -218,7 +218,7 @@ instance GoogleRequest UsersWatch where
         type Scopes UsersWatch =
              '["https://www.googleapis.com/auth/admin.directory.user",
                "https://www.googleapis.com/auth/admin.directory.user.readonly"]
-        requestClient UsersWatch{..}
+        requestClient UsersWatch'{..}
           = go _uwEvent _uwOrderBy (Just _uwViewType)
               _uwCustomFieldMask
               _uwDomain

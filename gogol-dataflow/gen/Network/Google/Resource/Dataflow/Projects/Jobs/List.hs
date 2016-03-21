@@ -72,7 +72,7 @@ type ProjectsJobsListResource =
 -- | List the jobs of a project
 --
 -- /See:/ 'projectsJobsList' smart constructor.
-data ProjectsJobsList = ProjectsJobsList
+data ProjectsJobsList = ProjectsJobsList'
     { _pjlXgafv          :: !(Maybe Text)
     , _pjlUploadProtocol :: !(Maybe Text)
     , _pjlPp             :: !Bool
@@ -115,7 +115,7 @@ projectsJobsList
     :: Text -- ^ 'pjlProjectId'
     -> ProjectsJobsList
 projectsJobsList pPjlProjectId_ =
-    ProjectsJobsList
+    ProjectsJobsList'
     { _pjlXgafv = Nothing
     , _pjlUploadProtocol = Nothing
     , _pjlPp = True
@@ -194,7 +194,7 @@ instance GoogleRequest ProjectsJobsList where
         type Scopes ProjectsJobsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ProjectsJobsList{..}
+        requestClient ProjectsJobsList'{..}
           = go _pjlProjectId _pjlXgafv _pjlUploadProtocol
               (Just _pjlPp)
               _pjlAccessToken

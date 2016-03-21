@@ -54,7 +54,7 @@ type ReportsInsertResource =
 -- | Creates a report.
 --
 -- /See:/ 'reportsInsert' smart constructor.
-data ReportsInsert = ReportsInsert
+data ReportsInsert = ReportsInsert'
     { _riProFileId :: !(Textual Int64)
     , _riPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ reportsInsert
     -> Report -- ^ 'riPayload'
     -> ReportsInsert
 reportsInsert pRiProFileId_ pRiPayload_ =
-    ReportsInsert
+    ReportsInsert'
     { _riProFileId = _Coerce # pRiProFileId_
     , _riPayload = pRiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ReportsInsert where
         type Rs ReportsInsert = Report
         type Scopes ReportsInsert =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsInsert{..}
+        requestClient ReportsInsert'{..}
           = go _riProFileId (Just AltJSON) _riPayload
               dFAReportingService
           where go

@@ -54,7 +54,7 @@ type ManagementSegmentsListResource =
 -- | Lists segments to which the user has access.
 --
 -- /See:/ 'managementSegmentsList' smart constructor.
-data ManagementSegmentsList = ManagementSegmentsList
+data ManagementSegmentsList = ManagementSegmentsList'
     { _mslStartIndex :: !(Maybe (Textual Int32))
     , _mslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ data ManagementSegmentsList = ManagementSegmentsList
 managementSegmentsList
     :: ManagementSegmentsList
 managementSegmentsList =
-    ManagementSegmentsList
+    ManagementSegmentsList'
     { _mslStartIndex = Nothing
     , _mslMaxResults = Nothing
     }
@@ -95,7 +95,7 @@ instance GoogleRequest ManagementSegmentsList where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementSegmentsList{..}
+        requestClient ManagementSegmentsList'{..}
           = go _mslStartIndex _mslMaxResults (Just AltJSON)
               analyticsService
           where go

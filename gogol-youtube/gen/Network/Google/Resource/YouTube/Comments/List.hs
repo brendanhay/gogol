@@ -62,7 +62,7 @@ type CommentsListResource =
 -- | Returns a list of comments that match the API request parameters.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+data CommentsList = CommentsList'
     { _cllPart       :: !Text
     , _cllId         :: !(Maybe Text)
     , _cllPageToken  :: !(Maybe Text)
@@ -90,7 +90,7 @@ commentsList
     :: Text -- ^ 'cllPart'
     -> CommentsList
 commentsList pCllPart_ =
-    CommentsList
+    CommentsList'
     { _cllPart = pCllPart_
     , _cllId = Nothing
     , _cllPageToken = Nothing
@@ -146,7 +146,7 @@ instance GoogleRequest CommentsList where
         type Rs CommentsList = CommentListResponse
         type Scopes CommentsList =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentsList{..}
+        requestClient CommentsList'{..}
           = go (Just _cllPart) _cllId _cllPageToken
               (Just _cllTextFormat)
               (Just _cllMaxResults)

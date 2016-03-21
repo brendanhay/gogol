@@ -57,7 +57,7 @@ type AssetsParentsListResource =
 -- | Return all parent ids of the specified asset.
 --
 -- /See:/ 'assetsParentsList' smart constructor.
-data AssetsParentsList = AssetsParentsList
+data AssetsParentsList = AssetsParentsList'
     { _aplId         :: !Text
     , _aplPageToken  :: !(Maybe Text)
     , _aplMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ assetsParentsList
     :: Text -- ^ 'aplId'
     -> AssetsParentsList
 assetsParentsList pAplId_ =
-    AssetsParentsList
+    AssetsParentsList'
     { _aplId = pAplId_
     , _aplPageToken = Nothing
     , _aplMaxResults = Nothing
@@ -106,7 +106,7 @@ instance GoogleRequest AssetsParentsList where
         type Scopes AssetsParentsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient AssetsParentsList{..}
+        requestClient AssetsParentsList'{..}
           = go _aplId _aplPageToken _aplMaxResults
               (Just AltJSON)
               mapsEngineService

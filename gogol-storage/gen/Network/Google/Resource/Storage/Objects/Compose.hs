@@ -82,7 +82,7 @@ type ObjectsComposeResource =
 -- bucket.
 --
 -- /See:/ 'objectsCompose' smart constructor.
-data ObjectsCompose = ObjectsCompose
+data ObjectsCompose = ObjectsCompose'
     { _oDestinationPredefinedACL :: !(Maybe ObjectsComposeDestinationPredefinedACL)
     , _oIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _oIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -112,7 +112,7 @@ objectsCompose
     -> Text -- ^ 'oDestinationObject'
     -> ObjectsCompose
 objectsCompose pOPayload_ pODestinationBucket_ pODestinationObject_ =
-    ObjectsCompose
+    ObjectsCompose'
     { _oDestinationPredefinedACL = Nothing
     , _oIfMetagenerationMatch = Nothing
     , _oIfGenerationMatch = Nothing
@@ -166,7 +166,7 @@ instance GoogleRequest ObjectsCompose where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsCompose{..}
+        requestClient ObjectsCompose'{..}
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch
@@ -183,7 +183,7 @@ instance GoogleRequest (MediaDownload ObjectsCompose)
         type Rs (MediaDownload ObjectsCompose) = Stream
         type Scopes (MediaDownload ObjectsCompose) =
              Scopes ObjectsCompose
-        requestClient (MediaDownload ObjectsCompose{..})
+        requestClient (MediaDownload ObjectsCompose'{..})
           = go _oDestinationBucket _oDestinationObject
               _oDestinationPredefinedACL
               _oIfMetagenerationMatch

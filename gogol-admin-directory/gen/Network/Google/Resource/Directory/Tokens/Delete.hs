@@ -55,7 +55,7 @@ type TokensDeleteResource =
 -- | Delete all access tokens issued by a user for an application.
 --
 -- /See:/ 'tokensDelete' smart constructor.
-data TokensDelete = TokensDelete
+data TokensDelete = TokensDelete'
     { _tdClientId :: !Text
     , _tdUserKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ tokensDelete
     -> Text -- ^ 'tdUserKey'
     -> TokensDelete
 tokensDelete pTdClientId_ pTdUserKey_ =
-    TokensDelete
+    TokensDelete'
     { _tdClientId = pTdClientId_
     , _tdUserKey = pTdUserKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest TokensDelete where
         type Rs TokensDelete = ()
         type Scopes TokensDelete =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient TokensDelete{..}
+        requestClient TokensDelete'{..}
           = go _tdUserKey _tdClientId (Just AltJSON)
               directoryService
           where go

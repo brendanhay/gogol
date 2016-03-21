@@ -56,7 +56,7 @@ type PlayListItemsUpdateResource =
 -- position in the playlist.
 --
 -- /See:/ 'playListItemsUpdate' smart constructor.
-data PlayListItemsUpdate = PlayListItemsUpdate
+data PlayListItemsUpdate = PlayListItemsUpdate'
     { _pliuPart    :: !Text
     , _pliuPayload :: !PlayListItem
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ playListItemsUpdate
     -> PlayListItem -- ^ 'pliuPayload'
     -> PlayListItemsUpdate
 playListItemsUpdate pPliuPart_ pPliuPayload_ =
-    PlayListItemsUpdate
+    PlayListItemsUpdate'
     { _pliuPart = pPliuPart_
     , _pliuPayload = pPliuPayload_
     }
@@ -105,7 +105,7 @@ instance GoogleRequest PlayListItemsUpdate where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient PlayListItemsUpdate{..}
+        requestClient PlayListItemsUpdate'{..}
           = go (Just _pliuPart) (Just AltJSON) _pliuPayload
               youTubeService
           where go

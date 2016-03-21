@@ -58,7 +58,7 @@ type ProductsListResource =
 -- | Lists the products in your Merchant Center account.
 --
 -- /See:/ 'productsList' smart constructor.
-data ProductsList = ProductsList
+data ProductsList = ProductsList'
     { _proMerchantId                  :: !(Textual Word64)
     , _proIncludeInvalidInsertedItems :: !(Maybe Bool)
     , _proPageToken                   :: !(Maybe Text)
@@ -80,7 +80,7 @@ productsList
     :: Word64 -- ^ 'proMerchantId'
     -> ProductsList
 productsList pProMerchantId_ =
-    ProductsList
+    ProductsList'
     { _proMerchantId = _Coerce # pProMerchantId_
     , _proIncludeInvalidInsertedItems = Nothing
     , _proPageToken = Nothing
@@ -119,7 +119,7 @@ instance GoogleRequest ProductsList where
         type Rs ProductsList = ProductsListResponse
         type Scopes ProductsList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductsList{..}
+        requestClient ProductsList'{..}
           = go _proMerchantId _proIncludeInvalidInsertedItems
               _proPageToken
               _proMaxResults

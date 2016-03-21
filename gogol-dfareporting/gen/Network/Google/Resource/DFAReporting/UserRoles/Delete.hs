@@ -54,7 +54,7 @@ type UserRolesDeleteResource =
 -- | Deletes an existing user role.
 --
 -- /See:/ 'userRolesDelete' smart constructor.
-data UserRolesDelete = UserRolesDelete
+data UserRolesDelete = UserRolesDelete'
     { _urdProFileId :: !(Textual Int64)
     , _urdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolesDelete
     -> Int64 -- ^ 'urdId'
     -> UserRolesDelete
 userRolesDelete pUrdProFileId_ pUrdId_ =
-    UserRolesDelete
+    UserRolesDelete'
     { _urdProFileId = _Coerce # pUrdProFileId_
     , _urdId = _Coerce # pUrdId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UserRolesDelete where
         type Rs UserRolesDelete = ()
         type Scopes UserRolesDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolesDelete{..}
+        requestClient UserRolesDelete'{..}
           = go _urdProFileId _urdId (Just AltJSON)
               dFAReportingService
           where go

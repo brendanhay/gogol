@@ -54,7 +54,7 @@ type TimelineAttachmentsDeleteResource =
 -- | Deletes an attachment from a timeline item.
 --
 -- /See:/ 'timelineAttachmentsDelete' smart constructor.
-data TimelineAttachmentsDelete = TimelineAttachmentsDelete
+data TimelineAttachmentsDelete = TimelineAttachmentsDelete'
     { _tadItemId       :: !Text
     , _tadAttachmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ timelineAttachmentsDelete
     -> Text -- ^ 'tadAttachmentId'
     -> TimelineAttachmentsDelete
 timelineAttachmentsDelete pTadItemId_ pTadAttachmentId_ =
-    TimelineAttachmentsDelete
+    TimelineAttachmentsDelete'
     { _tadItemId = pTadItemId_
     , _tadAttachmentId = pTadAttachmentId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest TimelineAttachmentsDelete
         type Rs TimelineAttachmentsDelete = ()
         type Scopes TimelineAttachmentsDelete =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineAttachmentsDelete{..}
+        requestClient TimelineAttachmentsDelete'{..}
           = go _tadItemId _tadAttachmentId (Just AltJSON)
               mirrorService
           where go

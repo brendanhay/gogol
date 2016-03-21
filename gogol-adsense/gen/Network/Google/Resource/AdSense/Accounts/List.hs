@@ -53,7 +53,7 @@ type AccountsListResource =
 -- | List all accounts available to this AdSense account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data AccountsList = AccountsList
 accountsList
     :: AccountsList
 accountsList =
-    AccountsList
+    AccountsList'
     { _alPageToken = Nothing
     , _alMaxResults = Nothing
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountsList where
         type Scopes AccountsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsList{..}
+        requestClient AccountsList'{..}
           = go _alPageToken _alMaxResults (Just AltJSON)
               adSenseService
           where go

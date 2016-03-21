@@ -55,7 +55,7 @@ type DomainsGetResource =
 -- | Retrives a domain of the customer.
 --
 -- /See:/ 'domainsGet' smart constructor.
-data DomainsGet = DomainsGet
+data DomainsGet = DomainsGet'
     { _dgCustomer   :: !Text
     , _dgDomainName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainsGet
     -> Text -- ^ 'dgDomainName'
     -> DomainsGet
 domainsGet pDgCustomer_ pDgDomainName_ =
-    DomainsGet
+    DomainsGet'
     { _dgCustomer = pDgCustomer_
     , _dgDomainName = pDgDomainName_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest DomainsGet where
         type Scopes DomainsGet =
              '["https://www.googleapis.com/auth/admin.directory.domain",
                "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
-        requestClient DomainsGet{..}
+        requestClient DomainsGet'{..}
           = go _dgCustomer _dgDomainName (Just AltJSON)
               directoryService
           where go

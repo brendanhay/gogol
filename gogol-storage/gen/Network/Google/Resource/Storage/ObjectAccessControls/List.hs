@@ -58,7 +58,7 @@ type ObjectAccessControlsListResource =
 -- | Retrieves ACL entries on the specified object.
 --
 -- /See:/ 'objectAccessControlsList' smart constructor.
-data ObjectAccessControlsList = ObjectAccessControlsList
+data ObjectAccessControlsList = ObjectAccessControlsList'
     { _oaclBucket     :: !Text
     , _oaclObject     :: !Text
     , _oaclGeneration :: !(Maybe (Textual Int64))
@@ -78,7 +78,7 @@ objectAccessControlsList
     -> Text -- ^ 'oaclObject'
     -> ObjectAccessControlsList
 objectAccessControlsList pOaclBucket_ pOaclObject_ =
-    ObjectAccessControlsList
+    ObjectAccessControlsList'
     { _oaclBucket = pOaclBucket_
     , _oaclObject = pOaclObject_
     , _oaclGeneration = Nothing
@@ -109,7 +109,7 @@ instance GoogleRequest ObjectAccessControlsList where
         type Scopes ObjectAccessControlsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient ObjectAccessControlsList{..}
+        requestClient ObjectAccessControlsList'{..}
           = go _oaclBucket _oaclObject _oaclGeneration
               (Just AltJSON)
               storageService

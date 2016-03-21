@@ -58,7 +58,7 @@ type RollingUpdatesInsertResource =
 -- | Inserts and starts a new update.
 --
 -- /See:/ 'rollingUpdatesInsert' smart constructor.
-data RollingUpdatesInsert = RollingUpdatesInsert
+data RollingUpdatesInsert = RollingUpdatesInsert'
     { _ruiProject :: !Text
     , _ruiZone    :: !Text
     , _ruiPayload :: !RollingUpdate
@@ -79,7 +79,7 @@ rollingUpdatesInsert
     -> RollingUpdate -- ^ 'ruiPayload'
     -> RollingUpdatesInsert
 rollingUpdatesInsert pRuiProject_ pRuiZone_ pRuiPayload_ =
-    RollingUpdatesInsert
+    RollingUpdatesInsert'
     { _ruiProject = pRuiProject_
     , _ruiZone = pRuiZone_
     , _ruiPayload = pRuiPayload_
@@ -104,7 +104,7 @@ instance GoogleRequest RollingUpdatesInsert where
         type Scopes RollingUpdatesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/replicapool"]
-        requestClient RollingUpdatesInsert{..}
+        requestClient RollingUpdatesInsert'{..}
           = go _ruiProject _ruiZone (Just AltJSON) _ruiPayload
               replicaPoolUpdaterService
           where go

@@ -54,7 +54,7 @@ type CreativesUpdateResource =
 -- | Updates an existing creative.
 --
 -- /See:/ 'creativesUpdate' smart constructor.
-data CreativesUpdate = CreativesUpdate
+data CreativesUpdate = CreativesUpdate'
     { _creProFileId :: !(Textual Int64)
     , _crePayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativesUpdate
     -> Creative -- ^ 'crePayload'
     -> CreativesUpdate
 creativesUpdate pCreProFileId_ pCrePayload_ =
-    CreativesUpdate
+    CreativesUpdate'
     { _creProFileId = _Coerce # pCreProFileId_
     , _crePayload = pCrePayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CreativesUpdate where
         type Rs CreativesUpdate = Creative
         type Scopes CreativesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativesUpdate{..}
+        requestClient CreativesUpdate'{..}
           = go _creProFileId (Just AltJSON) _crePayload
               dFAReportingService
           where go

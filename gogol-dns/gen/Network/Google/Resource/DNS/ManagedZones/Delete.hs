@@ -54,7 +54,7 @@ type ManagedZonesDeleteResource =
 -- | Delete a previously created ManagedZone.
 --
 -- /See:/ 'managedZonesDelete' smart constructor.
-data ManagedZonesDelete = ManagedZonesDelete
+data ManagedZonesDelete = ManagedZonesDelete'
     { _mzdProject     :: !Text
     , _mzdManagedZone :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ managedZonesDelete
     -> Text -- ^ 'mzdManagedZone'
     -> ManagedZonesDelete
 managedZonesDelete pMzdProject_ pMzdManagedZone_ =
-    ManagedZonesDelete
+    ManagedZonesDelete'
     { _mzdProject = pMzdProject_
     , _mzdManagedZone = pMzdManagedZone_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest ManagedZonesDelete where
         type Scopes ManagedZonesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ManagedZonesDelete{..}
+        requestClient ManagedZonesDelete'{..}
           = go _mzdProject _mzdManagedZone (Just AltJSON)
               dNSService
           where go

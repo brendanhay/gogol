@@ -55,7 +55,7 @@ type AdvertiserGroupsInsertResource =
 -- | Inserts a new advertiser group.
 --
 -- /See:/ 'advertiserGroupsInsert' smart constructor.
-data AdvertiserGroupsInsert = AdvertiserGroupsInsert
+data AdvertiserGroupsInsert = AdvertiserGroupsInsert'
     { _agiProFileId :: !(Textual Int64)
     , _agiPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ advertiserGroupsInsert
     -> AdvertiserGroup -- ^ 'agiPayload'
     -> AdvertiserGroupsInsert
 advertiserGroupsInsert pAgiProFileId_ pAgiPayload_ =
-    AdvertiserGroupsInsert
+    AdvertiserGroupsInsert'
     { _agiProFileId = _Coerce # pAgiProFileId_
     , _agiPayload = pAgiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AdvertiserGroupsInsert where
         type Rs AdvertiserGroupsInsert = AdvertiserGroup
         type Scopes AdvertiserGroupsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertiserGroupsInsert{..}
+        requestClient AdvertiserGroupsInsert'{..}
           = go _agiProFileId (Just AltJSON) _agiPayload
               dFAReportingService
           where go

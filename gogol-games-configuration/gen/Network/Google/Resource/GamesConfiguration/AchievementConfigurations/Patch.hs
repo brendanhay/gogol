@@ -56,7 +56,7 @@ type AchievementConfigurationsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'achievementConfigurationsPatch' smart constructor.
-data AchievementConfigurationsPatch = AchievementConfigurationsPatch
+data AchievementConfigurationsPatch = AchievementConfigurationsPatch'
     { _acpAchievementId :: !Text
     , _acpPayload       :: !AchievementConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ achievementConfigurationsPatch
     -> AchievementConfiguration -- ^ 'acpPayload'
     -> AchievementConfigurationsPatch
 achievementConfigurationsPatch pAcpAchievementId_ pAcpPayload_ =
-    AchievementConfigurationsPatch
+    AchievementConfigurationsPatch'
     { _acpAchievementId = pAcpAchievementId_
     , _acpPayload = pAcpPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest AchievementConfigurationsPatch
              AchievementConfiguration
         type Scopes AchievementConfigurationsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient AchievementConfigurationsPatch{..}
+        requestClient AchievementConfigurationsPatch'{..}
           = go _acpAchievementId (Just AltJSON) _acpPayload
               gamesConfigurationService
           where go

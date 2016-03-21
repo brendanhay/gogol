@@ -57,7 +57,7 @@ type ReportsRunResource =
 -- | Runs a report.
 --
 -- /See:/ 'reportsRun' smart constructor.
-data ReportsRun = ReportsRun
+data ReportsRun = ReportsRun'
     { _rrSynchronous :: !(Maybe Bool)
     , _rrReportId    :: !(Textual Int64)
     , _rrProFileId   :: !(Textual Int64)
@@ -77,7 +77,7 @@ reportsRun
     -> Int64 -- ^ 'rrProFileId'
     -> ReportsRun
 reportsRun pRrReportId_ pRrProFileId_ =
-    ReportsRun
+    ReportsRun'
     { _rrSynchronous = Nothing
     , _rrReportId = _Coerce # pRrReportId_
     , _rrProFileId = _Coerce # pRrProFileId_
@@ -105,7 +105,7 @@ instance GoogleRequest ReportsRun where
         type Rs ReportsRun = File
         type Scopes ReportsRun =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsRun{..}
+        requestClient ReportsRun'{..}
           = go _rrProFileId _rrReportId _rrSynchronous
               (Just AltJSON)
               dFAReportingService

@@ -68,7 +68,7 @@ type InstancesStopResource =
 -- are deleted. For more information, see Stopping an instance.
 --
 -- /See:/ 'instancesStop' smart constructor.
-data InstancesStop = InstancesStop
+data InstancesStop = InstancesStop'
     { _isProject  :: !Text
     , _isZone     :: !Text
     , _isInstance :: !Text
@@ -89,7 +89,7 @@ instancesStop
     -> Text -- ^ 'isInstance'
     -> InstancesStop
 instancesStop pIsProject_ pIsZone_ pIsInstance_ =
-    InstancesStop
+    InstancesStop'
     { _isProject = pIsProject_
     , _isZone = pIsZone_
     , _isInstance = pIsInstance_
@@ -114,7 +114,7 @@ instance GoogleRequest InstancesStop where
         type Scopes InstancesStop =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesStop{..}
+        requestClient InstancesStop'{..}
           = go _isProject _isZone _isInstance (Just AltJSON)
               computeService
           where go

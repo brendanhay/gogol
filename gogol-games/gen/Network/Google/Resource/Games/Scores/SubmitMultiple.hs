@@ -55,7 +55,7 @@ type ScoresSubmitMultipleResource =
 -- | Submits multiple scores to leaderboards.
 --
 -- /See:/ 'scoresSubmitMultiple' smart constructor.
-data ScoresSubmitMultiple = ScoresSubmitMultiple
+data ScoresSubmitMultiple = ScoresSubmitMultiple'
     { _ssmPayload  :: !PlayerScoreSubmissionList
     , _ssmLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ scoresSubmitMultiple
     :: PlayerScoreSubmissionList -- ^ 'ssmPayload'
     -> ScoresSubmitMultiple
 scoresSubmitMultiple pSsmPayload_ =
-    ScoresSubmitMultiple
+    ScoresSubmitMultiple'
     { _ssmPayload = pSsmPayload_
     , _ssmLanguage = Nothing
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ScoresSubmitMultiple where
         type Scopes ScoresSubmitMultiple =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresSubmitMultiple{..}
+        requestClient ScoresSubmitMultiple'{..}
           = go _ssmLanguage (Just AltJSON) _ssmPayload
               gamesService
           where go

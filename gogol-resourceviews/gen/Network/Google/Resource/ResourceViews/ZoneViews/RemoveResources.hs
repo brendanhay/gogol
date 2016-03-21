@@ -61,7 +61,7 @@ type ZoneViewsRemoveResourcesResource =
 -- | Remove resources from the view.
 --
 -- /See:/ 'zoneViewsRemoveResources' smart constructor.
-data ZoneViewsRemoveResources = ZoneViewsRemoveResources
+data ZoneViewsRemoveResources = ZoneViewsRemoveResources'
     { _zvrrResourceView :: !Text
     , _zvrrProject      :: !Text
     , _zvrrZone         :: !Text
@@ -86,7 +86,7 @@ zoneViewsRemoveResources
     -> ZoneViewsRemoveResourcesRequest -- ^ 'zvrrPayload'
     -> ZoneViewsRemoveResources
 zoneViewsRemoveResources pZvrrResourceView_ pZvrrProject_ pZvrrZone_ pZvrrPayload_ =
-    ZoneViewsRemoveResources
+    ZoneViewsRemoveResources'
     { _zvrrResourceView = pZvrrResourceView_
     , _zvrrProject = pZvrrProject_
     , _zvrrZone = pZvrrZone_
@@ -119,7 +119,7 @@ instance GoogleRequest ZoneViewsRemoveResources where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient ZoneViewsRemoveResources{..}
+        requestClient ZoneViewsRemoveResources'{..}
           = go _zvrrProject _zvrrZone _zvrrResourceView
               (Just AltJSON)
               _zvrrPayload

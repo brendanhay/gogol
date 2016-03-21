@@ -57,7 +57,7 @@ type StorelayoutpagesUpdateResource =
 -- | Updates the content of a store page.
 --
 -- /See:/ 'storelayoutpagesUpdate' smart constructor.
-data StorelayoutpagesUpdate = StorelayoutpagesUpdate
+data StorelayoutpagesUpdate = StorelayoutpagesUpdate'
     { _suEnterpriseId :: !Text
     , _suPageId       :: !Text
     , _suPayload      :: !StorePage
@@ -78,7 +78,7 @@ storelayoutpagesUpdate
     -> StorePage -- ^ 'suPayload'
     -> StorelayoutpagesUpdate
 storelayoutpagesUpdate pSuEnterpriseId_ pSuPageId_ pSuPayload_ =
-    StorelayoutpagesUpdate
+    StorelayoutpagesUpdate'
     { _suEnterpriseId = pSuEnterpriseId_
     , _suPageId = pSuPageId_
     , _suPayload = pSuPayload_
@@ -103,7 +103,7 @@ instance GoogleRequest StorelayoutpagesUpdate where
         type Rs StorelayoutpagesUpdate = StorePage
         type Scopes StorelayoutpagesUpdate =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutpagesUpdate{..}
+        requestClient StorelayoutpagesUpdate'{..}
           = go _suEnterpriseId _suPageId (Just AltJSON)
               _suPayload
               androidEnterpriseService

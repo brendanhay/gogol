@@ -52,7 +52,7 @@ type ChannelsStopResource =
 -- | Stop watching resources through this channel
 --
 -- /See:/ 'channelsStop' smart constructor.
-newtype ChannelsStop = ChannelsStop
+newtype ChannelsStop = ChannelsStop'
     { _csPayload :: Channel
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ channelsStop
     :: Channel -- ^ 'csPayload'
     -> ChannelsStop
 channelsStop pCsPayload_ =
-    ChannelsStop
+    ChannelsStop'
     { _csPayload = pCsPayload_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest ChannelsStop where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ChannelsStop{..}
+        requestClient ChannelsStop'{..}
           = go (Just AltJSON) _csPayload storageService
           where go
                   = buildClient (Proxy :: Proxy ChannelsStopResource)

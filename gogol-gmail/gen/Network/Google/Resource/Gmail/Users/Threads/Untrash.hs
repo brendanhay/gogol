@@ -55,7 +55,7 @@ type UsersThreadsUntrashResource =
 -- | Removes the specified thread from the trash.
 --
 -- /See:/ 'usersThreadsUntrash' smart constructor.
-data UsersThreadsUntrash = UsersThreadsUntrash
+data UsersThreadsUntrash = UsersThreadsUntrash'
     { _utuUserId :: !Text
     , _utuId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersThreadsUntrash
     :: Text -- ^ 'utuId'
     -> UsersThreadsUntrash
 usersThreadsUntrash pUtuId_ =
-    UsersThreadsUntrash
+    UsersThreadsUntrash'
     { _utuUserId = "me"
     , _utuId = pUtuId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersThreadsUntrash where
         type Scopes UsersThreadsUntrash =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersThreadsUntrash{..}
+        requestClient UsersThreadsUntrash'{..}
           = go _utuUserId _utuId (Just AltJSON) gmailService
           where go
                   = buildClient

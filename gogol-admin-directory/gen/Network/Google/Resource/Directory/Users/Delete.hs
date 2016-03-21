@@ -52,7 +52,7 @@ type UsersDeleteResource =
 -- | Delete user
 --
 -- /See:/ 'usersDelete' smart constructor.
-newtype UsersDelete = UsersDelete
+newtype UsersDelete = UsersDelete'
     { _udUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ usersDelete
     :: Text -- ^ 'udUserKey'
     -> UsersDelete
 usersDelete pUdUserKey_ =
-    UsersDelete
+    UsersDelete'
     { _udUserKey = pUdUserKey_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest UsersDelete where
         type Rs UsersDelete = ()
         type Scopes UsersDelete =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersDelete{..}
+        requestClient UsersDelete'{..}
           = go _udUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersDeleteResource)

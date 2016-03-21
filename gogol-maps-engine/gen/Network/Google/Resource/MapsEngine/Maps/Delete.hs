@@ -51,7 +51,7 @@ type MapsDeleteResource =
 -- | Delete a map.
 --
 -- /See:/ 'mapsDelete' smart constructor.
-newtype MapsDelete = MapsDelete
+newtype MapsDelete = MapsDelete'
     { _mdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ mapsDelete
     :: Text -- ^ 'mdId'
     -> MapsDelete
 mapsDelete pMdId_ =
-    MapsDelete
+    MapsDelete'
     { _mdId = pMdId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest MapsDelete where
         type Rs MapsDelete = ()
         type Scopes MapsDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient MapsDelete{..}
+        requestClient MapsDelete'{..}
           = go _mdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsDeleteResource)

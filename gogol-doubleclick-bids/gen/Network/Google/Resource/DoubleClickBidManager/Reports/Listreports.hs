@@ -53,7 +53,7 @@ type ReportsListreportsResource =
 -- | Retrieves stored reports.
 --
 -- /See:/ 'reportsListreports' smart constructor.
-newtype ReportsListreports = ReportsListreports
+newtype ReportsListreports = ReportsListreports'
     { _rlQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ reportsListreports
     :: Int64 -- ^ 'rlQueryId'
     -> ReportsListreports
 reportsListreports pRlQueryId_ =
-    ReportsListreports
+    ReportsListreports'
     { _rlQueryId = _Coerce # pRlQueryId_
     }
 
@@ -79,7 +79,7 @@ rlQueryId
 instance GoogleRequest ReportsListreports where
         type Rs ReportsListreports = ListReportsResponse
         type Scopes ReportsListreports = '[]
-        requestClient ReportsListreports{..}
+        requestClient ReportsListreports'{..}
           = go _rlQueryId (Just AltJSON) doubleClickBidsService
           where go
                   = buildClient

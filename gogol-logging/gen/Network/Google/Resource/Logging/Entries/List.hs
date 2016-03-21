@@ -69,7 +69,7 @@ type EntriesListResource =
 -- Logs](\/logging\/docs\/export).
 --
 -- /See:/ 'entriesList' smart constructor.
-data EntriesList = EntriesList
+data EntriesList = EntriesList'
     { _elXgafv          :: !(Maybe Text)
     , _elUploadProtocol :: !(Maybe Text)
     , _elPp             :: !Bool
@@ -103,7 +103,7 @@ entriesList
     :: ListLogEntriesRequest -- ^ 'elPayload'
     -> EntriesList
 entriesList pElPayload_ =
-    EntriesList
+    EntriesList'
     { _elXgafv = Nothing
     , _elUploadProtocol = Nothing
     , _elPp = True
@@ -162,7 +162,7 @@ instance GoogleRequest EntriesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
-        requestClient EntriesList{..}
+        requestClient EntriesList'{..}
           = go _elXgafv _elUploadProtocol (Just _elPp)
               _elAccessToken
               _elUploadType

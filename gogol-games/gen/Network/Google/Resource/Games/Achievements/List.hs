@@ -63,7 +63,7 @@ type AchievementsListResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsList' smart constructor.
-data AchievementsList = AchievementsList
+data AchievementsList = AchievementsList'
     { _alState      :: !(Maybe AchievementsListState)
     , _alLanguage   :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
@@ -88,7 +88,7 @@ achievementsList
     :: Text -- ^ 'alPlayerId'
     -> AchievementsList
 achievementsList pAlPlayerId_ =
-    AchievementsList
+    AchievementsList'
     { _alState = Nothing
     , _alLanguage = Nothing
     , _alPageToken = Nothing
@@ -131,7 +131,7 @@ instance GoogleRequest AchievementsList where
         type Scopes AchievementsList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsList{..}
+        requestClient AchievementsList'{..}
           = go _alPlayerId _alState _alLanguage _alPageToken
               _alMaxResults
               (Just AltJSON)

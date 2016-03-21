@@ -25,7 +25,7 @@ import           Network.Google.Prelude
 -- billing account to one or more projects.
 --
 -- /See:/ 'billingAccount' smart constructor.
-data BillingAccount = BillingAccount
+data BillingAccount = BillingAccount'
     { _baOpen        :: !(Maybe Bool)
     , _baName        :: !(Maybe Text)
     , _baDisplayName :: !(Maybe Text)
@@ -43,7 +43,7 @@ data BillingAccount = BillingAccount
 billingAccount
     :: BillingAccount
 billingAccount =
-    BillingAccount
+    BillingAccount'
     { _baOpen = Nothing
     , _baName = Nothing
     , _baDisplayName = Nothing
@@ -74,12 +74,12 @@ instance FromJSON BillingAccount where
         parseJSON
           = withObject "BillingAccount"
               (\ o ->
-                 BillingAccount <$>
+                 BillingAccount' <$>
                    (o .:? "open") <*> (o .:? "name") <*>
                      (o .:? "displayName"))
 
 instance ToJSON BillingAccount where
-        toJSON BillingAccount{..}
+        toJSON BillingAccount'{..}
           = object
               (catMaybes
                  [("open" .=) <$> _baOpen, ("name" .=) <$> _baName,
@@ -90,7 +90,7 @@ instance ToJSON BillingAccount where
 -- billing account can be assigned to multiple projects).
 --
 -- /See:/ 'projectBillingInfo' smart constructor.
-data ProjectBillingInfo = ProjectBillingInfo
+data ProjectBillingInfo = ProjectBillingInfo'
     { _pbiName               :: !(Maybe Text)
     , _pbiBillingAccountName :: !(Maybe Text)
     , _pbiProjectId          :: !(Maybe Text)
@@ -111,7 +111,7 @@ data ProjectBillingInfo = ProjectBillingInfo
 projectBillingInfo
     :: ProjectBillingInfo
 projectBillingInfo =
-    ProjectBillingInfo
+    ProjectBillingInfo'
     { _pbiName = Nothing
     , _pbiBillingAccountName = Nothing
     , _pbiProjectId = Nothing
@@ -153,13 +153,13 @@ instance FromJSON ProjectBillingInfo where
         parseJSON
           = withObject "ProjectBillingInfo"
               (\ o ->
-                 ProjectBillingInfo <$>
+                 ProjectBillingInfo' <$>
                    (o .:? "name") <*> (o .:? "billingAccountName") <*>
                      (o .:? "projectId")
                      <*> (o .:? "billingEnabled"))
 
 instance ToJSON ProjectBillingInfo where
-        toJSON ProjectBillingInfo{..}
+        toJSON ProjectBillingInfo'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _pbiName,
@@ -170,7 +170,7 @@ instance ToJSON ProjectBillingInfo where
 -- | Request message for \`ListProjectBillingInfoResponse\`.
 --
 -- /See:/ 'listProjectBillingInfoResponse' smart constructor.
-data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse
+data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse'
     { _lpbirNextPageToken      :: !(Maybe Text)
     , _lpbirProjectBillingInfo :: !(Maybe [ProjectBillingInfo])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -185,7 +185,7 @@ data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse
 listProjectBillingInfoResponse
     :: ListProjectBillingInfoResponse
 listProjectBillingInfoResponse =
-    ListProjectBillingInfoResponse
+    ListProjectBillingInfoResponse'
     { _lpbirNextPageToken = Nothing
     , _lpbirProjectBillingInfo = Nothing
     }
@@ -213,12 +213,12 @@ instance FromJSON ListProjectBillingInfoResponse
         parseJSON
           = withObject "ListProjectBillingInfoResponse"
               (\ o ->
-                 ListProjectBillingInfoResponse <$>
+                 ListProjectBillingInfoResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "projectBillingInfo" .!= mempty))
 
 instance ToJSON ListProjectBillingInfoResponse where
-        toJSON ListProjectBillingInfoResponse{..}
+        toJSON ListProjectBillingInfoResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lpbirNextPageToken,
@@ -228,7 +228,7 @@ instance ToJSON ListProjectBillingInfoResponse where
 -- | Response message for \`ListBillingAccounts\`.
 --
 -- /See:/ 'listBillingAccountsResponse' smart constructor.
-data ListBillingAccountsResponse = ListBillingAccountsResponse
+data ListBillingAccountsResponse = ListBillingAccountsResponse'
     { _lbarNextPageToken   :: !(Maybe Text)
     , _lbarBillingAccounts :: !(Maybe [BillingAccount])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -243,7 +243,7 @@ data ListBillingAccountsResponse = ListBillingAccountsResponse
 listBillingAccountsResponse
     :: ListBillingAccountsResponse
 listBillingAccountsResponse =
-    ListBillingAccountsResponse
+    ListBillingAccountsResponse'
     { _lbarNextPageToken = Nothing
     , _lbarBillingAccounts = Nothing
     }
@@ -269,12 +269,12 @@ instance FromJSON ListBillingAccountsResponse where
         parseJSON
           = withObject "ListBillingAccountsResponse"
               (\ o ->
-                 ListBillingAccountsResponse <$>
+                 ListBillingAccountsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "billingAccounts" .!= mempty))
 
 instance ToJSON ListBillingAccountsResponse where
-        toJSON ListBillingAccountsResponse{..}
+        toJSON ListBillingAccountsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lbarNextPageToken,

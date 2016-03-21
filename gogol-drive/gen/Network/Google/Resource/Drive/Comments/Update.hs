@@ -56,7 +56,7 @@ type CommentsUpdateResource =
 -- | Updates a comment with patch semantics.
 --
 -- /See:/ 'commentsUpdate' smart constructor.
-data CommentsUpdate = CommentsUpdate
+data CommentsUpdate = CommentsUpdate'
     { _cuPayload   :: !Comment
     , _cuFileId    :: !Text
     , _cuCommentId :: !Text
@@ -77,7 +77,7 @@ commentsUpdate
     -> Text -- ^ 'cuCommentId'
     -> CommentsUpdate
 commentsUpdate pCuPayload_ pCuFileId_ pCuCommentId_ =
-    CommentsUpdate
+    CommentsUpdate'
     { _cuPayload = pCuPayload_
     , _cuFileId = pCuFileId_
     , _cuCommentId = pCuCommentId_
@@ -102,7 +102,7 @@ instance GoogleRequest CommentsUpdate where
         type Scopes CommentsUpdate =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient CommentsUpdate{..}
+        requestClient CommentsUpdate'{..}
           = go _cuFileId _cuCommentId (Just AltJSON) _cuPayload
               driveService
           where go

@@ -52,14 +52,14 @@ type ScoresResetAllForAllPlayersResource =
 --
 -- /See:/ 'scoresResetAllForAllPlayers' smart constructor.
 data ScoresResetAllForAllPlayers =
-    ScoresResetAllForAllPlayers
+    ScoresResetAllForAllPlayers'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetAllForAllPlayers' with the minimum fields required to make a request.
 --
 scoresResetAllForAllPlayers
     :: ScoresResetAllForAllPlayers
-scoresResetAllForAllPlayers = ScoresResetAllForAllPlayers
+scoresResetAllForAllPlayers = ScoresResetAllForAllPlayers'
 
 instance GoogleRequest ScoresResetAllForAllPlayers
          where
@@ -67,7 +67,7 @@ instance GoogleRequest ScoresResetAllForAllPlayers
         type Scopes ScoresResetAllForAllPlayers =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresResetAllForAllPlayers{}
+        requestClient ScoresResetAllForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

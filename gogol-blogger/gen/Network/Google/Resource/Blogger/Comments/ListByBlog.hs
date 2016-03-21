@@ -64,7 +64,7 @@ type CommentsListByBlogResource =
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
 --
 -- /See:/ 'commentsListByBlog' smart constructor.
-data CommentsListByBlog = CommentsListByBlog
+data CommentsListByBlog = CommentsListByBlog'
     { _clbbStatus      :: !(Maybe [CommentsListByBlogStatus])
     , _clbbEndDate     :: !(Maybe DateTime')
     , _clbbBlogId      :: !Text
@@ -95,7 +95,7 @@ commentsListByBlog
     :: Text -- ^ 'clbbBlogId'
     -> CommentsListByBlog
 commentsListByBlog pClbbBlogId_ =
-    CommentsListByBlog
+    CommentsListByBlog'
     { _clbbStatus = Nothing
     , _clbbEndDate = Nothing
     , _clbbBlogId = pClbbBlogId_
@@ -153,7 +153,7 @@ instance GoogleRequest CommentsListByBlog where
         type Scopes CommentsListByBlog =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient CommentsListByBlog{..}
+        requestClient CommentsListByBlog'{..}
           = go _clbbBlogId (_clbbStatus ^. _Default)
               _clbbEndDate
               _clbbStartDate

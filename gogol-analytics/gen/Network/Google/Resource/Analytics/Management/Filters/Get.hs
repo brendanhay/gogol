@@ -55,7 +55,7 @@ type ManagementFiltersGetResource =
 -- | Returns a filters to which the user has access.
 --
 -- /See:/ 'managementFiltersGet' smart constructor.
-data ManagementFiltersGet = ManagementFiltersGet
+data ManagementFiltersGet = ManagementFiltersGet'
     { _mfgFilterId  :: !Text
     , _mfgAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementFiltersGet
     -> Text -- ^ 'mfgAccountId'
     -> ManagementFiltersGet
 managementFiltersGet pMfgFilterId_ pMfgAccountId_ =
-    ManagementFiltersGet
+    ManagementFiltersGet'
     { _mfgFilterId = pMfgFilterId_
     , _mfgAccountId = pMfgAccountId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ManagementFiltersGet where
         type Scopes ManagementFiltersGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementFiltersGet{..}
+        requestClient ManagementFiltersGet'{..}
           = go _mfgAccountId _mfgFilterId (Just AltJSON)
               analyticsService
           where go

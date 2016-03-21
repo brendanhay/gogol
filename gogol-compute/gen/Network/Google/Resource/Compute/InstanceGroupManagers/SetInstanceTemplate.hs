@@ -67,7 +67,7 @@ type InstanceGroupManagersSetInstanceTemplateResource
 -- change unless you recreate them.
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplate' smart constructor.
-data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate
+data InstanceGroupManagersSetInstanceTemplate = InstanceGroupManagersSetInstanceTemplate'
     { _igmsitProject              :: !Text
     , _igmsitInstanceGroupManager :: !Text
     , _igmsitZone                 :: !Text
@@ -92,7 +92,7 @@ instanceGroupManagersSetInstanceTemplate
     -> InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'igmsitPayload'
     -> InstanceGroupManagersSetInstanceTemplate
 instanceGroupManagersSetInstanceTemplate pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ pIgmsitPayload_ =
-    InstanceGroupManagersSetInstanceTemplate
+    InstanceGroupManagersSetInstanceTemplate'
     { _igmsitProject = pIgmsitProject_
     , _igmsitInstanceGroupManager = pIgmsitInstanceGroupManager_
     , _igmsitZone = pIgmsitZone_
@@ -131,7 +131,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersSetInstanceTemplate{..}
+          InstanceGroupManagersSetInstanceTemplate'{..}
           = go _igmsitProject _igmsitZone
               _igmsitInstanceGroupManager
               (Just AltJSON)

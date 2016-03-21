@@ -68,7 +68,7 @@ type VolumesMybooksListResource =
 -- | Return a list of books in My Library.
 --
 -- /See:/ 'volumesMybooksList' smart constructor.
-data VolumesMybooksList = VolumesMybooksList
+data VolumesMybooksList = VolumesMybooksList'
     { _vmlProcessingState :: !(Maybe [VolumesMybooksListProcessingState])
     , _vmlAcquireMethod   :: !(Maybe [VolumesMybooksListAcquireMethod])
     , _vmlCountry         :: !(Maybe Text)
@@ -98,7 +98,7 @@ data VolumesMybooksList = VolumesMybooksList
 volumesMybooksList
     :: VolumesMybooksList
 volumesMybooksList =
-    VolumesMybooksList
+    VolumesMybooksList'
     { _vmlProcessingState = Nothing
     , _vmlAcquireMethod = Nothing
     , _vmlCountry = Nothing
@@ -159,7 +159,7 @@ instance GoogleRequest VolumesMybooksList where
         type Rs VolumesMybooksList = Volumes
         type Scopes VolumesMybooksList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesMybooksList{..}
+        requestClient VolumesMybooksList'{..}
           = go (_vmlProcessingState ^. _Default)
               (_vmlAcquireMethod ^. _Default)
               _vmlCountry

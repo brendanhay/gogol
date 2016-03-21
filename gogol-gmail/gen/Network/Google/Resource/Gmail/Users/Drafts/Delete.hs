@@ -56,7 +56,7 @@ type UsersDraftsDeleteResource =
 -- trash it.
 --
 -- /See:/ 'usersDraftsDelete' smart constructor.
-data UsersDraftsDelete = UsersDraftsDelete
+data UsersDraftsDelete = UsersDraftsDelete'
     { _uddUserId :: !Text
     , _uddId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersDraftsDelete
     :: Text -- ^ 'uddId'
     -> UsersDraftsDelete
 usersDraftsDelete pUddId_ =
-    UsersDraftsDelete
+    UsersDraftsDelete'
     { _uddUserId = "me"
     , _uddId = pUddId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest UsersDraftsDelete where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersDraftsDelete{..}
+        requestClient UsersDraftsDelete'{..}
           = go _uddUserId _uddId (Just AltJSON) gmailService
           where go
                   = buildClient

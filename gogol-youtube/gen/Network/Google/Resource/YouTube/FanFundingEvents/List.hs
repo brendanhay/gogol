@@ -58,7 +58,7 @@ type FanFundingEventsListResource =
 -- | Lists fan funding events for a channel.
 --
 -- /See:/ 'fanFundingEventsList' smart constructor.
-data FanFundingEventsList = FanFundingEventsList
+data FanFundingEventsList = FanFundingEventsList'
     { _ffelPart       :: !Text
     , _ffelHl         :: !(Maybe Text)
     , _ffelPageToken  :: !(Maybe Text)
@@ -80,7 +80,7 @@ fanFundingEventsList
     :: Text -- ^ 'ffelPart'
     -> FanFundingEventsList
 fanFundingEventsList pFfelPart_ =
-    FanFundingEventsList
+    FanFundingEventsList'
     { _ffelPart = pFfelPart_
     , _ffelHl = Nothing
     , _ffelPageToken = Nothing
@@ -126,7 +126,7 @@ instance GoogleRequest FanFundingEventsList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient FanFundingEventsList{..}
+        requestClient FanFundingEventsList'{..}
           = go (Just _ffelPart) _ffelHl _ffelPageToken
               (Just _ffelMaxResults)
               (Just AltJSON)

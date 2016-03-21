@@ -55,7 +55,7 @@ type FirewallsGetResource =
 -- | Returns the specified firewall.
 --
 -- /See:/ 'firewallsGet' smart constructor.
-data FirewallsGet = FirewallsGet
+data FirewallsGet = FirewallsGet'
     { _fgProject  :: !Text
     , _fgFirewall :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ firewallsGet
     -> Text -- ^ 'fgFirewall'
     -> FirewallsGet
 firewallsGet pFgProject_ pFgFirewall_ =
-    FirewallsGet
+    FirewallsGet'
     { _fgProject = pFgProject_
     , _fgFirewall = pFgFirewall_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest FirewallsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient FirewallsGet{..}
+        requestClient FirewallsGet'{..}
           = go _fgProject _fgFirewall (Just AltJSON)
               computeService
           where go

@@ -63,7 +63,7 @@ type TasksMoveResource =
 -- a different position among its sibling tasks.
 --
 -- /See:/ 'tasksMove' smart constructor.
-data TasksMove = TasksMove
+data TasksMove = TasksMove'
     { _tmParent   :: !(Maybe Text)
     , _tmTaskList :: !Text
     , _tmTask     :: !Text
@@ -86,7 +86,7 @@ tasksMove
     -> Text -- ^ 'tmTask'
     -> TasksMove
 tasksMove pTmTaskList_ pTmTask_ =
-    TasksMove
+    TasksMove'
     { _tmParent = Nothing
     , _tmTaskList = pTmTaskList_
     , _tmTask = pTmTask_
@@ -117,7 +117,7 @@ instance GoogleRequest TasksMove where
         type Rs TasksMove = Task
         type Scopes TasksMove =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TasksMove{..}
+        requestClient TasksMove'{..}
           = go _tmTaskList _tmTask _tmParent _tmPrevious
               (Just AltJSON)
               appsTasksService

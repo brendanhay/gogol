@@ -59,7 +59,7 @@ type ZoneViewsListResource =
 -- | List resource views.
 --
 -- /See:/ 'zoneViewsList'' smart constructor.
-data ZoneViewsList' = ZoneViewsList'
+data ZoneViewsList' = ZoneViewsList''
     { _zvlProject    :: !Text
     , _zvlZone       :: !Text
     , _zvlPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ zoneViewsList'
     -> Text -- ^ 'zvlZone'
     -> ZoneViewsList'
 zoneViewsList' pZvlProject_ pZvlZone_ =
-    ZoneViewsList'
+    ZoneViewsList''
     { _zvlProject = pZvlProject_
     , _zvlZone = pZvlZone_
     , _zvlPageToken = Nothing
@@ -122,7 +122,7 @@ instance GoogleRequest ZoneViewsList' where
                "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ZoneViewsList'{..}
+        requestClient ZoneViewsList''{..}
           = go _zvlProject _zvlZone _zvlPageToken
               (Just _zvlMaxResults)
               (Just AltJSON)

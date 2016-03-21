@@ -62,7 +62,7 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
 -- | Updates an existing webProperty-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksUpdate' smart constructor.
-data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate
+data ManagementWebPropertyAdWordsLinksUpdate = ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluWebPropertyId            :: !Text
     , _mwpawluPayload                  :: !EntityAdWordsLink
     , _mwpawluAccountId                :: !Text
@@ -87,7 +87,7 @@ managementWebPropertyAdWordsLinksUpdate
     -> Text -- ^ 'mwpawluWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate
 managementWebPropertyAdWordsLinksUpdate pMwpawluWebPropertyId_ pMwpawluPayload_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksUpdate
+    ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluWebPropertyId = pMwpawluWebPropertyId_
     , _mwpawluPayload = pMwpawluPayload_
     , _mwpawluAccountId = pMwpawluAccountId_
@@ -125,7 +125,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyAdWordsLinksUpdate =
              '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
-          ManagementWebPropertyAdWordsLinksUpdate{..}
+          ManagementWebPropertyAdWordsLinksUpdate'{..}
           = go _mwpawluAccountId _mwpawluWebPropertyId
               _mwpawluWebPropertyAdWordsLinkId
               (Just AltJSON)

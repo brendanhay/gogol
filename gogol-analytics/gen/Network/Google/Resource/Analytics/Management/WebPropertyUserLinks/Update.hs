@@ -61,7 +61,7 @@ type ManagementWebPropertyUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksUpdate' smart constructor.
-data ManagementWebPropertyUserLinksUpdate = ManagementWebPropertyUserLinksUpdate
+data ManagementWebPropertyUserLinksUpdate = ManagementWebPropertyUserLinksUpdate'
     { _mwpuluWebPropertyId :: !Text
     , _mwpuluPayload       :: !EntityUserLink
     , _mwpuluAccountId     :: !Text
@@ -86,7 +86,7 @@ managementWebPropertyUserLinksUpdate
     -> Text -- ^ 'mwpuluLinkId'
     -> ManagementWebPropertyUserLinksUpdate
 managementWebPropertyUserLinksUpdate pMwpuluWebPropertyId_ pMwpuluPayload_ pMwpuluAccountId_ pMwpuluLinkId_ =
-    ManagementWebPropertyUserLinksUpdate
+    ManagementWebPropertyUserLinksUpdate'
     { _mwpuluWebPropertyId = pMwpuluWebPropertyId_
     , _mwpuluPayload = pMwpuluPayload_
     , _mwpuluAccountId = pMwpuluAccountId_
@@ -123,7 +123,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyUserLinksUpdate =
              '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient
-          ManagementWebPropertyUserLinksUpdate{..}
+          ManagementWebPropertyUserLinksUpdate'{..}
           = go _mwpuluAccountId _mwpuluWebPropertyId
               _mwpuluLinkId
               (Just AltJSON)

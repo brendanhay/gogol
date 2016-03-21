@@ -55,7 +55,7 @@ type DataSetsRollbackResource =
 -- | Roll back a transaction.
 --
 -- /See:/ 'dataSetsRollback' smart constructor.
-data DataSetsRollback = DataSetsRollback
+data DataSetsRollback = DataSetsRollback'
     { _dsrPayload   :: !RollbackRequest
     , _dsrDataSetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ dataSetsRollback
     -> Text -- ^ 'dsrDataSetId'
     -> DataSetsRollback
 dataSetsRollback pDsrPayload_ pDsrDataSetId_ =
-    DataSetsRollback
+    DataSetsRollback'
     { _dsrPayload = pDsrPayload_
     , _dsrDataSetId = pDsrDataSetId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest DataSetsRollback where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient DataSetsRollback{..}
+        requestClient DataSetsRollback'{..}
           = go _dsrDataSetId (Just AltJSON) _dsrPayload
               datastoreService
           where go

@@ -60,7 +60,7 @@ type AutoscalersAggregatedListResource =
 -- | Retrieves an aggregated list of autoscalers.
 --
 -- /See:/ 'autoscalersAggregatedList' smart constructor.
-data AutoscalersAggregatedList = AutoscalersAggregatedList
+data AutoscalersAggregatedList = AutoscalersAggregatedList'
     { _autProject    :: !Text
     , _autFilter     :: !(Maybe Text)
     , _autPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ autoscalersAggregatedList
     :: Text -- ^ 'autProject'
     -> AutoscalersAggregatedList
 autoscalersAggregatedList pAutProject_ =
-    AutoscalersAggregatedList
+    AutoscalersAggregatedList'
     { _autProject = pAutProject_
     , _autFilter = Nothing
     , _autPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest AutoscalersAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient AutoscalersAggregatedList{..}
+        requestClient AutoscalersAggregatedList'{..}
           = go _autProject _autFilter _autPageToken
               (Just _autMaxResults)
               (Just AltJSON)

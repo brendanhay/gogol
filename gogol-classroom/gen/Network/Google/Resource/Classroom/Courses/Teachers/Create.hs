@@ -83,7 +83,7 @@ type CoursesTeachersCreateResource =
 -- course.
 --
 -- /See:/ 'coursesTeachersCreate' smart constructor.
-data CoursesTeachersCreate = CoursesTeachersCreate
+data CoursesTeachersCreate = CoursesTeachersCreate'
     { _ctcXgafv          :: !(Maybe Text)
     , _ctcUploadProtocol :: !(Maybe Text)
     , _ctcPp             :: !Bool
@@ -121,7 +121,7 @@ coursesTeachersCreate
     -> Teacher -- ^ 'ctcPayload'
     -> CoursesTeachersCreate
 coursesTeachersCreate pCtcCourseId_ pCtcPayload_ =
-    CoursesTeachersCreate
+    CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcUploadProtocol = Nothing
     , _ctcPp = True
@@ -187,7 +187,7 @@ instance GoogleRequest CoursesTeachersCreate where
              '["https://www.googleapis.com/auth/classroom.profile.emails",
                "https://www.googleapis.com/auth/classroom.profile.photos",
                "https://www.googleapis.com/auth/classroom.rosters"]
-        requestClient CoursesTeachersCreate{..}
+        requestClient CoursesTeachersCreate'{..}
           = go _ctcCourseId _ctcXgafv _ctcUploadProtocol
               (Just _ctcPp)
               _ctcAccessToken

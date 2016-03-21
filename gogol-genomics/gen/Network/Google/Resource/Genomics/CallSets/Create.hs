@@ -68,7 +68,7 @@ type CallSetsCreateResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsCreate' smart constructor.
-data CallSetsCreate = CallSetsCreate
+data CallSetsCreate = CallSetsCreate'
     { _cscXgafv          :: !(Maybe Text)
     , _cscUploadProtocol :: !(Maybe Text)
     , _cscPp             :: !Bool
@@ -102,7 +102,7 @@ callSetsCreate
     :: CallSet -- ^ 'cscPayload'
     -> CallSetsCreate
 callSetsCreate pCscPayload_ =
-    CallSetsCreate
+    CallSetsCreate'
     { _cscXgafv = Nothing
     , _cscUploadProtocol = Nothing
     , _cscPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest CallSetsCreate where
         type Scopes CallSetsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient CallSetsCreate{..}
+        requestClient CallSetsCreate'{..}
           = go _cscXgafv _cscUploadProtocol (Just _cscPp)
               _cscAccessToken
               _cscUploadType

@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Options for counters
 --
 -- /See:/ 'counterOptions' smart constructor.
-data CounterOptions = CounterOptions
+data CounterOptions = CounterOptions'
     { _coField  :: !(Maybe Text)
     , _coMetric :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data CounterOptions = CounterOptions
 counterOptions
     :: CounterOptions
 counterOptions =
-    CounterOptions
+    CounterOptions'
     { _coField = Nothing
     , _coMetric = Nothing
     }
@@ -55,11 +55,11 @@ instance FromJSON CounterOptions where
         parseJSON
           = withObject "CounterOptions"
               (\ o ->
-                 CounterOptions <$>
+                 CounterOptions' <$>
                    (o .:? "field") <*> (o .:? "metric"))
 
 instance ToJSON CounterOptions where
-        toJSON CounterOptions{..}
+        toJSON CounterOptions'{..}
           = object
               (catMaybes
                  [("field" .=) <$> _coField,
@@ -73,17 +73,17 @@ instance ToJSON CounterOptions where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -93,7 +93,7 @@ instance ToJSON Empty where
 -- ServiceAccountKeys are immutable.
 --
 -- /See:/ 'serviceAccountKey' smart constructor.
-data ServiceAccountKey = ServiceAccountKey
+data ServiceAccountKey = ServiceAccountKey'
     { _sakValidAfterTime  :: !(Maybe Text)
     , _sakPrivateKeyData  :: !(Maybe (Textual Word8))
     , _sakName            :: !(Maybe Text)
@@ -117,7 +117,7 @@ data ServiceAccountKey = ServiceAccountKey
 serviceAccountKey
     :: ServiceAccountKey
 serviceAccountKey =
-    ServiceAccountKey
+    ServiceAccountKey'
     { _sakValidAfterTime = Nothing
     , _sakPrivateKeyData = Nothing
     , _sakName = Nothing
@@ -159,14 +159,14 @@ instance FromJSON ServiceAccountKey where
         parseJSON
           = withObject "ServiceAccountKey"
               (\ o ->
-                 ServiceAccountKey <$>
+                 ServiceAccountKey' <$>
                    (o .:? "validAfterTime") <*> (o .:? "privateKeyData")
                      <*> (o .:? "name")
                      <*> (o .:? "privateKeyType")
                      <*> (o .:? "validBeforeTime"))
 
 instance ToJSON ServiceAccountKey where
-        toJSON ServiceAccountKey{..}
+        toJSON ServiceAccountKey'{..}
           = object
               (catMaybes
                  [("validAfterTime" .=) <$> _sakValidAfterTime,
@@ -178,7 +178,7 @@ instance ToJSON ServiceAccountKey where
 -- | A rule to be applied in a Policy.
 --
 -- /See:/ 'rule' smart constructor.
-data Rule = Rule
+data Rule = Rule'
     { _rAction      :: !(Maybe Text)
     , _rIn          :: !(Maybe [Text])
     , _rNotIn       :: !(Maybe [Text])
@@ -208,7 +208,7 @@ data Rule = Rule
 rule
     :: Rule
 rule =
-    Rule
+    Rule'
     { _rAction = Nothing
     , _rIn = Nothing
     , _rNotIn = Nothing
@@ -270,7 +270,7 @@ instance FromJSON Rule where
         parseJSON
           = withObject "Rule"
               (\ o ->
-                 Rule <$>
+                 Rule' <$>
                    (o .:? "action") <*> (o .:? "in" .!= mempty) <*>
                      (o .:? "notIn" .!= mempty)
                      <*> (o .:? "conditions" .!= mempty)
@@ -279,7 +279,7 @@ instance FromJSON Rule where
                      <*> (o .:? "description"))
 
 instance ToJSON Rule where
-        toJSON Rule{..}
+        toJSON Rule'{..}
           = object
               (catMaybes
                  [("action" .=) <$> _rAction, ("in" .=) <$> _rIn,
@@ -292,7 +292,7 @@ instance ToJSON Rule where
 -- | The service account key create request.
 --
 -- /See:/ 'createServiceAccountKeyRequest' smart constructor.
-newtype CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest
+newtype CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest'
     { _csakrPrivateKeyType :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -304,7 +304,7 @@ newtype CreateServiceAccountKeyRequest = CreateServiceAccountKeyRequest
 createServiceAccountKeyRequest
     :: CreateServiceAccountKeyRequest
 createServiceAccountKeyRequest =
-    CreateServiceAccountKeyRequest
+    CreateServiceAccountKeyRequest'
     { _csakrPrivateKeyType = Nothing
     }
 
@@ -320,11 +320,11 @@ instance FromJSON CreateServiceAccountKeyRequest
         parseJSON
           = withObject "CreateServiceAccountKeyRequest"
               (\ o ->
-                 CreateServiceAccountKeyRequest <$>
+                 CreateServiceAccountKeyRequest' <$>
                    (o .:? "privateKeyType"))
 
 instance ToJSON CreateServiceAccountKeyRequest where
-        toJSON CreateServiceAccountKeyRequest{..}
+        toJSON CreateServiceAccountKeyRequest'{..}
           = object
               (catMaybes
                  [("privateKeyType" .=) <$> _csakrPrivateKeyType])
@@ -332,7 +332,7 @@ instance ToJSON CreateServiceAccountKeyRequest where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest
+newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -344,7 +344,7 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest
+    SetIAMPolicyRequest'
     { _siprPolicy = Nothing
     }
 
@@ -359,16 +359,16 @@ siprPolicy
 instance FromJSON SetIAMPolicyRequest where
         parseJSON
           = withObject "SetIAMPolicyRequest"
-              (\ o -> SetIAMPolicyRequest <$> (o .:? "policy"))
+              (\ o -> SetIAMPolicyRequest' <$> (o .:? "policy"))
 
 instance ToJSON SetIAMPolicyRequest where
-        toJSON SetIAMPolicyRequest{..}
+        toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | The service account sign blob request.
 --
 -- /See:/ 'signBlobRequest' smart constructor.
-newtype SignBlobRequest = SignBlobRequest
+newtype SignBlobRequest = SignBlobRequest'
     { _sbrBytesToSign :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -380,7 +380,7 @@ newtype SignBlobRequest = SignBlobRequest
 signBlobRequest
     :: SignBlobRequest
 signBlobRequest =
-    SignBlobRequest
+    SignBlobRequest'
     { _sbrBytesToSign = Nothing
     }
 
@@ -394,17 +394,17 @@ sbrBytesToSign
 instance FromJSON SignBlobRequest where
         parseJSON
           = withObject "SignBlobRequest"
-              (\ o -> SignBlobRequest <$> (o .:? "bytesToSign"))
+              (\ o -> SignBlobRequest' <$> (o .:? "bytesToSign"))
 
 instance ToJSON SignBlobRequest where
-        toJSON SignBlobRequest{..}
+        toJSON SignBlobRequest'{..}
           = object
               (catMaybes [("bytesToSign" .=) <$> _sbrBytesToSign])
 
 -- | The service account keys list response.
 --
 -- /See:/ 'listServiceAccountKeysResponse' smart constructor.
-newtype ListServiceAccountKeysResponse = ListServiceAccountKeysResponse
+newtype ListServiceAccountKeysResponse = ListServiceAccountKeysResponse'
     { _lsakrKeys :: Maybe [ServiceAccountKey]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -416,7 +416,7 @@ newtype ListServiceAccountKeysResponse = ListServiceAccountKeysResponse
 listServiceAccountKeysResponse
     :: ListServiceAccountKeysResponse
 listServiceAccountKeysResponse =
-    ListServiceAccountKeysResponse
+    ListServiceAccountKeysResponse'
     { _lsakrKeys = Nothing
     }
 
@@ -432,30 +432,30 @@ instance FromJSON ListServiceAccountKeysResponse
         parseJSON
           = withObject "ListServiceAccountKeysResponse"
               (\ o ->
-                 ListServiceAccountKeysResponse <$>
+                 ListServiceAccountKeysResponse' <$>
                    (o .:? "keys" .!= mempty))
 
 instance ToJSON ListServiceAccountKeysResponse where
-        toJSON ListServiceAccountKeysResponse{..}
+        toJSON ListServiceAccountKeysResponse'{..}
           = object (catMaybes [("keys" .=) <$> _lsakrKeys])
 
 -- | Write a Cloud Audit log
 --
 -- /See:/ 'cloudAuditOptions' smart constructor.
 data CloudAuditOptions =
-    CloudAuditOptions
+    CloudAuditOptions'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CloudAuditOptions' with the minimum fields required to make a request.
 --
 cloudAuditOptions
     :: CloudAuditOptions
-cloudAuditOptions = CloudAuditOptions
+cloudAuditOptions = CloudAuditOptions'
 
 instance FromJSON CloudAuditOptions where
         parseJSON
           = withObject "CloudAuditOptions"
-              (\ o -> pure CloudAuditOptions)
+              (\ o -> pure CloudAuditOptions')
 
 instance ToJSON CloudAuditOptions where
         toJSON = const emptyObject
@@ -464,19 +464,19 @@ instance ToJSON CloudAuditOptions where
 --
 -- /See:/ 'dataAccessOptions' smart constructor.
 data DataAccessOptions =
-    DataAccessOptions
+    DataAccessOptions'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataAccessOptions' with the minimum fields required to make a request.
 --
 dataAccessOptions
     :: DataAccessOptions
-dataAccessOptions = DataAccessOptions
+dataAccessOptions = DataAccessOptions'
 
 instance FromJSON DataAccessOptions where
         parseJSON
           = withObject "DataAccessOptions"
-              (\ o -> pure DataAccessOptions)
+              (\ o -> pure DataAccessOptions')
 
 instance ToJSON DataAccessOptions where
         toJSON = const emptyObject
@@ -492,7 +492,7 @@ instance ToJSON DataAccessOptions where
 -- account.
 --
 -- /See:/ 'serviceAccount' smart constructor.
-data ServiceAccount = ServiceAccount
+data ServiceAccount = ServiceAccount'
     { _saEmail          :: !(Maybe Text)
     , _saEtag           :: !(Maybe (Textual Word8))
     , _saUniqueId       :: !(Maybe Text)
@@ -522,7 +522,7 @@ data ServiceAccount = ServiceAccount
 serviceAccount
     :: ServiceAccount
 serviceAccount =
-    ServiceAccount
+    ServiceAccount'
     { _saEmail = Nothing
     , _saEtag = Nothing
     , _saUniqueId = Nothing
@@ -580,7 +580,7 @@ instance FromJSON ServiceAccount where
         parseJSON
           = withObject "ServiceAccount"
               (\ o ->
-                 ServiceAccount <$>
+                 ServiceAccount' <$>
                    (o .:? "email") <*> (o .:? "etag") <*>
                      (o .:? "uniqueId")
                      <*> (o .:? "name")
@@ -589,7 +589,7 @@ instance FromJSON ServiceAccount where
                      <*> (o .:? "oauth2ClientId"))
 
 instance ToJSON ServiceAccount where
-        toJSON ServiceAccount{..}
+        toJSON ServiceAccount'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _saEmail, ("etag" .=) <$> _saEtag,
@@ -602,7 +602,7 @@ instance ToJSON ServiceAccount where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
+newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -614,7 +614,7 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest
+    TestIAMPermissionsRequest'
     { _tiprPermissions = Nothing
     }
 
@@ -632,18 +632,18 @@ instance FromJSON TestIAMPermissionsRequest where
         parseJSON
           = withObject "TestIAMPermissionsRequest"
               (\ o ->
-                 TestIAMPermissionsRequest <$>
+                 TestIAMPermissionsRequest' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsRequest where
-        toJSON TestIAMPermissionsRequest{..}
+        toJSON TestIAMPermissionsRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
+newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -655,7 +655,7 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse
+    TestIAMPermissionsResponse'
     { _tiamprPermissions = Nothing
     }
 
@@ -672,11 +672,11 @@ instance FromJSON TestIAMPermissionsResponse where
         parseJSON
           = withObject "TestIAMPermissionsResponse"
               (\ o ->
-                 TestIAMPermissionsResponse <$>
+                 TestIAMPermissionsResponse' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsResponse where
-        toJSON TestIAMPermissionsResponse{..}
+        toJSON TestIAMPermissionsResponse'{..}
           = object
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
@@ -696,7 +696,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy
+data Policy = Policy'
     { _pEtag     :: !(Maybe (Textual Word8))
     , _pRules    :: !(Maybe [Rule])
     , _pVersion  :: !(Maybe (Textual Int32))
@@ -717,7 +717,7 @@ data Policy = Policy
 policy
     :: Policy
 policy =
-    Policy
+    Policy'
     { _pEtag = Nothing
     , _pRules = Nothing
     , _pVersion = Nothing
@@ -762,13 +762,13 @@ instance FromJSON Policy where
         parseJSON
           = withObject "Policy"
               (\ o ->
-                 Policy <$>
+                 Policy' <$>
                    (o .:? "etag") <*> (o .:? "rules" .!= mempty) <*>
                      (o .:? "version")
                      <*> (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
-        toJSON Policy{..}
+        toJSON Policy'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _pEtag, ("rules" .=) <$> _pRules,
@@ -778,7 +778,7 @@ instance ToJSON Policy where
 -- | A condition to be met.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition
+data Condition = Condition'
     { _cOp     :: !(Maybe Text)
     , _cIAM    :: !(Maybe Text)
     , _cValues :: !(Maybe [Text])
@@ -805,7 +805,7 @@ data Condition = Condition
 condition
     :: Condition
 condition =
-    Condition
+    Condition'
     { _cOp = Nothing
     , _cIAM = Nothing
     , _cValues = Nothing
@@ -845,7 +845,7 @@ instance FromJSON Condition where
         parseJSON
           = withObject "Condition"
               (\ o ->
-                 Condition <$>
+                 Condition' <$>
                    (o .:? "op") <*> (o .:? "iam") <*>
                      (o .:? "values" .!= mempty)
                      <*> (o .:? "value")
@@ -853,7 +853,7 @@ instance FromJSON Condition where
                      <*> (o .:? "svc"))
 
 instance ToJSON Condition where
-        toJSON Condition{..}
+        toJSON Condition'{..}
           = object
               (catMaybes
                  [("op" .=) <$> _cOp, ("iam" .=) <$> _cIAM,
@@ -863,7 +863,7 @@ instance ToJSON Condition where
 -- | The service account sign blob response.
 --
 -- /See:/ 'signBlobResponse' smart constructor.
-data SignBlobResponse = SignBlobResponse
+data SignBlobResponse = SignBlobResponse'
     { _sbrSignature :: !(Maybe (Textual Word8))
     , _sbrKeyId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -878,7 +878,7 @@ data SignBlobResponse = SignBlobResponse
 signBlobResponse
     :: SignBlobResponse
 signBlobResponse =
-    SignBlobResponse
+    SignBlobResponse'
     { _sbrSignature = Nothing
     , _sbrKeyId = Nothing
     }
@@ -897,11 +897,11 @@ instance FromJSON SignBlobResponse where
         parseJSON
           = withObject "SignBlobResponse"
               (\ o ->
-                 SignBlobResponse <$>
+                 SignBlobResponse' <$>
                    (o .:? "signature") <*> (o .:? "keyId"))
 
 instance ToJSON SignBlobResponse where
-        toJSON SignBlobResponse{..}
+        toJSON SignBlobResponse'{..}
           = object
               (catMaybes
                  [("signature" .=) <$> _sbrSignature,
@@ -910,7 +910,7 @@ instance ToJSON SignBlobResponse where
 -- | The service account list response.
 --
 -- /See:/ 'listServiceAccountsResponse' smart constructor.
-data ListServiceAccountsResponse = ListServiceAccountsResponse
+data ListServiceAccountsResponse = ListServiceAccountsResponse'
     { _lsarNextPageToken :: !(Maybe Text)
     , _lsarAccounts      :: !(Maybe [ServiceAccount])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -925,7 +925,7 @@ data ListServiceAccountsResponse = ListServiceAccountsResponse
 listServiceAccountsResponse
     :: ListServiceAccountsResponse
 listServiceAccountsResponse =
-    ListServiceAccountsResponse
+    ListServiceAccountsResponse'
     { _lsarNextPageToken = Nothing
     , _lsarAccounts = Nothing
     }
@@ -948,12 +948,12 @@ instance FromJSON ListServiceAccountsResponse where
         parseJSON
           = withObject "ListServiceAccountsResponse"
               (\ o ->
-                 ListServiceAccountsResponse <$>
+                 ListServiceAccountsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "accounts" .!= mempty))
 
 instance ToJSON ListServiceAccountsResponse where
-        toJSON ListServiceAccountsResponse{..}
+        toJSON ListServiceAccountsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsarNextPageToken,
@@ -974,7 +974,7 @@ instance ToJSON ListServiceAccountsResponse where
 -- the counter * incrementing it by anything other than 1
 --
 -- /See:/ 'logConfig' smart constructor.
-data LogConfig = LogConfig
+data LogConfig = LogConfig'
     { _lcCloudAudit :: !(Maybe CloudAuditOptions)
     , _lcDataAccess :: !(Maybe DataAccessOptions)
     , _lcCounter    :: !(Maybe CounterOptions)
@@ -992,7 +992,7 @@ data LogConfig = LogConfig
 logConfig
     :: LogConfig
 logConfig =
-    LogConfig
+    LogConfig'
     { _lcCloudAudit = Nothing
     , _lcDataAccess = Nothing
     , _lcCounter = Nothing
@@ -1017,12 +1017,12 @@ instance FromJSON LogConfig where
         parseJSON
           = withObject "LogConfig"
               (\ o ->
-                 LogConfig <$>
+                 LogConfig' <$>
                    (o .:? "cloudAudit") <*> (o .:? "dataAccess") <*>
                      (o .:? "counter"))
 
 instance ToJSON LogConfig where
-        toJSON LogConfig{..}
+        toJSON LogConfig'{..}
           = object
               (catMaybes
                  [("cloudAudit" .=) <$> _lcCloudAudit,
@@ -1032,7 +1032,7 @@ instance ToJSON LogConfig where
 -- | The service account create request.
 --
 -- /See:/ 'createServiceAccountRequest' smart constructor.
-data CreateServiceAccountRequest = CreateServiceAccountRequest
+data CreateServiceAccountRequest = CreateServiceAccountRequest'
     { _csarServiceAccount :: !(Maybe ServiceAccount)
     , _csarAccountId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1047,7 +1047,7 @@ data CreateServiceAccountRequest = CreateServiceAccountRequest
 createServiceAccountRequest
     :: CreateServiceAccountRequest
 createServiceAccountRequest =
-    CreateServiceAccountRequest
+    CreateServiceAccountRequest'
     { _csarServiceAccount = Nothing
     , _csarAccountId = Nothing
     }
@@ -1072,11 +1072,11 @@ instance FromJSON CreateServiceAccountRequest where
         parseJSON
           = withObject "CreateServiceAccountRequest"
               (\ o ->
-                 CreateServiceAccountRequest <$>
+                 CreateServiceAccountRequest' <$>
                    (o .:? "serviceAccount") <*> (o .:? "accountId"))
 
 instance ToJSON CreateServiceAccountRequest where
-        toJSON CreateServiceAccountRequest{..}
+        toJSON CreateServiceAccountRequest'{..}
           = object
               (catMaybes
                  [("serviceAccount" .=) <$> _csarServiceAccount,
@@ -1085,7 +1085,7 @@ instance ToJSON CreateServiceAccountRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding
+data Binding = Binding'
     { _bMembers :: !(Maybe [Text])
     , _bRole    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1100,7 +1100,7 @@ data Binding = Binding
 binding
     :: Binding
 binding =
-    Binding
+    Binding'
     { _bMembers = Nothing
     , _bRole = Nothing
     }
@@ -1134,11 +1134,11 @@ instance FromJSON Binding where
         parseJSON
           = withObject "Binding"
               (\ o ->
-                 Binding <$>
+                 Binding' <$>
                    (o .:? "members" .!= mempty) <*> (o .:? "role"))
 
 instance ToJSON Binding where
-        toJSON Binding{..}
+        toJSON Binding'{..}
           = object
               (catMaybes
                  [("members" .=) <$> _bMembers,

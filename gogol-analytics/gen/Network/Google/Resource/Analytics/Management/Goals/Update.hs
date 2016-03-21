@@ -63,7 +63,7 @@ type ManagementGoalsUpdateResource =
 -- | Updates an existing goal.
 --
 -- /See:/ 'managementGoalsUpdate' smart constructor.
-data ManagementGoalsUpdate = ManagementGoalsUpdate
+data ManagementGoalsUpdate = ManagementGoalsUpdate'
     { _mguWebPropertyId :: !Text
     , _mguGoalId        :: !Text
     , _mguProFileId     :: !Text
@@ -92,7 +92,7 @@ managementGoalsUpdate
     -> Text -- ^ 'mguAccountId'
     -> ManagementGoalsUpdate
 managementGoalsUpdate pMguWebPropertyId_ pMguGoalId_ pMguProFileId_ pMguPayload_ pMguAccountId_ =
-    ManagementGoalsUpdate
+    ManagementGoalsUpdate'
     { _mguWebPropertyId = pMguWebPropertyId_
     , _mguGoalId = pMguGoalId_
     , _mguProFileId = pMguProFileId_
@@ -130,7 +130,7 @@ instance GoogleRequest ManagementGoalsUpdate where
         type Rs ManagementGoalsUpdate = Goal
         type Scopes ManagementGoalsUpdate =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementGoalsUpdate{..}
+        requestClient ManagementGoalsUpdate'{..}
           = go _mguAccountId _mguWebPropertyId _mguProFileId
               _mguGoalId
               (Just AltJSON)

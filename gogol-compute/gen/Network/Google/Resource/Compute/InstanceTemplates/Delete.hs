@@ -63,7 +63,7 @@ type InstanceTemplatesDeleteResource =
 -- undone.
 --
 -- /See:/ 'instanceTemplatesDelete' smart constructor.
-data InstanceTemplatesDelete = InstanceTemplatesDelete
+data InstanceTemplatesDelete = InstanceTemplatesDelete'
     { _itdProject          :: !Text
     , _itdInstanceTemplate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ instanceTemplatesDelete
     -> Text -- ^ 'itdInstanceTemplate'
     -> InstanceTemplatesDelete
 instanceTemplatesDelete pItdProject_ pItdInstanceTemplate_ =
-    InstanceTemplatesDelete
+    InstanceTemplatesDelete'
     { _itdProject = pItdProject_
     , _itdInstanceTemplate = pItdInstanceTemplate_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest InstanceTemplatesDelete where
         type Scopes InstanceTemplatesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceTemplatesDelete{..}
+        requestClient InstanceTemplatesDelete'{..}
           = go _itdProject _itdInstanceTemplate (Just AltJSON)
               computeService
           where go

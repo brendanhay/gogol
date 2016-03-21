@@ -56,7 +56,7 @@ type RevisionsUpdateResource =
 -- | Updates a revision with patch semantics.
 --
 -- /See:/ 'revisionsUpdate' smart constructor.
-data RevisionsUpdate = RevisionsUpdate
+data RevisionsUpdate = RevisionsUpdate'
     { _revPayload    :: !Revision
     , _revFileId     :: !Text
     , _revRevisionId :: !Text
@@ -77,7 +77,7 @@ revisionsUpdate
     -> Text -- ^ 'revRevisionId'
     -> RevisionsUpdate
 revisionsUpdate pRevPayload_ pRevFileId_ pRevRevisionId_ =
-    RevisionsUpdate
+    RevisionsUpdate'
     { _revPayload = pRevPayload_
     , _revFileId = pRevFileId_
     , _revRevisionId = pRevRevisionId_
@@ -105,7 +105,7 @@ instance GoogleRequest RevisionsUpdate where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient RevisionsUpdate{..}
+        requestClient RevisionsUpdate'{..}
           = go _revFileId _revRevisionId (Just AltJSON)
               _revPayload
               driveService

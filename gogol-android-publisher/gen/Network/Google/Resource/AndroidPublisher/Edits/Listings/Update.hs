@@ -59,7 +59,7 @@ type EditsListingsUpdateResource =
 -- | Creates or updates a localized store listing.
 --
 -- /See:/ 'editsListingsUpdate' smart constructor.
-data EditsListingsUpdate = EditsListingsUpdate
+data EditsListingsUpdate = EditsListingsUpdate'
     { _eluPackageName :: !Text
     , _eluPayload     :: !Listing
     , _eluLanguage    :: !Text
@@ -84,7 +84,7 @@ editsListingsUpdate
     -> Text -- ^ 'eluEditId'
     -> EditsListingsUpdate
 editsListingsUpdate pEluPackageName_ pEluPayload_ pEluLanguage_ pEluEditId_ =
-    EditsListingsUpdate
+    EditsListingsUpdate'
     { _eluPackageName = pEluPackageName_
     , _eluPayload = pEluPayload_
     , _eluLanguage = pEluLanguage_
@@ -118,7 +118,7 @@ instance GoogleRequest EditsListingsUpdate where
         type Rs EditsListingsUpdate = Listing
         type Scopes EditsListingsUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsListingsUpdate{..}
+        requestClient EditsListingsUpdate'{..}
           = go _eluPackageName _eluEditId _eluLanguage
               (Just AltJSON)
               _eluPayload

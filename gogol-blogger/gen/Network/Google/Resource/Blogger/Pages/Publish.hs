@@ -55,7 +55,7 @@ type PagesPublishResource =
 -- | Publishes a draft page.
 --
 -- /See:/ 'pagesPublish' smart constructor.
-data PagesPublish = PagesPublish
+data PagesPublish = PagesPublish'
     { _pagaBlogId :: !Text
     , _pagaPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ pagesPublish
     -> Text -- ^ 'pagaPageId'
     -> PagesPublish
 pagesPublish pPagaBlogId_ pPagaPageId_ =
-    PagesPublish
+    PagesPublish'
     { _pagaBlogId = pPagaBlogId_
     , _pagaPageId = pPagaPageId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PagesPublish where
         type Rs PagesPublish = Page
         type Scopes PagesPublish =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PagesPublish{..}
+        requestClient PagesPublish'{..}
           = go _pagaBlogId _pagaPageId (Just AltJSON)
               bloggerService
           where go

@@ -73,7 +73,7 @@ type ProjectsMonitoredResourceDescriptorsListResource
 -- | Lists monitored resource descriptors that match a filter.
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsList' smart constructor.
-data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescriptorsList
+data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescriptorsList'
     { _pmrdlXgafv          :: !(Maybe Text)
     , _pmrdlUploadProtocol :: !(Maybe Text)
     , _pmrdlPp             :: !Bool
@@ -116,7 +116,7 @@ projectsMonitoredResourceDescriptorsList
     :: Text -- ^ 'pmrdlName'
     -> ProjectsMonitoredResourceDescriptorsList
 projectsMonitoredResourceDescriptorsList pPmrdlName_ =
-    ProjectsMonitoredResourceDescriptorsList
+    ProjectsMonitoredResourceDescriptorsList'
     { _pmrdlXgafv = Nothing
     , _pmrdlUploadProtocol = Nothing
     , _pmrdlPp = True
@@ -211,7 +211,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/monitoring.read",
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient
-          ProjectsMonitoredResourceDescriptorsList{..}
+          ProjectsMonitoredResourceDescriptorsList'{..}
           = go _pmrdlName _pmrdlXgafv _pmrdlUploadProtocol
               (Just _pmrdlPp)
               _pmrdlAccessToken

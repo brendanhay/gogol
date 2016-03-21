@@ -55,7 +55,7 @@ type ManagedZonesCreateResource =
 -- | Create a new ManagedZone.
 --
 -- /See:/ 'managedZonesCreate' smart constructor.
-data ManagedZonesCreate = ManagedZonesCreate
+data ManagedZonesCreate = ManagedZonesCreate'
     { _mzcProject :: !Text
     , _mzcPayload :: !ManagedZone
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managedZonesCreate
     -> ManagedZone -- ^ 'mzcPayload'
     -> ManagedZonesCreate
 managedZonesCreate pMzcProject_ pMzcPayload_ =
-    ManagedZonesCreate
+    ManagedZonesCreate'
     { _mzcProject = pMzcProject_
     , _mzcPayload = pMzcPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ManagedZonesCreate where
         type Scopes ManagedZonesCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ManagedZonesCreate{..}
+        requestClient ManagedZonesCreate'{..}
           = go _mzcProject (Just AltJSON) _mzcPayload
               dNSService
           where go

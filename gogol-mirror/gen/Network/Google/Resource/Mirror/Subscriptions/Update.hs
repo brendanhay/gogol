@@ -54,7 +54,7 @@ type SubscriptionsUpdateResource =
 -- | Updates an existing subscription in place.
 --
 -- /See:/ 'subscriptionsUpdate' smart constructor.
-data SubscriptionsUpdate = SubscriptionsUpdate
+data SubscriptionsUpdate = SubscriptionsUpdate'
     { _suPayload :: !Subscription
     , _suId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subscriptionsUpdate
     -> Text -- ^ 'suId'
     -> SubscriptionsUpdate
 subscriptionsUpdate pSuPayload_ pSuId_ =
-    SubscriptionsUpdate
+    SubscriptionsUpdate'
     { _suPayload = pSuPayload_
     , _suId = pSuId_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest SubscriptionsUpdate where
         type Rs SubscriptionsUpdate = Subscription
         type Scopes SubscriptionsUpdate =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient SubscriptionsUpdate{..}
+        requestClient SubscriptionsUpdate'{..}
           = go _suId (Just AltJSON) _suPayload mirrorService
           where go
                   = buildClient

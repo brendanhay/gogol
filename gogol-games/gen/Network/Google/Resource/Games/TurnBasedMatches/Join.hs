@@ -55,7 +55,7 @@ type TurnBasedMatchesJoinResource =
 -- | Join a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesJoin' smart constructor.
-data TurnBasedMatchesJoin = TurnBasedMatchesJoin
+data TurnBasedMatchesJoin = TurnBasedMatchesJoin'
     { _tbmjLanguage :: !(Maybe Text)
     , _tbmjMatchId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ turnBasedMatchesJoin
     :: Text -- ^ 'tbmjMatchId'
     -> TurnBasedMatchesJoin
 turnBasedMatchesJoin pTbmjMatchId_ =
-    TurnBasedMatchesJoin
+    TurnBasedMatchesJoin'
     { _tbmjLanguage = Nothing
     , _tbmjMatchId = pTbmjMatchId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TurnBasedMatchesJoin where
         type Scopes TurnBasedMatchesJoin =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesJoin{..}
+        requestClient TurnBasedMatchesJoin'{..}
           = go _tbmjMatchId _tbmjLanguage (Just AltJSON)
               gamesService
           where go

@@ -59,7 +59,7 @@ type LiveStreamsInsertResource =
 -- YouTube, which can then broadcast the video to your audience.
 --
 -- /See:/ 'liveStreamsInsert' smart constructor.
-data LiveStreamsInsert = LiveStreamsInsert
+data LiveStreamsInsert = LiveStreamsInsert'
     { _lsiPart                          :: !Text
     , _lsiPayload                       :: !LiveStream
     , _lsiOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -82,7 +82,7 @@ liveStreamsInsert
     -> LiveStream -- ^ 'lsiPayload'
     -> LiveStreamsInsert
 liveStreamsInsert pLsiPart_ pLsiPayload_ =
-    LiveStreamsInsert
+    LiveStreamsInsert'
     { _lsiPart = pLsiPart_
     , _lsiPayload = pLsiPayload_
     , _lsiOnBehalfOfContentOwner = Nothing
@@ -142,7 +142,7 @@ instance GoogleRequest LiveStreamsInsert where
         type Scopes LiveStreamsInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveStreamsInsert{..}
+        requestClient LiveStreamsInsert'{..}
           = go (Just _lsiPart) _lsiOnBehalfOfContentOwner
               _lsiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

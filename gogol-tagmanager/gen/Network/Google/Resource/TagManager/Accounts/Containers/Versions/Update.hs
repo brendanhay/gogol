@@ -62,7 +62,7 @@ type AccountsContainersVersionsUpdateResource =
 -- | Updates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUpdate' smart constructor.
-data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate
+data AccountsContainersVersionsUpdate = AccountsContainersVersionsUpdate'
     { _acccContainerId        :: !Text
     , _acccFingerprint        :: !(Maybe Text)
     , _acccContainerVersionId :: !Text
@@ -90,7 +90,7 @@ accountsContainersVersionsUpdate
     -> Text -- ^ 'acccAccountId'
     -> AccountsContainersVersionsUpdate
 accountsContainersVersionsUpdate pAcccContainerId_ pAcccContainerVersionId_ pAcccPayload_ pAcccAccountId_ =
-    AccountsContainersVersionsUpdate
+    AccountsContainersVersionsUpdate'
     { _acccContainerId = pAcccContainerId_
     , _acccFingerprint = Nothing
     , _acccContainerVersionId = pAcccContainerVersionId_
@@ -134,7 +134,7 @@ instance GoogleRequest
              ContainerVersion
         type Scopes AccountsContainersVersionsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-        requestClient AccountsContainersVersionsUpdate{..}
+        requestClient AccountsContainersVersionsUpdate'{..}
           = go _acccAccountId _acccContainerId
               _acccContainerVersionId
               _acccFingerprint

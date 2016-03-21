@@ -58,7 +58,7 @@ type LandingPagesInsertResource =
 -- | Inserts a new landing page for the specified campaign.
 --
 -- /See:/ 'landingPagesInsert' smart constructor.
-data LandingPagesInsert = LandingPagesInsert
+data LandingPagesInsert = LandingPagesInsert'
     { _lpiCampaignId :: !(Textual Int64)
     , _lpiProFileId  :: !(Textual Int64)
     , _lpiPayload    :: !LandingPage
@@ -79,7 +79,7 @@ landingPagesInsert
     -> LandingPage -- ^ 'lpiPayload'
     -> LandingPagesInsert
 landingPagesInsert pLpiCampaignId_ pLpiProFileId_ pLpiPayload_ =
-    LandingPagesInsert
+    LandingPagesInsert'
     { _lpiCampaignId = _Coerce # pLpiCampaignId_
     , _lpiProFileId = _Coerce # pLpiProFileId_
     , _lpiPayload = pLpiPayload_
@@ -107,7 +107,7 @@ instance GoogleRequest LandingPagesInsert where
         type Rs LandingPagesInsert = LandingPage
         type Scopes LandingPagesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient LandingPagesInsert{..}
+        requestClient LandingPagesInsert'{..}
           = go _lpiProFileId _lpiCampaignId (Just AltJSON)
               _lpiPayload
               dFAReportingService

@@ -53,7 +53,7 @@ type AssetsPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'assetsPermissionsList' smart constructor.
-newtype AssetsPermissionsList = AssetsPermissionsList
+newtype AssetsPermissionsList = AssetsPermissionsList'
     { _assId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ assetsPermissionsList
     :: Text -- ^ 'assId'
     -> AssetsPermissionsList
 assetsPermissionsList pAssId_ =
-    AssetsPermissionsList
+    AssetsPermissionsList'
     { _assId = pAssId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest AssetsPermissionsList where
         type Scopes AssetsPermissionsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient AssetsPermissionsList{..}
+        requestClient AssetsPermissionsList'{..}
           = go _assId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

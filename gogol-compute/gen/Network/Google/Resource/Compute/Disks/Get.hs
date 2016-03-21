@@ -59,7 +59,7 @@ type DisksGetResource =
 -- disks by making a list() request.
 --
 -- /See:/ 'disksGet' smart constructor.
-data DisksGet = DisksGet
+data DisksGet = DisksGet'
     { _dgProject :: !Text
     , _dgDisk    :: !Text
     , _dgZone    :: !Text
@@ -80,7 +80,7 @@ disksGet
     -> Text -- ^ 'dgZone'
     -> DisksGet
 disksGet pDgProject_ pDgDisk_ pDgZone_ =
-    DisksGet
+    DisksGet'
     { _dgProject = pDgProject_
     , _dgDisk = pDgDisk_
     , _dgZone = pDgZone_
@@ -105,7 +105,7 @@ instance GoogleRequest DisksGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient DisksGet{..}
+        requestClient DisksGet'{..}
           = go _dgProject _dgZone _dgDisk (Just AltJSON)
               computeService
           where go

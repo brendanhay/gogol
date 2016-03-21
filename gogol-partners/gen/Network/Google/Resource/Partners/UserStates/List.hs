@@ -88,7 +88,7 @@ type UserStatesListResource =
 -- | Lists states for current user.
 --
 -- /See:/ 'userStatesList' smart constructor.
-data UserStatesList = UserStatesList
+data UserStatesList = UserStatesList'
     { _uslXgafv                                       :: !(Maybe Text)
     , _uslUploadProtocol                              :: !(Maybe Text)
     , _uslPp                                          :: !Bool
@@ -139,7 +139,7 @@ data UserStatesList = UserStatesList
 userStatesList
     :: UserStatesList
 userStatesList =
-    UserStatesList
+    UserStatesList'
     { _uslXgafv = Nothing
     , _uslUploadProtocol = Nothing
     , _uslPp = True
@@ -250,7 +250,7 @@ uslCallback
 instance GoogleRequest UserStatesList where
         type Rs UserStatesList = ListUserStatesResponse
         type Scopes UserStatesList = '[]
-        requestClient UserStatesList{..}
+        requestClient UserStatesList'{..}
           = go _uslXgafv _uslUploadProtocol (Just _uslPp)
               _uslAccessToken
               _uslUploadType

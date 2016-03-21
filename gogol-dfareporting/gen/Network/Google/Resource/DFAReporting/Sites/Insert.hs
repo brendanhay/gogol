@@ -54,7 +54,7 @@ type SitesInsertResource =
 -- | Inserts a new site.
 --
 -- /See:/ 'sitesInsert' smart constructor.
-data SitesInsert = SitesInsert
+data SitesInsert = SitesInsert'
     { _sProFileId :: !(Textual Int64)
     , _sPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitesInsert
     -> Site -- ^ 'sPayload'
     -> SitesInsert
 sitesInsert pSProFileId_ pSPayload_ =
-    SitesInsert
+    SitesInsert'
     { _sProFileId = _Coerce # pSProFileId_
     , _sPayload = pSPayload_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest SitesInsert where
         type Rs SitesInsert = Site
         type Scopes SitesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SitesInsert{..}
+        requestClient SitesInsert'{..}
           = go _sProFileId (Just AltJSON) _sPayload
               dFAReportingService
           where go

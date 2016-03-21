@@ -55,7 +55,7 @@ type GlobalAccountsOperationsDeleteResource =
 -- | Deletes the specified operation resource.
 --
 -- /See:/ 'globalAccountsOperationsDelete' smart constructor.
-data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete
+data GlobalAccountsOperationsDelete = GlobalAccountsOperationsDelete'
     { _gaodProject   :: !Text
     , _gaodOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalAccountsOperationsDelete
     -> Text -- ^ 'gaodOperation'
     -> GlobalAccountsOperationsDelete
 globalAccountsOperationsDelete pGaodProject_ pGaodOperation_ =
-    GlobalAccountsOperationsDelete
+    GlobalAccountsOperationsDelete'
     { _gaodProject = pGaodProject_
     , _gaodOperation = pGaodOperation_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest GlobalAccountsOperationsDelete
         type Scopes GlobalAccountsOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient GlobalAccountsOperationsDelete{..}
+        requestClient GlobalAccountsOperationsDelete'{..}
           = go _gaodProject _gaodOperation (Just AltJSON)
               userAccountsService
           where go

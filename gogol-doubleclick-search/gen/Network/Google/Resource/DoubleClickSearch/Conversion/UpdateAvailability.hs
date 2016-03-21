@@ -55,7 +55,7 @@ type ConversionUpdateAvailabilityResource =
 -- DoubleClick Search.
 --
 -- /See:/ 'conversionUpdateAvailability' smart constructor.
-newtype ConversionUpdateAvailability = ConversionUpdateAvailability
+newtype ConversionUpdateAvailability = ConversionUpdateAvailability'
     { _cuaPayload :: UpdateAvailabilityRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ conversionUpdateAvailability
     :: UpdateAvailabilityRequest -- ^ 'cuaPayload'
     -> ConversionUpdateAvailability
 conversionUpdateAvailability pCuaPayload_ =
-    ConversionUpdateAvailability
+    ConversionUpdateAvailability'
     { _cuaPayload = pCuaPayload_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest ConversionUpdateAvailability
              UpdateAvailabilityResponse
         type Scopes ConversionUpdateAvailability =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ConversionUpdateAvailability{..}
+        requestClient ConversionUpdateAvailability'{..}
           = go (Just AltJSON) _cuaPayload
               doubleClickSearchService
           where go

@@ -56,7 +56,7 @@ type DatafeedstatusesListResource =
 -- | Lists the statuses of the datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedstatusesList' smart constructor.
-data DatafeedstatusesList = DatafeedstatusesList
+data DatafeedstatusesList = DatafeedstatusesList'
     { _dlMerchantId :: !(Textual Word64)
     , _dlPageToken  :: !(Maybe Text)
     , _dlMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ datafeedstatusesList
     :: Word64 -- ^ 'dlMerchantId'
     -> DatafeedstatusesList
 datafeedstatusesList pDlMerchantId_ =
-    DatafeedstatusesList
+    DatafeedstatusesList'
     { _dlMerchantId = _Coerce # pDlMerchantId_
     , _dlPageToken = Nothing
     , _dlMaxResults = Nothing
@@ -104,7 +104,7 @@ instance GoogleRequest DatafeedstatusesList where
              DatafeedstatusesListResponse
         type Scopes DatafeedstatusesList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient DatafeedstatusesList{..}
+        requestClient DatafeedstatusesList'{..}
           = go _dlMerchantId _dlPageToken _dlMaxResults
               (Just AltJSON)
               shoppingContentService

@@ -78,7 +78,7 @@ type CoursesCreateResource =
 -- specified in the \`id\` and already exists.
 --
 -- /See:/ 'coursesCreate' smart constructor.
-data CoursesCreate = CoursesCreate
+data CoursesCreate = CoursesCreate'
     { _ccXgafv          :: !(Maybe Text)
     , _ccUploadProtocol :: !(Maybe Text)
     , _ccPp             :: !Bool
@@ -112,7 +112,7 @@ coursesCreate
     :: Course -- ^ 'ccPayload'
     -> CoursesCreate
 coursesCreate pCcPayload_ =
-    CoursesCreate
+    CoursesCreate'
     { _ccXgafv = Nothing
     , _ccUploadProtocol = Nothing
     , _ccPp = True
@@ -168,7 +168,7 @@ instance GoogleRequest CoursesCreate where
         type Rs CoursesCreate = Course
         type Scopes CoursesCreate =
              '["https://www.googleapis.com/auth/classroom.courses"]
-        requestClient CoursesCreate{..}
+        requestClient CoursesCreate'{..}
           = go _ccXgafv _ccUploadProtocol (Just _ccPp)
               _ccAccessToken
               _ccUploadType

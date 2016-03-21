@@ -93,7 +93,7 @@ type VariantsImportResource =
 -- appended to the metadata already in a variant set.
 --
 -- /See:/ 'variantsImport' smart constructor.
-data VariantsImport = VariantsImport
+data VariantsImport = VariantsImport'
     { _viXgafv          :: !(Maybe Text)
     , _viUploadProtocol :: !(Maybe Text)
     , _viPp             :: !Bool
@@ -127,7 +127,7 @@ variantsImport
     :: ImportVariantsRequest -- ^ 'viPayload'
     -> VariantsImport
 variantsImport pViPayload_ =
-    VariantsImport
+    VariantsImport'
     { _viXgafv = Nothing
     , _viUploadProtocol = Nothing
     , _viPp = True
@@ -185,7 +185,7 @@ instance GoogleRequest VariantsImport where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.read_write",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantsImport{..}
+        requestClient VariantsImport'{..}
           = go _viXgafv _viUploadProtocol (Just _viPp)
               _viAccessToken
               _viUploadType

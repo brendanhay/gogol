@@ -55,7 +55,7 @@ type SchemasInsertResource =
 -- | Create schema.
 --
 -- /See:/ 'schemasInsert' smart constructor.
-data SchemasInsert = SchemasInsert
+data SchemasInsert = SchemasInsert'
     { _siPayload    :: !Schema
     , _siCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ schemasInsert
     -> Text -- ^ 'siCustomerId'
     -> SchemasInsert
 schemasInsert pSiPayload_ pSiCustomerId_ =
-    SchemasInsert
+    SchemasInsert'
     { _siPayload = pSiPayload_
     , _siCustomerId = pSiCustomerId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SchemasInsert where
         type Rs SchemasInsert = Schema
         type Scopes SchemasInsert =
              '["https://www.googleapis.com/auth/admin.directory.userschema"]
-        requestClient SchemasInsert{..}
+        requestClient SchemasInsert'{..}
           = go _siCustomerId (Just AltJSON) _siPayload
               directoryService
           where go

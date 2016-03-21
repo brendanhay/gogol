@@ -54,7 +54,7 @@ type ChangeLogsGetResource =
 -- | Gets one change log by ID.
 --
 -- /See:/ 'changeLogsGet' smart constructor.
-data ChangeLogsGet = ChangeLogsGet
+data ChangeLogsGet = ChangeLogsGet'
     { _clgProFileId :: !(Textual Int64)
     , _clgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ changeLogsGet
     -> Int64 -- ^ 'clgId'
     -> ChangeLogsGet
 changeLogsGet pClgProFileId_ pClgId_ =
-    ChangeLogsGet
+    ChangeLogsGet'
     { _clgProFileId = _Coerce # pClgProFileId_
     , _clgId = _Coerce # pClgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ChangeLogsGet where
         type Rs ChangeLogsGet = ChangeLog
         type Scopes ChangeLogsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ChangeLogsGet{..}
+        requestClient ChangeLogsGet'{..}
           = go _clgProFileId _clgId (Just AltJSON)
               dFAReportingService
           where go

@@ -57,7 +57,7 @@ type ResourcesCalendarsInsertResource =
 -- | Inserts a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsInsert' smart constructor.
-data ResourcesCalendarsInsert = ResourcesCalendarsInsert
+data ResourcesCalendarsInsert = ResourcesCalendarsInsert'
     { _rciPayload  :: !CalendarResource
     , _rciCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ resourcesCalendarsInsert
     -> Text -- ^ 'rciCustomer'
     -> ResourcesCalendarsInsert
 resourcesCalendarsInsert pRciPayload_ pRciCustomer_ =
-    ResourcesCalendarsInsert
+    ResourcesCalendarsInsert'
     { _rciPayload = pRciPayload_
     , _rciCustomer = pRciCustomer_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest ResourcesCalendarsInsert where
         type Rs ResourcesCalendarsInsert = CalendarResource
         type Scopes ResourcesCalendarsInsert =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
-        requestClient ResourcesCalendarsInsert{..}
+        requestClient ResourcesCalendarsInsert'{..}
           = go _rciCustomer (Just AltJSON) _rciPayload
               directoryService
           where go

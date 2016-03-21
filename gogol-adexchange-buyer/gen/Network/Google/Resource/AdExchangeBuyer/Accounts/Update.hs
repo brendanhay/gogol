@@ -53,7 +53,7 @@ type AccountsUpdateResource =
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _auPayload :: !Account
     , _auId      :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsUpdate
     -> Int32 -- ^ 'auId'
     -> AccountsUpdate
 accountsUpdate pAuPayload_ pAuId_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _auPayload = pAuPayload_
     , _auId = _Coerce # pAuId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
         type Scopes AccountsUpdate =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient AccountsUpdate{..}
+        requestClient AccountsUpdate'{..}
           = go _auId (Just AltJSON) _auPayload
               adExchangeBuyerService
           where go

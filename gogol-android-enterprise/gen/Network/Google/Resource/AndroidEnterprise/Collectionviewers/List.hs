@@ -60,7 +60,7 @@ type CollectionviewersListResource =
 -- then only these users will see the collection.
 --
 -- /See:/ 'collectionviewersList' smart constructor.
-data CollectionviewersList = CollectionviewersList
+data CollectionviewersList = CollectionviewersList'
     { _cEnterpriseId :: !Text
     , _cCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ collectionviewersList
     -> Text -- ^ 'cCollectionId'
     -> CollectionviewersList
 collectionviewersList pCEnterpriseId_ pCCollectionId_ =
-    CollectionviewersList
+    CollectionviewersList'
     { _cEnterpriseId = pCEnterpriseId_
     , _cCollectionId = pCCollectionId_
     }
@@ -99,7 +99,7 @@ instance GoogleRequest CollectionviewersList where
              CollectionViewersListResponse
         type Scopes CollectionviewersList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionviewersList{..}
+        requestClient CollectionviewersList'{..}
           = go _cEnterpriseId _cCollectionId (Just AltJSON)
               androidEnterpriseService
           where go

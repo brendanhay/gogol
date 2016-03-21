@@ -52,7 +52,7 @@ type EnterprisesListResource =
 -- | Looks up an enterprise by domain name.
 --
 -- /See:/ 'enterprisesList' smart constructor.
-newtype EnterprisesList = EnterprisesList
+newtype EnterprisesList = EnterprisesList'
     { _elDomain :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ enterprisesList
     :: Text -- ^ 'elDomain'
     -> EnterprisesList
 enterprisesList pElDomain_ =
-    EnterprisesList
+    EnterprisesList'
     { _elDomain = pElDomain_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest EnterprisesList where
         type Rs EnterprisesList = EnterprisesListResponse
         type Scopes EnterprisesList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesList{..}
+        requestClient EnterprisesList'{..}
           = go (Just _elDomain) (Just AltJSON)
               androidEnterpriseService
           where go

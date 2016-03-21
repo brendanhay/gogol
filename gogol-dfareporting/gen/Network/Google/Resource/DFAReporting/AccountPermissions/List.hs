@@ -53,7 +53,7 @@ type AccountPermissionsListResource =
 -- | Retrieves the list of account permissions.
 --
 -- /See:/ 'accountPermissionsList' smart constructor.
-newtype AccountPermissionsList = AccountPermissionsList
+newtype AccountPermissionsList = AccountPermissionsList'
     { _aplProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountPermissionsList
     :: Int64 -- ^ 'aplProFileId'
     -> AccountPermissionsList
 accountPermissionsList pAplProFileId_ =
-    AccountPermissionsList
+    AccountPermissionsList'
     { _aplProFileId = _Coerce # pAplProFileId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest AccountPermissionsList where
              AccountPermissionsListResponse
         type Scopes AccountPermissionsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountPermissionsList{..}
+        requestClient AccountPermissionsList'{..}
           = go _aplProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

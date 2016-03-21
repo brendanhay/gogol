@@ -60,7 +60,7 @@ type DisksAggregatedListResource =
 -- | Retrieves an aggregated list of persistent disks.
 --
 -- /See:/ 'disksAggregatedList' smart constructor.
-data DisksAggregatedList = DisksAggregatedList
+data DisksAggregatedList = DisksAggregatedList'
     { _dalProject    :: !Text
     , _dalFilter     :: !(Maybe Text)
     , _dalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ disksAggregatedList
     :: Text -- ^ 'dalProject'
     -> DisksAggregatedList
 disksAggregatedList pDalProject_ =
-    DisksAggregatedList
+    DisksAggregatedList'
     { _dalProject = pDalProject_
     , _dalFilter = Nothing
     , _dalPageToken = Nothing
@@ -142,7 +142,7 @@ instance GoogleRequest DisksAggregatedList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient DisksAggregatedList{..}
+        requestClient DisksAggregatedList'{..}
           = go _dalProject _dalFilter _dalPageToken
               (Just _dalMaxResults)
               (Just AltJSON)

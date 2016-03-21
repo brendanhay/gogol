@@ -54,7 +54,7 @@ type AccountsAlertsListResource =
 -- | List the alerts for the specified AdSense account.
 --
 -- /See:/ 'accountsAlertsList' smart constructor.
-data AccountsAlertsList = AccountsAlertsList
+data AccountsAlertsList = AccountsAlertsList'
     { _aalLocale    :: !(Maybe Text)
     , _aalAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsAlertsList
     :: Text -- ^ 'aalAccountId'
     -> AccountsAlertsList
 accountsAlertsList pAalAccountId_ =
-    AccountsAlertsList
+    AccountsAlertsList'
     { _aalLocale = Nothing
     , _aalAccountId = pAalAccountId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountsAlertsList where
         type Scopes AccountsAlertsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsAlertsList{..}
+        requestClient AccountsAlertsList'{..}
           = go _aalAccountId _aalLocale (Just AltJSON)
               adSenseService
           where go

@@ -57,7 +57,7 @@ type RepliesCreateResource =
 -- | Creates a new reply to a comment.
 --
 -- /See:/ 'repliesCreate' smart constructor.
-data RepliesCreate = RepliesCreate
+data RepliesCreate = RepliesCreate'
     { _rcPayload   :: !Reply
     , _rcFileId    :: !Text
     , _rcCommentId :: !Text
@@ -78,7 +78,7 @@ repliesCreate
     -> Text -- ^ 'rcCommentId'
     -> RepliesCreate
 repliesCreate pRcPayload_ pRcFileId_ pRcCommentId_ =
-    RepliesCreate
+    RepliesCreate'
     { _rcPayload = pRcPayload_
     , _rcFileId = pRcFileId_
     , _rcCommentId = pRcCommentId_
@@ -103,7 +103,7 @@ instance GoogleRequest RepliesCreate where
         type Scopes RepliesCreate =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient RepliesCreate{..}
+        requestClient RepliesCreate'{..}
           = go _rcFileId _rcCommentId (Just AltJSON) _rcPayload
               driveService
           where go

@@ -59,7 +59,7 @@ type AutoscalersGetResource =
 -- autoscalers by making a list() request.
 --
 -- /See:/ 'autoscalersGet' smart constructor.
-data AutoscalersGet = AutoscalersGet
+data AutoscalersGet = AutoscalersGet'
     { _agProject    :: !Text
     , _agZone       :: !Text
     , _agAutoscaler :: !Text
@@ -80,7 +80,7 @@ autoscalersGet
     -> Text -- ^ 'agAutoscaler'
     -> AutoscalersGet
 autoscalersGet pAgProject_ pAgZone_ pAgAutoscaler_ =
-    AutoscalersGet
+    AutoscalersGet'
     { _agProject = pAgProject_
     , _agZone = pAgZone_
     , _agAutoscaler = pAgAutoscaler_
@@ -106,7 +106,7 @@ instance GoogleRequest AutoscalersGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient AutoscalersGet{..}
+        requestClient AutoscalersGet'{..}
           = go _agProject _agZone _agAutoscaler (Just AltJSON)
               computeService
           where go

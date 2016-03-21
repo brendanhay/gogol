@@ -57,7 +57,7 @@ type PlayListsInsertResource =
 -- | Creates a playlist.
 --
 -- /See:/ 'playListsInsert' smart constructor.
-data PlayListsInsert = PlayListsInsert
+data PlayListsInsert = PlayListsInsert'
     { _pliPart                          :: !Text
     , _pliPayload                       :: !PlayList
     , _pliOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -80,7 +80,7 @@ playListsInsert
     -> PlayList -- ^ 'pliPayload'
     -> PlayListsInsert
 playListsInsert pPliPart_ pPliPayload_ =
-    PlayListsInsert
+    PlayListsInsert'
     { _pliPart = pPliPart_
     , _pliPayload = pPliPayload_
     , _pliOnBehalfOfContentOwner = Nothing
@@ -140,7 +140,7 @@ instance GoogleRequest PlayListsInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient PlayListsInsert{..}
+        requestClient PlayListsInsert'{..}
           = go (Just _pliPart) _pliOnBehalfOfContentOwner
               _pliOnBehalfOfContentOwnerChannel
               (Just AltJSON)

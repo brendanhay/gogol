@@ -57,7 +57,7 @@ type GroupsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert
+data GroupsInsert = GroupsInsert'
     { _giProject :: !Text
     , _giPayload :: !Group
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ groupsInsert
     -> Group -- ^ 'giPayload'
     -> GroupsInsert
 groupsInsert pGiProject_ pGiPayload_ =
-    GroupsInsert
+    GroupsInsert'
     { _giProject = pGiProject_
     , _giPayload = pGiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest GroupsInsert where
         type Scopes GroupsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient GroupsInsert{..}
+        requestClient GroupsInsert'{..}
           = go _giProject (Just AltJSON) _giPayload
               userAccountsService
           where go

@@ -56,7 +56,7 @@ type UsersPhotosPatchResource =
 -- | Add a photo for the user. This method supports patch semantics.
 --
 -- /See:/ 'usersPhotosPatch' smart constructor.
-data UsersPhotosPatch = UsersPhotosPatch
+data UsersPhotosPatch = UsersPhotosPatch'
     { _uppPayload :: !UserPhoto
     , _uppUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ usersPhotosPatch
     -> Text -- ^ 'uppUserKey'
     -> UsersPhotosPatch
 usersPhotosPatch pUppPayload_ pUppUserKey_ =
-    UsersPhotosPatch
+    UsersPhotosPatch'
     { _uppPayload = pUppPayload_
     , _uppUserKey = pUppUserKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersPhotosPatch where
         type Rs UsersPhotosPatch = UserPhoto
         type Scopes UsersPhotosPatch =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersPhotosPatch{..}
+        requestClient UsersPhotosPatch'{..}
           = go _uppUserKey (Just AltJSON) _uppPayload
               directoryService
           where go

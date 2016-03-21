@@ -62,7 +62,7 @@ type PurchasesSubscriptionsRevokeResource =
 -- recurring.
 --
 -- /See:/ 'purchasesSubscriptionsRevoke' smart constructor.
-data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke
+data PurchasesSubscriptionsRevoke = PurchasesSubscriptionsRevoke'
     { _pPackageName    :: !Text
     , _pToken          :: !Text
     , _pSubscriptionId :: !Text
@@ -83,7 +83,7 @@ purchasesSubscriptionsRevoke
     -> Text -- ^ 'pSubscriptionId'
     -> PurchasesSubscriptionsRevoke
 purchasesSubscriptionsRevoke pPPackageName_ pPToken_ pPSubscriptionId_ =
-    PurchasesSubscriptionsRevoke
+    PurchasesSubscriptionsRevoke'
     { _pPackageName = pPPackageName_
     , _pToken = pPToken_
     , _pSubscriptionId = pPSubscriptionId_
@@ -111,7 +111,7 @@ instance GoogleRequest PurchasesSubscriptionsRevoke
         type Rs PurchasesSubscriptionsRevoke = ()
         type Scopes PurchasesSubscriptionsRevoke =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient PurchasesSubscriptionsRevoke{..}
+        requestClient PurchasesSubscriptionsRevoke'{..}
           = go _pPackageName _pSubscriptionId _pToken
               (Just AltJSON)
               androidPublisherService

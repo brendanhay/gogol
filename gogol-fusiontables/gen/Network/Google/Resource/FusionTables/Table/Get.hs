@@ -51,7 +51,7 @@ type TableGetResource =
 -- | Retrieves a specific table by its ID.
 --
 -- /See:/ 'tableGet' smart constructor.
-newtype TableGet = TableGet
+newtype TableGet = TableGet'
     { _tgTableId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tableGet
     :: Text -- ^ 'tgTableId'
     -> TableGet
 tableGet pTgTableId_ =
-    TableGet
+    TableGet'
     { _tgTableId = pTgTableId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest TableGet where
         type Scopes TableGet =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient TableGet{..}
+        requestClient TableGet'{..}
           = go _tgTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableGetResource)

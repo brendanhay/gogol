@@ -62,7 +62,7 @@ type CommentsSetModerationStatusResource =
 -- comments.
 --
 -- /See:/ 'commentsSetModerationStatus' smart constructor.
-data CommentsSetModerationStatus = CommentsSetModerationStatus
+data CommentsSetModerationStatus = CommentsSetModerationStatus'
     { _csmsBanAuthor        :: !Bool
     , _csmsModerationStatus :: !CommentsSetModerationStatusModerationStatus
     , _csmsId               :: !Text
@@ -82,7 +82,7 @@ commentsSetModerationStatus
     -> Text -- ^ 'csmsId'
     -> CommentsSetModerationStatus
 commentsSetModerationStatus pCsmsModerationStatus_ pCsmsId_ =
-    CommentsSetModerationStatus
+    CommentsSetModerationStatus'
     { _csmsBanAuthor = False
     , _csmsModerationStatus = pCsmsModerationStatus_
     , _csmsId = pCsmsId_
@@ -113,7 +113,7 @@ instance GoogleRequest CommentsSetModerationStatus
         type Rs CommentsSetModerationStatus = ()
         type Scopes CommentsSetModerationStatus =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentsSetModerationStatus{..}
+        requestClient CommentsSetModerationStatus'{..}
           = go (Just _csmsId) (Just _csmsModerationStatus)
               (Just _csmsBanAuthor)
               (Just AltJSON)

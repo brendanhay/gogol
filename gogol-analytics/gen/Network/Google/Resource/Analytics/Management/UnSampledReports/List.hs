@@ -64,7 +64,7 @@ type ManagementUnSampledReportsListResource =
 -- | Lists unsampled reports to which the user has access.
 --
 -- /See:/ 'managementUnSampledReportsList' smart constructor.
-data ManagementUnSampledReportsList = ManagementUnSampledReportsList
+data ManagementUnSampledReportsList = ManagementUnSampledReportsList'
     { _musrlWebPropertyId :: !Text
     , _musrlProFileId     :: !Text
     , _musrlAccountId     :: !Text
@@ -91,7 +91,7 @@ managementUnSampledReportsList
     -> Text -- ^ 'musrlAccountId'
     -> ManagementUnSampledReportsList
 managementUnSampledReportsList pMusrlWebPropertyId_ pMusrlProFileId_ pMusrlAccountId_ =
-    ManagementUnSampledReportsList
+    ManagementUnSampledReportsList'
     { _musrlWebPropertyId = pMusrlWebPropertyId_
     , _musrlProFileId = pMusrlProFileId_
     , _musrlAccountId = pMusrlAccountId_
@@ -143,7 +143,7 @@ instance GoogleRequest ManagementUnSampledReportsList
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementUnSampledReportsList{..}
+        requestClient ManagementUnSampledReportsList'{..}
           = go _musrlAccountId _musrlWebPropertyId
               _musrlProFileId
               _musrlStartIndex

@@ -69,7 +69,7 @@ type AccountsOrdersGetResource =
 -- and _Get methods rules_ for more information about this method.
 --
 -- /See:/ 'accountsOrdersGet' smart constructor.
-data AccountsOrdersGet = AccountsOrdersGet
+data AccountsOrdersGet = AccountsOrdersGet'
     { _aogXgafv          :: !(Maybe Text)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -107,7 +107,7 @@ accountsOrdersGet
     -> Text -- ^ 'aogOrderId'
     -> AccountsOrdersGet
 accountsOrdersGet pAogAccountId_ pAogOrderId_ =
-    AccountsOrdersGet
+    AccountsOrdersGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -170,7 +170,7 @@ instance GoogleRequest AccountsOrdersGet where
         type Rs AccountsOrdersGet = Order
         type Scopes AccountsOrdersGet =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsOrdersGet{..}
+        requestClient AccountsOrdersGet'{..}
           = go _aogAccountId _aogOrderId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)

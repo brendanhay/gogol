@@ -54,7 +54,7 @@ type RelyingPartyGetAccountInfoResource =
 -- | Returns the account info.
 --
 -- /See:/ 'relyingPartyGetAccountInfo' smart constructor.
-newtype RelyingPartyGetAccountInfo = RelyingPartyGetAccountInfo
+newtype RelyingPartyGetAccountInfo = RelyingPartyGetAccountInfo'
     { _rpgaiPayload :: IdentitytoolkitRelyingPartyGetAccountInfoRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyGetAccountInfo
     :: IdentitytoolkitRelyingPartyGetAccountInfoRequest -- ^ 'rpgaiPayload'
     -> RelyingPartyGetAccountInfo
 relyingPartyGetAccountInfo pRpgaiPayload_ =
-    RelyingPartyGetAccountInfo
+    RelyingPartyGetAccountInfo'
     { _rpgaiPayload = pRpgaiPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyGetAccountInfo
         type Rs RelyingPartyGetAccountInfo =
              GetAccountInfoResponse
         type Scopes RelyingPartyGetAccountInfo = '[]
-        requestClient RelyingPartyGetAccountInfo{..}
+        requestClient RelyingPartyGetAccountInfo'{..}
           = go (Just AltJSON) _rpgaiPayload
               identityToolkitService
           where go

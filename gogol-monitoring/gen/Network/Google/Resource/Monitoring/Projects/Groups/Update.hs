@@ -69,7 +69,7 @@ type ProjectsGroupsUpdateResource =
 -- \`name\`.
 --
 -- /See:/ 'projectsGroupsUpdate' smart constructor.
-data ProjectsGroupsUpdate = ProjectsGroupsUpdate
+data ProjectsGroupsUpdate = ProjectsGroupsUpdate'
     { _pguXgafv          :: !(Maybe Text)
     , _pguValidateOnly   :: !(Maybe Bool)
     , _pguUploadProtocol :: !(Maybe Text)
@@ -110,7 +110,7 @@ projectsGroupsUpdate
     -> Text -- ^ 'pguName'
     -> ProjectsGroupsUpdate
 projectsGroupsUpdate pPguPayload_ pPguName_ =
-    ProjectsGroupsUpdate
+    ProjectsGroupsUpdate'
     { _pguXgafv = Nothing
     , _pguValidateOnly = Nothing
     , _pguUploadProtocol = Nothing
@@ -183,7 +183,7 @@ instance GoogleRequest ProjectsGroupsUpdate where
         type Scopes ProjectsGroupsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient ProjectsGroupsUpdate{..}
+        requestClient ProjectsGroupsUpdate'{..}
           = go _pguName _pguXgafv _pguValidateOnly
               _pguUploadProtocol
               (Just _pguPp)

@@ -55,7 +55,7 @@ type UsersMakeAdminResource =
 -- | change admin status of a user
 --
 -- /See:/ 'usersMakeAdmin' smart constructor.
-data UsersMakeAdmin = UsersMakeAdmin
+data UsersMakeAdmin = UsersMakeAdmin'
     { _umaPayload :: !UserMakeAdmin
     , _umaUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersMakeAdmin
     -> Text -- ^ 'umaUserKey'
     -> UsersMakeAdmin
 usersMakeAdmin pUmaPayload_ pUmaUserKey_ =
-    UsersMakeAdmin
+    UsersMakeAdmin'
     { _umaPayload = pUmaPayload_
     , _umaUserKey = pUmaUserKey_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersMakeAdmin where
         type Rs UsersMakeAdmin = ()
         type Scopes UsersMakeAdmin =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersMakeAdmin{..}
+        requestClient UsersMakeAdmin'{..}
           = go _umaUserKey (Just AltJSON) _umaPayload
               directoryService
           where go

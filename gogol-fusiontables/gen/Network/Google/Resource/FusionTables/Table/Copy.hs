@@ -54,7 +54,7 @@ type TableCopyResource =
 -- | Copies a table.
 --
 -- /See:/ 'tableCopy' smart constructor.
-data TableCopy = TableCopy
+data TableCopy = TableCopy'
     { _tcTableId          :: !Text
     , _tcCopyPresentation :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ tableCopy
     :: Text -- ^ 'tcTableId'
     -> TableCopy
 tableCopy pTcTableId_ =
-    TableCopy
+    TableCopy'
     { _tcTableId = pTcTableId_
     , _tcCopyPresentation = Nothing
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TableCopy where
         type Scopes TableCopy =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient TableCopy{..}
+        requestClient TableCopy'{..}
           = go _tcTableId _tcCopyPresentation (Just AltJSON)
               fusionTablesService
           where go

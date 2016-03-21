@@ -54,7 +54,7 @@ type LeaderboardConfigurationsUpdateResource =
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsUpdate' smart constructor.
-data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate
+data LeaderboardConfigurationsUpdate = LeaderboardConfigurationsUpdate'
     { _lcuPayload       :: !LeaderboardConfiguration
     , _lcuLeaderboardId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ leaderboardConfigurationsUpdate
     -> Text -- ^ 'lcuLeaderboardId'
     -> LeaderboardConfigurationsUpdate
 leaderboardConfigurationsUpdate pLcuPayload_ pLcuLeaderboardId_ =
-    LeaderboardConfigurationsUpdate
+    LeaderboardConfigurationsUpdate'
     { _lcuPayload = pLcuPayload_
     , _lcuLeaderboardId = pLcuLeaderboardId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest
              LeaderboardConfiguration
         type Scopes LeaderboardConfigurationsUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient LeaderboardConfigurationsUpdate{..}
+        requestClient LeaderboardConfigurationsUpdate'{..}
           = go _lcuLeaderboardId (Just AltJSON) _lcuPayload
               gamesConfigurationService
           where go

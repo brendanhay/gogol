@@ -59,7 +59,7 @@ type FirewallsListResource =
 -- | Retrieves the list of firewall rules available to the specified project.
 --
 -- /See:/ 'firewallsList' smart constructor.
-data FirewallsList = FirewallsList
+data FirewallsList = FirewallsList'
     { _flProject    :: !Text
     , _flFilter     :: !(Maybe Text)
     , _flPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ firewallsList
     :: Text -- ^ 'flProject'
     -> FirewallsList
 firewallsList pFlProject_ =
-    FirewallsList
+    FirewallsList'
     { _flProject = pFlProject_
     , _flFilter = Nothing
     , _flPageToken = Nothing
@@ -139,7 +139,7 @@ instance GoogleRequest FirewallsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient FirewallsList{..}
+        requestClient FirewallsList'{..}
           = go _flProject _flFilter _flPageToken
               (Just _flMaxResults)
               (Just AltJSON)

@@ -56,7 +56,7 @@ type EventsResetForAllPlayersResource =
 -- can be reset. All quests that use the event will also be reset.
 --
 -- /See:/ 'eventsResetForAllPlayers' smart constructor.
-newtype EventsResetForAllPlayers = EventsResetForAllPlayers
+newtype EventsResetForAllPlayers = EventsResetForAllPlayers'
     { _erfapEventId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ eventsResetForAllPlayers
     :: Text -- ^ 'erfapEventId'
     -> EventsResetForAllPlayers
 eventsResetForAllPlayers pErfapEventId_ =
-    EventsResetForAllPlayers
+    EventsResetForAllPlayers'
     { _erfapEventId = pErfapEventId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest EventsResetForAllPlayers where
         type Scopes EventsResetForAllPlayers =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient EventsResetForAllPlayers{..}
+        requestClient EventsResetForAllPlayers'{..}
           = go _erfapEventId (Just AltJSON)
               gamesManagementService
           where go

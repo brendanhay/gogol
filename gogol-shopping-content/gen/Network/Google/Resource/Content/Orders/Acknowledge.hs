@@ -57,7 +57,7 @@ type OrdersAcknowledgeResource =
 -- | Marks an order as acknowledged.
 --
 -- /See:/ 'ordersAcknowledge' smart constructor.
-data OrdersAcknowledge = OrdersAcknowledge
+data OrdersAcknowledge = OrdersAcknowledge'
     { _oaMerchantId :: !(Textual Word64)
     , _oaPayload    :: !OrdersAcknowledgeRequest
     , _oaOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersAcknowledge
     -> Text -- ^ 'oaOrderId'
     -> OrdersAcknowledge
 ordersAcknowledge pOaMerchantId_ pOaPayload_ pOaOrderId_ =
-    OrdersAcknowledge
+    OrdersAcknowledge'
     { _oaMerchantId = _Coerce # pOaMerchantId_
     , _oaPayload = pOaPayload_
     , _oaOrderId = pOaOrderId_
@@ -104,7 +104,7 @@ instance GoogleRequest OrdersAcknowledge where
         type Rs OrdersAcknowledge = OrdersAcknowledgeResponse
         type Scopes OrdersAcknowledge =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersAcknowledge{..}
+        requestClient OrdersAcknowledge'{..}
           = go _oaMerchantId _oaOrderId (Just AltJSON)
               _oaPayload
               shoppingContentService

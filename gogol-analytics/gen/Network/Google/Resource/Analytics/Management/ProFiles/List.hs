@@ -60,7 +60,7 @@ type ManagementProFilesListResource =
 -- | Lists views (profiles) to which the user has access.
 --
 -- /See:/ 'managementProFilesList' smart constructor.
-data ManagementProFilesList = ManagementProFilesList
+data ManagementProFilesList = ManagementProFilesList'
     { _mpflWebPropertyId :: !Text
     , _mpflAccountId     :: !Text
     , _mpflStartIndex    :: !(Maybe (Textual Int32))
@@ -83,7 +83,7 @@ managementProFilesList
     -> Text -- ^ 'mpflAccountId'
     -> ManagementProFilesList
 managementProFilesList pMpflWebPropertyId_ pMpflAccountId_ =
-    ManagementProFilesList
+    ManagementProFilesList'
     { _mpflWebPropertyId = pMpflWebPropertyId_
     , _mpflAccountId = pMpflAccountId_
     , _mpflStartIndex = Nothing
@@ -127,7 +127,7 @@ instance GoogleRequest ManagementProFilesList where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementProFilesList{..}
+        requestClient ManagementProFilesList'{..}
           = go _mpflAccountId _mpflWebPropertyId
               _mpflStartIndex
               _mpflMaxResults

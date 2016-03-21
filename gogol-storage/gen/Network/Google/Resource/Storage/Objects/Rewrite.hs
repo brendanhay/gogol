@@ -120,7 +120,7 @@ type ObjectsRewriteResource =
 -- metadata.
 --
 -- /See:/ 'objectsRewrite' smart constructor.
-data ObjectsRewrite = ObjectsRewrite
+data ObjectsRewrite = ObjectsRewrite'
     { _orDestinationPredefinedACL       :: !(Maybe ObjectsRewriteDestinationPredefinedACL)
     , _orIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
     , _orIfMetagenerationMatch          :: !(Maybe (Textual Int64))
@@ -188,7 +188,7 @@ objectsRewrite
     -> Text -- ^ 'orDestinationObject'
     -> ObjectsRewrite
 objectsRewrite pOrSourceObject_ pOrSourceBucket_ pOrPayload_ pOrDestinationBucket_ pOrDestinationObject_ =
-    ObjectsRewrite
+    ObjectsRewrite'
     { _orDestinationPredefinedACL = Nothing
     , _orIfSourceGenerationMatch = Nothing
     , _orIfMetagenerationMatch = Nothing
@@ -356,7 +356,7 @@ instance GoogleRequest ObjectsRewrite where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsRewrite{..}
+        requestClient ObjectsRewrite'{..}
           = go _orSourceBucket _orSourceObject
               _orDestinationBucket
               _orDestinationObject

@@ -86,7 +86,7 @@ type TimeseriesDescriptorsListResource =
 -- the value of the nextPageToken.
 --
 -- /See:/ 'timeseriesDescriptorsList' smart constructor.
-data TimeseriesDescriptorsList = TimeseriesDescriptorsList
+data TimeseriesDescriptorsList = TimeseriesDescriptorsList'
     { _tdlWindow     :: !(Maybe Text)
     , _tdlProject    :: !Text
     , _tdlCount      :: !(Textual Int32)
@@ -132,7 +132,7 @@ timeseriesDescriptorsList
     -> Text -- ^ 'tdlYoungest'
     -> TimeseriesDescriptorsList
 timeseriesDescriptorsList pTdlProject_ pTdlPayload_ pTdlMetric_ pTdlYoungest_ =
-    TimeseriesDescriptorsList
+    TimeseriesDescriptorsList'
     { _tdlWindow = Nothing
     , _tdlProject = pTdlProject_
     , _tdlCount = 100
@@ -238,7 +238,7 @@ instance GoogleRequest TimeseriesDescriptorsList
         type Scopes TimeseriesDescriptorsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient TimeseriesDescriptorsList{..}
+        requestClient TimeseriesDescriptorsList'{..}
           = go _tdlProject _tdlMetric (Just _tdlYoungest)
               _tdlWindow
               (Just _tdlCount)

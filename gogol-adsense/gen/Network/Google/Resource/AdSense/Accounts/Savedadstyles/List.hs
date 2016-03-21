@@ -56,7 +56,7 @@ type AccountsSavedadstylesListResource =
 -- | List all saved ad styles in the specified account.
 --
 -- /See:/ 'accountsSavedadstylesList' smart constructor.
-data AccountsSavedadstylesList = AccountsSavedadstylesList
+data AccountsSavedadstylesList = AccountsSavedadstylesList'
     { _aslAccountId  :: !Text
     , _aslPageToken  :: !(Maybe Text)
     , _aslMaxResults :: !(Maybe (Textual Int32))
@@ -75,7 +75,7 @@ accountsSavedadstylesList
     :: Text -- ^ 'aslAccountId'
     -> AccountsSavedadstylesList
 accountsSavedadstylesList pAslAccountId_ =
-    AccountsSavedadstylesList
+    AccountsSavedadstylesList'
     { _aslAccountId = pAslAccountId_
     , _aslPageToken = Nothing
     , _aslMaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest AccountsSavedadstylesList
         type Scopes AccountsSavedadstylesList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsSavedadstylesList{..}
+        requestClient AccountsSavedadstylesList'{..}
           = go _aslAccountId _aslPageToken _aslMaxResults
               (Just AltJSON)
               adSenseService

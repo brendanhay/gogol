@@ -59,7 +59,7 @@ type DatafeedsPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'datafeedsPatch' smart constructor.
-data DatafeedsPatch = DatafeedsPatch
+data DatafeedsPatch = DatafeedsPatch'
     { _dpMerchantId :: !(Textual Word64)
     , _dpPayload    :: !Datafeed
     , _dpDatafeedId :: !(Textual Word64)
@@ -83,7 +83,7 @@ datafeedsPatch
     -> Word64 -- ^ 'dpDatafeedId'
     -> DatafeedsPatch
 datafeedsPatch pDpMerchantId_ pDpPayload_ pDpDatafeedId_ =
-    DatafeedsPatch
+    DatafeedsPatch'
     { _dpMerchantId = _Coerce # pDpMerchantId_
     , _dpPayload = pDpPayload_
     , _dpDatafeedId = _Coerce # pDpDatafeedId_
@@ -113,7 +113,7 @@ instance GoogleRequest DatafeedsPatch where
         type Rs DatafeedsPatch = Datafeed
         type Scopes DatafeedsPatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient DatafeedsPatch{..}
+        requestClient DatafeedsPatch'{..}
           = go _dpMerchantId _dpDatafeedId _dpDryRun
               (Just AltJSON)
               _dpPayload

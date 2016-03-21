@@ -56,7 +56,7 @@ type ACLPatchResource =
 -- | Updates an access control rule. This method supports patch semantics.
 --
 -- /See:/ 'aclPatch' smart constructor.
-data ACLPatch = ACLPatch
+data ACLPatch = ACLPatch'
     { _apCalendarId :: !Text
     , _apRuleId     :: !Text
     , _apPayload    :: !ACLRule
@@ -77,7 +77,7 @@ aclPatch
     -> ACLRule -- ^ 'apPayload'
     -> ACLPatch
 aclPatch pApCalendarId_ pApRuleId_ pApPayload_ =
-    ACLPatch
+    ACLPatch'
     { _apCalendarId = pApCalendarId_
     , _apRuleId = pApRuleId_
     , _apPayload = pApPayload_
@@ -103,7 +103,7 @@ instance GoogleRequest ACLPatch where
         type Rs ACLPatch = ACLRule
         type Scopes ACLPatch =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient ACLPatch{..}
+        requestClient ACLPatch'{..}
           = go _apCalendarId _apRuleId (Just AltJSON)
               _apPayload
               appsCalendarService

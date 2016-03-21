@@ -79,7 +79,7 @@ type DebuggerDebuggeesBreakpointsListResource =
 -- | Lists all breakpoints for the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsList' smart constructor.
-data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList
+data DebuggerDebuggeesBreakpointsList = DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv           :: !(Maybe Text)
     , _ddblIncludeInactive :: !(Maybe Bool)
     , _ddblUploadProtocol  :: !(Maybe Text)
@@ -131,7 +131,7 @@ debuggerDebuggeesBreakpointsList
     :: Text -- ^ 'ddblDebuggeeId'
     -> DebuggerDebuggeesBreakpointsList
 debuggerDebuggeesBreakpointsList pDdblDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsList
+    DebuggerDebuggeesBreakpointsList'
     { _ddblXgafv = Nothing
     , _ddblIncludeInactive = Nothing
     , _ddblUploadProtocol = Nothing
@@ -244,7 +244,7 @@ instance GoogleRequest
         type Scopes DebuggerDebuggeesBreakpointsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugger"]
-        requestClient DebuggerDebuggeesBreakpointsList{..}
+        requestClient DebuggerDebuggeesBreakpointsList'{..}
           = go _ddblDebuggeeId _ddblXgafv _ddblIncludeInactive
               _ddblUploadProtocol
               (Just _ddblPp)

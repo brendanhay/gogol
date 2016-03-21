@@ -60,7 +60,7 @@ type MachineTypesAggregatedListResource =
 -- | Retrieves an aggregated list of machine types.
 --
 -- /See:/ 'machineTypesAggregatedList' smart constructor.
-data MachineTypesAggregatedList = MachineTypesAggregatedList
+data MachineTypesAggregatedList = MachineTypesAggregatedList'
     { _mtalProject    :: !Text
     , _mtalFilter     :: !(Maybe Text)
     , _mtalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ machineTypesAggregatedList
     :: Text -- ^ 'mtalProject'
     -> MachineTypesAggregatedList
 machineTypesAggregatedList pMtalProject_ =
-    MachineTypesAggregatedList
+    MachineTypesAggregatedList'
     { _mtalProject = pMtalProject_
     , _mtalFilter = Nothing
     , _mtalPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest MachineTypesAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient MachineTypesAggregatedList{..}
+        requestClient MachineTypesAggregatedList'{..}
           = go _mtalProject _mtalFilter _mtalPageToken
               (Just _mtalMaxResults)
               (Just AltJSON)

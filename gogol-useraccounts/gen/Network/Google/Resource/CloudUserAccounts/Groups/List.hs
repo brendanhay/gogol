@@ -61,7 +61,7 @@ type GroupsListResource =
 -- | Retrieves the list of groups contained within the specified project.
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+data GroupsList = GroupsList'
     { _glOrderBy    :: !(Maybe Text)
     , _glProject    :: !Text
     , _glFilter     :: !(Maybe Text)
@@ -86,7 +86,7 @@ groupsList
     :: Text -- ^ 'glProject'
     -> GroupsList
 groupsList pGlProject_ =
-    GroupsList
+    GroupsList'
     { _glOrderBy = Nothing
     , _glProject = pGlProject_
     , _glFilter = Nothing
@@ -158,7 +158,7 @@ instance GoogleRequest GroupsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/cloud.useraccounts",
                "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-        requestClient GroupsList{..}
+        requestClient GroupsList'{..}
           = go _glProject _glOrderBy _glFilter _glPageToken
               (Just _glMaxResults)
               (Just AltJSON)

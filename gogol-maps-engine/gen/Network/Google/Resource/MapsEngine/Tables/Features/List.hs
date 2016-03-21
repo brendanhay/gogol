@@ -71,7 +71,7 @@ type TablesFeaturesListResource =
 -- | Return all features readable by the current user.
 --
 -- /See:/ 'tablesFeaturesList' smart constructor.
-data TablesFeaturesList = TablesFeaturesList
+data TablesFeaturesList = TablesFeaturesList'
     { _tflInclude    :: !(Maybe Text)
     , _tflWhere      :: !(Maybe Text)
     , _tflOrderBy    :: !(Maybe Text)
@@ -111,7 +111,7 @@ tablesFeaturesList
     :: Text -- ^ 'tflId'
     -> TablesFeaturesList
 tablesFeaturesList pTflId_ =
-    TablesFeaturesList
+    TablesFeaturesList'
     { _tflInclude = Nothing
     , _tflWhere = Nothing
     , _tflOrderBy = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest TablesFeaturesList where
         type Scopes TablesFeaturesList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient TablesFeaturesList{..}
+        requestClient TablesFeaturesList'{..}
           = go _tflId _tflInclude _tflWhere _tflOrderBy
               _tflVersion
               _tflLimit

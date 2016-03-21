@@ -55,7 +55,7 @@ type TaskListsUpdateResource =
 -- | Updates the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsUpdate' smart constructor.
-data TaskListsUpdate = TaskListsUpdate
+data TaskListsUpdate = TaskListsUpdate'
     { _tluPayload  :: !TaskList
     , _tluTaskList :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ taskListsUpdate
     -> Text -- ^ 'tluTaskList'
     -> TaskListsUpdate
 taskListsUpdate pTluPayload_ pTluTaskList_ =
-    TaskListsUpdate
+    TaskListsUpdate'
     { _tluPayload = pTluPayload_
     , _tluTaskList = pTluTaskList_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TaskListsUpdate where
         type Rs TaskListsUpdate = TaskList
         type Scopes TaskListsUpdate =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TaskListsUpdate{..}
+        requestClient TaskListsUpdate'{..}
           = go _tluTaskList (Just AltJSON) _tluPayload
               appsTasksService
           where go

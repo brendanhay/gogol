@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | A description of a type of monitored resource.
 --
 -- /See:/ 'monitoredResourceDescriptor' smart constructor.
-data MonitoredResourceDescriptor = MonitoredResourceDescriptor
+data MonitoredResourceDescriptor = MonitoredResourceDescriptor'
     { _mrdDisplayName :: !(Maybe Text)
     , _mrdLabels      :: !(Maybe [LabelDescriptor])
     , _mrdType        :: !(Maybe Text)
@@ -44,7 +44,7 @@ data MonitoredResourceDescriptor = MonitoredResourceDescriptor
 monitoredResourceDescriptor
     :: MonitoredResourceDescriptor
 monitoredResourceDescriptor =
-    MonitoredResourceDescriptor
+    MonitoredResourceDescriptor'
     { _mrdDisplayName = Nothing
     , _mrdLabels = Nothing
     , _mrdType = Nothing
@@ -83,13 +83,13 @@ instance FromJSON MonitoredResourceDescriptor where
         parseJSON
           = withObject "MonitoredResourceDescriptor"
               (\ o ->
-                 MonitoredResourceDescriptor <$>
+                 MonitoredResourceDescriptor' <$>
                    (o .:? "displayName") <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "type")
                      <*> (o .:? "description"))
 
 instance ToJSON MonitoredResourceDescriptor where
-        toJSON MonitoredResourceDescriptor{..}
+        toJSON MonitoredResourceDescriptor'{..}
           = object
               (catMaybes
                  [("displayName" .=) <$> _mrdDisplayName,
@@ -100,7 +100,7 @@ instance ToJSON MonitoredResourceDescriptor where
 -- | Result returned from \`ListLogEntries\`.
 --
 -- /See:/ 'listLogEntriesResponse' smart constructor.
-data ListLogEntriesResponse = ListLogEntriesResponse
+data ListLogEntriesResponse = ListLogEntriesResponse'
     { _llerNextPageToken :: !(Maybe Text)
     , _llerEntries       :: !(Maybe [LogEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -115,7 +115,7 @@ data ListLogEntriesResponse = ListLogEntriesResponse
 listLogEntriesResponse
     :: ListLogEntriesResponse
 listLogEntriesResponse =
-    ListLogEntriesResponse
+    ListLogEntriesResponse'
     { _llerNextPageToken = Nothing
     , _llerEntries = Nothing
     }
@@ -139,12 +139,12 @@ instance FromJSON ListLogEntriesResponse where
         parseJSON
           = withObject "ListLogEntriesResponse"
               (\ o ->
-                 ListLogEntriesResponse <$>
+                 ListLogEntriesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "entries" .!= mempty))
 
 instance ToJSON ListLogEntriesResponse where
-        toJSON ListLogEntriesResponse{..}
+        toJSON ListLogEntriesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _llerNextPageToken,
@@ -157,7 +157,7 @@ instance ToJSON ListLogEntriesResponse where
 -- location by supplying a value for only the \`\"zone\"\` label.
 --
 -- /See:/ 'monitoredResourceLabels' smart constructor.
-newtype MonitoredResourceLabels = MonitoredResourceLabels
+newtype MonitoredResourceLabels = MonitoredResourceLabels'
     { _mrlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -170,7 +170,7 @@ monitoredResourceLabels
     :: HashMap Text Text -- ^ 'mrlAddtional'
     -> MonitoredResourceLabels
 monitoredResourceLabels pMrlAddtional_ =
-    MonitoredResourceLabels
+    MonitoredResourceLabels'
     { _mrlAddtional = _Coerce # pMrlAddtional_
     }
 
@@ -183,7 +183,7 @@ instance FromJSON MonitoredResourceLabels where
         parseJSON
           = withObject "MonitoredResourceLabels"
               (\ o ->
-                 MonitoredResourceLabels <$> (parseJSONObject o))
+                 MonitoredResourceLabels' <$> (parseJSONObject o))
 
 instance ToJSON MonitoredResourceLabels where
         toJSON = toJSON . _mrlAddtional
@@ -191,7 +191,7 @@ instance ToJSON MonitoredResourceLabels where
 -- | Result returned from ListLogMetrics.
 --
 -- /See:/ 'listLogMetricsResponse' smart constructor.
-data ListLogMetricsResponse = ListLogMetricsResponse
+data ListLogMetricsResponse = ListLogMetricsResponse'
     { _llmrMetrics       :: !(Maybe [LogMetric])
     , _llmrNextPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -206,7 +206,7 @@ data ListLogMetricsResponse = ListLogMetricsResponse
 listLogMetricsResponse
     :: ListLogMetricsResponse
 listLogMetricsResponse =
-    ListLogMetricsResponse
+    ListLogMetricsResponse'
     { _llmrMetrics = Nothing
     , _llmrNextPageToken = Nothing
     }
@@ -230,12 +230,12 @@ instance FromJSON ListLogMetricsResponse where
         parseJSON
           = withObject "ListLogMetricsResponse"
               (\ o ->
-                 ListLogMetricsResponse <$>
+                 ListLogMetricsResponse' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "nextPageToken"))
 
 instance ToJSON ListLogMetricsResponse where
-        toJSON ListLogMetricsResponse{..}
+        toJSON ListLogMetricsResponse'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _llmrMetrics,
@@ -244,7 +244,7 @@ instance ToJSON ListLogMetricsResponse where
 -- | The parameters to WriteLogEntries.
 --
 -- /See:/ 'writeLogEntriesRequest' smart constructor.
-data WriteLogEntriesRequest = WriteLogEntriesRequest
+data WriteLogEntriesRequest = WriteLogEntriesRequest'
     { _wlerEntries  :: !(Maybe [LogEntry])
     , _wlerResource :: !(Maybe MonitoredResource)
     , _wlerLabels   :: !(Maybe WriteLogEntriesRequestLabels)
@@ -265,7 +265,7 @@ data WriteLogEntriesRequest = WriteLogEntriesRequest
 writeLogEntriesRequest
     :: WriteLogEntriesRequest
 writeLogEntriesRequest =
-    WriteLogEntriesRequest
+    WriteLogEntriesRequest'
     { _wlerEntries = Nothing
     , _wlerResource = Nothing
     , _wlerLabels = Nothing
@@ -305,13 +305,13 @@ instance FromJSON WriteLogEntriesRequest where
         parseJSON
           = withObject "WriteLogEntriesRequest"
               (\ o ->
-                 WriteLogEntriesRequest <$>
+                 WriteLogEntriesRequest' <$>
                    (o .:? "entries" .!= mempty) <*> (o .:? "resource")
                      <*> (o .:? "labels")
                      <*> (o .:? "logName"))
 
 instance ToJSON WriteLogEntriesRequest where
-        toJSON WriteLogEntriesRequest{..}
+        toJSON WriteLogEntriesRequest'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _wlerEntries,
@@ -327,17 +327,17 @@ instance ToJSON WriteLogEntriesRequest where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -346,7 +346,7 @@ instance ToJSON Empty where
 -- additional information about the log entry.
 --
 -- /See:/ 'logEntryLabels' smart constructor.
-newtype LogEntryLabels = LogEntryLabels
+newtype LogEntryLabels = LogEntryLabels'
     { _lelAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -359,7 +359,7 @@ logEntryLabels
     :: HashMap Text Text -- ^ 'lelAddtional'
     -> LogEntryLabels
 logEntryLabels pLelAddtional_ =
-    LogEntryLabels
+    LogEntryLabels'
     { _lelAddtional = _Coerce # pLelAddtional_
     }
 
@@ -371,7 +371,7 @@ lelAddtional
 instance FromJSON LogEntryLabels where
         parseJSON
           = withObject "LogEntryLabels"
-              (\ o -> LogEntryLabels <$> (parseJSONObject o))
+              (\ o -> LogEntryLabels' <$> (parseJSONObject o))
 
 instance ToJSON LogEntryLabels where
         toJSON = toJSON . _lelAddtional
@@ -379,7 +379,7 @@ instance ToJSON LogEntryLabels where
 -- | Result returned from \`ListSinks\`.
 --
 -- /See:/ 'listSinksResponse' smart constructor.
-data ListSinksResponse = ListSinksResponse
+data ListSinksResponse = ListSinksResponse'
     { _lsrSinks         :: !(Maybe [LogSink])
     , _lsrNextPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -394,7 +394,7 @@ data ListSinksResponse = ListSinksResponse
 listSinksResponse
     :: ListSinksResponse
 listSinksResponse =
-    ListSinksResponse
+    ListSinksResponse'
     { _lsrSinks = Nothing
     , _lsrNextPageToken = Nothing
     }
@@ -418,12 +418,12 @@ instance FromJSON ListSinksResponse where
         parseJSON
           = withObject "ListSinksResponse"
               (\ o ->
-                 ListSinksResponse <$>
+                 ListSinksResponse' <$>
                    (o .:? "sinks" .!= mempty) <*>
                      (o .:? "nextPageToken"))
 
 instance ToJSON ListSinksResponse where
-        toJSON ListSinksResponse{..}
+        toJSON ListSinksResponse'{..}
           = object
               (catMaybes
                  [("sinks" .=) <$> _lsrSinks,
@@ -433,7 +433,7 @@ instance ToJSON ListSinksResponse where
 -- application.
 --
 -- /See:/ 'requestLog' smart constructor.
-data RequestLog = RequestLog
+data RequestLog = RequestLog'
     { _rlTraceId           :: !(Maybe Text)
     , _rlInstanceId        :: !(Maybe Text)
     , _rlStatus            :: !(Maybe (Textual Int32))
@@ -535,7 +535,7 @@ data RequestLog = RequestLog
 requestLog
     :: RequestLog
 requestLog =
-    RequestLog
+    RequestLog'
     { _rlTraceId = Nothing
     , _rlInstanceId = Nothing
     , _rlStatus = Nothing
@@ -757,7 +757,7 @@ instance FromJSON RequestLog where
         parseJSON
           = withObject "RequestLog"
               (\ o ->
-                 RequestLog <$>
+                 RequestLog' <$>
                    (o .:? "traceId") <*> (o .:? "instanceId") <*>
                      (o .:? "status")
                      <*> (o .:? "requestId")
@@ -790,7 +790,7 @@ instance FromJSON RequestLog where
                      <*> (o .:? "appEngineRelease"))
 
 instance ToJSON RequestLog where
-        toJSON RequestLog{..}
+        toJSON RequestLog'{..}
           = object
               (catMaybes
                  [("traceId" .=) <$> _rlTraceId,
@@ -828,7 +828,7 @@ instance ToJSON RequestLog where
 -- use \`protoPayload\` values that belong to a set of approved types.
 --
 -- /See:/ 'logEntryProtoPayload' smart constructor.
-newtype LogEntryProtoPayload = LogEntryProtoPayload
+newtype LogEntryProtoPayload = LogEntryProtoPayload'
     { _leppAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -841,7 +841,7 @@ logEntryProtoPayload
     :: HashMap Text JSONValue -- ^ 'leppAddtional'
     -> LogEntryProtoPayload
 logEntryProtoPayload pLeppAddtional_ =
-    LogEntryProtoPayload
+    LogEntryProtoPayload'
     { _leppAddtional = _Coerce # pLeppAddtional_
     }
 
@@ -855,7 +855,8 @@ leppAddtional
 instance FromJSON LogEntryProtoPayload where
         parseJSON
           = withObject "LogEntryProtoPayload"
-              (\ o -> LogEntryProtoPayload <$> (parseJSONObject o))
+              (\ o ->
+                 LogEntryProtoPayload' <$> (parseJSONObject o))
 
 instance ToJSON LogEntryProtoPayload where
         toJSON = toJSON . _leppAddtional
@@ -864,19 +865,19 @@ instance ToJSON LogEntryProtoPayload where
 --
 -- /See:/ 'writeLogEntriesResponse' smart constructor.
 data WriteLogEntriesResponse =
-    WriteLogEntriesResponse
+    WriteLogEntriesResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteLogEntriesResponse' with the minimum fields required to make a request.
 --
 writeLogEntriesResponse
     :: WriteLogEntriesResponse
-writeLogEntriesResponse = WriteLogEntriesResponse
+writeLogEntriesResponse = WriteLogEntriesResponse'
 
 instance FromJSON WriteLogEntriesResponse where
         parseJSON
           = withObject "WriteLogEntriesResponse"
-              (\ o -> pure WriteLogEntriesResponse)
+              (\ o -> pure WriteLogEntriesResponse')
 
 instance ToJSON WriteLogEntriesResponse where
         toJSON = const emptyObject
@@ -884,7 +885,7 @@ instance ToJSON WriteLogEntriesResponse where
 -- | Describes a sink used to export log entries outside Cloud Logging.
 --
 -- /See:/ 'logSink' smart constructor.
-data LogSink = LogSink
+data LogSink = LogSink'
     { _lsDestination         :: !(Maybe Text)
     , _lsOutputVersionFormat :: !(Maybe Text)
     , _lsName                :: !(Maybe Text)
@@ -905,7 +906,7 @@ data LogSink = LogSink
 logSink
     :: LogSink
 logSink =
-    LogSink
+    LogSink'
     { _lsDestination = Nothing
     , _lsOutputVersionFormat = Nothing
     , _lsName = Nothing
@@ -949,14 +950,14 @@ instance FromJSON LogSink where
         parseJSON
           = withObject "LogSink"
               (\ o ->
-                 LogSink <$>
+                 LogSink' <$>
                    (o .:? "destination") <*>
                      (o .:? "outputVersionFormat")
                      <*> (o .:? "name")
                      <*> (o .:? "filter"))
 
 instance ToJSON LogSink where
-        toJSON LogSink{..}
+        toJSON LogSink'{..}
           = object
               (catMaybes
                  [("destination" .=) <$> _lsDestination,
@@ -968,7 +969,7 @@ instance ToJSON LogSink where
 -- | Result returned from ListMonitoredResourceDescriptors.
 --
 -- /See:/ 'listMonitoredResourceDescriptorsResponse' smart constructor.
-data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptorsResponse
+data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptorsResponse'
     { _lmrdrNextPageToken       :: !(Maybe Text)
     , _lmrdrResourceDescriptors :: !(Maybe [MonitoredResourceDescriptor])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -983,7 +984,7 @@ data ListMonitoredResourceDescriptorsResponse = ListMonitoredResourceDescriptors
 listMonitoredResourceDescriptorsResponse
     :: ListMonitoredResourceDescriptorsResponse
 listMonitoredResourceDescriptorsResponse =
-    ListMonitoredResourceDescriptorsResponse
+    ListMonitoredResourceDescriptorsResponse'
     { _lmrdrNextPageToken = Nothing
     , _lmrdrResourceDescriptors = Nothing
     }
@@ -1010,13 +1011,13 @@ instance FromJSON
           = withObject
               "ListMonitoredResourceDescriptorsResponse"
               (\ o ->
-                 ListMonitoredResourceDescriptorsResponse <$>
+                 ListMonitoredResourceDescriptorsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "resourceDescriptors" .!= mempty))
 
 instance ToJSON
          ListMonitoredResourceDescriptorsResponse where
-        toJSON ListMonitoredResourceDescriptorsResponse{..}
+        toJSON ListMonitoredResourceDescriptorsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lmrdrNextPageToken,
@@ -1026,7 +1027,7 @@ instance ToJSON
 -- | A common proto for logging HTTP requests.
 --
 -- /See:/ 'hTTPRequest' smart constructor.
-data HTTPRequest = HTTPRequest
+data HTTPRequest = HTTPRequest'
     { _httprStatus                    :: !(Maybe (Textual Int32))
     , _httprRequestURL                :: !(Maybe Text)
     , _httprRemoteIP                  :: !(Maybe Text)
@@ -1065,7 +1066,7 @@ data HTTPRequest = HTTPRequest
 hTTPRequest
     :: HTTPRequest
 hTTPRequest =
-    HTTPRequest
+    HTTPRequest'
     { _httprStatus = Nothing
     , _httprRequestURL = Nothing
     , _httprRemoteIP = Nothing
@@ -1155,7 +1156,7 @@ instance FromJSON HTTPRequest where
         parseJSON
           = withObject "HTTPRequest"
               (\ o ->
-                 HTTPRequest <$>
+                 HTTPRequest' <$>
                    (o .:? "status") <*> (o .:? "requestUrl") <*>
                      (o .:? "remoteIp")
                      <*> (o .:? "validatedWithOriginServer")
@@ -1167,7 +1168,7 @@ instance FromJSON HTTPRequest where
                      <*> (o .:? "referer"))
 
 instance ToJSON HTTPRequest where
-        toJSON HTTPRequest{..}
+        toJSON HTTPRequest'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _httprStatus,
@@ -1188,7 +1189,7 @@ instance ToJSON HTTPRequest where
 -- \`{ \"size\": \"large\", \"color\":\"red\" }\`
 --
 -- /See:/ 'writeLogEntriesRequestLabels' smart constructor.
-newtype WriteLogEntriesRequestLabels = WriteLogEntriesRequestLabels
+newtype WriteLogEntriesRequestLabels = WriteLogEntriesRequestLabels'
     { _wlerlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1201,7 +1202,7 @@ writeLogEntriesRequestLabels
     :: HashMap Text Text -- ^ 'wlerlAddtional'
     -> WriteLogEntriesRequestLabels
 writeLogEntriesRequestLabels pWlerlAddtional_ =
-    WriteLogEntriesRequestLabels
+    WriteLogEntriesRequestLabels'
     { _wlerlAddtional = _Coerce # pWlerlAddtional_
     }
 
@@ -1215,7 +1216,8 @@ instance FromJSON WriteLogEntriesRequestLabels where
         parseJSON
           = withObject "WriteLogEntriesRequestLabels"
               (\ o ->
-                 WriteLogEntriesRequestLabels <$> (parseJSONObject o))
+                 WriteLogEntriesRequestLabels' <$>
+                   (parseJSONObject o))
 
 instance ToJSON WriteLogEntriesRequestLabels where
         toJSON = toJSON . _wlerlAddtional
@@ -1223,7 +1225,7 @@ instance ToJSON WriteLogEntriesRequestLabels where
 -- | A specific monitored resource or a group of monitored resources.
 --
 -- /See:/ 'monitoredResource' smart constructor.
-data MonitoredResource = MonitoredResource
+data MonitoredResource = MonitoredResource'
     { _mrLabels :: !(Maybe MonitoredResourceLabels)
     , _mrType   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1238,7 +1240,7 @@ data MonitoredResource = MonitoredResource
 monitoredResource
     :: MonitoredResource
 monitoredResource =
-    MonitoredResource
+    MonitoredResource'
     { _mrLabels = Nothing
     , _mrType = Nothing
     }
@@ -1261,11 +1263,11 @@ instance FromJSON MonitoredResource where
         parseJSON
           = withObject "MonitoredResource"
               (\ o ->
-                 MonitoredResource <$>
+                 MonitoredResource' <$>
                    (o .:? "labels") <*> (o .:? "type"))
 
 instance ToJSON MonitoredResource where
-        toJSON MonitoredResource{..}
+        toJSON MonitoredResource'{..}
           = object
               (catMaybes
                  [("labels" .=) <$> _mrLabels,
@@ -1274,7 +1276,7 @@ instance ToJSON MonitoredResource where
 -- | Application log line emitted while processing a request.
 --
 -- /See:/ 'logLine' smart constructor.
-data LogLine = LogLine
+data LogLine = LogLine'
     { _llTime           :: !(Maybe Text)
     , _llSeverity       :: !(Maybe Text)
     , _llLogMessage     :: !(Maybe Text)
@@ -1295,7 +1297,7 @@ data LogLine = LogLine
 logLine
     :: LogLine
 logLine =
-    LogLine
+    LogLine'
     { _llTime = Nothing
     , _llSeverity = Nothing
     , _llLogMessage = Nothing
@@ -1326,13 +1328,13 @@ instance FromJSON LogLine where
         parseJSON
           = withObject "LogLine"
               (\ o ->
-                 LogLine <$>
+                 LogLine' <$>
                    (o .:? "time") <*> (o .:? "severity") <*>
                      (o .:? "logMessage")
                      <*> (o .:? "sourceLocation"))
 
 instance ToJSON LogLine where
-        toJSON LogLine{..}
+        toJSON LogLine'{..}
           = object
               (catMaybes
                  [("time" .=) <$> _llTime,
@@ -1343,7 +1345,7 @@ instance ToJSON LogLine where
 -- | A description of a label.
 --
 -- /See:/ 'labelDescriptor' smart constructor.
-data LabelDescriptor = LabelDescriptor
+data LabelDescriptor = LabelDescriptor'
     { _ldKey         :: !(Maybe Text)
     , _ldValueType   :: !(Maybe Text)
     , _ldDescription :: !(Maybe Text)
@@ -1361,7 +1363,7 @@ data LabelDescriptor = LabelDescriptor
 labelDescriptor
     :: LabelDescriptor
 labelDescriptor =
-    LabelDescriptor
+    LabelDescriptor'
     { _ldKey = Nothing
     , _ldValueType = Nothing
     , _ldDescription = Nothing
@@ -1386,12 +1388,12 @@ instance FromJSON LabelDescriptor where
         parseJSON
           = withObject "LabelDescriptor"
               (\ o ->
-                 LabelDescriptor <$>
+                 LabelDescriptor' <$>
                    (o .:? "key") <*> (o .:? "valueType") <*>
                      (o .:? "description"))
 
 instance ToJSON LabelDescriptor where
-        toJSON LabelDescriptor{..}
+        toJSON LabelDescriptor'{..}
           = object
               (catMaybes
                  [("key" .=) <$> _ldKey,
@@ -1401,7 +1403,7 @@ instance ToJSON LabelDescriptor where
 -- | The parameters to \`ListLogEntries\`.
 --
 -- /See:/ 'listLogEntriesRequest' smart constructor.
-data ListLogEntriesRequest = ListLogEntriesRequest
+data ListLogEntriesRequest = ListLogEntriesRequest'
     { _llerOrderBy    :: !(Maybe Text)
     , _llerProjectIds :: !(Maybe [Text])
     , _llerFilter     :: !(Maybe Text)
@@ -1425,7 +1427,7 @@ data ListLogEntriesRequest = ListLogEntriesRequest
 listLogEntriesRequest
     :: ListLogEntriesRequest
 listLogEntriesRequest =
-    ListLogEntriesRequest
+    ListLogEntriesRequest'
     { _llerOrderBy = Nothing
     , _llerProjectIds = Nothing
     , _llerFilter = Nothing
@@ -1486,14 +1488,14 @@ instance FromJSON ListLogEntriesRequest where
         parseJSON
           = withObject "ListLogEntriesRequest"
               (\ o ->
-                 ListLogEntriesRequest <$>
+                 ListLogEntriesRequest' <$>
                    (o .:? "orderBy") <*> (o .:? "projectIds" .!= mempty)
                      <*> (o .:? "filter")
                      <*> (o .:? "pageToken")
                      <*> (o .:? "pageSize"))
 
 instance ToJSON ListLogEntriesRequest where
-        toJSON ListLogEntriesRequest{..}
+        toJSON ListLogEntriesRequest'{..}
           = object
               (catMaybes
                  [("orderBy" .=) <$> _llerOrderBy,
@@ -1506,7 +1508,7 @@ instance ToJSON ListLogEntriesRequest where
 -- which a log entry is associated.
 --
 -- /See:/ 'logEntryOperation' smart constructor.
-data LogEntryOperation = LogEntryOperation
+data LogEntryOperation = LogEntryOperation'
     { _leoFirst    :: !(Maybe Bool)
     , _leoProducer :: !(Maybe Text)
     , _leoLast     :: !(Maybe Bool)
@@ -1527,7 +1529,7 @@ data LogEntryOperation = LogEntryOperation
 logEntryOperation
     :: LogEntryOperation
 logEntryOperation =
-    LogEntryOperation
+    LogEntryOperation'
     { _leoFirst = Nothing
     , _leoProducer = Nothing
     , _leoLast = Nothing
@@ -1561,13 +1563,13 @@ instance FromJSON LogEntryOperation where
         parseJSON
           = withObject "LogEntryOperation"
               (\ o ->
-                 LogEntryOperation <$>
+                 LogEntryOperation' <$>
                    (o .:? "first") <*> (o .:? "producer") <*>
                      (o .:? "last")
                      <*> (o .:? "id"))
 
 instance ToJSON LogEntryOperation where
-        toJSON LogEntryOperation{..}
+        toJSON LogEntryOperation'{..}
           = object
               (catMaybes
                  [("first" .=) <$> _leoFirst,
@@ -1578,7 +1580,7 @@ instance ToJSON LogEntryOperation where
 -- log entries that match a logs filter.
 --
 -- /See:/ 'logMetric' smart constructor.
-data LogMetric = LogMetric
+data LogMetric = LogMetric'
     { _lmName        :: !(Maybe Text)
     , _lmFilter      :: !(Maybe Text)
     , _lmDescription :: !(Maybe Text)
@@ -1596,7 +1598,7 @@ data LogMetric = LogMetric
 logMetric
     :: LogMetric
 logMetric =
-    LogMetric
+    LogMetric'
     { _lmName = Nothing
     , _lmFilter = Nothing
     , _lmDescription = Nothing
@@ -1626,12 +1628,12 @@ instance FromJSON LogMetric where
         parseJSON
           = withObject "LogMetric"
               (\ o ->
-                 LogMetric <$>
+                 LogMetric' <$>
                    (o .:? "name") <*> (o .:? "filter") <*>
                      (o .:? "description"))
 
 instance ToJSON LogMetric where
-        toJSON LogMetric{..}
+        toJSON LogMetric'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _lmName,
@@ -1641,7 +1643,7 @@ instance ToJSON LogMetric where
 -- | An individual entry in a log.
 --
 -- /See:/ 'logEntry' smart constructor.
-data LogEntry = LogEntry
+data LogEntry = LogEntry'
     { _leOperation    :: !(Maybe LogEntryOperation)
     , _leSeverity     :: !(Maybe Text)
     , _leTextPayload  :: !(Maybe Text)
@@ -1683,7 +1685,7 @@ data LogEntry = LogEntry
 logEntry
     :: LogEntry
 logEntry =
-    LogEntry
+    LogEntry'
     { _leOperation = Nothing
     , _leSeverity = Nothing
     , _leTextPayload = Nothing
@@ -1773,7 +1775,7 @@ instance FromJSON LogEntry where
         parseJSON
           = withObject "LogEntry"
               (\ o ->
-                 LogEntry <$>
+                 LogEntry' <$>
                    (o .:? "operation") <*> (o .:? "severity") <*>
                      (o .:? "textPayload")
                      <*> (o .:? "jsonPayload")
@@ -1786,7 +1788,7 @@ instance FromJSON LogEntry where
                      <*> (o .:? "timestamp"))
 
 instance ToJSON LogEntry where
-        toJSON LogEntry{..}
+        toJSON LogEntry'{..}
           = object
               (catMaybes
                  [("operation" .=) <$> _leOperation,
@@ -1804,7 +1806,7 @@ instance ToJSON LogEntry where
 -- | Specifies a location in a source code file.
 --
 -- /See:/ 'sourceLocation' smart constructor.
-data SourceLocation = SourceLocation
+data SourceLocation = SourceLocation'
     { _slLine         :: !(Maybe (Textual Int64))
     , _slFunctionName :: !(Maybe Text)
     , _slFile         :: !(Maybe Text)
@@ -1822,7 +1824,7 @@ data SourceLocation = SourceLocation
 sourceLocation
     :: SourceLocation
 sourceLocation =
-    SourceLocation
+    SourceLocation'
     { _slLine = Nothing
     , _slFunctionName = Nothing
     , _slFile = Nothing
@@ -1854,12 +1856,12 @@ instance FromJSON SourceLocation where
         parseJSON
           = withObject "SourceLocation"
               (\ o ->
-                 SourceLocation <$>
+                 SourceLocation' <$>
                    (o .:? "line") <*> (o .:? "functionName") <*>
                      (o .:? "file"))
 
 instance ToJSON SourceLocation where
-        toJSON SourceLocation{..}
+        toJSON SourceLocation'{..}
           = object
               (catMaybes
                  [("line" .=) <$> _slLine,
@@ -1870,7 +1872,7 @@ instance ToJSON SourceLocation where
 -- and deploy an application.
 --
 -- /See:/ 'sourceReference' smart constructor.
-data SourceReference = SourceReference
+data SourceReference = SourceReference'
     { _srRepository :: !(Maybe Text)
     , _srRevisionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1885,7 +1887,7 @@ data SourceReference = SourceReference
 sourceReference
     :: SourceReference
 sourceReference =
-    SourceReference
+    SourceReference'
     { _srRepository = Nothing
     , _srRevisionId = Nothing
     }
@@ -1906,11 +1908,11 @@ instance FromJSON SourceReference where
         parseJSON
           = withObject "SourceReference"
               (\ o ->
-                 SourceReference <$>
+                 SourceReference' <$>
                    (o .:? "repository") <*> (o .:? "revisionId"))
 
 instance ToJSON SourceReference where
-        toJSON SourceReference{..}
+        toJSON SourceReference'{..}
           = object
               (catMaybes
                  [("repository" .=) <$> _srRepository,
@@ -1920,7 +1922,7 @@ instance ToJSON SourceReference where
 -- JSON object.
 --
 -- /See:/ 'logEntryJSONPayload' smart constructor.
-newtype LogEntryJSONPayload = LogEntryJSONPayload
+newtype LogEntryJSONPayload = LogEntryJSONPayload'
     { _lejpAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1933,7 +1935,7 @@ logEntryJSONPayload
     :: HashMap Text JSONValue -- ^ 'lejpAddtional'
     -> LogEntryJSONPayload
 logEntryJSONPayload pLejpAddtional_ =
-    LogEntryJSONPayload
+    LogEntryJSONPayload'
     { _lejpAddtional = _Coerce # pLejpAddtional_
     }
 
@@ -1947,7 +1949,7 @@ lejpAddtional
 instance FromJSON LogEntryJSONPayload where
         parseJSON
           = withObject "LogEntryJSONPayload"
-              (\ o -> LogEntryJSONPayload <$> (parseJSONObject o))
+              (\ o -> LogEntryJSONPayload' <$> (parseJSONObject o))
 
 instance ToJSON LogEntryJSONPayload where
         toJSON = toJSON . _lejpAddtional

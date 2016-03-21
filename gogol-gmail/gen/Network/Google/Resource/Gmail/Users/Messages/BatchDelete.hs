@@ -58,7 +58,7 @@ type UsersMessagesBatchDeleteResource =
 -- messages were not already deleted or even existed at all.
 --
 -- /See:/ 'usersMessagesBatchDelete' smart constructor.
-data UsersMessagesBatchDelete = UsersMessagesBatchDelete
+data UsersMessagesBatchDelete = UsersMessagesBatchDelete'
     { _umbdPayload :: !BatchDeleteMessagesRequest
     , _umbdUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ usersMessagesBatchDelete
     :: BatchDeleteMessagesRequest -- ^ 'umbdPayload'
     -> UsersMessagesBatchDelete
 usersMessagesBatchDelete pUmbdPayload_ =
-    UsersMessagesBatchDelete
+    UsersMessagesBatchDelete'
     { _umbdPayload = pUmbdPayload_
     , _umbdUserId = "me"
     }
@@ -94,7 +94,7 @@ instance GoogleRequest UsersMessagesBatchDelete where
         type Rs UsersMessagesBatchDelete = ()
         type Scopes UsersMessagesBatchDelete =
              '["https://mail.google.com/"]
-        requestClient UsersMessagesBatchDelete{..}
+        requestClient UsersMessagesBatchDelete'{..}
           = go _umbdUserId (Just AltJSON) _umbdPayload
               gmailService
           where go

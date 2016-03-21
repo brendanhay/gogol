@@ -58,7 +58,7 @@ type GlobalForwardingRulesGetResource =
 -- forwarding rules by making a list() request.
 --
 -- /See:/ 'globalForwardingRulesGet' smart constructor.
-data GlobalForwardingRulesGet = GlobalForwardingRulesGet
+data GlobalForwardingRulesGet = GlobalForwardingRulesGet'
     { _gfrgProject        :: !Text
     , _gfrgForwardingRule :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ globalForwardingRulesGet
     -> Text -- ^ 'gfrgForwardingRule'
     -> GlobalForwardingRulesGet
 globalForwardingRulesGet pGfrgProject_ pGfrgForwardingRule_ =
-    GlobalForwardingRulesGet
+    GlobalForwardingRulesGet'
     { _gfrgProject = pGfrgProject_
     , _gfrgForwardingRule = pGfrgForwardingRule_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest GlobalForwardingRulesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient GlobalForwardingRulesGet{..}
+        requestClient GlobalForwardingRulesGet'{..}
           = go _gfrgProject _gfrgForwardingRule (Just AltJSON)
               computeService
           where go

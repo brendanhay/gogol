@@ -56,7 +56,7 @@ type MarketplaceDealsUpdateResource =
 -- | Replaces all the deals in the proposal with the passed in deals
 --
 -- /See:/ 'marketplaceDealsUpdate' smart constructor.
-data MarketplaceDealsUpdate = MarketplaceDealsUpdate
+data MarketplaceDealsUpdate = MarketplaceDealsUpdate'
     { _mduPayload    :: !EditAllOrderDealsRequest
     , _mduProposalId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ marketplaceDealsUpdate
     -> Text -- ^ 'mduProposalId'
     -> MarketplaceDealsUpdate
 marketplaceDealsUpdate pMduPayload_ pMduProposalId_ =
-    MarketplaceDealsUpdate
+    MarketplaceDealsUpdate'
     { _mduPayload = pMduPayload_
     , _mduProposalId = pMduProposalId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest MarketplaceDealsUpdate where
              EditAllOrderDealsResponse
         type Scopes MarketplaceDealsUpdate =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient MarketplaceDealsUpdate{..}
+        requestClient MarketplaceDealsUpdate'{..}
           = go _mduProposalId (Just AltJSON) _mduPayload
               adExchangeBuyerService
           where go

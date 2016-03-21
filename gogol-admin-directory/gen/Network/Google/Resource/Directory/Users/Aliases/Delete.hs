@@ -55,7 +55,7 @@ type UsersAliasesDeleteResource =
 -- | Remove a alias for the user
 --
 -- /See:/ 'usersAliasesDelete' smart constructor.
-data UsersAliasesDelete = UsersAliasesDelete
+data UsersAliasesDelete = UsersAliasesDelete'
     { _uadAlias   :: !Text
     , _uadUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersAliasesDelete
     -> Text -- ^ 'uadUserKey'
     -> UsersAliasesDelete
 usersAliasesDelete pUadAlias_ pUadUserKey_ =
-    UsersAliasesDelete
+    UsersAliasesDelete'
     { _uadAlias = pUadAlias_
     , _uadUserKey = pUadUserKey_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersAliasesDelete where
         type Scopes UsersAliasesDelete =
              '["https://www.googleapis.com/auth/admin.directory.user",
                "https://www.googleapis.com/auth/admin.directory.user.alias"]
-        requestClient UsersAliasesDelete{..}
+        requestClient UsersAliasesDelete'{..}
           = go _uadUserKey _uadAlias (Just AltJSON)
               directoryService
           where go

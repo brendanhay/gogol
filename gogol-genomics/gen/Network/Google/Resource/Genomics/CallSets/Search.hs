@@ -74,7 +74,7 @@ type CallSetsSearchResource =
 -- [GlobalAllianceApi.searchCallSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L178).
 --
 -- /See:/ 'callSetsSearch' smart constructor.
-data CallSetsSearch = CallSetsSearch
+data CallSetsSearch = CallSetsSearch'
     { _cssXgafv          :: !(Maybe Text)
     , _cssUploadProtocol :: !(Maybe Text)
     , _cssPp             :: !Bool
@@ -108,7 +108,7 @@ callSetsSearch
     :: SearchCallSetsRequest -- ^ 'cssPayload'
     -> CallSetsSearch
 callSetsSearch pCssPayload_ =
-    CallSetsSearch
+    CallSetsSearch'
     { _cssXgafv = Nothing
     , _cssUploadProtocol = Nothing
     , _cssPp = True
@@ -167,7 +167,7 @@ instance GoogleRequest CallSetsSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient CallSetsSearch{..}
+        requestClient CallSetsSearch'{..}
           = go _cssXgafv _cssUploadProtocol (Just _cssPp)
               _cssAccessToken
               _cssUploadType

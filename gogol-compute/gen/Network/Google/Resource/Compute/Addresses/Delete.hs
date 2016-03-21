@@ -57,7 +57,7 @@ type AddressesDeleteResource =
 -- | Deletes the specified address resource.
 --
 -- /See:/ 'addressesDelete' smart constructor.
-data AddressesDelete = AddressesDelete
+data AddressesDelete = AddressesDelete'
     { _aaProject :: !Text
     , _aaAddress :: !Text
     , _aaRegion  :: !Text
@@ -78,7 +78,7 @@ addressesDelete
     -> Text -- ^ 'aaRegion'
     -> AddressesDelete
 addressesDelete pAaProject_ pAaAddress_ pAaRegion_ =
-    AddressesDelete
+    AddressesDelete'
     { _aaProject = pAaProject_
     , _aaAddress = pAaAddress_
     , _aaRegion = pAaRegion_
@@ -103,7 +103,7 @@ instance GoogleRequest AddressesDelete where
         type Scopes AddressesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient AddressesDelete{..}
+        requestClient AddressesDelete'{..}
           = go _aaProject _aaRegion _aaAddress (Just AltJSON)
               computeService
           where go

@@ -54,7 +54,7 @@ type ColumnGetResource =
 -- | Retrieves a specific column by its ID.
 --
 -- /See:/ 'columnGet' smart constructor.
-data ColumnGet = ColumnGet
+data ColumnGet = ColumnGet'
     { _cgTableId  :: !Text
     , _cgColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ columnGet
     -> Text -- ^ 'cgColumnId'
     -> ColumnGet
 columnGet pCgTableId_ pCgColumnId_ =
-    ColumnGet
+    ColumnGet'
     { _cgTableId = pCgTableId_
     , _cgColumnId = pCgColumnId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ColumnGet where
         type Scopes ColumnGet =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient ColumnGet{..}
+        requestClient ColumnGet'{..}
           = go _cgTableId _cgColumnId (Just AltJSON)
               fusionTablesService
           where go

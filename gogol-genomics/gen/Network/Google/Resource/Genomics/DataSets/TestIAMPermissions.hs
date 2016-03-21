@@ -72,7 +72,7 @@ type DataSetsTestIAMPermissionsResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsTestIAMPermissions' smart constructor.
-data DataSetsTestIAMPermissions = DataSetsTestIAMPermissions
+data DataSetsTestIAMPermissions = DataSetsTestIAMPermissions'
     { _dstipXgafv          :: !(Maybe Text)
     , _dstipUploadProtocol :: !(Maybe Text)
     , _dstipPp             :: !Bool
@@ -110,7 +110,7 @@ dataSetsTestIAMPermissions
     -> Text -- ^ 'dstipResource'
     -> DataSetsTestIAMPermissions
 dataSetsTestIAMPermissions pDstipPayload_ pDstipResource_ =
-    DataSetsTestIAMPermissions
+    DataSetsTestIAMPermissions'
     { _dstipXgafv = Nothing
     , _dstipUploadProtocol = Nothing
     , _dstipPp = True
@@ -180,7 +180,7 @@ instance GoogleRequest DataSetsTestIAMPermissions
         type Scopes DataSetsTestIAMPermissions =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsTestIAMPermissions{..}
+        requestClient DataSetsTestIAMPermissions'{..}
           = go _dstipResource _dstipXgafv _dstipUploadProtocol
               (Just _dstipPp)
               _dstipAccessToken

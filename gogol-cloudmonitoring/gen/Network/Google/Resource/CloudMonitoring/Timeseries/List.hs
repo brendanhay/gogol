@@ -81,7 +81,7 @@ type TimeseriesListResource =
 -- the value of the nextPageToken.
 --
 -- /See:/ 'timeseriesList' smart constructor.
-data TimeseriesList = TimeseriesList
+data TimeseriesList = TimeseriesList'
     { _tlWindow     :: !(Maybe Text)
     , _tlProject    :: !Text
     , _tlCount      :: !(Textual Int32)
@@ -127,7 +127,7 @@ timeseriesList
     -> Text -- ^ 'tlYoungest'
     -> TimeseriesList
 timeseriesList pTlProject_ pTlPayload_ pTlMetric_ pTlYoungest_ =
-    TimeseriesList
+    TimeseriesList'
     { _tlWindow = Nothing
     , _tlProject = pTlProject_
     , _tlCount = 6000
@@ -226,7 +226,7 @@ instance GoogleRequest TimeseriesList where
         type Scopes TimeseriesList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient TimeseriesList{..}
+        requestClient TimeseriesList'{..}
           = go _tlProject _tlMetric (Just _tlYoungest)
               _tlWindow
               (Just _tlCount)

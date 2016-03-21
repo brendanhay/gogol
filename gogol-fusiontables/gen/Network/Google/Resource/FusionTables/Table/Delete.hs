@@ -51,7 +51,7 @@ type TableDeleteResource =
 -- | Deletes a table.
 --
 -- /See:/ 'tableDelete' smart constructor.
-newtype TableDelete = TableDelete
+newtype TableDelete = TableDelete'
     { _tddTableId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tableDelete
     :: Text -- ^ 'tddTableId'
     -> TableDelete
 tableDelete pTddTableId_ =
-    TableDelete
+    TableDelete'
     { _tddTableId = pTddTableId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest TableDelete where
         type Rs TableDelete = ()
         type Scopes TableDelete =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TableDelete{..}
+        requestClient TableDelete'{..}
           = go _tddTableId (Just AltJSON) fusionTablesService
           where go
                   = buildClient (Proxy :: Proxy TableDeleteResource)

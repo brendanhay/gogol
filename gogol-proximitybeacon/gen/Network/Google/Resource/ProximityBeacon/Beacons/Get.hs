@@ -63,7 +63,7 @@ type BeaconsGetResource =
 -- | Returns detailed information about the specified beacon.
 --
 -- /See:/ 'beaconsGet' smart constructor.
-data BeaconsGet = BeaconsGet
+data BeaconsGet = BeaconsGet'
     { _bgXgafv          :: !(Maybe Text)
     , _bgUploadProtocol :: !(Maybe Text)
     , _bgPp             :: !Bool
@@ -97,7 +97,7 @@ beaconsGet
     :: Text -- ^ 'bgBeaconName'
     -> BeaconsGet
 beaconsGet pBgBeaconName_ =
-    BeaconsGet
+    BeaconsGet'
     { _bgXgafv = Nothing
     , _bgUploadProtocol = Nothing
     , _bgPp = True
@@ -152,7 +152,7 @@ bgCallback
 instance GoogleRequest BeaconsGet where
         type Rs BeaconsGet = Beacon
         type Scopes BeaconsGet = '[]
-        requestClient BeaconsGet{..}
+        requestClient BeaconsGet'{..}
           = go _bgBeaconName _bgXgafv _bgUploadProtocol
               (Just _bgPp)
               _bgAccessToken

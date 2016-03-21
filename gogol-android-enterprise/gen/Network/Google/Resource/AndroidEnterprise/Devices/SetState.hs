@@ -69,7 +69,7 @@ type DevicesSetStateResource =
 -- access to Google services.
 --
 -- /See:/ 'devicesSetState' smart constructor.
-data DevicesSetState = DevicesSetState
+data DevicesSetState = DevicesSetState'
     { _dssEnterpriseId :: !Text
     , _dssPayload      :: !DeviceState
     , _dssUserId       :: !Text
@@ -94,7 +94,7 @@ devicesSetState
     -> Text -- ^ 'dssDeviceId'
     -> DevicesSetState
 devicesSetState pDssEnterpriseId_ pDssPayload_ pDssUserId_ pDssDeviceId_ =
-    DevicesSetState
+    DevicesSetState'
     { _dssEnterpriseId = pDssEnterpriseId_
     , _dssPayload = pDssPayload_
     , _dssUserId = pDssUserId_
@@ -126,7 +126,7 @@ instance GoogleRequest DevicesSetState where
         type Rs DevicesSetState = DeviceState
         type Scopes DevicesSetState =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient DevicesSetState{..}
+        requestClient DevicesSetState'{..}
           = go _dssEnterpriseId _dssUserId _dssDeviceId
               (Just AltJSON)
               _dssPayload

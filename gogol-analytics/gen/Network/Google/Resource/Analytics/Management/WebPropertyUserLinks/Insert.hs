@@ -59,7 +59,7 @@ type ManagementWebPropertyUserLinksInsertResource =
 -- | Adds a new user to the given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksInsert' smart constructor.
-data ManagementWebPropertyUserLinksInsert = ManagementWebPropertyUserLinksInsert
+data ManagementWebPropertyUserLinksInsert = ManagementWebPropertyUserLinksInsert'
     { _mwpuliWebPropertyId :: !Text
     , _mwpuliPayload       :: !EntityUserLink
     , _mwpuliAccountId     :: !Text
@@ -80,7 +80,7 @@ managementWebPropertyUserLinksInsert
     -> Text -- ^ 'mwpuliAccountId'
     -> ManagementWebPropertyUserLinksInsert
 managementWebPropertyUserLinksInsert pMwpuliWebPropertyId_ pMwpuliPayload_ pMwpuliAccountId_ =
-    ManagementWebPropertyUserLinksInsert
+    ManagementWebPropertyUserLinksInsert'
     { _mwpuliWebPropertyId = pMwpuliWebPropertyId_
     , _mwpuliPayload = pMwpuliPayload_
     , _mwpuliAccountId = pMwpuliAccountId_
@@ -111,7 +111,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyUserLinksInsert =
              '["https://www.googleapis.com/auth/analytics.manage.users"]
         requestClient
-          ManagementWebPropertyUserLinksInsert{..}
+          ManagementWebPropertyUserLinksInsert'{..}
           = go _mwpuliAccountId _mwpuliWebPropertyId
               (Just AltJSON)
               _mwpuliPayload

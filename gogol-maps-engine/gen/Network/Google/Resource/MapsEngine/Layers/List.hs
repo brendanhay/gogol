@@ -78,7 +78,7 @@ type LayersListResource =
 -- | Return all layers readable by the current user.
 --
 -- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList
+data LayersList = LayersList'
     { _llCreatedAfter     :: !(Maybe DateTime')
     , _llCreatorEmail     :: !(Maybe Text)
     , _llRole             :: !(Maybe LayersListRole)
@@ -126,7 +126,7 @@ data LayersList = LayersList
 layersList
     :: LayersList
 layersList =
-    LayersList
+    LayersList'
     { _llCreatedAfter = Nothing
     , _llCreatorEmail = Nothing
     , _llRole = Nothing
@@ -233,7 +233,7 @@ instance GoogleRequest LayersList where
         type Scopes LayersList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient LayersList{..}
+        requestClient LayersList'{..}
           = go _llCreatedAfter _llCreatorEmail _llRole _llBbox
               _llProcessingStatus
               _llModifiedAfter

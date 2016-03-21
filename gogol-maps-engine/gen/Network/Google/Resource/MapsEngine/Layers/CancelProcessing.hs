@@ -53,7 +53,7 @@ type LayersCancelProcessingResource =
 -- | Cancel processing on a layer asset.
 --
 -- /See:/ 'layersCancelProcessing' smart constructor.
-newtype LayersCancelProcessing = LayersCancelProcessing
+newtype LayersCancelProcessing = LayersCancelProcessing'
     { _lcpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersCancelProcessing
     :: Text -- ^ 'lcpId'
     -> LayersCancelProcessing
 layersCancelProcessing pLcpId_ =
-    LayersCancelProcessing
+    LayersCancelProcessing'
     { _lcpId = pLcpId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest LayersCancelProcessing where
         type Rs LayersCancelProcessing = ProcessResponse
         type Scopes LayersCancelProcessing =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient LayersCancelProcessing{..}
+        requestClient LayersCancelProcessing'{..}
           = go _lcpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

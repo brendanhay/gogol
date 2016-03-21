@@ -55,7 +55,7 @@ type GlobalForwardingRulesDeleteResource =
 -- | Deletes the specified ForwardingRule resource.
 --
 -- /See:/ 'globalForwardingRulesDelete' smart constructor.
-data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete
+data GlobalForwardingRulesDelete = GlobalForwardingRulesDelete'
     { _gfrdProject        :: !Text
     , _gfrdForwardingRule :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalForwardingRulesDelete
     -> Text -- ^ 'gfrdForwardingRule'
     -> GlobalForwardingRulesDelete
 globalForwardingRulesDelete pGfrdProject_ pGfrdForwardingRule_ =
-    GlobalForwardingRulesDelete
+    GlobalForwardingRulesDelete'
     { _gfrdProject = pGfrdProject_
     , _gfrdForwardingRule = pGfrdForwardingRule_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest GlobalForwardingRulesDelete
         type Scopes GlobalForwardingRulesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient GlobalForwardingRulesDelete{..}
+        requestClient GlobalForwardingRulesDelete'{..}
           = go _gfrdProject _gfrdForwardingRule (Just AltJSON)
               computeService
           where go

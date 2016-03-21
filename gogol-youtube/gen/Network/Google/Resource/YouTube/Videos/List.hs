@@ -72,7 +72,7 @@ type VideosListResource =
 -- | Returns a list of videos that match the API request parameters.
 --
 -- /See:/ 'videosList' smart constructor.
-data VideosList = VideosList
+data VideosList = VideosList'
     { _vlChart                  :: !(Maybe VideosListChart)
     , _vlPart                   :: !Text
     , _vlRegionCode             :: !(Maybe Text)
@@ -115,7 +115,7 @@ videosList
     :: Text -- ^ 'vlPart'
     -> VideosList
 videosList pVlPart_ =
-    VideosList
+    VideosList'
     { _vlChart = Nothing
     , _vlPart = pVlPart_
     , _vlRegionCode = Nothing
@@ -228,7 +228,7 @@ instance GoogleRequest VideosList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosList{..}
+        requestClient VideosList'{..}
           = go (Just _vlPart) _vlChart _vlRegionCode _vlLocale
               _vlMyRating
               _vlHl

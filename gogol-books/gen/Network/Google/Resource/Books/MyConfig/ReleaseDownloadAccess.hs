@@ -59,7 +59,7 @@ type MyConfigReleaseDownloadAccessResource =
 -- | Release downloaded content access restriction.
 --
 -- /See:/ 'myConfigReleaseDownloadAccess' smart constructor.
-data MyConfigReleaseDownloadAccess = MyConfigReleaseDownloadAccess
+data MyConfigReleaseDownloadAccess = MyConfigReleaseDownloadAccess'
     { _mcrdaCpksver   :: !Text
     , _mcrdaLocale    :: !(Maybe Text)
     , _mcrdaVolumeIds :: ![Text]
@@ -82,7 +82,7 @@ myConfigReleaseDownloadAccess
     -> [Text] -- ^ 'mcrdaVolumeIds'
     -> MyConfigReleaseDownloadAccess
 myConfigReleaseDownloadAccess pMcrdaCpksver_ pMcrdaVolumeIds_ =
-    MyConfigReleaseDownloadAccess
+    MyConfigReleaseDownloadAccess'
     { _mcrdaCpksver = pMcrdaCpksver_
     , _mcrdaLocale = Nothing
     , _mcrdaVolumeIds = _Coerce # pMcrdaVolumeIds_
@@ -117,7 +117,7 @@ instance GoogleRequest MyConfigReleaseDownloadAccess
              DownloadAccesses
         type Scopes MyConfigReleaseDownloadAccess =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyConfigReleaseDownloadAccess{..}
+        requestClient MyConfigReleaseDownloadAccess'{..}
           = go _mcrdaVolumeIds (Just _mcrdaCpksver)
               _mcrdaLocale
               _mcrdaSource

@@ -56,7 +56,7 @@ type MarketplaceDealsDeleteResource =
 -- | Delete the specified deals from the proposal
 --
 -- /See:/ 'marketplaceDealsDelete' smart constructor.
-data MarketplaceDealsDelete = MarketplaceDealsDelete
+data MarketplaceDealsDelete = MarketplaceDealsDelete'
     { _mddPayload    :: !DeleteOrderDealsRequest
     , _mddProposalId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ marketplaceDealsDelete
     -> Text -- ^ 'mddProposalId'
     -> MarketplaceDealsDelete
 marketplaceDealsDelete pMddPayload_ pMddProposalId_ =
-    MarketplaceDealsDelete
+    MarketplaceDealsDelete'
     { _mddPayload = pMddPayload_
     , _mddProposalId = pMddProposalId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest MarketplaceDealsDelete where
              DeleteOrderDealsResponse
         type Scopes MarketplaceDealsDelete =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient MarketplaceDealsDelete{..}
+        requestClient MarketplaceDealsDelete'{..}
           = go _mddProposalId (Just AltJSON) _mddPayload
               adExchangeBuyerService
           where go

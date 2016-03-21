@@ -55,7 +55,7 @@ type AccountsPermissionsListResource =
 -- Container Permissions granted to each of them.
 --
 -- /See:/ 'accountsPermissionsList' smart constructor.
-newtype AccountsPermissionsList = AccountsPermissionsList
+newtype AccountsPermissionsList = AccountsPermissionsList'
     { _aplAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ accountsPermissionsList
     :: Text -- ^ 'aplAccountId'
     -> AccountsPermissionsList
 accountsPermissionsList pAplAccountId_ =
-    AccountsPermissionsList
+    AccountsPermissionsList'
     { _aplAccountId = pAplAccountId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest AccountsPermissionsList where
              ListAccountUsersResponse
         type Scopes AccountsPermissionsList =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-        requestClient AccountsPermissionsList{..}
+        requestClient AccountsPermissionsList'{..}
           = go _aplAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient

@@ -51,7 +51,7 @@ type CalendarsGetResource =
 -- | Returns metadata for a calendar.
 --
 -- /See:/ 'calendarsGet' smart constructor.
-newtype CalendarsGet = CalendarsGet
+newtype CalendarsGet = CalendarsGet'
     { _cgCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ calendarsGet
     :: Text -- ^ 'cgCalendarId'
     -> CalendarsGet
 calendarsGet pCgCalendarId_ =
-    CalendarsGet
+    CalendarsGet'
     { _cgCalendarId = pCgCalendarId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest CalendarsGet where
         type Scopes CalendarsGet =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient CalendarsGet{..}
+        requestClient CalendarsGet'{..}
           = go _cgCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsGetResource)

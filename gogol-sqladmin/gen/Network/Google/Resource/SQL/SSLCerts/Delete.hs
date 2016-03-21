@@ -59,7 +59,7 @@ type SSLCertsDeleteResource =
 -- instance is restarted.
 --
 -- /See:/ 'sslCertsDelete' smart constructor.
-data SSLCertsDelete = SSLCertsDelete
+data SSLCertsDelete = SSLCertsDelete'
     { _scdProject         :: !Text
     , _scdSha1Fingerprint :: !Text
     , _scdInstance        :: !Text
@@ -80,7 +80,7 @@ sslCertsDelete
     -> Text -- ^ 'scdInstance'
     -> SSLCertsDelete
 sslCertsDelete pScdProject_ pScdSha1Fingerprint_ pScdInstance_ =
-    SSLCertsDelete
+    SSLCertsDelete'
     { _scdProject = pScdProject_
     , _scdSha1Fingerprint = pScdSha1Fingerprint_
     , _scdInstance = pScdInstance_
@@ -107,7 +107,7 @@ instance GoogleRequest SSLCertsDelete where
         type Scopes SSLCertsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient SSLCertsDelete{..}
+        requestClient SSLCertsDelete'{..}
           = go _scdProject _scdInstance _scdSha1Fingerprint
               (Just AltJSON)
               sQLAdminService

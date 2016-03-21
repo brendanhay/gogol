@@ -60,7 +60,7 @@ type PagesPatchResource =
 -- | Update a page. This method supports patch semantics.
 --
 -- /See:/ 'pagesPatch' smart constructor.
-data PagesPatch = PagesPatch
+data PagesPatch = PagesPatch'
     { _ppBlogId  :: !Text
     , _ppPageId  :: !Text
     , _ppPayload :: !Page
@@ -87,7 +87,7 @@ pagesPatch
     -> Page -- ^ 'ppPayload'
     -> PagesPatch
 pagesPatch pPpBlogId_ pPpPageId_ pPpPayload_ =
-    PagesPatch
+    PagesPatch'
     { _ppBlogId = pPpBlogId_
     , _ppPageId = pPpPageId_
     , _ppPayload = pPpPayload_
@@ -123,7 +123,7 @@ instance GoogleRequest PagesPatch where
         type Rs PagesPatch = Page
         type Scopes PagesPatch =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PagesPatch{..}
+        requestClient PagesPatch'{..}
           = go _ppBlogId _ppPageId _ppRevert _ppPublish
               (Just AltJSON)
               _ppPayload

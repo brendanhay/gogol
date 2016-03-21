@@ -68,7 +68,7 @@ type PlayListItemsListResource =
 -- playlist or retrieve one or more playlist items by their unique IDs.
 --
 -- /See:/ 'playListItemsList' smart constructor.
-data PlayListItemsList = PlayListItemsList
+data PlayListItemsList = PlayListItemsList'
     { _plilPart                   :: !Text
     , _plilOnBehalfOfContentOwner :: !(Maybe Text)
     , _plilVideoId                :: !(Maybe Text)
@@ -99,7 +99,7 @@ playListItemsList
     :: Text -- ^ 'plilPart'
     -> PlayListItemsList
 playListItemsList pPlilPart_ =
-    PlayListItemsList
+    PlayListItemsList'
     { _plilPart = pPlilPart_
     , _plilOnBehalfOfContentOwner = Nothing
     , _plilVideoId = Nothing
@@ -178,7 +178,7 @@ instance GoogleRequest PlayListItemsList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient PlayListItemsList{..}
+        requestClient PlayListItemsList'{..}
           = go (Just _plilPart) _plilOnBehalfOfContentOwner
               _plilVideoId
               _plilId

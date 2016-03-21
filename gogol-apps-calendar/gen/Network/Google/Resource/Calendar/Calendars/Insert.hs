@@ -51,7 +51,7 @@ type CalendarsInsertResource =
 -- | Creates a secondary calendar.
 --
 -- /See:/ 'calendarsInsert' smart constructor.
-newtype CalendarsInsert = CalendarsInsert
+newtype CalendarsInsert = CalendarsInsert'
     { _ciPayload :: Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ calendarsInsert
     :: Calendar -- ^ 'ciPayload'
     -> CalendarsInsert
 calendarsInsert pCiPayload_ =
-    CalendarsInsert
+    CalendarsInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest CalendarsInsert where
         type Rs CalendarsInsert = Calendar
         type Scopes CalendarsInsert =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarsInsert{..}
+        requestClient CalendarsInsert'{..}
           = go (Just AltJSON) _ciPayload appsCalendarService
           where go
                   = buildClient

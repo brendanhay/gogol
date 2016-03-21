@@ -51,7 +51,7 @@ type SubscriptionsDeleteResource =
 -- | Deletes a subscription.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
-newtype SubscriptionsDelete = SubscriptionsDelete
+newtype SubscriptionsDelete = SubscriptionsDelete'
     { _sdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ subscriptionsDelete
     :: Text -- ^ 'sdId'
     -> SubscriptionsDelete
 subscriptionsDelete pSdId_ =
-    SubscriptionsDelete
+    SubscriptionsDelete'
     { _sdId = pSdId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest SubscriptionsDelete where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient SubscriptionsDelete{..}
+        requestClient SubscriptionsDelete'{..}
           = go (Just _sdId) (Just AltJSON) youTubeService
           where go
                   = buildClient

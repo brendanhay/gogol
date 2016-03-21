@@ -52,7 +52,7 @@ type AccountsPaymentsListResource =
 -- | List the payments for the specified AdSense account.
 --
 -- /See:/ 'accountsPaymentsList' smart constructor.
-newtype AccountsPaymentsList = AccountsPaymentsList
+newtype AccountsPaymentsList = AccountsPaymentsList'
     { _aplAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ accountsPaymentsList
     :: Text -- ^ 'aplAccountId'
     -> AccountsPaymentsList
 accountsPaymentsList pAplAccountId_ =
-    AccountsPaymentsList
+    AccountsPaymentsList'
     { _aplAccountId = pAplAccountId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest AccountsPaymentsList where
         type Scopes AccountsPaymentsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsPaymentsList{..}
+        requestClient AccountsPaymentsList'{..}
           = go _aplAccountId (Just AltJSON) adSenseService
           where go
                   = buildClient

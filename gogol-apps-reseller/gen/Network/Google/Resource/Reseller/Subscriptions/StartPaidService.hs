@@ -56,7 +56,7 @@ type SubscriptionsStartPaidServiceResource =
 -- | Starts paid service of a trial subscription
 --
 -- /See:/ 'subscriptionsStartPaidService' smart constructor.
-data SubscriptionsStartPaidService = SubscriptionsStartPaidService
+data SubscriptionsStartPaidService = SubscriptionsStartPaidService'
     { _sspsCustomerId     :: !Text
     , _sspsSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ subscriptionsStartPaidService
     -> Text -- ^ 'sspsSubscriptionId'
     -> SubscriptionsStartPaidService
 subscriptionsStartPaidService pSspsCustomerId_ pSspsSubscriptionId_ =
-    SubscriptionsStartPaidService
+    SubscriptionsStartPaidService'
     { _sspsCustomerId = pSspsCustomerId_
     , _sspsSubscriptionId = pSspsSubscriptionId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest SubscriptionsStartPaidService
         type Rs SubscriptionsStartPaidService = Subscription
         type Scopes SubscriptionsStartPaidService =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsStartPaidService{..}
+        requestClient SubscriptionsStartPaidService'{..}
           = go _sspsCustomerId _sspsSubscriptionId
               (Just AltJSON)
               appsResellerService

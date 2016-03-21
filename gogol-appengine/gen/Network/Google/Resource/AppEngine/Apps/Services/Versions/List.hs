@@ -75,7 +75,7 @@ type AppsServicesVersionsListResource =
 -- | Lists the versions of a service.
 --
 -- /See:/ 'appsServicesVersionsList' smart constructor.
-data AppsServicesVersionsList = AppsServicesVersionsList
+data AppsServicesVersionsList = AppsServicesVersionsList'
     { _asvlXgafv          :: !(Maybe Text)
     , _asvlUploadProtocol :: !(Maybe Text)
     , _asvlPp             :: !Bool
@@ -122,7 +122,7 @@ appsServicesVersionsList
     -> Text -- ^ 'asvlServicesId'
     -> AppsServicesVersionsList
 appsServicesVersionsList pAsvlAppsId_ pAsvlServicesId_ =
-    AppsServicesVersionsList
+    AppsServicesVersionsList'
     { _asvlXgafv = Nothing
     , _asvlUploadProtocol = Nothing
     , _asvlPp = True
@@ -208,7 +208,7 @@ instance GoogleRequest AppsServicesVersionsList where
              ListVersionsResponse
         type Scopes AppsServicesVersionsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesVersionsList{..}
+        requestClient AppsServicesVersionsList'{..}
           = go _asvlAppsId _asvlServicesId _asvlXgafv
               _asvlUploadProtocol
               (Just _asvlPp)

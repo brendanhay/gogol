@@ -59,7 +59,7 @@ type GroupsAddMemberResource =
 -- | Adds users to the specified group.
 --
 -- /See:/ 'groupsAddMember' smart constructor.
-data GroupsAddMember = GroupsAddMember
+data GroupsAddMember = GroupsAddMember'
     { _gamProject   :: !Text
     , _gamPayload   :: !GroupsAddMemberRequest
     , _gamGroupName :: !Text
@@ -80,7 +80,7 @@ groupsAddMember
     -> Text -- ^ 'gamGroupName'
     -> GroupsAddMember
 groupsAddMember pGamProject_ pGamPayload_ pGamGroupName_ =
-    GroupsAddMember
+    GroupsAddMember'
     { _gamProject = pGamProject_
     , _gamPayload = pGamPayload_
     , _gamGroupName = pGamGroupName_
@@ -106,7 +106,7 @@ instance GoogleRequest GroupsAddMember where
         type Scopes GroupsAddMember =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient GroupsAddMember{..}
+        requestClient GroupsAddMember'{..}
           = go _gamProject _gamGroupName (Just AltJSON)
               _gamPayload
               userAccountsService

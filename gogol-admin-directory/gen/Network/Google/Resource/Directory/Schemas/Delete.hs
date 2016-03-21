@@ -55,7 +55,7 @@ type SchemasDeleteResource =
 -- | Delete schema
 --
 -- /See:/ 'schemasDelete' smart constructor.
-data SchemasDelete = SchemasDelete
+data SchemasDelete = SchemasDelete'
     { _sdCustomerId :: !Text
     , _sdSchemaKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ schemasDelete
     -> Text -- ^ 'sdSchemaKey'
     -> SchemasDelete
 schemasDelete pSdCustomerId_ pSdSchemaKey_ =
-    SchemasDelete
+    SchemasDelete'
     { _sdCustomerId = pSdCustomerId_
     , _sdSchemaKey = pSdSchemaKey_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SchemasDelete where
         type Rs SchemasDelete = ()
         type Scopes SchemasDelete =
              '["https://www.googleapis.com/auth/admin.directory.userschema"]
-        requestClient SchemasDelete{..}
+        requestClient SchemasDelete'{..}
           = go _sdCustomerId _sdSchemaKey (Just AltJSON)
               directoryService
           where go

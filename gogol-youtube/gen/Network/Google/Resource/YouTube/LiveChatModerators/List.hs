@@ -59,7 +59,7 @@ type LiveChatModeratorsListResource =
 -- | Lists moderators for a live chat.
 --
 -- /See:/ 'liveChatModeratorsList' smart constructor.
-data LiveChatModeratorsList = LiveChatModeratorsList
+data LiveChatModeratorsList = LiveChatModeratorsList'
     { _livPart       :: !Text
     , _livLiveChatId :: !Text
     , _livPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ liveChatModeratorsList
     -> Text -- ^ 'livLiveChatId'
     -> LiveChatModeratorsList
 liveChatModeratorsList pLivPart_ pLivLiveChatId_ =
-    LiveChatModeratorsList
+    LiveChatModeratorsList'
     { _livPart = pLivPart_
     , _livLiveChatId = pLivLiveChatId_
     , _livPageToken = Nothing
@@ -123,7 +123,7 @@ instance GoogleRequest LiveChatModeratorsList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient LiveChatModeratorsList{..}
+        requestClient LiveChatModeratorsList'{..}
           = go (Just _livLiveChatId) (Just _livPart)
               _livPageToken
               (Just _livMaxResults)

@@ -74,7 +74,7 @@ type ChannelsListResource =
 -- request criteria.
 --
 -- /See:/ 'channelsList' smart constructor.
-data ChannelsList = ChannelsList
+data ChannelsList = ChannelsList'
     { _cPart                   :: !Text
     , _cMine                   :: !(Maybe Bool)
     , _cForUsername            :: !(Maybe Text)
@@ -117,7 +117,7 @@ channelsList
     :: Text -- ^ 'cPart'
     -> ChannelsList
 channelsList pCPart_ =
-    ChannelsList
+    ChannelsList'
     { _cPart = pCPart_
     , _cMine = Nothing
     , _cForUsername = Nothing
@@ -223,7 +223,7 @@ instance GoogleRequest ChannelsList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner",
                "https://www.googleapis.com/auth/youtubepartner-channel-audit"]
-        requestClient ChannelsList{..}
+        requestClient ChannelsList'{..}
           = go (Just _cPart) _cMine _cForUsername _cHl
               _cOnBehalfOfContentOwner
               _cCategoryId

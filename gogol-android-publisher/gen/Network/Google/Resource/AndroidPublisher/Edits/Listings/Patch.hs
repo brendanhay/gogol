@@ -61,7 +61,7 @@ type EditsListingsPatchResource =
 -- semantics.
 --
 -- /See:/ 'editsListingsPatch' smart constructor.
-data EditsListingsPatch = EditsListingsPatch
+data EditsListingsPatch = EditsListingsPatch'
     { _elpPackageName :: !Text
     , _elpPayload     :: !Listing
     , _elpLanguage    :: !Text
@@ -86,7 +86,7 @@ editsListingsPatch
     -> Text -- ^ 'elpEditId'
     -> EditsListingsPatch
 editsListingsPatch pElpPackageName_ pElpPayload_ pElpLanguage_ pElpEditId_ =
-    EditsListingsPatch
+    EditsListingsPatch'
     { _elpPackageName = pElpPackageName_
     , _elpPayload = pElpPayload_
     , _elpLanguage = pElpLanguage_
@@ -120,7 +120,7 @@ instance GoogleRequest EditsListingsPatch where
         type Rs EditsListingsPatch = Listing
         type Scopes EditsListingsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsListingsPatch{..}
+        requestClient EditsListingsPatch'{..}
           = go _elpPackageName _elpEditId _elpLanguage
               (Just AltJSON)
               _elpPayload

@@ -55,7 +55,7 @@ type NotificationsDeleteResource =
 -- | Deletes a notification
 --
 -- /See:/ 'notificationsDelete' smart constructor.
-data NotificationsDelete = NotificationsDelete
+data NotificationsDelete = NotificationsDelete'
     { _ndCustomer       :: !Text
     , _ndNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ notificationsDelete
     -> Text -- ^ 'ndNotificationId'
     -> NotificationsDelete
 notificationsDelete pNdCustomer_ pNdNotificationId_ =
-    NotificationsDelete
+    NotificationsDelete'
     { _ndCustomer = pNdCustomer_
     , _ndNotificationId = pNdNotificationId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest NotificationsDelete where
         type Rs NotificationsDelete = ()
         type Scopes NotificationsDelete =
              '["https://www.googleapis.com/auth/admin.directory.notifications"]
-        requestClient NotificationsDelete{..}
+        requestClient NotificationsDelete'{..}
           = go _ndCustomer _ndNotificationId (Just AltJSON)
               directoryService
           where go

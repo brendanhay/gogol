@@ -67,7 +67,7 @@ type ProjectsRegionsOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'projectsRegionsOperationsGet' smart constructor.
-data ProjectsRegionsOperationsGet = ProjectsRegionsOperationsGet
+data ProjectsRegionsOperationsGet = ProjectsRegionsOperationsGet'
     { _progXgafv          :: !(Maybe Text)
     , _progUploadProtocol :: !(Maybe Text)
     , _progPp             :: !Bool
@@ -101,7 +101,7 @@ projectsRegionsOperationsGet
     :: Text -- ^ 'progName'
     -> ProjectsRegionsOperationsGet
 projectsRegionsOperationsGet pProgName_ =
-    ProjectsRegionsOperationsGet
+    ProjectsRegionsOperationsGet'
     { _progXgafv = Nothing
     , _progUploadProtocol = Nothing
     , _progPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest ProjectsRegionsOperationsGet
         type Rs ProjectsRegionsOperationsGet = Operation
         type Scopes ProjectsRegionsOperationsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsOperationsGet{..}
+        requestClient ProjectsRegionsOperationsGet'{..}
           = go _progName _progXgafv _progUploadProtocol
               (Just _progPp)
               _progAccessToken

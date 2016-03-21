@@ -61,7 +61,7 @@ type StorelayoutclustersUpdateResource =
 -- | Updates a cluster.
 --
 -- /See:/ 'storelayoutclustersUpdate' smart constructor.
-data StorelayoutclustersUpdate = StorelayoutclustersUpdate
+data StorelayoutclustersUpdate = StorelayoutclustersUpdate'
     { _suuEnterpriseId :: !Text
     , _suuPageId       :: !Text
     , _suuPayload      :: !StoreCluster
@@ -86,7 +86,7 @@ storelayoutclustersUpdate
     -> Text -- ^ 'suuClusterId'
     -> StorelayoutclustersUpdate
 storelayoutclustersUpdate pSuuEnterpriseId_ pSuuPageId_ pSuuPayload_ pSuuClusterId_ =
-    StorelayoutclustersUpdate
+    StorelayoutclustersUpdate'
     { _suuEnterpriseId = pSuuEnterpriseId_
     , _suuPageId = pSuuPageId_
     , _suuPayload = pSuuPayload_
@@ -119,7 +119,7 @@ instance GoogleRequest StorelayoutclustersUpdate
         type Rs StorelayoutclustersUpdate = StoreCluster
         type Scopes StorelayoutclustersUpdate =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutclustersUpdate{..}
+        requestClient StorelayoutclustersUpdate'{..}
           = go _suuEnterpriseId _suuPageId _suuClusterId
               (Just AltJSON)
               _suuPayload

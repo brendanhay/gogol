@@ -45,7 +45,7 @@ import           Network.Google.ProximityBeacon.Types.Sum
 -- NormalizeLatLng(-270.0, 10.0)
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng
+data LatLng = LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -60,7 +60,7 @@ data LatLng = LatLng
 latLng
     :: LatLng
 latLng =
-    LatLng
+    LatLng'
     { _llLatitude = Nothing
     , _llLongitude = Nothing
     }
@@ -81,11 +81,11 @@ instance FromJSON LatLng where
         parseJSON
           = withObject "LatLng"
               (\ o ->
-                 LatLng <$>
+                 LatLng' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON LatLng where
-        toJSON LatLng{..}
+        toJSON LatLng'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _llLatitude,
@@ -96,7 +96,7 @@ instance ToJSON LatLng where
 -- your beacons.
 --
 -- /See:/ 'attachmentInfo' smart constructor.
-data AttachmentInfo = AttachmentInfo
+data AttachmentInfo = AttachmentInfo'
     { _aiData           :: !(Maybe (Textual Word8))
     , _aiNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -111,7 +111,7 @@ data AttachmentInfo = AttachmentInfo
 attachmentInfo
     :: AttachmentInfo
 attachmentInfo =
-    AttachmentInfo
+    AttachmentInfo'
     { _aiData = Nothing
     , _aiNamespacedType = Nothing
     }
@@ -134,11 +134,11 @@ instance FromJSON AttachmentInfo where
         parseJSON
           = withObject "AttachmentInfo"
               (\ o ->
-                 AttachmentInfo <$>
+                 AttachmentInfo' <$>
                    (o .:? "data") <*> (o .:? "namespacedType"))
 
 instance ToJSON AttachmentInfo where
-        toJSON AttachmentInfo{..}
+        toJSON AttachmentInfo'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _aiData,
@@ -148,7 +148,7 @@ instance ToJSON AttachmentInfo where
 -- version. Optional.
 --
 -- /See:/ 'beaconProperties' smart constructor.
-newtype BeaconProperties = BeaconProperties
+newtype BeaconProperties = BeaconProperties'
     { _bpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -161,7 +161,7 @@ beaconProperties
     :: HashMap Text Text -- ^ 'bpAddtional'
     -> BeaconProperties
 beaconProperties pBpAddtional_ =
-    BeaconProperties
+    BeaconProperties'
     { _bpAddtional = _Coerce # pBpAddtional_
     }
 
@@ -173,7 +173,7 @@ bpAddtional
 instance FromJSON BeaconProperties where
         parseJSON
           = withObject "BeaconProperties"
-              (\ o -> BeaconProperties <$> (parseJSONObject o))
+              (\ o -> BeaconProperties' <$> (parseJSONObject o))
 
 instance ToJSON BeaconProperties where
         toJSON = toJSON . _bpAddtional
@@ -186,17 +186,17 @@ instance ToJSON BeaconProperties where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -204,7 +204,7 @@ instance ToJSON Empty where
 -- | Response for a request to delete attachments.
 --
 -- /See:/ 'deleteAttachmentsResponse' smart constructor.
-newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
+newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse'
     { _darNumDeleted :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -216,7 +216,7 @@ newtype DeleteAttachmentsResponse = DeleteAttachmentsResponse
 deleteAttachmentsResponse
     :: DeleteAttachmentsResponse
 deleteAttachmentsResponse =
-    DeleteAttachmentsResponse
+    DeleteAttachmentsResponse'
     { _darNumDeleted = Nothing
     }
 
@@ -231,10 +231,10 @@ instance FromJSON DeleteAttachmentsResponse where
         parseJSON
           = withObject "DeleteAttachmentsResponse"
               (\ o ->
-                 DeleteAttachmentsResponse <$> (o .:? "numDeleted"))
+                 DeleteAttachmentsResponse' <$> (o .:? "numDeleted"))
 
 instance ToJSON DeleteAttachmentsResponse where
-        toJSON DeleteAttachmentsResponse{..}
+        toJSON DeleteAttachmentsResponse'{..}
           = object
               (catMaybes [("numDeleted" .=) <$> _darNumDeleted])
 
@@ -242,7 +242,7 @@ instance ToJSON DeleteAttachmentsResponse where
 -- mobile client has encountered \"in the wild\".
 --
 -- /See:/ 'getInfoForObservedBeaconsRequest' smart constructor.
-data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
+data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest'
     { _gifobrObservations    :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -257,7 +257,7 @@ data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
 getInfoForObservedBeaconsRequest
     :: GetInfoForObservedBeaconsRequest
 getInfoForObservedBeaconsRequest =
-    GetInfoForObservedBeaconsRequest
+    GetInfoForObservedBeaconsRequest'
     { _gifobrObservations = Nothing
     , _gifobrNamespacedTypes = Nothing
     }
@@ -287,13 +287,13 @@ instance FromJSON GetInfoForObservedBeaconsRequest
         parseJSON
           = withObject "GetInfoForObservedBeaconsRequest"
               (\ o ->
-                 GetInfoForObservedBeaconsRequest <$>
+                 GetInfoForObservedBeaconsRequest' <$>
                    (o .:? "observations" .!= mempty) <*>
                      (o .:? "namespacedTypes" .!= mempty))
 
 instance ToJSON GetInfoForObservedBeaconsRequest
          where
-        toJSON GetInfoForObservedBeaconsRequest{..}
+        toJSON GetInfoForObservedBeaconsRequest'{..}
           = object
               (catMaybes
                  [("observations" .=) <$> _gifobrObservations,
@@ -305,7 +305,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 -- attachments under it.
 --
 -- /See:/ 'namespace' smart constructor.
-data Namespace = Namespace
+data Namespace = Namespace'
     { _nServingVisibility :: !(Maybe Text)
     , _nNamespaceName     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -320,7 +320,7 @@ data Namespace = Namespace
 namespace
     :: Namespace
 namespace =
-    Namespace
+    Namespace'
     { _nServingVisibility = Nothing
     , _nNamespaceName = Nothing
     }
@@ -343,12 +343,12 @@ instance FromJSON Namespace where
         parseJSON
           = withObject "Namespace"
               (\ o ->
-                 Namespace <$>
+                 Namespace' <$>
                    (o .:? "servingVisibility") <*>
                      (o .:? "namespaceName"))
 
 instance ToJSON Namespace where
-        toJSON Namespace{..}
+        toJSON Namespace'{..}
           = object
               (catMaybes
                  [("servingVisibility" .=) <$> _nServingVisibility,
@@ -358,7 +358,7 @@ instance ToJSON Namespace where
 -- namespaces.
 --
 -- /See:/ 'listNamespacesResponse' smart constructor.
-newtype ListNamespacesResponse = ListNamespacesResponse
+newtype ListNamespacesResponse = ListNamespacesResponse'
     { _lnrNamespaces :: Maybe [Namespace]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -370,7 +370,7 @@ newtype ListNamespacesResponse = ListNamespacesResponse
 listNamespacesResponse
     :: ListNamespacesResponse
 listNamespacesResponse =
-    ListNamespacesResponse
+    ListNamespacesResponse'
     { _lnrNamespaces = Nothing
     }
 
@@ -386,11 +386,11 @@ instance FromJSON ListNamespacesResponse where
         parseJSON
           = withObject "ListNamespacesResponse"
               (\ o ->
-                 ListNamespacesResponse <$>
+                 ListNamespacesResponse' <$>
                    (o .:? "namespaces" .!= mempty))
 
 instance ToJSON ListNamespacesResponse where
-        toJSON ListNamespacesResponse{..}
+        toJSON ListNamespacesResponse'{..}
           = object
               (catMaybes [("namespaces" .=) <$> _lnrNamespaces])
 
@@ -403,7 +403,7 @@ instance ToJSON ListNamespacesResponse where
 -- [google.type.TimeOfDay][] and \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date
+data Date = Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
@@ -421,7 +421,7 @@ data Date = Date
 date
     :: Date
 date =
-    Date
+    Date'
     { _dDay = Nothing
     , _dYear = Nothing
     , _dMonth = Nothing
@@ -451,11 +451,11 @@ instance FromJSON Date where
         parseJSON
           = withObject "Date"
               (\ o ->
-                 Date <$>
+                 Date' <$>
                    (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
 
 instance ToJSON Date where
-        toJSON Date{..}
+        toJSON Date'{..}
           = object
               (catMaybes
                  [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
@@ -464,7 +464,7 @@ instance ToJSON Date where
 -- | Details of a beacon device.
 --
 -- /See:/ 'beacon' smart constructor.
-data Beacon = Beacon
+data Beacon = Beacon'
     { _bLatLng            :: !(Maybe LatLng)
     , _bStatus            :: !(Maybe Text)
     , _bBeaconName        :: !(Maybe Text)
@@ -500,7 +500,7 @@ data Beacon = Beacon
 beacon
     :: Beacon
 beacon =
-    Beacon
+    Beacon'
     { _bLatLng = Nothing
     , _bStatus = Nothing
     , _bBeaconName = Nothing
@@ -576,7 +576,7 @@ instance FromJSON Beacon where
         parseJSON
           = withObject "Beacon"
               (\ o ->
-                 Beacon <$>
+                 Beacon' <$>
                    (o .:? "latLng") <*> (o .:? "status") <*>
                      (o .:? "beaconName")
                      <*> (o .:? "indoorLevel")
@@ -587,7 +587,7 @@ instance FromJSON Beacon where
                      <*> (o .:? "properties"))
 
 instance ToJSON Beacon where
-        toJSON Beacon{..}
+        toJSON Beacon'{..}
           = object
               (catMaybes
                  [("latLng" .=) <$> _bLatLng,
@@ -603,7 +603,7 @@ instance ToJSON Beacon where
 -- | Diagnostics for a single beacon.
 --
 -- /See:/ 'diagnostics' smart constructor.
-data Diagnostics = Diagnostics
+data Diagnostics = Diagnostics'
     { _dAlerts                  :: !(Maybe [Text])
     , _dBeaconName              :: !(Maybe Text)
     , _dEstimatedLowBatteryDate :: !(Maybe Date)
@@ -621,7 +621,7 @@ data Diagnostics = Diagnostics
 diagnostics
     :: Diagnostics
 diagnostics =
-    Diagnostics
+    Diagnostics'
     { _dAlerts = Nothing
     , _dBeaconName = Nothing
     , _dEstimatedLowBatteryDate = Nothing
@@ -650,12 +650,12 @@ instance FromJSON Diagnostics where
         parseJSON
           = withObject "Diagnostics"
               (\ o ->
-                 Diagnostics <$>
+                 Diagnostics' <$>
                    (o .:? "alerts" .!= mempty) <*> (o .:? "beaconName")
                      <*> (o .:? "estimatedLowBatteryDate"))
 
 instance ToJSON Diagnostics where
-        toJSON Diagnostics{..}
+        toJSON Diagnostics'{..}
           = object
               (catMaybes
                  [("alerts" .=) <$> _dAlerts,
@@ -667,7 +667,7 @@ instance ToJSON Diagnostics where
 -- attachments.
 --
 -- /See:/ 'listBeaconAttachmentsResponse' smart constructor.
-newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
+newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse'
     { _lbarAttachments :: Maybe [BeaconAttachment]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -679,7 +679,7 @@ newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
 listBeaconAttachmentsResponse
     :: ListBeaconAttachmentsResponse
 listBeaconAttachmentsResponse =
-    ListBeaconAttachmentsResponse
+    ListBeaconAttachmentsResponse'
     { _lbarAttachments = Nothing
     }
 
@@ -695,11 +695,11 @@ instance FromJSON ListBeaconAttachmentsResponse where
         parseJSON
           = withObject "ListBeaconAttachmentsResponse"
               (\ o ->
-                 ListBeaconAttachmentsResponse <$>
+                 ListBeaconAttachmentsResponse' <$>
                    (o .:? "attachments" .!= mempty))
 
 instance ToJSON ListBeaconAttachmentsResponse where
-        toJSON ListBeaconAttachmentsResponse{..}
+        toJSON ListBeaconAttachmentsResponse'{..}
           = object
               (catMaybes [("attachments" .=) <$> _lbarAttachments])
 
@@ -707,7 +707,7 @@ instance ToJSON ListBeaconAttachmentsResponse where
 -- useful to indicate which floor of a building a beacon is located on.
 --
 -- /See:/ 'indoorLevel' smart constructor.
-newtype IndoorLevel = IndoorLevel
+newtype IndoorLevel = IndoorLevel'
     { _ilName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -719,7 +719,7 @@ newtype IndoorLevel = IndoorLevel
 indoorLevel
     :: IndoorLevel
 indoorLevel =
-    IndoorLevel
+    IndoorLevel'
     { _ilName = Nothing
     }
 
@@ -730,10 +730,10 @@ ilName = lens _ilName (\ s a -> s{_ilName = a})
 instance FromJSON IndoorLevel where
         parseJSON
           = withObject "IndoorLevel"
-              (\ o -> IndoorLevel <$> (o .:? "name"))
+              (\ o -> IndoorLevel' <$> (o .:? "name"))
 
 instance ToJSON IndoorLevel where
-        toJSON IndoorLevel{..}
+        toJSON IndoorLevel'{..}
           = object (catMaybes [("name" .=) <$> _ilName])
 
 -- | A subset of beacon information served via the
@@ -741,7 +741,7 @@ instance ToJSON IndoorLevel where
 -- app encounter your beacons.
 --
 -- /See:/ 'beaconInfo' smart constructor.
-data BeaconInfo = BeaconInfo
+data BeaconInfo = BeaconInfo'
     { _biAttachments  :: !(Maybe [AttachmentInfo])
     , _biBeaconName   :: !(Maybe Text)
     , _biDescription  :: !(Maybe Text)
@@ -762,7 +762,7 @@ data BeaconInfo = BeaconInfo
 beaconInfo
     :: BeaconInfo
 beaconInfo =
-    BeaconInfo
+    BeaconInfo'
     { _biAttachments = Nothing
     , _biBeaconName = Nothing
     , _biDescription = Nothing
@@ -801,14 +801,14 @@ instance FromJSON BeaconInfo where
         parseJSON
           = withObject "BeaconInfo"
               (\ o ->
-                 BeaconInfo <$>
+                 BeaconInfo' <$>
                    (o .:? "attachments" .!= mempty) <*>
                      (o .:? "beaconName")
                      <*> (o .:? "description")
                      <*> (o .:? "advertisedId"))
 
 instance ToJSON BeaconInfo where
-        toJSON BeaconInfo{..}
+        toJSON BeaconInfo'{..}
           = object
               (catMaybes
                  [("attachments" .=) <$> _biAttachments,
@@ -819,7 +819,7 @@ instance ToJSON BeaconInfo where
 -- | Represents one beacon observed once.
 --
 -- /See:/ 'observation' smart constructor.
-data Observation = Observation
+data Observation = Observation'
     { _oTelemetry    :: !(Maybe (Textual Word8))
     , _oTimestampMs  :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
@@ -837,7 +837,7 @@ data Observation = Observation
 observation
     :: Observation
 observation =
-    Observation
+    Observation'
     { _oTelemetry = Nothing
     , _oTimestampMs = Nothing
     , _oAdvertisedId = Nothing
@@ -867,12 +867,12 @@ instance FromJSON Observation where
         parseJSON
           = withObject "Observation"
               (\ o ->
-                 Observation <$>
+                 Observation' <$>
                    (o .:? "telemetry") <*> (o .:? "timestampMs") <*>
                      (o .:? "advertisedId"))
 
 instance ToJSON Observation where
-        toJSON Observation{..}
+        toJSON Observation'{..}
           = object
               (catMaybes
                  [("telemetry" .=) <$> _oTelemetry,
@@ -882,7 +882,7 @@ instance ToJSON Observation where
 -- | Project-specific data associated with a beacon.
 --
 -- /See:/ 'beaconAttachment' smart constructor.
-data BeaconAttachment = BeaconAttachment
+data BeaconAttachment = BeaconAttachment'
     { _baData           :: !(Maybe (Textual Word8))
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
@@ -900,7 +900,7 @@ data BeaconAttachment = BeaconAttachment
 beaconAttachment
     :: BeaconAttachment
 beaconAttachment =
-    BeaconAttachment
+    BeaconAttachment'
     { _baData = Nothing
     , _baAttachmentName = Nothing
     , _baNamespacedType = Nothing
@@ -937,12 +937,12 @@ instance FromJSON BeaconAttachment where
         parseJSON
           = withObject "BeaconAttachment"
               (\ o ->
-                 BeaconAttachment <$>
+                 BeaconAttachment' <$>
                    (o .:? "data") <*> (o .:? "attachmentName") <*>
                      (o .:? "namespacedType"))
 
 instance ToJSON BeaconAttachment where
-        toJSON BeaconAttachment{..}
+        toJSON BeaconAttachment'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _baData,
@@ -952,7 +952,7 @@ instance ToJSON BeaconAttachment where
 -- | Response that contains the requested diagnostics.
 --
 -- /See:/ 'listDiagnosticsResponse' smart constructor.
-data ListDiagnosticsResponse = ListDiagnosticsResponse
+data ListDiagnosticsResponse = ListDiagnosticsResponse'
     { _ldrNextPageToken :: !(Maybe Text)
     , _ldrDiagnostics   :: !(Maybe [Diagnostics])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -967,7 +967,7 @@ data ListDiagnosticsResponse = ListDiagnosticsResponse
 listDiagnosticsResponse
     :: ListDiagnosticsResponse
 listDiagnosticsResponse =
-    ListDiagnosticsResponse
+    ListDiagnosticsResponse'
     { _ldrNextPageToken = Nothing
     , _ldrDiagnostics = Nothing
     }
@@ -991,12 +991,12 @@ instance FromJSON ListDiagnosticsResponse where
         parseJSON
           = withObject "ListDiagnosticsResponse"
               (\ o ->
-                 ListDiagnosticsResponse <$>
+                 ListDiagnosticsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "diagnostics" .!= mempty))
 
 instance ToJSON ListDiagnosticsResponse where
-        toJSON ListDiagnosticsResponse{..}
+        toJSON ListDiagnosticsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ldrNextPageToken,
@@ -1005,7 +1005,7 @@ instance ToJSON ListDiagnosticsResponse where
 -- | Defines a unique identifier of a beacon as broadcast by the device.
 --
 -- /See:/ 'advertisedId' smart constructor.
-data AdvertisedId = AdvertisedId
+data AdvertisedId = AdvertisedId'
     { _aiId   :: !(Maybe (Textual Word8))
     , _aiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1020,7 +1020,7 @@ data AdvertisedId = AdvertisedId
 advertisedId
     :: AdvertisedId
 advertisedId =
-    AdvertisedId
+    AdvertisedId'
     { _aiId = Nothing
     , _aiType = Nothing
     }
@@ -1043,10 +1043,10 @@ instance FromJSON AdvertisedId where
         parseJSON
           = withObject "AdvertisedId"
               (\ o ->
-                 AdvertisedId <$> (o .:? "id") <*> (o .:? "type"))
+                 AdvertisedId' <$> (o .:? "id") <*> (o .:? "type"))
 
 instance ToJSON AdvertisedId where
-        toJSON AdvertisedId{..}
+        toJSON AdvertisedId'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _aiId, ("type" .=) <$> _aiType])
@@ -1054,7 +1054,7 @@ instance ToJSON AdvertisedId where
 -- | Response that contains list beacon results and pagination help.
 --
 -- /See:/ 'listBeaconsResponse' smart constructor.
-data ListBeaconsResponse = ListBeaconsResponse
+data ListBeaconsResponse = ListBeaconsResponse'
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrBeacons       :: !(Maybe [Beacon])
     , _lbrTotalCount    :: !(Maybe (Textual Int64))
@@ -1072,7 +1072,7 @@ data ListBeaconsResponse = ListBeaconsResponse
 listBeaconsResponse
     :: ListBeaconsResponse
 listBeaconsResponse =
-    ListBeaconsResponse
+    ListBeaconsResponse'
     { _lbrNextPageToken = Nothing
     , _lbrBeacons = Nothing
     , _lbrTotalCount = Nothing
@@ -1104,13 +1104,13 @@ instance FromJSON ListBeaconsResponse where
         parseJSON
           = withObject "ListBeaconsResponse"
               (\ o ->
-                 ListBeaconsResponse <$>
+                 ListBeaconsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "beacons" .!= mempty)
                      <*> (o .:? "totalCount"))
 
 instance ToJSON ListBeaconsResponse where
-        toJSON ListBeaconsResponse{..}
+        toJSON ListBeaconsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lbrNextPageToken,
@@ -1121,7 +1121,7 @@ instance ToJSON ListBeaconsResponse where
 -- data.
 --
 -- /See:/ 'getInfoForObservedBeaconsResponse' smart constructor.
-newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
+newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse'
     { _gifobrBeacons :: Maybe [BeaconInfo]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1133,7 +1133,7 @@ newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
 getInfoForObservedBeaconsResponse
     :: GetInfoForObservedBeaconsResponse
 getInfoForObservedBeaconsResponse =
-    GetInfoForObservedBeaconsResponse
+    GetInfoForObservedBeaconsResponse'
     { _gifobrBeacons = Nothing
     }
 
@@ -1151,11 +1151,11 @@ instance FromJSON GetInfoForObservedBeaconsResponse
         parseJSON
           = withObject "GetInfoForObservedBeaconsResponse"
               (\ o ->
-                 GetInfoForObservedBeaconsResponse <$>
+                 GetInfoForObservedBeaconsResponse' <$>
                    (o .:? "beacons" .!= mempty))
 
 instance ToJSON GetInfoForObservedBeaconsResponse
          where
-        toJSON GetInfoForObservedBeaconsResponse{..}
+        toJSON GetInfoForObservedBeaconsResponse'{..}
           = object
               (catMaybes [("beacons" .=) <$> _gifobrBeacons])

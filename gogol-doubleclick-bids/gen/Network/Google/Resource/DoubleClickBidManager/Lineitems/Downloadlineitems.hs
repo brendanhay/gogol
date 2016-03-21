@@ -53,7 +53,7 @@ type LineitemsDownloadlineitemsResource =
 -- | Retrieves line items in CSV format.
 --
 -- /See:/ 'lineitemsDownloadlineitems' smart constructor.
-newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems
+newtype LineitemsDownloadlineitems = LineitemsDownloadlineitems'
     { _ldPayload :: DownloadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ lineitemsDownloadlineitems
     :: DownloadLineItemsRequest -- ^ 'ldPayload'
     -> LineitemsDownloadlineitems
 lineitemsDownloadlineitems pLdPayload_ =
-    LineitemsDownloadlineitems
+    LineitemsDownloadlineitems'
     { _ldPayload = pLdPayload_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest LineitemsDownloadlineitems
         type Rs LineitemsDownloadlineitems =
              DownloadLineItemsResponse
         type Scopes LineitemsDownloadlineitems = '[]
-        requestClient LineitemsDownloadlineitems{..}
+        requestClient LineitemsDownloadlineitems'{..}
           = go (Just AltJSON) _ldPayload doubleClickBidsService
           where go
                   = buildClient

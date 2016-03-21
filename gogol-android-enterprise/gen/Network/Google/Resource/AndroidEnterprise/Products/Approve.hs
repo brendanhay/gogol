@@ -60,7 +60,7 @@ type ProductsApproveResource =
 -- any).
 --
 -- /See:/ 'productsApprove' smart constructor.
-data ProductsApprove = ProductsApprove
+data ProductsApprove = ProductsApprove'
     { _paEnterpriseId :: !Text
     , _paPayload      :: !ProductsApproveRequest
     , _paProductId    :: !Text
@@ -81,7 +81,7 @@ productsApprove
     -> Text -- ^ 'paProductId'
     -> ProductsApprove
 productsApprove pPaEnterpriseId_ pPaPayload_ pPaProductId_ =
-    ProductsApprove
+    ProductsApprove'
     { _paEnterpriseId = pPaEnterpriseId_
     , _paPayload = pPaPayload_
     , _paProductId = pPaProductId_
@@ -107,7 +107,7 @@ instance GoogleRequest ProductsApprove where
         type Rs ProductsApprove = ()
         type Scopes ProductsApprove =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient ProductsApprove{..}
+        requestClient ProductsApprove'{..}
           = go _paEnterpriseId _paProductId (Just AltJSON)
               _paPayload
               androidEnterpriseService

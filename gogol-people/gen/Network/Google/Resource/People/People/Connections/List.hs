@@ -77,7 +77,7 @@ type PeopleConnectionsListResource =
 -- linked profiles.
 --
 -- /See:/ 'peopleConnectionsList' smart constructor.
-data PeopleConnectionsList = PeopleConnectionsList
+data PeopleConnectionsList = PeopleConnectionsList'
     { _pclSyncToken               :: !(Maybe Text)
     , _pclXgafv                   :: !(Maybe Text)
     , _pclUploadProtocol          :: !(Maybe Text)
@@ -126,7 +126,7 @@ peopleConnectionsList
     :: Text -- ^ 'pclResourceName'
     -> PeopleConnectionsList
 peopleConnectionsList pPclResourceName_ =
-    PeopleConnectionsList
+    PeopleConnectionsList'
     { _pclSyncToken = Nothing
     , _pclXgafv = Nothing
     , _pclUploadProtocol = Nothing
@@ -225,7 +225,7 @@ instance GoogleRequest PeopleConnectionsList where
         type Scopes PeopleConnectionsList =
              '["https://www.googleapis.com/auth/contacts",
                "https://www.googleapis.com/auth/contacts.readonly"]
-        requestClient PeopleConnectionsList{..}
+        requestClient PeopleConnectionsList'{..}
           = go _pclResourceName _pclSyncToken _pclXgafv
               _pclUploadProtocol
               _pclRequestMaskIncludeField

@@ -55,7 +55,7 @@ type RemarketingListSharesGetResource =
 -- | Gets one remarketing list share by remarketing list ID.
 --
 -- /See:/ 'remarketingListSharesGet' smart constructor.
-data RemarketingListSharesGet = RemarketingListSharesGet
+data RemarketingListSharesGet = RemarketingListSharesGet'
     { _rlsgProFileId         :: !(Textual Int64)
     , _rlsgRemarketingListId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListSharesGet
     -> Int64 -- ^ 'rlsgRemarketingListId'
     -> RemarketingListSharesGet
 remarketingListSharesGet pRlsgProFileId_ pRlsgRemarketingListId_ =
-    RemarketingListSharesGet
+    RemarketingListSharesGet'
     { _rlsgProFileId = _Coerce # pRlsgProFileId_
     , _rlsgRemarketingListId = _Coerce # pRlsgRemarketingListId_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest RemarketingListSharesGet where
              RemarketingListShare
         type Scopes RemarketingListSharesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListSharesGet{..}
+        requestClient RemarketingListSharesGet'{..}
           = go _rlsgProFileId _rlsgRemarketingListId
               (Just AltJSON)
               dFAReportingService

@@ -60,7 +60,7 @@ type TargetVPNGatewaysGetResource =
 -- VPN gateways by making a list() request.
 --
 -- /See:/ 'targetVPNGatewaysGet' smart constructor.
-data TargetVPNGatewaysGet = TargetVPNGatewaysGet
+data TargetVPNGatewaysGet = TargetVPNGatewaysGet'
     { _tvggProject          :: !Text
     , _tvggTargetVPNGateway :: !Text
     , _tvggRegion           :: !Text
@@ -81,7 +81,7 @@ targetVPNGatewaysGet
     -> Text -- ^ 'tvggRegion'
     -> TargetVPNGatewaysGet
 targetVPNGatewaysGet pTvggProject_ pTvggTargetVPNGateway_ pTvggRegion_ =
-    TargetVPNGatewaysGet
+    TargetVPNGatewaysGet'
     { _tvggProject = pTvggProject_
     , _tvggTargetVPNGateway = pTvggTargetVPNGateway_
     , _tvggRegion = pTvggRegion_
@@ -109,7 +109,7 @@ instance GoogleRequest TargetVPNGatewaysGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetVPNGatewaysGet{..}
+        requestClient TargetVPNGatewaysGet'{..}
           = go _tvggProject _tvggRegion _tvggTargetVPNGateway
               (Just AltJSON)
               computeService

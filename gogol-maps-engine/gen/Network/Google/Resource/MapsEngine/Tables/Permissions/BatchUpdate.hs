@@ -60,7 +60,7 @@ type TablesPermissionsBatchUpdateResource =
 -- is atomic.
 --
 -- /See:/ 'tablesPermissionsBatchUpdate' smart constructor.
-data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate
+data TablesPermissionsBatchUpdate = TablesPermissionsBatchUpdate'
     { _tpbuPayload :: !PermissionsBatchUpdateRequest
     , _tpbuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ tablesPermissionsBatchUpdate
     -> Text -- ^ 'tpbuId'
     -> TablesPermissionsBatchUpdate
 tablesPermissionsBatchUpdate pTpbuPayload_ pTpbuId_ =
-    TablesPermissionsBatchUpdate
+    TablesPermissionsBatchUpdate'
     { _tpbuPayload = pTpbuPayload_
     , _tpbuId = pTpbuId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest TablesPermissionsBatchUpdate
              PermissionsBatchUpdateResponse
         type Scopes TablesPermissionsBatchUpdate =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesPermissionsBatchUpdate{..}
+        requestClient TablesPermissionsBatchUpdate'{..}
           = go _tpbuId (Just AltJSON) _tpbuPayload
               mapsEngineService
           where go

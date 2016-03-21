@@ -56,7 +56,7 @@ type EditsTestersUpdateResource =
 
 --
 -- /See:/ 'editsTestersUpdate' smart constructor.
-data EditsTestersUpdate = EditsTestersUpdate
+data EditsTestersUpdate = EditsTestersUpdate'
     { _etutTrack       :: !EditsTestersUpdateTrack
     , _etutPackageName :: !Text
     , _etutPayload     :: !Testers
@@ -81,7 +81,7 @@ editsTestersUpdate
     -> Text -- ^ 'etutEditId'
     -> EditsTestersUpdate
 editsTestersUpdate pEtutTrack_ pEtutPackageName_ pEtutPayload_ pEtutEditId_ =
-    EditsTestersUpdate
+    EditsTestersUpdate'
     { _etutTrack = pEtutTrack_
     , _etutPackageName = pEtutPackageName_
     , _etutPayload = pEtutPayload_
@@ -113,7 +113,7 @@ instance GoogleRequest EditsTestersUpdate where
         type Rs EditsTestersUpdate = Testers
         type Scopes EditsTestersUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsTestersUpdate{..}
+        requestClient EditsTestersUpdate'{..}
           = go _etutPackageName _etutEditId _etutTrack
               (Just AltJSON)
               _etutPayload

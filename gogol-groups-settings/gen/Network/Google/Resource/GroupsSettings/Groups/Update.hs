@@ -53,7 +53,7 @@ type GroupsUpdateResource =
 -- | Updates an existing resource.
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+data GroupsUpdate = GroupsUpdate'
     { _guPayload       :: !Groups
     , _guGroupUniqueId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsUpdate
     -> Text -- ^ 'guGroupUniqueId'
     -> GroupsUpdate
 groupsUpdate pGuPayload_ pGuGroupUniqueId_ =
-    GroupsUpdate
+    GroupsUpdate'
     { _guPayload = pGuPayload_
     , _guGroupUniqueId = pGuGroupUniqueId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest GroupsUpdate where
         type Rs GroupsUpdate = Groups
         type Scopes GroupsUpdate =
              '["https://www.googleapis.com/auth/apps.groups.settings"]
-        requestClient GroupsUpdate{..}
+        requestClient GroupsUpdate'{..}
           = go _guGroupUniqueId (Just AltJSON) _guPayload
               groupsSettingsService
           where go

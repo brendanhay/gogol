@@ -56,7 +56,7 @@ type URLChannelsListResource =
 -- | List all host URL channels in the host AdSense account.
 --
 -- /See:/ 'urlChannelsList' smart constructor.
-data URLChannelsList = URLChannelsList
+data URLChannelsList = URLChannelsList'
     { _uclAdClientId :: !Text
     , _uclPageToken  :: !(Maybe Text)
     , _uclMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ urlChannelsList
     :: Text -- ^ 'uclAdClientId'
     -> URLChannelsList
 urlChannelsList pUclAdClientId_ =
-    URLChannelsList
+    URLChannelsList'
     { _uclAdClientId = pUclAdClientId_
     , _uclPageToken = Nothing
     , _uclMaxResults = Nothing
@@ -106,7 +106,7 @@ instance GoogleRequest URLChannelsList where
         type Rs URLChannelsList = URLChannels
         type Scopes URLChannelsList =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient URLChannelsList{..}
+        requestClient URLChannelsList'{..}
           = go _uclAdClientId _uclPageToken _uclMaxResults
               (Just AltJSON)
               adSenseHostService

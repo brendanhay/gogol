@@ -55,7 +55,7 @@ type DomainsInsertResource =
 -- | Inserts a domain of the customer.
 --
 -- /See:/ 'domainsInsert' smart constructor.
-data DomainsInsert = DomainsInsert
+data DomainsInsert = DomainsInsert'
     { _diPayload  :: !Domains
     , _diCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainsInsert
     -> Text -- ^ 'diCustomer'
     -> DomainsInsert
 domainsInsert pDiPayload_ pDiCustomer_ =
-    DomainsInsert
+    DomainsInsert'
     { _diPayload = pDiPayload_
     , _diCustomer = pDiCustomer_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest DomainsInsert where
         type Rs DomainsInsert = Domains
         type Scopes DomainsInsert =
              '["https://www.googleapis.com/auth/admin.directory.domain"]
-        requestClient DomainsInsert{..}
+        requestClient DomainsInsert'{..}
           = go _diCustomer (Just AltJSON) _diPayload
               directoryService
           where go

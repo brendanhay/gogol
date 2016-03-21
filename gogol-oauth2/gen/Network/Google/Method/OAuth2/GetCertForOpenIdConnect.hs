@@ -46,19 +46,19 @@ type GetCertForOpenIdConnectMethod =
 --
 -- /See:/ 'getCertForOpenIdConnect' smart constructor.
 data GetCertForOpenIdConnect =
-    GetCertForOpenIdConnect
+    GetCertForOpenIdConnect'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetCertForOpenIdConnect' with the minimum fields required to make a request.
 --
 getCertForOpenIdConnect
     :: GetCertForOpenIdConnect
-getCertForOpenIdConnect = GetCertForOpenIdConnect
+getCertForOpenIdConnect = GetCertForOpenIdConnect'
 
 instance GoogleRequest GetCertForOpenIdConnect where
         type Rs GetCertForOpenIdConnect = JWK
         type Scopes GetCertForOpenIdConnect = '[]
-        requestClient GetCertForOpenIdConnect{}
+        requestClient GetCertForOpenIdConnect'{}
           = go (Just AltJSON) oAuth2Service
           where go
                   = buildClient

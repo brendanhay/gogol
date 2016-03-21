@@ -58,7 +58,7 @@ type UsersSessionsUpdateResource =
 -- | Updates or insert a given session.
 --
 -- /See:/ 'usersSessionsUpdate' smart constructor.
-data UsersSessionsUpdate = UsersSessionsUpdate
+data UsersSessionsUpdate = UsersSessionsUpdate'
     { _usuPayload           :: !Session
     , _usuUserId            :: !Text
     , _usuCurrentTimeMillis :: !(Maybe (Textual Int64))
@@ -82,7 +82,7 @@ usersSessionsUpdate
     -> Text -- ^ 'usuSessionId'
     -> UsersSessionsUpdate
 usersSessionsUpdate pUsuPayload_ pUsuUserId_ pUsuSessionId_ =
-    UsersSessionsUpdate
+    UsersSessionsUpdate'
     { _usuPayload = pUsuPayload_
     , _usuUserId = pUsuUserId_
     , _usuCurrentTimeMillis = Nothing
@@ -116,7 +116,7 @@ instance GoogleRequest UsersSessionsUpdate where
         type Rs UsersSessionsUpdate = Session
         type Scopes UsersSessionsUpdate =
              '["https://www.googleapis.com/auth/fitness.activity.write"]
-        requestClient UsersSessionsUpdate{..}
+        requestClient UsersSessionsUpdate'{..}
           = go _usuUserId _usuSessionId _usuCurrentTimeMillis
               (Just AltJSON)
               _usuPayload

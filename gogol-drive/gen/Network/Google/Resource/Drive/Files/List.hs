@@ -61,7 +61,7 @@ type FilesListResource =
 -- | Lists or searches files.
 --
 -- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList
+data FilesList = FilesList'
     { _flOrderBy   :: !(Maybe Text)
     , _flQ         :: !(Maybe Text)
     , _flSpaces    :: !Text
@@ -88,7 +88,7 @@ data FilesList = FilesList
 filesList
     :: FilesList
 filesList =
-    FilesList
+    FilesList'
     { _flOrderBy = Nothing
     , _flQ = Nothing
     , _flSpaces = "drive"
@@ -146,7 +146,7 @@ instance GoogleRequest FilesList where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient FilesList{..}
+        requestClient FilesList'{..}
           = go _flOrderBy _flQ (Just _flSpaces)
               (Just _flCorpus)
               _flPageToken

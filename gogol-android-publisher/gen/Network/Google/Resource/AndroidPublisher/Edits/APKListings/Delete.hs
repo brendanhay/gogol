@@ -62,7 +62,7 @@ type EditsAPKListingsDeleteResource =
 -- language code.
 --
 -- /See:/ 'editsAPKListingsDelete' smart constructor.
-data EditsAPKListingsDelete = EditsAPKListingsDelete
+data EditsAPKListingsDelete = EditsAPKListingsDelete'
     { _eapkldPackageName    :: !Text
     , _eapkldAPKVersionCode :: !(Textual Int32)
     , _eapkldLanguage       :: !Text
@@ -87,7 +87,7 @@ editsAPKListingsDelete
     -> Text -- ^ 'eapkldEditId'
     -> EditsAPKListingsDelete
 editsAPKListingsDelete pEapkldPackageName_ pEapkldAPKVersionCode_ pEapkldLanguage_ pEapkldEditId_ =
-    EditsAPKListingsDelete
+    EditsAPKListingsDelete'
     { _eapkldPackageName = pEapkldPackageName_
     , _eapkldAPKVersionCode = _Coerce # pEapkldAPKVersionCode_
     , _eapkldLanguage = pEapkldLanguage_
@@ -126,7 +126,7 @@ instance GoogleRequest EditsAPKListingsDelete where
         type Rs EditsAPKListingsDelete = ()
         type Scopes EditsAPKListingsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKListingsDelete{..}
+        requestClient EditsAPKListingsDelete'{..}
           = go _eapkldPackageName _eapkldEditId
               _eapkldAPKVersionCode
               _eapkldLanguage

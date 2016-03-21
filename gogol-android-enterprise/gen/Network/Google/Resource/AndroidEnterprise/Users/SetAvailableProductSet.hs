@@ -57,7 +57,7 @@ type UsersSetAvailableProductSetResource =
 -- | Modifies the set of products a user is entitled to access.
 --
 -- /See:/ 'usersSetAvailableProductSet' smart constructor.
-data UsersSetAvailableProductSet = UsersSetAvailableProductSet
+data UsersSetAvailableProductSet = UsersSetAvailableProductSet'
     { _usapsEnterpriseId :: !Text
     , _usapsPayload      :: !ProductSet
     , _usapsUserId       :: !Text
@@ -78,7 +78,7 @@ usersSetAvailableProductSet
     -> Text -- ^ 'usapsUserId'
     -> UsersSetAvailableProductSet
 usersSetAvailableProductSet pUsapsEnterpriseId_ pUsapsPayload_ pUsapsUserId_ =
-    UsersSetAvailableProductSet
+    UsersSetAvailableProductSet'
     { _usapsEnterpriseId = pUsapsEnterpriseId_
     , _usapsPayload = pUsapsPayload_
     , _usapsUserId = pUsapsUserId_
@@ -105,7 +105,7 @@ instance GoogleRequest UsersSetAvailableProductSet
         type Rs UsersSetAvailableProductSet = ProductSet
         type Scopes UsersSetAvailableProductSet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient UsersSetAvailableProductSet{..}
+        requestClient UsersSetAvailableProductSet'{..}
           = go _usapsEnterpriseId _usapsUserId (Just AltJSON)
               _usapsPayload
               androidEnterpriseService

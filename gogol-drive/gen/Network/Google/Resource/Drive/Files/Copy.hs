@@ -62,7 +62,7 @@ type FilesCopyResource =
 -- semantics.
 --
 -- /See:/ 'filesCopy' smart constructor.
-data FilesCopy = FilesCopy
+data FilesCopy = FilesCopy'
     { _fPayload                 :: !File
     , _fOCRLanguage             :: !(Maybe Text)
     , _fKeepRevisionForever     :: !Bool
@@ -88,7 +88,7 @@ filesCopy
     -> Text -- ^ 'fFileId'
     -> FilesCopy
 filesCopy pFPayload_ pFFileId_ =
-    FilesCopy
+    FilesCopy'
     { _fPayload = pFPayload_
     , _fOCRLanguage = Nothing
     , _fKeepRevisionForever = False
@@ -133,7 +133,7 @@ instance GoogleRequest FilesCopy where
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.photos.readonly"]
-        requestClient FilesCopy{..}
+        requestClient FilesCopy'{..}
           = go _fFileId _fOCRLanguage
               (Just _fKeepRevisionForever)
               (Just _fIgnoreDefaultVisibility)

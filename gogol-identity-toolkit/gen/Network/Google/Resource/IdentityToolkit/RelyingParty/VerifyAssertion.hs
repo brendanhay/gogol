@@ -54,7 +54,7 @@ type RelyingPartyVerifyAssertionResource =
 -- | Verifies the assertion returned by the IdP.
 --
 -- /See:/ 'relyingPartyVerifyAssertion' smart constructor.
-newtype RelyingPartyVerifyAssertion = RelyingPartyVerifyAssertion
+newtype RelyingPartyVerifyAssertion = RelyingPartyVerifyAssertion'
     { _rpvaPayload :: IdentitytoolkitRelyingPartyVerifyAssertionRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyVerifyAssertion
     :: IdentitytoolkitRelyingPartyVerifyAssertionRequest -- ^ 'rpvaPayload'
     -> RelyingPartyVerifyAssertion
 relyingPartyVerifyAssertion pRpvaPayload_ =
-    RelyingPartyVerifyAssertion
+    RelyingPartyVerifyAssertion'
     { _rpvaPayload = pRpvaPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyVerifyAssertion
         type Rs RelyingPartyVerifyAssertion =
              VerifyAssertionResponse
         type Scopes RelyingPartyVerifyAssertion = '[]
-        requestClient RelyingPartyVerifyAssertion{..}
+        requestClient RelyingPartyVerifyAssertion'{..}
           = go (Just AltJSON) _rpvaPayload
               identityToolkitService
           where go

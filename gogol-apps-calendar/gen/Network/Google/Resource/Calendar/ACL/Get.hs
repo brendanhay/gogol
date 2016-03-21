@@ -54,7 +54,7 @@ type ACLGetResource =
 -- | Returns an access control rule.
 --
 -- /See:/ 'aclGet' smart constructor.
-data ACLGet = ACLGet
+data ACLGet = ACLGet'
     { _agCalendarId :: !Text
     , _agRuleId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ aclGet
     -> Text -- ^ 'agRuleId'
     -> ACLGet
 aclGet pAgCalendarId_ pAgRuleId_ =
-    ACLGet
+    ACLGet'
     { _agCalendarId = pAgCalendarId_
     , _agRuleId = pAgRuleId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ACLGet where
         type Scopes ACLGet =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient ACLGet{..}
+        requestClient ACLGet'{..}
           = go _agCalendarId _agRuleId (Just AltJSON)
               appsCalendarService
           where go

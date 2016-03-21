@@ -56,7 +56,7 @@ type RelyingPartyGetProjectConfigResource =
 -- | Get project configuration.
 --
 -- /See:/ 'relyingPartyGetProjectConfig' smart constructor.
-data RelyingPartyGetProjectConfig = RelyingPartyGetProjectConfig
+data RelyingPartyGetProjectConfig = RelyingPartyGetProjectConfig'
     { _rpgpcDelegatedProjectNumber :: !(Maybe Text)
     , _rpgpcProjectNumber          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ data RelyingPartyGetProjectConfig = RelyingPartyGetProjectConfig
 relyingPartyGetProjectConfig
     :: RelyingPartyGetProjectConfig
 relyingPartyGetProjectConfig =
-    RelyingPartyGetProjectConfig
+    RelyingPartyGetProjectConfig'
     { _rpgpcDelegatedProjectNumber = Nothing
     , _rpgpcProjectNumber = Nothing
     }
@@ -93,7 +93,7 @@ instance GoogleRequest RelyingPartyGetProjectConfig
         type Rs RelyingPartyGetProjectConfig =
              IdentitytoolkitRelyingPartyGetProjectConfigResponse
         type Scopes RelyingPartyGetProjectConfig = '[]
-        requestClient RelyingPartyGetProjectConfig{..}
+        requestClient RelyingPartyGetProjectConfig'{..}
           = go _rpgpcDelegatedProjectNumber _rpgpcProjectNumber
               (Just AltJSON)
               identityToolkitService

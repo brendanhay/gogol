@@ -63,7 +63,7 @@ type UsersHistoryListResource =
 -- are returned in chronological order (increasing historyId).
 --
 -- /See:/ 'usersHistoryList' smart constructor.
-data UsersHistoryList = UsersHistoryList
+data UsersHistoryList = UsersHistoryList'
     { _uhlUserId         :: !Text
     , _uhlStartHistoryId :: !(Maybe (Textual Word64))
     , _uhlPageToken      :: !(Maybe Text)
@@ -87,7 +87,7 @@ data UsersHistoryList = UsersHistoryList
 usersHistoryList
     :: UsersHistoryList
 usersHistoryList =
-    UsersHistoryList
+    UsersHistoryList'
     { _uhlUserId = "me"
     , _uhlStartHistoryId = Nothing
     , _uhlPageToken = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest UsersHistoryList where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersHistoryList{..}
+        requestClient UsersHistoryList'{..}
           = go _uhlUserId _uhlStartHistoryId _uhlPageToken
               _uhlLabelId
               (Just _uhlMaxResults)

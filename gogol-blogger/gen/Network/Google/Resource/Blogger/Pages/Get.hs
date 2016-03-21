@@ -56,7 +56,7 @@ type PagesGetResource =
 -- | Gets one blog page by ID.
 --
 -- /See:/ 'pagesGet' smart constructor.
-data PagesGet = PagesGet
+data PagesGet = PagesGet'
     { _pgBlogId :: !Text
     , _pgPageId :: !Text
     , _pgView   :: !(Maybe PagesGetView)
@@ -76,7 +76,7 @@ pagesGet
     -> Text -- ^ 'pgPageId'
     -> PagesGet
 pagesGet pPgBlogId_ pPgPageId_ =
-    PagesGet
+    PagesGet'
     { _pgBlogId = pPgBlogId_
     , _pgPageId = pPgPageId_
     , _pgView = Nothing
@@ -98,7 +98,7 @@ instance GoogleRequest PagesGet where
         type Scopes PagesGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PagesGet{..}
+        requestClient PagesGet'{..}
           = go _pgBlogId _pgPageId _pgView (Just AltJSON)
               bloggerService
           where go

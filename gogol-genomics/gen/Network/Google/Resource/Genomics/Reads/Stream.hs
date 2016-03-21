@@ -67,7 +67,7 @@ type ReadsStreamResource =
 -- by reference name, position, and ID.
 --
 -- /See:/ 'readsStream' smart constructor.
-data ReadsStream = ReadsStream
+data ReadsStream = ReadsStream'
     { _rssXgafv          :: !(Maybe Text)
     , _rssUploadProtocol :: !(Maybe Text)
     , _rssPp             :: !Bool
@@ -101,7 +101,7 @@ readsStream
     :: StreamReadsRequest -- ^ 'rssPayload'
     -> ReadsStream
 readsStream pRssPayload_ =
-    ReadsStream
+    ReadsStream'
     { _rssXgafv = Nothing
     , _rssUploadProtocol = Nothing
     , _rssPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest ReadsStream where
         type Scopes ReadsStream =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient ReadsStream{..}
+        requestClient ReadsStream'{..}
           = go _rssXgafv _rssUploadProtocol (Just _rssPp)
               _rssAccessToken
               _rssUploadType

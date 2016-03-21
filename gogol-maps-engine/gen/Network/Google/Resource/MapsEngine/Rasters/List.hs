@@ -78,7 +78,7 @@ type RastersListResource =
 -- | Return all rasters readable by the current user.
 --
 -- /See:/ 'rastersList' smart constructor.
-data RastersList = RastersList
+data RastersList = RastersList'
     { _rlCreatedAfter     :: !(Maybe DateTime')
     , _rlCreatorEmail     :: !(Maybe Text)
     , _rlRole             :: !(Maybe RastersListRole)
@@ -127,7 +127,7 @@ rastersList
     :: Text -- ^ 'rlProjectId'
     -> RastersList
 rastersList pRlProjectId_ =
-    RastersList
+    RastersList'
     { _rlCreatedAfter = Nothing
     , _rlCreatorEmail = Nothing
     , _rlRole = Nothing
@@ -234,7 +234,7 @@ instance GoogleRequest RastersList where
         type Scopes RastersList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient RastersList{..}
+        requestClient RastersList'{..}
           = go (Just _rlProjectId) _rlCreatedAfter
               _rlCreatorEmail
               _rlRole

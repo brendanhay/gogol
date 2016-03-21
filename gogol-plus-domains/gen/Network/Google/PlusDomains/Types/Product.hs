@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'audience' smart constructor.
-data Audience = Audience
+data Audience = Audience'
     { _aEtag        :: !(Maybe Text)
     , _aKind        :: !Text
     , _aVisibility  :: !(Maybe Text)
@@ -46,7 +46,7 @@ data Audience = Audience
 audience
     :: Audience
 audience =
-    Audience
+    Audience'
     { _aEtag = Nothing
     , _aKind = "plus#audience"
     , _aVisibility = Nothing
@@ -86,14 +86,14 @@ instance FromJSON Audience where
         parseJSON
           = withObject "Audience"
               (\ o ->
-                 Audience <$>
+                 Audience' <$>
                    (o .:? "etag") <*> (o .:? "kind" .!= "plus#audience")
                      <*> (o .:? "visibility")
                      <*> (o .:? "item")
                      <*> (o .:? "memberCount"))
 
 instance ToJSON Audience where
-        toJSON Audience{..}
+        toJSON Audience'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _aEtag, Just ("kind" .= _aKind),
@@ -104,7 +104,7 @@ instance ToJSON Audience where
 -- | The service provider that initially published this activity.
 --
 -- /See:/ 'activityProvider' smart constructor.
-newtype ActivityProvider = ActivityProvider
+newtype ActivityProvider = ActivityProvider'
     { _apTitle :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -116,7 +116,7 @@ newtype ActivityProvider = ActivityProvider
 activityProvider
     :: ActivityProvider
 activityProvider =
-    ActivityProvider
+    ActivityProvider'
     { _apTitle = Nothing
     }
 
@@ -127,16 +127,16 @@ apTitle = lens _apTitle (\ s a -> s{_apTitle = a})
 instance FromJSON ActivityProvider where
         parseJSON
           = withObject "ActivityProvider"
-              (\ o -> ActivityProvider <$> (o .:? "title"))
+              (\ o -> ActivityProvider' <$> (o .:? "title"))
 
 instance ToJSON ActivityProvider where
-        toJSON ActivityProvider{..}
+        toJSON ActivityProvider'{..}
           = object (catMaybes [("title" .=) <$> _apTitle])
 
 -- | If the attachment is a video, the embeddable link.
 --
 -- /See:/ 'activityObjectAttachmentsItemEmbed' smart constructor.
-data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed
+data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed'
     { _aoaieURL  :: !(Maybe Text)
     , _aoaieType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -151,7 +151,7 @@ data ActivityObjectAttachmentsItemEmbed = ActivityObjectAttachmentsItemEmbed
 activityObjectAttachmentsItemEmbed
     :: ActivityObjectAttachmentsItemEmbed
 activityObjectAttachmentsItemEmbed =
-    ActivityObjectAttachmentsItemEmbed
+    ActivityObjectAttachmentsItemEmbed'
     { _aoaieURL = Nothing
     , _aoaieType = Nothing
     }
@@ -170,12 +170,12 @@ instance FromJSON ActivityObjectAttachmentsItemEmbed
         parseJSON
           = withObject "ActivityObjectAttachmentsItemEmbed"
               (\ o ->
-                 ActivityObjectAttachmentsItemEmbed <$>
+                 ActivityObjectAttachmentsItemEmbed' <$>
                    (o .:? "url") <*> (o .:? "type"))
 
 instance ToJSON ActivityObjectAttachmentsItemEmbed
          where
-        toJSON ActivityObjectAttachmentsItemEmbed{..}
+        toJSON ActivityObjectAttachmentsItemEmbed'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _aoaieURL,
@@ -184,7 +184,7 @@ instance ToJSON ActivityObjectAttachmentsItemEmbed
 -- | People who +1\'d this comment.
 --
 -- /See:/ 'commentPlusoners' smart constructor.
-newtype CommentPlusoners = CommentPlusoners
+newtype CommentPlusoners = CommentPlusoners'
     { _cpTotalItems :: Maybe (Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -196,7 +196,7 @@ newtype CommentPlusoners = CommentPlusoners
 commentPlusoners
     :: CommentPlusoners
 commentPlusoners =
-    CommentPlusoners
+    CommentPlusoners'
     { _cpTotalItems = Nothing
     }
 
@@ -209,17 +209,17 @@ cpTotalItems
 instance FromJSON CommentPlusoners where
         parseJSON
           = withObject "CommentPlusoners"
-              (\ o -> CommentPlusoners <$> (o .:? "totalItems"))
+              (\ o -> CommentPlusoners' <$> (o .:? "totalItems"))
 
 instance ToJSON CommentPlusoners where
-        toJSON CommentPlusoners{..}
+        toJSON CommentPlusoners'{..}
           = object
               (catMaybes [("totalItems" .=) <$> _cpTotalItems])
 
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'commentActorClientSpecificActorInfo' smart constructor.
-newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInfo
+newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInfo'
     { _cacsaiYouTubeActorInfo :: Maybe CommentActorClientSpecificActorInfoYouTubeActorInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -231,7 +231,7 @@ newtype CommentActorClientSpecificActorInfo = CommentActorClientSpecificActorInf
 commentActorClientSpecificActorInfo
     :: CommentActorClientSpecificActorInfo
 commentActorClientSpecificActorInfo =
-    CommentActorClientSpecificActorInfo
+    CommentActorClientSpecificActorInfo'
     { _cacsaiYouTubeActorInfo = Nothing
     }
 
@@ -246,12 +246,12 @@ instance FromJSON CommentActorClientSpecificActorInfo
         parseJSON
           = withObject "CommentActorClientSpecificActorInfo"
               (\ o ->
-                 CommentActorClientSpecificActorInfo <$>
+                 CommentActorClientSpecificActorInfo' <$>
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON CommentActorClientSpecificActorInfo
          where
-        toJSON CommentActorClientSpecificActorInfo{..}
+        toJSON CommentActorClientSpecificActorInfo'{..}
           = object
               (catMaybes
                  [("youtubeActorInfo" .=) <$>
@@ -260,7 +260,7 @@ instance ToJSON CommentActorClientSpecificActorInfo
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'activityObjectActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
     { _aoacsaiytaiChannelId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -272,7 +272,7 @@ newtype ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo = ActivityObj
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo
     :: ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
 activityObjectActorClientSpecificActorInfoYouTubeActorInfo =
-    ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+    ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
     { _aoacsaiytaiChannelId = Nothing
     }
 
@@ -289,14 +289,14 @@ instance FromJSON
           = withObject
               "ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo"
               (\ o ->
-                 ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
+                 ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'
                    <$> (o .:? "channelId"))
 
 instance ToJSON
          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
-          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo{..}
+          ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo'{..}
           = object
               (catMaybes
                  [("channelId" .=) <$> _aoacsaiytaiChannelId])
@@ -304,7 +304,7 @@ instance ToJSON
 -- | People who +1\'d this activity.
 --
 -- /See:/ 'activityObjectPlusoners' smart constructor.
-data ActivityObjectPlusoners = ActivityObjectPlusoners
+data ActivityObjectPlusoners = ActivityObjectPlusoners'
     { _aopTotalItems :: !(Maybe (Textual Word32))
     , _aopSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -319,7 +319,7 @@ data ActivityObjectPlusoners = ActivityObjectPlusoners
 activityObjectPlusoners
     :: ActivityObjectPlusoners
 activityObjectPlusoners =
-    ActivityObjectPlusoners
+    ActivityObjectPlusoners'
     { _aopTotalItems = Nothing
     , _aopSelfLink = Nothing
     }
@@ -340,11 +340,11 @@ instance FromJSON ActivityObjectPlusoners where
         parseJSON
           = withObject "ActivityObjectPlusoners"
               (\ o ->
-                 ActivityObjectPlusoners <$>
+                 ActivityObjectPlusoners' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON ActivityObjectPlusoners where
-        toJSON ActivityObjectPlusoners{..}
+        toJSON ActivityObjectPlusoners'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aopTotalItems,
@@ -352,7 +352,7 @@ instance ToJSON ActivityObjectPlusoners where
 
 --
 -- /See:/ 'personEmailsItem' smart constructor.
-data PersonEmailsItem = PersonEmailsItem
+data PersonEmailsItem = PersonEmailsItem'
     { _peiValue :: !(Maybe Text)
     , _peiType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -367,7 +367,7 @@ data PersonEmailsItem = PersonEmailsItem
 personEmailsItem
     :: PersonEmailsItem
 personEmailsItem =
-    PersonEmailsItem
+    PersonEmailsItem'
     { _peiValue = Nothing
     , _peiType = Nothing
     }
@@ -387,11 +387,11 @@ instance FromJSON PersonEmailsItem where
         parseJSON
           = withObject "PersonEmailsItem"
               (\ o ->
-                 PersonEmailsItem <$>
+                 PersonEmailsItem' <$>
                    (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON PersonEmailsItem where
-        toJSON PersonEmailsItem{..}
+        toJSON PersonEmailsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _peiValue,
@@ -400,7 +400,7 @@ instance ToJSON PersonEmailsItem where
 -- | The image representation of this actor.
 --
 -- /See:/ 'commentActorImage' smart constructor.
-newtype CommentActorImage = CommentActorImage
+newtype CommentActorImage = CommentActorImage'
     { _caiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -412,7 +412,7 @@ newtype CommentActorImage = CommentActorImage
 commentActorImage
     :: CommentActorImage
 commentActorImage =
-    CommentActorImage
+    CommentActorImage'
     { _caiURL = Nothing
     }
 
@@ -425,16 +425,16 @@ caiURL = lens _caiURL (\ s a -> s{_caiURL = a})
 instance FromJSON CommentActorImage where
         parseJSON
           = withObject "CommentActorImage"
-              (\ o -> CommentActorImage <$> (o .:? "url"))
+              (\ o -> CommentActorImage' <$> (o .:? "url"))
 
 instance ToJSON CommentActorImage where
-        toJSON CommentActorImage{..}
+        toJSON CommentActorImage'{..}
           = object (catMaybes [("url" .=) <$> _caiURL])
 
 -- | Image resource.
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItemImage' smart constructor.
-data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage
+data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight :: !(Maybe (Textual Word32))
     , _aoaitiiURL    :: !(Maybe Text)
     , _aoaitiiWidth  :: !(Maybe (Textual Word32))
@@ -455,7 +455,7 @@ data ActivityObjectAttachmentsItemThumbnailsItemImage = ActivityObjectAttachment
 activityObjectAttachmentsItemThumbnailsItemImage
     :: ActivityObjectAttachmentsItemThumbnailsItemImage
 activityObjectAttachmentsItemThumbnailsItemImage =
-    ActivityObjectAttachmentsItemThumbnailsItemImage
+    ActivityObjectAttachmentsItemThumbnailsItemImage'
     { _aoaitiiHeight = Nothing
     , _aoaitiiURL = Nothing
     , _aoaitiiWidth = Nothing
@@ -492,7 +492,7 @@ instance FromJSON
           = withObject
               "ActivityObjectAttachmentsItemThumbnailsItemImage"
               (\ o ->
-                 ActivityObjectAttachmentsItemThumbnailsItemImage <$>
+                 ActivityObjectAttachmentsItemThumbnailsItemImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
@@ -501,7 +501,7 @@ instance ToJSON
          ActivityObjectAttachmentsItemThumbnailsItemImage
          where
         toJSON
-          ActivityObjectAttachmentsItemThumbnailsItemImage{..}
+          ActivityObjectAttachmentsItemThumbnailsItemImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _aoaitiiHeight,
@@ -512,7 +512,7 @@ instance ToJSON
 -- | The position of the place.
 --
 -- /See:/ 'placePosition' smart constructor.
-data PlacePosition = PlacePosition
+data PlacePosition = PlacePosition'
     { _ppLatitude  :: !(Maybe (Textual Double))
     , _ppLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -527,7 +527,7 @@ data PlacePosition = PlacePosition
 placePosition
     :: PlacePosition
 placePosition =
-    PlacePosition
+    PlacePosition'
     { _ppLatitude = Nothing
     , _ppLongitude = Nothing
     }
@@ -548,11 +548,11 @@ instance FromJSON PlacePosition where
         parseJSON
           = withObject "PlacePosition"
               (\ o ->
-                 PlacePosition <$>
+                 PlacePosition' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON PlacePosition where
-        toJSON PlacePosition{..}
+        toJSON PlacePosition'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _ppLatitude,
@@ -560,7 +560,7 @@ instance ToJSON PlacePosition where
 
 --
 -- /See:/ 'personPlacesLivedItem' smart constructor.
-data PersonPlacesLivedItem = PersonPlacesLivedItem
+data PersonPlacesLivedItem = PersonPlacesLivedItem'
     { _ppliValue   :: !(Maybe Text)
     , _ppliPrimary :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -575,7 +575,7 @@ data PersonPlacesLivedItem = PersonPlacesLivedItem
 personPlacesLivedItem
     :: PersonPlacesLivedItem
 personPlacesLivedItem =
-    PersonPlacesLivedItem
+    PersonPlacesLivedItem'
     { _ppliValue = Nothing
     , _ppliPrimary = Nothing
     }
@@ -596,11 +596,11 @@ instance FromJSON PersonPlacesLivedItem where
         parseJSON
           = withObject "PersonPlacesLivedItem"
               (\ o ->
-                 PersonPlacesLivedItem <$>
+                 PersonPlacesLivedItem' <$>
                    (o .:? "value") <*> (o .:? "primary"))
 
 instance ToJSON PersonPlacesLivedItem where
-        toJSON PersonPlacesLivedItem{..}
+        toJSON PersonPlacesLivedItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ppliValue,
@@ -608,7 +608,7 @@ instance ToJSON PersonPlacesLivedItem where
 
 --
 -- /See:/ 'circle' smart constructor.
-data Circle = Circle
+data Circle = Circle'
     { _cEtag        :: !(Maybe Text)
     , _cKind        :: !Text
     , _cPeople      :: !(Maybe CirclePeople)
@@ -638,7 +638,7 @@ data Circle = Circle
 circle
     :: Circle
 circle =
-    Circle
+    Circle'
     { _cEtag = Nothing
     , _cKind = "plus#circle"
     , _cPeople = Nothing
@@ -683,7 +683,7 @@ instance FromJSON Circle where
         parseJSON
           = withObject "Circle"
               (\ o ->
-                 Circle <$>
+                 Circle' <$>
                    (o .:? "etag") <*> (o .:? "kind" .!= "plus#circle")
                      <*> (o .:? "people")
                      <*> (o .:? "selfLink")
@@ -692,7 +692,7 @@ instance FromJSON Circle where
                      <*> (o .:? "description"))
 
 instance ToJSON Circle where
-        toJSON Circle{..}
+        toJSON Circle'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _cEtag, Just ("kind" .= _cKind),
@@ -705,7 +705,7 @@ instance ToJSON Circle where
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'activityActorClientSpecificActorInfo' smart constructor.
-newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorInfo
+newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorInfo'
     { _aacsaiYouTubeActorInfo :: Maybe ActivityActorClientSpecificActorInfoYouTubeActorInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -717,7 +717,7 @@ newtype ActivityActorClientSpecificActorInfo = ActivityActorClientSpecificActorI
 activityActorClientSpecificActorInfo
     :: ActivityActorClientSpecificActorInfo
 activityActorClientSpecificActorInfo =
-    ActivityActorClientSpecificActorInfo
+    ActivityActorClientSpecificActorInfo'
     { _aacsaiYouTubeActorInfo = Nothing
     }
 
@@ -732,12 +732,12 @@ instance FromJSON
         parseJSON
           = withObject "ActivityActorClientSpecificActorInfo"
               (\ o ->
-                 ActivityActorClientSpecificActorInfo <$>
+                 ActivityActorClientSpecificActorInfo' <$>
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON ActivityActorClientSpecificActorInfo
          where
-        toJSON ActivityActorClientSpecificActorInfo{..}
+        toJSON ActivityActorClientSpecificActorInfo'{..}
           = object
               (catMaybes
                  [("youtubeActorInfo" .=) <$>
@@ -745,7 +745,7 @@ instance ToJSON ActivityActorClientSpecificActorInfo
 
 --
 -- /See:/ 'person' smart constructor.
-data Person = Person
+data Person = Person'
     { _pCurrentLocation    :: !(Maybe Text)
     , _pEtag               :: !(Maybe Text)
     , _pImage              :: !(Maybe PersonImage)
@@ -838,7 +838,7 @@ data Person = Person
 person
     :: Person
 person =
-    Person
+    Person'
     { _pCurrentLocation = Nothing
     , _pEtag = Nothing
     , _pImage = Nothing
@@ -1035,7 +1035,7 @@ instance FromJSON Person where
         parseJSON
           = withObject "Person"
               (\ o ->
-                 Person <$>
+                 Person' <$>
                    (o .:? "currentLocation") <*> (o .:? "etag") <*>
                      (o .:? "image")
                      <*> (o .:? "braggingRights")
@@ -1065,7 +1065,7 @@ instance FromJSON Person where
                      <*> (o .:? "circledByCount"))
 
 instance ToJSON Person where
-        toJSON Person{..}
+        toJSON Person'{..}
           = object
               (catMaybes
                  [("currentLocation" .=) <$> _pCurrentLocation,
@@ -1093,7 +1093,7 @@ instance ToJSON Person where
 
 --
 -- /See:/ 'videostream' smart constructor.
-data Videostream = Videostream
+data Videostream = Videostream'
     { _vHeight :: !(Maybe (Textual Int32))
     , _vURL    :: !(Maybe Text)
     , _vWidth  :: !(Maybe (Textual Int32))
@@ -1114,7 +1114,7 @@ data Videostream = Videostream
 videostream
     :: Videostream
 videostream =
-    Videostream
+    Videostream'
     { _vHeight = Nothing
     , _vURL = Nothing
     , _vWidth = Nothing
@@ -1145,13 +1145,13 @@ instance FromJSON Videostream where
         parseJSON
           = withObject "Videostream"
               (\ o ->
-                 Videostream <$>
+                 Videostream' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
 
 instance ToJSON Videostream where
-        toJSON Videostream{..}
+        toJSON Videostream'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _vHeight, ("url" .=) <$> _vURL,
@@ -1159,7 +1159,7 @@ instance ToJSON Videostream where
 
 --
 -- /See:/ 'circleFeed' smart constructor.
-data CircleFeed = CircleFeed
+data CircleFeed = CircleFeed'
     { _cfTotalItems    :: !(Maybe (Textual Int32))
     , _cfEtag          :: !(Maybe Text)
     , _cfNextPageToken :: !(Maybe Text)
@@ -1192,7 +1192,7 @@ data CircleFeed = CircleFeed
 circleFeed
     :: CircleFeed
 circleFeed =
-    CircleFeed
+    CircleFeed'
     { _cfTotalItems = Nothing
     , _cfEtag = Nothing
     , _cfNextPageToken = Nothing
@@ -1251,7 +1251,7 @@ instance FromJSON CircleFeed where
         parseJSON
           = withObject "CircleFeed"
               (\ o ->
-                 CircleFeed <$>
+                 CircleFeed' <$>
                    (o .:? "totalItems") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "nextLink")
@@ -1261,7 +1261,7 @@ instance FromJSON CircleFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON CircleFeed where
-        toJSON CircleFeed{..}
+        toJSON CircleFeed'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _cfTotalItems,
@@ -1275,7 +1275,7 @@ instance ToJSON CircleFeed where
 -- | The preview image for photos or videos.
 --
 -- /See:/ 'activityObjectAttachmentsItemImage' smart constructor.
-data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage
+data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight :: !(Maybe (Textual Word32))
     , _aoaiiURL    :: !(Maybe Text)
     , _aoaiiWidth  :: !(Maybe (Textual Word32))
@@ -1296,7 +1296,7 @@ data ActivityObjectAttachmentsItemImage = ActivityObjectAttachmentsItemImage
 activityObjectAttachmentsItemImage
     :: ActivityObjectAttachmentsItemImage
 activityObjectAttachmentsItemImage =
-    ActivityObjectAttachmentsItemImage
+    ActivityObjectAttachmentsItemImage'
     { _aoaiiHeight = Nothing
     , _aoaiiURL = Nothing
     , _aoaiiWidth = Nothing
@@ -1329,14 +1329,14 @@ instance FromJSON ActivityObjectAttachmentsItemImage
         parseJSON
           = withObject "ActivityObjectAttachmentsItemImage"
               (\ o ->
-                 ActivityObjectAttachmentsItemImage <$>
+                 ActivityObjectAttachmentsItemImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
 
 instance ToJSON ActivityObjectAttachmentsItemImage
          where
-        toJSON ActivityObjectAttachmentsItemImage{..}
+        toJSON ActivityObjectAttachmentsItemImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _aoaiiHeight,
@@ -1347,7 +1347,7 @@ instance ToJSON ActivityObjectAttachmentsItemImage
 -- | The person who posted this comment.
 --
 -- /See:/ 'commentActor' smart constructor.
-data CommentActor = CommentActor
+data CommentActor = CommentActor'
     { _caClientSpecificActorInfo :: !(Maybe CommentActorClientSpecificActorInfo)
     , _caImage                   :: !(Maybe CommentActorImage)
     , _caURL                     :: !(Maybe Text)
@@ -1374,7 +1374,7 @@ data CommentActor = CommentActor
 commentActor
     :: CommentActor
 commentActor =
-    CommentActor
+    CommentActor'
     { _caClientSpecificActorInfo = Nothing
     , _caImage = Nothing
     , _caURL = Nothing
@@ -1417,7 +1417,7 @@ instance FromJSON CommentActor where
         parseJSON
           = withObject "CommentActor"
               (\ o ->
-                 CommentActor <$>
+                 CommentActor' <$>
                    (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
                      <*> (o .:? "url")
                      <*> (o .:? "displayName")
@@ -1425,7 +1425,7 @@ instance FromJSON CommentActor where
                      <*> (o .:? "verification"))
 
 instance ToJSON CommentActor where
-        toJSON CommentActor{..}
+        toJSON CommentActor'{..}
           = object
               (catMaybes
                  [("clientSpecificActorInfo" .=) <$>
@@ -1438,7 +1438,7 @@ instance ToJSON CommentActor where
 -- | The object of this activity.
 --
 -- /See:/ 'activityObject' smart constructor.
-data ActivityObject = ActivityObject
+data ActivityObject = ActivityObject'
     { _aoPlusoners       :: !(Maybe ActivityObjectPlusoners)
     , _aoAttachments     :: !(Maybe [ActivityObjectAttachmentsItem])
     , _aoObjectType      :: !(Maybe Text)
@@ -1480,7 +1480,7 @@ data ActivityObject = ActivityObject
 activityObject
     :: ActivityObject
 activityObject =
-    ActivityObject
+    ActivityObject'
     { _aoPlusoners = Nothing
     , _aoAttachments = Nothing
     , _aoObjectType = Nothing
@@ -1562,7 +1562,7 @@ instance FromJSON ActivityObject where
         parseJSON
           = withObject "ActivityObject"
               (\ o ->
-                 ActivityObject <$>
+                 ActivityObject' <$>
                    (o .:? "plusoners") <*>
                      (o .:? "attachments" .!= mempty)
                      <*> (o .:? "objectType")
@@ -1576,7 +1576,7 @@ instance FromJSON ActivityObject where
                      <*> (o .:? "resharers"))
 
 instance ToJSON ActivityObject where
-        toJSON ActivityObject{..}
+        toJSON ActivityObject'{..}
           = object
               (catMaybes
                  [("plusoners" .=) <$> _aoPlusoners,
@@ -1594,7 +1594,7 @@ instance ToJSON ActivityObject where
 -- activity\'s actor.
 --
 -- /See:/ 'activityObjectActor' smart constructor.
-data ActivityObjectActor = ActivityObjectActor
+data ActivityObjectActor = ActivityObjectActor'
     { _aoaClientSpecificActorInfo :: !(Maybe ActivityObjectActorClientSpecificActorInfo)
     , _aoaImage                   :: !(Maybe ActivityObjectActorImage)
     , _aoaURL                     :: !(Maybe Text)
@@ -1621,7 +1621,7 @@ data ActivityObjectActor = ActivityObjectActor
 activityObjectActor
     :: ActivityObjectActor
 activityObjectActor =
-    ActivityObjectActor
+    ActivityObjectActor'
     { _aoaClientSpecificActorInfo = Nothing
     , _aoaImage = Nothing
     , _aoaURL = Nothing
@@ -1664,7 +1664,7 @@ instance FromJSON ActivityObjectActor where
         parseJSON
           = withObject "ActivityObjectActor"
               (\ o ->
-                 ActivityObjectActor <$>
+                 ActivityObjectActor' <$>
                    (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
                      <*> (o .:? "url")
                      <*> (o .:? "displayName")
@@ -1672,7 +1672,7 @@ instance FromJSON ActivityObjectActor where
                      <*> (o .:? "verification"))
 
 instance ToJSON ActivityObjectActor where
-        toJSON ActivityObjectActor{..}
+        toJSON ActivityObjectActor'{..}
           = object
               (catMaybes
                  [("clientSpecificActorInfo" .=) <$>
@@ -1685,7 +1685,7 @@ instance ToJSON ActivityObjectActor where
 -- | The full image URL for photo attachments.
 --
 -- /See:/ 'activityObjectAttachmentsItemFullImage' smart constructor.
-data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage
+data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight :: !(Maybe (Textual Word32))
     , _aoaifiURL    :: !(Maybe Text)
     , _aoaifiWidth  :: !(Maybe (Textual Word32))
@@ -1706,7 +1706,7 @@ data ActivityObjectAttachmentsItemFullImage = ActivityObjectAttachmentsItemFullI
 activityObjectAttachmentsItemFullImage
     :: ActivityObjectAttachmentsItemFullImage
 activityObjectAttachmentsItemFullImage =
-    ActivityObjectAttachmentsItemFullImage
+    ActivityObjectAttachmentsItemFullImage'
     { _aoaifiHeight = Nothing
     , _aoaifiURL = Nothing
     , _aoaifiWidth = Nothing
@@ -1740,14 +1740,14 @@ instance FromJSON
         parseJSON
           = withObject "ActivityObjectAttachmentsItemFullImage"
               (\ o ->
-                 ActivityObjectAttachmentsItemFullImage <$>
+                 ActivityObjectAttachmentsItemFullImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width")
                      <*> (o .:? "type"))
 
 instance ToJSON
          ActivityObjectAttachmentsItemFullImage where
-        toJSON ActivityObjectAttachmentsItemFullImage{..}
+        toJSON ActivityObjectAttachmentsItemFullImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _aoaifiHeight,
@@ -1758,7 +1758,7 @@ instance ToJSON
 -- | The author\'s Google profile image.
 --
 -- /See:/ 'mediaAuthorImage' smart constructor.
-newtype MediaAuthorImage = MediaAuthorImage
+newtype MediaAuthorImage = MediaAuthorImage'
     { _maiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1770,7 +1770,7 @@ newtype MediaAuthorImage = MediaAuthorImage
 mediaAuthorImage
     :: MediaAuthorImage
 mediaAuthorImage =
-    MediaAuthorImage
+    MediaAuthorImage'
     { _maiURL = Nothing
     }
 
@@ -1783,16 +1783,16 @@ maiURL = lens _maiURL (\ s a -> s{_maiURL = a})
 instance FromJSON MediaAuthorImage where
         parseJSON
           = withObject "MediaAuthorImage"
-              (\ o -> MediaAuthorImage <$> (o .:? "url"))
+              (\ o -> MediaAuthorImage' <$> (o .:? "url"))
 
 instance ToJSON MediaAuthorImage where
-        toJSON MediaAuthorImage{..}
+        toJSON MediaAuthorImage'{..}
           = object (catMaybes [("url" .=) <$> _maiURL])
 
 -- | The people in this circle.
 --
 -- /See:/ 'circlePeople' smart constructor.
-newtype CirclePeople = CirclePeople
+newtype CirclePeople = CirclePeople'
     { _cTotalItems :: Maybe (Textual Word32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1804,7 +1804,7 @@ newtype CirclePeople = CirclePeople
 circlePeople
     :: CirclePeople
 circlePeople =
-    CirclePeople
+    CirclePeople'
     { _cTotalItems = Nothing
     }
 
@@ -1817,16 +1817,16 @@ cTotalItems
 instance FromJSON CirclePeople where
         parseJSON
           = withObject "CirclePeople"
-              (\ o -> CirclePeople <$> (o .:? "totalItems"))
+              (\ o -> CirclePeople' <$> (o .:? "totalItems"))
 
 instance ToJSON CirclePeople where
-        toJSON CirclePeople{..}
+        toJSON CirclePeople'{..}
           = object
               (catMaybes [("totalItems" .=) <$> _cTotalItems])
 
 --
 -- /See:/ 'plusDomainsACLentryResource' smart constructor.
-data PlusDomainsACLentryResource = PlusDomainsACLentryResource
+data PlusDomainsACLentryResource = PlusDomainsACLentryResource'
     { _pdarDisplayName :: !(Maybe Text)
     , _pdarId          :: !(Maybe Text)
     , _pdarType        :: !(Maybe Text)
@@ -1844,7 +1844,7 @@ data PlusDomainsACLentryResource = PlusDomainsACLentryResource
 plusDomainsACLentryResource
     :: PlusDomainsACLentryResource
 plusDomainsACLentryResource =
-    PlusDomainsACLentryResource
+    PlusDomainsACLentryResource'
     { _pdarDisplayName = Nothing
     , _pdarId = Nothing
     , _pdarType = Nothing
@@ -1875,12 +1875,12 @@ instance FromJSON PlusDomainsACLentryResource where
         parseJSON
           = withObject "PlusDomainsACLentryResource"
               (\ o ->
-                 PlusDomainsACLentryResource <$>
+                 PlusDomainsACLentryResource' <$>
                    (o .:? "displayName") <*> (o .:? "id") <*>
                      (o .:? "type"))
 
 instance ToJSON PlusDomainsACLentryResource where
-        toJSON PlusDomainsACLentryResource{..}
+        toJSON PlusDomainsACLentryResource'{..}
           = object
               (catMaybes
                  [("displayName" .=) <$> _pdarDisplayName,
@@ -1889,7 +1889,7 @@ instance ToJSON PlusDomainsACLentryResource where
 -- | The image representation of the actor.
 --
 -- /See:/ 'activityActorImage' smart constructor.
-newtype ActivityActorImage = ActivityActorImage
+newtype ActivityActorImage = ActivityActorImage'
     { _aaiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1901,7 +1901,7 @@ newtype ActivityActorImage = ActivityActorImage
 activityActorImage
     :: ActivityActorImage
 activityActorImage =
-    ActivityActorImage
+    ActivityActorImage'
     { _aaiURL = Nothing
     }
 
@@ -1914,15 +1914,15 @@ aaiURL = lens _aaiURL (\ s a -> s{_aaiURL = a})
 instance FromJSON ActivityActorImage where
         parseJSON
           = withObject "ActivityActorImage"
-              (\ o -> ActivityActorImage <$> (o .:? "url"))
+              (\ o -> ActivityActorImage' <$> (o .:? "url"))
 
 instance ToJSON ActivityActorImage where
-        toJSON ActivityActorImage{..}
+        toJSON ActivityActorImage'{..}
           = object (catMaybes [("url" .=) <$> _aaiURL])
 
 --
 -- /See:/ 'peopleFeed' smart constructor.
-data PeopleFeed = PeopleFeed
+data PeopleFeed = PeopleFeed'
     { _pfTotalItems    :: !(Maybe (Textual Int32))
     , _pfEtag          :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
@@ -1952,7 +1952,7 @@ data PeopleFeed = PeopleFeed
 peopleFeed
     :: PeopleFeed
 peopleFeed =
-    PeopleFeed
+    PeopleFeed'
     { _pfTotalItems = Nothing
     , _pfEtag = Nothing
     , _pfNextPageToken = Nothing
@@ -2008,7 +2008,7 @@ instance FromJSON PeopleFeed where
         parseJSON
           = withObject "PeopleFeed"
               (\ o ->
-                 PeopleFeed <$>
+                 PeopleFeed' <$>
                    (o .:? "totalItems") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "plus#peopleFeed")
@@ -2017,7 +2017,7 @@ instance FromJSON PeopleFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON PeopleFeed where
-        toJSON PeopleFeed{..}
+        toJSON PeopleFeed'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _pfTotalItems,
@@ -2030,7 +2030,7 @@ instance ToJSON PeopleFeed where
 -- | The person\'s primary cover image.
 --
 -- /See:/ 'personCoverCoverPhoto' smart constructor.
-data PersonCoverCoverPhoto = PersonCoverCoverPhoto
+data PersonCoverCoverPhoto = PersonCoverCoverPhoto'
     { _pccpHeight :: !(Maybe (Textual Int32))
     , _pccpURL    :: !(Maybe Text)
     , _pccpWidth  :: !(Maybe (Textual Int32))
@@ -2048,7 +2048,7 @@ data PersonCoverCoverPhoto = PersonCoverCoverPhoto
 personCoverCoverPhoto
     :: PersonCoverCoverPhoto
 personCoverCoverPhoto =
-    PersonCoverCoverPhoto
+    PersonCoverCoverPhoto'
     { _pccpHeight = Nothing
     , _pccpURL = Nothing
     , _pccpWidth = Nothing
@@ -2074,12 +2074,12 @@ instance FromJSON PersonCoverCoverPhoto where
         parseJSON
           = withObject "PersonCoverCoverPhoto"
               (\ o ->
-                 PersonCoverCoverPhoto <$>
+                 PersonCoverCoverPhoto' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width"))
 
 instance ToJSON PersonCoverCoverPhoto where
-        toJSON PersonCoverCoverPhoto{..}
+        toJSON PersonCoverCoverPhoto'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _pccpHeight,
@@ -2089,7 +2089,7 @@ instance ToJSON PersonCoverCoverPhoto where
 -- | The person who uploaded this media.
 --
 -- /See:/ 'mediaAuthor' smart constructor.
-data MediaAuthor = MediaAuthor
+data MediaAuthor = MediaAuthor'
     { _maImage       :: !(Maybe MediaAuthorImage)
     , _maURL         :: !(Maybe Text)
     , _maDisplayName :: !(Maybe Text)
@@ -2110,7 +2110,7 @@ data MediaAuthor = MediaAuthor
 mediaAuthor
     :: MediaAuthor
 mediaAuthor =
-    MediaAuthor
+    MediaAuthor'
     { _maImage = Nothing
     , _maURL = Nothing
     , _maDisplayName = Nothing
@@ -2139,13 +2139,13 @@ instance FromJSON MediaAuthor where
         parseJSON
           = withObject "MediaAuthor"
               (\ o ->
-                 MediaAuthor <$>
+                 MediaAuthor' <$>
                    (o .:? "image") <*> (o .:? "url") <*>
                      (o .:? "displayName")
                      <*> (o .:? "id"))
 
 instance ToJSON MediaAuthor where
-        toJSON MediaAuthor{..}
+        toJSON MediaAuthor'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _maImage, ("url" .=) <$> _maURL,
@@ -2155,7 +2155,7 @@ instance ToJSON MediaAuthor where
 -- | The image representation of the original actor.
 --
 -- /See:/ 'activityObjectActorImage' smart constructor.
-newtype ActivityObjectActorImage = ActivityObjectActorImage
+newtype ActivityObjectActorImage = ActivityObjectActorImage'
     { _aoaiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2167,7 +2167,7 @@ newtype ActivityObjectActorImage = ActivityObjectActorImage
 activityObjectActorImage
     :: ActivityObjectActorImage
 activityObjectActorImage =
-    ActivityObjectActorImage
+    ActivityObjectActorImage'
     { _aoaiURL = Nothing
     }
 
@@ -2178,16 +2178,16 @@ aoaiURL = lens _aoaiURL (\ s a -> s{_aoaiURL = a})
 instance FromJSON ActivityObjectActorImage where
         parseJSON
           = withObject "ActivityObjectActorImage"
-              (\ o -> ActivityObjectActorImage <$> (o .:? "url"))
+              (\ o -> ActivityObjectActorImage' <$> (o .:? "url"))
 
 instance ToJSON ActivityObjectActorImage where
-        toJSON ActivityObjectActorImage{..}
+        toJSON ActivityObjectActorImage'{..}
           = object (catMaybes [("url" .=) <$> _aoaiURL])
 
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'commentActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClientSpecificActorInfoYouTubeActorInfo
+newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClientSpecificActorInfoYouTubeActorInfo'
     { _cacsaiytaiChannelId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2199,7 +2199,7 @@ newtype CommentActorClientSpecificActorInfoYouTubeActorInfo = CommentActorClient
 commentActorClientSpecificActorInfoYouTubeActorInfo
     :: CommentActorClientSpecificActorInfoYouTubeActorInfo
 commentActorClientSpecificActorInfoYouTubeActorInfo =
-    CommentActorClientSpecificActorInfoYouTubeActorInfo
+    CommentActorClientSpecificActorInfoYouTubeActorInfo'
     { _cacsaiytaiChannelId = Nothing
     }
 
@@ -2216,21 +2216,21 @@ instance FromJSON
           = withObject
               "CommentActorClientSpecificActorInfoYouTubeActorInfo"
               (\ o ->
-                 CommentActorClientSpecificActorInfoYouTubeActorInfo
+                 CommentActorClientSpecificActorInfoYouTubeActorInfo'
                    <$> (o .:? "channelId"))
 
 instance ToJSON
          CommentActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
-          CommentActorClientSpecificActorInfoYouTubeActorInfo{..}
+          CommentActorClientSpecificActorInfoYouTubeActorInfo'{..}
           = object
               (catMaybes
                  [("channelId" .=) <$> _cacsaiytaiChannelId])
 
 --
 -- /See:/ 'media' smart constructor.
-data Media = Media
+data Media = Media'
     { _mSizeBytes        :: !(Maybe (Textual Int64))
     , _mSummary          :: !(Maybe Text)
     , _mEtag             :: !(Maybe Text)
@@ -2293,7 +2293,7 @@ data Media = Media
 media
     :: Media
 media =
-    Media
+    Media'
     { _mSizeBytes = Nothing
     , _mSummary = Nothing
     , _mEtag = Nothing
@@ -2422,7 +2422,7 @@ instance FromJSON Media where
         parseJSON
           = withObject "Media"
               (\ o ->
-                 Media <$>
+                 Media' <$>
                    (o .:? "sizeBytes") <*> (o .:? "summary") <*>
                      (o .:? "etag")
                      <*> (o .:? "height")
@@ -2442,7 +2442,7 @@ instance FromJSON Media where
                      <*> (o .:? "mediaCreatedTime"))
 
 instance ToJSON Media where
-        toJSON Media{..}
+        toJSON Media'{..}
           = object
               (catMaybes
                  [("sizeBytes" .=) <$> _mSizeBytes,
@@ -2463,7 +2463,7 @@ instance ToJSON Media where
 -- | Comments in reply to this activity.
 --
 -- /See:/ 'activityObjectReplies' smart constructor.
-data ActivityObjectReplies = ActivityObjectReplies
+data ActivityObjectReplies = ActivityObjectReplies'
     { _aorTotalItems :: !(Maybe (Textual Word32))
     , _aorSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2478,7 +2478,7 @@ data ActivityObjectReplies = ActivityObjectReplies
 activityObjectReplies
     :: ActivityObjectReplies
 activityObjectReplies =
-    ActivityObjectReplies
+    ActivityObjectReplies'
     { _aorTotalItems = Nothing
     , _aorSelfLink = Nothing
     }
@@ -2499,11 +2499,11 @@ instance FromJSON ActivityObjectReplies where
         parseJSON
           = withObject "ActivityObjectReplies"
               (\ o ->
-                 ActivityObjectReplies <$>
+                 ActivityObjectReplies' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON ActivityObjectReplies where
-        toJSON ActivityObjectReplies{..}
+        toJSON ActivityObjectReplies'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aorTotalItems,
@@ -2511,7 +2511,7 @@ instance ToJSON ActivityObjectReplies where
 
 --
 -- /See:/ 'activityObjectAttachmentsItemPreviewThumbnailsItem' smart constructor.
-newtype ActivityObjectAttachmentsItemPreviewThumbnailsItem = ActivityObjectAttachmentsItemPreviewThumbnailsItem
+newtype ActivityObjectAttachmentsItemPreviewThumbnailsItem = ActivityObjectAttachmentsItemPreviewThumbnailsItem'
     { _aoaiptiURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2523,7 +2523,7 @@ newtype ActivityObjectAttachmentsItemPreviewThumbnailsItem = ActivityObjectAttac
 activityObjectAttachmentsItemPreviewThumbnailsItem
     :: ActivityObjectAttachmentsItemPreviewThumbnailsItem
 activityObjectAttachmentsItemPreviewThumbnailsItem =
-    ActivityObjectAttachmentsItemPreviewThumbnailsItem
+    ActivityObjectAttachmentsItemPreviewThumbnailsItem'
     { _aoaiptiURL = Nothing
     }
 
@@ -2539,20 +2539,20 @@ instance FromJSON
           = withObject
               "ActivityObjectAttachmentsItemPreviewThumbnailsItem"
               (\ o ->
-                 ActivityObjectAttachmentsItemPreviewThumbnailsItem
+                 ActivityObjectAttachmentsItemPreviewThumbnailsItem'
                    <$> (o .:? "url"))
 
 instance ToJSON
          ActivityObjectAttachmentsItemPreviewThumbnailsItem
          where
         toJSON
-          ActivityObjectAttachmentsItemPreviewThumbnailsItem{..}
+          ActivityObjectAttachmentsItemPreviewThumbnailsItem'{..}
           = object (catMaybes [("url" .=) <$> _aoaiptiURL])
 
 -- | Verification status of actor.
 --
 -- /See:/ 'activityActorVerification' smart constructor.
-newtype ActivityActorVerification = ActivityActorVerification
+newtype ActivityActorVerification = ActivityActorVerification'
     { _aavAdHocVerified :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2564,7 +2564,7 @@ newtype ActivityActorVerification = ActivityActorVerification
 activityActorVerification
     :: ActivityActorVerification
 activityActorVerification =
-    ActivityActorVerification
+    ActivityActorVerification'
     { _aavAdHocVerified = Nothing
     }
 
@@ -2578,11 +2578,11 @@ instance FromJSON ActivityActorVerification where
         parseJSON
           = withObject "ActivityActorVerification"
               (\ o ->
-                 ActivityActorVerification <$>
+                 ActivityActorVerification' <$>
                    (o .:? "adHocVerified"))
 
 instance ToJSON ActivityActorVerification where
-        toJSON ActivityActorVerification{..}
+        toJSON ActivityActorVerification'{..}
           = object
               (catMaybes
                  [("adHocVerified" .=) <$> _aavAdHocVerified])
@@ -2590,7 +2590,7 @@ instance ToJSON ActivityActorVerification where
 -- | Actor info specific to particular clients.
 --
 -- /See:/ 'activityObjectActorClientSpecificActorInfo' smart constructor.
-newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSpecificActorInfo
+newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSpecificActorInfo'
     { _aoacsaiYouTubeActorInfo :: Maybe ActivityObjectActorClientSpecificActorInfoYouTubeActorInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2602,7 +2602,7 @@ newtype ActivityObjectActorClientSpecificActorInfo = ActivityObjectActorClientSp
 activityObjectActorClientSpecificActorInfo
     :: ActivityObjectActorClientSpecificActorInfo
 activityObjectActorClientSpecificActorInfo =
-    ActivityObjectActorClientSpecificActorInfo
+    ActivityObjectActorClientSpecificActorInfo'
     { _aoacsaiYouTubeActorInfo = Nothing
     }
 
@@ -2618,12 +2618,13 @@ instance FromJSON
           = withObject
               "ActivityObjectActorClientSpecificActorInfo"
               (\ o ->
-                 ActivityObjectActorClientSpecificActorInfo <$>
+                 ActivityObjectActorClientSpecificActorInfo' <$>
                    (o .:? "youtubeActorInfo"))
 
 instance ToJSON
          ActivityObjectActorClientSpecificActorInfo where
-        toJSON ActivityObjectActorClientSpecificActorInfo{..}
+        toJSON
+          ActivityObjectActorClientSpecificActorInfo'{..}
           = object
               (catMaybes
                  [("youtubeActorInfo" .=) <$>
@@ -2631,7 +2632,7 @@ instance ToJSON
 
 --
 -- /See:/ 'activityObjectAttachmentsItem' smart constructor.
-data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem
+data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem'
     { _aFullImage         :: !(Maybe ActivityObjectAttachmentsItemFullImage)
     , _aImage             :: !(Maybe ActivityObjectAttachmentsItemImage)
     , _aObjectType        :: !(Maybe Text)
@@ -2670,7 +2671,7 @@ data ActivityObjectAttachmentsItem = ActivityObjectAttachmentsItem
 activityObjectAttachmentsItem
     :: ActivityObjectAttachmentsItem
 activityObjectAttachmentsItem =
-    ActivityObjectAttachmentsItem
+    ActivityObjectAttachmentsItem'
     { _aFullImage = Nothing
     , _aImage = Nothing
     , _aObjectType = Nothing
@@ -2745,7 +2746,7 @@ instance FromJSON ActivityObjectAttachmentsItem where
         parseJSON
           = withObject "ActivityObjectAttachmentsItem"
               (\ o ->
-                 ActivityObjectAttachmentsItem <$>
+                 ActivityObjectAttachmentsItem' <$>
                    (o .:? "fullImage") <*> (o .:? "image") <*>
                      (o .:? "objectType")
                      <*> (o .:? "previewThumbnails" .!= mempty)
@@ -2757,7 +2758,7 @@ instance FromJSON ActivityObjectAttachmentsItem where
                      <*> (o .:? "id"))
 
 instance ToJSON ActivityObjectAttachmentsItem where
-        toJSON ActivityObjectAttachmentsItem{..}
+        toJSON ActivityObjectAttachmentsItem'{..}
           = object
               (catMaybes
                  [("fullImage" .=) <$> _aFullImage,
@@ -2772,7 +2773,7 @@ instance ToJSON ActivityObjectAttachmentsItem where
 
 --
 -- /See:/ 'activityFeed' smart constructor.
-data ActivityFeed = ActivityFeed
+data ActivityFeed = ActivityFeed'
     { _afEtag          :: !(Maybe Text)
     , _afNextPageToken :: !(Maybe Text)
     , _afNextLink      :: !(Maybe Text)
@@ -2808,7 +2809,7 @@ data ActivityFeed = ActivityFeed
 activityFeed
     :: ActivityFeed
 activityFeed =
-    ActivityFeed
+    ActivityFeed'
     { _afEtag = Nothing
     , _afNextPageToken = Nothing
     , _afNextLink = Nothing
@@ -2873,7 +2874,7 @@ instance FromJSON ActivityFeed where
         parseJSON
           = withObject "ActivityFeed"
               (\ o ->
-                 ActivityFeed <$>
+                 ActivityFeed' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "nextLink")
                      <*> (o .:? "kind" .!= "plus#activityFeed")
@@ -2884,7 +2885,7 @@ instance FromJSON ActivityFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON ActivityFeed where
-        toJSON ActivityFeed{..}
+        toJSON ActivityFeed'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _afEtag,
@@ -2898,7 +2899,7 @@ instance ToJSON ActivityFeed where
 -- | Verification status of actor.
 --
 -- /See:/ 'activityObjectActorVerification' smart constructor.
-newtype ActivityObjectActorVerification = ActivityObjectActorVerification
+newtype ActivityObjectActorVerification = ActivityObjectActorVerification'
     { _aoavAdHocVerified :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2910,7 +2911,7 @@ newtype ActivityObjectActorVerification = ActivityObjectActorVerification
 activityObjectActorVerification
     :: ActivityObjectActorVerification
 activityObjectActorVerification =
-    ActivityObjectActorVerification
+    ActivityObjectActorVerification'
     { _aoavAdHocVerified = Nothing
     }
 
@@ -2925,11 +2926,11 @@ instance FromJSON ActivityObjectActorVerification
         parseJSON
           = withObject "ActivityObjectActorVerification"
               (\ o ->
-                 ActivityObjectActorVerification <$>
+                 ActivityObjectActorVerification' <$>
                    (o .:? "adHocVerified"))
 
 instance ToJSON ActivityObjectActorVerification where
-        toJSON ActivityObjectActorVerification{..}
+        toJSON ActivityObjectActorVerification'{..}
           = object
               (catMaybes
                  [("adHocVerified" .=) <$> _aoavAdHocVerified])
@@ -2938,7 +2939,7 @@ instance ToJSON ActivityObjectActorVerification where
 -- name.
 --
 -- /See:/ 'personName' smart constructor.
-data PersonName = PersonName
+data PersonName = PersonName'
     { _pnGivenName       :: !(Maybe Text)
     , _pnMiddleName      :: !(Maybe Text)
     , _pnFormatted       :: !(Maybe Text)
@@ -2965,7 +2966,7 @@ data PersonName = PersonName
 personName
     :: PersonName
 personName =
-    PersonName
+    PersonName'
     { _pnGivenName = Nothing
     , _pnMiddleName = Nothing
     , _pnFormatted = Nothing
@@ -3010,7 +3011,7 @@ instance FromJSON PersonName where
         parseJSON
           = withObject "PersonName"
               (\ o ->
-                 PersonName <$>
+                 PersonName' <$>
                    (o .:? "givenName") <*> (o .:? "middleName") <*>
                      (o .:? "formatted")
                      <*> (o .:? "honorificPrefix")
@@ -3018,7 +3019,7 @@ instance FromJSON PersonName where
                      <*> (o .:? "honorificSuffix"))
 
 instance ToJSON PersonName where
-        toJSON PersonName{..}
+        toJSON PersonName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _pnGivenName,
@@ -3031,7 +3032,7 @@ instance ToJSON PersonName where
 -- | The representation of the person\'s profile photo.
 --
 -- /See:/ 'personImage' smart constructor.
-data PersonImage = PersonImage
+data PersonImage = PersonImage'
     { _piURL       :: !(Maybe Text)
     , _piIsDefault :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3046,7 +3047,7 @@ data PersonImage = PersonImage
 personImage
     :: PersonImage
 personImage =
-    PersonImage
+    PersonImage'
     { _piURL = Nothing
     , _piIsDefault = Nothing
     }
@@ -3066,11 +3067,11 @@ instance FromJSON PersonImage where
         parseJSON
           = withObject "PersonImage"
               (\ o ->
-                 PersonImage <$>
+                 PersonImage' <$>
                    (o .:? "url") <*> (o .:? "isDefault"))
 
 instance ToJSON PersonImage where
-        toJSON PersonImage{..}
+        toJSON PersonImage'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _piURL,
@@ -3079,7 +3080,7 @@ instance ToJSON PersonImage where
 -- | Actor info specific to YouTube clients.
 --
 -- /See:/ 'activityActorClientSpecificActorInfoYouTubeActorInfo' smart constructor.
-newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClientSpecificActorInfoYouTubeActorInfo
+newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClientSpecificActorInfoYouTubeActorInfo'
     { _aacsaiytaiChannelId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3091,7 +3092,7 @@ newtype ActivityActorClientSpecificActorInfoYouTubeActorInfo = ActivityActorClie
 activityActorClientSpecificActorInfoYouTubeActorInfo
     :: ActivityActorClientSpecificActorInfoYouTubeActorInfo
 activityActorClientSpecificActorInfoYouTubeActorInfo =
-    ActivityActorClientSpecificActorInfoYouTubeActorInfo
+    ActivityActorClientSpecificActorInfoYouTubeActorInfo'
     { _aacsaiytaiChannelId = Nothing
     }
 
@@ -3108,14 +3109,14 @@ instance FromJSON
           = withObject
               "ActivityActorClientSpecificActorInfoYouTubeActorInfo"
               (\ o ->
-                 ActivityActorClientSpecificActorInfoYouTubeActorInfo
+                 ActivityActorClientSpecificActorInfoYouTubeActorInfo'
                    <$> (o .:? "channelId"))
 
 instance ToJSON
          ActivityActorClientSpecificActorInfoYouTubeActorInfo
          where
         toJSON
-          ActivityActorClientSpecificActorInfoYouTubeActorInfo{..}
+          ActivityActorClientSpecificActorInfoYouTubeActorInfo'{..}
           = object
               (catMaybes
                  [("channelId" .=) <$> _aacsaiytaiChannelId])
@@ -3123,7 +3124,7 @@ instance ToJSON
 -- | Status of the activity as seen by the viewer.
 --
 -- /See:/ 'activityObjectStatusForViewer' smart constructor.
-data ActivityObjectStatusForViewer = ActivityObjectStatusForViewer
+data ActivityObjectStatusForViewer = ActivityObjectStatusForViewer'
     { _aosfvCanComment        :: !(Maybe Bool)
     , _aosfvResharingDisabled :: !(Maybe Bool)
     , _aosfvCanUpdate         :: !(Maybe Bool)
@@ -3147,7 +3148,7 @@ data ActivityObjectStatusForViewer = ActivityObjectStatusForViewer
 activityObjectStatusForViewer
     :: ActivityObjectStatusForViewer
 activityObjectStatusForViewer =
-    ActivityObjectStatusForViewer
+    ActivityObjectStatusForViewer'
     { _aosfvCanComment = Nothing
     , _aosfvResharingDisabled = Nothing
     , _aosfvCanUpdate = Nothing
@@ -3189,14 +3190,14 @@ instance FromJSON ActivityObjectStatusForViewer where
         parseJSON
           = withObject "ActivityObjectStatusForViewer"
               (\ o ->
-                 ActivityObjectStatusForViewer <$>
+                 ActivityObjectStatusForViewer' <$>
                    (o .:? "canComment") <*> (o .:? "resharingDisabled")
                      <*> (o .:? "canUpdate")
                      <*> (o .:? "isPlusOned")
                      <*> (o .:? "canPlusone"))
 
 instance ToJSON ActivityObjectStatusForViewer where
-        toJSON ActivityObjectStatusForViewer{..}
+        toJSON ActivityObjectStatusForViewer'{..}
           = object
               (catMaybes
                  [("canComment" .=) <$> _aosfvCanComment,
@@ -3207,7 +3208,7 @@ instance ToJSON ActivityObjectStatusForViewer where
 
 --
 -- /See:/ 'activity' smart constructor.
-data Activity = Activity
+data Activity = Activity'
     { _actAccess          :: !(Maybe ACL)
     , _actPlaceName       :: !(Maybe Text)
     , _actEtag            :: !(Maybe Text)
@@ -3276,7 +3277,7 @@ data Activity = Activity
 activity
     :: Activity
 activity =
-    Activity
+    Activity'
     { _actAccess = Nothing
     , _actPlaceName = Nothing
     , _actEtag = Nothing
@@ -3409,7 +3410,7 @@ instance FromJSON Activity where
         parseJSON
           = withObject "Activity"
               (\ o ->
-                 Activity <$>
+                 Activity' <$>
                    (o .:? "access") <*> (o .:? "placeName") <*>
                      (o .:? "etag")
                      <*> (o .:? "annotation")
@@ -3431,7 +3432,7 @@ instance FromJSON Activity where
                      <*> (o .:? "provider"))
 
 instance ToJSON Activity where
-        toJSON Activity{..}
+        toJSON Activity'{..}
           = object
               (catMaybes
                  [("access" .=) <$> _actAccess,
@@ -3455,7 +3456,7 @@ instance ToJSON Activity where
 -- | The physical address of the place.
 --
 -- /See:/ 'placeAddress' smart constructor.
-newtype PlaceAddress = PlaceAddress
+newtype PlaceAddress = PlaceAddress'
     { _paFormatted :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3467,7 +3468,7 @@ newtype PlaceAddress = PlaceAddress
 placeAddress
     :: PlaceAddress
 placeAddress =
-    PlaceAddress
+    PlaceAddress'
     { _paFormatted = Nothing
     }
 
@@ -3479,16 +3480,16 @@ paFormatted
 instance FromJSON PlaceAddress where
         parseJSON
           = withObject "PlaceAddress"
-              (\ o -> PlaceAddress <$> (o .:? "formatted"))
+              (\ o -> PlaceAddress' <$> (o .:? "formatted"))
 
 instance ToJSON PlaceAddress where
-        toJSON PlaceAddress{..}
+        toJSON PlaceAddress'{..}
           = object
               (catMaybes [("formatted" .=) <$> _paFormatted])
 
 --
 -- /See:/ 'audiencesFeed' smart constructor.
-data AudiencesFeed = AudiencesFeed
+data AudiencesFeed = AudiencesFeed'
     { _audTotalItems    :: !(Maybe (Textual Int32))
     , _audEtag          :: !(Maybe Text)
     , _audNextPageToken :: !(Maybe Text)
@@ -3512,7 +3513,7 @@ data AudiencesFeed = AudiencesFeed
 audiencesFeed
     :: AudiencesFeed
 audiencesFeed =
-    AudiencesFeed
+    AudiencesFeed'
     { _audTotalItems = Nothing
     , _audEtag = Nothing
     , _audNextPageToken = Nothing
@@ -3556,14 +3557,14 @@ instance FromJSON AudiencesFeed where
         parseJSON
           = withObject "AudiencesFeed"
               (\ o ->
-                 AudiencesFeed <$>
+                 AudiencesFeed' <$>
                    (o .:? "totalItems") <*> (o .:? "etag") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "plus#audiencesFeed")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AudiencesFeed where
-        toJSON AudiencesFeed{..}
+        toJSON AudiencesFeed'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _audTotalItems,
@@ -3574,7 +3575,7 @@ instance ToJSON AudiencesFeed where
 
 --
 -- /See:/ 'activityObjectAttachmentsItemThumbnailsItem' smart constructor.
-data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItemThumbnailsItem
+data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItemThumbnailsItem'
     { _aoaitiImage       :: !(Maybe ActivityObjectAttachmentsItemThumbnailsItemImage)
     , _aoaitiURL         :: !(Maybe Text)
     , _aoaitiDescription :: !(Maybe Text)
@@ -3592,7 +3593,7 @@ data ActivityObjectAttachmentsItemThumbnailsItem = ActivityObjectAttachmentsItem
 activityObjectAttachmentsItemThumbnailsItem
     :: ActivityObjectAttachmentsItemThumbnailsItem
 activityObjectAttachmentsItemThumbnailsItem =
-    ActivityObjectAttachmentsItemThumbnailsItem
+    ActivityObjectAttachmentsItemThumbnailsItem'
     { _aoaitiImage = Nothing
     , _aoaitiURL = Nothing
     , _aoaitiDescription = Nothing
@@ -3620,14 +3621,14 @@ instance FromJSON
           = withObject
               "ActivityObjectAttachmentsItemThumbnailsItem"
               (\ o ->
-                 ActivityObjectAttachmentsItemThumbnailsItem <$>
+                 ActivityObjectAttachmentsItemThumbnailsItem' <$>
                    (o .:? "image") <*> (o .:? "url") <*>
                      (o .:? "description"))
 
 instance ToJSON
          ActivityObjectAttachmentsItemThumbnailsItem where
         toJSON
-          ActivityObjectAttachmentsItemThumbnailsItem{..}
+          ActivityObjectAttachmentsItemThumbnailsItem'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _aoaitiImage,
@@ -3637,7 +3638,7 @@ instance ToJSON
 -- | The cover photo content.
 --
 -- /See:/ 'personCover' smart constructor.
-data PersonCover = PersonCover
+data PersonCover = PersonCover'
     { _pcLayout     :: !(Maybe Text)
     , _pcCoverInfo  :: !(Maybe PersonCoverCoverInfo)
     , _pcCoverPhoto :: !(Maybe PersonCoverCoverPhoto)
@@ -3655,7 +3656,7 @@ data PersonCover = PersonCover
 personCover
     :: PersonCover
 personCover =
-    PersonCover
+    PersonCover'
     { _pcLayout = Nothing
     , _pcCoverInfo = Nothing
     , _pcCoverPhoto = Nothing
@@ -3680,12 +3681,12 @@ instance FromJSON PersonCover where
         parseJSON
           = withObject "PersonCover"
               (\ o ->
-                 PersonCover <$>
+                 PersonCover' <$>
                    (o .:? "layout") <*> (o .:? "coverInfo") <*>
                      (o .:? "coverPhoto"))
 
 instance ToJSON PersonCover where
-        toJSON PersonCover{..}
+        toJSON PersonCover'{..}
           = object
               (catMaybes
                  [("layout" .=) <$> _pcLayout,
@@ -3694,7 +3695,7 @@ instance ToJSON PersonCover where
 
 --
 -- /See:/ 'commentInReplyToItem' smart constructor.
-data CommentInReplyToItem = CommentInReplyToItem
+data CommentInReplyToItem = CommentInReplyToItem'
     { _cirtiURL :: !(Maybe Text)
     , _cirtiId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3709,7 +3710,7 @@ data CommentInReplyToItem = CommentInReplyToItem
 commentInReplyToItem
     :: CommentInReplyToItem
 commentInReplyToItem =
-    CommentInReplyToItem
+    CommentInReplyToItem'
     { _cirtiURL = Nothing
     , _cirtiId = Nothing
     }
@@ -3726,18 +3727,18 @@ instance FromJSON CommentInReplyToItem where
         parseJSON
           = withObject "CommentInReplyToItem"
               (\ o ->
-                 CommentInReplyToItem <$>
+                 CommentInReplyToItem' <$>
                    (o .:? "url") <*> (o .:? "id"))
 
 instance ToJSON CommentInReplyToItem where
-        toJSON CommentInReplyToItem{..}
+        toJSON CommentInReplyToItem'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _cirtiURL, ("id" .=) <$> _cirtiId])
 
 --
 -- /See:/ 'personOrganizationsItem' smart constructor.
-data PersonOrganizationsItem = PersonOrganizationsItem
+data PersonOrganizationsItem = PersonOrganizationsItem'
     { _poiDePartment  :: !(Maybe Text)
     , _poiLocation    :: !(Maybe Text)
     , _poiEndDate     :: !(Maybe Text)
@@ -3773,7 +3774,7 @@ data PersonOrganizationsItem = PersonOrganizationsItem
 personOrganizationsItem
     :: PersonOrganizationsItem
 personOrganizationsItem =
-    PersonOrganizationsItem
+    PersonOrganizationsItem'
     { _poiDePartment = Nothing
     , _poiLocation = Nothing
     , _poiEndDate = Nothing
@@ -3836,7 +3837,7 @@ instance FromJSON PersonOrganizationsItem where
         parseJSON
           = withObject "PersonOrganizationsItem"
               (\ o ->
-                 PersonOrganizationsItem <$>
+                 PersonOrganizationsItem' <$>
                    (o .:? "department") <*> (o .:? "location") <*>
                      (o .:? "endDate")
                      <*> (o .:? "primary")
@@ -3847,7 +3848,7 @@ instance FromJSON PersonOrganizationsItem where
                      <*> (o .:? "description"))
 
 instance ToJSON PersonOrganizationsItem where
-        toJSON PersonOrganizationsItem{..}
+        toJSON PersonOrganizationsItem'{..}
           = object
               (catMaybes
                  [("department" .=) <$> _poiDePartment,
@@ -3861,7 +3862,7 @@ instance ToJSON PersonOrganizationsItem where
 
 --
 -- /See:/ 'personURLsItem' smart constructor.
-data PersonURLsItem = PersonURLsItem
+data PersonURLsItem = PersonURLsItem'
     { _puiValue :: !(Maybe Text)
     , _puiType  :: !(Maybe Text)
     , _puiLabel :: !(Maybe Text)
@@ -3879,7 +3880,7 @@ data PersonURLsItem = PersonURLsItem
 personURLsItem
     :: PersonURLsItem
 personURLsItem =
-    PersonURLsItem
+    PersonURLsItem'
     { _puiValue = Nothing
     , _puiType = Nothing
     , _puiLabel = Nothing
@@ -3905,12 +3906,12 @@ instance FromJSON PersonURLsItem where
         parseJSON
           = withObject "PersonURLsItem"
               (\ o ->
-                 PersonURLsItem <$>
+                 PersonURLsItem' <$>
                    (o .:? "value") <*> (o .:? "type") <*>
                      (o .:? "label"))
 
 instance ToJSON PersonURLsItem where
-        toJSON PersonURLsItem{..}
+        toJSON PersonURLsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _puiValue,
@@ -3920,7 +3921,7 @@ instance ToJSON PersonURLsItem where
 -- | Extra information about the cover photo.
 --
 -- /See:/ 'personCoverCoverInfo' smart constructor.
-data PersonCoverCoverInfo = PersonCoverCoverInfo
+data PersonCoverCoverInfo = PersonCoverCoverInfo'
     { _pcciTopImageOffSet  :: !(Maybe (Textual Int32))
     , _pcciLeftImageOffSet :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3935,7 +3936,7 @@ data PersonCoverCoverInfo = PersonCoverCoverInfo
 personCoverCoverInfo
     :: PersonCoverCoverInfo
 personCoverCoverInfo =
-    PersonCoverCoverInfo
+    PersonCoverCoverInfo'
     { _pcciTopImageOffSet = Nothing
     , _pcciLeftImageOffSet = Nothing
     }
@@ -3960,12 +3961,12 @@ instance FromJSON PersonCoverCoverInfo where
         parseJSON
           = withObject "PersonCoverCoverInfo"
               (\ o ->
-                 PersonCoverCoverInfo <$>
+                 PersonCoverCoverInfo' <$>
                    (o .:? "topImageOffset") <*>
                      (o .:? "leftImageOffset"))
 
 instance ToJSON PersonCoverCoverInfo where
-        toJSON PersonCoverCoverInfo{..}
+        toJSON PersonCoverCoverInfo'{..}
           = object
               (catMaybes
                  [("topImageOffset" .=) <$> _pcciTopImageOffSet,
@@ -3974,7 +3975,7 @@ instance ToJSON PersonCoverCoverInfo where
 -- | People who reshared this activity.
 --
 -- /See:/ 'activityObjectResharers' smart constructor.
-data ActivityObjectResharers = ActivityObjectResharers
+data ActivityObjectResharers = ActivityObjectResharers'
     { _aTotalItems :: !(Maybe (Textual Word32))
     , _aSelfLink   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3989,7 +3990,7 @@ data ActivityObjectResharers = ActivityObjectResharers
 activityObjectResharers
     :: ActivityObjectResharers
 activityObjectResharers =
-    ActivityObjectResharers
+    ActivityObjectResharers'
     { _aTotalItems = Nothing
     , _aSelfLink = Nothing
     }
@@ -4009,11 +4010,11 @@ instance FromJSON ActivityObjectResharers where
         parseJSON
           = withObject "ActivityObjectResharers"
               (\ o ->
-                 ActivityObjectResharers <$>
+                 ActivityObjectResharers' <$>
                    (o .:? "totalItems") <*> (o .:? "selfLink"))
 
 instance ToJSON ActivityObjectResharers where
-        toJSON ActivityObjectResharers{..}
+        toJSON ActivityObjectResharers'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aTotalItems,
@@ -4021,7 +4022,7 @@ instance ToJSON ActivityObjectResharers where
 
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment
+data Comment = Comment'
     { _comEtag      :: !(Maybe Text)
     , _comPlusoners :: !(Maybe CommentPlusoners)
     , _comKind      :: !Text
@@ -4063,7 +4064,7 @@ data Comment = Comment
 comment
     :: Comment
 comment =
-    Comment
+    Comment'
     { _comEtag = Nothing
     , _comPlusoners = Nothing
     , _comKind = "plus#comment"
@@ -4138,7 +4139,7 @@ instance FromJSON Comment where
         parseJSON
           = withObject "Comment"
               (\ o ->
-                 Comment <$>
+                 Comment' <$>
                    (o .:? "etag") <*> (o .:? "plusoners") <*>
                      (o .:? "kind" .!= "plus#comment")
                      <*> (o .:? "published")
@@ -4151,7 +4152,7 @@ instance FromJSON Comment where
                      <*> (o .:? "inReplyTo" .!= mempty))
 
 instance ToJSON Comment where
-        toJSON Comment{..}
+        toJSON Comment'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _comEtag,
@@ -4167,7 +4168,7 @@ instance ToJSON Comment where
 
 --
 -- /See:/ 'place' smart constructor.
-data Place = Place
+data Place = Place'
     { _plaKind        :: !Text
     , _plaAddress     :: !(Maybe PlaceAddress)
     , _plaDisplayName :: !(Maybe Text)
@@ -4191,7 +4192,7 @@ data Place = Place
 place
     :: Place
 place =
-    Place
+    Place'
     { _plaKind = "plus#place"
     , _plaAddress = Nothing
     , _plaDisplayName = Nothing
@@ -4227,14 +4228,14 @@ instance FromJSON Place where
         parseJSON
           = withObject "Place"
               (\ o ->
-                 Place <$>
+                 Place' <$>
                    (o .:? "kind" .!= "plus#place") <*> (o .:? "address")
                      <*> (o .:? "displayName")
                      <*> (o .:? "id")
                      <*> (o .:? "position"))
 
 instance ToJSON Place where
-        toJSON Place{..}
+        toJSON Place'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _plaKind),
@@ -4245,7 +4246,7 @@ instance ToJSON Place where
 
 --
 -- /See:/ 'acl' smart constructor.
-data ACL = ACL
+data ACL = ACL'
     { _aclcKind             :: !Text
     , _aclcItems            :: !(Maybe [PlusDomainsACLentryResource])
     , _aclcDomainRestricted :: !(Maybe Bool)
@@ -4266,7 +4267,7 @@ data ACL = ACL
 acl
     :: ACL
 acl =
-    ACL
+    ACL'
     { _aclcKind = "plus#acl"
     , _aclcItems = Nothing
     , _aclcDomainRestricted = Nothing
@@ -4301,14 +4302,14 @@ instance FromJSON ACL where
         parseJSON
           = withObject "ACL"
               (\ o ->
-                 ACL <$>
+                 ACL' <$>
                    (o .:? "kind" .!= "plus#acl") <*>
                      (o .:? "items" .!= mempty)
                      <*> (o .:? "domainRestricted")
                      <*> (o .:? "description"))
 
 instance ToJSON ACL where
-        toJSON ACL{..}
+        toJSON ACL'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aclcKind),
@@ -4319,7 +4320,7 @@ instance ToJSON ACL where
 -- | Exif information of the media item.
 --
 -- /See:/ 'mediaExif' smart constructor.
-newtype MediaExif = MediaExif
+newtype MediaExif = MediaExif'
     { _meTime :: Maybe DateTime'
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4331,7 +4332,7 @@ newtype MediaExif = MediaExif
 mediaExif
     :: MediaExif
 mediaExif =
-    MediaExif
+    MediaExif'
     { _meTime = Nothing
     }
 
@@ -4344,16 +4345,16 @@ meTime
 instance FromJSON MediaExif where
         parseJSON
           = withObject "MediaExif"
-              (\ o -> MediaExif <$> (o .:? "time"))
+              (\ o -> MediaExif' <$> (o .:? "time"))
 
 instance ToJSON MediaExif where
-        toJSON MediaExif{..}
+        toJSON MediaExif'{..}
           = object (catMaybes [("time" .=) <$> _meTime])
 
 -- | The person who performed this activity.
 --
 -- /See:/ 'activityActor' smart constructor.
-data ActivityActor = ActivityActor
+data ActivityActor = ActivityActor'
     { _aaClientSpecificActorInfo :: !(Maybe ActivityActorClientSpecificActorInfo)
     , _aaImage                   :: !(Maybe ActivityActorImage)
     , _aaURL                     :: !(Maybe Text)
@@ -4383,7 +4384,7 @@ data ActivityActor = ActivityActor
 activityActor
     :: ActivityActor
 activityActor =
-    ActivityActor
+    ActivityActor'
     { _aaClientSpecificActorInfo = Nothing
     , _aaImage = Nothing
     , _aaURL = Nothing
@@ -4431,7 +4432,7 @@ instance FromJSON ActivityActor where
         parseJSON
           = withObject "ActivityActor"
               (\ o ->
-                 ActivityActor <$>
+                 ActivityActor' <$>
                    (o .:? "clientSpecificActorInfo") <*> (o .:? "image")
                      <*> (o .:? "url")
                      <*> (o .:? "name")
@@ -4440,7 +4441,7 @@ instance FromJSON ActivityActor where
                      <*> (o .:? "verification"))
 
 instance ToJSON ActivityActor where
-        toJSON ActivityActor{..}
+        toJSON ActivityActor'{..}
           = object
               (catMaybes
                  [("clientSpecificActorInfo" .=) <$>
@@ -4454,7 +4455,7 @@ instance ToJSON ActivityActor where
 -- | The object of this comment.
 --
 -- /See:/ 'commentObject' smart constructor.
-data CommentObject = CommentObject
+data CommentObject = CommentObject'
     { _coObjectType      :: !Text
     , _coOriginalContent :: !(Maybe Text)
     , _coContent         :: !(Maybe Text)
@@ -4472,7 +4473,7 @@ data CommentObject = CommentObject
 commentObject
     :: CommentObject
 commentObject =
-    CommentObject
+    CommentObject'
     { _coObjectType = "comment"
     , _coOriginalContent = Nothing
     , _coContent = Nothing
@@ -4501,13 +4502,13 @@ instance FromJSON CommentObject where
         parseJSON
           = withObject "CommentObject"
               (\ o ->
-                 CommentObject <$>
+                 CommentObject' <$>
                    (o .:? "objectType" .!= "comment") <*>
                      (o .:? "originalContent")
                      <*> (o .:? "content"))
 
 instance ToJSON CommentObject where
-        toJSON CommentObject{..}
+        toJSON CommentObject'{..}
           = object
               (catMaybes
                  [Just ("objectType" .= _coObjectType),
@@ -4516,7 +4517,7 @@ instance ToJSON CommentObject where
 
 --
 -- /See:/ 'commentFeed' smart constructor.
-data CommentFeed = CommentFeed
+data CommentFeed = CommentFeed'
     { _cffEtag          :: !(Maybe Text)
     , _cffNextPageToken :: !(Maybe Text)
     , _cffNextLink      :: !(Maybe Text)
@@ -4549,7 +4550,7 @@ data CommentFeed = CommentFeed
 commentFeed
     :: CommentFeed
 commentFeed =
-    CommentFeed
+    CommentFeed'
     { _cffEtag = Nothing
     , _cffNextPageToken = Nothing
     , _cffNextLink = Nothing
@@ -4608,7 +4609,7 @@ instance FromJSON CommentFeed where
         parseJSON
           = withObject "CommentFeed"
               (\ o ->
-                 CommentFeed <$>
+                 CommentFeed' <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "nextLink")
                      <*> (o .:? "kind" .!= "plus#commentFeed")
@@ -4618,7 +4619,7 @@ instance FromJSON CommentFeed where
                      <*> (o .:? "title"))
 
 instance ToJSON CommentFeed where
-        toJSON CommentFeed{..}
+        toJSON CommentFeed'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _cffEtag,
@@ -4632,7 +4633,7 @@ instance ToJSON CommentFeed where
 -- | Verification status of actor.
 --
 -- /See:/ 'commentActorVerification' smart constructor.
-newtype CommentActorVerification = CommentActorVerification
+newtype CommentActorVerification = CommentActorVerification'
     { _cavAdHocVerified :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4644,7 +4645,7 @@ newtype CommentActorVerification = CommentActorVerification
 commentActorVerification
     :: CommentActorVerification
 commentActorVerification =
-    CommentActorVerification
+    CommentActorVerification'
     { _cavAdHocVerified = Nothing
     }
 
@@ -4658,10 +4659,11 @@ instance FromJSON CommentActorVerification where
         parseJSON
           = withObject "CommentActorVerification"
               (\ o ->
-                 CommentActorVerification <$> (o .:? "adHocVerified"))
+                 CommentActorVerification' <$>
+                   (o .:? "adHocVerified"))
 
 instance ToJSON CommentActorVerification where
-        toJSON CommentActorVerification{..}
+        toJSON CommentActorVerification'{..}
           = object
               (catMaybes
                  [("adHocVerified" .=) <$> _cavAdHocVerified])
@@ -4669,7 +4671,7 @@ instance ToJSON CommentActorVerification where
 -- | An object representation of the individual components of name.
 --
 -- /See:/ 'activityActorName' smart constructor.
-data ActivityActorName = ActivityActorName
+data ActivityActorName = ActivityActorName'
     { _aanGivenName  :: !(Maybe Text)
     , _aanFamilyName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4684,7 +4686,7 @@ data ActivityActorName = ActivityActorName
 activityActorName
     :: ActivityActorName
 activityActorName =
-    ActivityActorName
+    ActivityActorName'
     { _aanGivenName = Nothing
     , _aanFamilyName = Nothing
     }
@@ -4704,11 +4706,11 @@ instance FromJSON ActivityActorName where
         parseJSON
           = withObject "ActivityActorName"
               (\ o ->
-                 ActivityActorName <$>
+                 ActivityActorName' <$>
                    (o .:? "givenName") <*> (o .:? "familyName"))
 
 instance ToJSON ActivityActorName where
-        toJSON ActivityActorName{..}
+        toJSON ActivityActorName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _aanGivenName,

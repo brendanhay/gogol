@@ -90,7 +90,7 @@ type AccountsExperienceLocalesListResource =
 -- more information about this method.
 --
 -- /See:/ 'accountsExperienceLocalesList' smart constructor.
-data AccountsExperienceLocalesList = AccountsExperienceLocalesList
+data AccountsExperienceLocalesList = AccountsExperienceLocalesList'
     { _aellTitleLevelEidr :: !(Maybe Text)
     , _aellStatus         :: !(Maybe [Text])
     , _aellPphNames       :: !(Maybe [Text])
@@ -151,7 +151,7 @@ accountsExperienceLocalesList
     :: Text -- ^ 'aellAccountId'
     -> AccountsExperienceLocalesList
 accountsExperienceLocalesList pAellAccountId_ =
-    AccountsExperienceLocalesList
+    AccountsExperienceLocalesList'
     { _aellTitleLevelEidr = Nothing
     , _aellStatus = Nothing
     , _aellPphNames = Nothing
@@ -279,7 +279,7 @@ instance GoogleRequest AccountsExperienceLocalesList
              ListExperienceLocalesResponse
         type Scopes AccountsExperienceLocalesList =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsExperienceLocalesList{..}
+        requestClient AccountsExperienceLocalesList'{..}
           = go _aellAccountId _aellTitleLevelEidr
               (_aellStatus ^. _Default)
               (_aellPphNames ^. _Default)

@@ -78,7 +78,7 @@ type PostUserInfosListResource =
 -- access rights, specific to the user.
 --
 -- /See:/ 'postUserInfosList'' smart constructor.
-data PostUserInfosList' = PostUserInfosList'
+data PostUserInfosList' = PostUserInfosList''
     { _puilStatus      :: !(Maybe [PostUserInfosListStatus])
     , _puilOrderBy     :: !PostUserInfosListOrderBy
     , _puilEndDate     :: !(Maybe DateTime')
@@ -122,7 +122,7 @@ postUserInfosList'
     -> Text -- ^ 'puilUserId'
     -> PostUserInfosList'
 postUserInfosList' pPuilBlogId_ pPuilUserId_ =
-    PostUserInfosList'
+    PostUserInfosList''
     { _puilStatus = Nothing
     , _puilOrderBy = PUILOBPublished
     , _puilEndDate = Nothing
@@ -205,7 +205,7 @@ instance GoogleRequest PostUserInfosList' where
         type Scopes PostUserInfosList' =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PostUserInfosList'{..}
+        requestClient PostUserInfosList''{..}
           = go _puilUserId _puilBlogId
               (_puilStatus ^. _Default)
               (Just _puilOrderBy)

@@ -55,7 +55,7 @@ type PlacementGroupsInsertResource =
 -- | Inserts a new placement group.
 --
 -- /See:/ 'placementGroupsInsert' smart constructor.
-data PlacementGroupsInsert = PlacementGroupsInsert
+data PlacementGroupsInsert = PlacementGroupsInsert'
     { _pgiProFileId :: !(Textual Int64)
     , _pgiPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementGroupsInsert
     -> PlacementGroup -- ^ 'pgiPayload'
     -> PlacementGroupsInsert
 placementGroupsInsert pPgiProFileId_ pPgiPayload_ =
-    PlacementGroupsInsert
+    PlacementGroupsInsert'
     { _pgiProFileId = _Coerce # pPgiProFileId_
     , _pgiPayload = pPgiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PlacementGroupsInsert where
         type Rs PlacementGroupsInsert = PlacementGroup
         type Scopes PlacementGroupsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementGroupsInsert{..}
+        requestClient PlacementGroupsInsert'{..}
           = go _pgiProFileId (Just AltJSON) _pgiPayload
               dFAReportingService
           where go

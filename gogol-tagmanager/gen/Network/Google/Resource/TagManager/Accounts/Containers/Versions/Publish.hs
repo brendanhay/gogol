@@ -61,7 +61,7 @@ type AccountsContainersVersionsPublishResource =
 -- | Publishes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsPublish' smart constructor.
-data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish
+data AccountsContainersVersionsPublish = AccountsContainersVersionsPublish'
     { _acvpContainerId        :: !Text
     , _acvpFingerprint        :: !(Maybe Text)
     , _acvpContainerVersionId :: !Text
@@ -85,7 +85,7 @@ accountsContainersVersionsPublish
     -> Text -- ^ 'acvpAccountId'
     -> AccountsContainersVersionsPublish
 accountsContainersVersionsPublish pAcvpContainerId_ pAcvpContainerVersionId_ pAcvpAccountId_ =
-    AccountsContainersVersionsPublish
+    AccountsContainersVersionsPublish'
     { _acvpContainerId = pAcvpContainerId_
     , _acvpFingerprint = Nothing
     , _acvpContainerVersionId = pAcvpContainerVersionId_
@@ -123,7 +123,7 @@ instance GoogleRequest
              PublishContainerVersionResponse
         type Scopes AccountsContainersVersionsPublish =
              '["https://www.googleapis.com/auth/tagmanager.publish"]
-        requestClient AccountsContainersVersionsPublish{..}
+        requestClient AccountsContainersVersionsPublish'{..}
           = go _acvpAccountId _acvpContainerId
               _acvpContainerVersionId
               _acvpFingerprint

@@ -60,7 +60,7 @@ type ForwardingRulesAggregatedListResource =
 -- | Retrieves an aggregated list of forwarding rules.
 --
 -- /See:/ 'forwardingRulesAggregatedList' smart constructor.
-data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList
+data ForwardingRulesAggregatedList = ForwardingRulesAggregatedList'
     { _fralProject    :: !Text
     , _fralFilter     :: !(Maybe Text)
     , _fralPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ forwardingRulesAggregatedList
     :: Text -- ^ 'fralProject'
     -> ForwardingRulesAggregatedList
 forwardingRulesAggregatedList pFralProject_ =
-    ForwardingRulesAggregatedList
+    ForwardingRulesAggregatedList'
     { _fralProject = pFralProject_
     , _fralFilter = Nothing
     , _fralPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest ForwardingRulesAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ForwardingRulesAggregatedList{..}
+        requestClient ForwardingRulesAggregatedList'{..}
           = go _fralProject _fralFilter _fralPageToken
               (Just _fralMaxResults)
               (Just AltJSON)

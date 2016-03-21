@@ -56,7 +56,7 @@ type ReportsPatchResource =
 -- | Updates a report. This method supports patch semantics.
 --
 -- /See:/ 'reportsPatch' smart constructor.
-data ReportsPatch = ReportsPatch
+data ReportsPatch = ReportsPatch'
     { _rpReportId  :: !(Textual Int64)
     , _rpProFileId :: !(Textual Int64)
     , _rpPayload   :: !Report
@@ -77,7 +77,7 @@ reportsPatch
     -> Report -- ^ 'rpPayload'
     -> ReportsPatch
 reportsPatch pRpReportId_ pRpProFileId_ pRpPayload_ =
-    ReportsPatch
+    ReportsPatch'
     { _rpReportId = _Coerce # pRpReportId_
     , _rpProFileId = _Coerce # pRpProFileId_
     , _rpPayload = pRpPayload_
@@ -104,7 +104,7 @@ instance GoogleRequest ReportsPatch where
         type Rs ReportsPatch = Report
         type Scopes ReportsPatch =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsPatch{..}
+        requestClient ReportsPatch'{..}
           = go _rpProFileId _rpReportId (Just AltJSON)
               _rpPayload
               dFAReportingService

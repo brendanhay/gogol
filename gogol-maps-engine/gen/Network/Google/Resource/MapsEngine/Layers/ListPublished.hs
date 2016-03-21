@@ -57,7 +57,7 @@ type LayersListPublishedResource =
 -- | Return all published layers readable by the current user.
 --
 -- /See:/ 'layersListPublished' smart constructor.
-data LayersListPublished = LayersListPublished
+data LayersListPublished = LayersListPublished'
     { _llpPageToken  :: !(Maybe Text)
     , _llpProjectId  :: !(Maybe Text)
     , _llpMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ data LayersListPublished = LayersListPublished
 layersListPublished
     :: LayersListPublished
 layersListPublished =
-    LayersListPublished
+    LayersListPublished'
     { _llpPageToken = Nothing
     , _llpProjectId = Nothing
     , _llpMaxResults = Nothing
@@ -110,7 +110,7 @@ instance GoogleRequest LayersListPublished where
         type Scopes LayersListPublished =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient LayersListPublished{..}
+        requestClient LayersListPublished'{..}
           = go _llpPageToken _llpProjectId _llpMaxResults
               (Just AltJSON)
               mapsEngineService

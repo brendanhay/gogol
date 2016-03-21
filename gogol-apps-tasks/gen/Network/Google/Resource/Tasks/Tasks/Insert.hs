@@ -58,7 +58,7 @@ type TasksInsertResource =
 -- | Creates a new task on the specified task list.
 --
 -- /See:/ 'tasksInsert' smart constructor.
-data TasksInsert = TasksInsert
+data TasksInsert = TasksInsert'
     { _tiParent   :: !(Maybe Text)
     , _tiPayload  :: !Task
     , _tiTaskList :: !Text
@@ -81,7 +81,7 @@ tasksInsert
     -> Text -- ^ 'tiTaskList'
     -> TasksInsert
 tasksInsert pTiPayload_ pTiTaskList_ =
-    TasksInsert
+    TasksInsert'
     { _tiParent = Nothing
     , _tiPayload = pTiPayload_
     , _tiTaskList = pTiTaskList_
@@ -113,7 +113,7 @@ instance GoogleRequest TasksInsert where
         type Rs TasksInsert = Task
         type Scopes TasksInsert =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TasksInsert{..}
+        requestClient TasksInsert'{..}
           = go _tiTaskList _tiParent _tiPrevious (Just AltJSON)
               _tiPayload
               appsTasksService

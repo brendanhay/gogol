@@ -57,7 +57,7 @@ type HostedModelsPredictResource =
 -- | Submit input and request an output against a hosted model.
 --
 -- /See:/ 'hostedModelsPredict' smart constructor.
-data HostedModelsPredict = HostedModelsPredict
+data HostedModelsPredict = HostedModelsPredict'
     { _hmpProject         :: !Text
     , _hmpPayload         :: !Input
     , _hmpHostedModelName :: !Text
@@ -78,7 +78,7 @@ hostedModelsPredict
     -> Text -- ^ 'hmpHostedModelName'
     -> HostedModelsPredict
 hostedModelsPredict pHmpProject_ pHmpPayload_ pHmpHostedModelName_ =
-    HostedModelsPredict
+    HostedModelsPredict'
     { _hmpProject = pHmpProject_
     , _hmpPayload = pHmpPayload_
     , _hmpHostedModelName = pHmpHostedModelName_
@@ -104,7 +104,7 @@ instance GoogleRequest HostedModelsPredict where
         type Rs HostedModelsPredict = Output
         type Scopes HostedModelsPredict =
              '["https://www.googleapis.com/auth/prediction"]
-        requestClient HostedModelsPredict{..}
+        requestClient HostedModelsPredict'{..}
           = go _hmpProject _hmpHostedModelName (Just AltJSON)
               _hmpPayload
               predictionService

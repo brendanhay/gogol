@@ -54,7 +54,7 @@ type AdsUpdateResource =
 -- | Updates an existing ad.
 --
 -- /See:/ 'adsUpdate' smart constructor.
-data AdsUpdate = AdsUpdate
+data AdsUpdate = AdsUpdate'
     { _aProFileId :: !(Textual Int64)
     , _aPayload   :: !Ad
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ adsUpdate
     -> Ad -- ^ 'aPayload'
     -> AdsUpdate
 adsUpdate pAProFileId_ pAPayload_ =
-    AdsUpdate
+    AdsUpdate'
     { _aProFileId = _Coerce # pAProFileId_
     , _aPayload = pAPayload_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest AdsUpdate where
         type Rs AdsUpdate = Ad
         type Scopes AdsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdsUpdate{..}
+        requestClient AdsUpdate'{..}
           = go _aProFileId (Just AltJSON) _aPayload
               dFAReportingService
           where go

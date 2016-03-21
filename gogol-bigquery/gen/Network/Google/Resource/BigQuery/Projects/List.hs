@@ -53,7 +53,7 @@ type ProjectsListResource =
 -- | Lists all projects to which you have been granted any project role.
 --
 -- /See:/ 'projectsList' smart constructor.
-data ProjectsList = ProjectsList
+data ProjectsList = ProjectsList'
     { _plPageToken  :: !(Maybe Text)
     , _plMaxResults :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ data ProjectsList = ProjectsList
 projectsList
     :: ProjectsList
 projectsList =
-    ProjectsList
+    ProjectsList'
     { _plPageToken = Nothing
     , _plMaxResults = Nothing
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ProjectsList where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient ProjectsList{..}
+        requestClient ProjectsList'{..}
           = go _plPageToken _plMaxResults (Just AltJSON)
               bigQueryService
           where go

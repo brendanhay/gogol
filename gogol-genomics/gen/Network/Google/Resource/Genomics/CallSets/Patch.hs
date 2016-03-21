@@ -74,7 +74,7 @@ type CallSetsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'callSetsPatch' smart constructor.
-data CallSetsPatch = CallSetsPatch
+data CallSetsPatch = CallSetsPatch'
     { _cspXgafv          :: !(Maybe Text)
     , _cspUploadProtocol :: !(Maybe Text)
     , _cspUpdateMask     :: !(Maybe Text)
@@ -115,7 +115,7 @@ callSetsPatch
     -> Text -- ^ 'cspCallSetId'
     -> CallSetsPatch
 callSetsPatch pCspPayload_ pCspCallSetId_ =
-    CallSetsPatch
+    CallSetsPatch'
     { _cspXgafv = Nothing
     , _cspUploadProtocol = Nothing
     , _cspUpdateMask = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest CallSetsPatch where
         type Scopes CallSetsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient CallSetsPatch{..}
+        requestClient CallSetsPatch'{..}
           = go _cspCallSetId _cspXgafv _cspUploadProtocol
               _cspUpdateMask
               (Just _cspPp)

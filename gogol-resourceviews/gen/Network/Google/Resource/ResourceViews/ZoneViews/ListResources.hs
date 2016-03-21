@@ -71,7 +71,7 @@ type ZoneViewsListResourcesResource =
 -- | List the resources of the resource view.
 --
 -- /See:/ 'zoneViewsListResources' smart constructor.
-data ZoneViewsListResources = ZoneViewsListResources
+data ZoneViewsListResources = ZoneViewsListResources'
     { _zvlrResourceView :: !Text
     , _zvlrListState    :: !ZoneViewsListResourcesListState
     , _zvlrProject      :: !Text
@@ -107,7 +107,7 @@ zoneViewsListResources
     -> Text -- ^ 'zvlrZone'
     -> ZoneViewsListResources
 zoneViewsListResources pZvlrResourceView_ pZvlrProject_ pZvlrZone_ =
-    ZoneViewsListResources
+    ZoneViewsListResources'
     { _zvlrResourceView = pZvlrResourceView_
     , _zvlrListState = All
     , _zvlrProject = pZvlrProject_
@@ -179,7 +179,7 @@ instance GoogleRequest ZoneViewsListResources where
                "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ZoneViewsListResources{..}
+        requestClient ZoneViewsListResources'{..}
           = go _zvlrProject _zvlrZone _zvlrResourceView
               (Just _zvlrListState)
               _zvlrFormat

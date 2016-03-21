@@ -54,7 +54,7 @@ type AchievementConfigurationsUpdateResource =
 -- | Update the metadata of the achievement configuration with the given ID.
 --
 -- /See:/ 'achievementConfigurationsUpdate' smart constructor.
-data AchievementConfigurationsUpdate = AchievementConfigurationsUpdate
+data AchievementConfigurationsUpdate = AchievementConfigurationsUpdate'
     { _acuAchievementId :: !Text
     , _acuPayload       :: !AchievementConfiguration
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ achievementConfigurationsUpdate
     -> AchievementConfiguration -- ^ 'acuPayload'
     -> AchievementConfigurationsUpdate
 achievementConfigurationsUpdate pAcuAchievementId_ pAcuPayload_ =
-    AchievementConfigurationsUpdate
+    AchievementConfigurationsUpdate'
     { _acuAchievementId = pAcuAchievementId_
     , _acuPayload = pAcuPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest
              AchievementConfiguration
         type Scopes AchievementConfigurationsUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient AchievementConfigurationsUpdate{..}
+        requestClient AchievementConfigurationsUpdate'{..}
           = go _acuAchievementId (Just AltJSON) _acuPayload
               gamesConfigurationService
           where go

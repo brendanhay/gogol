@@ -55,7 +55,7 @@ type SubscriptionsGetResource =
 -- | Gets a subscription of the customer.
 --
 -- /See:/ 'subscriptionsGet' smart constructor.
-data SubscriptionsGet = SubscriptionsGet
+data SubscriptionsGet = SubscriptionsGet'
     { _sgCustomerId     :: !Text
     , _sgSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ subscriptionsGet
     -> Text -- ^ 'sgSubscriptionId'
     -> SubscriptionsGet
 subscriptionsGet pSgCustomerId_ pSgSubscriptionId_ =
-    SubscriptionsGet
+    SubscriptionsGet'
     { _sgCustomerId = pSgCustomerId_
     , _sgSubscriptionId = pSgSubscriptionId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SubscriptionsGet where
         type Scopes SubscriptionsGet =
              '["https://www.googleapis.com/auth/apps.order",
                "https://www.googleapis.com/auth/apps.order.readonly"]
-        requestClient SubscriptionsGet{..}
+        requestClient SubscriptionsGet'{..}
           = go _sgCustomerId _sgSubscriptionId (Just AltJSON)
               appsResellerService
           where go

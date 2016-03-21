@@ -57,7 +57,7 @@ type StyleListResource =
 -- | Retrieves a list of styles.
 --
 -- /See:/ 'styleList' smart constructor.
-data StyleList = StyleList
+data StyleList = StyleList'
     { _slPageToken  :: !(Maybe Text)
     , _slTableId    :: !Text
     , _slMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ styleList
     :: Text -- ^ 'slTableId'
     -> StyleList
 styleList pSlTableId_ =
-    StyleList
+    StyleList'
     { _slPageToken = Nothing
     , _slTableId = pSlTableId_
     , _slMaxResults = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest StyleList where
         type Scopes StyleList =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient StyleList{..}
+        requestClient StyleList'{..}
           = go _slTableId _slPageToken _slMaxResults
               (Just AltJSON)
               fusionTablesService

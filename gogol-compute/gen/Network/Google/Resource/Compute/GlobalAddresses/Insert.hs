@@ -57,7 +57,7 @@ type GlobalAddressesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'globalAddressesInsert' smart constructor.
-data GlobalAddressesInsert = GlobalAddressesInsert
+data GlobalAddressesInsert = GlobalAddressesInsert'
     { _gaiProject :: !Text
     , _gaiPayload :: !Address
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ globalAddressesInsert
     -> Address -- ^ 'gaiPayload'
     -> GlobalAddressesInsert
 globalAddressesInsert pGaiProject_ pGaiPayload_ =
-    GlobalAddressesInsert
+    GlobalAddressesInsert'
     { _gaiProject = pGaiProject_
     , _gaiPayload = pGaiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest GlobalAddressesInsert where
         type Scopes GlobalAddressesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient GlobalAddressesInsert{..}
+        requestClient GlobalAddressesInsert'{..}
           = go _gaiProject (Just AltJSON) _gaiPayload
               computeService
           where go

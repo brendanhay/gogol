@@ -55,7 +55,7 @@ type DirectorySiteContactsGetResource =
 -- | Gets one directory site contact by ID.
 --
 -- /See:/ 'directorySiteContactsGet' smart constructor.
-data DirectorySiteContactsGet = DirectorySiteContactsGet
+data DirectorySiteContactsGet = DirectorySiteContactsGet'
     { _dscgProFileId :: !(Textual Int64)
     , _dscgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ directorySiteContactsGet
     -> Int64 -- ^ 'dscgId'
     -> DirectorySiteContactsGet
 directorySiteContactsGet pDscgProFileId_ pDscgId_ =
-    DirectorySiteContactsGet
+    DirectorySiteContactsGet'
     { _dscgProFileId = _Coerce # pDscgProFileId_
     , _dscgId = _Coerce # pDscgId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest DirectorySiteContactsGet where
              DirectorySiteContact
         type Scopes DirectorySiteContactsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DirectorySiteContactsGet{..}
+        requestClient DirectorySiteContactsGet'{..}
           = go _dscgProFileId _dscgId (Just AltJSON)
               dFAReportingService
           where go

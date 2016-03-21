@@ -60,7 +60,7 @@ type DeploymentsListResource =
 -- | Lists all deployments for a given project.
 --
 -- /See:/ 'deploymentsList' smart constructor.
-data DeploymentsList = DeploymentsList
+data DeploymentsList = DeploymentsList'
     { _dlProject    :: !Text
     , _dlFilter     :: !(Maybe Text)
     , _dlPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ deploymentsList
     :: Text -- ^ 'dlProject'
     -> DeploymentsList
 deploymentsList pDlProject_ =
-    DeploymentsList
+    DeploymentsList'
     { _dlProject = pDlProject_
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest DeploymentsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient DeploymentsList{..}
+        requestClient DeploymentsList'{..}
           = go _dlProject _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)

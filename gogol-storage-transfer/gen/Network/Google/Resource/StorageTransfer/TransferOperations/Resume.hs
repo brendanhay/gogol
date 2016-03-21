@@ -66,7 +66,7 @@ type TransferOperationsResumeResource =
 -- | Resumes a transfer operation that is paused.
 --
 -- /See:/ 'transferOperationsResume' smart constructor.
-data TransferOperationsResume = TransferOperationsResume
+data TransferOperationsResume = TransferOperationsResume'
     { _torXgafv          :: !(Maybe Text)
     , _torUploadProtocol :: !(Maybe Text)
     , _torPp             :: !Bool
@@ -104,7 +104,7 @@ transferOperationsResume
     -> Text -- ^ 'torName'
     -> TransferOperationsResume
 transferOperationsResume pTorPayload_ pTorName_ =
-    TransferOperationsResume
+    TransferOperationsResume'
     { _torXgafv = Nothing
     , _torUploadProtocol = Nothing
     , _torPp = True
@@ -166,7 +166,7 @@ instance GoogleRequest TransferOperationsResume where
         type Rs TransferOperationsResume = Empty
         type Scopes TransferOperationsResume =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferOperationsResume{..}
+        requestClient TransferOperationsResume'{..}
           = go _torName _torXgafv _torUploadProtocol
               (Just _torPp)
               _torAccessToken

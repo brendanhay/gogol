@@ -56,7 +56,7 @@ type RoleAssignmentsGetResource =
 -- | Retrieve a role assignment.
 --
 -- /See:/ 'roleAssignmentsGet' smart constructor.
-data RoleAssignmentsGet = RoleAssignmentsGet
+data RoleAssignmentsGet = RoleAssignmentsGet'
     { _ragCustomer         :: !Text
     , _ragRoleAssignmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ roleAssignmentsGet
     -> Text -- ^ 'ragRoleAssignmentId'
     -> RoleAssignmentsGet
 roleAssignmentsGet pRagCustomer_ pRagRoleAssignmentId_ =
-    RoleAssignmentsGet
+    RoleAssignmentsGet'
     { _ragCustomer = pRagCustomer_
     , _ragRoleAssignmentId = pRagRoleAssignmentId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest RoleAssignmentsGet where
         type Scopes RoleAssignmentsGet =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
-        requestClient RoleAssignmentsGet{..}
+        requestClient RoleAssignmentsGet'{..}
           = go _ragCustomer _ragRoleAssignmentId (Just AltJSON)
               directoryService
           where go

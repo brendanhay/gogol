@@ -53,7 +53,7 @@ type CirclesUpdateResource =
 -- | Update a circle\'s description.
 --
 -- /See:/ 'circlesUpdate' smart constructor.
-data CirclesUpdate = CirclesUpdate
+data CirclesUpdate = CirclesUpdate'
     { _cuPayload  :: !Circle
     , _cuCircleId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ circlesUpdate
     -> Text -- ^ 'cuCircleId'
     -> CirclesUpdate
 circlesUpdate pCuPayload_ pCuCircleId_ =
-    CirclesUpdate
+    CirclesUpdate'
     { _cuPayload = pCuPayload_
     , _cuCircleId = pCuCircleId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest CirclesUpdate where
         type Scopes CirclesUpdate =
              '["https://www.googleapis.com/auth/plus.circles.write",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient CirclesUpdate{..}
+        requestClient CirclesUpdate'{..}
           = go _cuCircleId (Just AltJSON) _cuPayload
               plusDomainsService
           where go

@@ -61,7 +61,7 @@ type InstancesUpdateResource =
 -- retain. For partial updates, use patch.
 --
 -- /See:/ 'instancesUpdate' smart constructor.
-data InstancesUpdate = InstancesUpdate
+data InstancesUpdate = InstancesUpdate'
     { _iuProject  :: !Text
     , _iuPayload  :: !DatabaseInstance
     , _iuInstance :: !Text
@@ -82,7 +82,7 @@ instancesUpdate
     -> Text -- ^ 'iuInstance'
     -> InstancesUpdate
 instancesUpdate pIuProject_ pIuPayload_ pIuInstance_ =
-    InstancesUpdate
+    InstancesUpdate'
     { _iuProject = pIuProject_
     , _iuPayload = pIuPayload_
     , _iuInstance = pIuInstance_
@@ -108,7 +108,7 @@ instance GoogleRequest InstancesUpdate where
         type Scopes InstancesUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesUpdate{..}
+        requestClient InstancesUpdate'{..}
           = go _iuProject _iuInstance (Just AltJSON) _iuPayload
               sQLAdminService
           where go

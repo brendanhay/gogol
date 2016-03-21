@@ -56,7 +56,7 @@ type UsersThreadsDeleteResource =
 -- cannot be undone. Prefer threads.trash instead.
 --
 -- /See:/ 'usersThreadsDelete' smart constructor.
-data UsersThreadsDelete = UsersThreadsDelete
+data UsersThreadsDelete = UsersThreadsDelete'
     { _utdUserId :: !Text
     , _utdId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersThreadsDelete
     :: Text -- ^ 'utdId'
     -> UsersThreadsDelete
 usersThreadsDelete pUtdId_ =
-    UsersThreadsDelete
+    UsersThreadsDelete'
     { _utdUserId = "me"
     , _utdId = pUtdId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersThreadsDelete where
         type Rs UsersThreadsDelete = ()
         type Scopes UsersThreadsDelete =
              '["https://mail.google.com/"]
-        requestClient UsersThreadsDelete{..}
+        requestClient UsersThreadsDelete'{..}
           = go _utdUserId _utdId (Just AltJSON) gmailService
           where go
                   = buildClient

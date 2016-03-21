@@ -78,7 +78,7 @@ type TablesFeaturesBatchPatchResource =
 -- read Updating features in the Google Maps Engine developer\'s guide.
 --
 -- /See:/ 'tablesFeaturesBatchPatch' smart constructor.
-data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch
+data TablesFeaturesBatchPatch = TablesFeaturesBatchPatch'
     { _tfbpPayload :: !FeaturesBatchPatchRequest
     , _tfbpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -95,7 +95,7 @@ tablesFeaturesBatchPatch
     -> Text -- ^ 'tfbpId'
     -> TablesFeaturesBatchPatch
 tablesFeaturesBatchPatch pTfbpPayload_ pTfbpId_ =
-    TablesFeaturesBatchPatch
+    TablesFeaturesBatchPatch'
     { _tfbpPayload = pTfbpPayload_
     , _tfbpId = pTfbpId_
     }
@@ -113,7 +113,7 @@ instance GoogleRequest TablesFeaturesBatchPatch where
         type Rs TablesFeaturesBatchPatch = ()
         type Scopes TablesFeaturesBatchPatch =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesFeaturesBatchPatch{..}
+        requestClient TablesFeaturesBatchPatch'{..}
           = go _tfbpId (Just AltJSON) _tfbpPayload
               mapsEngineService
           where go

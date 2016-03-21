@@ -65,7 +65,7 @@ type TransferOperationsCancelResource =
 -- succeeded or whether the operation completed despite cancellation.
 --
 -- /See:/ 'transferOperationsCancel' smart constructor.
-data TransferOperationsCancel = TransferOperationsCancel
+data TransferOperationsCancel = TransferOperationsCancel'
     { _tocXgafv          :: !(Maybe Text)
     , _tocUploadProtocol :: !(Maybe Text)
     , _tocPp             :: !Bool
@@ -99,7 +99,7 @@ transferOperationsCancel
     :: Text -- ^ 'tocName'
     -> TransferOperationsCancel
 transferOperationsCancel pTocName_ =
-    TransferOperationsCancel
+    TransferOperationsCancel'
     { _tocXgafv = Nothing
     , _tocUploadProtocol = Nothing
     , _tocPp = True
@@ -155,7 +155,7 @@ instance GoogleRequest TransferOperationsCancel where
         type Rs TransferOperationsCancel = Empty
         type Scopes TransferOperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferOperationsCancel{..}
+        requestClient TransferOperationsCancel'{..}
           = go _tocName _tocXgafv _tocUploadProtocol
               (Just _tocPp)
               _tocAccessToken

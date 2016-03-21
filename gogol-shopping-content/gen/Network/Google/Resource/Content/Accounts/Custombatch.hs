@@ -57,7 +57,7 @@ type AccountsCustombatchResource =
 -- (sub-)accounts in a single request.
 --
 -- /See:/ 'accountsCustombatch' smart constructor.
-data AccountsCustombatch = AccountsCustombatch
+data AccountsCustombatch = AccountsCustombatch'
     { _aaPayload :: !AccountsCustomBatchRequest
     , _aaDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsCustombatch
     :: AccountsCustomBatchRequest -- ^ 'aaPayload'
     -> AccountsCustombatch
 accountsCustombatch pAaPayload_ =
-    AccountsCustombatch
+    AccountsCustombatch'
     { _aaPayload = pAaPayload_
     , _aaDryRun = Nothing
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountsCustombatch where
              AccountsCustomBatchResponse
         type Scopes AccountsCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountsCustombatch{..}
+        requestClient AccountsCustombatch'{..}
           = go _aaDryRun (Just AltJSON) _aaPayload
               shoppingContentService
           where go

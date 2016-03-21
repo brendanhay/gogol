@@ -68,7 +68,7 @@ type CallSetsGetResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsGet' smart constructor.
-data CallSetsGet = CallSetsGet
+data CallSetsGet = CallSetsGet'
     { _csgXgafv          :: !(Maybe Text)
     , _csgUploadProtocol :: !(Maybe Text)
     , _csgPp             :: !Bool
@@ -102,7 +102,7 @@ callSetsGet
     :: Text -- ^ 'csgCallSetId'
     -> CallSetsGet
 callSetsGet pCsgCallSetId_ =
-    CallSetsGet
+    CallSetsGet'
     { _csgXgafv = Nothing
     , _csgUploadProtocol = Nothing
     , _csgPp = True
@@ -161,7 +161,7 @@ instance GoogleRequest CallSetsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient CallSetsGet{..}
+        requestClient CallSetsGet'{..}
           = go _csgCallSetId _csgXgafv _csgUploadProtocol
               (Just _csgPp)
               _csgAccessToken

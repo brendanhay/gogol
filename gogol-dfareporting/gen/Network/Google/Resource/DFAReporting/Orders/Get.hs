@@ -57,7 +57,7 @@ type OrdersGetResource =
 -- | Gets one order by ID.
 --
 -- /See:/ 'ordersGet' smart constructor.
-data OrdersGet = OrdersGet
+data OrdersGet = OrdersGet'
     { _ogProFileId :: !(Textual Int64)
     , _ogId        :: !(Textual Int64)
     , _ogProjectId :: !(Textual Int64)
@@ -78,7 +78,7 @@ ordersGet
     -> Int64 -- ^ 'ogProjectId'
     -> OrdersGet
 ordersGet pOgProFileId_ pOgId_ pOgProjectId_ =
-    OrdersGet
+    OrdersGet'
     { _ogProFileId = _Coerce # pOgProFileId_
     , _ogId = _Coerce # pOgId_
     , _ogProjectId = _Coerce # pOgProjectId_
@@ -104,7 +104,7 @@ instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
         type Scopes OrdersGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OrdersGet{..}
+        requestClient OrdersGet'{..}
           = go _ogProFileId _ogProjectId _ogId (Just AltJSON)
               dFAReportingService
           where go

@@ -54,7 +54,7 @@ type CustomersPatchResource =
 -- | Updates a customer. This method supports patch semantics.
 --
 -- /See:/ 'customersPatch' smart constructor.
-data CustomersPatch = CustomersPatch
+data CustomersPatch = CustomersPatch'
     { _cpCustomerKey :: !Text
     , _cpPayload     :: !Customer
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ customersPatch
     -> Customer -- ^ 'cpPayload'
     -> CustomersPatch
 customersPatch pCpCustomerKey_ pCpPayload_ =
-    CustomersPatch
+    CustomersPatch'
     { _cpCustomerKey = pCpCustomerKey_
     , _cpPayload = pCpPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CustomersPatch where
         type Rs CustomersPatch = Customer
         type Scopes CustomersPatch =
              '["https://www.googleapis.com/auth/admin.directory.customer"]
-        requestClient CustomersPatch{..}
+        requestClient CustomersPatch'{..}
           = go _cpCustomerKey (Just AltJSON) _cpPayload
               directoryService
           where go

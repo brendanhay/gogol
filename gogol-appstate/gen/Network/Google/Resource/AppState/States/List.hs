@@ -51,7 +51,7 @@ type StatesListResource =
 -- | Lists all the states keys, and optionally the state data.
 --
 -- /See:/ 'statesList' smart constructor.
-newtype StatesList = StatesList
+newtype StatesList = StatesList'
     { _slIncludeData :: Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ newtype StatesList = StatesList
 statesList
     :: StatesList
 statesList =
-    StatesList
+    StatesList'
     { _slIncludeData = False
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest StatesList where
         type Rs StatesList = ListResponse
         type Scopes StatesList =
              '["https://www.googleapis.com/auth/appstate"]
-        requestClient StatesList{..}
+        requestClient StatesList'{..}
           = go (Just _slIncludeData) (Just AltJSON)
               appStateService
           where go

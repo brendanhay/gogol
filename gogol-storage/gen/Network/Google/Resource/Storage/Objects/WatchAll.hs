@@ -67,7 +67,7 @@ type ObjectsWatchAllResource =
 -- | Watch for changes on all objects in a bucket.
 --
 -- /See:/ 'objectsWatchAll' smart constructor.
-data ObjectsWatchAll = ObjectsWatchAll
+data ObjectsWatchAll = ObjectsWatchAll'
     { _owaPrefix     :: !(Maybe Text)
     , _owaBucket     :: !Text
     , _owaPayload    :: !Channel
@@ -102,7 +102,7 @@ objectsWatchAll
     -> Channel -- ^ 'owaPayload'
     -> ObjectsWatchAll
 objectsWatchAll pOwaBucket_ pOwaPayload_ =
-    ObjectsWatchAll
+    ObjectsWatchAll'
     { _owaPrefix = Nothing
     , _owaBucket = pOwaBucket_
     , _owaPayload = pOwaPayload_
@@ -172,7 +172,7 @@ instance GoogleRequest ObjectsWatchAll where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsWatchAll{..}
+        requestClient ObjectsWatchAll'{..}
           = go _owaBucket _owaPrefix _owaVersions
               _owaProjection
               _owaPageToken

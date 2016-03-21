@@ -67,7 +67,7 @@ type PeopleGetResource =
 -- \`people\/me\` to indicate the authenticated user.
 --
 -- /See:/ 'peopleGet' smart constructor.
-data PeopleGet = PeopleGet
+data PeopleGet = PeopleGet'
     { _pgXgafv                   :: !(Maybe Text)
     , _pgUploadProtocol          :: !(Maybe Text)
     , _pgResourceName            :: !Text
@@ -104,7 +104,7 @@ peopleGet
     :: Text -- ^ 'pgResourceName'
     -> PeopleGet
 peopleGet pPgResourceName_ =
-    PeopleGet
+    PeopleGet'
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
     , _pgResourceName = pPgResourceName_
@@ -182,7 +182,7 @@ instance GoogleRequest PeopleGet where
                "https://www.googleapis.com/auth/user.phonenumbers.read",
                "https://www.googleapis.com/auth/userinfo.email",
                "https://www.googleapis.com/auth/userinfo.profile"]
-        requestClient PeopleGet{..}
+        requestClient PeopleGet'{..}
           = go _pgResourceName _pgXgafv _pgUploadProtocol
               _pgRequestMaskIncludeField
               (Just _pgPp)

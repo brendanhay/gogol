@@ -62,7 +62,7 @@ type InstancesDeleteAccessConfigResource =
 -- | Deletes an access config from an instance\'s network interface.
 --
 -- /See:/ 'instancesDeleteAccessConfig' smart constructor.
-data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig
+data InstancesDeleteAccessConfig = InstancesDeleteAccessConfig'
     { _idacProject          :: !Text
     , _idacNetworkInterface :: !Text
     , _idacZone             :: !Text
@@ -91,7 +91,7 @@ instancesDeleteAccessConfig
     -> Text -- ^ 'idacInstance'
     -> InstancesDeleteAccessConfig
 instancesDeleteAccessConfig pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pIdacAccessConfig_ pIdacInstance_ =
-    InstancesDeleteAccessConfig
+    InstancesDeleteAccessConfig'
     { _idacProject = pIdacProject_
     , _idacNetworkInterface = pIdacNetworkInterface_
     , _idacZone = pIdacZone_
@@ -131,7 +131,7 @@ instance GoogleRequest InstancesDeleteAccessConfig
         type Scopes InstancesDeleteAccessConfig =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesDeleteAccessConfig{..}
+        requestClient InstancesDeleteAccessConfig'{..}
           = go _idacProject _idacZone _idacInstance
               (Just _idacAccessConfig)
               (Just _idacNetworkInterface)

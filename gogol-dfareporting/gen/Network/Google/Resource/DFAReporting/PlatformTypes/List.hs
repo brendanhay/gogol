@@ -53,7 +53,7 @@ type PlatformTypesListResource =
 -- | Retrieves a list of platform types.
 --
 -- /See:/ 'platformTypesList' smart constructor.
-newtype PlatformTypesList = PlatformTypesList
+newtype PlatformTypesList = PlatformTypesList'
     { _ptlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ platformTypesList
     :: Int64 -- ^ 'ptlProFileId'
     -> PlatformTypesList
 platformTypesList pPtlProFileId_ =
-    PlatformTypesList
+    PlatformTypesList'
     { _ptlProFileId = _Coerce # pPtlProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest PlatformTypesList where
         type Rs PlatformTypesList = PlatformTypesListResponse
         type Scopes PlatformTypesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlatformTypesList{..}
+        requestClient PlatformTypesList'{..}
           = go _ptlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

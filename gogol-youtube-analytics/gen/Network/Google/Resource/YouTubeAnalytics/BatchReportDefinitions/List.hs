@@ -53,7 +53,7 @@ type BatchReportDefinitionsListResource =
 -- | Retrieves a list of available batch report definitions.
 --
 -- /See:/ 'batchReportDefinitionsList' smart constructor.
-newtype BatchReportDefinitionsList = BatchReportDefinitionsList
+newtype BatchReportDefinitionsList = BatchReportDefinitionsList'
     { _brdlOnBehalfOfContentOwner :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ batchReportDefinitionsList
     :: Text -- ^ 'brdlOnBehalfOfContentOwner'
     -> BatchReportDefinitionsList
 batchReportDefinitionsList pBrdlOnBehalfOfContentOwner_ =
-    BatchReportDefinitionsList
+    BatchReportDefinitionsList'
     { _brdlOnBehalfOfContentOwner = pBrdlOnBehalfOfContentOwner_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest BatchReportDefinitionsList
         type Scopes BatchReportDefinitionsList =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient BatchReportDefinitionsList{..}
+        requestClient BatchReportDefinitionsList'{..}
           = go (Just _brdlOnBehalfOfContentOwner)
               (Just AltJSON)
               youTubeAnalyticsService

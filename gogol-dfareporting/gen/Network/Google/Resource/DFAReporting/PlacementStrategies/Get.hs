@@ -55,7 +55,7 @@ type PlacementStrategiesGetResource =
 -- | Gets one placement strategy by ID.
 --
 -- /See:/ 'placementStrategiesGet' smart constructor.
-data PlacementStrategiesGet = PlacementStrategiesGet
+data PlacementStrategiesGet = PlacementStrategiesGet'
     { _psgProFileId :: !(Textual Int64)
     , _psgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementStrategiesGet
     -> Int64 -- ^ 'psgId'
     -> PlacementStrategiesGet
 placementStrategiesGet pPsgProFileId_ pPsgId_ =
-    PlacementStrategiesGet
+    PlacementStrategiesGet'
     { _psgProFileId = _Coerce # pPsgProFileId_
     , _psgId = _Coerce # pPsgId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PlacementStrategiesGet where
         type Rs PlacementStrategiesGet = PlacementStrategy
         type Scopes PlacementStrategiesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementStrategiesGet{..}
+        requestClient PlacementStrategiesGet'{..}
           = go _psgProFileId _psgId (Just AltJSON)
               dFAReportingService
           where go

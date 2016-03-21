@@ -58,7 +58,7 @@ type ColumnPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'columnPatch' smart constructor.
-data ColumnPatch = ColumnPatch
+data ColumnPatch = ColumnPatch'
     { _cpPayload  :: !Column
     , _cpTableId  :: !Text
     , _cpColumnId :: !Text
@@ -79,7 +79,7 @@ columnPatch
     -> Text -- ^ 'cpColumnId'
     -> ColumnPatch
 columnPatch pCpPayload_ pCpTableId_ pCpColumnId_ =
-    ColumnPatch
+    ColumnPatch'
     { _cpPayload = pCpPayload_
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
@@ -104,7 +104,7 @@ instance GoogleRequest ColumnPatch where
         type Rs ColumnPatch = Column
         type Scopes ColumnPatch =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient ColumnPatch{..}
+        requestClient ColumnPatch'{..}
           = go _cpTableId _cpColumnId (Just AltJSON) _cpPayload
               fusionTablesService
           where go

@@ -56,7 +56,7 @@ type ProjectsSetCommonInstanceMetadataResource =
 -- the data included in the request.
 --
 -- /See:/ 'projectsSetCommonInstanceMetadata' smart constructor.
-data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata
+data ProjectsSetCommonInstanceMetadata = ProjectsSetCommonInstanceMetadata'
     { _pscimProject :: !Text
     , _pscimPayload :: !Metadata
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ projectsSetCommonInstanceMetadata
     -> Metadata -- ^ 'pscimPayload'
     -> ProjectsSetCommonInstanceMetadata
 projectsSetCommonInstanceMetadata pPscimProject_ pPscimPayload_ =
-    ProjectsSetCommonInstanceMetadata
+    ProjectsSetCommonInstanceMetadata'
     { _pscimProject = pPscimProject_
     , _pscimPayload = pPscimPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest
         type Scopes ProjectsSetCommonInstanceMetadata =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient ProjectsSetCommonInstanceMetadata{..}
+        requestClient ProjectsSetCommonInstanceMetadata'{..}
           = go _pscimProject (Just AltJSON) _pscimPayload
               computeService
           where go

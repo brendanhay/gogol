@@ -159,7 +159,7 @@ type ObjectsCopyResource =
 -- metadata.
 --
 -- /See:/ 'objectsCopy' smart constructor.
-data ObjectsCopy = ObjectsCopy
+data ObjectsCopy = ObjectsCopy'
     { _ocDestinationPredefinedACL       :: !(Maybe ObjectsCopyDestinationPredefinedACL)
     , _ocIfSourceGenerationMatch        :: !(Maybe (Textual Int64))
     , _ocIfMetagenerationMatch          :: !(Maybe (Textual Int64))
@@ -221,7 +221,7 @@ objectsCopy
     -> Text -- ^ 'ocDestinationObject'
     -> ObjectsCopy
 objectsCopy pOcSourceObject_ pOcSourceBucket_ pOcPayload_ pOcDestinationBucket_ pOcDestinationObject_ =
-    ObjectsCopy
+    ObjectsCopy'
     { _ocDestinationPredefinedACL = Nothing
     , _ocIfSourceGenerationMatch = Nothing
     , _ocIfMetagenerationMatch = Nothing
@@ -364,7 +364,7 @@ instance GoogleRequest ObjectsCopy where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsCopy{..}
+        requestClient ObjectsCopy'{..}
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject
@@ -391,7 +391,7 @@ instance GoogleRequest (MediaDownload ObjectsCopy)
         type Rs (MediaDownload ObjectsCopy) = Stream
         type Scopes (MediaDownload ObjectsCopy) =
              Scopes ObjectsCopy
-        requestClient (MediaDownload ObjectsCopy{..})
+        requestClient (MediaDownload ObjectsCopy'{..})
           = go _ocSourceBucket _ocSourceObject
               _ocDestinationBucket
               _ocDestinationObject

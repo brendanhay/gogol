@@ -55,7 +55,7 @@ type PlacementStrategiesUpdateResource =
 -- | Updates an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesUpdate' smart constructor.
-data PlacementStrategiesUpdate = PlacementStrategiesUpdate
+data PlacementStrategiesUpdate = PlacementStrategiesUpdate'
     { _psuProFileId :: !(Textual Int64)
     , _psuPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementStrategiesUpdate
     -> PlacementStrategy -- ^ 'psuPayload'
     -> PlacementStrategiesUpdate
 placementStrategiesUpdate pPsuProFileId_ pPsuPayload_ =
-    PlacementStrategiesUpdate
+    PlacementStrategiesUpdate'
     { _psuProFileId = _Coerce # pPsuProFileId_
     , _psuPayload = pPsuPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest PlacementStrategiesUpdate
         type Rs PlacementStrategiesUpdate = PlacementStrategy
         type Scopes PlacementStrategiesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementStrategiesUpdate{..}
+        requestClient PlacementStrategiesUpdate'{..}
           = go _psuProFileId (Just AltJSON) _psuPayload
               dFAReportingService
           where go

@@ -67,7 +67,7 @@ type VariantsStreamResource =
 -- ordered by reference name, position, and ID.
 --
 -- /See:/ 'variantsStream' smart constructor.
-data VariantsStream = VariantsStream
+data VariantsStream = VariantsStream'
     { _vXgafv          :: !(Maybe Text)
     , _vUploadProtocol :: !(Maybe Text)
     , _vPp             :: !Bool
@@ -101,7 +101,7 @@ variantsStream
     :: StreamVariantsRequest -- ^ 'vPayload'
     -> VariantsStream
 variantsStream pVPayload_ =
-    VariantsStream
+    VariantsStream'
     { _vXgafv = Nothing
     , _vUploadProtocol = Nothing
     , _vPp = True
@@ -155,7 +155,7 @@ instance GoogleRequest VariantsStream where
         type Scopes VariantsStream =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantsStream{..}
+        requestClient VariantsStream'{..}
           = go _vXgafv _vUploadProtocol (Just _vPp)
               _vAccessToken
               _vUploadType

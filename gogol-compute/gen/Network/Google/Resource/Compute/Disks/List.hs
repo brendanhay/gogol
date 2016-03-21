@@ -63,7 +63,7 @@ type DisksListResource =
 -- zone.
 --
 -- /See:/ 'disksList' smart constructor.
-data DisksList = DisksList
+data DisksList = DisksList'
     { _dlProject    :: !Text
     , _dlZone       :: !Text
     , _dlFilter     :: !(Maybe Text)
@@ -89,7 +89,7 @@ disksList
     -> Text -- ^ 'dlZone'
     -> DisksList
 disksList pDlProject_ pDlZone_ =
-    DisksList
+    DisksList'
     { _dlProject = pDlProject_
     , _dlZone = pDlZone_
     , _dlFilter = Nothing
@@ -152,7 +152,7 @@ instance GoogleRequest DisksList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient DisksList{..}
+        requestClient DisksList'{..}
           = go _dlProject _dlZone _dlFilter _dlPageToken
               (Just _dlMaxResults)
               (Just AltJSON)

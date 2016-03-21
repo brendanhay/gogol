@@ -56,7 +56,7 @@ type FloodlightActivitiesGeneratetagResource =
 -- | Generates a tag for a floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesGeneratetag' smart constructor.
-data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag
+data FloodlightActivitiesGeneratetag = FloodlightActivitiesGeneratetag'
     { _fagFloodlightActivityId :: !(Maybe (Textual Int64))
     , _fagProFileId            :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesGeneratetag
     :: Int64 -- ^ 'fagProFileId'
     -> FloodlightActivitiesGeneratetag
 floodlightActivitiesGeneratetag pFagProFileId_ =
-    FloodlightActivitiesGeneratetag
+    FloodlightActivitiesGeneratetag'
     { _fagFloodlightActivityId = Nothing
     , _fagProFileId = _Coerce # pFagProFileId_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest
              FloodlightActivitiesGenerateTagResponse
         type Scopes FloodlightActivitiesGeneratetag =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivitiesGeneratetag{..}
+        requestClient FloodlightActivitiesGeneratetag'{..}
           = go _fagProFileId _fagFloodlightActivityId
               (Just AltJSON)
               dFAReportingService

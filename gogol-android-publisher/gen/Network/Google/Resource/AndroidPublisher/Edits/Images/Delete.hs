@@ -61,7 +61,7 @@ type EditsImagesDeleteResource =
 -- | Deletes the image (specified by id) from the edit.
 --
 -- /See:/ 'editsImagesDelete' smart constructor.
-data EditsImagesDelete = EditsImagesDelete
+data EditsImagesDelete = EditsImagesDelete'
     { _eidPackageName :: !Text
     , _eidImageType   :: !EditsImagesDeleteImageType
     , _eidImageId     :: !Text
@@ -90,7 +90,7 @@ editsImagesDelete
     -> Text -- ^ 'eidEditId'
     -> EditsImagesDelete
 editsImagesDelete pEidPackageName_ pEidImageType_ pEidImageId_ pEidLanguage_ pEidEditId_ =
-    EditsImagesDelete
+    EditsImagesDelete'
     { _eidPackageName = pEidPackageName_
     , _eidImageType = pEidImageType_
     , _eidImageId = pEidImageId_
@@ -131,7 +131,7 @@ instance GoogleRequest EditsImagesDelete where
         type Rs EditsImagesDelete = ()
         type Scopes EditsImagesDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsImagesDelete{..}
+        requestClient EditsImagesDelete'{..}
           = go _eidPackageName _eidEditId _eidLanguage
               _eidImageType
               _eidImageId

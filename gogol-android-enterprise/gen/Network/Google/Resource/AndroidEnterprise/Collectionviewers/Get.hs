@@ -61,7 +61,7 @@ type CollectionviewersGetResource =
 -- viewersOnly then only these users will see the collection.
 --
 -- /See:/ 'collectionviewersGet' smart constructor.
-data CollectionviewersGet = CollectionviewersGet
+data CollectionviewersGet = CollectionviewersGet'
     { _cggEnterpriseId :: !Text
     , _cggCollectionId :: !Text
     , _cggUserId       :: !Text
@@ -82,7 +82,7 @@ collectionviewersGet
     -> Text -- ^ 'cggUserId'
     -> CollectionviewersGet
 collectionviewersGet pCggEnterpriseId_ pCggCollectionId_ pCggUserId_ =
-    CollectionviewersGet
+    CollectionviewersGet'
     { _cggEnterpriseId = pCggEnterpriseId_
     , _cggCollectionId = pCggCollectionId_
     , _cggUserId = pCggUserId_
@@ -109,7 +109,7 @@ instance GoogleRequest CollectionviewersGet where
         type Rs CollectionviewersGet = User
         type Scopes CollectionviewersGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionviewersGet{..}
+        requestClient CollectionviewersGet'{..}
           = go _cggEnterpriseId _cggCollectionId _cggUserId
               (Just AltJSON)
               androidEnterpriseService

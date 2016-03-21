@@ -64,7 +64,7 @@ type ProjectsServiceAccountsKeysGetResource =
 -- | Gets the ServiceAccountKey by key id.
 --
 -- /See:/ 'projectsServiceAccountsKeysGet' smart constructor.
-data ProjectsServiceAccountsKeysGet = ProjectsServiceAccountsKeysGet
+data ProjectsServiceAccountsKeysGet = ProjectsServiceAccountsKeysGet'
     { _psakgXgafv          :: !(Maybe Text)
     , _psakgUploadProtocol :: !(Maybe Text)
     , _psakgPp             :: !Bool
@@ -98,7 +98,7 @@ projectsServiceAccountsKeysGet
     :: Text -- ^ 'psakgName'
     -> ProjectsServiceAccountsKeysGet
 projectsServiceAccountsKeysGet pPsakgName_ =
-    ProjectsServiceAccountsKeysGet
+    ProjectsServiceAccountsKeysGet'
     { _psakgXgafv = Nothing
     , _psakgUploadProtocol = Nothing
     , _psakgPp = True
@@ -163,7 +163,7 @@ instance GoogleRequest ProjectsServiceAccountsKeysGet
              ServiceAccountKey
         type Scopes ProjectsServiceAccountsKeysGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsKeysGet{..}
+        requestClient ProjectsServiceAccountsKeysGet'{..}
           = go _psakgName _psakgXgafv _psakgUploadProtocol
               (Just _psakgPp)
               _psakgAccessToken

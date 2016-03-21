@@ -80,7 +80,7 @@ type CoursesPatchResource =
 -- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesPatch' smart constructor.
-data CoursesPatch = CoursesPatch
+data CoursesPatch = CoursesPatch'
     { _cpXgafv          :: !(Maybe Text)
     , _cpUploadProtocol :: !(Maybe Text)
     , _cpUpdateMask     :: !(Maybe Text)
@@ -121,7 +121,7 @@ coursesPatch
     -> Text -- ^ 'cpId'
     -> CoursesPatch
 coursesPatch pCpPayload_ pCpId_ =
-    CoursesPatch
+    CoursesPatch'
     { _cpXgafv = Nothing
     , _cpUploadProtocol = Nothing
     , _cpUpdateMask = Nothing
@@ -194,7 +194,7 @@ instance GoogleRequest CoursesPatch where
         type Rs CoursesPatch = Course
         type Scopes CoursesPatch =
              '["https://www.googleapis.com/auth/classroom.courses"]
-        requestClient CoursesPatch{..}
+        requestClient CoursesPatch'{..}
           = go _cpId _cpXgafv _cpUploadProtocol _cpUpdateMask
               (Just _cpPp)
               _cpAccessToken

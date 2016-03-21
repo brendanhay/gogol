@@ -58,7 +58,7 @@ type TaskListResource =
 -- | Retrieves a list of tasks.
 --
 -- /See:/ 'taskList'' smart constructor.
-data TaskList' = TaskList'
+data TaskList' = TaskList''
     { _tlPageToken  :: !(Maybe Text)
     , _tlTableId    :: !Text
     , _tlStartIndex :: !(Maybe (Textual Word32))
@@ -80,7 +80,7 @@ taskList'
     :: Text -- ^ 'tlTableId'
     -> TaskList'
 taskList' pTlTableId_ =
-    TaskList'
+    TaskList''
     { _tlPageToken = Nothing
     , _tlTableId = pTlTableId_
     , _tlStartIndex = Nothing
@@ -114,7 +114,7 @@ instance GoogleRequest TaskList' where
         type Scopes TaskList' =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient TaskList'{..}
+        requestClient TaskList''{..}
           = go _tlTableId _tlPageToken _tlStartIndex
               _tlMaxResults
               (Just AltJSON)

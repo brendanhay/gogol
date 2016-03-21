@@ -55,7 +55,7 @@ type CreativeFieldsUpdateResource =
 -- | Updates an existing creative field.
 --
 -- /See:/ 'creativeFieldsUpdate' smart constructor.
-data CreativeFieldsUpdate = CreativeFieldsUpdate
+data CreativeFieldsUpdate = CreativeFieldsUpdate'
     { _cfuProFileId :: !(Textual Int64)
     , _cfuPayload   :: !CreativeField
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeFieldsUpdate
     -> CreativeField -- ^ 'cfuPayload'
     -> CreativeFieldsUpdate
 creativeFieldsUpdate pCfuProFileId_ pCfuPayload_ =
-    CreativeFieldsUpdate
+    CreativeFieldsUpdate'
     { _cfuProFileId = _Coerce # pCfuProFileId_
     , _cfuPayload = pCfuPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CreativeFieldsUpdate where
         type Rs CreativeFieldsUpdate = CreativeField
         type Scopes CreativeFieldsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldsUpdate{..}
+        requestClient CreativeFieldsUpdate'{..}
           = go _cfuProFileId (Just AltJSON) _cfuPayload
               dFAReportingService
           where go

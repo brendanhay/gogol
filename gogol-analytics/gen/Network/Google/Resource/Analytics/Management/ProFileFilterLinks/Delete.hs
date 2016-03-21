@@ -61,7 +61,7 @@ type ManagementProFileFilterLinksDeleteResource =
 -- | Delete a profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksDelete' smart constructor.
-data ManagementProFileFilterLinksDelete = ManagementProFileFilterLinksDelete
+data ManagementProFileFilterLinksDelete = ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId :: !Text
     , _mpffldProFileId     :: !Text
     , _mpffldAccountId     :: !Text
@@ -86,7 +86,7 @@ managementProFileFilterLinksDelete
     -> Text -- ^ 'mpffldLinkId'
     -> ManagementProFileFilterLinksDelete
 managementProFileFilterLinksDelete pMpffldWebPropertyId_ pMpffldProFileId_ pMpffldAccountId_ pMpffldLinkId_ =
-    ManagementProFileFilterLinksDelete
+    ManagementProFileFilterLinksDelete'
     { _mpffldWebPropertyId = pMpffldWebPropertyId_
     , _mpffldProFileId = pMpffldProFileId_
     , _mpffldAccountId = pMpffldAccountId_
@@ -121,7 +121,7 @@ instance GoogleRequest
         type Rs ManagementProFileFilterLinksDelete = ()
         type Scopes ManagementProFileFilterLinksDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementProFileFilterLinksDelete{..}
+        requestClient ManagementProFileFilterLinksDelete'{..}
           = go _mpffldAccountId _mpffldWebPropertyId
               _mpffldProFileId
               _mpffldLinkId

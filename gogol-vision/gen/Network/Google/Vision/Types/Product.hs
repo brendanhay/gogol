@@ -47,7 +47,7 @@ import           Network.Google.Vision.Types.Sum
 -- NormalizeLatLng(-270.0, 10.0)
 --
 -- /See:/ 'latLng' smart constructor.
-data LatLng = LatLng
+data LatLng = LatLng'
     { _llLatitude  :: !(Maybe (Textual Double))
     , _llLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -62,7 +62,7 @@ data LatLng = LatLng
 latLng
     :: LatLng
 latLng =
-    LatLng
+    LatLng'
     { _llLatitude = Nothing
     , _llLongitude = Nothing
     }
@@ -83,11 +83,11 @@ instance FromJSON LatLng where
         parseJSON
           = withObject "LatLng"
               (\ o ->
-                 LatLng <$>
+                 LatLng' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON LatLng where
-        toJSON LatLng{..}
+        toJSON LatLng'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _llLatitude,
@@ -99,7 +99,7 @@ instance ToJSON LatLng where
 -- number of top-scoring results to return.
 --
 -- /See:/ 'feature' smart constructor.
-data Feature = Feature
+data Feature = Feature'
     { _fType       :: !(Maybe FeatureType)
     , _fMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -114,7 +114,7 @@ data Feature = Feature
 feature
     :: Feature
 feature =
-    Feature
+    Feature'
     { _fType = Nothing
     , _fMaxResults = Nothing
     }
@@ -133,10 +133,10 @@ instance FromJSON Feature where
         parseJSON
           = withObject "Feature"
               (\ o ->
-                 Feature <$> (o .:? "type") <*> (o .:? "maxResults"))
+                 Feature' <$> (o .:? "type") <*> (o .:? "maxResults"))
 
 instance ToJSON Feature where
-        toJSON Feature{..}
+        toJSON Feature'{..}
           = object
               (catMaybes
                  [("type" .=) <$> _fType,
@@ -179,7 +179,7 @@ instance ToJSON Feature where
 -- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -197,7 +197,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -227,12 +227,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -242,7 +242,7 @@ instance ToJSON Status where
 -- | Arbitrary name\/value pair.
 --
 -- /See:/ 'property' smart constructor.
-data Property = Property
+data Property = Property'
     { _pValue :: !(Maybe Text)
     , _pName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -257,7 +257,7 @@ data Property = Property
 property
     :: Property
 property =
-    Property
+    Property'
     { _pValue = Nothing
     , _pName = Nothing
     }
@@ -274,10 +274,10 @@ instance FromJSON Property where
         parseJSON
           = withObject "Property"
               (\ o ->
-                 Property <$> (o .:? "value") <*> (o .:? "name"))
+                 Property' <$> (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON Property where
-        toJSON Property{..}
+        toJSON Property'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pValue, ("name" .=) <$> _pName])
@@ -285,7 +285,7 @@ instance ToJSON Property where
 -- | Client image to perform Vision tasks over.
 --
 -- /See:/ 'image' smart constructor.
-data Image = Image
+data Image = Image'
     { _iContent :: !(Maybe (Textual Word8))
     , _iSource  :: !(Maybe ImageSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -300,7 +300,7 @@ data Image = Image
 image
     :: Image
 image =
-    Image
+    Image'
     { _iContent = Nothing
     , _iSource = Nothing
     }
@@ -321,10 +321,10 @@ instance FromJSON Image where
         parseJSON
           = withObject "Image"
               (\ o ->
-                 Image <$> (o .:? "content") <*> (o .:? "source"))
+                 Image' <$> (o .:? "content") <*> (o .:? "source"))
 
 instance ToJSON Image where
-        toJSON Image{..}
+        toJSON Image'{..}
           = object
               (catMaybes
                  [("content" .=) <$> _iContent,
@@ -336,7 +336,7 @@ instance ToJSON Image where
 -- \<= x \< width or 0 \<= y \< height.
 --
 -- /See:/ 'landmark' smart constructor.
-data Landmark = Landmark
+data Landmark = Landmark'
     { _lType     :: !(Maybe LandmarkType)
     , _lPosition :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -351,7 +351,7 @@ data Landmark = Landmark
 landmark
     :: Landmark
 landmark =
-    Landmark
+    Landmark'
     { _lType = Nothing
     , _lPosition = Nothing
     }
@@ -369,10 +369,10 @@ instance FromJSON Landmark where
         parseJSON
           = withObject "Landmark"
               (\ o ->
-                 Landmark <$> (o .:? "type") <*> (o .:? "position"))
+                 Landmark' <$> (o .:? "type") <*> (o .:? "position"))
 
 instance ToJSON Landmark where
-        toJSON Landmark{..}
+        toJSON Landmark'{..}
           = object
               (catMaybes
                  [("type" .=) <$> _lType,
@@ -425,7 +425,7 @@ instance ToJSON Landmark where
 -- ...
 --
 -- /See:/ 'color' smart constructor.
-data Color = Color
+data Color = Color'
     { _cRed   :: !(Maybe (Textual Double))
     , _cAlpha :: !(Maybe (Textual Double))
     , _cGreen :: !(Maybe (Textual Double))
@@ -446,7 +446,7 @@ data Color = Color
 color
     :: Color
 color =
-    Color
+    Color'
     { _cRed = Nothing
     , _cAlpha = Nothing
     , _cGreen = Nothing
@@ -489,12 +489,12 @@ instance FromJSON Color where
         parseJSON
           = withObject "Color"
               (\ o ->
-                 Color <$>
+                 Color' <$>
                    (o .:? "red") <*> (o .:? "alpha") <*> (o .:? "green")
                      <*> (o .:? "blue"))
 
 instance ToJSON Color where
-        toJSON Color{..}
+        toJSON Color'{..}
           = object
               (catMaybes
                  [("red" .=) <$> _cRed, ("alpha" .=) <$> _cAlpha,
@@ -503,7 +503,7 @@ instance ToJSON Color where
 -- | A bounding polygon for the detected image annotation.
 --
 -- /See:/ 'boundingPoly' smart constructor.
-newtype BoundingPoly = BoundingPoly
+newtype BoundingPoly = BoundingPoly'
     { _bpVertices :: Maybe [Vertex]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -515,7 +515,7 @@ newtype BoundingPoly = BoundingPoly
 boundingPoly
     :: BoundingPoly
 boundingPoly =
-    BoundingPoly
+    BoundingPoly'
     { _bpVertices = Nothing
     }
 
@@ -530,10 +530,10 @@ instance FromJSON BoundingPoly where
         parseJSON
           = withObject "BoundingPoly"
               (\ o ->
-                 BoundingPoly <$> (o .:? "vertices" .!= mempty))
+                 BoundingPoly' <$> (o .:? "vertices" .!= mempty))
 
 instance ToJSON BoundingPoly where
-        toJSON BoundingPoly{..}
+        toJSON BoundingPoly'{..}
           = object
               (catMaybes [("vertices" .=) <$> _bpVertices])
 
@@ -541,7 +541,7 @@ instance ToJSON BoundingPoly where
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'vertex' smart constructor.
-data Vertex = Vertex
+data Vertex = Vertex'
     { _vX :: !(Maybe (Textual Int32))
     , _vY :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -556,7 +556,7 @@ data Vertex = Vertex
 vertex
     :: Vertex
 vertex =
-    Vertex
+    Vertex'
     { _vX = Nothing
     , _vY = Nothing
     }
@@ -572,17 +572,17 @@ vY = lens _vY (\ s a -> s{_vY = a}) . mapping _Coerce
 instance FromJSON Vertex where
         parseJSON
           = withObject "Vertex"
-              (\ o -> Vertex <$> (o .:? "x") <*> (o .:? "y"))
+              (\ o -> Vertex' <$> (o .:? "x") <*> (o .:? "y"))
 
 instance ToJSON Vertex where
-        toJSON Vertex{..}
+        toJSON Vertex'{..}
           = object
               (catMaybes [("x" .=) <$> _vX, ("y" .=) <$> _vY])
 
 -- | Detected entity location information.
 --
 -- /See:/ 'locationInfo' smart constructor.
-newtype LocationInfo = LocationInfo
+newtype LocationInfo = LocationInfo'
     { _liLatLng :: Maybe LatLng
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -594,7 +594,7 @@ newtype LocationInfo = LocationInfo
 locationInfo
     :: LocationInfo
 locationInfo =
-    LocationInfo
+    LocationInfo'
     { _liLatLng = Nothing
     }
 
@@ -605,15 +605,15 @@ liLatLng = lens _liLatLng (\ s a -> s{_liLatLng = a})
 instance FromJSON LocationInfo where
         parseJSON
           = withObject "LocationInfo"
-              (\ o -> LocationInfo <$> (o .:? "latLng"))
+              (\ o -> LocationInfo' <$> (o .:? "latLng"))
 
 instance ToJSON LocationInfo where
-        toJSON LocationInfo{..}
+        toJSON LocationInfo'{..}
           = object (catMaybes [("latLng" .=) <$> _liLatLng])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -626,7 +626,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -639,7 +639,7 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
@@ -648,7 +648,7 @@ instance ToJSON StatusDetailsItem where
 -- call.
 --
 -- /See:/ 'batchAnnotateImagesRequest' smart constructor.
-newtype BatchAnnotateImagesRequest = BatchAnnotateImagesRequest
+newtype BatchAnnotateImagesRequest = BatchAnnotateImagesRequest'
     { _bairRequests :: Maybe [AnnotateImageRequest]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -660,7 +660,7 @@ newtype BatchAnnotateImagesRequest = BatchAnnotateImagesRequest
 batchAnnotateImagesRequest
     :: BatchAnnotateImagesRequest
 batchAnnotateImagesRequest =
-    BatchAnnotateImagesRequest
+    BatchAnnotateImagesRequest'
     { _bairRequests = Nothing
     }
 
@@ -675,11 +675,11 @@ instance FromJSON BatchAnnotateImagesRequest where
         parseJSON
           = withObject "BatchAnnotateImagesRequest"
               (\ o ->
-                 BatchAnnotateImagesRequest <$>
+                 BatchAnnotateImagesRequest' <$>
                    (o .:? "requests" .!= mempty))
 
 instance ToJSON BatchAnnotateImagesRequest where
-        toJSON BatchAnnotateImagesRequest{..}
+        toJSON BatchAnnotateImagesRequest'{..}
           = object
               (catMaybes [("requests" .=) <$> _bairRequests])
 
@@ -687,7 +687,7 @@ instance ToJSON BatchAnnotateImagesRequest where
 -- the color occupies in the image.
 --
 -- /See:/ 'colorInfo' smart constructor.
-data ColorInfo = ColorInfo
+data ColorInfo = ColorInfo'
     { _ciColor         :: !(Maybe Color)
     , _ciScore         :: !(Maybe (Textual Double))
     , _ciPixelFraction :: !(Maybe (Textual Double))
@@ -705,7 +705,7 @@ data ColorInfo = ColorInfo
 colorInfo
     :: ColorInfo
 colorInfo =
-    ColorInfo
+    ColorInfo'
     { _ciColor = Nothing
     , _ciScore = Nothing
     , _ciPixelFraction = Nothing
@@ -733,12 +733,12 @@ instance FromJSON ColorInfo where
         parseJSON
           = withObject "ColorInfo"
               (\ o ->
-                 ColorInfo <$>
+                 ColorInfo' <$>
                    (o .:? "color") <*> (o .:? "score") <*>
                      (o .:? "pixelFraction"))
 
 instance ToJSON ColorInfo where
-        toJSON ColorInfo{..}
+        toJSON ColorInfo'{..}
           = object
               (catMaybes
                  [("color" .=) <$> _ciColor,
@@ -748,7 +748,7 @@ instance ToJSON ColorInfo where
 -- | Response to an image annotation request.
 --
 -- /See:/ 'annotateImageResponse' smart constructor.
-data AnnotateImageResponse = AnnotateImageResponse
+data AnnotateImageResponse = AnnotateImageResponse'
     { _airLogoAnnotations           :: !(Maybe [EntityAnnotation])
     , _airLabelAnnotations          :: !(Maybe [EntityAnnotation])
     , _airFaceAnnotations           :: !(Maybe [FaceAnnotation])
@@ -781,7 +781,7 @@ data AnnotateImageResponse = AnnotateImageResponse
 annotateImageResponse
     :: AnnotateImageResponse
 annotateImageResponse =
-    AnnotateImageResponse
+    AnnotateImageResponse'
     { _airLogoAnnotations = Nothing
     , _airLabelAnnotations = Nothing
     , _airFaceAnnotations = Nothing
@@ -854,7 +854,7 @@ instance FromJSON AnnotateImageResponse where
         parseJSON
           = withObject "AnnotateImageResponse"
               (\ o ->
-                 AnnotateImageResponse <$>
+                 AnnotateImageResponse' <$>
                    (o .:? "logoAnnotations" .!= mempty) <*>
                      (o .:? "labelAnnotations" .!= mempty)
                      <*> (o .:? "faceAnnotations" .!= mempty)
@@ -865,7 +865,7 @@ instance FromJSON AnnotateImageResponse where
                      <*> (o .:? "imagePropertiesAnnotation"))
 
 instance ToJSON AnnotateImageResponse where
-        toJSON AnnotateImageResponse{..}
+        toJSON AnnotateImageResponse'{..}
           = object
               (catMaybes
                  [("logoAnnotations" .=) <$> _airLogoAnnotations,
@@ -883,7 +883,7 @@ instance ToJSON AnnotateImageResponse where
 -- | Stores image properties (e.g. dominant colors).
 --
 -- /See:/ 'imageProperties' smart constructor.
-newtype ImageProperties = ImageProperties
+newtype ImageProperties = ImageProperties'
     { _ipDominantColors :: Maybe DominantColorsAnnotation
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -895,7 +895,7 @@ newtype ImageProperties = ImageProperties
 imageProperties
     :: ImageProperties
 imageProperties =
-    ImageProperties
+    ImageProperties'
     { _ipDominantColors = Nothing
     }
 
@@ -908,10 +908,11 @@ ipDominantColors
 instance FromJSON ImageProperties where
         parseJSON
           = withObject "ImageProperties"
-              (\ o -> ImageProperties <$> (o .:? "dominantColors"))
+              (\ o ->
+                 ImageProperties' <$> (o .:? "dominantColors"))
 
 instance ToJSON ImageProperties where
-        toJSON ImageProperties{..}
+        toJSON ImageProperties'{..}
           = object
               (catMaybes
                  [("dominantColors" .=) <$> _ipDominantColors])
@@ -919,7 +920,7 @@ instance ToJSON ImageProperties where
 -- | A face annotation contains the results of face detection.
 --
 -- /See:/ 'faceAnnotation' smart constructor.
-data FaceAnnotation = FaceAnnotation
+data FaceAnnotation = FaceAnnotation'
     { _faTiltAngle              :: !(Maybe (Textual Double))
     , _faBlurredLikelihood      :: !(Maybe FaceAnnotationBlurredLikelihood)
     , _faBoundingPoly           :: !(Maybe BoundingPoly)
@@ -973,7 +974,7 @@ data FaceAnnotation = FaceAnnotation
 faceAnnotation
     :: FaceAnnotation
 faceAnnotation =
-    FaceAnnotation
+    FaceAnnotation'
     { _faTiltAngle = Nothing
     , _faBlurredLikelihood = Nothing
     , _faBoundingPoly = Nothing
@@ -1104,7 +1105,7 @@ instance FromJSON FaceAnnotation where
         parseJSON
           = withObject "FaceAnnotation"
               (\ o ->
-                 FaceAnnotation <$>
+                 FaceAnnotation' <$>
                    (o .:? "tiltAngle") <*> (o .:? "blurredLikelihood")
                      <*> (o .:? "boundingPoly")
                      <*> (o .:? "surpriseLikelihood")
@@ -1121,7 +1122,7 @@ instance FromJSON FaceAnnotation where
                      <*> (o .:? "landmarks" .!= mempty))
 
 instance ToJSON FaceAnnotation where
-        toJSON FaceAnnotation{..}
+        toJSON FaceAnnotation'{..}
           = object
               (catMaybes
                  [("tiltAngle" .=) <$> _faTiltAngle,
@@ -1146,7 +1147,7 @@ instance ToJSON FaceAnnotation where
 -- | Set of detected entity features.
 --
 -- /See:/ 'entityAnnotation' smart constructor.
-data EntityAnnotation = EntityAnnotation
+data EntityAnnotation = EntityAnnotation'
     { _eaScore        :: !(Maybe (Textual Double))
     , _eaTopicality   :: !(Maybe (Textual Double))
     , _eaLocale       :: !(Maybe Text)
@@ -1182,7 +1183,7 @@ data EntityAnnotation = EntityAnnotation
 entityAnnotation
     :: EntityAnnotation
 entityAnnotation =
-    EntityAnnotation
+    EntityAnnotation'
     { _eaScore = Nothing
     , _eaTopicality = Nothing
     , _eaLocale = Nothing
@@ -1263,7 +1264,7 @@ instance FromJSON EntityAnnotation where
         parseJSON
           = withObject "EntityAnnotation"
               (\ o ->
-                 EntityAnnotation <$>
+                 EntityAnnotation' <$>
                    (o .:? "score") <*> (o .:? "topicality") <*>
                      (o .:? "locale")
                      <*> (o .:? "boundingPoly")
@@ -1274,7 +1275,7 @@ instance FromJSON EntityAnnotation where
                      <*> (o .:? "properties" .!= mempty))
 
 instance ToJSON EntityAnnotation where
-        toJSON EntityAnnotation{..}
+        toJSON EntityAnnotation'{..}
           = object
               (catMaybes
                  [("score" .=) <$> _eaScore,
@@ -1291,7 +1292,7 @@ instance ToJSON EntityAnnotation where
 -- user-requested features.
 --
 -- /See:/ 'annotateImageRequest' smart constructor.
-data AnnotateImageRequest = AnnotateImageRequest
+data AnnotateImageRequest = AnnotateImageRequest'
     { _airImage        :: !(Maybe Image)
     , _airFeatures     :: !(Maybe [Feature])
     , _airImageContext :: !(Maybe ImageContext)
@@ -1309,7 +1310,7 @@ data AnnotateImageRequest = AnnotateImageRequest
 annotateImageRequest
     :: AnnotateImageRequest
 annotateImageRequest =
-    AnnotateImageRequest
+    AnnotateImageRequest'
     { _airImage = Nothing
     , _airFeatures = Nothing
     , _airImageContext = Nothing
@@ -1336,12 +1337,12 @@ instance FromJSON AnnotateImageRequest where
         parseJSON
           = withObject "AnnotateImageRequest"
               (\ o ->
-                 AnnotateImageRequest <$>
+                 AnnotateImageRequest' <$>
                    (o .:? "image") <*> (o .:? "features" .!= mempty) <*>
                      (o .:? "imageContext"))
 
 instance ToJSON AnnotateImageRequest where
-        toJSON AnnotateImageRequest{..}
+        toJSON AnnotateImageRequest'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _airImage,
@@ -1351,7 +1352,7 @@ instance ToJSON AnnotateImageRequest where
 -- | External image source (i.e. Google Cloud Storage image location).
 --
 -- /See:/ 'imageSource' smart constructor.
-newtype ImageSource = ImageSource
+newtype ImageSource = ImageSource'
     { _isGcsImageURI :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1363,7 +1364,7 @@ newtype ImageSource = ImageSource
 imageSource
     :: ImageSource
 imageSource =
-    ImageSource
+    ImageSource'
     { _isGcsImageURI = Nothing
     }
 
@@ -1379,10 +1380,10 @@ isGcsImageURI
 instance FromJSON ImageSource where
         parseJSON
           = withObject "ImageSource"
-              (\ o -> ImageSource <$> (o .:? "gcsImageUri"))
+              (\ o -> ImageSource' <$> (o .:? "gcsImageUri"))
 
 instance ToJSON ImageSource where
-        toJSON ImageSource{..}
+        toJSON ImageSource'{..}
           = object
               (catMaybes [("gcsImageUri" .=) <$> _isGcsImageURI])
 
@@ -1391,7 +1392,7 @@ instance ToJSON ImageSource where
 -- medical, violence).
 --
 -- /See:/ 'safeSearchAnnotation' smart constructor.
-data SafeSearchAnnotation = SafeSearchAnnotation
+data SafeSearchAnnotation = SafeSearchAnnotation'
     { _ssaSpoof    :: !(Maybe SafeSearchAnnotationSpoof)
     , _ssaAdult    :: !(Maybe SafeSearchAnnotationAdult)
     , _ssaMedical  :: !(Maybe SafeSearchAnnotationMedical)
@@ -1412,7 +1413,7 @@ data SafeSearchAnnotation = SafeSearchAnnotation
 safeSearchAnnotation
     :: SafeSearchAnnotation
 safeSearchAnnotation =
-    SafeSearchAnnotation
+    SafeSearchAnnotation'
     { _ssaSpoof = Nothing
     , _ssaAdult = Nothing
     , _ssaMedical = Nothing
@@ -1442,13 +1443,13 @@ instance FromJSON SafeSearchAnnotation where
         parseJSON
           = withObject "SafeSearchAnnotation"
               (\ o ->
-                 SafeSearchAnnotation <$>
+                 SafeSearchAnnotation' <$>
                    (o .:? "spoof") <*> (o .:? "adult") <*>
                      (o .:? "medical")
                      <*> (o .:? "violence"))
 
 instance ToJSON SafeSearchAnnotation where
-        toJSON SafeSearchAnnotation{..}
+        toJSON SafeSearchAnnotation'{..}
           = object
               (catMaybes
                  [("spoof" .=) <$> _ssaSpoof,
@@ -1459,7 +1460,7 @@ instance ToJSON SafeSearchAnnotation where
 -- | Image context.
 --
 -- /See:/ 'imageContext' smart constructor.
-data ImageContext = ImageContext
+data ImageContext = ImageContext'
     { _icLanguageHints :: !(Maybe [Text])
     , _icLatLongRect   :: !(Maybe LatLongRect)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1474,7 +1475,7 @@ data ImageContext = ImageContext
 imageContext
     :: ImageContext
 imageContext =
-    ImageContext
+    ImageContext'
     { _icLanguageHints = Nothing
     , _icLatLongRect = Nothing
     }
@@ -1506,12 +1507,12 @@ instance FromJSON ImageContext where
         parseJSON
           = withObject "ImageContext"
               (\ o ->
-                 ImageContext <$>
+                 ImageContext' <$>
                    (o .:? "languageHints" .!= mempty) <*>
                      (o .:? "latLongRect"))
 
 instance ToJSON ImageContext where
-        toJSON ImageContext{..}
+        toJSON ImageContext'{..}
           = object
               (catMaybes
                  [("languageHints" .=) <$> _icLanguageHints,
@@ -1520,7 +1521,7 @@ instance ToJSON ImageContext where
 -- | Set of dominant colors and their corresponding scores.
 --
 -- /See:/ 'dominantColorsAnnotation' smart constructor.
-newtype DominantColorsAnnotation = DominantColorsAnnotation
+newtype DominantColorsAnnotation = DominantColorsAnnotation'
     { _dcaColors :: Maybe [ColorInfo]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1532,7 +1533,7 @@ newtype DominantColorsAnnotation = DominantColorsAnnotation
 dominantColorsAnnotation
     :: DominantColorsAnnotation
 dominantColorsAnnotation =
-    DominantColorsAnnotation
+    DominantColorsAnnotation'
     { _dcaColors = Nothing
     }
 
@@ -1547,17 +1548,17 @@ instance FromJSON DominantColorsAnnotation where
         parseJSON
           = withObject "DominantColorsAnnotation"
               (\ o ->
-                 DominantColorsAnnotation <$>
+                 DominantColorsAnnotation' <$>
                    (o .:? "colors" .!= mempty))
 
 instance ToJSON DominantColorsAnnotation where
-        toJSON DominantColorsAnnotation{..}
+        toJSON DominantColorsAnnotation'{..}
           = object (catMaybes [("colors" .=) <$> _dcaColors])
 
 -- | Rectangle determined by min and max LatLng pairs.
 --
 -- /See:/ 'latLongRect' smart constructor.
-data LatLongRect = LatLongRect
+data LatLongRect = LatLongRect'
     { _llrMaxLatLng :: !(Maybe LatLng)
     , _llrMinLatLng :: !(Maybe LatLng)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1572,7 +1573,7 @@ data LatLongRect = LatLongRect
 latLongRect
     :: LatLongRect
 latLongRect =
-    LatLongRect
+    LatLongRect'
     { _llrMaxLatLng = Nothing
     , _llrMinLatLng = Nothing
     }
@@ -1591,11 +1592,11 @@ instance FromJSON LatLongRect where
         parseJSON
           = withObject "LatLongRect"
               (\ o ->
-                 LatLongRect <$>
+                 LatLongRect' <$>
                    (o .:? "maxLatLng") <*> (o .:? "minLatLng"))
 
 instance ToJSON LatLongRect where
-        toJSON LatLongRect{..}
+        toJSON LatLongRect'{..}
           = object
               (catMaybes
                  [("maxLatLng" .=) <$> _llrMaxLatLng,
@@ -1604,7 +1605,7 @@ instance ToJSON LatLongRect where
 -- | Response to a batch image annotation request.
 --
 -- /See:/ 'batchAnnotateImagesResponse' smart constructor.
-newtype BatchAnnotateImagesResponse = BatchAnnotateImagesResponse
+newtype BatchAnnotateImagesResponse = BatchAnnotateImagesResponse'
     { _bairResponses :: Maybe [AnnotateImageResponse]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1616,7 +1617,7 @@ newtype BatchAnnotateImagesResponse = BatchAnnotateImagesResponse
 batchAnnotateImagesResponse
     :: BatchAnnotateImagesResponse
 batchAnnotateImagesResponse =
-    BatchAnnotateImagesResponse
+    BatchAnnotateImagesResponse'
     { _bairResponses = Nothing
     }
 
@@ -1632,11 +1633,11 @@ instance FromJSON BatchAnnotateImagesResponse where
         parseJSON
           = withObject "BatchAnnotateImagesResponse"
               (\ o ->
-                 BatchAnnotateImagesResponse <$>
+                 BatchAnnotateImagesResponse' <$>
                    (o .:? "responses" .!= mempty))
 
 instance ToJSON BatchAnnotateImagesResponse where
-        toJSON BatchAnnotateImagesResponse{..}
+        toJSON BatchAnnotateImagesResponse'{..}
           = object
               (catMaybes [("responses" .=) <$> _bairResponses])
 
@@ -1645,7 +1646,7 @@ instance ToJSON BatchAnnotateImagesResponse where
 -- coordinates are in the same scale as the original image.
 --
 -- /See:/ 'position' smart constructor.
-data Position = Position
+data Position = Position'
     { _pZ :: !(Maybe (Textual Double))
     , _pX :: !(Maybe (Textual Double))
     , _pY :: !(Maybe (Textual Double))
@@ -1663,7 +1664,7 @@ data Position = Position
 position
     :: Position
 position =
-    Position
+    Position'
     { _pZ = Nothing
     , _pX = Nothing
     , _pY = Nothing
@@ -1685,11 +1686,11 @@ instance FromJSON Position where
         parseJSON
           = withObject "Position"
               (\ o ->
-                 Position <$>
+                 Position' <$>
                    (o .:? "z") <*> (o .:? "x") <*> (o .:? "y"))
 
 instance ToJSON Position where
-        toJSON Position{..}
+        toJSON Position'{..}
           = object
               (catMaybes
                  [("z" .=) <$> _pZ, ("x" .=) <$> _pX,

@@ -54,7 +54,7 @@ type VerificationCodesGenerateResource =
 -- | Generate new backup verification codes for the user.
 --
 -- /See:/ 'verificationCodesGenerate' smart constructor.
-newtype VerificationCodesGenerate = VerificationCodesGenerate
+newtype VerificationCodesGenerate = VerificationCodesGenerate'
     { _vcgUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ verificationCodesGenerate
     :: Text -- ^ 'vcgUserKey'
     -> VerificationCodesGenerate
 verificationCodesGenerate pVcgUserKey_ =
-    VerificationCodesGenerate
+    VerificationCodesGenerate'
     { _vcgUserKey = pVcgUserKey_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest VerificationCodesGenerate
         type Rs VerificationCodesGenerate = ()
         type Scopes VerificationCodesGenerate =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient VerificationCodesGenerate{..}
+        requestClient VerificationCodesGenerate'{..}
           = go _vcgUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

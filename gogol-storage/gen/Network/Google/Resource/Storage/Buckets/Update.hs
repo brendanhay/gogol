@@ -67,7 +67,7 @@ type BucketsUpdateResource =
 -- | Updates a bucket.
 --
 -- /See:/ 'bucketsUpdate' smart constructor.
-data BucketsUpdate = BucketsUpdate
+data BucketsUpdate = BucketsUpdate'
     { _buIfMetagenerationMatch      :: !(Maybe (Textual Int64))
     , _buPredefinedACL              :: !(Maybe BucketsUpdatePredefinedACL)
     , _buBucket                     :: !Text
@@ -99,7 +99,7 @@ bucketsUpdate
     -> Bucket -- ^ 'buPayload'
     -> BucketsUpdate
 bucketsUpdate pBuBucket_ pBuPayload_ =
-    BucketsUpdate
+    BucketsUpdate'
     { _buIfMetagenerationMatch = Nothing
     , _buPredefinedACL = Nothing
     , _buBucket = pBuBucket_
@@ -157,7 +157,7 @@ instance GoogleRequest BucketsUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient BucketsUpdate{..}
+        requestClient BucketsUpdate'{..}
           = go _buBucket _buIfMetagenerationMatch
               _buPredefinedACL
               _buPredefinedDefaultObjectACL

@@ -145,7 +145,7 @@ type CSEListResource =
 -- search engine used for the search, and the search results.
 --
 -- /See:/ 'cSEList' smart constructor.
-data CSEList = CSEList
+data CSEList = CSEList'
     { _cselImgDominantColor :: !(Maybe CSEListImgDominantColor)
     , _cselSiteSearchFilter :: !(Maybe CSEListSiteSearchFilter)
     , _cselC2coff           :: !(Maybe Text)
@@ -251,7 +251,7 @@ cSEList
     :: Text -- ^ 'cselQ'
     -> CSEList
 cSEList pCselQ_ =
-    CSEList
+    CSEList'
     { _cselImgDominantColor = Nothing
     , _cselSiteSearchFilter = Nothing
     , _cselC2coff = Nothing
@@ -467,7 +467,7 @@ cselHighRange
 instance GoogleRequest CSEList where
         type Rs CSEList = Search
         type Scopes CSEList = '[]
-        requestClient CSEList{..}
+        requestClient CSEList'{..}
           = go (Just _cselQ) _cselImgDominantColor
               _cselSiteSearchFilter
               _cselC2coff

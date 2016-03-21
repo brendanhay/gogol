@@ -58,7 +58,7 @@ type RoomsLeaveResource =
 -- method directly is unsupported.
 --
 -- /See:/ 'roomsLeave' smart constructor.
-data RoomsLeave = RoomsLeave
+data RoomsLeave = RoomsLeave'
     { _rlPayload  :: !RoomLeaveRequest
     , _rlRoomId   :: !Text
     , _rlLanguage :: !(Maybe Text)
@@ -78,7 +78,7 @@ roomsLeave
     -> Text -- ^ 'rlRoomId'
     -> RoomsLeave
 roomsLeave pRlPayload_ pRlRoomId_ =
-    RoomsLeave
+    RoomsLeave'
     { _rlPayload = pRlPayload_
     , _rlRoomId = pRlRoomId_
     , _rlLanguage = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest RoomsLeave where
         type Scopes RoomsLeave =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsLeave{..}
+        requestClient RoomsLeave'{..}
           = go _rlRoomId _rlLanguage (Just AltJSON) _rlPayload
               gamesService
           where go

@@ -55,7 +55,7 @@ type GroupsAliasesDeleteResource =
 -- | Remove a alias for the group
 --
 -- /See:/ 'groupsAliasesDelete' smart constructor.
-data GroupsAliasesDelete = GroupsAliasesDelete
+data GroupsAliasesDelete = GroupsAliasesDelete'
     { _gadGroupKey :: !Text
     , _gadAlias    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsAliasesDelete
     -> Text -- ^ 'gadAlias'
     -> GroupsAliasesDelete
 groupsAliasesDelete pGadGroupKey_ pGadAlias_ =
-    GroupsAliasesDelete
+    GroupsAliasesDelete'
     { _gadGroupKey = pGadGroupKey_
     , _gadAlias = pGadAlias_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest GroupsAliasesDelete where
         type Rs GroupsAliasesDelete = ()
         type Scopes GroupsAliasesDelete =
              '["https://www.googleapis.com/auth/admin.directory.group"]
-        requestClient GroupsAliasesDelete{..}
+        requestClient GroupsAliasesDelete'{..}
           = go _gadGroupKey _gadAlias (Just AltJSON)
               directoryService
           where go

@@ -57,7 +57,7 @@ type ImagesInsertResource =
 -- request.
 --
 -- /See:/ 'imagesInsert' smart constructor.
-data ImagesInsert = ImagesInsert
+data ImagesInsert = ImagesInsert'
     { _iiProject :: !Text
     , _iiPayload :: !Image
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ imagesInsert
     -> Image -- ^ 'iiPayload'
     -> ImagesInsert
 imagesInsert pIiProject_ pIiPayload_ =
-    ImagesInsert
+    ImagesInsert'
     { _iiProject = pIiProject_
     , _iiPayload = pIiPayload_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest ImagesInsert where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ImagesInsert{..}
+        requestClient ImagesInsert'{..}
           = go _iiProject (Just AltJSON) _iiPayload
               computeService
           where go

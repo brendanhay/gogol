@@ -71,7 +71,7 @@ type ProjectsJobsWorkItemsReportStatusResource =
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
 -- /See:/ 'projectsJobsWorkItemsReportStatus' smart constructor.
-data ProjectsJobsWorkItemsReportStatus = ProjectsJobsWorkItemsReportStatus
+data ProjectsJobsWorkItemsReportStatus = ProjectsJobsWorkItemsReportStatus'
     { _pjwirsXgafv          :: !(Maybe Text)
     , _pjwirsJobId          :: !Text
     , _pjwirsUploadProtocol :: !(Maybe Text)
@@ -113,7 +113,7 @@ projectsJobsWorkItemsReportStatus
     -> Text -- ^ 'pjwirsProjectId'
     -> ProjectsJobsWorkItemsReportStatus
 projectsJobsWorkItemsReportStatus pPjwirsJobId_ pPjwirsPayload_ pPjwirsProjectId_ =
-    ProjectsJobsWorkItemsReportStatus
+    ProjectsJobsWorkItemsReportStatus'
     { _pjwirsXgafv = Nothing
     , _pjwirsJobId = pPjwirsJobId_
     , _pjwirsUploadProtocol = Nothing
@@ -189,7 +189,7 @@ instance GoogleRequest
         type Scopes ProjectsJobsWorkItemsReportStatus =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ProjectsJobsWorkItemsReportStatus{..}
+        requestClient ProjectsJobsWorkItemsReportStatus'{..}
           = go _pjwirsProjectId _pjwirsJobId _pjwirsXgafv
               _pjwirsUploadProtocol
               (Just _pjwirsPp)

@@ -50,19 +50,19 @@ type QueriesListqueriesResource =
 --
 -- /See:/ 'queriesListqueries' smart constructor.
 data QueriesListqueries =
-    QueriesListqueries
+    QueriesListqueries'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueriesListqueries' with the minimum fields required to make a request.
 --
 queriesListqueries
     :: QueriesListqueries
-queriesListqueries = QueriesListqueries
+queriesListqueries = QueriesListqueries'
 
 instance GoogleRequest QueriesListqueries where
         type Rs QueriesListqueries = ListQueriesResponse
         type Scopes QueriesListqueries = '[]
-        requestClient QueriesListqueries{}
+        requestClient QueriesListqueries'{}
           = go (Just AltJSON) doubleClickBidsService
           where go
                   = buildClient

@@ -59,7 +59,7 @@ type StorelayoutclustersInsertResource =
 -- | Inserts a new cluster in a page.
 --
 -- /See:/ 'storelayoutclustersInsert' smart constructor.
-data StorelayoutclustersInsert = StorelayoutclustersInsert
+data StorelayoutclustersInsert = StorelayoutclustersInsert'
     { _sEnterpriseId :: !Text
     , _sPageId       :: !Text
     , _sPayload      :: !StoreCluster
@@ -80,7 +80,7 @@ storelayoutclustersInsert
     -> StoreCluster -- ^ 'sPayload'
     -> StorelayoutclustersInsert
 storelayoutclustersInsert pSEnterpriseId_ pSPageId_ pSPayload_ =
-    StorelayoutclustersInsert
+    StorelayoutclustersInsert'
     { _sEnterpriseId = pSEnterpriseId_
     , _sPageId = pSPageId_
     , _sPayload = pSPayload_
@@ -105,7 +105,7 @@ instance GoogleRequest StorelayoutclustersInsert
         type Rs StorelayoutclustersInsert = StoreCluster
         type Scopes StorelayoutclustersInsert =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutclustersInsert{..}
+        requestClient StorelayoutclustersInsert'{..}
           = go _sEnterpriseId _sPageId (Just AltJSON) _sPayload
               androidEnterpriseService
           where go

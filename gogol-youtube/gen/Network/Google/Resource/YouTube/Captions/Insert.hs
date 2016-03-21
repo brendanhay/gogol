@@ -72,7 +72,7 @@ type CaptionsInsertResource =
 -- | Uploads a caption track.
 --
 -- /See:/ 'captionsInsert' smart constructor.
-data CaptionsInsert = CaptionsInsert
+data CaptionsInsert = CaptionsInsert'
     { _ciOnBehalfOf             :: !(Maybe Text)
     , _ciPart                   :: !Text
     , _ciPayload                :: !Caption
@@ -98,7 +98,7 @@ captionsInsert
     -> Caption -- ^ 'ciPayload'
     -> CaptionsInsert
 captionsInsert pCiPart_ pCiPayload_ =
-    CaptionsInsert
+    CaptionsInsert'
     { _ciOnBehalfOf = Nothing
     , _ciPart = pCiPart_
     , _ciPayload = pCiPayload_
@@ -152,7 +152,7 @@ instance GoogleRequest CaptionsInsert where
         type Scopes CaptionsInsert =
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient CaptionsInsert{..}
+        requestClient CaptionsInsert'{..}
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync
@@ -168,7 +168,7 @@ instance GoogleRequest (MediaUpload CaptionsInsert)
         type Rs (MediaUpload CaptionsInsert) = Caption
         type Scopes (MediaUpload CaptionsInsert) =
              Scopes CaptionsInsert
-        requestClient (MediaUpload CaptionsInsert{..} body)
+        requestClient (MediaUpload CaptionsInsert'{..} body)
           = go (Just _ciPart) _ciOnBehalfOf
               _ciOnBehalfOfContentOwner
               _ciSync

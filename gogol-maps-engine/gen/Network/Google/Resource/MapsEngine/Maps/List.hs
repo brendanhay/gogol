@@ -78,7 +78,7 @@ type MapsListResource =
 -- | Return all maps readable by the current user.
 --
 -- /See:/ 'mapsList' smart constructor.
-data MapsList = MapsList
+data MapsList = MapsList'
     { _mlCreatedAfter     :: !(Maybe DateTime')
     , _mlCreatorEmail     :: !(Maybe Text)
     , _mlRole             :: !(Maybe MapsListRole)
@@ -126,7 +126,7 @@ data MapsList = MapsList
 mapsList
     :: MapsList
 mapsList =
-    MapsList
+    MapsList'
     { _mlCreatedAfter = Nothing
     , _mlCreatorEmail = Nothing
     , _mlRole = Nothing
@@ -233,7 +233,7 @@ instance GoogleRequest MapsList where
         type Scopes MapsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient MapsList{..}
+        requestClient MapsList'{..}
           = go _mlCreatedAfter _mlCreatorEmail _mlRole _mlBbox
               _mlProcessingStatus
               _mlModifiedAfter

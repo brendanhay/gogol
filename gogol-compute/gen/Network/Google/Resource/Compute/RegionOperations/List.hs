@@ -63,7 +63,7 @@ type RegionOperationsListResource =
 -- region.
 --
 -- /See:/ 'regionOperationsList' smart constructor.
-data RegionOperationsList = RegionOperationsList
+data RegionOperationsList = RegionOperationsList'
     { _rolProject    :: !Text
     , _rolFilter     :: !(Maybe Text)
     , _rolRegion     :: !Text
@@ -89,7 +89,7 @@ regionOperationsList
     -> Text -- ^ 'rolRegion'
     -> RegionOperationsList
 regionOperationsList pRolProject_ pRolRegion_ =
-    RegionOperationsList
+    RegionOperationsList'
     { _rolProject = pRolProject_
     , _rolFilter = Nothing
     , _rolRegion = pRolRegion_
@@ -155,7 +155,7 @@ instance GoogleRequest RegionOperationsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RegionOperationsList{..}
+        requestClient RegionOperationsList'{..}
           = go _rolProject _rolRegion _rolFilter _rolPageToken
               (Just _rolMaxResults)
               (Just AltJSON)

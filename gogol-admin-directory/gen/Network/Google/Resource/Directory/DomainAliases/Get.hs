@@ -55,7 +55,7 @@ type DomainAliasesGetResource =
 -- | Retrieves a domain alias of the customer.
 --
 -- /See:/ 'domainAliasesGet' smart constructor.
-data DomainAliasesGet = DomainAliasesGet
+data DomainAliasesGet = DomainAliasesGet'
     { _dagDomainAliasName :: !Text
     , _dagCustomer        :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ domainAliasesGet
     -> Text -- ^ 'dagCustomer'
     -> DomainAliasesGet
 domainAliasesGet pDagDomainAliasName_ pDagCustomer_ =
-    DomainAliasesGet
+    DomainAliasesGet'
     { _dagDomainAliasName = pDagDomainAliasName_
     , _dagCustomer = pDagCustomer_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest DomainAliasesGet where
         type Scopes DomainAliasesGet =
              '["https://www.googleapis.com/auth/admin.directory.domain",
                "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
-        requestClient DomainAliasesGet{..}
+        requestClient DomainAliasesGet'{..}
           = go _dagCustomer _dagDomainAliasName (Just AltJSON)
               directoryService
           where go

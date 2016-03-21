@@ -55,7 +55,7 @@ type CreativeGroupsUpdateResource =
 -- | Updates an existing creative group.
 --
 -- /See:/ 'creativeGroupsUpdate' smart constructor.
-data CreativeGroupsUpdate = CreativeGroupsUpdate
+data CreativeGroupsUpdate = CreativeGroupsUpdate'
     { _cguProFileId :: !(Textual Int64)
     , _cguPayload   :: !CreativeGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeGroupsUpdate
     -> CreativeGroup -- ^ 'cguPayload'
     -> CreativeGroupsUpdate
 creativeGroupsUpdate pCguProFileId_ pCguPayload_ =
-    CreativeGroupsUpdate
+    CreativeGroupsUpdate'
     { _cguProFileId = _Coerce # pCguProFileId_
     , _cguPayload = pCguPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CreativeGroupsUpdate where
         type Rs CreativeGroupsUpdate = CreativeGroup
         type Scopes CreativeGroupsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeGroupsUpdate{..}
+        requestClient CreativeGroupsUpdate'{..}
           = go _cguProFileId (Just AltJSON) _cguPayload
               dFAReportingService
           where go

@@ -60,7 +60,7 @@ type DataSetsListResource =
 -- granted the READER dataset role.
 --
 -- /See:/ 'dataSetsList' smart constructor.
-data DataSetsList = DataSetsList
+data DataSetsList = DataSetsList'
     { _dslAll        :: !(Maybe Bool)
     , _dslPageToken  :: !(Maybe Text)
     , _dslProjectId  :: !Text
@@ -82,7 +82,7 @@ dataSetsList
     :: Text -- ^ 'dslProjectId'
     -> DataSetsList
 dataSetsList pDslProjectId_ =
-    DataSetsList
+    DataSetsList'
     { _dslAll = Nothing
     , _dslPageToken = Nothing
     , _dslProjectId = pDslProjectId_
@@ -117,7 +117,7 @@ instance GoogleRequest DataSetsList where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient DataSetsList{..}
+        requestClient DataSetsList'{..}
           = go _dslProjectId _dslAll _dslPageToken
               _dslMaxResults
               (Just AltJSON)

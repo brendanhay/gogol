@@ -54,7 +54,7 @@ type SubAccountsInsertResource =
 -- | Inserts a new subaccount.
 --
 -- /See:/ 'subAccountsInsert' smart constructor.
-data SubAccountsInsert = SubAccountsInsert
+data SubAccountsInsert = SubAccountsInsert'
     { _saiProFileId :: !(Textual Int64)
     , _saiPayload   :: !SubAccount
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subAccountsInsert
     -> SubAccount -- ^ 'saiPayload'
     -> SubAccountsInsert
 subAccountsInsert pSaiProFileId_ pSaiPayload_ =
-    SubAccountsInsert
+    SubAccountsInsert'
     { _saiProFileId = _Coerce # pSaiProFileId_
     , _saiPayload = pSaiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SubAccountsInsert where
         type Rs SubAccountsInsert = SubAccount
         type Scopes SubAccountsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SubAccountsInsert{..}
+        requestClient SubAccountsInsert'{..}
           = go _saiProFileId (Just AltJSON) _saiPayload
               dFAReportingService
           where go

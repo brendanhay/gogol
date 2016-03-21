@@ -57,7 +57,7 @@ type UsersInsertResource =
 -- in the request.
 --
 -- /See:/ 'usersInsert' smart constructor.
-data UsersInsert = UsersInsert
+data UsersInsert = UsersInsert'
     { _uiProject :: !Text
     , _uiPayload :: !User
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ usersInsert
     -> User -- ^ 'uiPayload'
     -> UsersInsert
 usersInsert pUiProject_ pUiPayload_ =
-    UsersInsert
+    UsersInsert'
     { _uiProject = pUiProject_
     , _uiPayload = pUiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest UsersInsert where
         type Scopes UsersInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient UsersInsert{..}
+        requestClient UsersInsert'{..}
           = go _uiProject (Just AltJSON) _uiPayload
               userAccountsService
           where go

@@ -51,7 +51,7 @@ type ProposalsGetResource =
 -- | Get a proposal given its id
 --
 -- /See:/ 'proposalsGet' smart constructor.
-newtype ProposalsGet = ProposalsGet
+newtype ProposalsGet = ProposalsGet'
     { _pgProposalId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ proposalsGet
     :: Text -- ^ 'pgProposalId'
     -> ProposalsGet
 proposalsGet pPgProposalId_ =
-    ProposalsGet
+    ProposalsGet'
     { _pgProposalId = pPgProposalId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest ProposalsGet where
         type Rs ProposalsGet = Proposal
         type Scopes ProposalsGet =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProposalsGet{..}
+        requestClient ProposalsGet'{..}
           = go _pgProposalId (Just AltJSON)
               adExchangeBuyerService
           where go

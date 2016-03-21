@@ -62,7 +62,7 @@ type ManagementProFileUserLinksInsertResource =
 -- | Adds a new user to the given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksInsert' smart constructor.
-data ManagementProFileUserLinksInsert = ManagementProFileUserLinksInsert
+data ManagementProFileUserLinksInsert = ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId :: !Text
     , _mpfuliProFileId     :: !Text
     , _mpfuliPayload       :: !EntityUserLink
@@ -87,7 +87,7 @@ managementProFileUserLinksInsert
     -> Text -- ^ 'mpfuliAccountId'
     -> ManagementProFileUserLinksInsert
 managementProFileUserLinksInsert pMpfuliWebPropertyId_ pMpfuliProFileId_ pMpfuliPayload_ pMpfuliAccountId_ =
-    ManagementProFileUserLinksInsert
+    ManagementProFileUserLinksInsert'
     { _mpfuliWebPropertyId = pMpfuliWebPropertyId_
     , _mpfuliProFileId = pMpfuliProFileId_
     , _mpfuliPayload = pMpfuliPayload_
@@ -124,7 +124,7 @@ instance GoogleRequest
              EntityUserLink
         type Scopes ManagementProFileUserLinksInsert =
              '["https://www.googleapis.com/auth/analytics.manage.users"]
-        requestClient ManagementProFileUserLinksInsert{..}
+        requestClient ManagementProFileUserLinksInsert'{..}
           = go _mpfuliAccountId _mpfuliWebPropertyId
               _mpfuliProFileId
               (Just AltJSON)

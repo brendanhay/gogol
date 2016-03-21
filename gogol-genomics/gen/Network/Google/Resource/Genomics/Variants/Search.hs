@@ -74,7 +74,7 @@ type VariantsSearchResource =
 -- [GlobalAllianceApi.searchVariants](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L126).
 --
 -- /See:/ 'variantsSearch' smart constructor.
-data VariantsSearch = VariantsSearch
+data VariantsSearch = VariantsSearch'
     { _vsXgafv          :: !(Maybe Text)
     , _vsUploadProtocol :: !(Maybe Text)
     , _vsPp             :: !Bool
@@ -108,7 +108,7 @@ variantsSearch
     :: SearchVariantsRequest -- ^ 'vsPayload'
     -> VariantsSearch
 variantsSearch pVsPayload_ =
-    VariantsSearch
+    VariantsSearch'
     { _vsXgafv = Nothing
     , _vsUploadProtocol = Nothing
     , _vsPp = True
@@ -166,7 +166,7 @@ instance GoogleRequest VariantsSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient VariantsSearch{..}
+        requestClient VariantsSearch'{..}
           = go _vsXgafv _vsUploadProtocol (Just _vsPp)
               _vsAccessToken
               _vsUploadType

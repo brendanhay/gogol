@@ -71,7 +71,7 @@ type AppsOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'appsOperationsGet' smart constructor.
-data AppsOperationsGet = AppsOperationsGet
+data AppsOperationsGet = AppsOperationsGet'
     { _aogXgafv          :: !(Maybe Text)
     , _aogUploadProtocol :: !(Maybe Text)
     , _aogPp             :: !Bool
@@ -109,7 +109,7 @@ appsOperationsGet
     -> Text -- ^ 'aogOperationsId'
     -> AppsOperationsGet
 appsOperationsGet pAogAppsId_ pAogOperationsId_ =
-    AppsOperationsGet
+    AppsOperationsGet'
     { _aogXgafv = Nothing
     , _aogUploadProtocol = Nothing
     , _aogPp = True
@@ -173,7 +173,7 @@ instance GoogleRequest AppsOperationsGet where
         type Rs AppsOperationsGet = Operation
         type Scopes AppsOperationsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsOperationsGet{..}
+        requestClient AppsOperationsGet'{..}
           = go _aogAppsId _aogOperationsId _aogXgafv
               _aogUploadProtocol
               (Just _aogPp)

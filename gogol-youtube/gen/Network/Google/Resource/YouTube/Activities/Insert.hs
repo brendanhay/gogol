@@ -65,7 +65,7 @@ type ActivitiesInsertResource =
 -- playlistItems.insert() method to mark a video as a favorite.
 --
 -- /See:/ 'activitiesInsert' smart constructor.
-data ActivitiesInsert = ActivitiesInsert
+data ActivitiesInsert = ActivitiesInsert'
     { _aiPart    :: !Text
     , _aiPayload :: !Activity
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ activitiesInsert
     -> Activity -- ^ 'aiPayload'
     -> ActivitiesInsert
 activitiesInsert pAiPart_ pAiPayload_ =
-    ActivitiesInsert
+    ActivitiesInsert'
     { _aiPart = pAiPart_
     , _aiPayload = pAiPayload_
     }
@@ -103,7 +103,7 @@ instance GoogleRequest ActivitiesInsert where
         type Scopes ActivitiesInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient ActivitiesInsert{..}
+        requestClient ActivitiesInsert'{..}
           = go (Just _aiPart) (Just AltJSON) _aiPayload
               youTubeService
           where go

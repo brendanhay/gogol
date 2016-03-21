@@ -56,7 +56,7 @@ type LeaderboardConfigurationsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'leaderboardConfigurationsPatch' smart constructor.
-data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch
+data LeaderboardConfigurationsPatch = LeaderboardConfigurationsPatch'
     { _lcpPayload       :: !LeaderboardConfiguration
     , _lcpLeaderboardId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ leaderboardConfigurationsPatch
     -> Text -- ^ 'lcpLeaderboardId'
     -> LeaderboardConfigurationsPatch
 leaderboardConfigurationsPatch pLcpPayload_ pLcpLeaderboardId_ =
-    LeaderboardConfigurationsPatch
+    LeaderboardConfigurationsPatch'
     { _lcpPayload = pLcpPayload_
     , _lcpLeaderboardId = pLcpLeaderboardId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest LeaderboardConfigurationsPatch
              LeaderboardConfiguration
         type Scopes LeaderboardConfigurationsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient LeaderboardConfigurationsPatch{..}
+        requestClient LeaderboardConfigurationsPatch'{..}
           = go _lcpLeaderboardId (Just AltJSON) _lcpPayload
               gamesConfigurationService
           where go

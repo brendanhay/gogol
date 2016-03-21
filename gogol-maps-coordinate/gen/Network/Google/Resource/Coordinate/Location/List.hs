@@ -62,7 +62,7 @@ type LocationListResource =
 -- | Retrieves a list of locations for a worker.
 --
 -- /See:/ 'locationList' smart constructor.
-data LocationList = LocationList
+data LocationList = LocationList'
     { _llWorkerEmail      :: !Text
     , _llStartTimestampMs :: !(Textual Word64)
     , _llTeamId           :: !Text
@@ -89,7 +89,7 @@ locationList
     -> Text -- ^ 'llTeamId'
     -> LocationList
 locationList pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
-    LocationList
+    LocationList'
     { _llWorkerEmail = pLlWorkerEmail_
     , _llStartTimestampMs = _Coerce # pLlStartTimestampMs_
     , _llTeamId = pLlTeamId_
@@ -130,7 +130,7 @@ instance GoogleRequest LocationList where
         type Scopes LocationList =
              '["https://www.googleapis.com/auth/coordinate",
                "https://www.googleapis.com/auth/coordinate.readonly"]
-        requestClient LocationList{..}
+        requestClient LocationList'{..}
           = go _llTeamId _llWorkerEmail
               (Just _llStartTimestampMs)
               _llPageToken

@@ -60,7 +60,7 @@ type AccounttaxPatchResource =
 -- semantics.
 --
 -- /See:/ 'accounttaxPatch' smart constructor.
-data AccounttaxPatch = AccounttaxPatch
+data AccounttaxPatch = AccounttaxPatch'
     { _appMerchantId :: !(Textual Word64)
     , _appPayload    :: !AccountTax
     , _appAccountId  :: !(Textual Word64)
@@ -84,7 +84,7 @@ accounttaxPatch
     -> Word64 -- ^ 'appAccountId'
     -> AccounttaxPatch
 accounttaxPatch pAppMerchantId_ pAppPayload_ pAppAccountId_ =
-    AccounttaxPatch
+    AccounttaxPatch'
     { _appMerchantId = _Coerce # pAppMerchantId_
     , _appPayload = pAppPayload_
     , _appAccountId = _Coerce # pAppAccountId_
@@ -118,7 +118,7 @@ instance GoogleRequest AccounttaxPatch where
         type Rs AccounttaxPatch = AccountTax
         type Scopes AccounttaxPatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccounttaxPatch{..}
+        requestClient AccounttaxPatch'{..}
           = go _appMerchantId _appAccountId _appDryRun
               (Just AltJSON)
               _appPayload

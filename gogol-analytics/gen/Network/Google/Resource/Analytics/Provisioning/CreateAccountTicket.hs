@@ -53,7 +53,7 @@ type ProvisioningCreateAccountTicketResource =
 -- | Creates an account ticket.
 --
 -- /See:/ 'provisioningCreateAccountTicket' smart constructor.
-newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket
+newtype ProvisioningCreateAccountTicket = ProvisioningCreateAccountTicket'
     { _pcatPayload :: AccountTicket
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ provisioningCreateAccountTicket
     :: AccountTicket -- ^ 'pcatPayload'
     -> ProvisioningCreateAccountTicket
 provisioningCreateAccountTicket pPcatPayload_ =
-    ProvisioningCreateAccountTicket
+    ProvisioningCreateAccountTicket'
     { _pcatPayload = pPcatPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest
              AccountTicket
         type Scopes ProvisioningCreateAccountTicket =
              '["https://www.googleapis.com/auth/analytics.provision"]
-        requestClient ProvisioningCreateAccountTicket{..}
+        requestClient ProvisioningCreateAccountTicket'{..}
           = go (Just AltJSON) _pcatPayload analyticsService
           where go
                   = buildClient

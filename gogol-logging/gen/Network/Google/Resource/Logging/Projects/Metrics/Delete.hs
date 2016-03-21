@@ -63,7 +63,7 @@ type ProjectsMetricsDeleteResource =
 -- | Deletes a logs-based metric.
 --
 -- /See:/ 'projectsMetricsDelete' smart constructor.
-data ProjectsMetricsDelete = ProjectsMetricsDelete
+data ProjectsMetricsDelete = ProjectsMetricsDelete'
     { _pmdXgafv          :: !(Maybe Text)
     , _pmdUploadProtocol :: !(Maybe Text)
     , _pmdPp             :: !Bool
@@ -97,7 +97,7 @@ projectsMetricsDelete
     :: Text -- ^ 'pmdMetricName'
     -> ProjectsMetricsDelete
 projectsMetricsDelete pPmdMetricName_ =
-    ProjectsMetricsDelete
+    ProjectsMetricsDelete'
     { _pmdXgafv = Nothing
     , _pmdUploadProtocol = Nothing
     , _pmdPp = True
@@ -158,7 +158,7 @@ instance GoogleRequest ProjectsMetricsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.write"]
-        requestClient ProjectsMetricsDelete{..}
+        requestClient ProjectsMetricsDelete'{..}
           = go _pmdMetricName _pmdXgafv _pmdUploadProtocol
               (Just _pmdPp)
               _pmdAccessToken

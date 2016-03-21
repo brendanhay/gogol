@@ -56,7 +56,7 @@ type PeopleListByCircleResource =
 -- | List all of the people who are members of a circle.
 --
 -- /See:/ 'peopleListByCircle' smart constructor.
-data PeopleListByCircle = PeopleListByCircle
+data PeopleListByCircle = PeopleListByCircle'
     { _plbcCircleId   :: !Text
     , _plbcPageToken  :: !(Maybe Text)
     , _plbcMaxResults :: !(Textual Word32)
@@ -75,7 +75,7 @@ peopleListByCircle
     :: Text -- ^ 'plbcCircleId'
     -> PeopleListByCircle
 peopleListByCircle pPlbcCircleId_ =
-    PeopleListByCircle
+    PeopleListByCircle'
     { _plbcCircleId = pPlbcCircleId_
     , _plbcPageToken = Nothing
     , _plbcMaxResults = 20
@@ -108,7 +108,7 @@ instance GoogleRequest PeopleListByCircle where
         type Scopes PeopleListByCircle =
              '["https://www.googleapis.com/auth/plus.circles.read",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PeopleListByCircle{..}
+        requestClient PeopleListByCircle'{..}
           = go _plbcCircleId _plbcPageToken
               (Just _plbcMaxResults)
               (Just AltJSON)

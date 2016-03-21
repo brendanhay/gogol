@@ -56,7 +56,7 @@ type EntitlementsListResource =
 -- | List of all entitlements for the specified user. Only the ID is set.
 --
 -- /See:/ 'entitlementsList' smart constructor.
-data EntitlementsList = EntitlementsList
+data EntitlementsList = EntitlementsList'
     { _elEnterpriseId :: !Text
     , _elUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ entitlementsList
     -> Text -- ^ 'elUserId'
     -> EntitlementsList
 entitlementsList pElEnterpriseId_ pElUserId_ =
-    EntitlementsList
+    EntitlementsList'
     { _elEnterpriseId = pElEnterpriseId_
     , _elUserId = pElUserId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest EntitlementsList where
         type Rs EntitlementsList = EntitlementsListResponse
         type Scopes EntitlementsList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EntitlementsList{..}
+        requestClient EntitlementsList'{..}
           = go _elEnterpriseId _elUserId (Just AltJSON)
               androidEnterpriseService
           where go

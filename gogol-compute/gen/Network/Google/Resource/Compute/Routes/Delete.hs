@@ -55,7 +55,7 @@ type RoutesDeleteResource =
 -- | Deletes the specified Route resource.
 --
 -- /See:/ 'routesDelete' smart constructor.
-data RoutesDelete = RoutesDelete
+data RoutesDelete = RoutesDelete'
     { _rdProject :: !Text
     , _rdRoute   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ routesDelete
     -> Text -- ^ 'rdRoute'
     -> RoutesDelete
 routesDelete pRdProject_ pRdRoute_ =
-    RoutesDelete
+    RoutesDelete'
     { _rdProject = pRdProject_
     , _rdRoute = pRdRoute_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest RoutesDelete where
         type Scopes RoutesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient RoutesDelete{..}
+        requestClient RoutesDelete'{..}
           = go _rdProject _rdRoute (Just AltJSON)
               computeService
           where go

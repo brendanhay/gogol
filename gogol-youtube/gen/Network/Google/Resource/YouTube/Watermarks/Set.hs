@@ -68,7 +68,7 @@ type WatermarksSetResource =
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 --
 -- /See:/ 'watermarksSet' smart constructor.
-data WatermarksSet = WatermarksSet
+data WatermarksSet = WatermarksSet'
     { _wsChannelId              :: !Text
     , _wsPayload                :: !InvideoBranding
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
@@ -88,7 +88,7 @@ watermarksSet
     -> InvideoBranding -- ^ 'wsPayload'
     -> WatermarksSet
 watermarksSet pWsChannelId_ pWsPayload_ =
-    WatermarksSet
+    WatermarksSet'
     { _wsChannelId = pWsChannelId_
     , _wsPayload = pWsPayload_
     , _wsOnBehalfOfContentOwner = Nothing
@@ -127,7 +127,7 @@ instance GoogleRequest WatermarksSet where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.upload",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient WatermarksSet{..}
+        requestClient WatermarksSet'{..}
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
               _wsPayload
@@ -141,7 +141,7 @@ instance GoogleRequest (MediaUpload WatermarksSet)
         type Rs (MediaUpload WatermarksSet) = ()
         type Scopes (MediaUpload WatermarksSet) =
              Scopes WatermarksSet
-        requestClient (MediaUpload WatermarksSet{..} body)
+        requestClient (MediaUpload WatermarksSet'{..} body)
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
               (Just AltMedia)

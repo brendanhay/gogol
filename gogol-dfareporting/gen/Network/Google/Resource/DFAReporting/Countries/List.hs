@@ -53,7 +53,7 @@ type CountriesListResource =
 -- | Retrieves a list of countries.
 --
 -- /See:/ 'countriesList' smart constructor.
-newtype CountriesList = CountriesList
+newtype CountriesList = CountriesList'
     { _couProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ countriesList
     :: Int64 -- ^ 'couProFileId'
     -> CountriesList
 countriesList pCouProFileId_ =
-    CountriesList
+    CountriesList'
     { _couProFileId = _Coerce # pCouProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest CountriesList where
         type Rs CountriesList = CountriesListResponse
         type Scopes CountriesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CountriesList{..}
+        requestClient CountriesList'{..}
           = go _couProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy CountriesListResource)

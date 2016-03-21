@@ -71,7 +71,7 @@ type PeopleGetBatchGetResource =
 -- authenticated user.
 --
 -- /See:/ 'peopleGetBatchGet' smart constructor.
-data PeopleGetBatchGet = PeopleGetBatchGet
+data PeopleGetBatchGet = PeopleGetBatchGet'
     { _pgbgXgafv                   :: !(Maybe Text)
     , _pgbgUploadProtocol          :: !(Maybe Text)
     , _pgbgRequestMaskIncludeField :: !(Maybe Text)
@@ -107,7 +107,7 @@ data PeopleGetBatchGet = PeopleGetBatchGet
 peopleGetBatchGet
     :: PeopleGetBatchGet
 peopleGetBatchGet =
-    PeopleGetBatchGet
+    PeopleGetBatchGet'
     { _pgbgXgafv = Nothing
     , _pgbgUploadProtocol = Nothing
     , _pgbgRequestMaskIncludeField = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest PeopleGetBatchGet where
                "https://www.googleapis.com/auth/user.phonenumbers.read",
                "https://www.googleapis.com/auth/userinfo.email",
                "https://www.googleapis.com/auth/userinfo.profile"]
-        requestClient PeopleGetBatchGet{..}
+        requestClient PeopleGetBatchGet'{..}
           = go _pgbgXgafv _pgbgUploadProtocol
               _pgbgRequestMaskIncludeField
               (Just _pgbgPp)

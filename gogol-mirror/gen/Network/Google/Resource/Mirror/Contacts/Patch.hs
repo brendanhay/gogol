@@ -53,7 +53,7 @@ type ContactsPatchResource =
 -- | Updates a contact in place. This method supports patch semantics.
 --
 -- /See:/ 'contactsPatch' smart constructor.
-data ContactsPatch = ContactsPatch
+data ContactsPatch = ContactsPatch'
     { _cpPayload :: !Contact
     , _cpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ contactsPatch
     -> Text -- ^ 'cpId'
     -> ContactsPatch
 contactsPatch pCpPayload_ pCpId_ =
-    ContactsPatch
+    ContactsPatch'
     { _cpPayload = pCpPayload_
     , _cpId = pCpId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest ContactsPatch where
         type Rs ContactsPatch = Contact
         type Scopes ContactsPatch =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient ContactsPatch{..}
+        requestClient ContactsPatch'{..}
           = go _cpId (Just AltJSON) _cpPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsPatchResource)

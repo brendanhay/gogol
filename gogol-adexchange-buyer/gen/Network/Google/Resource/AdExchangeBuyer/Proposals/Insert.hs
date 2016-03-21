@@ -53,7 +53,7 @@ type ProposalsInsertResource =
 -- | Create the given list of proposals
 --
 -- /See:/ 'proposalsInsert' smart constructor.
-newtype ProposalsInsert = ProposalsInsert
+newtype ProposalsInsert = ProposalsInsert'
     { _piPayload :: CreateOrdersRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ proposalsInsert
     :: CreateOrdersRequest -- ^ 'piPayload'
     -> ProposalsInsert
 proposalsInsert pPiPayload_ =
-    ProposalsInsert
+    ProposalsInsert'
     { _piPayload = pPiPayload_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest ProposalsInsert where
         type Rs ProposalsInsert = CreateOrdersResponse
         type Scopes ProposalsInsert =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProposalsInsert{..}
+        requestClient ProposalsInsert'{..}
           = go (Just AltJSON) _piPayload adExchangeBuyerService
           where go
                   = buildClient

@@ -54,7 +54,7 @@ type CollectionsDeleteResource =
 -- | Deletes a collection.
 --
 -- /See:/ 'collectionsDelete' smart constructor.
-data CollectionsDelete = CollectionsDelete
+data CollectionsDelete = CollectionsDelete'
     { _cddEnterpriseId :: !Text
     , _cddCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ collectionsDelete
     -> Text -- ^ 'cddCollectionId'
     -> CollectionsDelete
 collectionsDelete pCddEnterpriseId_ pCddCollectionId_ =
-    CollectionsDelete
+    CollectionsDelete'
     { _cddEnterpriseId = pCddEnterpriseId_
     , _cddCollectionId = pCddCollectionId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CollectionsDelete where
         type Rs CollectionsDelete = ()
         type Scopes CollectionsDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionsDelete{..}
+        requestClient CollectionsDelete'{..}
           = go _cddEnterpriseId _cddCollectionId (Just AltJSON)
               androidEnterpriseService
           where go

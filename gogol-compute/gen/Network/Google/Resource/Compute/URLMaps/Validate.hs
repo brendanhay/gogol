@@ -63,7 +63,7 @@ type URLMapsValidateResource =
 -- UrlMap.
 --
 -- /See:/ 'urlMapsValidate' smart constructor.
-data URLMapsValidate = URLMapsValidate
+data URLMapsValidate = URLMapsValidate'
     { _umvURLMap  :: !Text
     , _umvProject :: !Text
     , _umvPayload :: !URLMapsValidateRequest
@@ -84,7 +84,7 @@ urlMapsValidate
     -> URLMapsValidateRequest -- ^ 'umvPayload'
     -> URLMapsValidate
 urlMapsValidate pUmvURLMap_ pUmvProject_ pUmvPayload_ =
-    URLMapsValidate
+    URLMapsValidate'
     { _umvURLMap = pUmvURLMap_
     , _umvProject = pUmvProject_
     , _umvPayload = pUmvPayload_
@@ -110,7 +110,7 @@ instance GoogleRequest URLMapsValidate where
         type Scopes URLMapsValidate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient URLMapsValidate{..}
+        requestClient URLMapsValidate'{..}
           = go _umvProject _umvURLMap (Just AltJSON)
               _umvPayload
               computeService

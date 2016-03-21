@@ -59,7 +59,7 @@ type AccountsAdUnitsInsertResource =
 -- account.
 --
 -- /See:/ 'accountsAdUnitsInsert' smart constructor.
-data AccountsAdUnitsInsert = AccountsAdUnitsInsert
+data AccountsAdUnitsInsert = AccountsAdUnitsInsert'
     { _aauiPayload    :: !AdUnit
     , _aauiAdClientId :: !Text
     , _aauiAccountId  :: !Text
@@ -80,7 +80,7 @@ accountsAdUnitsInsert
     -> Text -- ^ 'aauiAccountId'
     -> AccountsAdUnitsInsert
 accountsAdUnitsInsert pAauiPayload_ pAauiAdClientId_ pAauiAccountId_ =
-    AccountsAdUnitsInsert
+    AccountsAdUnitsInsert'
     { _aauiPayload = pAauiPayload_
     , _aauiAdClientId = pAauiAdClientId_
     , _aauiAccountId = pAauiAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest AccountsAdUnitsInsert where
         type Rs AccountsAdUnitsInsert = AdUnit
         type Scopes AccountsAdUnitsInsert =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsAdUnitsInsert{..}
+        requestClient AccountsAdUnitsInsert'{..}
           = go _aauiAccountId _aauiAdClientId (Just AltJSON)
               _aauiPayload
               adSenseHostService

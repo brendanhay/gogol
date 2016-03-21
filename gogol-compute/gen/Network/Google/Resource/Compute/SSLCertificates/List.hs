@@ -62,7 +62,7 @@ type SSLCertificatesListResource =
 -- specified project.
 --
 -- /See:/ 'sslCertificatesList' smart constructor.
-data SSLCertificatesList = SSLCertificatesList
+data SSLCertificatesList = SSLCertificatesList'
     { _sclProject    :: !Text
     , _sclFilter     :: !(Maybe Text)
     , _sclPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ sslCertificatesList
     :: Text -- ^ 'sclProject'
     -> SSLCertificatesList
 sslCertificatesList pSclProject_ =
-    SSLCertificatesList
+    SSLCertificatesList'
     { _sclProject = pSclProject_
     , _sclFilter = Nothing
     , _sclPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest SSLCertificatesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SSLCertificatesList{..}
+        requestClient SSLCertificatesList'{..}
           = go _sclProject _sclFilter _sclPageToken
               (Just _sclMaxResults)
               (Just AltJSON)

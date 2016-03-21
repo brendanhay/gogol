@@ -60,7 +60,7 @@ type ACLListResource =
 -- | Returns the rules in the access control list for the calendar.
 --
 -- /See:/ 'aclList' smart constructor.
-data ACLList = ACLList
+data ACLList = ACLList'
     { _alSyncToken   :: !(Maybe Text)
     , _alCalendarId  :: !Text
     , _alShowDeleted :: !(Maybe Bool)
@@ -85,7 +85,7 @@ aclList
     :: Text -- ^ 'alCalendarId'
     -> ACLList
 aclList pAlCalendarId_ =
-    ACLList
+    ACLList'
     { _alSyncToken = Nothing
     , _alCalendarId = pAlCalendarId_
     , _alShowDeleted = Nothing
@@ -138,7 +138,7 @@ instance GoogleRequest ACLList where
         type Rs ACLList = ACL
         type Scopes ACLList =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient ACLList{..}
+        requestClient ACLList'{..}
           = go _alCalendarId _alSyncToken _alShowDeleted
               _alPageToken
               _alMaxResults

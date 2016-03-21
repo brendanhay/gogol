@@ -54,7 +54,7 @@ type CalendarsClearResource =
 -- with the primary calendar of an account.
 --
 -- /See:/ 'calendarsClear' smart constructor.
-newtype CalendarsClear = CalendarsClear
+newtype CalendarsClear = CalendarsClear'
     { _ccCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ calendarsClear
     :: Text -- ^ 'ccCalendarId'
     -> CalendarsClear
 calendarsClear pCcCalendarId_ =
-    CalendarsClear
+    CalendarsClear'
     { _ccCalendarId = pCcCalendarId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest CalendarsClear where
         type Rs CalendarsClear = ()
         type Scopes CalendarsClear =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarsClear{..}
+        requestClient CalendarsClear'{..}
           = go _ccCalendarId (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy CalendarsClearResource)

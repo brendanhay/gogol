@@ -65,7 +65,7 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
 -- policy or the resource does not exist.
 --
 -- /See:/ 'projectsSubscriptionsGetIAMPolicy' smart constructor.
-data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy
+data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv          :: !(Maybe Text)
     , _psgipUploadProtocol :: !(Maybe Text)
     , _psgipPp             :: !Bool
@@ -99,7 +99,7 @@ projectsSubscriptionsGetIAMPolicy
     :: Text -- ^ 'psgipResource'
     -> ProjectsSubscriptionsGetIAMPolicy
 projectsSubscriptionsGetIAMPolicy pPsgipResource_ =
-    ProjectsSubscriptionsGetIAMPolicy
+    ProjectsSubscriptionsGetIAMPolicy'
     { _psgipXgafv = Nothing
     , _psgipUploadProtocol = Nothing
     , _psgipPp = True
@@ -165,7 +165,7 @@ instance GoogleRequest
         type Scopes ProjectsSubscriptionsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsGetIAMPolicy{..}
+        requestClient ProjectsSubscriptionsGetIAMPolicy'{..}
           = go _psgipResource _psgipXgafv _psgipUploadProtocol
               (Just _psgipPp)
               _psgipAccessToken

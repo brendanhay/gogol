@@ -68,7 +68,7 @@ type CalendarListWatchResource =
 -- | Watch for changes to CalendarList resources.
 --
 -- /See:/ 'calendarListWatch' smart constructor.
-data CalendarListWatch = CalendarListWatch
+data CalendarListWatch = CalendarListWatch'
     { _clwSyncToken     :: !(Maybe Text)
     , _clwMinAccessRole :: !(Maybe CalendarListWatchMinAccessRole)
     , _clwShowDeleted   :: !(Maybe Bool)
@@ -99,7 +99,7 @@ calendarListWatch
     :: Channel -- ^ 'clwPayload'
     -> CalendarListWatch
 calendarListWatch pClwPayload_ =
-    CalendarListWatch
+    CalendarListWatch'
     { _clwSyncToken = Nothing
     , _clwMinAccessRole = Nothing
     , _clwShowDeleted = Nothing
@@ -170,7 +170,7 @@ instance GoogleRequest CalendarListWatch where
         type Scopes CalendarListWatch =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient CalendarListWatch{..}
+        requestClient CalendarListWatch'{..}
           = go _clwSyncToken _clwMinAccessRole _clwShowDeleted
               _clwShowHidden
               _clwPageToken

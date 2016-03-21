@@ -68,7 +68,7 @@ type VariantsDeleteResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsDelete' smart constructor.
-data VariantsDelete = VariantsDelete
+data VariantsDelete = VariantsDelete'
     { _vdXgafv          :: !(Maybe Text)
     , _vdUploadProtocol :: !(Maybe Text)
     , _vdPp             :: !Bool
@@ -102,7 +102,7 @@ variantsDelete
     :: Text -- ^ 'vdVariantId'
     -> VariantsDelete
 variantsDelete pVdVariantId_ =
-    VariantsDelete
+    VariantsDelete'
     { _vdXgafv = Nothing
     , _vdUploadProtocol = Nothing
     , _vdPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest VariantsDelete where
         type Scopes VariantsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantsDelete{..}
+        requestClient VariantsDelete'{..}
           = go _vdVariantId _vdXgafv _vdUploadProtocol
               (Just _vdPp)
               _vdAccessToken

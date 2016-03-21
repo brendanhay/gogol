@@ -51,7 +51,7 @@ type WebResourceDeleteResource =
 -- | Relinquish ownership of a website or domain.
 --
 -- /See:/ 'webResourceDelete' smart constructor.
-newtype WebResourceDelete = WebResourceDelete
+newtype WebResourceDelete = WebResourceDelete'
     { _wrdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ webResourceDelete
     :: Text -- ^ 'wrdId'
     -> WebResourceDelete
 webResourceDelete pWrdId_ =
-    WebResourceDelete
+    WebResourceDelete'
     { _wrdId = pWrdId_
     }
 
@@ -76,7 +76,7 @@ instance GoogleRequest WebResourceDelete where
         type Rs WebResourceDelete = ()
         type Scopes WebResourceDelete =
              '["https://www.googleapis.com/auth/siteverification"]
-        requestClient WebResourceDelete{..}
+        requestClient WebResourceDelete'{..}
           = go _wrdId (Just AltJSON) siteVerificationService
           where go
                   = buildClient

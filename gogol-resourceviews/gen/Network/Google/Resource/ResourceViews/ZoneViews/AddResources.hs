@@ -61,7 +61,7 @@ type ZoneViewsAddResourcesResource =
 -- | Add resources to the view.
 --
 -- /See:/ 'zoneViewsAddResources' smart constructor.
-data ZoneViewsAddResources = ZoneViewsAddResources
+data ZoneViewsAddResources = ZoneViewsAddResources'
     { _zvarResourceView :: !Text
     , _zvarProject      :: !Text
     , _zvarZone         :: !Text
@@ -86,7 +86,7 @@ zoneViewsAddResources
     -> ZoneViewsAddResourcesRequest -- ^ 'zvarPayload'
     -> ZoneViewsAddResources
 zoneViewsAddResources pZvarResourceView_ pZvarProject_ pZvarZone_ pZvarPayload_ =
-    ZoneViewsAddResources
+    ZoneViewsAddResources'
     { _zvarResourceView = pZvarResourceView_
     , _zvarProject = pZvarProject_
     , _zvarZone = pZvarZone_
@@ -119,7 +119,7 @@ instance GoogleRequest ZoneViewsAddResources where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient ZoneViewsAddResources{..}
+        requestClient ZoneViewsAddResources'{..}
           = go _zvarProject _zvarZone _zvarResourceView
               (Just AltJSON)
               _zvarPayload

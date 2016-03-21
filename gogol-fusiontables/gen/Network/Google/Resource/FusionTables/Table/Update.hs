@@ -57,7 +57,7 @@ type TableUpdateResource =
 -- description, and attribution will be updated.
 --
 -- /See:/ 'tableUpdate' smart constructor.
-data TableUpdate = TableUpdate
+data TableUpdate = TableUpdate'
     { _tabPayload               :: !Table
     , _tabReplaceViewDefinition :: !(Maybe Bool)
     , _tabTableId               :: !Text
@@ -77,7 +77,7 @@ tableUpdate
     -> Text -- ^ 'tabTableId'
     -> TableUpdate
 tableUpdate pTabPayload_ pTabTableId_ =
-    TableUpdate
+    TableUpdate'
     { _tabPayload = pTabPayload_
     , _tabReplaceViewDefinition = Nothing
     , _tabTableId = pTabTableId_
@@ -105,7 +105,7 @@ instance GoogleRequest TableUpdate where
         type Rs TableUpdate = Table
         type Scopes TableUpdate =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TableUpdate{..}
+        requestClient TableUpdate'{..}
           = go _tabTableId _tabReplaceViewDefinition
               (Just AltJSON)
               _tabPayload

@@ -60,7 +60,7 @@ type HTTPSHealthChecksUpdateResource =
 -- data included in the request.
 --
 -- /See:/ 'httpsHealthChecksUpdate' smart constructor.
-data HTTPSHealthChecksUpdate = HTTPSHealthChecksUpdate
+data HTTPSHealthChecksUpdate = HTTPSHealthChecksUpdate'
     { _hhcuProject          :: !Text
     , _hhcuPayload          :: !HTTPSHealthCheck
     , _hhcuHTTPSHealthCheck :: !Text
@@ -81,7 +81,7 @@ httpsHealthChecksUpdate
     -> Text -- ^ 'hhcuHTTPSHealthCheck'
     -> HTTPSHealthChecksUpdate
 httpsHealthChecksUpdate pHhcuProject_ pHhcuPayload_ pHhcuHTTPSHealthCheck_ =
-    HTTPSHealthChecksUpdate
+    HTTPSHealthChecksUpdate'
     { _hhcuProject = pHhcuProject_
     , _hhcuPayload = pHhcuPayload_
     , _hhcuHTTPSHealthCheck = pHhcuHTTPSHealthCheck_
@@ -108,7 +108,7 @@ instance GoogleRequest HTTPSHealthChecksUpdate where
         type Scopes HTTPSHealthChecksUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient HTTPSHealthChecksUpdate{..}
+        requestClient HTTPSHealthChecksUpdate'{..}
           = go _hhcuProject _hhcuHTTPSHealthCheck
               (Just AltJSON)
               _hhcuPayload

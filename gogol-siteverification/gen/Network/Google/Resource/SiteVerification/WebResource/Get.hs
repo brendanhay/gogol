@@ -52,7 +52,7 @@ type WebResourceGetResource =
 -- | Get the most current data for a website or domain.
 --
 -- /See:/ 'webResourceGet' smart constructor.
-newtype WebResourceGet = WebResourceGet
+newtype WebResourceGet = WebResourceGet'
     { _wrgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ webResourceGet
     :: Text -- ^ 'wrgId'
     -> WebResourceGet
 webResourceGet pWrgId_ =
-    WebResourceGet
+    WebResourceGet'
     { _wrgId = pWrgId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest WebResourceGet where
              SiteVerificationWebResourceResource
         type Scopes WebResourceGet =
              '["https://www.googleapis.com/auth/siteverification"]
-        requestClient WebResourceGet{..}
+        requestClient WebResourceGet'{..}
           = go _wrgId (Just AltJSON) siteVerificationService
           where go
                   = buildClient (Proxy :: Proxy WebResourceGetResource)

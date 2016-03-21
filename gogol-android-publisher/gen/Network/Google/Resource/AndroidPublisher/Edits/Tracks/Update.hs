@@ -63,7 +63,7 @@ type EditsTracksUpdateResource =
 -- adding new APKs will cause it to resume.
 --
 -- /See:/ 'editsTracksUpdate' smart constructor.
-data EditsTracksUpdate = EditsTracksUpdate
+data EditsTracksUpdate = EditsTracksUpdate'
     { _etuTrack       :: !EditsTracksUpdateTrack
     , _etuPackageName :: !Text
     , _etuPayload     :: !Track
@@ -88,7 +88,7 @@ editsTracksUpdate
     -> Text -- ^ 'etuEditId'
     -> EditsTracksUpdate
 editsTracksUpdate pEtuTrack_ pEtuPackageName_ pEtuPayload_ pEtuEditId_ =
-    EditsTracksUpdate
+    EditsTracksUpdate'
     { _etuTrack = pEtuTrack_
     , _etuPackageName = pEtuPackageName_
     , _etuPayload = pEtuPayload_
@@ -120,7 +120,7 @@ instance GoogleRequest EditsTracksUpdate where
         type Rs EditsTracksUpdate = Track
         type Scopes EditsTracksUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsTracksUpdate{..}
+        requestClient EditsTracksUpdate'{..}
           = go _etuPackageName _etuEditId _etuTrack
               (Just AltJSON)
               _etuPayload

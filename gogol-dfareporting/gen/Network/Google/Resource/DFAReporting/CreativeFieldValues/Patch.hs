@@ -62,7 +62,7 @@ type CreativeFieldValuesPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeFieldValuesPatch' smart constructor.
-data CreativeFieldValuesPatch = CreativeFieldValuesPatch
+data CreativeFieldValuesPatch = CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId :: !(Textual Int64)
     , _cfvpProFileId       :: !(Textual Int64)
     , _cfvpPayload         :: !CreativeFieldValue
@@ -87,7 +87,7 @@ creativeFieldValuesPatch
     -> Int64 -- ^ 'cfvpId'
     -> CreativeFieldValuesPatch
 creativeFieldValuesPatch pCfvpCreativeFieldId_ pCfvpProFileId_ pCfvpPayload_ pCfvpId_ =
-    CreativeFieldValuesPatch
+    CreativeFieldValuesPatch'
     { _cfvpCreativeFieldId = _Coerce # pCfvpCreativeFieldId_
     , _cfvpProFileId = _Coerce # pCfvpProFileId_
     , _cfvpPayload = pCfvpPayload_
@@ -122,7 +122,7 @@ instance GoogleRequest CreativeFieldValuesPatch where
         type Rs CreativeFieldValuesPatch = CreativeFieldValue
         type Scopes CreativeFieldValuesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldValuesPatch{..}
+        requestClient CreativeFieldValuesPatch'{..}
           = go _cfvpProFileId _cfvpCreativeFieldId
               (Just _cfvpId)
               (Just AltJSON)

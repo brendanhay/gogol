@@ -51,7 +51,7 @@ type CirclesRemoveResource =
 -- | Delete a circle.
 --
 -- /See:/ 'circlesRemove' smart constructor.
-newtype CirclesRemove = CirclesRemove
+newtype CirclesRemove = CirclesRemove'
     { _crCircleId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ circlesRemove
     :: Text -- ^ 'crCircleId'
     -> CirclesRemove
 circlesRemove pCrCircleId_ =
-    CirclesRemove
+    CirclesRemove'
     { _crCircleId = pCrCircleId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest CirclesRemove where
         type Scopes CirclesRemove =
              '["https://www.googleapis.com/auth/plus.circles.write",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient CirclesRemove{..}
+        requestClient CirclesRemove'{..}
           = go _crCircleId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy CirclesRemoveResource)

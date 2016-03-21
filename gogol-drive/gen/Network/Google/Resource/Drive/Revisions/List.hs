@@ -52,7 +52,7 @@ type RevisionsListResource =
 -- | Lists a file\'s revisions.
 --
 -- /See:/ 'revisionsList' smart constructor.
-newtype RevisionsList = RevisionsList
+newtype RevisionsList = RevisionsList'
     { _rllFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ revisionsList
     :: Text -- ^ 'rllFileId'
     -> RevisionsList
 revisionsList pRllFileId_ =
-    RevisionsList
+    RevisionsList'
     { _rllFileId = pRllFileId_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest RevisionsList where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient RevisionsList{..}
+        requestClient RevisionsList'{..}
           = go _rllFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy RevisionsListResource)

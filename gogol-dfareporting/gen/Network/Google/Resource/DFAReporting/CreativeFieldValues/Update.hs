@@ -58,7 +58,7 @@ type CreativeFieldValuesUpdateResource =
 -- | Updates an existing creative field value.
 --
 -- /See:/ 'creativeFieldValuesUpdate' smart constructor.
-data CreativeFieldValuesUpdate = CreativeFieldValuesUpdate
+data CreativeFieldValuesUpdate = CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId :: !(Textual Int64)
     , _cfvuProFileId       :: !(Textual Int64)
     , _cfvuPayload         :: !CreativeFieldValue
@@ -79,7 +79,7 @@ creativeFieldValuesUpdate
     -> CreativeFieldValue -- ^ 'cfvuPayload'
     -> CreativeFieldValuesUpdate
 creativeFieldValuesUpdate pCfvuCreativeFieldId_ pCfvuProFileId_ pCfvuPayload_ =
-    CreativeFieldValuesUpdate
+    CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId = _Coerce # pCfvuCreativeFieldId_
     , _cfvuProFileId = _Coerce # pCfvuProFileId_
     , _cfvuPayload = pCfvuPayload_
@@ -110,7 +110,7 @@ instance GoogleRequest CreativeFieldValuesUpdate
              CreativeFieldValue
         type Scopes CreativeFieldValuesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldValuesUpdate{..}
+        requestClient CreativeFieldValuesUpdate'{..}
           = go _cfvuProFileId _cfvuCreativeFieldId
               (Just AltJSON)
               _cfvuPayload

@@ -56,7 +56,7 @@ type QuestsResetResource =
 -- whitelisted tester accounts for your application.
 --
 -- /See:/ 'questsReset' smart constructor.
-newtype QuestsReset = QuestsReset
+newtype QuestsReset = QuestsReset'
     { _qrQuestId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ questsReset
     :: Text -- ^ 'qrQuestId'
     -> QuestsReset
 questsReset pQrQuestId_ =
-    QuestsReset
+    QuestsReset'
     { _qrQuestId = pQrQuestId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest QuestsReset where
         type Scopes QuestsReset =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestsReset{..}
+        requestClient QuestsReset'{..}
           = go _qrQuestId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy QuestsResetResource)

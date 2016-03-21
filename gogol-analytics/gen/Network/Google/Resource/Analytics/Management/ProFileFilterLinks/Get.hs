@@ -62,7 +62,7 @@ type ManagementProFileFilterLinksGetResource =
 -- | Returns a single profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksGet' smart constructor.
-data ManagementProFileFilterLinksGet = ManagementProFileFilterLinksGet
+data ManagementProFileFilterLinksGet = ManagementProFileFilterLinksGet'
     { _mpfflgWebPropertyId :: !Text
     , _mpfflgProFileId     :: !Text
     , _mpfflgAccountId     :: !Text
@@ -87,7 +87,7 @@ managementProFileFilterLinksGet
     -> Text -- ^ 'mpfflgLinkId'
     -> ManagementProFileFilterLinksGet
 managementProFileFilterLinksGet pMpfflgWebPropertyId_ pMpfflgProFileId_ pMpfflgAccountId_ pMpfflgLinkId_ =
-    ManagementProFileFilterLinksGet
+    ManagementProFileFilterLinksGet'
     { _mpfflgWebPropertyId = pMpfflgWebPropertyId_
     , _mpfflgProFileId = pMpfflgProFileId_
     , _mpfflgAccountId = pMpfflgAccountId_
@@ -124,7 +124,7 @@ instance GoogleRequest
         type Scopes ManagementProFileFilterLinksGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementProFileFilterLinksGet{..}
+        requestClient ManagementProFileFilterLinksGet'{..}
           = go _mpfflgAccountId _mpfflgWebPropertyId
               _mpfflgProFileId
               _mpfflgLinkId

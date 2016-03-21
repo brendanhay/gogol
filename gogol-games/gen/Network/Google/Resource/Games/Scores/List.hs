@@ -63,7 +63,7 @@ type ScoresListResource =
 -- | Lists the scores in a leaderboard, starting from the top.
 --
 -- /See:/ 'scoresList' smart constructor.
-data ScoresList = ScoresList
+data ScoresList = ScoresList'
     { _sllCollection    :: !ScoresListCollection
     , _sllTimeSpan      :: !ScoresListTimeSpan
     , _sllLeaderboardId :: !Text
@@ -93,7 +93,7 @@ scoresList
     -> Text -- ^ 'sllLeaderboardId'
     -> ScoresList
 scoresList pSllCollection_ pSllTimeSpan_ pSllLeaderboardId_ =
-    ScoresList
+    ScoresList'
     { _sllCollection = pSllCollection_
     , _sllTimeSpan = pSllTimeSpan_
     , _sllLeaderboardId = pSllLeaderboardId_
@@ -143,7 +143,7 @@ instance GoogleRequest ScoresList where
         type Scopes ScoresList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresList{..}
+        requestClient ScoresList'{..}
           = go _sllLeaderboardId _sllCollection
               (Just _sllTimeSpan)
               _sllLanguage

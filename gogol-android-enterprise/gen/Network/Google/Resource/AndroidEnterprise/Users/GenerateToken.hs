@@ -59,7 +59,7 @@ type UsersGenerateTokenResource =
 -- generated token. This call only works with Google managed accounts.
 --
 -- /See:/ 'usersGenerateToken' smart constructor.
-data UsersGenerateToken = UsersGenerateToken
+data UsersGenerateToken = UsersGenerateToken'
     { _ugtEnterpriseId :: !Text
     , _ugtUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ usersGenerateToken
     -> Text -- ^ 'ugtUserId'
     -> UsersGenerateToken
 usersGenerateToken pUgtEnterpriseId_ pUgtUserId_ =
-    UsersGenerateToken
+    UsersGenerateToken'
     { _ugtEnterpriseId = pUgtEnterpriseId_
     , _ugtUserId = pUgtUserId_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest UsersGenerateToken where
         type Rs UsersGenerateToken = UserToken
         type Scopes UsersGenerateToken =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient UsersGenerateToken{..}
+        requestClient UsersGenerateToken'{..}
           = go _ugtEnterpriseId _ugtUserId (Just AltJSON)
               androidEnterpriseService
           where go

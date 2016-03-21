@@ -55,7 +55,7 @@ type LeaderboardConfigurationsInsertResource =
 -- | Insert a new leaderboard configuration in this application.
 --
 -- /See:/ 'leaderboardConfigurationsInsert' smart constructor.
-data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert
+data LeaderboardConfigurationsInsert = LeaderboardConfigurationsInsert'
     { _lciPayload       :: !LeaderboardConfiguration
     , _lciApplicationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ leaderboardConfigurationsInsert
     -> Text -- ^ 'lciApplicationId'
     -> LeaderboardConfigurationsInsert
 leaderboardConfigurationsInsert pLciPayload_ pLciApplicationId_ =
-    LeaderboardConfigurationsInsert
+    LeaderboardConfigurationsInsert'
     { _lciPayload = pLciPayload_
     , _lciApplicationId = pLciApplicationId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest
              LeaderboardConfiguration
         type Scopes LeaderboardConfigurationsInsert =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient LeaderboardConfigurationsInsert{..}
+        requestClient LeaderboardConfigurationsInsert'{..}
           = go _lciApplicationId (Just AltJSON) _lciPayload
               gamesConfigurationService
           where go

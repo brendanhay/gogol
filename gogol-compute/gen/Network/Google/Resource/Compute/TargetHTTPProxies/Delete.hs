@@ -55,7 +55,7 @@ type TargetHTTPProxiesDeleteResource =
 -- | Deletes the specified TargetHttpProxy resource.
 --
 -- /See:/ 'targetHTTPProxiesDelete' smart constructor.
-data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete
+data TargetHTTPProxiesDelete = TargetHTTPProxiesDelete'
     { _thttppdProject         :: !Text
     , _thttppdTargetHTTPProxy :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ targetHTTPProxiesDelete
     -> Text -- ^ 'thttppdTargetHTTPProxy'
     -> TargetHTTPProxiesDelete
 targetHTTPProxiesDelete pThttppdProject_ pThttppdTargetHTTPProxy_ =
-    TargetHTTPProxiesDelete
+    TargetHTTPProxiesDelete'
     { _thttppdProject = pThttppdProject_
     , _thttppdTargetHTTPProxy = pThttppdTargetHTTPProxy_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest TargetHTTPProxiesDelete where
         type Scopes TargetHTTPProxiesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetHTTPProxiesDelete{..}
+        requestClient TargetHTTPProxiesDelete'{..}
           = go _thttppdProject _thttppdTargetHTTPProxy
               (Just AltJSON)
               computeService

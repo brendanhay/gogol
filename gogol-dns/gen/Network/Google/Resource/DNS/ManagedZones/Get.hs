@@ -54,7 +54,7 @@ type ManagedZonesGetResource =
 -- | Fetch the representation of an existing ManagedZone.
 --
 -- /See:/ 'managedZonesGet' smart constructor.
-data ManagedZonesGet = ManagedZonesGet
+data ManagedZonesGet = ManagedZonesGet'
     { _mzgProject     :: !Text
     , _mzgManagedZone :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ managedZonesGet
     -> Text -- ^ 'mzgManagedZone'
     -> ManagedZonesGet
 managedZonesGet pMzgProject_ pMzgManagedZone_ =
-    ManagedZonesGet
+    ManagedZonesGet'
     { _mzgProject = pMzgProject_
     , _mzgManagedZone = pMzgManagedZone_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest ManagedZonesGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ManagedZonesGet{..}
+        requestClient ManagedZonesGet'{..}
           = go _mzgProject _mzgManagedZone (Just AltJSON)
               dNSService
           where go

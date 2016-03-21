@@ -60,7 +60,7 @@ type TypesListResource =
 -- | Lists all resource types for Deployment Manager.
 --
 -- /See:/ 'typesList' smart constructor.
-data TypesList = TypesList
+data TypesList = TypesList'
     { _tlProject    :: !Text
     , _tlFilter     :: !(Maybe Text)
     , _tlPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ typesList
     :: Text -- ^ 'tlProject'
     -> TypesList
 typesList pTlProject_ =
-    TypesList
+    TypesList'
     { _tlProject = pTlProject_
     , _tlFilter = Nothing
     , _tlPageToken = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest TypesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient TypesList{..}
+        requestClient TypesList'{..}
           = go _tlProject _tlFilter _tlPageToken
               (Just _tlMaxResults)
               (Just AltJSON)

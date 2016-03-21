@@ -54,7 +54,7 @@ type CreativesGetResource =
 -- | Gets one creative by ID.
 --
 -- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet
+data CreativesGet = CreativesGet'
     { _ccProFileId :: !(Textual Int64)
     , _ccId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativesGet
     -> Int64 -- ^ 'ccId'
     -> CreativesGet
 creativesGet pCcProFileId_ pCcId_ =
-    CreativesGet
+    CreativesGet'
     { _ccProFileId = _Coerce # pCcProFileId_
     , _ccId = _Coerce # pCcId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative
         type Scopes CreativesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativesGet{..}
+        requestClient CreativesGet'{..}
           = go _ccProFileId _ccId (Just AltJSON)
               dFAReportingService
           where go

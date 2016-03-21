@@ -55,14 +55,14 @@ type AchievementsResetAllResource =
 --
 -- /See:/ 'achievementsResetAll' smart constructor.
 data AchievementsResetAll =
-    AchievementsResetAll
+    AchievementsResetAll'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetAll' with the minimum fields required to make a request.
 --
 achievementsResetAll
     :: AchievementsResetAll
-achievementsResetAll = AchievementsResetAll
+achievementsResetAll = AchievementsResetAll'
 
 instance GoogleRequest AchievementsResetAll where
         type Rs AchievementsResetAll =
@@ -70,7 +70,7 @@ instance GoogleRequest AchievementsResetAll where
         type Scopes AchievementsResetAll =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsResetAll{}
+        requestClient AchievementsResetAll'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

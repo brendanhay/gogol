@@ -56,7 +56,7 @@ type TemplateUpdateResource =
 -- | Updates an existing template
 --
 -- /See:/ 'templateUpdate' smart constructor.
-data TemplateUpdate = TemplateUpdate
+data TemplateUpdate = TemplateUpdate'
     { _tuTemplateId :: !(Textual Int32)
     , _tuPayload    :: !Template
     , _tuTableId    :: !Text
@@ -77,7 +77,7 @@ templateUpdate
     -> Text -- ^ 'tuTableId'
     -> TemplateUpdate
 templateUpdate pTuTemplateId_ pTuPayload_ pTuTableId_ =
-    TemplateUpdate
+    TemplateUpdate'
     { _tuTemplateId = _Coerce # pTuTemplateId_
     , _tuPayload = pTuPayload_
     , _tuTableId = pTuTableId_
@@ -103,7 +103,7 @@ instance GoogleRequest TemplateUpdate where
         type Rs TemplateUpdate = Template
         type Scopes TemplateUpdate =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TemplateUpdate{..}
+        requestClient TemplateUpdate'{..}
           = go _tuTableId _tuTemplateId (Just AltJSON)
               _tuPayload
               fusionTablesService

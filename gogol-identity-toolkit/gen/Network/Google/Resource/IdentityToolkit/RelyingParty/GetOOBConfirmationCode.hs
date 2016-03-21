@@ -53,7 +53,7 @@ type RelyingPartyGetOOBConfirmationCodeResource =
 -- | Get a code for user action confirmation.
 --
 -- /See:/ 'relyingPartyGetOOBConfirmationCode' smart constructor.
-newtype RelyingPartyGetOOBConfirmationCode = RelyingPartyGetOOBConfirmationCode
+newtype RelyingPartyGetOOBConfirmationCode = RelyingPartyGetOOBConfirmationCode'
     { _rpgoobccPayload :: RelyingParty
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ relyingPartyGetOOBConfirmationCode
     :: RelyingParty -- ^ 'rpgoobccPayload'
     -> RelyingPartyGetOOBConfirmationCode
 relyingPartyGetOOBConfirmationCode pRpgoobccPayload_ =
-    RelyingPartyGetOOBConfirmationCode
+    RelyingPartyGetOOBConfirmationCode'
     { _rpgoobccPayload = pRpgoobccPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest
         type Rs RelyingPartyGetOOBConfirmationCode =
              GetOOBConfirmationCodeResponse
         type Scopes RelyingPartyGetOOBConfirmationCode = '[]
-        requestClient RelyingPartyGetOOBConfirmationCode{..}
+        requestClient RelyingPartyGetOOBConfirmationCode'{..}
           = go (Just AltJSON) _rpgoobccPayload
               identityToolkitService
           where go

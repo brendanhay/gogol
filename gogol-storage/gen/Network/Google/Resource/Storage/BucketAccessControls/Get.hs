@@ -55,7 +55,7 @@ type BucketAccessControlsGetResource =
 -- | Returns the ACL entry for the specified entity on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsGet' smart constructor.
-data BucketAccessControlsGet = BucketAccessControlsGet
+data BucketAccessControlsGet = BucketAccessControlsGet'
     { _bacgBucket :: !Text
     , _bacgEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ bucketAccessControlsGet
     -> Text -- ^ 'bacgEntity'
     -> BucketAccessControlsGet
 bucketAccessControlsGet pBacgBucket_ pBacgEntity_ =
-    BucketAccessControlsGet
+    BucketAccessControlsGet'
     { _bacgBucket = pBacgBucket_
     , _bacgEntity = pBacgEntity_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest BucketAccessControlsGet where
         type Scopes BucketAccessControlsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient BucketAccessControlsGet{..}
+        requestClient BucketAccessControlsGet'{..}
           = go _bacgBucket _bacgEntity (Just AltJSON)
               storageService
           where go

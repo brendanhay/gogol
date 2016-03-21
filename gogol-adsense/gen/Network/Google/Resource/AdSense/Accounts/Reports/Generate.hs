@@ -99,7 +99,7 @@ type AccountsReportsGenerateResource =
 -- specify \"alt=csv\" as a query parameter.
 --
 -- /See:/ 'accountsReportsGenerate' smart constructor.
-data AccountsReportsGenerate = AccountsReportsGenerate
+data AccountsReportsGenerate = AccountsReportsGenerate'
     { _argDimension            :: !(Maybe [Text])
     , _argLocale               :: !(Maybe Text)
     , _argEndDate              :: !Text
@@ -147,7 +147,7 @@ accountsReportsGenerate
     -> Text -- ^ 'argAccountId'
     -> AccountsReportsGenerate
 accountsReportsGenerate pArgEndDate_ pArgStartDate_ pArgAccountId_ =
-    AccountsReportsGenerate
+    AccountsReportsGenerate'
     { _argDimension = Nothing
     , _argLocale = Nothing
     , _argEndDate = pArgEndDate_
@@ -246,7 +246,7 @@ instance GoogleRequest AccountsReportsGenerate where
         type Scopes AccountsReportsGenerate =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsReportsGenerate{..}
+        requestClient AccountsReportsGenerate'{..}
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)
@@ -272,7 +272,7 @@ instance GoogleRequest
         type Scopes (MediaDownload AccountsReportsGenerate) =
              Scopes AccountsReportsGenerate
         requestClient
-          (MediaDownload AccountsReportsGenerate{..})
+          (MediaDownload AccountsReportsGenerate'{..})
           = go _argAccountId (Just _argStartDate)
               (Just _argEndDate)
               (_argDimension ^. _Default)

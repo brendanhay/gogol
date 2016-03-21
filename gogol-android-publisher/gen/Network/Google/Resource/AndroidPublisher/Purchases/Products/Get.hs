@@ -59,7 +59,7 @@ type PurchasesProductsGetResource =
 -- | Checks the purchase and consumption status of an inapp item.
 --
 -- /See:/ 'purchasesProductsGet' smart constructor.
-data PurchasesProductsGet = PurchasesProductsGet
+data PurchasesProductsGet = PurchasesProductsGet'
     { _ppgPackageName :: !Text
     , _ppgToken       :: !Text
     , _ppgProductId   :: !Text
@@ -80,7 +80,7 @@ purchasesProductsGet
     -> Text -- ^ 'ppgProductId'
     -> PurchasesProductsGet
 purchasesProductsGet pPpgPackageName_ pPpgToken_ pPpgProductId_ =
-    PurchasesProductsGet
+    PurchasesProductsGet'
     { _ppgPackageName = pPpgPackageName_
     , _ppgToken = pPpgToken_
     , _ppgProductId = pPpgProductId_
@@ -107,7 +107,7 @@ instance GoogleRequest PurchasesProductsGet where
         type Rs PurchasesProductsGet = ProductPurchase
         type Scopes PurchasesProductsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient PurchasesProductsGet{..}
+        requestClient PurchasesProductsGet'{..}
           = go _ppgPackageName _ppgProductId _ppgToken
               (Just AltJSON)
               androidPublisherService

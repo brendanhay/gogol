@@ -80,7 +80,7 @@ type ProjectsTracesListResource =
 -- | Returns of a list of traces that match the specified filter conditions.
 --
 -- /See:/ 'projectsTracesList' smart constructor.
-data ProjectsTracesList = ProjectsTracesList
+data ProjectsTracesList = ProjectsTracesList'
     { _ptlXgafv          :: !(Maybe Text)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlOrderBy        :: !(Maybe Text)
@@ -135,7 +135,7 @@ projectsTracesList
     :: Text -- ^ 'ptlProjectId'
     -> ProjectsTracesList
 projectsTracesList pPtlProjectId_ =
-    ProjectsTracesList
+    ProjectsTracesList'
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlOrderBy = Nothing
@@ -247,7 +247,7 @@ instance GoogleRequest ProjectsTracesList where
         type Rs ProjectsTracesList = ListTracesResponse
         type Scopes ProjectsTracesList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsTracesList{..}
+        requestClient ProjectsTracesList'{..}
           = go _ptlProjectId _ptlXgafv _ptlUploadProtocol
               _ptlOrderBy
               _ptlStartTime

@@ -53,7 +53,7 @@ type RegionsListResource =
 -- | Retrieves a list of regions.
 --
 -- /See:/ 'regionsList' smart constructor.
-newtype RegionsList = RegionsList
+newtype RegionsList = RegionsList'
     { _rProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ regionsList
     :: Int64 -- ^ 'rProFileId'
     -> RegionsList
 regionsList pRProFileId_ =
-    RegionsList
+    RegionsList'
     { _rProFileId = _Coerce # pRProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest RegionsList where
         type Rs RegionsList = RegionsListResponse
         type Scopes RegionsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RegionsList{..}
+        requestClient RegionsList'{..}
           = go _rProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy RegionsListResource)

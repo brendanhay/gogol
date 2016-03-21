@@ -70,7 +70,7 @@ type ProjectsZonesClustersGetResource =
 -- | Gets a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersGet' smart constructor.
-data ProjectsZonesClustersGet = ProjectsZonesClustersGet
+data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
     { _pzcgXgafv          :: !(Maybe Text)
     , _pzcgUploadProtocol :: !(Maybe Text)
     , _pzcgPp             :: !Bool
@@ -112,7 +112,7 @@ projectsZonesClustersGet
     -> Text -- ^ 'pzcgProjectId'
     -> ProjectsZonesClustersGet
 projectsZonesClustersGet pPzcgZone_ pPzcgClusterId_ pPzcgProjectId_ =
-    ProjectsZonesClustersGet
+    ProjectsZonesClustersGet'
     { _pzcgXgafv = Nothing
     , _pzcgUploadProtocol = Nothing
     , _pzcgPp = True
@@ -185,7 +185,7 @@ instance GoogleRequest ProjectsZonesClustersGet where
         type Rs ProjectsZonesClustersGet = Cluster
         type Scopes ProjectsZonesClustersGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesClustersGet{..}
+        requestClient ProjectsZonesClustersGet'{..}
           = go _pzcgProjectId _pzcgZone _pzcgClusterId
               _pzcgXgafv
               _pzcgUploadProtocol

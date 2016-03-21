@@ -54,7 +54,7 @@ type PretargetingConfigListResource =
 -- configurations.
 --
 -- /See:/ 'pretargetingConfigList'' smart constructor.
-newtype PretargetingConfigList' = PretargetingConfigList'
+newtype PretargetingConfigList' = PretargetingConfigList''
     { _pclAccountId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ pretargetingConfigList'
     :: Int64 -- ^ 'pclAccountId'
     -> PretargetingConfigList'
 pretargetingConfigList' pPclAccountId_ =
-    PretargetingConfigList'
+    PretargetingConfigList''
     { _pclAccountId = _Coerce # pPclAccountId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest PretargetingConfigList' where
              PretargetingConfigList
         type Scopes PretargetingConfigList' =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient PretargetingConfigList'{..}
+        requestClient PretargetingConfigList''{..}
           = go _pclAccountId (Just AltJSON)
               adExchangeBuyerService
           where go

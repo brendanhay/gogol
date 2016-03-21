@@ -60,7 +60,7 @@ type InstanceGroupsAggregatedListResource =
 -- | Retrieves the list of instance groups and sorts them by zone.
 --
 -- /See:/ 'instanceGroupsAggregatedList' smart constructor.
-data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList
+data InstanceGroupsAggregatedList = InstanceGroupsAggregatedList'
     { _igalProject    :: !Text
     , _igalFilter     :: !(Maybe Text)
     , _igalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ instanceGroupsAggregatedList
     :: Text -- ^ 'igalProject'
     -> InstanceGroupsAggregatedList
 instanceGroupsAggregatedList pIgalProject_ =
-    InstanceGroupsAggregatedList
+    InstanceGroupsAggregatedList'
     { _igalProject = pIgalProject_
     , _igalFilter = Nothing
     , _igalPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest InstanceGroupsAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupsAggregatedList{..}
+        requestClient InstanceGroupsAggregatedList'{..}
           = go _igalProject _igalFilter _igalPageToken
               (Just _igalMaxResults)
               (Just AltJSON)

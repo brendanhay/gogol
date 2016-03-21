@@ -53,7 +53,7 @@ type BrowsersListResource =
 -- | Retrieves a list of browsers.
 --
 -- /See:/ 'browsersList' smart constructor.
-newtype BrowsersList = BrowsersList
+newtype BrowsersList = BrowsersList'
     { _blProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ browsersList
     :: Int64 -- ^ 'blProFileId'
     -> BrowsersList
 browsersList pBlProFileId_ =
-    BrowsersList
+    BrowsersList'
     { _blProFileId = _Coerce # pBlProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest BrowsersList where
         type Rs BrowsersList = BrowsersListResponse
         type Scopes BrowsersList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient BrowsersList{..}
+        requestClient BrowsersList'{..}
           = go _blProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy BrowsersListResource)

@@ -55,7 +55,7 @@ type OrgUnitsDeleteResource =
 -- | Remove Organization Unit
 --
 -- /See:/ 'orgUnitsDelete' smart constructor.
-data OrgUnitsDelete = OrgUnitsDelete
+data OrgUnitsDelete = OrgUnitsDelete'
     { _oudOrgUnitPath :: ![Text]
     , _oudCustomerId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ orgUnitsDelete
     -> Text -- ^ 'oudCustomerId'
     -> OrgUnitsDelete
 orgUnitsDelete pOudOrgUnitPath_ pOudCustomerId_ =
-    OrgUnitsDelete
+    OrgUnitsDelete'
     { _oudOrgUnitPath = _Coerce # pOudOrgUnitPath_
     , _oudCustomerId = pOudCustomerId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest OrgUnitsDelete where
         type Rs OrgUnitsDelete = ()
         type Scopes OrgUnitsDelete =
              '["https://www.googleapis.com/auth/admin.directory.orgunit"]
-        requestClient OrgUnitsDelete{..}
+        requestClient OrgUnitsDelete'{..}
           = go _oudCustomerId _oudOrgUnitPath (Just AltJSON)
               directoryService
           where go

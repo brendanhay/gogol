@@ -56,7 +56,7 @@ type AccountsAlertsDeleteResource =
 -- AdSense account.
 --
 -- /See:/ 'accountsAlertsDelete' smart constructor.
-data AccountsAlertsDelete = AccountsAlertsDelete
+data AccountsAlertsDelete = AccountsAlertsDelete'
     { _aadAlertId   :: !Text
     , _aadAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsAlertsDelete
     -> Text -- ^ 'aadAccountId'
     -> AccountsAlertsDelete
 accountsAlertsDelete pAadAlertId_ pAadAccountId_ =
-    AccountsAlertsDelete
+    AccountsAlertsDelete'
     { _aadAlertId = pAadAlertId_
     , _aadAccountId = pAadAccountId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountsAlertsDelete where
         type Rs AccountsAlertsDelete = ()
         type Scopes AccountsAlertsDelete =
              '["https://www.googleapis.com/auth/adsense"]
-        requestClient AccountsAlertsDelete{..}
+        requestClient AccountsAlertsDelete'{..}
           = go _aadAccountId _aadAlertId (Just AltJSON)
               adSenseService
           where go

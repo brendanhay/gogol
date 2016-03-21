@@ -63,7 +63,7 @@ type ChromeosDevicesUpdateResource =
 -- | Update Chrome OS Device
 --
 -- /See:/ 'chromeosDevicesUpdate' smart constructor.
-data ChromeosDevicesUpdate = ChromeosDevicesUpdate
+data ChromeosDevicesUpdate = ChromeosDevicesUpdate'
     { _cduPayload    :: !ChromeOSDevice
     , _cduCustomerId :: !Text
     , _cduDeviceId   :: !Text
@@ -87,7 +87,7 @@ chromeosDevicesUpdate
     -> Text -- ^ 'cduDeviceId'
     -> ChromeosDevicesUpdate
 chromeosDevicesUpdate pCduPayload_ pCduCustomerId_ pCduDeviceId_ =
-    ChromeosDevicesUpdate
+    ChromeosDevicesUpdate'
     { _cduPayload = pCduPayload_
     , _cduCustomerId = pCduCustomerId_
     , _cduDeviceId = pCduDeviceId_
@@ -120,7 +120,7 @@ instance GoogleRequest ChromeosDevicesUpdate where
         type Rs ChromeosDevicesUpdate = ChromeOSDevice
         type Scopes ChromeosDevicesUpdate =
              '["https://www.googleapis.com/auth/admin.directory.device.chromeos"]
-        requestClient ChromeosDevicesUpdate{..}
+        requestClient ChromeosDevicesUpdate'{..}
           = go _cduCustomerId _cduDeviceId _cduProjection
               (Just AltJSON)
               _cduPayload

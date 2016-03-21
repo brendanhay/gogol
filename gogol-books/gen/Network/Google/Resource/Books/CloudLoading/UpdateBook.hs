@@ -53,7 +53,7 @@ type CloudLoadingUpdateBookResource =
 -- |
 --
 -- /See:/ 'cloudLoadingUpdateBook' smart constructor.
-newtype CloudLoadingUpdateBook = CloudLoadingUpdateBook
+newtype CloudLoadingUpdateBook = CloudLoadingUpdateBook'
     { _clubPayload :: BooksCloudLoadingResource
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ cloudLoadingUpdateBook
     :: BooksCloudLoadingResource -- ^ 'clubPayload'
     -> CloudLoadingUpdateBook
 cloudLoadingUpdateBook pClubPayload_ =
-    CloudLoadingUpdateBook
+    CloudLoadingUpdateBook'
     { _clubPayload = pClubPayload_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest CloudLoadingUpdateBook where
              BooksCloudLoadingResource
         type Scopes CloudLoadingUpdateBook =
              '["https://www.googleapis.com/auth/books"]
-        requestClient CloudLoadingUpdateBook{..}
+        requestClient CloudLoadingUpdateBook'{..}
           = go (Just AltJSON) _clubPayload booksService
           where go
                   = buildClient

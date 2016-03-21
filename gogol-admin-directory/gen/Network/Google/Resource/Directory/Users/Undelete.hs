@@ -55,7 +55,7 @@ type UsersUndeleteResource =
 -- | Undelete a deleted user
 --
 -- /See:/ 'usersUndelete' smart constructor.
-data UsersUndelete = UsersUndelete
+data UsersUndelete = UsersUndelete'
     { _uuPayload :: !UserUndelete
     , _uuUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersUndelete
     -> Text -- ^ 'uuUserKey'
     -> UsersUndelete
 usersUndelete pUuPayload_ pUuUserKey_ =
-    UsersUndelete
+    UsersUndelete'
     { _uuPayload = pUuPayload_
     , _uuUserKey = pUuUserKey_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersUndelete where
         type Rs UsersUndelete = ()
         type Scopes UsersUndelete =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersUndelete{..}
+        requestClient UsersUndelete'{..}
           = go _uuUserKey (Just AltJSON) _uuPayload
               directoryService
           where go

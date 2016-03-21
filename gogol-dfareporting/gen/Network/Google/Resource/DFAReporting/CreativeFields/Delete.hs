@@ -54,7 +54,7 @@ type CreativeFieldsDeleteResource =
 -- | Deletes an existing creative field.
 --
 -- /See:/ 'creativeFieldsDelete' smart constructor.
-data CreativeFieldsDelete = CreativeFieldsDelete
+data CreativeFieldsDelete = CreativeFieldsDelete'
     { _cfdProFileId :: !(Textual Int64)
     , _cfdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativeFieldsDelete
     -> Int64 -- ^ 'cfdId'
     -> CreativeFieldsDelete
 creativeFieldsDelete pCfdProFileId_ pCfdId_ =
-    CreativeFieldsDelete
+    CreativeFieldsDelete'
     { _cfdProFileId = _Coerce # pCfdProFileId_
     , _cfdId = _Coerce # pCfdId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CreativeFieldsDelete where
         type Rs CreativeFieldsDelete = ()
         type Scopes CreativeFieldsDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldsDelete{..}
+        requestClient CreativeFieldsDelete'{..}
           = go _cfdProFileId _cfdId (Just AltJSON)
               dFAReportingService
           where go

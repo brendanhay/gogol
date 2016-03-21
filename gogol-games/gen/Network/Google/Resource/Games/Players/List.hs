@@ -60,7 +60,7 @@ type PlayersListResource =
 -- | Get the collection of players for the currently authenticated user.
 --
 -- /See:/ 'playersList' smart constructor.
-data PlayersList = PlayersList
+data PlayersList = PlayersList'
     { _plCollection :: !PlayersListCollection
     , _plLanguage   :: !(Maybe Text)
     , _plPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ playersList
     :: PlayersListCollection -- ^ 'plCollection'
     -> PlayersList
 playersList pPlCollection_ =
-    PlayersList
+    PlayersList'
     { _plCollection = pPlCollection_
     , _plLanguage = Nothing
     , _plPageToken = Nothing
@@ -117,7 +117,7 @@ instance GoogleRequest PlayersList where
         type Scopes PlayersList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PlayersList{..}
+        requestClient PlayersList'{..}
           = go _plCollection _plLanguage _plPageToken
               _plMaxResults
               (Just AltJSON)

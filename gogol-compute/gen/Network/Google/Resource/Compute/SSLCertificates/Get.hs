@@ -58,7 +58,7 @@ type SSLCertificatesGetResource =
 -- SSL certificates by making a list() request.
 --
 -- /See:/ 'sslCertificatesGet' smart constructor.
-data SSLCertificatesGet = SSLCertificatesGet
+data SSLCertificatesGet = SSLCertificatesGet'
     { _scgProject        :: !Text
     , _scgSSLCertificate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ sslCertificatesGet
     -> Text -- ^ 'scgSSLCertificate'
     -> SSLCertificatesGet
 sslCertificatesGet pScgProject_ pScgSSLCertificate_ =
-    SSLCertificatesGet
+    SSLCertificatesGet'
     { _scgProject = pScgProject_
     , _scgSSLCertificate = pScgSSLCertificate_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest SSLCertificatesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SSLCertificatesGet{..}
+        requestClient SSLCertificatesGet'{..}
           = go _scgProject _scgSSLCertificate (Just AltJSON)
               computeService
           where go

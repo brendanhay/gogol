@@ -64,7 +64,7 @@ type LiveStreamsListResource =
 -- | Returns a list of video streams that match the API request parameters.
 --
 -- /See:/ 'liveStreamsList' smart constructor.
-data LiveStreamsList = LiveStreamsList
+data LiveStreamsList = LiveStreamsList'
     { _lslPart                          :: !Text
     , _lslMine                          :: !(Maybe Bool)
     , _lslOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -95,7 +95,7 @@ liveStreamsList
     :: Text -- ^ 'lslPart'
     -> LiveStreamsList
 liveStreamsList pLslPart_ =
-    LiveStreamsList
+    LiveStreamsList'
     { _lslPart = pLslPart_
     , _lslMine = Nothing
     , _lslOnBehalfOfContentOwner = Nothing
@@ -181,7 +181,7 @@ instance GoogleRequest LiveStreamsList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient LiveStreamsList{..}
+        requestClient LiveStreamsList'{..}
           = go (Just _lslPart) _lslMine
               _lslOnBehalfOfContentOwner
               _lslOnBehalfOfContentOwnerChannel

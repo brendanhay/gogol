@@ -62,7 +62,7 @@ type DataSetsDeleteResource =
 -- another dataset with the same name.
 --
 -- /See:/ 'dataSetsDelete' smart constructor.
-data DataSetsDelete = DataSetsDelete
+data DataSetsDelete = DataSetsDelete'
     { _dsdDataSetId      :: !Text
     , _dsdProjectId      :: !Text
     , _dsdDeleteContents :: !(Maybe Bool)
@@ -82,7 +82,7 @@ dataSetsDelete
     -> Text -- ^ 'dsdProjectId'
     -> DataSetsDelete
 dataSetsDelete pDsdDataSetId_ pDsdProjectId_ =
-    DataSetsDelete
+    DataSetsDelete'
     { _dsdDataSetId = pDsdDataSetId_
     , _dsdProjectId = pDsdProjectId_
     , _dsdDeleteContents = Nothing
@@ -110,7 +110,7 @@ instance GoogleRequest DataSetsDelete where
         type Scopes DataSetsDelete =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient DataSetsDelete{..}
+        requestClient DataSetsDelete'{..}
           = go _dsdProjectId _dsdDataSetId _dsdDeleteContents
               (Just AltJSON)
               bigQueryService

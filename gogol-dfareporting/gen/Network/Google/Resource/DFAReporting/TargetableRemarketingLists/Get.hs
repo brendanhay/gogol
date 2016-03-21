@@ -55,7 +55,7 @@ type TargetableRemarketingListsGetResource =
 -- | Gets one remarketing list by ID.
 --
 -- /See:/ 'targetableRemarketingListsGet' smart constructor.
-data TargetableRemarketingListsGet = TargetableRemarketingListsGet
+data TargetableRemarketingListsGet = TargetableRemarketingListsGet'
     { _trlgProFileId :: !(Textual Int64)
     , _trlgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ targetableRemarketingListsGet
     -> Int64 -- ^ 'trlgId'
     -> TargetableRemarketingListsGet
 targetableRemarketingListsGet pTrlgProFileId_ pTrlgId_ =
-    TargetableRemarketingListsGet
+    TargetableRemarketingListsGet'
     { _trlgProFileId = _Coerce # pTrlgProFileId_
     , _trlgId = _Coerce # pTrlgId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest TargetableRemarketingListsGet
              TargetableRemarketingList
         type Scopes TargetableRemarketingListsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient TargetableRemarketingListsGet{..}
+        requestClient TargetableRemarketingListsGet'{..}
           = go _trlgProFileId _trlgId (Just AltJSON)
               dFAReportingService
           where go

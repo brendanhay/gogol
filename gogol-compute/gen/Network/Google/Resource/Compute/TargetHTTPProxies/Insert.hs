@@ -58,7 +58,7 @@ type TargetHTTPProxiesInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'targetHTTPProxiesInsert' smart constructor.
-data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert
+data TargetHTTPProxiesInsert = TargetHTTPProxiesInsert'
     { _thttppiProject :: !Text
     , _thttppiPayload :: !TargetHTTPProxy
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ targetHTTPProxiesInsert
     -> TargetHTTPProxy -- ^ 'thttppiPayload'
     -> TargetHTTPProxiesInsert
 targetHTTPProxiesInsert pThttppiProject_ pThttppiPayload_ =
-    TargetHTTPProxiesInsert
+    TargetHTTPProxiesInsert'
     { _thttppiProject = pThttppiProject_
     , _thttppiPayload = pThttppiPayload_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest TargetHTTPProxiesInsert where
         type Scopes TargetHTTPProxiesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetHTTPProxiesInsert{..}
+        requestClient TargetHTTPProxiesInsert'{..}
           = go _thttppiProject (Just AltJSON) _thttppiPayload
               computeService
           where go

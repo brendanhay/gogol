@@ -58,7 +58,7 @@ type TargetHTTPProxiesSetURLMapResource =
 -- | Changes the URL map for TargetHttpProxy.
 --
 -- /See:/ 'targetHTTPProxiesSetURLMap' smart constructor.
-data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap
+data TargetHTTPProxiesSetURLMap = TargetHTTPProxiesSetURLMap'
     { _thttppsumProject         :: !Text
     , _thttppsumPayload         :: !URLMapReference
     , _thttppsumTargetHTTPProxy :: !Text
@@ -79,7 +79,7 @@ targetHTTPProxiesSetURLMap
     -> Text -- ^ 'thttppsumTargetHTTPProxy'
     -> TargetHTTPProxiesSetURLMap
 targetHTTPProxiesSetURLMap pThttppsumProject_ pThttppsumPayload_ pThttppsumTargetHTTPProxy_ =
-    TargetHTTPProxiesSetURLMap
+    TargetHTTPProxiesSetURLMap'
     { _thttppsumProject = pThttppsumProject_
     , _thttppsumPayload = pThttppsumPayload_
     , _thttppsumTargetHTTPProxy = pThttppsumTargetHTTPProxy_
@@ -109,7 +109,7 @@ instance GoogleRequest TargetHTTPProxiesSetURLMap
         type Scopes TargetHTTPProxiesSetURLMap =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetHTTPProxiesSetURLMap{..}
+        requestClient TargetHTTPProxiesSetURLMap'{..}
           = go _thttppsumProject _thttppsumTargetHTTPProxy
               (Just AltJSON)
               _thttppsumPayload

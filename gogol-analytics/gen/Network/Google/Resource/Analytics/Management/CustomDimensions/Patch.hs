@@ -65,7 +65,7 @@ type ManagementCustomDimensionsPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementCustomDimensionsPatch' smart constructor.
-data ManagementCustomDimensionsPatch = ManagementCustomDimensionsPatch
+data ManagementCustomDimensionsPatch = ManagementCustomDimensionsPatch'
     { _mcdpWebPropertyId               :: !Text
     , _mcdpIgnoreCustomDataSourceLinks :: !Bool
     , _mcdpPayload                     :: !CustomDimension
@@ -93,7 +93,7 @@ managementCustomDimensionsPatch
     -> Text -- ^ 'mcdpCustomDimensionId'
     -> ManagementCustomDimensionsPatch
 managementCustomDimensionsPatch pMcdpWebPropertyId_ pMcdpPayload_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
-    ManagementCustomDimensionsPatch
+    ManagementCustomDimensionsPatch'
     { _mcdpWebPropertyId = pMcdpWebPropertyId_
     , _mcdpIgnoreCustomDataSourceLinks = False
     , _mcdpPayload = pMcdpPayload_
@@ -137,7 +137,7 @@ instance GoogleRequest
              CustomDimension
         type Scopes ManagementCustomDimensionsPatch =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementCustomDimensionsPatch{..}
+        requestClient ManagementCustomDimensionsPatch'{..}
           = go _mcdpAccountId _mcdpWebPropertyId
               _mcdpCustomDimensionId
               (Just _mcdpIgnoreCustomDataSourceLinks)

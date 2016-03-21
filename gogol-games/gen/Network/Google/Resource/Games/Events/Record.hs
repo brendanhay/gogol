@@ -56,7 +56,7 @@ type EventsRecordResource =
 -- for the currently authenticated user of this application.
 --
 -- /See:/ 'eventsRecord' smart constructor.
-data EventsRecord = EventsRecord
+data EventsRecord = EventsRecord'
     { _erPayload  :: !EventRecordRequest
     , _erLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ eventsRecord
     :: EventRecordRequest -- ^ 'erPayload'
     -> EventsRecord
 eventsRecord pErPayload_ =
-    EventsRecord
+    EventsRecord'
     { _erPayload = pErPayload_
     , _erLanguage = Nothing
     }
@@ -92,7 +92,7 @@ instance GoogleRequest EventsRecord where
         type Scopes EventsRecord =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient EventsRecord{..}
+        requestClient EventsRecord'{..}
           = go _erLanguage (Just AltJSON) _erPayload
               gamesService
           where go

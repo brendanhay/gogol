@@ -57,7 +57,7 @@ type OrderDocumentsGetResource =
 -- | Gets one order document by ID.
 --
 -- /See:/ 'orderDocumentsGet' smart constructor.
-data OrderDocumentsGet = OrderDocumentsGet
+data OrderDocumentsGet = OrderDocumentsGet'
     { _odgProFileId :: !(Textual Int64)
     , _odgId        :: !(Textual Int64)
     , _odgProjectId :: !(Textual Int64)
@@ -78,7 +78,7 @@ orderDocumentsGet
     -> Int64 -- ^ 'odgProjectId'
     -> OrderDocumentsGet
 orderDocumentsGet pOdgProFileId_ pOdgId_ pOdgProjectId_ =
-    OrderDocumentsGet
+    OrderDocumentsGet'
     { _odgProFileId = _Coerce # pOdgProFileId_
     , _odgId = _Coerce # pOdgId_
     , _odgProjectId = _Coerce # pOdgProjectId_
@@ -105,7 +105,7 @@ instance GoogleRequest OrderDocumentsGet where
         type Rs OrderDocumentsGet = OrderDocument
         type Scopes OrderDocumentsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OrderDocumentsGet{..}
+        requestClient OrderDocumentsGet'{..}
           = go _odgProFileId _odgProjectId _odgId
               (Just AltJSON)
               dFAReportingService

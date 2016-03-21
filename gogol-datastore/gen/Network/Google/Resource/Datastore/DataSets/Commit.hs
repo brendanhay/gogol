@@ -57,7 +57,7 @@ type DataSetsCommitResource =
 -- entities.
 --
 -- /See:/ 'dataSetsCommit' smart constructor.
-data DataSetsCommit = DataSetsCommit
+data DataSetsCommit = DataSetsCommit'
     { _dscPayload   :: !CommitRequest
     , _dscDataSetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ dataSetsCommit
     -> Text -- ^ 'dscDataSetId'
     -> DataSetsCommit
 dataSetsCommit pDscPayload_ pDscDataSetId_ =
-    DataSetsCommit
+    DataSetsCommit'
     { _dscPayload = pDscPayload_
     , _dscDataSetId = pDscDataSetId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest DataSetsCommit where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient DataSetsCommit{..}
+        requestClient DataSetsCommit'{..}
           = go _dscDataSetId (Just AltJSON) _dscPayload
               datastoreService
           where go

@@ -54,7 +54,7 @@ type UserRolesUpdateResource =
 -- | Updates an existing user role.
 --
 -- /See:/ 'userRolesUpdate' smart constructor.
-data UserRolesUpdate = UserRolesUpdate
+data UserRolesUpdate = UserRolesUpdate'
     { _uruProFileId :: !(Textual Int64)
     , _uruPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolesUpdate
     -> UserRole -- ^ 'uruPayload'
     -> UserRolesUpdate
 userRolesUpdate pUruProFileId_ pUruPayload_ =
-    UserRolesUpdate
+    UserRolesUpdate'
     { _uruProFileId = _Coerce # pUruProFileId_
     , _uruPayload = pUruPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UserRolesUpdate where
         type Rs UserRolesUpdate = UserRole
         type Scopes UserRolesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolesUpdate{..}
+        requestClient UserRolesUpdate'{..}
           = go _uruProFileId (Just AltJSON) _uruPayload
               dFAReportingService
           where go

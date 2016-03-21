@@ -65,7 +65,7 @@ type SubAccountsListResource =
 -- | Gets a list of subaccounts, possibly filtered.
 --
 -- /See:/ 'subAccountsList' smart constructor.
-data SubAccountsList = SubAccountsList
+data SubAccountsList = SubAccountsList'
     { _salSearchString :: !(Maybe Text)
     , _salIds          :: !(Maybe [Textual Int64])
     , _salProFileId    :: !(Textual Int64)
@@ -96,7 +96,7 @@ subAccountsList
     :: Int64 -- ^ 'salProFileId'
     -> SubAccountsList
 subAccountsList pSalProFileId_ =
-    SubAccountsList
+    SubAccountsList'
     { _salSearchString = Nothing
     , _salIds = Nothing
     , _salProFileId = _Coerce # pSalProFileId_
@@ -156,7 +156,7 @@ instance GoogleRequest SubAccountsList where
         type Rs SubAccountsList = SubAccountsListResponse
         type Scopes SubAccountsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SubAccountsList{..}
+        requestClient SubAccountsList'{..}
           = go _salProFileId _salSearchString
               (_salIds ^. _Default)
               _salSortOrder

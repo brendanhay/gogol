@@ -58,7 +58,7 @@ type MyLibraryAnnotationsInsertResource =
 -- | Inserts a new annotation.
 --
 -- /See:/ 'myLibraryAnnotationsInsert' smart constructor.
-data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert
+data MyLibraryAnnotationsInsert = MyLibraryAnnotationsInsert'
     { _mlaiCountry                   :: !(Maybe Text)
     , _mlaiPayload                   :: !Annotation
     , _mlaiShowOnlySummaryInResponse :: !(Maybe Bool)
@@ -80,7 +80,7 @@ myLibraryAnnotationsInsert
     :: Annotation -- ^ 'mlaiPayload'
     -> MyLibraryAnnotationsInsert
 myLibraryAnnotationsInsert pMlaiPayload_ =
-    MyLibraryAnnotationsInsert
+    MyLibraryAnnotationsInsert'
     { _mlaiCountry = Nothing
     , _mlaiPayload = pMlaiPayload_
     , _mlaiShowOnlySummaryInResponse = Nothing
@@ -114,7 +114,7 @@ instance GoogleRequest MyLibraryAnnotationsInsert
         type Rs MyLibraryAnnotationsInsert = Annotation
         type Scopes MyLibraryAnnotationsInsert =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryAnnotationsInsert{..}
+        requestClient MyLibraryAnnotationsInsert'{..}
           = go _mlaiCountry _mlaiShowOnlySummaryInResponse
               _mlaiSource
               (Just AltJSON)

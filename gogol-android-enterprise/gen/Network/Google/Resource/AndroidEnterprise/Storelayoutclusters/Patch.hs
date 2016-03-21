@@ -61,7 +61,7 @@ type StorelayoutclustersPatchResource =
 -- | Updates a cluster. This method supports patch semantics.
 --
 -- /See:/ 'storelayoutclustersPatch' smart constructor.
-data StorelayoutclustersPatch = StorelayoutclustersPatch
+data StorelayoutclustersPatch = StorelayoutclustersPatch'
     { _sppEnterpriseId :: !Text
     , _sppPageId       :: !Text
     , _sppPayload      :: !StoreCluster
@@ -86,7 +86,7 @@ storelayoutclustersPatch
     -> Text -- ^ 'sppClusterId'
     -> StorelayoutclustersPatch
 storelayoutclustersPatch pSppEnterpriseId_ pSppPageId_ pSppPayload_ pSppClusterId_ =
-    StorelayoutclustersPatch
+    StorelayoutclustersPatch'
     { _sppEnterpriseId = pSppEnterpriseId_
     , _sppPageId = pSppPageId_
     , _sppPayload = pSppPayload_
@@ -118,7 +118,7 @@ instance GoogleRequest StorelayoutclustersPatch where
         type Rs StorelayoutclustersPatch = StoreCluster
         type Scopes StorelayoutclustersPatch =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutclustersPatch{..}
+        requestClient StorelayoutclustersPatch'{..}
           = go _sppEnterpriseId _sppPageId _sppClusterId
               (Just AltJSON)
               _sppPayload

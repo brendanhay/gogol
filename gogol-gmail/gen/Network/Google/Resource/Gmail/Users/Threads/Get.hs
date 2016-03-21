@@ -58,7 +58,7 @@ type UsersThreadsGetResource =
 -- | Gets the specified thread.
 --
 -- /See:/ 'usersThreadsGet' smart constructor.
-data UsersThreadsGet = UsersThreadsGet
+data UsersThreadsGet = UsersThreadsGet'
     { _utgFormat          :: !UsersThreadsGetFormat
     , _utgUserId          :: !Text
     , _utgId              :: !Text
@@ -80,7 +80,7 @@ usersThreadsGet
     :: Text -- ^ 'utgId'
     -> UsersThreadsGet
 usersThreadsGet pUtgId_ =
-    UsersThreadsGet
+    UsersThreadsGet'
     { _utgFormat = UTGFFull
     , _utgUserId = "me"
     , _utgId = pUtgId_
@@ -116,7 +116,7 @@ instance GoogleRequest UsersThreadsGet where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersThreadsGet{..}
+        requestClient UsersThreadsGet'{..}
           = go _utgUserId _utgId (Just _utgFormat)
               (_utgMetadataHeaders ^. _Default)
               (Just AltJSON)

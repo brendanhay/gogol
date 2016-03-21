@@ -54,7 +54,7 @@ type ProjectsGetResource =
 -- | Gets one project by ID.
 --
 -- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet
+data ProjectsGet = ProjectsGet'
     { _proProFileId :: !(Textual Int64)
     , _proId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ projectsGet
     -> Int64 -- ^ 'proId'
     -> ProjectsGet
 projectsGet pProProFileId_ pProId_ =
-    ProjectsGet
+    ProjectsGet'
     { _proProFileId = _Coerce # pProProFileId_
     , _proId = _Coerce # pProId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ProjectsGet where
         type Rs ProjectsGet = Project
         type Scopes ProjectsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ProjectsGet{..}
+        requestClient ProjectsGet'{..}
           = go _proProFileId _proId (Just AltJSON)
               dFAReportingService
           where go

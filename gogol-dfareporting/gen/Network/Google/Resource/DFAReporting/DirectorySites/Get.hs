@@ -54,7 +54,7 @@ type DirectorySitesGetResource =
 -- | Gets one directory site by ID.
 --
 -- /See:/ 'directorySitesGet' smart constructor.
-data DirectorySitesGet = DirectorySitesGet
+data DirectorySitesGet = DirectorySitesGet'
     { _dsgProFileId :: !(Textual Int64)
     , _dsgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ directorySitesGet
     -> Int64 -- ^ 'dsgId'
     -> DirectorySitesGet
 directorySitesGet pDsgProFileId_ pDsgId_ =
-    DirectorySitesGet
+    DirectorySitesGet'
     { _dsgProFileId = _Coerce # pDsgProFileId_
     , _dsgId = _Coerce # pDsgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest DirectorySitesGet where
         type Rs DirectorySitesGet = DirectorySite
         type Scopes DirectorySitesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DirectorySitesGet{..}
+        requestClient DirectorySitesGet'{..}
           = go _dsgProFileId _dsgId (Just AltJSON)
               dFAReportingService
           where go

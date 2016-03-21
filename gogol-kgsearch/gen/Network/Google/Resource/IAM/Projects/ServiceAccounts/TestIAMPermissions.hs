@@ -69,7 +69,7 @@ type ProjectsServiceAccountsTestIAMPermissionsResource
 -- for the specified IAM resource.
 --
 -- /See:/ 'projectsServiceAccountsTestIAMPermissions' smart constructor.
-data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMPermissions
+data ProjectsServiceAccountsTestIAMPermissions = ProjectsServiceAccountsTestIAMPermissions'
     { _psatipXgafv          :: !(Maybe Text)
     , _psatipUploadProtocol :: !(Maybe Text)
     , _psatipPp             :: !Bool
@@ -107,7 +107,7 @@ projectsServiceAccountsTestIAMPermissions
     -> Text -- ^ 'psatipResource'
     -> ProjectsServiceAccountsTestIAMPermissions
 projectsServiceAccountsTestIAMPermissions pPsatipPayload_ pPsatipResource_ =
-    ProjectsServiceAccountsTestIAMPermissions
+    ProjectsServiceAccountsTestIAMPermissions'
     { _psatipXgafv = Nothing
     , _psatipUploadProtocol = Nothing
     , _psatipPp = True
@@ -181,7 +181,7 @@ instance GoogleRequest
         type Scopes ProjectsServiceAccountsTestIAMPermissions
              = '["https://www.googleapis.com/auth/cloud-platform"]
         requestClient
-          ProjectsServiceAccountsTestIAMPermissions{..}
+          ProjectsServiceAccountsTestIAMPermissions'{..}
           = go _psatipResource _psatipXgafv
               _psatipUploadProtocol
               (Just _psatipPp)

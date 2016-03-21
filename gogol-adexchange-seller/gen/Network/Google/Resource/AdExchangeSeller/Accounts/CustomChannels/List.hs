@@ -62,7 +62,7 @@ type AccountsCustomChannelsListResource =
 -- account.
 --
 -- /See:/ 'accountsCustomChannelsList' smart constructor.
-data AccountsCustomChannelsList = AccountsCustomChannelsList
+data AccountsCustomChannelsList = AccountsCustomChannelsList'
     { _acclAdClientId :: !Text
     , _acclAccountId  :: !Text
     , _acclPageToken  :: !(Maybe Text)
@@ -85,7 +85,7 @@ accountsCustomChannelsList
     -> Text -- ^ 'acclAccountId'
     -> AccountsCustomChannelsList
 accountsCustomChannelsList pAcclAdClientId_ pAcclAccountId_ =
-    AccountsCustomChannelsList
+    AccountsCustomChannelsList'
     { _acclAdClientId = pAcclAdClientId_
     , _acclAccountId = pAcclAccountId_
     , _acclPageToken = Nothing
@@ -126,7 +126,7 @@ instance GoogleRequest AccountsCustomChannelsList
         type Scopes AccountsCustomChannelsList =
              '["https://www.googleapis.com/auth/adexchange.seller",
                "https://www.googleapis.com/auth/adexchange.seller.readonly"]
-        requestClient AccountsCustomChannelsList{..}
+        requestClient AccountsCustomChannelsList'{..}
           = go _acclAccountId _acclAdClientId _acclPageToken
               _acclMaxResults
               (Just AltJSON)

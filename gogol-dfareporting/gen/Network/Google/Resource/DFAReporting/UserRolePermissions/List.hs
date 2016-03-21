@@ -55,7 +55,7 @@ type UserRolePermissionsListResource =
 -- | Gets a list of user role permissions, possibly filtered.
 --
 -- /See:/ 'userRolePermissionsList' smart constructor.
-data UserRolePermissionsList = UserRolePermissionsList
+data UserRolePermissionsList = UserRolePermissionsList'
     { _urplIds       :: !(Maybe [Textual Int64])
     , _urplProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolePermissionsList
     :: Int64 -- ^ 'urplProFileId'
     -> UserRolePermissionsList
 userRolePermissionsList pUrplProFileId_ =
-    UserRolePermissionsList
+    UserRolePermissionsList'
     { _urplIds = Nothing
     , _urplProFileId = _Coerce # pUrplProFileId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest UserRolePermissionsList where
              UserRolePermissionsListResponse
         type Scopes UserRolePermissionsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolePermissionsList{..}
+        requestClient UserRolePermissionsList'{..}
           = go _urplProFileId (_urplIds ^. _Default)
               (Just AltJSON)
               dFAReportingService

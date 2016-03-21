@@ -98,7 +98,7 @@ type ReadsSearchResource =
 -- [GlobalAllianceApi.searchReads](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L85).
 --
 -- /See:/ 'readsSearch' smart constructor.
-data ReadsSearch = ReadsSearch
+data ReadsSearch = ReadsSearch'
     { _reaXgafv          :: !(Maybe Text)
     , _reaUploadProtocol :: !(Maybe Text)
     , _reaPp             :: !Bool
@@ -132,7 +132,7 @@ readsSearch
     :: SearchReadsRequest -- ^ 'reaPayload'
     -> ReadsSearch
 readsSearch pReaPayload_ =
-    ReadsSearch
+    ReadsSearch'
     { _reaXgafv = Nothing
     , _reaUploadProtocol = Nothing
     , _reaPp = True
@@ -191,7 +191,7 @@ instance GoogleRequest ReadsSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReadsSearch{..}
+        requestClient ReadsSearch'{..}
           = go _reaXgafv _reaUploadProtocol (Just _reaPp)
               _reaAccessToken
               _reaUploadType

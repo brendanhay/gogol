@@ -56,7 +56,7 @@ type DefaultObjectAccessControlsDeleteResource =
 -- entity on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsDelete' smart constructor.
-data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete
+data DefaultObjectAccessControlsDelete = DefaultObjectAccessControlsDelete'
     { _doacdBucket :: !Text
     , _doacdEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ defaultObjectAccessControlsDelete
     -> Text -- ^ 'doacdEntity'
     -> DefaultObjectAccessControlsDelete
 defaultObjectAccessControlsDelete pDoacdBucket_ pDoacdEntity_ =
-    DefaultObjectAccessControlsDelete
+    DefaultObjectAccessControlsDelete'
     { _doacdBucket = pDoacdBucket_
     , _doacdEntity = pDoacdEntity_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest
         type Scopes DefaultObjectAccessControlsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient DefaultObjectAccessControlsDelete{..}
+        requestClient DefaultObjectAccessControlsDelete'{..}
           = go _doacdBucket _doacdEntity (Just AltJSON)
               storageService
           where go

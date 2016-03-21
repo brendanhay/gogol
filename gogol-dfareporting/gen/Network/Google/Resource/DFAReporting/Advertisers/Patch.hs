@@ -57,7 +57,7 @@ type AdvertisersPatchResource =
 -- | Updates an existing advertiser. This method supports patch semantics.
 --
 -- /See:/ 'advertisersPatch' smart constructor.
-data AdvertisersPatch = AdvertisersPatch
+data AdvertisersPatch = AdvertisersPatch'
     { _apProFileId :: !(Textual Int64)
     , _apPayload   :: !Advertiser
     , _apId        :: !(Textual Int64)
@@ -78,7 +78,7 @@ advertisersPatch
     -> Int64 -- ^ 'apId'
     -> AdvertisersPatch
 advertisersPatch pApProFileId_ pApPayload_ pApId_ =
-    AdvertisersPatch
+    AdvertisersPatch'
     { _apProFileId = _Coerce # pApProFileId_
     , _apPayload = pApPayload_
     , _apId = _Coerce # pApId_
@@ -103,7 +103,7 @@ instance GoogleRequest AdvertisersPatch where
         type Rs AdvertisersPatch = Advertiser
         type Scopes AdvertisersPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertisersPatch{..}
+        requestClient AdvertisersPatch'{..}
           = go _apProFileId (Just _apId) (Just AltJSON)
               _apPayload
               dFAReportingService

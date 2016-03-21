@@ -60,7 +60,7 @@ type AddressesAggregatedListResource =
 -- | Retrieves an aggregated list of addresses.
 --
 -- /See:/ 'addressesAggregatedList' smart constructor.
-data AddressesAggregatedList = AddressesAggregatedList
+data AddressesAggregatedList = AddressesAggregatedList'
     { _aalProject    :: !Text
     , _aalFilter     :: !(Maybe Text)
     , _aalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ addressesAggregatedList
     :: Text -- ^ 'aalProject'
     -> AddressesAggregatedList
 addressesAggregatedList pAalProject_ =
-    AddressesAggregatedList
+    AddressesAggregatedList'
     { _aalProject = pAalProject_
     , _aalFilter = Nothing
     , _aalPageToken = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest AddressesAggregatedList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient AddressesAggregatedList{..}
+        requestClient AddressesAggregatedList'{..}
           = go _aalProject _aalFilter _aalPageToken
               (Just _aalMaxResults)
               (Just AltJSON)

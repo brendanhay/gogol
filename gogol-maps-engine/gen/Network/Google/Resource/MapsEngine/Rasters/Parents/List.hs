@@ -57,7 +57,7 @@ type RastersParentsListResource =
 -- | Return all parent ids of the specified rasters.
 --
 -- /See:/ 'rastersParentsList' smart constructor.
-data RastersParentsList = RastersParentsList
+data RastersParentsList = RastersParentsList'
     { _rId         :: !Text
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ rastersParentsList
     :: Text -- ^ 'rId'
     -> RastersParentsList
 rastersParentsList pRId_ =
-    RastersParentsList
+    RastersParentsList'
     { _rId = pRId_
     , _rPageToken = Nothing
     , _rMaxResults = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest RastersParentsList where
         type Scopes RastersParentsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient RastersParentsList{..}
+        requestClient RastersParentsList'{..}
           = go _rId _rPageToken _rMaxResults (Just AltJSON)
               mapsEngineService
           where go

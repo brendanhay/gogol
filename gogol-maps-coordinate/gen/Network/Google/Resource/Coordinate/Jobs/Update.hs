@@ -76,7 +76,7 @@ type JobsUpdateResource =
 -- | Updates a job. Fields that are set in the job state will be updated.
 --
 -- /See:/ 'jobsUpdate' smart constructor.
-data JobsUpdate = JobsUpdate
+data JobsUpdate = JobsUpdate'
     { _juJobId               :: !(Textual Word64)
     , _juProgress            :: !(Maybe JobsUpdateProgress)
     , _juNote                :: !(Maybe Text)
@@ -127,7 +127,7 @@ jobsUpdate
     -> Job -- ^ 'juPayload'
     -> JobsUpdate
 jobsUpdate pJuJobId_ pJuTeamId_ pJuPayload_ =
-    JobsUpdate
+    JobsUpdate'
     { _juJobId = _Coerce # pJuJobId_
     , _juProgress = Nothing
     , _juNote = Nothing
@@ -221,7 +221,7 @@ instance GoogleRequest JobsUpdate where
         type Rs JobsUpdate = Job
         type Scopes JobsUpdate =
              '["https://www.googleapis.com/auth/coordinate"]
-        requestClient JobsUpdate{..}
+        requestClient JobsUpdate'{..}
           = go _juTeamId _juJobId _juProgress _juNote
               _juCustomerPhoneNumber
               _juCustomerName

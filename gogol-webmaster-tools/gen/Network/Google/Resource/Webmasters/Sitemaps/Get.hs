@@ -54,7 +54,7 @@ type SitemapsGetResource =
 -- | Retrieves information about a specific sitemap.
 --
 -- /See:/ 'sitemapsGet' smart constructor.
-data SitemapsGet = SitemapsGet
+data SitemapsGet = SitemapsGet'
     { _sgFeedpath :: !Text
     , _sgSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitemapsGet
     -> Text -- ^ 'sgSiteURL'
     -> SitemapsGet
 sitemapsGet pSgFeedpath_ pSgSiteURL_ =
-    SitemapsGet
+    SitemapsGet'
     { _sgFeedpath = pSgFeedpath_
     , _sgSiteURL = pSgSiteURL_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SitemapsGet where
         type Scopes SitemapsGet =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient SitemapsGet{..}
+        requestClient SitemapsGet'{..}
           = go _sgSiteURL _sgFeedpath (Just AltJSON)
               webmasterToolsService
           where go

@@ -62,7 +62,7 @@ type SubscriptionsListResource =
 -- name prefix.
 --
 -- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList
+data SubscriptionsList = SubscriptionsList'
     { _slCustomerNamePrefix :: !(Maybe Text)
     , _slCustomerId         :: !(Maybe Text)
     , _slCustomerAuthToken  :: !(Maybe Text)
@@ -86,7 +86,7 @@ data SubscriptionsList = SubscriptionsList
 subscriptionsList
     :: SubscriptionsList
 subscriptionsList =
-    SubscriptionsList
+    SubscriptionsList'
     { _slCustomerNamePrefix = Nothing
     , _slCustomerId = Nothing
     , _slCustomerAuthToken = Nothing
@@ -130,7 +130,7 @@ instance GoogleRequest SubscriptionsList where
         type Scopes SubscriptionsList =
              '["https://www.googleapis.com/auth/apps.order",
                "https://www.googleapis.com/auth/apps.order.readonly"]
-        requestClient SubscriptionsList{..}
+        requestClient SubscriptionsList'{..}
           = go _slCustomerNamePrefix _slCustomerId
               _slCustomerAuthToken
               _slPageToken

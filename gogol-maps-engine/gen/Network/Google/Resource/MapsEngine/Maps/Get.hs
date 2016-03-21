@@ -53,7 +53,7 @@ type MapsGetResource =
 -- | Return metadata for a particular map.
 --
 -- /See:/ 'mapsGet' smart constructor.
-data MapsGet = MapsGet
+data MapsGet = MapsGet'
     { _mgVersion :: !(Maybe MapsGetVersion)
     , _mgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ mapsGet
     :: Text -- ^ 'mgId'
     -> MapsGet
 mapsGet pMgId_ =
-    MapsGet
+    MapsGet'
     { _mgVersion = Nothing
     , _mgId = pMgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest MapsGet where
         type Scopes MapsGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient MapsGet{..}
+        requestClient MapsGet'{..}
           = go _mgId _mgVersion (Just AltJSON)
               mapsEngineService
           where go

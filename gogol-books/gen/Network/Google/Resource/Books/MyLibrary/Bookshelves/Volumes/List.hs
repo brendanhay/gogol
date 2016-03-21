@@ -69,7 +69,7 @@ type MyLibraryBookshelvesVolumesListResource =
 -- | Gets volume information for volumes on a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesVolumesList' smart constructor.
-data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList
+data MyLibraryBookshelvesVolumesList = MyLibraryBookshelvesVolumesList'
     { _mlbvlCountry       :: !(Maybe Text)
     , _mlbvlQ             :: !(Maybe Text)
     , _mlbvlShelf         :: !Text
@@ -103,7 +103,7 @@ myLibraryBookshelvesVolumesList
     :: Text -- ^ 'mlbvlShelf'
     -> MyLibraryBookshelvesVolumesList
 myLibraryBookshelvesVolumesList pMlbvlShelf_ =
-    MyLibraryBookshelvesVolumesList
+    MyLibraryBookshelvesVolumesList'
     { _mlbvlCountry = Nothing
     , _mlbvlQ = Nothing
     , _mlbvlShelf = pMlbvlShelf_
@@ -164,7 +164,7 @@ instance GoogleRequest
         type Rs MyLibraryBookshelvesVolumesList = Volumes
         type Scopes MyLibraryBookshelvesVolumesList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryBookshelvesVolumesList{..}
+        requestClient MyLibraryBookshelvesVolumesList'{..}
           = go _mlbvlShelf _mlbvlCountry _mlbvlQ _mlbvlSource
               _mlbvlProjection
               _mlbvlStartIndex

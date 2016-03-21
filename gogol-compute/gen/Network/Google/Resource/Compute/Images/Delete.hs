@@ -55,7 +55,7 @@ type ImagesDeleteResource =
 -- | Deletes the specified image.
 --
 -- /See:/ 'imagesDelete' smart constructor.
-data ImagesDelete = ImagesDelete
+data ImagesDelete = ImagesDelete'
     { _imaImage   :: !Text
     , _imaProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ imagesDelete
     -> Text -- ^ 'imaProject'
     -> ImagesDelete
 imagesDelete pImaImage_ pImaProject_ =
-    ImagesDelete
+    ImagesDelete'
     { _imaImage = pImaImage_
     , _imaProject = pImaProject_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ImagesDelete where
         type Scopes ImagesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient ImagesDelete{..}
+        requestClient ImagesDelete'{..}
           = go _imaProject _imaImage (Just AltJSON)
               computeService
           where go

@@ -56,7 +56,7 @@ type RoomsDeclineResource =
 -- only. Calling this method directly is unsupported.
 --
 -- /See:/ 'roomsDecline' smart constructor.
-data RoomsDecline = RoomsDecline
+data RoomsDecline = RoomsDecline'
     { _rooRoomId   :: !Text
     , _rooLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ roomsDecline
     :: Text -- ^ 'rooRoomId'
     -> RoomsDecline
 roomsDecline pRooRoomId_ =
-    RoomsDecline
+    RoomsDecline'
     { _rooRoomId = pRooRoomId_
     , _rooLanguage = Nothing
     }
@@ -92,7 +92,7 @@ instance GoogleRequest RoomsDecline where
         type Scopes RoomsDecline =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsDecline{..}
+        requestClient RoomsDecline'{..}
           = go _rooRoomId _rooLanguage (Just AltJSON)
               gamesService
           where go

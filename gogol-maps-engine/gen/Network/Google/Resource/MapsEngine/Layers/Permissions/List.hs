@@ -53,7 +53,7 @@ type LayersPermissionsListResource =
 -- | Return all of the permissions for the specified asset.
 --
 -- /See:/ 'layersPermissionsList' smart constructor.
-newtype LayersPermissionsList = LayersPermissionsList
+newtype LayersPermissionsList = LayersPermissionsList'
     { _lplId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersPermissionsList
     :: Text -- ^ 'lplId'
     -> LayersPermissionsList
 layersPermissionsList pLplId_ =
-    LayersPermissionsList
+    LayersPermissionsList'
     { _lplId = pLplId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest LayersPermissionsList where
         type Scopes LayersPermissionsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient LayersPermissionsList{..}
+        requestClient LayersPermissionsList'{..}
           = go _lplId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

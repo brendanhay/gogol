@@ -54,7 +54,7 @@ type UsersGetResource =
 -- | Retrieves a user\'s details.
 --
 -- /See:/ 'usersGet' smart constructor.
-data UsersGet = UsersGet
+data UsersGet = UsersGet'
     { _ugEnterpriseId :: !Text
     , _ugUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersGet
     -> Text -- ^ 'ugUserId'
     -> UsersGet
 usersGet pUgEnterpriseId_ pUgUserId_ =
-    UsersGet
+    UsersGet'
     { _ugEnterpriseId = pUgEnterpriseId_
     , _ugUserId = pUgUserId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest UsersGet where
         type Rs UsersGet = User
         type Scopes UsersGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient UsersGet{..}
+        requestClient UsersGet'{..}
           = go _ugEnterpriseId _ugUserId (Just AltJSON)
               androidEnterpriseService
           where go

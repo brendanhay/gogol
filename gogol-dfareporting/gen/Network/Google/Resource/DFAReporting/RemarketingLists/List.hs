@@ -71,7 +71,7 @@ type RemarketingListsListResource =
 -- | Retrieves a list of remarketing lists, possibly filtered.
 --
 -- /See:/ 'remarketingListsList' smart constructor.
-data RemarketingListsList = RemarketingListsList
+data RemarketingListsList = RemarketingListsList'
     { _rllFloodlightActivityId :: !(Maybe (Textual Int64))
     , _rllAdvertiserId         :: !(Textual Int64)
     , _rllProFileId            :: !(Textual Int64)
@@ -109,7 +109,7 @@ remarketingListsList
     -> Int64 -- ^ 'rllProFileId'
     -> RemarketingListsList
 remarketingListsList pRllAdvertiserId_ pRllProFileId_ =
-    RemarketingListsList
+    RemarketingListsList'
     { _rllFloodlightActivityId = Nothing
     , _rllAdvertiserId = _Coerce # pRllAdvertiserId_
     , _rllProFileId = _Coerce # pRllProFileId_
@@ -184,7 +184,7 @@ instance GoogleRequest RemarketingListsList where
              RemarketingListsListResponse
         type Scopes RemarketingListsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListsList{..}
+        requestClient RemarketingListsList'{..}
           = go _rllProFileId (Just _rllAdvertiserId)
               _rllFloodlightActivityId
               _rllSortOrder

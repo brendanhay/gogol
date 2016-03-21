@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | This is a JSON template for an image configuration resource.
 --
 -- /See:/ 'imageConfiguration' smart constructor.
-data ImageConfiguration = ImageConfiguration
+data ImageConfiguration = ImageConfiguration'
     { _icResourceId :: !(Maybe Text)
     , _icKind       :: !Text
     , _icURL        :: !(Maybe Text)
@@ -44,7 +44,7 @@ data ImageConfiguration = ImageConfiguration
 imageConfiguration
     :: ImageConfiguration
 imageConfiguration =
-    ImageConfiguration
+    ImageConfiguration'
     { _icResourceId = Nothing
     , _icKind = "gamesConfiguration#imageConfiguration"
     , _icURL = Nothing
@@ -74,7 +74,7 @@ instance FromJSON ImageConfiguration where
         parseJSON
           = withObject "ImageConfiguration"
               (\ o ->
-                 ImageConfiguration <$>
+                 ImageConfiguration' <$>
                    (o .:? "resourceId") <*>
                      (o .:? "kind" .!=
                         "gamesConfiguration#imageConfiguration")
@@ -82,7 +82,7 @@ instance FromJSON ImageConfiguration where
                      <*> (o .:? "imageType"))
 
 instance ToJSON ImageConfiguration where
-        toJSON ImageConfiguration{..}
+        toJSON ImageConfiguration'{..}
           = object
               (catMaybes
                  [("resourceId" .=) <$> _icResourceId,
@@ -92,7 +92,7 @@ instance ToJSON ImageConfiguration where
 -- | This is a JSON template for a ListConfigurations response.
 --
 -- /See:/ 'leaderboardConfigurationListResponse' smart constructor.
-data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse
+data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse'
     { _lclrNextPageToken :: !(Maybe Text)
     , _lclrKind          :: !Text
     , _lclrItems         :: !(Maybe [LeaderboardConfiguration])
@@ -110,7 +110,7 @@ data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse
 leaderboardConfigurationListResponse
     :: LeaderboardConfigurationListResponse
 leaderboardConfigurationListResponse =
-    LeaderboardConfigurationListResponse
+    LeaderboardConfigurationListResponse'
     { _lclrNextPageToken = Nothing
     , _lclrKind = "gamesConfiguration#leaderboardConfigurationListResponse"
     , _lclrItems = Nothing
@@ -139,7 +139,7 @@ instance FromJSON
         parseJSON
           = withObject "LeaderboardConfigurationListResponse"
               (\ o ->
-                 LeaderboardConfigurationListResponse <$>
+                 LeaderboardConfigurationListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "gamesConfiguration#leaderboardConfigurationListResponse")
@@ -147,7 +147,7 @@ instance FromJSON
 
 instance ToJSON LeaderboardConfigurationListResponse
          where
-        toJSON LeaderboardConfigurationListResponse{..}
+        toJSON LeaderboardConfigurationListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lclrNextPageToken,
@@ -157,7 +157,7 @@ instance ToJSON LeaderboardConfigurationListResponse
 -- | This is a JSON template for a number affix resource.
 --
 -- /See:/ 'gamesNumberAffixConfiguration' smart constructor.
-data GamesNumberAffixConfiguration = GamesNumberAffixConfiguration
+data GamesNumberAffixConfiguration = GamesNumberAffixConfiguration'
     { _gnacFew   :: !(Maybe LocalizedStringBundle)
     , _gnacOther :: !(Maybe LocalizedStringBundle)
     , _gnacTwo   :: !(Maybe LocalizedStringBundle)
@@ -184,7 +184,7 @@ data GamesNumberAffixConfiguration = GamesNumberAffixConfiguration
 gamesNumberAffixConfiguration
     :: GamesNumberAffixConfiguration
 gamesNumberAffixConfiguration =
-    GamesNumberAffixConfiguration
+    GamesNumberAffixConfiguration'
     { _gnacFew = Nothing
     , _gnacOther = Nothing
     , _gnacTwo = Nothing
@@ -230,14 +230,14 @@ instance FromJSON GamesNumberAffixConfiguration where
         parseJSON
           = withObject "GamesNumberAffixConfiguration"
               (\ o ->
-                 GamesNumberAffixConfiguration <$>
+                 GamesNumberAffixConfiguration' <$>
                    (o .:? "few") <*> (o .:? "other") <*> (o .:? "two")
                      <*> (o .:? "one")
                      <*> (o .:? "zero")
                      <*> (o .:? "many"))
 
 instance ToJSON GamesNumberAffixConfiguration where
-        toJSON GamesNumberAffixConfiguration{..}
+        toJSON GamesNumberAffixConfiguration'{..}
           = object
               (catMaybes
                  [("few" .=) <$> _gnacFew,
@@ -248,7 +248,7 @@ instance ToJSON GamesNumberAffixConfiguration where
 -- | This is a JSON template for a ListConfigurations response.
 --
 -- /See:/ 'achievementConfigurationListResponse' smart constructor.
-data AchievementConfigurationListResponse = AchievementConfigurationListResponse
+data AchievementConfigurationListResponse = AchievementConfigurationListResponse'
     { _aclrNextPageToken :: !(Maybe Text)
     , _aclrKind          :: !Text
     , _aclrItems         :: !(Maybe [AchievementConfiguration])
@@ -266,7 +266,7 @@ data AchievementConfigurationListResponse = AchievementConfigurationListResponse
 achievementConfigurationListResponse
     :: AchievementConfigurationListResponse
 achievementConfigurationListResponse =
-    AchievementConfigurationListResponse
+    AchievementConfigurationListResponse'
     { _aclrNextPageToken = Nothing
     , _aclrKind = "gamesConfiguration#achievementConfigurationListResponse"
     , _aclrItems = Nothing
@@ -295,7 +295,7 @@ instance FromJSON
         parseJSON
           = withObject "AchievementConfigurationListResponse"
               (\ o ->
-                 AchievementConfigurationListResponse <$>
+                 AchievementConfigurationListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "gamesConfiguration#achievementConfigurationListResponse")
@@ -303,7 +303,7 @@ instance FromJSON
 
 instance ToJSON AchievementConfigurationListResponse
          where
-        toJSON AchievementConfigurationListResponse{..}
+        toJSON AchievementConfigurationListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _aclrNextPageToken,
@@ -313,7 +313,7 @@ instance ToJSON AchievementConfigurationListResponse
 -- | This is a JSON template for an leaderboard configuration resource.
 --
 -- /See:/ 'leaderboardConfiguration' smart constructor.
-data LeaderboardConfiguration = LeaderboardConfiguration
+data LeaderboardConfiguration = LeaderboardConfiguration'
     { _lcScoreMax   :: !(Maybe (Textual Int64))
     , _lcKind       :: !Text
     , _lcPublished  :: !(Maybe LeaderboardConfigurationDetail)
@@ -346,7 +346,7 @@ data LeaderboardConfiguration = LeaderboardConfiguration
 leaderboardConfiguration
     :: LeaderboardConfiguration
 leaderboardConfiguration =
-    LeaderboardConfiguration
+    LeaderboardConfiguration'
     { _lcScoreMax = Nothing
     , _lcKind = "gamesConfiguration#leaderboardConfiguration"
     , _lcPublished = Nothing
@@ -402,7 +402,7 @@ instance FromJSON LeaderboardConfiguration where
         parseJSON
           = withObject "LeaderboardConfiguration"
               (\ o ->
-                 LeaderboardConfiguration <$>
+                 LeaderboardConfiguration' <$>
                    (o .:? "scoreMax") <*>
                      (o .:? "kind" .!=
                         "gamesConfiguration#leaderboardConfiguration")
@@ -414,7 +414,7 @@ instance FromJSON LeaderboardConfiguration where
                      <*> (o .:? "scoreOrder"))
 
 instance ToJSON LeaderboardConfiguration where
-        toJSON LeaderboardConfiguration{..}
+        toJSON LeaderboardConfiguration'{..}
           = object
               (catMaybes
                  [("scoreMax" .=) <$> _lcScoreMax,
@@ -428,7 +428,7 @@ instance ToJSON LeaderboardConfiguration where
 -- | This is a JSON template for an achievement configuration resource.
 --
 -- /See:/ 'achievementConfiguration' smart constructor.
-data AchievementConfiguration = AchievementConfiguration
+data AchievementConfiguration = AchievementConfiguration'
     { _acAchievementType :: !(Maybe Text)
     , _acStepsToUnlock   :: !(Maybe (Textual Int32))
     , _acKind            :: !Text
@@ -461,7 +461,7 @@ data AchievementConfiguration = AchievementConfiguration
 achievementConfiguration
     :: AchievementConfiguration
 achievementConfiguration =
-    AchievementConfiguration
+    AchievementConfiguration'
     { _acAchievementType = Nothing
     , _acStepsToUnlock = Nothing
     , _acKind = "gamesConfiguration#achievementConfiguration"
@@ -521,7 +521,7 @@ instance FromJSON AchievementConfiguration where
         parseJSON
           = withObject "AchievementConfiguration"
               (\ o ->
-                 AchievementConfiguration <$>
+                 AchievementConfiguration' <$>
                    (o .:? "achievementType") <*> (o .:? "stepsToUnlock")
                      <*>
                      (o .:? "kind" .!=
@@ -533,7 +533,7 @@ instance FromJSON AchievementConfiguration where
                      <*> (o .:? "id"))
 
 instance ToJSON AchievementConfiguration where
-        toJSON AchievementConfiguration{..}
+        toJSON AchievementConfiguration'{..}
           = object
               (catMaybes
                  [("achievementType" .=) <$> _acAchievementType,
@@ -547,7 +547,7 @@ instance ToJSON AchievementConfiguration where
 -- | This is a JSON template for a localized string resource.
 --
 -- /See:/ 'localizedString' smart constructor.
-data LocalizedString = LocalizedString
+data LocalizedString = LocalizedString'
     { _lsKind   :: !Text
     , _lsLocale :: !(Maybe Text)
     , _lsValue  :: !(Maybe Text)
@@ -565,7 +565,7 @@ data LocalizedString = LocalizedString
 localizedString
     :: LocalizedString
 localizedString =
-    LocalizedString
+    LocalizedString'
     { _lsKind = "gamesConfiguration#localizedString"
     , _lsLocale = Nothing
     , _lsValue = Nothing
@@ -588,14 +588,14 @@ instance FromJSON LocalizedString where
         parseJSON
           = withObject "LocalizedString"
               (\ o ->
-                 LocalizedString <$>
+                 LocalizedString' <$>
                    (o .:? "kind" .!=
                       "gamesConfiguration#localizedString")
                      <*> (o .:? "locale")
                      <*> (o .:? "value"))
 
 instance ToJSON LocalizedString where
-        toJSON LocalizedString{..}
+        toJSON LocalizedString'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lsKind),
@@ -605,7 +605,7 @@ instance ToJSON LocalizedString where
 -- | This is a JSON template for a number format resource.
 --
 -- /See:/ 'gamesNumberFormatConfiguration' smart constructor.
-data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
+data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration'
     { _gnfcSuffix           :: !(Maybe GamesNumberAffixConfiguration)
     , _gnfcCurrencyCode     :: !(Maybe Text)
     , _gnfcNumberFormatType :: !(Maybe Text)
@@ -626,7 +626,7 @@ data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
 gamesNumberFormatConfiguration
     :: GamesNumberFormatConfiguration
 gamesNumberFormatConfiguration =
-    GamesNumberFormatConfiguration
+    GamesNumberFormatConfiguration'
     { _gnfcSuffix = Nothing
     , _gnfcCurrencyCode = Nothing
     , _gnfcNumberFormatType = Nothing
@@ -669,13 +669,13 @@ instance FromJSON GamesNumberFormatConfiguration
         parseJSON
           = withObject "GamesNumberFormatConfiguration"
               (\ o ->
-                 GamesNumberFormatConfiguration <$>
+                 GamesNumberFormatConfiguration' <$>
                    (o .:? "suffix") <*> (o .:? "currencyCode") <*>
                      (o .:? "numberFormatType")
                      <*> (o .:? "numDecimalPlaces"))
 
 instance ToJSON GamesNumberFormatConfiguration where
-        toJSON GamesNumberFormatConfiguration{..}
+        toJSON GamesNumberFormatConfiguration'{..}
           = object
               (catMaybes
                  [("suffix" .=) <$> _gnfcSuffix,
@@ -686,7 +686,7 @@ instance ToJSON GamesNumberFormatConfiguration where
 -- | This is a JSON template for a leaderboard configuration detail.
 --
 -- /See:/ 'leaderboardConfigurationDetail' smart constructor.
-data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
+data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail'
     { _lcdKind        :: !Text
     , _lcdScoreFormat :: !(Maybe GamesNumberFormatConfiguration)
     , _lcdSortRank    :: !(Maybe (Textual Int32))
@@ -710,7 +710,7 @@ data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
 leaderboardConfigurationDetail
     :: LeaderboardConfigurationDetail
 leaderboardConfigurationDetail =
-    LeaderboardConfigurationDetail
+    LeaderboardConfigurationDetail'
     { _lcdKind = "gamesConfiguration#leaderboardConfigurationDetail"
     , _lcdScoreFormat = Nothing
     , _lcdSortRank = Nothing
@@ -749,7 +749,7 @@ instance FromJSON LeaderboardConfigurationDetail
         parseJSON
           = withObject "LeaderboardConfigurationDetail"
               (\ o ->
-                 LeaderboardConfigurationDetail <$>
+                 LeaderboardConfigurationDetail' <$>
                    (o .:? "kind" .!=
                       "gamesConfiguration#leaderboardConfigurationDetail")
                      <*> (o .:? "scoreFormat")
@@ -758,7 +758,7 @@ instance FromJSON LeaderboardConfigurationDetail
                      <*> (o .:? "iconUrl"))
 
 instance ToJSON LeaderboardConfigurationDetail where
-        toJSON LeaderboardConfigurationDetail{..}
+        toJSON LeaderboardConfigurationDetail'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lcdKind),
@@ -770,7 +770,7 @@ instance ToJSON LeaderboardConfigurationDetail where
 -- | This is a JSON template for an achievement configuration detail.
 --
 -- /See:/ 'achievementConfigurationDetail' smart constructor.
-data AchievementConfigurationDetail = AchievementConfigurationDetail
+data AchievementConfigurationDetail = AchievementConfigurationDetail'
     { _acdKind        :: !Text
     , _acdSortRank    :: !(Maybe (Textual Int32))
     , _acdName        :: !(Maybe LocalizedStringBundle)
@@ -797,7 +797,7 @@ data AchievementConfigurationDetail = AchievementConfigurationDetail
 achievementConfigurationDetail
     :: AchievementConfigurationDetail
 achievementConfigurationDetail =
-    AchievementConfigurationDetail
+    AchievementConfigurationDetail'
     { _acdKind = "gamesConfiguration#achievementConfigurationDetail"
     , _acdSortRank = Nothing
     , _acdName = Nothing
@@ -844,7 +844,7 @@ instance FromJSON AchievementConfigurationDetail
         parseJSON
           = withObject "AchievementConfigurationDetail"
               (\ o ->
-                 AchievementConfigurationDetail <$>
+                 AchievementConfigurationDetail' <$>
                    (o .:? "kind" .!=
                       "gamesConfiguration#achievementConfigurationDetail")
                      <*> (o .:? "sortRank")
@@ -854,7 +854,7 @@ instance FromJSON AchievementConfigurationDetail
                      <*> (o .:? "description"))
 
 instance ToJSON AchievementConfigurationDetail where
-        toJSON AchievementConfigurationDetail{..}
+        toJSON AchievementConfigurationDetail'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _acdKind),
@@ -867,7 +867,7 @@ instance ToJSON AchievementConfigurationDetail where
 -- | This is a JSON template for a localized string bundle resource.
 --
 -- /See:/ 'localizedStringBundle' smart constructor.
-data LocalizedStringBundle = LocalizedStringBundle
+data LocalizedStringBundle = LocalizedStringBundle'
     { _lsbKind         :: !Text
     , _lsbTranslations :: !(Maybe [LocalizedString])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -882,7 +882,7 @@ data LocalizedStringBundle = LocalizedStringBundle
 localizedStringBundle
     :: LocalizedStringBundle
 localizedStringBundle =
-    LocalizedStringBundle
+    LocalizedStringBundle'
     { _lsbKind = "gamesConfiguration#localizedStringBundle"
     , _lsbTranslations = Nothing
     }
@@ -904,13 +904,13 @@ instance FromJSON LocalizedStringBundle where
         parseJSON
           = withObject "LocalizedStringBundle"
               (\ o ->
-                 LocalizedStringBundle <$>
+                 LocalizedStringBundle' <$>
                    (o .:? "kind" .!=
                       "gamesConfiguration#localizedStringBundle")
                      <*> (o .:? "translations" .!= mempty))
 
 instance ToJSON LocalizedStringBundle where
-        toJSON LocalizedStringBundle{..}
+        toJSON LocalizedStringBundle'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lsbKind),

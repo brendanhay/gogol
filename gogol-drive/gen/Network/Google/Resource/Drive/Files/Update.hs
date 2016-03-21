@@ -78,7 +78,7 @@ type FilesUpdateResource =
 -- | Updates a file\'s metadata and\/or content with patch semantics.
 --
 -- /See:/ 'filesUpdate' smart constructor.
-data FilesUpdate = FilesUpdate
+data FilesUpdate = FilesUpdate'
     { _fuPayload                   :: !File
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuUseContentAsIndexableText :: !Bool
@@ -110,7 +110,7 @@ filesUpdate
     -> Text -- ^ 'fuFileId'
     -> FilesUpdate
 filesUpdate pFuPayload_ pFuFileId_ =
-    FilesUpdate
+    FilesUpdate'
     { _fuPayload = pFuPayload_
     , _fuRemoveParents = Nothing
     , _fuUseContentAsIndexableText = False
@@ -167,7 +167,7 @@ instance GoogleRequest FilesUpdate where
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.metadata",
                "https://www.googleapis.com/auth/drive.scripts"]
-        requestClient FilesUpdate{..}
+        requestClient FilesUpdate'{..}
           = go _fuFileId _fuRemoveParents
               (Just _fuUseContentAsIndexableText)
               _fuOCRLanguage
@@ -185,7 +185,7 @@ instance GoogleRequest (MediaUpload FilesUpdate)
         type Rs (MediaUpload FilesUpdate) = File
         type Scopes (MediaUpload FilesUpdate) =
              Scopes FilesUpdate
-        requestClient (MediaUpload FilesUpdate{..} body)
+        requestClient (MediaUpload FilesUpdate'{..} body)
           = go _fuFileId _fuRemoveParents
               (Just _fuUseContentAsIndexableText)
               _fuOCRLanguage

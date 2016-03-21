@@ -51,7 +51,7 @@ type AccountsGetResource =
 -- | Get information about the selected associated AdSense account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet
+newtype AccountsGet = AccountsGet'
     { _agAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgAccountId_ =
-    AccountsGet
+    AccountsGet'
     { _agAccountId = pAgAccountId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
         type Scopes AccountsGet =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsGet{..}
+        requestClient AccountsGet'{..}
           = go _agAccountId (Just AltJSON) adSenseHostService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

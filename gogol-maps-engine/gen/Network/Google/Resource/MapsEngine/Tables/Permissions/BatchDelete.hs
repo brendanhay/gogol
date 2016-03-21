@@ -56,7 +56,7 @@ type TablesPermissionsBatchDeleteResource =
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ 'tablesPermissionsBatchDelete' smart constructor.
-data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete
+data TablesPermissionsBatchDelete = TablesPermissionsBatchDelete'
     { _tpbdPayload :: !PermissionsBatchDeleteRequest
     , _tpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ tablesPermissionsBatchDelete
     -> Text -- ^ 'tpbdId'
     -> TablesPermissionsBatchDelete
 tablesPermissionsBatchDelete pTpbdPayload_ pTpbdId_ =
-    TablesPermissionsBatchDelete
+    TablesPermissionsBatchDelete'
     { _tpbdPayload = pTpbdPayload_
     , _tpbdId = pTpbdId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest TablesPermissionsBatchDelete
              PermissionsBatchDeleteResponse
         type Scopes TablesPermissionsBatchDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesPermissionsBatchDelete{..}
+        requestClient TablesPermissionsBatchDelete'{..}
           = go _tpbdId (Just AltJSON) _tpbdPayload
               mapsEngineService
           where go

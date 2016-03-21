@@ -54,7 +54,7 @@ type EventTagsGetResource =
 -- | Gets one event tag by ID.
 --
 -- /See:/ 'eventTagsGet' smart constructor.
-data EventTagsGet = EventTagsGet
+data EventTagsGet = EventTagsGet'
     { _etgProFileId :: !(Textual Int64)
     , _etgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsGet
     -> Int64 -- ^ 'etgId'
     -> EventTagsGet
 eventTagsGet pEtgProFileId_ pEtgId_ =
-    EventTagsGet
+    EventTagsGet'
     { _etgProFileId = _Coerce # pEtgProFileId_
     , _etgId = _Coerce # pEtgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest EventTagsGet where
         type Rs EventTagsGet = EventTag
         type Scopes EventTagsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient EventTagsGet{..}
+        requestClient EventTagsGet'{..}
           = go _etgProFileId _etgId (Just AltJSON)
               dFAReportingService
           where go

@@ -50,7 +50,7 @@ type AccountstatusesCustombatchResource =
 
 --
 -- /See:/ 'accountstatusesCustombatch' smart constructor.
-newtype AccountstatusesCustombatch = AccountstatusesCustombatch
+newtype AccountstatusesCustombatch = AccountstatusesCustombatch'
     { _accPayload :: AccountstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ accountstatusesCustombatch
     :: AccountstatusesCustomBatchRequest -- ^ 'accPayload'
     -> AccountstatusesCustombatch
 accountstatusesCustombatch pAccPayload_ =
-    AccountstatusesCustombatch
+    AccountstatusesCustombatch'
     { _accPayload = pAccPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest AccountstatusesCustombatch
              AccountstatusesCustomBatchResponse
         type Scopes AccountstatusesCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountstatusesCustombatch{..}
+        requestClient AccountstatusesCustombatch'{..}
           = go (Just AltJSON) _accPayload
               shoppingContentService
           where go

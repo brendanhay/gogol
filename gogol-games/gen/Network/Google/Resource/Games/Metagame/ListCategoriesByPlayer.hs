@@ -65,7 +65,7 @@ type MetagameListCategoriesByPlayerResource =
 -- playerId.
 --
 -- /See:/ 'metagameListCategoriesByPlayer' smart constructor.
-data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer
+data MetagameListCategoriesByPlayer = MetagameListCategoriesByPlayer'
     { _mlcbpCollection :: !MetagameListCategoriesByPlayerCollection
     , _mlcbpLanguage   :: !(Maybe Text)
     , _mlcbpPageToken  :: !(Maybe Text)
@@ -91,7 +91,7 @@ metagameListCategoriesByPlayer
     -> Text -- ^ 'mlcbpPlayerId'
     -> MetagameListCategoriesByPlayer
 metagameListCategoriesByPlayer pMlcbpCollection_ pMlcbpPlayerId_ =
-    MetagameListCategoriesByPlayer
+    MetagameListCategoriesByPlayer'
     { _mlcbpCollection = pMlcbpCollection_
     , _mlcbpLanguage = Nothing
     , _mlcbpPageToken = Nothing
@@ -140,7 +140,7 @@ instance GoogleRequest MetagameListCategoriesByPlayer
         type Scopes MetagameListCategoriesByPlayer =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient MetagameListCategoriesByPlayer{..}
+        requestClient MetagameListCategoriesByPlayer'{..}
           = go _mlcbpPlayerId _mlcbpCollection _mlcbpLanguage
               _mlcbpPageToken
               _mlcbpMaxResults

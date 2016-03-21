@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'uploadAccountResponseErrorItem' smart constructor.
-data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem
+data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem'
     { _uareiMessage :: !(Maybe Text)
     , _uareiIndex   :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data UploadAccountResponseErrorItem = UploadAccountResponseErrorItem
 uploadAccountResponseErrorItem
     :: UploadAccountResponseErrorItem
 uploadAccountResponseErrorItem =
-    UploadAccountResponseErrorItem
+    UploadAccountResponseErrorItem'
     { _uareiMessage = Nothing
     , _uareiIndex = Nothing
     }
@@ -58,11 +58,11 @@ instance FromJSON UploadAccountResponseErrorItem
         parseJSON
           = withObject "UploadAccountResponseErrorItem"
               (\ o ->
-                 UploadAccountResponseErrorItem <$>
+                 UploadAccountResponseErrorItem' <$>
                    (o .:? "message") <*> (o .:? "index"))
 
 instance ToJSON UploadAccountResponseErrorItem where
-        toJSON UploadAccountResponseErrorItem{..}
+        toJSON UploadAccountResponseErrorItem'{..}
           = object
               (catMaybes
                  [("message" .=) <$> _uareiMessage,
@@ -70,7 +70,7 @@ instance ToJSON UploadAccountResponseErrorItem where
 
 --
 -- /See:/ 'userInfoProviderUserInfoItem' smart constructor.
-data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem
+data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem'
     { _uipuiiProviderId  :: !(Maybe Text)
     , _uipuiiEmail       :: !(Maybe Text)
     , _uipuiiPhotoURL    :: !(Maybe Text)
@@ -97,7 +97,7 @@ data UserInfoProviderUserInfoItem = UserInfoProviderUserInfoItem
 userInfoProviderUserInfoItem
     :: UserInfoProviderUserInfoItem
 userInfoProviderUserInfoItem =
-    UserInfoProviderUserInfoItem
+    UserInfoProviderUserInfoItem'
     { _uipuiiProviderId = Nothing
     , _uipuiiEmail = Nothing
     , _uipuiiPhotoURL = Nothing
@@ -146,7 +146,7 @@ instance FromJSON UserInfoProviderUserInfoItem where
         parseJSON
           = withObject "UserInfoProviderUserInfoItem"
               (\ o ->
-                 UserInfoProviderUserInfoItem <$>
+                 UserInfoProviderUserInfoItem' <$>
                    (o .:? "providerId") <*> (o .:? "email") <*>
                      (o .:? "photoUrl")
                      <*> (o .:? "federatedId")
@@ -154,7 +154,7 @@ instance FromJSON UserInfoProviderUserInfoItem where
                      <*> (o .:? "rawId"))
 
 instance ToJSON UserInfoProviderUserInfoItem where
-        toJSON UserInfoProviderUserInfoItem{..}
+        toJSON UserInfoProviderUserInfoItem'{..}
           = object
               (catMaybes
                  [("providerId" .=) <$> _uipuiiProviderId,
@@ -167,7 +167,7 @@ instance ToJSON UserInfoProviderUserInfoItem where
 -- | Response from verifying a custom token
 --
 -- /See:/ 'verifyCustomTokenResponse' smart constructor.
-data VerifyCustomTokenResponse = VerifyCustomTokenResponse
+data VerifyCustomTokenResponse = VerifyCustomTokenResponse'
     { _vctrKind         :: !Text
     , _vctrRefreshToken :: !(Maybe Text)
     , _vctrExpiresIn    :: !(Maybe (Textual Int64))
@@ -188,7 +188,7 @@ data VerifyCustomTokenResponse = VerifyCustomTokenResponse
 verifyCustomTokenResponse
     :: VerifyCustomTokenResponse
 verifyCustomTokenResponse =
-    VerifyCustomTokenResponse
+    VerifyCustomTokenResponse'
     { _vctrKind = "identitytoolkit#VerifyCustomTokenResponse"
     , _vctrRefreshToken = Nothing
     , _vctrExpiresIn = Nothing
@@ -222,7 +222,7 @@ instance FromJSON VerifyCustomTokenResponse where
         parseJSON
           = withObject "VerifyCustomTokenResponse"
               (\ o ->
-                 VerifyCustomTokenResponse <$>
+                 VerifyCustomTokenResponse' <$>
                    (o .:? "kind" .!=
                       "identitytoolkit#VerifyCustomTokenResponse")
                      <*> (o .:? "refreshToken")
@@ -230,7 +230,7 @@ instance FromJSON VerifyCustomTokenResponse where
                      <*> (o .:? "idToken"))
 
 instance ToJSON VerifyCustomTokenResponse where
-        toJSON VerifyCustomTokenResponse{..}
+        toJSON VerifyCustomTokenResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _vctrKind),
@@ -241,7 +241,7 @@ instance ToJSON VerifyCustomTokenResponse where
 -- | Template for a single idp configuration.
 --
 -- /See:/ 'idpConfig' smart constructor.
-data IdpConfig = IdpConfig
+data IdpConfig = IdpConfig'
     { _icClientId          :: !(Maybe Text)
     , _icEnabled           :: !(Maybe Bool)
     , _icExperimentPercent :: !(Maybe (Textual Int32))
@@ -262,7 +262,7 @@ data IdpConfig = IdpConfig
 idpConfig
     :: IdpConfig
 idpConfig =
-    IdpConfig
+    IdpConfig'
     { _icClientId = Nothing
     , _icEnabled = Nothing
     , _icExperimentPercent = Nothing
@@ -296,13 +296,13 @@ instance FromJSON IdpConfig where
         parseJSON
           = withObject "IdpConfig"
               (\ o ->
-                 IdpConfig <$>
+                 IdpConfig' <$>
                    (o .:? "clientId") <*> (o .:? "enabled") <*>
                      (o .:? "experimentPercent")
                      <*> (o .:? "provider"))
 
 instance ToJSON IdpConfig where
-        toJSON IdpConfig{..}
+        toJSON IdpConfig'{..}
           = object
               (catMaybes
                  [("clientId" .=) <$> _icClientId,
@@ -313,7 +313,7 @@ instance ToJSON IdpConfig where
 -- | Template for an individual account info.
 --
 -- /See:/ 'userInfo' smart constructor.
-data UserInfo = UserInfo
+data UserInfo = UserInfo'
     { _uiEmail             :: !(Maybe Text)
     , _uiPhotoURL          :: !(Maybe Text)
     , _uiDisabled          :: !(Maybe Bool)
@@ -358,7 +358,7 @@ data UserInfo = UserInfo
 userInfo
     :: UserInfo
 userInfo =
-    UserInfo
+    UserInfo'
     { _uiEmail = Nothing
     , _uiPhotoURL = Nothing
     , _uiDisabled = Nothing
@@ -448,7 +448,7 @@ instance FromJSON UserInfo where
         parseJSON
           = withObject "UserInfo"
               (\ o ->
-                 UserInfo <$>
+                 UserInfo' <$>
                    (o .:? "email") <*> (o .:? "photoUrl") <*>
                      (o .:? "disabled")
                      <*> (o .:? "providerUserInfo" .!= mempty)
@@ -462,7 +462,7 @@ instance FromJSON UserInfo where
                      <*> (o .:? "localId"))
 
 instance ToJSON UserInfo where
-        toJSON UserInfo{..}
+        toJSON UserInfo'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _uiEmail,
@@ -481,7 +481,7 @@ instance ToJSON UserInfo where
 -- | Response of setting the project configuration.
 --
 -- /See:/ 'identitytoolkitRelyingPartySetProjectConfigResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartySetProjectConfigResponse = IdentitytoolkitRelyingPartySetProjectConfigResponse
+newtype IdentitytoolkitRelyingPartySetProjectConfigResponse = IdentitytoolkitRelyingPartySetProjectConfigResponse'
     { _irpspcrProjectId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -493,7 +493,7 @@ newtype IdentitytoolkitRelyingPartySetProjectConfigResponse = IdentitytoolkitRel
 identitytoolkitRelyingPartySetProjectConfigResponse
     :: IdentitytoolkitRelyingPartySetProjectConfigResponse
 identitytoolkitRelyingPartySetProjectConfigResponse =
-    IdentitytoolkitRelyingPartySetProjectConfigResponse
+    IdentitytoolkitRelyingPartySetProjectConfigResponse'
     { _irpspcrProjectId = Nothing
     }
 
@@ -510,21 +510,21 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartySetProjectConfigResponse"
               (\ o ->
-                 IdentitytoolkitRelyingPartySetProjectConfigResponse
+                 IdentitytoolkitRelyingPartySetProjectConfigResponse'
                    <$> (o .:? "projectId"))
 
 instance ToJSON
          IdentitytoolkitRelyingPartySetProjectConfigResponse
          where
         toJSON
-          IdentitytoolkitRelyingPartySetProjectConfigResponse{..}
+          IdentitytoolkitRelyingPartySetProjectConfigResponse'{..}
           = object
               (catMaybes [("projectId" .=) <$> _irpspcrProjectId])
 
 -- | Request to verify a custom token
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyCustomTokenRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
     { _irpvctrInstanceId        :: !(Maybe Text)
     , _irpvctrToken             :: !(Maybe Text)
     , _irpvctrReturnSecureToken :: !(Maybe Bool)
@@ -542,7 +542,7 @@ data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyin
 identitytoolkitRelyingPartyVerifyCustomTokenRequest
     :: IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
 identitytoolkitRelyingPartyVerifyCustomTokenRequest =
-    IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+    IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
     { _irpvctrInstanceId = Nothing
     , _irpvctrToken = Nothing
     , _irpvctrReturnSecureToken = Nothing
@@ -572,7 +572,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyVerifyCustomTokenRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
+                 IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
                    <$>
                    (o .:? "instanceId") <*> (o .:? "token") <*>
                      (o .:? "returnSecureToken"))
@@ -581,7 +581,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartyVerifyCustomTokenRequest{..}
+          IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'{..}
           = object
               (catMaybes
                  [("instanceId" .=) <$> _irpvctrInstanceId,
@@ -591,7 +591,7 @@ instance ToJSON
 
 --
 -- /See:/ 'setAccountInfoResponseProviderUserInfoItem' smart constructor.
-data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProviderUserInfoItem
+data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProviderUserInfoItem'
     { _sairpuiiProviderId  :: !(Maybe Text)
     , _sairpuiiPhotoURL    :: !(Maybe Text)
     , _sairpuiiDisplayName :: !(Maybe Text)
@@ -609,7 +609,7 @@ data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProvider
 setAccountInfoResponseProviderUserInfoItem
     :: SetAccountInfoResponseProviderUserInfoItem
 setAccountInfoResponseProviderUserInfoItem =
-    SetAccountInfoResponseProviderUserInfoItem
+    SetAccountInfoResponseProviderUserInfoItem'
     { _sairpuiiProviderId = Nothing
     , _sairpuiiPhotoURL = Nothing
     , _sairpuiiDisplayName = Nothing
@@ -641,13 +641,14 @@ instance FromJSON
           = withObject
               "SetAccountInfoResponseProviderUserInfoItem"
               (\ o ->
-                 SetAccountInfoResponseProviderUserInfoItem <$>
+                 SetAccountInfoResponseProviderUserInfoItem' <$>
                    (o .:? "providerId") <*> (o .:? "photoUrl") <*>
                      (o .:? "displayName"))
 
 instance ToJSON
          SetAccountInfoResponseProviderUserInfoItem where
-        toJSON SetAccountInfoResponseProviderUserInfoItem{..}
+        toJSON
+          SetAccountInfoResponseProviderUserInfoItem'{..}
           = object
               (catMaybes
                  [("providerId" .=) <$> _sairpuiiProviderId,
@@ -657,7 +658,7 @@ instance ToJSON
 -- | Request to verify the password.
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyPasswordRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyPasswordRequest = IdentitytoolkitRelyingPartyVerifyPasswordRequest
+data IdentitytoolkitRelyingPartyVerifyPasswordRequest = IdentitytoolkitRelyingPartyVerifyPasswordRequest'
     { _irpvprEmail                  :: !(Maybe Text)
     , _irpvprInstanceId             :: !(Maybe Text)
     , _irpvprCaptchaChallenge       :: !(Maybe Text)
@@ -693,7 +694,7 @@ data IdentitytoolkitRelyingPartyVerifyPasswordRequest = IdentitytoolkitRelyingPa
 identitytoolkitRelyingPartyVerifyPasswordRequest
     :: IdentitytoolkitRelyingPartyVerifyPasswordRequest
 identitytoolkitRelyingPartyVerifyPasswordRequest =
-    IdentitytoolkitRelyingPartyVerifyPasswordRequest
+    IdentitytoolkitRelyingPartyVerifyPasswordRequest'
     { _irpvprEmail = Nothing
     , _irpvprInstanceId = Nothing
     , _irpvprCaptchaChallenge = Nothing
@@ -768,7 +769,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyVerifyPasswordRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyVerifyPasswordRequest <$>
+                 IdentitytoolkitRelyingPartyVerifyPasswordRequest' <$>
                    (o .:? "email") <*> (o .:? "instanceId") <*>
                      (o .:? "captchaChallenge")
                      <*> (o .:? "delegatedProjectNumber")
@@ -782,7 +783,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartyVerifyPasswordRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartyVerifyPasswordRequest{..}
+          IdentitytoolkitRelyingPartyVerifyPasswordRequest'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _irpvprEmail,
@@ -801,7 +802,7 @@ instance ToJSON
 -- user reauth.
 --
 -- /See:/ 'signupNewUserResponse' smart constructor.
-data SignupNewUserResponse = SignupNewUserResponse
+data SignupNewUserResponse = SignupNewUserResponse'
     { _snurEmail        :: !(Maybe Text)
     , _snurKind         :: !Text
     , _snurRefreshToken :: !(Maybe Text)
@@ -831,7 +832,7 @@ data SignupNewUserResponse = SignupNewUserResponse
 signupNewUserResponse
     :: SignupNewUserResponse
 signupNewUserResponse =
-    SignupNewUserResponse
+    SignupNewUserResponse'
     { _snurEmail = Nothing
     , _snurKind = "identitytoolkit#SignupNewUserResponse"
     , _snurRefreshToken = Nothing
@@ -884,7 +885,7 @@ instance FromJSON SignupNewUserResponse where
         parseJSON
           = withObject "SignupNewUserResponse"
               (\ o ->
-                 SignupNewUserResponse <$>
+                 SignupNewUserResponse' <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#SignupNewUserResponse")
@@ -895,7 +896,7 @@ instance FromJSON SignupNewUserResponse where
                      <*> (o .:? "idToken"))
 
 instance ToJSON SignupNewUserResponse where
-        toJSON SignupNewUserResponse{..}
+        toJSON SignupNewUserResponse'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _snurEmail,
@@ -909,7 +910,7 @@ instance ToJSON SignupNewUserResponse where
 -- | Request to set the project configuration.
 --
 -- /See:/ 'identitytoolkitRelyingPartySetProjectConfigRequest' smart constructor.
-data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelyingPartySetProjectConfigRequest
+data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelyingPartySetProjectConfigRequest'
     { _irpspcrAPIKey                 :: !(Maybe Text)
     , _irpspcrIdpConfig              :: !(Maybe [IdpConfig])
     , _irpspcrChangeEmailTemplate    :: !(Maybe EmailTemplate)
@@ -942,7 +943,7 @@ data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelying
 identitytoolkitRelyingPartySetProjectConfigRequest
     :: IdentitytoolkitRelyingPartySetProjectConfigRequest
 identitytoolkitRelyingPartySetProjectConfigRequest =
-    IdentitytoolkitRelyingPartySetProjectConfigRequest
+    IdentitytoolkitRelyingPartySetProjectConfigRequest'
     { _irpspcrAPIKey = Nothing
     , _irpspcrIdpConfig = Nothing
     , _irpspcrChangeEmailTemplate = Nothing
@@ -1012,7 +1013,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartySetProjectConfigRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartySetProjectConfigRequest
+                 IdentitytoolkitRelyingPartySetProjectConfigRequest'
                    <$>
                    (o .:? "apiKey") <*> (o .:? "idpConfig" .!= mempty)
                      <*> (o .:? "changeEmailTemplate")
@@ -1026,7 +1027,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartySetProjectConfigRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartySetProjectConfigRequest{..}
+          IdentitytoolkitRelyingPartySetProjectConfigRequest'{..}
           = object
               (catMaybes
                  [("apiKey" .=) <$> _irpspcrAPIKey,
@@ -1046,7 +1047,7 @@ instance ToJSON
 -- | Request to set the account information.
 --
 -- /See:/ 'identitytoolkitRelyingPartySetAccountInfoRequest' smart constructor.
-data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPartySetAccountInfoRequest
+data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPartySetAccountInfoRequest'
     { _irpsairUpgradeToFederatedLogin :: !(Maybe Bool)
     , _irpsairEmail                   :: !(Maybe Text)
     , _irpsairInstanceId              :: !(Maybe Text)
@@ -1112,7 +1113,7 @@ data IdentitytoolkitRelyingPartySetAccountInfoRequest = IdentitytoolkitRelyingPa
 identitytoolkitRelyingPartySetAccountInfoRequest
     :: IdentitytoolkitRelyingPartySetAccountInfoRequest
 identitytoolkitRelyingPartySetAccountInfoRequest =
-    IdentitytoolkitRelyingPartySetAccountInfoRequest
+    IdentitytoolkitRelyingPartySetAccountInfoRequest'
     { _irpsairUpgradeToFederatedLogin = Nothing
     , _irpsairEmail = Nothing
     , _irpsairInstanceId = Nothing
@@ -1263,7 +1264,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartySetAccountInfoRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartySetAccountInfoRequest <$>
+                 IdentitytoolkitRelyingPartySetAccountInfoRequest' <$>
                    (o .:? "upgradeToFederatedLogin") <*> (o .:? "email")
                      <*> (o .:? "instanceId")
                      <*> (o .:? "photoUrl")
@@ -1287,7 +1288,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartySetAccountInfoRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartySetAccountInfoRequest{..}
+          IdentitytoolkitRelyingPartySetAccountInfoRequest'{..}
           = object
               (catMaybes
                  [("upgradeToFederatedLogin" .=) <$>
@@ -1316,7 +1317,7 @@ instance ToJSON
 -- | Request to verify the IDP assertion.
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyAssertionRequest' smart constructor.
-data IdentitytoolkitRelyingPartyVerifyAssertionRequest = IdentitytoolkitRelyingPartyVerifyAssertionRequest
+data IdentitytoolkitRelyingPartyVerifyAssertionRequest = IdentitytoolkitRelyingPartyVerifyAssertionRequest'
     { _irpvarInstanceId             :: !(Maybe Text)
     , _irpvarDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpvarPostBody               :: !(Maybe Text)
@@ -1352,7 +1353,7 @@ data IdentitytoolkitRelyingPartyVerifyAssertionRequest = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartyVerifyAssertionRequest
     :: IdentitytoolkitRelyingPartyVerifyAssertionRequest
 identitytoolkitRelyingPartyVerifyAssertionRequest =
-    IdentitytoolkitRelyingPartyVerifyAssertionRequest
+    IdentitytoolkitRelyingPartyVerifyAssertionRequest'
     { _irpvarInstanceId = Nothing
     , _irpvarDelegatedProjectNumber = Nothing
     , _irpvarPostBody = Nothing
@@ -1430,7 +1431,8 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyVerifyAssertionRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyVerifyAssertionRequest <$>
+                 IdentitytoolkitRelyingPartyVerifyAssertionRequest'
+                   <$>
                    (o .:? "instanceId") <*>
                      (o .:? "delegatedProjectNumber")
                      <*> (o .:? "postBody")
@@ -1445,7 +1447,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartyVerifyAssertionRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartyVerifyAssertionRequest{..}
+          IdentitytoolkitRelyingPartyVerifyAssertionRequest'{..}
           = object
               (catMaybes
                  [("instanceId" .=) <$> _irpvarInstanceId,
@@ -1464,7 +1466,7 @@ instance ToJSON
 -- | Respone of deleting account.
 --
 -- /See:/ 'deleteAccountResponse' smart constructor.
-newtype DeleteAccountResponse = DeleteAccountResponse
+newtype DeleteAccountResponse = DeleteAccountResponse'
     { _darKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1476,7 +1478,7 @@ newtype DeleteAccountResponse = DeleteAccountResponse
 deleteAccountResponse
     :: DeleteAccountResponse
 deleteAccountResponse =
-    DeleteAccountResponse
+    DeleteAccountResponse'
     { _darKind = "identitytoolkit#DeleteAccountResponse"
     }
 
@@ -1488,18 +1490,18 @@ instance FromJSON DeleteAccountResponse where
         parseJSON
           = withObject "DeleteAccountResponse"
               (\ o ->
-                 DeleteAccountResponse <$>
+                 DeleteAccountResponse' <$>
                    (o .:? "kind" .!=
                       "identitytoolkit#DeleteAccountResponse"))
 
 instance ToJSON DeleteAccountResponse where
-        toJSON DeleteAccountResponse{..}
+        toJSON DeleteAccountResponse'{..}
           = object (catMaybes [Just ("kind" .= _darKind)])
 
 -- | Response of signing out user.
 --
 -- /See:/ 'identitytoolkitRelyingPartySignOutUserResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartySignOutUserResponse = IdentitytoolkitRelyingPartySignOutUserResponse
+newtype IdentitytoolkitRelyingPartySignOutUserResponse = IdentitytoolkitRelyingPartySignOutUserResponse'
     { _irpsourLocalId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1511,7 +1513,7 @@ newtype IdentitytoolkitRelyingPartySignOutUserResponse = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartySignOutUserResponse
     :: IdentitytoolkitRelyingPartySignOutUserResponse
 identitytoolkitRelyingPartySignOutUserResponse =
-    IdentitytoolkitRelyingPartySignOutUserResponse
+    IdentitytoolkitRelyingPartySignOutUserResponse'
     { _irpsourLocalId = Nothing
     }
 
@@ -1527,20 +1529,20 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartySignOutUserResponse"
               (\ o ->
-                 IdentitytoolkitRelyingPartySignOutUserResponse <$>
+                 IdentitytoolkitRelyingPartySignOutUserResponse' <$>
                    (o .:? "localId"))
 
 instance ToJSON
          IdentitytoolkitRelyingPartySignOutUserResponse where
         toJSON
-          IdentitytoolkitRelyingPartySignOutUserResponse{..}
+          IdentitytoolkitRelyingPartySignOutUserResponse'{..}
           = object
               (catMaybes [("localId" .=) <$> _irpsourLocalId])
 
 -- | Respone of downloading accounts in batch.
 --
 -- /See:/ 'downloadAccountResponse' smart constructor.
-data DownloadAccountResponse = DownloadAccountResponse
+data DownloadAccountResponse = DownloadAccountResponse'
     { _dNextPageToken :: !(Maybe Text)
     , _dUsers         :: !(Maybe [UserInfo])
     , _dKind          :: !Text
@@ -1558,7 +1560,7 @@ data DownloadAccountResponse = DownloadAccountResponse
 downloadAccountResponse
     :: DownloadAccountResponse
 downloadAccountResponse =
-    DownloadAccountResponse
+    DownloadAccountResponse'
     { _dNextPageToken = Nothing
     , _dUsers = Nothing
     , _dKind = "identitytoolkit#DownloadAccountResponse"
@@ -1585,7 +1587,7 @@ instance FromJSON DownloadAccountResponse where
         parseJSON
           = withObject "DownloadAccountResponse"
               (\ o ->
-                 DownloadAccountResponse <$>
+                 DownloadAccountResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "users" .!= mempty)
                      <*>
@@ -1593,7 +1595,7 @@ instance FromJSON DownloadAccountResponse where
                         "identitytoolkit#DownloadAccountResponse"))
 
 instance ToJSON DownloadAccountResponse where
-        toJSON DownloadAccountResponse{..}
+        toJSON DownloadAccountResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dNextPageToken,
@@ -1602,7 +1604,7 @@ instance ToJSON DownloadAccountResponse where
 -- | Response of getting the project configuration.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetProjectConfigResponse' smart constructor.
-data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyingPartyGetProjectConfigResponse
+data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyingPartyGetProjectConfigResponse'
     { _irpgpcrAuthorizedDomains     :: !(Maybe [Text])
     , _irpgpcrAPIKey                :: !(Maybe Text)
     , _irpgpcrIdpConfig             :: !(Maybe [IdpConfig])
@@ -1638,7 +1640,7 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyin
 identitytoolkitRelyingPartyGetProjectConfigResponse
     :: IdentitytoolkitRelyingPartyGetProjectConfigResponse
 identitytoolkitRelyingPartyGetProjectConfigResponse =
-    IdentitytoolkitRelyingPartyGetProjectConfigResponse
+    IdentitytoolkitRelyingPartyGetProjectConfigResponse'
     { _irpgpcrAuthorizedDomains = Nothing
     , _irpgpcrAPIKey = Nothing
     , _irpgpcrIdpConfig = Nothing
@@ -1715,7 +1717,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyGetProjectConfigResponse"
               (\ o ->
-                 IdentitytoolkitRelyingPartyGetProjectConfigResponse
+                 IdentitytoolkitRelyingPartyGetProjectConfigResponse'
                    <$>
                    (o .:? "authorizedDomains" .!= mempty) <*>
                      (o .:? "apiKey")
@@ -1731,7 +1733,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartyGetProjectConfigResponse
          where
         toJSON
-          IdentitytoolkitRelyingPartyGetProjectConfigResponse{..}
+          IdentitytoolkitRelyingPartyGetProjectConfigResponse'{..}
           = object
               (catMaybes
                  [("authorizedDomains" .=) <$>
@@ -1752,7 +1754,7 @@ instance ToJSON
 -- | Response of resetting the password.
 --
 -- /See:/ 'resetPasswordResponse' smart constructor.
-data ResetPasswordResponse = ResetPasswordResponse
+data ResetPasswordResponse = ResetPasswordResponse'
     { _rprEmail :: !(Maybe Text)
     , _rprKind  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1767,7 +1769,7 @@ data ResetPasswordResponse = ResetPasswordResponse
 resetPasswordResponse
     :: ResetPasswordResponse
 resetPasswordResponse =
-    ResetPasswordResponse
+    ResetPasswordResponse'
     { _rprEmail = Nothing
     , _rprKind = "identitytoolkit#ResetPasswordResponse"
     }
@@ -1784,13 +1786,13 @@ instance FromJSON ResetPasswordResponse where
         parseJSON
           = withObject "ResetPasswordResponse"
               (\ o ->
-                 ResetPasswordResponse <$>
+                 ResetPasswordResponse' <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#ResetPasswordResponse"))
 
 instance ToJSON ResetPasswordResponse where
-        toJSON ResetPasswordResponse{..}
+        toJSON ResetPasswordResponse'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _rprEmail,
@@ -1799,7 +1801,7 @@ instance ToJSON ResetPasswordResponse where
 -- | Respone of uploading accounts in batch.
 --
 -- /See:/ 'uploadAccountResponse' smart constructor.
-data UploadAccountResponse = UploadAccountResponse
+data UploadAccountResponse = UploadAccountResponse'
     { _uarKind  :: !Text
     , _uarError :: !(Maybe [UploadAccountResponseErrorItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1814,7 +1816,7 @@ data UploadAccountResponse = UploadAccountResponse
 uploadAccountResponse
     :: UploadAccountResponse
 uploadAccountResponse =
-    UploadAccountResponse
+    UploadAccountResponse'
     { _uarKind = "identitytoolkit#UploadAccountResponse"
     , _uarError = Nothing
     }
@@ -1834,13 +1836,13 @@ instance FromJSON UploadAccountResponse where
         parseJSON
           = withObject "UploadAccountResponse"
               (\ o ->
-                 UploadAccountResponse <$>
+                 UploadAccountResponse' <$>
                    (o .:? "kind" .!=
                       "identitytoolkit#UploadAccountResponse")
                      <*> (o .:? "error" .!= mempty))
 
 instance ToJSON UploadAccountResponse where
-        toJSON UploadAccountResponse{..}
+        toJSON UploadAccountResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _uarKind),
@@ -1849,7 +1851,7 @@ instance ToJSON UploadAccountResponse where
 -- | Response of creating the IDP authentication URL.
 --
 -- /See:/ 'createAuthURIResponse' smart constructor.
-data CreateAuthURIResponse = CreateAuthURIResponse
+data CreateAuthURIResponse = CreateAuthURIResponse'
     { _caurProviderId          :: !(Maybe Text)
     , _caurKind                :: !Text
     , _caurAllProviders        :: !(Maybe [Text])
@@ -1882,7 +1884,7 @@ data CreateAuthURIResponse = CreateAuthURIResponse
 createAuthURIResponse
     :: CreateAuthURIResponse
 createAuthURIResponse =
-    CreateAuthURIResponse
+    CreateAuthURIResponse'
     { _caurProviderId = Nothing
     , _caurKind = "identitytoolkit#CreateAuthUriResponse"
     , _caurAllProviders = Nothing
@@ -1945,7 +1947,7 @@ instance FromJSON CreateAuthURIResponse where
         parseJSON
           = withObject "CreateAuthURIResponse"
               (\ o ->
-                 CreateAuthURIResponse <$>
+                 CreateAuthURIResponse' <$>
                    (o .:? "providerId") <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#CreateAuthUriResponse")
@@ -1957,7 +1959,7 @@ instance FromJSON CreateAuthURIResponse where
                      <*> (o .:? "forExistingProvider"))
 
 instance ToJSON CreateAuthURIResponse where
-        toJSON CreateAuthURIResponse{..}
+        toJSON CreateAuthURIResponse'{..}
           = object
               (catMaybes
                  [("providerId" .=) <$> _caurProviderId,
@@ -1973,7 +1975,7 @@ instance ToJSON CreateAuthURIResponse where
 -- | Respone of getting public keys.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetPublicKeysResponse' smart constructor.
-newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse = IdentitytoolkitRelyingPartyGetPublicKeysResponse
+newtype IdentitytoolkitRelyingPartyGetPublicKeysResponse = IdentitytoolkitRelyingPartyGetPublicKeysResponse'
     { _irpgpkrAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1986,7 +1988,7 @@ identitytoolkitRelyingPartyGetPublicKeysResponse
     :: HashMap Text Text -- ^ 'irpgpkrAddtional'
     -> IdentitytoolkitRelyingPartyGetPublicKeysResponse
 identitytoolkitRelyingPartyGetPublicKeysResponse pIrpgpkrAddtional_ =
-    IdentitytoolkitRelyingPartyGetPublicKeysResponse
+    IdentitytoolkitRelyingPartyGetPublicKeysResponse'
     { _irpgpkrAddtional = _Coerce # pIrpgpkrAddtional_
     }
 
@@ -2003,7 +2005,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyGetPublicKeysResponse"
               (\ o ->
-                 IdentitytoolkitRelyingPartyGetPublicKeysResponse <$>
+                 IdentitytoolkitRelyingPartyGetPublicKeysResponse' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -2015,7 +2017,7 @@ instance ToJSON
 -- email etc.)
 --
 -- /See:/ 'relyingParty' smart constructor.
-data RelyingParty = RelyingParty
+data RelyingParty = RelyingParty'
     { _rpEmail       :: !(Maybe Text)
     , _rpKind        :: !Text
     , _rpUserIP      :: !(Maybe Text)
@@ -2048,7 +2050,7 @@ data RelyingParty = RelyingParty
 relyingParty
     :: RelyingParty
 relyingParty =
-    RelyingParty
+    RelyingParty'
     { _rpEmail = Nothing
     , _rpKind = "identitytoolkit#relyingparty"
     , _rpUserIP = Nothing
@@ -2102,7 +2104,7 @@ instance FromJSON RelyingParty where
         parseJSON
           = withObject "RelyingParty"
               (\ o ->
-                 RelyingParty <$>
+                 RelyingParty' <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!= "identitytoolkit#relyingparty")
                      <*> (o .:? "userIp")
@@ -2113,7 +2115,7 @@ instance FromJSON RelyingParty where
                      <*> (o .:? "idToken"))
 
 instance ToJSON RelyingParty where
-        toJSON RelyingParty{..}
+        toJSON RelyingParty'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _rpEmail, Just ("kind" .= _rpKind),
@@ -2127,7 +2129,7 @@ instance ToJSON RelyingParty where
 -- | Request to get the account information.
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetAccountInfoRequest' smart constructor.
-data IdentitytoolkitRelyingPartyGetAccountInfoRequest = IdentitytoolkitRelyingPartyGetAccountInfoRequest
+data IdentitytoolkitRelyingPartyGetAccountInfoRequest = IdentitytoolkitRelyingPartyGetAccountInfoRequest'
     { _irpgairEmail                  :: !(Maybe [Text])
     , _irpgairDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpgairLocalId                :: !(Maybe [Text])
@@ -2148,7 +2150,7 @@ data IdentitytoolkitRelyingPartyGetAccountInfoRequest = IdentitytoolkitRelyingPa
 identitytoolkitRelyingPartyGetAccountInfoRequest
     :: IdentitytoolkitRelyingPartyGetAccountInfoRequest
 identitytoolkitRelyingPartyGetAccountInfoRequest =
-    IdentitytoolkitRelyingPartyGetAccountInfoRequest
+    IdentitytoolkitRelyingPartyGetAccountInfoRequest'
     { _irpgairEmail = Nothing
     , _irpgairDelegatedProjectNumber = Nothing
     , _irpgairLocalId = Nothing
@@ -2191,7 +2193,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyGetAccountInfoRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyGetAccountInfoRequest <$>
+                 IdentitytoolkitRelyingPartyGetAccountInfoRequest' <$>
                    (o .:? "email" .!= mempty) <*>
                      (o .:? "delegatedProjectNumber")
                      <*> (o .:? "localId" .!= mempty)
@@ -2201,7 +2203,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartyGetAccountInfoRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartyGetAccountInfoRequest{..}
+          IdentitytoolkitRelyingPartyGetAccountInfoRequest'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _irpgairEmail,
@@ -2213,7 +2215,7 @@ instance ToJSON
 -- | Template for an email template.
 --
 -- /See:/ 'emailTemplate' smart constructor.
-data EmailTemplate = EmailTemplate
+data EmailTemplate = EmailTemplate'
     { _etSubject         :: !(Maybe Text)
     , _etBody            :: !(Maybe Text)
     , _etFormat          :: !(Maybe Text)
@@ -2240,7 +2242,7 @@ data EmailTemplate = EmailTemplate
 emailTemplate
     :: EmailTemplate
 emailTemplate =
-    EmailTemplate
+    EmailTemplate'
     { _etSubject = Nothing
     , _etBody = Nothing
     , _etFormat = Nothing
@@ -2281,7 +2283,7 @@ instance FromJSON EmailTemplate where
         parseJSON
           = withObject "EmailTemplate"
               (\ o ->
-                 EmailTemplate <$>
+                 EmailTemplate' <$>
                    (o .:? "subject") <*> (o .:? "body") <*>
                      (o .:? "format")
                      <*> (o .:? "fromDisplayName")
@@ -2289,7 +2291,7 @@ instance FromJSON EmailTemplate where
                      <*> (o .:? "replyTo"))
 
 instance ToJSON EmailTemplate where
-        toJSON EmailTemplate{..}
+        toJSON EmailTemplate'{..}
           = object
               (catMaybes
                  [("subject" .=) <$> _etSubject,
@@ -2301,7 +2303,7 @@ instance ToJSON EmailTemplate where
 -- | Request to upload user account in batch.
 --
 -- /See:/ 'identitytoolkitRelyingPartyUploadAccountRequest' smart constructor.
-data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPartyUploadAccountRequest
+data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPartyUploadAccountRequest'
     { _irpuarUsers                  :: !(Maybe [UserInfo])
     , _irpuarMemoryCost             :: !(Maybe (Textual Int32))
     , _irpuarDelegatedProjectNumber :: !(Maybe (Textual Int64))
@@ -2331,7 +2333,7 @@ data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyUploadAccountRequest
     :: IdentitytoolkitRelyingPartyUploadAccountRequest
 identitytoolkitRelyingPartyUploadAccountRequest =
-    IdentitytoolkitRelyingPartyUploadAccountRequest
+    IdentitytoolkitRelyingPartyUploadAccountRequest'
     { _irpuarUsers = Nothing
     , _irpuarMemoryCost = Nothing
     , _irpuarDelegatedProjectNumber = Nothing
@@ -2395,7 +2397,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyUploadAccountRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyUploadAccountRequest <$>
+                 IdentitytoolkitRelyingPartyUploadAccountRequest' <$>
                    (o .:? "users" .!= mempty) <*> (o .:? "memoryCost")
                      <*> (o .:? "delegatedProjectNumber")
                      <*> (o .:? "saltSeparator")
@@ -2406,7 +2408,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartyUploadAccountRequest where
         toJSON
-          IdentitytoolkitRelyingPartyUploadAccountRequest{..}
+          IdentitytoolkitRelyingPartyUploadAccountRequest'{..}
           = object
               (catMaybes
                  [("users" .=) <$> _irpuarUsers,
@@ -2421,7 +2423,7 @@ instance ToJSON
 -- | Request to reset the password.
 --
 -- /See:/ 'identitytoolkitRelyingPartyResetPasswordRequest' smart constructor.
-data IdentitytoolkitRelyingPartyResetPasswordRequest = IdentitytoolkitRelyingPartyResetPasswordRequest
+data IdentitytoolkitRelyingPartyResetPasswordRequest = IdentitytoolkitRelyingPartyResetPasswordRequest'
     { _irprprEmail       :: !(Maybe Text)
     , _irprprNewPassword :: !(Maybe Text)
     , _irprprOOBCode     :: !(Maybe Text)
@@ -2442,7 +2444,7 @@ data IdentitytoolkitRelyingPartyResetPasswordRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyResetPasswordRequest
     :: IdentitytoolkitRelyingPartyResetPasswordRequest
 identitytoolkitRelyingPartyResetPasswordRequest =
-    IdentitytoolkitRelyingPartyResetPasswordRequest
+    IdentitytoolkitRelyingPartyResetPasswordRequest'
     { _irprprEmail = Nothing
     , _irprprNewPassword = Nothing
     , _irprprOOBCode = Nothing
@@ -2478,7 +2480,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyResetPasswordRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyResetPasswordRequest <$>
+                 IdentitytoolkitRelyingPartyResetPasswordRequest' <$>
                    (o .:? "email") <*> (o .:? "newPassword") <*>
                      (o .:? "oobCode")
                      <*> (o .:? "oldPassword"))
@@ -2486,7 +2488,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartyResetPasswordRequest where
         toJSON
-          IdentitytoolkitRelyingPartyResetPasswordRequest{..}
+          IdentitytoolkitRelyingPartyResetPasswordRequest'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _irprprEmail,
@@ -2497,7 +2499,7 @@ instance ToJSON
 -- | Request to get the IDP authentication URL.
 --
 -- /See:/ 'identitytoolkitRelyingPartyCreateAuthURIRequest' smart constructor.
-data IdentitytoolkitRelyingPartyCreateAuthURIRequest = IdentitytoolkitRelyingPartyCreateAuthURIRequest
+data IdentitytoolkitRelyingPartyCreateAuthURIRequest = IdentitytoolkitRelyingPartyCreateAuthURIRequest'
     { _irpcaurProviderId       :: !(Maybe Text)
     , _irpcaurClientId         :: !(Maybe Text)
     , _irpcaurContext          :: !(Maybe Text)
@@ -2536,7 +2538,7 @@ data IdentitytoolkitRelyingPartyCreateAuthURIRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyCreateAuthURIRequest
     :: IdentitytoolkitRelyingPartyCreateAuthURIRequest
 identitytoolkitRelyingPartyCreateAuthURIRequest =
-    IdentitytoolkitRelyingPartyCreateAuthURIRequest
+    IdentitytoolkitRelyingPartyCreateAuthURIRequest'
     { _irpcaurProviderId = Nothing
     , _irpcaurClientId = Nothing
     , _irpcaurContext = Nothing
@@ -2622,7 +2624,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyCreateAuthURIRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyCreateAuthURIRequest <$>
+                 IdentitytoolkitRelyingPartyCreateAuthURIRequest' <$>
                    (o .:? "providerId") <*> (o .:? "clientId") <*>
                      (o .:? "context")
                      <*> (o .:? "identifier")
@@ -2636,7 +2638,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartyCreateAuthURIRequest where
         toJSON
-          IdentitytoolkitRelyingPartyCreateAuthURIRequest{..}
+          IdentitytoolkitRelyingPartyCreateAuthURIRequest'{..}
           = object
               (catMaybes
                  [("providerId" .=) <$> _irpcaurProviderId,
@@ -2653,7 +2655,7 @@ instance ToJSON
 -- | Response of getting account information.
 --
 -- /See:/ 'getAccountInfoResponse' smart constructor.
-data GetAccountInfoResponse = GetAccountInfoResponse
+data GetAccountInfoResponse = GetAccountInfoResponse'
     { _gairUsers :: !(Maybe [UserInfo])
     , _gairKind  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2668,7 +2670,7 @@ data GetAccountInfoResponse = GetAccountInfoResponse
 getAccountInfoResponse
     :: GetAccountInfoResponse
 getAccountInfoResponse =
-    GetAccountInfoResponse
+    GetAccountInfoResponse'
     { _gairUsers = Nothing
     , _gairKind = "identitytoolkit#GetAccountInfoResponse"
     }
@@ -2688,13 +2690,13 @@ instance FromJSON GetAccountInfoResponse where
         parseJSON
           = withObject "GetAccountInfoResponse"
               (\ o ->
-                 GetAccountInfoResponse <$>
+                 GetAccountInfoResponse' <$>
                    (o .:? "users" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#GetAccountInfoResponse"))
 
 instance ToJSON GetAccountInfoResponse where
-        toJSON GetAccountInfoResponse{..}
+        toJSON GetAccountInfoResponse'{..}
           = object
               (catMaybes
                  [("users" .=) <$> _gairUsers,
@@ -2703,7 +2705,7 @@ instance ToJSON GetAccountInfoResponse where
 -- | Request to delete account.
 --
 -- /See:/ 'identitytoolkitRelyingPartyDeleteAccountRequest' smart constructor.
-data IdentitytoolkitRelyingPartyDeleteAccountRequest = IdentitytoolkitRelyingPartyDeleteAccountRequest
+data IdentitytoolkitRelyingPartyDeleteAccountRequest = IdentitytoolkitRelyingPartyDeleteAccountRequest'
     { _irpdarDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _irpdarLocalId                :: !(Maybe Text)
     , _irpdarIdToken                :: !(Maybe Text)
@@ -2721,7 +2723,7 @@ data IdentitytoolkitRelyingPartyDeleteAccountRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartyDeleteAccountRequest
     :: IdentitytoolkitRelyingPartyDeleteAccountRequest
 identitytoolkitRelyingPartyDeleteAccountRequest =
-    IdentitytoolkitRelyingPartyDeleteAccountRequest
+    IdentitytoolkitRelyingPartyDeleteAccountRequest'
     { _irpdarDelegatedProjectNumber = Nothing
     , _irpdarLocalId = Nothing
     , _irpdarIdToken = Nothing
@@ -2753,7 +2755,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyDeleteAccountRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyDeleteAccountRequest <$>
+                 IdentitytoolkitRelyingPartyDeleteAccountRequest' <$>
                    (o .:? "delegatedProjectNumber") <*>
                      (o .:? "localId")
                      <*> (o .:? "idToken"))
@@ -2761,7 +2763,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartyDeleteAccountRequest where
         toJSON
-          IdentitytoolkitRelyingPartyDeleteAccountRequest{..}
+          IdentitytoolkitRelyingPartyDeleteAccountRequest'{..}
           = object
               (catMaybes
                  [("delegatedProjectNumber" .=) <$>
@@ -2773,7 +2775,7 @@ instance ToJSON
 -- email etc.).
 --
 -- /See:/ 'getOOBConfirmationCodeResponse' smart constructor.
-data GetOOBConfirmationCodeResponse = GetOOBConfirmationCodeResponse
+data GetOOBConfirmationCodeResponse = GetOOBConfirmationCodeResponse'
     { _goobccrEmail   :: !(Maybe Text)
     , _goobccrKind    :: !Text
     , _goobccrOOBCode :: !(Maybe Text)
@@ -2791,7 +2793,7 @@ data GetOOBConfirmationCodeResponse = GetOOBConfirmationCodeResponse
 getOOBConfirmationCodeResponse
     :: GetOOBConfirmationCodeResponse
 getOOBConfirmationCodeResponse =
-    GetOOBConfirmationCodeResponse
+    GetOOBConfirmationCodeResponse'
     { _goobccrEmail = Nothing
     , _goobccrKind = "identitytoolkit#GetOobConfirmationCodeResponse"
     , _goobccrOOBCode = Nothing
@@ -2818,14 +2820,14 @@ instance FromJSON GetOOBConfirmationCodeResponse
         parseJSON
           = withObject "GetOOBConfirmationCodeResponse"
               (\ o ->
-                 GetOOBConfirmationCodeResponse <$>
+                 GetOOBConfirmationCodeResponse' <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#GetOobConfirmationCodeResponse")
                      <*> (o .:? "oobCode"))
 
 instance ToJSON GetOOBConfirmationCodeResponse where
-        toJSON GetOOBConfirmationCodeResponse{..}
+        toJSON GetOOBConfirmationCodeResponse'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _goobccrEmail,
@@ -2835,7 +2837,7 @@ instance ToJSON GetOOBConfirmationCodeResponse where
 -- | Request to download user account in batch.
 --
 -- /See:/ 'identitytoolkitRelyingPartyDownloadAccountRequest' smart constructor.
-data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingPartyDownloadAccountRequest
+data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingPartyDownloadAccountRequest'
     { _iNextPageToken          :: !(Maybe Text)
     , _iDelegatedProjectNumber :: !(Maybe (Textual Int64))
     , _iMaxResults             :: !(Maybe (Textual Word32))
@@ -2853,7 +2855,7 @@ data IdentitytoolkitRelyingPartyDownloadAccountRequest = IdentitytoolkitRelyingP
 identitytoolkitRelyingPartyDownloadAccountRequest
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest
 identitytoolkitRelyingPartyDownloadAccountRequest =
-    IdentitytoolkitRelyingPartyDownloadAccountRequest
+    IdentitytoolkitRelyingPartyDownloadAccountRequest'
     { _iNextPageToken = Nothing
     , _iDelegatedProjectNumber = Nothing
     , _iMaxResults = Nothing
@@ -2887,7 +2889,8 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartyDownloadAccountRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartyDownloadAccountRequest <$>
+                 IdentitytoolkitRelyingPartyDownloadAccountRequest'
+                   <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "delegatedProjectNumber")
                      <*> (o .:? "maxResults"))
@@ -2896,7 +2899,7 @@ instance ToJSON
          IdentitytoolkitRelyingPartyDownloadAccountRequest
          where
         toJSON
-          IdentitytoolkitRelyingPartyDownloadAccountRequest{..}
+          IdentitytoolkitRelyingPartyDownloadAccountRequest'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _iNextPageToken,
@@ -2907,7 +2910,7 @@ instance ToJSON
 -- | Request of verifying the password.
 --
 -- /See:/ 'verifyPasswordResponse' smart constructor.
-data VerifyPasswordResponse = VerifyPasswordResponse
+data VerifyPasswordResponse = VerifyPasswordResponse'
     { _vprEmail                  :: !(Maybe Text)
     , _vprPhotoURL               :: !(Maybe Text)
     , _vprOAuthAccessToken       :: !(Maybe Text)
@@ -2952,7 +2955,7 @@ data VerifyPasswordResponse = VerifyPasswordResponse
 verifyPasswordResponse
     :: VerifyPasswordResponse
 verifyPasswordResponse =
-    VerifyPasswordResponse
+    VerifyPasswordResponse'
     { _vprEmail = Nothing
     , _vprPhotoURL = Nothing
     , _vprOAuthAccessToken = Nothing
@@ -3040,7 +3043,7 @@ instance FromJSON VerifyPasswordResponse where
         parseJSON
           = withObject "VerifyPasswordResponse"
               (\ o ->
-                 VerifyPasswordResponse <$>
+                 VerifyPasswordResponse' <$>
                    (o .:? "email") <*> (o .:? "photoUrl") <*>
                      (o .:? "oauthAccessToken")
                      <*>
@@ -3056,7 +3059,7 @@ instance FromJSON VerifyPasswordResponse where
                      <*> (o .:? "oauthAuthorizationCode"))
 
 instance ToJSON VerifyPasswordResponse where
-        toJSON VerifyPasswordResponse{..}
+        toJSON VerifyPasswordResponse'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _vprEmail,
@@ -3076,7 +3079,7 @@ instance ToJSON VerifyPasswordResponse where
 -- | Respone of setting the account information.
 --
 -- /See:/ 'setAccountInfoResponse' smart constructor.
-data SetAccountInfoResponse = SetAccountInfoResponse
+data SetAccountInfoResponse = SetAccountInfoResponse'
     { _sairEmail            :: !(Maybe Text)
     , _sairPhotoURL         :: !(Maybe Text)
     , _sairKind             :: !Text
@@ -3112,7 +3115,7 @@ data SetAccountInfoResponse = SetAccountInfoResponse
 setAccountInfoResponse
     :: SetAccountInfoResponse
 setAccountInfoResponse =
-    SetAccountInfoResponse
+    SetAccountInfoResponse'
     { _sairEmail = Nothing
     , _sairPhotoURL = Nothing
     , _sairKind = "identitytoolkit#SetAccountInfoResponse"
@@ -3180,7 +3183,7 @@ instance FromJSON SetAccountInfoResponse where
         parseJSON
           = withObject "SetAccountInfoResponse"
               (\ o ->
-                 SetAccountInfoResponse <$>
+                 SetAccountInfoResponse' <$>
                    (o .:? "email") <*> (o .:? "photoUrl") <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#SetAccountInfoResponse")
@@ -3192,7 +3195,7 @@ instance FromJSON SetAccountInfoResponse where
                      <*> (o .:? "idToken"))
 
 instance ToJSON SetAccountInfoResponse where
-        toJSON SetAccountInfoResponse{..}
+        toJSON SetAccountInfoResponse'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _sairEmail,
@@ -3209,7 +3212,7 @@ instance ToJSON SetAccountInfoResponse where
 -- reauth.
 --
 -- /See:/ 'identitytoolkitRelyingPartySignupNewUserRequest' smart constructor.
-data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPartySignupNewUserRequest
+data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPartySignupNewUserRequest'
     { _irpsnurEmail             :: !(Maybe Text)
     , _irpsnurInstanceId        :: !(Maybe Text)
     , _irpsnurCaptchaChallenge  :: !(Maybe Text)
@@ -3242,7 +3245,7 @@ data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPar
 identitytoolkitRelyingPartySignupNewUserRequest
     :: IdentitytoolkitRelyingPartySignupNewUserRequest
 identitytoolkitRelyingPartySignupNewUserRequest =
-    IdentitytoolkitRelyingPartySignupNewUserRequest
+    IdentitytoolkitRelyingPartySignupNewUserRequest'
     { _irpsnurEmail = Nothing
     , _irpsnurInstanceId = Nothing
     , _irpsnurCaptchaChallenge = Nothing
@@ -3306,7 +3309,7 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartySignupNewUserRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartySignupNewUserRequest <$>
+                 IdentitytoolkitRelyingPartySignupNewUserRequest' <$>
                    (o .:? "email") <*> (o .:? "instanceId") <*>
                      (o .:? "captchaChallenge")
                      <*> (o .:? "returnSecureToken")
@@ -3318,7 +3321,7 @@ instance FromJSON
 instance ToJSON
          IdentitytoolkitRelyingPartySignupNewUserRequest where
         toJSON
-          IdentitytoolkitRelyingPartySignupNewUserRequest{..}
+          IdentitytoolkitRelyingPartySignupNewUserRequest'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _irpsnurEmail,
@@ -3334,7 +3337,7 @@ instance ToJSON
 -- | Response of verifying the IDP assertion.
 --
 -- /See:/ 'verifyAssertionResponse' smart constructor.
-data VerifyAssertionResponse = VerifyAssertionResponse
+data VerifyAssertionResponse = VerifyAssertionResponse'
     { _varProviderId             :: !(Maybe Text)
     , _varFullName               :: !(Maybe Text)
     , _varEmail                  :: !(Maybe Text)
@@ -3445,7 +3448,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse
 verifyAssertionResponse
     :: VerifyAssertionResponse
 verifyAssertionResponse =
-    VerifyAssertionResponse
+    VerifyAssertionResponse'
     { _varProviderId = Nothing
     , _varFullName = Nothing
     , _varEmail = Nothing
@@ -3692,7 +3695,7 @@ instance FromJSON VerifyAssertionResponse where
         parseJSON
           = withObject "VerifyAssertionResponse"
               (\ o ->
-                 VerifyAssertionResponse <$>
+                 VerifyAssertionResponse' <$>
                    (o .:? "providerId") <*> (o .:? "fullName") <*>
                      (o .:? "email")
                      <*> (o .:? "emailRecycled")
@@ -3730,7 +3733,7 @@ instance FromJSON VerifyAssertionResponse where
                      <*> (o .:? "oauthAuthorizationCode"))
 
 instance ToJSON VerifyAssertionResponse where
-        toJSON VerifyAssertionResponse{..}
+        toJSON VerifyAssertionResponse'{..}
           = object
               (catMaybes
                  [("providerId" .=) <$> _varProviderId,
@@ -3772,7 +3775,7 @@ instance ToJSON VerifyAssertionResponse where
 -- | Request to sign out user.
 --
 -- /See:/ 'identitytoolkitRelyingPartySignOutUserRequest' smart constructor.
-data IdentitytoolkitRelyingPartySignOutUserRequest = IdentitytoolkitRelyingPartySignOutUserRequest
+data IdentitytoolkitRelyingPartySignOutUserRequest = IdentitytoolkitRelyingPartySignOutUserRequest'
     { _iInstanceId :: !(Maybe Text)
     , _iLocalId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3787,7 +3790,7 @@ data IdentitytoolkitRelyingPartySignOutUserRequest = IdentitytoolkitRelyingParty
 identitytoolkitRelyingPartySignOutUserRequest
     :: IdentitytoolkitRelyingPartySignOutUserRequest
 identitytoolkitRelyingPartySignOutUserRequest =
-    IdentitytoolkitRelyingPartySignOutUserRequest
+    IdentitytoolkitRelyingPartySignOutUserRequest'
     { _iInstanceId = Nothing
     , _iLocalId = Nothing
     }
@@ -3807,13 +3810,13 @@ instance FromJSON
           = withObject
               "IdentitytoolkitRelyingPartySignOutUserRequest"
               (\ o ->
-                 IdentitytoolkitRelyingPartySignOutUserRequest <$>
+                 IdentitytoolkitRelyingPartySignOutUserRequest' <$>
                    (o .:? "instanceId") <*> (o .:? "localId"))
 
 instance ToJSON
          IdentitytoolkitRelyingPartySignOutUserRequest where
         toJSON
-          IdentitytoolkitRelyingPartySignOutUserRequest{..}
+          IdentitytoolkitRelyingPartySignOutUserRequest'{..}
           = object
               (catMaybes
                  [("instanceId" .=) <$> _iInstanceId,
@@ -3822,7 +3825,7 @@ instance ToJSON
 -- | Response of getting recaptcha param.
 --
 -- /See:/ 'getRecaptchaParamResponse' smart constructor.
-data GetRecaptchaParamResponse = GetRecaptchaParamResponse
+data GetRecaptchaParamResponse = GetRecaptchaParamResponse'
     { _grprRecaptchaSiteKey :: !(Maybe Text)
     , _grprKind             :: !Text
     , _grprRecaptchaStoken  :: !(Maybe Text)
@@ -3840,7 +3843,7 @@ data GetRecaptchaParamResponse = GetRecaptchaParamResponse
 getRecaptchaParamResponse
     :: GetRecaptchaParamResponse
 getRecaptchaParamResponse =
-    GetRecaptchaParamResponse
+    GetRecaptchaParamResponse'
     { _grprRecaptchaSiteKey = Nothing
     , _grprKind = "identitytoolkit#GetRecaptchaParamResponse"
     , _grprRecaptchaStoken = Nothing
@@ -3867,14 +3870,14 @@ instance FromJSON GetRecaptchaParamResponse where
         parseJSON
           = withObject "GetRecaptchaParamResponse"
               (\ o ->
-                 GetRecaptchaParamResponse <$>
+                 GetRecaptchaParamResponse' <$>
                    (o .:? "recaptchaSiteKey") <*>
                      (o .:? "kind" .!=
                         "identitytoolkit#GetRecaptchaParamResponse")
                      <*> (o .:? "recaptchaStoken"))
 
 instance ToJSON GetRecaptchaParamResponse where
-        toJSON GetRecaptchaParamResponse{..}
+        toJSON GetRecaptchaParamResponse'{..}
           = object
               (catMaybes
                  [("recaptchaSiteKey" .=) <$> _grprRecaptchaSiteKey,

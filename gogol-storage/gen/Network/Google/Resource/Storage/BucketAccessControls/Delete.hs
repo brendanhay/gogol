@@ -56,7 +56,7 @@ type BucketAccessControlsDeleteResource =
 -- specified bucket.
 --
 -- /See:/ 'bucketAccessControlsDelete' smart constructor.
-data BucketAccessControlsDelete = BucketAccessControlsDelete
+data BucketAccessControlsDelete = BucketAccessControlsDelete'
     { _bacdBucket :: !Text
     , _bacdEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ bucketAccessControlsDelete
     -> Text -- ^ 'bacdEntity'
     -> BucketAccessControlsDelete
 bucketAccessControlsDelete pBacdBucket_ pBacdEntity_ =
-    BucketAccessControlsDelete
+    BucketAccessControlsDelete'
     { _bacdBucket = pBacdBucket_
     , _bacdEntity = pBacdEntity_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest BucketAccessControlsDelete
         type Scopes BucketAccessControlsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient BucketAccessControlsDelete{..}
+        requestClient BucketAccessControlsDelete'{..}
           = go _bacdBucket _bacdEntity (Just AltJSON)
               storageService
           where go

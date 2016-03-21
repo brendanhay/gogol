@@ -73,7 +73,7 @@ type DataSetsListResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsList' smart constructor.
-data DataSetsList = DataSetsList
+data DataSetsList = DataSetsList'
     { _dslXgafv          :: !(Maybe Text)
     , _dslUploadProtocol :: !(Maybe Text)
     , _dslPp             :: !Bool
@@ -112,7 +112,7 @@ data DataSetsList = DataSetsList
 dataSetsList
     :: DataSetsList
 dataSetsList =
-    DataSetsList
+    DataSetsList'
     { _dslXgafv = Nothing
     , _dslUploadProtocol = Nothing
     , _dslPp = True
@@ -187,7 +187,7 @@ instance GoogleRequest DataSetsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient DataSetsList{..}
+        requestClient DataSetsList'{..}
           = go _dslXgafv _dslUploadProtocol (Just _dslPp)
               _dslAccessToken
               _dslUploadType

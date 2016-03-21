@@ -57,7 +57,7 @@ type ApplicationsVerifyResource =
 -- was granted for.
 --
 -- /See:/ 'applicationsVerify' smart constructor.
-newtype ApplicationsVerify = ApplicationsVerify
+newtype ApplicationsVerify = ApplicationsVerify'
     { _avApplicationId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ applicationsVerify
     :: Text -- ^ 'avApplicationId'
     -> ApplicationsVerify
 applicationsVerify pAvApplicationId_ =
-    ApplicationsVerify
+    ApplicationsVerify'
     { _avApplicationId = pAvApplicationId_
     }
 
@@ -86,7 +86,7 @@ instance GoogleRequest ApplicationsVerify where
         type Scopes ApplicationsVerify =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ApplicationsVerify{..}
+        requestClient ApplicationsVerify'{..}
           = go _avApplicationId (Just AltJSON) gamesService
           where go
                   = buildClient

@@ -58,7 +58,7 @@ type ZonesListResource =
 -- | Retrieves the list of Zone resources available to the specified project.
 --
 -- /See:/ 'zonesList' smart constructor.
-data ZonesList = ZonesList
+data ZonesList = ZonesList'
     { _zlProject    :: !Text
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
@@ -80,7 +80,7 @@ zonesList
     :: Text -- ^ 'zlProject'
     -> ZonesList
 zonesList pZlProject_ =
-    ZonesList
+    ZonesList'
     { _zlProject = pZlProject_
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
@@ -138,7 +138,7 @@ instance GoogleRequest ZonesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ZonesList{..}
+        requestClient ZonesList'{..}
           = go _zlProject _zlFilter _zlPageToken
               (Just _zlMaxResults)
               (Just AltJSON)

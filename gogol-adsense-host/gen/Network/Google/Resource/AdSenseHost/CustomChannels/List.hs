@@ -57,7 +57,7 @@ type CustomChannelsListResource =
 -- | List all host custom channels in this AdSense account.
 --
 -- /See:/ 'customChannelsList' smart constructor.
-data CustomChannelsList = CustomChannelsList
+data CustomChannelsList = CustomChannelsList'
     { _cclAdClientId :: !Text
     , _cclPageToken  :: !(Maybe Text)
     , _cclMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ customChannelsList
     :: Text -- ^ 'cclAdClientId'
     -> CustomChannelsList
 customChannelsList pCclAdClientId_ =
-    CustomChannelsList
+    CustomChannelsList'
     { _cclAdClientId = pCclAdClientId_
     , _cclPageToken = Nothing
     , _cclMaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest CustomChannelsList where
         type Rs CustomChannelsList = CustomChannels
         type Scopes CustomChannelsList =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient CustomChannelsList{..}
+        requestClient CustomChannelsList'{..}
           = go _cclAdClientId _cclPageToken _cclMaxResults
               (Just AltJSON)
               adSenseHostService

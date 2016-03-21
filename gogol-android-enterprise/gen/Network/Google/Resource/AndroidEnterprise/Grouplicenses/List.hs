@@ -55,7 +55,7 @@ type GrouplicensesListResource =
 -- license.
 --
 -- /See:/ 'grouplicensesList' smart constructor.
-newtype GrouplicensesList = GrouplicensesList
+newtype GrouplicensesList = GrouplicensesList'
     { _glEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ grouplicensesList
     :: Text -- ^ 'glEnterpriseId'
     -> GrouplicensesList
 grouplicensesList pGlEnterpriseId_ =
-    GrouplicensesList
+    GrouplicensesList'
     { _glEnterpriseId = pGlEnterpriseId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest GrouplicensesList where
         type Rs GrouplicensesList = GroupLicensesListResponse
         type Scopes GrouplicensesList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient GrouplicensesList{..}
+        requestClient GrouplicensesList'{..}
           = go _glEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

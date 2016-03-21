@@ -61,7 +61,7 @@ type InAppProductsListResource =
 -- managed in-app products..
 --
 -- /See:/ 'inAppProductsList' smart constructor.
-data InAppProductsList = InAppProductsList
+data InAppProductsList = InAppProductsList'
     { _iaplPackageName :: !Text
     , _iaplToken       :: !(Maybe Text)
     , _iaplStartIndex  :: !(Maybe (Textual Word32))
@@ -83,7 +83,7 @@ inAppProductsList
     :: Text -- ^ 'iaplPackageName'
     -> InAppProductsList
 inAppProductsList pIaplPackageName_ =
-    InAppProductsList
+    InAppProductsList'
     { _iaplPackageName = pIaplPackageName_
     , _iaplToken = Nothing
     , _iaplStartIndex = Nothing
@@ -117,7 +117,7 @@ instance GoogleRequest InAppProductsList where
         type Rs InAppProductsList = InAppProductsListResponse
         type Scopes InAppProductsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient InAppProductsList{..}
+        requestClient InAppProductsList'{..}
           = go _iaplPackageName _iaplToken _iaplStartIndex
               _iaplMaxResults
               (Just AltJSON)

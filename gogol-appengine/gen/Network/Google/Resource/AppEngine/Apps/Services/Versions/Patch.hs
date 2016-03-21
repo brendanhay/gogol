@@ -75,7 +75,7 @@ type AppsServicesVersionsPatchResource =
 -- | Updates an existing version. Note: UNIMPLEMENTED.
 --
 -- /See:/ 'appsServicesVersionsPatch' smart constructor.
-data AppsServicesVersionsPatch = AppsServicesVersionsPatch
+data AppsServicesVersionsPatch = AppsServicesVersionsPatch'
     { _asvpXgafv          :: !(Maybe Text)
     , _asvpUploadProtocol :: !(Maybe Text)
     , _asvpPp             :: !Bool
@@ -124,7 +124,7 @@ appsServicesVersionsPatch
     -> Text -- ^ 'asvpServicesId'
     -> AppsServicesVersionsPatch
 appsServicesVersionsPatch pAsvpPayload_ pAsvpVersionsId_ pAsvpAppsId_ pAsvpServicesId_ =
-    AppsServicesVersionsPatch
+    AppsServicesVersionsPatch'
     { _asvpXgafv = Nothing
     , _asvpUploadProtocol = Nothing
     , _asvpPp = True
@@ -209,7 +209,7 @@ instance GoogleRequest AppsServicesVersionsPatch
         type Rs AppsServicesVersionsPatch = Operation
         type Scopes AppsServicesVersionsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesVersionsPatch{..}
+        requestClient AppsServicesVersionsPatch'{..}
           = go _asvpAppsId _asvpServicesId _asvpVersionsId
               _asvpXgafv
               _asvpUploadProtocol

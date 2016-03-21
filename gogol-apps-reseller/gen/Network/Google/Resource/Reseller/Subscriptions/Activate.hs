@@ -56,7 +56,7 @@ type SubscriptionsActivateResource =
 -- | Activates a subscription previously suspended by the reseller
 --
 -- /See:/ 'subscriptionsActivate' smart constructor.
-data SubscriptionsActivate = SubscriptionsActivate
+data SubscriptionsActivate = SubscriptionsActivate'
     { _saCustomerId     :: !Text
     , _saSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ subscriptionsActivate
     -> Text -- ^ 'saSubscriptionId'
     -> SubscriptionsActivate
 subscriptionsActivate pSaCustomerId_ pSaSubscriptionId_ =
-    SubscriptionsActivate
+    SubscriptionsActivate'
     { _saCustomerId = pSaCustomerId_
     , _saSubscriptionId = pSaSubscriptionId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SubscriptionsActivate where
         type Rs SubscriptionsActivate = Subscription
         type Scopes SubscriptionsActivate =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsActivate{..}
+        requestClient SubscriptionsActivate'{..}
           = go _saCustomerId _saSubscriptionId (Just AltJSON)
               appsResellerService
           where go

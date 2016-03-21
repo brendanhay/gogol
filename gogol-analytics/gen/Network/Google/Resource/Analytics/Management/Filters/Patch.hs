@@ -57,7 +57,7 @@ type ManagementFiltersPatchResource =
 -- | Updates an existing filter. This method supports patch semantics.
 --
 -- /See:/ 'managementFiltersPatch' smart constructor.
-data ManagementFiltersPatch = ManagementFiltersPatch
+data ManagementFiltersPatch = ManagementFiltersPatch'
     { _mfpFilterId  :: !Text
     , _mfpPayload   :: !Filter
     , _mfpAccountId :: !Text
@@ -78,7 +78,7 @@ managementFiltersPatch
     -> Text -- ^ 'mfpAccountId'
     -> ManagementFiltersPatch
 managementFiltersPatch pMfpFilterId_ pMfpPayload_ pMfpAccountId_ =
-    ManagementFiltersPatch
+    ManagementFiltersPatch'
     { _mfpFilterId = pMfpFilterId_
     , _mfpPayload = pMfpPayload_
     , _mfpAccountId = pMfpAccountId_
@@ -103,7 +103,7 @@ instance GoogleRequest ManagementFiltersPatch where
         type Rs ManagementFiltersPatch = Filter
         type Scopes ManagementFiltersPatch =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementFiltersPatch{..}
+        requestClient ManagementFiltersPatch'{..}
           = go _mfpAccountId _mfpFilterId (Just AltJSON)
               _mfpPayload
               analyticsService

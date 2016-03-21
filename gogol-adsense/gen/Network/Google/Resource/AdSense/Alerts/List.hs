@@ -51,7 +51,7 @@ type AlertsListResource =
 -- | List the alerts for this AdSense account.
 --
 -- /See:/ 'alertsList' smart constructor.
-newtype AlertsList = AlertsList
+newtype AlertsList = AlertsList'
     { _alLocale :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ newtype AlertsList = AlertsList
 alertsList
     :: AlertsList
 alertsList =
-    AlertsList
+    AlertsList'
     { _alLocale = Nothing
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest AlertsList where
         type Scopes AlertsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AlertsList{..}
+        requestClient AlertsList'{..}
           = go _alLocale (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsListResource)

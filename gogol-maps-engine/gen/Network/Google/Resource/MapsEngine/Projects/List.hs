@@ -50,21 +50,21 @@ type ProjectsListResource =
 --
 -- /See:/ 'projectsList' smart constructor.
 data ProjectsList =
-    ProjectsList
+    ProjectsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList' with the minimum fields required to make a request.
 --
 projectsList
     :: ProjectsList
-projectsList = ProjectsList
+projectsList = ProjectsList'
 
 instance GoogleRequest ProjectsList where
         type Rs ProjectsList = ProjectsListResponse
         type Scopes ProjectsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient ProjectsList{}
+        requestClient ProjectsList'{}
           = go (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy ProjectsListResource)

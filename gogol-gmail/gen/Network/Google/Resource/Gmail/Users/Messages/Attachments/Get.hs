@@ -58,7 +58,7 @@ type UsersMessagesAttachmentsGetResource =
 -- | Gets the specified message attachment.
 --
 -- /See:/ 'usersMessagesAttachmentsGet' smart constructor.
-data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet
+data UsersMessagesAttachmentsGet = UsersMessagesAttachmentsGet'
     { _umagUserId    :: !Text
     , _umagId        :: !Text
     , _umagMessageId :: !Text
@@ -78,7 +78,7 @@ usersMessagesAttachmentsGet
     -> Text -- ^ 'umagMessageId'
     -> UsersMessagesAttachmentsGet
 usersMessagesAttachmentsGet pUmagId_ pUmagMessageId_ =
-    UsersMessagesAttachmentsGet
+    UsersMessagesAttachmentsGet'
     { _umagUserId = "me"
     , _umagId = pUmagId_
     , _umagMessageId = pUmagMessageId_
@@ -107,7 +107,7 @@ instance GoogleRequest UsersMessagesAttachmentsGet
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersMessagesAttachmentsGet{..}
+        requestClient UsersMessagesAttachmentsGet'{..}
           = go _umagUserId _umagMessageId _umagId
               (Just AltJSON)
               gmailService

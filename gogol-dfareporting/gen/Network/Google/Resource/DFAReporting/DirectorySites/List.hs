@@ -84,7 +84,7 @@ type DirectorySitesListResource =
 -- | Retrieves a list of directory sites, possibly filtered.
 --
 -- /See:/ 'directorySitesList' smart constructor.
-data DirectorySitesList = DirectorySitesList
+data DirectorySitesList = DirectorySitesList'
     { _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
@@ -136,7 +136,7 @@ directorySitesList
     :: Int64 -- ^ 'dslProFileId'
     -> DirectorySitesList
 directorySitesList pDslProFileId_ =
-    DirectorySitesList
+    DirectorySitesList'
     { _dslSearchString = Nothing
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
@@ -250,7 +250,7 @@ instance GoogleRequest DirectorySitesList where
              DirectorySitesListResponse
         type Scopes DirectorySitesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DirectorySitesList{..}
+        requestClient DirectorySitesList'{..}
           = go _dslProFileId _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements

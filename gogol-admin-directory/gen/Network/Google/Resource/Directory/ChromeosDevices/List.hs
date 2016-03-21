@@ -69,7 +69,7 @@ type ChromeosDevicesListResource =
 -- | Retrieve all Chrome OS Devices of a customer (paginated)
 --
 -- /See:/ 'chromeosDevicesList' smart constructor.
-data ChromeosDevicesList = ChromeosDevicesList
+data ChromeosDevicesList = ChromeosDevicesList'
     { _cdlOrderBy    :: !(Maybe ChromeosDevicesListOrderBy)
     , _cdlCustomerId :: !Text
     , _cdlSortOrder  :: !(Maybe ChromeosDevicesListSortOrder)
@@ -100,7 +100,7 @@ chromeosDevicesList
     :: Text -- ^ 'cdlCustomerId'
     -> ChromeosDevicesList
 chromeosDevicesList pCdlCustomerId_ =
-    ChromeosDevicesList
+    ChromeosDevicesList'
     { _cdlOrderBy = Nothing
     , _cdlCustomerId = pCdlCustomerId_
     , _cdlSortOrder = Nothing
@@ -155,7 +155,7 @@ instance GoogleRequest ChromeosDevicesList where
         type Scopes ChromeosDevicesList =
              '["https://www.googleapis.com/auth/admin.directory.device.chromeos",
                "https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly"]
-        requestClient ChromeosDevicesList{..}
+        requestClient ChromeosDevicesList'{..}
           = go _cdlCustomerId _cdlOrderBy _cdlSortOrder
               _cdlQuery
               _cdlProjection

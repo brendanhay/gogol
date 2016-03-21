@@ -54,7 +54,7 @@ type ACLInsertResource =
 -- | Creates an access control rule.
 --
 -- /See:/ 'aclInsert' smart constructor.
-data ACLInsert = ACLInsert
+data ACLInsert = ACLInsert'
     { _aiCalendarId :: !Text
     , _aiPayload    :: !ACLRule
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ aclInsert
     -> ACLRule -- ^ 'aiPayload'
     -> ACLInsert
 aclInsert pAiCalendarId_ pAiPayload_ =
-    ACLInsert
+    ACLInsert'
     { _aiCalendarId = pAiCalendarId_
     , _aiPayload = pAiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ACLInsert where
         type Rs ACLInsert = ACLRule
         type Scopes ACLInsert =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient ACLInsert{..}
+        requestClient ACLInsert'{..}
           = go _aiCalendarId (Just AltJSON) _aiPayload
               appsCalendarService
           where go

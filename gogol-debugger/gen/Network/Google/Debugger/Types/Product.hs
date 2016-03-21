@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Response for registering a debuggee.
 --
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
-newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse
+newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse'
     { _rdrDebuggee :: Maybe Debuggee
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse
 registerDebuggeeResponse
     :: RegisterDebuggeeResponse
 registerDebuggeeResponse =
-    RegisterDebuggeeResponse
+    RegisterDebuggeeResponse'
     { _rdrDebuggee = Nothing
     }
 
@@ -49,10 +49,10 @@ instance FromJSON RegisterDebuggeeResponse where
         parseJSON
           = withObject "RegisterDebuggeeResponse"
               (\ o ->
-                 RegisterDebuggeeResponse <$> (o .:? "debuggee"))
+                 RegisterDebuggeeResponse' <$> (o .:? "debuggee"))
 
 instance ToJSON RegisterDebuggeeResponse where
-        toJSON RegisterDebuggeeResponse{..}
+        toJSON RegisterDebuggeeResponse'{..}
           = object
               (catMaybes [("debuggee" .=) <$> _rdrDebuggee])
 
@@ -61,7 +61,7 @@ instance ToJSON RegisterDebuggeeResponse where
 -- directory.
 --
 -- /See:/ 'sourceContext' smart constructor.
-data SourceContext = SourceContext
+data SourceContext = SourceContext'
     { _scCloudWorkspace :: !(Maybe CloudWorkspaceSourceContext)
     , _scCloudRepo      :: !(Maybe CloudRepoSourceContext)
     , _scGerrit         :: !(Maybe GerritSourceContext)
@@ -82,7 +82,7 @@ data SourceContext = SourceContext
 sourceContext
     :: SourceContext
 sourceContext =
-    SourceContext
+    SourceContext'
     { _scCloudWorkspace = Nothing
     , _scCloudRepo = Nothing
     , _scGerrit = Nothing
@@ -112,13 +112,13 @@ instance FromJSON SourceContext where
         parseJSON
           = withObject "SourceContext"
               (\ o ->
-                 SourceContext <$>
+                 SourceContext' <$>
                    (o .:? "cloudWorkspace") <*> (o .:? "cloudRepo") <*>
                      (o .:? "gerrit")
                      <*> (o .:? "git"))
 
 instance ToJSON SourceContext where
-        toJSON SourceContext{..}
+        toJSON SourceContext'{..}
           = object
               (catMaybes
                  [("cloudWorkspace" .=) <$> _scCloudWorkspace,
@@ -128,7 +128,7 @@ instance ToJSON SourceContext where
 -- | Response for setting a breakpoint.
 --
 -- /See:/ 'setBreakpointResponse' smart constructor.
-newtype SetBreakpointResponse = SetBreakpointResponse
+newtype SetBreakpointResponse = SetBreakpointResponse'
     { _sbrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -140,7 +140,7 @@ newtype SetBreakpointResponse = SetBreakpointResponse
 setBreakpointResponse
     :: SetBreakpointResponse
 setBreakpointResponse =
-    SetBreakpointResponse
+    SetBreakpointResponse'
     { _sbrBreakpoint = Nothing
     }
 
@@ -155,10 +155,10 @@ instance FromJSON SetBreakpointResponse where
         parseJSON
           = withObject "SetBreakpointResponse"
               (\ o ->
-                 SetBreakpointResponse <$> (o .:? "breakpoint"))
+                 SetBreakpointResponse' <$> (o .:? "breakpoint"))
 
 instance ToJSON SetBreakpointResponse where
-        toJSON SetBreakpointResponse{..}
+        toJSON SetBreakpointResponse'{..}
           = object
               (catMaybes [("breakpoint" .=) <$> _sbrBreakpoint])
 
@@ -170,17 +170,17 @@ instance ToJSON SetBreakpointResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -190,20 +190,20 @@ instance ToJSON Empty where
 --
 -- /See:/ 'updateActiveBreakpointResponse' smart constructor.
 data UpdateActiveBreakpointResponse =
-    UpdateActiveBreakpointResponse
+    UpdateActiveBreakpointResponse'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateActiveBreakpointResponse' with the minimum fields required to make a request.
 --
 updateActiveBreakpointResponse
     :: UpdateActiveBreakpointResponse
-updateActiveBreakpointResponse = UpdateActiveBreakpointResponse
+updateActiveBreakpointResponse = UpdateActiveBreakpointResponse'
 
 instance FromJSON UpdateActiveBreakpointResponse
          where
         parseJSON
           = withObject "UpdateActiveBreakpointResponse"
-              (\ o -> pure UpdateActiveBreakpointResponse)
+              (\ o -> pure UpdateActiveBreakpointResponse')
 
 instance ToJSON UpdateActiveBreakpointResponse where
         toJSON = const emptyObject
@@ -211,7 +211,7 @@ instance ToJSON UpdateActiveBreakpointResponse where
 -- | A SourceContext referring to a Gerrit project.
 --
 -- /See:/ 'gerritSourceContext' smart constructor.
-data GerritSourceContext = GerritSourceContext
+data GerritSourceContext = GerritSourceContext'
     { _gscGerritProject :: !(Maybe Text)
     , _gscAliasName     :: !(Maybe Text)
     , _gscRevisionId    :: !(Maybe Text)
@@ -235,7 +235,7 @@ data GerritSourceContext = GerritSourceContext
 gerritSourceContext
     :: GerritSourceContext
 gerritSourceContext =
-    GerritSourceContext
+    GerritSourceContext'
     { _gscGerritProject = Nothing
     , _gscAliasName = Nothing
     , _gscRevisionId = Nothing
@@ -277,14 +277,14 @@ instance FromJSON GerritSourceContext where
         parseJSON
           = withObject "GerritSourceContext"
               (\ o ->
-                 GerritSourceContext <$>
+                 GerritSourceContext' <$>
                    (o .:? "gerritProject") <*> (o .:? "aliasName") <*>
                      (o .:? "revisionId")
                      <*> (o .:? "hostUri")
                      <*> (o .:? "aliasContext"))
 
 instance ToJSON GerritSourceContext where
-        toJSON GerritSourceContext{..}
+        toJSON GerritSourceContext'{..}
           = object
               (catMaybes
                  [("gerritProject" .=) <$> _gscGerritProject,
@@ -296,7 +296,7 @@ instance ToJSON GerritSourceContext where
 -- | A unique identifier for a cloud repo.
 --
 -- /See:/ 'repoId' smart constructor.
-data RepoId = RepoId
+data RepoId = RepoId'
     { _riUid           :: !(Maybe Text)
     , _riProjectRepoId :: !(Maybe ProjectRepoId)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -311,7 +311,7 @@ data RepoId = RepoId
 repoId
     :: RepoId
 repoId =
-    RepoId
+    RepoId'
     { _riUid = Nothing
     , _riProjectRepoId = Nothing
     }
@@ -330,10 +330,11 @@ instance FromJSON RepoId where
         parseJSON
           = withObject "RepoId"
               (\ o ->
-                 RepoId <$> (o .:? "uid") <*> (o .:? "projectRepoId"))
+                 RepoId' <$>
+                   (o .:? "uid") <*> (o .:? "projectRepoId"))
 
 instance ToJSON RepoId where
-        toJSON RepoId{..}
+        toJSON RepoId'{..}
           = object
               (catMaybes
                  [("uid" .=) <$> _riUid,
@@ -342,7 +343,7 @@ instance ToJSON RepoId where
 -- | Labels with user defined metadata.
 --
 -- /See:/ 'extendedSourceContextLabels' smart constructor.
-newtype ExtendedSourceContextLabels = ExtendedSourceContextLabels
+newtype ExtendedSourceContextLabels = ExtendedSourceContextLabels'
     { _esclAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -355,7 +356,7 @@ extendedSourceContextLabels
     :: HashMap Text Text -- ^ 'esclAddtional'
     -> ExtendedSourceContextLabels
 extendedSourceContextLabels pEsclAddtional_ =
-    ExtendedSourceContextLabels
+    ExtendedSourceContextLabels'
     { _esclAddtional = _Coerce # pEsclAddtional_
     }
 
@@ -369,7 +370,7 @@ instance FromJSON ExtendedSourceContextLabels where
         parseJSON
           = withObject "ExtendedSourceContextLabels"
               (\ o ->
-                 ExtendedSourceContextLabels <$> (parseJSONObject o))
+                 ExtendedSourceContextLabels' <$> (parseJSONObject o))
 
 instance ToJSON ExtendedSourceContextLabels where
         toJSON = toJSON . _esclAddtional
@@ -378,7 +379,7 @@ instance ToJSON ExtendedSourceContextLabels where
 -- winged-cargo-31) and a repo name within that project.
 --
 -- /See:/ 'projectRepoId' smart constructor.
-data ProjectRepoId = ProjectRepoId
+data ProjectRepoId = ProjectRepoId'
     { _priRepoName  :: !(Maybe Text)
     , _priProjectId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -393,7 +394,7 @@ data ProjectRepoId = ProjectRepoId
 projectRepoId
     :: ProjectRepoId
 projectRepoId =
-    ProjectRepoId
+    ProjectRepoId'
     { _priRepoName = Nothing
     , _priProjectId = Nothing
     }
@@ -412,11 +413,11 @@ instance FromJSON ProjectRepoId where
         parseJSON
           = withObject "ProjectRepoId"
               (\ o ->
-                 ProjectRepoId <$>
+                 ProjectRepoId' <$>
                    (o .:? "repoName") <*> (o .:? "projectId"))
 
 instance ToJSON ProjectRepoId where
-        toJSON ProjectRepoId{..}
+        toJSON ProjectRepoId'{..}
           = object
               (catMaybes
                  [("repoName" .=) <$> _priRepoName,
@@ -425,7 +426,7 @@ instance ToJSON ProjectRepoId where
 -- | Represents a message with parameters.
 --
 -- /See:/ 'formatMessage' smart constructor.
-data FormatMessage = FormatMessage
+data FormatMessage = FormatMessage'
     { _fmFormat     :: !(Maybe Text)
     , _fmParameters :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -440,7 +441,7 @@ data FormatMessage = FormatMessage
 formatMessage
     :: FormatMessage
 formatMessage =
-    FormatMessage
+    FormatMessage'
     { _fmFormat = Nothing
     , _fmParameters = Nothing
     }
@@ -465,11 +466,11 @@ instance FromJSON FormatMessage where
         parseJSON
           = withObject "FormatMessage"
               (\ o ->
-                 FormatMessage <$>
+                 FormatMessage' <$>
                    (o .:? "format") <*> (o .:? "parameters" .!= mempty))
 
 instance ToJSON FormatMessage where
-        toJSON FormatMessage{..}
+        toJSON FormatMessage'{..}
           = object
               (catMaybes
                  [("format" .=) <$> _fmFormat,
@@ -478,7 +479,7 @@ instance ToJSON FormatMessage where
 -- | Represents the breakpoint specification, status and results.
 --
 -- /See:/ 'breakpoint' smart constructor.
-data Breakpoint = Breakpoint
+data Breakpoint = Breakpoint'
     { _bStatus               :: !(Maybe StatusMessage)
     , _bLogLevel             :: !(Maybe Text)
     , _bLocation             :: !(Maybe SourceLocation)
@@ -535,7 +536,7 @@ data Breakpoint = Breakpoint
 breakpoint
     :: Breakpoint
 breakpoint =
-    Breakpoint
+    Breakpoint'
     { _bStatus = Nothing
     , _bLogLevel = Nothing
     , _bLocation = Nothing
@@ -683,7 +684,7 @@ instance FromJSON Breakpoint where
         parseJSON
           = withObject "Breakpoint"
               (\ o ->
-                 Breakpoint <$>
+                 Breakpoint' <$>
                    (o .:? "status") <*> (o .:? "logLevel") <*>
                      (o .:? "location")
                      <*> (o .:? "action")
@@ -701,7 +702,7 @@ instance FromJSON Breakpoint where
                      <*> (o .:? "isFinalState"))
 
 instance ToJSON Breakpoint where
-        toJSON Breakpoint{..}
+        toJSON Breakpoint'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _bStatus,
@@ -725,7 +726,7 @@ instance ToJSON Breakpoint where
 -- displayed to the user.
 --
 -- /See:/ 'breakpointLabels' smart constructor.
-newtype BreakpointLabels = BreakpointLabels
+newtype BreakpointLabels = BreakpointLabels'
     { _blAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -738,7 +739,7 @@ breakpointLabels
     :: HashMap Text Text -- ^ 'blAddtional'
     -> BreakpointLabels
 breakpointLabels pBlAddtional_ =
-    BreakpointLabels
+    BreakpointLabels'
     { _blAddtional = _Coerce # pBlAddtional_
     }
 
@@ -750,7 +751,7 @@ blAddtional
 instance FromJSON BreakpointLabels where
         parseJSON
           = withObject "BreakpointLabels"
-              (\ o -> BreakpointLabels <$> (parseJSONObject o))
+              (\ o -> BreakpointLabels' <$> (parseJSONObject o))
 
 instance ToJSON BreakpointLabels where
         toJSON = toJSON . _blAddtional
@@ -758,7 +759,7 @@ instance ToJSON BreakpointLabels where
 -- | Response for getting breakpoint information.
 --
 -- /See:/ 'getBreakpointResponse' smart constructor.
-newtype GetBreakpointResponse = GetBreakpointResponse
+newtype GetBreakpointResponse = GetBreakpointResponse'
     { _gbrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -770,7 +771,7 @@ newtype GetBreakpointResponse = GetBreakpointResponse
 getBreakpointResponse
     :: GetBreakpointResponse
 getBreakpointResponse =
-    GetBreakpointResponse
+    GetBreakpointResponse'
     { _gbrBreakpoint = Nothing
     }
 
@@ -785,10 +786,10 @@ instance FromJSON GetBreakpointResponse where
         parseJSON
           = withObject "GetBreakpointResponse"
               (\ o ->
-                 GetBreakpointResponse <$> (o .:? "breakpoint"))
+                 GetBreakpointResponse' <$> (o .:? "breakpoint"))
 
 instance ToJSON GetBreakpointResponse where
-        toJSON GetBreakpointResponse{..}
+        toJSON GetBreakpointResponse'{..}
           = object
               (catMaybes [("breakpoint" .=) <$> _gbrBreakpoint])
 
@@ -832,7 +833,7 @@ instance ToJSON GetBreakpointResponse where
 -- may or may not support it.
 --
 -- /See:/ 'variable' smart constructor.
-data Variable = Variable
+data Variable = Variable'
     { _vStatus        :: !(Maybe StatusMessage)
     , _vVarTableIndex :: !(Maybe (Textual Int32))
     , _vMembers       :: !(Maybe [Variable])
@@ -859,7 +860,7 @@ data Variable = Variable
 variable
     :: Variable
 variable =
-    Variable
+    Variable'
     { _vStatus = Nothing
     , _vVarTableIndex = Nothing
     , _vMembers = Nothing
@@ -919,7 +920,7 @@ instance FromJSON Variable where
         parseJSON
           = withObject "Variable"
               (\ o ->
-                 Variable <$>
+                 Variable' <$>
                    (o .:? "status") <*> (o .:? "varTableIndex") <*>
                      (o .:? "members" .!= mempty)
                      <*> (o .:? "value")
@@ -927,7 +928,7 @@ instance FromJSON Variable where
                      <*> (o .:? "type"))
 
 instance ToJSON Variable where
-        toJSON Variable{..}
+        toJSON Variable'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _vStatus,
@@ -939,7 +940,7 @@ instance ToJSON Variable where
 -- | Response for listing breakpoints.
 --
 -- /See:/ 'listBreakpointsResponse' smart constructor.
-data ListBreakpointsResponse = ListBreakpointsResponse
+data ListBreakpointsResponse = ListBreakpointsResponse'
     { _lbrNextWaitToken :: !(Maybe Text)
     , _lbrBreakpoints   :: !(Maybe [Breakpoint])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -954,7 +955,7 @@ data ListBreakpointsResponse = ListBreakpointsResponse
 listBreakpointsResponse
     :: ListBreakpointsResponse
 listBreakpointsResponse =
-    ListBreakpointsResponse
+    ListBreakpointsResponse'
     { _lbrNextWaitToken = Nothing
     , _lbrBreakpoints = Nothing
     }
@@ -980,12 +981,12 @@ instance FromJSON ListBreakpointsResponse where
         parseJSON
           = withObject "ListBreakpointsResponse"
               (\ o ->
-                 ListBreakpointsResponse <$>
+                 ListBreakpointsResponse' <$>
                    (o .:? "nextWaitToken") <*>
                      (o .:? "breakpoints" .!= mempty))
 
 instance ToJSON ListBreakpointsResponse where
-        toJSON ListBreakpointsResponse{..}
+        toJSON ListBreakpointsResponse'{..}
           = object
               (catMaybes
                  [("nextWaitToken" .=) <$> _lbrNextWaitToken,
@@ -994,7 +995,7 @@ instance ToJSON ListBreakpointsResponse where
 -- | Response for listing debuggees.
 --
 -- /See:/ 'listDebuggeesResponse' smart constructor.
-newtype ListDebuggeesResponse = ListDebuggeesResponse
+newtype ListDebuggeesResponse = ListDebuggeesResponse'
     { _ldrDebuggees :: Maybe [Debuggee]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1006,7 +1007,7 @@ newtype ListDebuggeesResponse = ListDebuggeesResponse
 listDebuggeesResponse
     :: ListDebuggeesResponse
 listDebuggeesResponse =
-    ListDebuggeesResponse
+    ListDebuggeesResponse'
     { _ldrDebuggees = Nothing
     }
 
@@ -1024,18 +1025,18 @@ instance FromJSON ListDebuggeesResponse where
         parseJSON
           = withObject "ListDebuggeesResponse"
               (\ o ->
-                 ListDebuggeesResponse <$>
+                 ListDebuggeesResponse' <$>
                    (o .:? "debuggees" .!= mempty))
 
 instance ToJSON ListDebuggeesResponse where
-        toJSON ListDebuggeesResponse{..}
+        toJSON ListDebuggeesResponse'{..}
           = object
               (catMaybes [("debuggees" .=) <$> _ldrDebuggees])
 
 -- | Request to update an active breakpoint.
 --
 -- /See:/ 'updateActiveBreakpointRequest' smart constructor.
-newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest
+newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest'
     { _uabrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1047,7 +1048,7 @@ newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest
 updateActiveBreakpointRequest
     :: UpdateActiveBreakpointRequest
 updateActiveBreakpointRequest =
-    UpdateActiveBreakpointRequest
+    UpdateActiveBreakpointRequest'
     { _uabrBreakpoint = Nothing
     }
 
@@ -1061,11 +1062,11 @@ instance FromJSON UpdateActiveBreakpointRequest where
         parseJSON
           = withObject "UpdateActiveBreakpointRequest"
               (\ o ->
-                 UpdateActiveBreakpointRequest <$>
+                 UpdateActiveBreakpointRequest' <$>
                    (o .:? "breakpoint"))
 
 instance ToJSON UpdateActiveBreakpointRequest where
-        toJSON UpdateActiveBreakpointRequest{..}
+        toJSON UpdateActiveBreakpointRequest'{..}
           = object
               (catMaybes [("breakpoint" .=) <$> _uabrBreakpoint])
 
@@ -1076,7 +1077,7 @@ instance ToJSON UpdateActiveBreakpointRequest where
 -- the message \`Location not found\`.
 --
 -- /See:/ 'statusMessage' smart constructor.
-data StatusMessage = StatusMessage
+data StatusMessage = StatusMessage'
     { _smRefersTo    :: !(Maybe Text)
     , _smIsError     :: !(Maybe Bool)
     , _smDescription :: !(Maybe FormatMessage)
@@ -1094,7 +1095,7 @@ data StatusMessage = StatusMessage
 statusMessage
     :: StatusMessage
 statusMessage =
-    StatusMessage
+    StatusMessage'
     { _smRefersTo = Nothing
     , _smIsError = Nothing
     , _smDescription = Nothing
@@ -1120,12 +1121,12 @@ instance FromJSON StatusMessage where
         parseJSON
           = withObject "StatusMessage"
               (\ o ->
-                 StatusMessage <$>
+                 StatusMessage' <$>
                    (o .:? "refersTo") <*> (o .:? "isError") <*>
                      (o .:? "description"))
 
 instance ToJSON StatusMessage where
-        toJSON StatusMessage{..}
+        toJSON StatusMessage'{..}
           = object
               (catMaybes
                  [("refersTo" .=) <$> _smRefersTo,
@@ -1135,7 +1136,7 @@ instance ToJSON StatusMessage where
 -- | Response for listing active breakpoints.
 --
 -- /See:/ 'listActiveBreakpointsResponse' smart constructor.
-data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse
+data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse'
     { _labrNextWaitToken :: !(Maybe Text)
     , _labrBreakpoints   :: !(Maybe [Breakpoint])
     , _labrWaitExpired   :: !(Maybe Bool)
@@ -1153,7 +1154,7 @@ data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse
 listActiveBreakpointsResponse
     :: ListActiveBreakpointsResponse
 listActiveBreakpointsResponse =
-    ListActiveBreakpointsResponse
+    ListActiveBreakpointsResponse'
     { _labrNextWaitToken = Nothing
     , _labrBreakpoints = Nothing
     , _labrWaitExpired = Nothing
@@ -1186,13 +1187,13 @@ instance FromJSON ListActiveBreakpointsResponse where
         parseJSON
           = withObject "ListActiveBreakpointsResponse"
               (\ o ->
-                 ListActiveBreakpointsResponse <$>
+                 ListActiveBreakpointsResponse' <$>
                    (o .:? "nextWaitToken") <*>
                      (o .:? "breakpoints" .!= mempty)
                      <*> (o .:? "waitExpired"))
 
 instance ToJSON ListActiveBreakpointsResponse where
-        toJSON ListActiveBreakpointsResponse{..}
+        toJSON ListActiveBreakpointsResponse'{..}
           = object
               (catMaybes
                  [("nextWaitToken" .=) <$> _labrNextWaitToken,
@@ -1203,7 +1204,7 @@ instance ToJSON ListActiveBreakpointsResponse where
 -- details describing the context.
 --
 -- /See:/ 'extendedSourceContext' smart constructor.
-data ExtendedSourceContext = ExtendedSourceContext
+data ExtendedSourceContext = ExtendedSourceContext'
     { _escContext :: !(Maybe SourceContext)
     , _escLabels  :: !(Maybe ExtendedSourceContextLabels)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1218,7 +1219,7 @@ data ExtendedSourceContext = ExtendedSourceContext
 extendedSourceContext
     :: ExtendedSourceContext
 extendedSourceContext =
-    ExtendedSourceContext
+    ExtendedSourceContext'
     { _escContext = Nothing
     , _escLabels = Nothing
     }
@@ -1237,11 +1238,11 @@ instance FromJSON ExtendedSourceContext where
         parseJSON
           = withObject "ExtendedSourceContext"
               (\ o ->
-                 ExtendedSourceContext <$>
+                 ExtendedSourceContext' <$>
                    (o .:? "context") <*> (o .:? "labels"))
 
 instance ToJSON ExtendedSourceContext where
-        toJSON ExtendedSourceContext{..}
+        toJSON ExtendedSourceContext'{..}
           = object
               (catMaybes
                  [("context" .=) <$> _escContext,
@@ -1251,7 +1252,7 @@ instance ToJSON ExtendedSourceContext where
 -- repository (e.g. GitHub).
 --
 -- /See:/ 'gitSourceContext' smart constructor.
-data GitSourceContext = GitSourceContext
+data GitSourceContext = GitSourceContext'
     { _gURL        :: !(Maybe Text)
     , _gRevisionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1266,7 +1267,7 @@ data GitSourceContext = GitSourceContext
 gitSourceContext
     :: GitSourceContext
 gitSourceContext =
-    GitSourceContext
+    GitSourceContext'
     { _gURL = Nothing
     , _gRevisionId = Nothing
     }
@@ -1284,11 +1285,11 @@ instance FromJSON GitSourceContext where
         parseJSON
           = withObject "GitSourceContext"
               (\ o ->
-                 GitSourceContext <$>
+                 GitSourceContext' <$>
                    (o .:? "url") <*> (o .:? "revisionId"))
 
 instance ToJSON GitSourceContext where
-        toJSON GitSourceContext{..}
+        toJSON GitSourceContext'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _gURL,
@@ -1297,7 +1298,7 @@ instance ToJSON GitSourceContext where
 -- | Represents a location in the source code.
 --
 -- /See:/ 'sourceLocation' smart constructor.
-data SourceLocation = SourceLocation
+data SourceLocation = SourceLocation'
     { _slPath :: !(Maybe Text)
     , _slLine :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1312,7 +1313,7 @@ data SourceLocation = SourceLocation
 sourceLocation
     :: SourceLocation
 sourceLocation =
-    SourceLocation
+    SourceLocation'
     { _slPath = Nothing
     , _slLine = Nothing
     }
@@ -1331,10 +1332,11 @@ instance FromJSON SourceLocation where
         parseJSON
           = withObject "SourceLocation"
               (\ o ->
-                 SourceLocation <$> (o .:? "path") <*> (o .:? "line"))
+                 SourceLocation' <$>
+                   (o .:? "path") <*> (o .:? "line"))
 
 instance ToJSON SourceLocation where
-        toJSON SourceLocation{..}
+        toJSON SourceLocation'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _slPath, ("line" .=) <$> _slLine])
@@ -1342,7 +1344,7 @@ instance ToJSON SourceLocation where
 -- | Represents a stack frame context.
 --
 -- /See:/ 'stackFrame' smart constructor.
-data StackFrame = StackFrame
+data StackFrame = StackFrame'
     { _sfFunction  :: !(Maybe Text)
     , _sfLocation  :: !(Maybe SourceLocation)
     , _sfArguments :: !(Maybe [Variable])
@@ -1363,7 +1365,7 @@ data StackFrame = StackFrame
 stackFrame
     :: StackFrame
 stackFrame =
-    StackFrame
+    StackFrame'
     { _sfFunction = Nothing
     , _sfLocation = Nothing
     , _sfArguments = Nothing
@@ -1400,13 +1402,13 @@ instance FromJSON StackFrame where
         parseJSON
           = withObject "StackFrame"
               (\ o ->
-                 StackFrame <$>
+                 StackFrame' <$>
                    (o .:? "function") <*> (o .:? "location") <*>
                      (o .:? "arguments" .!= mempty)
                      <*> (o .:? "locals" .!= mempty))
 
 instance ToJSON StackFrame where
-        toJSON StackFrame{..}
+        toJSON StackFrame'{..}
           = object
               (catMaybes
                  [("function" .=) <$> _sfFunction,
@@ -1418,7 +1420,7 @@ instance ToJSON StackFrame where
 -- (a repo hosted by the Google Cloud Platform).
 --
 -- /See:/ 'cloudRepoSourceContext' smart constructor.
-data CloudRepoSourceContext = CloudRepoSourceContext
+data CloudRepoSourceContext = CloudRepoSourceContext'
     { _crscRepoId       :: !(Maybe RepoId)
     , _crscAliasName    :: !(Maybe Text)
     , _crscRevisionId   :: !(Maybe Text)
@@ -1439,7 +1441,7 @@ data CloudRepoSourceContext = CloudRepoSourceContext
 cloudRepoSourceContext
     :: CloudRepoSourceContext
 cloudRepoSourceContext =
-    CloudRepoSourceContext
+    CloudRepoSourceContext'
     { _crscRepoId = Nothing
     , _crscAliasName = Nothing
     , _crscRevisionId = Nothing
@@ -1473,13 +1475,13 @@ instance FromJSON CloudRepoSourceContext where
         parseJSON
           = withObject "CloudRepoSourceContext"
               (\ o ->
-                 CloudRepoSourceContext <$>
+                 CloudRepoSourceContext' <$>
                    (o .:? "repoId") <*> (o .:? "aliasName") <*>
                      (o .:? "revisionId")
                      <*> (o .:? "aliasContext"))
 
 instance ToJSON CloudRepoSourceContext where
-        toJSON CloudRepoSourceContext{..}
+        toJSON CloudRepoSourceContext'{..}
           = object
               (catMaybes
                  [("repoId" .=) <$> _crscRepoId,
@@ -1491,7 +1493,7 @@ instance ToJSON CloudRepoSourceContext where
 -- displayed to the user.
 --
 -- /See:/ 'debuggeeLabels' smart constructor.
-newtype DebuggeeLabels = DebuggeeLabels
+newtype DebuggeeLabels = DebuggeeLabels'
     { _dlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1504,7 +1506,7 @@ debuggeeLabels
     :: HashMap Text Text -- ^ 'dlAddtional'
     -> DebuggeeLabels
 debuggeeLabels pDlAddtional_ =
-    DebuggeeLabels
+    DebuggeeLabels'
     { _dlAddtional = _Coerce # pDlAddtional_
     }
 
@@ -1516,7 +1518,7 @@ dlAddtional
 instance FromJSON DebuggeeLabels where
         parseJSON
           = withObject "DebuggeeLabels"
-              (\ o -> DebuggeeLabels <$> (parseJSONObject o))
+              (\ o -> DebuggeeLabels' <$> (parseJSONObject o))
 
 instance ToJSON DebuggeeLabels where
         toJSON = toJSON . _dlAddtional
@@ -1528,7 +1530,7 @@ instance ToJSON DebuggeeLabels where
 -- using exactly the same field values when registering.
 --
 -- /See:/ 'debuggee' smart constructor.
-data Debuggee = Debuggee
+data Debuggee = Debuggee'
     { _dStatus            :: !(Maybe StatusMessage)
     , _dUniquifier        :: !(Maybe Text)
     , _dProject           :: !(Maybe Text)
@@ -1570,7 +1572,7 @@ data Debuggee = Debuggee
 debuggee
     :: Debuggee
 debuggee =
-    Debuggee
+    Debuggee'
     { _dStatus = Nothing
     , _dUniquifier = Nothing
     , _dProject = Nothing
@@ -1663,7 +1665,7 @@ instance FromJSON Debuggee where
         parseJSON
           = withObject "Debuggee"
               (\ o ->
-                 Debuggee <$>
+                 Debuggee' <$>
                    (o .:? "status") <*> (o .:? "uniquifier") <*>
                      (o .:? "project")
                      <*> (o .:? "extSourceContexts" .!= mempty)
@@ -1676,7 +1678,7 @@ instance FromJSON Debuggee where
                      <*> (o .:? "sourceContexts" .!= mempty))
 
 instance ToJSON Debuggee where
-        toJSON Debuggee{..}
+        toJSON Debuggee'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _dStatus,
@@ -1694,7 +1696,7 @@ instance ToJSON Debuggee where
 -- snapshot.
 --
 -- /See:/ 'cloudWorkspaceSourceContext' smart constructor.
-data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext
+data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext'
     { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
     , _cwscSnapshotId  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1709,7 +1711,7 @@ data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext
 cloudWorkspaceSourceContext
     :: CloudWorkspaceSourceContext
 cloudWorkspaceSourceContext =
-    CloudWorkspaceSourceContext
+    CloudWorkspaceSourceContext'
     { _cwscWorkspaceId = Nothing
     , _cwscSnapshotId = Nothing
     }
@@ -1731,11 +1733,11 @@ instance FromJSON CloudWorkspaceSourceContext where
         parseJSON
           = withObject "CloudWorkspaceSourceContext"
               (\ o ->
-                 CloudWorkspaceSourceContext <$>
+                 CloudWorkspaceSourceContext' <$>
                    (o .:? "workspaceId") <*> (o .:? "snapshotId"))
 
 instance ToJSON CloudWorkspaceSourceContext where
-        toJSON CloudWorkspaceSourceContext{..}
+        toJSON CloudWorkspaceSourceContext'{..}
           = object
               (catMaybes
                  [("workspaceId" .=) <$> _cwscWorkspaceId,
@@ -1744,7 +1746,7 @@ instance ToJSON CloudWorkspaceSourceContext where
 -- | Request to register a debuggee.
 --
 -- /See:/ 'registerDebuggeeRequest' smart constructor.
-newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
+newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest'
     { _rDebuggee :: Maybe Debuggee
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1756,7 +1758,7 @@ newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
 registerDebuggeeRequest
     :: RegisterDebuggeeRequest
 registerDebuggeeRequest =
-    RegisterDebuggeeRequest
+    RegisterDebuggeeRequest'
     { _rDebuggee = Nothing
     }
 
@@ -1771,16 +1773,16 @@ instance FromJSON RegisterDebuggeeRequest where
         parseJSON
           = withObject "RegisterDebuggeeRequest"
               (\ o ->
-                 RegisterDebuggeeRequest <$> (o .:? "debuggee"))
+                 RegisterDebuggeeRequest' <$> (o .:? "debuggee"))
 
 instance ToJSON RegisterDebuggeeRequest where
-        toJSON RegisterDebuggeeRequest{..}
+        toJSON RegisterDebuggeeRequest'{..}
           = object (catMaybes [("debuggee" .=) <$> _rDebuggee])
 
 -- | An alias to a repo revision.
 --
 -- /See:/ 'aliasContext' smart constructor.
-data AliasContext = AliasContext
+data AliasContext = AliasContext'
     { _acKind :: !(Maybe Text)
     , _acName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1795,7 +1797,7 @@ data AliasContext = AliasContext
 aliasContext
     :: AliasContext
 aliasContext =
-    AliasContext
+    AliasContext'
     { _acKind = Nothing
     , _acName = Nothing
     }
@@ -1812,10 +1814,10 @@ instance FromJSON AliasContext where
         parseJSON
           = withObject "AliasContext"
               (\ o ->
-                 AliasContext <$> (o .:? "kind") <*> (o .:? "name"))
+                 AliasContext' <$> (o .:? "kind") <*> (o .:? "name"))
 
 instance ToJSON AliasContext where
-        toJSON AliasContext{..}
+        toJSON AliasContext'{..}
           = object
               (catMaybes
                  [("kind" .=) <$> _acKind, ("name" .=) <$> _acName])
@@ -1825,7 +1827,7 @@ instance ToJSON AliasContext where
 -- stored before they are committed.
 --
 -- /See:/ 'cloudWorkspaceId' smart constructor.
-data CloudWorkspaceId = CloudWorkspaceId
+data CloudWorkspaceId = CloudWorkspaceId'
     { _cwiRepoId :: !(Maybe RepoId)
     , _cwiName   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1840,7 +1842,7 @@ data CloudWorkspaceId = CloudWorkspaceId
 cloudWorkspaceId
     :: CloudWorkspaceId
 cloudWorkspaceId =
-    CloudWorkspaceId
+    CloudWorkspaceId'
     { _cwiRepoId = Nothing
     , _cwiName = Nothing
     }
@@ -1859,11 +1861,11 @@ instance FromJSON CloudWorkspaceId where
         parseJSON
           = withObject "CloudWorkspaceId"
               (\ o ->
-                 CloudWorkspaceId <$>
+                 CloudWorkspaceId' <$>
                    (o .:? "repoId") <*> (o .:? "name"))
 
 instance ToJSON CloudWorkspaceId where
-        toJSON CloudWorkspaceId{..}
+        toJSON CloudWorkspaceId'{..}
           = object
               (catMaybes
                  [("repoId" .=) <$> _cwiRepoId,

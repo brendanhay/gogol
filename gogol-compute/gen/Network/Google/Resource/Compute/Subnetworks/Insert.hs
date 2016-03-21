@@ -59,7 +59,7 @@ type SubnetworksInsertResource =
 -- the request.
 --
 -- /See:/ 'subnetworksInsert' smart constructor.
-data SubnetworksInsert = SubnetworksInsert
+data SubnetworksInsert = SubnetworksInsert'
     { _siProject :: !Text
     , _siPayload :: !Subnetwork
     , _siRegion  :: !Text
@@ -80,7 +80,7 @@ subnetworksInsert
     -> Text -- ^ 'siRegion'
     -> SubnetworksInsert
 subnetworksInsert pSiProject_ pSiPayload_ pSiRegion_ =
-    SubnetworksInsert
+    SubnetworksInsert'
     { _siProject = pSiProject_
     , _siPayload = pSiPayload_
     , _siRegion = pSiRegion_
@@ -105,7 +105,7 @@ instance GoogleRequest SubnetworksInsert where
         type Scopes SubnetworksInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient SubnetworksInsert{..}
+        requestClient SubnetworksInsert'{..}
           = go _siProject _siRegion (Just AltJSON) _siPayload
               computeService
           where go

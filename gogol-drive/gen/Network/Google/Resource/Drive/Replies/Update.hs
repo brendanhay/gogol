@@ -59,7 +59,7 @@ type RepliesUpdateResource =
 -- | Updates a reply with patch semantics.
 --
 -- /See:/ 'repliesUpdate' smart constructor.
-data RepliesUpdate = RepliesUpdate
+data RepliesUpdate = RepliesUpdate'
     { _ruPayload   :: !Reply
     , _ruReplyId   :: !Text
     , _ruFileId    :: !Text
@@ -84,7 +84,7 @@ repliesUpdate
     -> Text -- ^ 'ruCommentId'
     -> RepliesUpdate
 repliesUpdate pRuPayload_ pRuReplyId_ pRuFileId_ pRuCommentId_ =
-    RepliesUpdate
+    RepliesUpdate'
     { _ruPayload = pRuPayload_
     , _ruReplyId = pRuReplyId_
     , _ruFileId = pRuFileId_
@@ -115,7 +115,7 @@ instance GoogleRequest RepliesUpdate where
         type Scopes RepliesUpdate =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient RepliesUpdate{..}
+        requestClient RepliesUpdate'{..}
           = go _ruFileId _ruCommentId _ruReplyId (Just AltJSON)
               _ruPayload
               driveService

@@ -54,7 +54,7 @@ type UsersPhotosGetResource =
 -- | Retrieve photo of a user
 --
 -- /See:/ 'usersPhotosGet' smart constructor.
-newtype UsersPhotosGet = UsersPhotosGet
+newtype UsersPhotosGet = UsersPhotosGet'
     { _upgUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ usersPhotosGet
     :: Text -- ^ 'upgUserKey'
     -> UsersPhotosGet
 usersPhotosGet pUpgUserKey_ =
-    UsersPhotosGet
+    UsersPhotosGet'
     { _upgUserKey = pUpgUserKey_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest UsersPhotosGet where
         type Scopes UsersPhotosGet =
              '["https://www.googleapis.com/auth/admin.directory.user",
                "https://www.googleapis.com/auth/admin.directory.user.readonly"]
-        requestClient UsersPhotosGet{..}
+        requestClient UsersPhotosGet'{..}
           = go _upgUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersPhotosGetResource)

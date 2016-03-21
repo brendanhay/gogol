@@ -54,7 +54,7 @@ type CommentsCreateResource =
 -- | Creates a new comment on a file.
 --
 -- /See:/ 'commentsCreate' smart constructor.
-data CommentsCreate = CommentsCreate
+data CommentsCreate = CommentsCreate'
     { _ccPayload :: !Comment
     , _ccFileId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentsCreate
     -> Text -- ^ 'ccFileId'
     -> CommentsCreate
 commentsCreate pCcPayload_ pCcFileId_ =
-    CommentsCreate
+    CommentsCreate'
     { _ccPayload = pCcPayload_
     , _ccFileId = pCcFileId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest CommentsCreate where
         type Scopes CommentsCreate =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient CommentsCreate{..}
+        requestClient CommentsCreate'{..}
           = go _ccFileId (Just AltJSON) _ccPayload driveService
           where go
                   = buildClient (Proxy :: Proxy CommentsCreateResource)

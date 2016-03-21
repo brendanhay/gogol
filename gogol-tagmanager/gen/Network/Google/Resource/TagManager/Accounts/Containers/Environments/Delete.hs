@@ -57,7 +57,7 @@ type AccountsContainersEnvironmentsDeleteResource =
 -- | Deletes a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsDelete' smart constructor.
-data AccountsContainersEnvironmentsDelete = AccountsContainersEnvironmentsDelete
+data AccountsContainersEnvironmentsDelete = AccountsContainersEnvironmentsDelete'
     { _acedContainerId   :: !Text
     , _acedAccountId     :: !Text
     , _acedEnvironmentId :: !Text
@@ -78,7 +78,7 @@ accountsContainersEnvironmentsDelete
     -> Text -- ^ 'acedEnvironmentId'
     -> AccountsContainersEnvironmentsDelete
 accountsContainersEnvironmentsDelete pAcedContainerId_ pAcedAccountId_ pAcedEnvironmentId_ =
-    AccountsContainersEnvironmentsDelete
+    AccountsContainersEnvironmentsDelete'
     { _acedContainerId = pAcedContainerId_
     , _acedAccountId = pAcedAccountId_
     , _acedEnvironmentId = pAcedEnvironmentId_
@@ -108,7 +108,7 @@ instance GoogleRequest
         type Scopes AccountsContainersEnvironmentsDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
-          AccountsContainersEnvironmentsDelete{..}
+          AccountsContainersEnvironmentsDelete'{..}
           = go _acedAccountId _acedContainerId
               _acedEnvironmentId
               (Just AltJSON)

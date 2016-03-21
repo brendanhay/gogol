@@ -64,7 +64,7 @@ type ProjectsServiceAccountsGetResource =
 -- | Gets a ServiceAccount
 --
 -- /See:/ 'projectsServiceAccountsGet' smart constructor.
-data ProjectsServiceAccountsGet = ProjectsServiceAccountsGet
+data ProjectsServiceAccountsGet = ProjectsServiceAccountsGet'
     { _psagXgafv          :: !(Maybe Text)
     , _psagUploadProtocol :: !(Maybe Text)
     , _psagPp             :: !Bool
@@ -98,7 +98,7 @@ projectsServiceAccountsGet
     :: Text -- ^ 'psagName'
     -> ProjectsServiceAccountsGet
 projectsServiceAccountsGet pPsagName_ =
-    ProjectsServiceAccountsGet
+    ProjectsServiceAccountsGet'
     { _psagXgafv = Nothing
     , _psagUploadProtocol = Nothing
     , _psagPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest ProjectsServiceAccountsGet
         type Rs ProjectsServiceAccountsGet = ServiceAccount
         type Scopes ProjectsServiceAccountsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsGet{..}
+        requestClient ProjectsServiceAccountsGet'{..}
           = go _psagName _psagXgafv _psagUploadProtocol
               (Just _psagPp)
               _psagAccessToken

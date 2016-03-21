@@ -59,7 +59,7 @@ type PlacementGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'placementGroupsPatch' smart constructor.
-data PlacementGroupsPatch = PlacementGroupsPatch
+data PlacementGroupsPatch = PlacementGroupsPatch'
     { _pgpProFileId :: !(Textual Int64)
     , _pgpPayload   :: !PlacementGroup
     , _pgpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ placementGroupsPatch
     -> Int64 -- ^ 'pgpId'
     -> PlacementGroupsPatch
 placementGroupsPatch pPgpProFileId_ pPgpPayload_ pPgpId_ =
-    PlacementGroupsPatch
+    PlacementGroupsPatch'
     { _pgpProFileId = _Coerce # pPgpProFileId_
     , _pgpPayload = pPgpPayload_
     , _pgpId = _Coerce # pPgpId_
@@ -106,7 +106,7 @@ instance GoogleRequest PlacementGroupsPatch where
         type Rs PlacementGroupsPatch = PlacementGroup
         type Scopes PlacementGroupsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementGroupsPatch{..}
+        requestClient PlacementGroupsPatch'{..}
           = go _pgpProFileId (Just _pgpId) (Just AltJSON)
               _pgpPayload
               dFAReportingService

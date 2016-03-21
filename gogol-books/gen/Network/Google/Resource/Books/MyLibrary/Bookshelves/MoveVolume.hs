@@ -59,7 +59,7 @@ type MyLibraryBookshelvesMoveVolumeResource =
 -- | Moves a volume within a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesMoveVolume' smart constructor.
-data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume
+data MyLibraryBookshelvesMoveVolume = MyLibraryBookshelvesMoveVolume'
     { _mlbmvShelf          :: !Text
     , _mlbmvVolumeId       :: !Text
     , _mlbmvSource         :: !(Maybe Text)
@@ -83,7 +83,7 @@ myLibraryBookshelvesMoveVolume
     -> Int32 -- ^ 'mlbmvVolumePosition'
     -> MyLibraryBookshelvesMoveVolume
 myLibraryBookshelvesMoveVolume pMlbmvShelf_ pMlbmvVolumeId_ pMlbmvVolumePosition_ =
-    MyLibraryBookshelvesMoveVolume
+    MyLibraryBookshelvesMoveVolume'
     { _mlbmvShelf = pMlbmvShelf_
     , _mlbmvVolumeId = pMlbmvVolumeId_
     , _mlbmvSource = Nothing
@@ -119,7 +119,7 @@ instance GoogleRequest MyLibraryBookshelvesMoveVolume
         type Rs MyLibraryBookshelvesMoveVolume = ()
         type Scopes MyLibraryBookshelvesMoveVolume =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryBookshelvesMoveVolume{..}
+        requestClient MyLibraryBookshelvesMoveVolume'{..}
           = go _mlbmvShelf (Just _mlbmvVolumeId)
               (Just _mlbmvVolumePosition)
               _mlbmvSource

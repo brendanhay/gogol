@@ -70,7 +70,7 @@ type UserProFilesGetResource =
 -- access errors.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
-data UserProFilesGet = UserProFilesGet
+data UserProFilesGet = UserProFilesGet'
     { _upfgXgafv          :: !(Maybe Text)
     , _upfgUploadProtocol :: !(Maybe Text)
     , _upfgPp             :: !Bool
@@ -104,7 +104,7 @@ userProFilesGet
     :: Text -- ^ 'upfgUserId'
     -> UserProFilesGet
 userProFilesGet pUpfgUserId_ =
-    UserProFilesGet
+    UserProFilesGet'
     { _upfgXgafv = Nothing
     , _upfgUploadProtocol = Nothing
     , _upfgPp = True
@@ -167,7 +167,7 @@ instance GoogleRequest UserProFilesGet where
                "https://www.googleapis.com/auth/classroom.profile.photos",
                "https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
-        requestClient UserProFilesGet{..}
+        requestClient UserProFilesGet'{..}
           = go _upfgUserId _upfgXgafv _upfgUploadProtocol
               (Just _upfgPp)
               _upfgAccessToken

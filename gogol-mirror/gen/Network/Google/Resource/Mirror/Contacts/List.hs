@@ -50,20 +50,20 @@ type ContactsListResource =
 --
 -- /See:/ 'contactsList' smart constructor.
 data ContactsList =
-    ContactsList
+    ContactsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsList' with the minimum fields required to make a request.
 --
 contactsList
     :: ContactsList
-contactsList = ContactsList
+contactsList = ContactsList'
 
 instance GoogleRequest ContactsList where
         type Rs ContactsList = ContactsListResponse
         type Scopes ContactsList =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient ContactsList{}
+        requestClient ContactsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsListResource)

@@ -57,7 +57,7 @@ type MembersUpdateResource =
 -- | Update membership of a user in the specified group.
 --
 -- /See:/ 'membersUpdate' smart constructor.
-data MembersUpdate = MembersUpdate
+data MembersUpdate = MembersUpdate'
     { _muMemberKey :: !Text
     , _muGroupKey  :: !Text
     , _muPayload   :: !Member
@@ -78,7 +78,7 @@ membersUpdate
     -> Member -- ^ 'muPayload'
     -> MembersUpdate
 membersUpdate pMuMemberKey_ pMuGroupKey_ pMuPayload_ =
-    MembersUpdate
+    MembersUpdate'
     { _muMemberKey = pMuMemberKey_
     , _muGroupKey = pMuGroupKey_
     , _muPayload = pMuPayload_
@@ -106,7 +106,7 @@ instance GoogleRequest MembersUpdate where
         type Scopes MembersUpdate =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.member"]
-        requestClient MembersUpdate{..}
+        requestClient MembersUpdate'{..}
           = go _muGroupKey _muMemberKey (Just AltJSON)
               _muPayload
               directoryService

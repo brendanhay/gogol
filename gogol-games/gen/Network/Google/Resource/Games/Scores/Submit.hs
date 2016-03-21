@@ -59,7 +59,7 @@ type ScoresSubmitResource =
 -- | Submits a score to the specified leaderboard.
 --
 -- /See:/ 'scoresSubmit' smart constructor.
-data ScoresSubmit = ScoresSubmit
+data ScoresSubmit = ScoresSubmit'
     { _ssScoreTag      :: !(Maybe Text)
     , _ssScore         :: !(Textual Int64)
     , _ssLeaderboardId :: !Text
@@ -82,7 +82,7 @@ scoresSubmit
     -> Text -- ^ 'ssLeaderboardId'
     -> ScoresSubmit
 scoresSubmit pSsScore_ pSsLeaderboardId_ =
-    ScoresSubmit
+    ScoresSubmit'
     { _ssScoreTag = Nothing
     , _ssScore = _Coerce # pSsScore_
     , _ssLeaderboardId = pSsLeaderboardId_
@@ -122,7 +122,7 @@ instance GoogleRequest ScoresSubmit where
         type Scopes ScoresSubmit =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresSubmit{..}
+        requestClient ScoresSubmit'{..}
           = go _ssLeaderboardId (Just _ssScore) _ssScoreTag
               _ssLanguage
               (Just AltJSON)

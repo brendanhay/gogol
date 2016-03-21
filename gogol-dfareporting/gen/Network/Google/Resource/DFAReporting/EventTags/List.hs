@@ -76,7 +76,7 @@ type EventTagsListResource =
 -- | Retrieves a list of event tags, possibly filtered.
 --
 -- /See:/ 'eventTagsList' smart constructor.
-data EventTagsList = EventTagsList
+data EventTagsList = EventTagsList'
     { _etlDefinitionsOnly :: !(Maybe Bool)
     , _etlEventTagTypes   :: !(Maybe [EventTagsListEventTagTypes])
     , _etlEnabled         :: !(Maybe Bool)
@@ -119,7 +119,7 @@ eventTagsList
     :: Int64 -- ^ 'etlProFileId'
     -> EventTagsList
 eventTagsList pEtlProFileId_ =
-    EventTagsList
+    EventTagsList'
     { _etlDefinitionsOnly = Nothing
     , _etlEventTagTypes = Nothing
     , _etlEnabled = Nothing
@@ -224,7 +224,7 @@ instance GoogleRequest EventTagsList where
         type Rs EventTagsList = EventTagsListResponse
         type Scopes EventTagsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient EventTagsList{..}
+        requestClient EventTagsList'{..}
           = go _etlProFileId _etlDefinitionsOnly
               (_etlEventTagTypes ^. _Default)
               _etlEnabled

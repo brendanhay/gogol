@@ -54,7 +54,7 @@ type SubscriptionsInsertResource =
 -- | Adds a subscription for the authenticated user\'s channel.
 --
 -- /See:/ 'subscriptionsInsert' smart constructor.
-data SubscriptionsInsert = SubscriptionsInsert
+data SubscriptionsInsert = SubscriptionsInsert'
     { _siPart    :: !Text
     , _siPayload :: !Subscription
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subscriptionsInsert
     -> Subscription -- ^ 'siPayload'
     -> SubscriptionsInsert
 subscriptionsInsert pSiPart_ pSiPayload_ =
-    SubscriptionsInsert
+    SubscriptionsInsert'
     { _siPart = pSiPart_
     , _siPayload = pSiPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SubscriptionsInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient SubscriptionsInsert{..}
+        requestClient SubscriptionsInsert'{..}
           = go (Just _siPart) (Just AltJSON) _siPayload
               youTubeService
           where go

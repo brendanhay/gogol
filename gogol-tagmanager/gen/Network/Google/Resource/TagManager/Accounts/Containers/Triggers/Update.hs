@@ -61,7 +61,7 @@ type AccountsContainersTriggersUpdateResource =
 -- | Updates a GTM Trigger.
 --
 -- /See:/ 'accountsContainersTriggersUpdate' smart constructor.
-data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate
+data AccountsContainersTriggersUpdate = AccountsContainersTriggersUpdate'
     { _actuContainerId :: !Text
     , _actuTriggerId   :: !Text
     , _actuFingerprint :: !(Maybe Text)
@@ -89,7 +89,7 @@ accountsContainersTriggersUpdate
     -> Text -- ^ 'actuAccountId'
     -> AccountsContainersTriggersUpdate
 accountsContainersTriggersUpdate pActuContainerId_ pActuTriggerId_ pActuPayload_ pActuAccountId_ =
-    AccountsContainersTriggersUpdate
+    AccountsContainersTriggersUpdate'
     { _actuContainerId = pActuContainerId_
     , _actuTriggerId = pActuTriggerId_
     , _actuFingerprint = Nothing
@@ -132,7 +132,7 @@ instance GoogleRequest
         type Rs AccountsContainersTriggersUpdate = Trigger
         type Scopes AccountsContainersTriggersUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersTriggersUpdate{..}
+        requestClient AccountsContainersTriggersUpdate'{..}
           = go _actuAccountId _actuContainerId _actuTriggerId
               _actuFingerprint
               (Just AltJSON)

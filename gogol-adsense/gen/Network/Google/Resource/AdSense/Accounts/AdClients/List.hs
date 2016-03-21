@@ -56,7 +56,7 @@ type AccountsAdClientsListResource =
 -- | List all ad clients in the specified account.
 --
 -- /See:/ 'accountsAdClientsList' smart constructor.
-data AccountsAdClientsList = AccountsAdClientsList
+data AccountsAdClientsList = AccountsAdClientsList'
     { _aaclAccountId  :: !Text
     , _aaclPageToken  :: !(Maybe Text)
     , _aaclMaxResults :: !(Maybe (Textual Int32))
@@ -75,7 +75,7 @@ accountsAdClientsList
     :: Text -- ^ 'aaclAccountId'
     -> AccountsAdClientsList
 accountsAdClientsList pAaclAccountId_ =
-    AccountsAdClientsList
+    AccountsAdClientsList'
     { _aaclAccountId = pAaclAccountId_
     , _aaclPageToken = Nothing
     , _aaclMaxResults = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest AccountsAdClientsList where
         type Scopes AccountsAdClientsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsAdClientsList{..}
+        requestClient AccountsAdClientsList'{..}
           = go _aaclAccountId _aaclPageToken _aaclMaxResults
               (Just AltJSON)
               adSenseService

@@ -65,7 +65,7 @@ type CollectionviewersPatchResource =
 -- semantics.
 --
 -- /See:/ 'collectionviewersPatch' smart constructor.
-data CollectionviewersPatch = CollectionviewersPatch
+data CollectionviewersPatch = CollectionviewersPatch'
     { _cppEnterpriseId :: !Text
     , _cppCollectionId :: !Text
     , _cppPayload      :: !User
@@ -90,7 +90,7 @@ collectionviewersPatch
     -> Text -- ^ 'cppUserId'
     -> CollectionviewersPatch
 collectionviewersPatch pCppEnterpriseId_ pCppCollectionId_ pCppPayload_ pCppUserId_ =
-    CollectionviewersPatch
+    CollectionviewersPatch'
     { _cppEnterpriseId = pCppEnterpriseId_
     , _cppCollectionId = pCppCollectionId_
     , _cppPayload = pCppPayload_
@@ -123,7 +123,7 @@ instance GoogleRequest CollectionviewersPatch where
         type Rs CollectionviewersPatch = User
         type Scopes CollectionviewersPatch =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionviewersPatch{..}
+        requestClient CollectionviewersPatch'{..}
           = go _cppEnterpriseId _cppCollectionId _cppUserId
               (Just AltJSON)
               _cppPayload

@@ -53,7 +53,7 @@ type LayersProcessResource =
 -- | Process a layer asset.
 --
 -- /See:/ 'layersProcess' smart constructor.
-newtype LayersProcess = LayersProcess
+newtype LayersProcess = LayersProcess'
     { _lpsId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersProcess
     :: Text -- ^ 'lpsId'
     -> LayersProcess
 layersProcess pLpsId_ =
-    LayersProcess
+    LayersProcess'
     { _lpsId = pLpsId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest LayersProcess where
         type Rs LayersProcess = ProcessResponse
         type Scopes LayersProcess =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient LayersProcess{..}
+        requestClient LayersProcess'{..}
           = go _lpsId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersProcessResource)

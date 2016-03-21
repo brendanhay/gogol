@@ -59,7 +59,7 @@ type PermissionsUpdateResource =
 -- | Updates a permission with patch semantics.
 --
 -- /See:/ 'permissionsUpdate' smart constructor.
-data PermissionsUpdate = PermissionsUpdate
+data PermissionsUpdate = PermissionsUpdate'
     { _puPayload           :: !Permission
     , _puTransferOwnership :: !Bool
     , _puFileId            :: !Text
@@ -83,7 +83,7 @@ permissionsUpdate
     -> Text -- ^ 'puPermissionId'
     -> PermissionsUpdate
 permissionsUpdate pPuPayload_ pPuFileId_ pPuPermissionId_ =
-    PermissionsUpdate
+    PermissionsUpdate'
     { _puPayload = pPuPayload_
     , _puTransferOwnership = False
     , _puFileId = pPuFileId_
@@ -118,7 +118,7 @@ instance GoogleRequest PermissionsUpdate where
         type Scopes PermissionsUpdate =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient PermissionsUpdate{..}
+        requestClient PermissionsUpdate'{..}
           = go _puFileId _puPermissionId
               (Just _puTransferOwnership)
               (Just AltJSON)

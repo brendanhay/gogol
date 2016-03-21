@@ -57,7 +57,7 @@ type AchievementsResetMultipleForAllPlayersResource =
 -- achievements may be reset.
 --
 -- /See:/ 'achievementsResetMultipleForAllPlayers' smart constructor.
-newtype AchievementsResetMultipleForAllPlayers = AchievementsResetMultipleForAllPlayers
+newtype AchievementsResetMultipleForAllPlayers = AchievementsResetMultipleForAllPlayers'
     { _armfapPayload :: AchievementResetMultipleForAllRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ achievementsResetMultipleForAllPlayers
     :: AchievementResetMultipleForAllRequest -- ^ 'armfapPayload'
     -> AchievementsResetMultipleForAllPlayers
 achievementsResetMultipleForAllPlayers pArmfapPayload_ =
-    AchievementsResetMultipleForAllPlayers
+    AchievementsResetMultipleForAllPlayers'
     { _armfapPayload = pArmfapPayload_
     }
 
@@ -87,7 +87,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient
-          AchievementsResetMultipleForAllPlayers{..}
+          AchievementsResetMultipleForAllPlayers'{..}
           = go (Just AltJSON) _armfapPayload
               gamesManagementService
           where go

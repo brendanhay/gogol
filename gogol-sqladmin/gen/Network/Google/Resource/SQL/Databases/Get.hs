@@ -59,7 +59,7 @@ type DatabasesGetResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesGet' smart constructor.
-data DatabasesGet = DatabasesGet
+data DatabasesGet = DatabasesGet'
     { _dgProject  :: !Text
     , _dgDatabase :: !Text
     , _dgInstance :: !Text
@@ -80,7 +80,7 @@ databasesGet
     -> Text -- ^ 'dgInstance'
     -> DatabasesGet
 databasesGet pDgProject_ pDgDatabase_ pDgInstance_ =
-    DatabasesGet
+    DatabasesGet'
     { _dgProject = pDgProject_
     , _dgDatabase = pDgDatabase_
     , _dgInstance = pDgInstance_
@@ -106,7 +106,7 @@ instance GoogleRequest DatabasesGet where
         type Scopes DatabasesGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient DatabasesGet{..}
+        requestClient DatabasesGet'{..}
           = go _dgProject _dgInstance _dgDatabase
               (Just AltJSON)
               sQLAdminService

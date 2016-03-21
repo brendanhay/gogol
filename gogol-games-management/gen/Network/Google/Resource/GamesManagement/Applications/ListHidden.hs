@@ -60,7 +60,7 @@ type ApplicationsListHiddenResource =
 -- is only available to user accounts for your developer console.
 --
 -- /See:/ 'applicationsListHidden' smart constructor.
-data ApplicationsListHidden = ApplicationsListHidden
+data ApplicationsListHidden = ApplicationsListHidden'
     { _alhApplicationId :: !Text
     , _alhPageToken     :: !(Maybe Text)
     , _alhMaxResults    :: !(Maybe (Textual Int32))
@@ -79,7 +79,7 @@ applicationsListHidden
     :: Text -- ^ 'alhApplicationId'
     -> ApplicationsListHidden
 applicationsListHidden pAlhApplicationId_ =
-    ApplicationsListHidden
+    ApplicationsListHidden'
     { _alhApplicationId = pAlhApplicationId_
     , _alhPageToken = Nothing
     , _alhMaxResults = Nothing
@@ -110,7 +110,7 @@ instance GoogleRequest ApplicationsListHidden where
         type Scopes ApplicationsListHidden =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ApplicationsListHidden{..}
+        requestClient ApplicationsListHidden'{..}
           = go _alhApplicationId _alhPageToken _alhMaxResults
               (Just AltJSON)
               gamesManagementService

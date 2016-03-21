@@ -56,7 +56,7 @@ type TasksClearResource =
 -- when retrieving all tasks for a task list.
 --
 -- /See:/ 'tasksClear' smart constructor.
-newtype TasksClear = TasksClear
+newtype TasksClear = TasksClear'
     { _tcTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ tasksClear
     :: Text -- ^ 'tcTaskList'
     -> TasksClear
 tasksClear pTcTaskList_ =
-    TasksClear
+    TasksClear'
     { _tcTaskList = pTcTaskList_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest TasksClear where
         type Rs TasksClear = ()
         type Scopes TasksClear =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TasksClear{..}
+        requestClient TasksClear'{..}
           = go _tcTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TasksClearResource)

@@ -52,7 +52,7 @@ type DatafeedsCustombatchResource =
 
 --
 -- /See:/ 'datafeedsCustombatch' smart constructor.
-data DatafeedsCustombatch = DatafeedsCustombatch
+data DatafeedsCustombatch = DatafeedsCustombatch'
     { _dPayload :: !DatafeedsCustomBatchRequest
     , _dDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -68,7 +68,7 @@ datafeedsCustombatch
     :: DatafeedsCustomBatchRequest -- ^ 'dPayload'
     -> DatafeedsCustombatch
 datafeedsCustombatch pDPayload_ =
-    DatafeedsCustombatch
+    DatafeedsCustombatch'
     { _dPayload = pDPayload_
     , _dDryRun = Nothing
     }
@@ -86,7 +86,7 @@ instance GoogleRequest DatafeedsCustombatch where
              DatafeedsCustomBatchResponse
         type Scopes DatafeedsCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient DatafeedsCustombatch{..}
+        requestClient DatafeedsCustombatch'{..}
           = go _dDryRun (Just AltJSON) _dPayload
               shoppingContentService
           where go

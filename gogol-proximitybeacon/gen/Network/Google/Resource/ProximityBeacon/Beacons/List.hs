@@ -73,7 +73,7 @@ type BeaconsListResource =
 -- be returned.
 --
 -- /See:/ 'beaconsList' smart constructor.
-data BeaconsList = BeaconsList
+data BeaconsList = BeaconsList'
     { _blXgafv          :: !(Maybe Text)
     , _blUploadProtocol :: !(Maybe Text)
     , _blPp             :: !Bool
@@ -112,7 +112,7 @@ data BeaconsList = BeaconsList
 beaconsList
     :: BeaconsList
 beaconsList =
-    BeaconsList
+    BeaconsList'
     { _blXgafv = Nothing
     , _blUploadProtocol = Nothing
     , _blPp = True
@@ -225,7 +225,7 @@ blCallback
 instance GoogleRequest BeaconsList where
         type Rs BeaconsList = ListBeaconsResponse
         type Scopes BeaconsList = '[]
-        requestClient BeaconsList{..}
+        requestClient BeaconsList'{..}
           = go _blXgafv _blUploadProtocol (Just _blPp)
               _blAccessToken
               _blUploadType

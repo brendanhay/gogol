@@ -79,7 +79,7 @@ type ProjectsJobsMessagesListResource =
 -- | Request the job status.
 --
 -- /See:/ 'projectsJobsMessagesList' smart constructor.
-data ProjectsJobsMessagesList = ProjectsJobsMessagesList
+data ProjectsJobsMessagesList = ProjectsJobsMessagesList'
     { _pjmlXgafv             :: !(Maybe Text)
     , _pjmlJobId             :: !Text
     , _pjmlUploadProtocol    :: !(Maybe Text)
@@ -132,7 +132,7 @@ projectsJobsMessagesList
     -> Text -- ^ 'pjmlProjectId'
     -> ProjectsJobsMessagesList
 projectsJobsMessagesList pPjmlJobId_ pPjmlProjectId_ =
-    ProjectsJobsMessagesList
+    ProjectsJobsMessagesList'
     { _pjmlXgafv = Nothing
     , _pjmlJobId = pPjmlJobId_
     , _pjmlUploadProtocol = Nothing
@@ -238,7 +238,7 @@ instance GoogleRequest ProjectsJobsMessagesList where
         type Scopes ProjectsJobsMessagesList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ProjectsJobsMessagesList{..}
+        requestClient ProjectsJobsMessagesList'{..}
           = go _pjmlProjectId _pjmlJobId _pjmlXgafv
               _pjmlUploadProtocol
               _pjmlStartTime

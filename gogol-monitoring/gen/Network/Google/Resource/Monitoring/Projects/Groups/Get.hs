@@ -63,7 +63,7 @@ type ProjectsGroupsGetResource =
 -- | Gets a single group.
 --
 -- /See:/ 'projectsGroupsGet' smart constructor.
-data ProjectsGroupsGet = ProjectsGroupsGet
+data ProjectsGroupsGet = ProjectsGroupsGet'
     { _pggXgafv          :: !(Maybe Text)
     , _pggUploadProtocol :: !(Maybe Text)
     , _pggPp             :: !Bool
@@ -97,7 +97,7 @@ projectsGroupsGet
     :: Text -- ^ 'pggName'
     -> ProjectsGroupsGet
 projectsGroupsGet pPggName_ =
-    ProjectsGroupsGet
+    ProjectsGroupsGet'
     { _pggXgafv = Nothing
     , _pggUploadProtocol = Nothing
     , _pggPp = True
@@ -155,7 +155,7 @@ instance GoogleRequest ProjectsGroupsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.read"]
-        requestClient ProjectsGroupsGet{..}
+        requestClient ProjectsGroupsGet'{..}
           = go _pggName _pggXgafv _pggUploadProtocol
               (Just _pggPp)
               _pggAccessToken

@@ -61,7 +61,7 @@ type AccountsURLChannelsListResource =
 -- account.
 --
 -- /See:/ 'accountsURLChannelsList' smart constructor.
-data AccountsURLChannelsList = AccountsURLChannelsList
+data AccountsURLChannelsList = AccountsURLChannelsList'
     { _auclAdClientId :: !Text
     , _auclAccountId  :: !Text
     , _auclPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ accountsURLChannelsList
     -> Text -- ^ 'auclAccountId'
     -> AccountsURLChannelsList
 accountsURLChannelsList pAuclAdClientId_ pAuclAccountId_ =
-    AccountsURLChannelsList
+    AccountsURLChannelsList'
     { _auclAdClientId = pAuclAdClientId_
     , _auclAccountId = pAuclAccountId_
     , _auclPageToken = Nothing
@@ -124,7 +124,7 @@ instance GoogleRequest AccountsURLChannelsList where
         type Scopes AccountsURLChannelsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsURLChannelsList{..}
+        requestClient AccountsURLChannelsList'{..}
           = go _auclAccountId _auclAdClientId _auclPageToken
               _auclMaxResults
               (Just AltJSON)

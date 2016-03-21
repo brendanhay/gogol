@@ -57,7 +57,7 @@ type TrainedModelsListResource =
 -- | List available models.
 --
 -- /See:/ 'trainedModelsList' smart constructor.
-data TrainedModelsList = TrainedModelsList
+data TrainedModelsList = TrainedModelsList'
     { _tmlProject    :: !Text
     , _tmlPageToken  :: !(Maybe Text)
     , _tmlMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ trainedModelsList
     :: Text -- ^ 'tmlProject'
     -> TrainedModelsList
 trainedModelsList pTmlProject_ =
-    TrainedModelsList
+    TrainedModelsList'
     { _tmlProject = pTmlProject_
     , _tmlPageToken = Nothing
     , _tmlMaxResults = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest TrainedModelsList where
         type Rs TrainedModelsList = List
         type Scopes TrainedModelsList =
              '["https://www.googleapis.com/auth/prediction"]
-        requestClient TrainedModelsList{..}
+        requestClient TrainedModelsList'{..}
           = go _tmlProject _tmlPageToken _tmlMaxResults
               (Just AltJSON)
               predictionService

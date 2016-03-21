@@ -51,7 +51,7 @@ type EnterprisesGetResource =
 -- | Retrieves the name and domain of an enterprise.
 --
 -- /See:/ 'enterprisesGet' smart constructor.
-newtype EnterprisesGet = EnterprisesGet
+newtype EnterprisesGet = EnterprisesGet'
     { _eEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ enterprisesGet
     :: Text -- ^ 'eEnterpriseId'
     -> EnterprisesGet
 enterprisesGet pEEnterpriseId_ =
-    EnterprisesGet
+    EnterprisesGet'
     { _eEnterpriseId = pEEnterpriseId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest EnterprisesGet where
         type Rs EnterprisesGet = Enterprise
         type Scopes EnterprisesGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesGet{..}
+        requestClient EnterprisesGet'{..}
           = go _eEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

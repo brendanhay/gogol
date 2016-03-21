@@ -51,7 +51,7 @@ type ContactsInsertResource =
 -- | Inserts a new contact.
 --
 -- /See:/ 'contactsInsert' smart constructor.
-newtype ContactsInsert = ContactsInsert
+newtype ContactsInsert = ContactsInsert'
     { _ciPayload :: Contact
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ contactsInsert
     :: Contact -- ^ 'ciPayload'
     -> ContactsInsert
 contactsInsert pCiPayload_ =
-    ContactsInsert
+    ContactsInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest ContactsInsert where
         type Rs ContactsInsert = Contact
         type Scopes ContactsInsert =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient ContactsInsert{..}
+        requestClient ContactsInsert'{..}
           = go (Just AltJSON) _ciPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsInsertResource)

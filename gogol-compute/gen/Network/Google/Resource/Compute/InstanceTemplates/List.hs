@@ -62,7 +62,7 @@ type InstanceTemplatesListResource =
 -- specified project and zone.
 --
 -- /See:/ 'instanceTemplatesList' smart constructor.
-data InstanceTemplatesList = InstanceTemplatesList
+data InstanceTemplatesList = InstanceTemplatesList'
     { _itlProject    :: !Text
     , _itlFilter     :: !(Maybe Text)
     , _itlPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ instanceTemplatesList
     :: Text -- ^ 'itlProject'
     -> InstanceTemplatesList
 instanceTemplatesList pItlProject_ =
-    InstanceTemplatesList
+    InstanceTemplatesList'
     { _itlProject = pItlProject_
     , _itlFilter = Nothing
     , _itlPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest InstanceTemplatesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceTemplatesList{..}
+        requestClient InstanceTemplatesList'{..}
           = go _itlProject _itlFilter _itlPageToken
               (Just _itlMaxResults)
               (Just AltJSON)

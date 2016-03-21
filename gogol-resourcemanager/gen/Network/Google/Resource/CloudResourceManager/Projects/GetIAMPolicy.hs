@@ -69,7 +69,7 @@ type ProjectsGetIAMPolicyResource =
 -- Permission is denied if the policy or the resource does not exist.
 --
 -- /See:/ 'projectsGetIAMPolicy' smart constructor.
-data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy
+data ProjectsGetIAMPolicy = ProjectsGetIAMPolicy'
     { _pgipXgafv          :: !(Maybe Text)
     , _pgipUploadProtocol :: !(Maybe Text)
     , _pgipPp             :: !Bool
@@ -107,7 +107,7 @@ projectsGetIAMPolicy
     -> Text -- ^ 'pgipResource'
     -> ProjectsGetIAMPolicy
 projectsGetIAMPolicy pPgipPayload_ pPgipResource_ =
-    ProjectsGetIAMPolicy
+    ProjectsGetIAMPolicy'
     { _pgipXgafv = Nothing
     , _pgipUploadProtocol = Nothing
     , _pgipPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest ProjectsGetIAMPolicy where
         type Scopes ProjectsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient ProjectsGetIAMPolicy{..}
+        requestClient ProjectsGetIAMPolicy'{..}
           = go _pgipResource _pgipXgafv _pgipUploadProtocol
               (Just _pgipPp)
               _pgipAccessToken

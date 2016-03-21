@@ -55,7 +55,7 @@ type GroupsDeleteResource =
 -- | Deletes the specified Group resource.
 --
 -- /See:/ 'groupsDelete' smart constructor.
-data GroupsDelete = GroupsDelete
+data GroupsDelete = GroupsDelete'
     { _gdProject   :: !Text
     , _gdGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsDelete
     -> Text -- ^ 'gdGroupName'
     -> GroupsDelete
 groupsDelete pGdProject_ pGdGroupName_ =
-    GroupsDelete
+    GroupsDelete'
     { _gdProject = pGdProject_
     , _gdGroupName = pGdGroupName_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest GroupsDelete where
         type Scopes GroupsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient GroupsDelete{..}
+        requestClient GroupsDelete'{..}
           = go _gdProject _gdGroupName (Just AltJSON)
               userAccountsService
           where go

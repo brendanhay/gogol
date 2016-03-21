@@ -57,7 +57,7 @@ type LayersParentsListResource =
 -- | Return all parent ids of the specified layer.
 --
 -- /See:/ 'layersParentsList' smart constructor.
-data LayersParentsList = LayersParentsList
+data LayersParentsList = LayersParentsList'
     { _lId         :: !Text
     , _lPageToken  :: !(Maybe Text)
     , _lMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ layersParentsList
     :: Text -- ^ 'lId'
     -> LayersParentsList
 layersParentsList pLId_ =
-    LayersParentsList
+    LayersParentsList'
     { _lId = pLId_
     , _lPageToken = Nothing
     , _lMaxResults = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest LayersParentsList where
         type Scopes LayersParentsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient LayersParentsList{..}
+        requestClient LayersParentsList'{..}
           = go _lId _lPageToken _lMaxResults (Just AltJSON)
               mapsEngineService
           where go

@@ -51,7 +51,7 @@ type RasterCollectionsDeleteResource =
 -- | Delete a raster collection.
 --
 -- /See:/ 'rasterCollectionsDelete' smart constructor.
-newtype RasterCollectionsDelete = RasterCollectionsDelete
+newtype RasterCollectionsDelete = RasterCollectionsDelete'
     { _rcdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ rasterCollectionsDelete
     :: Text -- ^ 'rcdId'
     -> RasterCollectionsDelete
 rasterCollectionsDelete pRcdId_ =
-    RasterCollectionsDelete
+    RasterCollectionsDelete'
     { _rcdId = pRcdId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest RasterCollectionsDelete where
         type Rs RasterCollectionsDelete = ()
         type Scopes RasterCollectionsDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RasterCollectionsDelete{..}
+        requestClient RasterCollectionsDelete'{..}
           = go _rcdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

@@ -76,7 +76,7 @@ type VariantSetsSearchResource =
 -- [GlobalAllianceApi.searchVariantSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/variantmethods.avdl#L49).
 --
 -- /See:/ 'variantSetsSearch' smart constructor.
-data VariantSetsSearch = VariantSetsSearch
+data VariantSetsSearch = VariantSetsSearch'
     { _vssXgafv          :: !(Maybe Text)
     , _vssUploadProtocol :: !(Maybe Text)
     , _vssPp             :: !Bool
@@ -110,7 +110,7 @@ variantSetsSearch
     :: SearchVariantSetsRequest -- ^ 'vssPayload'
     -> VariantSetsSearch
 variantSetsSearch pVssPayload_ =
-    VariantSetsSearch
+    VariantSetsSearch'
     { _vssXgafv = Nothing
     , _vssUploadProtocol = Nothing
     , _vssPp = True
@@ -169,7 +169,7 @@ instance GoogleRequest VariantSetsSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient VariantSetsSearch{..}
+        requestClient VariantSetsSearch'{..}
           = go _vssXgafv _vssUploadProtocol (Just _vssPp)
               _vssAccessToken
               _vssUploadType

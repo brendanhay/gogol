@@ -54,7 +54,7 @@ type GroupItemsDeleteResource =
 -- | Removes an item from a group.
 --
 -- /See:/ 'groupItemsDelete' smart constructor.
-data GroupItemsDelete = GroupItemsDelete
+data GroupItemsDelete = GroupItemsDelete'
     { _gidOnBehalfOfContentOwner :: !(Maybe Text)
     , _gidId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupItemsDelete
     :: Text -- ^ 'gidId'
     -> GroupItemsDelete
 groupItemsDelete pGidId_ =
-    GroupItemsDelete
+    GroupItemsDelete'
     { _gidOnBehalfOfContentOwner = Nothing
     , _gidId = pGidId_
     }
@@ -100,7 +100,7 @@ instance GoogleRequest GroupItemsDelete where
         type Scopes GroupItemsDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient GroupItemsDelete{..}
+        requestClient GroupItemsDelete'{..}
           = go (Just _gidId) _gidOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

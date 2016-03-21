@@ -76,7 +76,7 @@ type ActivitiesListResource =
 -- using the source parameter.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+data ActivitiesList = ActivitiesList'
     { _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
     , _alGroupingStrategy :: !ActivitiesListGroupingStrategy
@@ -106,7 +106,7 @@ data ActivitiesList = ActivitiesList
 activitiesList
     :: ActivitiesList
 activitiesList =
-    ActivitiesList
+    ActivitiesList'
     { _alDriveFileId = Nothing
     , _alDriveAncestorId = Nothing
     , _alGroupingStrategy = DriveUi
@@ -166,7 +166,7 @@ instance GoogleRequest ActivitiesList where
                "https://www.googleapis.com/auth/drive.metadata",
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient ActivitiesList{..}
+        requestClient ActivitiesList'{..}
           = go _alDriveFileId _alDriveAncestorId
               (Just _alGroupingStrategy)
               (Just _alUserId)

@@ -63,7 +63,7 @@ type ProjectsTopicsGetResource =
 -- | Gets the configuration of a topic.
 --
 -- /See:/ 'projectsTopicsGet' smart constructor.
-data ProjectsTopicsGet = ProjectsTopicsGet
+data ProjectsTopicsGet = ProjectsTopicsGet'
     { _ptgXgafv          :: !(Maybe Text)
     , _ptgUploadProtocol :: !(Maybe Text)
     , _ptgPp             :: !Bool
@@ -97,7 +97,7 @@ projectsTopicsGet
     :: Text -- ^ 'ptgTopic'
     -> ProjectsTopicsGet
 projectsTopicsGet pPtgTopic_ =
-    ProjectsTopicsGet
+    ProjectsTopicsGet'
     { _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
     , _ptgPp = True
@@ -154,7 +154,7 @@ instance GoogleRequest ProjectsTopicsGet where
         type Scopes ProjectsTopicsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsTopicsGet{..}
+        requestClient ProjectsTopicsGet'{..}
           = go _ptgTopic _ptgXgafv _ptgUploadProtocol
               (Just _ptgPp)
               _ptgAccessToken

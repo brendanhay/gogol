@@ -59,7 +59,7 @@ type ChangesListResource =
 -- | Lists changes for a user.
 --
 -- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList
+data ChangesList = ChangesList'
     { _clRestrictToMyDrive :: !Bool
     , _clSpaces            :: !Text
     , _clPageToken         :: !Text
@@ -84,7 +84,7 @@ changesList
     :: Text -- ^ 'clPageToken'
     -> ChangesList
 changesList pClPageToken_ =
-    ChangesList
+    ChangesList'
     { _clRestrictToMyDrive = False
     , _clSpaces = "drive"
     , _clPageToken = pClPageToken_
@@ -135,7 +135,7 @@ instance GoogleRequest ChangesList where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient ChangesList{..}
+        requestClient ChangesList'{..}
           = go (Just _clPageToken) (Just _clRestrictToMyDrive)
               (Just _clSpaces)
               (Just _clPageSize)

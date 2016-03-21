@@ -58,7 +58,7 @@ type InstancesResetResource =
 -- | Performs a hard reset on the instance.
 --
 -- /See:/ 'instancesReset' smart constructor.
-data InstancesReset = InstancesReset
+data InstancesReset = InstancesReset'
     { _irProject  :: !Text
     , _irZone     :: !Text
     , _irInstance :: !Text
@@ -79,7 +79,7 @@ instancesReset
     -> Text -- ^ 'irInstance'
     -> InstancesReset
 instancesReset pIrProject_ pIrZone_ pIrInstance_ =
-    InstancesReset
+    InstancesReset'
     { _irProject = pIrProject_
     , _irZone = pIrZone_
     , _irInstance = pIrInstance_
@@ -104,7 +104,7 @@ instance GoogleRequest InstancesReset where
         type Scopes InstancesReset =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesReset{..}
+        requestClient InstancesReset'{..}
           = go _irProject _irZone _irInstance (Just AltJSON)
               computeService
           where go

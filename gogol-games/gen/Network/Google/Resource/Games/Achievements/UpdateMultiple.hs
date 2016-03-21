@@ -53,7 +53,7 @@ type AchievementsUpdateMultipleResource =
 -- | Updates multiple achievements for the currently authenticated player.
 --
 -- /See:/ 'achievementsUpdateMultiple' smart constructor.
-newtype AchievementsUpdateMultiple = AchievementsUpdateMultiple
+newtype AchievementsUpdateMultiple = AchievementsUpdateMultiple'
     { _aumPayload :: AchievementUpdateMultipleRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ achievementsUpdateMultiple
     :: AchievementUpdateMultipleRequest -- ^ 'aumPayload'
     -> AchievementsUpdateMultiple
 achievementsUpdateMultiple pAumPayload_ =
-    AchievementsUpdateMultiple
+    AchievementsUpdateMultiple'
     { _aumPayload = pAumPayload_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest AchievementsUpdateMultiple
         type Scopes AchievementsUpdateMultiple =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsUpdateMultiple{..}
+        requestClient AchievementsUpdateMultiple'{..}
           = go (Just AltJSON) _aumPayload gamesService
           where go
                   = buildClient

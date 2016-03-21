@@ -55,7 +55,7 @@ type GroupsAliasesInsertResource =
 -- | Add a alias for the group
 --
 -- /See:/ 'groupsAliasesInsert' smart constructor.
-data GroupsAliasesInsert = GroupsAliasesInsert
+data GroupsAliasesInsert = GroupsAliasesInsert'
     { _gaiGroupKey :: !Text
     , _gaiPayload  :: !Alias
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsAliasesInsert
     -> Alias -- ^ 'gaiPayload'
     -> GroupsAliasesInsert
 groupsAliasesInsert pGaiGroupKey_ pGaiPayload_ =
-    GroupsAliasesInsert
+    GroupsAliasesInsert'
     { _gaiGroupKey = pGaiGroupKey_
     , _gaiPayload = pGaiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest GroupsAliasesInsert where
         type Rs GroupsAliasesInsert = Alias
         type Scopes GroupsAliasesInsert =
              '["https://www.googleapis.com/auth/admin.directory.group"]
-        requestClient GroupsAliasesInsert{..}
+        requestClient GroupsAliasesInsert'{..}
           = go _gaiGroupKey (Just AltJSON) _gaiPayload
               directoryService
           where go

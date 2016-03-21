@@ -52,7 +52,7 @@ type ConversionUpdateResource =
 -- | Updates a batch of conversions in DoubleClick Search.
 --
 -- /See:/ 'conversionUpdate' smart constructor.
-newtype ConversionUpdate = ConversionUpdate
+newtype ConversionUpdate = ConversionUpdate'
     { _cuPayload :: ConversionList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ conversionUpdate
     :: ConversionList -- ^ 'cuPayload'
     -> ConversionUpdate
 conversionUpdate pCuPayload_ =
-    ConversionUpdate
+    ConversionUpdate'
     { _cuPayload = pCuPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest ConversionUpdate where
         type Rs ConversionUpdate = ConversionList
         type Scopes ConversionUpdate =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ConversionUpdate{..}
+        requestClient ConversionUpdate'{..}
           = go (Just AltJSON) _cuPayload
               doubleClickSearchService
           where go

@@ -61,7 +61,7 @@ type ManagementGoalsInsertResource =
 -- | Create a new goal.
 --
 -- /See:/ 'managementGoalsInsert' smart constructor.
-data ManagementGoalsInsert = ManagementGoalsInsert
+data ManagementGoalsInsert = ManagementGoalsInsert'
     { _mgiWebPropertyId :: !Text
     , _mgiProFileId     :: !Text
     , _mgiPayload       :: !Goal
@@ -86,7 +86,7 @@ managementGoalsInsert
     -> Text -- ^ 'mgiAccountId'
     -> ManagementGoalsInsert
 managementGoalsInsert pMgiWebPropertyId_ pMgiProFileId_ pMgiPayload_ pMgiAccountId_ =
-    ManagementGoalsInsert
+    ManagementGoalsInsert'
     { _mgiWebPropertyId = pMgiWebPropertyId_
     , _mgiProFileId = pMgiProFileId_
     , _mgiPayload = pMgiPayload_
@@ -118,7 +118,7 @@ instance GoogleRequest ManagementGoalsInsert where
         type Rs ManagementGoalsInsert = Goal
         type Scopes ManagementGoalsInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementGoalsInsert{..}
+        requestClient ManagementGoalsInsert'{..}
           = go _mgiAccountId _mgiWebPropertyId _mgiProFileId
               (Just AltJSON)
               _mgiPayload

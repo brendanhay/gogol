@@ -51,7 +51,7 @@ type LayersDeleteResource =
 -- | Delete a layer.
 --
 -- /See:/ 'layersDelete' smart constructor.
-newtype LayersDelete = LayersDelete
+newtype LayersDelete = LayersDelete'
     { _ldId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ layersDelete
     :: Text -- ^ 'ldId'
     -> LayersDelete
 layersDelete pLdId_ =
-    LayersDelete
+    LayersDelete'
     { _ldId = pLdId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest LayersDelete where
         type Rs LayersDelete = ()
         type Scopes LayersDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient LayersDelete{..}
+        requestClient LayersDelete'{..}
           = go _ldId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy LayersDeleteResource)

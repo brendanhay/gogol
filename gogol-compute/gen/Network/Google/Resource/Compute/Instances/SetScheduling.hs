@@ -60,7 +60,7 @@ type InstancesSetSchedulingResource =
 -- | Sets an instance\'s scheduling options.
 --
 -- /See:/ 'instancesSetScheduling' smart constructor.
-data InstancesSetScheduling = InstancesSetScheduling
+data InstancesSetScheduling = InstancesSetScheduling'
     { _issProject  :: !Text
     , _issZone     :: !Text
     , _issPayload  :: !Scheduling
@@ -85,7 +85,7 @@ instancesSetScheduling
     -> Text -- ^ 'issInstance'
     -> InstancesSetScheduling
 instancesSetScheduling pIssProject_ pIssZone_ pIssPayload_ pIssInstance_ =
-    InstancesSetScheduling
+    InstancesSetScheduling'
     { _issProject = pIssProject_
     , _issZone = pIssZone_
     , _issPayload = pIssPayload_
@@ -116,7 +116,7 @@ instance GoogleRequest InstancesSetScheduling where
         type Scopes InstancesSetScheduling =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesSetScheduling{..}
+        requestClient InstancesSetScheduling'{..}
           = go _issProject _issZone _issInstance (Just AltJSON)
               _issPayload
               computeService

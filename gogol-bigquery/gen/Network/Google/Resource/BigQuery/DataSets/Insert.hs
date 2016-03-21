@@ -54,7 +54,7 @@ type DataSetsInsertResource =
 -- | Creates a new empty dataset.
 --
 -- /See:/ 'dataSetsInsert' smart constructor.
-data DataSetsInsert = DataSetsInsert
+data DataSetsInsert = DataSetsInsert'
     { _dsiPayload   :: !DataSet
     , _dsiProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ dataSetsInsert
     -> Text -- ^ 'dsiProjectId'
     -> DataSetsInsert
 dataSetsInsert pDsiPayload_ pDsiProjectId_ =
-    DataSetsInsert
+    DataSetsInsert'
     { _dsiPayload = pDsiPayload_
     , _dsiProjectId = pDsiProjectId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest DataSetsInsert where
         type Scopes DataSetsInsert =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient DataSetsInsert{..}
+        requestClient DataSetsInsert'{..}
           = go _dsiProjectId (Just AltJSON) _dsiPayload
               bigQueryService
           where go

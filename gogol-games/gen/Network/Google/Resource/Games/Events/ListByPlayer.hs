@@ -58,7 +58,7 @@ type EventsListByPlayerResource =
 -- application for the currently authenticated user.
 --
 -- /See:/ 'eventsListByPlayer' smart constructor.
-data EventsListByPlayer = EventsListByPlayer
+data EventsListByPlayer = EventsListByPlayer'
     { _elbpLanguage   :: !(Maybe Text)
     , _elbpPageToken  :: !(Maybe Text)
     , _elbpMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ data EventsListByPlayer = EventsListByPlayer
 eventsListByPlayer
     :: EventsListByPlayer
 eventsListByPlayer =
-    EventsListByPlayer
+    EventsListByPlayer'
     { _elbpLanguage = Nothing
     , _elbpPageToken = Nothing
     , _elbpMaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest EventsListByPlayer where
         type Scopes EventsListByPlayer =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient EventsListByPlayer{..}
+        requestClient EventsListByPlayer'{..}
           = go _elbpLanguage _elbpPageToken _elbpMaxResults
               (Just AltJSON)
               gamesService

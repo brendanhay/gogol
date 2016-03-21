@@ -55,7 +55,7 @@ type RolesDeleteResource =
 -- | Deletes a role.
 --
 -- /See:/ 'rolesDelete' smart constructor.
-data RolesDelete = RolesDelete
+data RolesDelete = RolesDelete'
     { _rdRoleId   :: !Text
     , _rdCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ rolesDelete
     -> Text -- ^ 'rdCustomer'
     -> RolesDelete
 rolesDelete pRdRoleId_ pRdCustomer_ =
-    RolesDelete
+    RolesDelete'
     { _rdRoleId = pRdRoleId_
     , _rdCustomer = pRdCustomer_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest RolesDelete where
         type Rs RolesDelete = ()
         type Scopes RolesDelete =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
-        requestClient RolesDelete{..}
+        requestClient RolesDelete'{..}
           = go _rdCustomer _rdRoleId (Just AltJSON)
               directoryService
           where go

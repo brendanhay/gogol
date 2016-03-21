@@ -66,7 +66,7 @@ type AppsGetResource =
 -- | Gets information about an application.
 --
 -- /See:/ 'appsGet' smart constructor.
-data AppsGet = AppsGet
+data AppsGet = AppsGet'
     { _agXgafv                :: !(Maybe Text)
     , _agUploadProtocol       :: !(Maybe Text)
     , _agPp                   :: !Bool
@@ -103,7 +103,7 @@ appsGet
     :: Text -- ^ 'agAppsId'
     -> AppsGet
 appsGet pAgAppsId_ =
-    AppsGet
+    AppsGet'
     { _agXgafv = Nothing
     , _agUploadProtocol = Nothing
     , _agPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest AppsGet where
         type Rs AppsGet = Application
         type Scopes AppsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsGet{..}
+        requestClient AppsGet'{..}
           = go _agAppsId _agXgafv _agUploadProtocol
               (Just _agPp)
               _agAccessToken

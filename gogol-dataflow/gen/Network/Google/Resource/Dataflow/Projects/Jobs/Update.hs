@@ -69,7 +69,7 @@ type ProjectsJobsUpdateResource =
 -- | Updates the state of an existing dataflow job.
 --
 -- /See:/ 'projectsJobsUpdate' smart constructor.
-data ProjectsJobsUpdate = ProjectsJobsUpdate
+data ProjectsJobsUpdate = ProjectsJobsUpdate'
     { _pjuXgafv          :: !(Maybe Text)
     , _pjuJobId          :: !Text
     , _pjuUploadProtocol :: !(Maybe Text)
@@ -111,7 +111,7 @@ projectsJobsUpdate
     -> Text -- ^ 'pjuProjectId'
     -> ProjectsJobsUpdate
 projectsJobsUpdate pPjuJobId_ pPjuPayload_ pPjuProjectId_ =
-    ProjectsJobsUpdate
+    ProjectsJobsUpdate'
     { _pjuXgafv = Nothing
     , _pjuJobId = pPjuJobId_
     , _pjuUploadProtocol = Nothing
@@ -180,7 +180,7 @@ instance GoogleRequest ProjectsJobsUpdate where
         type Scopes ProjectsJobsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ProjectsJobsUpdate{..}
+        requestClient ProjectsJobsUpdate'{..}
           = go _pjuProjectId _pjuJobId _pjuXgafv
               _pjuUploadProtocol
               (Just _pjuPp)

@@ -57,7 +57,7 @@ type RasterCollectionsPermissionsBatchDeleteResource
 -- | Remove permission entries from an already existing asset.
 --
 -- /See:/ 'rasterCollectionsPermissionsBatchDelete' smart constructor.
-data RasterCollectionsPermissionsBatchDelete = RasterCollectionsPermissionsBatchDelete
+data RasterCollectionsPermissionsBatchDelete = RasterCollectionsPermissionsBatchDelete'
     { _rcpbdPayload :: !PermissionsBatchDeleteRequest
     , _rcpbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ rasterCollectionsPermissionsBatchDelete
     -> Text -- ^ 'rcpbdId'
     -> RasterCollectionsPermissionsBatchDelete
 rasterCollectionsPermissionsBatchDelete pRcpbdPayload_ pRcpbdId_ =
-    RasterCollectionsPermissionsBatchDelete
+    RasterCollectionsPermissionsBatchDelete'
     { _rcpbdPayload = pRcpbdPayload_
     , _rcpbdId = pRcpbdId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest
         type Scopes RasterCollectionsPermissionsBatchDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
         requestClient
-          RasterCollectionsPermissionsBatchDelete{..}
+          RasterCollectionsPermissionsBatchDelete'{..}
           = go _rcpbdId (Just AltJSON) _rcpbdPayload
               mapsEngineService
           where go

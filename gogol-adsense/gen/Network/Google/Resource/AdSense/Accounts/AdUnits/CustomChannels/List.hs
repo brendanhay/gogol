@@ -63,7 +63,7 @@ type AccountsAdUnitsCustomChannelsListResource =
 -- | List all custom channels which the specified ad unit belongs to.
 --
 -- /See:/ 'accountsAdUnitsCustomChannelsList' smart constructor.
-data AccountsAdUnitsCustomChannelsList = AccountsAdUnitsCustomChannelsList
+data AccountsAdUnitsCustomChannelsList = AccountsAdUnitsCustomChannelsList'
     { _aaucclAdUnitId   :: !Text
     , _aaucclAdClientId :: !Text
     , _aaucclAccountId  :: !Text
@@ -90,7 +90,7 @@ accountsAdUnitsCustomChannelsList
     -> Text -- ^ 'aaucclAccountId'
     -> AccountsAdUnitsCustomChannelsList
 accountsAdUnitsCustomChannelsList pAaucclAdUnitId_ pAaucclAdClientId_ pAaucclAccountId_ =
-    AccountsAdUnitsCustomChannelsList
+    AccountsAdUnitsCustomChannelsList'
     { _aaucclAdUnitId = pAaucclAdUnitId_
     , _aaucclAdClientId = pAaucclAdClientId_
     , _aaucclAccountId = pAaucclAccountId_
@@ -139,7 +139,7 @@ instance GoogleRequest
         type Scopes AccountsAdUnitsCustomChannelsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsAdUnitsCustomChannelsList{..}
+        requestClient AccountsAdUnitsCustomChannelsList'{..}
           = go _aaucclAccountId _aaucclAdClientId
               _aaucclAdUnitId
               _aaucclPageToken

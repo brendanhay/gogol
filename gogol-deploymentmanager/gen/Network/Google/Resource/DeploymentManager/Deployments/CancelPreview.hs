@@ -61,7 +61,7 @@ type DeploymentsCancelPreviewResource =
 -- deployment.
 --
 -- /See:/ 'deploymentsCancelPreview' smart constructor.
-data DeploymentsCancelPreview = DeploymentsCancelPreview
+data DeploymentsCancelPreview = DeploymentsCancelPreview'
     { _dcpProject    :: !Text
     , _dcpPayload    :: !DeploymentsCancelPreviewRequest
     , _dcpDeployment :: !Text
@@ -82,7 +82,7 @@ deploymentsCancelPreview
     -> Text -- ^ 'dcpDeployment'
     -> DeploymentsCancelPreview
 deploymentsCancelPreview pDcpProject_ pDcpPayload_ pDcpDeployment_ =
-    DeploymentsCancelPreview
+    DeploymentsCancelPreview'
     { _dcpProject = pDcpProject_
     , _dcpPayload = pDcpPayload_
     , _dcpDeployment = pDcpDeployment_
@@ -109,7 +109,7 @@ instance GoogleRequest DeploymentsCancelPreview where
         type Scopes DeploymentsCancelPreview =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient DeploymentsCancelPreview{..}
+        requestClient DeploymentsCancelPreview'{..}
           = go _dcpProject _dcpDeployment (Just AltJSON)
               _dcpPayload
               deploymentManagerService

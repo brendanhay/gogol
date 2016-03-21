@@ -57,7 +57,7 @@ type MyLibraryReadingPositionsGetResource =
 -- | Retrieves my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsGet' smart constructor.
-data MyLibraryReadingPositionsGet = MyLibraryReadingPositionsGet
+data MyLibraryReadingPositionsGet = MyLibraryReadingPositionsGet'
     { _mlrpgContentVersion :: !(Maybe Text)
     , _mlrpgVolumeId       :: !Text
     , _mlrpgSource         :: !(Maybe Text)
@@ -76,7 +76,7 @@ myLibraryReadingPositionsGet
     :: Text -- ^ 'mlrpgVolumeId'
     -> MyLibraryReadingPositionsGet
 myLibraryReadingPositionsGet pMlrpgVolumeId_ =
-    MyLibraryReadingPositionsGet
+    MyLibraryReadingPositionsGet'
     { _mlrpgContentVersion = Nothing
     , _mlrpgVolumeId = pMlrpgVolumeId_
     , _mlrpgSource = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest MyLibraryReadingPositionsGet
              ReadingPosition
         type Scopes MyLibraryReadingPositionsGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryReadingPositionsGet{..}
+        requestClient MyLibraryReadingPositionsGet'{..}
           = go _mlrpgVolumeId _mlrpgContentVersion _mlrpgSource
               (Just AltJSON)
               booksService

@@ -57,7 +57,7 @@ type JobsQueryResource =
 -- query completes within a specified timeout.
 --
 -- /See:/ 'jobsQuery' smart constructor.
-data JobsQuery = JobsQuery
+data JobsQuery = JobsQuery'
     { _jqPayload   :: !QueryRequest
     , _jqProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ jobsQuery
     -> Text -- ^ 'jqProjectId'
     -> JobsQuery
 jobsQuery pJqPayload_ pJqProjectId_ =
-    JobsQuery
+    JobsQuery'
     { _jqPayload = pJqPayload_
     , _jqProjectId = pJqProjectId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest JobsQuery where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient JobsQuery{..}
+        requestClient JobsQuery'{..}
           = go _jqProjectId (Just AltJSON) _jqPayload
               bigQueryService
           where go

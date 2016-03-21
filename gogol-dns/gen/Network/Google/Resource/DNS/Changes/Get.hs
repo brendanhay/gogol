@@ -57,7 +57,7 @@ type ChangesGetResource =
 -- | Fetch the representation of an existing Change.
 --
 -- /See:/ 'changesGet' smart constructor.
-data ChangesGet = ChangesGet
+data ChangesGet = ChangesGet'
     { _cgProject     :: !Text
     , _cgChangeId    :: !Text
     , _cgManagedZone :: !Text
@@ -78,7 +78,7 @@ changesGet
     -> Text -- ^ 'cgManagedZone'
     -> ChangesGet
 changesGet pCgProject_ pCgChangeId_ pCgManagedZone_ =
-    ChangesGet
+    ChangesGet'
     { _cgProject = pCgProject_
     , _cgChangeId = pCgChangeId_
     , _cgManagedZone = pCgManagedZone_
@@ -109,7 +109,7 @@ instance GoogleRequest ChangesGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ChangesGet{..}
+        requestClient ChangesGet'{..}
           = go _cgProject _cgManagedZone _cgChangeId
               (Just AltJSON)
               dNSService

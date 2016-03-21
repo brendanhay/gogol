@@ -60,7 +60,7 @@ type InstancesStartResource =
 -- method. For more information, see Restart an instance.
 --
 -- /See:/ 'instancesStart' smart constructor.
-data InstancesStart = InstancesStart
+data InstancesStart = InstancesStart'
     { _insProject  :: !Text
     , _insZone     :: !Text
     , _insInstance :: !Text
@@ -81,7 +81,7 @@ instancesStart
     -> Text -- ^ 'insInstance'
     -> InstancesStart
 instancesStart pInsProject_ pInsZone_ pInsInstance_ =
-    InstancesStart
+    InstancesStart'
     { _insProject = pInsProject_
     , _insZone = pInsZone_
     , _insInstance = pInsInstance_
@@ -106,7 +106,7 @@ instance GoogleRequest InstancesStart where
         type Scopes InstancesStart =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesStart{..}
+        requestClient InstancesStart'{..}
           = go _insProject _insZone _insInstance (Just AltJSON)
               computeService
           where go

@@ -58,7 +58,7 @@ type BackendServicesGetResource =
 -- backend services by making a list() request.
 --
 -- /See:/ 'backendServicesGet' smart constructor.
-data BackendServicesGet = BackendServicesGet
+data BackendServicesGet = BackendServicesGet'
     { _bsgProject        :: !Text
     , _bsgBackendService :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ backendServicesGet
     -> Text -- ^ 'bsgBackendService'
     -> BackendServicesGet
 backendServicesGet pBsgProject_ pBsgBackendService_ =
-    BackendServicesGet
+    BackendServicesGet'
     { _bsgProject = pBsgProject_
     , _bsgBackendService = pBsgBackendService_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest BackendServicesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient BackendServicesGet{..}
+        requestClient BackendServicesGet'{..}
           = go _bsgProject _bsgBackendService (Just AltJSON)
               computeService
           where go

@@ -55,7 +55,7 @@ type ManagementFiltersInsertResource =
 -- | Create a new filter.
 --
 -- /See:/ 'managementFiltersInsert' smart constructor.
-data ManagementFiltersInsert = ManagementFiltersInsert
+data ManagementFiltersInsert = ManagementFiltersInsert'
     { _mfiPayload   :: !Filter
     , _mfiAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ managementFiltersInsert
     -> Text -- ^ 'mfiAccountId'
     -> ManagementFiltersInsert
 managementFiltersInsert pMfiPayload_ pMfiAccountId_ =
-    ManagementFiltersInsert
+    ManagementFiltersInsert'
     { _mfiPayload = pMfiPayload_
     , _mfiAccountId = pMfiAccountId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ManagementFiltersInsert where
         type Rs ManagementFiltersInsert = Filter
         type Scopes ManagementFiltersInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementFiltersInsert{..}
+        requestClient ManagementFiltersInsert'{..}
           = go _mfiAccountId (Just AltJSON) _mfiPayload
               analyticsService
           where go

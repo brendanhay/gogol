@@ -56,7 +56,7 @@ type MarketplaceNotesInsertResource =
 -- | Add notes to the proposal
 --
 -- /See:/ 'marketplaceNotesInsert' smart constructor.
-data MarketplaceNotesInsert = MarketplaceNotesInsert
+data MarketplaceNotesInsert = MarketplaceNotesInsert'
     { _mniPayload    :: !AddOrderNotesRequest
     , _mniProposalId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ marketplaceNotesInsert
     -> Text -- ^ 'mniProposalId'
     -> MarketplaceNotesInsert
 marketplaceNotesInsert pMniPayload_ pMniProposalId_ =
-    MarketplaceNotesInsert
+    MarketplaceNotesInsert'
     { _mniPayload = pMniPayload_
     , _mniProposalId = pMniProposalId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest MarketplaceNotesInsert where
              AddOrderNotesResponse
         type Scopes MarketplaceNotesInsert =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient MarketplaceNotesInsert{..}
+        requestClient MarketplaceNotesInsert'{..}
           = go _mniProposalId (Just AltJSON) _mniPayload
               adExchangeBuyerService
           where go

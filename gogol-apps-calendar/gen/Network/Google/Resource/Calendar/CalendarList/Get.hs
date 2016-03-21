@@ -54,7 +54,7 @@ type CalendarListGetResource =
 -- | Returns an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListGet' smart constructor.
-newtype CalendarListGet = CalendarListGet
+newtype CalendarListGet = CalendarListGet'
     { _clgCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ calendarListGet
     :: Text -- ^ 'clgCalendarId'
     -> CalendarListGet
 calendarListGet pClgCalendarId_ =
-    CalendarListGet
+    CalendarListGet'
     { _clgCalendarId = pClgCalendarId_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest CalendarListGet where
         type Scopes CalendarListGet =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient CalendarListGet{..}
+        requestClient CalendarListGet'{..}
           = go _clgCalendarId (Just AltJSON)
               appsCalendarService
           where go

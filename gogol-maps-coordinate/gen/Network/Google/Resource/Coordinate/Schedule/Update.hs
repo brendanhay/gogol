@@ -65,7 +65,7 @@ type ScheduleUpdateResource =
 -- | Replaces the schedule of a job with the provided schedule.
 --
 -- /See:/ 'scheduleUpdate' smart constructor.
-data ScheduleUpdate = ScheduleUpdate
+data ScheduleUpdate = ScheduleUpdate'
     { _suJobId     :: !(Textual Word64)
     , _suAllDay    :: !(Maybe Bool)
     , _suStartTime :: !(Maybe (Textual Word64))
@@ -98,7 +98,7 @@ scheduleUpdate
     -> Schedule -- ^ 'suPayload'
     -> ScheduleUpdate
 scheduleUpdate pSuJobId_ pSuTeamId_ pSuPayload_ =
-    ScheduleUpdate
+    ScheduleUpdate'
     { _suJobId = _Coerce # pSuJobId_
     , _suAllDay = Nothing
     , _suStartTime = Nothing
@@ -149,7 +149,7 @@ instance GoogleRequest ScheduleUpdate where
         type Rs ScheduleUpdate = Schedule
         type Scopes ScheduleUpdate =
              '["https://www.googleapis.com/auth/coordinate"]
-        requestClient ScheduleUpdate{..}
+        requestClient ScheduleUpdate'{..}
           = go _suTeamId _suJobId _suAllDay _suStartTime
               _suEndTime
               _suDuration

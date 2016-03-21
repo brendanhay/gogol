@@ -61,7 +61,7 @@ type TablesGetResource =
 -- describes the structure of this table.
 --
 -- /See:/ 'tablesGet' smart constructor.
-data TablesGet = TablesGet
+data TablesGet = TablesGet'
     { _tgDataSetId :: !Text
     , _tgProjectId :: !Text
     , _tgTableId   :: !Text
@@ -82,7 +82,7 @@ tablesGet
     -> Text -- ^ 'tgTableId'
     -> TablesGet
 tablesGet pTgDataSetId_ pTgProjectId_ pTgTableId_ =
-    TablesGet
+    TablesGet'
     { _tgDataSetId = pTgDataSetId_
     , _tgProjectId = pTgProjectId_
     , _tgTableId = pTgTableId_
@@ -109,7 +109,7 @@ instance GoogleRequest TablesGet where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient TablesGet{..}
+        requestClient TablesGet'{..}
           = go _tgProjectId _tgDataSetId _tgTableId
               (Just AltJSON)
               bigQueryService

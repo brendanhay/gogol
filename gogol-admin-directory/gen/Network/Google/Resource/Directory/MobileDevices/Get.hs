@@ -58,7 +58,7 @@ type MobileDevicesGetResource =
 -- | Retrieve Mobile Device
 --
 -- /See:/ 'mobileDevicesGet' smart constructor.
-data MobileDevicesGet = MobileDevicesGet
+data MobileDevicesGet = MobileDevicesGet'
     { _mdgResourceId :: !Text
     , _mdgCustomerId :: !Text
     , _mdgProjection :: !(Maybe MobileDevicesGetProjection)
@@ -78,7 +78,7 @@ mobileDevicesGet
     -> Text -- ^ 'mdgCustomerId'
     -> MobileDevicesGet
 mobileDevicesGet pMdgResourceId_ pMdgCustomerId_ =
-    MobileDevicesGet
+    MobileDevicesGet'
     { _mdgResourceId = pMdgResourceId_
     , _mdgCustomerId = pMdgCustomerId_
     , _mdgProjection = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest MobileDevicesGet where
              '["https://www.googleapis.com/auth/admin.directory.device.mobile",
                "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
                "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
-        requestClient MobileDevicesGet{..}
+        requestClient MobileDevicesGet'{..}
           = go _mdgCustomerId _mdgResourceId _mdgProjection
               (Just AltJSON)
               directoryService

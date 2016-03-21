@@ -57,7 +57,7 @@ type EventsQuickAddResource =
 -- | Creates an event based on a simple text string.
 --
 -- /See:/ 'eventsQuickAdd' smart constructor.
-data EventsQuickAdd = EventsQuickAdd
+data EventsQuickAdd = EventsQuickAdd'
     { _eqaCalendarId        :: !Text
     , _eqaText              :: !Text
     , _eqaSendNotifications :: !(Maybe Bool)
@@ -77,7 +77,7 @@ eventsQuickAdd
     -> Text -- ^ 'eqaText'
     -> EventsQuickAdd
 eventsQuickAdd pEqaCalendarId_ pEqaText_ =
-    EventsQuickAdd
+    EventsQuickAdd'
     { _eqaCalendarId = pEqaCalendarId_
     , _eqaText = pEqaText_
     , _eqaSendNotifications = Nothing
@@ -106,7 +106,7 @@ instance GoogleRequest EventsQuickAdd where
         type Rs EventsQuickAdd = Event
         type Scopes EventsQuickAdd =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsQuickAdd{..}
+        requestClient EventsQuickAdd'{..}
           = go _eqaCalendarId (Just _eqaText)
               _eqaSendNotifications
               (Just AltJSON)

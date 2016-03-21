@@ -58,7 +58,7 @@ type NotificationsUpdateResource =
 -- | Updates a notification.
 --
 -- /See:/ 'notificationsUpdate' smart constructor.
-data NotificationsUpdate = NotificationsUpdate
+data NotificationsUpdate = NotificationsUpdate'
     { _nuPayload        :: !Notification
     , _nuCustomer       :: !Text
     , _nuNotificationId :: !Text
@@ -79,7 +79,7 @@ notificationsUpdate
     -> Text -- ^ 'nuNotificationId'
     -> NotificationsUpdate
 notificationsUpdate pNuPayload_ pNuCustomer_ pNuNotificationId_ =
-    NotificationsUpdate
+    NotificationsUpdate'
     { _nuPayload = pNuPayload_
     , _nuCustomer = pNuCustomer_
     , _nuNotificationId = pNuNotificationId_
@@ -105,7 +105,7 @@ instance GoogleRequest NotificationsUpdate where
         type Rs NotificationsUpdate = Notification
         type Scopes NotificationsUpdate =
              '["https://www.googleapis.com/auth/admin.directory.notifications"]
-        requestClient NotificationsUpdate{..}
+        requestClient NotificationsUpdate'{..}
           = go _nuCustomer _nuNotificationId (Just AltJSON)
               _nuPayload
               directoryService

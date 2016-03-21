@@ -81,7 +81,7 @@ type AdvertisersListResource =
 -- | Retrieves a list of advertisers, possibly filtered.
 --
 -- /See:/ 'advertisersList' smart constructor.
-data AdvertisersList = AdvertisersList
+data AdvertisersList = AdvertisersList'
     { _allStatus                              :: !(Maybe AdvertisersListStatus)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
@@ -130,7 +130,7 @@ advertisersList
     :: Int64 -- ^ 'allProFileId'
     -> AdvertisersList
 advertisersList pAllProFileId_ =
-    AdvertisersList
+    AdvertisersList'
     { _allStatus = Nothing
     , _allOnlyParent = Nothing
     , _allSearchString = Nothing
@@ -238,7 +238,7 @@ instance GoogleRequest AdvertisersList where
         type Rs AdvertisersList = AdvertisersListResponse
         type Scopes AdvertisersList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertisersList{..}
+        requestClient AdvertisersList'{..}
           = go _allProFileId _allStatus _allOnlyParent
               _allSearchString
               (_allIds ^. _Default)

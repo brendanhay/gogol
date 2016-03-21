@@ -61,7 +61,7 @@ type CustomChannelsAdUnitsListResource =
 -- | List all ad units in the specified custom channel.
 --
 -- /See:/ 'customChannelsAdUnitsList' smart constructor.
-data CustomChannelsAdUnitsList = CustomChannelsAdUnitsList
+data CustomChannelsAdUnitsList = CustomChannelsAdUnitsList'
     { _ccaulIncludeInactive :: !(Maybe Bool)
     , _ccaulCustomChannelId :: !Text
     , _ccaulAdClientId      :: !Text
@@ -87,7 +87,7 @@ customChannelsAdUnitsList
     -> Text -- ^ 'ccaulAdClientId'
     -> CustomChannelsAdUnitsList
 customChannelsAdUnitsList pCcaulCustomChannelId_ pCcaulAdClientId_ =
-    CustomChannelsAdUnitsList
+    CustomChannelsAdUnitsList'
     { _ccaulIncludeInactive = Nothing
     , _ccaulCustomChannelId = pCcaulCustomChannelId_
     , _ccaulAdClientId = pCcaulAdClientId_
@@ -135,7 +135,7 @@ instance GoogleRequest CustomChannelsAdUnitsList
         type Scopes CustomChannelsAdUnitsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient CustomChannelsAdUnitsList{..}
+        requestClient CustomChannelsAdUnitsList'{..}
           = go _ccaulAdClientId _ccaulCustomChannelId
               _ccaulIncludeInactive
               _ccaulPageToken

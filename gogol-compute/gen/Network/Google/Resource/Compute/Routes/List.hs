@@ -61,7 +61,7 @@ type RoutesListResource =
 -- project.
 --
 -- /See:/ 'routesList' smart constructor.
-data RoutesList = RoutesList
+data RoutesList = RoutesList'
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ routesList
     :: Text -- ^ 'rlProject'
     -> RoutesList
 routesList pRlProject_ =
-    RoutesList
+    RoutesList'
     { _rlProject = pRlProject_
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest RoutesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RoutesList{..}
+        requestClient RoutesList'{..}
           = go _rlProject _rlFilter _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)

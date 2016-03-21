@@ -53,7 +53,7 @@ type LayersGetResource =
 -- | Return metadata for a particular layer.
 --
 -- /See:/ 'layersGet' smart constructor.
-data LayersGet = LayersGet
+data LayersGet = LayersGet'
     { _lgVersion :: !(Maybe LayersGetVersion)
     , _lgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ layersGet
     :: Text -- ^ 'lgId'
     -> LayersGet
 layersGet pLgId_ =
-    LayersGet
+    LayersGet'
     { _lgVersion = Nothing
     , _lgId = pLgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest LayersGet where
         type Scopes LayersGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient LayersGet{..}
+        requestClient LayersGet'{..}
           = go _lgId _lgVersion (Just AltJSON)
               mapsEngineService
           where go

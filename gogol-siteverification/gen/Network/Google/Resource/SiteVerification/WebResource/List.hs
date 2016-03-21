@@ -50,21 +50,21 @@ type WebResourceListResource =
 --
 -- /See:/ 'webResourceList' smart constructor.
 data WebResourceList =
-    WebResourceList
+    WebResourceList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceList' with the minimum fields required to make a request.
 --
 webResourceList
     :: WebResourceList
-webResourceList = WebResourceList
+webResourceList = WebResourceList'
 
 instance GoogleRequest WebResourceList where
         type Rs WebResourceList =
              SiteVerificationWebResourceListResponse
         type Scopes WebResourceList =
              '["https://www.googleapis.com/auth/siteverification"]
-        requestClient WebResourceList{}
+        requestClient WebResourceList'{}
           = go (Just AltJSON) siteVerificationService
           where go
                   = buildClient

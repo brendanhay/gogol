@@ -54,7 +54,7 @@ type PretargetingConfigGetResource =
 -- | Gets a specific pretargeting configuration
 --
 -- /See:/ 'pretargetingConfigGet' smart constructor.
-data PretargetingConfigGet = PretargetingConfigGet
+data PretargetingConfigGet = PretargetingConfigGet'
     { _pcgAccountId :: !(Textual Int64)
     , _pcgConfigId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ pretargetingConfigGet
     -> Int64 -- ^ 'pcgConfigId'
     -> PretargetingConfigGet
 pretargetingConfigGet pPcgAccountId_ pPcgConfigId_ =
-    PretargetingConfigGet
+    PretargetingConfigGet'
     { _pcgAccountId = _Coerce # pPcgAccountId_
     , _pcgConfigId = _Coerce # pPcgConfigId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PretargetingConfigGet where
         type Rs PretargetingConfigGet = PretargetingConfig
         type Scopes PretargetingConfigGet =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient PretargetingConfigGet{..}
+        requestClient PretargetingConfigGet'{..}
           = go _pcgAccountId _pcgConfigId (Just AltJSON)
               adExchangeBuyerService
           where go

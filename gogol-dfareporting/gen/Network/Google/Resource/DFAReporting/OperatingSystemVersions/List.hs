@@ -53,7 +53,7 @@ type OperatingSystemVersionsListResource =
 -- | Retrieves a list of operating system versions.
 --
 -- /See:/ 'operatingSystemVersionsList' smart constructor.
-newtype OperatingSystemVersionsList = OperatingSystemVersionsList
+newtype OperatingSystemVersionsList = OperatingSystemVersionsList'
     { _osvlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ operatingSystemVersionsList
     :: Int64 -- ^ 'osvlProFileId'
     -> OperatingSystemVersionsList
 operatingSystemVersionsList pOsvlProFileId_ =
-    OperatingSystemVersionsList
+    OperatingSystemVersionsList'
     { _osvlProFileId = _Coerce # pOsvlProFileId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest OperatingSystemVersionsList
              OperatingSystemVersionsListResponse
         type Scopes OperatingSystemVersionsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OperatingSystemVersionsList{..}
+        requestClient OperatingSystemVersionsList'{..}
           = go _osvlProFileId (Just AltJSON)
               dFAReportingService
           where go

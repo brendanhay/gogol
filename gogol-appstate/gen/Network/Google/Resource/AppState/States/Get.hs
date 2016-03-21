@@ -53,7 +53,7 @@ type StatesGetResource =
 -- exist on the server, an HTTP 404 will be returned.
 --
 -- /See:/ 'statesGet' smart constructor.
-newtype StatesGet = StatesGet
+newtype StatesGet = StatesGet'
     { _sgStateKey :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ statesGet
     :: Int32 -- ^ 'sgStateKey'
     -> StatesGet
 statesGet pSgStateKey_ =
-    StatesGet
+    StatesGet'
     { _sgStateKey = _Coerce # pSgStateKey_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest StatesGet where
         type Rs StatesGet = GetResponse
         type Scopes StatesGet =
              '["https://www.googleapis.com/auth/appstate"]
-        requestClient StatesGet{..}
+        requestClient StatesGet'{..}
           = go _sgStateKey (Just AltJSON) appStateService
           where go
                   = buildClient (Proxy :: Proxy StatesGetResource)

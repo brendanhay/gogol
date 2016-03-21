@@ -57,7 +57,7 @@ type ProposalsPatchResource =
 -- | Update the given proposal. This method supports patch semantics.
 --
 -- /See:/ 'proposalsPatch' smart constructor.
-data ProposalsPatch = ProposalsPatch
+data ProposalsPatch = ProposalsPatch'
     { _ppUpdateAction   :: !ProposalsPatchUpdateAction
     , _ppRevisionNumber :: !(Textual Int64)
     , _ppPayload        :: !Proposal
@@ -82,7 +82,7 @@ proposalsPatch
     -> Text -- ^ 'ppProposalId'
     -> ProposalsPatch
 proposalsPatch pPpUpdateAction_ pPpRevisionNumber_ pPpPayload_ pPpProposalId_ =
-    ProposalsPatch
+    ProposalsPatch'
     { _ppUpdateAction = pPpUpdateAction_
     , _ppRevisionNumber = _Coerce # pPpRevisionNumber_
     , _ppPayload = pPpPayload_
@@ -119,7 +119,7 @@ instance GoogleRequest ProposalsPatch where
         type Rs ProposalsPatch = Proposal
         type Scopes ProposalsPatch =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProposalsPatch{..}
+        requestClient ProposalsPatch'{..}
           = go _ppProposalId _ppRevisionNumber _ppUpdateAction
               (Just AltJSON)
               _ppPayload

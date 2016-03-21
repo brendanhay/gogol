@@ -53,7 +53,7 @@ type CalendarListDeleteResource =
 -- | Deletes an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListDelete' smart constructor.
-newtype CalendarListDelete = CalendarListDelete
+newtype CalendarListDelete = CalendarListDelete'
     { _cldCalendarId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ calendarListDelete
     :: Text -- ^ 'cldCalendarId'
     -> CalendarListDelete
 calendarListDelete pCldCalendarId_ =
-    CalendarListDelete
+    CalendarListDelete'
     { _cldCalendarId = pCldCalendarId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest CalendarListDelete where
         type Rs CalendarListDelete = ()
         type Scopes CalendarListDelete =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarListDelete{..}
+        requestClient CalendarListDelete'{..}
           = go _cldCalendarId (Just AltJSON)
               appsCalendarService
           where go

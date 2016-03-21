@@ -60,7 +60,7 @@ type AccountshippingPatchResource =
 -- semantics.
 --
 -- /See:/ 'accountshippingPatch' smart constructor.
-data AccountshippingPatch = AccountshippingPatch
+data AccountshippingPatch = AccountshippingPatch'
     { _ap1MerchantId :: !(Textual Word64)
     , _ap1Payload    :: !AccountShipping
     , _ap1AccountId  :: !(Textual Word64)
@@ -84,7 +84,7 @@ accountshippingPatch
     -> Word64 -- ^ 'ap1AccountId'
     -> AccountshippingPatch
 accountshippingPatch pAp1MerchantId_ pAp1Payload_ pAp1AccountId_ =
-    AccountshippingPatch
+    AccountshippingPatch'
     { _ap1MerchantId = _Coerce # pAp1MerchantId_
     , _ap1Payload = pAp1Payload_
     , _ap1AccountId = _Coerce # pAp1AccountId_
@@ -119,7 +119,7 @@ instance GoogleRequest AccountshippingPatch where
         type Rs AccountshippingPatch = AccountShipping
         type Scopes AccountshippingPatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountshippingPatch{..}
+        requestClient AccountshippingPatch'{..}
           = go _ap1MerchantId _ap1AccountId _ap1DryRun
               (Just AltJSON)
               _ap1Payload

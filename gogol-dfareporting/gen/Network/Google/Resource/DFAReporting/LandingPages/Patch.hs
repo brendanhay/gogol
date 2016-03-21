@@ -62,7 +62,7 @@ type LandingPagesPatchResource =
 -- semantics.
 --
 -- /See:/ 'landingPagesPatch' smart constructor.
-data LandingPagesPatch = LandingPagesPatch
+data LandingPagesPatch = LandingPagesPatch'
     { _lppCampaignId :: !(Textual Int64)
     , _lppProFileId  :: !(Textual Int64)
     , _lppPayload    :: !LandingPage
@@ -87,7 +87,7 @@ landingPagesPatch
     -> Int64 -- ^ 'lppId'
     -> LandingPagesPatch
 landingPagesPatch pLppCampaignId_ pLppProFileId_ pLppPayload_ pLppId_ =
-    LandingPagesPatch
+    LandingPagesPatch'
     { _lppCampaignId = _Coerce # pLppCampaignId_
     , _lppProFileId = _Coerce # pLppProFileId_
     , _lppPayload = pLppPayload_
@@ -121,7 +121,7 @@ instance GoogleRequest LandingPagesPatch where
         type Rs LandingPagesPatch = LandingPage
         type Scopes LandingPagesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient LandingPagesPatch{..}
+        requestClient LandingPagesPatch'{..}
           = go _lppProFileId _lppCampaignId (Just _lppId)
               (Just AltJSON)
               _lppPayload

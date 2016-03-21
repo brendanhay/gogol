@@ -71,7 +71,7 @@ type DirectorySiteContactsListResource =
 -- | Retrieves a list of directory site contacts, possibly filtered.
 --
 -- /See:/ 'directorySiteContactsList' smart constructor.
-data DirectorySiteContactsList = DirectorySiteContactsList
+data DirectorySiteContactsList = DirectorySiteContactsList'
     { _dsclSearchString     :: !(Maybe Text)
     , _dsclIds              :: !(Maybe [Textual Int64])
     , _dsclProFileId        :: !(Textual Int64)
@@ -105,7 +105,7 @@ directorySiteContactsList
     :: Int64 -- ^ 'dsclProFileId'
     -> DirectorySiteContactsList
 directorySiteContactsList pDsclProFileId_ =
-    DirectorySiteContactsList
+    DirectorySiteContactsList'
     { _dsclSearchString = Nothing
     , _dsclIds = Nothing
     , _dsclProFileId = _Coerce # pDsclProFileId_
@@ -183,7 +183,7 @@ instance GoogleRequest DirectorySiteContactsList
              DirectorySiteContactsListResponse
         type Scopes DirectorySiteContactsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DirectorySiteContactsList{..}
+        requestClient DirectorySiteContactsList'{..}
           = go _dsclProFileId _dsclSearchString
               (_dsclIds ^. _Default)
               (_dsclDirectorySiteIds ^. _Default)

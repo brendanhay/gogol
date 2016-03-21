@@ -56,7 +56,7 @@ type CalendarListInsertResource =
 -- | Adds an entry to the user\'s calendar list.
 --
 -- /See:/ 'calendarListInsert' smart constructor.
-data CalendarListInsert = CalendarListInsert
+data CalendarListInsert = CalendarListInsert'
     { _cliPayload        :: !CalendarListEntry
     , _cliColorRgbFormat :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ calendarListInsert
     :: CalendarListEntry -- ^ 'cliPayload'
     -> CalendarListInsert
 calendarListInsert pCliPayload_ =
-    CalendarListInsert
+    CalendarListInsert'
     { _cliPayload = pCliPayload_
     , _cliColorRgbFormat = Nothing
     }
@@ -95,7 +95,7 @@ instance GoogleRequest CalendarListInsert where
         type Rs CalendarListInsert = CalendarListEntry
         type Scopes CalendarListInsert =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarListInsert{..}
+        requestClient CalendarListInsert'{..}
           = go _cliColorRgbFormat (Just AltJSON) _cliPayload
               appsCalendarService
           where go

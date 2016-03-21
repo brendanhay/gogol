@@ -68,7 +68,7 @@ type ReadGroupSetsGetResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSetsGet' smart constructor.
-data ReadGroupSetsGet = ReadGroupSetsGet
+data ReadGroupSetsGet = ReadGroupSetsGet'
     { _rgsgXgafv          :: !(Maybe Text)
     , _rgsgReadGroupSetId :: !Text
     , _rgsgUploadProtocol :: !(Maybe Text)
@@ -102,7 +102,7 @@ readGroupSetsGet
     :: Text -- ^ 'rgsgReadGroupSetId'
     -> ReadGroupSetsGet
 readGroupSetsGet pRgsgReadGroupSetId_ =
-    ReadGroupSetsGet
+    ReadGroupSetsGet'
     { _rgsgXgafv = Nothing
     , _rgsgReadGroupSetId = pRgsgReadGroupSetId_
     , _rgsgUploadProtocol = Nothing
@@ -163,7 +163,7 @@ instance GoogleRequest ReadGroupSetsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReadGroupSetsGet{..}
+        requestClient ReadGroupSetsGet'{..}
           = go _rgsgReadGroupSetId _rgsgXgafv
               _rgsgUploadProtocol
               (Just _rgsgPp)

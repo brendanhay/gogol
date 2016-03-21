@@ -51,7 +51,7 @@ type TablesDeleteResource =
 -- | Delete a table.
 --
 -- /See:/ 'tablesDelete' smart constructor.
-newtype TablesDelete = TablesDelete
+newtype TablesDelete = TablesDelete'
     { _tdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ tablesDelete
     :: Text -- ^ 'tdId'
     -> TablesDelete
 tablesDelete pTdId_ =
-    TablesDelete
+    TablesDelete'
     { _tdId = pTdId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest TablesDelete where
         type Rs TablesDelete = ()
         type Scopes TablesDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesDelete{..}
+        requestClient TablesDelete'{..}
           = go _tdId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesDeleteResource)

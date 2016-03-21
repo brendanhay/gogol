@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- others recognize the person.
 --
 -- /See:/ 'photo' smart constructor.
-data Photo = Photo
+data Photo = Photo'
     { _pURL      :: !(Maybe Text)
     , _pMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -39,7 +39,7 @@ data Photo = Photo
 photo
     :: Photo
 photo =
-    Photo
+    Photo'
     { _pURL = Nothing
     , _pMetadata = Nothing
     }
@@ -57,10 +57,10 @@ instance FromJSON Photo where
         parseJSON
           = withObject "Photo"
               (\ o ->
-                 Photo <$> (o .:? "url") <*> (o .:? "metadata"))
+                 Photo' <$> (o .:? "url") <*> (o .:? "metadata"))
 
 instance ToJSON Photo where
-        toJSON Photo{..}
+        toJSON Photo'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _pURL,
@@ -69,7 +69,7 @@ instance ToJSON Photo where
 -- | An event related to the person.
 --
 -- /See:/ 'event' smart constructor.
-data Event = Event
+data Event = Event'
     { _eDate          :: !(Maybe Date)
     , _eMetadata      :: !(Maybe FieldMetadata)
     , _eType          :: !(Maybe Text)
@@ -90,7 +90,7 @@ data Event = Event
 event
     :: Event
 event =
-    Event
+    Event'
     { _eDate = Nothing
     , _eMetadata = Nothing
     , _eType = Nothing
@@ -123,13 +123,13 @@ instance FromJSON Event where
         parseJSON
           = withObject "Event"
               (\ o ->
-                 Event <$>
+                 Event' <$>
                    (o .:? "date") <*> (o .:? "metadata") <*>
                      (o .:? "type")
                      <*> (o .:? "formattedType"))
 
 instance ToJSON Event where
-        toJSON Event{..}
+        toJSON Event'{..}
           = object
               (catMaybes
                  [("date" .=) <$> _eDate,
@@ -139,7 +139,7 @@ instance ToJSON Event where
 
 --
 -- /See:/ 'listConnectionsResponse' smart constructor.
-data ListConnectionsResponse = ListConnectionsResponse
+data ListConnectionsResponse = ListConnectionsResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrConnections   :: !(Maybe [Person])
     , _lcrNextSyncToken :: !(Maybe Text)
@@ -157,7 +157,7 @@ data ListConnectionsResponse = ListConnectionsResponse
 listConnectionsResponse
     :: ListConnectionsResponse
 listConnectionsResponse =
-    ListConnectionsResponse
+    ListConnectionsResponse'
     { _lcrNextPageToken = Nothing
     , _lcrConnections = Nothing
     , _lcrNextSyncToken = Nothing
@@ -187,13 +187,13 @@ instance FromJSON ListConnectionsResponse where
         parseJSON
           = withObject "ListConnectionsResponse"
               (\ o ->
-                 ListConnectionsResponse <$>
+                 ListConnectionsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "connections" .!= mempty)
                      <*> (o .:? "nextSyncToken"))
 
 instance ToJSON ListConnectionsResponse where
-        toJSON ListConnectionsResponse{..}
+        toJSON ListConnectionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lcrNextPageToken,
@@ -203,7 +203,7 @@ instance ToJSON ListConnectionsResponse where
 -- | A Google Apps Domain membership.
 --
 -- /See:/ 'domainMembership' smart constructor.
-newtype DomainMembership = DomainMembership
+newtype DomainMembership = DomainMembership'
     { _dmInViewerDomain :: Maybe Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -215,7 +215,7 @@ newtype DomainMembership = DomainMembership
 domainMembership
     :: DomainMembership
 domainMembership =
-    DomainMembership
+    DomainMembership'
     { _dmInViewerDomain = Nothing
     }
 
@@ -229,10 +229,10 @@ instance FromJSON DomainMembership where
         parseJSON
           = withObject "DomainMembership"
               (\ o ->
-                 DomainMembership <$> (o .:? "inViewerDomain"))
+                 DomainMembership' <$> (o .:? "inViewerDomain"))
 
 instance ToJSON DomainMembership where
-        toJSON DomainMembership{..}
+        toJSON DomainMembership'{..}
           = object
               (catMaybes
                  [("inViewerDomain" .=) <$> _dmInViewerDomain])
@@ -240,7 +240,7 @@ instance ToJSON DomainMembership where
 -- | The kind of relationship the person is looking for.
 --
 -- /See:/ 'relationshipInterest' smart constructor.
-data RelationshipInterest = RelationshipInterest
+data RelationshipInterest = RelationshipInterest'
     { _riValue          :: !(Maybe Text)
     , _riMetadata       :: !(Maybe FieldMetadata)
     , _riFormattedValue :: !(Maybe Text)
@@ -258,7 +258,7 @@ data RelationshipInterest = RelationshipInterest
 relationshipInterest
     :: RelationshipInterest
 relationshipInterest =
-    RelationshipInterest
+    RelationshipInterest'
     { _riValue = Nothing
     , _riMetadata = Nothing
     , _riFormattedValue = Nothing
@@ -288,12 +288,12 @@ instance FromJSON RelationshipInterest where
         parseJSON
           = withObject "RelationshipInterest"
               (\ o ->
-                 RelationshipInterest <$>
+                 RelationshipInterest' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
                      (o .:? "formattedValue"))
 
 instance ToJSON RelationshipInterest where
-        toJSON RelationshipInterest{..}
+        toJSON RelationshipInterest'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _riValue,
@@ -303,7 +303,7 @@ instance ToJSON RelationshipInterest where
 -- | A person\'s bragging rights.
 --
 -- /See:/ 'braggingRights' smart constructor.
-data BraggingRights = BraggingRights
+data BraggingRights = BraggingRights'
     { _brValue    :: !(Maybe Text)
     , _brMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -318,7 +318,7 @@ data BraggingRights = BraggingRights
 braggingRights
     :: BraggingRights
 braggingRights =
-    BraggingRights
+    BraggingRights'
     { _brValue = Nothing
     , _brMetadata = Nothing
     }
@@ -336,11 +336,11 @@ instance FromJSON BraggingRights where
         parseJSON
           = withObject "BraggingRights"
               (\ o ->
-                 BraggingRights <$>
+                 BraggingRights' <$>
                    (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON BraggingRights where
-        toJSON BraggingRights{..}
+        toJSON BraggingRights'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _brValue,
@@ -349,7 +349,7 @@ instance ToJSON BraggingRights where
 -- | A person\'s membership in a group.
 --
 -- /See:/ 'membership' smart constructor.
-data Membership = Membership
+data Membership = Membership'
     { _mDomainMembership       :: !(Maybe DomainMembership)
     , _mContactGroupMembership :: !(Maybe ContactGroupMembership)
     , _mMetadata               :: !(Maybe FieldMetadata)
@@ -367,7 +367,7 @@ data Membership = Membership
 membership
     :: Membership
 membership =
-    Membership
+    Membership'
     { _mDomainMembership = Nothing
     , _mContactGroupMembership = Nothing
     , _mMetadata = Nothing
@@ -394,13 +394,13 @@ instance FromJSON Membership where
         parseJSON
           = withObject "Membership"
               (\ o ->
-                 Membership <$>
+                 Membership' <$>
                    (o .:? "domainMembership") <*>
                      (o .:? "contactGroupMembership")
                      <*> (o .:? "metadata"))
 
 instance ToJSON Membership where
-        toJSON Membership{..}
+        toJSON Membership'{..}
           = object
               (catMaybes
                  [("domainMembership" .=) <$> _mDomainMembership,
@@ -416,7 +416,7 @@ instance ToJSON Membership where
 -- \`metadata.primary\` set to true.
 --
 -- /See:/ 'person' smart constructor.
-data Person = Person
+data Person = Person'
     { _perEmailAddresses        :: !(Maybe [EmailAddress])
     , _perAgeRange              :: !(Maybe Text)
     , _perEtag                  :: !(Maybe Text)
@@ -512,7 +512,7 @@ data Person = Person
 person
     :: Person
 person =
-    Person
+    Person'
     { _perEmailAddresses = Nothing
     , _perAgeRange = Nothing
     , _perEtag = Nothing
@@ -756,7 +756,7 @@ instance FromJSON Person where
         parseJSON
           = withObject "Person"
               (\ o ->
-                 Person <$>
+                 Person' <$>
                    (o .:? "emailAddresses" .!= mempty) <*>
                      (o .:? "ageRange")
                      <*> (o .:? "etag")
@@ -788,7 +788,7 @@ instance FromJSON Person where
                      <*> (o .:? "relationshipInterests" .!= mempty))
 
 instance ToJSON Person where
-        toJSON Person{..}
+        toJSON Person'{..}
           = object
               (catMaybes
                  [("emailAddresses" .=) <$> _perEmailAddresses,
@@ -826,7 +826,7 @@ instance ToJSON Person where
 -- | A Google contact group membership.
 --
 -- /See:/ 'contactGroupMembership' smart constructor.
-newtype ContactGroupMembership = ContactGroupMembership
+newtype ContactGroupMembership = ContactGroupMembership'
     { _cgmContactGroupId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -838,7 +838,7 @@ newtype ContactGroupMembership = ContactGroupMembership
 contactGroupMembership
     :: ContactGroupMembership
 contactGroupMembership =
-    ContactGroupMembership
+    ContactGroupMembership'
     { _cgmContactGroupId = Nothing
     }
 
@@ -855,10 +855,10 @@ instance FromJSON ContactGroupMembership where
         parseJSON
           = withObject "ContactGroupMembership"
               (\ o ->
-                 ContactGroupMembership <$> (o .:? "contactGroupId"))
+                 ContactGroupMembership' <$> (o .:? "contactGroupId"))
 
 instance ToJSON ContactGroupMembership where
-        toJSON ContactGroupMembership{..}
+        toJSON ContactGroupMembership'{..}
           = object
               (catMaybes
                  [("contactGroupId" .=) <$> _cgmContactGroupId])
@@ -866,7 +866,7 @@ instance ToJSON ContactGroupMembership where
 -- | A person\'s locale preference.
 --
 -- /See:/ 'locale' smart constructor.
-data Locale = Locale
+data Locale = Locale'
     { _lValue    :: !(Maybe Text)
     , _lMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -881,7 +881,7 @@ data Locale = Locale
 locale
     :: Locale
 locale =
-    Locale
+    Locale'
     { _lValue = Nothing
     , _lMetadata = Nothing
     }
@@ -900,10 +900,10 @@ instance FromJSON Locale where
         parseJSON
           = withObject "Locale"
               (\ o ->
-                 Locale <$> (o .:? "value") <*> (o .:? "metadata"))
+                 Locale' <$> (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON Locale where
-        toJSON Locale{..}
+        toJSON Locale'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _lValue,
@@ -912,7 +912,7 @@ instance ToJSON Locale where
 -- | A person\'s relationship status.
 --
 -- /See:/ 'relationshipStatus' smart constructor.
-data RelationshipStatus = RelationshipStatus
+data RelationshipStatus = RelationshipStatus'
     { _rsValue          :: !(Maybe Text)
     , _rsMetadata       :: !(Maybe FieldMetadata)
     , _rsFormattedValue :: !(Maybe Text)
@@ -930,7 +930,7 @@ data RelationshipStatus = RelationshipStatus
 relationshipStatus
     :: RelationshipStatus
 relationshipStatus =
-    RelationshipStatus
+    RelationshipStatus'
     { _rsValue = Nothing
     , _rsMetadata = Nothing
     , _rsFormattedValue = Nothing
@@ -961,12 +961,12 @@ instance FromJSON RelationshipStatus where
         parseJSON
           = withObject "RelationshipStatus"
               (\ o ->
-                 RelationshipStatus <$>
+                 RelationshipStatus' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
                      (o .:? "formattedValue"))
 
 instance ToJSON RelationshipStatus where
-        toJSON RelationshipStatus{..}
+        toJSON RelationshipStatus'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rsValue,
@@ -976,7 +976,7 @@ instance ToJSON RelationshipStatus where
 -- | A person\'s associated URLs.
 --
 -- /See:/ 'url' smart constructor.
-data URL = URL
+data URL = URL'
     { _uValue         :: !(Maybe Text)
     , _uMetadata      :: !(Maybe FieldMetadata)
     , _uType          :: !(Maybe Text)
@@ -997,7 +997,7 @@ data URL = URL
 url
     :: URL
 url =
-    URL
+    URL'
     { _uValue = Nothing
     , _uMetadata = Nothing
     , _uType = Nothing
@@ -1032,13 +1032,13 @@ instance FromJSON URL where
         parseJSON
           = withObject "URL"
               (\ o ->
-                 URL <$>
+                 URL' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
                      (o .:? "type")
                      <*> (o .:? "formattedType"))
 
 instance ToJSON URL where
-        toJSON URL{..}
+        toJSON URL'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _uValue,
@@ -1050,7 +1050,7 @@ instance ToJSON URL where
 -- fields are optional.
 --
 -- /See:/ 'address' smart constructor.
-data Address = Address
+data Address = Address'
     { _aStreetAddress   :: !(Maybe Text)
     , _aPoBox           :: !(Maybe Text)
     , _aCountry         :: !(Maybe Text)
@@ -1095,7 +1095,7 @@ data Address = Address
 address
     :: Address
 address =
-    Address
+    Address'
     { _aStreetAddress = Nothing
     , _aPoBox = Nothing
     , _aCountry = Nothing
@@ -1178,7 +1178,7 @@ instance FromJSON Address where
         parseJSON
           = withObject "Address"
               (\ o ->
-                 Address <$>
+                 Address' <$>
                    (o .:? "streetAddress") <*> (o .:? "poBox") <*>
                      (o .:? "country")
                      <*> (o .:? "postalCode")
@@ -1192,7 +1192,7 @@ instance FromJSON Address where
                      <*> (o .:? "formattedType"))
 
 instance ToJSON Address where
-        toJSON Address{..}
+        toJSON Address'{..}
           = object
               (catMaybes
                  [("streetAddress" .=) <$> _aStreetAddress,
@@ -1210,7 +1210,7 @@ instance ToJSON Address where
 -- | A person\'s relation to another person.
 --
 -- /See:/ 'relation' smart constructor.
-data Relation = Relation
+data Relation = Relation'
     { _rPerson        :: !(Maybe Text)
     , _rMetadata      :: !(Maybe FieldMetadata)
     , _rType          :: !(Maybe Text)
@@ -1231,7 +1231,7 @@ data Relation = Relation
 relation
     :: Relation
 relation =
-    Relation
+    Relation'
     { _rPerson = Nothing
     , _rMetadata = Nothing
     , _rType = Nothing
@@ -1268,13 +1268,13 @@ instance FromJSON Relation where
         parseJSON
           = withObject "Relation"
               (\ o ->
-                 Relation <$>
+                 Relation' <$>
                    (o .:? "person") <*> (o .:? "metadata") <*>
                      (o .:? "type")
                      <*> (o .:? "formattedType"))
 
 instance ToJSON Relation where
-        toJSON Relation{..}
+        toJSON Relation'{..}
           = object
               (catMaybes
                  [("person" .=) <$> _rPerson,
@@ -1284,7 +1284,7 @@ instance ToJSON Relation where
 
 --
 -- /See:/ 'getPeopleResponse' smart constructor.
-newtype GetPeopleResponse = GetPeopleResponse
+newtype GetPeopleResponse = GetPeopleResponse'
     { _gprResponses :: Maybe [PersonResponse]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1296,7 +1296,7 @@ newtype GetPeopleResponse = GetPeopleResponse
 getPeopleResponse
     :: GetPeopleResponse
 getPeopleResponse =
-    GetPeopleResponse
+    GetPeopleResponse'
     { _gprResponses = Nothing
     }
 
@@ -1311,10 +1311,11 @@ instance FromJSON GetPeopleResponse where
         parseJSON
           = withObject "GetPeopleResponse"
               (\ o ->
-                 GetPeopleResponse <$> (o .:? "responses" .!= mempty))
+                 GetPeopleResponse' <$>
+                   (o .:? "responses" .!= mempty))
 
 instance ToJSON GetPeopleResponse where
-        toJSON GetPeopleResponse{..}
+        toJSON GetPeopleResponse'{..}
           = object
               (catMaybes [("responses" .=) <$> _gprResponses])
 
@@ -1323,7 +1324,7 @@ instance ToJSON GetPeopleResponse where
 -- same date, but are not guaranteed to.
 --
 -- /See:/ 'birthday' smart constructor.
-data Birthday = Birthday
+data Birthday = Birthday'
     { _bText     :: !(Maybe Text)
     , _bDate     :: !(Maybe Date)
     , _bMetadata :: !(Maybe FieldMetadata)
@@ -1341,7 +1342,7 @@ data Birthday = Birthday
 birthday
     :: Birthday
 birthday =
-    Birthday
+    Birthday'
     { _bText = Nothing
     , _bDate = Nothing
     , _bMetadata = Nothing
@@ -1364,12 +1365,12 @@ instance FromJSON Birthday where
         parseJSON
           = withObject "Birthday"
               (\ o ->
-                 Birthday <$>
+                 Birthday' <$>
                    (o .:? "text") <*> (o .:? "date") <*>
                      (o .:? "metadata"))
 
 instance ToJSON Birthday where
-        toJSON Birthday{..}
+        toJSON Birthday'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _bText, ("date" .=) <$> _bDate,
@@ -1384,7 +1385,7 @@ instance ToJSON Birthday where
 -- of year; for example, anniversary date.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date
+data Date = Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
@@ -1402,7 +1403,7 @@ data Date = Date
 date
     :: Date
 date =
-    Date
+    Date'
     { _dDay = Nothing
     , _dYear = Nothing
     , _dMonth = Nothing
@@ -1432,11 +1433,11 @@ instance FromJSON Date where
         parseJSON
           = withObject "Date"
               (\ o ->
-                 Date <$>
+                 Date' <$>
                    (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
 
 instance ToJSON Date where
-        toJSON Date{..}
+        toJSON Date'{..}
           = object
               (catMaybes
                  [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
@@ -1445,7 +1446,7 @@ instance ToJSON Date where
 -- | A brief one-line description of the person.
 --
 -- /See:/ 'tagline' smart constructor.
-data Tagline = Tagline
+data Tagline = Tagline'
     { _tValue    :: !(Maybe Text)
     , _tMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1460,7 +1461,7 @@ data Tagline = Tagline
 tagline
     :: Tagline
 tagline =
-    Tagline
+    Tagline'
     { _tValue = Nothing
     , _tMetadata = Nothing
     }
@@ -1478,10 +1479,10 @@ instance FromJSON Tagline where
         parseJSON
           = withObject "Tagline"
               (\ o ->
-                 Tagline <$> (o .:? "value") <*> (o .:? "metadata"))
+                 Tagline' <$> (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON Tagline where
-        toJSON Tagline{..}
+        toJSON Tagline'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tValue,
@@ -1490,7 +1491,7 @@ instance ToJSON Tagline where
 -- | A person\'s past or current residence.
 --
 -- /See:/ 'residence' smart constructor.
-data Residence = Residence
+data Residence = Residence'
     { _resValue    :: !(Maybe Text)
     , _resCurrent  :: !(Maybe Bool)
     , _resMetadata :: !(Maybe FieldMetadata)
@@ -1508,7 +1509,7 @@ data Residence = Residence
 residence
     :: Residence
 residence =
-    Residence
+    Residence'
     { _resValue = Nothing
     , _resCurrent = Nothing
     , _resMetadata = Nothing
@@ -1533,12 +1534,12 @@ instance FromJSON Residence where
         parseJSON
           = withObject "Residence"
               (\ o ->
-                 Residence <$>
+                 Residence' <$>
                    (o .:? "value") <*> (o .:? "current") <*>
                      (o .:? "metadata"))
 
 instance ToJSON Residence where
-        toJSON Residence{..}
+        toJSON Residence'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _resValue,
@@ -1548,7 +1549,7 @@ instance ToJSON Residence where
 -- | A person\'s gender.
 --
 -- /See:/ 'gender' smart constructor.
-data Gender = Gender
+data Gender = Gender'
     { _gValue          :: !(Maybe Text)
     , _gMetadata       :: !(Maybe FieldMetadata)
     , _gFormattedValue :: !(Maybe Text)
@@ -1566,7 +1567,7 @@ data Gender = Gender
 gender
     :: Gender
 gender =
-    Gender
+    Gender'
     { _gValue = Nothing
     , _gMetadata = Nothing
     , _gFormattedValue = Nothing
@@ -1594,12 +1595,12 @@ instance FromJSON Gender where
         parseJSON
           = withObject "Gender"
               (\ o ->
-                 Gender <$>
+                 Gender' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
                      (o .:? "formattedValue"))
 
 instance ToJSON Gender where
-        toJSON Gender{..}
+        toJSON Gender'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _gValue,
@@ -1609,7 +1610,7 @@ instance ToJSON Gender where
 -- | A person\'s name. If the name is a mononym, the family name is empty.
 --
 -- /See:/ 'name' smart constructor.
-data Name = Name
+data Name = Name'
     { _nGivenName               :: !(Maybe Text)
     , _nPhoneticHonorificSuffix :: !(Maybe Text)
     , _nMiddleName              :: !(Maybe Text)
@@ -1654,7 +1655,7 @@ data Name = Name
 name
     :: Name
 name =
-    Name
+    Name'
     { _nGivenName = Nothing
     , _nPhoneticHonorificSuffix = Nothing
     , _nMiddleName = Nothing
@@ -1741,7 +1742,7 @@ instance FromJSON Name where
         parseJSON
           = withObject "Name"
               (\ o ->
-                 Name <$>
+                 Name' <$>
                    (o .:? "givenName") <*>
                      (o .:? "phoneticHonorificSuffix")
                      <*> (o .:? "middleName")
@@ -1756,7 +1757,7 @@ instance FromJSON Name where
                      <*> (o .:? "honorificSuffix"))
 
 instance ToJSON Name where
-        toJSON Name{..}
+        toJSON Name'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _nGivenName,
@@ -1777,7 +1778,7 @@ instance ToJSON Name where
 -- | Metadata about a field.
 --
 -- /See:/ 'fieldMetadata' smart constructor.
-data FieldMetadata = FieldMetadata
+data FieldMetadata = FieldMetadata'
     { _fmVerified :: !(Maybe Bool)
     , _fmPrimary  :: !(Maybe Bool)
     , _fmSource   :: !(Maybe Source)
@@ -1795,7 +1796,7 @@ data FieldMetadata = FieldMetadata
 fieldMetadata
     :: FieldMetadata
 fieldMetadata =
-    FieldMetadata
+    FieldMetadata'
     { _fmVerified = Nothing
     , _fmPrimary = Nothing
     , _fmSource = Nothing
@@ -1822,12 +1823,12 @@ instance FromJSON FieldMetadata where
         parseJSON
           = withObject "FieldMetadata"
               (\ o ->
-                 FieldMetadata <$>
+                 FieldMetadata' <$>
                    (o .:? "verified") <*> (o .:? "primary") <*>
                      (o .:? "source"))
 
 instance ToJSON FieldMetadata where
-        toJSON FieldMetadata{..}
+        toJSON FieldMetadata'{..}
           = object
               (catMaybes
                  [("verified" .=) <$> _fmVerified,
@@ -1837,7 +1838,7 @@ instance ToJSON FieldMetadata where
 -- | A person\'s phone number.
 --
 -- /See:/ 'phoneNumber' smart constructor.
-data PhoneNumber = PhoneNumber
+data PhoneNumber = PhoneNumber'
     { _pnCanonicalForm :: !(Maybe Text)
     , _pnValue         :: !(Maybe Text)
     , _pnMetadata      :: !(Maybe FieldMetadata)
@@ -1861,7 +1862,7 @@ data PhoneNumber = PhoneNumber
 phoneNumber
     :: PhoneNumber
 phoneNumber =
-    PhoneNumber
+    PhoneNumber'
     { _pnCanonicalForm = Nothing
     , _pnValue = Nothing
     , _pnMetadata = Nothing
@@ -1906,14 +1907,14 @@ instance FromJSON PhoneNumber where
         parseJSON
           = withObject "PhoneNumber"
               (\ o ->
-                 PhoneNumber <$>
+                 PhoneNumber' <$>
                    (o .:? "canonicalForm") <*> (o .:? "value") <*>
                      (o .:? "metadata")
                      <*> (o .:? "type")
                      <*> (o .:? "formattedType"))
 
 instance ToJSON PhoneNumber where
-        toJSON PhoneNumber{..}
+        toJSON PhoneNumber'{..}
           = object
               (catMaybes
                  [("canonicalForm" .=) <$> _pnCanonicalForm,
@@ -1925,7 +1926,7 @@ instance ToJSON PhoneNumber where
 -- | A person\'s occupation.
 --
 -- /See:/ 'occupation' smart constructor.
-data Occupation = Occupation
+data Occupation = Occupation'
     { _oValue    :: !(Maybe Text)
     , _oMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1940,7 +1941,7 @@ data Occupation = Occupation
 occupation
     :: Occupation
 occupation =
-    Occupation
+    Occupation'
     { _oValue = Nothing
     , _oMetadata = Nothing
     }
@@ -1958,11 +1959,11 @@ instance FromJSON Occupation where
         parseJSON
           = withObject "Occupation"
               (\ o ->
-                 Occupation <$>
+                 Occupation' <$>
                    (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON Occupation where
-        toJSON Occupation{..}
+        toJSON Occupation'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _oValue,
@@ -1971,7 +1972,7 @@ instance ToJSON Occupation where
 -- | A person\'s email address.
 --
 -- /See:/ 'emailAddress' smart constructor.
-data EmailAddress = EmailAddress
+data EmailAddress = EmailAddress'
     { _eaValue         :: !(Maybe Text)
     , _eaMetadata      :: !(Maybe FieldMetadata)
     , _eaType          :: !(Maybe Text)
@@ -1992,7 +1993,7 @@ data EmailAddress = EmailAddress
 emailAddress
     :: EmailAddress
 emailAddress =
-    EmailAddress
+    EmailAddress'
     { _eaValue = Nothing
     , _eaMetadata = Nothing
     , _eaType = Nothing
@@ -2025,13 +2026,13 @@ instance FromJSON EmailAddress where
         parseJSON
           = withObject "EmailAddress"
               (\ o ->
-                 EmailAddress <$>
+                 EmailAddress' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
                      (o .:? "type")
                      <*> (o .:? "formattedType"))
 
 instance ToJSON EmailAddress where
-        toJSON EmailAddress{..}
+        toJSON EmailAddress'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _eaValue,
@@ -2042,7 +2043,7 @@ instance ToJSON EmailAddress where
 -- | The source of a field.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source
+data Source = Source'
     { _sId   :: !(Maybe Text)
     , _sType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2057,7 +2058,7 @@ data Source = Source
 source
     :: Source
 source =
-    Source
+    Source'
     { _sId = Nothing
     , _sType = Nothing
     }
@@ -2073,10 +2074,10 @@ sType = lens _sType (\ s a -> s{_sType = a})
 instance FromJSON Source where
         parseJSON
           = withObject "Source"
-              (\ o -> Source <$> (o .:? "id") <*> (o .:? "type"))
+              (\ o -> Source' <$> (o .:? "id") <*> (o .:? "type"))
 
 instance ToJSON Source where
-        toJSON Source{..}
+        toJSON Source'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _sId, ("type" .=) <$> _sType])
@@ -2084,7 +2085,7 @@ instance ToJSON Source where
 -- | A person\'s instant messaging client.
 --
 -- /See:/ 'imClient' smart constructor.
-data ImClient = ImClient
+data ImClient = ImClient'
     { _icFormattedProtocol :: !(Maybe Text)
     , _icUsername          :: !(Maybe Text)
     , _icProtocol          :: !(Maybe Text)
@@ -2111,7 +2112,7 @@ data ImClient = ImClient
 imClient
     :: ImClient
 imClient =
-    ImClient
+    ImClient'
     { _icFormattedProtocol = Nothing
     , _icUsername = Nothing
     , _icProtocol = Nothing
@@ -2162,7 +2163,7 @@ instance FromJSON ImClient where
         parseJSON
           = withObject "ImClient"
               (\ o ->
-                 ImClient <$>
+                 ImClient' <$>
                    (o .:? "formattedProtocol") <*> (o .:? "username")
                      <*> (o .:? "protocol")
                      <*> (o .:? "metadata")
@@ -2170,7 +2171,7 @@ instance FromJSON ImClient where
                      <*> (o .:? "formattedType"))
 
 instance ToJSON ImClient where
-        toJSON ImClient{..}
+        toJSON ImClient'{..}
           = object
               (catMaybes
                  [("formattedProtocol" .=) <$> _icFormattedProtocol,
@@ -2183,7 +2184,7 @@ instance ToJSON ImClient where
 -- | Metadata about a person.
 --
 -- /See:/ 'personMetadata' smart constructor.
-data PersonMetadata = PersonMetadata
+data PersonMetadata = PersonMetadata'
     { _pmPreviousResourceNames :: !(Maybe [Text])
     , _pmObjectType            :: !(Maybe Text)
     , _pmSources               :: !(Maybe [Source])
@@ -2204,7 +2205,7 @@ data PersonMetadata = PersonMetadata
 personMetadata
     :: PersonMetadata
 personMetadata =
-    PersonMetadata
+    PersonMetadata'
     { _pmPreviousResourceNames = Nothing
     , _pmObjectType = Nothing
     , _pmSources = Nothing
@@ -2246,14 +2247,14 @@ instance FromJSON PersonMetadata where
         parseJSON
           = withObject "PersonMetadata"
               (\ o ->
-                 PersonMetadata <$>
+                 PersonMetadata' <$>
                    (o .:? "previousResourceNames" .!= mempty) <*>
                      (o .:? "objectType")
                      <*> (o .:? "sources" .!= mempty)
                      <*> (o .:? "deleted"))
 
 instance ToJSON PersonMetadata where
-        toJSON PersonMetadata{..}
+        toJSON PersonMetadata'{..}
           = object
               (catMaybes
                  [("previousResourceNames" .=) <$>
@@ -2265,7 +2266,7 @@ instance ToJSON PersonMetadata where
 -- | A person\'s nickname.
 --
 -- /See:/ 'nickname' smart constructor.
-data Nickname = Nickname
+data Nickname = Nickname'
     { _nicValue    :: !(Maybe Text)
     , _nicMetadata :: !(Maybe FieldMetadata)
     , _nicType     :: !(Maybe Text)
@@ -2283,7 +2284,7 @@ data Nickname = Nickname
 nickname
     :: Nickname
 nickname =
-    Nickname
+    Nickname'
     { _nicValue = Nothing
     , _nicMetadata = Nothing
     , _nicType = Nothing
@@ -2306,12 +2307,12 @@ instance FromJSON Nickname where
         parseJSON
           = withObject "Nickname"
               (\ o ->
-                 Nickname <$>
+                 Nickname' <$>
                    (o .:? "value") <*> (o .:? "metadata") <*>
                      (o .:? "type"))
 
 instance ToJSON Nickname where
-        toJSON Nickname{..}
+        toJSON Nickname'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _nicValue,
@@ -2322,7 +2323,7 @@ instance ToJSON Nickname where
 -- permitted.
 --
 -- /See:/ 'organization' smart constructor.
-data Organization = Organization
+data Organization = Organization'
     { _orgDePartment     :: !(Maybe Text)
     , _orgLocation       :: !(Maybe Text)
     , _orgDomain         :: !(Maybe Text)
@@ -2373,7 +2374,7 @@ data Organization = Organization
 organization
     :: Organization
 organization =
-    Organization
+    Organization'
     { _orgDePartment = Nothing
     , _orgLocation = Nothing
     , _orgDomain = Nothing
@@ -2471,7 +2472,7 @@ instance FromJSON Organization where
         parseJSON
           = withObject "Organization"
               (\ o ->
-                 Organization <$>
+                 Organization' <$>
                    (o .:? "department") <*> (o .:? "location") <*>
                      (o .:? "domain")
                      <*> (o .:? "endDate")
@@ -2487,7 +2488,7 @@ instance FromJSON Organization where
                      <*> (o .:? "formattedType"))
 
 instance ToJSON Organization where
-        toJSON Organization{..}
+        toJSON Organization'{..}
           = object
               (catMaybes
                  [("department" .=) <$> _orgDePartment,
@@ -2507,7 +2508,7 @@ instance ToJSON Organization where
 -- | One of the person\'s interests.
 --
 -- /See:/ 'interest' smart constructor.
-data Interest = Interest
+data Interest = Interest'
     { _iValue    :: !(Maybe Text)
     , _iMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2522,7 +2523,7 @@ data Interest = Interest
 interest
     :: Interest
 interest =
-    Interest
+    Interest'
     { _iValue = Nothing
     , _iMetadata = Nothing
     }
@@ -2540,10 +2541,10 @@ instance FromJSON Interest where
         parseJSON
           = withObject "Interest"
               (\ o ->
-                 Interest <$> (o .:? "value") <*> (o .:? "metadata"))
+                 Interest' <$> (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON Interest where
-        toJSON Interest{..}
+        toJSON Interest'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _iValue,
@@ -2552,7 +2553,7 @@ instance ToJSON Interest where
 -- | The response for a single person
 --
 -- /See:/ 'personResponse' smart constructor.
-data PersonResponse = PersonResponse
+data PersonResponse = PersonResponse'
     { _prRequestedResourceName :: !(Maybe Text)
     , _prPerson                :: !(Maybe Person)
     , _prHTTPStatusCode        :: !(Maybe (Textual Int32))
@@ -2570,7 +2571,7 @@ data PersonResponse = PersonResponse
 personResponse
     :: PersonResponse
 personResponse =
-    PersonResponse
+    PersonResponse'
     { _prRequestedResourceName = Nothing
     , _prPerson = Nothing
     , _prHTTPStatusCode = Nothing
@@ -2601,12 +2602,12 @@ instance FromJSON PersonResponse where
         parseJSON
           = withObject "PersonResponse"
               (\ o ->
-                 PersonResponse <$>
+                 PersonResponse' <$>
                    (o .:? "requestedResourceName") <*> (o .:? "person")
                      <*> (o .:? "httpStatusCode"))
 
 instance ToJSON PersonResponse where
-        toJSON PersonResponse{..}
+        toJSON PersonResponse'{..}
           = object
               (catMaybes
                  [("requestedResourceName" .=) <$>
@@ -2617,7 +2618,7 @@ instance ToJSON PersonResponse where
 -- | A skill that the person has.
 --
 -- /See:/ 'skill' smart constructor.
-data Skill = Skill
+data Skill = Skill'
     { _sValue    :: !(Maybe Text)
     , _sMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2632,7 +2633,7 @@ data Skill = Skill
 skill
     :: Skill
 skill =
-    Skill
+    Skill'
     { _sValue = Nothing
     , _sMetadata = Nothing
     }
@@ -2650,10 +2651,10 @@ instance FromJSON Skill where
         parseJSON
           = withObject "Skill"
               (\ o ->
-                 Skill <$> (o .:? "value") <*> (o .:? "metadata"))
+                 Skill' <$> (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON Skill where
-        toJSON Skill{..}
+        toJSON Skill'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _sValue,
@@ -2662,7 +2663,7 @@ instance ToJSON Skill where
 -- | A person\'s short biography.
 --
 -- /See:/ 'biography' smart constructor.
-data Biography = Biography
+data Biography = Biography'
     { _bioValue    :: !(Maybe Text)
     , _bioMetadata :: !(Maybe FieldMetadata)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2677,7 +2678,7 @@ data Biography = Biography
 biography
     :: Biography
 biography =
-    Biography
+    Biography'
     { _bioValue = Nothing
     , _bioMetadata = Nothing
     }
@@ -2695,10 +2696,11 @@ instance FromJSON Biography where
         parseJSON
           = withObject "Biography"
               (\ o ->
-                 Biography <$> (o .:? "value") <*> (o .:? "metadata"))
+                 Biography' <$>
+                   (o .:? "value") <*> (o .:? "metadata"))
 
 instance ToJSON Biography where
-        toJSON Biography{..}
+        toJSON Biography'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _bioValue,
@@ -2708,7 +2710,7 @@ instance ToJSON Biography where
 -- page that represents who they are or what they care about.
 --
 -- /See:/ 'coverPhoto' smart constructor.
-data CoverPhoto = CoverPhoto
+data CoverPhoto = CoverPhoto'
     { _cpDefault  :: !(Maybe Bool)
     , _cpURL      :: !(Maybe Text)
     , _cpMetadata :: !(Maybe FieldMetadata)
@@ -2726,7 +2728,7 @@ data CoverPhoto = CoverPhoto
 coverPhoto
     :: CoverPhoto
 coverPhoto =
-    CoverPhoto
+    CoverPhoto'
     { _cpDefault = Nothing
     , _cpURL = Nothing
     , _cpMetadata = Nothing
@@ -2751,12 +2753,12 @@ instance FromJSON CoverPhoto where
         parseJSON
           = withObject "CoverPhoto"
               (\ o ->
-                 CoverPhoto <$>
+                 CoverPhoto' <$>
                    (o .:? "default") <*> (o .:? "url") <*>
                      (o .:? "metadata"))
 
 instance ToJSON CoverPhoto where
-        toJSON CoverPhoto{..}
+        toJSON CoverPhoto'{..}
           = object
               (catMaybes
                  [("default" .=) <$> _cpDefault,

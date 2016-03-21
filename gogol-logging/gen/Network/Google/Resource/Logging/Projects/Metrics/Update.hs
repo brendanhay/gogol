@@ -65,7 +65,7 @@ type ProjectsMetricsUpdateResource =
 -- | Creates or updates a logs-based metric.
 --
 -- /See:/ 'projectsMetricsUpdate' smart constructor.
-data ProjectsMetricsUpdate = ProjectsMetricsUpdate
+data ProjectsMetricsUpdate = ProjectsMetricsUpdate'
     { _pmuXgafv          :: !(Maybe Text)
     , _pmuUploadProtocol :: !(Maybe Text)
     , _pmuPp             :: !Bool
@@ -103,7 +103,7 @@ projectsMetricsUpdate
     -> LogMetric -- ^ 'pmuPayload'
     -> ProjectsMetricsUpdate
 projectsMetricsUpdate pPmuMetricName_ pPmuPayload_ =
-    ProjectsMetricsUpdate
+    ProjectsMetricsUpdate'
     { _pmuXgafv = Nothing
     , _pmuUploadProtocol = Nothing
     , _pmuPp = True
@@ -173,7 +173,7 @@ instance GoogleRequest ProjectsMetricsUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.write"]
-        requestClient ProjectsMetricsUpdate{..}
+        requestClient ProjectsMetricsUpdate'{..}
           = go _pmuMetricName _pmuXgafv _pmuUploadProtocol
               (Just _pmuPp)
               _pmuAccessToken

@@ -81,7 +81,7 @@ type EditsExpansionFilesUploadResource =
 -- | Uploads and attaches a new Expansion File to the APK specified.
 --
 -- /See:/ 'editsExpansionFilesUpload' smart constructor.
-data EditsExpansionFilesUpload = EditsExpansionFilesUpload
+data EditsExpansionFilesUpload = EditsExpansionFilesUpload'
     { _ePackageName       :: !Text
     , _eAPKVersionCode    :: !(Textual Int32)
     , _eExpansionFileType :: !EditsExpansionFilesUploadExpansionFileType
@@ -106,7 +106,7 @@ editsExpansionFilesUpload
     -> Text -- ^ 'eEditId'
     -> EditsExpansionFilesUpload
 editsExpansionFilesUpload pEPackageName_ pEAPKVersionCode_ pEExpansionFileType_ pEEditId_ =
-    EditsExpansionFilesUpload
+    EditsExpansionFilesUpload'
     { _ePackageName = pEPackageName_
     , _eAPKVersionCode = _Coerce # pEAPKVersionCode_
     , _eExpansionFileType = pEExpansionFileType_
@@ -142,7 +142,7 @@ instance GoogleRequest EditsExpansionFilesUpload
              ExpansionFilesUploadResponse
         type Scopes EditsExpansionFilesUpload =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsExpansionFilesUpload{..}
+        requestClient EditsExpansionFilesUpload'{..}
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
               (Just AltJSON)
@@ -159,7 +159,7 @@ instance GoogleRequest
         type Scopes (MediaUpload EditsExpansionFilesUpload) =
              Scopes EditsExpansionFilesUpload
         requestClient
-          (MediaUpload EditsExpansionFilesUpload{..} body)
+          (MediaUpload EditsExpansionFilesUpload'{..} body)
           = go _ePackageName _eEditId _eAPKVersionCode
               _eExpansionFileType
               (Just AltJSON)

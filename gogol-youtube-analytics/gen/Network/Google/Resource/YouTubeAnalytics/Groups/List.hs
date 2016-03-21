@@ -63,7 +63,7 @@ type GroupsListResource =
 -- owns, or you can retrieve one or more groups by their unique IDs.
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+data GroupsList = GroupsList'
     { _glMine                   :: !(Maybe Bool)
     , _glOnBehalfOfContentOwner :: !(Maybe Text)
     , _glId                     :: !(Maybe Text)
@@ -84,7 +84,7 @@ data GroupsList = GroupsList
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList
+    GroupsList'
     { _glMine = Nothing
     , _glOnBehalfOfContentOwner = Nothing
     , _glId = Nothing
@@ -131,7 +131,7 @@ instance GoogleRequest GroupsList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient GroupsList{..}
+        requestClient GroupsList'{..}
           = go _glMine _glOnBehalfOfContentOwner _glId
               _glPageToken
               (Just AltJSON)

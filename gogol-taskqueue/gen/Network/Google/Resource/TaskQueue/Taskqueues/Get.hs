@@ -56,7 +56,7 @@ type TaskqueuesGetResource =
 -- | Get detailed information about a TaskQueue.
 --
 -- /See:/ 'taskqueuesGet' smart constructor.
-data TaskqueuesGet = TaskqueuesGet
+data TaskqueuesGet = TaskqueuesGet'
     { _tasTaskqueue :: !Text
     , _tasProject   :: !Text
     , _tasGetStats  :: !(Maybe Bool)
@@ -76,7 +76,7 @@ taskqueuesGet
     -> Text -- ^ 'tasProject'
     -> TaskqueuesGet
 taskqueuesGet pTasTaskqueue_ pTasProject_ =
-    TaskqueuesGet
+    TaskqueuesGet'
     { _tasTaskqueue = pTasTaskqueue_
     , _tasProject = pTasProject_
     , _tasGetStats = Nothing
@@ -102,7 +102,7 @@ instance GoogleRequest TaskqueuesGet where
         type Scopes TaskqueuesGet =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TaskqueuesGet{..}
+        requestClient TaskqueuesGet'{..}
           = go _tasProject _tasTaskqueue _tasGetStats
               (Just AltJSON)
               taskQueueService

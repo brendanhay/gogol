@@ -78,7 +78,7 @@ type InstanceGroupManagersAbandonInstancesResource =
 -- with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersAbandonInstances' smart constructor.
-data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances
+data InstanceGroupManagersAbandonInstances = InstanceGroupManagersAbandonInstances'
     { _igmaiProject              :: !Text
     , _igmaiInstanceGroupManager :: !Text
     , _igmaiZone                 :: !Text
@@ -103,7 +103,7 @@ instanceGroupManagersAbandonInstances
     -> InstanceGroupManagersAbandonInstancesRequest -- ^ 'igmaiPayload'
     -> InstanceGroupManagersAbandonInstances
 instanceGroupManagersAbandonInstances pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ pIgmaiPayload_ =
-    InstanceGroupManagersAbandonInstances
+    InstanceGroupManagersAbandonInstances'
     { _igmaiProject = pIgmaiProject_
     , _igmaiInstanceGroupManager = pIgmaiInstanceGroupManager_
     , _igmaiZone = pIgmaiZone_
@@ -139,7 +139,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersAbandonInstances{..}
+          InstanceGroupManagersAbandonInstances'{..}
           = go _igmaiProject _igmaiZone
               _igmaiInstanceGroupManager
               (Just AltJSON)

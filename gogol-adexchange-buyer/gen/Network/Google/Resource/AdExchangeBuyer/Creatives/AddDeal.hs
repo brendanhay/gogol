@@ -56,7 +56,7 @@ type CreativesAddDealResource =
 -- | Add a deal id association for the creative.
 --
 -- /See:/ 'creativesAddDeal' smart constructor.
-data CreativesAddDeal = CreativesAddDeal
+data CreativesAddDeal = CreativesAddDeal'
     { _cadBuyerCreativeId :: !Text
     , _cadDealId          :: !(Textual Int64)
     , _cadAccountId       :: !(Textual Int32)
@@ -77,7 +77,7 @@ creativesAddDeal
     -> Int32 -- ^ 'cadAccountId'
     -> CreativesAddDeal
 creativesAddDeal pCadBuyerCreativeId_ pCadDealId_ pCadAccountId_ =
-    CreativesAddDeal
+    CreativesAddDeal'
     { _cadBuyerCreativeId = pCadBuyerCreativeId_
     , _cadDealId = _Coerce # pCadDealId_
     , _cadAccountId = _Coerce # pCadAccountId_
@@ -105,7 +105,7 @@ instance GoogleRequest CreativesAddDeal where
         type Rs CreativesAddDeal = ()
         type Scopes CreativesAddDeal =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient CreativesAddDeal{..}
+        requestClient CreativesAddDeal'{..}
           = go _cadAccountId _cadBuyerCreativeId _cadDealId
               (Just AltJSON)
               adExchangeBuyerService

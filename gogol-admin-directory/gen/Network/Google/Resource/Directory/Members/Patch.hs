@@ -59,7 +59,7 @@ type MembersPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'membersPatch' smart constructor.
-data MembersPatch = MembersPatch
+data MembersPatch = MembersPatch'
     { _mpMemberKey :: !Text
     , _mpGroupKey  :: !Text
     , _mpPayload   :: !Member
@@ -80,7 +80,7 @@ membersPatch
     -> Member -- ^ 'mpPayload'
     -> MembersPatch
 membersPatch pMpMemberKey_ pMpGroupKey_ pMpPayload_ =
-    MembersPatch
+    MembersPatch'
     { _mpMemberKey = pMpMemberKey_
     , _mpGroupKey = pMpGroupKey_
     , _mpPayload = pMpPayload_
@@ -108,7 +108,7 @@ instance GoogleRequest MembersPatch where
         type Scopes MembersPatch =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.member"]
-        requestClient MembersPatch{..}
+        requestClient MembersPatch'{..}
           = go _mpGroupKey _mpMemberKey (Just AltJSON)
               _mpPayload
               directoryService

@@ -57,7 +57,7 @@ type DataSetsAllocateIdsResource =
 -- before it is inserted).
 --
 -- /See:/ 'dataSetsAllocateIds' smart constructor.
-data DataSetsAllocateIds = DataSetsAllocateIds
+data DataSetsAllocateIds = DataSetsAllocateIds'
     { _dsaiPayload   :: !AllocateIdsRequest
     , _dsaiDataSetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ dataSetsAllocateIds
     -> Text -- ^ 'dsaiDataSetId'
     -> DataSetsAllocateIds
 dataSetsAllocateIds pDsaiPayload_ pDsaiDataSetId_ =
-    DataSetsAllocateIds
+    DataSetsAllocateIds'
     { _dsaiPayload = pDsaiPayload_
     , _dsaiDataSetId = pDsaiDataSetId_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest DataSetsAllocateIds where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient DataSetsAllocateIds{..}
+        requestClient DataSetsAllocateIds'{..}
           = go _dsaiDataSetId (Just AltJSON) _dsaiPayload
               datastoreService
           where go

@@ -70,7 +70,7 @@ type ProjectsTopicsPublishResource =
 -- contain either a non-empty data field, or at least one attribute.
 --
 -- /See:/ 'projectsTopicsPublish' smart constructor.
-data ProjectsTopicsPublish = ProjectsTopicsPublish
+data ProjectsTopicsPublish = ProjectsTopicsPublish'
     { _ptpXgafv          :: !(Maybe Text)
     , _ptpUploadProtocol :: !(Maybe Text)
     , _ptpPp             :: !Bool
@@ -108,7 +108,7 @@ projectsTopicsPublish
     -> Text -- ^ 'ptpTopic'
     -> ProjectsTopicsPublish
 projectsTopicsPublish pPtpPayload_ pPtpTopic_ =
-    ProjectsTopicsPublish
+    ProjectsTopicsPublish'
     { _ptpXgafv = Nothing
     , _ptpUploadProtocol = Nothing
     , _ptpPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest ProjectsTopicsPublish where
         type Scopes ProjectsTopicsPublish =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsTopicsPublish{..}
+        requestClient ProjectsTopicsPublish'{..}
           = go _ptpTopic _ptpXgafv _ptpUploadProtocol
               (Just _ptpPp)
               _ptpAccessToken

@@ -67,7 +67,7 @@ type PagespeedAPIRunPagespeedResource =
 -- other information.
 --
 -- /See:/ 'pagespeedAPIRunPagespeed' smart constructor.
-data PagespeedAPIRunPagespeed = PagespeedAPIRunPagespeed
+data PagespeedAPIRunPagespeed = PagespeedAPIRunPagespeed'
     { _parpScreenshot                :: !Bool
     , _parpLocale                    :: !(Maybe Text)
     , _parpURL                       :: !Text
@@ -95,7 +95,7 @@ pagespeedAPIRunPagespeed
     :: Text -- ^ 'parpURL'
     -> PagespeedAPIRunPagespeed
 pagespeedAPIRunPagespeed pParpURL_ =
-    PagespeedAPIRunPagespeed
+    PagespeedAPIRunPagespeed'
     { _parpScreenshot = False
     , _parpLocale = Nothing
     , _parpURL = pParpURL_
@@ -141,7 +141,7 @@ parpRule
 instance GoogleRequest PagespeedAPIRunPagespeed where
         type Rs PagespeedAPIRunPagespeed = Result
         type Scopes PagespeedAPIRunPagespeed = '[]
-        requestClient PagespeedAPIRunPagespeed{..}
+        requestClient PagespeedAPIRunPagespeed'{..}
           = go (Just _parpURL) (Just _parpScreenshot)
               _parpLocale
               (Just _parpFilterThirdPartyResources)

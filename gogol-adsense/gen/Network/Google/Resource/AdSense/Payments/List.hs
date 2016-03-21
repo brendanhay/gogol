@@ -49,21 +49,21 @@ type PaymentsListResource =
 --
 -- /See:/ 'paymentsList' smart constructor.
 data PaymentsList =
-    PaymentsList
+    PaymentsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PaymentsList' with the minimum fields required to make a request.
 --
 paymentsList
     :: PaymentsList
-paymentsList = PaymentsList
+paymentsList = PaymentsList'
 
 instance GoogleRequest PaymentsList where
         type Rs PaymentsList = Payments
         type Scopes PaymentsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient PaymentsList{}
+        requestClient PaymentsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy PaymentsListResource)

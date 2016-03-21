@@ -79,7 +79,7 @@ type CoursesListResource =
 -- if any users specified in the query arguments do not exist.
 --
 -- /See:/ 'coursesList' smart constructor.
-data CoursesList = CoursesList
+data CoursesList = CoursesList'
     { _clStudentId      :: !(Maybe Text)
     , _clXgafv          :: !(Maybe Text)
     , _clUploadProtocol :: !(Maybe Text)
@@ -121,7 +121,7 @@ data CoursesList = CoursesList
 coursesList
     :: CoursesList
 coursesList =
-    CoursesList
+    CoursesList'
     { _clStudentId = Nothing
     , _clXgafv = Nothing
     , _clUploadProtocol = Nothing
@@ -207,7 +207,7 @@ instance GoogleRequest CoursesList where
         type Scopes CoursesList =
              '["https://www.googleapis.com/auth/classroom.courses",
                "https://www.googleapis.com/auth/classroom.courses.readonly"]
-        requestClient CoursesList{..}
+        requestClient CoursesList'{..}
           = go _clStudentId _clXgafv _clUploadProtocol
               (Just _clPp)
               _clAccessToken

@@ -54,7 +54,7 @@ type TemplateGetResource =
 -- | Retrieves a specific template by its id
 --
 -- /See:/ 'templateGet' smart constructor.
-data TemplateGet = TemplateGet
+data TemplateGet = TemplateGet'
     { _temeTemplateId :: !(Textual Int32)
     , _temeTableId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ templateGet
     -> Text -- ^ 'temeTableId'
     -> TemplateGet
 templateGet pTemeTemplateId_ pTemeTableId_ =
-    TemplateGet
+    TemplateGet'
     { _temeTemplateId = _Coerce # pTemeTemplateId_
     , _temeTableId = pTemeTableId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest TemplateGet where
         type Scopes TemplateGet =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient TemplateGet{..}
+        requestClient TemplateGet'{..}
           = go _temeTableId _temeTemplateId (Just AltJSON)
               fusionTablesService
           where go

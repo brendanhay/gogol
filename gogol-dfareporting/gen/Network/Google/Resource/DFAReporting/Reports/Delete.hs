@@ -54,7 +54,7 @@ type ReportsDeleteResource =
 -- | Deletes a report by its ID.
 --
 -- /See:/ 'reportsDelete' smart constructor.
-data ReportsDelete = ReportsDelete
+data ReportsDelete = ReportsDelete'
     { _rdReportId  :: !(Textual Int64)
     , _rdProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ reportsDelete
     -> Int64 -- ^ 'rdProFileId'
     -> ReportsDelete
 reportsDelete pRdReportId_ pRdProFileId_ =
-    ReportsDelete
+    ReportsDelete'
     { _rdReportId = _Coerce # pRdReportId_
     , _rdProFileId = _Coerce # pRdProFileId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ReportsDelete where
         type Rs ReportsDelete = ()
         type Scopes ReportsDelete =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsDelete{..}
+        requestClient ReportsDelete'{..}
           = go _rdProFileId _rdReportId (Just AltJSON)
               dFAReportingService
           where go

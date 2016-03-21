@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'userSettings' smart constructor.
-data UserSettings = UserSettings
+data UserSettings = UserSettings'
     { _usNotification :: !(Maybe UserSettingsNotification)
     , _usKind         :: !Text
     , _usNotesExport  :: !(Maybe UserSettingsNotesExport)
@@ -40,7 +40,7 @@ data UserSettings = UserSettings
 userSettings
     :: UserSettings
 userSettings =
-    UserSettings
+    UserSettings'
     { _usNotification = Nothing
     , _usKind = "books#usersettings"
     , _usNotesExport = Nothing
@@ -65,13 +65,13 @@ instance FromJSON UserSettings where
         parseJSON
           = withObject "UserSettings"
               (\ o ->
-                 UserSettings <$>
+                 UserSettings' <$>
                    (o .:? "notification") <*>
                      (o .:? "kind" .!= "books#usersettings")
                      <*> (o .:? "notesExport"))
 
 instance ToJSON UserSettings where
-        toJSON UserSettings{..}
+        toJSON UserSettings'{..}
           = object
               (catMaybes
                  [("notification" .=) <$> _usNotification,
@@ -80,7 +80,7 @@ instance ToJSON UserSettings where
 
 --
 -- /See:/ 'annotations' smart constructor.
-data Annotations = Annotations
+data Annotations = Annotations'
     { _aTotalItems    :: !(Maybe (Textual Int32))
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
@@ -101,7 +101,7 @@ data Annotations = Annotations
 annotations
     :: Annotations
 annotations =
-    Annotations
+    Annotations'
     { _aTotalItems = Nothing
     , _aNextPageToken = Nothing
     , _aKind = "books#annotations"
@@ -136,13 +136,13 @@ instance FromJSON Annotations where
         parseJSON
           = withObject "Annotations"
               (\ o ->
-                 Annotations <$>
+                 Annotations' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "books#annotations")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Annotations where
-        toJSON Annotations{..}
+        toJSON Annotations'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _aTotalItems,
@@ -151,7 +151,7 @@ instance ToJSON Annotations where
 
 --
 -- /See:/ 'annotationsData' smart constructor.
-data AnnotationsData = AnnotationsData
+data AnnotationsData = AnnotationsData'
     { _adTotalItems    :: !(Maybe (Textual Int32))
     , _adNextPageToken :: !(Maybe Text)
     , _adKind          :: !Text
@@ -172,7 +172,7 @@ data AnnotationsData = AnnotationsData
 annotationsData
     :: AnnotationsData
 annotationsData =
-    AnnotationsData
+    AnnotationsData'
     { _adTotalItems = Nothing
     , _adNextPageToken = Nothing
     , _adKind = "books#annotationsdata"
@@ -206,13 +206,13 @@ instance FromJSON AnnotationsData where
         parseJSON
           = withObject "AnnotationsData"
               (\ o ->
-                 AnnotationsData <$>
+                 AnnotationsData' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "books#annotationsdata")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON AnnotationsData where
-        toJSON AnnotationsData{..}
+        toJSON AnnotationsData'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _adTotalItems,
@@ -221,7 +221,7 @@ instance ToJSON AnnotationsData where
 
 --
 -- /See:/ 'userSettingsNotificationMoreFromAuthors' smart constructor.
-newtype UserSettingsNotificationMoreFromAuthors = UserSettingsNotificationMoreFromAuthors
+newtype UserSettingsNotificationMoreFromAuthors = UserSettingsNotificationMoreFromAuthors'
     { _usnmfaOptedState :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -233,7 +233,7 @@ newtype UserSettingsNotificationMoreFromAuthors = UserSettingsNotificationMoreFr
 userSettingsNotificationMoreFromAuthors
     :: UserSettingsNotificationMoreFromAuthors
 userSettingsNotificationMoreFromAuthors =
-    UserSettingsNotificationMoreFromAuthors
+    UserSettingsNotificationMoreFromAuthors'
     { _usnmfaOptedState = Nothing
     }
 
@@ -248,19 +248,19 @@ instance FromJSON
           = withObject
               "UserSettingsNotificationMoreFromAuthors"
               (\ o ->
-                 UserSettingsNotificationMoreFromAuthors <$>
+                 UserSettingsNotificationMoreFromAuthors' <$>
                    (o .:? "opted_state"))
 
 instance ToJSON
          UserSettingsNotificationMoreFromAuthors where
-        toJSON UserSettingsNotificationMoreFromAuthors{..}
+        toJSON UserSettingsNotificationMoreFromAuthors'{..}
           = object
               (catMaybes
                  [("opted_state" .=) <$> _usnmfaOptedState])
 
 --
 -- /See:/ 'volumeannotations' smart constructor.
-data Volumeannotations = Volumeannotations
+data Volumeannotations = Volumeannotations'
     { _vTotalItems    :: !(Maybe (Textual Int32))
     , _vNextPageToken :: !(Maybe Text)
     , _vKind          :: !Text
@@ -284,7 +284,7 @@ data Volumeannotations = Volumeannotations
 volumeannotations
     :: Volumeannotations
 volumeannotations =
-    Volumeannotations
+    Volumeannotations'
     { _vTotalItems = Nothing
     , _vNextPageToken = Nothing
     , _vKind = "books#volumeannotations"
@@ -326,14 +326,14 @@ instance FromJSON Volumeannotations where
         parseJSON
           = withObject "Volumeannotations"
               (\ o ->
-                 Volumeannotations <$>
+                 Volumeannotations' <$>
                    (o .:? "totalItems") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "books#volumeannotations")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "version"))
 
 instance ToJSON Volumeannotations where
-        toJSON Volumeannotations{..}
+        toJSON Volumeannotations'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _vTotalItems,
@@ -345,7 +345,7 @@ instance ToJSON Volumeannotations where
 -- from a Google Books user.
 --
 -- /See:/ 'reviewSource' smart constructor.
-data ReviewSource = ReviewSource
+data ReviewSource = ReviewSource'
     { _rsExtraDescription :: !(Maybe Text)
     , _rsURL              :: !(Maybe Text)
     , _rsDescription      :: !(Maybe Text)
@@ -363,7 +363,7 @@ data ReviewSource = ReviewSource
 reviewSource
     :: ReviewSource
 reviewSource =
-    ReviewSource
+    ReviewSource'
     { _rsExtraDescription = Nothing
     , _rsURL = Nothing
     , _rsDescription = Nothing
@@ -389,12 +389,12 @@ instance FromJSON ReviewSource where
         parseJSON
           = withObject "ReviewSource"
               (\ o ->
-                 ReviewSource <$>
+                 ReviewSource' <$>
                    (o .:? "extraDescription") <*> (o .:? "url") <*>
                      (o .:? "description"))
 
 instance ToJSON ReviewSource where
-        toJSON ReviewSource{..}
+        toJSON ReviewSource'{..}
           = object
               (catMaybes
                  [("extraDescription" .=) <$> _rsExtraDescription,
@@ -403,7 +403,7 @@ instance ToJSON ReviewSource where
 
 --
 -- /See:/ 'annotationData' smart constructor.
-data AnnotationData = AnnotationData
+data AnnotationData = AnnotationData'
     { _annEncodedData    :: !(Maybe (Textual Word8))
     , _annKind           :: !Text
     , _annData           :: !(Maybe JSONValue)
@@ -439,7 +439,7 @@ data AnnotationData = AnnotationData
 annotationData
     :: AnnotationData
 annotationData =
-    AnnotationData
+    AnnotationData'
     { _annEncodedData = Nothing
     , _annKind = "books#annotationdata"
     , _annData = Nothing
@@ -501,7 +501,7 @@ instance FromJSON AnnotationData where
         parseJSON
           = withObject "AnnotationData"
               (\ o ->
-                 AnnotationData <$>
+                 AnnotationData' <$>
                    (o .:? "encoded_data") <*>
                      (o .:? "kind" .!= "books#annotationdata")
                      <*> (o .:? "data")
@@ -513,7 +513,7 @@ instance FromJSON AnnotationData where
                      <*> (o .:? "layerId"))
 
 instance ToJSON AnnotationData where
-        toJSON AnnotationData{..}
+        toJSON AnnotationData'{..}
           = object
               (catMaybes
                  [("encoded_data" .=) <$> _annEncodedData,
@@ -526,7 +526,7 @@ instance ToJSON AnnotationData where
 
 --
 -- /See:/ 'volumeannotation' smart constructor.
-data Volumeannotation = Volumeannotation
+data Volumeannotation = Volumeannotation'
     { _volSelectedText       :: !(Maybe Text)
     , _volAnnotationDataLink :: !(Maybe Text)
     , _volPageIds            :: !(Maybe [Text])
@@ -577,7 +577,7 @@ data Volumeannotation = Volumeannotation
 volumeannotation
     :: Volumeannotation
 volumeannotation =
-    Volumeannotation
+    Volumeannotation'
     { _volSelectedText = Nothing
     , _volAnnotationDataLink = Nothing
     , _volPageIds = Nothing
@@ -674,7 +674,7 @@ instance FromJSON Volumeannotation where
         parseJSON
           = withObject "Volumeannotation"
               (\ o ->
-                 Volumeannotation <$>
+                 Volumeannotation' <$>
                    (o .:? "selectedText") <*>
                      (o .:? "annotationDataLink")
                      <*> (o .:? "pageIds" .!= mempty)
@@ -691,7 +691,7 @@ instance FromJSON Volumeannotation where
                      <*> (o .:? "layerId"))
 
 instance ToJSON Volumeannotation where
-        toJSON Volumeannotation{..}
+        toJSON Volumeannotation'{..}
           = object
               (catMaybes
                  [("selectedText" .=) <$> _volSelectedText,
@@ -709,7 +709,7 @@ instance ToJSON Volumeannotation where
 
 --
 -- /See:/ 'booksCloudLoadingResource' smart constructor.
-data BooksCloudLoadingResource = BooksCloudLoadingResource
+data BooksCloudLoadingResource = BooksCloudLoadingResource'
     { _bclrProcessingState :: !(Maybe Text)
     , _bclrVolumeId        :: !(Maybe Text)
     , _bclrAuthor          :: !(Maybe Text)
@@ -730,7 +730,7 @@ data BooksCloudLoadingResource = BooksCloudLoadingResource
 booksCloudLoadingResource
     :: BooksCloudLoadingResource
 booksCloudLoadingResource =
-    BooksCloudLoadingResource
+    BooksCloudLoadingResource'
     { _bclrProcessingState = Nothing
     , _bclrVolumeId = Nothing
     , _bclrAuthor = Nothing
@@ -758,13 +758,13 @@ instance FromJSON BooksCloudLoadingResource where
         parseJSON
           = withObject "BooksCloudLoadingResource"
               (\ o ->
-                 BooksCloudLoadingResource <$>
+                 BooksCloudLoadingResource' <$>
                    (o .:? "processingState") <*> (o .:? "volumeId") <*>
                      (o .:? "author")
                      <*> (o .:? "title"))
 
 instance ToJSON BooksCloudLoadingResource where
-        toJSON BooksCloudLoadingResource{..}
+        toJSON BooksCloudLoadingResource'{..}
           = object
               (catMaybes
                  [("processingState" .=) <$> _bclrProcessingState,
@@ -774,7 +774,7 @@ instance ToJSON BooksCloudLoadingResource where
 
 --
 -- /See:/ 'volumeseriesInfoVolumeSeriesItemIssueItem' smart constructor.
-data VolumeseriesInfoVolumeSeriesItemIssueItem = VolumeseriesInfoVolumeSeriesItemIssueItem
+data VolumeseriesInfoVolumeSeriesItemIssueItem = VolumeseriesInfoVolumeSeriesItemIssueItem'
     { _vivsiiiIssueOrderNumber   :: !(Maybe (Textual Int32))
     , _vivsiiiIssueDisplayNumber :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -789,7 +789,7 @@ data VolumeseriesInfoVolumeSeriesItemIssueItem = VolumeseriesInfoVolumeSeriesIte
 volumeseriesInfoVolumeSeriesItemIssueItem
     :: VolumeseriesInfoVolumeSeriesItemIssueItem
 volumeseriesInfoVolumeSeriesItemIssueItem =
-    VolumeseriesInfoVolumeSeriesItemIssueItem
+    VolumeseriesInfoVolumeSeriesItemIssueItem'
     { _vivsiiiIssueOrderNumber = Nothing
     , _vivsiiiIssueDisplayNumber = Nothing
     }
@@ -811,13 +811,13 @@ instance FromJSON
           = withObject
               "VolumeseriesInfoVolumeSeriesItemIssueItem"
               (\ o ->
-                 VolumeseriesInfoVolumeSeriesItemIssueItem <$>
+                 VolumeseriesInfoVolumeSeriesItemIssueItem' <$>
                    (o .:? "issueOrderNumber") <*>
                      (o .:? "issueDisplayNumber"))
 
 instance ToJSON
          VolumeseriesInfoVolumeSeriesItemIssueItem where
-        toJSON VolumeseriesInfoVolumeSeriesItemIssueItem{..}
+        toJSON VolumeseriesInfoVolumeSeriesItemIssueItem'{..}
           = object
               (catMaybes
                  [("issueOrderNumber" .=) <$>
@@ -827,7 +827,7 @@ instance ToJSON
 
 --
 -- /See:/ 'annotation' smart constructor.
-data Annotation = Annotation
+data Annotation = Annotation'
     { _aaSelectedText         :: !(Maybe Text)
     , _aaLayerSummary         :: !(Maybe AnnotationLayerSummary)
     , _aaHighlightStyle       :: !(Maybe Text)
@@ -887,7 +887,7 @@ data Annotation = Annotation
 annotation
     :: Annotation
 annotation =
-    Annotation
+    Annotation'
     { _aaSelectedText = Nothing
     , _aaLayerSummary = Nothing
     , _aaHighlightStyle = Nothing
@@ -1005,7 +1005,7 @@ instance FromJSON Annotation where
         parseJSON
           = withObject "Annotation"
               (\ o ->
-                 Annotation <$>
+                 Annotation' <$>
                    (o .:? "selectedText") <*> (o .:? "layerSummary") <*>
                      (o .:? "highlightStyle")
                      <*> (o .:? "clientVersionRanges")
@@ -1024,7 +1024,7 @@ instance FromJSON Annotation where
                      <*> (o .:? "layerId"))
 
 instance ToJSON Annotation where
-        toJSON Annotation{..}
+        toJSON Annotation'{..}
           = object
               (catMaybes
                  [("selectedText" .=) <$> _aaSelectedText,
@@ -1048,7 +1048,7 @@ instance ToJSON Annotation where
 -- | Author of this review.
 --
 -- /See:/ 'reviewAuthor' smart constructor.
-newtype ReviewAuthor = ReviewAuthor
+newtype ReviewAuthor = ReviewAuthor'
     { _raDisplayName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1060,7 +1060,7 @@ newtype ReviewAuthor = ReviewAuthor
 reviewAuthor
     :: ReviewAuthor
 reviewAuthor =
-    ReviewAuthor
+    ReviewAuthor'
     { _raDisplayName = Nothing
     }
 
@@ -1073,10 +1073,10 @@ raDisplayName
 instance FromJSON ReviewAuthor where
         parseJSON
           = withObject "ReviewAuthor"
-              (\ o -> ReviewAuthor <$> (o .:? "displayName"))
+              (\ o -> ReviewAuthor' <$> (o .:? "displayName"))
 
 instance ToJSON ReviewAuthor where
-        toJSON ReviewAuthor{..}
+        toJSON ReviewAuthor'{..}
           = object
               (catMaybes [("displayName" .=) <$> _raDisplayName])
 
@@ -1084,7 +1084,7 @@ instance ToJSON ReviewAuthor where
 -- rectangle.
 --
 -- /See:/ 'geolayerDataGeoViewport' smart constructor.
-data GeolayerDataGeoViewport = GeolayerDataGeoViewport
+data GeolayerDataGeoViewport = GeolayerDataGeoViewport'
     { _gdgvHi :: !(Maybe GeolayerDataGeoViewportHi)
     , _gdgvLo :: !(Maybe GeolayerDataGeoViewportLo)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1099,7 +1099,7 @@ data GeolayerDataGeoViewport = GeolayerDataGeoViewport
 geolayerDataGeoViewport
     :: GeolayerDataGeoViewport
 geolayerDataGeoViewport =
-    GeolayerDataGeoViewport
+    GeolayerDataGeoViewport'
     { _gdgvHi = Nothing
     , _gdgvLo = Nothing
     }
@@ -1114,11 +1114,11 @@ instance FromJSON GeolayerDataGeoViewport where
         parseJSON
           = withObject "GeolayerDataGeoViewport"
               (\ o ->
-                 GeolayerDataGeoViewport <$>
+                 GeolayerDataGeoViewport' <$>
                    (o .:? "hi") <*> (o .:? "lo"))
 
 instance ToJSON GeolayerDataGeoViewport where
-        toJSON GeolayerDataGeoViewport{..}
+        toJSON GeolayerDataGeoViewport'{..}
           = object
               (catMaybes
                  [("hi" .=) <$> _gdgvHi, ("lo" .=) <$> _gdgvLo])
@@ -1127,7 +1127,7 @@ instance ToJSON GeolayerDataGeoViewport where
 -- last read or whether they purchased this book)
 --
 -- /See:/ 'volumeUserInfo' smart constructor.
-data VolumeUserInfo = VolumeUserInfo
+data VolumeUserInfo = VolumeUserInfo'
     { _vuiIsFamilySharingAllowed :: !(Maybe Bool)
     , _vuiIsFamilySharedToUser   :: !(Maybe Bool)
     , _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
@@ -1187,7 +1187,7 @@ data VolumeUserInfo = VolumeUserInfo
 volumeUserInfo
     :: VolumeUserInfo
 volumeUserInfo =
-    VolumeUserInfo
+    VolumeUserInfo'
     { _vuiIsFamilySharingAllowed = Nothing
     , _vuiIsFamilySharedToUser = Nothing
     , _vuiCopy = Nothing
@@ -1321,7 +1321,7 @@ instance FromJSON VolumeUserInfo where
         parseJSON
           = withObject "VolumeUserInfo"
               (\ o ->
-                 VolumeUserInfo <$>
+                 VolumeUserInfo' <$>
                    (o .:? "isFamilySharingAllowed") <*>
                      (o .:? "isFamilySharedToUser")
                      <*> (o .:? "copy")
@@ -1341,7 +1341,7 @@ instance FromJSON VolumeUserInfo where
                      <*> (o .:? "readingPosition"))
 
 instance ToJSON VolumeUserInfo where
-        toJSON VolumeUserInfo{..}
+        toJSON VolumeUserInfo'{..}
           = object
               (catMaybes
                  [("isFamilySharingAllowed" .=) <$>
@@ -1368,7 +1368,7 @@ instance ToJSON VolumeUserInfo where
 
 --
 -- /See:/ 'layersummary' smart constructor.
-data Layersummary = Layersummary
+data Layersummary = Layersummary'
     { _lAnnotationsDataLink      :: !(Maybe Text)
     , _lAnnotationsLink          :: !(Maybe Text)
     , _lKind                     :: !Text
@@ -1416,7 +1416,7 @@ data Layersummary = Layersummary
 layersummary
     :: Layersummary
 layersummary =
-    Layersummary
+    Layersummary'
     { _lAnnotationsDataLink = Nothing
     , _lAnnotationsLink = Nothing
     , _lKind = "books#layersummary"
@@ -1512,7 +1512,7 @@ instance FromJSON Layersummary where
         parseJSON
           = withObject "Layersummary"
               (\ o ->
-                 Layersummary <$>
+                 Layersummary' <$>
                    (o .:? "annotationsDataLink") <*>
                      (o .:? "annotationsLink")
                      <*> (o .:? "kind" .!= "books#layersummary")
@@ -1528,7 +1528,7 @@ instance FromJSON Layersummary where
                      <*> (o .:? "layerId"))
 
 instance ToJSON Layersummary where
-        toJSON Layersummary{..}
+        toJSON Layersummary'{..}
           = object
               (catMaybes
                  [("annotationsDataLink" .=) <$>
@@ -1549,7 +1549,7 @@ instance ToJSON Layersummary where
 -- | The content ranges to identify the selected text.
 --
 -- /See:/ 'volumeannotationContentRanges' smart constructor.
-data VolumeannotationContentRanges = VolumeannotationContentRanges
+data VolumeannotationContentRanges = VolumeannotationContentRanges'
     { _vcrGbImageRange   :: !(Maybe BooksAnnotationsRange)
     , _vcrContentVersion :: !(Maybe Text)
     , _vcrGbTextRange    :: !(Maybe BooksAnnotationsRange)
@@ -1570,7 +1570,7 @@ data VolumeannotationContentRanges = VolumeannotationContentRanges
 volumeannotationContentRanges
     :: VolumeannotationContentRanges
 volumeannotationContentRanges =
-    VolumeannotationContentRanges
+    VolumeannotationContentRanges'
     { _vcrGbImageRange = Nothing
     , _vcrContentVersion = Nothing
     , _vcrGbTextRange = Nothing
@@ -1604,13 +1604,13 @@ instance FromJSON VolumeannotationContentRanges where
         parseJSON
           = withObject "VolumeannotationContentRanges"
               (\ o ->
-                 VolumeannotationContentRanges <$>
+                 VolumeannotationContentRanges' <$>
                    (o .:? "gbImageRange") <*> (o .:? "contentVersion")
                      <*> (o .:? "gbTextRange")
                      <*> (o .:? "cfiRange"))
 
 instance ToJSON VolumeannotationContentRanges where
-        toJSON VolumeannotationContentRanges{..}
+        toJSON VolumeannotationContentRanges'{..}
           = object
               (catMaybes
                  [("gbImageRange" .=) <$> _vcrGbImageRange,
@@ -1623,7 +1623,7 @@ instance ToJSON VolumeannotationContentRanges where
 -- domain in one country but not in another, e.g.).
 --
 -- /See:/ 'volumeAccessInfo' smart constructor.
-data VolumeAccessInfo = VolumeAccessInfo
+data VolumeAccessInfo = VolumeAccessInfo'
     { _vaiWebReaderLink                    :: !(Maybe Text)
     , _vaiCountry                          :: !(Maybe Text)
     , _vaiDriveImportedContentLink         :: !(Maybe Text)
@@ -1674,7 +1674,7 @@ data VolumeAccessInfo = VolumeAccessInfo
 volumeAccessInfo
     :: VolumeAccessInfo
 volumeAccessInfo =
-    VolumeAccessInfo
+    VolumeAccessInfo'
     { _vaiWebReaderLink = Nothing
     , _vaiCountry = Nothing
     , _vaiDriveImportedContentLink = Nothing
@@ -1790,7 +1790,7 @@ instance FromJSON VolumeAccessInfo where
         parseJSON
           = withObject "VolumeAccessInfo"
               (\ o ->
-                 VolumeAccessInfo <$>
+                 VolumeAccessInfo' <$>
                    (o .:? "webReaderLink") <*> (o .:? "country") <*>
                      (o .:? "driveImportedContentLink")
                      <*> (o .:? "explicitOfflineLicenseManagement")
@@ -1806,7 +1806,7 @@ instance FromJSON VolumeAccessInfo where
                      <*> (o .:? "publicDomain"))
 
 instance ToJSON VolumeAccessInfo where
-        toJSON VolumeAccessInfo{..}
+        toJSON VolumeAccessInfo'{..}
           = object
               (catMaybes
                  [("webReaderLink" .=) <$> _vaiWebReaderLink,
@@ -1831,7 +1831,7 @@ instance ToJSON VolumeAccessInfo where
 -- projection.)
 --
 -- /See:/ 'volumeVolumeInfoImageLinks' smart constructor.
-data VolumeVolumeInfoImageLinks = VolumeVolumeInfoImageLinks
+data VolumeVolumeInfoImageLinks = VolumeVolumeInfoImageLinks'
     { _vviilThumbnail      :: !(Maybe Text)
     , _vviilSmall          :: !(Maybe Text)
     , _vviilExtraLarge     :: !(Maybe Text)
@@ -1858,7 +1858,7 @@ data VolumeVolumeInfoImageLinks = VolumeVolumeInfoImageLinks
 volumeVolumeInfoImageLinks
     :: VolumeVolumeInfoImageLinks
 volumeVolumeInfoImageLinks =
-    VolumeVolumeInfoImageLinks
+    VolumeVolumeInfoImageLinks'
     { _vviilThumbnail = Nothing
     , _vviilSmall = Nothing
     , _vviilExtraLarge = Nothing
@@ -1907,7 +1907,7 @@ instance FromJSON VolumeVolumeInfoImageLinks where
         parseJSON
           = withObject "VolumeVolumeInfoImageLinks"
               (\ o ->
-                 VolumeVolumeInfoImageLinks <$>
+                 VolumeVolumeInfoImageLinks' <$>
                    (o .:? "thumbnail") <*> (o .:? "small") <*>
                      (o .:? "extraLarge")
                      <*> (o .:? "large")
@@ -1915,7 +1915,7 @@ instance FromJSON VolumeVolumeInfoImageLinks where
                      <*> (o .:? "smallThumbnail"))
 
 instance ToJSON VolumeVolumeInfoImageLinks where
-        toJSON VolumeVolumeInfoImageLinks{..}
+        toJSON VolumeVolumeInfoImageLinks'{..}
           = object
               (catMaybes
                  [("thumbnail" .=) <$> _vviilThumbnail,
@@ -1927,7 +1927,7 @@ instance ToJSON VolumeVolumeInfoImageLinks where
 
 --
 -- /See:/ 'volumeUserInfoUserUploadedVolumeInfo' smart constructor.
-newtype VolumeUserInfoUserUploadedVolumeInfo = VolumeUserInfoUserUploadedVolumeInfo
+newtype VolumeUserInfoUserUploadedVolumeInfo = VolumeUserInfoUserUploadedVolumeInfo'
     { _vuiuuviProcessingState :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1939,7 +1939,7 @@ newtype VolumeUserInfoUserUploadedVolumeInfo = VolumeUserInfoUserUploadedVolumeI
 volumeUserInfoUserUploadedVolumeInfo
     :: VolumeUserInfoUserUploadedVolumeInfo
 volumeUserInfoUserUploadedVolumeInfo =
-    VolumeUserInfoUserUploadedVolumeInfo
+    VolumeUserInfoUserUploadedVolumeInfo'
     { _vuiuuviProcessingState = Nothing
     }
 
@@ -1953,12 +1953,12 @@ instance FromJSON
         parseJSON
           = withObject "VolumeUserInfoUserUploadedVolumeInfo"
               (\ o ->
-                 VolumeUserInfoUserUploadedVolumeInfo <$>
+                 VolumeUserInfoUserUploadedVolumeInfo' <$>
                    (o .:? "processingState"))
 
 instance ToJSON VolumeUserInfoUserUploadedVolumeInfo
          where
-        toJSON VolumeUserInfoUserUploadedVolumeInfo{..}
+        toJSON VolumeUserInfoUserUploadedVolumeInfo'{..}
           = object
               (catMaybes
                  [("processingState" .=) <$> _vuiuuviProcessingState])
@@ -1966,7 +1966,7 @@ instance ToJSON VolumeUserInfoUserUploadedVolumeInfo
 -- | Copy\/Paste accounting information.
 --
 -- /See:/ 'volumeUserInfoCopy' smart constructor.
-data VolumeUserInfoCopy = VolumeUserInfoCopy
+data VolumeUserInfoCopy = VolumeUserInfoCopy'
     { _vuicLimitType               :: !(Maybe Text)
     , _vuicAllowedCharacterCount   :: !(Maybe (Textual Int32))
     , _vuicUpdated                 :: !(Maybe DateTime')
@@ -1987,7 +1987,7 @@ data VolumeUserInfoCopy = VolumeUserInfoCopy
 volumeUserInfoCopy
     :: VolumeUserInfoCopy
 volumeUserInfoCopy =
-    VolumeUserInfoCopy
+    VolumeUserInfoCopy'
     { _vuicLimitType = Nothing
     , _vuicAllowedCharacterCount = Nothing
     , _vuicUpdated = Nothing
@@ -2020,14 +2020,14 @@ instance FromJSON VolumeUserInfoCopy where
         parseJSON
           = withObject "VolumeUserInfoCopy"
               (\ o ->
-                 VolumeUserInfoCopy <$>
+                 VolumeUserInfoCopy' <$>
                    (o .:? "limitType") <*>
                      (o .:? "allowedCharacterCount")
                      <*> (o .:? "updated")
                      <*> (o .:? "remainingCharacterCount"))
 
 instance ToJSON VolumeUserInfoCopy where
-        toJSON VolumeUserInfoCopy{..}
+        toJSON VolumeUserInfoCopy'{..}
           = object
               (catMaybes
                  [("limitType" .=) <$> _vuicLimitType,
@@ -2039,7 +2039,7 @@ instance ToJSON VolumeUserInfoCopy where
 
 --
 -- /See:/ 'booksVolumesRecommendedRateResponse' smart constructor.
-newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateResponse
+newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateResponse'
     { _bvrrrConsistencyToken :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2051,7 +2051,7 @@ newtype BooksVolumesRecommendedRateResponse = BooksVolumesRecommendedRateRespons
 booksVolumesRecommendedRateResponse
     :: BooksVolumesRecommendedRateResponse
 booksVolumesRecommendedRateResponse =
-    BooksVolumesRecommendedRateResponse
+    BooksVolumesRecommendedRateResponse'
     { _bvrrrConsistencyToken = Nothing
     }
 
@@ -2065,12 +2065,12 @@ instance FromJSON BooksVolumesRecommendedRateResponse
         parseJSON
           = withObject "BooksVolumesRecommendedRateResponse"
               (\ o ->
-                 BooksVolumesRecommendedRateResponse <$>
+                 BooksVolumesRecommendedRateResponse' <$>
                    (o .:? "consistency_token"))
 
 instance ToJSON BooksVolumesRecommendedRateResponse
          where
-        toJSON BooksVolumesRecommendedRateResponse{..}
+        toJSON BooksVolumesRecommendedRateResponse'{..}
           = object
               (catMaybes
                  [("consistency_token" .=) <$>
@@ -2078,7 +2078,7 @@ instance ToJSON BooksVolumesRecommendedRateResponse
 
 --
 -- /See:/ 'volumeseriesInfo' smart constructor.
-data VolumeseriesInfo = VolumeseriesInfo
+data VolumeseriesInfo = VolumeseriesInfo'
     { _viBookDisplayNumber    :: !(Maybe Text)
     , _viKind                 :: !Text
     , _viShortSeriesBookTitle :: !(Maybe Text)
@@ -2099,7 +2099,7 @@ data VolumeseriesInfo = VolumeseriesInfo
 volumeseriesInfo
     :: VolumeseriesInfo
 volumeseriesInfo =
-    VolumeseriesInfo
+    VolumeseriesInfo'
     { _viBookDisplayNumber = Nothing
     , _viKind = "books#volume_series_info"
     , _viShortSeriesBookTitle = Nothing
@@ -2134,14 +2134,14 @@ instance FromJSON VolumeseriesInfo where
         parseJSON
           = withObject "VolumeseriesInfo"
               (\ o ->
-                 VolumeseriesInfo <$>
+                 VolumeseriesInfo' <$>
                    (o .:? "bookDisplayNumber") <*>
                      (o .:? "kind" .!= "books#volume_series_info")
                      <*> (o .:? "shortSeriesBookTitle")
                      <*> (o .:? "volumeSeries" .!= mempty))
 
 instance ToJSON VolumeseriesInfo where
-        toJSON VolumeseriesInfo{..}
+        toJSON VolumeseriesInfo'{..}
           = object
               (catMaybes
                  [("bookDisplayNumber" .=) <$> _viBookDisplayNumber,
@@ -2152,7 +2152,7 @@ instance ToJSON VolumeseriesInfo where
 
 --
 -- /See:/ 'bookshelf' smart constructor.
-data Bookshelf = Bookshelf
+data Bookshelf = Bookshelf'
     { _bAccess             :: !(Maybe Text)
     , _bVolumesLastUpdated :: !(Maybe DateTime')
     , _bKind               :: !Text
@@ -2191,7 +2191,7 @@ data Bookshelf = Bookshelf
 bookshelf
     :: Bookshelf
 bookshelf =
-    Bookshelf
+    Bookshelf'
     { _bAccess = Nothing
     , _bVolumesLastUpdated = Nothing
     , _bKind = "books#bookshelf"
@@ -2263,7 +2263,7 @@ instance FromJSON Bookshelf where
         parseJSON
           = withObject "Bookshelf"
               (\ o ->
-                 Bookshelf <$>
+                 Bookshelf' <$>
                    (o .:? "access") <*> (o .:? "volumesLastUpdated") <*>
                      (o .:? "kind" .!= "books#bookshelf")
                      <*> (o .:? "created")
@@ -2275,7 +2275,7 @@ instance FromJSON Bookshelf where
                      <*> (o .:? "description"))
 
 instance ToJSON Bookshelf where
-        toJSON Bookshelf{..}
+        toJSON Bookshelf'{..}
           = object
               (catMaybes
                  [("access" .=) <$> _bAccess,
@@ -2290,7 +2290,7 @@ instance ToJSON Bookshelf where
 
 --
 -- /See:/ 'notification' smart constructor.
-data Notification = Notification
+data Notification = Notification'
     { _nTargetURL                      :: !(Maybe Text)
     , _nShowNotificationSettingsAction :: !(Maybe Bool)
     , _nKind                           :: !Text
@@ -2329,7 +2329,7 @@ data Notification = Notification
 notification
     :: Notification
 notification =
-    Notification
+    Notification'
     { _nTargetURL = Nothing
     , _nShowNotificationSettingsAction = Nothing
     , _nKind = "books#notification"
@@ -2385,7 +2385,7 @@ instance FromJSON Notification where
         parseJSON
           = withObject "Notification"
               (\ o ->
-                 Notification <$>
+                 Notification' <$>
                    (o .:? "targetUrl") <*>
                      (o .:? "show_notification_settings_action")
                      <*> (o .:? "kind" .!= "books#notification")
@@ -2398,7 +2398,7 @@ instance FromJSON Notification where
                      <*> (o .:? "title"))
 
 instance ToJSON Notification where
-        toJSON Notification{..}
+        toJSON Notification'{..}
           = object
               (catMaybes
                  [("targetUrl" .=) <$> _nTargetURL,
@@ -2415,7 +2415,7 @@ instance ToJSON Notification where
 
 --
 -- /See:/ 'annotationsSummaryLayersItem' smart constructor.
-data AnnotationsSummaryLayersItem = AnnotationsSummaryLayersItem
+data AnnotationsSummaryLayersItem = AnnotationsSummaryLayersItem'
     { _asliLimitType               :: !(Maybe Text)
     , _asliAllowedCharacterCount   :: !(Maybe (Textual Int32))
     , _asliUpdated                 :: !(Maybe DateTime')
@@ -2439,7 +2439,7 @@ data AnnotationsSummaryLayersItem = AnnotationsSummaryLayersItem
 annotationsSummaryLayersItem
     :: AnnotationsSummaryLayersItem
 annotationsSummaryLayersItem =
-    AnnotationsSummaryLayersItem
+    AnnotationsSummaryLayersItem'
     { _asliLimitType = Nothing
     , _asliAllowedCharacterCount = Nothing
     , _asliUpdated = Nothing
@@ -2477,7 +2477,7 @@ instance FromJSON AnnotationsSummaryLayersItem where
         parseJSON
           = withObject "AnnotationsSummaryLayersItem"
               (\ o ->
-                 AnnotationsSummaryLayersItem <$>
+                 AnnotationsSummaryLayersItem' <$>
                    (o .:? "limitType") <*>
                      (o .:? "allowedCharacterCount")
                      <*> (o .:? "updated")
@@ -2485,7 +2485,7 @@ instance FromJSON AnnotationsSummaryLayersItem where
                      <*> (o .:? "remainingCharacterCount"))
 
 instance ToJSON AnnotationsSummaryLayersItem where
-        toJSON AnnotationsSummaryLayersItem{..}
+        toJSON AnnotationsSummaryLayersItem'{..}
           = object
               (catMaybes
                  [("limitType" .=) <$> _asliLimitType,
@@ -2499,7 +2499,7 @@ instance ToJSON AnnotationsSummaryLayersItem where
 -- | The rental duration (for rental offers only).
 --
 -- /See:/ 'volumeSaleInfoOffersItemRentalDuration' smart constructor.
-data VolumeSaleInfoOffersItemRentalDuration = VolumeSaleInfoOffersItemRentalDuration
+data VolumeSaleInfoOffersItemRentalDuration = VolumeSaleInfoOffersItemRentalDuration'
     { _vsioirdCount :: !(Maybe (Textual Double))
     , _vsioirdUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2514,7 +2514,7 @@ data VolumeSaleInfoOffersItemRentalDuration = VolumeSaleInfoOffersItemRentalDura
 volumeSaleInfoOffersItemRentalDuration
     :: VolumeSaleInfoOffersItemRentalDuration
 volumeSaleInfoOffersItemRentalDuration =
-    VolumeSaleInfoOffersItemRentalDuration
+    VolumeSaleInfoOffersItemRentalDuration'
     { _vsioirdCount = Nothing
     , _vsioirdUnit = Nothing
     }
@@ -2533,12 +2533,12 @@ instance FromJSON
         parseJSON
           = withObject "VolumeSaleInfoOffersItemRentalDuration"
               (\ o ->
-                 VolumeSaleInfoOffersItemRentalDuration <$>
+                 VolumeSaleInfoOffersItemRentalDuration' <$>
                    (o .:? "count") <*> (o .:? "unit"))
 
 instance ToJSON
          VolumeSaleInfoOffersItemRentalDuration where
-        toJSON VolumeSaleInfoOffersItemRentalDuration{..}
+        toJSON VolumeSaleInfoOffersItemRentalDuration'{..}
           = object
               (catMaybes
                  [("count" .=) <$> _vsioirdCount,
@@ -2546,7 +2546,7 @@ instance ToJSON
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemExamplesItem' smart constructor.
-data DictlayerDataDictWordsItemExamplesItem = DictlayerDataDictWordsItemExamplesItem
+data DictlayerDataDictWordsItemExamplesItem = DictlayerDataDictWordsItemExamplesItem'
     { _dddwieiText   :: !(Maybe Text)
     , _dddwieiSource :: !(Maybe DictlayerDataDictWordsItemExamplesItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2561,7 +2561,7 @@ data DictlayerDataDictWordsItemExamplesItem = DictlayerDataDictWordsItemExamples
 dictlayerDataDictWordsItemExamplesItem
     :: DictlayerDataDictWordsItemExamplesItem
 dictlayerDataDictWordsItemExamplesItem =
-    DictlayerDataDictWordsItemExamplesItem
+    DictlayerDataDictWordsItemExamplesItem'
     { _dddwieiText = Nothing
     , _dddwieiSource = Nothing
     }
@@ -2580,12 +2580,12 @@ instance FromJSON
         parseJSON
           = withObject "DictlayerDataDictWordsItemExamplesItem"
               (\ o ->
-                 DictlayerDataDictWordsItemExamplesItem <$>
+                 DictlayerDataDictWordsItemExamplesItem' <$>
                    (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
          DictlayerDataDictWordsItemExamplesItem where
-        toJSON DictlayerDataDictWordsItemExamplesItem{..}
+        toJSON DictlayerDataDictWordsItemExamplesItem'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _dddwieiText,
@@ -2593,7 +2593,7 @@ instance ToJSON
 
 --
 -- /See:/ 'offersItemsItem' smart constructor.
-data OffersItemsItem = OffersItemsItem
+data OffersItemsItem = OffersItemsItem'
     { _oiiItems        :: !(Maybe [OffersItemsItemItemsItem])
     , _oiiArtURL       :: !(Maybe Text)
     , _oiiId           :: !(Maybe Text)
@@ -2614,7 +2614,7 @@ data OffersItemsItem = OffersItemsItem
 offersItemsItem
     :: OffersItemsItem
 offersItemsItem =
-    OffersItemsItem
+    OffersItemsItem'
     { _oiiItems = Nothing
     , _oiiArtURL = Nothing
     , _oiiId = Nothing
@@ -2643,13 +2643,13 @@ instance FromJSON OffersItemsItem where
         parseJSON
           = withObject "OffersItemsItem"
               (\ o ->
-                 OffersItemsItem <$>
+                 OffersItemsItem' <$>
                    (o .:? "items" .!= mempty) <*> (o .:? "artUrl") <*>
                      (o .:? "id")
                      <*> (o .:? "gservicesKey"))
 
 instance ToJSON OffersItemsItem where
-        toJSON OffersItemsItem{..}
+        toJSON OffersItemsItem'{..}
           = object
               (catMaybes
                  [("items" .=) <$> _oiiItems,
@@ -2658,7 +2658,7 @@ instance ToJSON OffersItemsItem where
 
 --
 -- /See:/ 'annotationLayerSummary' smart constructor.
-data AnnotationLayerSummary = AnnotationLayerSummary
+data AnnotationLayerSummary = AnnotationLayerSummary'
     { _alsLimitType               :: !(Maybe Text)
     , _alsAllowedCharacterCount   :: !(Maybe (Textual Int32))
     , _alsRemainingCharacterCount :: !(Maybe (Textual Int32))
@@ -2676,7 +2676,7 @@ data AnnotationLayerSummary = AnnotationLayerSummary
 annotationLayerSummary
     :: AnnotationLayerSummary
 annotationLayerSummary =
-    AnnotationLayerSummary
+    AnnotationLayerSummary'
     { _alsLimitType = Nothing
     , _alsAllowedCharacterCount = Nothing
     , _alsRemainingCharacterCount = Nothing
@@ -2708,13 +2708,13 @@ instance FromJSON AnnotationLayerSummary where
         parseJSON
           = withObject "AnnotationLayerSummary"
               (\ o ->
-                 AnnotationLayerSummary <$>
+                 AnnotationLayerSummary' <$>
                    (o .:? "limitType") <*>
                      (o .:? "allowedCharacterCount")
                      <*> (o .:? "remainingCharacterCount"))
 
 instance ToJSON AnnotationLayerSummary where
-        toJSON AnnotationLayerSummary{..}
+        toJSON AnnotationLayerSummary'{..}
           = object
               (catMaybes
                  [("limitType" .=) <$> _alsLimitType,
@@ -2726,7 +2726,7 @@ instance ToJSON AnnotationLayerSummary where
 -- | Search result information related to this volume.
 --
 -- /See:/ 'volumeSearchInfo' smart constructor.
-newtype VolumeSearchInfo = VolumeSearchInfo
+newtype VolumeSearchInfo = VolumeSearchInfo'
     { _vsiTextSnippet :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2738,7 +2738,7 @@ newtype VolumeSearchInfo = VolumeSearchInfo
 volumeSearchInfo
     :: VolumeSearchInfo
 volumeSearchInfo =
-    VolumeSearchInfo
+    VolumeSearchInfo'
     { _vsiTextSnippet = Nothing
     }
 
@@ -2751,16 +2751,16 @@ vsiTextSnippet
 instance FromJSON VolumeSearchInfo where
         parseJSON
           = withObject "VolumeSearchInfo"
-              (\ o -> VolumeSearchInfo <$> (o .:? "textSnippet"))
+              (\ o -> VolumeSearchInfo' <$> (o .:? "textSnippet"))
 
 instance ToJSON VolumeSearchInfo where
-        toJSON VolumeSearchInfo{..}
+        toJSON VolumeSearchInfo'{..}
           = object
               (catMaybes [("textSnippet" .=) <$> _vsiTextSnippet])
 
 --
 -- /See:/ 'annotationsSummary' smart constructor.
-data AnnotationsSummary = AnnotationsSummary
+data AnnotationsSummary = AnnotationsSummary'
     { _asKind   :: !Text
     , _asLayers :: !(Maybe [AnnotationsSummaryLayersItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2775,7 +2775,7 @@ data AnnotationsSummary = AnnotationsSummary
 annotationsSummary
     :: AnnotationsSummary
 annotationsSummary =
-    AnnotationsSummary
+    AnnotationsSummary'
     { _asKind = "books#annotationsSummary"
     , _asLayers = Nothing
     }
@@ -2793,12 +2793,12 @@ instance FromJSON AnnotationsSummary where
         parseJSON
           = withObject "AnnotationsSummary"
               (\ o ->
-                 AnnotationsSummary <$>
+                 AnnotationsSummary' <$>
                    (o .:? "kind" .!= "books#annotationsSummary") <*>
                      (o .:? "layers" .!= mempty))
 
 instance ToJSON AnnotationsSummary where
-        toJSON AnnotationsSummary{..}
+        toJSON AnnotationsSummary'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _asKind),
@@ -2806,7 +2806,7 @@ instance ToJSON AnnotationsSummary where
 
 --
 -- /See:/ 'category' smart constructor.
-data Category = Category
+data Category = Category'
     { _cKind  :: !Text
     , _cItems :: !(Maybe [CategoryItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2821,7 +2821,7 @@ data Category = Category
 category
     :: Category
 category =
-    Category
+    Category'
     { _cKind = "onboarding#category"
     , _cItems = Nothing
     }
@@ -2840,19 +2840,19 @@ instance FromJSON Category where
         parseJSON
           = withObject "Category"
               (\ o ->
-                 Category <$>
+                 Category' <$>
                    (o .:? "kind" .!= "onboarding#category") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Category where
-        toJSON Category{..}
+        toJSON Category'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cKind), ("items" .=) <$> _cItems])
 
 --
 -- /See:/ 'discoveryclustersClustersItemBanner_with_content_container' smart constructor.
-data DiscoveryclustersClustersItemBanner_with_content_container = DiscoveryclustersClustersItemBanner_with_content_container
+data DiscoveryclustersClustersItemBanner_with_content_container = DiscoveryclustersClustersItemBanner_with_content_container'
     { _dcibFillColorArgb  :: !(Maybe Text)
     , _dcibMoreButtonURL  :: !(Maybe Text)
     , _dcibTextColorArgb  :: !(Maybe Text)
@@ -2879,7 +2879,7 @@ data DiscoveryclustersClustersItemBanner_with_content_container = Discoveryclust
 discoveryclustersClustersItemBanner_with_content_container
     :: DiscoveryclustersClustersItemBanner_with_content_container
 discoveryclustersClustersItemBanner_with_content_container =
-    DiscoveryclustersClustersItemBanner_with_content_container
+    DiscoveryclustersClustersItemBanner_with_content_container'
     { _dcibFillColorArgb = Nothing
     , _dcibMoreButtonURL = Nothing
     , _dcibTextColorArgb = Nothing
@@ -2924,7 +2924,7 @@ instance FromJSON
           = withObject
               "DiscoveryclustersClustersItemBannerWithContentContainer"
               (\ o ->
-                 DiscoveryclustersClustersItemBanner_with_content_container
+                 DiscoveryclustersClustersItemBanner_with_content_container'
                    <$>
                    (o .:? "fillColorArgb") <*> (o .:? "moreButtonUrl")
                      <*> (o .:? "textColorArgb")
@@ -2936,7 +2936,7 @@ instance ToJSON
          DiscoveryclustersClustersItemBanner_with_content_container
          where
         toJSON
-          DiscoveryclustersClustersItemBanner_with_content_container{..}
+          DiscoveryclustersClustersItemBanner_with_content_container'{..}
           = object
               (catMaybes
                  [("fillColorArgb" .=) <$> _dcibFillColorArgb,
@@ -2948,7 +2948,7 @@ instance ToJSON
 
 --
 -- /See:/ 'volume' smart constructor.
-data Volume = Volume
+data Volume = Volume'
     { _vvUserInfo        :: !(Maybe VolumeUserInfo)
     , _vvEtag            :: !(Maybe Text)
     , _vvAccessInfo      :: !(Maybe VolumeAccessInfo)
@@ -2990,7 +2990,7 @@ data Volume = Volume
 volume
     :: Volume
 volume =
-    Volume
+    Volume'
     { _vvUserInfo = Nothing
     , _vvEtag = Nothing
     , _vvAccessInfo = Nothing
@@ -3068,7 +3068,7 @@ instance FromJSON Volume where
         parseJSON
           = withObject "Volume"
               (\ o ->
-                 Volume <$>
+                 Volume' <$>
                    (o .:? "userInfo") <*> (o .:? "etag") <*>
                      (o .:? "accessInfo")
                      <*> (o .:? "kind" .!= "books#volume")
@@ -3081,7 +3081,7 @@ instance FromJSON Volume where
                      <*> (o .:? "volumeInfo"))
 
 instance ToJSON Volume where
-        toJSON Volume{..}
+        toJSON Volume'{..}
           = object
               (catMaybes
                  [("userInfo" .=) <$> _vvUserInfo,
@@ -3097,7 +3097,7 @@ instance ToJSON Volume where
 
 --
 -- /See:/ 'geolayerDataGeoBoundaryItemItem' smart constructor.
-data GeolayerDataGeoBoundaryItemItem = GeolayerDataGeoBoundaryItemItem
+data GeolayerDataGeoBoundaryItemItem = GeolayerDataGeoBoundaryItemItem'
     { _gdgbiiLatitude  :: !(Maybe (Textual Word32))
     , _gdgbiiLongitude :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3112,7 +3112,7 @@ data GeolayerDataGeoBoundaryItemItem = GeolayerDataGeoBoundaryItemItem
 geolayerDataGeoBoundaryItemItem
     :: GeolayerDataGeoBoundaryItemItem
 geolayerDataGeoBoundaryItemItem =
-    GeolayerDataGeoBoundaryItemItem
+    GeolayerDataGeoBoundaryItemItem'
     { _gdgbiiLatitude = Nothing
     , _gdgbiiLongitude = Nothing
     }
@@ -3134,11 +3134,11 @@ instance FromJSON GeolayerDataGeoBoundaryItemItem
         parseJSON
           = withObject "GeolayerDataGeoBoundaryItemItem"
               (\ o ->
-                 GeolayerDataGeoBoundaryItemItem <$>
+                 GeolayerDataGeoBoundaryItemItem' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON GeolayerDataGeoBoundaryItemItem where
-        toJSON GeolayerDataGeoBoundaryItemItem{..}
+        toJSON GeolayerDataGeoBoundaryItemItem'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _gdgbiiLatitude,
@@ -3146,7 +3146,7 @@ instance ToJSON GeolayerDataGeoBoundaryItemItem where
 
 --
 -- /See:/ 'series' smart constructor.
-data Series = Series
+data Series = Series'
     { _sKind   :: !Text
     , _sSeries :: !(Maybe [SeriesSeriesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3161,7 +3161,7 @@ data Series = Series
 series
     :: Series
 series =
-    Series
+    Series'
     { _sKind = "books#series"
     , _sSeries = Nothing
     }
@@ -3179,12 +3179,12 @@ instance FromJSON Series where
         parseJSON
           = withObject "Series"
               (\ o ->
-                 Series <$>
+                 Series' <$>
                    (o .:? "kind" .!= "books#series") <*>
                      (o .:? "series" .!= mempty))
 
 instance ToJSON Series where
-        toJSON Series{..}
+        toJSON Series'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sKind),
@@ -3192,7 +3192,7 @@ instance ToJSON Series where
 
 --
 -- /See:/ 'offersItemsItemItemsItem' smart constructor.
-data OffersItemsItemItemsItem = OffersItemsItemItemsItem
+data OffersItemsItemItemsItem = OffersItemsItemItemsItem'
     { _oiiiiCanonicalVolumeLink :: !(Maybe Text)
     , _oiiiiCoverURL            :: !(Maybe Text)
     , _oiiiiVolumeId            :: !(Maybe Text)
@@ -3219,7 +3219,7 @@ data OffersItemsItemItemsItem = OffersItemsItemItemsItem
 offersItemsItemItemsItem
     :: OffersItemsItemItemsItem
 offersItemsItemItemsItem =
-    OffersItemsItemItemsItem
+    OffersItemsItemItemsItem'
     { _oiiiiCanonicalVolumeLink = Nothing
     , _oiiiiCoverURL = Nothing
     , _oiiiiVolumeId = Nothing
@@ -3260,7 +3260,7 @@ instance FromJSON OffersItemsItemItemsItem where
         parseJSON
           = withObject "OffersItemsItemItemsItem"
               (\ o ->
-                 OffersItemsItemItemsItem <$>
+                 OffersItemsItemItemsItem' <$>
                    (o .:? "canonicalVolumeLink") <*> (o .:? "coverUrl")
                      <*> (o .:? "volumeId")
                      <*> (o .:? "author")
@@ -3268,7 +3268,7 @@ instance FromJSON OffersItemsItemItemsItem where
                      <*> (o .:? "description"))
 
 instance ToJSON OffersItemsItemItemsItem where
-        toJSON OffersItemsItemItemsItem{..}
+        toJSON OffersItemsItemItemsItem'{..}
           = object
               (catMaybes
                  [("canonicalVolumeLink" .=) <$>
@@ -3281,7 +3281,7 @@ instance ToJSON OffersItemsItemItemsItem where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource' smart constructor.
-data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource = DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource = DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource'
     { _dddwisidieisURL         :: !(Maybe Text)
     , _dddwisidieisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3296,7 +3296,7 @@ data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource = Dic
 dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
     :: DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
 dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource =
-    DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+    DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource'
     { _dddwisidieisURL = Nothing
     , _dddwisidieisAttribution = Nothing
     }
@@ -3318,14 +3318,14 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
+                 DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource'
                    <$> (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource
          where
         toJSON
-          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource{..}
+          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddwisidieisURL,
@@ -3333,7 +3333,7 @@ instance ToJSON
 
 --
 -- /See:/ 'geolayerDataCommon' smart constructor.
-data GeolayerDataCommon = GeolayerDataCommon
+data GeolayerDataCommon = GeolayerDataCommon'
     { _gdcSnippet         :: !(Maybe Text)
     , _gdcSnippetURL      :: !(Maybe Text)
     , _gdcLang            :: !(Maybe Text)
@@ -3357,7 +3357,7 @@ data GeolayerDataCommon = GeolayerDataCommon
 geolayerDataCommon
     :: GeolayerDataCommon
 geolayerDataCommon =
-    GeolayerDataCommon
+    GeolayerDataCommon'
     { _gdcSnippet = Nothing
     , _gdcSnippetURL = Nothing
     , _gdcLang = Nothing
@@ -3395,14 +3395,14 @@ instance FromJSON GeolayerDataCommon where
         parseJSON
           = withObject "GeolayerDataCommon"
               (\ o ->
-                 GeolayerDataCommon <$>
+                 GeolayerDataCommon' <$>
                    (o .:? "snippet") <*> (o .:? "snippetUrl") <*>
                      (o .:? "lang")
                      <*> (o .:? "title")
                      <*> (o .:? "previewImageUrl"))
 
 instance ToJSON GeolayerDataCommon where
-        toJSON GeolayerDataCommon{..}
+        toJSON GeolayerDataCommon'{..}
           = object
               (catMaybes
                  [("snippet" .=) <$> _gdcSnippet,
@@ -3412,7 +3412,7 @@ instance ToJSON GeolayerDataCommon where
 
 --
 -- /See:/ 'geolayerDataGeo' smart constructor.
-data GeolayerDataGeo = GeolayerDataGeo
+data GeolayerDataGeo = GeolayerDataGeo'
     { _gdgMapType     :: !(Maybe Text)
     , _gdgCachePolicy :: !(Maybe Text)
     , _gdgViewport    :: !(Maybe GeolayerDataGeoViewport)
@@ -3445,7 +3445,7 @@ data GeolayerDataGeo = GeolayerDataGeo
 geolayerDataGeo
     :: GeolayerDataGeo
 geolayerDataGeo =
-    GeolayerDataGeo
+    GeolayerDataGeo'
     { _gdgMapType = Nothing
     , _gdgCachePolicy = Nothing
     , _gdgViewport = Nothing
@@ -3514,7 +3514,7 @@ instance FromJSON GeolayerDataGeo where
         parseJSON
           = withObject "GeolayerDataGeo"
               (\ o ->
-                 GeolayerDataGeo <$>
+                 GeolayerDataGeo' <$>
                    (o .:? "mapType") <*> (o .:? "cachePolicy") <*>
                      (o .:? "viewport")
                      <*> (o .:? "boundary" .!= mempty)
@@ -3524,7 +3524,7 @@ instance FromJSON GeolayerDataGeo where
                      <*> (o .:? "longitude"))
 
 instance ToJSON GeolayerDataGeo where
-        toJSON GeolayerDataGeo{..}
+        toJSON GeolayerDataGeo'{..}
           = object
               (catMaybes
                  [("mapType" .=) <$> _gdgMapType,
@@ -3538,7 +3538,7 @@ instance ToJSON GeolayerDataGeo where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItem' smart constructor.
-data DictlayerDataDictWordsItem = DictlayerDataDictWordsItem
+data DictlayerDataDictWordsItem = DictlayerDataDictWordsItem'
     { _dddwiSenses      :: !(Maybe [DictlayerDataDictWordsItemSensesItem])
     , _dddwiSource      :: !(Maybe DictlayerDataDictWordsItemSource)
     , _dddwiDerivatives :: !(Maybe [DictlayerDataDictWordsItemDerivativesItem])
@@ -3559,7 +3559,7 @@ data DictlayerDataDictWordsItem = DictlayerDataDictWordsItem
 dictlayerDataDictWordsItem
     :: DictlayerDataDictWordsItem
 dictlayerDataDictWordsItem =
-    DictlayerDataDictWordsItem
+    DictlayerDataDictWordsItem'
     { _dddwiSenses = Nothing
     , _dddwiSource = Nothing
     , _dddwiDerivatives = Nothing
@@ -3596,13 +3596,13 @@ instance FromJSON DictlayerDataDictWordsItem where
         parseJSON
           = withObject "DictlayerDataDictWordsItem"
               (\ o ->
-                 DictlayerDataDictWordsItem <$>
+                 DictlayerDataDictWordsItem' <$>
                    (o .:? "senses" .!= mempty) <*> (o .:? "source") <*>
                      (o .:? "derivatives" .!= mempty)
                      <*> (o .:? "examples" .!= mempty))
 
 instance ToJSON DictlayerDataDictWordsItem where
-        toJSON DictlayerDataDictWordsItem{..}
+        toJSON DictlayerDataDictWordsItem'{..}
           = object
               (catMaybes
                  [("senses" .=) <$> _dddwiSenses,
@@ -3612,7 +3612,7 @@ instance ToJSON DictlayerDataDictWordsItem where
 
 --
 -- /See:/ 'categoryItemsItem' smart constructor.
-data CategoryItemsItem = CategoryItemsItem
+data CategoryItemsItem = CategoryItemsItem'
     { _ciiName       :: !(Maybe Text)
     , _ciiCategoryId :: !(Maybe Text)
     , _ciiBadgeURL   :: !(Maybe Text)
@@ -3630,7 +3630,7 @@ data CategoryItemsItem = CategoryItemsItem
 categoryItemsItem
     :: CategoryItemsItem
 categoryItemsItem =
-    CategoryItemsItem
+    CategoryItemsItem'
     { _ciiName = Nothing
     , _ciiCategoryId = Nothing
     , _ciiBadgeURL = Nothing
@@ -3652,12 +3652,12 @@ instance FromJSON CategoryItemsItem where
         parseJSON
           = withObject "CategoryItemsItem"
               (\ o ->
-                 CategoryItemsItem <$>
+                 CategoryItemsItem' <$>
                    (o .:? "name") <*> (o .:? "categoryId") <*>
                      (o .:? "badgeUrl"))
 
 instance ToJSON CategoryItemsItem where
-        toJSON CategoryItemsItem{..}
+        toJSON CategoryItemsItem'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _ciiName,
@@ -3666,7 +3666,7 @@ instance ToJSON CategoryItemsItem where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemDerivativesItemSource' smart constructor.
-data DictlayerDataDictWordsItemDerivativesItemSource = DictlayerDataDictWordsItemDerivativesItemSource
+data DictlayerDataDictWordsItemDerivativesItemSource = DictlayerDataDictWordsItemDerivativesItemSource'
     { _dddwidisURL         :: !(Maybe Text)
     , _dddwidisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3681,7 +3681,7 @@ data DictlayerDataDictWordsItemDerivativesItemSource = DictlayerDataDictWordsIte
 dictlayerDataDictWordsItemDerivativesItemSource
     :: DictlayerDataDictWordsItemDerivativesItemSource
 dictlayerDataDictWordsItemDerivativesItemSource =
-    DictlayerDataDictWordsItemDerivativesItemSource
+    DictlayerDataDictWordsItemDerivativesItemSource'
     { _dddwidisURL = Nothing
     , _dddwidisAttribution = Nothing
     }
@@ -3701,13 +3701,13 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemDerivativesItemSource"
               (\ o ->
-                 DictlayerDataDictWordsItemDerivativesItemSource <$>
+                 DictlayerDataDictWordsItemDerivativesItemSource' <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
          DictlayerDataDictWordsItemDerivativesItemSource where
         toJSON
-          DictlayerDataDictWordsItemDerivativesItemSource{..}
+          DictlayerDataDictWordsItemDerivativesItemSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddwidisURL,
@@ -3715,7 +3715,7 @@ instance ToJSON
 
 --
 -- /See:/ 'geolayerData' smart constructor.
-data GeolayerData = GeolayerData
+data GeolayerData = GeolayerData'
     { _gdKind   :: !Text
     , _gdGeo    :: !(Maybe GeolayerDataGeo)
     , _gdCommon :: !(Maybe GeolayerDataCommon)
@@ -3733,7 +3733,7 @@ data GeolayerData = GeolayerData
 geolayerData
     :: GeolayerData
 geolayerData =
-    GeolayerData
+    GeolayerData'
     { _gdKind = "books#geolayerdata"
     , _gdGeo = Nothing
     , _gdCommon = Nothing
@@ -3752,13 +3752,13 @@ instance FromJSON GeolayerData where
         parseJSON
           = withObject "GeolayerData"
               (\ o ->
-                 GeolayerData <$>
+                 GeolayerData' <$>
                    (o .:? "kind" .!= "books#geolayerdata") <*>
                      (o .:? "geo")
                      <*> (o .:? "common"))
 
 instance ToJSON GeolayerData where
-        toJSON GeolayerData{..}
+        toJSON GeolayerData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _gdKind), ("geo" .=) <$> _gdGeo,
@@ -3768,7 +3768,7 @@ instance ToJSON GeolayerData where
 -- (game) and \"go\" (verb).
 --
 -- /See:/ 'dictlayerDataDictWordsItemSource' smart constructor.
-data DictlayerDataDictWordsItemSource = DictlayerDataDictWordsItemSource
+data DictlayerDataDictWordsItemSource = DictlayerDataDictWordsItemSource'
     { _dddwisURL         :: !(Maybe Text)
     , _dddwisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3783,7 +3783,7 @@ data DictlayerDataDictWordsItemSource = DictlayerDataDictWordsItemSource
 dictlayerDataDictWordsItemSource
     :: DictlayerDataDictWordsItemSource
 dictlayerDataDictWordsItemSource =
-    DictlayerDataDictWordsItemSource
+    DictlayerDataDictWordsItemSource'
     { _dddwisURL = Nothing
     , _dddwisAttribution = Nothing
     }
@@ -3802,12 +3802,12 @@ instance FromJSON DictlayerDataDictWordsItemSource
         parseJSON
           = withObject "DictlayerDataDictWordsItemSource"
               (\ o ->
-                 DictlayerDataDictWordsItemSource <$>
+                 DictlayerDataDictWordsItemSource' <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON DictlayerDataDictWordsItemSource
          where
-        toJSON DictlayerDataDictWordsItemSource{..}
+        toJSON DictlayerDataDictWordsItemSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddwisURL,
@@ -3815,7 +3815,7 @@ instance ToJSON DictlayerDataDictWordsItemSource
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemDerivativesItem' smart constructor.
-data DictlayerDataDictWordsItemDerivativesItem = DictlayerDataDictWordsItemDerivativesItem
+data DictlayerDataDictWordsItemDerivativesItem = DictlayerDataDictWordsItemDerivativesItem'
     { _dddwidiText   :: !(Maybe Text)
     , _dddwidiSource :: !(Maybe DictlayerDataDictWordsItemDerivativesItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3830,7 +3830,7 @@ data DictlayerDataDictWordsItemDerivativesItem = DictlayerDataDictWordsItemDeriv
 dictlayerDataDictWordsItemDerivativesItem
     :: DictlayerDataDictWordsItemDerivativesItem
 dictlayerDataDictWordsItemDerivativesItem =
-    DictlayerDataDictWordsItemDerivativesItem
+    DictlayerDataDictWordsItemDerivativesItem'
     { _dddwidiText = Nothing
     , _dddwidiSource = Nothing
     }
@@ -3850,12 +3850,12 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemDerivativesItem"
               (\ o ->
-                 DictlayerDataDictWordsItemDerivativesItem <$>
+                 DictlayerDataDictWordsItemDerivativesItem' <$>
                    (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
          DictlayerDataDictWordsItemDerivativesItem where
-        toJSON DictlayerDataDictWordsItemDerivativesItem{..}
+        toJSON DictlayerDataDictWordsItemDerivativesItem'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _dddwidiText,
@@ -3863,7 +3863,7 @@ instance ToJSON
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem' smart constructor.
-data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem = DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem = DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem'
     { _dddwisidieiText   :: !(Maybe Text)
     , _dddwisidieiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3878,7 +3878,7 @@ data DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem = Dictlayer
 dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
     :: DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
 dictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem =
-    DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+    DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem'
     { _dddwisidieiText = Nothing
     , _dddwisidieiSource = Nothing
     }
@@ -3900,14 +3900,14 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
+                 DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem'
                    <$> (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem
          where
         toJSON
-          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem{..}
+          DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _dddwisidieiText,
@@ -3915,7 +3915,7 @@ instance ToJSON
 
 --
 -- /See:/ 'dictlayerData' smart constructor.
-data DictlayerData = DictlayerData
+data DictlayerData = DictlayerData'
     { _ddKind   :: !Text
     , _ddDict   :: !(Maybe DictlayerDataDict)
     , _ddCommon :: !(Maybe DictlayerDataCommon)
@@ -3933,7 +3933,7 @@ data DictlayerData = DictlayerData
 dictlayerData
     :: DictlayerData
 dictlayerData =
-    DictlayerData
+    DictlayerData'
     { _ddKind = "books#dictlayerdata"
     , _ddDict = Nothing
     , _ddCommon = Nothing
@@ -3952,13 +3952,13 @@ instance FromJSON DictlayerData where
         parseJSON
           = withObject "DictlayerData"
               (\ o ->
-                 DictlayerData <$>
+                 DictlayerData' <$>
                    (o .:? "kind" .!= "books#dictlayerdata") <*>
                      (o .:? "dict")
                      <*> (o .:? "common"))
 
 instance ToJSON DictlayerData where
-        toJSON DictlayerData{..}
+        toJSON DictlayerData'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ddKind), ("dict" .=) <$> _ddDict,
@@ -3966,7 +3966,7 @@ instance ToJSON DictlayerData where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItemSource' smart constructor.
-data DictlayerDataDictWordsItemSensesItemSynonymsItemSource = DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+data DictlayerDataDictWordsItemSensesItemSynonymsItemSource = DictlayerDataDictWordsItemSensesItemSynonymsItemSource'
     { _dddwisisisURL         :: !(Maybe Text)
     , _dddwisisisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3981,7 +3981,7 @@ data DictlayerDataDictWordsItemSensesItemSynonymsItemSource = DictlayerDataDictW
 dictlayerDataDictWordsItemSensesItemSynonymsItemSource
     :: DictlayerDataDictWordsItemSensesItemSynonymsItemSource
 dictlayerDataDictWordsItemSensesItemSynonymsItemSource =
-    DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+    DictlayerDataDictWordsItemSensesItemSynonymsItemSource'
     { _dddwisisisURL = Nothing
     , _dddwisisisAttribution = Nothing
     }
@@ -4003,14 +4003,14 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemSynonymsItemSource"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemSynonymsItemSource
+                 DictlayerDataDictWordsItemSensesItemSynonymsItemSource'
                    <$> (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
          DictlayerDataDictWordsItemSensesItemSynonymsItemSource
          where
         toJSON
-          DictlayerDataDictWordsItemSensesItemSynonymsItemSource{..}
+          DictlayerDataDictWordsItemSensesItemSynonymsItemSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddwisisisURL,
@@ -4018,7 +4018,7 @@ instance ToJSON
 
 --
 -- /See:/ 'seriesmembership' smart constructor.
-data Seriesmembership = Seriesmembership
+data Seriesmembership = Seriesmembership'
     { _serNextPageToken :: !(Maybe Text)
     , _serKind          :: !Text
     , _serMember        :: !(Maybe [Volume])
@@ -4036,7 +4036,7 @@ data Seriesmembership = Seriesmembership
 seriesmembership
     :: Seriesmembership
 seriesmembership =
-    Seriesmembership
+    Seriesmembership'
     { _serNextPageToken = Nothing
     , _serKind = "books#series#membership"
     , _serMember = Nothing
@@ -4061,13 +4061,13 @@ instance FromJSON Seriesmembership where
         parseJSON
           = withObject "Seriesmembership"
               (\ o ->
-                 Seriesmembership <$>
+                 Seriesmembership' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "books#series#membership")
                      <*> (o .:? "member" .!= mempty))
 
 instance ToJSON Seriesmembership where
-        toJSON Seriesmembership{..}
+        toJSON Seriesmembership'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _serNextPageToken,
@@ -4076,7 +4076,7 @@ instance ToJSON Seriesmembership where
 
 --
 -- /See:/ 'userSettingsNotification' smart constructor.
-newtype UserSettingsNotification = UserSettingsNotification
+newtype UserSettingsNotification = UserSettingsNotification'
     { _usnMoreFromAuthors :: Maybe UserSettingsNotificationMoreFromAuthors
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4088,7 +4088,7 @@ newtype UserSettingsNotification = UserSettingsNotification
 userSettingsNotification
     :: UserSettingsNotification
 userSettingsNotification =
-    UserSettingsNotification
+    UserSettingsNotification'
     { _usnMoreFromAuthors = Nothing
     }
 
@@ -4101,18 +4101,18 @@ instance FromJSON UserSettingsNotification where
         parseJSON
           = withObject "UserSettingsNotification"
               (\ o ->
-                 UserSettingsNotification <$>
+                 UserSettingsNotification' <$>
                    (o .:? "moreFromAuthors"))
 
 instance ToJSON UserSettingsNotification where
-        toJSON UserSettingsNotification{..}
+        toJSON UserSettingsNotification'{..}
           = object
               (catMaybes
                  [("moreFromAuthors" .=) <$> _usnMoreFromAuthors])
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSynonymsItem' smart constructor.
-data DictlayerDataDictWordsItemSensesItemSynonymsItem = DictlayerDataDictWordsItemSensesItemSynonymsItem
+data DictlayerDataDictWordsItemSensesItemSynonymsItem = DictlayerDataDictWordsItemSensesItemSynonymsItem'
     { _dddwisisiText   :: !(Maybe Text)
     , _dddwisisiSource :: !(Maybe DictlayerDataDictWordsItemSensesItemSynonymsItemSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4127,7 +4127,7 @@ data DictlayerDataDictWordsItemSensesItemSynonymsItem = DictlayerDataDictWordsIt
 dictlayerDataDictWordsItemSensesItemSynonymsItem
     :: DictlayerDataDictWordsItemSensesItemSynonymsItem
 dictlayerDataDictWordsItemSensesItemSynonymsItem =
-    DictlayerDataDictWordsItemSensesItemSynonymsItem
+    DictlayerDataDictWordsItemSensesItemSynonymsItem'
     { _dddwisisiText = Nothing
     , _dddwisisiSource = Nothing
     }
@@ -4149,14 +4149,14 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemSynonymsItem"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemSynonymsItem <$>
+                 DictlayerDataDictWordsItemSensesItemSynonymsItem' <$>
                    (o .:? "text") <*> (o .:? "source"))
 
 instance ToJSON
          DictlayerDataDictWordsItemSensesItemSynonymsItem
          where
         toJSON
-          DictlayerDataDictWordsItemSensesItemSynonymsItem{..}
+          DictlayerDataDictWordsItemSensesItemSynonymsItem'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _dddwisisiText,
@@ -4164,7 +4164,7 @@ instance ToJSON
 
 --
 -- /See:/ 'geolayerDataGeoViewportLo' smart constructor.
-data GeolayerDataGeoViewportLo = GeolayerDataGeoViewportLo
+data GeolayerDataGeoViewportLo = GeolayerDataGeoViewportLo'
     { _gdgvlLatitude  :: !(Maybe (Textual Double))
     , _gdgvlLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4179,7 +4179,7 @@ data GeolayerDataGeoViewportLo = GeolayerDataGeoViewportLo
 geolayerDataGeoViewportLo
     :: GeolayerDataGeoViewportLo
 geolayerDataGeoViewportLo =
-    GeolayerDataGeoViewportLo
+    GeolayerDataGeoViewportLo'
     { _gdgvlLatitude = Nothing
     , _gdgvlLongitude = Nothing
     }
@@ -4200,11 +4200,11 @@ instance FromJSON GeolayerDataGeoViewportLo where
         parseJSON
           = withObject "GeolayerDataGeoViewportLo"
               (\ o ->
-                 GeolayerDataGeoViewportLo <$>
+                 GeolayerDataGeoViewportLo' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON GeolayerDataGeoViewportLo where
-        toJSON GeolayerDataGeoViewportLo{..}
+        toJSON GeolayerDataGeoViewportLo'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _gdgvlLatitude,
@@ -4213,7 +4213,7 @@ instance ToJSON GeolayerDataGeoViewportLo where
 -- | Offer list (=undiscounted) price in Micros.
 --
 -- /See:/ 'volumeSaleInfoOffersItemListPrice' smart constructor.
-data VolumeSaleInfoOffersItemListPrice = VolumeSaleInfoOffersItemListPrice
+data VolumeSaleInfoOffersItemListPrice = VolumeSaleInfoOffersItemListPrice'
     { _vsioilpCurrencyCode   :: !(Maybe Text)
     , _vsioilpAmountInMicros :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4228,7 +4228,7 @@ data VolumeSaleInfoOffersItemListPrice = VolumeSaleInfoOffersItemListPrice
 volumeSaleInfoOffersItemListPrice
     :: VolumeSaleInfoOffersItemListPrice
 volumeSaleInfoOffersItemListPrice =
-    VolumeSaleInfoOffersItemListPrice
+    VolumeSaleInfoOffersItemListPrice'
     { _vsioilpCurrencyCode = Nothing
     , _vsioilpAmountInMicros = Nothing
     }
@@ -4249,12 +4249,12 @@ instance FromJSON VolumeSaleInfoOffersItemListPrice
         parseJSON
           = withObject "VolumeSaleInfoOffersItemListPrice"
               (\ o ->
-                 VolumeSaleInfoOffersItemListPrice <$>
+                 VolumeSaleInfoOffersItemListPrice' <$>
                    (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
 
 instance ToJSON VolumeSaleInfoOffersItemListPrice
          where
-        toJSON VolumeSaleInfoOffersItemListPrice{..}
+        toJSON VolumeSaleInfoOffersItemListPrice'{..}
           = object
               (catMaybes
                  [("currencyCode" .=) <$> _vsioilpCurrencyCode,
@@ -4262,7 +4262,7 @@ instance ToJSON VolumeSaleInfoOffersItemListPrice
 
 --
 -- /See:/ 'downloadAccessRestriction' smart constructor.
-data DownloadAccessRestriction = DownloadAccessRestriction
+data DownloadAccessRestriction = DownloadAccessRestriction'
     { _darJustAcquired       :: !(Maybe Bool)
     , _darSignature          :: !(Maybe Text)
     , _darKind               :: !Text
@@ -4307,7 +4307,7 @@ data DownloadAccessRestriction = DownloadAccessRestriction
 downloadAccessRestriction
     :: DownloadAccessRestriction
 downloadAccessRestriction =
-    DownloadAccessRestriction
+    DownloadAccessRestriction'
     { _darJustAcquired = Nothing
     , _darSignature = Nothing
     , _darKind = "books#downloadAccessRestriction"
@@ -4399,7 +4399,7 @@ instance FromJSON DownloadAccessRestriction where
         parseJSON
           = withObject "DownloadAccessRestriction"
               (\ o ->
-                 DownloadAccessRestriction <$>
+                 DownloadAccessRestriction' <$>
                    (o .:? "justAcquired") <*> (o .:? "signature") <*>
                      (o .:? "kind" .!= "books#downloadAccessRestriction")
                      <*> (o .:? "maxDownloadDevices")
@@ -4413,7 +4413,7 @@ instance FromJSON DownloadAccessRestriction where
                      <*> (o .:? "nonce"))
 
 instance ToJSON DownloadAccessRestriction where
-        toJSON DownloadAccessRestriction{..}
+        toJSON DownloadAccessRestriction'{..}
           = object
               (catMaybes
                  [("justAcquired" .=) <$> _darJustAcquired,
@@ -4431,7 +4431,7 @@ instance ToJSON DownloadAccessRestriction where
 
 --
 -- /See:/ 'dictlayerDataCommon' smart constructor.
-newtype DictlayerDataCommon = DictlayerDataCommon
+newtype DictlayerDataCommon = DictlayerDataCommon'
     { _ddcTitle :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4443,7 +4443,7 @@ newtype DictlayerDataCommon = DictlayerDataCommon
 dictlayerDataCommon
     :: DictlayerDataCommon
 dictlayerDataCommon =
-    DictlayerDataCommon
+    DictlayerDataCommon'
     { _ddcTitle = Nothing
     }
 
@@ -4455,15 +4455,15 @@ ddcTitle = lens _ddcTitle (\ s a -> s{_ddcTitle = a})
 instance FromJSON DictlayerDataCommon where
         parseJSON
           = withObject "DictlayerDataCommon"
-              (\ o -> DictlayerDataCommon <$> (o .:? "title"))
+              (\ o -> DictlayerDataCommon' <$> (o .:? "title"))
 
 instance ToJSON DictlayerDataCommon where
-        toJSON DictlayerDataCommon{..}
+        toJSON DictlayerDataCommon'{..}
           = object (catMaybes [("title" .=) <$> _ddcTitle])
 
 --
 -- /See:/ 'discoveryclustersClustersItem' smart constructor.
-data DiscoveryclustersClustersItem = DiscoveryclustersClustersItem
+data DiscoveryclustersClustersItem = DiscoveryclustersClustersItem'
     { _dciBannerWithContentContainer :: !(Maybe DiscoveryclustersClustersItemBanner_with_content_container)
     , _dciUid                        :: !(Maybe Text)
     , _dciTotalVolumes               :: !(Maybe (Textual Int32))
@@ -4490,7 +4490,7 @@ data DiscoveryclustersClustersItem = DiscoveryclustersClustersItem
 discoveryclustersClustersItem
     :: DiscoveryclustersClustersItem
 discoveryclustersClustersItem =
-    DiscoveryclustersClustersItem
+    DiscoveryclustersClustersItem'
     { _dciBannerWithContentContainer = Nothing
     , _dciUid = Nothing
     , _dciTotalVolumes = Nothing
@@ -4530,7 +4530,7 @@ instance FromJSON DiscoveryclustersClustersItem where
         parseJSON
           = withObject "DiscoveryclustersClustersItem"
               (\ o ->
-                 DiscoveryclustersClustersItem <$>
+                 DiscoveryclustersClustersItem' <$>
                    (o .:? "banner_with_content_container") <*>
                      (o .:? "uid")
                      <*> (o .:? "totalVolumes")
@@ -4539,7 +4539,7 @@ instance FromJSON DiscoveryclustersClustersItem where
                      <*> (o .:? "volumes" .!= mempty))
 
 instance ToJSON DiscoveryclustersClustersItem where
-        toJSON DiscoveryclustersClustersItem{..}
+        toJSON DiscoveryclustersClustersItem'{..}
           = object
               (catMaybes
                  [("banner_with_content_container" .=) <$>
@@ -4555,7 +4555,7 @@ instance ToJSON DiscoveryclustersClustersItem where
 -- volume. (In LITE projection.)
 --
 -- /See:/ 'volumeSaleInfoRetailPrice' smart constructor.
-data VolumeSaleInfoRetailPrice = VolumeSaleInfoRetailPrice
+data VolumeSaleInfoRetailPrice = VolumeSaleInfoRetailPrice'
     { _vsirpAmount       :: !(Maybe (Textual Double))
     , _vsirpCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4570,7 +4570,7 @@ data VolumeSaleInfoRetailPrice = VolumeSaleInfoRetailPrice
 volumeSaleInfoRetailPrice
     :: VolumeSaleInfoRetailPrice
 volumeSaleInfoRetailPrice =
-    VolumeSaleInfoRetailPrice
+    VolumeSaleInfoRetailPrice'
     { _vsirpAmount = Nothing
     , _vsirpCurrencyCode = Nothing
     }
@@ -4591,11 +4591,11 @@ instance FromJSON VolumeSaleInfoRetailPrice where
         parseJSON
           = withObject "VolumeSaleInfoRetailPrice"
               (\ o ->
-                 VolumeSaleInfoRetailPrice <$>
+                 VolumeSaleInfoRetailPrice' <$>
                    (o .:? "amount") <*> (o .:? "currencyCode"))
 
 instance ToJSON VolumeSaleInfoRetailPrice where
-        toJSON VolumeSaleInfoRetailPrice{..}
+        toJSON VolumeSaleInfoRetailPrice'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _vsirpAmount,
@@ -4604,7 +4604,7 @@ instance ToJSON VolumeSaleInfoRetailPrice where
 -- | Suggested retail price. (In LITE projection.)
 --
 -- /See:/ 'volumeSaleInfoListPrice' smart constructor.
-data VolumeSaleInfoListPrice = VolumeSaleInfoListPrice
+data VolumeSaleInfoListPrice = VolumeSaleInfoListPrice'
     { _vsilpAmount       :: !(Maybe (Textual Double))
     , _vsilpCurrencyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4619,7 +4619,7 @@ data VolumeSaleInfoListPrice = VolumeSaleInfoListPrice
 volumeSaleInfoListPrice
     :: VolumeSaleInfoListPrice
 volumeSaleInfoListPrice =
-    VolumeSaleInfoListPrice
+    VolumeSaleInfoListPrice'
     { _vsilpAmount = Nothing
     , _vsilpCurrencyCode = Nothing
     }
@@ -4640,11 +4640,11 @@ instance FromJSON VolumeSaleInfoListPrice where
         parseJSON
           = withObject "VolumeSaleInfoListPrice"
               (\ o ->
-                 VolumeSaleInfoListPrice <$>
+                 VolumeSaleInfoListPrice' <$>
                    (o .:? "amount") <*> (o .:? "currencyCode"))
 
 instance ToJSON VolumeSaleInfoListPrice where
-        toJSON VolumeSaleInfoListPrice{..}
+        toJSON VolumeSaleInfoListPrice'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _vsilpAmount,
@@ -4652,7 +4652,7 @@ instance ToJSON VolumeSaleInfoListPrice where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemConjugationsItem' smart constructor.
-data DictlayerDataDictWordsItemSensesItemConjugationsItem = DictlayerDataDictWordsItemSensesItemConjugationsItem
+data DictlayerDataDictWordsItemSensesItemConjugationsItem = DictlayerDataDictWordsItemSensesItemConjugationsItem'
     { _dddwisiciValue :: !(Maybe Text)
     , _dddwisiciType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4667,7 +4667,7 @@ data DictlayerDataDictWordsItemSensesItemConjugationsItem = DictlayerDataDictWor
 dictlayerDataDictWordsItemSensesItemConjugationsItem
     :: DictlayerDataDictWordsItemSensesItemConjugationsItem
 dictlayerDataDictWordsItemSensesItemConjugationsItem =
-    DictlayerDataDictWordsItemSensesItemConjugationsItem
+    DictlayerDataDictWordsItemSensesItemConjugationsItem'
     { _dddwisiciValue = Nothing
     , _dddwisiciType = Nothing
     }
@@ -4689,14 +4689,14 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemConjugationsItem"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemConjugationsItem
+                 DictlayerDataDictWordsItemSensesItemConjugationsItem'
                    <$> (o .:? "value") <*> (o .:? "type"))
 
 instance ToJSON
          DictlayerDataDictWordsItemSensesItemConjugationsItem
          where
         toJSON
-          DictlayerDataDictWordsItemSensesItemConjugationsItem{..}
+          DictlayerDataDictWordsItemSensesItemConjugationsItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dddwisiciValue,
@@ -4704,7 +4704,7 @@ instance ToJSON
 
 --
 -- /See:/ 'volume2' smart constructor.
-data Volume2 = Volume2
+data Volume2 = Volume2'
     { _voloNextPageToken :: !(Maybe Text)
     , _voloKind          :: !Text
     , _voloItems         :: !(Maybe [Volume])
@@ -4722,7 +4722,7 @@ data Volume2 = Volume2
 volume2
     :: Volume2
 volume2 =
-    Volume2
+    Volume2'
     { _voloNextPageToken = Nothing
     , _voloKind = "onboarding#volume"
     , _voloItems = Nothing
@@ -4748,13 +4748,13 @@ instance FromJSON Volume2 where
         parseJSON
           = withObject "Volume2"
               (\ o ->
-                 Volume2 <$>
+                 Volume2' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "onboarding#volume")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Volume2 where
-        toJSON Volume2{..}
+        toJSON Volume2'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _voloNextPageToken,
@@ -4763,7 +4763,7 @@ instance ToJSON Volume2 where
 
 --
 -- /See:/ 'review' smart constructor.
-data Review = Review
+data Review = Review'
     { _rRating      :: !(Maybe Text)
     , _rKind        :: !Text
     , _rContent     :: !(Maybe Text)
@@ -4802,7 +4802,7 @@ data Review = Review
 review
     :: Review
 review =
-    Review
+    Review'
     { _rRating = Nothing
     , _rKind = "books#review"
     , _rContent = Nothing
@@ -4864,7 +4864,7 @@ instance FromJSON Review where
         parseJSON
           = withObject "Review"
               (\ o ->
-                 Review <$>
+                 Review' <$>
                    (o .:? "rating") <*>
                      (o .:? "kind" .!= "books#review")
                      <*> (o .:? "content")
@@ -4877,7 +4877,7 @@ instance FromJSON Review where
                      <*> (o .:? "type"))
 
 instance ToJSON Review where
-        toJSON Review{..}
+        toJSON Review'{..}
           = object
               (catMaybes
                  [("rating" .=) <$> _rRating, Just ("kind" .= _rKind),
@@ -4891,7 +4891,7 @@ instance ToJSON Review where
 -- | Period during this book is\/was a valid rental.
 --
 -- /See:/ 'volumeUserInfoRentalPeriod' smart constructor.
-data VolumeUserInfoRentalPeriod = VolumeUserInfoRentalPeriod
+data VolumeUserInfoRentalPeriod = VolumeUserInfoRentalPeriod'
     { _vuirpEndUtcSec   :: !(Maybe (Textual Int64))
     , _vuirpStartUtcSec :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4906,7 +4906,7 @@ data VolumeUserInfoRentalPeriod = VolumeUserInfoRentalPeriod
 volumeUserInfoRentalPeriod
     :: VolumeUserInfoRentalPeriod
 volumeUserInfoRentalPeriod =
-    VolumeUserInfoRentalPeriod
+    VolumeUserInfoRentalPeriod'
     { _vuirpEndUtcSec = Nothing
     , _vuirpStartUtcSec = Nothing
     }
@@ -4927,11 +4927,11 @@ instance FromJSON VolumeUserInfoRentalPeriod where
         parseJSON
           = withObject "VolumeUserInfoRentalPeriod"
               (\ o ->
-                 VolumeUserInfoRentalPeriod <$>
+                 VolumeUserInfoRentalPeriod' <$>
                    (o .:? "endUtcSec") <*> (o .:? "startUtcSec"))
 
 instance ToJSON VolumeUserInfoRentalPeriod where
-        toJSON VolumeUserInfoRentalPeriod{..}
+        toJSON VolumeUserInfoRentalPeriod'{..}
           = object
               (catMaybes
                  [("endUtcSec" .=) <$> _vuirpEndUtcSec,
@@ -4943,7 +4943,7 @@ instance ToJSON VolumeUserInfoRentalPeriod where
 -- countries).
 --
 -- /See:/ 'volumeSaleInfo' smart constructor.
-data VolumeSaleInfo = VolumeSaleInfo
+data VolumeSaleInfo = VolumeSaleInfo'
     { _vsiCountry     :: !(Maybe Text)
     , _vsiOnSaleDate  :: !(Maybe DateTime')
     , _vsiListPrice   :: !(Maybe VolumeSaleInfoListPrice)
@@ -4976,7 +4976,7 @@ data VolumeSaleInfo = VolumeSaleInfo
 volumeSaleInfo
     :: VolumeSaleInfo
 volumeSaleInfo =
-    VolumeSaleInfo
+    VolumeSaleInfo'
     { _vsiCountry = Nothing
     , _vsiOnSaleDate = Nothing
     , _vsiListPrice = Nothing
@@ -5045,7 +5045,7 @@ instance FromJSON VolumeSaleInfo where
         parseJSON
           = withObject "VolumeSaleInfo"
               (\ o ->
-                 VolumeSaleInfo <$>
+                 VolumeSaleInfo' <$>
                    (o .:? "country") <*> (o .:? "onSaleDate") <*>
                      (o .:? "listPrice")
                      <*> (o .:? "retailPrice")
@@ -5055,7 +5055,7 @@ instance FromJSON VolumeSaleInfo where
                      <*> (o .:? "saleability"))
 
 instance ToJSON VolumeSaleInfo where
-        toJSON VolumeSaleInfo{..}
+        toJSON VolumeSaleInfo'{..}
           = object
               (catMaybes
                  [("country" .=) <$> _vsiCountry,
@@ -5069,7 +5069,7 @@ instance ToJSON VolumeSaleInfo where
 
 --
 -- /See:/ 'seriesSeriesItem' smart constructor.
-data SeriesSeriesItem = SeriesSeriesItem
+data SeriesSeriesItem = SeriesSeriesItem'
     { _ssiSeriesId       :: !(Maybe Text)
     , _ssiImageURL       :: !(Maybe Text)
     , _ssiBannerImageURL :: !(Maybe Text)
@@ -5093,7 +5093,7 @@ data SeriesSeriesItem = SeriesSeriesItem
 seriesSeriesItem
     :: SeriesSeriesItem
 seriesSeriesItem =
-    SeriesSeriesItem
+    SeriesSeriesItem'
     { _ssiSeriesId = Nothing
     , _ssiImageURL = Nothing
     , _ssiBannerImageURL = Nothing
@@ -5126,14 +5126,14 @@ instance FromJSON SeriesSeriesItem where
         parseJSON
           = withObject "SeriesSeriesItem"
               (\ o ->
-                 SeriesSeriesItem <$>
+                 SeriesSeriesItem' <$>
                    (o .:? "seriesId") <*> (o .:? "imageUrl") <*>
                      (o .:? "bannerImageUrl")
                      <*> (o .:? "title")
                      <*> (o .:? "seriesType"))
 
 instance ToJSON SeriesSeriesItem where
-        toJSON SeriesSeriesItem{..}
+        toJSON SeriesSeriesItem'{..}
           = object
               (catMaybes
                  [("seriesId" .=) <$> _ssiSeriesId,
@@ -5144,7 +5144,7 @@ instance ToJSON SeriesSeriesItem where
 
 --
 -- /See:/ 'metadata' smart constructor.
-data Metadata = Metadata
+data Metadata = Metadata'
     { _mKind  :: !Text
     , _mItems :: !(Maybe [MetadataItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5159,7 +5159,7 @@ data Metadata = Metadata
 metadata
     :: Metadata
 metadata =
-    Metadata
+    Metadata'
     { _mKind = "dictionary#metadata"
     , _mItems = Nothing
     }
@@ -5178,12 +5178,12 @@ instance FromJSON Metadata where
         parseJSON
           = withObject "Metadata"
               (\ o ->
-                 Metadata <$>
+                 Metadata' <$>
                    (o .:? "kind" .!= "dictionary#metadata") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Metadata where
-        toJSON Metadata{..}
+        toJSON Metadata'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mKind), ("items" .=) <$> _mItems])
@@ -5191,7 +5191,7 @@ instance ToJSON Metadata where
 -- | What layers exist in this volume and high level information about them.
 --
 -- /See:/ 'volumeLayerInfo' smart constructor.
-newtype VolumeLayerInfo = VolumeLayerInfo
+newtype VolumeLayerInfo = VolumeLayerInfo'
     { _vliLayers :: Maybe [VolumeLayerInfoLayersItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5203,7 +5203,7 @@ newtype VolumeLayerInfo = VolumeLayerInfo
 volumeLayerInfo
     :: VolumeLayerInfo
 volumeLayerInfo =
-    VolumeLayerInfo
+    VolumeLayerInfo'
     { _vliLayers = Nothing
     }
 
@@ -5219,16 +5219,16 @@ instance FromJSON VolumeLayerInfo where
         parseJSON
           = withObject "VolumeLayerInfo"
               (\ o ->
-                 VolumeLayerInfo <$> (o .:? "layers" .!= mempty))
+                 VolumeLayerInfo' <$> (o .:? "layers" .!= mempty))
 
 instance ToJSON VolumeLayerInfo where
-        toJSON VolumeLayerInfo{..}
+        toJSON VolumeLayerInfo'{..}
           = object (catMaybes [("layers" .=) <$> _vliLayers])
 
 -- | Physical dimensions of this volume.
 --
 -- /See:/ 'volumeVolumeInfoDimensions' smart constructor.
-data VolumeVolumeInfoDimensions = VolumeVolumeInfoDimensions
+data VolumeVolumeInfoDimensions = VolumeVolumeInfoDimensions'
     { _vvidHeight    :: !(Maybe Text)
     , _vvidWidth     :: !(Maybe Text)
     , _vvidThickness :: !(Maybe Text)
@@ -5246,7 +5246,7 @@ data VolumeVolumeInfoDimensions = VolumeVolumeInfoDimensions
 volumeVolumeInfoDimensions
     :: VolumeVolumeInfoDimensions
 volumeVolumeInfoDimensions =
-    VolumeVolumeInfoDimensions
+    VolumeVolumeInfoDimensions'
     { _vvidHeight = Nothing
     , _vvidWidth = Nothing
     , _vvidThickness = Nothing
@@ -5272,12 +5272,12 @@ instance FromJSON VolumeVolumeInfoDimensions where
         parseJSON
           = withObject "VolumeVolumeInfoDimensions"
               (\ o ->
-                 VolumeVolumeInfoDimensions <$>
+                 VolumeVolumeInfoDimensions' <$>
                    (o .:? "height") <*> (o .:? "width") <*>
                      (o .:? "thickness"))
 
 instance ToJSON VolumeVolumeInfoDimensions where
-        toJSON VolumeVolumeInfoDimensions{..}
+        toJSON VolumeVolumeInfoDimensions'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _vvidHeight,
@@ -5286,7 +5286,7 @@ instance ToJSON VolumeVolumeInfoDimensions where
 
 --
 -- /See:/ 'requestAccess' smart constructor.
-data RequestAccess = RequestAccess
+data RequestAccess = RequestAccess'
     { _raConcurrentAccess :: !(Maybe ConcurrentAccessRestriction)
     , _raKind             :: !Text
     , _raDownloadAccess   :: !(Maybe DownloadAccessRestriction)
@@ -5304,7 +5304,7 @@ data RequestAccess = RequestAccess
 requestAccess
     :: RequestAccess
 requestAccess =
-    RequestAccess
+    RequestAccess'
     { _raConcurrentAccess = Nothing
     , _raKind = "books#requestAccess"
     , _raDownloadAccess = Nothing
@@ -5330,13 +5330,13 @@ instance FromJSON RequestAccess where
         parseJSON
           = withObject "RequestAccess"
               (\ o ->
-                 RequestAccess <$>
+                 RequestAccess' <$>
                    (o .:? "concurrentAccess") <*>
                      (o .:? "kind" .!= "books#requestAccess")
                      <*> (o .:? "downloadAccess"))
 
 instance ToJSON RequestAccess where
-        toJSON RequestAccess{..}
+        toJSON RequestAccess'{..}
           = object
               (catMaybes
                  [("concurrentAccess" .=) <$> _raConcurrentAccess,
@@ -5346,7 +5346,7 @@ instance ToJSON RequestAccess where
 -- | Selection ranges sent from the client.
 --
 -- /See:/ 'annotationClientVersionRanges' smart constructor.
-data AnnotationClientVersionRanges = AnnotationClientVersionRanges
+data AnnotationClientVersionRanges = AnnotationClientVersionRanges'
     { _acvrGbImageRange   :: !(Maybe BooksAnnotationsRange)
     , _acvrContentVersion :: !(Maybe Text)
     , _acvrImageCfiRange  :: !(Maybe BooksAnnotationsRange)
@@ -5370,7 +5370,7 @@ data AnnotationClientVersionRanges = AnnotationClientVersionRanges
 annotationClientVersionRanges
     :: AnnotationClientVersionRanges
 annotationClientVersionRanges =
-    AnnotationClientVersionRanges
+    AnnotationClientVersionRanges'
     { _acvrGbImageRange = Nothing
     , _acvrContentVersion = Nothing
     , _acvrImageCfiRange = Nothing
@@ -5411,14 +5411,14 @@ instance FromJSON AnnotationClientVersionRanges where
         parseJSON
           = withObject "AnnotationClientVersionRanges"
               (\ o ->
-                 AnnotationClientVersionRanges <$>
+                 AnnotationClientVersionRanges' <$>
                    (o .:? "gbImageRange") <*> (o .:? "contentVersion")
                      <*> (o .:? "imageCfiRange")
                      <*> (o .:? "gbTextRange")
                      <*> (o .:? "cfiRange"))
 
 instance ToJSON AnnotationClientVersionRanges where
-        toJSON AnnotationClientVersionRanges{..}
+        toJSON AnnotationClientVersionRanges'{..}
           = object
               (catMaybes
                  [("gbImageRange" .=) <$> _acvrGbImageRange,
@@ -5429,7 +5429,7 @@ instance ToJSON AnnotationClientVersionRanges where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemDefinitionsItem' smart constructor.
-data DictlayerDataDictWordsItemSensesItemDefinitionsItem = DictlayerDataDictWordsItemSensesItemDefinitionsItem
+data DictlayerDataDictWordsItemSensesItemDefinitionsItem = DictlayerDataDictWordsItemSensesItemDefinitionsItem'
     { _dddwisidiDefinition :: !(Maybe Text)
     , _dddwisidiExamples   :: !(Maybe [DictlayerDataDictWordsItemSensesItemDefinitionsItemExamplesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5444,7 +5444,7 @@ data DictlayerDataDictWordsItemSensesItemDefinitionsItem = DictlayerDataDictWord
 dictlayerDataDictWordsItemSensesItemDefinitionsItem
     :: DictlayerDataDictWordsItemSensesItemDefinitionsItem
 dictlayerDataDictWordsItemSensesItemDefinitionsItem =
-    DictlayerDataDictWordsItemSensesItemDefinitionsItem
+    DictlayerDataDictWordsItemSensesItemDefinitionsItem'
     { _dddwisidiDefinition = Nothing
     , _dddwisidiExamples = Nothing
     }
@@ -5468,7 +5468,7 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemDefinitionsItem"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemDefinitionsItem
+                 DictlayerDataDictWordsItemSensesItemDefinitionsItem'
                    <$>
                    (o .:? "definition") <*>
                      (o .:? "examples" .!= mempty))
@@ -5477,7 +5477,7 @@ instance ToJSON
          DictlayerDataDictWordsItemSensesItemDefinitionsItem
          where
         toJSON
-          DictlayerDataDictWordsItemSensesItemDefinitionsItem{..}
+          DictlayerDataDictWordsItemSensesItemDefinitionsItem'{..}
           = object
               (catMaybes
                  [("definition" .=) <$> _dddwisidiDefinition,
@@ -5485,7 +5485,7 @@ instance ToJSON
 
 --
 -- /See:/ 'volumeLayerInfoLayersItem' smart constructor.
-data VolumeLayerInfoLayersItem = VolumeLayerInfoLayersItem
+data VolumeLayerInfoLayersItem = VolumeLayerInfoLayersItem'
     { _vliliVolumeAnnotationsVersion :: !(Maybe Text)
     , _vliliLayerId                  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5500,7 +5500,7 @@ data VolumeLayerInfoLayersItem = VolumeLayerInfoLayersItem
 volumeLayerInfoLayersItem
     :: VolumeLayerInfoLayersItem
 volumeLayerInfoLayersItem =
-    VolumeLayerInfoLayersItem
+    VolumeLayerInfoLayersItem'
     { _vliliVolumeAnnotationsVersion = Nothing
     , _vliliLayerId = Nothing
     }
@@ -5522,12 +5522,12 @@ instance FromJSON VolumeLayerInfoLayersItem where
         parseJSON
           = withObject "VolumeLayerInfoLayersItem"
               (\ o ->
-                 VolumeLayerInfoLayersItem <$>
+                 VolumeLayerInfoLayersItem' <$>
                    (o .:? "volumeAnnotationsVersion") <*>
                      (o .:? "layerId"))
 
 instance ToJSON VolumeLayerInfoLayersItem where
-        toJSON VolumeLayerInfoLayersItem{..}
+        toJSON VolumeLayerInfoLayersItem'{..}
           = object
               (catMaybes
                  [("volumeAnnotationsVersion" .=) <$>
@@ -5537,7 +5537,7 @@ instance ToJSON VolumeLayerInfoLayersItem where
 -- | Selection ranges for the most recent content version.
 --
 -- /See:/ 'annotationCurrentVersionRanges' smart constructor.
-data AnnotationCurrentVersionRanges = AnnotationCurrentVersionRanges
+data AnnotationCurrentVersionRanges = AnnotationCurrentVersionRanges'
     { _aGbImageRange   :: !(Maybe BooksAnnotationsRange)
     , _aContentVersion :: !(Maybe Text)
     , _aImageCfiRange  :: !(Maybe BooksAnnotationsRange)
@@ -5561,7 +5561,7 @@ data AnnotationCurrentVersionRanges = AnnotationCurrentVersionRanges
 annotationCurrentVersionRanges
     :: AnnotationCurrentVersionRanges
 annotationCurrentVersionRanges =
-    AnnotationCurrentVersionRanges
+    AnnotationCurrentVersionRanges'
     { _aGbImageRange = Nothing
     , _aContentVersion = Nothing
     , _aImageCfiRange = Nothing
@@ -5602,14 +5602,14 @@ instance FromJSON AnnotationCurrentVersionRanges
         parseJSON
           = withObject "AnnotationCurrentVersionRanges"
               (\ o ->
-                 AnnotationCurrentVersionRanges <$>
+                 AnnotationCurrentVersionRanges' <$>
                    (o .:? "gbImageRange") <*> (o .:? "contentVersion")
                      <*> (o .:? "imageCfiRange")
                      <*> (o .:? "gbTextRange")
                      <*> (o .:? "cfiRange"))
 
 instance ToJSON AnnotationCurrentVersionRanges where
-        toJSON AnnotationCurrentVersionRanges{..}
+        toJSON AnnotationCurrentVersionRanges'{..}
           = object
               (catMaybes
                  [("gbImageRange" .=) <$> _aGbImageRange,
@@ -5621,7 +5621,7 @@ instance ToJSON AnnotationCurrentVersionRanges where
 -- | Information about pdf content. (In LITE projection.)
 --
 -- /See:/ 'volumeAccessInfoPdf' smart constructor.
-data VolumeAccessInfoPdf = VolumeAccessInfoPdf
+data VolumeAccessInfoPdf = VolumeAccessInfoPdf'
     { _vaipAcsTokenLink :: !(Maybe Text)
     , _vaipIsAvailable  :: !(Maybe Bool)
     , _vaipDownloadLink :: !(Maybe Text)
@@ -5639,7 +5639,7 @@ data VolumeAccessInfoPdf = VolumeAccessInfoPdf
 volumeAccessInfoPdf
     :: VolumeAccessInfoPdf
 volumeAccessInfoPdf =
-    VolumeAccessInfoPdf
+    VolumeAccessInfoPdf'
     { _vaipAcsTokenLink = Nothing
     , _vaipIsAvailable = Nothing
     , _vaipDownloadLink = Nothing
@@ -5668,12 +5668,12 @@ instance FromJSON VolumeAccessInfoPdf where
         parseJSON
           = withObject "VolumeAccessInfoPdf"
               (\ o ->
-                 VolumeAccessInfoPdf <$>
+                 VolumeAccessInfoPdf' <$>
                    (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
                      (o .:? "downloadLink"))
 
 instance ToJSON VolumeAccessInfoPdf where
-        toJSON VolumeAccessInfoPdf{..}
+        toJSON VolumeAccessInfoPdf'{..}
           = object
               (catMaybes
                  [("acsTokenLink" .=) <$> _vaipAcsTokenLink,
@@ -5682,7 +5682,7 @@ instance ToJSON VolumeAccessInfoPdf where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemExamplesItemSource' smart constructor.
-data DictlayerDataDictWordsItemExamplesItemSource = DictlayerDataDictWordsItemExamplesItemSource
+data DictlayerDataDictWordsItemExamplesItemSource = DictlayerDataDictWordsItemExamplesItemSource'
     { _dddwieisURL         :: !(Maybe Text)
     , _dddwieisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5697,7 +5697,7 @@ data DictlayerDataDictWordsItemExamplesItemSource = DictlayerDataDictWordsItemEx
 dictlayerDataDictWordsItemExamplesItemSource
     :: DictlayerDataDictWordsItemExamplesItemSource
 dictlayerDataDictWordsItemExamplesItemSource =
-    DictlayerDataDictWordsItemExamplesItemSource
+    DictlayerDataDictWordsItemExamplesItemSource'
     { _dddwieisURL = Nothing
     , _dddwieisAttribution = Nothing
     }
@@ -5717,13 +5717,13 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemExamplesItemSource"
               (\ o ->
-                 DictlayerDataDictWordsItemExamplesItemSource <$>
+                 DictlayerDataDictWordsItemExamplesItemSource' <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
          DictlayerDataDictWordsItemExamplesItemSource where
         toJSON
-          DictlayerDataDictWordsItemExamplesItemSource{..}
+          DictlayerDataDictWordsItemExamplesItemSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddwieisURL,
@@ -5732,7 +5732,7 @@ instance ToJSON
 -- | Information about epub content. (In LITE projection.)
 --
 -- /See:/ 'volumeAccessInfoEpub' smart constructor.
-data VolumeAccessInfoEpub = VolumeAccessInfoEpub
+data VolumeAccessInfoEpub = VolumeAccessInfoEpub'
     { _vaieAcsTokenLink :: !(Maybe Text)
     , _vaieIsAvailable  :: !(Maybe Bool)
     , _vaieDownloadLink :: !(Maybe Text)
@@ -5750,7 +5750,7 @@ data VolumeAccessInfoEpub = VolumeAccessInfoEpub
 volumeAccessInfoEpub
     :: VolumeAccessInfoEpub
 volumeAccessInfoEpub =
-    VolumeAccessInfoEpub
+    VolumeAccessInfoEpub'
     { _vaieAcsTokenLink = Nothing
     , _vaieIsAvailable = Nothing
     , _vaieDownloadLink = Nothing
@@ -5779,12 +5779,12 @@ instance FromJSON VolumeAccessInfoEpub where
         parseJSON
           = withObject "VolumeAccessInfoEpub"
               (\ o ->
-                 VolumeAccessInfoEpub <$>
+                 VolumeAccessInfoEpub' <$>
                    (o .:? "acsTokenLink") <*> (o .:? "isAvailable") <*>
                      (o .:? "downloadLink"))
 
 instance ToJSON VolumeAccessInfoEpub where
-        toJSON VolumeAccessInfoEpub{..}
+        toJSON VolumeAccessInfoEpub'{..}
           = object
               (catMaybes
                  [("acsTokenLink" .=) <$> _vaieAcsTokenLink,
@@ -5793,7 +5793,7 @@ instance ToJSON VolumeAccessInfoEpub where
 
 --
 -- /See:/ 'readingPosition' smart constructor.
-data ReadingPosition = ReadingPosition
+data ReadingPosition = ReadingPosition'
     { _rpEpubCfiPosition :: !(Maybe Text)
     , _rpKind            :: !Text
     , _rpGbImagePosition :: !(Maybe Text)
@@ -5823,7 +5823,7 @@ data ReadingPosition = ReadingPosition
 readingPosition
     :: ReadingPosition
 readingPosition =
-    ReadingPosition
+    ReadingPosition'
     { _rpEpubCfiPosition = Nothing
     , _rpKind = "books#readingPosition"
     , _rpGbImagePosition = Nothing
@@ -5877,7 +5877,7 @@ instance FromJSON ReadingPosition where
         parseJSON
           = withObject "ReadingPosition"
               (\ o ->
-                 ReadingPosition <$>
+                 ReadingPosition' <$>
                    (o .:? "epubCfiPosition") <*>
                      (o .:? "kind" .!= "books#readingPosition")
                      <*> (o .:? "gbImagePosition")
@@ -5887,7 +5887,7 @@ instance FromJSON ReadingPosition where
                      <*> (o .:? "gbTextPosition"))
 
 instance ToJSON ReadingPosition where
-        toJSON ReadingPosition{..}
+        toJSON ReadingPosition'{..}
           = object
               (catMaybes
                  [("epubCfiPosition" .=) <$> _rpEpubCfiPosition,
@@ -5900,7 +5900,7 @@ instance ToJSON ReadingPosition where
 
 --
 -- /See:/ 'volumeSaleInfoOffersItem' smart constructor.
-data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem
+data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem'
     { _vsioiFinskyOfferType :: !(Maybe (Textual Int32))
     , _vsioiRentalDuration  :: !(Maybe VolumeSaleInfoOffersItemRentalDuration)
     , _vsioiListPrice       :: !(Maybe VolumeSaleInfoOffersItemListPrice)
@@ -5921,7 +5921,7 @@ data VolumeSaleInfoOffersItem = VolumeSaleInfoOffersItem
 volumeSaleInfoOffersItem
     :: VolumeSaleInfoOffersItem
 volumeSaleInfoOffersItem =
-    VolumeSaleInfoOffersItem
+    VolumeSaleInfoOffersItem'
     { _vsioiFinskyOfferType = Nothing
     , _vsioiRentalDuration = Nothing
     , _vsioiListPrice = Nothing
@@ -5957,14 +5957,14 @@ instance FromJSON VolumeSaleInfoOffersItem where
         parseJSON
           = withObject "VolumeSaleInfoOffersItem"
               (\ o ->
-                 VolumeSaleInfoOffersItem <$>
+                 VolumeSaleInfoOffersItem' <$>
                    (o .:? "finskyOfferType") <*>
                      (o .:? "rentalDuration")
                      <*> (o .:? "listPrice")
                      <*> (o .:? "retailPrice"))
 
 instance ToJSON VolumeSaleInfoOffersItem where
-        toJSON VolumeSaleInfoOffersItem{..}
+        toJSON VolumeSaleInfoOffersItem'{..}
           = object
               (catMaybes
                  [("finskyOfferType" .=) <$> _vsioiFinskyOfferType,
@@ -5974,7 +5974,7 @@ instance ToJSON VolumeSaleInfoOffersItem where
 
 --
 -- /See:/ 'dictlayerDataDict' smart constructor.
-data DictlayerDataDict = DictlayerDataDict
+data DictlayerDataDict = DictlayerDataDict'
     { _dddSource :: !(Maybe DictlayerDataDictSource)
     , _dddWords  :: !(Maybe [DictlayerDataDictWordsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5989,7 +5989,7 @@ data DictlayerDataDict = DictlayerDataDict
 dictlayerDataDict
     :: DictlayerDataDict
 dictlayerDataDict =
-    DictlayerDataDict
+    DictlayerDataDict'
     { _dddSource = Nothing
     , _dddWords = Nothing
     }
@@ -6009,11 +6009,11 @@ instance FromJSON DictlayerDataDict where
         parseJSON
           = withObject "DictlayerDataDict"
               (\ o ->
-                 DictlayerDataDict <$>
+                 DictlayerDataDict' <$>
                    (o .:? "source") <*> (o .:? "words" .!= mempty))
 
 instance ToJSON DictlayerDataDict where
-        toJSON DictlayerDataDict{..}
+        toJSON DictlayerDataDict'{..}
           = object
               (catMaybes
                  [("source" .=) <$> _dddSource,
@@ -6021,7 +6021,7 @@ instance ToJSON DictlayerDataDict where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItem' smart constructor.
-data DictlayerDataDictWordsItemSensesItem = DictlayerDataDictWordsItemSensesItem
+data DictlayerDataDictWordsItemSensesItem = DictlayerDataDictWordsItemSensesItem'
     { _dddwisiPronunciationURL :: !(Maybe Text)
     , _dddwisiConjugations     :: !(Maybe [DictlayerDataDictWordsItemSensesItemConjugationsItem])
     , _dddwisiPronunciation    :: !(Maybe Text)
@@ -6054,7 +6054,7 @@ data DictlayerDataDictWordsItemSensesItem = DictlayerDataDictWordsItemSensesItem
 dictlayerDataDictWordsItemSensesItem
     :: DictlayerDataDictWordsItemSensesItem
 dictlayerDataDictWordsItemSensesItem =
-    DictlayerDataDictWordsItemSensesItem
+    DictlayerDataDictWordsItemSensesItem'
     { _dddwisiPronunciationURL = Nothing
     , _dddwisiConjugations = Nothing
     , _dddwisiPronunciation = Nothing
@@ -6116,7 +6116,7 @@ instance FromJSON
         parseJSON
           = withObject "DictlayerDataDictWordsItemSensesItem"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItem <$>
+                 DictlayerDataDictWordsItemSensesItem' <$>
                    (o .:? "pronunciationUrl") <*>
                      (o .:? "conjugations" .!= mempty)
                      <*> (o .:? "pronunciation")
@@ -6128,7 +6128,7 @@ instance FromJSON
 
 instance ToJSON DictlayerDataDictWordsItemSensesItem
          where
-        toJSON DictlayerDataDictWordsItemSensesItem{..}
+        toJSON DictlayerDataDictWordsItemSensesItem'{..}
           = object
               (catMaybes
                  [("pronunciationUrl" .=) <$>
@@ -6144,7 +6144,7 @@ instance ToJSON DictlayerDataDictWordsItemSensesItem
 -- | Recommendation related information for this volume.
 --
 -- /See:/ 'volumeRecommendedInfo' smart constructor.
-newtype VolumeRecommendedInfo = VolumeRecommendedInfo
+newtype VolumeRecommendedInfo = VolumeRecommendedInfo'
     { _vriExplanation :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6156,7 +6156,7 @@ newtype VolumeRecommendedInfo = VolumeRecommendedInfo
 volumeRecommendedInfo
     :: VolumeRecommendedInfo
 volumeRecommendedInfo =
-    VolumeRecommendedInfo
+    VolumeRecommendedInfo'
     { _vriExplanation = Nothing
     }
 
@@ -6170,16 +6170,16 @@ instance FromJSON VolumeRecommendedInfo where
         parseJSON
           = withObject "VolumeRecommendedInfo"
               (\ o ->
-                 VolumeRecommendedInfo <$> (o .:? "explanation"))
+                 VolumeRecommendedInfo' <$> (o .:? "explanation"))
 
 instance ToJSON VolumeRecommendedInfo where
-        toJSON VolumeRecommendedInfo{..}
+        toJSON VolumeRecommendedInfo'{..}
           = object
               (catMaybes [("explanation" .=) <$> _vriExplanation])
 
 --
 -- /See:/ 'offers' smart constructor.
-data Offers = Offers
+data Offers = Offers'
     { _oKind  :: !Text
     , _oItems :: !(Maybe [OffersItemsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6194,7 +6194,7 @@ data Offers = Offers
 offers
     :: Offers
 offers =
-    Offers
+    Offers'
     { _oKind = "promooffer#offers"
     , _oItems = Nothing
     }
@@ -6213,19 +6213,19 @@ instance FromJSON Offers where
         parseJSON
           = withObject "Offers"
               (\ o ->
-                 Offers <$>
+                 Offers' <$>
                    (o .:? "kind" .!= "promooffer#offers") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Offers where
-        toJSON Offers{..}
+        toJSON Offers'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oKind), ("items" .=) <$> _oItems])
 
 --
 -- /See:/ 'discoveryclusters' smart constructor.
-data Discoveryclusters = Discoveryclusters
+data Discoveryclusters = Discoveryclusters'
     { _dKind          :: !Text
     , _dTotalClusters :: !(Maybe (Textual Int32))
     , _dClusters      :: !(Maybe [DiscoveryclustersClustersItem])
@@ -6243,7 +6243,7 @@ data Discoveryclusters = Discoveryclusters
 discoveryclusters
     :: Discoveryclusters
 discoveryclusters =
-    Discoveryclusters
+    Discoveryclusters'
     { _dKind = "books#discovery#clusters"
     , _dTotalClusters = Nothing
     , _dClusters = Nothing
@@ -6269,13 +6269,13 @@ instance FromJSON Discoveryclusters where
         parseJSON
           = withObject "Discoveryclusters"
               (\ o ->
-                 Discoveryclusters <$>
+                 Discoveryclusters' <$>
                    (o .:? "kind" .!= "books#discovery#clusters") <*>
                      (o .:? "totalClusters")
                      <*> (o .:? "clusters" .!= mempty))
 
 instance ToJSON Discoveryclusters where
-        toJSON Discoveryclusters{..}
+        toJSON Discoveryclusters'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dKind),
@@ -6284,7 +6284,7 @@ instance ToJSON Discoveryclusters where
 
 --
 -- /See:/ 'volumeseriesInfoVolumeSeriesItem' smart constructor.
-data VolumeseriesInfoVolumeSeriesItem = VolumeseriesInfoVolumeSeriesItem
+data VolumeseriesInfoVolumeSeriesItem = VolumeseriesInfoVolumeSeriesItem'
     { _vivsiSeriesId       :: !(Maybe Text)
     , _vivsiSeriesBookType :: !(Maybe Text)
     , _vivsiOrderNumber    :: !(Maybe (Textual Int32))
@@ -6305,7 +6305,7 @@ data VolumeseriesInfoVolumeSeriesItem = VolumeseriesInfoVolumeSeriesItem
 volumeseriesInfoVolumeSeriesItem
     :: VolumeseriesInfoVolumeSeriesItem
 volumeseriesInfoVolumeSeriesItem =
-    VolumeseriesInfoVolumeSeriesItem
+    VolumeseriesInfoVolumeSeriesItem'
     { _vivsiSeriesId = Nothing
     , _vivsiSeriesBookType = Nothing
     , _vivsiOrderNumber = Nothing
@@ -6344,14 +6344,14 @@ instance FromJSON VolumeseriesInfoVolumeSeriesItem
         parseJSON
           = withObject "VolumeseriesInfoVolumeSeriesItem"
               (\ o ->
-                 VolumeseriesInfoVolumeSeriesItem <$>
+                 VolumeseriesInfoVolumeSeriesItem' <$>
                    (o .:? "seriesId") <*> (o .:? "seriesBookType") <*>
                      (o .:? "orderNumber")
                      <*> (o .:? "issue" .!= mempty))
 
 instance ToJSON VolumeseriesInfoVolumeSeriesItem
          where
-        toJSON VolumeseriesInfoVolumeSeriesItem{..}
+        toJSON VolumeseriesInfoVolumeSeriesItem'{..}
           = object
               (catMaybes
                  [("seriesId" .=) <$> _vivsiSeriesId,
@@ -6362,7 +6362,7 @@ instance ToJSON VolumeseriesInfoVolumeSeriesItem
 -- | User settings in sub-objects, each for different purposes.
 --
 -- /See:/ 'userSettingsNotesExport' smart constructor.
-data UserSettingsNotesExport = UserSettingsNotesExport
+data UserSettingsNotesExport = UserSettingsNotesExport'
     { _usneFolderName :: !(Maybe Text)
     , _usneIsEnabled  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6377,7 +6377,7 @@ data UserSettingsNotesExport = UserSettingsNotesExport
 userSettingsNotesExport
     :: UserSettingsNotesExport
 userSettingsNotesExport =
-    UserSettingsNotesExport
+    UserSettingsNotesExport'
     { _usneFolderName = Nothing
     , _usneIsEnabled = Nothing
     }
@@ -6396,11 +6396,11 @@ instance FromJSON UserSettingsNotesExport where
         parseJSON
           = withObject "UserSettingsNotesExport"
               (\ o ->
-                 UserSettingsNotesExport <$>
+                 UserSettingsNotesExport' <$>
                    (o .:? "folderName") <*> (o .:? "isEnabled"))
 
 instance ToJSON UserSettingsNotesExport where
-        toJSON UserSettingsNotesExport{..}
+        toJSON UserSettingsNotesExport'{..}
           = object
               (catMaybes
                  [("folderName" .=) <$> _usneFolderName,
@@ -6408,7 +6408,7 @@ instance ToJSON UserSettingsNotesExport where
 
 --
 -- /See:/ 'concurrentAccessRestriction' smart constructor.
-data ConcurrentAccessRestriction = ConcurrentAccessRestriction
+data ConcurrentAccessRestriction = ConcurrentAccessRestriction'
     { _carMaxConcurrentDevices :: !(Maybe (Textual Int32))
     , _carSignature            :: !(Maybe Text)
     , _carTimeWindowSeconds    :: !(Maybe (Textual Int32))
@@ -6450,7 +6450,7 @@ data ConcurrentAccessRestriction = ConcurrentAccessRestriction
 concurrentAccessRestriction
     :: ConcurrentAccessRestriction
 concurrentAccessRestriction =
-    ConcurrentAccessRestriction
+    ConcurrentAccessRestriction'
     { _carMaxConcurrentDevices = Nothing
     , _carSignature = Nothing
     , _carTimeWindowSeconds = Nothing
@@ -6530,7 +6530,7 @@ instance FromJSON ConcurrentAccessRestriction where
         parseJSON
           = withObject "ConcurrentAccessRestriction"
               (\ o ->
-                 ConcurrentAccessRestriction <$>
+                 ConcurrentAccessRestriction' <$>
                    (o .:? "maxConcurrentDevices") <*>
                      (o .:? "signature")
                      <*> (o .:? "timeWindowSeconds")
@@ -6546,7 +6546,7 @@ instance FromJSON ConcurrentAccessRestriction where
                      <*> (o .:? "nonce"))
 
 instance ToJSON ConcurrentAccessRestriction where
-        toJSON ConcurrentAccessRestriction{..}
+        toJSON ConcurrentAccessRestriction'{..}
           = object
               (catMaybes
                  [("maxConcurrentDevices" .=) <$>
@@ -6564,7 +6564,7 @@ instance ToJSON ConcurrentAccessRestriction where
 
 --
 -- /See:/ 'volumes' smart constructor.
-data Volumes = Volumes
+data Volumes = Volumes'
     { _v1TotalItems :: !(Maybe (Textual Int32))
     , _v1Kind       :: !Text
     , _v1Items      :: !(Maybe [Volume])
@@ -6582,7 +6582,7 @@ data Volumes = Volumes
 volumes
     :: Volumes
 volumes =
-    Volumes
+    Volumes'
     { _v1TotalItems = Nothing
     , _v1Kind = "books#volumes"
     , _v1Items = Nothing
@@ -6609,13 +6609,13 @@ instance FromJSON Volumes where
         parseJSON
           = withObject "Volumes"
               (\ o ->
-                 Volumes <$>
+                 Volumes' <$>
                    (o .:? "totalItems") <*>
                      (o .:? "kind" .!= "books#volumes")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Volumes where
-        toJSON Volumes{..}
+        toJSON Volumes'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _v1TotalItems,
@@ -6623,7 +6623,7 @@ instance ToJSON Volumes where
 
 --
 -- /See:/ 'bookshelves' smart constructor.
-data Bookshelves = Bookshelves
+data Bookshelves = Bookshelves'
     { _booKind  :: !Text
     , _booItems :: !(Maybe [Bookshelf])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6638,7 +6638,7 @@ data Bookshelves = Bookshelves
 bookshelves
     :: Bookshelves
 bookshelves =
-    Bookshelves
+    Bookshelves'
     { _booKind = "books#bookshelves"
     , _booItems = Nothing
     }
@@ -6658,12 +6658,12 @@ instance FromJSON Bookshelves where
         parseJSON
           = withObject "Bookshelves"
               (\ o ->
-                 Bookshelves <$>
+                 Bookshelves' <$>
                    (o .:? "kind" .!= "books#bookshelves") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON Bookshelves where
-        toJSON Bookshelves{..}
+        toJSON Bookshelves'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _booKind),
@@ -6672,7 +6672,7 @@ instance ToJSON Bookshelves where
 -- | The source, url and attribution for this dictionary data.
 --
 -- /See:/ 'dictlayerDataDictSource' smart constructor.
-data DictlayerDataDictSource = DictlayerDataDictSource
+data DictlayerDataDictSource = DictlayerDataDictSource'
     { _dddsURL         :: !(Maybe Text)
     , _dddsAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6687,7 +6687,7 @@ data DictlayerDataDictSource = DictlayerDataDictSource
 dictlayerDataDictSource
     :: DictlayerDataDictSource
 dictlayerDataDictSource =
-    DictlayerDataDictSource
+    DictlayerDataDictSource'
     { _dddsURL = Nothing
     , _dddsAttribution = Nothing
     }
@@ -6704,11 +6704,11 @@ instance FromJSON DictlayerDataDictSource where
         parseJSON
           = withObject "DictlayerDataDictSource"
               (\ o ->
-                 DictlayerDataDictSource <$>
+                 DictlayerDataDictSource' <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON DictlayerDataDictSource where
-        toJSON DictlayerDataDictSource{..}
+        toJSON DictlayerDataDictSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddsURL,
@@ -6716,7 +6716,7 @@ instance ToJSON DictlayerDataDictSource where
 
 --
 -- /See:/ 'downloadAccesses' smart constructor.
-data DownloadAccesses = DownloadAccesses
+data DownloadAccesses = DownloadAccesses'
     { _daKind               :: !Text
     , _daDownloadAccessList :: !(Maybe [DownloadAccessRestriction])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6731,7 +6731,7 @@ data DownloadAccesses = DownloadAccesses
 downloadAccesses
     :: DownloadAccesses
 downloadAccesses =
-    DownloadAccesses
+    DownloadAccesses'
     { _daKind = "books#downloadAccesses"
     , _daDownloadAccessList = Nothing
     }
@@ -6752,12 +6752,12 @@ instance FromJSON DownloadAccesses where
         parseJSON
           = withObject "DownloadAccesses"
               (\ o ->
-                 DownloadAccesses <$>
+                 DownloadAccesses' <$>
                    (o .:? "kind" .!= "books#downloadAccesses") <*>
                      (o .:? "downloadAccessList" .!= mempty))
 
 instance ToJSON DownloadAccesses where
-        toJSON DownloadAccesses{..}
+        toJSON DownloadAccesses'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _daKind),
@@ -6765,7 +6765,7 @@ instance ToJSON DownloadAccesses where
 
 --
 -- /See:/ 'geolayerDataGeoViewportHi' smart constructor.
-data GeolayerDataGeoViewportHi = GeolayerDataGeoViewportHi
+data GeolayerDataGeoViewportHi = GeolayerDataGeoViewportHi'
     { _gdgvhLatitude  :: !(Maybe (Textual Double))
     , _gdgvhLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6780,7 +6780,7 @@ data GeolayerDataGeoViewportHi = GeolayerDataGeoViewportHi
 geolayerDataGeoViewportHi
     :: GeolayerDataGeoViewportHi
 geolayerDataGeoViewportHi =
-    GeolayerDataGeoViewportHi
+    GeolayerDataGeoViewportHi'
     { _gdgvhLatitude = Nothing
     , _gdgvhLongitude = Nothing
     }
@@ -6801,11 +6801,11 @@ instance FromJSON GeolayerDataGeoViewportHi where
         parseJSON
           = withObject "GeolayerDataGeoViewportHi"
               (\ o ->
-                 GeolayerDataGeoViewportHi <$>
+                 GeolayerDataGeoViewportHi' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON GeolayerDataGeoViewportHi where
-        toJSON GeolayerDataGeoViewportHi{..}
+        toJSON GeolayerDataGeoViewportHi'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _gdgvhLatitude,
@@ -6814,7 +6814,7 @@ instance ToJSON GeolayerDataGeoViewportHi where
 -- | General volume information.
 --
 -- /See:/ 'volumeVolumeInfo' smart constructor.
-data VolumeVolumeInfo = VolumeVolumeInfo
+data VolumeVolumeInfo = VolumeVolumeInfo'
     { _vviImageLinks          :: !(Maybe VolumeVolumeInfoImageLinks)
     , _vviAverageRating       :: !(Maybe (Textual Double))
     , _vviRatingsCount        :: !(Maybe (Textual Int32))
@@ -6901,7 +6901,7 @@ data VolumeVolumeInfo = VolumeVolumeInfo
 volumeVolumeInfo
     :: VolumeVolumeInfo
 volumeVolumeInfo =
-    VolumeVolumeInfo
+    VolumeVolumeInfo'
     { _vviImageLinks = Nothing
     , _vviAverageRating = Nothing
     , _vviRatingsCount = Nothing
@@ -7099,7 +7099,7 @@ instance FromJSON VolumeVolumeInfo where
         parseJSON
           = withObject "VolumeVolumeInfo"
               (\ o ->
-                 VolumeVolumeInfo <$>
+                 VolumeVolumeInfo' <$>
                    (o .:? "imageLinks") <*> (o .:? "averageRating") <*>
                      (o .:? "ratingsCount")
                      <*> (o .:? "canonicalVolumeLink")
@@ -7127,7 +7127,7 @@ instance FromJSON VolumeVolumeInfo where
                      <*> (o .:? "printType"))
 
 instance ToJSON VolumeVolumeInfo where
-        toJSON VolumeVolumeInfo{..}
+        toJSON VolumeVolumeInfo'{..}
           = object
               (catMaybes
                  [("imageLinks" .=) <$> _vviImageLinks,
@@ -7161,7 +7161,7 @@ instance ToJSON VolumeVolumeInfo where
 
 --
 -- /See:/ 'metadataItemsItem' smart constructor.
-data MetadataItemsItem = MetadataItemsItem
+data MetadataItemsItem = MetadataItemsItem'
     { _miiSize         :: !(Maybe (Textual Int64))
     , _miiVersion      :: !(Maybe (Textual Int64))
     , _miiLanguage     :: !(Maybe Text)
@@ -7185,7 +7185,7 @@ data MetadataItemsItem = MetadataItemsItem
 metadataItemsItem
     :: MetadataItemsItem
 metadataItemsItem =
-    MetadataItemsItem
+    MetadataItemsItem'
     { _miiSize = Nothing
     , _miiVersion = Nothing
     , _miiLanguage = Nothing
@@ -7221,14 +7221,14 @@ instance FromJSON MetadataItemsItem where
         parseJSON
           = withObject "MetadataItemsItem"
               (\ o ->
-                 MetadataItemsItem <$>
+                 MetadataItemsItem' <$>
                    (o .:? "size") <*> (o .:? "version") <*>
                      (o .:? "language")
                      <*> (o .:? "download_url")
                      <*> (o .:? "encrypted_key"))
 
 instance ToJSON MetadataItemsItem where
-        toJSON MetadataItemsItem{..}
+        toJSON MetadataItemsItem'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _miiSize,
@@ -7239,7 +7239,7 @@ instance ToJSON MetadataItemsItem where
 
 --
 -- /See:/ 'dictlayerDataDictWordsItemSensesItemSource' smart constructor.
-data DictlayerDataDictWordsItemSensesItemSource = DictlayerDataDictWordsItemSensesItemSource
+data DictlayerDataDictWordsItemSensesItemSource = DictlayerDataDictWordsItemSensesItemSource'
     { _dddwisisURL         :: !(Maybe Text)
     , _dddwisisAttribution :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7254,7 +7254,7 @@ data DictlayerDataDictWordsItemSensesItemSource = DictlayerDataDictWordsItemSens
 dictlayerDataDictWordsItemSensesItemSource
     :: DictlayerDataDictWordsItemSensesItemSource
 dictlayerDataDictWordsItemSensesItemSource =
-    DictlayerDataDictWordsItemSensesItemSource
+    DictlayerDataDictWordsItemSensesItemSource'
     { _dddwisisURL = Nothing
     , _dddwisisAttribution = Nothing
     }
@@ -7274,12 +7274,13 @@ instance FromJSON
           = withObject
               "DictlayerDataDictWordsItemSensesItemSource"
               (\ o ->
-                 DictlayerDataDictWordsItemSensesItemSource <$>
+                 DictlayerDataDictWordsItemSensesItemSource' <$>
                    (o .:? "url") <*> (o .:? "attribution"))
 
 instance ToJSON
          DictlayerDataDictWordsItemSensesItemSource where
-        toJSON DictlayerDataDictWordsItemSensesItemSource{..}
+        toJSON
+          DictlayerDataDictWordsItemSensesItemSource'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _dddwisisURL,
@@ -7288,7 +7289,7 @@ instance ToJSON
 -- | Offer retail (=discounted) price in Micros
 --
 -- /See:/ 'volumeSaleInfoOffersItemRetailPrice' smart constructor.
-data VolumeSaleInfoOffersItemRetailPrice = VolumeSaleInfoOffersItemRetailPrice
+data VolumeSaleInfoOffersItemRetailPrice = VolumeSaleInfoOffersItemRetailPrice'
     { _vsioirpCurrencyCode   :: !(Maybe Text)
     , _vsioirpAmountInMicros :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7303,7 +7304,7 @@ data VolumeSaleInfoOffersItemRetailPrice = VolumeSaleInfoOffersItemRetailPrice
 volumeSaleInfoOffersItemRetailPrice
     :: VolumeSaleInfoOffersItemRetailPrice
 volumeSaleInfoOffersItemRetailPrice =
-    VolumeSaleInfoOffersItemRetailPrice
+    VolumeSaleInfoOffersItemRetailPrice'
     { _vsioirpCurrencyCode = Nothing
     , _vsioirpAmountInMicros = Nothing
     }
@@ -7324,12 +7325,12 @@ instance FromJSON VolumeSaleInfoOffersItemRetailPrice
         parseJSON
           = withObject "VolumeSaleInfoOffersItemRetailPrice"
               (\ o ->
-                 VolumeSaleInfoOffersItemRetailPrice <$>
+                 VolumeSaleInfoOffersItemRetailPrice' <$>
                    (o .:? "currencyCode") <*> (o .:? "amountInMicros"))
 
 instance ToJSON VolumeSaleInfoOffersItemRetailPrice
          where
-        toJSON VolumeSaleInfoOffersItemRetailPrice{..}
+        toJSON VolumeSaleInfoOffersItemRetailPrice'{..}
           = object
               (catMaybes
                  [("currencyCode" .=) <$> _vsioirpCurrencyCode,
@@ -7337,7 +7338,7 @@ instance ToJSON VolumeSaleInfoOffersItemRetailPrice
 
 --
 -- /See:/ 'volumeVolumeInfoIndustryIdentifiersItem' smart constructor.
-data VolumeVolumeInfoIndustryIdentifiersItem = VolumeVolumeInfoIndustryIdentifiersItem
+data VolumeVolumeInfoIndustryIdentifiersItem = VolumeVolumeInfoIndustryIdentifiersItem'
     { _vviiiiIdentifier :: !(Maybe Text)
     , _vviiiiType       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7352,7 +7353,7 @@ data VolumeVolumeInfoIndustryIdentifiersItem = VolumeVolumeInfoIndustryIdentifie
 volumeVolumeInfoIndustryIdentifiersItem
     :: VolumeVolumeInfoIndustryIdentifiersItem
 volumeVolumeInfoIndustryIdentifiersItem =
-    VolumeVolumeInfoIndustryIdentifiersItem
+    VolumeVolumeInfoIndustryIdentifiersItem'
     { _vviiiiIdentifier = Nothing
     , _vviiiiType = Nothing
     }
@@ -7374,12 +7375,12 @@ instance FromJSON
           = withObject
               "VolumeVolumeInfoIndustryIdentifiersItem"
               (\ o ->
-                 VolumeVolumeInfoIndustryIdentifiersItem <$>
+                 VolumeVolumeInfoIndustryIdentifiersItem' <$>
                    (o .:? "identifier") <*> (o .:? "type"))
 
 instance ToJSON
          VolumeVolumeInfoIndustryIdentifiersItem where
-        toJSON VolumeVolumeInfoIndustryIdentifiersItem{..}
+        toJSON VolumeVolumeInfoIndustryIdentifiersItem'{..}
           = object
               (catMaybes
                  [("identifier" .=) <$> _vviiiiIdentifier,
@@ -7387,7 +7388,7 @@ instance ToJSON
 
 --
 -- /See:/ 'booksAnnotationsRange' smart constructor.
-data BooksAnnotationsRange = BooksAnnotationsRange
+data BooksAnnotationsRange = BooksAnnotationsRange'
     { _barStartOffSet   :: !(Maybe Text)
     , _barEndOffSet     :: !(Maybe Text)
     , _barEndPosition   :: !(Maybe Text)
@@ -7408,7 +7409,7 @@ data BooksAnnotationsRange = BooksAnnotationsRange
 booksAnnotationsRange
     :: BooksAnnotationsRange
 booksAnnotationsRange =
-    BooksAnnotationsRange
+    BooksAnnotationsRange'
     { _barStartOffSet = Nothing
     , _barEndOffSet = Nothing
     , _barEndPosition = Nothing
@@ -7442,13 +7443,13 @@ instance FromJSON BooksAnnotationsRange where
         parseJSON
           = withObject "BooksAnnotationsRange"
               (\ o ->
-                 BooksAnnotationsRange <$>
+                 BooksAnnotationsRange' <$>
                    (o .:? "startOffset") <*> (o .:? "endOffset") <*>
                      (o .:? "endPosition")
                      <*> (o .:? "startPosition"))
 
 instance ToJSON BooksAnnotationsRange where
-        toJSON BooksAnnotationsRange{..}
+        toJSON BooksAnnotationsRange'{..}
           = object
               (catMaybes
                  [("startOffset" .=) <$> _barStartOffSet,
@@ -7458,7 +7459,7 @@ instance ToJSON BooksAnnotationsRange where
 
 --
 -- /See:/ 'layersummaries' smart constructor.
-data Layersummaries = Layersummaries
+data Layersummaries = Layersummaries'
     { _layTotalItems :: !(Maybe (Textual Int32))
     , _layKind       :: !Text
     , _layItems      :: !(Maybe [Layersummary])
@@ -7476,7 +7477,7 @@ data Layersummaries = Layersummaries
 layersummaries
     :: Layersummaries
 layersummaries =
-    Layersummaries
+    Layersummaries'
     { _layTotalItems = Nothing
     , _layKind = "books#layersummaries"
     , _layItems = Nothing
@@ -7504,13 +7505,13 @@ instance FromJSON Layersummaries where
         parseJSON
           = withObject "Layersummaries"
               (\ o ->
-                 Layersummaries <$>
+                 Layersummaries' <$>
                    (o .:? "totalItems") <*>
                      (o .:? "kind" .!= "books#layersummaries")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Layersummaries where
-        toJSON Layersummaries{..}
+        toJSON Layersummaries'{..}
           = object
               (catMaybes
                  [("totalItems" .=) <$> _layTotalItems,

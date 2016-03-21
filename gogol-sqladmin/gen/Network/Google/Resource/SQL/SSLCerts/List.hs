@@ -56,7 +56,7 @@ type SSLCertsListResource =
 -- | Lists all of the current SSL certificates for the instance.
 --
 -- /See:/ 'sslCertsList' smart constructor.
-data SSLCertsList = SSLCertsList
+data SSLCertsList = SSLCertsList'
     { _sclProject  :: !Text
     , _sclInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ sslCertsList
     -> Text -- ^ 'sclInstance'
     -> SSLCertsList
 sslCertsList pSclProject_ pSclInstance_ =
-    SSLCertsList
+    SSLCertsList'
     { _sclProject = pSclProject_
     , _sclInstance = pSclInstance_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SSLCertsList where
         type Scopes SSLCertsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient SSLCertsList{..}
+        requestClient SSLCertsList'{..}
           = go _sclProject _sclInstance (Just AltJSON)
               sQLAdminService
           where go

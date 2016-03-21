@@ -60,7 +60,7 @@ type CalendarListPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'calendarListPatch' smart constructor.
-data CalendarListPatch = CalendarListPatch
+data CalendarListPatch = CalendarListPatch'
     { _clpCalendarId     :: !Text
     , _clpPayload        :: !CalendarListEntry
     , _clpColorRgbFormat :: !(Maybe Bool)
@@ -80,7 +80,7 @@ calendarListPatch
     -> CalendarListEntry -- ^ 'clpPayload'
     -> CalendarListPatch
 calendarListPatch pClpCalendarId_ pClpPayload_ =
-    CalendarListPatch
+    CalendarListPatch'
     { _clpCalendarId = pClpCalendarId_
     , _clpPayload = pClpPayload_
     , _clpColorRgbFormat = Nothing
@@ -112,7 +112,7 @@ instance GoogleRequest CalendarListPatch where
         type Rs CalendarListPatch = CalendarListEntry
         type Scopes CalendarListPatch =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarListPatch{..}
+        requestClient CalendarListPatch'{..}
           = go _clpCalendarId _clpColorRgbFormat (Just AltJSON)
               _clpPayload
               appsCalendarService

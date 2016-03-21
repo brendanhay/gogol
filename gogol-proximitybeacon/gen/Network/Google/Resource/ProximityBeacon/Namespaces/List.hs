@@ -67,7 +67,7 @@ type NamespacesListResource =
 -- namespaced type, and the namespace must be owned by your project.
 --
 -- /See:/ 'namespacesList' smart constructor.
-data NamespacesList = NamespacesList
+data NamespacesList = NamespacesList'
     { _nlXgafv          :: !(Maybe Text)
     , _nlUploadProtocol :: !(Maybe Text)
     , _nlPp             :: !Bool
@@ -97,7 +97,7 @@ data NamespacesList = NamespacesList
 namespacesList
     :: NamespacesList
 namespacesList =
-    NamespacesList
+    NamespacesList'
     { _nlXgafv = Nothing
     , _nlUploadProtocol = Nothing
     , _nlPp = True
@@ -146,7 +146,7 @@ nlCallback
 instance GoogleRequest NamespacesList where
         type Rs NamespacesList = ListNamespacesResponse
         type Scopes NamespacesList = '[]
-        requestClient NamespacesList{..}
+        requestClient NamespacesList'{..}
           = go _nlXgafv _nlUploadProtocol (Just _nlPp)
               _nlAccessToken
               _nlUploadType

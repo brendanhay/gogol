@@ -59,7 +59,7 @@ type PostsGetByPathResource =
 -- | Retrieve a Post by Path.
 --
 -- /See:/ 'postsGetByPath' smart constructor.
-data PostsGetByPath = PostsGetByPath
+data PostsGetByPath = PostsGetByPath'
     { _pgbpPath        :: !Text
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe (Textual Word32))
@@ -82,7 +82,7 @@ postsGetByPath
     -> Text -- ^ 'pgbpBlogId'
     -> PostsGetByPath
 postsGetByPath pPgbpPath_ pPgbpBlogId_ =
-    PostsGetByPath
+    PostsGetByPath'
     { _pgbpPath = pPgbpPath_
     , _pgbpBlogId = pPgbpBlogId_
     , _pgbpMaxComments = Nothing
@@ -115,7 +115,7 @@ instance GoogleRequest PostsGetByPath where
         type Scopes PostsGetByPath =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PostsGetByPath{..}
+        requestClient PostsGetByPath'{..}
           = go _pgbpBlogId (Just _pgbpPath) _pgbpMaxComments
               _pgbpView
               (Just AltJSON)

@@ -84,7 +84,7 @@ type AccountsOrdersListResource =
 -- this method.
 --
 -- /See:/ 'accountsOrdersList' smart constructor.
-data AccountsOrdersList = AccountsOrdersList
+data AccountsOrdersList = AccountsOrdersList'
     { _aolStatus         :: !(Maybe [Text])
     , _aolPphNames       :: !(Maybe [Text])
     , _aolXgafv          :: !(Maybe Text)
@@ -139,7 +139,7 @@ accountsOrdersList
     :: Text -- ^ 'aolAccountId'
     -> AccountsOrdersList
 accountsOrdersList pAolAccountId_ =
-    AccountsOrdersList
+    AccountsOrdersList'
     { _aolStatus = Nothing
     , _aolPphNames = Nothing
     , _aolXgafv = Nothing
@@ -246,7 +246,7 @@ instance GoogleRequest AccountsOrdersList where
         type Rs AccountsOrdersList = ListOrdersResponse
         type Scopes AccountsOrdersList =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsOrdersList{..}
+        requestClient AccountsOrdersList'{..}
           = go _aolAccountId (_aolStatus ^. _Default)
               (_aolPphNames ^. _Default)
               _aolXgafv

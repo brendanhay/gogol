@@ -53,7 +53,7 @@ type URLGetResource =
 -- | Expands a short URL or gets creation time and analytics.
 --
 -- /See:/ 'urlGet' smart constructor.
-data URLGet = URLGet
+data URLGet = URLGet'
     { _ugProjection :: !(Maybe URLGetProjection)
     , _ugShortURL   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ urlGet
     :: Text -- ^ 'ugShortURL'
     -> URLGet
 urlGet pUgShortURL_ =
-    URLGet
+    URLGet'
     { _ugProjection = Nothing
     , _ugShortURL = pUgShortURL_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest URLGet where
         type Rs URLGet = URL
         type Scopes URLGet =
              '["https://www.googleapis.com/auth/urlshortener"]
-        requestClient URLGet{..}
+        requestClient URLGet'{..}
           = go (Just _ugShortURL) _ugProjection (Just AltJSON)
               uRLShortenerService
           where go

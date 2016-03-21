@@ -54,7 +54,7 @@ type AdsInsertResource =
 -- | Inserts a new ad.
 --
 -- /See:/ 'adsInsert' smart constructor.
-data AdsInsert = AdsInsert
+data AdsInsert = AdsInsert'
     { _aiProFileId :: !(Textual Int64)
     , _aiPayload   :: !Ad
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ adsInsert
     -> Ad -- ^ 'aiPayload'
     -> AdsInsert
 adsInsert pAiProFileId_ pAiPayload_ =
-    AdsInsert
+    AdsInsert'
     { _aiProFileId = _Coerce # pAiProFileId_
     , _aiPayload = pAiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AdsInsert where
         type Rs AdsInsert = Ad
         type Scopes AdsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdsInsert{..}
+        requestClient AdsInsert'{..}
           = go _aiProFileId (Just AltJSON) _aiPayload
               dFAReportingService
           where go

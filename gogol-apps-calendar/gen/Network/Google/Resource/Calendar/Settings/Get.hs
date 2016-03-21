@@ -53,7 +53,7 @@ type SettingsGetResource =
 -- | Returns a single user setting.
 --
 -- /See:/ 'settingsGet' smart constructor.
-newtype SettingsGet = SettingsGet
+newtype SettingsGet = SettingsGet'
     { _sgSetting :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ settingsGet
     :: Text -- ^ 'sgSetting'
     -> SettingsGet
 settingsGet pSgSetting_ =
-    SettingsGet
+    SettingsGet'
     { _sgSetting = pSgSetting_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest SettingsGet where
         type Scopes SettingsGet =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient SettingsGet{..}
+        requestClient SettingsGet'{..}
           = go _sgSetting (Just AltJSON) appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy SettingsGetResource)

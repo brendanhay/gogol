@@ -63,7 +63,7 @@ type BookshelvesVolumesListResource =
 -- | Retrieves volumes in a specific bookshelf for the specified user.
 --
 -- /See:/ 'bookshelvesVolumesList' smart constructor.
-data BookshelvesVolumesList = BookshelvesVolumesList
+data BookshelvesVolumesList = BookshelvesVolumesList'
     { _bvlUserId        :: !Text
     , _bvlShelf         :: !Text
     , _bvlSource        :: !(Maybe Text)
@@ -92,7 +92,7 @@ bookshelvesVolumesList
     -> Text -- ^ 'bvlShelf'
     -> BookshelvesVolumesList
 bookshelvesVolumesList pBvlUserId_ pBvlShelf_ =
-    BookshelvesVolumesList
+    BookshelvesVolumesList'
     { _bvlUserId = pBvlUserId_
     , _bvlShelf = pBvlShelf_
     , _bvlSource = Nothing
@@ -139,7 +139,7 @@ instance GoogleRequest BookshelvesVolumesList where
         type Rs BookshelvesVolumesList = Volumes
         type Scopes BookshelvesVolumesList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient BookshelvesVolumesList{..}
+        requestClient BookshelvesVolumesList'{..}
           = go _bvlUserId _bvlShelf _bvlSource _bvlStartIndex
               _bvlMaxResults
               _bvlShowPreOrders

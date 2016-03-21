@@ -54,7 +54,7 @@ type AccountsGetResource =
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
-data AccountsGet = AccountsGet
+data AccountsGet = AccountsGet'
     { _aggProFileId :: !(Textual Int64)
     , _aggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsGet
     -> Int64 -- ^ 'aggId'
     -> AccountsGet
 accountsGet pAggProFileId_ pAggId_ =
-    AccountsGet
+    AccountsGet'
     { _aggProFileId = _Coerce # pAggProFileId_
     , _aggId = _Coerce # pAggId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
         type Scopes AccountsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountsGet{..}
+        requestClient AccountsGet'{..}
           = go _aggProFileId _aggId (Just AltJSON)
               dFAReportingService
           where go

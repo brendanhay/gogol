@@ -70,7 +70,7 @@ type CoursesGetResource =
 -- exists with the requested ID.
 --
 -- /See:/ 'coursesGet' smart constructor.
-data CoursesGet = CoursesGet
+data CoursesGet = CoursesGet'
     { _cgXgafv          :: !(Maybe Text)
     , _cgUploadProtocol :: !(Maybe Text)
     , _cgPp             :: !Bool
@@ -104,7 +104,7 @@ coursesGet
     :: Text -- ^ 'cgId'
     -> CoursesGet
 coursesGet pCgId_ =
-    CoursesGet
+    CoursesGet'
     { _cgXgafv = Nothing
     , _cgUploadProtocol = Nothing
     , _cgPp = True
@@ -161,7 +161,7 @@ instance GoogleRequest CoursesGet where
         type Scopes CoursesGet =
              '["https://www.googleapis.com/auth/classroom.courses",
                "https://www.googleapis.com/auth/classroom.courses.readonly"]
-        requestClient CoursesGet{..}
+        requestClient CoursesGet'{..}
           = go _cgId _cgXgafv _cgUploadProtocol (Just _cgPp)
               _cgAccessToken
               _cgUploadType

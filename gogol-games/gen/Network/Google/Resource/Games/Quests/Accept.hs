@@ -56,7 +56,7 @@ type QuestsAcceptResource =
 -- quest.
 --
 -- /See:/ 'questsAccept' smart constructor.
-data QuestsAccept = QuestsAccept
+data QuestsAccept = QuestsAccept'
     { _qaLanguage :: !(Maybe Text)
     , _qaQuestId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ questsAccept
     :: Text -- ^ 'qaQuestId'
     -> QuestsAccept
 questsAccept pQaQuestId_ =
-    QuestsAccept
+    QuestsAccept'
     { _qaLanguage = Nothing
     , _qaQuestId = pQaQuestId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest QuestsAccept where
         type Scopes QuestsAccept =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestsAccept{..}
+        requestClient QuestsAccept'{..}
           = go _qaQuestId _qaLanguage (Just AltJSON)
               gamesService
           where go

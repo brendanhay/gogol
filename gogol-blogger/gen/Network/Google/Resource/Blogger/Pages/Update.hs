@@ -60,7 +60,7 @@ type PagesUpdateResource =
 -- | Update a page.
 --
 -- /See:/ 'pagesUpdate' smart constructor.
-data PagesUpdate = PagesUpdate
+data PagesUpdate = PagesUpdate'
     { _puuBlogId  :: !Text
     , _puuPageId  :: !Text
     , _puuPayload :: !Page
@@ -87,7 +87,7 @@ pagesUpdate
     -> Page -- ^ 'puuPayload'
     -> PagesUpdate
 pagesUpdate pPuuBlogId_ pPuuPageId_ pPuuPayload_ =
-    PagesUpdate
+    PagesUpdate'
     { _puuBlogId = pPuuBlogId_
     , _puuPageId = pPuuPageId_
     , _puuPayload = pPuuPayload_
@@ -126,7 +126,7 @@ instance GoogleRequest PagesUpdate where
         type Rs PagesUpdate = Page
         type Scopes PagesUpdate =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PagesUpdate{..}
+        requestClient PagesUpdate'{..}
           = go _puuBlogId _puuPageId _puuRevert _puuPublish
               (Just AltJSON)
               _puuPayload

@@ -74,7 +74,7 @@ type OperationsCancelResource =
 -- the operation completed despite cancellation.
 --
 -- /See:/ 'operationsCancel' smart constructor.
-data OperationsCancel = OperationsCancel
+data OperationsCancel = OperationsCancel'
     { _ocXgafv          :: !(Maybe Text)
     , _ocUploadProtocol :: !(Maybe Text)
     , _ocPp             :: !Bool
@@ -112,7 +112,7 @@ operationsCancel
     -> Text -- ^ 'ocName'
     -> OperationsCancel
 operationsCancel pOcPayload_ pOcName_ =
-    OperationsCancel
+    OperationsCancel'
     { _ocXgafv = Nothing
     , _ocUploadProtocol = Nothing
     , _ocPp = True
@@ -174,7 +174,7 @@ instance GoogleRequest OperationsCancel where
         type Scopes OperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient OperationsCancel{..}
+        requestClient OperationsCancel'{..}
           = go _ocName _ocXgafv _ocUploadProtocol (Just _ocPp)
               _ocAccessToken
               _ocUploadType

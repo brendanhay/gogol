@@ -54,7 +54,7 @@ type InAppProductsDeleteResource =
 -- | Delete an in-app product for an app.
 --
 -- /See:/ 'inAppProductsDelete' smart constructor.
-data InAppProductsDelete = InAppProductsDelete
+data InAppProductsDelete = InAppProductsDelete'
     { _iapdPackageName :: !Text
     , _iapdSKU         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ inAppProductsDelete
     -> Text -- ^ 'iapdSKU'
     -> InAppProductsDelete
 inAppProductsDelete pIapdPackageName_ pIapdSKU_ =
-    InAppProductsDelete
+    InAppProductsDelete'
     { _iapdPackageName = pIapdPackageName_
     , _iapdSKU = pIapdSKU_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest InAppProductsDelete where
         type Rs InAppProductsDelete = ()
         type Scopes InAppProductsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient InAppProductsDelete{..}
+        requestClient InAppProductsDelete'{..}
           = go _iapdPackageName _iapdSKU (Just AltJSON)
               androidPublisherService
           where go

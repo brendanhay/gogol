@@ -58,7 +58,7 @@ type GlobalForwardingRulesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'globalForwardingRulesInsert' smart constructor.
-data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert
+data GlobalForwardingRulesInsert = GlobalForwardingRulesInsert'
     { _gfriProject :: !Text
     , _gfriPayload :: !ForwardingRule
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ globalForwardingRulesInsert
     -> ForwardingRule -- ^ 'gfriPayload'
     -> GlobalForwardingRulesInsert
 globalForwardingRulesInsert pGfriProject_ pGfriPayload_ =
-    GlobalForwardingRulesInsert
+    GlobalForwardingRulesInsert'
     { _gfriProject = pGfriProject_
     , _gfriPayload = pGfriPayload_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest GlobalForwardingRulesInsert
         type Scopes GlobalForwardingRulesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient GlobalForwardingRulesInsert{..}
+        requestClient GlobalForwardingRulesInsert'{..}
           = go _gfriProject (Just AltJSON) _gfriPayload
               computeService
           where go

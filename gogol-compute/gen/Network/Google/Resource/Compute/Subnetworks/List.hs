@@ -62,7 +62,7 @@ type SubnetworksListResource =
 -- | Retrieves a list of subnetworks available to the specified project.
 --
 -- /See:/ 'subnetworksList' smart constructor.
-data SubnetworksList = SubnetworksList
+data SubnetworksList = SubnetworksList'
     { _slProject    :: !Text
     , _slFilter     :: !(Maybe Text)
     , _slRegion     :: !Text
@@ -88,7 +88,7 @@ subnetworksList
     -> Text -- ^ 'slRegion'
     -> SubnetworksList
 subnetworksList pSlProject_ pSlRegion_ =
-    SubnetworksList
+    SubnetworksList'
     { _slProject = pSlProject_
     , _slFilter = Nothing
     , _slRegion = pSlRegion_
@@ -151,7 +151,7 @@ instance GoogleRequest SubnetworksList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SubnetworksList{..}
+        requestClient SubnetworksList'{..}
           = go _slProject _slRegion _slFilter _slPageToken
               (Just _slMaxResults)
               (Just AltJSON)

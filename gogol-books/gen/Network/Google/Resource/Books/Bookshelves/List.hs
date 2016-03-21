@@ -54,7 +54,7 @@ type BookshelvesListResource =
 -- | Retrieves a list of public bookshelves for the specified user.
 --
 -- /See:/ 'bookshelvesList' smart constructor.
-data BookshelvesList = BookshelvesList
+data BookshelvesList = BookshelvesList'
     { _blUserId :: !Text
     , _blSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ bookshelvesList
     :: Text -- ^ 'blUserId'
     -> BookshelvesList
 bookshelvesList pBlUserId_ =
-    BookshelvesList
+    BookshelvesList'
     { _blUserId = pBlUserId_
     , _blSource = Nothing
     }
@@ -87,7 +87,7 @@ instance GoogleRequest BookshelvesList where
         type Rs BookshelvesList = Bookshelves
         type Scopes BookshelvesList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient BookshelvesList{..}
+        requestClient BookshelvesList'{..}
           = go _blUserId _blSource (Just AltJSON) booksService
           where go
                   = buildClient

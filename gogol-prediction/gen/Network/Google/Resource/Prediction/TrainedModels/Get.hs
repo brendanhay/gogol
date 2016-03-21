@@ -54,7 +54,7 @@ type TrainedModelsGetResource =
 -- | Check training status of your model.
 --
 -- /See:/ 'trainedModelsGet' smart constructor.
-data TrainedModelsGet = TrainedModelsGet
+data TrainedModelsGet = TrainedModelsGet'
     { _tmgProject :: !Text
     , _tmgId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ trainedModelsGet
     -> Text -- ^ 'tmgId'
     -> TrainedModelsGet
 trainedModelsGet pTmgProject_ pTmgId_ =
-    TrainedModelsGet
+    TrainedModelsGet'
     { _tmgProject = pTmgProject_
     , _tmgId = pTmgId_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest TrainedModelsGet where
         type Rs TrainedModelsGet = Insert2
         type Scopes TrainedModelsGet =
              '["https://www.googleapis.com/auth/prediction"]
-        requestClient TrainedModelsGet{..}
+        requestClient TrainedModelsGet'{..}
           = go _tmgProject _tmgId (Just AltJSON)
               predictionService
           where go

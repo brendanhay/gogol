@@ -59,7 +59,7 @@ type RemarketingListSharesPatchResource =
 -- semantics.
 --
 -- /See:/ 'remarketingListSharesPatch' smart constructor.
-data RemarketingListSharesPatch = RemarketingListSharesPatch
+data RemarketingListSharesPatch = RemarketingListSharesPatch'
     { _rlspProFileId         :: !(Textual Int64)
     , _rlspPayload           :: !RemarketingListShare
     , _rlspRemarketingListId :: !(Textual Int64)
@@ -80,7 +80,7 @@ remarketingListSharesPatch
     -> Int64 -- ^ 'rlspRemarketingListId'
     -> RemarketingListSharesPatch
 remarketingListSharesPatch pRlspProFileId_ pRlspPayload_ pRlspRemarketingListId_ =
-    RemarketingListSharesPatch
+    RemarketingListSharesPatch'
     { _rlspProFileId = _Coerce # pRlspProFileId_
     , _rlspPayload = pRlspPayload_
     , _rlspRemarketingListId = _Coerce # pRlspRemarketingListId_
@@ -111,7 +111,7 @@ instance GoogleRequest RemarketingListSharesPatch
              RemarketingListShare
         type Scopes RemarketingListSharesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListSharesPatch{..}
+        requestClient RemarketingListSharesPatch'{..}
           = go _rlspProFileId (Just _rlspRemarketingListId)
               (Just AltJSON)
               _rlspPayload

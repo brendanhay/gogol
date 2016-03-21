@@ -63,7 +63,7 @@ type SnapshotsDeleteResource =
 -- corresponding snapshot. For more information, see Deleting snaphots.
 --
 -- /See:/ 'snapshotsDelete' smart constructor.
-data SnapshotsDelete = SnapshotsDelete
+data SnapshotsDelete = SnapshotsDelete'
     { _snaSnapshot :: !Text
     , _snaProject  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ snapshotsDelete
     -> Text -- ^ 'snaProject'
     -> SnapshotsDelete
 snapshotsDelete pSnaSnapshot_ pSnaProject_ =
-    SnapshotsDelete
+    SnapshotsDelete'
     { _snaSnapshot = pSnaSnapshot_
     , _snaProject = pSnaProject_
     }
@@ -100,7 +100,7 @@ instance GoogleRequest SnapshotsDelete where
         type Scopes SnapshotsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient SnapshotsDelete{..}
+        requestClient SnapshotsDelete'{..}
           = go _snaProject _snaSnapshot (Just AltJSON)
               computeService
           where go

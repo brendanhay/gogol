@@ -54,7 +54,7 @@ type SubAccountsGetResource =
 -- | Gets one subaccount by ID.
 --
 -- /See:/ 'subAccountsGet' smart constructor.
-data SubAccountsGet = SubAccountsGet
+data SubAccountsGet = SubAccountsGet'
     { _sagProFileId :: !(Textual Int64)
     , _sagId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ subAccountsGet
     -> Int64 -- ^ 'sagId'
     -> SubAccountsGet
 subAccountsGet pSagProFileId_ pSagId_ =
-    SubAccountsGet
+    SubAccountsGet'
     { _sagProFileId = _Coerce # pSagProFileId_
     , _sagId = _Coerce # pSagId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SubAccountsGet where
         type Rs SubAccountsGet = SubAccount
         type Scopes SubAccountsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SubAccountsGet{..}
+        requestClient SubAccountsGet'{..}
           = go _sagProFileId _sagId (Just AltJSON)
               dFAReportingService
           where go

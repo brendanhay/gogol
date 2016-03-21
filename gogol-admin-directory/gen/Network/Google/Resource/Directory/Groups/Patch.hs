@@ -54,7 +54,7 @@ type GroupsPatchResource =
 -- | Update Group. This method supports patch semantics.
 --
 -- /See:/ 'groupsPatch' smart constructor.
-data GroupsPatch = GroupsPatch
+data GroupsPatch = GroupsPatch'
     { _gpGroupKey :: !Text
     , _gpPayload  :: !Group
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ groupsPatch
     -> Group -- ^ 'gpPayload'
     -> GroupsPatch
 groupsPatch pGpGroupKey_ pGpPayload_ =
-    GroupsPatch
+    GroupsPatch'
     { _gpGroupKey = pGpGroupKey_
     , _gpPayload = pGpPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest GroupsPatch where
         type Rs GroupsPatch = Group
         type Scopes GroupsPatch =
              '["https://www.googleapis.com/auth/admin.directory.group"]
-        requestClient GroupsPatch{..}
+        requestClient GroupsPatch'{..}
           = go _gpGroupKey (Just AltJSON) _gpPayload
               directoryService
           where go

@@ -60,7 +60,7 @@ type TurnBasedMatchesListResource =
 -- | Returns turn-based matches the player is or was involved in.
 --
 -- /See:/ 'turnBasedMatchesList' smart constructor.
-data TurnBasedMatchesList = TurnBasedMatchesList
+data TurnBasedMatchesList = TurnBasedMatchesList'
     { _tMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tIncludeMatchData    :: !(Maybe Bool)
     , _tLanguage            :: !(Maybe Text)
@@ -84,7 +84,7 @@ data TurnBasedMatchesList = TurnBasedMatchesList
 turnBasedMatchesList
     :: TurnBasedMatchesList
 turnBasedMatchesList =
-    TurnBasedMatchesList
+    TurnBasedMatchesList'
     { _tMaxCompletedMatches = Nothing
     , _tIncludeMatchData = Nothing
     , _tLanguage = Nothing
@@ -134,7 +134,7 @@ instance GoogleRequest TurnBasedMatchesList where
         type Scopes TurnBasedMatchesList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesList{..}
+        requestClient TurnBasedMatchesList'{..}
           = go _tMaxCompletedMatches _tIncludeMatchData
               _tLanguage
               _tPageToken

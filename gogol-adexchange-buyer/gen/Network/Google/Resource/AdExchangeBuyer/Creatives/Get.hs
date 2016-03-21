@@ -55,7 +55,7 @@ type CreativesGetResource =
 -- 30-40 minutes after submission.
 --
 -- /See:/ 'creativesGet' smart constructor.
-data CreativesGet = CreativesGet
+data CreativesGet = CreativesGet'
     { _cgBuyerCreativeId :: !Text
     , _cgAccountId       :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativesGet
     -> Int32 -- ^ 'cgAccountId'
     -> CreativesGet
 creativesGet pCgBuyerCreativeId_ pCgAccountId_ =
-    CreativesGet
+    CreativesGet'
     { _cgBuyerCreativeId = pCgBuyerCreativeId_
     , _cgAccountId = _Coerce # pCgAccountId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest CreativesGet where
         type Rs CreativesGet = Creative
         type Scopes CreativesGet =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient CreativesGet{..}
+        requestClient CreativesGet'{..}
           = go _cgAccountId _cgBuyerCreativeId (Just AltJSON)
               adExchangeBuyerService
           where go

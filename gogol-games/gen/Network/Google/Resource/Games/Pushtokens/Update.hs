@@ -51,7 +51,7 @@ type PushtokensUpdateResource =
 -- | Registers a push token for the current user and application.
 --
 -- /See:/ 'pushtokensUpdate' smart constructor.
-newtype PushtokensUpdate = PushtokensUpdate
+newtype PushtokensUpdate = PushtokensUpdate'
     { _puPayload :: PushToken
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ pushtokensUpdate
     :: PushToken -- ^ 'puPayload'
     -> PushtokensUpdate
 pushtokensUpdate pPuPayload_ =
-    PushtokensUpdate
+    PushtokensUpdate'
     { _puPayload = pPuPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest PushtokensUpdate where
         type Scopes PushtokensUpdate =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PushtokensUpdate{..}
+        requestClient PushtokensUpdate'{..}
           = go (Just AltJSON) _puPayload gamesService
           where go
                   = buildClient

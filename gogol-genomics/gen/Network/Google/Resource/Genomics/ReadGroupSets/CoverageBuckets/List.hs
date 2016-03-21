@@ -98,7 +98,7 @@ type ReadGroupSetsCoverageBucketsListResource =
 -- target read group set.
 --
 -- /See:/ 'readGroupSetsCoverageBucketsList' smart constructor.
-data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList
+data ReadGroupSetsCoverageBucketsList = ReadGroupSetsCoverageBucketsList'
     { _rgscblXgafv             :: !(Maybe Text)
     , _rgscblReadGroupSetId    :: !Text
     , _rgscblUploadProtocol    :: !(Maybe Text)
@@ -150,7 +150,7 @@ readGroupSetsCoverageBucketsList
     :: Text -- ^ 'rgscblReadGroupSetId'
     -> ReadGroupSetsCoverageBucketsList
 readGroupSetsCoverageBucketsList pRgscblReadGroupSetId_ =
-    ReadGroupSetsCoverageBucketsList
+    ReadGroupSetsCoverageBucketsList'
     { _rgscblXgafv = Nothing
     , _rgscblReadGroupSetId = pRgscblReadGroupSetId_
     , _rgscblUploadProtocol = Nothing
@@ -270,7 +270,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReadGroupSetsCoverageBucketsList{..}
+        requestClient ReadGroupSetsCoverageBucketsList'{..}
           = go _rgscblReadGroupSetId _rgscblXgafv
               _rgscblUploadProtocol
               (Just _rgscblPp)

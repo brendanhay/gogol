@@ -61,7 +61,7 @@ type AutoscalersUpdateResource =
 -- in the request.
 --
 -- /See:/ 'autoscalersUpdate' smart constructor.
-data AutoscalersUpdate = AutoscalersUpdate
+data AutoscalersUpdate = AutoscalersUpdate'
     { _auProject    :: !Text
     , _auZone       :: !Text
     , _auPayload    :: !Autoscaler
@@ -85,7 +85,7 @@ autoscalersUpdate
     -> Autoscaler -- ^ 'auPayload'
     -> AutoscalersUpdate
 autoscalersUpdate pAuProject_ pAuZone_ pAuPayload_ =
-    AutoscalersUpdate
+    AutoscalersUpdate'
     { _auProject = pAuProject_
     , _auZone = pAuZone_
     , _auPayload = pAuPayload_
@@ -116,7 +116,7 @@ instance GoogleRequest AutoscalersUpdate where
         type Scopes AutoscalersUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient AutoscalersUpdate{..}
+        requestClient AutoscalersUpdate'{..}
           = go _auProject _auZone _auAutoscaler (Just AltJSON)
               _auPayload
               computeService

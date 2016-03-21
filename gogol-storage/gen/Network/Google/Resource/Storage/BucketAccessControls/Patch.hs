@@ -59,7 +59,7 @@ type BucketAccessControlsPatchResource =
 -- semantics.
 --
 -- /See:/ 'bucketAccessControlsPatch' smart constructor.
-data BucketAccessControlsPatch = BucketAccessControlsPatch
+data BucketAccessControlsPatch = BucketAccessControlsPatch'
     { _bacpBucket  :: !Text
     , _bacpPayload :: !BucketAccessControl
     , _bacpEntity  :: !Text
@@ -80,7 +80,7 @@ bucketAccessControlsPatch
     -> Text -- ^ 'bacpEntity'
     -> BucketAccessControlsPatch
 bucketAccessControlsPatch pBacpBucket_ pBacpPayload_ pBacpEntity_ =
-    BucketAccessControlsPatch
+    BucketAccessControlsPatch'
     { _bacpBucket = pBacpBucket_
     , _bacpPayload = pBacpPayload_
     , _bacpEntity = pBacpEntity_
@@ -110,7 +110,7 @@ instance GoogleRequest BucketAccessControlsPatch
         type Scopes BucketAccessControlsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient BucketAccessControlsPatch{..}
+        requestClient BucketAccessControlsPatch'{..}
           = go _bacpBucket _bacpEntity (Just AltJSON)
               _bacpPayload
               storageService

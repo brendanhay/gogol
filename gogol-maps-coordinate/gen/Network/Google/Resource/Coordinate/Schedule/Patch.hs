@@ -67,7 +67,7 @@ type SchedulePatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'schedulePatch' smart constructor.
-data SchedulePatch = SchedulePatch
+data SchedulePatch = SchedulePatch'
     { _spJobId     :: !(Textual Word64)
     , _spAllDay    :: !(Maybe Bool)
     , _spStartTime :: !(Maybe (Textual Word64))
@@ -100,7 +100,7 @@ schedulePatch
     -> Schedule -- ^ 'spPayload'
     -> SchedulePatch
 schedulePatch pSpJobId_ pSpTeamId_ pSpPayload_ =
-    SchedulePatch
+    SchedulePatch'
     { _spJobId = _Coerce # pSpJobId_
     , _spAllDay = Nothing
     , _spStartTime = Nothing
@@ -151,7 +151,7 @@ instance GoogleRequest SchedulePatch where
         type Rs SchedulePatch = Schedule
         type Scopes SchedulePatch =
              '["https://www.googleapis.com/auth/coordinate"]
-        requestClient SchedulePatch{..}
+        requestClient SchedulePatch'{..}
           = go _spTeamId _spJobId _spAllDay _spStartTime
               _spEndTime
               _spDuration

@@ -53,7 +53,7 @@ type RasterCollectionsProcessResource =
 -- | Process a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsProcess' smart constructor.
-newtype RasterCollectionsProcess = RasterCollectionsProcess
+newtype RasterCollectionsProcess = RasterCollectionsProcess'
     { _rcpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rasterCollectionsProcess
     :: Text -- ^ 'rcpId'
     -> RasterCollectionsProcess
 rasterCollectionsProcess pRcpId_ =
-    RasterCollectionsProcess
+    RasterCollectionsProcess'
     { _rcpId = pRcpId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest RasterCollectionsProcess where
         type Rs RasterCollectionsProcess = ProcessResponse
         type Scopes RasterCollectionsProcess =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RasterCollectionsProcess{..}
+        requestClient RasterCollectionsProcess'{..}
           = go _rcpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

@@ -60,7 +60,7 @@ type InstallsGetResource =
 -- | Retrieves details of an installation of an app on a device.
 --
 -- /See:/ 'installsGet' smart constructor.
-data InstallsGet = InstallsGet
+data InstallsGet = InstallsGet'
     { _igEnterpriseId :: !Text
     , _igUserId       :: !Text
     , _igInstallId    :: !Text
@@ -85,7 +85,7 @@ installsGet
     -> Text -- ^ 'igDeviceId'
     -> InstallsGet
 installsGet pIgEnterpriseId_ pIgUserId_ pIgInstallId_ pIgDeviceId_ =
-    InstallsGet
+    InstallsGet'
     { _igEnterpriseId = pIgEnterpriseId_
     , _igUserId = pIgUserId_
     , _igInstallId = pIgInstallId_
@@ -117,7 +117,7 @@ instance GoogleRequest InstallsGet where
         type Rs InstallsGet = Install
         type Scopes InstallsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient InstallsGet{..}
+        requestClient InstallsGet'{..}
           = go _igEnterpriseId _igUserId _igDeviceId
               _igInstallId
               (Just AltJSON)

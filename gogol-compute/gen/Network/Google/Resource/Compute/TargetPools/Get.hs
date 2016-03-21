@@ -59,7 +59,7 @@ type TargetPoolsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'targetPoolsGet' smart constructor.
-data TargetPoolsGet = TargetPoolsGet
+data TargetPoolsGet = TargetPoolsGet'
     { _tpgProject    :: !Text
     , _tpgTargetPool :: !Text
     , _tpgRegion     :: !Text
@@ -80,7 +80,7 @@ targetPoolsGet
     -> Text -- ^ 'tpgRegion'
     -> TargetPoolsGet
 targetPoolsGet pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
-    TargetPoolsGet
+    TargetPoolsGet'
     { _tpgProject = pTpgProject_
     , _tpgTargetPool = pTpgTargetPool_
     , _tpgRegion = pTpgRegion_
@@ -108,7 +108,7 @@ instance GoogleRequest TargetPoolsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetPoolsGet{..}
+        requestClient TargetPoolsGet'{..}
           = go _tpgProject _tpgRegion _tpgTargetPool
               (Just AltJSON)
               computeService

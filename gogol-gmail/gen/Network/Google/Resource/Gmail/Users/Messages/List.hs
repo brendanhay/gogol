@@ -63,7 +63,7 @@ type UsersMessagesListResource =
 -- | Lists the messages in the user\'s mailbox.
 --
 -- /See:/ 'usersMessagesList' smart constructor.
-data UsersMessagesList = UsersMessagesList
+data UsersMessagesList = UsersMessagesList'
     { _umlQ                :: !(Maybe Text)
     , _umlUserId           :: !Text
     , _umlIncludeSpamTrash :: !Bool
@@ -90,7 +90,7 @@ data UsersMessagesList = UsersMessagesList
 usersMessagesList
     :: UsersMessagesList
 usersMessagesList =
-    UsersMessagesList
+    UsersMessagesList'
     { _umlQ = Nothing
     , _umlUserId = "me"
     , _umlIncludeSpamTrash = False
@@ -143,7 +143,7 @@ instance GoogleRequest UsersMessagesList where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersMessagesList{..}
+        requestClient UsersMessagesList'{..}
           = go _umlUserId _umlQ (Just _umlIncludeSpamTrash)
               (_umlLabelIds ^. _Default)
               _umlPageToken

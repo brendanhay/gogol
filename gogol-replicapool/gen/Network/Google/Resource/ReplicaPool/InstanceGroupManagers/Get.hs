@@ -58,7 +58,7 @@ type InstanceGroupManagersGetResource =
 -- | Returns the specified Instance Group Manager resource.
 --
 -- /See:/ 'instanceGroupManagersGet' smart constructor.
-data InstanceGroupManagersGet = InstanceGroupManagersGet
+data InstanceGroupManagersGet = InstanceGroupManagersGet'
     { _igmgProject              :: !Text
     , _igmgInstanceGroupManager :: !Text
     , _igmgZone                 :: !Text
@@ -79,7 +79,7 @@ instanceGroupManagersGet
     -> Text -- ^ 'igmgZone'
     -> InstanceGroupManagersGet
 instanceGroupManagersGet pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
-    InstanceGroupManagersGet
+    InstanceGroupManagersGet'
     { _igmgProject = pIgmgProject_
     , _igmgInstanceGroupManager = pIgmgInstanceGroupManager_
     , _igmgZone = pIgmgZone_
@@ -108,7 +108,7 @@ instance GoogleRequest InstanceGroupManagersGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupManagersGet{..}
+        requestClient InstanceGroupManagersGet'{..}
           = go _igmgProject _igmgZone _igmgInstanceGroupManager
               (Just AltJSON)
               replicaPoolService

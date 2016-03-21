@@ -53,7 +53,7 @@ type AccounttaxGetResource =
 -- | Retrieves the tax settings of the account.
 --
 -- /See:/ 'accounttaxGet' smart constructor.
-data AccounttaxGet = AccounttaxGet
+data AccounttaxGet = AccounttaxGet'
     { _aggMerchantId :: !(Textual Word64)
     , _aggAccountId  :: !(Textual Word64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accounttaxGet
     -> Word64 -- ^ 'aggAccountId'
     -> AccounttaxGet
 accounttaxGet pAggMerchantId_ pAggAccountId_ =
-    AccounttaxGet
+    AccounttaxGet'
     { _aggMerchantId = _Coerce # pAggMerchantId_
     , _aggAccountId = _Coerce # pAggAccountId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccounttaxGet where
         type Rs AccounttaxGet = AccountTax
         type Scopes AccounttaxGet =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccounttaxGet{..}
+        requestClient AccounttaxGet'{..}
           = go _aggMerchantId _aggAccountId (Just AltJSON)
               shoppingContentService
           where go

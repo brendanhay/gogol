@@ -51,7 +51,7 @@ type GroupsGetResource =
 -- | Gets one resource by id.
 --
 -- /See:/ 'groupsGet' smart constructor.
-newtype GroupsGet = GroupsGet
+newtype GroupsGet = GroupsGet'
     { _ggGroupUniqueId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ groupsGet
     :: Text -- ^ 'ggGroupUniqueId'
     -> GroupsGet
 groupsGet pGgGroupUniqueId_ =
-    GroupsGet
+    GroupsGet'
     { _ggGroupUniqueId = pGgGroupUniqueId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest GroupsGet where
         type Rs GroupsGet = Groups
         type Scopes GroupsGet =
              '["https://www.googleapis.com/auth/apps.groups.settings"]
-        requestClient GroupsGet{..}
+        requestClient GroupsGet'{..}
           = go _ggGroupUniqueId (Just AltJSON)
               groupsSettingsService
           where go

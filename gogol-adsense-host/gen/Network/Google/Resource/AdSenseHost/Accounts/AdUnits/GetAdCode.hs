@@ -62,7 +62,7 @@ type AccountsAdUnitsGetAdCodeResource =
 -- custom channels.
 --
 -- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
-data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode
+data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId            :: !Text
     , _aaugacAdClientId          :: !Text
     , _aaugacAccountId           :: !Text
@@ -86,7 +86,7 @@ accountsAdUnitsGetAdCode
     -> Text -- ^ 'aaugacAccountId'
     -> AccountsAdUnitsGetAdCode
 accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
-    AccountsAdUnitsGetAdCode
+    AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId = pAaugacAdUnitId_
     , _aaugacAdClientId = pAaugacAdClientId_
     , _aaugacAccountId = pAaugacAccountId_
@@ -123,7 +123,7 @@ instance GoogleRequest AccountsAdUnitsGetAdCode where
         type Rs AccountsAdUnitsGetAdCode = AdCode
         type Scopes AccountsAdUnitsGetAdCode =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsAdUnitsGetAdCode{..}
+        requestClient AccountsAdUnitsGetAdCode'{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               (_aaugacHostCustomChannelId ^. _Default)

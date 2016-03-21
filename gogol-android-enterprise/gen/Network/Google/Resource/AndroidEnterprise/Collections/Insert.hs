@@ -54,7 +54,7 @@ type CollectionsInsertResource =
 -- | Creates a new collection.
 --
 -- /See:/ 'collectionsInsert' smart constructor.
-data CollectionsInsert = CollectionsInsert
+data CollectionsInsert = CollectionsInsert'
     { _ciEnterpriseId :: !Text
     , _ciPayload      :: !Collection
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ collectionsInsert
     -> Collection -- ^ 'ciPayload'
     -> CollectionsInsert
 collectionsInsert pCiEnterpriseId_ pCiPayload_ =
-    CollectionsInsert
+    CollectionsInsert'
     { _ciEnterpriseId = pCiEnterpriseId_
     , _ciPayload = pCiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CollectionsInsert where
         type Rs CollectionsInsert = Collection
         type Scopes CollectionsInsert =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionsInsert{..}
+        requestClient CollectionsInsert'{..}
           = go _ciEnterpriseId (Just AltJSON) _ciPayload
               androidEnterpriseService
           where go

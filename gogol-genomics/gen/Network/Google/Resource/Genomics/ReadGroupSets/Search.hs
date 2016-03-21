@@ -76,7 +76,7 @@ type ReadGroupSetsSearchResource =
 -- [GlobalAllianceApi.searchReadGroupSets](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/readmethods.avdl#L135).
 --
 -- /See:/ 'readGroupSetsSearch' smart constructor.
-data ReadGroupSetsSearch = ReadGroupSetsSearch
+data ReadGroupSetsSearch = ReadGroupSetsSearch'
     { _rgssXgafv          :: !(Maybe Text)
     , _rgssUploadProtocol :: !(Maybe Text)
     , _rgssPp             :: !Bool
@@ -110,7 +110,7 @@ readGroupSetsSearch
     :: SearchReadGroupSetsRequest -- ^ 'rgssPayload'
     -> ReadGroupSetsSearch
 readGroupSetsSearch pRgssPayload_ =
-    ReadGroupSetsSearch
+    ReadGroupSetsSearch'
     { _rgssXgafv = Nothing
     , _rgssUploadProtocol = Nothing
     , _rgssPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest ReadGroupSetsSearch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReadGroupSetsSearch{..}
+        requestClient ReadGroupSetsSearch'{..}
           = go _rgssXgafv _rgssUploadProtocol (Just _rgssPp)
               _rgssAccessToken
               _rgssUploadType

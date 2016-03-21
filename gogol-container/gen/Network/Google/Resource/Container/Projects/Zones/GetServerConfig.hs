@@ -69,7 +69,7 @@ type ProjectsZonesGetServerConfigResource =
 -- | Returns configuration info about the Container Engine service.
 --
 -- /See:/ 'projectsZonesGetServerConfig' smart constructor.
-data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig
+data ProjectsZonesGetServerConfig = ProjectsZonesGetServerConfig'
     { _pzgscXgafv          :: !(Maybe Text)
     , _pzgscUploadProtocol :: !(Maybe Text)
     , _pzgscPp             :: !Bool
@@ -107,7 +107,7 @@ projectsZonesGetServerConfig
     -> Text -- ^ 'pzgscProjectId'
     -> ProjectsZonesGetServerConfig
 projectsZonesGetServerConfig pPzgscZone_ pPzgscProjectId_ =
-    ProjectsZonesGetServerConfig
+    ProjectsZonesGetServerConfig'
     { _pzgscXgafv = Nothing
     , _pzgscUploadProtocol = Nothing
     , _pzgscPp = True
@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsZonesGetServerConfig
         type Rs ProjectsZonesGetServerConfig = ServerConfig
         type Scopes ProjectsZonesGetServerConfig =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesGetServerConfig{..}
+        requestClient ProjectsZonesGetServerConfig'{..}
           = go _pzgscProjectId _pzgscZone _pzgscXgafv
               _pzgscUploadProtocol
               (Just _pzgscPp)

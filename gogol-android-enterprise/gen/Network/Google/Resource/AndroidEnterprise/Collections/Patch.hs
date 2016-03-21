@@ -57,7 +57,7 @@ type CollectionsPatchResource =
 -- | Updates a collection. This method supports patch semantics.
 --
 -- /See:/ 'collectionsPatch' smart constructor.
-data CollectionsPatch = CollectionsPatch
+data CollectionsPatch = CollectionsPatch'
     { _cpEnterpriseId :: !Text
     , _cpCollectionId :: !Text
     , _cpPayload      :: !Collection
@@ -78,7 +78,7 @@ collectionsPatch
     -> Collection -- ^ 'cpPayload'
     -> CollectionsPatch
 collectionsPatch pCpEnterpriseId_ pCpCollectionId_ pCpPayload_ =
-    CollectionsPatch
+    CollectionsPatch'
     { _cpEnterpriseId = pCpEnterpriseId_
     , _cpCollectionId = pCpCollectionId_
     , _cpPayload = pCpPayload_
@@ -105,7 +105,7 @@ instance GoogleRequest CollectionsPatch where
         type Rs CollectionsPatch = Collection
         type Scopes CollectionsPatch =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionsPatch{..}
+        requestClient CollectionsPatch'{..}
           = go _cpEnterpriseId _cpCollectionId (Just AltJSON)
               _cpPayload
               androidEnterpriseService

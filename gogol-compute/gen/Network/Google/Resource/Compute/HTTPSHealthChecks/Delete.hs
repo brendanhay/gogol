@@ -55,7 +55,7 @@ type HTTPSHealthChecksDeleteResource =
 -- | Deletes the specified HttpsHealthCheck resource.
 --
 -- /See:/ 'httpsHealthChecksDelete' smart constructor.
-data HTTPSHealthChecksDelete = HTTPSHealthChecksDelete
+data HTTPSHealthChecksDelete = HTTPSHealthChecksDelete'
     { _hhcdProject          :: !Text
     , _hhcdHTTPSHealthCheck :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ httpsHealthChecksDelete
     -> Text -- ^ 'hhcdHTTPSHealthCheck'
     -> HTTPSHealthChecksDelete
 httpsHealthChecksDelete pHhcdProject_ pHhcdHTTPSHealthCheck_ =
-    HTTPSHealthChecksDelete
+    HTTPSHealthChecksDelete'
     { _hhcdProject = pHhcdProject_
     , _hhcdHTTPSHealthCheck = pHhcdHTTPSHealthCheck_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest HTTPSHealthChecksDelete where
         type Scopes HTTPSHealthChecksDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient HTTPSHealthChecksDelete{..}
+        requestClient HTTPSHealthChecksDelete'{..}
           = go _hhcdProject _hhcdHTTPSHealthCheck
               (Just AltJSON)
               computeService

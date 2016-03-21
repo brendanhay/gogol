@@ -76,7 +76,7 @@ type CommentThreadsListResource =
 -- | Returns a list of comment threads that match the API request parameters.
 --
 -- /See:/ 'commentThreadsList' smart constructor.
-data CommentThreadsList = CommentThreadsList
+data CommentThreadsList = CommentThreadsList'
     { _ctlPart                         :: !Text
     , _ctlModerationStatus             :: !CommentThreadsListModerationStatus
     , _ctlSearchTerms                  :: !(Maybe Text)
@@ -119,7 +119,7 @@ commentThreadsList
     :: Text -- ^ 'ctlPart'
     -> CommentThreadsList
 commentThreadsList pCtlPart_ =
-    CommentThreadsList
+    CommentThreadsList'
     { _ctlPart = pCtlPart_
     , _ctlModerationStatus = Published
     , _ctlSearchTerms = Nothing
@@ -218,7 +218,7 @@ instance GoogleRequest CommentThreadsList where
              CommentThreadListResponse
         type Scopes CommentThreadsList =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentThreadsList{..}
+        requestClient CommentThreadsList'{..}
           = go (Just _ctlPart) (Just _ctlModerationStatus)
               _ctlSearchTerms
               _ctlChannelId

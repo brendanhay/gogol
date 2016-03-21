@@ -59,7 +59,7 @@ type CommentsGetResource =
 -- | Gets one comment by ID.
 --
 -- /See:/ 'commentsGet' smart constructor.
-data CommentsGet = CommentsGet
+data CommentsGet = CommentsGet'
     { _cgBlogId    :: !Text
     , _cgView      :: !(Maybe CommentsGetView)
     , _cgPostId    :: !Text
@@ -83,7 +83,7 @@ commentsGet
     -> Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgBlogId_ pCgPostId_ pCgCommentId_ =
-    CommentsGet
+    CommentsGet'
     { _cgBlogId = pCgBlogId_
     , _cgView = Nothing
     , _cgPostId = pCgPostId_
@@ -115,7 +115,7 @@ instance GoogleRequest CommentsGet where
         type Scopes CommentsGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient CommentsGet{..}
+        requestClient CommentsGet'{..}
           = go _cgBlogId _cgPostId _cgCommentId _cgView
               (Just AltJSON)
               bloggerService

@@ -63,7 +63,7 @@ type ProjectsSubscriptionsGetResource =
 -- | Gets the configuration details of a subscription.
 --
 -- /See:/ 'projectsSubscriptionsGet' smart constructor.
-data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet
+data ProjectsSubscriptionsGet = ProjectsSubscriptionsGet'
     { _psgXgafv          :: !(Maybe Text)
     , _psgUploadProtocol :: !(Maybe Text)
     , _psgPp             :: !Bool
@@ -97,7 +97,7 @@ projectsSubscriptionsGet
     :: Text -- ^ 'psgSubscription'
     -> ProjectsSubscriptionsGet
 projectsSubscriptionsGet pPsgSubscription_ =
-    ProjectsSubscriptionsGet
+    ProjectsSubscriptionsGet'
     { _psgXgafv = Nothing
     , _psgUploadProtocol = Nothing
     , _psgPp = True
@@ -156,7 +156,7 @@ instance GoogleRequest ProjectsSubscriptionsGet where
         type Scopes ProjectsSubscriptionsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsGet{..}
+        requestClient ProjectsSubscriptionsGet'{..}
           = go _psgSubscription _psgXgafv _psgUploadProtocol
               (Just _psgPp)
               _psgAccessToken

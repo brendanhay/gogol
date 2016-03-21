@@ -53,7 +53,7 @@ type AccountsPreferredDealsListResource =
 -- | List the preferred deals for this Ad Exchange account.
 --
 -- /See:/ 'accountsPreferredDealsList' smart constructor.
-newtype AccountsPreferredDealsList = AccountsPreferredDealsList
+newtype AccountsPreferredDealsList = AccountsPreferredDealsList'
     { _apdlAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsPreferredDealsList
     :: Text -- ^ 'apdlAccountId'
     -> AccountsPreferredDealsList
 accountsPreferredDealsList pApdlAccountId_ =
-    AccountsPreferredDealsList
+    AccountsPreferredDealsList'
     { _apdlAccountId = pApdlAccountId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest AccountsPreferredDealsList
         type Scopes AccountsPreferredDealsList =
              '["https://www.googleapis.com/auth/adexchange.seller",
                "https://www.googleapis.com/auth/adexchange.seller.readonly"]
-        requestClient AccountsPreferredDealsList{..}
+        requestClient AccountsPreferredDealsList'{..}
           = go _apdlAccountId (Just AltJSON)
               adExchangeSellerService
           where go

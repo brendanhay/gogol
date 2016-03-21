@@ -65,7 +65,7 @@ type ProjectsTopicsCreateResource =
 -- | Creates the given topic with the given name.
 --
 -- /See:/ 'projectsTopicsCreate' smart constructor.
-data ProjectsTopicsCreate = ProjectsTopicsCreate
+data ProjectsTopicsCreate = ProjectsTopicsCreate'
     { _ptcXgafv          :: !(Maybe Text)
     , _ptcUploadProtocol :: !(Maybe Text)
     , _ptcPp             :: !Bool
@@ -103,7 +103,7 @@ projectsTopicsCreate
     -> Text -- ^ 'ptcName'
     -> ProjectsTopicsCreate
 projectsTopicsCreate pPtcPayload_ pPtcName_ =
-    ProjectsTopicsCreate
+    ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcUploadProtocol = Nothing
     , _ptcPp = True
@@ -172,7 +172,7 @@ instance GoogleRequest ProjectsTopicsCreate where
         type Scopes ProjectsTopicsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsTopicsCreate{..}
+        requestClient ProjectsTopicsCreate'{..}
           = go _ptcName _ptcXgafv _ptcUploadProtocol
               (Just _ptcPp)
               _ptcAccessToken

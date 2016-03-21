@@ -55,7 +55,7 @@ type TokensListResource =
 -- applications.
 --
 -- /See:/ 'tokensList' smart constructor.
-newtype TokensList = TokensList
+newtype TokensList = TokensList'
     { _tlUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ tokensList
     :: Text -- ^ 'tlUserKey'
     -> TokensList
 tokensList pTlUserKey_ =
-    TokensList
+    TokensList'
     { _tlUserKey = pTlUserKey_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest TokensList where
         type Rs TokensList = Tokens
         type Scopes TokensList =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient TokensList{..}
+        requestClient TokensList'{..}
           = go _tlUserKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy TokensListResource)

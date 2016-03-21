@@ -59,7 +59,7 @@ type InstancesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'instancesInsert' smart constructor.
-data InstancesInsert = InstancesInsert
+data InstancesInsert = InstancesInsert'
     { _iiiProject :: !Text
     , _iiiZone    :: !Text
     , _iiiPayload :: !Instance
@@ -80,7 +80,7 @@ instancesInsert
     -> Instance -- ^ 'iiiPayload'
     -> InstancesInsert
 instancesInsert pIiiProject_ pIiiZone_ pIiiPayload_ =
-    InstancesInsert
+    InstancesInsert'
     { _iiiProject = pIiiProject_
     , _iiiZone = pIiiZone_
     , _iiiPayload = pIiiPayload_
@@ -105,7 +105,7 @@ instance GoogleRequest InstancesInsert where
         type Scopes InstancesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesInsert{..}
+        requestClient InstancesInsert'{..}
           = go _iiiProject _iiiZone (Just AltJSON) _iiiPayload
               computeService
           where go

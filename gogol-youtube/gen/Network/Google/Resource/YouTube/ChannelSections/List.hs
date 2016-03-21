@@ -62,7 +62,7 @@ type ChannelSectionsListResource =
 -- | Returns channelSection resources that match the API request criteria.
 --
 -- /See:/ 'channelSectionsList' smart constructor.
-data ChannelSectionsList = ChannelSectionsList
+data ChannelSectionsList = ChannelSectionsList'
     { _cslPart                   :: !Text
     , _cslMine                   :: !(Maybe Bool)
     , _cslChannelId              :: !(Maybe Text)
@@ -90,7 +90,7 @@ channelSectionsList
     :: Text -- ^ 'cslPart'
     -> ChannelSectionsList
 channelSectionsList pCslPart_ =
-    ChannelSectionsList
+    ChannelSectionsList'
     { _cslPart = pCslPart_
     , _cslMine = Nothing
     , _cslChannelId = Nothing
@@ -163,7 +163,7 @@ instance GoogleRequest ChannelSectionsList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient ChannelSectionsList{..}
+        requestClient ChannelSectionsList'{..}
           = go (Just _cslPart) _cslMine _cslChannelId _cslHl
               _cslOnBehalfOfContentOwner
               _cslId

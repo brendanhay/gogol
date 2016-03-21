@@ -56,7 +56,7 @@ type UsersPhotosUpdateResource =
 -- | Add a photo for the user
 --
 -- /See:/ 'usersPhotosUpdate' smart constructor.
-data UsersPhotosUpdate = UsersPhotosUpdate
+data UsersPhotosUpdate = UsersPhotosUpdate'
     { _upuPayload :: !UserPhoto
     , _upuUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ usersPhotosUpdate
     -> Text -- ^ 'upuUserKey'
     -> UsersPhotosUpdate
 usersPhotosUpdate pUpuPayload_ pUpuUserKey_ =
-    UsersPhotosUpdate
+    UsersPhotosUpdate'
     { _upuPayload = pUpuPayload_
     , _upuUserKey = pUpuUserKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersPhotosUpdate where
         type Rs UsersPhotosUpdate = UserPhoto
         type Scopes UsersPhotosUpdate =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersPhotosUpdate{..}
+        requestClient UsersPhotosUpdate'{..}
           = go _upuUserKey (Just AltJSON) _upuPayload
               directoryService
           where go

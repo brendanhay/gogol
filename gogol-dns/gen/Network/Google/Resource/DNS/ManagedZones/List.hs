@@ -59,7 +59,7 @@ type ManagedZonesListResource =
 -- | Enumerate ManagedZones that have been created but not yet deleted.
 --
 -- /See:/ 'managedZonesList' smart constructor.
-data ManagedZonesList = ManagedZonesList
+data ManagedZonesList = ManagedZonesList'
     { _mzlProject    :: !Text
     , _mzlPageToken  :: !(Maybe Text)
     , _mzlDNSName    :: !(Maybe Text)
@@ -81,7 +81,7 @@ managedZonesList
     :: Text -- ^ 'mzlProject'
     -> ManagedZonesList
 managedZonesList pMzlProject_ =
-    ManagedZonesList
+    ManagedZonesList'
     { _mzlProject = pMzlProject_
     , _mzlPageToken = Nothing
     , _mzlDNSName = Nothing
@@ -119,7 +119,7 @@ instance GoogleRequest ManagedZonesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ManagedZonesList{..}
+        requestClient ManagedZonesList'{..}
           = go _mzlProject _mzlPageToken _mzlDNSName
               _mzlMaxResults
               (Just AltJSON)

@@ -57,7 +57,7 @@ type OrgUnitsUpdateResource =
 -- | Update Organization Unit
 --
 -- /See:/ 'orgUnitsUpdate' smart constructor.
-data OrgUnitsUpdate = OrgUnitsUpdate
+data OrgUnitsUpdate = OrgUnitsUpdate'
     { _ouuPayload     :: !OrgUnit
     , _ouuOrgUnitPath :: ![Text]
     , _ouuCustomerId  :: !Text
@@ -78,7 +78,7 @@ orgUnitsUpdate
     -> Text -- ^ 'ouuCustomerId'
     -> OrgUnitsUpdate
 orgUnitsUpdate pOuuPayload_ pOuuOrgUnitPath_ pOuuCustomerId_ =
-    OrgUnitsUpdate
+    OrgUnitsUpdate'
     { _ouuPayload = pOuuPayload_
     , _ouuOrgUnitPath = _Coerce # pOuuOrgUnitPath_
     , _ouuCustomerId = pOuuCustomerId_
@@ -106,7 +106,7 @@ instance GoogleRequest OrgUnitsUpdate where
         type Rs OrgUnitsUpdate = OrgUnit
         type Scopes OrgUnitsUpdate =
              '["https://www.googleapis.com/auth/admin.directory.orgunit"]
-        requestClient OrgUnitsUpdate{..}
+        requestClient OrgUnitsUpdate'{..}
           = go _ouuCustomerId _ouuOrgUnitPath (Just AltJSON)
               _ouuPayload
               directoryService

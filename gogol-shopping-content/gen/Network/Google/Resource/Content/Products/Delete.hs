@@ -55,7 +55,7 @@ type ProductsDeleteResource =
 -- | Deletes a product from your Merchant Center account.
 --
 -- /See:/ 'productsDelete' smart constructor.
-data ProductsDelete = ProductsDelete
+data ProductsDelete = ProductsDelete'
     { _pdMerchantId :: !(Textual Word64)
     , _pdProductId  :: !Text
     , _pdDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ productsDelete
     -> Text -- ^ 'pdProductId'
     -> ProductsDelete
 productsDelete pPdMerchantId_ pPdProductId_ =
-    ProductsDelete
+    ProductsDelete'
     { _pdMerchantId = _Coerce # pPdMerchantId_
     , _pdProductId = pPdProductId_
     , _pdDryRun = Nothing
@@ -100,7 +100,7 @@ instance GoogleRequest ProductsDelete where
         type Rs ProductsDelete = ()
         type Scopes ProductsDelete =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductsDelete{..}
+        requestClient ProductsDelete'{..}
           = go _pdMerchantId _pdProductId _pdDryRun
               (Just AltJSON)
               shoppingContentService

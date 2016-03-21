@@ -76,7 +76,7 @@ type ProjectsSubscriptionsAcknowledgeResource =
 -- error.
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge' smart constructor.
-data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge
+data ProjectsSubscriptionsAcknowledge = ProjectsSubscriptionsAcknowledge'
     { _psaXgafv          :: !(Maybe Text)
     , _psaUploadProtocol :: !(Maybe Text)
     , _psaPp             :: !Bool
@@ -114,7 +114,7 @@ projectsSubscriptionsAcknowledge
     -> Text -- ^ 'psaSubscription'
     -> ProjectsSubscriptionsAcknowledge
 projectsSubscriptionsAcknowledge pPsaPayload_ pPsaSubscription_ =
-    ProjectsSubscriptionsAcknowledge
+    ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaUploadProtocol = Nothing
     , _psaPp = True
@@ -180,7 +180,7 @@ instance GoogleRequest
         type Scopes ProjectsSubscriptionsAcknowledge =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsAcknowledge{..}
+        requestClient ProjectsSubscriptionsAcknowledge'{..}
           = go _psaSubscription _psaXgafv _psaUploadProtocol
               (Just _psaPp)
               _psaAccessToken

@@ -59,7 +59,7 @@ type DatabasesInsertResource =
 -- Cloud SQL instance.
 --
 -- /See:/ 'databasesInsert' smart constructor.
-data DatabasesInsert = DatabasesInsert
+data DatabasesInsert = DatabasesInsert'
     { _diProject  :: !Text
     , _diPayload  :: !Database
     , _diInstance :: !Text
@@ -80,7 +80,7 @@ databasesInsert
     -> Text -- ^ 'diInstance'
     -> DatabasesInsert
 databasesInsert pDiProject_ pDiPayload_ pDiInstance_ =
-    DatabasesInsert
+    DatabasesInsert'
     { _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diInstance = pDiInstance_
@@ -106,7 +106,7 @@ instance GoogleRequest DatabasesInsert where
         type Scopes DatabasesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient DatabasesInsert{..}
+        requestClient DatabasesInsert'{..}
           = go _diProject _diInstance (Just AltJSON) _diPayload
               sQLAdminService
           where go

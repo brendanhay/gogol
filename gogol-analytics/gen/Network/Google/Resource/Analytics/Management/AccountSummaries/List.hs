@@ -57,7 +57,7 @@ type ManagementAccountSummariesListResource =
 -- accounts\/properties\/profiles) to which the user has access.
 --
 -- /See:/ 'managementAccountSummariesList' smart constructor.
-data ManagementAccountSummariesList = ManagementAccountSummariesList
+data ManagementAccountSummariesList = ManagementAccountSummariesList'
     { _maslStartIndex :: !(Maybe (Textual Int32))
     , _maslMaxResults :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ data ManagementAccountSummariesList = ManagementAccountSummariesList
 managementAccountSummariesList
     :: ManagementAccountSummariesList
 managementAccountSummariesList =
-    ManagementAccountSummariesList
+    ManagementAccountSummariesList'
     { _maslStartIndex = Nothing
     , _maslMaxResults = Nothing
     }
@@ -100,7 +100,7 @@ instance GoogleRequest ManagementAccountSummariesList
         type Scopes ManagementAccountSummariesList =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementAccountSummariesList{..}
+        requestClient ManagementAccountSummariesList'{..}
           = go _maslStartIndex _maslMaxResults (Just AltJSON)
               analyticsService
           where go

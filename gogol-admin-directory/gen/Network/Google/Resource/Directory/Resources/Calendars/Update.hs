@@ -59,7 +59,7 @@ type ResourcesCalendarsUpdateResource =
 -- | Updates a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsUpdate' smart constructor.
-data ResourcesCalendarsUpdate = ResourcesCalendarsUpdate
+data ResourcesCalendarsUpdate = ResourcesCalendarsUpdate'
     { _rcuPayload            :: !CalendarResource
     , _rcuCustomer           :: !Text
     , _rcuCalendarResourceId :: !Text
@@ -80,7 +80,7 @@ resourcesCalendarsUpdate
     -> Text -- ^ 'rcuCalendarResourceId'
     -> ResourcesCalendarsUpdate
 resourcesCalendarsUpdate pRcuPayload_ pRcuCustomer_ pRcuCalendarResourceId_ =
-    ResourcesCalendarsUpdate
+    ResourcesCalendarsUpdate'
     { _rcuPayload = pRcuPayload_
     , _rcuCustomer = pRcuCustomer_
     , _rcuCalendarResourceId = pRcuCalendarResourceId_
@@ -108,7 +108,7 @@ instance GoogleRequest ResourcesCalendarsUpdate where
         type Rs ResourcesCalendarsUpdate = CalendarResource
         type Scopes ResourcesCalendarsUpdate =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar"]
-        requestClient ResourcesCalendarsUpdate{..}
+        requestClient ResourcesCalendarsUpdate'{..}
           = go _rcuCustomer _rcuCalendarResourceId
               (Just AltJSON)
               _rcuPayload

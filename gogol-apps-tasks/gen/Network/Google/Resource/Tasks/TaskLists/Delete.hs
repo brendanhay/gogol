@@ -53,7 +53,7 @@ type TaskListsDeleteResource =
 -- | Deletes the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsDelete' smart constructor.
-newtype TaskListsDelete = TaskListsDelete
+newtype TaskListsDelete = TaskListsDelete'
     { _tldTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ taskListsDelete
     :: Text -- ^ 'tldTaskList'
     -> TaskListsDelete
 taskListsDelete pTldTaskList_ =
-    TaskListsDelete
+    TaskListsDelete'
     { _tldTaskList = pTldTaskList_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest TaskListsDelete where
         type Rs TaskListsDelete = ()
         type Scopes TaskListsDelete =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TaskListsDelete{..}
+        requestClient TaskListsDelete'{..}
           = go _tldTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient

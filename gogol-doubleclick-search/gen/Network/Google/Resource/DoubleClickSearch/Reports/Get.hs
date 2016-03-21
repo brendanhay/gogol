@@ -51,7 +51,7 @@ type ReportsGetResource =
 -- | Polls for the status of a report request.
 --
 -- /See:/ 'reportsGet' smart constructor.
-newtype ReportsGet = ReportsGet
+newtype ReportsGet = ReportsGet'
     { _rgReportId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ reportsGet
     :: Text -- ^ 'rgReportId'
     -> ReportsGet
 reportsGet pRgReportId_ =
-    ReportsGet
+    ReportsGet'
     { _rgReportId = pRgReportId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
         type Scopes ReportsGet =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ReportsGet{..}
+        requestClient ReportsGet'{..}
           = go _rgReportId (Just AltJSON)
               doubleClickSearchService
           where go

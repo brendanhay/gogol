@@ -57,7 +57,7 @@ type DevicesGetResource =
 -- | Retrieves the details of a device.
 --
 -- /See:/ 'devicesGet' smart constructor.
-data DevicesGet = DevicesGet
+data DevicesGet = DevicesGet'
     { _dgEnterpriseId :: !Text
     , _dgUserId       :: !Text
     , _dgDeviceId     :: !Text
@@ -78,7 +78,7 @@ devicesGet
     -> Text -- ^ 'dgDeviceId'
     -> DevicesGet
 devicesGet pDgEnterpriseId_ pDgUserId_ pDgDeviceId_ =
-    DevicesGet
+    DevicesGet'
     { _dgEnterpriseId = pDgEnterpriseId_
     , _dgUserId = pDgUserId_
     , _dgDeviceId = pDgDeviceId_
@@ -103,7 +103,7 @@ instance GoogleRequest DevicesGet where
         type Rs DevicesGet = Device
         type Scopes DevicesGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient DevicesGet{..}
+        requestClient DevicesGet'{..}
           = go _dgEnterpriseId _dgUserId _dgDeviceId
               (Just AltJSON)
               androidEnterpriseService

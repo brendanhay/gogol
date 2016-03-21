@@ -62,7 +62,7 @@ type ProductsGetAppRestrictionsSchemaResource =
 -- restrictions are defined.
 --
 -- /See:/ 'productsGetAppRestrictionsSchema' smart constructor.
-data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema
+data ProductsGetAppRestrictionsSchema = ProductsGetAppRestrictionsSchema'
     { _pgarsEnterpriseId :: !Text
     , _pgarsLanguage     :: !(Maybe Text)
     , _pgarsProductId    :: !Text
@@ -82,7 +82,7 @@ productsGetAppRestrictionsSchema
     -> Text -- ^ 'pgarsProductId'
     -> ProductsGetAppRestrictionsSchema
 productsGetAppRestrictionsSchema pPgarsEnterpriseId_ pPgarsProductId_ =
-    ProductsGetAppRestrictionsSchema
+    ProductsGetAppRestrictionsSchema'
     { _pgarsEnterpriseId = pPgarsEnterpriseId_
     , _pgarsLanguage = Nothing
     , _pgarsProductId = pPgarsProductId_
@@ -113,7 +113,7 @@ instance GoogleRequest
              AppRestrictionsSchema
         type Scopes ProductsGetAppRestrictionsSchema =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient ProductsGetAppRestrictionsSchema{..}
+        requestClient ProductsGetAppRestrictionsSchema'{..}
           = go _pgarsEnterpriseId _pgarsProductId
               _pgarsLanguage
               (Just AltJSON)

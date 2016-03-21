@@ -54,7 +54,7 @@ type MyLibraryAnnotationsDeleteResource =
 -- | Deletes an annotation.
 --
 -- /See:/ 'myLibraryAnnotationsDelete' smart constructor.
-data MyLibraryAnnotationsDelete = MyLibraryAnnotationsDelete
+data MyLibraryAnnotationsDelete = MyLibraryAnnotationsDelete'
     { _mladAnnotationId :: !Text
     , _mladSource       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ myLibraryAnnotationsDelete
     :: Text -- ^ 'mladAnnotationId'
     -> MyLibraryAnnotationsDelete
 myLibraryAnnotationsDelete pMladAnnotationId_ =
-    MyLibraryAnnotationsDelete
+    MyLibraryAnnotationsDelete'
     { _mladAnnotationId = pMladAnnotationId_
     , _mladSource = Nothing
     }
@@ -91,7 +91,7 @@ instance GoogleRequest MyLibraryAnnotationsDelete
         type Rs MyLibraryAnnotationsDelete = ()
         type Scopes MyLibraryAnnotationsDelete =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryAnnotationsDelete{..}
+        requestClient MyLibraryAnnotationsDelete'{..}
           = go _mladAnnotationId _mladSource (Just AltJSON)
               booksService
           where go

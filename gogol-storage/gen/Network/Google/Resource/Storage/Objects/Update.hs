@@ -90,7 +90,7 @@ type ObjectsUpdateResource =
 -- | Updates an object\'s metadata.
 --
 -- /See:/ 'objectsUpdate' smart constructor.
-data ObjectsUpdate = ObjectsUpdate
+data ObjectsUpdate = ObjectsUpdate'
     { _ouIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _ouIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _ouIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -132,7 +132,7 @@ objectsUpdate
     -> Text -- ^ 'ouObject'
     -> ObjectsUpdate
 objectsUpdate pOuBucket_ pOuPayload_ pOuObject_ =
-    ObjectsUpdate
+    ObjectsUpdate'
     { _ouIfMetagenerationMatch = Nothing
     , _ouIfGenerationNotMatch = Nothing
     , _ouIfGenerationMatch = Nothing
@@ -215,7 +215,7 @@ instance GoogleRequest ObjectsUpdate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsUpdate{..}
+        requestClient ObjectsUpdate'{..}
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch
@@ -235,7 +235,7 @@ instance GoogleRequest (MediaDownload ObjectsUpdate)
         type Rs (MediaDownload ObjectsUpdate) = Stream
         type Scopes (MediaDownload ObjectsUpdate) =
              Scopes ObjectsUpdate
-        requestClient (MediaDownload ObjectsUpdate{..})
+        requestClient (MediaDownload ObjectsUpdate'{..})
           = go _ouBucket _ouObject _ouIfMetagenerationMatch
               _ouIfGenerationNotMatch
               _ouIfGenerationMatch

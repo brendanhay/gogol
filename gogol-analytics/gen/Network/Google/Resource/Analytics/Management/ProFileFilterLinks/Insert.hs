@@ -62,7 +62,7 @@ type ManagementProFileFilterLinksInsertResource =
 -- | Create a new profile filter link.
 --
 -- /See:/ 'managementProFileFilterLinksInsert' smart constructor.
-data ManagementProFileFilterLinksInsert = ManagementProFileFilterLinksInsert
+data ManagementProFileFilterLinksInsert = ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId :: !Text
     , _mpffliProFileId     :: !Text
     , _mpffliPayload       :: !ProFileFilterLink
@@ -87,7 +87,7 @@ managementProFileFilterLinksInsert
     -> Text -- ^ 'mpffliAccountId'
     -> ManagementProFileFilterLinksInsert
 managementProFileFilterLinksInsert pMpffliWebPropertyId_ pMpffliProFileId_ pMpffliPayload_ pMpffliAccountId_ =
-    ManagementProFileFilterLinksInsert
+    ManagementProFileFilterLinksInsert'
     { _mpffliWebPropertyId = pMpffliWebPropertyId_
     , _mpffliProFileId = pMpffliProFileId_
     , _mpffliPayload = pMpffliPayload_
@@ -124,7 +124,7 @@ instance GoogleRequest
              ProFileFilterLink
         type Scopes ManagementProFileFilterLinksInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementProFileFilterLinksInsert{..}
+        requestClient ManagementProFileFilterLinksInsert'{..}
           = go _mpffliAccountId _mpffliWebPropertyId
               _mpffliProFileId
               (Just AltJSON)

@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | A list of files.
 --
 -- /See:/ 'fileList' smart constructor.
-data FileList = FileList
+data FileList = FileList'
     { _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
     , _flFiles         :: !(Maybe [File])
@@ -41,7 +41,7 @@ data FileList = FileList
 fileList
     :: FileList
 fileList =
-    FileList
+    FileList'
     { _flNextPageToken = Nothing
     , _flKind = "drive#fileList"
     , _flFiles = Nothing
@@ -68,13 +68,13 @@ instance FromJSON FileList where
         parseJSON
           = withObject "FileList"
               (\ o ->
-                 FileList <$>
+                 FileList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "drive#fileList")
                      <*> (o .:? "files" .!= mempty))
 
 instance ToJSON FileList where
-        toJSON FileList{..}
+        toJSON FileList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _flNextPageToken,
@@ -85,7 +85,7 @@ instance ToJSON FileList where
 -- the location of the comment.
 --
 -- /See:/ 'commentQuotedFileContent' smart constructor.
-data CommentQuotedFileContent = CommentQuotedFileContent
+data CommentQuotedFileContent = CommentQuotedFileContent'
     { _cqfcValue    :: !(Maybe Text)
     , _cqfcMimeType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -100,7 +100,7 @@ data CommentQuotedFileContent = CommentQuotedFileContent
 commentQuotedFileContent
     :: CommentQuotedFileContent
 commentQuotedFileContent =
-    CommentQuotedFileContent
+    CommentQuotedFileContent'
     { _cqfcValue = Nothing
     , _cqfcMimeType = Nothing
     }
@@ -120,11 +120,11 @@ instance FromJSON CommentQuotedFileContent where
         parseJSON
           = withObject "CommentQuotedFileContent"
               (\ o ->
-                 CommentQuotedFileContent <$>
+                 CommentQuotedFileContent' <$>
                    (o .:? "value") <*> (o .:? "mimeType"))
 
 instance ToJSON CommentQuotedFileContent where
-        toJSON CommentQuotedFileContent{..}
+        toJSON CommentQuotedFileContent'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _cqfcValue,
@@ -134,7 +134,7 @@ instance ToJSON CommentQuotedFileContent where
 -- bytes.
 --
 -- /See:/ 'aboutStorageQuota' smart constructor.
-data AboutStorageQuota = AboutStorageQuota
+data AboutStorageQuota = AboutStorageQuota'
     { _asqUsageInDriveTrash :: !(Maybe (Textual Int64))
     , _asqLimit             :: !(Maybe (Textual Int64))
     , _asqUsage             :: !(Maybe (Textual Int64))
@@ -155,7 +155,7 @@ data AboutStorageQuota = AboutStorageQuota
 aboutStorageQuota
     :: AboutStorageQuota
 aboutStorageQuota =
-    AboutStorageQuota
+    AboutStorageQuota'
     { _asqUsageInDriveTrash = Nothing
     , _asqLimit = Nothing
     , _asqUsage = Nothing
@@ -193,13 +193,13 @@ instance FromJSON AboutStorageQuota where
         parseJSON
           = withObject "AboutStorageQuota"
               (\ o ->
-                 AboutStorageQuota <$>
+                 AboutStorageQuota' <$>
                    (o .:? "usageInDriveTrash") <*> (o .:? "limit") <*>
                      (o .:? "usage")
                      <*> (o .:? "usageInDrive"))
 
 instance ToJSON AboutStorageQuota where
-        toJSON AboutStorageQuota{..}
+        toJSON AboutStorageQuota'{..}
           = object
               (catMaybes
                  [("usageInDriveTrash" .=) <$> _asqUsageInDriveTrash,
@@ -210,7 +210,7 @@ instance ToJSON AboutStorageQuota where
 -- | A reply to a comment on a file.
 --
 -- /See:/ 'reply' smart constructor.
-data Reply = Reply
+data Reply = Reply'
     { _rHTMLContent  :: !(Maybe Text)
     , _rModifiedTime :: !(Maybe DateTime')
     , _rCreatedTime  :: !(Maybe DateTime')
@@ -246,7 +246,7 @@ data Reply = Reply
 reply
     :: Reply
 reply =
-    Reply
+    Reply'
     { _rHTMLContent = Nothing
     , _rModifiedTime = Nothing
     , _rCreatedTime = Nothing
@@ -307,7 +307,7 @@ instance FromJSON Reply where
         parseJSON
           = withObject "Reply"
               (\ o ->
-                 Reply <$>
+                 Reply' <$>
                    (o .:? "htmlContent") <*> (o .:? "modifiedTime") <*>
                      (o .:? "createdTime")
                      <*> (o .:? "kind" .!= "drive#reply")
@@ -318,7 +318,7 @@ instance FromJSON Reply where
                      <*> (o .:? "deleted"))
 
 instance ToJSON Reply where
-        toJSON Reply{..}
+        toJSON Reply'{..}
           = object
               (catMaybes
                  [("htmlContent" .=) <$> _rHTMLContent,
@@ -332,7 +332,7 @@ instance ToJSON Reply where
 -- | A map of source MIME type to possible targets for all supported imports.
 --
 -- /See:/ 'aboutImportFormats' smart constructor.
-newtype AboutImportFormats = AboutImportFormats
+newtype AboutImportFormats = AboutImportFormats'
     { _aifAddtional :: HashMap Text [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -345,7 +345,7 @@ aboutImportFormats
     :: HashMap Text [Text] -- ^ 'aifAddtional'
     -> AboutImportFormats
 aboutImportFormats pAifAddtional_ =
-    AboutImportFormats
+    AboutImportFormats'
     { _aifAddtional = _Coerce # pAifAddtional_
     }
 
@@ -357,7 +357,7 @@ aifAddtional
 instance FromJSON AboutImportFormats where
         parseJSON
           = withObject "AboutImportFormats"
-              (\ o -> AboutImportFormats <$> (parseJSONObject o))
+              (\ o -> AboutImportFormats' <$> (parseJSONObject o))
 
 instance ToJSON AboutImportFormats where
         toJSON = toJSON . _aifAddtional
@@ -365,7 +365,7 @@ instance ToJSON AboutImportFormats where
 -- | Capabilities the current user has on the file.
 --
 -- /See:/ 'fileCapabilities' smart constructor.
-data FileCapabilities = FileCapabilities
+data FileCapabilities = FileCapabilities'
     { _fcCanComment       :: !(Maybe Bool)
     , _fcCanEdit          :: !(Maybe Bool)
     , _fcCanReadRevisions :: !(Maybe Bool)
@@ -389,7 +389,7 @@ data FileCapabilities = FileCapabilities
 fileCapabilities
     :: FileCapabilities
 fileCapabilities =
-    FileCapabilities
+    FileCapabilities'
     { _fcCanComment = Nothing
     , _fcCanEdit = Nothing
     , _fcCanReadRevisions = Nothing
@@ -429,14 +429,14 @@ instance FromJSON FileCapabilities where
         parseJSON
           = withObject "FileCapabilities"
               (\ o ->
-                 FileCapabilities <$>
+                 FileCapabilities' <$>
                    (o .:? "canComment") <*> (o .:? "canEdit") <*>
                      (o .:? "canReadRevisions")
                      <*> (o .:? "canCopy")
                      <*> (o .:? "canShare"))
 
 instance ToJSON FileCapabilities where
-        toJSON FileCapabilities{..}
+        toJSON FileCapabilities'{..}
           = object
               (catMaybes
                  [("canComment" .=) <$> _fcCanComment,
@@ -448,7 +448,7 @@ instance ToJSON FileCapabilities where
 -- | A list of replies to a comment on a file.
 --
 -- /See:/ 'replyList' smart constructor.
-data ReplyList = ReplyList
+data ReplyList = ReplyList'
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
     , _rlReplies       :: !(Maybe [Reply])
@@ -466,7 +466,7 @@ data ReplyList = ReplyList
 replyList
     :: ReplyList
 replyList =
-    ReplyList
+    ReplyList'
     { _rlNextPageToken = Nothing
     , _rlKind = "drive#replyList"
     , _rlReplies = Nothing
@@ -494,13 +494,13 @@ instance FromJSON ReplyList where
         parseJSON
           = withObject "ReplyList"
               (\ o ->
-                 ReplyList <$>
+                 ReplyList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "drive#replyList")
                      <*> (o .:? "replies" .!= mempty))
 
 instance ToJSON ReplyList where
-        toJSON ReplyList{..}
+        toJSON ReplyList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlNextPageToken,
@@ -511,7 +511,7 @@ instance ToJSON ReplyList where
 -- generate a standard thumbnail.
 --
 -- /See:/ 'fileContentHintsThumbnail' smart constructor.
-data FileContentHintsThumbnail = FileContentHintsThumbnail
+data FileContentHintsThumbnail = FileContentHintsThumbnail'
     { _fchtImage    :: !(Maybe (Textual Word8))
     , _fchtMimeType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -526,7 +526,7 @@ data FileContentHintsThumbnail = FileContentHintsThumbnail
 fileContentHintsThumbnail
     :: FileContentHintsThumbnail
 fileContentHintsThumbnail =
-    FileContentHintsThumbnail
+    FileContentHintsThumbnail'
     { _fchtImage = Nothing
     , _fchtMimeType = Nothing
     }
@@ -546,11 +546,11 @@ instance FromJSON FileContentHintsThumbnail where
         parseJSON
           = withObject "FileContentHintsThumbnail"
               (\ o ->
-                 FileContentHintsThumbnail <$>
+                 FileContentHintsThumbnail' <$>
                    (o .:? "image") <*> (o .:? "mimeType"))
 
 instance ToJSON FileContentHintsThumbnail where
-        toJSON FileContentHintsThumbnail{..}
+        toJSON FileContentHintsThumbnail'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _fchtImage,
@@ -559,7 +559,7 @@ instance ToJSON FileContentHintsThumbnail where
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel
+data Channel = Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -598,7 +598,7 @@ data Channel = Channel
 channel
     :: Channel
 channel =
-    Channel
+    Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -663,7 +663,7 @@ instance FromJSON Channel where
         parseJSON
           = withObject "Channel"
               (\ o ->
-                 Channel <$>
+                 Channel' <$>
                    (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
                      (o .:? "kind" .!= "api#channel")
                      <*> (o .:? "expiration")
@@ -675,7 +675,7 @@ instance FromJSON Channel where
                      <*> (o .:? "type"))
 
 instance ToJSON Channel where
-        toJSON Channel{..}
+        toJSON Channel'{..}
           = object
               (catMaybes
                  [("resourceUri" .=) <$> _cResourceURI,
@@ -692,7 +692,7 @@ instance ToJSON Channel where
 -- immediately upon upload.
 --
 -- /See:/ 'fileVideoMediaMetadata' smart constructor.
-data FileVideoMediaMetadata = FileVideoMediaMetadata
+data FileVideoMediaMetadata = FileVideoMediaMetadata'
     { _fvmmHeight         :: !(Maybe (Textual Int32))
     , _fvmmWidth          :: !(Maybe (Textual Int32))
     , _fvmmDurationMillis :: !(Maybe (Textual Int64))
@@ -710,7 +710,7 @@ data FileVideoMediaMetadata = FileVideoMediaMetadata
 fileVideoMediaMetadata
     :: FileVideoMediaMetadata
 fileVideoMediaMetadata =
-    FileVideoMediaMetadata
+    FileVideoMediaMetadata'
     { _fvmmHeight = Nothing
     , _fvmmWidth = Nothing
     , _fvmmDurationMillis = Nothing
@@ -739,12 +739,12 @@ instance FromJSON FileVideoMediaMetadata where
         parseJSON
           = withObject "FileVideoMediaMetadata"
               (\ o ->
-                 FileVideoMediaMetadata <$>
+                 FileVideoMediaMetadata' <$>
                    (o .:? "height") <*> (o .:? "width") <*>
                      (o .:? "durationMillis"))
 
 instance ToJSON FileVideoMediaMetadata where
-        toJSON FileVideoMediaMetadata{..}
+        toJSON FileVideoMediaMetadata'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _fvmmHeight,
@@ -756,7 +756,7 @@ instance ToJSON FileVideoMediaMetadata where
 -- requests.
 --
 -- /See:/ 'fileAppProperties' smart constructor.
-newtype FileAppProperties = FileAppProperties
+newtype FileAppProperties = FileAppProperties'
     { _fapAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -769,7 +769,7 @@ fileAppProperties
     :: HashMap Text Text -- ^ 'fapAddtional'
     -> FileAppProperties
 fileAppProperties pFapAddtional_ =
-    FileAppProperties
+    FileAppProperties'
     { _fapAddtional = _Coerce # pFapAddtional_
     }
 
@@ -781,7 +781,7 @@ fapAddtional
 instance FromJSON FileAppProperties where
         parseJSON
           = withObject "FileAppProperties"
-              (\ o -> FileAppProperties <$> (parseJSONObject o))
+              (\ o -> FileAppProperties' <$> (parseJSONObject o))
 
 instance ToJSON FileAppProperties where
         toJSON = toJSON . _fapAddtional
@@ -789,7 +789,7 @@ instance ToJSON FileAppProperties where
 -- | A change to a file.
 --
 -- /See:/ 'change' smart constructor.
-data Change = Change
+data Change = Change'
     { _chaRemoved :: !(Maybe Bool)
     , _chaTime    :: !(Maybe DateTime')
     , _chaKind    :: !Text
@@ -813,7 +813,7 @@ data Change = Change
 change
     :: Change
 change =
-    Change
+    Change'
     { _chaRemoved = Nothing
     , _chaTime = Nothing
     , _chaKind = "drive#change"
@@ -850,14 +850,14 @@ instance FromJSON Change where
         parseJSON
           = withObject "Change"
               (\ o ->
-                 Change <$>
+                 Change' <$>
                    (o .:? "removed") <*> (o .:? "time") <*>
                      (o .:? "kind" .!= "drive#change")
                      <*> (o .:? "fileId")
                      <*> (o .:? "file"))
 
 instance ToJSON Change where
-        toJSON Change{..}
+        toJSON Change'{..}
           = object
               (catMaybes
                  [("removed" .=) <$> _chaRemoved,
@@ -868,7 +868,7 @@ instance ToJSON Change where
 -- | A map of source MIME type to possible targets for all supported exports.
 --
 -- /See:/ 'aboutExportFormats' smart constructor.
-newtype AboutExportFormats = AboutExportFormats
+newtype AboutExportFormats = AboutExportFormats'
     { _aefAddtional :: HashMap Text [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -881,7 +881,7 @@ aboutExportFormats
     :: HashMap Text [Text] -- ^ 'aefAddtional'
     -> AboutExportFormats
 aboutExportFormats pAefAddtional_ =
-    AboutExportFormats
+    AboutExportFormats'
     { _aefAddtional = _Coerce # pAefAddtional_
     }
 
@@ -893,7 +893,7 @@ aefAddtional
 instance FromJSON AboutExportFormats where
         parseJSON
           = withObject "AboutExportFormats"
-              (\ o -> AboutExportFormats <$> (parseJSONObject o))
+              (\ o -> AboutExportFormats' <$> (parseJSONObject o))
 
 instance ToJSON AboutExportFormats where
         toJSON = toJSON . _aefAddtional
@@ -901,7 +901,7 @@ instance ToJSON AboutExportFormats where
 -- | Information about a Drive user.
 --
 -- /See:/ 'user' smart constructor.
-data User = User
+data User = User'
     { _uPhotoLink    :: !(Maybe Text)
     , _uMe           :: !(Maybe Bool)
     , _uKind         :: !Text
@@ -928,7 +928,7 @@ data User = User
 user
     :: User
 user =
-    User
+    User'
     { _uPhotoLink = Nothing
     , _uMe = Nothing
     , _uKind = "drive#user"
@@ -973,7 +973,7 @@ instance FromJSON User where
         parseJSON
           = withObject "User"
               (\ o ->
-                 User <$>
+                 User' <$>
                    (o .:? "photoLink") <*> (o .:? "me") <*>
                      (o .:? "kind" .!= "drive#user")
                      <*> (o .:? "emailAddress")
@@ -981,7 +981,7 @@ instance FromJSON User where
                      <*> (o .:? "permissionId"))
 
 instance ToJSON User where
-        toJSON User{..}
+        toJSON User'{..}
           = object
               (catMaybes
                  [("photoLink" .=) <$> _uPhotoLink,
@@ -993,7 +993,7 @@ instance ToJSON User where
 -- | A list of changes for a user.
 --
 -- /See:/ 'changeList' smart constructor.
-data ChangeList = ChangeList
+data ChangeList = ChangeList'
     { _clNewStartPageToken :: !(Maybe Text)
     , _clNextPageToken     :: !(Maybe Text)
     , _clChanges           :: !(Maybe [Change])
@@ -1014,7 +1014,7 @@ data ChangeList = ChangeList
 changeList
     :: ChangeList
 changeList =
-    ChangeList
+    ChangeList'
     { _clNewStartPageToken = Nothing
     , _clNextPageToken = Nothing
     , _clChanges = Nothing
@@ -1050,14 +1050,14 @@ instance FromJSON ChangeList where
         parseJSON
           = withObject "ChangeList"
               (\ o ->
-                 ChangeList <$>
+                 ChangeList' <$>
                    (o .:? "newStartPageToken") <*>
                      (o .:? "nextPageToken")
                      <*> (o .:? "changes" .!= mempty)
                      <*> (o .:? "kind" .!= "drive#changeList"))
 
 instance ToJSON ChangeList where
-        toJSON ChangeList{..}
+        toJSON ChangeList'{..}
           = object
               (catMaybes
                  [("newStartPageToken" .=) <$> _clNewStartPageToken,
@@ -1069,7 +1069,7 @@ instance ToJSON ChangeList where
 -- never populated in responses.
 --
 -- /See:/ 'fileContentHints' smart constructor.
-data FileContentHints = FileContentHints
+data FileContentHints = FileContentHints'
     { _fchThumbnail     :: !(Maybe FileContentHintsThumbnail)
     , _fchIndexableText :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1084,7 +1084,7 @@ data FileContentHints = FileContentHints
 fileContentHints
     :: FileContentHints
 fileContentHints =
-    FileContentHints
+    FileContentHints'
     { _fchThumbnail = Nothing
     , _fchIndexableText = Nothing
     }
@@ -1106,11 +1106,11 @@ instance FromJSON FileContentHints where
         parseJSON
           = withObject "FileContentHints"
               (\ o ->
-                 FileContentHints <$>
+                 FileContentHints' <$>
                    (o .:? "thumbnail") <*> (o .:? "indexableText"))
 
 instance ToJSON FileContentHints where
-        toJSON FileContentHints{..}
+        toJSON FileContentHints'{..}
           = object
               (catMaybes
                  [("thumbnail" .=) <$> _fchThumbnail,
@@ -1119,7 +1119,7 @@ instance ToJSON FileContentHints where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams
+newtype ChannelParams = ChannelParams'
     { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1132,7 +1132,7 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams
+    ChannelParams'
     { _cpAddtional = _Coerce # pCpAddtional_
     }
 
@@ -1145,7 +1145,7 @@ cpAddtional
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> ChannelParams <$> (parseJSONObject o))
+              (\ o -> ChannelParams' <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
         toJSON = toJSON . _cpAddtional
@@ -1154,7 +1154,7 @@ instance ToJSON ChannelParams where
 -- Entries with null values are cleared in update and copy requests.
 --
 -- /See:/ 'fileProperties' smart constructor.
-newtype FileProperties = FileProperties
+newtype FileProperties = FileProperties'
     { _fpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1167,7 +1167,7 @@ fileProperties
     :: HashMap Text Text -- ^ 'fpAddtional'
     -> FileProperties
 fileProperties pFpAddtional_ =
-    FileProperties
+    FileProperties'
     { _fpAddtional = _Coerce # pFpAddtional_
     }
 
@@ -1179,7 +1179,7 @@ fpAddtional
 instance FromJSON FileProperties where
         parseJSON
           = withObject "FileProperties"
-              (\ o -> FileProperties <$> (parseJSONObject o))
+              (\ o -> FileProperties' <$> (parseJSONObject o))
 
 instance ToJSON FileProperties where
         toJSON = toJSON . _fpAddtional
@@ -1187,7 +1187,7 @@ instance ToJSON FileProperties where
 -- | A map of maximum import sizes by MIME type, in bytes.
 --
 -- /See:/ 'aboutMaxImportSizes' smart constructor.
-newtype AboutMaxImportSizes = AboutMaxImportSizes
+newtype AboutMaxImportSizes = AboutMaxImportSizes'
     { _amisAddtional :: HashMap Text (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1200,7 +1200,7 @@ aboutMaxImportSizes
     :: HashMap Text Int64 -- ^ 'amisAddtional'
     -> AboutMaxImportSizes
 aboutMaxImportSizes pAmisAddtional_ =
-    AboutMaxImportSizes
+    AboutMaxImportSizes'
     { _amisAddtional = _Coerce # pAmisAddtional_
     }
 
@@ -1213,7 +1213,7 @@ amisAddtional
 instance FromJSON AboutMaxImportSizes where
         parseJSON
           = withObject "AboutMaxImportSizes"
-              (\ o -> AboutMaxImportSizes <$> (parseJSONObject o))
+              (\ o -> AboutMaxImportSizes' <$> (parseJSONObject o))
 
 instance ToJSON AboutMaxImportSizes where
         toJSON = toJSON . _amisAddtional
@@ -1221,7 +1221,7 @@ instance ToJSON AboutMaxImportSizes where
 -- | Information about the user, the user\'s Drive, and system capabilities.
 --
 -- /See:/ 'about' smart constructor.
-data About = About
+data About = About'
     { _aExportFormats      :: !(Maybe AboutExportFormats)
     , _aMaxImportSizes     :: !(Maybe AboutMaxImportSizes)
     , _aImportFormats      :: !(Maybe AboutImportFormats)
@@ -1257,7 +1257,7 @@ data About = About
 about
     :: About
 about =
-    About
+    About'
     { _aExportFormats = Nothing
     , _aMaxImportSizes = Nothing
     , _aImportFormats = Nothing
@@ -1327,7 +1327,7 @@ instance FromJSON About where
         parseJSON
           = withObject "About"
               (\ o ->
-                 About <$>
+                 About' <$>
                    (o .:? "exportFormats") <*> (o .:? "maxImportSizes")
                      <*> (o .:? "importFormats")
                      <*> (o .:? "kind" .!= "drive#about")
@@ -1338,7 +1338,7 @@ instance FromJSON About where
                      <*> (o .:? "folderColorPalette" .!= mempty))
 
 instance ToJSON About where
-        toJSON About{..}
+        toJSON About'{..}
           = object
               (catMaybes
                  [("exportFormats" .=) <$> _aExportFormats,
@@ -1354,7 +1354,7 @@ instance ToJSON About where
 -- | Geographic location information stored in the image.
 --
 -- /See:/ 'fileImageMediaMetadataLocation' smart constructor.
-data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation
+data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation'
     { _fimmlLatitude  :: !(Maybe (Textual Double))
     , _fimmlAltitude  :: !(Maybe (Textual Double))
     , _fimmlLongitude :: !(Maybe (Textual Double))
@@ -1372,7 +1372,7 @@ data FileImageMediaMetadataLocation = FileImageMediaMetadataLocation
 fileImageMediaMetadataLocation
     :: FileImageMediaMetadataLocation
 fileImageMediaMetadataLocation =
-    FileImageMediaMetadataLocation
+    FileImageMediaMetadataLocation'
     { _fimmlLatitude = Nothing
     , _fimmlAltitude = Nothing
     , _fimmlLongitude = Nothing
@@ -1404,12 +1404,12 @@ instance FromJSON FileImageMediaMetadataLocation
         parseJSON
           = withObject "FileImageMediaMetadataLocation"
               (\ o ->
-                 FileImageMediaMetadataLocation <$>
+                 FileImageMediaMetadataLocation' <$>
                    (o .:? "latitude") <*> (o .:? "altitude") <*>
                      (o .:? "longitude"))
 
 instance ToJSON FileImageMediaMetadataLocation where
-        toJSON FileImageMediaMetadataLocation{..}
+        toJSON FileImageMediaMetadataLocation'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _fimmlLatitude,
@@ -1418,7 +1418,7 @@ instance ToJSON FileImageMediaMetadataLocation where
 
 --
 -- /See:/ 'startPageToken' smart constructor.
-data StartPageToken = StartPageToken
+data StartPageToken = StartPageToken'
     { _sptKind           :: !Text
     , _sptStartPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1433,7 +1433,7 @@ data StartPageToken = StartPageToken
 startPageToken
     :: StartPageToken
 startPageToken =
-    StartPageToken
+    StartPageToken'
     { _sptKind = "drive#startPageToken"
     , _sptStartPageToken = Nothing
     }
@@ -1452,12 +1452,12 @@ instance FromJSON StartPageToken where
         parseJSON
           = withObject "StartPageToken"
               (\ o ->
-                 StartPageToken <$>
+                 StartPageToken' <$>
                    (o .:? "kind" .!= "drive#startPageToken") <*>
                      (o .:? "startPageToken"))
 
 instance ToJSON StartPageToken where
-        toJSON StartPageToken{..}
+        toJSON StartPageToken'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sptKind),
@@ -1466,7 +1466,7 @@ instance ToJSON StartPageToken where
 -- | Additional metadata about image media, if available.
 --
 -- /See:/ 'fileImageMediaMetadata' smart constructor.
-data FileImageMediaMetadata = FileImageMediaMetadata
+data FileImageMediaMetadata = FileImageMediaMetadata'
     { _fimmRotation         :: !(Maybe (Textual Int32))
     , _fimmHeight           :: !(Maybe (Textual Int32))
     , _fimmSubjectDistance  :: !(Maybe (Textual Int32))
@@ -1538,7 +1538,7 @@ data FileImageMediaMetadata = FileImageMediaMetadata
 fileImageMediaMetadata
     :: FileImageMediaMetadata
 fileImageMediaMetadata =
-    FileImageMediaMetadata
+    FileImageMediaMetadata'
     { _fimmRotation = Nothing
     , _fimmHeight = Nothing
     , _fimmSubjectDistance = Nothing
@@ -1693,7 +1693,7 @@ instance FromJSON FileImageMediaMetadata where
         parseJSON
           = withObject "FileImageMediaMetadata"
               (\ o ->
-                 FileImageMediaMetadata <$>
+                 FileImageMediaMetadata' <$>
                    (o .:? "rotation") <*> (o .:? "height") <*>
                      (o .:? "subjectDistance")
                      <*> (o .:? "maxApertureValue")
@@ -1716,7 +1716,7 @@ instance FromJSON FileImageMediaMetadata where
                      <*> (o .:? "colorSpace"))
 
 instance ToJSON FileImageMediaMetadata where
-        toJSON FileImageMediaMetadata{..}
+        toJSON FileImageMediaMetadata'{..}
           = object
               (catMaybes
                  [("rotation" .=) <$> _fimmRotation,
@@ -1744,7 +1744,7 @@ instance ToJSON FileImageMediaMetadata where
 -- | A comment on a file.
 --
 -- /See:/ 'comment' smart constructor.
-data Comment = Comment
+data Comment = Comment'
     { _comHTMLContent       :: !(Maybe Text)
     , _comModifiedTime      :: !(Maybe DateTime')
     , _comCreatedTime       :: !(Maybe DateTime')
@@ -1789,7 +1789,7 @@ data Comment = Comment
 comment
     :: Comment
 comment =
-    Comment
+    Comment'
     { _comHTMLContent = Nothing
     , _comModifiedTime = Nothing
     , _comCreatedTime = Nothing
@@ -1880,7 +1880,7 @@ instance FromJSON Comment where
         parseJSON
           = withObject "Comment"
               (\ o ->
-                 Comment <$>
+                 Comment' <$>
                    (o .:? "htmlContent") <*> (o .:? "modifiedTime") <*>
                      (o .:? "createdTime")
                      <*> (o .:? "kind" .!= "drive#comment")
@@ -1894,7 +1894,7 @@ instance FromJSON Comment where
                      <*> (o .:? "deleted"))
 
 instance ToJSON Comment where
-        toJSON Comment{..}
+        toJSON Comment'{..}
           = object
               (catMaybes
                  [("htmlContent" .=) <$> _comHTMLContent,
@@ -1912,7 +1912,7 @@ instance ToJSON Comment where
 -- | The metadata for a revision to a file.
 --
 -- /See:/ 'revision' smart constructor.
-data Revision = Revision
+data Revision = Revision'
     { _revModifiedTime           :: !(Maybe DateTime')
     , _revSize                   :: !(Maybe (Textual Int64))
     , _revOriginalFilename       :: !(Maybe Text)
@@ -1957,7 +1957,7 @@ data Revision = Revision
 revision
     :: Revision
 revision =
-    Revision
+    Revision'
     { _revModifiedTime = Nothing
     , _revSize = Nothing
     , _revOriginalFilename = Nothing
@@ -2053,7 +2053,7 @@ instance FromJSON Revision where
         parseJSON
           = withObject "Revision"
               (\ o ->
-                 Revision <$>
+                 Revision' <$>
                    (o .:? "modifiedTime") <*> (o .:? "size") <*>
                      (o .:? "originalFilename")
                      <*> (o .:? "kind" .!= "drive#revision")
@@ -2067,7 +2067,7 @@ instance FromJSON Revision where
                      <*> (o .:? "id"))
 
 instance ToJSON Revision where
-        toJSON Revision{..}
+        toJSON Revision'{..}
           = object
               (catMaybes
                  [("modifiedTime" .=) <$> _revModifiedTime,
@@ -2088,7 +2088,7 @@ instance ToJSON Revision where
 -- the world access to a file or a folder hierarchy.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission
+data Permission = Permission'
     { _pPhotoLink          :: !(Maybe Text)
     , _pKind               :: !Text
     , _pDomain             :: !(Maybe Text)
@@ -2124,7 +2124,7 @@ data Permission = Permission
 permission
     :: Permission
 permission =
-    Permission
+    Permission'
     { _pPhotoLink = Nothing
     , _pKind = "drive#permission"
     , _pDomain = Nothing
@@ -2186,7 +2186,7 @@ instance FromJSON Permission where
         parseJSON
           = withObject "Permission"
               (\ o ->
-                 Permission <$>
+                 Permission' <$>
                    (o .:? "photoLink") <*>
                      (o .:? "kind" .!= "drive#permission")
                      <*> (o .:? "domain")
@@ -2198,7 +2198,7 @@ instance FromJSON Permission where
                      <*> (o .:? "type"))
 
 instance ToJSON Permission where
-        toJSON Permission{..}
+        toJSON Permission'{..}
           = object
               (catMaybes
                  [("photoLink" .=) <$> _pPhotoLink,
@@ -2212,7 +2212,7 @@ instance ToJSON Permission where
 -- | The metadata for a file.
 --
 -- /See:/ 'file' smart constructor.
-data File = File
+data File = File'
     { _fOwnedByMe             :: !(Maybe Bool)
     , _fThumbnailLink         :: !(Maybe Text)
     , _fFullFileExtension     :: !(Maybe Text)
@@ -2350,7 +2350,7 @@ data File = File
 file
     :: File
 file =
-    File
+    File'
     { _fOwnedByMe = Nothing
     , _fThumbnailLink = Nothing
     , _fFullFileExtension = Nothing
@@ -2687,7 +2687,7 @@ instance FromJSON File where
         parseJSON
           = withObject "File"
               (\ o ->
-                 File <$>
+                 File' <$>
                    (o .:? "ownedByMe") <*> (o .:? "thumbnailLink") <*>
                      (o .:? "fullFileExtension")
                      <*> (o .:? "modifiedTime")
@@ -2732,7 +2732,7 @@ instance FromJSON File where
                      <*> (o .:? "properties"))
 
 instance ToJSON File where
-        toJSON File{..}
+        toJSON File'{..}
           = object
               (catMaybes
                  [("ownedByMe" .=) <$> _fOwnedByMe,
@@ -2781,7 +2781,7 @@ instance ToJSON File where
 -- | A list of generated file IDs which can be provided in create requests.
 --
 -- /See:/ 'generatedIds' smart constructor.
-data GeneratedIds = GeneratedIds
+data GeneratedIds = GeneratedIds'
     { _giSpace :: !(Maybe Text)
     , _giKind  :: !Text
     , _giIds   :: !(Maybe [Text])
@@ -2799,7 +2799,7 @@ data GeneratedIds = GeneratedIds
 generatedIds
     :: GeneratedIds
 generatedIds =
-    GeneratedIds
+    GeneratedIds'
     { _giSpace = Nothing
     , _giKind = "drive#generatedIds"
     , _giIds = Nothing
@@ -2823,13 +2823,13 @@ instance FromJSON GeneratedIds where
         parseJSON
           = withObject "GeneratedIds"
               (\ o ->
-                 GeneratedIds <$>
+                 GeneratedIds' <$>
                    (o .:? "space") <*>
                      (o .:? "kind" .!= "drive#generatedIds")
                      <*> (o .:? "ids" .!= mempty))
 
 instance ToJSON GeneratedIds where
-        toJSON GeneratedIds{..}
+        toJSON GeneratedIds'{..}
           = object
               (catMaybes
                  [("space" .=) <$> _giSpace, Just ("kind" .= _giKind),
@@ -2838,7 +2838,7 @@ instance ToJSON GeneratedIds where
 -- | A list of comments on a file.
 --
 -- /See:/ 'commentList' smart constructor.
-data CommentList = CommentList
+data CommentList = CommentList'
     { _cllNextPageToken :: !(Maybe Text)
     , _cllKind          :: !Text
     , _cllComments      :: !(Maybe [Comment])
@@ -2856,7 +2856,7 @@ data CommentList = CommentList
 commentList
     :: CommentList
 commentList =
-    CommentList
+    CommentList'
     { _cllNextPageToken = Nothing
     , _cllKind = "drive#commentList"
     , _cllComments = Nothing
@@ -2884,13 +2884,13 @@ instance FromJSON CommentList where
         parseJSON
           = withObject "CommentList"
               (\ o ->
-                 CommentList <$>
+                 CommentList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "drive#commentList")
                      <*> (o .:? "comments" .!= mempty))
 
 instance ToJSON CommentList where
-        toJSON CommentList{..}
+        toJSON CommentList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _cllNextPageToken,
@@ -2900,7 +2900,7 @@ instance ToJSON CommentList where
 -- | A list of revisions of a file.
 --
 -- /See:/ 'revisionList' smart constructor.
-data RevisionList = RevisionList
+data RevisionList = RevisionList'
     { _rllKind      :: !Text
     , _rllRevisions :: !(Maybe [Revision])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2915,7 +2915,7 @@ data RevisionList = RevisionList
 revisionList
     :: RevisionList
 revisionList =
-    RevisionList
+    RevisionList'
     { _rllKind = "drive#revisionList"
     , _rllRevisions = Nothing
     }
@@ -2935,12 +2935,12 @@ instance FromJSON RevisionList where
         parseJSON
           = withObject "RevisionList"
               (\ o ->
-                 RevisionList <$>
+                 RevisionList' <$>
                    (o .:? "kind" .!= "drive#revisionList") <*>
                      (o .:? "revisions" .!= mempty))
 
 instance ToJSON RevisionList where
-        toJSON RevisionList{..}
+        toJSON RevisionList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rllKind),
@@ -2949,7 +2949,7 @@ instance ToJSON RevisionList where
 -- | A list of permissions for a file.
 --
 -- /See:/ 'permissionList' smart constructor.
-data PermissionList = PermissionList
+data PermissionList = PermissionList'
     { _plKind        :: !Text
     , _plPermissions :: !(Maybe [Permission])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2964,7 +2964,7 @@ data PermissionList = PermissionList
 permissionList
     :: PermissionList
 permissionList =
-    PermissionList
+    PermissionList'
     { _plKind = "drive#permissionList"
     , _plPermissions = Nothing
     }
@@ -2985,12 +2985,12 @@ instance FromJSON PermissionList where
         parseJSON
           = withObject "PermissionList"
               (\ o ->
-                 PermissionList <$>
+                 PermissionList' <$>
                    (o .:? "kind" .!= "drive#permissionList") <*>
                      (o .:? "permissions" .!= mempty))
 
 instance ToJSON PermissionList where
-        toJSON PermissionList{..}
+        toJSON PermissionList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _plKind),

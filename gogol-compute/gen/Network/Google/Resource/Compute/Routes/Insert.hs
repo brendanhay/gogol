@@ -57,7 +57,7 @@ type RoutesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'routesInsert' smart constructor.
-data RoutesInsert = RoutesInsert
+data RoutesInsert = RoutesInsert'
     { _riProject :: !Text
     , _riPayload :: !Route
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ routesInsert
     -> Route -- ^ 'riPayload'
     -> RoutesInsert
 routesInsert pRiProject_ pRiPayload_ =
-    RoutesInsert
+    RoutesInsert'
     { _riProject = pRiProject_
     , _riPayload = pRiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest RoutesInsert where
         type Scopes RoutesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient RoutesInsert{..}
+        requestClient RoutesInsert'{..}
           = go _riProject (Just AltJSON) _riPayload
               computeService
           where go

@@ -58,7 +58,7 @@ type VolumesRecommendedListResource =
 -- | Return a list of recommended books for the current user.
 --
 -- /See:/ 'volumesRecommendedList' smart constructor.
-data VolumesRecommendedList = VolumesRecommendedList
+data VolumesRecommendedList = VolumesRecommendedList'
     { _vrlLocale                   :: !(Maybe Text)
     , _vrlMaxAllowedMaturityRating :: !(Maybe VolumesRecommendedListMaxAllowedMaturityRating)
     , _vrlSource                   :: !(Maybe Text)
@@ -76,7 +76,7 @@ data VolumesRecommendedList = VolumesRecommendedList
 volumesRecommendedList
     :: VolumesRecommendedList
 volumesRecommendedList =
-    VolumesRecommendedList
+    VolumesRecommendedList'
     { _vrlLocale = Nothing
     , _vrlMaxAllowedMaturityRating = Nothing
     , _vrlSource = Nothing
@@ -104,7 +104,7 @@ instance GoogleRequest VolumesRecommendedList where
         type Rs VolumesRecommendedList = Volumes
         type Scopes VolumesRecommendedList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesRecommendedList{..}
+        requestClient VolumesRecommendedList'{..}
           = go _vrlLocale _vrlMaxAllowedMaturityRating
               _vrlSource
               (Just AltJSON)

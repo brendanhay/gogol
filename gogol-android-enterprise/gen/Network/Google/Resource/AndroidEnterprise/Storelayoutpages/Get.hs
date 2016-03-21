@@ -55,7 +55,7 @@ type StorelayoutpagesGetResource =
 -- | Retrieves details of a store page.
 --
 -- /See:/ 'storelayoutpagesGet' smart constructor.
-data StorelayoutpagesGet = StorelayoutpagesGet
+data StorelayoutpagesGet = StorelayoutpagesGet'
     { _sgEnterpriseId :: !Text
     , _sgPageId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ storelayoutpagesGet
     -> Text -- ^ 'sgPageId'
     -> StorelayoutpagesGet
 storelayoutpagesGet pSgEnterpriseId_ pSgPageId_ =
-    StorelayoutpagesGet
+    StorelayoutpagesGet'
     { _sgEnterpriseId = pSgEnterpriseId_
     , _sgPageId = pSgPageId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest StorelayoutpagesGet where
         type Rs StorelayoutpagesGet = StorePage
         type Scopes StorelayoutpagesGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutpagesGet{..}
+        requestClient StorelayoutpagesGet'{..}
           = go _sgEnterpriseId _sgPageId (Just AltJSON)
               androidEnterpriseService
           where go

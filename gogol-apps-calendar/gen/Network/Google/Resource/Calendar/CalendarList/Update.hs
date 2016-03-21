@@ -58,7 +58,7 @@ type CalendarListUpdateResource =
 -- | Updates an entry on the user\'s calendar list.
 --
 -- /See:/ 'calendarListUpdate' smart constructor.
-data CalendarListUpdate = CalendarListUpdate
+data CalendarListUpdate = CalendarListUpdate'
     { _cluCalendarId     :: !Text
     , _cluPayload        :: !CalendarListEntry
     , _cluColorRgbFormat :: !(Maybe Bool)
@@ -78,7 +78,7 @@ calendarListUpdate
     -> CalendarListEntry -- ^ 'cluPayload'
     -> CalendarListUpdate
 calendarListUpdate pCluCalendarId_ pCluPayload_ =
-    CalendarListUpdate
+    CalendarListUpdate'
     { _cluCalendarId = pCluCalendarId_
     , _cluPayload = pCluPayload_
     , _cluColorRgbFormat = Nothing
@@ -110,7 +110,7 @@ instance GoogleRequest CalendarListUpdate where
         type Rs CalendarListUpdate = CalendarListEntry
         type Scopes CalendarListUpdate =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarListUpdate{..}
+        requestClient CalendarListUpdate'{..}
           = go _cluCalendarId _cluColorRgbFormat (Just AltJSON)
               _cluPayload
               appsCalendarService

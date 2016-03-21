@@ -71,7 +71,7 @@ type AppsServicesVersionsDeleteResource =
 -- | Deletes an existing version.
 --
 -- /See:/ 'appsServicesVersionsDelete' smart constructor.
-data AppsServicesVersionsDelete = AppsServicesVersionsDelete
+data AppsServicesVersionsDelete = AppsServicesVersionsDelete'
     { _asvdXgafv          :: !(Maybe Text)
     , _asvdUploadProtocol :: !(Maybe Text)
     , _asvdPp             :: !Bool
@@ -113,7 +113,7 @@ appsServicesVersionsDelete
     -> Text -- ^ 'asvdServicesId'
     -> AppsServicesVersionsDelete
 appsServicesVersionsDelete pAsvdVersionsId_ pAsvdAppsId_ pAsvdServicesId_ =
-    AppsServicesVersionsDelete
+    AppsServicesVersionsDelete'
     { _asvdXgafv = Nothing
     , _asvdUploadProtocol = Nothing
     , _asvdPp = True
@@ -187,7 +187,7 @@ instance GoogleRequest AppsServicesVersionsDelete
         type Rs AppsServicesVersionsDelete = Operation
         type Scopes AppsServicesVersionsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesVersionsDelete{..}
+        requestClient AppsServicesVersionsDelete'{..}
           = go _asvdAppsId _asvdServicesId _asvdVersionsId
               _asvdXgafv
               _asvdUploadProtocol

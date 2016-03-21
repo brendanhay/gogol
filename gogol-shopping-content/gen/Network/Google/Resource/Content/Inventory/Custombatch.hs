@@ -59,7 +59,7 @@ type InventoryCustombatchResource =
 -- the products.
 --
 -- /See:/ 'inventoryCustombatch' smart constructor.
-data InventoryCustombatch = InventoryCustombatch
+data InventoryCustombatch = InventoryCustombatch'
     { _icPayload :: !InventoryCustomBatchRequest
     , _icDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ inventoryCustombatch
     :: InventoryCustomBatchRequest -- ^ 'icPayload'
     -> InventoryCustombatch
 inventoryCustombatch pIcPayload_ =
-    InventoryCustombatch
+    InventoryCustombatch'
     { _icPayload = pIcPayload_
     , _icDryRun = Nothing
     }
@@ -94,7 +94,7 @@ instance GoogleRequest InventoryCustombatch where
              InventoryCustomBatchResponse
         type Scopes InventoryCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient InventoryCustombatch{..}
+        requestClient InventoryCustombatch'{..}
           = go _icDryRun (Just AltJSON) _icPayload
               shoppingContentService
           where go

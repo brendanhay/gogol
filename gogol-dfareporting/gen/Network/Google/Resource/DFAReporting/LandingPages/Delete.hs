@@ -57,7 +57,7 @@ type LandingPagesDeleteResource =
 -- | Deletes an existing campaign landing page.
 --
 -- /See:/ 'landingPagesDelete' smart constructor.
-data LandingPagesDelete = LandingPagesDelete
+data LandingPagesDelete = LandingPagesDelete'
     { _lpdCampaignId :: !(Textual Int64)
     , _lpdProFileId  :: !(Textual Int64)
     , _lpdId         :: !(Textual Int64)
@@ -78,7 +78,7 @@ landingPagesDelete
     -> Int64 -- ^ 'lpdId'
     -> LandingPagesDelete
 landingPagesDelete pLpdCampaignId_ pLpdProFileId_ pLpdId_ =
-    LandingPagesDelete
+    LandingPagesDelete'
     { _lpdCampaignId = _Coerce # pLpdCampaignId_
     , _lpdProFileId = _Coerce # pLpdProFileId_
     , _lpdId = _Coerce # pLpdId_
@@ -106,7 +106,7 @@ instance GoogleRequest LandingPagesDelete where
         type Rs LandingPagesDelete = ()
         type Scopes LandingPagesDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient LandingPagesDelete{..}
+        requestClient LandingPagesDelete'{..}
           = go _lpdProFileId _lpdCampaignId _lpdId
               (Just AltJSON)
               dFAReportingService

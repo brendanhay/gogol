@@ -63,7 +63,7 @@ type LiveChatMessagesListResource =
 -- | Lists live chat messages for a specific chat.
 --
 -- /See:/ 'liveChatMessagesList' smart constructor.
-data LiveChatMessagesList = LiveChatMessagesList
+data LiveChatMessagesList = LiveChatMessagesList'
     { _lcmlPart             :: !Text
     , _lcmlLiveChatId       :: !Text
     , _lcmlHl               :: !(Maybe Text)
@@ -92,7 +92,7 @@ liveChatMessagesList
     -> Text -- ^ 'lcmlLiveChatId'
     -> LiveChatMessagesList
 liveChatMessagesList pLcmlPart_ pLcmlLiveChatId_ =
-    LiveChatMessagesList
+    LiveChatMessagesList'
     { _lcmlPart = pLcmlPart_
     , _lcmlLiveChatId = pLcmlLiveChatId_
     , _lcmlHl = Nothing
@@ -155,7 +155,7 @@ instance GoogleRequest LiveChatMessagesList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient LiveChatMessagesList{..}
+        requestClient LiveChatMessagesList'{..}
           = go (Just _lcmlLiveChatId) (Just _lcmlPart) _lcmlHl
               _lcmlPageToken
               (Just _lcmlMaxResults)

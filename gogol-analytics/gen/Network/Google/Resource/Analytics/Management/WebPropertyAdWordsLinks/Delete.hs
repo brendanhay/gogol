@@ -59,7 +59,7 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
 -- | Deletes a web property-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksDelete' smart constructor.
-data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinksDelete
+data ManagementWebPropertyAdWordsLinksDelete = ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldWebPropertyId            :: !Text
     , _mwpawldAccountId                :: !Text
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
@@ -80,7 +80,7 @@ managementWebPropertyAdWordsLinksDelete
     -> Text -- ^ 'mwpawldWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksDelete
 managementWebPropertyAdWordsLinksDelete pMwpawldWebPropertyId_ pMwpawldAccountId_ pMwpawldWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksDelete
+    ManagementWebPropertyAdWordsLinksDelete'
     { _mwpawldWebPropertyId = pMwpawldWebPropertyId_
     , _mwpawldAccountId = pMwpawldAccountId_
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
@@ -110,7 +110,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyAdWordsLinksDelete =
              '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
-          ManagementWebPropertyAdWordsLinksDelete{..}
+          ManagementWebPropertyAdWordsLinksDelete'{..}
           = go _mwpawldAccountId _mwpawldWebPropertyId
               _mwpawldWebPropertyAdWordsLinkId
               (Just AltJSON)

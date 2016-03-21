@@ -61,7 +61,7 @@ type GlobalForwardingRulesSetTargetResource =
 -- same type as the old target.
 --
 -- /See:/ 'globalForwardingRulesSetTarget' smart constructor.
-data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget
+data GlobalForwardingRulesSetTarget = GlobalForwardingRulesSetTarget'
     { _gfrstProject        :: !Text
     , _gfrstForwardingRule :: !Text
     , _gfrstPayload        :: !TargetReference
@@ -82,7 +82,7 @@ globalForwardingRulesSetTarget
     -> TargetReference -- ^ 'gfrstPayload'
     -> GlobalForwardingRulesSetTarget
 globalForwardingRulesSetTarget pGfrstProject_ pGfrstForwardingRule_ pGfrstPayload_ =
-    GlobalForwardingRulesSetTarget
+    GlobalForwardingRulesSetTarget'
     { _gfrstProject = pGfrstProject_
     , _gfrstForwardingRule = pGfrstForwardingRule_
     , _gfrstPayload = pGfrstPayload_
@@ -110,7 +110,7 @@ instance GoogleRequest GlobalForwardingRulesSetTarget
         type Scopes GlobalForwardingRulesSetTarget =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient GlobalForwardingRulesSetTarget{..}
+        requestClient GlobalForwardingRulesSetTarget'{..}
           = go _gfrstProject _gfrstForwardingRule
               (Just AltJSON)
               _gfrstPayload

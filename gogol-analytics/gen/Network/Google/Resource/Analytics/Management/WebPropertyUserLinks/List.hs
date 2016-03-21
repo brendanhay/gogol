@@ -61,7 +61,7 @@ type ManagementWebPropertyUserLinksListResource =
 -- | Lists webProperty-user links for a given web property.
 --
 -- /See:/ 'managementWebPropertyUserLinksList' smart constructor.
-data ManagementWebPropertyUserLinksList = ManagementWebPropertyUserLinksList
+data ManagementWebPropertyUserLinksList = ManagementWebPropertyUserLinksList'
     { _mwpullWebPropertyId :: !Text
     , _mwpullAccountId     :: !Text
     , _mwpullStartIndex    :: !(Maybe (Textual Int32))
@@ -84,7 +84,7 @@ managementWebPropertyUserLinksList
     -> Text -- ^ 'mwpullAccountId'
     -> ManagementWebPropertyUserLinksList
 managementWebPropertyUserLinksList pMwpullWebPropertyId_ pMwpullAccountId_ =
-    ManagementWebPropertyUserLinksList
+    ManagementWebPropertyUserLinksList'
     { _mwpullWebPropertyId = pMwpullWebPropertyId_
     , _mwpullAccountId = pMwpullAccountId_
     , _mwpullStartIndex = Nothing
@@ -129,7 +129,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyUserLinksList =
              '["https://www.googleapis.com/auth/analytics.manage.users",
                "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
-        requestClient ManagementWebPropertyUserLinksList{..}
+        requestClient ManagementWebPropertyUserLinksList'{..}
           = go _mwpullAccountId _mwpullWebPropertyId
               _mwpullStartIndex
               _mwpullMaxResults

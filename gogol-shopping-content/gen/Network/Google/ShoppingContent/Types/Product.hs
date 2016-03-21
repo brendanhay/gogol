@@ -22,7 +22,7 @@ import           Network.Google.ShoppingContent.Types.Sum
 
 --
 -- /See:/ 'ordersAcknowledgeRequest' smart constructor.
-newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
+newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest'
     { _oarOperationId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -34,7 +34,7 @@ newtype OrdersAcknowledgeRequest = OrdersAcknowledgeRequest
 ordersAcknowledgeRequest
     :: OrdersAcknowledgeRequest
 ordersAcknowledgeRequest =
-    OrdersAcknowledgeRequest
+    OrdersAcknowledgeRequest'
     { _oarOperationId = Nothing
     }
 
@@ -48,17 +48,17 @@ instance FromJSON OrdersAcknowledgeRequest where
         parseJSON
           = withObject "OrdersAcknowledgeRequest"
               (\ o ->
-                 OrdersAcknowledgeRequest <$> (o .:? "operationId"))
+                 OrdersAcknowledgeRequest' <$> (o .:? "operationId"))
 
 instance ToJSON OrdersAcknowledgeRequest where
-        toJSON OrdersAcknowledgeRequest{..}
+        toJSON OrdersAcknowledgeRequest'{..}
           = object
               (catMaybes [("operationId" .=) <$> _oarOperationId])
 
 -- | The tax settings of a merchant account.
 --
 -- /See:/ 'accountTax' smart constructor.
-data AccountTax = AccountTax
+data AccountTax = AccountTax'
     { _atRules     :: !(Maybe [AccountTaxTaxRule])
     , _atKind      :: !Text
     , _atAccountId :: !(Maybe (Textual Word64))
@@ -76,7 +76,7 @@ data AccountTax = AccountTax
 accountTax
     :: AccountTax
 accountTax =
-    AccountTax
+    AccountTax'
     { _atRules = Nothing
     , _atKind = "content#accountTax"
     , _atAccountId = Nothing
@@ -104,13 +104,13 @@ instance FromJSON AccountTax where
         parseJSON
           = withObject "AccountTax"
               (\ o ->
-                 AccountTax <$>
+                 AccountTax' <$>
                    (o .:? "rules" .!= mempty) <*>
                      (o .:? "kind" .!= "content#accountTax")
                      <*> (o .:? "accountId"))
 
 instance ToJSON AccountTax where
-        toJSON AccountTax{..}
+        toJSON AccountTax'{..}
           = object
               (catMaybes
                  [("rules" .=) <$> _atRules, Just ("kind" .= _atKind),
@@ -118,7 +118,7 @@ instance ToJSON AccountTax where
 
 --
 -- /See:/ 'ordersUpdateMerchantOrderIdRequest' smart constructor.
-data OrdersUpdateMerchantOrderIdRequest = OrdersUpdateMerchantOrderIdRequest
+data OrdersUpdateMerchantOrderIdRequest = OrdersUpdateMerchantOrderIdRequest'
     { _oumoirMerchantOrderId :: !(Maybe Text)
     , _oumoirOperationId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -133,7 +133,7 @@ data OrdersUpdateMerchantOrderIdRequest = OrdersUpdateMerchantOrderIdRequest
 ordersUpdateMerchantOrderIdRequest
     :: OrdersUpdateMerchantOrderIdRequest
 ordersUpdateMerchantOrderIdRequest =
-    OrdersUpdateMerchantOrderIdRequest
+    OrdersUpdateMerchantOrderIdRequest'
     { _oumoirMerchantOrderId = Nothing
     , _oumoirOperationId = Nothing
     }
@@ -156,12 +156,12 @@ instance FromJSON OrdersUpdateMerchantOrderIdRequest
         parseJSON
           = withObject "OrdersUpdateMerchantOrderIdRequest"
               (\ o ->
-                 OrdersUpdateMerchantOrderIdRequest <$>
+                 OrdersUpdateMerchantOrderIdRequest' <$>
                    (o .:? "merchantOrderId") <*> (o .:? "operationId"))
 
 instance ToJSON OrdersUpdateMerchantOrderIdRequest
          where
-        toJSON OrdersUpdateMerchantOrderIdRequest{..}
+        toJSON OrdersUpdateMerchantOrderIdRequest'{..}
           = object
               (catMaybes
                  [("merchantOrderId" .=) <$> _oumoirMerchantOrderId,
@@ -169,7 +169,7 @@ instance ToJSON OrdersUpdateMerchantOrderIdRequest
 
 --
 -- /See:/ 'ordersAdvanceTestOrderResponse' smart constructor.
-newtype OrdersAdvanceTestOrderResponse = OrdersAdvanceTestOrderResponse
+newtype OrdersAdvanceTestOrderResponse = OrdersAdvanceTestOrderResponse'
     { _oatorKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -181,7 +181,7 @@ newtype OrdersAdvanceTestOrderResponse = OrdersAdvanceTestOrderResponse
 ordersAdvanceTestOrderResponse
     :: OrdersAdvanceTestOrderResponse
 ordersAdvanceTestOrderResponse =
-    OrdersAdvanceTestOrderResponse
+    OrdersAdvanceTestOrderResponse'
     { _oatorKind = "content#ordersAdvanceTestOrderResponse"
     }
 
@@ -196,17 +196,17 @@ instance FromJSON OrdersAdvanceTestOrderResponse
         parseJSON
           = withObject "OrdersAdvanceTestOrderResponse"
               (\ o ->
-                 OrdersAdvanceTestOrderResponse <$>
+                 OrdersAdvanceTestOrderResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersAdvanceTestOrderResponse"))
 
 instance ToJSON OrdersAdvanceTestOrderResponse where
-        toJSON OrdersAdvanceTestOrderResponse{..}
+        toJSON OrdersAdvanceTestOrderResponse'{..}
           = object (catMaybes [Just ("kind" .= _oatorKind)])
 
 --
 -- /See:/ 'productsCustomBatchResponse' smart constructor.
-data ProductsCustomBatchResponse = ProductsCustomBatchResponse
+data ProductsCustomBatchResponse = ProductsCustomBatchResponse'
     { _pcbrEntries :: !(Maybe [ProductsCustomBatchResponseEntry])
     , _pcbrKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -221,7 +221,7 @@ data ProductsCustomBatchResponse = ProductsCustomBatchResponse
 productsCustomBatchResponse
     :: ProductsCustomBatchResponse
 productsCustomBatchResponse =
-    ProductsCustomBatchResponse
+    ProductsCustomBatchResponse'
     { _pcbrEntries = Nothing
     , _pcbrKind = "content#productsCustomBatchResponse"
     }
@@ -242,13 +242,13 @@ instance FromJSON ProductsCustomBatchResponse where
         parseJSON
           = withObject "ProductsCustomBatchResponse"
               (\ o ->
-                 ProductsCustomBatchResponse <$>
+                 ProductsCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#productsCustomBatchResponse"))
 
 instance ToJSON ProductsCustomBatchResponse where
-        toJSON ProductsCustomBatchResponse{..}
+        toJSON ProductsCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _pcbrEntries,
@@ -256,7 +256,7 @@ instance ToJSON ProductsCustomBatchResponse where
 
 --
 -- /See:/ 'testOrderCustomer' smart constructor.
-data TestOrderCustomer = TestOrderCustomer
+data TestOrderCustomer = TestOrderCustomer'
     { _tocFullName                    :: !(Maybe Text)
     , _tocEmail                       :: !(Maybe Text)
     , _tocExplicitMarketingPreference :: !(Maybe Bool)
@@ -274,7 +274,7 @@ data TestOrderCustomer = TestOrderCustomer
 testOrderCustomer
     :: TestOrderCustomer
 testOrderCustomer =
-    TestOrderCustomer
+    TestOrderCustomer'
     { _tocFullName = Nothing
     , _tocEmail = Nothing
     , _tocExplicitMarketingPreference = Nothing
@@ -303,12 +303,12 @@ instance FromJSON TestOrderCustomer where
         parseJSON
           = withObject "TestOrderCustomer"
               (\ o ->
-                 TestOrderCustomer <$>
+                 TestOrderCustomer' <$>
                    (o .:? "fullName") <*> (o .:? "email") <*>
                      (o .:? "explicitMarketingPreference"))
 
 instance ToJSON TestOrderCustomer where
-        toJSON TestOrderCustomer{..}
+        toJSON TestOrderCustomer'{..}
           = object
               (catMaybes
                  [("fullName" .=) <$> _tocFullName,
@@ -318,7 +318,7 @@ instance ToJSON TestOrderCustomer where
 
 --
 -- /See:/ 'datafeedstatusesCustomBatchResponse' smart constructor.
-data DatafeedstatusesCustomBatchResponse = DatafeedstatusesCustomBatchResponse
+data DatafeedstatusesCustomBatchResponse = DatafeedstatusesCustomBatchResponse'
     { _dcbrEntries :: !(Maybe [DatafeedstatusesCustomBatchResponseEntry])
     , _dcbrKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -333,7 +333,7 @@ data DatafeedstatusesCustomBatchResponse = DatafeedstatusesCustomBatchResponse
 datafeedstatusesCustomBatchResponse
     :: DatafeedstatusesCustomBatchResponse
 datafeedstatusesCustomBatchResponse =
-    DatafeedstatusesCustomBatchResponse
+    DatafeedstatusesCustomBatchResponse'
     { _dcbrEntries = Nothing
     , _dcbrKind = "content#datafeedstatusesCustomBatchResponse"
     }
@@ -355,14 +355,14 @@ instance FromJSON DatafeedstatusesCustomBatchResponse
         parseJSON
           = withObject "DatafeedstatusesCustomBatchResponse"
               (\ o ->
-                 DatafeedstatusesCustomBatchResponse <$>
+                 DatafeedstatusesCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#datafeedstatusesCustomBatchResponse"))
 
 instance ToJSON DatafeedstatusesCustomBatchResponse
          where
-        toJSON DatafeedstatusesCustomBatchResponse{..}
+        toJSON DatafeedstatusesCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _dcbrEntries,
@@ -370,7 +370,7 @@ instance ToJSON DatafeedstatusesCustomBatchResponse
 
 --
 -- /See:/ 'orderReturn' smart constructor.
-data OrderReturn = OrderReturn
+data OrderReturn = OrderReturn'
     { _orQuantity     :: !(Maybe (Textual Word32))
     , _orActor        :: !(Maybe Text)
     , _orReason       :: !(Maybe Text)
@@ -394,7 +394,7 @@ data OrderReturn = OrderReturn
 orderReturn
     :: OrderReturn
 orderReturn =
-    OrderReturn
+    OrderReturn'
     { _orQuantity = Nothing
     , _orActor = Nothing
     , _orReason = Nothing
@@ -431,14 +431,14 @@ instance FromJSON OrderReturn where
         parseJSON
           = withObject "OrderReturn"
               (\ o ->
-                 OrderReturn <$>
+                 OrderReturn' <$>
                    (o .:? "quantity") <*> (o .:? "actor") <*>
                      (o .:? "reason")
                      <*> (o .:? "creationDate")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrderReturn where
-        toJSON OrderReturn{..}
+        toJSON OrderReturn'{..}
           = object
               (catMaybes
                  [("quantity" .=) <$> _orQuantity,
@@ -450,7 +450,7 @@ instance ToJSON OrderReturn where
 -- | A batch entry encoding a single non-batch accounttax response.
 --
 -- /See:/ 'accounttaxCustomBatchResponseEntry' smart constructor.
-data AccounttaxCustomBatchResponseEntry = AccounttaxCustomBatchResponseEntry
+data AccounttaxCustomBatchResponseEntry = AccounttaxCustomBatchResponseEntry'
     { _acbreAccountTax :: !(Maybe AccountTax)
     , _acbreKind       :: !Text
     , _acbreErrors     :: !(Maybe Errors)
@@ -471,7 +471,7 @@ data AccounttaxCustomBatchResponseEntry = AccounttaxCustomBatchResponseEntry
 accounttaxCustomBatchResponseEntry
     :: AccounttaxCustomBatchResponseEntry
 accounttaxCustomBatchResponseEntry =
-    AccounttaxCustomBatchResponseEntry
+    AccounttaxCustomBatchResponseEntry'
     { _acbreAccountTax = Nothing
     , _acbreKind = "content#accounttaxCustomBatchResponseEntry"
     , _acbreErrors = Nothing
@@ -506,7 +506,7 @@ instance FromJSON AccounttaxCustomBatchResponseEntry
         parseJSON
           = withObject "AccounttaxCustomBatchResponseEntry"
               (\ o ->
-                 AccounttaxCustomBatchResponseEntry <$>
+                 AccounttaxCustomBatchResponseEntry' <$>
                    (o .:? "accountTax") <*>
                      (o .:? "kind" .!=
                         "content#accounttaxCustomBatchResponseEntry")
@@ -515,7 +515,7 @@ instance FromJSON AccounttaxCustomBatchResponseEntry
 
 instance ToJSON AccounttaxCustomBatchResponseEntry
          where
-        toJSON AccounttaxCustomBatchResponseEntry{..}
+        toJSON AccounttaxCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [("accountTax" .=) <$> _acbreAccountTax,
@@ -525,7 +525,7 @@ instance ToJSON AccounttaxCustomBatchResponseEntry
 
 --
 -- /See:/ 'inventoryCustomBatchRequest' smart constructor.
-newtype InventoryCustomBatchRequest = InventoryCustomBatchRequest
+newtype InventoryCustomBatchRequest = InventoryCustomBatchRequest'
     { _icbrEntries :: Maybe [InventoryCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -537,7 +537,7 @@ newtype InventoryCustomBatchRequest = InventoryCustomBatchRequest
 inventoryCustomBatchRequest
     :: InventoryCustomBatchRequest
 inventoryCustomBatchRequest =
-    InventoryCustomBatchRequest
+    InventoryCustomBatchRequest'
     { _icbrEntries = Nothing
     }
 
@@ -552,17 +552,17 @@ instance FromJSON InventoryCustomBatchRequest where
         parseJSON
           = withObject "InventoryCustomBatchRequest"
               (\ o ->
-                 InventoryCustomBatchRequest <$>
+                 InventoryCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON InventoryCustomBatchRequest where
-        toJSON InventoryCustomBatchRequest{..}
+        toJSON InventoryCustomBatchRequest'{..}
           = object
               (catMaybes [("entries" .=) <$> _icbrEntries])
 
 --
 -- /See:/ 'accountsAuthInfoResponse' smart constructor.
-data AccountsAuthInfoResponse = AccountsAuthInfoResponse
+data AccountsAuthInfoResponse = AccountsAuthInfoResponse'
     { _aairKind               :: !Text
     , _aairAccountIdentifiers :: !(Maybe [AccountIdentifier])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -577,7 +577,7 @@ data AccountsAuthInfoResponse = AccountsAuthInfoResponse
 accountsAuthInfoResponse
     :: AccountsAuthInfoResponse
 accountsAuthInfoResponse =
-    AccountsAuthInfoResponse
+    AccountsAuthInfoResponse'
     { _aairKind = "content#accountsAuthInfoResponse"
     , _aairAccountIdentifiers = Nothing
     }
@@ -602,12 +602,12 @@ instance FromJSON AccountsAuthInfoResponse where
         parseJSON
           = withObject "AccountsAuthInfoResponse"
               (\ o ->
-                 AccountsAuthInfoResponse <$>
+                 AccountsAuthInfoResponse' <$>
                    (o .:? "kind" .!= "content#accountsAuthInfoResponse")
                      <*> (o .:? "accountIdentifiers" .!= mempty))
 
 instance ToJSON AccountsAuthInfoResponse where
-        toJSON AccountsAuthInfoResponse{..}
+        toJSON AccountsAuthInfoResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aairKind),
@@ -616,7 +616,7 @@ instance ToJSON AccountsAuthInfoResponse where
 
 --
 -- /See:/ 'productStatusDestinationStatus' smart constructor.
-data ProductStatusDestinationStatus = ProductStatusDestinationStatus
+data ProductStatusDestinationStatus = ProductStatusDestinationStatus'
     { _psdsDestination    :: !(Maybe Text)
     , _psdsIntention      :: !(Maybe Text)
     , _psdsApprovalStatus :: !(Maybe Text)
@@ -634,7 +634,7 @@ data ProductStatusDestinationStatus = ProductStatusDestinationStatus
 productStatusDestinationStatus
     :: ProductStatusDestinationStatus
 productStatusDestinationStatus =
-    ProductStatusDestinationStatus
+    ProductStatusDestinationStatus'
     { _psdsDestination = Nothing
     , _psdsIntention = Nothing
     , _psdsApprovalStatus = Nothing
@@ -664,12 +664,12 @@ instance FromJSON ProductStatusDestinationStatus
         parseJSON
           = withObject "ProductStatusDestinationStatus"
               (\ o ->
-                 ProductStatusDestinationStatus <$>
+                 ProductStatusDestinationStatus' <$>
                    (o .:? "destination") <*> (o .:? "intention") <*>
                      (o .:? "approvalStatus"))
 
 instance ToJSON ProductStatusDestinationStatus where
-        toJSON ProductStatusDestinationStatus{..}
+        toJSON ProductStatusDestinationStatus'{..}
           = object
               (catMaybes
                  [("destination" .=) <$> _psdsDestination,
@@ -679,7 +679,7 @@ instance ToJSON ProductStatusDestinationStatus where
 -- | Tax calculation rule to apply in a state or province (USA only).
 --
 -- /See:/ 'accountTaxTaxRule' smart constructor.
-data AccountTaxTaxRule = AccountTaxTaxRule
+data AccountTaxTaxRule = AccountTaxTaxRule'
     { _attrUseGlobalRate :: !(Maybe Bool)
     , _attrCountry       :: !(Maybe Text)
     , _attrShippingTaxed :: !(Maybe Bool)
@@ -703,7 +703,7 @@ data AccountTaxTaxRule = AccountTaxTaxRule
 accountTaxTaxRule
     :: AccountTaxTaxRule
 accountTaxTaxRule =
-    AccountTaxTaxRule
+    AccountTaxTaxRule'
     { _attrUseGlobalRate = Nothing
     , _attrCountry = Nothing
     , _attrShippingTaxed = Nothing
@@ -748,14 +748,14 @@ instance FromJSON AccountTaxTaxRule where
         parseJSON
           = withObject "AccountTaxTaxRule"
               (\ o ->
-                 AccountTaxTaxRule <$>
+                 AccountTaxTaxRule' <$>
                    (o .:? "useGlobalRate") <*> (o .:? "country") <*>
                      (o .:? "shippingTaxed")
                      <*> (o .:? "locationId")
                      <*> (o .:? "ratePercent"))
 
 instance ToJSON AccountTaxTaxRule where
-        toJSON AccountTaxTaxRule{..}
+        toJSON AccountTaxTaxRule'{..}
           = object
               (catMaybes
                  [("useGlobalRate" .=) <$> _attrUseGlobalRate,
@@ -766,7 +766,7 @@ instance ToJSON AccountTaxTaxRule where
 
 --
 -- /See:/ 'productDestination' smart constructor.
-data ProductDestination = ProductDestination
+data ProductDestination = ProductDestination'
     { _pdIntention       :: !(Maybe Text)
     , _pdDestinationName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -781,7 +781,7 @@ data ProductDestination = ProductDestination
 productDestination
     :: ProductDestination
 productDestination =
-    ProductDestination
+    ProductDestination'
     { _pdIntention = Nothing
     , _pdDestinationName = Nothing
     }
@@ -801,11 +801,11 @@ instance FromJSON ProductDestination where
         parseJSON
           = withObject "ProductDestination"
               (\ o ->
-                 ProductDestination <$>
+                 ProductDestination' <$>
                    (o .:? "intention") <*> (o .:? "destinationName"))
 
 instance ToJSON ProductDestination where
-        toJSON ProductDestination{..}
+        toJSON ProductDestination'{..}
           = object
               (catMaybes
                  [("intention" .=) <$> _pdIntention,
@@ -813,7 +813,7 @@ instance ToJSON ProductDestination where
 
 --
 -- /See:/ 'datafeedsCustomBatchRequest' smart constructor.
-newtype DatafeedsCustomBatchRequest = DatafeedsCustomBatchRequest
+newtype DatafeedsCustomBatchRequest = DatafeedsCustomBatchRequest'
     { _dEntries :: Maybe [DatafeedsCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -825,7 +825,7 @@ newtype DatafeedsCustomBatchRequest = DatafeedsCustomBatchRequest
 datafeedsCustomBatchRequest
     :: DatafeedsCustomBatchRequest
 datafeedsCustomBatchRequest =
-    DatafeedsCustomBatchRequest
+    DatafeedsCustomBatchRequest'
     { _dEntries = Nothing
     }
 
@@ -840,16 +840,16 @@ instance FromJSON DatafeedsCustomBatchRequest where
         parseJSON
           = withObject "DatafeedsCustomBatchRequest"
               (\ o ->
-                 DatafeedsCustomBatchRequest <$>
+                 DatafeedsCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON DatafeedsCustomBatchRequest where
-        toJSON DatafeedsCustomBatchRequest{..}
+        toJSON DatafeedsCustomBatchRequest'{..}
           = object (catMaybes [("entries" .=) <$> _dEntries])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntry' smart constructor.
-data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
+data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry'
     { _ocbreMerchantId      :: !(Maybe (Textual Word64))
     , _ocbreCancelLineItem  :: !(Maybe OrdersCustomBatchRequestEntryCancelLineItem)
     , _ocbreRefund          :: !(Maybe OrdersCustomBatchRequestEntryRefund)
@@ -894,7 +894,7 @@ data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
 ordersCustomBatchRequestEntry
     :: OrdersCustomBatchRequestEntry
 ordersCustomBatchRequestEntry =
-    OrdersCustomBatchRequestEntry
+    OrdersCustomBatchRequestEntry'
     { _ocbreMerchantId = Nothing
     , _ocbreCancelLineItem = Nothing
     , _ocbreRefund = Nothing
@@ -985,7 +985,7 @@ instance FromJSON OrdersCustomBatchRequestEntry where
         parseJSON
           = withObject "OrdersCustomBatchRequestEntry"
               (\ o ->
-                 OrdersCustomBatchRequestEntry <$>
+                 OrdersCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "cancelLineItem") <*>
                      (o .:? "refund")
                      <*> (o .:? "updateShipment")
@@ -999,7 +999,7 @@ instance FromJSON OrdersCustomBatchRequestEntry where
                      <*> (o .:? "batchId"))
 
 instance ToJSON OrdersCustomBatchRequestEntry where
-        toJSON OrdersCustomBatchRequestEntry{..}
+        toJSON OrdersCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _ocbreMerchantId,
@@ -1017,7 +1017,7 @@ instance ToJSON OrdersCustomBatchRequestEntry where
 
 --
 -- /See:/ 'ordersRefundRequest' smart constructor.
-data OrdersRefundRequest = OrdersRefundRequest
+data OrdersRefundRequest = OrdersRefundRequest'
     { _orrAmount      :: !(Maybe Price)
     , _orrReason      :: !(Maybe Text)
     , _orrOperationId :: !(Maybe Text)
@@ -1038,7 +1038,7 @@ data OrdersRefundRequest = OrdersRefundRequest
 ordersRefundRequest
     :: OrdersRefundRequest
 ordersRefundRequest =
-    OrdersRefundRequest
+    OrdersRefundRequest'
     { _orrAmount = Nothing
     , _orrReason = Nothing
     , _orrOperationId = Nothing
@@ -1071,13 +1071,13 @@ instance FromJSON OrdersRefundRequest where
         parseJSON
           = withObject "OrdersRefundRequest"
               (\ o ->
-                 OrdersRefundRequest <$>
+                 OrdersRefundRequest' <$>
                    (o .:? "amount") <*> (o .:? "reason") <*>
                      (o .:? "operationId")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrdersRefundRequest where
-        toJSON OrdersRefundRequest{..}
+        toJSON OrdersRefundRequest'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _orrAmount,
@@ -1088,7 +1088,7 @@ instance ToJSON OrdersRefundRequest where
 -- | Shipping cost calculation method. Exactly one of the field is set.
 --
 -- /See:/ 'accountShippingShippingServiceCalculationMethod' smart constructor.
-data AccountShippingShippingServiceCalculationMethod = AccountShippingShippingServiceCalculationMethod
+data AccountShippingShippingServiceCalculationMethod = AccountShippingShippingServiceCalculationMethod'
     { _assscmPercentageRate :: !(Maybe Text)
     , _assscmCarrierRate    :: !(Maybe Text)
     , _assscmRateTable      :: !(Maybe Text)
@@ -1112,7 +1112,7 @@ data AccountShippingShippingServiceCalculationMethod = AccountShippingShippingSe
 accountShippingShippingServiceCalculationMethod
     :: AccountShippingShippingServiceCalculationMethod
 accountShippingShippingServiceCalculationMethod =
-    AccountShippingShippingServiceCalculationMethod
+    AccountShippingShippingServiceCalculationMethod'
     { _assscmPercentageRate = Nothing
     , _assscmCarrierRate = Nothing
     , _assscmRateTable = Nothing
@@ -1158,7 +1158,7 @@ instance FromJSON
           = withObject
               "AccountShippingShippingServiceCalculationMethod"
               (\ o ->
-                 AccountShippingShippingServiceCalculationMethod <$>
+                 AccountShippingShippingServiceCalculationMethod' <$>
                    (o .:? "percentageRate") <*> (o .:? "carrierRate")
                      <*> (o .:? "rateTable")
                      <*> (o .:? "excluded")
@@ -1167,7 +1167,7 @@ instance FromJSON
 instance ToJSON
          AccountShippingShippingServiceCalculationMethod where
         toJSON
-          AccountShippingShippingServiceCalculationMethod{..}
+          AccountShippingShippingServiceCalculationMethod'{..}
           = object
               (catMaybes
                  [("percentageRate" .=) <$> _assscmPercentageRate,
@@ -1178,7 +1178,7 @@ instance ToJSON
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancelLineItem' smart constructor.
-data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntryCancelLineItem
+data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntryCancelLineItem'
     { _ocbrecliAmount     :: !(Maybe Price)
     , _ocbrecliQuantity   :: !(Maybe (Textual Word32))
     , _ocbrecliLineItemId :: !(Maybe Text)
@@ -1202,7 +1202,7 @@ data OrdersCustomBatchRequestEntryCancelLineItem = OrdersCustomBatchRequestEntry
 ordersCustomBatchRequestEntryCancelLineItem
     :: OrdersCustomBatchRequestEntryCancelLineItem
 ordersCustomBatchRequestEntryCancelLineItem =
-    OrdersCustomBatchRequestEntryCancelLineItem
+    OrdersCustomBatchRequestEntryCancelLineItem'
     { _ocbrecliAmount = Nothing
     , _ocbrecliQuantity = Nothing
     , _ocbrecliLineItemId = Nothing
@@ -1249,7 +1249,7 @@ instance FromJSON
           = withObject
               "OrdersCustomBatchRequestEntryCancelLineItem"
               (\ o ->
-                 OrdersCustomBatchRequestEntryCancelLineItem <$>
+                 OrdersCustomBatchRequestEntryCancelLineItem' <$>
                    (o .:? "amount") <*> (o .:? "quantity") <*>
                      (o .:? "lineItemId")
                      <*> (o .:? "reason")
@@ -1258,7 +1258,7 @@ instance FromJSON
 instance ToJSON
          OrdersCustomBatchRequestEntryCancelLineItem where
         toJSON
-          OrdersCustomBatchRequestEntryCancelLineItem{..}
+          OrdersCustomBatchRequestEntryCancelLineItem'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _ocbrecliAmount,
@@ -1269,7 +1269,7 @@ instance ToJSON
 
 --
 -- /See:/ 'orderLineItemShippingDetailsMethod' smart constructor.
-data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
+data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod'
     { _olisdmCarrier          :: !(Maybe Text)
     , _olisdmMethodName       :: !(Maybe Text)
     , _olisdmMaxDaysInTransit :: !(Maybe (Textual Word32))
@@ -1290,7 +1290,7 @@ data OrderLineItemShippingDetailsMethod = OrderLineItemShippingDetailsMethod
 orderLineItemShippingDetailsMethod
     :: OrderLineItemShippingDetailsMethod
 orderLineItemShippingDetailsMethod =
-    OrderLineItemShippingDetailsMethod
+    OrderLineItemShippingDetailsMethod'
     { _olisdmCarrier = Nothing
     , _olisdmMethodName = Nothing
     , _olisdmMaxDaysInTransit = Nothing
@@ -1328,14 +1328,14 @@ instance FromJSON OrderLineItemShippingDetailsMethod
         parseJSON
           = withObject "OrderLineItemShippingDetailsMethod"
               (\ o ->
-                 OrderLineItemShippingDetailsMethod <$>
+                 OrderLineItemShippingDetailsMethod' <$>
                    (o .:? "carrier") <*> (o .:? "methodName") <*>
                      (o .:? "maxDaysInTransit")
                      <*> (o .:? "minDaysInTransit"))
 
 instance ToJSON OrderLineItemShippingDetailsMethod
          where
-        toJSON OrderLineItemShippingDetailsMethod{..}
+        toJSON OrderLineItemShippingDetailsMethod'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _olisdmCarrier,
@@ -1346,7 +1346,7 @@ instance ToJSON OrderLineItemShippingDetailsMethod
 -- | Datafeed data.
 --
 -- /See:/ 'datafeed' smart constructor.
-data Datafeed = Datafeed
+data Datafeed = Datafeed'
     { _dKind                 :: !Text
     , _dFormat               :: !(Maybe DatafeedFormat)
     , _dAttributeLanguage    :: !(Maybe Text)
@@ -1388,7 +1388,7 @@ data Datafeed = Datafeed
 datafeed
     :: Datafeed
 datafeed =
-    Datafeed
+    Datafeed'
     { _dKind = "content#datafeed"
     , _dFormat = Nothing
     , _dAttributeLanguage = Nothing
@@ -1470,7 +1470,7 @@ instance FromJSON Datafeed where
         parseJSON
           = withObject "Datafeed"
               (\ o ->
-                 Datafeed <$>
+                 Datafeed' <$>
                    (o .:? "kind" .!= "content#datafeed") <*>
                      (o .:? "format")
                      <*> (o .:? "attributeLanguage")
@@ -1484,7 +1484,7 @@ instance FromJSON Datafeed where
                      <*> (o .:? "fileName"))
 
 instance ToJSON Datafeed where
-        toJSON Datafeed{..}
+        toJSON Datafeed'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dKind), ("format" .=) <$> _dFormat,
@@ -1501,7 +1501,7 @@ instance ToJSON Datafeed where
 
 --
 -- /See:/ 'ordersCreateTestOrderResponse' smart constructor.
-data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
+data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse'
     { _octorKind    :: !Text
     , _octorOrderId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1516,7 +1516,7 @@ data OrdersCreateTestOrderResponse = OrdersCreateTestOrderResponse
 ordersCreateTestOrderResponse
     :: OrdersCreateTestOrderResponse
 ordersCreateTestOrderResponse =
-    OrdersCreateTestOrderResponse
+    OrdersCreateTestOrderResponse'
     { _octorKind = "content#ordersCreateTestOrderResponse"
     , _octorOrderId = Nothing
     }
@@ -1536,13 +1536,13 @@ instance FromJSON OrdersCreateTestOrderResponse where
         parseJSON
           = withObject "OrdersCreateTestOrderResponse"
               (\ o ->
-                 OrdersCreateTestOrderResponse <$>
+                 OrdersCreateTestOrderResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersCreateTestOrderResponse")
                      <*> (o .:? "orderId"))
 
 instance ToJSON OrdersCreateTestOrderResponse where
-        toJSON OrdersCreateTestOrderResponse{..}
+        toJSON OrdersCreateTestOrderResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _octorKind),
@@ -1551,7 +1551,7 @@ instance ToJSON OrdersCreateTestOrderResponse where
 -- | A batch entry encoding a single non-batch accounts response.
 --
 -- /See:/ 'accountsCustomBatchResponseEntry' smart constructor.
-data AccountsCustomBatchResponseEntry = AccountsCustomBatchResponseEntry
+data AccountsCustomBatchResponseEntry = AccountsCustomBatchResponseEntry'
     { _aKind    :: !Text
     , _aAccount :: !(Maybe Account)
     , _aErrors  :: !(Maybe Errors)
@@ -1572,7 +1572,7 @@ data AccountsCustomBatchResponseEntry = AccountsCustomBatchResponseEntry
 accountsCustomBatchResponseEntry
     :: AccountsCustomBatchResponseEntry
 accountsCustomBatchResponseEntry =
-    AccountsCustomBatchResponseEntry
+    AccountsCustomBatchResponseEntry'
     { _aKind = "content#accountsCustomBatchResponseEntry"
     , _aAccount = Nothing
     , _aErrors = Nothing
@@ -1604,7 +1604,7 @@ instance FromJSON AccountsCustomBatchResponseEntry
         parseJSON
           = withObject "AccountsCustomBatchResponseEntry"
               (\ o ->
-                 AccountsCustomBatchResponseEntry <$>
+                 AccountsCustomBatchResponseEntry' <$>
                    (o .:? "kind" .!=
                       "content#accountsCustomBatchResponseEntry")
                      <*> (o .:? "account")
@@ -1613,7 +1613,7 @@ instance FromJSON AccountsCustomBatchResponseEntry
 
 instance ToJSON AccountsCustomBatchResponseEntry
          where
-        toJSON AccountsCustomBatchResponseEntry{..}
+        toJSON AccountsCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aKind),
@@ -1623,7 +1623,7 @@ instance ToJSON AccountsCustomBatchResponseEntry
 
 --
 -- /See:/ 'accountIdentifier' smart constructor.
-data AccountIdentifier = AccountIdentifier
+data AccountIdentifier = AccountIdentifier'
     { _aiMerchantId   :: !(Maybe (Textual Word64))
     , _aiAggregatorId :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1638,7 +1638,7 @@ data AccountIdentifier = AccountIdentifier
 accountIdentifier
     :: AccountIdentifier
 accountIdentifier =
-    AccountIdentifier
+    AccountIdentifier'
     { _aiMerchantId = Nothing
     , _aiAggregatorId = Nothing
     }
@@ -1661,11 +1661,11 @@ instance FromJSON AccountIdentifier where
         parseJSON
           = withObject "AccountIdentifier"
               (\ o ->
-                 AccountIdentifier <$>
+                 AccountIdentifier' <$>
                    (o .:? "merchantId") <*> (o .:? "aggregatorId"))
 
 instance ToJSON AccountIdentifier where
-        toJSON AccountIdentifier{..}
+        toJSON AccountIdentifier'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _aiMerchantId,
@@ -1673,7 +1673,7 @@ instance ToJSON AccountIdentifier where
 
 --
 -- /See:/ 'testOrderPaymentMethod' smart constructor.
-data TestOrderPaymentMethod = TestOrderPaymentMethod
+data TestOrderPaymentMethod = TestOrderPaymentMethod'
     { _topmExpirationMonth          :: !(Maybe (Textual Int32))
     , _topmExpirationYear           :: !(Maybe (Textual Int32))
     , _topmLastFourDigits           :: !(Maybe Text)
@@ -1697,7 +1697,7 @@ data TestOrderPaymentMethod = TestOrderPaymentMethod
 testOrderPaymentMethod
     :: TestOrderPaymentMethod
 testOrderPaymentMethod =
-    TestOrderPaymentMethod
+    TestOrderPaymentMethod'
     { _topmExpirationMonth = Nothing
     , _topmExpirationYear = Nothing
     , _topmLastFourDigits = Nothing
@@ -1740,7 +1740,7 @@ instance FromJSON TestOrderPaymentMethod where
         parseJSON
           = withObject "TestOrderPaymentMethod"
               (\ o ->
-                 TestOrderPaymentMethod <$>
+                 TestOrderPaymentMethod' <$>
                    (o .:? "expirationMonth") <*>
                      (o .:? "expirationYear")
                      <*> (o .:? "lastFourDigits")
@@ -1748,7 +1748,7 @@ instance FromJSON TestOrderPaymentMethod where
                      <*> (o .:? "predefinedBillingAddress"))
 
 instance ToJSON TestOrderPaymentMethod where
-        toJSON TestOrderPaymentMethod{..}
+        toJSON TestOrderPaymentMethod'{..}
           = object
               (catMaybes
                  [("expirationMonth" .=) <$> _topmExpirationMonth,
@@ -1760,7 +1760,7 @@ instance ToJSON TestOrderPaymentMethod where
 
 --
 -- /See:/ 'orderLineItem' smart constructor.
-data OrderLineItem = OrderLineItem
+data OrderLineItem = OrderLineItem'
     { _oliQuantityOrdered   :: !(Maybe (Textual Word32))
     , _oliReturnInfo        :: !(Maybe OrderLineItemReturnInfo)
     , _oliQuantityDelivered :: !(Maybe (Textual Word32))
@@ -1811,7 +1811,7 @@ data OrderLineItem = OrderLineItem
 orderLineItem
     :: OrderLineItem
 orderLineItem =
-    OrderLineItem
+    OrderLineItem'
     { _oliQuantityOrdered = Nothing
     , _oliReturnInfo = Nothing
     , _oliQuantityDelivered = Nothing
@@ -1921,7 +1921,7 @@ instance FromJSON OrderLineItem where
         parseJSON
           = withObject "OrderLineItem"
               (\ o ->
-                 OrderLineItem <$>
+                 OrderLineItem' <$>
                    (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
                      <*> (o .:? "quantityDelivered")
                      <*> (o .:? "shippingDetails")
@@ -1937,7 +1937,7 @@ instance FromJSON OrderLineItem where
                      <*> (o .:? "returns" .!= mempty))
 
 instance ToJSON OrderLineItem where
-        toJSON OrderLineItem{..}
+        toJSON OrderLineItem'{..}
           = object
               (catMaybes
                  [("quantityOrdered" .=) <$> _oliQuantityOrdered,
@@ -1956,7 +1956,7 @@ instance ToJSON OrderLineItem where
 
 --
 -- /See:/ 'productstatusesCustomBatchResponse' smart constructor.
-data ProductstatusesCustomBatchResponse = ProductstatusesCustomBatchResponse
+data ProductstatusesCustomBatchResponse = ProductstatusesCustomBatchResponse'
     { _pEntries :: !(Maybe [ProductstatusesCustomBatchResponseEntry])
     , _pKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1971,7 +1971,7 @@ data ProductstatusesCustomBatchResponse = ProductstatusesCustomBatchResponse
 productstatusesCustomBatchResponse
     :: ProductstatusesCustomBatchResponse
 productstatusesCustomBatchResponse =
-    ProductstatusesCustomBatchResponse
+    ProductstatusesCustomBatchResponse'
     { _pEntries = Nothing
     , _pKind = "content#productstatusesCustomBatchResponse"
     }
@@ -1993,14 +1993,14 @@ instance FromJSON ProductstatusesCustomBatchResponse
         parseJSON
           = withObject "ProductstatusesCustomBatchResponse"
               (\ o ->
-                 ProductstatusesCustomBatchResponse <$>
+                 ProductstatusesCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#productstatusesCustomBatchResponse"))
 
 instance ToJSON ProductstatusesCustomBatchResponse
          where
-        toJSON ProductstatusesCustomBatchResponse{..}
+        toJSON ProductstatusesCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _pEntries,
@@ -2008,7 +2008,7 @@ instance ToJSON ProductstatusesCustomBatchResponse
 
 --
 -- /See:/ 'productUnitPricingMeasure' smart constructor.
-data ProductUnitPricingMeasure = ProductUnitPricingMeasure
+data ProductUnitPricingMeasure = ProductUnitPricingMeasure'
     { _pupmValue :: !(Maybe (Textual Double))
     , _pupmUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2023,7 +2023,7 @@ data ProductUnitPricingMeasure = ProductUnitPricingMeasure
 productUnitPricingMeasure
     :: ProductUnitPricingMeasure
 productUnitPricingMeasure =
-    ProductUnitPricingMeasure
+    ProductUnitPricingMeasure'
     { _pupmValue = Nothing
     , _pupmUnit = Nothing
     }
@@ -2042,11 +2042,11 @@ instance FromJSON ProductUnitPricingMeasure where
         parseJSON
           = withObject "ProductUnitPricingMeasure"
               (\ o ->
-                 ProductUnitPricingMeasure <$>
+                 ProductUnitPricingMeasure' <$>
                    (o .:? "value") <*> (o .:? "unit"))
 
 instance ToJSON ProductUnitPricingMeasure where
-        toJSON ProductUnitPricingMeasure{..}
+        toJSON ProductUnitPricingMeasure'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pupmValue,
@@ -2054,7 +2054,7 @@ instance ToJSON ProductUnitPricingMeasure where
 
 --
 -- /See:/ 'ordersUpdateShipmentRequest' smart constructor.
-data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest
+data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest'
     { _ousrCarrier     :: !(Maybe Text)
     , _ousrStatus      :: !(Maybe Text)
     , _ousrTrackingId  :: !(Maybe Text)
@@ -2078,7 +2078,7 @@ data OrdersUpdateShipmentRequest = OrdersUpdateShipmentRequest
 ordersUpdateShipmentRequest
     :: OrdersUpdateShipmentRequest
 ordersUpdateShipmentRequest =
-    OrdersUpdateShipmentRequest
+    OrdersUpdateShipmentRequest'
     { _ousrCarrier = Nothing
     , _ousrStatus = Nothing
     , _ousrTrackingId = Nothing
@@ -2118,14 +2118,14 @@ instance FromJSON OrdersUpdateShipmentRequest where
         parseJSON
           = withObject "OrdersUpdateShipmentRequest"
               (\ o ->
-                 OrdersUpdateShipmentRequest <$>
+                 OrdersUpdateShipmentRequest' <$>
                    (o .:? "carrier") <*> (o .:? "status") <*>
                      (o .:? "trackingId")
                      <*> (o .:? "shipmentId")
                      <*> (o .:? "operationId"))
 
 instance ToJSON OrdersUpdateShipmentRequest where
-        toJSON OrdersUpdateShipmentRequest{..}
+        toJSON OrdersUpdateShipmentRequest'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _ousrCarrier,
@@ -2136,7 +2136,7 @@ instance ToJSON OrdersUpdateShipmentRequest where
 
 --
 -- /See:/ 'orderShipmentLineItemShipment' smart constructor.
-data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
+data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment'
     { _oslisQuantity   :: !(Maybe (Textual Word32))
     , _oslisLineItemId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2151,7 +2151,7 @@ data OrderShipmentLineItemShipment = OrderShipmentLineItemShipment
 orderShipmentLineItemShipment
     :: OrderShipmentLineItemShipment
 orderShipmentLineItemShipment =
-    OrderShipmentLineItemShipment
+    OrderShipmentLineItemShipment'
     { _oslisQuantity = Nothing
     , _oslisLineItemId = Nothing
     }
@@ -2173,11 +2173,11 @@ instance FromJSON OrderShipmentLineItemShipment where
         parseJSON
           = withObject "OrderShipmentLineItemShipment"
               (\ o ->
-                 OrderShipmentLineItemShipment <$>
+                 OrderShipmentLineItemShipment' <$>
                    (o .:? "quantity") <*> (o .:? "lineItemId"))
 
 instance ToJSON OrderShipmentLineItemShipment where
-        toJSON OrderShipmentLineItemShipment{..}
+        toJSON OrderShipmentLineItemShipment'{..}
           = object
               (catMaybes
                  [("quantity" .=) <$> _oslisQuantity,
@@ -2185,7 +2185,7 @@ instance ToJSON OrderShipmentLineItemShipment where
 
 --
 -- /See:/ 'loyaltyPoints' smart constructor.
-data LoyaltyPoints = LoyaltyPoints
+data LoyaltyPoints = LoyaltyPoints'
     { _lpRatio       :: !(Maybe (Textual Double))
     , _lpPointsValue :: !(Maybe (Textual Int64))
     , _lpName        :: !(Maybe Text)
@@ -2203,7 +2203,7 @@ data LoyaltyPoints = LoyaltyPoints
 loyaltyPoints
     :: LoyaltyPoints
 loyaltyPoints =
-    LoyaltyPoints
+    LoyaltyPoints'
     { _lpRatio = Nothing
     , _lpPointsValue = Nothing
     , _lpName = Nothing
@@ -2233,12 +2233,12 @@ instance FromJSON LoyaltyPoints where
         parseJSON
           = withObject "LoyaltyPoints"
               (\ o ->
-                 LoyaltyPoints <$>
+                 LoyaltyPoints' <$>
                    (o .:? "ratio") <*> (o .:? "pointsValue") <*>
                      (o .:? "name"))
 
 instance ToJSON LoyaltyPoints where
-        toJSON LoyaltyPoints{..}
+        toJSON LoyaltyPoints'{..}
           = object
               (catMaybes
                  [("ratio" .=) <$> _lpRatio,
@@ -2247,7 +2247,7 @@ instance ToJSON LoyaltyPoints where
 
 --
 -- /See:/ 'accountshippingCustomBatchRequest' smart constructor.
-newtype AccountshippingCustomBatchRequest = AccountshippingCustomBatchRequest
+newtype AccountshippingCustomBatchRequest = AccountshippingCustomBatchRequest'
     { _acbrEntries :: Maybe [AccountshippingCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2259,7 +2259,7 @@ newtype AccountshippingCustomBatchRequest = AccountshippingCustomBatchRequest
 accountshippingCustomBatchRequest
     :: AccountshippingCustomBatchRequest
 accountshippingCustomBatchRequest =
-    AccountshippingCustomBatchRequest
+    AccountshippingCustomBatchRequest'
     { _acbrEntries = Nothing
     }
 
@@ -2275,18 +2275,18 @@ instance FromJSON AccountshippingCustomBatchRequest
         parseJSON
           = withObject "AccountshippingCustomBatchRequest"
               (\ o ->
-                 AccountshippingCustomBatchRequest <$>
+                 AccountshippingCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON AccountshippingCustomBatchRequest
          where
-        toJSON AccountshippingCustomBatchRequest{..}
+        toJSON AccountshippingCustomBatchRequest'{..}
           = object
               (catMaybes [("entries" .=) <$> _acbrEntries])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryShipLineItems' smart constructor.
-data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryShipLineItems
+data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryShipLineItems'
     { _ocbresliCarrier    :: !(Maybe Text)
     , _ocbresliTrackingId :: !(Maybe Text)
     , _ocbresliShipmentId :: !(Maybe Text)
@@ -2307,7 +2307,7 @@ data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryS
 ordersCustomBatchRequestEntryShipLineItems
     :: OrdersCustomBatchRequestEntryShipLineItems
 ordersCustomBatchRequestEntryShipLineItems =
-    OrdersCustomBatchRequestEntryShipLineItems
+    OrdersCustomBatchRequestEntryShipLineItems'
     { _ocbresliCarrier = Nothing
     , _ocbresliTrackingId = Nothing
     , _ocbresliShipmentId = Nothing
@@ -2346,14 +2346,15 @@ instance FromJSON
           = withObject
               "OrdersCustomBatchRequestEntryShipLineItems"
               (\ o ->
-                 OrdersCustomBatchRequestEntryShipLineItems <$>
+                 OrdersCustomBatchRequestEntryShipLineItems' <$>
                    (o .:? "carrier") <*> (o .:? "trackingId") <*>
                      (o .:? "shipmentId")
                      <*> (o .:? "lineItems" .!= mempty))
 
 instance ToJSON
          OrdersCustomBatchRequestEntryShipLineItems where
-        toJSON OrdersCustomBatchRequestEntryShipLineItems{..}
+        toJSON
+          OrdersCustomBatchRequestEntryShipLineItems'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _ocbresliCarrier,
@@ -2365,7 +2366,7 @@ instance ToJSON
 -- computed offline and not returned immediately at insertion time.
 --
 -- /See:/ 'accountStatus' smart constructor.
-data AccountStatus = AccountStatus
+data AccountStatus = AccountStatus'
     { _asDataQualityIssues :: !(Maybe [AccountStatusDataQualityIssue])
     , _asKind              :: !Text
     , _asAccountId         :: !(Maybe Text)
@@ -2383,7 +2384,7 @@ data AccountStatus = AccountStatus
 accountStatus
     :: AccountStatus
 accountStatus =
-    AccountStatus
+    AccountStatus'
     { _asDataQualityIssues = Nothing
     , _asKind = "content#accountStatus"
     , _asAccountId = Nothing
@@ -2411,13 +2412,13 @@ instance FromJSON AccountStatus where
         parseJSON
           = withObject "AccountStatus"
               (\ o ->
-                 AccountStatus <$>
+                 AccountStatus' <$>
                    (o .:? "dataQualityIssues" .!= mempty) <*>
                      (o .:? "kind" .!= "content#accountStatus")
                      <*> (o .:? "accountId"))
 
 instance ToJSON AccountStatus where
-        toJSON AccountStatus{..}
+        toJSON AccountStatus'{..}
           = object
               (catMaybes
                  [("dataQualityIssues" .=) <$> _asDataQualityIssues,
@@ -2426,7 +2427,7 @@ instance ToJSON AccountStatus where
 
 --
 -- /See:/ 'ordersReturnLineItemRequest' smart constructor.
-data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
+data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest'
     { _orlirQuantity    :: !(Maybe (Textual Word32))
     , _orlirLineItemId  :: !(Maybe Text)
     , _orlirReason      :: !(Maybe Text)
@@ -2450,7 +2451,7 @@ data OrdersReturnLineItemRequest = OrdersReturnLineItemRequest
 ordersReturnLineItemRequest
     :: OrdersReturnLineItemRequest
 ordersReturnLineItemRequest =
-    OrdersReturnLineItemRequest
+    OrdersReturnLineItemRequest'
     { _orlirQuantity = Nothing
     , _orlirLineItemId = Nothing
     , _orlirReason = Nothing
@@ -2492,14 +2493,14 @@ instance FromJSON OrdersReturnLineItemRequest where
         parseJSON
           = withObject "OrdersReturnLineItemRequest"
               (\ o ->
-                 OrdersReturnLineItemRequest <$>
+                 OrdersReturnLineItemRequest' <$>
                    (o .:? "quantity") <*> (o .:? "lineItemId") <*>
                      (o .:? "reason")
                      <*> (o .:? "operationId")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrdersReturnLineItemRequest where
-        toJSON OrdersReturnLineItemRequest{..}
+        toJSON OrdersReturnLineItemRequest'{..}
           = object
               (catMaybes
                  [("quantity" .=) <$> _orlirQuantity,
@@ -2510,7 +2511,7 @@ instance ToJSON OrdersReturnLineItemRequest where
 
 --
 -- /See:/ 'accountstatusesCustomBatchRequest' smart constructor.
-newtype AccountstatusesCustomBatchRequest = AccountstatusesCustomBatchRequest
+newtype AccountstatusesCustomBatchRequest = AccountstatusesCustomBatchRequest'
     { _aEntries :: Maybe [AccountstatusesCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2522,7 +2523,7 @@ newtype AccountstatusesCustomBatchRequest = AccountstatusesCustomBatchRequest
 accountstatusesCustomBatchRequest
     :: AccountstatusesCustomBatchRequest
 accountstatusesCustomBatchRequest =
-    AccountstatusesCustomBatchRequest
+    AccountstatusesCustomBatchRequest'
     { _aEntries = Nothing
     }
 
@@ -2538,17 +2539,17 @@ instance FromJSON AccountstatusesCustomBatchRequest
         parseJSON
           = withObject "AccountstatusesCustomBatchRequest"
               (\ o ->
-                 AccountstatusesCustomBatchRequest <$>
+                 AccountstatusesCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON AccountstatusesCustomBatchRequest
          where
-        toJSON AccountstatusesCustomBatchRequest{..}
+        toJSON AccountstatusesCustomBatchRequest'{..}
           = object (catMaybes [("entries" .=) <$> _aEntries])
 
 --
 -- /See:/ 'accounttaxListResponse' smart constructor.
-data AccounttaxListResponse = AccounttaxListResponse
+data AccounttaxListResponse = AccounttaxListResponse'
     { _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
     , _alrResources     :: !(Maybe [AccountTax])
@@ -2566,7 +2567,7 @@ data AccounttaxListResponse = AccounttaxListResponse
 accounttaxListResponse
     :: AccounttaxListResponse
 accounttaxListResponse =
-    AccounttaxListResponse
+    AccounttaxListResponse'
     { _alrNextPageToken = Nothing
     , _alrKind = "content#accounttaxListResponse"
     , _alrResources = Nothing
@@ -2593,13 +2594,13 @@ instance FromJSON AccounttaxListResponse where
         parseJSON
           = withObject "AccounttaxListResponse"
               (\ o ->
-                 AccounttaxListResponse <$>
+                 AccounttaxListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "content#accounttaxListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON AccounttaxListResponse where
-        toJSON AccounttaxListResponse{..}
+        toJSON AccounttaxListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alrNextPageToken,
@@ -2608,7 +2609,7 @@ instance ToJSON AccounttaxListResponse where
 
 --
 -- /See:/ 'ordersGetTestOrderTemplateResponse' smart constructor.
-data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse
+data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse'
     { _ogtotrKind     :: !Text
     , _ogtotrTemplate :: !(Maybe TestOrder)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2623,7 +2624,7 @@ data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse
 ordersGetTestOrderTemplateResponse
     :: OrdersGetTestOrderTemplateResponse
 ordersGetTestOrderTemplateResponse =
-    OrdersGetTestOrderTemplateResponse
+    OrdersGetTestOrderTemplateResponse'
     { _ogtotrKind = "content#ordersGetTestOrderTemplateResponse"
     , _ogtotrTemplate = Nothing
     }
@@ -2645,14 +2646,14 @@ instance FromJSON OrdersGetTestOrderTemplateResponse
         parseJSON
           = withObject "OrdersGetTestOrderTemplateResponse"
               (\ o ->
-                 OrdersGetTestOrderTemplateResponse <$>
+                 OrdersGetTestOrderTemplateResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersGetTestOrderTemplateResponse")
                      <*> (o .:? "template"))
 
 instance ToJSON OrdersGetTestOrderTemplateResponse
          where
-        toJSON OrdersGetTestOrderTemplateResponse{..}
+        toJSON OrdersGetTestOrderTemplateResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ogtotrKind),
@@ -2661,7 +2662,7 @@ instance ToJSON OrdersGetTestOrderTemplateResponse
 -- | A batch entry encoding a single non-batch accounts request.
 --
 -- /See:/ 'accountsCustomBatchRequestEntry' smart constructor.
-data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry
+data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry'
     { _accMerchantId :: !(Maybe (Textual Word64))
     , _accAccount    :: !(Maybe Account)
     , _accAccountId  :: !(Maybe (Textual Word64))
@@ -2685,7 +2686,7 @@ data AccountsCustomBatchRequestEntry = AccountsCustomBatchRequestEntry
 accountsCustomBatchRequestEntry
     :: AccountsCustomBatchRequestEntry
 accountsCustomBatchRequestEntry =
-    AccountsCustomBatchRequestEntry
+    AccountsCustomBatchRequestEntry'
     { _accMerchantId = Nothing
     , _accAccount = Nothing
     , _accAccountId = Nothing
@@ -2728,14 +2729,14 @@ instance FromJSON AccountsCustomBatchRequestEntry
         parseJSON
           = withObject "AccountsCustomBatchRequestEntry"
               (\ o ->
-                 AccountsCustomBatchRequestEntry <$>
+                 AccountsCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "account") <*>
                      (o .:? "accountId")
                      <*> (o .:? "method")
                      <*> (o .:? "batchId"))
 
 instance ToJSON AccountsCustomBatchRequestEntry where
-        toJSON AccountsCustomBatchRequestEntry{..}
+        toJSON AccountsCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _accMerchantId,
@@ -2746,7 +2747,7 @@ instance ToJSON AccountsCustomBatchRequestEntry where
 
 --
 -- /See:/ 'weight' smart constructor.
-data Weight = Weight
+data Weight = Weight'
     { _wValue :: !(Maybe Text)
     , _wUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2761,7 +2762,7 @@ data Weight = Weight
 weight
     :: Weight
 weight =
-    Weight
+    Weight'
     { _wValue = Nothing
     , _wUnit = Nothing
     }
@@ -2778,10 +2779,10 @@ instance FromJSON Weight where
         parseJSON
           = withObject "Weight"
               (\ o ->
-                 Weight <$> (o .:? "value") <*> (o .:? "unit"))
+                 Weight' <$> (o .:? "value") <*> (o .:? "unit"))
 
 instance ToJSON Weight where
-        toJSON Weight{..}
+        toJSON Weight'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _wValue, ("unit" .=) <$> _wUnit])
@@ -2789,7 +2790,7 @@ instance ToJSON Weight where
 -- | An error returned by the API.
 --
 -- /See:/ 'error'' smart constructor.
-data Error' = Error'
+data Error' = Error''
     { _eDomain  :: !(Maybe Text)
     , _eReason  :: !(Maybe Text)
     , _eMessage :: !(Maybe Text)
@@ -2807,7 +2808,7 @@ data Error' = Error'
 error'
     :: Error'
 error' =
-    Error'
+    Error''
     { _eDomain = Nothing
     , _eReason = Nothing
     , _eMessage = Nothing
@@ -2829,12 +2830,12 @@ instance FromJSON Error' where
         parseJSON
           = withObject "Error"
               (\ o ->
-                 Error' <$>
+                 Error'' <$>
                    (o .:? "domain") <*> (o .:? "reason") <*>
                      (o .:? "message"))
 
 instance ToJSON Error' where
-        toJSON Error'{..}
+        toJSON Error''{..}
           = object
               (catMaybes
                  [("domain" .=) <$> _eDomain,
@@ -2843,7 +2844,7 @@ instance ToJSON Error' where
 
 --
 -- /See:/ 'productstatusesListResponse' smart constructor.
-data ProductstatusesListResponse = ProductstatusesListResponse
+data ProductstatusesListResponse = ProductstatusesListResponse'
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
     , _plrResources     :: !(Maybe [ProductStatus])
@@ -2861,7 +2862,7 @@ data ProductstatusesListResponse = ProductstatusesListResponse
 productstatusesListResponse
     :: ProductstatusesListResponse
 productstatusesListResponse =
-    ProductstatusesListResponse
+    ProductstatusesListResponse'
     { _plrNextPageToken = Nothing
     , _plrKind = "content#productstatusesListResponse"
     , _plrResources = Nothing
@@ -2888,14 +2889,14 @@ instance FromJSON ProductstatusesListResponse where
         parseJSON
           = withObject "ProductstatusesListResponse"
               (\ o ->
-                 ProductstatusesListResponse <$>
+                 ProductstatusesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "content#productstatusesListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON ProductstatusesListResponse where
-        toJSON ProductstatusesListResponse{..}
+        toJSON ProductstatusesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plrNextPageToken,
@@ -2904,7 +2905,7 @@ instance ToJSON ProductstatusesListResponse where
 
 --
 -- /See:/ 'ordersRefundResponse' smart constructor.
-data OrdersRefundResponse = OrdersRefundResponse
+data OrdersRefundResponse = OrdersRefundResponse'
     { _orrKind            :: !Text
     , _orrExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2919,7 +2920,7 @@ data OrdersRefundResponse = OrdersRefundResponse
 ordersRefundResponse
     :: OrdersRefundResponse
 ordersRefundResponse =
-    OrdersRefundResponse
+    OrdersRefundResponse'
     { _orrKind = "content#ordersRefundResponse"
     , _orrExecutionStatus = Nothing
     }
@@ -2939,12 +2940,12 @@ instance FromJSON OrdersRefundResponse where
         parseJSON
           = withObject "OrdersRefundResponse"
               (\ o ->
-                 OrdersRefundResponse <$>
+                 OrdersRefundResponse' <$>
                    (o .:? "kind" .!= "content#ordersRefundResponse") <*>
                      (o .:? "executionStatus"))
 
 instance ToJSON OrdersRefundResponse where
-        toJSON OrdersRefundResponse{..}
+        toJSON OrdersRefundResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _orrKind),
@@ -2952,7 +2953,7 @@ instance ToJSON OrdersRefundResponse where
 
 --
 -- /See:/ 'ordersCreateTestOrderRequest' smart constructor.
-data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
+data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest'
     { _octorTemplateName :: !(Maybe Text)
     , _octorTestOrder    :: !(Maybe TestOrder)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2967,7 +2968,7 @@ data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
 ordersCreateTestOrderRequest
     :: OrdersCreateTestOrderRequest
 ordersCreateTestOrderRequest =
-    OrdersCreateTestOrderRequest
+    OrdersCreateTestOrderRequest'
     { _octorTemplateName = Nothing
     , _octorTestOrder = Nothing
     }
@@ -2990,11 +2991,11 @@ instance FromJSON OrdersCreateTestOrderRequest where
         parseJSON
           = withObject "OrdersCreateTestOrderRequest"
               (\ o ->
-                 OrdersCreateTestOrderRequest <$>
+                 OrdersCreateTestOrderRequest' <$>
                    (o .:? "templateName") <*> (o .:? "testOrder"))
 
 instance ToJSON OrdersCreateTestOrderRequest where
-        toJSON OrdersCreateTestOrderRequest{..}
+        toJSON OrdersCreateTestOrderRequest'{..}
           = object
               (catMaybes
                  [("templateName" .=) <$> _octorTemplateName,
@@ -3002,7 +3003,7 @@ instance ToJSON OrdersCreateTestOrderRequest where
 
 --
 -- /See:/ 'accountUser' smart constructor.
-data AccountUser = AccountUser
+data AccountUser = AccountUser'
     { _auAdmin        :: !(Maybe Bool)
     , _auEmailAddress :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3017,7 +3018,7 @@ data AccountUser = AccountUser
 accountUser
     :: AccountUser
 accountUser =
-    AccountUser
+    AccountUser'
     { _auAdmin = Nothing
     , _auEmailAddress = Nothing
     }
@@ -3036,11 +3037,11 @@ instance FromJSON AccountUser where
         parseJSON
           = withObject "AccountUser"
               (\ o ->
-                 AccountUser <$>
+                 AccountUser' <$>
                    (o .:? "admin") <*> (o .:? "emailAddress"))
 
 instance ToJSON AccountUser where
-        toJSON AccountUser{..}
+        toJSON AccountUser'{..}
           = object
               (catMaybes
                  [("admin" .=) <$> _auAdmin,
@@ -3050,7 +3051,7 @@ instance ToJSON AccountUser where
 -- landing page differs from what is submitted, or conflicts with a policy.
 --
 -- /See:/ 'accountStatusExampleItem' smart constructor.
-data AccountStatusExampleItem = AccountStatusExampleItem
+data AccountStatusExampleItem = AccountStatusExampleItem'
     { _aseiSubmittedValue     :: !(Maybe Text)
     , _aseiLink               :: !(Maybe Text)
     , _aseiItemId             :: !(Maybe Text)
@@ -3074,7 +3075,7 @@ data AccountStatusExampleItem = AccountStatusExampleItem
 accountStatusExampleItem
     :: AccountStatusExampleItem
 accountStatusExampleItem =
-    AccountStatusExampleItem
+    AccountStatusExampleItem'
     { _aseiSubmittedValue = Nothing
     , _aseiLink = Nothing
     , _aseiItemId = Nothing
@@ -3112,14 +3113,14 @@ instance FromJSON AccountStatusExampleItem where
         parseJSON
           = withObject "AccountStatusExampleItem"
               (\ o ->
-                 AccountStatusExampleItem <$>
+                 AccountStatusExampleItem' <$>
                    (o .:? "submittedValue") <*> (o .:? "link") <*>
                      (o .:? "itemId")
                      <*> (o .:? "title")
                      <*> (o .:? "valueOnLandingPage"))
 
 instance ToJSON AccountStatusExampleItem where
-        toJSON AccountStatusExampleItem{..}
+        toJSON AccountStatusExampleItem'{..}
           = object
               (catMaybes
                  [("submittedValue" .=) <$> _aseiSubmittedValue,
@@ -3132,7 +3133,7 @@ instance ToJSON AccountStatusExampleItem where
 -- | A batch entry encoding a single non-batch datafeeds request.
 --
 -- /See:/ 'datafeedsCustomBatchRequestEntry' smart constructor.
-data DatafeedsCustomBatchRequestEntry = DatafeedsCustomBatchRequestEntry
+data DatafeedsCustomBatchRequestEntry = DatafeedsCustomBatchRequestEntry'
     { _dcbreMerchantId :: !(Maybe (Textual Word64))
     , _dcbreDatafeed   :: !(Maybe Datafeed)
     , _dcbreMethod     :: !(Maybe Text)
@@ -3156,7 +3157,7 @@ data DatafeedsCustomBatchRequestEntry = DatafeedsCustomBatchRequestEntry
 datafeedsCustomBatchRequestEntry
     :: DatafeedsCustomBatchRequestEntry
 datafeedsCustomBatchRequestEntry =
-    DatafeedsCustomBatchRequestEntry
+    DatafeedsCustomBatchRequestEntry'
     { _dcbreMerchantId = Nothing
     , _dcbreDatafeed = Nothing
     , _dcbreMethod = Nothing
@@ -3199,7 +3200,7 @@ instance FromJSON DatafeedsCustomBatchRequestEntry
         parseJSON
           = withObject "DatafeedsCustomBatchRequestEntry"
               (\ o ->
-                 DatafeedsCustomBatchRequestEntry <$>
+                 DatafeedsCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "datafeed") <*>
                      (o .:? "method")
                      <*> (o .:? "datafeedId")
@@ -3207,7 +3208,7 @@ instance FromJSON DatafeedsCustomBatchRequestEntry
 
 instance ToJSON DatafeedsCustomBatchRequestEntry
          where
-        toJSON DatafeedsCustomBatchRequestEntry{..}
+        toJSON DatafeedsCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _dcbreMerchantId,
@@ -3218,7 +3219,7 @@ instance ToJSON DatafeedsCustomBatchRequestEntry
 
 --
 -- /See:/ 'installment' smart constructor.
-data Installment = Installment
+data Installment = Installment'
     { _iAmount :: !(Maybe Price)
     , _iMonths :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3233,7 +3234,7 @@ data Installment = Installment
 installment
     :: Installment
 installment =
-    Installment
+    Installment'
     { _iAmount = Nothing
     , _iMonths = Nothing
     }
@@ -3252,11 +3253,11 @@ instance FromJSON Installment where
         parseJSON
           = withObject "Installment"
               (\ o ->
-                 Installment <$>
+                 Installment' <$>
                    (o .:? "amount") <*> (o .:? "months"))
 
 instance ToJSON Installment where
-        toJSON Installment{..}
+        toJSON Installment'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _iAmount,
@@ -3268,7 +3269,7 @@ instance ToJSON Installment where
 -- schedule, only hour is required.
 --
 -- /See:/ 'datafeedFetchSchedule' smart constructor.
-data DatafeedFetchSchedule = DatafeedFetchSchedule
+data DatafeedFetchSchedule = DatafeedFetchSchedule'
     { _dfsFetchURL     :: !(Maybe Text)
     , _dfsUsername     :: !(Maybe Text)
     , _dfsMinuteOfHour :: !(Maybe (Textual Word32))
@@ -3301,7 +3302,7 @@ data DatafeedFetchSchedule = DatafeedFetchSchedule
 datafeedFetchSchedule
     :: DatafeedFetchSchedule
 datafeedFetchSchedule =
-    DatafeedFetchSchedule
+    DatafeedFetchSchedule'
     { _dfsFetchURL = Nothing
     , _dfsUsername = Nothing
     , _dfsMinuteOfHour = Nothing
@@ -3366,7 +3367,7 @@ instance FromJSON DatafeedFetchSchedule where
         parseJSON
           = withObject "DatafeedFetchSchedule"
               (\ o ->
-                 DatafeedFetchSchedule <$>
+                 DatafeedFetchSchedule' <$>
                    (o .:? "fetchUrl") <*> (o .:? "username") <*>
                      (o .:? "minuteOfHour")
                      <*> (o .:? "password")
@@ -3376,7 +3377,7 @@ instance FromJSON DatafeedFetchSchedule where
                      <*> (o .:? "timeZone"))
 
 instance ToJSON DatafeedFetchSchedule where
-        toJSON DatafeedFetchSchedule{..}
+        toJSON DatafeedFetchSchedule'{..}
           = object
               (catMaybes
                  [("fetchUrl" .=) <$> _dfsFetchURL,
@@ -3390,7 +3391,7 @@ instance ToJSON DatafeedFetchSchedule where
 
 --
 -- /See:/ 'ordersCustomBatchRequest' smart constructor.
-newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest
+newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest'
     { _ocbrEntries :: Maybe [OrdersCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3402,7 +3403,7 @@ newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest
 ordersCustomBatchRequest
     :: OrdersCustomBatchRequest
 ordersCustomBatchRequest =
-    OrdersCustomBatchRequest
+    OrdersCustomBatchRequest'
     { _ocbrEntries = Nothing
     }
 
@@ -3417,17 +3418,17 @@ instance FromJSON OrdersCustomBatchRequest where
         parseJSON
           = withObject "OrdersCustomBatchRequest"
               (\ o ->
-                 OrdersCustomBatchRequest <$>
+                 OrdersCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON OrdersCustomBatchRequest where
-        toJSON OrdersCustomBatchRequest{..}
+        toJSON OrdersCustomBatchRequest'{..}
           = object
               (catMaybes [("entries" .=) <$> _ocbrEntries])
 
 --
 -- /See:/ 'accountsListResponse' smart constructor.
-data AccountsListResponse = AccountsListResponse
+data AccountsListResponse = AccountsListResponse'
     { _accNextPageToken :: !(Maybe Text)
     , _accKind          :: !Text
     , _accResources     :: !(Maybe [Account])
@@ -3445,7 +3446,7 @@ data AccountsListResponse = AccountsListResponse
 accountsListResponse
     :: AccountsListResponse
 accountsListResponse =
-    AccountsListResponse
+    AccountsListResponse'
     { _accNextPageToken = Nothing
     , _accKind = "content#accountsListResponse"
     , _accResources = Nothing
@@ -3472,13 +3473,13 @@ instance FromJSON AccountsListResponse where
         parseJSON
           = withObject "AccountsListResponse"
               (\ o ->
-                 AccountsListResponse <$>
+                 AccountsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "content#accountsListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON AccountsListResponse where
-        toJSON AccountsListResponse{..}
+        toJSON AccountsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _accNextPageToken,
@@ -3487,7 +3488,7 @@ instance ToJSON AccountsListResponse where
 
 --
 -- /See:/ 'productStatusDataQualityIssue' smart constructor.
-data ProductStatusDataQualityIssue = ProductStatusDataQualityIssue
+data ProductStatusDataQualityIssue = ProductStatusDataQualityIssue'
     { _psdqiLocation           :: !(Maybe Text)
     , _psdqiFetchStatus        :: !(Maybe Text)
     , _psdqiSeverity           :: !(Maybe Text)
@@ -3520,7 +3521,7 @@ data ProductStatusDataQualityIssue = ProductStatusDataQualityIssue
 productStatusDataQualityIssue
     :: ProductStatusDataQualityIssue
 productStatusDataQualityIssue =
-    ProductStatusDataQualityIssue
+    ProductStatusDataQualityIssue'
     { _psdqiLocation = Nothing
     , _psdqiFetchStatus = Nothing
     , _psdqiSeverity = Nothing
@@ -3580,7 +3581,7 @@ instance FromJSON ProductStatusDataQualityIssue where
         parseJSON
           = withObject "ProductStatusDataQualityIssue"
               (\ o ->
-                 ProductStatusDataQualityIssue <$>
+                 ProductStatusDataQualityIssue' <$>
                    (o .:? "location") <*> (o .:? "fetchStatus") <*>
                      (o .:? "severity")
                      <*> (o .:? "valueProvided")
@@ -3590,7 +3591,7 @@ instance FromJSON ProductStatusDataQualityIssue where
                      <*> (o .:? "detail"))
 
 instance ToJSON ProductStatusDataQualityIssue where
-        toJSON ProductStatusDataQualityIssue{..}
+        toJSON ProductStatusDataQualityIssue'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _psdqiLocation,
@@ -3605,7 +3606,7 @@ instance ToJSON ProductStatusDataQualityIssue where
 
 --
 -- /See:/ 'ordersShipLineItemsRequest' smart constructor.
-data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest
+data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest'
     { _oslirCarrier     :: !(Maybe Text)
     , _oslirTrackingId  :: !(Maybe Text)
     , _oslirShipmentId  :: !(Maybe Text)
@@ -3629,7 +3630,7 @@ data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest
 ordersShipLineItemsRequest
     :: OrdersShipLineItemsRequest
 ordersShipLineItemsRequest =
-    OrdersShipLineItemsRequest
+    OrdersShipLineItemsRequest'
     { _oslirCarrier = Nothing
     , _oslirTrackingId = Nothing
     , _oslirShipmentId = Nothing
@@ -3672,14 +3673,14 @@ instance FromJSON OrdersShipLineItemsRequest where
         parseJSON
           = withObject "OrdersShipLineItemsRequest"
               (\ o ->
-                 OrdersShipLineItemsRequest <$>
+                 OrdersShipLineItemsRequest' <$>
                    (o .:? "carrier") <*> (o .:? "trackingId") <*>
                      (o .:? "shipmentId")
                      <*> (o .:? "lineItems" .!= mempty)
                      <*> (o .:? "operationId"))
 
 instance ToJSON OrdersShipLineItemsRequest where
-        toJSON OrdersShipLineItemsRequest{..}
+        toJSON OrdersShipLineItemsRequest'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _oslirCarrier,
@@ -3690,7 +3691,7 @@ instance ToJSON OrdersShipLineItemsRequest where
 
 --
 -- /See:/ 'accountsCustomBatchResponse' smart constructor.
-data AccountsCustomBatchResponse = AccountsCustomBatchResponse
+data AccountsCustomBatchResponse = AccountsCustomBatchResponse'
     { _acbrcEntries :: !(Maybe [AccountsCustomBatchResponseEntry])
     , _acbrcKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3705,7 +3706,7 @@ data AccountsCustomBatchResponse = AccountsCustomBatchResponse
 accountsCustomBatchResponse
     :: AccountsCustomBatchResponse
 accountsCustomBatchResponse =
-    AccountsCustomBatchResponse
+    AccountsCustomBatchResponse'
     { _acbrcEntries = Nothing
     , _acbrcKind = "content#accountsCustomBatchResponse"
     }
@@ -3727,13 +3728,13 @@ instance FromJSON AccountsCustomBatchResponse where
         parseJSON
           = withObject "AccountsCustomBatchResponse"
               (\ o ->
-                 AccountsCustomBatchResponse <$>
+                 AccountsCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#accountsCustomBatchResponse"))
 
 instance ToJSON AccountsCustomBatchResponse where
-        toJSON AccountsCustomBatchResponse{..}
+        toJSON AccountsCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _acbrcEntries,
@@ -3741,7 +3742,7 @@ instance ToJSON AccountsCustomBatchResponse where
 
 --
 -- /See:/ 'productTax' smart constructor.
-data ProductTax = ProductTax
+data ProductTax = ProductTax'
     { _ptTaxShip    :: !(Maybe Bool)
     , _ptCountry    :: !(Maybe Text)
     , _ptPostalCode :: !(Maybe Text)
@@ -3768,7 +3769,7 @@ data ProductTax = ProductTax
 productTax
     :: ProductTax
 productTax =
-    ProductTax
+    ProductTax'
     { _ptTaxShip = Nothing
     , _ptCountry = Nothing
     , _ptPostalCode = Nothing
@@ -3817,7 +3818,7 @@ instance FromJSON ProductTax where
         parseJSON
           = withObject "ProductTax"
               (\ o ->
-                 ProductTax <$>
+                 ProductTax' <$>
                    (o .:? "taxShip") <*> (o .:? "country") <*>
                      (o .:? "postalCode")
                      <*> (o .:? "rate")
@@ -3825,7 +3826,7 @@ instance FromJSON ProductTax where
                      <*> (o .:? "locationId"))
 
 instance ToJSON ProductTax where
-        toJSON ProductTax{..}
+        toJSON ProductTax'{..}
           = object
               (catMaybes
                  [("taxShip" .=) <$> _ptTaxShip,
@@ -3836,7 +3837,7 @@ instance ToJSON ProductTax where
 
 --
 -- /See:/ 'orderShipment' smart constructor.
-data OrderShipment = OrderShipment
+data OrderShipment = OrderShipment'
     { _osCarrier      :: !(Maybe Text)
     , _osStatus       :: !(Maybe Text)
     , _osTrackingId   :: !(Maybe Text)
@@ -3866,7 +3867,7 @@ data OrderShipment = OrderShipment
 orderShipment
     :: OrderShipment
 orderShipment =
-    OrderShipment
+    OrderShipment'
     { _osCarrier = Nothing
     , _osStatus = Nothing
     , _osTrackingId = Nothing
@@ -3918,7 +3919,7 @@ instance FromJSON OrderShipment where
         parseJSON
           = withObject "OrderShipment"
               (\ o ->
-                 OrderShipment <$>
+                 OrderShipment' <$>
                    (o .:? "carrier") <*> (o .:? "status") <*>
                      (o .:? "trackingId")
                      <*> (o .:? "lineItems" .!= mempty)
@@ -3927,7 +3928,7 @@ instance FromJSON OrderShipment where
                      <*> (o .:? "deliveryDate"))
 
 instance ToJSON OrderShipment where
-        toJSON OrderShipment{..}
+        toJSON OrderShipment'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _osCarrier,
@@ -3940,7 +3941,7 @@ instance ToJSON OrderShipment where
 
 --
 -- /See:/ 'orderLineItemReturnInfo' smart constructor.
-data OrderLineItemReturnInfo = OrderLineItemReturnInfo
+data OrderLineItemReturnInfo = OrderLineItemReturnInfo'
     { _oliriIsReturnable :: !(Maybe Bool)
     , _oliriPolicyURL    :: !(Maybe Text)
     , _oliriDaysToReturn :: !(Maybe (Textual Int32))
@@ -3958,7 +3959,7 @@ data OrderLineItemReturnInfo = OrderLineItemReturnInfo
 orderLineItemReturnInfo
     :: OrderLineItemReturnInfo
 orderLineItemReturnInfo =
-    OrderLineItemReturnInfo
+    OrderLineItemReturnInfo'
     { _oliriIsReturnable = Nothing
     , _oliriPolicyURL = Nothing
     , _oliriDaysToReturn = Nothing
@@ -3987,12 +3988,12 @@ instance FromJSON OrderLineItemReturnInfo where
         parseJSON
           = withObject "OrderLineItemReturnInfo"
               (\ o ->
-                 OrderLineItemReturnInfo <$>
+                 OrderLineItemReturnInfo' <$>
                    (o .:? "isReturnable") <*> (o .:? "policyUrl") <*>
                      (o .:? "daysToReturn"))
 
 instance ToJSON OrderLineItemReturnInfo where
-        toJSON OrderLineItemReturnInfo{..}
+        toJSON OrderLineItemReturnInfo'{..}
           = object
               (catMaybes
                  [("isReturnable" .=) <$> _oliriIsReturnable,
@@ -4001,7 +4002,7 @@ instance ToJSON OrderLineItemReturnInfo where
 
 --
 -- /See:/ 'accountShippingRateTableCell' smart constructor.
-data AccountShippingRateTableCell = AccountShippingRateTableCell
+data AccountShippingRateTableCell = AccountShippingRateTableCell'
     { _asrtcRate      :: !(Maybe Price)
     , _asrtcCondition :: !(Maybe AccountShippingCondition)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4016,7 +4017,7 @@ data AccountShippingRateTableCell = AccountShippingRateTableCell
 accountShippingRateTableCell
     :: AccountShippingRateTableCell
 accountShippingRateTableCell =
-    AccountShippingRateTableCell
+    AccountShippingRateTableCell'
     { _asrtcRate = Nothing
     , _asrtcCondition = Nothing
     }
@@ -4040,11 +4041,11 @@ instance FromJSON AccountShippingRateTableCell where
         parseJSON
           = withObject "AccountShippingRateTableCell"
               (\ o ->
-                 AccountShippingRateTableCell <$>
+                 AccountShippingRateTableCell' <$>
                    (o .:? "rate") <*> (o .:? "condition"))
 
 instance ToJSON AccountShippingRateTableCell where
-        toJSON AccountShippingRateTableCell{..}
+        toJSON AccountShippingRateTableCell'{..}
           = object
               (catMaybes
                  [("rate" .=) <$> _asrtcRate,
@@ -4053,7 +4054,7 @@ instance ToJSON AccountShippingRateTableCell where
 -- | Account data.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _aaUsers        :: !(Maybe [AccountUser])
     , _aaKind         :: !Text
     , _aaSellerId     :: !(Maybe Text)
@@ -4089,7 +4090,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _aaUsers = Nothing
     , _aaKind = "content#account"
     , _aaSellerId = Nothing
@@ -4160,7 +4161,7 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "users" .!= mempty) <*>
                      (o .:? "kind" .!= "content#account")
                      <*> (o .:? "sellerId")
@@ -4172,7 +4173,7 @@ instance FromJSON Account where
                      <*> (o .:? "adultContent"))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("users" .=) <$> _aaUsers, Just ("kind" .= _aaKind),
@@ -4186,7 +4187,7 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'inventorySetRequest' smart constructor.
-data InventorySetRequest = InventorySetRequest
+data InventorySetRequest = InventorySetRequest'
     { _isrLoyaltyPoints          :: !(Maybe LoyaltyPoints)
     , _isrQuantity               :: !(Maybe (Textual Word32))
     , _isrInstallment            :: !(Maybe Installment)
@@ -4219,7 +4220,7 @@ data InventorySetRequest = InventorySetRequest
 inventorySetRequest
     :: InventorySetRequest
 inventorySetRequest =
-    InventorySetRequest
+    InventorySetRequest'
     { _isrLoyaltyPoints = Nothing
     , _isrQuantity = Nothing
     , _isrInstallment = Nothing
@@ -4285,7 +4286,7 @@ instance FromJSON InventorySetRequest where
         parseJSON
           = withObject "InventorySetRequest"
               (\ o ->
-                 InventorySetRequest <$>
+                 InventorySetRequest' <$>
                    (o .:? "loyaltyPoints") <*> (o .:? "quantity") <*>
                      (o .:? "installment")
                      <*> (o .:? "salePrice")
@@ -4295,7 +4296,7 @@ instance FromJSON InventorySetRequest where
                      <*> (o .:? "price"))
 
 instance ToJSON InventorySetRequest where
-        toJSON InventorySetRequest{..}
+        toJSON InventorySetRequest'{..}
           = object
               (catMaybes
                  [("loyaltyPoints" .=) <$> _isrLoyaltyPoints,
@@ -4319,7 +4320,7 @@ instance ToJSON InventorySetRequest where
 -- must be defined; the root must only have children.
 --
 -- /See:/ 'accountShippingShippingServiceCostRule' smart constructor.
-data AccountShippingShippingServiceCostRule = AccountShippingShippingServiceCostRule
+data AccountShippingShippingServiceCostRule = AccountShippingShippingServiceCostRule'
     { _assscrChildren          :: !(Maybe [AccountShippingShippingServiceCostRule])
     , _assscrCalculationMethod :: !(Maybe AccountShippingShippingServiceCalculationMethod)
     , _assscrCondition         :: !(Maybe AccountShippingCondition)
@@ -4337,7 +4338,7 @@ data AccountShippingShippingServiceCostRule = AccountShippingShippingServiceCost
 accountShippingShippingServiceCostRule
     :: AccountShippingShippingServiceCostRule
 accountShippingShippingServiceCostRule =
-    AccountShippingShippingServiceCostRule
+    AccountShippingShippingServiceCostRule'
     { _assscrChildren = Nothing
     , _assscrCalculationMethod = Nothing
     , _assscrCondition = Nothing
@@ -4370,14 +4371,14 @@ instance FromJSON
         parseJSON
           = withObject "AccountShippingShippingServiceCostRule"
               (\ o ->
-                 AccountShippingShippingServiceCostRule <$>
+                 AccountShippingShippingServiceCostRule' <$>
                    (o .:? "children" .!= mempty) <*>
                      (o .:? "calculationMethod")
                      <*> (o .:? "condition"))
 
 instance ToJSON
          AccountShippingShippingServiceCostRule where
-        toJSON AccountShippingShippingServiceCostRule{..}
+        toJSON AccountShippingShippingServiceCostRule'{..}
           = object
               (catMaybes
                  [("children" .=) <$> _assscrChildren,
@@ -4387,7 +4388,7 @@ instance ToJSON
 
 --
 -- /See:/ 'ordersCancelLineItemRequest' smart constructor.
-data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
+data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest'
     { _oclirAmount      :: !(Maybe Price)
     , _oclirQuantity    :: !(Maybe (Textual Word32))
     , _oclirLineItemId  :: !(Maybe Text)
@@ -4414,7 +4415,7 @@ data OrdersCancelLineItemRequest = OrdersCancelLineItemRequest
 ordersCancelLineItemRequest
     :: OrdersCancelLineItemRequest
 ordersCancelLineItemRequest =
-    OrdersCancelLineItemRequest
+    OrdersCancelLineItemRequest'
     { _oclirAmount = Nothing
     , _oclirQuantity = Nothing
     , _oclirLineItemId = Nothing
@@ -4464,7 +4465,7 @@ instance FromJSON OrdersCancelLineItemRequest where
         parseJSON
           = withObject "OrdersCancelLineItemRequest"
               (\ o ->
-                 OrdersCancelLineItemRequest <$>
+                 OrdersCancelLineItemRequest' <$>
                    (o .:? "amount") <*> (o .:? "quantity") <*>
                      (o .:? "lineItemId")
                      <*> (o .:? "reason")
@@ -4472,7 +4473,7 @@ instance FromJSON OrdersCancelLineItemRequest where
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrdersCancelLineItemRequest where
-        toJSON OrdersCancelLineItemRequest{..}
+        toJSON OrdersCancelLineItemRequest'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _oclirAmount,
@@ -4484,7 +4485,7 @@ instance ToJSON OrdersCancelLineItemRequest where
 
 --
 -- /See:/ 'productShippingWeight' smart constructor.
-data ProductShippingWeight = ProductShippingWeight
+data ProductShippingWeight = ProductShippingWeight'
     { _pswValue :: !(Maybe (Textual Double))
     , _pswUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4499,7 +4500,7 @@ data ProductShippingWeight = ProductShippingWeight
 productShippingWeight
     :: ProductShippingWeight
 productShippingWeight =
-    ProductShippingWeight
+    ProductShippingWeight'
     { _pswValue = Nothing
     , _pswUnit = Nothing
     }
@@ -4519,11 +4520,11 @@ instance FromJSON ProductShippingWeight where
         parseJSON
           = withObject "ProductShippingWeight"
               (\ o ->
-                 ProductShippingWeight <$>
+                 ProductShippingWeight' <$>
                    (o .:? "value") <*> (o .:? "unit"))
 
 instance ToJSON ProductShippingWeight where
-        toJSON ProductShippingWeight{..}
+        toJSON ProductShippingWeight'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pswValue,
@@ -4532,7 +4533,7 @@ instance ToJSON ProductShippingWeight where
 -- | A batch entry encoding a single non-batch accountstatuses request.
 --
 -- /See:/ 'accountstatusesCustomBatchRequestEntry' smart constructor.
-data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry
+data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestEntry'
     { _acbrecMerchantId :: !(Maybe (Textual Word64))
     , _acbrecAccountId  :: !(Maybe (Textual Word64))
     , _acbrecMethod     :: !(Maybe Text)
@@ -4553,7 +4554,7 @@ data AccountstatusesCustomBatchRequestEntry = AccountstatusesCustomBatchRequestE
 accountstatusesCustomBatchRequestEntry
     :: AccountstatusesCustomBatchRequestEntry
 accountstatusesCustomBatchRequestEntry =
-    AccountstatusesCustomBatchRequestEntry
+    AccountstatusesCustomBatchRequestEntry'
     { _acbrecMerchantId = Nothing
     , _acbrecAccountId = Nothing
     , _acbrecMethod = Nothing
@@ -4591,14 +4592,14 @@ instance FromJSON
         parseJSON
           = withObject "AccountstatusesCustomBatchRequestEntry"
               (\ o ->
-                 AccountstatusesCustomBatchRequestEntry <$>
+                 AccountstatusesCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "accountId") <*>
                      (o .:? "method")
                      <*> (o .:? "batchId"))
 
 instance ToJSON
          AccountstatusesCustomBatchRequestEntry where
-        toJSON AccountstatusesCustomBatchRequestEntry{..}
+        toJSON AccountstatusesCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _acbrecMerchantId,
@@ -4609,7 +4610,7 @@ instance ToJSON
 -- | A batch entry encoding a single non-batch productstatuses response.
 --
 -- /See:/ 'productstatusesCustomBatchResponseEntry' smart constructor.
-data ProductstatusesCustomBatchResponseEntry = ProductstatusesCustomBatchResponseEntry
+data ProductstatusesCustomBatchResponseEntry = ProductstatusesCustomBatchResponseEntry'
     { _pcbreKind          :: !Text
     , _pcbreProductStatus :: !(Maybe ProductStatus)
     , _pcbreErrors        :: !(Maybe Errors)
@@ -4630,7 +4631,7 @@ data ProductstatusesCustomBatchResponseEntry = ProductstatusesCustomBatchRespons
 productstatusesCustomBatchResponseEntry
     :: ProductstatusesCustomBatchResponseEntry
 productstatusesCustomBatchResponseEntry =
-    ProductstatusesCustomBatchResponseEntry
+    ProductstatusesCustomBatchResponseEntry'
     { _pcbreKind = "content#productstatusesCustomBatchResponseEntry"
     , _pcbreProductStatus = Nothing
     , _pcbreErrors = Nothing
@@ -4667,7 +4668,7 @@ instance FromJSON
           = withObject
               "ProductstatusesCustomBatchResponseEntry"
               (\ o ->
-                 ProductstatusesCustomBatchResponseEntry <$>
+                 ProductstatusesCustomBatchResponseEntry' <$>
                    (o .:? "kind" .!=
                       "content#productstatusesCustomBatchResponseEntry")
                      <*> (o .:? "productStatus")
@@ -4676,7 +4677,7 @@ instance FromJSON
 
 instance ToJSON
          ProductstatusesCustomBatchResponseEntry where
-        toJSON ProductstatusesCustomBatchResponseEntry{..}
+        toJSON ProductstatusesCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pcbreKind),
@@ -4686,7 +4687,7 @@ instance ToJSON
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryCancel' smart constructor.
-data OrdersCustomBatchRequestEntryCancel = OrdersCustomBatchRequestEntryCancel
+data OrdersCustomBatchRequestEntryCancel = OrdersCustomBatchRequestEntryCancel'
     { _ocbrecReason     :: !(Maybe Text)
     , _ocbrecReasonText :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4701,7 +4702,7 @@ data OrdersCustomBatchRequestEntryCancel = OrdersCustomBatchRequestEntryCancel
 ordersCustomBatchRequestEntryCancel
     :: OrdersCustomBatchRequestEntryCancel
 ordersCustomBatchRequestEntryCancel =
-    OrdersCustomBatchRequestEntryCancel
+    OrdersCustomBatchRequestEntryCancel'
     { _ocbrecReason = Nothing
     , _ocbrecReasonText = Nothing
     }
@@ -4722,12 +4723,12 @@ instance FromJSON OrdersCustomBatchRequestEntryCancel
         parseJSON
           = withObject "OrdersCustomBatchRequestEntryCancel"
               (\ o ->
-                 OrdersCustomBatchRequestEntryCancel <$>
+                 OrdersCustomBatchRequestEntryCancel' <$>
                    (o .:? "reason") <*> (o .:? "reasonText"))
 
 instance ToJSON OrdersCustomBatchRequestEntryCancel
          where
-        toJSON OrdersCustomBatchRequestEntryCancel{..}
+        toJSON OrdersCustomBatchRequestEntryCancel'{..}
           = object
               (catMaybes
                  [("reason" .=) <$> _ocbrecReason,
@@ -4735,7 +4736,7 @@ instance ToJSON OrdersCustomBatchRequestEntryCancel
 
 --
 -- /See:/ 'datafeedFormat' smart constructor.
-data DatafeedFormat = DatafeedFormat
+data DatafeedFormat = DatafeedFormat'
     { _dfQuotingMode     :: !(Maybe Text)
     , _dfFileEncoding    :: !(Maybe Text)
     , _dfColumnDelimiter :: !(Maybe Text)
@@ -4753,7 +4754,7 @@ data DatafeedFormat = DatafeedFormat
 datafeedFormat
     :: DatafeedFormat
 datafeedFormat =
-    DatafeedFormat
+    DatafeedFormat'
     { _dfQuotingMode = Nothing
     , _dfFileEncoding = Nothing
     , _dfColumnDelimiter = Nothing
@@ -4785,12 +4786,12 @@ instance FromJSON DatafeedFormat where
         parseJSON
           = withObject "DatafeedFormat"
               (\ o ->
-                 DatafeedFormat <$>
+                 DatafeedFormat' <$>
                    (o .:? "quotingMode") <*> (o .:? "fileEncoding") <*>
                      (o .:? "columnDelimiter"))
 
 instance ToJSON DatafeedFormat where
-        toJSON DatafeedFormat{..}
+        toJSON DatafeedFormat'{..}
           = object
               (catMaybes
                  [("quotingMode" .=) <$> _dfQuotingMode,
@@ -4799,7 +4800,7 @@ instance ToJSON DatafeedFormat where
 
 --
 -- /See:/ 'productShipping' smart constructor.
-data ProductShipping = ProductShipping
+data ProductShipping = ProductShipping'
     { _psService           :: !(Maybe Text)
     , _psLocationGroupName :: !(Maybe Text)
     , _psCountry           :: !(Maybe Text)
@@ -4829,7 +4830,7 @@ data ProductShipping = ProductShipping
 productShipping
     :: ProductShipping
 productShipping =
-    ProductShipping
+    ProductShipping'
     { _psService = Nothing
     , _psLocationGroupName = Nothing
     , _psCountry = Nothing
@@ -4882,7 +4883,7 @@ instance FromJSON ProductShipping where
         parseJSON
           = withObject "ProductShipping"
               (\ o ->
-                 ProductShipping <$>
+                 ProductShipping' <$>
                    (o .:? "service") <*> (o .:? "locationGroupName") <*>
                      (o .:? "country")
                      <*> (o .:? "postalCode")
@@ -4891,7 +4892,7 @@ instance FromJSON ProductShipping where
                      <*> (o .:? "locationId"))
 
 instance ToJSON ProductShipping where
-        toJSON ProductShipping{..}
+        toJSON ProductShipping'{..}
           = object
               (catMaybes
                  [("service" .=) <$> _psService,
@@ -4905,7 +4906,7 @@ instance ToJSON ProductShipping where
 -- | A batch entry encoding a single non-batch accountshipping request.
 --
 -- /See:/ 'accountshippingCustomBatchRequestEntry' smart constructor.
-data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry
+data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestEntry'
     { _aaMerchantId      :: !(Maybe (Textual Word64))
     , _aaAccountId       :: !(Maybe (Textual Word64))
     , _aaMethod          :: !(Maybe Text)
@@ -4929,7 +4930,7 @@ data AccountshippingCustomBatchRequestEntry = AccountshippingCustomBatchRequestE
 accountshippingCustomBatchRequestEntry
     :: AccountshippingCustomBatchRequestEntry
 accountshippingCustomBatchRequestEntry =
-    AccountshippingCustomBatchRequestEntry
+    AccountshippingCustomBatchRequestEntry'
     { _aaMerchantId = Nothing
     , _aaAccountId = Nothing
     , _aaMethod = Nothing
@@ -4971,7 +4972,7 @@ instance FromJSON
         parseJSON
           = withObject "AccountshippingCustomBatchRequestEntry"
               (\ o ->
-                 AccountshippingCustomBatchRequestEntry <$>
+                 AccountshippingCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "accountId") <*>
                      (o .:? "method")
                      <*> (o .:? "accountShipping")
@@ -4979,7 +4980,7 @@ instance FromJSON
 
 instance ToJSON
          AccountshippingCustomBatchRequestEntry where
-        toJSON AccountshippingCustomBatchRequestEntry{..}
+        toJSON AccountshippingCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _aaMerchantId,
@@ -4990,7 +4991,7 @@ instance ToJSON
 
 --
 -- /See:/ 'accountsCustomBatchRequest' smart constructor.
-newtype AccountsCustomBatchRequest = AccountsCustomBatchRequest
+newtype AccountsCustomBatchRequest = AccountsCustomBatchRequest'
     { _accEntries :: Maybe [AccountsCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5002,7 +5003,7 @@ newtype AccountsCustomBatchRequest = AccountsCustomBatchRequest
 accountsCustomBatchRequest
     :: AccountsCustomBatchRequest
 accountsCustomBatchRequest =
-    AccountsCustomBatchRequest
+    AccountsCustomBatchRequest'
     { _accEntries = Nothing
     }
 
@@ -5017,16 +5018,16 @@ instance FromJSON AccountsCustomBatchRequest where
         parseJSON
           = withObject "AccountsCustomBatchRequest"
               (\ o ->
-                 AccountsCustomBatchRequest <$>
+                 AccountsCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON AccountsCustomBatchRequest where
-        toJSON AccountsCustomBatchRequest{..}
+        toJSON AccountsCustomBatchRequest'{..}
           = object (catMaybes [("entries" .=) <$> _accEntries])
 
 --
 -- /See:/ 'productCustomAttribute' smart constructor.
-data ProductCustomAttribute = ProductCustomAttribute
+data ProductCustomAttribute = ProductCustomAttribute'
     { _pcaValue :: !(Maybe Text)
     , _pcaName  :: !(Maybe Text)
     , _pcaType  :: !(Maybe Text)
@@ -5047,7 +5048,7 @@ data ProductCustomAttribute = ProductCustomAttribute
 productCustomAttribute
     :: ProductCustomAttribute
 productCustomAttribute =
-    ProductCustomAttribute
+    ProductCustomAttribute'
     { _pcaValue = Nothing
     , _pcaName = Nothing
     , _pcaType = Nothing
@@ -5076,12 +5077,12 @@ instance FromJSON ProductCustomAttribute where
         parseJSON
           = withObject "ProductCustomAttribute"
               (\ o ->
-                 ProductCustomAttribute <$>
+                 ProductCustomAttribute' <$>
                    (o .:? "value") <*> (o .:? "name") <*> (o .:? "type")
                      <*> (o .:? "unit"))
 
 instance ToJSON ProductCustomAttribute where
-        toJSON ProductCustomAttribute{..}
+        toJSON ProductCustomAttribute'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pcaValue,
@@ -5094,7 +5095,7 @@ instance ToJSON ProductCustomAttribute where
 -- start=12* end=2* is invalid).
 --
 -- /See:/ 'accountShippingPostalCodeRange' smart constructor.
-data AccountShippingPostalCodeRange = AccountShippingPostalCodeRange
+data AccountShippingPostalCodeRange = AccountShippingPostalCodeRange'
     { _aspcrStart :: !(Maybe Text)
     , _aspcrEnd   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5109,7 +5110,7 @@ data AccountShippingPostalCodeRange = AccountShippingPostalCodeRange
 accountShippingPostalCodeRange
     :: AccountShippingPostalCodeRange
 accountShippingPostalCodeRange =
-    AccountShippingPostalCodeRange
+    AccountShippingPostalCodeRange'
     { _aspcrStart = Nothing
     , _aspcrEnd = Nothing
     }
@@ -5128,11 +5129,11 @@ instance FromJSON AccountShippingPostalCodeRange
         parseJSON
           = withObject "AccountShippingPostalCodeRange"
               (\ o ->
-                 AccountShippingPostalCodeRange <$>
+                 AccountShippingPostalCodeRange' <$>
                    (o .:? "start") <*> (o .:? "end"))
 
 instance ToJSON AccountShippingPostalCodeRange where
-        toJSON AccountShippingPostalCodeRange{..}
+        toJSON AccountShippingPostalCodeRange'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _aspcrStart,
@@ -5140,7 +5141,7 @@ instance ToJSON AccountShippingPostalCodeRange where
 
 --
 -- /See:/ 'ordersListResponse' smart constructor.
-data OrdersListResponse = OrdersListResponse
+data OrdersListResponse = OrdersListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
     , _olrResources     :: !(Maybe [Order])
@@ -5158,7 +5159,7 @@ data OrdersListResponse = OrdersListResponse
 ordersListResponse
     :: OrdersListResponse
 ordersListResponse =
-    OrdersListResponse
+    OrdersListResponse'
     { _olrNextPageToken = Nothing
     , _olrKind = "content#ordersListResponse"
     , _olrResources = Nothing
@@ -5185,13 +5186,13 @@ instance FromJSON OrdersListResponse where
         parseJSON
           = withObject "OrdersListResponse"
               (\ o ->
-                 OrdersListResponse <$>
+                 OrdersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "content#ordersListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON OrdersListResponse where
-        toJSON OrdersListResponse{..}
+        toJSON OrdersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olrNextPageToken,
@@ -5200,7 +5201,7 @@ instance ToJSON OrdersListResponse where
 
 --
 -- /See:/ 'ordersShipLineItemsResponse' smart constructor.
-data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
+data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse'
     { _oslirKind            :: !Text
     , _oslirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5215,7 +5216,7 @@ data OrdersShipLineItemsResponse = OrdersShipLineItemsResponse
 ordersShipLineItemsResponse
     :: OrdersShipLineItemsResponse
 ordersShipLineItemsResponse =
-    OrdersShipLineItemsResponse
+    OrdersShipLineItemsResponse'
     { _oslirKind = "content#ordersShipLineItemsResponse"
     , _oslirExecutionStatus = Nothing
     }
@@ -5236,13 +5237,13 @@ instance FromJSON OrdersShipLineItemsResponse where
         parseJSON
           = withObject "OrdersShipLineItemsResponse"
               (\ o ->
-                 OrdersShipLineItemsResponse <$>
+                 OrdersShipLineItemsResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersShipLineItemsResponse")
                      <*> (o .:? "executionStatus"))
 
 instance ToJSON OrdersShipLineItemsResponse where
-        toJSON OrdersShipLineItemsResponse{..}
+        toJSON OrdersShipLineItemsResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oslirKind),
@@ -5251,7 +5252,7 @@ instance ToJSON OrdersShipLineItemsResponse where
 -- | Shipping services provided in a country.
 --
 -- /See:/ 'accountShippingShippingService' smart constructor.
-data AccountShippingShippingService = AccountShippingShippingService
+data AccountShippingShippingService = AccountShippingShippingService'
     { _asssCostRuleTree      :: !(Maybe AccountShippingShippingServiceCostRule)
     , _asssSaleCountry       :: !(Maybe Text)
     , _asssCalculationMethod :: !(Maybe AccountShippingShippingServiceCalculationMethod)
@@ -5275,7 +5276,7 @@ data AccountShippingShippingService = AccountShippingShippingService
 accountShippingShippingService
     :: AccountShippingShippingService
 accountShippingShippingService =
-    AccountShippingShippingService
+    AccountShippingShippingService'
     { _asssCostRuleTree = Nothing
     , _asssSaleCountry = Nothing
     , _asssCalculationMethod = Nothing
@@ -5316,14 +5317,14 @@ instance FromJSON AccountShippingShippingService
         parseJSON
           = withObject "AccountShippingShippingService"
               (\ o ->
-                 AccountShippingShippingService <$>
+                 AccountShippingShippingService' <$>
                    (o .:? "costRuleTree") <*> (o .:? "saleCountry") <*>
                      (o .:? "calculationMethod")
                      <*> (o .:? "active")
                      <*> (o .:? "name"))
 
 instance ToJSON AccountShippingShippingService where
-        toJSON AccountShippingShippingService{..}
+        toJSON AccountShippingShippingService'{..}
           = object
               (catMaybes
                  [("costRuleTree" .=) <$> _asssCostRuleTree,
@@ -5337,7 +5338,7 @@ instance ToJSON AccountShippingShippingService where
 -- locations, or shipping labels.
 --
 -- /See:/ 'accountShippingRateTable' smart constructor.
-data AccountShippingRateTable = AccountShippingRateTable
+data AccountShippingRateTable = AccountShippingRateTable'
     { _asrtSaleCountry :: !(Maybe Text)
     , _asrtContent     :: !(Maybe [AccountShippingRateTableCell])
     , _asrtName        :: !(Maybe Text)
@@ -5355,7 +5356,7 @@ data AccountShippingRateTable = AccountShippingRateTable
 accountShippingRateTable
     :: AccountShippingRateTable
 accountShippingRateTable =
-    AccountShippingRateTable
+    AccountShippingRateTable'
     { _asrtSaleCountry = Nothing
     , _asrtContent = Nothing
     , _asrtName = Nothing
@@ -5386,13 +5387,13 @@ instance FromJSON AccountShippingRateTable where
         parseJSON
           = withObject "AccountShippingRateTable"
               (\ o ->
-                 AccountShippingRateTable <$>
+                 AccountShippingRateTable' <$>
                    (o .:? "saleCountry") <*>
                      (o .:? "content" .!= mempty)
                      <*> (o .:? "name"))
 
 instance ToJSON AccountShippingRateTable where
-        toJSON AccountShippingRateTable{..}
+        toJSON AccountShippingRateTable'{..}
           = object
               (catMaybes
                  [("saleCountry" .=) <$> _asrtSaleCountry,
@@ -5401,7 +5402,7 @@ instance ToJSON AccountShippingRateTable where
 
 --
 -- /See:/ 'accountshippingCustomBatchResponse' smart constructor.
-data AccountshippingCustomBatchResponse = AccountshippingCustomBatchResponse
+data AccountshippingCustomBatchResponse = AccountshippingCustomBatchResponse'
     { _acccEntries :: !(Maybe [AccountshippingCustomBatchResponseEntry])
     , _acccKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5416,7 +5417,7 @@ data AccountshippingCustomBatchResponse = AccountshippingCustomBatchResponse
 accountshippingCustomBatchResponse
     :: AccountshippingCustomBatchResponse
 accountshippingCustomBatchResponse =
-    AccountshippingCustomBatchResponse
+    AccountshippingCustomBatchResponse'
     { _acccEntries = Nothing
     , _acccKind = "content#accountshippingCustomBatchResponse"
     }
@@ -5438,14 +5439,14 @@ instance FromJSON AccountshippingCustomBatchResponse
         parseJSON
           = withObject "AccountshippingCustomBatchResponse"
               (\ o ->
-                 AccountshippingCustomBatchResponse <$>
+                 AccountshippingCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#accountshippingCustomBatchResponse"))
 
 instance ToJSON AccountshippingCustomBatchResponse
          where
-        toJSON AccountshippingCustomBatchResponse{..}
+        toJSON AccountshippingCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _acccEntries,
@@ -5453,7 +5454,7 @@ instance ToJSON AccountshippingCustomBatchResponse
 
 --
 -- /See:/ 'ordersUpdateShipmentResponse' smart constructor.
-data OrdersUpdateShipmentResponse = OrdersUpdateShipmentResponse
+data OrdersUpdateShipmentResponse = OrdersUpdateShipmentResponse'
     { _ousrKind            :: !Text
     , _ousrExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5468,7 +5469,7 @@ data OrdersUpdateShipmentResponse = OrdersUpdateShipmentResponse
 ordersUpdateShipmentResponse
     :: OrdersUpdateShipmentResponse
 ordersUpdateShipmentResponse =
-    OrdersUpdateShipmentResponse
+    OrdersUpdateShipmentResponse'
     { _ousrKind = "content#ordersUpdateShipmentResponse"
     , _ousrExecutionStatus = Nothing
     }
@@ -5488,13 +5489,13 @@ instance FromJSON OrdersUpdateShipmentResponse where
         parseJSON
           = withObject "OrdersUpdateShipmentResponse"
               (\ o ->
-                 OrdersUpdateShipmentResponse <$>
+                 OrdersUpdateShipmentResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersUpdateShipmentResponse")
                      <*> (o .:? "executionStatus"))
 
 instance ToJSON OrdersUpdateShipmentResponse where
-        toJSON OrdersUpdateShipmentResponse{..}
+        toJSON OrdersUpdateShipmentResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ousrKind),
@@ -5502,7 +5503,7 @@ instance ToJSON OrdersUpdateShipmentResponse where
 
 --
 -- /See:/ 'productstatusesCustomBatchRequest' smart constructor.
-newtype ProductstatusesCustomBatchRequest = ProductstatusesCustomBatchRequest
+newtype ProductstatusesCustomBatchRequest = ProductstatusesCustomBatchRequest'
     { _proEntries :: Maybe [ProductstatusesCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5514,7 +5515,7 @@ newtype ProductstatusesCustomBatchRequest = ProductstatusesCustomBatchRequest
 productstatusesCustomBatchRequest
     :: ProductstatusesCustomBatchRequest
 productstatusesCustomBatchRequest =
-    ProductstatusesCustomBatchRequest
+    ProductstatusesCustomBatchRequest'
     { _proEntries = Nothing
     }
 
@@ -5530,17 +5531,17 @@ instance FromJSON ProductstatusesCustomBatchRequest
         parseJSON
           = withObject "ProductstatusesCustomBatchRequest"
               (\ o ->
-                 ProductstatusesCustomBatchRequest <$>
+                 ProductstatusesCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON ProductstatusesCustomBatchRequest
          where
-        toJSON ProductstatusesCustomBatchRequest{..}
+        toJSON ProductstatusesCustomBatchRequest'{..}
           = object (catMaybes [("entries" .=) <$> _proEntries])
 
 --
 -- /See:/ 'ordersReturnLineItemResponse' smart constructor.
-data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse
+data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse'
     { _orlirKind            :: !Text
     , _orlirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5555,7 +5556,7 @@ data OrdersReturnLineItemResponse = OrdersReturnLineItemResponse
 ordersReturnLineItemResponse
     :: OrdersReturnLineItemResponse
 ordersReturnLineItemResponse =
-    OrdersReturnLineItemResponse
+    OrdersReturnLineItemResponse'
     { _orlirKind = "content#ordersReturnLineItemResponse"
     , _orlirExecutionStatus = Nothing
     }
@@ -5576,13 +5577,13 @@ instance FromJSON OrdersReturnLineItemResponse where
         parseJSON
           = withObject "OrdersReturnLineItemResponse"
               (\ o ->
-                 OrdersReturnLineItemResponse <$>
+                 OrdersReturnLineItemResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersReturnLineItemResponse")
                      <*> (o .:? "executionStatus"))
 
 instance ToJSON OrdersReturnLineItemResponse where
-        toJSON OrdersReturnLineItemResponse{..}
+        toJSON OrdersReturnLineItemResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _orlirKind),
@@ -5590,7 +5591,7 @@ instance ToJSON OrdersReturnLineItemResponse where
 
 --
 -- /See:/ 'productCustomGroup' smart constructor.
-data ProductCustomGroup = ProductCustomGroup
+data ProductCustomGroup = ProductCustomGroup'
     { _pcgName       :: !(Maybe Text)
     , _pcgAttributes :: !(Maybe [ProductCustomAttribute])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5605,7 +5606,7 @@ data ProductCustomGroup = ProductCustomGroup
 productCustomGroup
     :: ProductCustomGroup
 productCustomGroup =
-    ProductCustomGroup
+    ProductCustomGroup'
     { _pcgName = Nothing
     , _pcgAttributes = Nothing
     }
@@ -5627,11 +5628,11 @@ instance FromJSON ProductCustomGroup where
         parseJSON
           = withObject "ProductCustomGroup"
               (\ o ->
-                 ProductCustomGroup <$>
+                 ProductCustomGroup' <$>
                    (o .:? "name") <*> (o .:? "attributes" .!= mempty))
 
 instance ToJSON ProductCustomGroup where
-        toJSON ProductCustomGroup{..}
+        toJSON ProductCustomGroup'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _pcgName,
@@ -5639,7 +5640,7 @@ instance ToJSON ProductCustomGroup where
 
 --
 -- /See:/ 'accountstatusesCustomBatchResponse' smart constructor.
-data AccountstatusesCustomBatchResponse = AccountstatusesCustomBatchResponse
+data AccountstatusesCustomBatchResponse = AccountstatusesCustomBatchResponse'
     { _acbr1Entries :: !(Maybe [AccountstatusesCustomBatchResponseEntry])
     , _acbr1Kind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5654,7 +5655,7 @@ data AccountstatusesCustomBatchResponse = AccountstatusesCustomBatchResponse
 accountstatusesCustomBatchResponse
     :: AccountstatusesCustomBatchResponse
 accountstatusesCustomBatchResponse =
-    AccountstatusesCustomBatchResponse
+    AccountstatusesCustomBatchResponse'
     { _acbr1Entries = Nothing
     , _acbr1Kind = "content#accountstatusesCustomBatchResponse"
     }
@@ -5677,14 +5678,14 @@ instance FromJSON AccountstatusesCustomBatchResponse
         parseJSON
           = withObject "AccountstatusesCustomBatchResponse"
               (\ o ->
-                 AccountstatusesCustomBatchResponse <$>
+                 AccountstatusesCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#accountstatusesCustomBatchResponse"))
 
 instance ToJSON AccountstatusesCustomBatchResponse
          where
-        toJSON AccountstatusesCustomBatchResponse{..}
+        toJSON AccountstatusesCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _acbr1Entries,
@@ -5694,7 +5695,7 @@ instance ToJSON AccountstatusesCustomBatchResponse
 -- asynchronously by the data quality analysis.
 --
 -- /See:/ 'productStatus' smart constructor.
-data ProductStatus = ProductStatus
+data ProductStatus = ProductStatus'
     { _psDataQualityIssues    :: !(Maybe [ProductStatusDataQualityIssue])
     , _psKind                 :: !Text
     , _psLink                 :: !(Maybe Text)
@@ -5730,7 +5731,7 @@ data ProductStatus = ProductStatus
 productStatus
     :: ProductStatus
 productStatus =
-    ProductStatus
+    ProductStatus'
     { _psDataQualityIssues = Nothing
     , _psKind = "content#productStatus"
     , _psLink = Nothing
@@ -5798,7 +5799,7 @@ instance FromJSON ProductStatus where
         parseJSON
           = withObject "ProductStatus"
               (\ o ->
-                 ProductStatus <$>
+                 ProductStatus' <$>
                    (o .:? "dataQualityIssues" .!= mempty) <*>
                      (o .:? "kind" .!= "content#productStatus")
                      <*> (o .:? "link")
@@ -5810,7 +5811,7 @@ instance FromJSON ProductStatus where
                      <*> (o .:? "productId"))
 
 instance ToJSON ProductStatus where
-        toJSON ProductStatus{..}
+        toJSON ProductStatus'{..}
           = object
               (catMaybes
                  [("dataQualityIssues" .=) <$> _psDataQualityIssues,
@@ -5826,7 +5827,7 @@ instance ToJSON ProductStatus where
 
 --
 -- /See:/ 'accountstatusesListResponse' smart constructor.
-data AccountstatusesListResponse = AccountstatusesListResponse
+data AccountstatusesListResponse = AccountstatusesListResponse'
     { _alrlNextPageToken :: !(Maybe Text)
     , _alrlKind          :: !Text
     , _alrlResources     :: !(Maybe [AccountStatus])
@@ -5844,7 +5845,7 @@ data AccountstatusesListResponse = AccountstatusesListResponse
 accountstatusesListResponse
     :: AccountstatusesListResponse
 accountstatusesListResponse =
-    AccountstatusesListResponse
+    AccountstatusesListResponse'
     { _alrlNextPageToken = Nothing
     , _alrlKind = "content#accountstatusesListResponse"
     , _alrlResources = Nothing
@@ -5872,14 +5873,14 @@ instance FromJSON AccountstatusesListResponse where
         parseJSON
           = withObject "AccountstatusesListResponse"
               (\ o ->
-                 AccountstatusesListResponse <$>
+                 AccountstatusesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "content#accountstatusesListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON AccountstatusesListResponse where
-        toJSON AccountstatusesListResponse{..}
+        toJSON AccountstatusesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alrlNextPageToken,
@@ -5888,7 +5889,7 @@ instance ToJSON AccountstatusesListResponse where
 
 --
 -- /See:/ 'accounttaxCustomBatchRequest' smart constructor.
-newtype AccounttaxCustomBatchRequest = AccounttaxCustomBatchRequest
+newtype AccounttaxCustomBatchRequest = AccounttaxCustomBatchRequest'
     { _aaEntries :: Maybe [AccounttaxCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5900,7 +5901,7 @@ newtype AccounttaxCustomBatchRequest = AccounttaxCustomBatchRequest
 accounttaxCustomBatchRequest
     :: AccounttaxCustomBatchRequest
 accounttaxCustomBatchRequest =
-    AccounttaxCustomBatchRequest
+    AccounttaxCustomBatchRequest'
     { _aaEntries = Nothing
     }
 
@@ -5915,17 +5916,17 @@ instance FromJSON AccounttaxCustomBatchRequest where
         parseJSON
           = withObject "AccounttaxCustomBatchRequest"
               (\ o ->
-                 AccounttaxCustomBatchRequest <$>
+                 AccounttaxCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON AccounttaxCustomBatchRequest where
-        toJSON AccounttaxCustomBatchRequest{..}
+        toJSON AccounttaxCustomBatchRequest'{..}
           = object (catMaybes [("entries" .=) <$> _aaEntries])
 
 -- | A batch entry encoding a single non-batch products request.
 --
 -- /See:/ 'productsCustomBatchRequestEntry' smart constructor.
-data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry
+data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry'
     { _pMerchantId :: !(Maybe (Textual Word64))
     , _pMethod     :: !(Maybe Text)
     , _pProduct    :: !(Maybe Product)
@@ -5949,7 +5950,7 @@ data ProductsCustomBatchRequestEntry = ProductsCustomBatchRequestEntry
 productsCustomBatchRequestEntry
     :: ProductsCustomBatchRequestEntry
 productsCustomBatchRequestEntry =
-    ProductsCustomBatchRequestEntry
+    ProductsCustomBatchRequestEntry'
     { _pMerchantId = Nothing
     , _pMethod = Nothing
     , _pProduct = Nothing
@@ -5987,14 +5988,14 @@ instance FromJSON ProductsCustomBatchRequestEntry
         parseJSON
           = withObject "ProductsCustomBatchRequestEntry"
               (\ o ->
-                 ProductsCustomBatchRequestEntry <$>
+                 ProductsCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "method") <*>
                      (o .:? "product")
                      <*> (o .:? "productId")
                      <*> (o .:? "batchId"))
 
 instance ToJSON ProductsCustomBatchRequestEntry where
-        toJSON ProductsCustomBatchRequestEntry{..}
+        toJSON ProductsCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _pMerchantId,
@@ -6006,7 +6007,7 @@ instance ToJSON ProductsCustomBatchRequestEntry where
 -- | A batch entry encoding a single non-batch datafeedstatuses request.
 --
 -- /See:/ 'datafeedstatusesCustomBatchRequestEntry' smart constructor.
-data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchRequestEntry
+data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchRequestEntry'
     { _dMerchantId :: !(Maybe (Textual Word64))
     , _dMethod     :: !(Maybe Text)
     , _dDatafeedId :: !(Maybe (Textual Word64))
@@ -6027,7 +6028,7 @@ data DatafeedstatusesCustomBatchRequestEntry = DatafeedstatusesCustomBatchReques
 datafeedstatusesCustomBatchRequestEntry
     :: DatafeedstatusesCustomBatchRequestEntry
 datafeedstatusesCustomBatchRequestEntry =
-    DatafeedstatusesCustomBatchRequestEntry
+    DatafeedstatusesCustomBatchRequestEntry'
     { _dMerchantId = Nothing
     , _dMethod = Nothing
     , _dDatafeedId = Nothing
@@ -6061,14 +6062,14 @@ instance FromJSON
           = withObject
               "DatafeedstatusesCustomBatchRequestEntry"
               (\ o ->
-                 DatafeedstatusesCustomBatchRequestEntry <$>
+                 DatafeedstatusesCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "method") <*>
                      (o .:? "datafeedId")
                      <*> (o .:? "batchId"))
 
 instance ToJSON
          DatafeedstatusesCustomBatchRequestEntry where
-        toJSON DatafeedstatusesCustomBatchRequestEntry{..}
+        toJSON DatafeedstatusesCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _dMerchantId,
@@ -6078,7 +6079,7 @@ instance ToJSON
 
 --
 -- /See:/ 'orderCustomer' smart constructor.
-data OrderCustomer = OrderCustomer
+data OrderCustomer = OrderCustomer'
     { _ocFullName                    :: !(Maybe Text)
     , _ocEmail                       :: !(Maybe Text)
     , _ocExplicitMarketingPreference :: !(Maybe Bool)
@@ -6096,7 +6097,7 @@ data OrderCustomer = OrderCustomer
 orderCustomer
     :: OrderCustomer
 orderCustomer =
-    OrderCustomer
+    OrderCustomer'
     { _ocFullName = Nothing
     , _ocEmail = Nothing
     , _ocExplicitMarketingPreference = Nothing
@@ -6125,12 +6126,12 @@ instance FromJSON OrderCustomer where
         parseJSON
           = withObject "OrderCustomer"
               (\ o ->
-                 OrderCustomer <$>
+                 OrderCustomer' <$>
                    (o .:? "fullName") <*> (o .:? "email") <*>
                      (o .:? "explicitMarketingPreference"))
 
 instance ToJSON OrderCustomer where
-        toJSON OrderCustomer{..}
+        toJSON OrderCustomer'{..}
           = object
               (catMaybes
                  [("fullName" .=) <$> _ocFullName,
@@ -6141,7 +6142,7 @@ instance ToJSON OrderCustomer where
 -- | A batch entry encoding a single non-batch inventory response.
 --
 -- /See:/ 'inventoryCustomBatchResponseEntry' smart constructor.
-data InventoryCustomBatchResponseEntry = InventoryCustomBatchResponseEntry
+data InventoryCustomBatchResponseEntry = InventoryCustomBatchResponseEntry'
     { _icbreKind    :: !Text
     , _icbreErrors  :: !(Maybe Errors)
     , _icbreBatchId :: !(Maybe (Textual Word32))
@@ -6159,7 +6160,7 @@ data InventoryCustomBatchResponseEntry = InventoryCustomBatchResponseEntry
 inventoryCustomBatchResponseEntry
     :: InventoryCustomBatchResponseEntry
 inventoryCustomBatchResponseEntry =
-    InventoryCustomBatchResponseEntry
+    InventoryCustomBatchResponseEntry'
     { _icbreKind = "content#inventoryCustomBatchResponseEntry"
     , _icbreErrors = Nothing
     , _icbreBatchId = Nothing
@@ -6187,7 +6188,7 @@ instance FromJSON InventoryCustomBatchResponseEntry
         parseJSON
           = withObject "InventoryCustomBatchResponseEntry"
               (\ o ->
-                 InventoryCustomBatchResponseEntry <$>
+                 InventoryCustomBatchResponseEntry' <$>
                    (o .:? "kind" .!=
                       "content#inventoryCustomBatchResponseEntry")
                      <*> (o .:? "errors")
@@ -6195,7 +6196,7 @@ instance FromJSON InventoryCustomBatchResponseEntry
 
 instance ToJSON InventoryCustomBatchResponseEntry
          where
-        toJSON InventoryCustomBatchResponseEntry{..}
+        toJSON InventoryCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _icbreKind),
@@ -6204,7 +6205,7 @@ instance ToJSON InventoryCustomBatchResponseEntry
 
 --
 -- /See:/ 'accountshippingListResponse' smart constructor.
-data AccountshippingListResponse = AccountshippingListResponse
+data AccountshippingListResponse = AccountshippingListResponse'
     { _alr1NextPageToken :: !(Maybe Text)
     , _alr1Kind          :: !Text
     , _alr1Resources     :: !(Maybe [AccountShipping])
@@ -6222,7 +6223,7 @@ data AccountshippingListResponse = AccountshippingListResponse
 accountshippingListResponse
     :: AccountshippingListResponse
 accountshippingListResponse =
-    AccountshippingListResponse
+    AccountshippingListResponse'
     { _alr1NextPageToken = Nothing
     , _alr1Kind = "content#accountshippingListResponse"
     , _alr1Resources = Nothing
@@ -6251,14 +6252,14 @@ instance FromJSON AccountshippingListResponse where
         parseJSON
           = withObject "AccountshippingListResponse"
               (\ o ->
-                 AccountshippingListResponse <$>
+                 AccountshippingListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "content#accountshippingListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON AccountshippingListResponse where
-        toJSON AccountshippingListResponse{..}
+        toJSON AccountshippingListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _alr1NextPageToken,
@@ -6267,7 +6268,7 @@ instance ToJSON AccountshippingListResponse where
 
 --
 -- /See:/ 'inventory' smart constructor.
-data Inventory = Inventory
+data Inventory = Inventory'
     { _iLoyaltyPoints          :: !(Maybe LoyaltyPoints)
     , _iKind                   :: !Text
     , _iQuantity               :: !(Maybe (Textual Word32))
@@ -6303,7 +6304,7 @@ data Inventory = Inventory
 inventory
     :: Inventory
 inventory =
-    Inventory
+    Inventory'
     { _iLoyaltyPoints = Nothing
     , _iKind = "content#inventory"
     , _iQuantity = Nothing
@@ -6374,7 +6375,7 @@ instance FromJSON Inventory where
         parseJSON
           = withObject "Inventory"
               (\ o ->
-                 Inventory <$>
+                 Inventory' <$>
                    (o .:? "loyaltyPoints") <*>
                      (o .:? "kind" .!= "content#inventory")
                      <*> (o .:? "quantity")
@@ -6386,7 +6387,7 @@ instance FromJSON Inventory where
                      <*> (o .:? "price"))
 
 instance ToJSON Inventory where
-        toJSON Inventory{..}
+        toJSON Inventory'{..}
           = object
               (catMaybes
                  [("loyaltyPoints" .=) <$> _iLoyaltyPoints,
@@ -6403,7 +6404,7 @@ instance ToJSON Inventory where
 
 --
 -- /See:/ 'ordersGetByMerchantOrderIdResponse' smart constructor.
-data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse
+data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse'
     { _ogbmoirKind  :: !Text
     , _ogbmoirOrder :: !(Maybe Order)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6418,7 +6419,7 @@ data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse
 ordersGetByMerchantOrderIdResponse
     :: OrdersGetByMerchantOrderIdResponse
 ordersGetByMerchantOrderIdResponse =
-    OrdersGetByMerchantOrderIdResponse
+    OrdersGetByMerchantOrderIdResponse'
     { _ogbmoirKind = "content#ordersGetByMerchantOrderIdResponse"
     , _ogbmoirOrder = Nothing
     }
@@ -6439,14 +6440,14 @@ instance FromJSON OrdersGetByMerchantOrderIdResponse
         parseJSON
           = withObject "OrdersGetByMerchantOrderIdResponse"
               (\ o ->
-                 OrdersGetByMerchantOrderIdResponse <$>
+                 OrdersGetByMerchantOrderIdResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersGetByMerchantOrderIdResponse")
                      <*> (o .:? "order"))
 
 instance ToJSON OrdersGetByMerchantOrderIdResponse
          where
-        toJSON OrdersGetByMerchantOrderIdResponse{..}
+        toJSON OrdersGetByMerchantOrderIdResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ogbmoirKind),
@@ -6454,7 +6455,7 @@ instance ToJSON OrdersGetByMerchantOrderIdResponse
 
 --
 -- /See:/ 'orderPromotionBenefit' smart constructor.
-data OrderPromotionBenefit = OrderPromotionBenefit
+data OrderPromotionBenefit = OrderPromotionBenefit'
     { _opbTaxImpact :: !(Maybe Price)
     , _opbDiscount  :: !(Maybe Price)
     , _opbOfferIds  :: !(Maybe [Text])
@@ -6478,7 +6479,7 @@ data OrderPromotionBenefit = OrderPromotionBenefit
 orderPromotionBenefit
     :: OrderPromotionBenefit
 orderPromotionBenefit =
-    OrderPromotionBenefit
+    OrderPromotionBenefit'
     { _opbTaxImpact = Nothing
     , _opbDiscount = Nothing
     , _opbOfferIds = Nothing
@@ -6519,14 +6520,14 @@ instance FromJSON OrderPromotionBenefit where
         parseJSON
           = withObject "OrderPromotionBenefit"
               (\ o ->
-                 OrderPromotionBenefit <$>
+                 OrderPromotionBenefit' <$>
                    (o .:? "taxImpact") <*> (o .:? "discount") <*>
                      (o .:? "offerIds" .!= mempty)
                      <*> (o .:? "subType")
                      <*> (o .:? "type"))
 
 instance ToJSON OrderPromotionBenefit where
-        toJSON OrderPromotionBenefit{..}
+        toJSON OrderPromotionBenefit'{..}
           = object
               (catMaybes
                  [("taxImpact" .=) <$> _opbTaxImpact,
@@ -6537,7 +6538,7 @@ instance ToJSON OrderPromotionBenefit where
 
 --
 -- /See:/ 'ordersCancelRequest' smart constructor.
-data OrdersCancelRequest = OrdersCancelRequest
+data OrdersCancelRequest = OrdersCancelRequest'
     { _ocrReason      :: !(Maybe Text)
     , _ocrOperationId :: !(Maybe Text)
     , _ocrReasonText  :: !(Maybe Text)
@@ -6555,7 +6556,7 @@ data OrdersCancelRequest = OrdersCancelRequest
 ordersCancelRequest
     :: OrdersCancelRequest
 ordersCancelRequest =
-    OrdersCancelRequest
+    OrdersCancelRequest'
     { _ocrReason = Nothing
     , _ocrOperationId = Nothing
     , _ocrReasonText = Nothing
@@ -6582,12 +6583,12 @@ instance FromJSON OrdersCancelRequest where
         parseJSON
           = withObject "OrdersCancelRequest"
               (\ o ->
-                 OrdersCancelRequest <$>
+                 OrdersCancelRequest' <$>
                    (o .:? "reason") <*> (o .:? "operationId") <*>
                      (o .:? "reasonText"))
 
 instance ToJSON OrdersCancelRequest where
-        toJSON OrdersCancelRequest{..}
+        toJSON OrdersCancelRequest'{..}
           = object
               (catMaybes
                  [("reason" .=) <$> _ocrReason,
@@ -6596,7 +6597,7 @@ instance ToJSON OrdersCancelRequest where
 
 --
 -- /See:/ 'orderLineItemProductVariantAttribute' smart constructor.
-data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute
+data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute'
     { _olipvaDimension :: !(Maybe Text)
     , _olipvaValue     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6611,7 +6612,7 @@ data OrderLineItemProductVariantAttribute = OrderLineItemProductVariantAttribute
 orderLineItemProductVariantAttribute
     :: OrderLineItemProductVariantAttribute
 orderLineItemProductVariantAttribute =
-    OrderLineItemProductVariantAttribute
+    OrderLineItemProductVariantAttribute'
     { _olipvaDimension = Nothing
     , _olipvaValue = Nothing
     }
@@ -6632,12 +6633,12 @@ instance FromJSON
         parseJSON
           = withObject "OrderLineItemProductVariantAttribute"
               (\ o ->
-                 OrderLineItemProductVariantAttribute <$>
+                 OrderLineItemProductVariantAttribute' <$>
                    (o .:? "dimension") <*> (o .:? "value"))
 
 instance ToJSON OrderLineItemProductVariantAttribute
          where
-        toJSON OrderLineItemProductVariantAttribute{..}
+        toJSON OrderLineItemProductVariantAttribute'{..}
           = object
               (catMaybes
                  [("dimension" .=) <$> _olipvaDimension,
@@ -6645,7 +6646,7 @@ instance ToJSON OrderLineItemProductVariantAttribute
 
 --
 -- /See:/ 'ordersCustomBatchResponseEntry' smart constructor.
-data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry
+data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry'
     { _oKind            :: !Text
     , _oExecutionStatus :: !(Maybe Text)
     , _oErrors          :: !(Maybe Errors)
@@ -6669,7 +6670,7 @@ data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry
 ordersCustomBatchResponseEntry
     :: OrdersCustomBatchResponseEntry
 ordersCustomBatchResponseEntry =
-    OrdersCustomBatchResponseEntry
+    OrdersCustomBatchResponseEntry'
     { _oKind = "content#ordersCustomBatchResponseEntry"
     , _oExecutionStatus = Nothing
     , _oErrors = Nothing
@@ -6709,7 +6710,7 @@ instance FromJSON OrdersCustomBatchResponseEntry
         parseJSON
           = withObject "OrdersCustomBatchResponseEntry"
               (\ o ->
-                 OrdersCustomBatchResponseEntry <$>
+                 OrdersCustomBatchResponseEntry' <$>
                    (o .:? "kind" .!=
                       "content#ordersCustomBatchResponseEntry")
                      <*> (o .:? "executionStatus")
@@ -6718,7 +6719,7 @@ instance FromJSON OrdersCustomBatchResponseEntry
                      <*> (o .:? "batchId"))
 
 instance ToJSON OrdersCustomBatchResponseEntry where
-        toJSON OrdersCustomBatchResponseEntry{..}
+        toJSON OrdersCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oKind),
@@ -6729,7 +6730,7 @@ instance ToJSON OrdersCustomBatchResponseEntry where
 -- | A carrier-calculated shipping rate.
 --
 -- /See:/ 'accountShippingCarrierRate' smart constructor.
-data AccountShippingCarrierRate = AccountShippingCarrierRate
+data AccountShippingCarrierRate = AccountShippingCarrierRate'
     { _ascrCarrier          :: !(Maybe Text)
     , _ascrSaleCountry      :: !(Maybe Text)
     , _ascrShippingOrigin   :: !(Maybe Text)
@@ -6759,7 +6760,7 @@ data AccountShippingCarrierRate = AccountShippingCarrierRate
 accountShippingCarrierRate
     :: AccountShippingCarrierRate
 accountShippingCarrierRate =
-    AccountShippingCarrierRate
+    AccountShippingCarrierRate'
     { _ascrCarrier = Nothing
     , _ascrSaleCountry = Nothing
     , _ascrShippingOrigin = Nothing
@@ -6815,7 +6816,7 @@ instance FromJSON AccountShippingCarrierRate where
         parseJSON
           = withObject "AccountShippingCarrierRate"
               (\ o ->
-                 AccountShippingCarrierRate <$>
+                 AccountShippingCarrierRate' <$>
                    (o .:? "carrier") <*> (o .:? "saleCountry") <*>
                      (o .:? "shippingOrigin")
                      <*> (o .:? "carrierService")
@@ -6824,7 +6825,7 @@ instance FromJSON AccountShippingCarrierRate where
                      <*> (o .:? "modifierFlatRate"))
 
 instance ToJSON AccountShippingCarrierRate where
-        toJSON AccountShippingCarrierRate{..}
+        toJSON AccountShippingCarrierRate'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _ascrCarrier,
@@ -6837,7 +6838,7 @@ instance ToJSON AccountShippingCarrierRate where
 
 --
 -- /See:/ 'orderPromotion' smart constructor.
-data OrderPromotion = OrderPromotion
+data OrderPromotion = OrderPromotion'
     { _opEffectiveDates        :: !(Maybe Text)
     , _opGenericRedemptionCode :: !(Maybe Text)
     , _opRedemptionChannel     :: !(Maybe Text)
@@ -6867,7 +6868,7 @@ data OrderPromotion = OrderPromotion
 orderPromotion
     :: OrderPromotion
 orderPromotion =
-    OrderPromotion
+    OrderPromotion'
     { _opEffectiveDates = Nothing
     , _opGenericRedemptionCode = Nothing
     , _opRedemptionChannel = Nothing
@@ -6929,7 +6930,7 @@ instance FromJSON OrderPromotion where
         parseJSON
           = withObject "OrderPromotion"
               (\ o ->
-                 OrderPromotion <$>
+                 OrderPromotion' <$>
                    (o .:? "effectiveDates") <*>
                      (o .:? "genericRedemptionCode")
                      <*> (o .:? "redemptionChannel")
@@ -6939,7 +6940,7 @@ instance FromJSON OrderPromotion where
                      <*> (o .:? "productApplicability"))
 
 instance ToJSON OrderPromotion where
-        toJSON OrderPromotion{..}
+        toJSON OrderPromotion'{..}
           = object
               (catMaybes
                  [("effectiveDates" .=) <$> _opEffectiveDates,
@@ -6954,7 +6955,7 @@ instance ToJSON OrderPromotion where
 
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price
+data Price = Price'
     { _pValue    :: !(Maybe Text)
     , _pCurrency :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6969,7 +6970,7 @@ data Price = Price
 price
     :: Price
 price =
-    Price
+    Price'
     { _pValue = Nothing
     , _pCurrency = Nothing
     }
@@ -6987,10 +6988,10 @@ instance FromJSON Price where
         parseJSON
           = withObject "Price"
               (\ o ->
-                 Price <$> (o .:? "value") <*> (o .:? "currency"))
+                 Price' <$> (o .:? "value") <*> (o .:? "currency"))
 
 instance ToJSON Price where
-        toJSON Price{..}
+        toJSON Price'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pValue,
@@ -6998,7 +6999,7 @@ instance ToJSON Price where
 
 --
 -- /See:/ 'orderLineItemShippingDetails' smart constructor.
-data OrderLineItemShippingDetails = OrderLineItemShippingDetails
+data OrderLineItemShippingDetails = OrderLineItemShippingDetails'
     { _olisdShipByDate    :: !(Maybe Text)
     , _olisdMethod        :: !(Maybe OrderLineItemShippingDetailsMethod)
     , _olisdDeliverByDate :: !(Maybe Text)
@@ -7016,7 +7017,7 @@ data OrderLineItemShippingDetails = OrderLineItemShippingDetails
 orderLineItemShippingDetails
     :: OrderLineItemShippingDetails
 orderLineItemShippingDetails =
-    OrderLineItemShippingDetails
+    OrderLineItemShippingDetails'
     { _olisdShipByDate = Nothing
     , _olisdMethod = Nothing
     , _olisdDeliverByDate = Nothing
@@ -7043,12 +7044,12 @@ instance FromJSON OrderLineItemShippingDetails where
         parseJSON
           = withObject "OrderLineItemShippingDetails"
               (\ o ->
-                 OrderLineItemShippingDetails <$>
+                 OrderLineItemShippingDetails' <$>
                    (o .:? "shipByDate") <*> (o .:? "method") <*>
                      (o .:? "deliverByDate"))
 
 instance ToJSON OrderLineItemShippingDetails where
-        toJSON OrderLineItemShippingDetails{..}
+        toJSON OrderLineItemShippingDetails'{..}
           = object
               (catMaybes
                  [("shipByDate" .=) <$> _olisdShipByDate,
@@ -7057,7 +7058,7 @@ instance ToJSON OrderLineItemShippingDetails where
 
 --
 -- /See:/ 'datafeedsCustomBatchResponse' smart constructor.
-data DatafeedsCustomBatchResponse = DatafeedsCustomBatchResponse
+data DatafeedsCustomBatchResponse = DatafeedsCustomBatchResponse'
     { _datEntries :: !(Maybe [DatafeedsCustomBatchResponseEntry])
     , _datKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7072,7 +7073,7 @@ data DatafeedsCustomBatchResponse = DatafeedsCustomBatchResponse
 datafeedsCustomBatchResponse
     :: DatafeedsCustomBatchResponse
 datafeedsCustomBatchResponse =
-    DatafeedsCustomBatchResponse
+    DatafeedsCustomBatchResponse'
     { _datEntries = Nothing
     , _datKind = "content#datafeedsCustomBatchResponse"
     }
@@ -7093,13 +7094,13 @@ instance FromJSON DatafeedsCustomBatchResponse where
         parseJSON
           = withObject "DatafeedsCustomBatchResponse"
               (\ o ->
-                 DatafeedsCustomBatchResponse <$>
+                 DatafeedsCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#datafeedsCustomBatchResponse"))
 
 instance ToJSON DatafeedsCustomBatchResponse where
-        toJSON DatafeedsCustomBatchResponse{..}
+        toJSON DatafeedsCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _datEntries,
@@ -7107,7 +7108,7 @@ instance ToJSON DatafeedsCustomBatchResponse where
 
 --
 -- /See:/ 'orderDeliveryDetails' smart constructor.
-data OrderDeliveryDetails = OrderDeliveryDetails
+data OrderDeliveryDetails = OrderDeliveryDetails'
     { _oddAddress     :: !(Maybe OrderAddress)
     , _oddPhoneNumber :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7122,7 +7123,7 @@ data OrderDeliveryDetails = OrderDeliveryDetails
 orderDeliveryDetails
     :: OrderDeliveryDetails
 orderDeliveryDetails =
-    OrderDeliveryDetails
+    OrderDeliveryDetails'
     { _oddAddress = Nothing
     , _oddPhoneNumber = Nothing
     }
@@ -7142,11 +7143,11 @@ instance FromJSON OrderDeliveryDetails where
         parseJSON
           = withObject "OrderDeliveryDetails"
               (\ o ->
-                 OrderDeliveryDetails <$>
+                 OrderDeliveryDetails' <$>
                    (o .:? "address") <*> (o .:? "phoneNumber"))
 
 instance ToJSON OrderDeliveryDetails where
-        toJSON OrderDeliveryDetails{..}
+        toJSON OrderDeliveryDetails'{..}
           = object
               (catMaybes
                  [("address" .=) <$> _oddAddress,
@@ -7154,7 +7155,7 @@ instance ToJSON OrderDeliveryDetails where
 
 --
 -- /See:/ 'ordersCancelResponse' smart constructor.
-data OrdersCancelResponse = OrdersCancelResponse
+data OrdersCancelResponse = OrdersCancelResponse'
     { _ocrKind            :: !Text
     , _ocrExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7169,7 +7170,7 @@ data OrdersCancelResponse = OrdersCancelResponse
 ordersCancelResponse
     :: OrdersCancelResponse
 ordersCancelResponse =
-    OrdersCancelResponse
+    OrdersCancelResponse'
     { _ocrKind = "content#ordersCancelResponse"
     , _ocrExecutionStatus = Nothing
     }
@@ -7189,12 +7190,12 @@ instance FromJSON OrdersCancelResponse where
         parseJSON
           = withObject "OrdersCancelResponse"
               (\ o ->
-                 OrdersCancelResponse <$>
+                 OrdersCancelResponse' <$>
                    (o .:? "kind" .!= "content#ordersCancelResponse") <*>
                      (o .:? "executionStatus"))
 
 instance ToJSON OrdersCancelResponse where
-        toJSON OrdersCancelResponse{..}
+        toJSON OrdersCancelResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ocrKind),
@@ -7202,7 +7203,7 @@ instance ToJSON OrdersCancelResponse where
 
 --
 -- /See:/ 'testOrder' smart constructor.
-data TestOrder = TestOrder
+data TestOrder = TestOrder'
     { _toKind                      :: !Text
     , _toLineItems                 :: !(Maybe [TestOrderLineItem])
     , _toShippingOption            :: !(Maybe Text)
@@ -7238,7 +7239,7 @@ data TestOrder = TestOrder
 testOrder
     :: TestOrder
 testOrder =
-    TestOrder
+    TestOrder'
     { _toKind = "content#testOrder"
     , _toLineItems = Nothing
     , _toShippingOption = Nothing
@@ -7309,7 +7310,7 @@ instance FromJSON TestOrder where
         parseJSON
           = withObject "TestOrder"
               (\ o ->
-                 TestOrder <$>
+                 TestOrder' <$>
                    (o .:? "kind" .!= "content#testOrder") <*>
                      (o .:? "lineItems" .!= mempty)
                      <*> (o .:? "shippingOption")
@@ -7321,7 +7322,7 @@ instance FromJSON TestOrder where
                      <*> (o .:? "shippingCost"))
 
 instance ToJSON TestOrder where
-        toJSON TestOrder{..}
+        toJSON TestOrder'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _toKind),
@@ -7338,7 +7339,7 @@ instance ToJSON TestOrder where
 -- | A batch entry encoding a single non-batch datafeedstatuses response.
 --
 -- /See:/ 'datafeedstatusesCustomBatchResponseEntry' smart constructor.
-data DatafeedstatusesCustomBatchResponseEntry = DatafeedstatusesCustomBatchResponseEntry
+data DatafeedstatusesCustomBatchResponseEntry = DatafeedstatusesCustomBatchResponseEntry'
     { _datErrors         :: !(Maybe Errors)
     , _datDatafeedStatus :: !(Maybe DatafeedStatus)
     , _datBatchId        :: !(Maybe (Textual Word32))
@@ -7356,7 +7357,7 @@ data DatafeedstatusesCustomBatchResponseEntry = DatafeedstatusesCustomBatchRespo
 datafeedstatusesCustomBatchResponseEntry
     :: DatafeedstatusesCustomBatchResponseEntry
 datafeedstatusesCustomBatchResponseEntry =
-    DatafeedstatusesCustomBatchResponseEntry
+    DatafeedstatusesCustomBatchResponseEntry'
     { _datErrors = Nothing
     , _datDatafeedStatus = Nothing
     , _datBatchId = Nothing
@@ -7386,13 +7387,13 @@ instance FromJSON
           = withObject
               "DatafeedstatusesCustomBatchResponseEntry"
               (\ o ->
-                 DatafeedstatusesCustomBatchResponseEntry <$>
+                 DatafeedstatusesCustomBatchResponseEntry' <$>
                    (o .:? "errors") <*> (o .:? "datafeedStatus") <*>
                      (o .:? "batchId"))
 
 instance ToJSON
          DatafeedstatusesCustomBatchResponseEntry where
-        toJSON DatafeedstatusesCustomBatchResponseEntry{..}
+        toJSON DatafeedstatusesCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [("errors" .=) <$> _datErrors,
@@ -7401,7 +7402,7 @@ instance ToJSON
 
 --
 -- /See:/ 'orderRefund' smart constructor.
-data OrderRefund = OrderRefund
+data OrderRefund = OrderRefund'
     { _oAmount       :: !(Maybe Price)
     , _oActor        :: !(Maybe Text)
     , _oReason       :: !(Maybe Text)
@@ -7425,7 +7426,7 @@ data OrderRefund = OrderRefund
 orderRefund
     :: OrderRefund
 orderRefund =
-    OrderRefund
+    OrderRefund'
     { _oAmount = Nothing
     , _oActor = Nothing
     , _oReason = Nothing
@@ -7460,14 +7461,14 @@ instance FromJSON OrderRefund where
         parseJSON
           = withObject "OrderRefund"
               (\ o ->
-                 OrderRefund <$>
+                 OrderRefund' <$>
                    (o .:? "amount") <*> (o .:? "actor") <*>
                      (o .:? "reason")
                      <*> (o .:? "creationDate")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrderRefund where
-        toJSON OrderRefund{..}
+        toJSON OrderRefund'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _oAmount,
@@ -7477,7 +7478,7 @@ instance ToJSON OrderRefund where
 
 --
 -- /See:/ 'testOrderLineItemProduct' smart constructor.
-data TestOrderLineItemProduct = TestOrderLineItemProduct
+data TestOrderLineItemProduct = TestOrderLineItemProduct'
     { _tolipImageLink         :: !(Maybe Text)
     , _tolipChannel           :: !(Maybe Text)
     , _tolipBrand             :: !(Maybe Text)
@@ -7525,7 +7526,7 @@ data TestOrderLineItemProduct = TestOrderLineItemProduct
 testOrderLineItemProduct
     :: TestOrderLineItemProduct
 testOrderLineItemProduct =
-    TestOrderLineItemProduct
+    TestOrderLineItemProduct'
     { _tolipImageLink = Nothing
     , _tolipChannel = Nothing
     , _tolipBrand = Nothing
@@ -7617,7 +7618,7 @@ instance FromJSON TestOrderLineItemProduct where
         parseJSON
           = withObject "TestOrderLineItemProduct"
               (\ o ->
-                 TestOrderLineItemProduct <$>
+                 TestOrderLineItemProduct' <$>
                    (o .:? "imageLink") <*> (o .:? "channel") <*>
                      (o .:? "brand")
                      <*> (o .:? "targetCountry")
@@ -7632,7 +7633,7 @@ instance FromJSON TestOrderLineItemProduct where
                      <*> (o .:? "condition"))
 
 instance ToJSON TestOrderLineItemProduct where
-        toJSON TestOrderLineItemProduct{..}
+        toJSON TestOrderLineItemProduct'{..}
           = object
               (catMaybes
                  [("imageLink" .=) <$> _tolipImageLink,
@@ -7651,7 +7652,7 @@ instance ToJSON TestOrderLineItemProduct where
 
 --
 -- /See:/ 'accounttaxCustomBatchResponse' smart constructor.
-data AccounttaxCustomBatchResponse = AccounttaxCustomBatchResponse
+data AccounttaxCustomBatchResponse = AccounttaxCustomBatchResponse'
     { _a2Entries :: !(Maybe [AccounttaxCustomBatchResponseEntry])
     , _a2Kind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7666,7 +7667,7 @@ data AccounttaxCustomBatchResponse = AccounttaxCustomBatchResponse
 accounttaxCustomBatchResponse
     :: AccounttaxCustomBatchResponse
 accounttaxCustomBatchResponse =
-    AccounttaxCustomBatchResponse
+    AccounttaxCustomBatchResponse'
     { _a2Entries = Nothing
     , _a2Kind = "content#accounttaxCustomBatchResponse"
     }
@@ -7687,13 +7688,13 @@ instance FromJSON AccounttaxCustomBatchResponse where
         parseJSON
           = withObject "AccounttaxCustomBatchResponse"
               (\ o ->
-                 AccounttaxCustomBatchResponse <$>
+                 AccounttaxCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#accounttaxCustomBatchResponse"))
 
 instance ToJSON AccounttaxCustomBatchResponse where
-        toJSON AccounttaxCustomBatchResponse{..}
+        toJSON AccounttaxCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _a2Entries,
@@ -7702,7 +7703,7 @@ instance ToJSON AccounttaxCustomBatchResponse where
 -- | A batch entry encoding a single non-batch inventory request.
 --
 -- /See:/ 'inventoryCustomBatchRequestEntry' smart constructor.
-data InventoryCustomBatchRequestEntry = InventoryCustomBatchRequestEntry
+data InventoryCustomBatchRequestEntry = InventoryCustomBatchRequestEntry'
     { _iMerchantId :: !(Maybe (Textual Word64))
     , _iStoreCode  :: !(Maybe Text)
     , _iInventory  :: !(Maybe Inventory)
@@ -7726,7 +7727,7 @@ data InventoryCustomBatchRequestEntry = InventoryCustomBatchRequestEntry
 inventoryCustomBatchRequestEntry
     :: InventoryCustomBatchRequestEntry
 inventoryCustomBatchRequestEntry =
-    InventoryCustomBatchRequestEntry
+    InventoryCustomBatchRequestEntry'
     { _iMerchantId = Nothing
     , _iStoreCode = Nothing
     , _iInventory = Nothing
@@ -7767,7 +7768,7 @@ instance FromJSON InventoryCustomBatchRequestEntry
         parseJSON
           = withObject "InventoryCustomBatchRequestEntry"
               (\ o ->
-                 InventoryCustomBatchRequestEntry <$>
+                 InventoryCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "storeCode") <*>
                      (o .:? "inventory")
                      <*> (o .:? "productId")
@@ -7775,7 +7776,7 @@ instance FromJSON InventoryCustomBatchRequestEntry
 
 instance ToJSON InventoryCustomBatchRequestEntry
          where
-        toJSON InventoryCustomBatchRequestEntry{..}
+        toJSON InventoryCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _iMerchantId,
@@ -7786,7 +7787,7 @@ instance ToJSON InventoryCustomBatchRequestEntry
 
 --
 -- /See:/ 'orderAddress' smart constructor.
-data OrderAddress = OrderAddress
+data OrderAddress = OrderAddress'
     { _oaRecipientName   :: !(Maybe Text)
     , _oaStreetAddress   :: !(Maybe [Text])
     , _oaCountry         :: !(Maybe Text)
@@ -7819,7 +7820,7 @@ data OrderAddress = OrderAddress
 orderAddress
     :: OrderAddress
 orderAddress =
-    OrderAddress
+    OrderAddress'
     { _oaRecipientName = Nothing
     , _oaStreetAddress = Nothing
     , _oaCountry = Nothing
@@ -7884,7 +7885,7 @@ instance FromJSON OrderAddress where
         parseJSON
           = withObject "OrderAddress"
               (\ o ->
-                 OrderAddress <$>
+                 OrderAddress' <$>
                    (o .:? "recipientName") <*>
                      (o .:? "streetAddress" .!= mempty)
                      <*> (o .:? "country")
@@ -7895,7 +7896,7 @@ instance FromJSON OrderAddress where
                      <*> (o .:? "region"))
 
 instance ToJSON OrderAddress where
-        toJSON OrderAddress{..}
+        toJSON OrderAddress'{..}
           = object
               (catMaybes
                  [("recipientName" .=) <$> _oaRecipientName,
@@ -7909,7 +7910,7 @@ instance ToJSON OrderAddress where
 
 --
 -- /See:/ 'productUnitPricingBaseMeasure' smart constructor.
-data ProductUnitPricingBaseMeasure = ProductUnitPricingBaseMeasure
+data ProductUnitPricingBaseMeasure = ProductUnitPricingBaseMeasure'
     { _pupbmValue :: !(Maybe (Textual Int64))
     , _pupbmUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7924,7 +7925,7 @@ data ProductUnitPricingBaseMeasure = ProductUnitPricingBaseMeasure
 productUnitPricingBaseMeasure
     :: ProductUnitPricingBaseMeasure
 productUnitPricingBaseMeasure =
-    ProductUnitPricingBaseMeasure
+    ProductUnitPricingBaseMeasure'
     { _pupbmValue = Nothing
     , _pupbmUnit = Nothing
     }
@@ -7944,11 +7945,11 @@ instance FromJSON ProductUnitPricingBaseMeasure where
         parseJSON
           = withObject "ProductUnitPricingBaseMeasure"
               (\ o ->
-                 ProductUnitPricingBaseMeasure <$>
+                 ProductUnitPricingBaseMeasure' <$>
                    (o .:? "value") <*> (o .:? "unit"))
 
 instance ToJSON ProductUnitPricingBaseMeasure where
-        toJSON ProductUnitPricingBaseMeasure{..}
+        toJSON ProductUnitPricingBaseMeasure'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _pupbmValue,
@@ -7956,7 +7957,7 @@ instance ToJSON ProductUnitPricingBaseMeasure where
 
 --
 -- /See:/ 'accountShippingCondition' smart constructor.
-data AccountShippingCondition = AccountShippingCondition
+data AccountShippingCondition = AccountShippingCondition'
     { _ascWeightMax               :: !(Maybe Weight)
     , _ascDeliveryPostalCode      :: !(Maybe Text)
     , _ascDeliveryLocationGroup   :: !(Maybe Text)
@@ -7986,7 +7987,7 @@ data AccountShippingCondition = AccountShippingCondition
 accountShippingCondition
     :: AccountShippingCondition
 accountShippingCondition =
-    AccountShippingCondition
+    AccountShippingCondition'
     { _ascWeightMax = Nothing
     , _ascDeliveryPostalCode = Nothing
     , _ascDeliveryLocationGroup = Nothing
@@ -8045,7 +8046,7 @@ instance FromJSON AccountShippingCondition where
         parseJSON
           = withObject "AccountShippingCondition"
               (\ o ->
-                 AccountShippingCondition <$>
+                 AccountShippingCondition' <$>
                    (o .:? "weightMax") <*> (o .:? "deliveryPostalCode")
                      <*> (o .:? "deliveryLocationGroup")
                      <*> (o .:? "priceMax")
@@ -8054,7 +8055,7 @@ instance FromJSON AccountShippingCondition where
                      <*> (o .:? "deliveryPostalCodeRange"))
 
 instance ToJSON AccountShippingCondition where
-        toJSON AccountShippingCondition{..}
+        toJSON AccountShippingCondition'{..}
           = object
               (catMaybes
                  [("weightMax" .=) <$> _ascWeightMax,
@@ -8069,7 +8070,7 @@ instance ToJSON AccountShippingCondition where
 
 --
 -- /See:/ 'datafeedsListResponse' smart constructor.
-data DatafeedsListResponse = DatafeedsListResponse
+data DatafeedsListResponse = DatafeedsListResponse'
     { _dlrNextPageToken :: !(Maybe Text)
     , _dlrKind          :: !Text
     , _dlrResources     :: !(Maybe [Datafeed])
@@ -8087,7 +8088,7 @@ data DatafeedsListResponse = DatafeedsListResponse
 datafeedsListResponse
     :: DatafeedsListResponse
 datafeedsListResponse =
-    DatafeedsListResponse
+    DatafeedsListResponse'
     { _dlrNextPageToken = Nothing
     , _dlrKind = "content#datafeedsListResponse"
     , _dlrResources = Nothing
@@ -8114,13 +8115,13 @@ instance FromJSON DatafeedsListResponse where
         parseJSON
           = withObject "DatafeedsListResponse"
               (\ o ->
-                 DatafeedsListResponse <$>
+                 DatafeedsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "content#datafeedsListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON DatafeedsListResponse where
-        toJSON DatafeedsListResponse{..}
+        toJSON DatafeedsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dlrNextPageToken,
@@ -8130,7 +8131,7 @@ instance ToJSON DatafeedsListResponse where
 -- | A batch entry encoding a single non-batch products response.
 --
 -- /See:/ 'productsCustomBatchResponseEntry' smart constructor.
-data ProductsCustomBatchResponseEntry = ProductsCustomBatchResponseEntry
+data ProductsCustomBatchResponseEntry = ProductsCustomBatchResponseEntry'
     { _proKind    :: !Text
     , _proProduct :: !(Maybe Product)
     , _proErrors  :: !(Maybe Errors)
@@ -8151,7 +8152,7 @@ data ProductsCustomBatchResponseEntry = ProductsCustomBatchResponseEntry
 productsCustomBatchResponseEntry
     :: ProductsCustomBatchResponseEntry
 productsCustomBatchResponseEntry =
-    ProductsCustomBatchResponseEntry
+    ProductsCustomBatchResponseEntry'
     { _proKind = "content#productsCustomBatchResponseEntry"
     , _proProduct = Nothing
     , _proErrors = Nothing
@@ -8185,7 +8186,7 @@ instance FromJSON ProductsCustomBatchResponseEntry
         parseJSON
           = withObject "ProductsCustomBatchResponseEntry"
               (\ o ->
-                 ProductsCustomBatchResponseEntry <$>
+                 ProductsCustomBatchResponseEntry' <$>
                    (o .:? "kind" .!=
                       "content#productsCustomBatchResponseEntry")
                      <*> (o .:? "product")
@@ -8194,7 +8195,7 @@ instance FromJSON ProductsCustomBatchResponseEntry
 
 instance ToJSON ProductsCustomBatchResponseEntry
          where
-        toJSON ProductsCustomBatchResponseEntry{..}
+        toJSON ProductsCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _proKind),
@@ -8204,7 +8205,7 @@ instance ToJSON ProductsCustomBatchResponseEntry
 
 --
 -- /See:/ 'orderPaymentMethod' smart constructor.
-data OrderPaymentMethod = OrderPaymentMethod
+data OrderPaymentMethod = OrderPaymentMethod'
     { _opmExpirationMonth :: !(Maybe (Textual Int32))
     , _opmExpirationYear  :: !(Maybe (Textual Int32))
     , _opmPhoneNumber     :: !(Maybe Text)
@@ -8231,7 +8232,7 @@ data OrderPaymentMethod = OrderPaymentMethod
 orderPaymentMethod
     :: OrderPaymentMethod
 orderPaymentMethod =
-    OrderPaymentMethod
+    OrderPaymentMethod'
     { _opmExpirationMonth = Nothing
     , _opmExpirationYear = Nothing
     , _opmPhoneNumber = Nothing
@@ -8280,7 +8281,7 @@ instance FromJSON OrderPaymentMethod where
         parseJSON
           = withObject "OrderPaymentMethod"
               (\ o ->
-                 OrderPaymentMethod <$>
+                 OrderPaymentMethod' <$>
                    (o .:? "expirationMonth") <*>
                      (o .:? "expirationYear")
                      <*> (o .:? "phoneNumber")
@@ -8289,7 +8290,7 @@ instance FromJSON OrderPaymentMethod where
                      <*> (o .:? "type"))
 
 instance ToJSON OrderPaymentMethod where
-        toJSON OrderPaymentMethod{..}
+        toJSON OrderPaymentMethod'{..}
           = object
               (catMaybes
                  [("expirationMonth" .=) <$> _opmExpirationMonth,
@@ -8302,7 +8303,7 @@ instance ToJSON OrderPaymentMethod where
 -- | Product data.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product
+data Product = Product'
     { _ppDisplayAdsLink         :: !(Maybe Text)
     , _ppCustomLabel1           :: !(Maybe Text)
     , _ppShippingWidth          :: !(Maybe ProductShippingDimension)
@@ -8524,7 +8525,7 @@ data Product = Product
 product
     :: Product
 product =
-    Product
+    Product'
     { _ppDisplayAdsLink = Nothing
     , _ppCustomLabel1 = Nothing
     , _ppShippingWidth = Nothing
@@ -9032,7 +9033,7 @@ instance FromJSON Product where
         parseJSON
           = withObject "Product"
               (\ o ->
-                 Product <$>
+                 Product' <$>
                    (o .:? "displayAdsLink") <*> (o .:? "customLabel1")
                      <*> (o .:? "shippingWidth")
                      <*> (o .:? "customGroups" .!= mempty)
@@ -9105,7 +9106,7 @@ instance FromJSON Product where
                      <*> (o .:? "displayAdsId"))
 
 instance ToJSON Product where
-        toJSON Product{..}
+        toJSON Product'{..}
           = object
               (catMaybes
                  [("displayAdsLink" .=) <$> _ppDisplayAdsLink,
@@ -9189,7 +9190,7 @@ instance ToJSON Product where
 -- | A list of errors returned by a failed batch entry.
 --
 -- /See:/ 'errors' smart constructor.
-data Errors = Errors
+data Errors = Errors'
     { _errCode    :: !(Maybe (Textual Word32))
     , _errMessage :: !(Maybe Text)
     , _errErrors  :: !(Maybe [Error'])
@@ -9207,7 +9208,7 @@ data Errors = Errors
 errors
     :: Errors
 errors =
-    Errors
+    Errors'
     { _errCode = Nothing
     , _errMessage = Nothing
     , _errErrors = Nothing
@@ -9235,12 +9236,12 @@ instance FromJSON Errors where
         parseJSON
           = withObject "Errors"
               (\ o ->
-                 Errors <$>
+                 Errors' <$>
                    (o .:? "code") <*> (o .:? "message") <*>
                      (o .:? "errors" .!= mempty))
 
 instance ToJSON Errors where
-        toJSON Errors{..}
+        toJSON Errors'{..}
           = object
               (catMaybes
                  [("code" .=) <$> _errCode,
@@ -9250,7 +9251,7 @@ instance ToJSON Errors where
 -- | A batch entry encoding a single non-batch accountstatuses response.
 --
 -- /See:/ 'accountstatusesCustomBatchResponseEntry' smart constructor.
-data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry
+data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchResponseEntry'
     { _acccAccountStatus :: !(Maybe AccountStatus)
     , _acccErrors        :: !(Maybe Errors)
     , _acccBatchId       :: !(Maybe (Textual Word32))
@@ -9268,7 +9269,7 @@ data AccountstatusesCustomBatchResponseEntry = AccountstatusesCustomBatchRespons
 accountstatusesCustomBatchResponseEntry
     :: AccountstatusesCustomBatchResponseEntry
 accountstatusesCustomBatchResponseEntry =
-    AccountstatusesCustomBatchResponseEntry
+    AccountstatusesCustomBatchResponseEntry'
     { _acccAccountStatus = Nothing
     , _acccErrors = Nothing
     , _acccBatchId = Nothing
@@ -9298,13 +9299,13 @@ instance FromJSON
           = withObject
               "AccountstatusesCustomBatchResponseEntry"
               (\ o ->
-                 AccountstatusesCustomBatchResponseEntry <$>
+                 AccountstatusesCustomBatchResponseEntry' <$>
                    (o .:? "accountStatus") <*> (o .:? "errors") <*>
                      (o .:? "batchId"))
 
 instance ToJSON
          AccountstatusesCustomBatchResponseEntry where
-        toJSON AccountstatusesCustomBatchResponseEntry{..}
+        toJSON AccountstatusesCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [("accountStatus" .=) <$> _acccAccountStatus,
@@ -9313,7 +9314,7 @@ instance ToJSON
 
 --
 -- /See:/ 'inventorySetResponse' smart constructor.
-newtype InventorySetResponse = InventorySetResponse
+newtype InventorySetResponse = InventorySetResponse'
     { _isrKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9325,7 +9326,7 @@ newtype InventorySetResponse = InventorySetResponse
 inventorySetResponse
     :: InventorySetResponse
 inventorySetResponse =
-    InventorySetResponse
+    InventorySetResponse'
     { _isrKind = "content#inventorySetResponse"
     }
 
@@ -9338,16 +9339,16 @@ instance FromJSON InventorySetResponse where
         parseJSON
           = withObject "InventorySetResponse"
               (\ o ->
-                 InventorySetResponse <$>
+                 InventorySetResponse' <$>
                    (o .:? "kind" .!= "content#inventorySetResponse"))
 
 instance ToJSON InventorySetResponse where
-        toJSON InventorySetResponse{..}
+        toJSON InventorySetResponse'{..}
           = object (catMaybes [Just ("kind" .= _isrKind)])
 
 --
 -- /See:/ 'ordersCancelLineItemResponse' smart constructor.
-data OrdersCancelLineItemResponse = OrdersCancelLineItemResponse
+data OrdersCancelLineItemResponse = OrdersCancelLineItemResponse'
     { _oclirKind            :: !Text
     , _oclirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9362,7 +9363,7 @@ data OrdersCancelLineItemResponse = OrdersCancelLineItemResponse
 ordersCancelLineItemResponse
     :: OrdersCancelLineItemResponse
 ordersCancelLineItemResponse =
-    OrdersCancelLineItemResponse
+    OrdersCancelLineItemResponse'
     { _oclirKind = "content#ordersCancelLineItemResponse"
     , _oclirExecutionStatus = Nothing
     }
@@ -9383,13 +9384,13 @@ instance FromJSON OrdersCancelLineItemResponse where
         parseJSON
           = withObject "OrdersCancelLineItemResponse"
               (\ o ->
-                 OrdersCancelLineItemResponse <$>
+                 OrdersCancelLineItemResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersCancelLineItemResponse")
                      <*> (o .:? "executionStatus"))
 
 instance ToJSON OrdersCancelLineItemResponse where
-        toJSON OrdersCancelLineItemResponse{..}
+        toJSON OrdersCancelLineItemResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oclirKind),
@@ -9397,7 +9398,7 @@ instance ToJSON OrdersCancelLineItemResponse where
 
 --
 -- /See:/ 'testOrderLineItem' smart constructor.
-data TestOrderLineItem = TestOrderLineItem
+data TestOrderLineItem = TestOrderLineItem'
     { _toliQuantityOrdered :: !(Maybe (Textual Word32))
     , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
     , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
@@ -9421,7 +9422,7 @@ data TestOrderLineItem = TestOrderLineItem
 testOrderLineItem
     :: TestOrderLineItem
 testOrderLineItem =
-    TestOrderLineItem
+    TestOrderLineItem'
     { _toliQuantityOrdered = Nothing
     , _toliReturnInfo = Nothing
     , _toliShippingDetails = Nothing
@@ -9462,14 +9463,14 @@ instance FromJSON TestOrderLineItem where
         parseJSON
           = withObject "TestOrderLineItem"
               (\ o ->
-                 TestOrderLineItem <$>
+                 TestOrderLineItem' <$>
                    (o .:? "quantityOrdered") <*> (o .:? "returnInfo")
                      <*> (o .:? "shippingDetails")
                      <*> (o .:? "product")
                      <*> (o .:? "unitTax"))
 
 instance ToJSON TestOrderLineItem where
-        toJSON TestOrderLineItem{..}
+        toJSON TestOrderLineItem'{..}
           = object
               (catMaybes
                  [("quantityOrdered" .=) <$> _toliQuantityOrdered,
@@ -9481,7 +9482,7 @@ instance ToJSON TestOrderLineItem where
 -- | A batch entry encoding a single non-batch productstatuses request.
 --
 -- /See:/ 'productstatusesCustomBatchRequestEntry' smart constructor.
-data ProductstatusesCustomBatchRequestEntry = ProductstatusesCustomBatchRequestEntry
+data ProductstatusesCustomBatchRequestEntry = ProductstatusesCustomBatchRequestEntry'
     { _pcbrecMerchantId :: !(Maybe (Textual Word64))
     , _pcbrecMethod     :: !(Maybe Text)
     , _pcbrecProductId  :: !(Maybe Text)
@@ -9502,7 +9503,7 @@ data ProductstatusesCustomBatchRequestEntry = ProductstatusesCustomBatchRequestE
 productstatusesCustomBatchRequestEntry
     :: ProductstatusesCustomBatchRequestEntry
 productstatusesCustomBatchRequestEntry =
-    ProductstatusesCustomBatchRequestEntry
+    ProductstatusesCustomBatchRequestEntry'
     { _pcbrecMerchantId = Nothing
     , _pcbrecMethod = Nothing
     , _pcbrecProductId = Nothing
@@ -9538,14 +9539,14 @@ instance FromJSON
         parseJSON
           = withObject "ProductstatusesCustomBatchRequestEntry"
               (\ o ->
-                 ProductstatusesCustomBatchRequestEntry <$>
+                 ProductstatusesCustomBatchRequestEntry' <$>
                    (o .:? "merchantId") <*> (o .:? "method") <*>
                      (o .:? "productId")
                      <*> (o .:? "batchId"))
 
 instance ToJSON
          ProductstatusesCustomBatchRequestEntry where
-        toJSON ProductstatusesCustomBatchRequestEntry{..}
+        toJSON ProductstatusesCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("merchantId" .=) <$> _pcbrecMerchantId,
@@ -9556,7 +9557,7 @@ instance ToJSON
 -- | A batch entry encoding a single non-batch accountshipping response.
 --
 -- /See:/ 'accountshippingCustomBatchResponseEntry' smart constructor.
-data AccountshippingCustomBatchResponseEntry = AccountshippingCustomBatchResponseEntry
+data AccountshippingCustomBatchResponseEntry = AccountshippingCustomBatchResponseEntry'
     { _acbre1Kind            :: !Text
     , _acbre1Errors          :: !(Maybe Errors)
     , _acbre1AccountShipping :: !(Maybe AccountShipping)
@@ -9577,7 +9578,7 @@ data AccountshippingCustomBatchResponseEntry = AccountshippingCustomBatchRespons
 accountshippingCustomBatchResponseEntry
     :: AccountshippingCustomBatchResponseEntry
 accountshippingCustomBatchResponseEntry =
-    AccountshippingCustomBatchResponseEntry
+    AccountshippingCustomBatchResponseEntry'
     { _acbre1Kind = "content#accountshippingCustomBatchResponseEntry"
     , _acbre1Errors = Nothing
     , _acbre1AccountShipping = Nothing
@@ -9614,7 +9615,7 @@ instance FromJSON
           = withObject
               "AccountshippingCustomBatchResponseEntry"
               (\ o ->
-                 AccountshippingCustomBatchResponseEntry <$>
+                 AccountshippingCustomBatchResponseEntry' <$>
                    (o .:? "kind" .!=
                       "content#accountshippingCustomBatchResponseEntry")
                      <*> (o .:? "errors")
@@ -9623,7 +9624,7 @@ instance FromJSON
 
 instance ToJSON
          AccountshippingCustomBatchResponseEntry where
-        toJSON AccountshippingCustomBatchResponseEntry{..}
+        toJSON AccountshippingCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _acbre1Kind),
@@ -9633,7 +9634,7 @@ instance ToJSON
 
 --
 -- /See:/ 'productAspect' smart constructor.
-data ProductAspect = ProductAspect
+data ProductAspect = ProductAspect'
     { _paIntention       :: !(Maybe Text)
     , _paAspectName      :: !(Maybe Text)
     , _paDestinationName :: !(Maybe Text)
@@ -9651,7 +9652,7 @@ data ProductAspect = ProductAspect
 productAspect
     :: ProductAspect
 productAspect =
-    ProductAspect
+    ProductAspect'
     { _paIntention = Nothing
     , _paAspectName = Nothing
     , _paDestinationName = Nothing
@@ -9677,12 +9678,12 @@ instance FromJSON ProductAspect where
         parseJSON
           = withObject "ProductAspect"
               (\ o ->
-                 ProductAspect <$>
+                 ProductAspect' <$>
                    (o .:? "intention") <*> (o .:? "aspectName") <*>
                      (o .:? "destinationName"))
 
 instance ToJSON ProductAspect where
-        toJSON ProductAspect{..}
+        toJSON ProductAspect'{..}
           = object
               (catMaybes
                  [("intention" .=) <$> _paIntention,
@@ -9692,7 +9693,7 @@ instance ToJSON ProductAspect where
 -- | The shipping settings of a merchant account.
 --
 -- /See:/ 'accountShipping' smart constructor.
-data AccountShipping = AccountShipping
+data AccountShipping = AccountShipping'
     { _assRateTables     :: !(Maybe [AccountShippingRateTable])
     , _assCarrierRates   :: !(Maybe [AccountShippingCarrierRate])
     , _assKind           :: !Text
@@ -9719,7 +9720,7 @@ data AccountShipping = AccountShipping
 accountShipping
     :: AccountShipping
 accountShipping =
-    AccountShipping
+    AccountShipping'
     { _assRateTables = Nothing
     , _assCarrierRates = Nothing
     , _assKind = "content#accountShipping"
@@ -9774,7 +9775,7 @@ instance FromJSON AccountShipping where
         parseJSON
           = withObject "AccountShipping"
               (\ o ->
-                 AccountShipping <$>
+                 AccountShipping' <$>
                    (o .:? "rateTables" .!= mempty) <*>
                      (o .:? "carrierRates" .!= mempty)
                      <*> (o .:? "kind" .!= "content#accountShipping")
@@ -9783,7 +9784,7 @@ instance FromJSON AccountShipping where
                      <*> (o .:? "services" .!= mempty))
 
 instance ToJSON AccountShipping where
-        toJSON AccountShipping{..}
+        toJSON AccountShipping'{..}
           = object
               (catMaybes
                  [("rateTables" .=) <$> _assRateTables,
@@ -9795,7 +9796,7 @@ instance ToJSON AccountShipping where
 
 --
 -- /See:/ 'ordersUpdateMerchantOrderIdResponse' smart constructor.
-data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
+data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse'
     { _oumoirKind            :: !Text
     , _oumoirExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9810,7 +9811,7 @@ data OrdersUpdateMerchantOrderIdResponse = OrdersUpdateMerchantOrderIdResponse
 ordersUpdateMerchantOrderIdResponse
     :: OrdersUpdateMerchantOrderIdResponse
 ordersUpdateMerchantOrderIdResponse =
-    OrdersUpdateMerchantOrderIdResponse
+    OrdersUpdateMerchantOrderIdResponse'
     { _oumoirKind = "content#ordersUpdateMerchantOrderIdResponse"
     , _oumoirExecutionStatus = Nothing
     }
@@ -9832,14 +9833,14 @@ instance FromJSON OrdersUpdateMerchantOrderIdResponse
         parseJSON
           = withObject "OrdersUpdateMerchantOrderIdResponse"
               (\ o ->
-                 OrdersUpdateMerchantOrderIdResponse <$>
+                 OrdersUpdateMerchantOrderIdResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersUpdateMerchantOrderIdResponse")
                      <*> (o .:? "executionStatus"))
 
 instance ToJSON OrdersUpdateMerchantOrderIdResponse
          where
-        toJSON OrdersUpdateMerchantOrderIdResponse{..}
+        toJSON OrdersUpdateMerchantOrderIdResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oumoirKind),
@@ -9848,7 +9849,7 @@ instance ToJSON OrdersUpdateMerchantOrderIdResponse
 -- | An example occurrence for a particular error.
 --
 -- /See:/ 'datafeedStatusExample' smart constructor.
-data DatafeedStatusExample = DatafeedStatusExample
+data DatafeedStatusExample = DatafeedStatusExample'
     { _dseLineNumber :: !(Maybe (Textual Word64))
     , _dseItemId     :: !(Maybe Text)
     , _dseValue      :: !(Maybe Text)
@@ -9866,7 +9867,7 @@ data DatafeedStatusExample = DatafeedStatusExample
 datafeedStatusExample
     :: DatafeedStatusExample
 datafeedStatusExample =
-    DatafeedStatusExample
+    DatafeedStatusExample'
     { _dseLineNumber = Nothing
     , _dseItemId = Nothing
     , _dseValue = Nothing
@@ -9892,12 +9893,12 @@ instance FromJSON DatafeedStatusExample where
         parseJSON
           = withObject "DatafeedStatusExample"
               (\ o ->
-                 DatafeedStatusExample <$>
+                 DatafeedStatusExample' <$>
                    (o .:? "lineNumber") <*> (o .:? "itemId") <*>
                      (o .:? "value"))
 
 instance ToJSON DatafeedStatusExample where
-        toJSON DatafeedStatusExample{..}
+        toJSON DatafeedStatusExample'{..}
           = object
               (catMaybes
                  [("lineNumber" .=) <$> _dseLineNumber,
@@ -9906,7 +9907,7 @@ instance ToJSON DatafeedStatusExample where
 
 --
 -- /See:/ 'ordersAcknowledgeResponse' smart constructor.
-data OrdersAcknowledgeResponse = OrdersAcknowledgeResponse
+data OrdersAcknowledgeResponse = OrdersAcknowledgeResponse'
     { _oarKind            :: !Text
     , _oarExecutionStatus :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9921,7 +9922,7 @@ data OrdersAcknowledgeResponse = OrdersAcknowledgeResponse
 ordersAcknowledgeResponse
     :: OrdersAcknowledgeResponse
 ordersAcknowledgeResponse =
-    OrdersAcknowledgeResponse
+    OrdersAcknowledgeResponse'
     { _oarKind = "content#ordersAcknowledgeResponse"
     , _oarExecutionStatus = Nothing
     }
@@ -9941,13 +9942,13 @@ instance FromJSON OrdersAcknowledgeResponse where
         parseJSON
           = withObject "OrdersAcknowledgeResponse"
               (\ o ->
-                 OrdersAcknowledgeResponse <$>
+                 OrdersAcknowledgeResponse' <$>
                    (o .:? "kind" .!=
                       "content#ordersAcknowledgeResponse")
                      <*> (o .:? "executionStatus"))
 
 instance ToJSON OrdersAcknowledgeResponse where
-        toJSON OrdersAcknowledgeResponse{..}
+        toJSON OrdersAcknowledgeResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oarKind),
@@ -9955,7 +9956,7 @@ instance ToJSON OrdersAcknowledgeResponse where
 
 --
 -- /See:/ 'order' smart constructor.
-data Order = Order
+data Order = Order'
     { _ooStatus          :: !(Maybe Text)
     , _ooMerchantId      :: !(Maybe (Textual Word64))
     , _ooRefunds         :: !(Maybe [OrderRefund])
@@ -10021,7 +10022,7 @@ data Order = Order
 order
     :: Order
 order =
-    Order
+    Order'
     { _ooStatus = Nothing
     , _ooMerchantId = Nothing
     , _ooRefunds = Nothing
@@ -10159,7 +10160,7 @@ instance FromJSON Order where
         parseJSON
           = withObject "Order"
               (\ o ->
-                 Order <$>
+                 Order' <$>
                    (o .:? "status") <*> (o .:? "merchantId") <*>
                      (o .:? "refunds" .!= mempty)
                      <*> (o .:? "kind" .!= "content#order")
@@ -10180,7 +10181,7 @@ instance FromJSON Order where
                      <*> (o .:? "shippingCost"))
 
 instance ToJSON Order where
-        toJSON Order{..}
+        toJSON Order'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _ooStatus,
@@ -10204,7 +10205,7 @@ instance ToJSON Order where
 
 --
 -- /See:/ 'inventoryCustomBatchResponse' smart constructor.
-data InventoryCustomBatchResponse = InventoryCustomBatchResponse
+data InventoryCustomBatchResponse = InventoryCustomBatchResponse'
     { _invEntries :: !(Maybe [InventoryCustomBatchResponseEntry])
     , _invKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -10219,7 +10220,7 @@ data InventoryCustomBatchResponse = InventoryCustomBatchResponse
 inventoryCustomBatchResponse
     :: InventoryCustomBatchResponse
 inventoryCustomBatchResponse =
-    InventoryCustomBatchResponse
+    InventoryCustomBatchResponse'
     { _invEntries = Nothing
     , _invKind = "content#inventoryCustomBatchResponse"
     }
@@ -10240,13 +10241,13 @@ instance FromJSON InventoryCustomBatchResponse where
         parseJSON
           = withObject "InventoryCustomBatchResponse"
               (\ o ->
-                 InventoryCustomBatchResponse <$>
+                 InventoryCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#inventoryCustomBatchResponse"))
 
 instance ToJSON InventoryCustomBatchResponse where
-        toJSON InventoryCustomBatchResponse{..}
+        toJSON InventoryCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _invEntries,
@@ -10254,7 +10255,7 @@ instance ToJSON InventoryCustomBatchResponse where
 
 --
 -- /See:/ 'orderLineItemProduct' smart constructor.
-data OrderLineItemProduct = OrderLineItemProduct
+data OrderLineItemProduct = OrderLineItemProduct'
     { _olipImageLink         :: !(Maybe Text)
     , _olipShownImage        :: !(Maybe Text)
     , _olipChannel           :: !(Maybe Text)
@@ -10308,7 +10309,7 @@ data OrderLineItemProduct = OrderLineItemProduct
 orderLineItemProduct
     :: OrderLineItemProduct
 orderLineItemProduct =
-    OrderLineItemProduct
+    OrderLineItemProduct'
     { _olipImageLink = Nothing
     , _olipShownImage = Nothing
     , _olipChannel = Nothing
@@ -10413,7 +10414,7 @@ instance FromJSON OrderLineItemProduct where
         parseJSON
           = withObject "OrderLineItemProduct"
               (\ o ->
-                 OrderLineItemProduct <$>
+                 OrderLineItemProduct' <$>
                    (o .:? "imageLink") <*> (o .:? "shownImage") <*>
                      (o .:? "channel")
                      <*> (o .:? "brand")
@@ -10430,7 +10431,7 @@ instance FromJSON OrderLineItemProduct where
                      <*> (o .:? "condition"))
 
 instance ToJSON OrderLineItemProduct where
-        toJSON OrderLineItemProduct{..}
+        toJSON OrderLineItemProduct'{..}
           = object
               (catMaybes
                  [("imageLink" .=) <$> _olipImageLink,
@@ -10451,7 +10452,7 @@ instance ToJSON OrderLineItemProduct where
 -- | A batch entry encoding a single non-batch accounttax request.
 --
 -- /See:/ 'accounttaxCustomBatchRequestEntry' smart constructor.
-data AccounttaxCustomBatchRequestEntry = AccounttaxCustomBatchRequestEntry
+data AccounttaxCustomBatchRequestEntry = AccounttaxCustomBatchRequestEntry'
     { _a2AccountTax :: !(Maybe AccountTax)
     , _a2MerchantId :: !(Maybe (Textual Word64))
     , _a2AccountId  :: !(Maybe (Textual Word64))
@@ -10475,7 +10476,7 @@ data AccounttaxCustomBatchRequestEntry = AccounttaxCustomBatchRequestEntry
 accounttaxCustomBatchRequestEntry
     :: AccounttaxCustomBatchRequestEntry
 accounttaxCustomBatchRequestEntry =
-    AccounttaxCustomBatchRequestEntry
+    AccounttaxCustomBatchRequestEntry'
     { _a2AccountTax = Nothing
     , _a2MerchantId = Nothing
     , _a2AccountId = Nothing
@@ -10515,7 +10516,7 @@ instance FromJSON AccounttaxCustomBatchRequestEntry
         parseJSON
           = withObject "AccounttaxCustomBatchRequestEntry"
               (\ o ->
-                 AccounttaxCustomBatchRequestEntry <$>
+                 AccounttaxCustomBatchRequestEntry' <$>
                    (o .:? "accountTax") <*> (o .:? "merchantId") <*>
                      (o .:? "accountId")
                      <*> (o .:? "method")
@@ -10523,7 +10524,7 @@ instance FromJSON AccounttaxCustomBatchRequestEntry
 
 instance ToJSON AccounttaxCustomBatchRequestEntry
          where
-        toJSON AccounttaxCustomBatchRequestEntry{..}
+        toJSON AccounttaxCustomBatchRequestEntry'{..}
           = object
               (catMaybes
                  [("accountTax" .=) <$> _a2AccountTax,
@@ -10535,7 +10536,7 @@ instance ToJSON AccounttaxCustomBatchRequestEntry
 -- | An error occurring in the feed, like \"invalid price\".
 --
 -- /See:/ 'datafeedStatusError' smart constructor.
-data DatafeedStatusError = DatafeedStatusError
+data DatafeedStatusError = DatafeedStatusError'
     { _dseCount    :: !(Maybe (Textual Word64))
     , _dseCode     :: !(Maybe Text)
     , _dseMessage  :: !(Maybe Text)
@@ -10556,7 +10557,7 @@ data DatafeedStatusError = DatafeedStatusError
 datafeedStatusError
     :: DatafeedStatusError
 datafeedStatusError =
-    DatafeedStatusError
+    DatafeedStatusError'
     { _dseCount = Nothing
     , _dseCode = Nothing
     , _dseMessage = Nothing
@@ -10589,13 +10590,13 @@ instance FromJSON DatafeedStatusError where
         parseJSON
           = withObject "DatafeedStatusError"
               (\ o ->
-                 DatafeedStatusError <$>
+                 DatafeedStatusError' <$>
                    (o .:? "count") <*> (o .:? "code") <*>
                      (o .:? "message")
                      <*> (o .:? "examples" .!= mempty))
 
 instance ToJSON DatafeedStatusError where
-        toJSON DatafeedStatusError{..}
+        toJSON DatafeedStatusError'{..}
           = object
               (catMaybes
                  [("count" .=) <$> _dseCount,
@@ -10605,7 +10606,7 @@ instance ToJSON DatafeedStatusError where
 
 --
 -- /See:/ 'productsCustomBatchRequest' smart constructor.
-newtype ProductsCustomBatchRequest = ProductsCustomBatchRequest
+newtype ProductsCustomBatchRequest = ProductsCustomBatchRequest'
     { _pcbrcEntries :: Maybe [ProductsCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10617,7 +10618,7 @@ newtype ProductsCustomBatchRequest = ProductsCustomBatchRequest
 productsCustomBatchRequest
     :: ProductsCustomBatchRequest
 productsCustomBatchRequest =
-    ProductsCustomBatchRequest
+    ProductsCustomBatchRequest'
     { _pcbrcEntries = Nothing
     }
 
@@ -10632,17 +10633,17 @@ instance FromJSON ProductsCustomBatchRequest where
         parseJSON
           = withObject "ProductsCustomBatchRequest"
               (\ o ->
-                 ProductsCustomBatchRequest <$>
+                 ProductsCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON ProductsCustomBatchRequest where
-        toJSON ProductsCustomBatchRequest{..}
+        toJSON ProductsCustomBatchRequest'{..}
           = object
               (catMaybes [("entries" .=) <$> _pcbrcEntries])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
-data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntryReturnLineItem
+data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntryReturnLineItem'
     { _ocbrerliQuantity   :: !(Maybe (Textual Word32))
     , _ocbrerliLineItemId :: !(Maybe Text)
     , _ocbrerliReason     :: !(Maybe Text)
@@ -10663,7 +10664,7 @@ data OrdersCustomBatchRequestEntryReturnLineItem = OrdersCustomBatchRequestEntry
 ordersCustomBatchRequestEntryReturnLineItem
     :: OrdersCustomBatchRequestEntryReturnLineItem
 ordersCustomBatchRequestEntryReturnLineItem =
-    OrdersCustomBatchRequestEntryReturnLineItem
+    OrdersCustomBatchRequestEntryReturnLineItem'
     { _ocbrerliQuantity = Nothing
     , _ocbrerliLineItemId = Nothing
     , _ocbrerliReason = Nothing
@@ -10701,7 +10702,7 @@ instance FromJSON
           = withObject
               "OrdersCustomBatchRequestEntryReturnLineItem"
               (\ o ->
-                 OrdersCustomBatchRequestEntryReturnLineItem <$>
+                 OrdersCustomBatchRequestEntryReturnLineItem' <$>
                    (o .:? "quantity") <*> (o .:? "lineItemId") <*>
                      (o .:? "reason")
                      <*> (o .:? "reasonText"))
@@ -10709,7 +10710,7 @@ instance FromJSON
 instance ToJSON
          OrdersCustomBatchRequestEntryReturnLineItem where
         toJSON
-          OrdersCustomBatchRequestEntryReturnLineItem{..}
+          OrdersCustomBatchRequestEntryReturnLineItem'{..}
           = object
               (catMaybes
                  [("quantity" .=) <$> _ocbrerliQuantity,
@@ -10719,7 +10720,7 @@ instance ToJSON
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryUpdateShipment' smart constructor.
-data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntryUpdateShipment
+data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntryUpdateShipment'
     { _ocbreusCarrier    :: !(Maybe Text)
     , _ocbreusStatus     :: !(Maybe Text)
     , _ocbreusTrackingId :: !(Maybe Text)
@@ -10740,7 +10741,7 @@ data OrdersCustomBatchRequestEntryUpdateShipment = OrdersCustomBatchRequestEntry
 ordersCustomBatchRequestEntryUpdateShipment
     :: OrdersCustomBatchRequestEntryUpdateShipment
 ordersCustomBatchRequestEntryUpdateShipment =
-    OrdersCustomBatchRequestEntryUpdateShipment
+    OrdersCustomBatchRequestEntryUpdateShipment'
     { _ocbreusCarrier = Nothing
     , _ocbreusStatus = Nothing
     , _ocbreusTrackingId = Nothing
@@ -10777,7 +10778,7 @@ instance FromJSON
           = withObject
               "OrdersCustomBatchRequestEntryUpdateShipment"
               (\ o ->
-                 OrdersCustomBatchRequestEntryUpdateShipment <$>
+                 OrdersCustomBatchRequestEntryUpdateShipment' <$>
                    (o .:? "carrier") <*> (o .:? "status") <*>
                      (o .:? "trackingId")
                      <*> (o .:? "shipmentId"))
@@ -10785,7 +10786,7 @@ instance FromJSON
 instance ToJSON
          OrdersCustomBatchRequestEntryUpdateShipment where
         toJSON
-          OrdersCustomBatchRequestEntryUpdateShipment{..}
+          OrdersCustomBatchRequestEntryUpdateShipment'{..}
           = object
               (catMaybes
                  [("carrier" .=) <$> _ocbreusCarrier,
@@ -10797,7 +10798,7 @@ instance ToJSON
 -- datafeed computed asynchronously when the feed processing is finished.
 --
 -- /See:/ 'datafeedStatus' smart constructor.
-data DatafeedStatus = DatafeedStatus
+data DatafeedStatus = DatafeedStatus'
     { _dsItemsTotal       :: !(Maybe (Textual Word64))
     , _dsKind             :: !Text
     , _dsWarnings         :: !(Maybe [DatafeedStatusError])
@@ -10830,7 +10831,7 @@ data DatafeedStatus = DatafeedStatus
 datafeedStatus
     :: DatafeedStatus
 datafeedStatus =
-    DatafeedStatus
+    DatafeedStatus'
     { _dsItemsTotal = Nothing
     , _dsKind = "content#datafeedStatus"
     , _dsWarnings = Nothing
@@ -10894,7 +10895,7 @@ instance FromJSON DatafeedStatus where
         parseJSON
           = withObject "DatafeedStatus"
               (\ o ->
-                 DatafeedStatus <$>
+                 DatafeedStatus' <$>
                    (o .:? "itemsTotal") <*>
                      (o .:? "kind" .!= "content#datafeedStatus")
                      <*> (o .:? "warnings" .!= mempty)
@@ -10905,7 +10906,7 @@ instance FromJSON DatafeedStatus where
                      <*> (o .:? "errors" .!= mempty))
 
 instance ToJSON DatafeedStatus where
-        toJSON DatafeedStatus{..}
+        toJSON DatafeedStatus'{..}
           = object
               (catMaybes
                  [("itemsTotal" .=) <$> _dsItemsTotal,
@@ -10919,7 +10920,7 @@ instance ToJSON DatafeedStatus where
 
 --
 -- /See:/ 'datafeedstatusesCustomBatchRequest' smart constructor.
-newtype DatafeedstatusesCustomBatchRequest = DatafeedstatusesCustomBatchRequest
+newtype DatafeedstatusesCustomBatchRequest = DatafeedstatusesCustomBatchRequest'
     { _dcbrcEntries :: Maybe [DatafeedstatusesCustomBatchRequestEntry]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10931,7 +10932,7 @@ newtype DatafeedstatusesCustomBatchRequest = DatafeedstatusesCustomBatchRequest
 datafeedstatusesCustomBatchRequest
     :: DatafeedstatusesCustomBatchRequest
 datafeedstatusesCustomBatchRequest =
-    DatafeedstatusesCustomBatchRequest
+    DatafeedstatusesCustomBatchRequest'
     { _dcbrcEntries = Nothing
     }
 
@@ -10947,12 +10948,12 @@ instance FromJSON DatafeedstatusesCustomBatchRequest
         parseJSON
           = withObject "DatafeedstatusesCustomBatchRequest"
               (\ o ->
-                 DatafeedstatusesCustomBatchRequest <$>
+                 DatafeedstatusesCustomBatchRequest' <$>
                    (o .:? "entries" .!= mempty))
 
 instance ToJSON DatafeedstatusesCustomBatchRequest
          where
-        toJSON DatafeedstatusesCustomBatchRequest{..}
+        toJSON DatafeedstatusesCustomBatchRequest'{..}
           = object
               (catMaybes [("entries" .=) <$> _dcbrcEntries])
 
@@ -10960,7 +10961,7 @@ instance ToJSON DatafeedstatusesCustomBatchRequest
 -- the group must be of the same type.
 --
 -- /See:/ 'accountShippingLocationGroup' smart constructor.
-data AccountShippingLocationGroup = AccountShippingLocationGroup
+data AccountShippingLocationGroup = AccountShippingLocationGroup'
     { _aslgCountry          :: !(Maybe Text)
     , _aslgLocationIds      :: !(Maybe [Textual Int64])
     , _aslgPostalCodeRanges :: !(Maybe [AccountShippingPostalCodeRange])
@@ -10984,7 +10985,7 @@ data AccountShippingLocationGroup = AccountShippingLocationGroup
 accountShippingLocationGroup
     :: AccountShippingLocationGroup
 accountShippingLocationGroup =
-    AccountShippingLocationGroup
+    AccountShippingLocationGroup'
     { _aslgCountry = Nothing
     , _aslgLocationIds = Nothing
     , _aslgPostalCodeRanges = Nothing
@@ -11032,7 +11033,7 @@ instance FromJSON AccountShippingLocationGroup where
         parseJSON
           = withObject "AccountShippingLocationGroup"
               (\ o ->
-                 AccountShippingLocationGroup <$>
+                 AccountShippingLocationGroup' <$>
                    (o .:? "country") <*>
                      (o .:? "locationIds" .!= mempty)
                      <*> (o .:? "postalCodeRanges" .!= mempty)
@@ -11040,7 +11041,7 @@ instance FromJSON AccountShippingLocationGroup where
                      <*> (o .:? "postalCodes" .!= mempty))
 
 instance ToJSON AccountShippingLocationGroup where
-        toJSON AccountShippingLocationGroup{..}
+        toJSON AccountShippingLocationGroup'{..}
           = object
               (catMaybes
                  [("country" .=) <$> _aslgCountry,
@@ -11051,7 +11052,7 @@ instance ToJSON AccountShippingLocationGroup where
 
 --
 -- /See:/ 'accountStatusDataQualityIssue' smart constructor.
-data AccountStatusDataQualityIssue = AccountStatusDataQualityIssue
+data AccountStatusDataQualityIssue = AccountStatusDataQualityIssue'
     { _asdqiSubmittedValue :: !(Maybe Text)
     , _asdqiCountry        :: !(Maybe Text)
     , _asdqiDisplayedValue :: !(Maybe Text)
@@ -11084,7 +11085,7 @@ data AccountStatusDataQualityIssue = AccountStatusDataQualityIssue
 accountStatusDataQualityIssue
     :: AccountStatusDataQualityIssue
 accountStatusDataQualityIssue =
-    AccountStatusDataQualityIssue
+    AccountStatusDataQualityIssue'
     { _asdqiSubmittedValue = Nothing
     , _asdqiCountry = Nothing
     , _asdqiDisplayedValue = Nothing
@@ -11147,7 +11148,7 @@ instance FromJSON AccountStatusDataQualityIssue where
         parseJSON
           = withObject "AccountStatusDataQualityIssue"
               (\ o ->
-                 AccountStatusDataQualityIssue <$>
+                 AccountStatusDataQualityIssue' <$>
                    (o .:? "submittedValue") <*> (o .:? "country") <*>
                      (o .:? "displayedValue")
                      <*> (o .:? "numItems")
@@ -11157,7 +11158,7 @@ instance FromJSON AccountStatusDataQualityIssue where
                      <*> (o .:? "id"))
 
 instance ToJSON AccountStatusDataQualityIssue where
-        toJSON AccountStatusDataQualityIssue{..}
+        toJSON AccountStatusDataQualityIssue'{..}
           = object
               (catMaybes
                  [("submittedValue" .=) <$> _asdqiSubmittedValue,
@@ -11171,7 +11172,7 @@ instance ToJSON AccountStatusDataQualityIssue where
 
 --
 -- /See:/ 'productShippingDimension' smart constructor.
-data ProductShippingDimension = ProductShippingDimension
+data ProductShippingDimension = ProductShippingDimension'
     { _psdValue :: !(Maybe (Textual Double))
     , _psdUnit  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11186,7 +11187,7 @@ data ProductShippingDimension = ProductShippingDimension
 productShippingDimension
     :: ProductShippingDimension
 productShippingDimension =
-    ProductShippingDimension
+    ProductShippingDimension'
     { _psdValue = Nothing
     , _psdUnit = Nothing
     }
@@ -11206,11 +11207,11 @@ instance FromJSON ProductShippingDimension where
         parseJSON
           = withObject "ProductShippingDimension"
               (\ o ->
-                 ProductShippingDimension <$>
+                 ProductShippingDimension' <$>
                    (o .:? "value") <*> (o .:? "unit"))
 
 instance ToJSON ProductShippingDimension where
-        toJSON ProductShippingDimension{..}
+        toJSON ProductShippingDimension'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _psdValue,
@@ -11219,7 +11220,7 @@ instance ToJSON ProductShippingDimension where
 -- | A batch entry encoding a single non-batch datafeeds response.
 --
 -- /See:/ 'datafeedsCustomBatchResponseEntry' smart constructor.
-data DatafeedsCustomBatchResponseEntry = DatafeedsCustomBatchResponseEntry
+data DatafeedsCustomBatchResponseEntry = DatafeedsCustomBatchResponseEntry'
     { _dcbrecDatafeed :: !(Maybe Datafeed)
     , _dcbrecErrors   :: !(Maybe Errors)
     , _dcbrecBatchId  :: !(Maybe (Textual Word32))
@@ -11237,7 +11238,7 @@ data DatafeedsCustomBatchResponseEntry = DatafeedsCustomBatchResponseEntry
 datafeedsCustomBatchResponseEntry
     :: DatafeedsCustomBatchResponseEntry
 datafeedsCustomBatchResponseEntry =
-    DatafeedsCustomBatchResponseEntry
+    DatafeedsCustomBatchResponseEntry'
     { _dcbrecDatafeed = Nothing
     , _dcbrecErrors = Nothing
     , _dcbrecBatchId = Nothing
@@ -11267,13 +11268,13 @@ instance FromJSON DatafeedsCustomBatchResponseEntry
         parseJSON
           = withObject "DatafeedsCustomBatchResponseEntry"
               (\ o ->
-                 DatafeedsCustomBatchResponseEntry <$>
+                 DatafeedsCustomBatchResponseEntry' <$>
                    (o .:? "datafeed") <*> (o .:? "errors") <*>
                      (o .:? "batchId"))
 
 instance ToJSON DatafeedsCustomBatchResponseEntry
          where
-        toJSON DatafeedsCustomBatchResponseEntry{..}
+        toJSON DatafeedsCustomBatchResponseEntry'{..}
           = object
               (catMaybes
                  [("datafeed" .=) <$> _dcbrecDatafeed,
@@ -11282,7 +11283,7 @@ instance ToJSON DatafeedsCustomBatchResponseEntry
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryRefund' smart constructor.
-data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund
+data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund'
     { _ocbrerAmount     :: !(Maybe Price)
     , _ocbrerReason     :: !(Maybe Text)
     , _ocbrerReasonText :: !(Maybe Text)
@@ -11300,7 +11301,7 @@ data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund
 ordersCustomBatchRequestEntryRefund
     :: OrdersCustomBatchRequestEntryRefund
 ordersCustomBatchRequestEntryRefund =
-    OrdersCustomBatchRequestEntryRefund
+    OrdersCustomBatchRequestEntryRefund'
     { _ocbrerAmount = Nothing
     , _ocbrerReason = Nothing
     , _ocbrerReasonText = Nothing
@@ -11327,13 +11328,13 @@ instance FromJSON OrdersCustomBatchRequestEntryRefund
         parseJSON
           = withObject "OrdersCustomBatchRequestEntryRefund"
               (\ o ->
-                 OrdersCustomBatchRequestEntryRefund <$>
+                 OrdersCustomBatchRequestEntryRefund' <$>
                    (o .:? "amount") <*> (o .:? "reason") <*>
                      (o .:? "reasonText"))
 
 instance ToJSON OrdersCustomBatchRequestEntryRefund
          where
-        toJSON OrdersCustomBatchRequestEntryRefund{..}
+        toJSON OrdersCustomBatchRequestEntryRefund'{..}
           = object
               (catMaybes
                  [("amount" .=) <$> _ocbrerAmount,
@@ -11342,7 +11343,7 @@ instance ToJSON OrdersCustomBatchRequestEntryRefund
 
 --
 -- /See:/ 'datafeedstatusesListResponse' smart constructor.
-data DatafeedstatusesListResponse = DatafeedstatusesListResponse
+data DatafeedstatusesListResponse = DatafeedstatusesListResponse'
     { _dlrlNextPageToken :: !(Maybe Text)
     , _dlrlKind          :: !Text
     , _dlrlResources     :: !(Maybe [DatafeedStatus])
@@ -11360,7 +11361,7 @@ data DatafeedstatusesListResponse = DatafeedstatusesListResponse
 datafeedstatusesListResponse
     :: DatafeedstatusesListResponse
 datafeedstatusesListResponse =
-    DatafeedstatusesListResponse
+    DatafeedstatusesListResponse'
     { _dlrlNextPageToken = Nothing
     , _dlrlKind = "content#datafeedstatusesListResponse"
     , _dlrlResources = Nothing
@@ -11388,14 +11389,14 @@ instance FromJSON DatafeedstatusesListResponse where
         parseJSON
           = withObject "DatafeedstatusesListResponse"
               (\ o ->
-                 DatafeedstatusesListResponse <$>
+                 DatafeedstatusesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "content#datafeedstatusesListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON DatafeedstatusesListResponse where
-        toJSON DatafeedstatusesListResponse{..}
+        toJSON DatafeedstatusesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dlrlNextPageToken,
@@ -11404,7 +11405,7 @@ instance ToJSON DatafeedstatusesListResponse where
 
 --
 -- /See:/ 'productsListResponse' smart constructor.
-data ProductsListResponse = ProductsListResponse
+data ProductsListResponse = ProductsListResponse'
     { _plrlNextPageToken :: !(Maybe Text)
     , _plrlKind          :: !Text
     , _plrlResources     :: !(Maybe [Product])
@@ -11422,7 +11423,7 @@ data ProductsListResponse = ProductsListResponse
 productsListResponse
     :: ProductsListResponse
 productsListResponse =
-    ProductsListResponse
+    ProductsListResponse'
     { _plrlNextPageToken = Nothing
     , _plrlKind = "content#productsListResponse"
     , _plrlResources = Nothing
@@ -11450,13 +11451,13 @@ instance FromJSON ProductsListResponse where
         parseJSON
           = withObject "ProductsListResponse"
               (\ o ->
-                 ProductsListResponse <$>
+                 ProductsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "content#productsListResponse")
                      <*> (o .:? "resources" .!= mempty))
 
 instance ToJSON ProductsListResponse where
-        toJSON ProductsListResponse{..}
+        toJSON ProductsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _plrlNextPageToken,
@@ -11465,7 +11466,7 @@ instance ToJSON ProductsListResponse where
 
 --
 -- /See:/ 'accountAdwordsLink' smart constructor.
-data AccountAdwordsLink = AccountAdwordsLink
+data AccountAdwordsLink = AccountAdwordsLink'
     { _aalStatus    :: !(Maybe Text)
     , _aalAdwordsId :: !(Maybe (Textual Word64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11480,7 +11481,7 @@ data AccountAdwordsLink = AccountAdwordsLink
 accountAdwordsLink
     :: AccountAdwordsLink
 accountAdwordsLink =
-    AccountAdwordsLink
+    AccountAdwordsLink'
     { _aalStatus = Nothing
     , _aalAdwordsId = Nothing
     }
@@ -11509,11 +11510,11 @@ instance FromJSON AccountAdwordsLink where
         parseJSON
           = withObject "AccountAdwordsLink"
               (\ o ->
-                 AccountAdwordsLink <$>
+                 AccountAdwordsLink' <$>
                    (o .:? "status") <*> (o .:? "adwordsId"))
 
 instance ToJSON AccountAdwordsLink where
-        toJSON AccountAdwordsLink{..}
+        toJSON AccountAdwordsLink'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _aalStatus,
@@ -11521,7 +11522,7 @@ instance ToJSON AccountAdwordsLink where
 
 --
 -- /See:/ 'orderCancellation' smart constructor.
-data OrderCancellation = OrderCancellation
+data OrderCancellation = OrderCancellation'
     { _ocQuantity     :: !(Maybe (Textual Word32))
     , _ocActor        :: !(Maybe Text)
     , _ocReason       :: !(Maybe Text)
@@ -11545,7 +11546,7 @@ data OrderCancellation = OrderCancellation
 orderCancellation
     :: OrderCancellation
 orderCancellation =
-    OrderCancellation
+    OrderCancellation'
     { _ocQuantity = Nothing
     , _ocActor = Nothing
     , _ocReason = Nothing
@@ -11582,14 +11583,14 @@ instance FromJSON OrderCancellation where
         parseJSON
           = withObject "OrderCancellation"
               (\ o ->
-                 OrderCancellation <$>
+                 OrderCancellation' <$>
                    (o .:? "quantity") <*> (o .:? "actor") <*>
                      (o .:? "reason")
                      <*> (o .:? "creationDate")
                      <*> (o .:? "reasonText"))
 
 instance ToJSON OrderCancellation where
-        toJSON OrderCancellation{..}
+        toJSON OrderCancellation'{..}
           = object
               (catMaybes
                  [("quantity" .=) <$> _ocQuantity,
@@ -11600,7 +11601,7 @@ instance ToJSON OrderCancellation where
 
 --
 -- /See:/ 'ordersCustomBatchResponse' smart constructor.
-data OrdersCustomBatchResponse = OrdersCustomBatchResponse
+data OrdersCustomBatchResponse = OrdersCustomBatchResponse'
     { _ordEntries :: !(Maybe [OrdersCustomBatchResponseEntry])
     , _ordKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -11615,7 +11616,7 @@ data OrdersCustomBatchResponse = OrdersCustomBatchResponse
 ordersCustomBatchResponse
     :: OrdersCustomBatchResponse
 ordersCustomBatchResponse =
-    OrdersCustomBatchResponse
+    OrdersCustomBatchResponse'
     { _ordEntries = Nothing
     , _ordKind = "content#ordersCustomBatchResponse"
     }
@@ -11636,13 +11637,13 @@ instance FromJSON OrdersCustomBatchResponse where
         parseJSON
           = withObject "OrdersCustomBatchResponse"
               (\ o ->
-                 OrdersCustomBatchResponse <$>
+                 OrdersCustomBatchResponse' <$>
                    (o .:? "entries" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "content#ordersCustomBatchResponse"))
 
 instance ToJSON OrdersCustomBatchResponse where
-        toJSON OrdersCustomBatchResponse{..}
+        toJSON OrdersCustomBatchResponse'{..}
           = object
               (catMaybes
                  [("entries" .=) <$> _ordEntries,

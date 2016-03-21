@@ -55,7 +55,7 @@ type InstancesStartReplicaResource =
 -- | Starts the replication in the read replica instance.
 --
 -- /See:/ 'instancesStartReplica' smart constructor.
-data InstancesStartReplica = InstancesStartReplica
+data InstancesStartReplica = InstancesStartReplica'
     { _iProject  :: !Text
     , _iInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesStartReplica
     -> Text -- ^ 'iInstance'
     -> InstancesStartReplica
 instancesStartReplica pIProject_ pIInstance_ =
-    InstancesStartReplica
+    InstancesStartReplica'
     { _iProject = pIProject_
     , _iInstance = pIInstance_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest InstancesStartReplica where
         type Scopes InstancesStartReplica =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesStartReplica{..}
+        requestClient InstancesStartReplica'{..}
           = go _iProject _iInstance (Just AltJSON)
               sQLAdminService
           where go

@@ -70,7 +70,7 @@ type InstanceGroupManagersInsertResource =
 -- listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersInsert' smart constructor.
-data InstanceGroupManagersInsert = InstanceGroupManagersInsert
+data InstanceGroupManagersInsert = InstanceGroupManagersInsert'
     { _igmiProject :: !Text
     , _igmiZone    :: !Text
     , _igmiPayload :: !InstanceGroupManager
@@ -91,7 +91,7 @@ instanceGroupManagersInsert
     -> InstanceGroupManager -- ^ 'igmiPayload'
     -> InstanceGroupManagersInsert
 instanceGroupManagersInsert pIgmiProject_ pIgmiZone_ pIgmiPayload_ =
-    InstanceGroupManagersInsert
+    InstanceGroupManagersInsert'
     { _igmiProject = pIgmiProject_
     , _igmiZone = pIgmiZone_
     , _igmiPayload = pIgmiPayload_
@@ -118,7 +118,7 @@ instance GoogleRequest InstanceGroupManagersInsert
         type Scopes InstanceGroupManagersInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupManagersInsert{..}
+        requestClient InstanceGroupManagersInsert'{..}
           = go _igmiProject _igmiZone (Just AltJSON)
               _igmiPayload
               computeService

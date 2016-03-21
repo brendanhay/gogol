@@ -65,7 +65,7 @@ type RepresentativesRepresentativeInfoByAddressResource
 -- address.
 --
 -- /See:/ 'representativesRepresentativeInfoByAddress' smart constructor.
-data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress
+data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles          :: !(Maybe [RepresentativesRepresentativeInfoByAddressRoles])
     , _rribaAddress        :: !(Maybe Text)
     , _rribaIncludeOffices :: !Bool
@@ -86,7 +86,7 @@ data RepresentativesRepresentativeInfoByAddress = RepresentativesRepresentativeI
 representativesRepresentativeInfoByAddress
     :: RepresentativesRepresentativeInfoByAddress
 representativesRepresentativeInfoByAddress =
-    RepresentativesRepresentativeInfoByAddress
+    RepresentativesRepresentativeInfoByAddress'
     { _rribaRoles = Nothing
     , _rribaAddress = Nothing
     , _rribaIncludeOffices = True
@@ -132,7 +132,7 @@ instance GoogleRequest
                RepresentativesRepresentativeInfoByAddress
              = '[]
         requestClient
-          RepresentativesRepresentativeInfoByAddress{..}
+          RepresentativesRepresentativeInfoByAddress'{..}
           = go (_rribaRoles ^. _Default) _rribaAddress
               (Just _rribaIncludeOffices)
               (_rribaLevels ^. _Default)

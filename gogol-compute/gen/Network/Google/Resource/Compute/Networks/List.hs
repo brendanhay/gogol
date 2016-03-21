@@ -59,7 +59,7 @@ type NetworksListResource =
 -- | Retrieves the list of networks available to the specified project.
 --
 -- /See:/ 'networksList' smart constructor.
-data NetworksList = NetworksList
+data NetworksList = NetworksList'
     { _nlProject    :: !Text
     , _nlFilter     :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ networksList
     :: Text -- ^ 'nlProject'
     -> NetworksList
 networksList pNlProject_ =
-    NetworksList
+    NetworksList'
     { _nlProject = pNlProject_
     , _nlFilter = Nothing
     , _nlPageToken = Nothing
@@ -139,7 +139,7 @@ instance GoogleRequest NetworksList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient NetworksList{..}
+        requestClient NetworksList'{..}
           = go _nlProject _nlFilter _nlPageToken
               (Just _nlMaxResults)
               (Just AltJSON)

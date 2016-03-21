@@ -54,7 +54,7 @@ type CreativeFieldsGetResource =
 -- | Gets one creative field by ID.
 --
 -- /See:/ 'creativeFieldsGet' smart constructor.
-data CreativeFieldsGet = CreativeFieldsGet
+data CreativeFieldsGet = CreativeFieldsGet'
     { _cfgProFileId :: !(Textual Int64)
     , _cfgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativeFieldsGet
     -> Int64 -- ^ 'cfgId'
     -> CreativeFieldsGet
 creativeFieldsGet pCfgProFileId_ pCfgId_ =
-    CreativeFieldsGet
+    CreativeFieldsGet'
     { _cfgProFileId = _Coerce # pCfgProFileId_
     , _cfgId = _Coerce # pCfgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CreativeFieldsGet where
         type Rs CreativeFieldsGet = CreativeField
         type Scopes CreativeFieldsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldsGet{..}
+        requestClient CreativeFieldsGet'{..}
           = go _cfgProFileId _cfgId (Just AltJSON)
               dFAReportingService
           where go

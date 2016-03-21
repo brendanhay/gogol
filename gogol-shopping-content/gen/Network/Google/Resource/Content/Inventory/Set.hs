@@ -65,7 +65,7 @@ type InventorySetResource =
 -- product.
 --
 -- /See:/ 'inventorySet' smart constructor.
-data InventorySet = InventorySet
+data InventorySet = InventorySet'
     { _isMerchantId :: !(Textual Word64)
     , _isStoreCode  :: !Text
     , _isPayload    :: !InventorySetRequest
@@ -93,7 +93,7 @@ inventorySet
     -> Text -- ^ 'isProductId'
     -> InventorySet
 inventorySet pIsMerchantId_ pIsStoreCode_ pIsPayload_ pIsProductId_ =
-    InventorySet
+    InventorySet'
     { _isMerchantId = _Coerce # pIsMerchantId_
     , _isStoreCode = pIsStoreCode_
     , _isPayload = pIsPayload_
@@ -131,7 +131,7 @@ instance GoogleRequest InventorySet where
         type Rs InventorySet = InventorySetResponse
         type Scopes InventorySet =
              '["https://www.googleapis.com/auth/content"]
-        requestClient InventorySet{..}
+        requestClient InventorySet'{..}
           = go _isMerchantId _isStoreCode _isProductId
               _isDryRun
               (Just AltJSON)

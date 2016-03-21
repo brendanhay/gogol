@@ -54,7 +54,7 @@ type AccountsPermissionsGetResource =
 -- | Gets a user\'s Account & Container Permissions.
 --
 -- /See:/ 'accountsPermissionsGet' smart constructor.
-data AccountsPermissionsGet = AccountsPermissionsGet
+data AccountsPermissionsGet = AccountsPermissionsGet'
     { _apgAccountId    :: !Text
     , _apgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsPermissionsGet
     -> Text -- ^ 'apgPermissionId'
     -> AccountsPermissionsGet
 accountsPermissionsGet pApgAccountId_ pApgPermissionId_ =
-    AccountsPermissionsGet
+    AccountsPermissionsGet'
     { _apgAccountId = pApgAccountId_
     , _apgPermissionId = pApgPermissionId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AccountsPermissionsGet where
         type Rs AccountsPermissionsGet = UserAccess
         type Scopes AccountsPermissionsGet =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-        requestClient AccountsPermissionsGet{..}
+        requestClient AccountsPermissionsGet'{..}
           = go _apgAccountId _apgPermissionId (Just AltJSON)
               tagManagerService
           where go

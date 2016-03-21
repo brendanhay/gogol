@@ -51,7 +51,7 @@ type ContactsDeleteResource =
 -- | Deletes a contact.
 --
 -- /See:/ 'contactsDelete' smart constructor.
-newtype ContactsDelete = ContactsDelete
+newtype ContactsDelete = ContactsDelete'
     { _cdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ contactsDelete
     :: Text -- ^ 'cdId'
     -> ContactsDelete
 contactsDelete pCdId_ =
-    ContactsDelete
+    ContactsDelete'
     { _cdId = pCdId_
     }
 
@@ -76,7 +76,7 @@ instance GoogleRequest ContactsDelete where
         type Rs ContactsDelete = ()
         type Scopes ContactsDelete =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient ContactsDelete{..}
+        requestClient ContactsDelete'{..}
           = go _cdId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsDeleteResource)

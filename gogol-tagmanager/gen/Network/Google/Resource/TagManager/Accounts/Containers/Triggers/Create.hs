@@ -57,7 +57,7 @@ type AccountsContainersTriggersCreateResource =
 -- | Creates a GTM Trigger.
 --
 -- /See:/ 'accountsContainersTriggersCreate' smart constructor.
-data AccountsContainersTriggersCreate = AccountsContainersTriggersCreate
+data AccountsContainersTriggersCreate = AccountsContainersTriggersCreate'
     { _actcContainerId :: !Text
     , _actcPayload     :: !Trigger
     , _actcAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersTriggersCreate
     -> Text -- ^ 'actcAccountId'
     -> AccountsContainersTriggersCreate
 accountsContainersTriggersCreate pActcContainerId_ pActcPayload_ pActcAccountId_ =
-    AccountsContainersTriggersCreate
+    AccountsContainersTriggersCreate'
     { _actcContainerId = pActcContainerId_
     , _actcPayload = pActcPayload_
     , _actcAccountId = pActcAccountId_
@@ -106,7 +106,7 @@ instance GoogleRequest
         type Rs AccountsContainersTriggersCreate = Trigger
         type Scopes AccountsContainersTriggersCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersTriggersCreate{..}
+        requestClient AccountsContainersTriggersCreate'{..}
           = go _actcAccountId _actcContainerId (Just AltJSON)
               _actcPayload
               tagManagerService

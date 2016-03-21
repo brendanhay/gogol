@@ -68,7 +68,7 @@ type InstanceGroupsListInstancesResource =
 -- | Lists the instances in the specified instance group.
 --
 -- /See:/ 'instanceGroupsListInstances'' smart constructor.
-data InstanceGroupsListInstances' = InstanceGroupsListInstances'
+data InstanceGroupsListInstances' = InstanceGroupsListInstances''
     { _igliProject       :: !Text
     , _igliZone          :: !Text
     , _igliPayload       :: !InstanceGroupsListInstancesRequest
@@ -102,7 +102,7 @@ instanceGroupsListInstances'
     -> Text -- ^ 'igliInstanceGroup'
     -> InstanceGroupsListInstances'
 instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliPayload_ pIgliInstanceGroup_ =
-    InstanceGroupsListInstances'
+    InstanceGroupsListInstances''
     { _igliProject = pIgliProject_
     , _igliZone = pIgliZone_
     , _igliPayload = pIgliPayload_
@@ -184,7 +184,7 @@ instance GoogleRequest InstanceGroupsListInstances'
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstanceGroupsListInstances'{..}
+        requestClient InstanceGroupsListInstances''{..}
           = go _igliProject _igliZone _igliInstanceGroup
               _igliFilter
               _igliPageToken

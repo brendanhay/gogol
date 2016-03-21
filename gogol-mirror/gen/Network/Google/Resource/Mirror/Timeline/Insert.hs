@@ -61,7 +61,7 @@ type TimelineInsertResource =
 -- | Inserts a new item into the timeline.
 --
 -- /See:/ 'timelineInsert' smart constructor.
-newtype TimelineInsert = TimelineInsert
+newtype TimelineInsert = TimelineInsert'
     { _tiPayload :: TimelineItem
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -74,7 +74,7 @@ timelineInsert
     :: TimelineItem -- ^ 'tiPayload'
     -> TimelineInsert
 timelineInsert pTiPayload_ =
-    TimelineInsert
+    TimelineInsert'
     { _tiPayload = pTiPayload_
     }
 
@@ -88,7 +88,7 @@ instance GoogleRequest TimelineInsert where
         type Scopes TimelineInsert =
              '["https://www.googleapis.com/auth/glass.location",
                "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineInsert{..}
+        requestClient TimelineInsert'{..}
           = go (Just AltJSON) _tiPayload mirrorService
           where go :<|> _
                   = buildClient (Proxy :: Proxy TimelineInsertResource)
@@ -99,7 +99,7 @@ instance GoogleRequest (MediaUpload TimelineInsert)
         type Rs (MediaUpload TimelineInsert) = TimelineItem
         type Scopes (MediaUpload TimelineInsert) =
              Scopes TimelineInsert
-        requestClient (MediaUpload TimelineInsert{..} body)
+        requestClient (MediaUpload TimelineInsert'{..} body)
           = go (Just AltJSON) (Just AltMedia) _tiPayload body
               mirrorService
           where _ :<|> go

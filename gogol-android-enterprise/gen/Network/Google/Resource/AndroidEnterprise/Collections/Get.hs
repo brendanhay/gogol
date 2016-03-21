@@ -54,7 +54,7 @@ type CollectionsGetResource =
 -- | Retrieves the details of a collection.
 --
 -- /See:/ 'collectionsGet' smart constructor.
-data CollectionsGet = CollectionsGet
+data CollectionsGet = CollectionsGet'
     { _cgEnterpriseId :: !Text
     , _cgCollectionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ collectionsGet
     -> Text -- ^ 'cgCollectionId'
     -> CollectionsGet
 collectionsGet pCgEnterpriseId_ pCgCollectionId_ =
-    CollectionsGet
+    CollectionsGet'
     { _cgEnterpriseId = pCgEnterpriseId_
     , _cgCollectionId = pCgCollectionId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CollectionsGet where
         type Rs CollectionsGet = Collection
         type Scopes CollectionsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionsGet{..}
+        requestClient CollectionsGet'{..}
           = go _cgEnterpriseId _cgCollectionId (Just AltJSON)
               androidEnterpriseService
           where go

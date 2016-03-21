@@ -51,7 +51,7 @@ type AccountsGetResource =
 -- | Gets one account by ID.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet
+newtype AccountsGet = AccountsGet'
     { _agId :: Textual Int32
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ accountsGet
     :: Int32 -- ^ 'agId'
     -> AccountsGet
 accountsGet pAgId_ =
-    AccountsGet
+    AccountsGet'
     { _agId = _Coerce # pAgId_
     }
 
@@ -76,7 +76,7 @@ instance GoogleRequest AccountsGet where
         type Rs AccountsGet = Account
         type Scopes AccountsGet =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient AccountsGet{..}
+        requestClient AccountsGet'{..}
           = go _agId (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

@@ -53,7 +53,7 @@ type ChannelSectionsDeleteResource =
 -- | Deletes a channelSection.
 --
 -- /See:/ 'channelSectionsDelete' smart constructor.
-data ChannelSectionsDelete = ChannelSectionsDelete
+data ChannelSectionsDelete = ChannelSectionsDelete'
     { _csdOnBehalfOfContentOwner :: !(Maybe Text)
     , _csdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ channelSectionsDelete
     :: Text -- ^ 'csdId'
     -> ChannelSectionsDelete
 channelSectionsDelete pCsdId_ =
-    ChannelSectionsDelete
+    ChannelSectionsDelete'
     { _csdOnBehalfOfContentOwner = Nothing
     , _csdId = pCsdId_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest ChannelSectionsDelete where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient ChannelSectionsDelete{..}
+        requestClient ChannelSectionsDelete'{..}
           = go (Just _csdId) _csdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

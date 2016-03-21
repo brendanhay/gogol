@@ -55,7 +55,7 @@ type UsersWatchResource =
 -- | Set up or update a push notification watch on the given user mailbox.
 --
 -- /See:/ 'usersWatch' smart constructor.
-data UsersWatch = UsersWatch
+data UsersWatch = UsersWatch'
     { _uwPayload :: !WatchRequest
     , _uwUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersWatch
     :: WatchRequest -- ^ 'uwPayload'
     -> UsersWatch
 usersWatch pUwPayload_ =
-    UsersWatch
+    UsersWatch'
     { _uwPayload = pUwPayload_
     , _uwUserId = "me"
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersWatch where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersWatch{..}
+        requestClient UsersWatch'{..}
           = go _uwUserId (Just AltJSON) _uwPayload gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersWatchResource)

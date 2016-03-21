@@ -57,7 +57,7 @@ type PawsVerifyDeviceResource =
 -- configurations, so this always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsVerifyDevice' smart constructor.
-newtype PawsVerifyDevice = PawsVerifyDevice
+newtype PawsVerifyDevice = PawsVerifyDevice'
     { _pvdPayload :: PawsVerifyDeviceRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ pawsVerifyDevice
     :: PawsVerifyDeviceRequest -- ^ 'pvdPayload'
     -> PawsVerifyDevice
 pawsVerifyDevice pPvdPayload_ =
-    PawsVerifyDevice
+    PawsVerifyDevice'
     { _pvdPayload = pPvdPayload_
     }
 
@@ -82,7 +82,7 @@ pvdPayload
 instance GoogleRequest PawsVerifyDevice where
         type Rs PawsVerifyDevice = PawsVerifyDeviceResponse
         type Scopes PawsVerifyDevice = '[]
-        requestClient PawsVerifyDevice{..}
+        requestClient PawsVerifyDevice'{..}
           = go (Just AltJSON) _pvdPayload spectrumService
           where go
                   = buildClient

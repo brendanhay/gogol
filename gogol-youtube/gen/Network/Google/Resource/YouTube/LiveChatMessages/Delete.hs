@@ -52,7 +52,7 @@ type LiveChatMessagesDeleteResource =
 -- | Deletes a chat message.
 --
 -- /See:/ 'liveChatMessagesDelete' smart constructor.
-newtype LiveChatMessagesDelete = LiveChatMessagesDelete
+newtype LiveChatMessagesDelete = LiveChatMessagesDelete'
     { _lId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ liveChatMessagesDelete
     :: Text -- ^ 'lId'
     -> LiveChatMessagesDelete
 liveChatMessagesDelete pLId_ =
-    LiveChatMessagesDelete
+    LiveChatMessagesDelete'
     { _lId = pLId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest LiveChatMessagesDelete where
         type Scopes LiveChatMessagesDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveChatMessagesDelete{..}
+        requestClient LiveChatMessagesDelete'{..}
           = go (Just _lId) (Just AltJSON) youTubeService
           where go
                   = buildClient

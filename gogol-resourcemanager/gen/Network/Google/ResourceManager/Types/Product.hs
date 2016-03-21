@@ -27,7 +27,7 @@ import           Network.Google.ResourceManager.Types.Sum
 -- so on.
 --
 -- /See:/ 'resourceId' smart constructor.
-data ResourceId = ResourceId
+data ResourceId = ResourceId'
     { _riId   :: !(Maybe Text)
     , _riType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -42,7 +42,7 @@ data ResourceId = ResourceId
 resourceId
     :: ResourceId
 resourceId =
-    ResourceId
+    ResourceId'
     { _riId = Nothing
     , _riType = Nothing
     }
@@ -61,10 +61,10 @@ instance FromJSON ResourceId where
         parseJSON
           = withObject "ResourceId"
               (\ o ->
-                 ResourceId <$> (o .:? "id") <*> (o .:? "type"))
+                 ResourceId' <$> (o .:? "id") <*> (o .:? "type"))
 
 instance ToJSON ResourceId where
-        toJSON ResourceId{..}
+        toJSON ResourceId'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _riId, ("type" .=) <$> _riType])
@@ -75,7 +75,7 @@ instance ToJSON ResourceId where
 -- to retrieve the next request page.
 --
 -- /See:/ 'listProjectsResponse' smart constructor.
-data ListProjectsResponse = ListProjectsResponse
+data ListProjectsResponse = ListProjectsResponse'
     { _lprNextPageToken :: !(Maybe Text)
     , _lprProjects      :: !(Maybe [Project])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -90,7 +90,7 @@ data ListProjectsResponse = ListProjectsResponse
 listProjectsResponse
     :: ListProjectsResponse
 listProjectsResponse =
-    ListProjectsResponse
+    ListProjectsResponse'
     { _lprNextPageToken = Nothing
     , _lprProjects = Nothing
     }
@@ -119,12 +119,12 @@ instance FromJSON ListProjectsResponse where
         parseJSON
           = withObject "ListProjectsResponse"
               (\ o ->
-                 ListProjectsResponse <$>
+                 ListProjectsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "projects" .!= mempty))
 
 instance ToJSON ListProjectsResponse where
-        toJSON ListProjectsResponse{..}
+        toJSON ListProjectsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lprNextPageToken,
@@ -134,19 +134,19 @@ instance ToJSON ListProjectsResponse where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest
+    GetIAMPolicyRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest
+getIAMPolicyRequest = GetIAMPolicyRequest'
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest)
+              (\ o -> pure GetIAMPolicyRequest')
 
 instance ToJSON GetIAMPolicyRequest where
         toJSON = const emptyObject
@@ -156,7 +156,7 @@ instance ToJSON GetIAMPolicyRequest where
 -- Platform resources.
 --
 -- /See:/ 'project' smart constructor.
-data Project = Project
+data Project = Project'
     { _pParent         :: !(Maybe ResourceId)
     , _pProjectNumber  :: !(Maybe (Textual Int64))
     , _pName           :: !(Maybe Text)
@@ -186,7 +186,7 @@ data Project = Project
 project
     :: Project
 project =
-    Project
+    Project'
     { _pParent = Nothing
     , _pProjectNumber = Nothing
     , _pName = Nothing
@@ -252,7 +252,7 @@ instance FromJSON Project where
         parseJSON
           = withObject "Project"
               (\ o ->
-                 Project <$>
+                 Project' <$>
                    (o .:? "parent") <*> (o .:? "projectNumber") <*>
                      (o .:? "name")
                      <*> (o .:? "labels")
@@ -261,7 +261,7 @@ instance FromJSON Project where
                      <*> (o .:? "createTime"))
 
 instance ToJSON Project where
-        toJSON Project{..}
+        toJSON Project'{..}
           = object
               (catMaybes
                  [("parent" .=) <$> _pParent,
@@ -279,17 +279,17 @@ instance ToJSON Project where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -297,7 +297,7 @@ instance ToJSON Empty where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest
+newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -309,7 +309,7 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest
+    SetIAMPolicyRequest'
     { _siprPolicy = Nothing
     }
 
@@ -324,16 +324,16 @@ siprPolicy
 instance FromJSON SetIAMPolicyRequest where
         parseJSON
           = withObject "SetIAMPolicyRequest"
-              (\ o -> SetIAMPolicyRequest <$> (o .:? "policy"))
+              (\ o -> SetIAMPolicyRequest' <$> (o .:? "policy"))
 
 instance ToJSON SetIAMPolicyRequest where
-        toJSON SetIAMPolicyRequest{..}
+        toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
+newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -345,7 +345,7 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest
+    TestIAMPermissionsRequest'
     { _tiprPermissions = Nothing
     }
 
@@ -363,18 +363,18 @@ instance FromJSON TestIAMPermissionsRequest where
         parseJSON
           = withObject "TestIAMPermissionsRequest"
               (\ o ->
-                 TestIAMPermissionsRequest <$>
+                 TestIAMPermissionsRequest' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsRequest where
-        toJSON TestIAMPermissionsRequest{..}
+        toJSON TestIAMPermissionsRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
+newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -386,7 +386,7 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse
+    TestIAMPermissionsResponse'
     { _tiamprPermissions = Nothing
     }
 
@@ -403,11 +403,11 @@ instance FromJSON TestIAMPermissionsResponse where
         parseJSON
           = withObject "TestIAMPermissionsResponse"
               (\ o ->
-                 TestIAMPermissionsResponse <$>
+                 TestIAMPermissionsResponse' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsResponse where
-        toJSON TestIAMPermissionsResponse{..}
+        toJSON TestIAMPermissionsResponse'{..}
           = object
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
@@ -427,7 +427,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy
+data Policy = Policy'
     { _pEtag     :: !(Maybe (Textual Word8))
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
@@ -445,7 +445,7 @@ data Policy = Policy
 policy
     :: Policy
 policy =
-    Policy
+    Policy'
     { _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
@@ -484,12 +484,12 @@ instance FromJSON Policy where
         parseJSON
           = withObject "Policy"
               (\ o ->
-                 Policy <$>
+                 Policy' <$>
                    (o .:? "etag") <*> (o .:? "version") <*>
                      (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
-        toJSON Policy{..}
+        toJSON Policy'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _pEtag,
@@ -507,7 +507,7 @@ instance ToJSON Policy where
 -- Read-write.
 --
 -- /See:/ 'projectLabels' smart constructor.
-newtype ProjectLabels = ProjectLabels
+newtype ProjectLabels = ProjectLabels'
     { _plAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -520,7 +520,7 @@ projectLabels
     :: HashMap Text Text -- ^ 'plAddtional'
     -> ProjectLabels
 projectLabels pPlAddtional_ =
-    ProjectLabels
+    ProjectLabels'
     { _plAddtional = _Coerce # pPlAddtional_
     }
 
@@ -532,7 +532,7 @@ plAddtional
 instance FromJSON ProjectLabels where
         parseJSON
           = withObject "ProjectLabels"
-              (\ o -> ProjectLabels <$> (parseJSONObject o))
+              (\ o -> ProjectLabels' <$> (parseJSONObject o))
 
 instance ToJSON ProjectLabels where
         toJSON = toJSON . _plAddtional
@@ -541,19 +541,19 @@ instance ToJSON ProjectLabels where
 --
 -- /See:/ 'undeleteProjectRequest' smart constructor.
 data UndeleteProjectRequest =
-    UndeleteProjectRequest
+    UndeleteProjectRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UndeleteProjectRequest' with the minimum fields required to make a request.
 --
 undeleteProjectRequest
     :: UndeleteProjectRequest
-undeleteProjectRequest = UndeleteProjectRequest
+undeleteProjectRequest = UndeleteProjectRequest'
 
 instance FromJSON UndeleteProjectRequest where
         parseJSON
           = withObject "UndeleteProjectRequest"
-              (\ o -> pure UndeleteProjectRequest)
+              (\ o -> pure UndeleteProjectRequest')
 
 instance ToJSON UndeleteProjectRequest where
         toJSON = const emptyObject
@@ -561,7 +561,7 @@ instance ToJSON UndeleteProjectRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding
+data Binding = Binding'
     { _bMembers :: !(Maybe [Text])
     , _bRole    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -576,7 +576,7 @@ data Binding = Binding
 binding
     :: Binding
 binding =
-    Binding
+    Binding'
     { _bMembers = Nothing
     , _bRole = Nothing
     }
@@ -610,11 +610,11 @@ instance FromJSON Binding where
         parseJSON
           = withObject "Binding"
               (\ o ->
-                 Binding <$>
+                 Binding' <$>
                    (o .:? "members" .!= mempty) <*> (o .:? "role"))
 
 instance ToJSON Binding where
-        toJSON Binding{..}
+        toJSON Binding'{..}
           = object
               (catMaybes
                  [("members" .=) <$> _bMembers,

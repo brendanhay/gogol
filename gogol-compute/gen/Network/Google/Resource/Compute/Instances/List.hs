@@ -61,7 +61,7 @@ type InstancesListResource =
 -- | Retrieves the list of instances contained within the specified zone.
 --
 -- /See:/ 'instancesList' smart constructor.
-data InstancesList = InstancesList
+data InstancesList = InstancesList'
     { _ilProject    :: !Text
     , _ilZone       :: !Text
     , _ilFilter     :: !(Maybe Text)
@@ -87,7 +87,7 @@ instancesList
     -> Text -- ^ 'ilZone'
     -> InstancesList
 instancesList pIlProject_ pIlZone_ =
-    InstancesList
+    InstancesList'
     { _ilProject = pIlProject_
     , _ilZone = pIlZone_
     , _ilFilter = Nothing
@@ -150,7 +150,7 @@ instance GoogleRequest InstancesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstancesList{..}
+        requestClient InstancesList'{..}
           = go _ilProject _ilZone _ilFilter _ilPageToken
               (Just _ilMaxResults)
               (Just AltJSON)

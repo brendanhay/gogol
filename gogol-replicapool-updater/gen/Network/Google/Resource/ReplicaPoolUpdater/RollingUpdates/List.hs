@@ -64,7 +64,7 @@ type RollingUpdatesListResource =
 -- chronological order and paginated format.
 --
 -- /See:/ 'rollingUpdatesList' smart constructor.
-data RollingUpdatesList = RollingUpdatesList
+data RollingUpdatesList = RollingUpdatesList'
     { _rulProject    :: !Text
     , _rulZone       :: !Text
     , _rulFilter     :: !(Maybe Text)
@@ -90,7 +90,7 @@ rollingUpdatesList
     -> Text -- ^ 'rulZone'
     -> RollingUpdatesList
 rollingUpdatesList pRulProject_ pRulZone_ =
-    RollingUpdatesList
+    RollingUpdatesList'
     { _rulProject = pRulProject_
     , _rulZone = pRulZone_
     , _rulFilter = Nothing
@@ -133,7 +133,7 @@ instance GoogleRequest RollingUpdatesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/replicapool",
                "https://www.googleapis.com/auth/replicapool.readonly"]
-        requestClient RollingUpdatesList{..}
+        requestClient RollingUpdatesList'{..}
           = go _rulProject _rulZone _rulFilter _rulPageToken
               (Just _rulMaxResults)
               (Just AltJSON)

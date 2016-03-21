@@ -75,7 +75,7 @@ type CoursesStudentsDeleteResource =
 -- not exist.
 --
 -- /See:/ 'coursesStudentsDelete' smart constructor.
-data CoursesStudentsDelete = CoursesStudentsDelete
+data CoursesStudentsDelete = CoursesStudentsDelete'
     { _csdXgafv          :: !(Maybe Text)
     , _csdUploadProtocol :: !(Maybe Text)
     , _csdPp             :: !Bool
@@ -113,7 +113,7 @@ coursesStudentsDelete
     -> Text -- ^ 'csdUserId'
     -> CoursesStudentsDelete
 coursesStudentsDelete pCsdCourseId_ pCsdUserId_ =
-    CoursesStudentsDelete
+    CoursesStudentsDelete'
     { _csdXgafv = Nothing
     , _csdUploadProtocol = Nothing
     , _csdPp = True
@@ -179,7 +179,7 @@ instance GoogleRequest CoursesStudentsDelete where
         type Rs CoursesStudentsDelete = Empty
         type Scopes CoursesStudentsDelete =
              '["https://www.googleapis.com/auth/classroom.rosters"]
-        requestClient CoursesStudentsDelete{..}
+        requestClient CoursesStudentsDelete'{..}
           = go _csdCourseId _csdUserId _csdXgafv
               _csdUploadProtocol
               (Just _csdPp)

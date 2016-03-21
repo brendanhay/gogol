@@ -53,7 +53,7 @@ type RasterCollectionsPatchResource =
 -- | Mutate a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsPatch' smart constructor.
-data RasterCollectionsPatch = RasterCollectionsPatch
+data RasterCollectionsPatch = RasterCollectionsPatch'
     { _rasPayload :: !RasterCollection
     , _rasId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ rasterCollectionsPatch
     -> Text -- ^ 'rasId'
     -> RasterCollectionsPatch
 rasterCollectionsPatch pRasPayload_ pRasId_ =
-    RasterCollectionsPatch
+    RasterCollectionsPatch'
     { _rasPayload = pRasPayload_
     , _rasId = pRasId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest RasterCollectionsPatch where
         type Rs RasterCollectionsPatch = ()
         type Scopes RasterCollectionsPatch =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RasterCollectionsPatch{..}
+        requestClient RasterCollectionsPatch'{..}
           = go _rasId (Just AltJSON) _rasPayload
               mapsEngineService
           where go

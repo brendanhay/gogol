@@ -56,7 +56,7 @@ type CreativesPatchResource =
 -- | Updates an existing creative. This method supports patch semantics.
 --
 -- /See:/ 'creativesPatch' smart constructor.
-data CreativesPatch = CreativesPatch
+data CreativesPatch = CreativesPatch'
     { _cppProFileId :: !(Textual Int64)
     , _cppPayload   :: !Creative
     , _cppId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ creativesPatch
     -> Int64 -- ^ 'cppId'
     -> CreativesPatch
 creativesPatch pCppProFileId_ pCppPayload_ pCppId_ =
-    CreativesPatch
+    CreativesPatch'
     { _cppProFileId = _Coerce # pCppProFileId_
     , _cppPayload = pCppPayload_
     , _cppId = _Coerce # pCppId_
@@ -103,7 +103,7 @@ instance GoogleRequest CreativesPatch where
         type Rs CreativesPatch = Creative
         type Scopes CreativesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativesPatch{..}
+        requestClient CreativesPatch'{..}
           = go _cppProFileId (Just _cppId) (Just AltJSON)
               _cppPayload
               dFAReportingService

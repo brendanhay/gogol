@@ -67,7 +67,7 @@ type ProjectsServiceAccountsKeysCreateResource =
 -- | Creates a service account key and returns it.
 --
 -- /See:/ 'projectsServiceAccountsKeysCreate' smart constructor.
-data ProjectsServiceAccountsKeysCreate = ProjectsServiceAccountsKeysCreate
+data ProjectsServiceAccountsKeysCreate = ProjectsServiceAccountsKeysCreate'
     { _psakcXgafv          :: !(Maybe Text)
     , _psakcUploadProtocol :: !(Maybe Text)
     , _psakcPp             :: !Bool
@@ -105,7 +105,7 @@ projectsServiceAccountsKeysCreate
     -> Text -- ^ 'psakcName'
     -> ProjectsServiceAccountsKeysCreate
 projectsServiceAccountsKeysCreate pPsakcPayload_ pPsakcName_ =
-    ProjectsServiceAccountsKeysCreate
+    ProjectsServiceAccountsKeysCreate'
     { _psakcXgafv = Nothing
     , _psakcUploadProtocol = Nothing
     , _psakcPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest
              ServiceAccountKey
         type Scopes ProjectsServiceAccountsKeysCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsKeysCreate{..}
+        requestClient ProjectsServiceAccountsKeysCreate'{..}
           = go _psakcName _psakcXgafv _psakcUploadProtocol
               (Just _psakcPp)
               _psakcAccessToken

@@ -51,7 +51,7 @@ type CommentsDeleteResource =
 -- | Deletes a comment.
 --
 -- /See:/ 'commentsDelete' smart constructor.
-newtype CommentsDelete = CommentsDelete
+newtype CommentsDelete = CommentsDelete'
     { _cdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ commentsDelete
     :: Text -- ^ 'cdId'
     -> CommentsDelete
 commentsDelete pCdId_ =
-    CommentsDelete
+    CommentsDelete'
     { _cdId = pCdId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest CommentsDelete where
         type Rs CommentsDelete = ()
         type Scopes CommentsDelete =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentsDelete{..}
+        requestClient CommentsDelete'{..}
           = go (Just _cdId) (Just AltJSON) youTubeService
           where go
                   = buildClient (Proxy :: Proxy CommentsDeleteResource)

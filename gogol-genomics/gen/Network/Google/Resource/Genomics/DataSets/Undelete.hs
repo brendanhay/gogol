@@ -75,7 +75,7 @@ type DataSetsUndeleteResource =
 -- This operation is only possible for a week after the deletion occurred.
 --
 -- /See:/ 'dataSetsUndelete' smart constructor.
-data DataSetsUndelete = DataSetsUndelete
+data DataSetsUndelete = DataSetsUndelete'
     { _dsuXgafv          :: !(Maybe Text)
     , _dsuUploadProtocol :: !(Maybe Text)
     , _dsuPp             :: !Bool
@@ -113,7 +113,7 @@ dataSetsUndelete
     -> Text -- ^ 'dsuDataSetId'
     -> DataSetsUndelete
 dataSetsUndelete pDsuPayload_ pDsuDataSetId_ =
-    DataSetsUndelete
+    DataSetsUndelete'
     { _dsuXgafv = Nothing
     , _dsuUploadProtocol = Nothing
     , _dsuPp = True
@@ -177,7 +177,7 @@ instance GoogleRequest DataSetsUndelete where
         type Scopes DataSetsUndelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsUndelete{..}
+        requestClient DataSetsUndelete'{..}
           = go _dsuDataSetId _dsuXgafv _dsuUploadProtocol
               (Just _dsuPp)
               _dsuAccessToken

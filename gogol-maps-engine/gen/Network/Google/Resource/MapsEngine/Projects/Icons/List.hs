@@ -57,7 +57,7 @@ type ProjectsIconsListResource =
 -- | Return all icons in the current project
 --
 -- /See:/ 'projectsIconsList' smart constructor.
-data ProjectsIconsList = ProjectsIconsList
+data ProjectsIconsList = ProjectsIconsList'
     { _pilPageToken  :: !(Maybe Text)
     , _pilProjectId  :: !Text
     , _pilMaxResults :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ projectsIconsList
     :: Text -- ^ 'pilProjectId'
     -> ProjectsIconsList
 projectsIconsList pPilProjectId_ =
-    ProjectsIconsList
+    ProjectsIconsList'
     { _pilPageToken = Nothing
     , _pilProjectId = pPilProjectId_
     , _pilMaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest ProjectsIconsList where
         type Scopes ProjectsIconsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient ProjectsIconsList{..}
+        requestClient ProjectsIconsList'{..}
           = go _pilProjectId _pilPageToken _pilMaxResults
               (Just AltJSON)
               mapsEngineService

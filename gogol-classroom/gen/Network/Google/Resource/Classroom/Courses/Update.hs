@@ -74,7 +74,7 @@ type CoursesUpdateResource =
 -- following request errors: * CourseNotModifiable
 --
 -- /See:/ 'coursesUpdate' smart constructor.
-data CoursesUpdate = CoursesUpdate
+data CoursesUpdate = CoursesUpdate'
     { _cuXgafv          :: !(Maybe Text)
     , _cuUploadProtocol :: !(Maybe Text)
     , _cuPp             :: !Bool
@@ -112,7 +112,7 @@ coursesUpdate
     -> Text -- ^ 'cuId'
     -> CoursesUpdate
 coursesUpdate pCuPayload_ pCuId_ =
-    CoursesUpdate
+    CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuUploadProtocol = Nothing
     , _cuPp = True
@@ -174,7 +174,7 @@ instance GoogleRequest CoursesUpdate where
         type Rs CoursesUpdate = Course
         type Scopes CoursesUpdate =
              '["https://www.googleapis.com/auth/classroom.courses"]
-        requestClient CoursesUpdate{..}
+        requestClient CoursesUpdate'{..}
           = go _cuId _cuXgafv _cuUploadProtocol (Just _cuPp)
               _cuAccessToken
               _cuUploadType

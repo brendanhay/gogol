@@ -60,7 +60,7 @@ type TargetInstancesGetResource =
 -- target instances by making a list() request.
 --
 -- /See:/ 'targetInstancesGet' smart constructor.
-data TargetInstancesGet = TargetInstancesGet
+data TargetInstancesGet = TargetInstancesGet'
     { _tigProject        :: !Text
     , _tigTargetInstance :: !Text
     , _tigZone           :: !Text
@@ -81,7 +81,7 @@ targetInstancesGet
     -> Text -- ^ 'tigZone'
     -> TargetInstancesGet
 targetInstancesGet pTigProject_ pTigTargetInstance_ pTigZone_ =
-    TargetInstancesGet
+    TargetInstancesGet'
     { _tigProject = pTigProject_
     , _tigTargetInstance = pTigTargetInstance_
     , _tigZone = pTigZone_
@@ -108,7 +108,7 @@ instance GoogleRequest TargetInstancesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetInstancesGet{..}
+        requestClient TargetInstancesGet'{..}
           = go _tigProject _tigZone _tigTargetInstance
               (Just AltJSON)
               computeService

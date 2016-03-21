@@ -67,7 +67,7 @@ type AdvertiserGroupsListResource =
 -- | Retrieves a list of advertiser groups, possibly filtered.
 --
 -- /See:/ 'advertiserGroupsList' smart constructor.
-data AdvertiserGroupsList = AdvertiserGroupsList
+data AdvertiserGroupsList = AdvertiserGroupsList'
     { _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe [Textual Int64])
     , _aglProFileId    :: !(Textual Int64)
@@ -98,7 +98,7 @@ advertiserGroupsList
     :: Int64 -- ^ 'aglProFileId'
     -> AdvertiserGroupsList
 advertiserGroupsList pAglProFileId_ =
-    AdvertiserGroupsList
+    AdvertiserGroupsList'
     { _aglSearchString = Nothing
     , _aglIds = Nothing
     , _aglProFileId = _Coerce # pAglProFileId_
@@ -160,7 +160,7 @@ instance GoogleRequest AdvertiserGroupsList where
              AdvertiserGroupsListResponse
         type Scopes AdvertiserGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertiserGroupsList{..}
+        requestClient AdvertiserGroupsList'{..}
           = go _aglProFileId _aglSearchString
               (_aglIds ^. _Default)
               _aglSortOrder

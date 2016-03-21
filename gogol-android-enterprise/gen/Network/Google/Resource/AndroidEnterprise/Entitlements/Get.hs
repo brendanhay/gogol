@@ -57,7 +57,7 @@ type EntitlementsGetResource =
 -- | Retrieves details of an entitlement.
 --
 -- /See:/ 'entitlementsGet' smart constructor.
-data EntitlementsGet = EntitlementsGet
+data EntitlementsGet = EntitlementsGet'
     { _egEntitlementId :: !Text
     , _egEnterpriseId  :: !Text
     , _egUserId        :: !Text
@@ -78,7 +78,7 @@ entitlementsGet
     -> Text -- ^ 'egUserId'
     -> EntitlementsGet
 entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
-    EntitlementsGet
+    EntitlementsGet'
     { _egEntitlementId = pEgEntitlementId_
     , _egEnterpriseId = pEgEnterpriseId_
     , _egUserId = pEgUserId_
@@ -104,7 +104,7 @@ instance GoogleRequest EntitlementsGet where
         type Rs EntitlementsGet = Entitlement
         type Scopes EntitlementsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EntitlementsGet{..}
+        requestClient EntitlementsGet'{..}
           = go _egEnterpriseId _egUserId _egEntitlementId
               (Just AltJSON)
               androidEnterpriseService

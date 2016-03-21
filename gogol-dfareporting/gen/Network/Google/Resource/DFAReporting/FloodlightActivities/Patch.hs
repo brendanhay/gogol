@@ -59,7 +59,7 @@ type FloodlightActivitiesPatchResource =
 -- semantics.
 --
 -- /See:/ 'floodlightActivitiesPatch' smart constructor.
-data FloodlightActivitiesPatch = FloodlightActivitiesPatch
+data FloodlightActivitiesPatch = FloodlightActivitiesPatch'
     { _fapProFileId :: !(Textual Int64)
     , _fapPayload   :: !FloodlightActivity
     , _fapId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ floodlightActivitiesPatch
     -> Int64 -- ^ 'fapId'
     -> FloodlightActivitiesPatch
 floodlightActivitiesPatch pFapProFileId_ pFapPayload_ pFapId_ =
-    FloodlightActivitiesPatch
+    FloodlightActivitiesPatch'
     { _fapProFileId = _Coerce # pFapProFileId_
     , _fapPayload = pFapPayload_
     , _fapId = _Coerce # pFapId_
@@ -108,7 +108,7 @@ instance GoogleRequest FloodlightActivitiesPatch
              FloodlightActivity
         type Scopes FloodlightActivitiesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivitiesPatch{..}
+        requestClient FloodlightActivitiesPatch'{..}
           = go _fapProFileId (Just _fapId) (Just AltJSON)
               _fapPayload
               dFAReportingService

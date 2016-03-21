@@ -57,7 +57,7 @@ type OrdersReturnlineitemResource =
 -- | Returns a line item.
 --
 -- /See:/ 'ordersReturnlineitem' smart constructor.
-data OrdersReturnlineitem = OrdersReturnlineitem
+data OrdersReturnlineitem = OrdersReturnlineitem'
     { _oMerchantId :: !(Textual Word64)
     , _oPayload    :: !OrdersReturnLineItemRequest
     , _oOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersReturnlineitem
     -> Text -- ^ 'oOrderId'
     -> OrdersReturnlineitem
 ordersReturnlineitem pOMerchantId_ pOPayload_ pOOrderId_ =
-    OrdersReturnlineitem
+    OrdersReturnlineitem'
     { _oMerchantId = _Coerce # pOMerchantId_
     , _oPayload = pOPayload_
     , _oOrderId = pOOrderId_
@@ -103,7 +103,7 @@ instance GoogleRequest OrdersReturnlineitem where
              OrdersReturnLineItemResponse
         type Scopes OrdersReturnlineitem =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersReturnlineitem{..}
+        requestClient OrdersReturnlineitem'{..}
           = go _oMerchantId _oOrderId (Just AltJSON) _oPayload
               shoppingContentService
           where go

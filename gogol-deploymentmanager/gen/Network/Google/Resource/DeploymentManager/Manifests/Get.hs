@@ -58,7 +58,7 @@ type ManifestsGetResource =
 -- | Gets information about a specific manifest.
 --
 -- /See:/ 'manifestsGet' smart constructor.
-data ManifestsGet = ManifestsGet
+data ManifestsGet = ManifestsGet'
     { _mgProject    :: !Text
     , _mgManifest   :: !Text
     , _mgDeployment :: !Text
@@ -79,7 +79,7 @@ manifestsGet
     -> Text -- ^ 'mgDeployment'
     -> ManifestsGet
 manifestsGet pMgProject_ pMgManifest_ pMgDeployment_ =
-    ManifestsGet
+    ManifestsGet'
     { _mgProject = pMgProject_
     , _mgManifest = pMgManifest_
     , _mgDeployment = pMgDeployment_
@@ -107,7 +107,7 @@ instance GoogleRequest ManifestsGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ManifestsGet{..}
+        requestClient ManifestsGet'{..}
           = go _mgProject _mgDeployment _mgManifest
               (Just AltJSON)
               deploymentManagerService

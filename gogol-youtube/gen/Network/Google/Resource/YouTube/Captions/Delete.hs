@@ -55,7 +55,7 @@ type CaptionsDeleteResource =
 -- | Deletes a specified caption track.
 --
 -- /See:/ 'captionsDelete' smart constructor.
-data CaptionsDelete = CaptionsDelete
+data CaptionsDelete = CaptionsDelete'
     { _cddOnBehalfOf             :: !(Maybe Text)
     , _cddOnBehalfOfContentOwner :: !(Maybe Text)
     , _cddId                     :: !Text
@@ -74,7 +74,7 @@ captionsDelete
     :: Text -- ^ 'cddId'
     -> CaptionsDelete
 captionsDelete pCddId_ =
-    CaptionsDelete
+    CaptionsDelete'
     { _cddOnBehalfOf = Nothing
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddId = pCddId_
@@ -113,7 +113,7 @@ instance GoogleRequest CaptionsDelete where
         type Scopes CaptionsDelete =
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient CaptionsDelete{..}
+        requestClient CaptionsDelete'{..}
           = go (Just _cddId) _cddOnBehalfOf
               _cddOnBehalfOfContentOwner
               (Just AltJSON)

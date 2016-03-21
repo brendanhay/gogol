@@ -68,7 +68,7 @@ type ReportsFilesGetResource =
 -- | Retrieves a report file.
 --
 -- /See:/ 'reportsFilesGet' smart constructor.
-data ReportsFilesGet = ReportsFilesGet
+data ReportsFilesGet = ReportsFilesGet'
     { _rfgReportId  :: !(Textual Int64)
     , _rfgProFileId :: !(Textual Int64)
     , _rfgFileId    :: !(Textual Int64)
@@ -89,7 +89,7 @@ reportsFilesGet
     -> Int64 -- ^ 'rfgFileId'
     -> ReportsFilesGet
 reportsFilesGet pRfgReportId_ pRfgProFileId_ pRfgFileId_ =
-    ReportsFilesGet
+    ReportsFilesGet'
     { _rfgReportId = _Coerce # pRfgReportId_
     , _rfgProFileId = _Coerce # pRfgProFileId_
     , _rfgFileId = _Coerce # pRfgFileId_
@@ -117,7 +117,7 @@ instance GoogleRequest ReportsFilesGet where
         type Rs ReportsFilesGet = File
         type Scopes ReportsFilesGet =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsFilesGet{..}
+        requestClient ReportsFilesGet'{..}
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltJSON)
               dFAReportingService
@@ -131,7 +131,7 @@ instance GoogleRequest
         type Rs (MediaDownload ReportsFilesGet) = Stream
         type Scopes (MediaDownload ReportsFilesGet) =
              Scopes ReportsFilesGet
-        requestClient (MediaDownload ReportsFilesGet{..})
+        requestClient (MediaDownload ReportsFilesGet'{..})
           = go _rfgProFileId _rfgReportId _rfgFileId
               (Just AltMedia)
               dFAReportingService

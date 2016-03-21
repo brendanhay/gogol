@@ -56,7 +56,7 @@ type CirclesListResource =
 -- | List all of the circles for a user.
 --
 -- /See:/ 'circlesList' smart constructor.
-data CirclesList = CirclesList
+data CirclesList = CirclesList'
     { _cUserId     :: !Text
     , _cPageToken  :: !(Maybe Text)
     , _cMaxResults :: !(Textual Word32)
@@ -75,7 +75,7 @@ circlesList
     :: Text -- ^ 'cUserId'
     -> CirclesList
 circlesList pCUserId_ =
-    CirclesList
+    CirclesList'
     { _cUserId = pCUserId_
     , _cPageToken = Nothing
     , _cMaxResults = 20
@@ -107,7 +107,7 @@ instance GoogleRequest CirclesList where
              '["https://www.googleapis.com/auth/plus.circles.read",
                "https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient CirclesList{..}
+        requestClient CirclesList'{..}
           = go _cUserId _cPageToken (Just _cMaxResults)
               (Just AltJSON)
               plusDomainsService

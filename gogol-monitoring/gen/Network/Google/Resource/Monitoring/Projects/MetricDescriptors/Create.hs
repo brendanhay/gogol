@@ -69,7 +69,7 @@ type ProjectsMetricDescriptorsCreateResource =
 -- [custom metrics](\/monitoring\/custom-metrics).
 --
 -- /See:/ 'projectsMetricDescriptorsCreate' smart constructor.
-data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate
+data ProjectsMetricDescriptorsCreate = ProjectsMetricDescriptorsCreate'
     { _pmdcXgafv          :: !(Maybe Text)
     , _pmdcUploadProtocol :: !(Maybe Text)
     , _pmdcPp             :: !Bool
@@ -107,7 +107,7 @@ projectsMetricDescriptorsCreate
     -> Text -- ^ 'pmdcName'
     -> ProjectsMetricDescriptorsCreate
 projectsMetricDescriptorsCreate pPmdcPayload_ pPmdcName_ =
-    ProjectsMetricDescriptorsCreate
+    ProjectsMetricDescriptorsCreate'
     { _pmdcXgafv = Nothing
     , _pmdcUploadProtocol = Nothing
     , _pmdcPp = True
@@ -175,7 +175,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.write"]
-        requestClient ProjectsMetricDescriptorsCreate{..}
+        requestClient ProjectsMetricDescriptorsCreate'{..}
           = go _pmdcName _pmdcXgafv _pmdcUploadProtocol
               (Just _pmdcPp)
               _pmdcAccessToken

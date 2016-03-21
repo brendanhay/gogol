@@ -53,7 +53,7 @@ type RevisionsCheckResource =
 -- | Checks whether the games client is out of date.
 --
 -- /See:/ 'revisionsCheck' smart constructor.
-newtype RevisionsCheck = RevisionsCheck
+newtype RevisionsCheck = RevisionsCheck'
     { _rcClientRevision :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ revisionsCheck
     :: Text -- ^ 'rcClientRevision'
     -> RevisionsCheck
 revisionsCheck pRcClientRevision_ =
-    RevisionsCheck
+    RevisionsCheck'
     { _rcClientRevision = pRcClientRevision_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest RevisionsCheck where
         type Scopes RevisionsCheck =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RevisionsCheck{..}
+        requestClient RevisionsCheck'{..}
           = go (Just _rcClientRevision) (Just AltJSON)
               gamesService
           where go

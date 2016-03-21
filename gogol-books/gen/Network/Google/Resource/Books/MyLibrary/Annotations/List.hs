@@ -71,7 +71,7 @@ type MyLibraryAnnotationsListResource =
 -- | Retrieves a list of annotations, possibly filtered.
 --
 -- /See:/ 'myLibraryAnnotationsList' smart constructor.
-data MyLibraryAnnotationsList = MyLibraryAnnotationsList
+data MyLibraryAnnotationsList = MyLibraryAnnotationsList'
     { _mlalContentVersion :: !(Maybe Text)
     , _mlalShowDeleted    :: !(Maybe Bool)
     , _mlalUpdatedMax     :: !(Maybe Text)
@@ -110,7 +110,7 @@ data MyLibraryAnnotationsList = MyLibraryAnnotationsList
 myLibraryAnnotationsList
     :: MyLibraryAnnotationsList
 myLibraryAnnotationsList =
-    MyLibraryAnnotationsList
+    MyLibraryAnnotationsList'
     { _mlalContentVersion = Nothing
     , _mlalShowDeleted = Nothing
     , _mlalUpdatedMax = Nothing
@@ -189,7 +189,7 @@ instance GoogleRequest MyLibraryAnnotationsList where
         type Rs MyLibraryAnnotationsList = Annotations
         type Scopes MyLibraryAnnotationsList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryAnnotationsList{..}
+        requestClient MyLibraryAnnotationsList'{..}
           = go _mlalContentVersion _mlalShowDeleted
               _mlalUpdatedMax
               _mlalUpdatedMin

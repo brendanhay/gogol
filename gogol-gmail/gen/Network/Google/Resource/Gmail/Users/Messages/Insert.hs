@@ -79,7 +79,7 @@ type UsersMessagesInsertResource =
 -- message.
 --
 -- /See:/ 'usersMessagesInsert' smart constructor.
-data UsersMessagesInsert = UsersMessagesInsert
+data UsersMessagesInsert = UsersMessagesInsert'
     { _uPayload            :: !Message
     , _uUserId             :: !Text
     , _uDeleted            :: !Bool
@@ -101,7 +101,7 @@ usersMessagesInsert
     :: Message -- ^ 'uPayload'
     -> UsersMessagesInsert
 usersMessagesInsert pUPayload_ =
-    UsersMessagesInsert
+    UsersMessagesInsert'
     { _uPayload = pUPayload_
     , _uUserId = "me"
     , _uDeleted = False
@@ -135,7 +135,7 @@ instance GoogleRequest UsersMessagesInsert where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.insert",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersMessagesInsert{..}
+        requestClient UsersMessagesInsert'{..}
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
               (Just AltJSON)
@@ -152,7 +152,7 @@ instance GoogleRequest
         type Scopes (MediaUpload UsersMessagesInsert) =
              Scopes UsersMessagesInsert
         requestClient
-          (MediaUpload UsersMessagesInsert{..} body)
+          (MediaUpload UsersMessagesInsert'{..} body)
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
               (Just AltJSON)

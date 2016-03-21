@@ -56,7 +56,7 @@ type WebResourcePatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'webResourcePatch' smart constructor.
-data WebResourcePatch = WebResourcePatch
+data WebResourcePatch = WebResourcePatch'
     { _wrpPayload :: !SiteVerificationWebResourceResource
     , _wrpId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ webResourcePatch
     -> Text -- ^ 'wrpId'
     -> WebResourcePatch
 webResourcePatch pWrpPayload_ pWrpId_ =
-    WebResourcePatch
+    WebResourcePatch'
     { _wrpPayload = pWrpPayload_
     , _wrpId = pWrpId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest WebResourcePatch where
              SiteVerificationWebResourceResource
         type Scopes WebResourcePatch =
              '["https://www.googleapis.com/auth/siteverification"]
-        requestClient WebResourcePatch{..}
+        requestClient WebResourcePatch'{..}
           = go _wrpId (Just AltJSON) _wrpPayload
               siteVerificationService
           where go

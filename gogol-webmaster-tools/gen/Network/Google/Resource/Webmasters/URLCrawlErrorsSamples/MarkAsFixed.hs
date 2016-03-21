@@ -63,7 +63,7 @@ type URLCrawlErrorsSamplesMarkAsFixedResource =
 -- samples list.
 --
 -- /See:/ 'urlCrawlErrorsSamplesMarkAsFixed' smart constructor.
-data URLCrawlErrorsSamplesMarkAsFixed = URLCrawlErrorsSamplesMarkAsFixed
+data URLCrawlErrorsSamplesMarkAsFixed = URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafPlatform :: !URLCrawlErrorsSamplesMarkAsFixedPlatform
     , _ucesmafCategory :: !URLCrawlErrorsSamplesMarkAsFixedCategory
     , _ucesmafSiteURL  :: !Text
@@ -88,7 +88,7 @@ urlCrawlErrorsSamplesMarkAsFixed
     -> Text -- ^ 'ucesmafURL'
     -> URLCrawlErrorsSamplesMarkAsFixed
 urlCrawlErrorsSamplesMarkAsFixed pUcesmafPlatform_ pUcesmafCategory_ pUcesmafSiteURL_ pUcesmafURL_ =
-    URLCrawlErrorsSamplesMarkAsFixed
+    URLCrawlErrorsSamplesMarkAsFixed'
     { _ucesmafPlatform = pUcesmafPlatform_
     , _ucesmafCategory = pUcesmafCategory_
     , _ucesmafSiteURL = pUcesmafSiteURL_
@@ -127,7 +127,7 @@ instance GoogleRequest
         type Rs URLCrawlErrorsSamplesMarkAsFixed = ()
         type Scopes URLCrawlErrorsSamplesMarkAsFixed =
              '["https://www.googleapis.com/auth/webmasters"]
-        requestClient URLCrawlErrorsSamplesMarkAsFixed{..}
+        requestClient URLCrawlErrorsSamplesMarkAsFixed'{..}
           = go _ucesmafSiteURL _ucesmafURL
               (Just _ucesmafCategory)
               (Just _ucesmafPlatform)

@@ -51,7 +51,7 @@ type AssetsGetResource =
 -- | Return metadata for a particular asset.
 --
 -- /See:/ 'assetsGet' smart constructor.
-newtype AssetsGet = AssetsGet
+newtype AssetsGet = AssetsGet'
     { _agId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ assetsGet
     :: Text -- ^ 'agId'
     -> AssetsGet
 assetsGet pAgId_ =
-    AssetsGet
+    AssetsGet'
     { _agId = pAgId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest AssetsGet where
         type Scopes AssetsGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient AssetsGet{..}
+        requestClient AssetsGet'{..}
           = go _agId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy AssetsGetResource)

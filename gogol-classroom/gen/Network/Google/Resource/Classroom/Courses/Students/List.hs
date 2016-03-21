@@ -76,7 +76,7 @@ type CoursesStudentsListResource =
 -- access errors.
 --
 -- /See:/ 'coursesStudentsList' smart constructor.
-data CoursesStudentsList = CoursesStudentsList
+data CoursesStudentsList = CoursesStudentsList'
     { _cslXgafv          :: !(Maybe Text)
     , _cslUploadProtocol :: !(Maybe Text)
     , _cslPp             :: !Bool
@@ -116,7 +116,7 @@ coursesStudentsList
     :: Text -- ^ 'cslCourseId'
     -> CoursesStudentsList
 coursesStudentsList pCslCourseId_ =
-    CoursesStudentsList
+    CoursesStudentsList'
     { _cslXgafv = Nothing
     , _cslUploadProtocol = Nothing
     , _cslPp = True
@@ -193,7 +193,7 @@ instance GoogleRequest CoursesStudentsList where
                "https://www.googleapis.com/auth/classroom.profile.photos",
                "https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
-        requestClient CoursesStudentsList{..}
+        requestClient CoursesStudentsList'{..}
           = go _cslCourseId _cslXgafv _cslUploadProtocol
               (Just _cslPp)
               _cslAccessToken

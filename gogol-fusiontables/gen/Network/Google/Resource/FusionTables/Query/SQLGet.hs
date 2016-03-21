@@ -64,7 +64,7 @@ type QuerySQLGetResource =
 -- | Executes a SQL statement which can be any of - SELECT - SHOW - DESCRIBE
 --
 -- /See:/ 'querySQLGet' smart constructor.
-data QuerySQLGet = QuerySQLGet
+data QuerySQLGet = QuerySQLGet'
     { _qsqlgTyped :: !(Maybe Bool)
     , _qsqlgHdrs  :: !(Maybe Bool)
     , _qsqlgSQL   :: !Text
@@ -83,7 +83,7 @@ querySQLGet
     :: Text -- ^ 'qsqlgSQL'
     -> QuerySQLGet
 querySQLGet pQsqlgSQL_ =
-    QuerySQLGet
+    QuerySQLGet'
     { _qsqlgTyped = Nothing
     , _qsqlgHdrs = Nothing
     , _qsqlgSQL = pQsqlgSQL_
@@ -109,7 +109,7 @@ instance GoogleRequest QuerySQLGet where
         type Scopes QuerySQLGet =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient QuerySQLGet{..}
+        requestClient QuerySQLGet'{..}
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltJSON)
               fusionTablesService
@@ -122,7 +122,7 @@ instance GoogleRequest (MediaDownload QuerySQLGet)
         type Rs (MediaDownload QuerySQLGet) = Stream
         type Scopes (MediaDownload QuerySQLGet) =
              Scopes QuerySQLGet
-        requestClient (MediaDownload QuerySQLGet{..})
+        requestClient (MediaDownload QuerySQLGet'{..})
           = go (Just _qsqlgSQL) _qsqlgTyped _qsqlgHdrs
               (Just AltMedia)
               fusionTablesService

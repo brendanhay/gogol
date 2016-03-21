@@ -53,7 +53,7 @@ type AlertsDeleteResource =
 -- account.
 --
 -- /See:/ 'alertsDelete' smart constructor.
-newtype AlertsDelete = AlertsDelete
+newtype AlertsDelete = AlertsDelete'
     { _adAlertId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ alertsDelete
     :: Text -- ^ 'adAlertId'
     -> AlertsDelete
 alertsDelete pAdAlertId_ =
-    AlertsDelete
+    AlertsDelete'
     { _adAlertId = pAdAlertId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest AlertsDelete where
         type Rs AlertsDelete = ()
         type Scopes AlertsDelete =
              '["https://www.googleapis.com/auth/adsense"]
-        requestClient AlertsDelete{..}
+        requestClient AlertsDelete'{..}
           = go _adAlertId (Just AltJSON) adSenseService
           where go
                   = buildClient (Proxy :: Proxy AlertsDeleteResource)

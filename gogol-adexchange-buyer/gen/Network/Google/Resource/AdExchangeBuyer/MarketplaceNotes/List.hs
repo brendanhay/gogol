@@ -53,7 +53,7 @@ type MarketplaceNotesListResource =
 -- | Get all the notes associated with a proposal
 --
 -- /See:/ 'marketplaceNotesList' smart constructor.
-newtype MarketplaceNotesList = MarketplaceNotesList
+newtype MarketplaceNotesList = MarketplaceNotesList'
     { _mnlProposalId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ marketplaceNotesList
     :: Text -- ^ 'mnlProposalId'
     -> MarketplaceNotesList
 marketplaceNotesList pMnlProposalId_ =
-    MarketplaceNotesList
+    MarketplaceNotesList'
     { _mnlProposalId = pMnlProposalId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest MarketplaceNotesList where
         type Rs MarketplaceNotesList = GetOrderNotesResponse
         type Scopes MarketplaceNotesList =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient MarketplaceNotesList{..}
+        requestClient MarketplaceNotesList'{..}
           = go _mnlProposalId (Just AltJSON)
               adExchangeBuyerService
           where go

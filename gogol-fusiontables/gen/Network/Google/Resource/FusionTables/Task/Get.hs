@@ -54,7 +54,7 @@ type TaskGetResource =
 -- | Retrieves a specific task by its ID.
 --
 -- /See:/ 'taskGet' smart constructor.
-data TaskGet = TaskGet
+data TaskGet = TaskGet'
     { _tggTaskId  :: !Text
     , _tggTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ taskGet
     -> Text -- ^ 'tggTableId'
     -> TaskGet
 taskGet pTggTaskId_ pTggTableId_ =
-    TaskGet
+    TaskGet'
     { _tggTaskId = pTggTaskId_
     , _tggTableId = pTggTableId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TaskGet where
         type Scopes TaskGet =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient TaskGet{..}
+        requestClient TaskGet'{..}
           = go _tggTableId _tggTaskId (Just AltJSON)
               fusionTablesService
           where go

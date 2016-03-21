@@ -54,7 +54,7 @@ type PageViewsGetResource =
 -- | Retrieve pageview stats for a Blog.
 --
 -- /See:/ 'pageViewsGet' smart constructor.
-data PageViewsGet = PageViewsGet
+data PageViewsGet = PageViewsGet'
     { _pvgBlogId :: !Text
     , _pvgRange  :: !(Maybe [PageViewsGetRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ pageViewsGet
     :: Text -- ^ 'pvgBlogId'
     -> PageViewsGet
 pageViewsGet pPvgBlogId_ =
-    PageViewsGet
+    PageViewsGet'
     { _pvgBlogId = pPvgBlogId_
     , _pvgRange = Nothing
     }
@@ -90,7 +90,7 @@ instance GoogleRequest PageViewsGet where
         type Rs PageViewsGet = Pageviews
         type Scopes PageViewsGet =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PageViewsGet{..}
+        requestClient PageViewsGet'{..}
           = go _pvgBlogId (_pvgRange ^. _Default)
               (Just AltJSON)
               bloggerService

@@ -57,7 +57,7 @@ type AccountsReportsSavedListResource =
 -- | List all saved reports in this Ad Exchange account.
 --
 -- /See:/ 'accountsReportsSavedList' smart constructor.
-data AccountsReportsSavedList = AccountsReportsSavedList
+data AccountsReportsSavedList = AccountsReportsSavedList'
     { _arslAccountId  :: !Text
     , _arslPageToken  :: !(Maybe Text)
     , _arslMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ accountsReportsSavedList
     :: Text -- ^ 'arslAccountId'
     -> AccountsReportsSavedList
 accountsReportsSavedList pArslAccountId_ =
-    AccountsReportsSavedList
+    AccountsReportsSavedList'
     { _arslAccountId = pArslAccountId_
     , _arslPageToken = Nothing
     , _arslMaxResults = Nothing
@@ -109,7 +109,7 @@ instance GoogleRequest AccountsReportsSavedList where
         type Scopes AccountsReportsSavedList =
              '["https://www.googleapis.com/auth/adexchange.seller",
                "https://www.googleapis.com/auth/adexchange.seller.readonly"]
-        requestClient AccountsReportsSavedList{..}
+        requestClient AccountsReportsSavedList'{..}
           = go _arslAccountId _arslPageToken _arslMaxResults
               (Just AltJSON)
               adExchangeSellerService

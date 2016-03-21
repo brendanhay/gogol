@@ -62,7 +62,7 @@ type AutoscalersListResource =
 -- | Lists all Autoscaler resources in this zone.
 --
 -- /See:/ 'autoscalersList' smart constructor.
-data AutoscalersList = AutoscalersList
+data AutoscalersList = AutoscalersList'
     { _alProject    :: !Text
     , _alZone       :: !Text
     , _alFilter     :: !(Maybe Text)
@@ -88,7 +88,7 @@ autoscalersList
     -> Text -- ^ 'alZone'
     -> AutoscalersList
 autoscalersList pAlProject_ pAlZone_ =
-    AutoscalersList
+    AutoscalersList'
     { _alProject = pAlProject_
     , _alZone = pAlZone_
     , _alFilter = Nothing
@@ -122,7 +122,7 @@ instance GoogleRequest AutoscalersList where
         type Scopes AutoscalersList =
              '["https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient AutoscalersList{..}
+        requestClient AutoscalersList'{..}
           = go _alProject _alZone _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)

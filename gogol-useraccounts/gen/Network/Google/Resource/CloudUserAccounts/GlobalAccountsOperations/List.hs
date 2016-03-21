@@ -63,7 +63,7 @@ type GlobalAccountsOperationsListResource =
 -- project.
 --
 -- /See:/ 'globalAccountsOperationsList' smart constructor.
-data GlobalAccountsOperationsList = GlobalAccountsOperationsList
+data GlobalAccountsOperationsList = GlobalAccountsOperationsList'
     { _gaolOrderBy    :: !(Maybe Text)
     , _gaolProject    :: !Text
     , _gaolFilter     :: !(Maybe Text)
@@ -88,7 +88,7 @@ globalAccountsOperationsList
     :: Text -- ^ 'gaolProject'
     -> GlobalAccountsOperationsList
 globalAccountsOperationsList pGaolProject_ =
-    GlobalAccountsOperationsList
+    GlobalAccountsOperationsList'
     { _gaolOrderBy = Nothing
     , _gaolProject = pGaolProject_
     , _gaolFilter = Nothing
@@ -164,7 +164,7 @@ instance GoogleRequest GlobalAccountsOperationsList
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/cloud.useraccounts",
                "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-        requestClient GlobalAccountsOperationsList{..}
+        requestClient GlobalAccountsOperationsList'{..}
           = go _gaolProject _gaolOrderBy _gaolFilter
               _gaolPageToken
               (Just _gaolMaxResults)

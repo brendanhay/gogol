@@ -61,7 +61,7 @@ type TargetPoolsRemoveInstanceResource =
 -- | Removes instance URL from a target pool.
 --
 -- /See:/ 'targetPoolsRemoveInstance' smart constructor.
-data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance
+data TargetPoolsRemoveInstance = TargetPoolsRemoveInstance'
     { _tpriProject    :: !Text
     , _tpriTargetPool :: !Text
     , _tpriPayload    :: !TargetPoolsRemoveInstanceRequest
@@ -86,7 +86,7 @@ targetPoolsRemoveInstance
     -> Text -- ^ 'tpriRegion'
     -> TargetPoolsRemoveInstance
 targetPoolsRemoveInstance pTpriProject_ pTpriTargetPool_ pTpriPayload_ pTpriRegion_ =
-    TargetPoolsRemoveInstance
+    TargetPoolsRemoveInstance'
     { _tpriProject = pTpriProject_
     , _tpriTargetPool = pTpriTargetPool_
     , _tpriPayload = pTpriPayload_
@@ -120,7 +120,7 @@ instance GoogleRequest TargetPoolsRemoveInstance
         type Scopes TargetPoolsRemoveInstance =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsRemoveInstance{..}
+        requestClient TargetPoolsRemoveInstance'{..}
           = go _tpriProject _tpriRegion _tpriTargetPool
               (Just AltJSON)
               _tpriPayload

@@ -53,7 +53,7 @@ type VideosDeleteResource =
 -- | Deletes a YouTube video.
 --
 -- /See:/ 'videosDelete' smart constructor.
-data VideosDelete = VideosDelete
+data VideosDelete = VideosDelete'
     { _vdOnBehalfOfContentOwner :: !(Maybe Text)
     , _vdId                     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ videosDelete
     :: Text -- ^ 'vdId'
     -> VideosDelete
 videosDelete pVdId_ =
-    VideosDelete
+    VideosDelete'
     { _vdOnBehalfOfContentOwner = Nothing
     , _vdId = pVdId_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest VideosDelete where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosDelete{..}
+        requestClient VideosDelete'{..}
           = go (Just _vdId) _vdOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService

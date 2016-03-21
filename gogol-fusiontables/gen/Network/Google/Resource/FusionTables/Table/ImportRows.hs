@@ -78,7 +78,7 @@ type TableImportRowsResource =
 -- | Imports more rows into a table.
 --
 -- /See:/ 'tableImportRows' smart constructor.
-data TableImportRows = TableImportRows
+data TableImportRows = TableImportRows'
     { _tirStartLine :: !(Maybe (Textual Int32))
     , _tirEndLine   :: !(Maybe (Textual Int32))
     , _tirTableId   :: !Text
@@ -106,7 +106,7 @@ tableImportRows
     :: Text -- ^ 'tirTableId'
     -> TableImportRows
 tableImportRows pTirTableId_ =
-    TableImportRows
+    TableImportRows'
     { _tirStartLine = Nothing
     , _tirEndLine = Nothing
     , _tirTableId = pTirTableId_
@@ -159,7 +159,7 @@ instance GoogleRequest TableImportRows where
         type Rs TableImportRows = Import
         type Scopes TableImportRows =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TableImportRows{..}
+        requestClient TableImportRows'{..}
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter
               _tirEncoding
@@ -176,7 +176,7 @@ instance GoogleRequest (MediaUpload TableImportRows)
         type Rs (MediaUpload TableImportRows) = Import
         type Scopes (MediaUpload TableImportRows) =
              Scopes TableImportRows
-        requestClient (MediaUpload TableImportRows{..} body)
+        requestClient (MediaUpload TableImportRows'{..} body)
           = go _tirTableId _tirStartLine _tirEndLine
               _tirDelimiter
               _tirEncoding

@@ -60,7 +60,7 @@ type GroupsListResource =
 -- | Retrieve all groups in a domain (paginated)
 --
 -- /See:/ 'groupsList' smart constructor.
-data GroupsList = GroupsList
+data GroupsList = GroupsList'
     { _glDomain     :: !(Maybe Text)
     , _glCustomer   :: !(Maybe Text)
     , _glPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ data GroupsList = GroupsList
 groupsList
     :: GroupsList
 groupsList =
-    GroupsList
+    GroupsList'
     { _glDomain = Nothing
     , _glCustomer = Nothing
     , _glPageToken = Nothing
@@ -126,7 +126,7 @@ instance GoogleRequest GroupsList where
         type Scopes GroupsList =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
-        requestClient GroupsList{..}
+        requestClient GroupsList'{..}
           = go _glDomain _glCustomer _glPageToken _glUserKey
               _glMaxResults
               (Just AltJSON)

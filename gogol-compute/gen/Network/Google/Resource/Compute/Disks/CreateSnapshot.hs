@@ -60,7 +60,7 @@ type DisksCreateSnapshotResource =
 -- | Creates a snapshot of a specified persistent disk.
 --
 -- /See:/ 'disksCreateSnapshot' smart constructor.
-data DisksCreateSnapshot = DisksCreateSnapshot
+data DisksCreateSnapshot = DisksCreateSnapshot'
     { _dcsProject :: !Text
     , _dcsDisk    :: !Text
     , _dcsZone    :: !Text
@@ -85,7 +85,7 @@ disksCreateSnapshot
     -> Snapshot -- ^ 'dcsPayload'
     -> DisksCreateSnapshot
 disksCreateSnapshot pDcsProject_ pDcsDisk_ pDcsZone_ pDcsPayload_ =
-    DisksCreateSnapshot
+    DisksCreateSnapshot'
     { _dcsProject = pDcsProject_
     , _dcsDisk = pDcsDisk_
     , _dcsZone = pDcsZone_
@@ -115,7 +115,7 @@ instance GoogleRequest DisksCreateSnapshot where
         type Scopes DisksCreateSnapshot =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient DisksCreateSnapshot{..}
+        requestClient DisksCreateSnapshot'{..}
           = go _dcsProject _dcsZone _dcsDisk (Just AltJSON)
               _dcsPayload
               computeService

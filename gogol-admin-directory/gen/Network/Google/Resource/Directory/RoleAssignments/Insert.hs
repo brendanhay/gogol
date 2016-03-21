@@ -56,7 +56,7 @@ type RoleAssignmentsInsertResource =
 -- | Creates a role assignment.
 --
 -- /See:/ 'roleAssignmentsInsert' smart constructor.
-data RoleAssignmentsInsert = RoleAssignmentsInsert
+data RoleAssignmentsInsert = RoleAssignmentsInsert'
     { _raiPayload  :: !RoleAssignment
     , _raiCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ roleAssignmentsInsert
     -> Text -- ^ 'raiCustomer'
     -> RoleAssignmentsInsert
 roleAssignmentsInsert pRaiPayload_ pRaiCustomer_ =
-    RoleAssignmentsInsert
+    RoleAssignmentsInsert'
     { _raiPayload = pRaiPayload_
     , _raiCustomer = pRaiCustomer_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest RoleAssignmentsInsert where
         type Rs RoleAssignmentsInsert = RoleAssignment
         type Scopes RoleAssignmentsInsert =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
-        requestClient RoleAssignmentsInsert{..}
+        requestClient RoleAssignmentsInsert'{..}
           = go _raiCustomer (Just AltJSON) _raiPayload
               directoryService
           where go

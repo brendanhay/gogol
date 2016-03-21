@@ -59,7 +59,7 @@ type ManagementCustomDimensionsInsertResource =
 -- | Create a new custom dimension.
 --
 -- /See:/ 'managementCustomDimensionsInsert' smart constructor.
-data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert
+data ManagementCustomDimensionsInsert = ManagementCustomDimensionsInsert'
     { _mcdiWebPropertyId :: !Text
     , _mcdiPayload       :: !CustomDimension
     , _mcdiAccountId     :: !Text
@@ -80,7 +80,7 @@ managementCustomDimensionsInsert
     -> Text -- ^ 'mcdiAccountId'
     -> ManagementCustomDimensionsInsert
 managementCustomDimensionsInsert pMcdiWebPropertyId_ pMcdiPayload_ pMcdiAccountId_ =
-    ManagementCustomDimensionsInsert
+    ManagementCustomDimensionsInsert'
     { _mcdiWebPropertyId = pMcdiWebPropertyId_
     , _mcdiPayload = pMcdiPayload_
     , _mcdiAccountId = pMcdiAccountId_
@@ -109,7 +109,7 @@ instance GoogleRequest
              CustomDimension
         type Scopes ManagementCustomDimensionsInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementCustomDimensionsInsert{..}
+        requestClient ManagementCustomDimensionsInsert'{..}
           = go _mcdiAccountId _mcdiWebPropertyId (Just AltJSON)
               _mcdiPayload
               analyticsService

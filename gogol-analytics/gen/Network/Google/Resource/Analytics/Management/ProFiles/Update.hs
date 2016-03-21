@@ -60,7 +60,7 @@ type ManagementProFilesUpdateResource =
 -- | Updates an existing view (profile).
 --
 -- /See:/ 'managementProFilesUpdate' smart constructor.
-data ManagementProFilesUpdate = ManagementProFilesUpdate
+data ManagementProFilesUpdate = ManagementProFilesUpdate'
     { _mpfuWebPropertyId :: !Text
     , _mpfuProFileId     :: !Text
     , _mpfuPayload       :: !ProFile
@@ -85,7 +85,7 @@ managementProFilesUpdate
     -> Text -- ^ 'mpfuAccountId'
     -> ManagementProFilesUpdate
 managementProFilesUpdate pMpfuWebPropertyId_ pMpfuProFileId_ pMpfuPayload_ pMpfuAccountId_ =
-    ManagementProFilesUpdate
+    ManagementProFilesUpdate'
     { _mpfuWebPropertyId = pMpfuWebPropertyId_
     , _mpfuProFileId = pMpfuProFileId_
     , _mpfuPayload = pMpfuPayload_
@@ -119,7 +119,7 @@ instance GoogleRequest ManagementProFilesUpdate where
         type Rs ManagementProFilesUpdate = ProFile
         type Scopes ManagementProFilesUpdate =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementProFilesUpdate{..}
+        requestClient ManagementProFilesUpdate'{..}
           = go _mpfuAccountId _mpfuWebPropertyId _mpfuProFileId
               (Just AltJSON)
               _mpfuPayload

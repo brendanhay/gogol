@@ -55,7 +55,7 @@ type TaskListsInsertResource =
 -- lists.
 --
 -- /See:/ 'taskListsInsert' smart constructor.
-newtype TaskListsInsert = TaskListsInsert
+newtype TaskListsInsert = TaskListsInsert'
     { _tliPayload :: TaskList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ taskListsInsert
     :: TaskList -- ^ 'tliPayload'
     -> TaskListsInsert
 taskListsInsert pTliPayload_ =
-    TaskListsInsert
+    TaskListsInsert'
     { _tliPayload = pTliPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest TaskListsInsert where
         type Rs TaskListsInsert = TaskList
         type Scopes TaskListsInsert =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TaskListsInsert{..}
+        requestClient TaskListsInsert'{..}
           = go (Just AltJSON) _tliPayload appsTasksService
           where go
                   = buildClient

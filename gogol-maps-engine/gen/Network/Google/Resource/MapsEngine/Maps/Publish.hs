@@ -55,7 +55,7 @@ type MapsPublishResource =
 -- | Publish a map asset.
 --
 -- /See:/ 'mapsPublish' smart constructor.
-data MapsPublish = MapsPublish
+data MapsPublish = MapsPublish'
     { _mapForce :: !(Maybe Bool)
     , _mapId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ mapsPublish
     :: Text -- ^ 'mapId'
     -> MapsPublish
 mapsPublish pMapId_ =
-    MapsPublish
+    MapsPublish'
     { _mapForce = Nothing
     , _mapId = pMapId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest MapsPublish where
         type Rs MapsPublish = PublishResponse
         type Scopes MapsPublish =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient MapsPublish{..}
+        requestClient MapsPublish'{..}
           = go _mapId _mapForce (Just AltJSON)
               mapsEngineService
           where go

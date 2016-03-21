@@ -62,7 +62,7 @@ type DataRealtimeGetResource =
 -- | Returns real time data for a view (profile).
 --
 -- /See:/ 'dataRealtimeGet' smart constructor.
-data DataRealtimeGet = DataRealtimeGet
+data DataRealtimeGet = DataRealtimeGet'
     { _drgMetrics    :: !Text
     , _drgFilters    :: !(Maybe Text)
     , _drgIds        :: !Text
@@ -91,7 +91,7 @@ dataRealtimeGet
     -> Text -- ^ 'drgIds'
     -> DataRealtimeGet
 dataRealtimeGet pDrgMetrics_ pDrgIds_ =
-    DataRealtimeGet
+    DataRealtimeGet'
     { _drgMetrics = pDrgMetrics_
     , _drgFilters = Nothing
     , _drgIds = pDrgIds_
@@ -141,7 +141,7 @@ instance GoogleRequest DataRealtimeGet where
         type Scopes DataRealtimeGet =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient DataRealtimeGet{..}
+        requestClient DataRealtimeGet'{..}
           = go (Just _drgIds) (Just _drgMetrics) _drgFilters
               _drgSort
               _drgDimensions

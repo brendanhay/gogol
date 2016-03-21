@@ -55,7 +55,7 @@ type LiveStreamsDeleteResource =
 -- | Deletes a video stream.
 --
 -- /See:/ 'liveStreamsDelete' smart constructor.
-data LiveStreamsDelete = LiveStreamsDelete
+data LiveStreamsDelete = LiveStreamsDelete'
     { _lsdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lsdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lsdId                            :: !Text
@@ -74,7 +74,7 @@ liveStreamsDelete
     :: Text -- ^ 'lsdId'
     -> LiveStreamsDelete
 liveStreamsDelete pLsdId_ =
-    LiveStreamsDelete
+    LiveStreamsDelete'
     { _lsdOnBehalfOfContentOwner = Nothing
     , _lsdOnBehalfOfContentOwnerChannel = Nothing
     , _lsdId = pLsdId_
@@ -126,7 +126,7 @@ instance GoogleRequest LiveStreamsDelete where
         type Scopes LiveStreamsDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveStreamsDelete{..}
+        requestClient LiveStreamsDelete'{..}
           = go (Just _lsdId) _lsdOnBehalfOfContentOwner
               _lsdOnBehalfOfContentOwnerChannel
               (Just AltJSON)

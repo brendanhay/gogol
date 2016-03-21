@@ -67,7 +67,7 @@ type AccountsListResource =
 -- | Retrieves the list of accounts, possibly filtered.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _accSearchString :: !(Maybe Text)
     , _accIds          :: !(Maybe [Textual Int64])
     , _accProFileId    :: !(Textual Int64)
@@ -101,7 +101,7 @@ accountsList
     :: Int64 -- ^ 'accProFileId'
     -> AccountsList
 accountsList pAccProFileId_ =
-    AccountsList
+    AccountsList'
     { _accSearchString = Nothing
     , _accIds = Nothing
     , _accProFileId = _Coerce # pAccProFileId_
@@ -168,7 +168,7 @@ instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse
         type Scopes AccountsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountsList{..}
+        requestClient AccountsList'{..}
           = go _accProFileId _accSearchString
               (_accIds ^. _Default)
               _accSortOrder

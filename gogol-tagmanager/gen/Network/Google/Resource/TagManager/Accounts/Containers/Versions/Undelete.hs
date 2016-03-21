@@ -59,7 +59,7 @@ type AccountsContainersVersionsUndeleteResource =
 -- | Undeletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsUndelete' smart constructor.
-data AccountsContainersVersionsUndelete = AccountsContainersVersionsUndelete
+data AccountsContainersVersionsUndelete = AccountsContainersVersionsUndelete'
     { _acvucContainerId        :: !Text
     , _acvucContainerVersionId :: !Text
     , _acvucAccountId          :: !Text
@@ -80,7 +80,7 @@ accountsContainersVersionsUndelete
     -> Text -- ^ 'acvucAccountId'
     -> AccountsContainersVersionsUndelete
 accountsContainersVersionsUndelete pAcvucContainerId_ pAcvucContainerVersionId_ pAcvucAccountId_ =
-    AccountsContainersVersionsUndelete
+    AccountsContainersVersionsUndelete'
     { _acvucContainerId = pAcvucContainerId_
     , _acvucContainerVersionId = pAcvucContainerVersionId_
     , _acvucAccountId = pAcvucAccountId_
@@ -110,7 +110,7 @@ instance GoogleRequest
              ContainerVersion
         type Scopes AccountsContainersVersionsUndelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-        requestClient AccountsContainersVersionsUndelete{..}
+        requestClient AccountsContainersVersionsUndelete'{..}
           = go _acvucAccountId _acvucContainerId
               _acvucContainerVersionId
               (Just AltJSON)

@@ -55,7 +55,7 @@ type InstancesStopReplicaResource =
 -- | Stops the replication in the read replica instance.
 --
 -- /See:/ 'instancesStopReplica' smart constructor.
-data InstancesStopReplica = InstancesStopReplica
+data InstancesStopReplica = InstancesStopReplica'
     { _isrProject  :: !Text
     , _isrInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ instancesStopReplica
     -> Text -- ^ 'isrInstance'
     -> InstancesStopReplica
 instancesStopReplica pIsrProject_ pIsrInstance_ =
-    InstancesStopReplica
+    InstancesStopReplica'
     { _isrProject = pIsrProject_
     , _isrInstance = pIsrInstance_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest InstancesStopReplica where
         type Scopes InstancesStopReplica =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesStopReplica{..}
+        requestClient InstancesStopReplica'{..}
           = go _isrProject _isrInstance (Just AltJSON)
               sQLAdminService
           where go

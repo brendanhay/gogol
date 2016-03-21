@@ -55,7 +55,7 @@ type UsersGetAvailableProductSetResource =
 -- | Retrieves the set of products a user is entitled to access.
 --
 -- /See:/ 'usersGetAvailableProductSet' smart constructor.
-data UsersGetAvailableProductSet = UsersGetAvailableProductSet
+data UsersGetAvailableProductSet = UsersGetAvailableProductSet'
     { _ugapsEnterpriseId :: !Text
     , _ugapsUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersGetAvailableProductSet
     -> Text -- ^ 'ugapsUserId'
     -> UsersGetAvailableProductSet
 usersGetAvailableProductSet pUgapsEnterpriseId_ pUgapsUserId_ =
-    UsersGetAvailableProductSet
+    UsersGetAvailableProductSet'
     { _ugapsEnterpriseId = pUgapsEnterpriseId_
     , _ugapsUserId = pUgapsUserId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest UsersGetAvailableProductSet
         type Rs UsersGetAvailableProductSet = ProductSet
         type Scopes UsersGetAvailableProductSet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient UsersGetAvailableProductSet{..}
+        requestClient UsersGetAvailableProductSet'{..}
           = go _ugapsEnterpriseId _ugapsUserId (Just AltJSON)
               androidEnterpriseService
           where go

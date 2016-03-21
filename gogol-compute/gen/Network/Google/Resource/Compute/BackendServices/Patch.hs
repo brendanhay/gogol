@@ -64,7 +64,7 @@ type BackendServicesPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'backendServicesPatch' smart constructor.
-data BackendServicesPatch = BackendServicesPatch
+data BackendServicesPatch = BackendServicesPatch'
     { _bspProject        :: !Text
     , _bspPayload        :: !BackendService
     , _bspBackendService :: !Text
@@ -85,7 +85,7 @@ backendServicesPatch
     -> Text -- ^ 'bspBackendService'
     -> BackendServicesPatch
 backendServicesPatch pBspProject_ pBspPayload_ pBspBackendService_ =
-    BackendServicesPatch
+    BackendServicesPatch'
     { _bspProject = pBspProject_
     , _bspPayload = pBspPayload_
     , _bspBackendService = pBspBackendService_
@@ -112,7 +112,7 @@ instance GoogleRequest BackendServicesPatch where
         type Scopes BackendServicesPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient BackendServicesPatch{..}
+        requestClient BackendServicesPatch'{..}
           = go _bspProject _bspBackendService (Just AltJSON)
               _bspPayload
               computeService

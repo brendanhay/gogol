@@ -53,7 +53,7 @@ type AccountsPatchResource =
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+data AccountsPatch = AccountsPatch'
     { _apPayload :: !Account
     , _apId      :: !(Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ accountsPatch
     -> Int32 -- ^ 'apId'
     -> AccountsPatch
 accountsPatch pApPayload_ pApId_ =
-    AccountsPatch
+    AccountsPatch'
     { _apPayload = pApPayload_
     , _apId = _Coerce # pApId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
         type Scopes AccountsPatch =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient AccountsPatch{..}
+        requestClient AccountsPatch'{..}
           = go _apId (Just AltJSON) _apPayload
               adExchangeBuyerService
           where go

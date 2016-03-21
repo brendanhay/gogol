@@ -69,7 +69,7 @@ type ObjectsDeleteResource =
 -- is used.
 --
 -- /See:/ 'objectsDelete' smart constructor.
-data ObjectsDelete = ObjectsDelete
+data ObjectsDelete = ObjectsDelete'
     { _odIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _odIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _odIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -101,7 +101,7 @@ objectsDelete
     -> Text -- ^ 'odObject'
     -> ObjectsDelete
 objectsDelete pOdBucket_ pOdObject_ =
-    ObjectsDelete
+    ObjectsDelete'
     { _odIfMetagenerationMatch = Nothing
     , _odIfGenerationNotMatch = Nothing
     , _odIfGenerationMatch = Nothing
@@ -165,7 +165,7 @@ instance GoogleRequest ObjectsDelete where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsDelete{..}
+        requestClient ObjectsDelete'{..}
           = go _odBucket _odObject _odIfMetagenerationMatch
               _odIfGenerationNotMatch
               _odIfGenerationMatch

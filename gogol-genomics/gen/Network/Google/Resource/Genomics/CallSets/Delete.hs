@@ -68,7 +68,7 @@ type CallSetsDeleteResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSetsDelete' smart constructor.
-data CallSetsDelete = CallSetsDelete
+data CallSetsDelete = CallSetsDelete'
     { _csdXgafv          :: !(Maybe Text)
     , _csdUploadProtocol :: !(Maybe Text)
     , _csdPp             :: !Bool
@@ -102,7 +102,7 @@ callSetsDelete
     :: Text -- ^ 'csdCallSetId'
     -> CallSetsDelete
 callSetsDelete pCsdCallSetId_ =
-    CallSetsDelete
+    CallSetsDelete'
     { _csdXgafv = Nothing
     , _csdUploadProtocol = Nothing
     , _csdPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest CallSetsDelete where
         type Scopes CallSetsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient CallSetsDelete{..}
+        requestClient CallSetsDelete'{..}
           = go _csdCallSetId _csdXgafv _csdUploadProtocol
               (Just _csdPp)
               _csdAccessToken

@@ -66,7 +66,7 @@ type CampaignCreativeAssociationsListResource =
 -- campaign.
 --
 -- /See:/ 'campaignCreativeAssociationsList' smart constructor.
-data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList
+data CampaignCreativeAssociationsList = CampaignCreativeAssociationsList'
     { _ccalCampaignId :: !(Textual Int64)
     , _ccalProFileId  :: !(Textual Int64)
     , _ccalSortOrder  :: !(Maybe CampaignCreativeAssociationsListSortOrder)
@@ -92,7 +92,7 @@ campaignCreativeAssociationsList
     -> Int64 -- ^ 'ccalProFileId'
     -> CampaignCreativeAssociationsList
 campaignCreativeAssociationsList pCcalCampaignId_ pCcalProFileId_ =
-    CampaignCreativeAssociationsList
+    CampaignCreativeAssociationsList'
     { _ccalCampaignId = _Coerce # pCcalCampaignId_
     , _ccalProFileId = _Coerce # pCcalProFileId_
     , _ccalSortOrder = Nothing
@@ -139,7 +139,7 @@ instance GoogleRequest
              CampaignCreativeAssociationsListResponse
         type Scopes CampaignCreativeAssociationsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignCreativeAssociationsList{..}
+        requestClient CampaignCreativeAssociationsList'{..}
           = go _ccalProFileId _ccalCampaignId _ccalSortOrder
               _ccalPageToken
               _ccalMaxResults

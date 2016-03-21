@@ -53,7 +53,7 @@ type OrdersCustombatchResource =
 -- | Retrieves or modifies multiple orders in a single request.
 --
 -- /See:/ 'ordersCustombatch' smart constructor.
-newtype OrdersCustombatch = OrdersCustombatch
+newtype OrdersCustombatch = OrdersCustombatch'
     { _ocPayload :: OrdersCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ ordersCustombatch
     :: OrdersCustomBatchRequest -- ^ 'ocPayload'
     -> OrdersCustombatch
 ordersCustombatch pOcPayload_ =
-    OrdersCustombatch
+    OrdersCustombatch'
     { _ocPayload = pOcPayload_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest OrdersCustombatch where
         type Rs OrdersCustombatch = OrdersCustomBatchResponse
         type Scopes OrdersCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersCustombatch{..}
+        requestClient OrdersCustombatch'{..}
           = go (Just AltJSON) _ocPayload shoppingContentService
           where go
                   = buildClient

@@ -51,7 +51,7 @@ type UsersStopResource =
 -- | Stop receiving push notifications for the given user mailbox.
 --
 -- /See:/ 'usersStop' smart constructor.
-newtype UsersStop = UsersStop
+newtype UsersStop = UsersStop'
     { _usUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -63,7 +63,7 @@ newtype UsersStop = UsersStop
 usersStop
     :: UsersStop
 usersStop =
-    UsersStop
+    UsersStop'
     { _usUserId = "me"
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest UsersStop where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersStop{..}
+        requestClient UsersStop'{..}
           = go _usUserId (Just AltJSON) gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersStopResource)

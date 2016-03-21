@@ -55,7 +55,7 @@ type WebResourceGetTokenResource =
 -- | Get a verification token for placing on a website or domain.
 --
 -- /See:/ 'webResourceGetToken' smart constructor.
-newtype WebResourceGetToken = WebResourceGetToken
+newtype WebResourceGetToken = WebResourceGetToken'
     { _wrgtPayload :: SiteVerificationWebResourceGettokenRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ webResourceGetToken
     :: SiteVerificationWebResourceGettokenRequest -- ^ 'wrgtPayload'
     -> WebResourceGetToken
 webResourceGetToken pWrgtPayload_ =
-    WebResourceGetToken
+    WebResourceGetToken'
     { _wrgtPayload = pWrgtPayload_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest WebResourceGetToken where
         type Scopes WebResourceGetToken =
              '["https://www.googleapis.com/auth/siteverification",
                "https://www.googleapis.com/auth/siteverification.verify_only"]
-        requestClient WebResourceGetToken{..}
+        requestClient WebResourceGetToken'{..}
           = go (Just AltJSON) _wrgtPayload
               siteVerificationService
           where go

@@ -55,7 +55,7 @@ type RolesGetResource =
 -- | Retrieves a role.
 --
 -- /See:/ 'rolesGet' smart constructor.
-data RolesGet = RolesGet
+data RolesGet = RolesGet'
     { _rgRoleId   :: !Text
     , _rgCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ rolesGet
     -> Text -- ^ 'rgCustomer'
     -> RolesGet
 rolesGet pRgRoleId_ pRgCustomer_ =
-    RolesGet
+    RolesGet'
     { _rgRoleId = pRgRoleId_
     , _rgCustomer = pRgCustomer_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest RolesGet where
         type Scopes RolesGet =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
-        requestClient RolesGet{..}
+        requestClient RolesGet'{..}
           = go _rgCustomer _rgRoleId (Just AltJSON)
               directoryService
           where go

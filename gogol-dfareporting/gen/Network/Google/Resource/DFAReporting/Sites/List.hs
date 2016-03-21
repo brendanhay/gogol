@@ -87,7 +87,7 @@ type SitesListResource =
 -- | Retrieves a list of sites, possibly filtered.
 --
 -- /See:/ 'sitesList' smart constructor.
-data SitesList = SitesList
+data SitesList = SitesList'
     { _sitUnmAppedSite                   :: !(Maybe Bool)
     , _sitCampaignIds                    :: !(Maybe [Textual Int64])
     , _sitSearchString                   :: !(Maybe Text)
@@ -145,7 +145,7 @@ sitesList
     :: Int64 -- ^ 'sitProFileId'
     -> SitesList
 sitesList pSitProFileId_ =
-    SitesList
+    SitesList'
     { _sitUnmAppedSite = Nothing
     , _sitCampaignIds = Nothing
     , _sitSearchString = Nothing
@@ -273,7 +273,7 @@ instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
         type Scopes SitesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SitesList{..}
+        requestClient SitesList'{..}
           = go _sitProFileId _sitUnmAppedSite
               (_sitCampaignIds ^. _Default)
               _sitSearchString

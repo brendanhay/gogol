@@ -61,7 +61,7 @@ type UsersDataSetAggregateResource =
 -- request.
 --
 -- /See:/ 'usersDataSetAggregate' smart constructor.
-data UsersDataSetAggregate = UsersDataSetAggregate
+data UsersDataSetAggregate = UsersDataSetAggregate'
     { _udsaPayload :: !AggregateRequest
     , _udsaUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ usersDataSetAggregate
     -> Text -- ^ 'udsaUserId'
     -> UsersDataSetAggregate
 usersDataSetAggregate pUdsaPayload_ pUdsaUserId_ =
-    UsersDataSetAggregate
+    UsersDataSetAggregate'
     { _udsaPayload = pUdsaPayload_
     , _udsaUserId = pUdsaUserId_
     }
@@ -103,7 +103,7 @@ instance GoogleRequest UsersDataSetAggregate where
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSetAggregate{..}
+        requestClient UsersDataSetAggregate'{..}
           = go _udsaUserId (Just AltJSON) _udsaPayload
               fitnessService
           where go

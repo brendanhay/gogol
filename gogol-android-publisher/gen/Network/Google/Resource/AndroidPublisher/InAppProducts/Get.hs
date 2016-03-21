@@ -54,7 +54,7 @@ type InAppProductsGetResource =
 -- | Returns information about the in-app product specified.
 --
 -- /See:/ 'inAppProductsGet' smart constructor.
-data InAppProductsGet = InAppProductsGet
+data InAppProductsGet = InAppProductsGet'
     { _iapgPackageName :: !Text
     , _iapgSKU         :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ inAppProductsGet
     -> Text -- ^ 'iapgSKU'
     -> InAppProductsGet
 inAppProductsGet pIapgPackageName_ pIapgSKU_ =
-    InAppProductsGet
+    InAppProductsGet'
     { _iapgPackageName = pIapgPackageName_
     , _iapgSKU = pIapgSKU_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest InAppProductsGet where
         type Rs InAppProductsGet = InAppProduct
         type Scopes InAppProductsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient InAppProductsGet{..}
+        requestClient InAppProductsGet'{..}
           = go _iapgPackageName _iapgSKU (Just AltJSON)
               androidPublisherService
           where go

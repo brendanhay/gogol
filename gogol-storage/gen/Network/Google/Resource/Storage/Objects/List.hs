@@ -64,7 +64,7 @@ type ObjectsListResource =
 -- | Retrieves a list of objects matching the criteria.
 --
 -- /See:/ 'objectsList' smart constructor.
-data ObjectsList = ObjectsList
+data ObjectsList = ObjectsList'
     { _olPrefix     :: !(Maybe Text)
     , _olBucket     :: !Text
     , _olVersions   :: !(Maybe Bool)
@@ -95,7 +95,7 @@ objectsList
     :: Text -- ^ 'olBucket'
     -> ObjectsList
 objectsList pOlBucket_ =
-    ObjectsList
+    ObjectsList'
     { _olPrefix = Nothing
     , _olBucket = pOlBucket_
     , _olVersions = Nothing
@@ -155,7 +155,7 @@ instance GoogleRequest ObjectsList where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsList{..}
+        requestClient ObjectsList'{..}
           = go _olBucket _olPrefix _olVersions _olProjection
               _olPageToken
               _olDelimiter

@@ -61,7 +61,7 @@ type ObjectAccessControlsDeleteResource =
 -- specified object.
 --
 -- /See:/ 'objectAccessControlsDelete' smart constructor.
-data ObjectAccessControlsDelete = ObjectAccessControlsDelete
+data ObjectAccessControlsDelete = ObjectAccessControlsDelete'
     { _oacdBucket     :: !Text
     , _oacdObject     :: !Text
     , _oacdEntity     :: !Text
@@ -85,7 +85,7 @@ objectAccessControlsDelete
     -> Text -- ^ 'oacdEntity'
     -> ObjectAccessControlsDelete
 objectAccessControlsDelete pOacdBucket_ pOacdObject_ pOacdEntity_ =
-    ObjectAccessControlsDelete
+    ObjectAccessControlsDelete'
     { _oacdBucket = pOacdBucket_
     , _oacdObject = pOacdObject_
     , _oacdEntity = pOacdEntity_
@@ -124,7 +124,7 @@ instance GoogleRequest ObjectAccessControlsDelete
         type Scopes ObjectAccessControlsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient ObjectAccessControlsDelete{..}
+        requestClient ObjectAccessControlsDelete'{..}
           = go _oacdBucket _oacdObject _oacdEntity
               _oacdGeneration
               (Just AltJSON)

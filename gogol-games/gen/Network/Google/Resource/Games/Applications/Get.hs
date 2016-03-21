@@ -60,7 +60,7 @@ type ApplicationsGetResource =
 -- the returned response will not include any instance data.
 --
 -- /See:/ 'applicationsGet' smart constructor.
-data ApplicationsGet = ApplicationsGet
+data ApplicationsGet = ApplicationsGet'
     { _agApplicationId :: !Text
     , _agPlatformType  :: !(Maybe ApplicationsGetPlatformType)
     , _agLanguage      :: !(Maybe Text)
@@ -79,7 +79,7 @@ applicationsGet
     :: Text -- ^ 'agApplicationId'
     -> ApplicationsGet
 applicationsGet pAgApplicationId_ =
-    ApplicationsGet
+    ApplicationsGet'
     { _agApplicationId = pAgApplicationId_
     , _agPlatformType = Nothing
     , _agLanguage = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest ApplicationsGet where
         type Scopes ApplicationsGet =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ApplicationsGet{..}
+        requestClient ApplicationsGet'{..}
           = go _agApplicationId _agPlatformType _agLanguage
               (Just AltJSON)
               gamesService

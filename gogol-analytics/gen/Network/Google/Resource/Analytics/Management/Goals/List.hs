@@ -63,7 +63,7 @@ type ManagementGoalsListResource =
 -- | Lists goals to which the user has access.
 --
 -- /See:/ 'managementGoalsList' smart constructor.
-data ManagementGoalsList = ManagementGoalsList
+data ManagementGoalsList = ManagementGoalsList'
     { _mglWebPropertyId :: !Text
     , _mglProFileId     :: !Text
     , _mglAccountId     :: !Text
@@ -90,7 +90,7 @@ managementGoalsList
     -> Text -- ^ 'mglAccountId'
     -> ManagementGoalsList
 managementGoalsList pMglWebPropertyId_ pMglProFileId_ pMglAccountId_ =
-    ManagementGoalsList
+    ManagementGoalsList'
     { _mglWebPropertyId = pMglWebPropertyId_
     , _mglProFileId = pMglProFileId_
     , _mglAccountId = pMglAccountId_
@@ -140,7 +140,7 @@ instance GoogleRequest ManagementGoalsList where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementGoalsList{..}
+        requestClient ManagementGoalsList'{..}
           = go _mglAccountId _mglWebPropertyId _mglProFileId
               _mglStartIndex
               _mglMaxResults

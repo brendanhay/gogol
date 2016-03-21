@@ -72,7 +72,7 @@ type SubscriptionsListResource =
 -- | Returns subscription resources that match the API request criteria.
 --
 -- /See:/ 'subscriptionsList' smart constructor.
-data SubscriptionsList = SubscriptionsList
+data SubscriptionsList = SubscriptionsList'
     { _subPart                          :: !Text
     , _subMine                          :: !(Maybe Bool)
     , _subChannelId                     :: !(Maybe Text)
@@ -115,7 +115,7 @@ subscriptionsList
     :: Text -- ^ 'subPart'
     -> SubscriptionsList
 subscriptionsList pSubPart_ =
-    SubscriptionsList
+    SubscriptionsList'
     { _subPart = pSubPart_
     , _subMine = Nothing
     , _subChannelId = Nothing
@@ -235,7 +235,7 @@ instance GoogleRequest SubscriptionsList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient SubscriptionsList{..}
+        requestClient SubscriptionsList'{..}
           = go (Just _subPart) _subMine _subChannelId
               _subOnBehalfOfContentOwner
               _subOnBehalfOfContentOwnerChannel

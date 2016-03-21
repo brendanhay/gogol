@@ -56,7 +56,7 @@ type ActivitiesInsertResource =
 -- | Create a new activity for the authenticated user.
 --
 -- /See:/ 'activitiesInsert' smart constructor.
-data ActivitiesInsert = ActivitiesInsert
+data ActivitiesInsert = ActivitiesInsert'
     { _aiPayload :: !Activity
     , _aiUserId  :: !Text
     , _aiPreview :: !(Maybe Bool)
@@ -76,7 +76,7 @@ activitiesInsert
     -> Text -- ^ 'aiUserId'
     -> ActivitiesInsert
 activitiesInsert pAiPayload_ pAiUserId_ =
-    ActivitiesInsert
+    ActivitiesInsert'
     { _aiPayload = pAiPayload_
     , _aiUserId = pAiUserId_
     , _aiPreview = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest ActivitiesInsert where
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me",
                "https://www.googleapis.com/auth/plus.stream.write"]
-        requestClient ActivitiesInsert{..}
+        requestClient ActivitiesInsert'{..}
           = go _aiUserId _aiPreview (Just AltJSON) _aiPayload
               plusDomainsService
           where go

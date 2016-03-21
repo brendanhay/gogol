@@ -62,7 +62,7 @@ type FilesListResource =
 -- | Lists files for a user profile.
 --
 -- /See:/ 'filesList' smart constructor.
-data FilesList = FilesList
+data FilesList = FilesList'
     { _flProFileId  :: !(Textual Int64)
     , _flSortOrder  :: !FilesListSortOrder
     , _flScope      :: !FilesListScope
@@ -90,7 +90,7 @@ filesList
     :: Int64 -- ^ 'flProFileId'
     -> FilesList
 filesList pFlProFileId_ =
-    FilesList
+    FilesList'
     { _flProFileId = _Coerce # pFlProFileId_
     , _flSortOrder = FLSODescending
     , _flScope = FLSMine
@@ -134,7 +134,7 @@ instance GoogleRequest FilesList where
         type Rs FilesList = FileList
         type Scopes FilesList =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient FilesList{..}
+        requestClient FilesList'{..}
           = go _flProFileId (Just _flSortOrder) (Just _flScope)
               _flPageToken
               (Just _flSortField)

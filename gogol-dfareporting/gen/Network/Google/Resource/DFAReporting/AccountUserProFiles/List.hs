@@ -75,7 +75,7 @@ type AccountUserProFilesListResource =
 -- | Retrieves a list of account user profiles, possibly filtered.
 --
 -- /See:/ 'accountUserProFilesList' smart constructor.
-data AccountUserProFilesList = AccountUserProFilesList
+data AccountUserProFilesList = AccountUserProFilesList'
     { _aupflUserRoleId   :: !(Maybe (Textual Int64))
     , _aupflSearchString :: !(Maybe Text)
     , _aupflIds          :: !(Maybe [Textual Int64])
@@ -115,7 +115,7 @@ accountUserProFilesList
     :: Int64 -- ^ 'aupflProFileId'
     -> AccountUserProFilesList
 accountUserProFilesList pAupflProFileId_ =
-    AccountUserProFilesList
+    AccountUserProFilesList'
     { _aupflUserRoleId = Nothing
     , _aupflSearchString = Nothing
     , _aupflIds = Nothing
@@ -203,7 +203,7 @@ instance GoogleRequest AccountUserProFilesList where
              AccountUserProFilesListResponse
         type Scopes AccountUserProFilesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountUserProFilesList{..}
+        requestClient AccountUserProFilesList'{..}
           = go _aupflProFileId _aupflUserRoleId
               _aupflSearchString
               (_aupflIds ^. _Default)

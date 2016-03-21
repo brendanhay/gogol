@@ -60,7 +60,7 @@ type ForwardingRulesInsertResource =
 -- using the data included in the request.
 --
 -- /See:/ 'forwardingRulesInsert' smart constructor.
-data ForwardingRulesInsert = ForwardingRulesInsert
+data ForwardingRulesInsert = ForwardingRulesInsert'
     { _friProject :: !Text
     , _friPayload :: !ForwardingRule
     , _friRegion  :: !Text
@@ -81,7 +81,7 @@ forwardingRulesInsert
     -> Text -- ^ 'friRegion'
     -> ForwardingRulesInsert
 forwardingRulesInsert pFriProject_ pFriPayload_ pFriRegion_ =
-    ForwardingRulesInsert
+    ForwardingRulesInsert'
     { _friProject = pFriProject_
     , _friPayload = pFriPayload_
     , _friRegion = pFriRegion_
@@ -107,7 +107,7 @@ instance GoogleRequest ForwardingRulesInsert where
         type Scopes ForwardingRulesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient ForwardingRulesInsert{..}
+        requestClient ForwardingRulesInsert'{..}
           = go _friProject _friRegion (Just AltJSON)
               _friPayload
               computeService

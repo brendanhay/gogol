@@ -72,7 +72,7 @@ type ProductsGenerateApprovalURLResource =
 -- only be used to display permissions for up to 1 day.
 --
 -- /See:/ 'productsGenerateApprovalURL' smart constructor.
-data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL
+data ProductsGenerateApprovalURL = ProductsGenerateApprovalURL'
     { _pgauLanguageCode :: !(Maybe Text)
     , _pgauEnterpriseId :: !Text
     , _pgauProductId    :: !Text
@@ -92,7 +92,7 @@ productsGenerateApprovalURL
     -> Text -- ^ 'pgauProductId'
     -> ProductsGenerateApprovalURL
 productsGenerateApprovalURL pPgauEnterpriseId_ pPgauProductId_ =
-    ProductsGenerateApprovalURL
+    ProductsGenerateApprovalURL'
     { _pgauLanguageCode = Nothing
     , _pgauEnterpriseId = pPgauEnterpriseId_
     , _pgauProductId = pPgauProductId_
@@ -123,7 +123,7 @@ instance GoogleRequest ProductsGenerateApprovalURL
              ProductsGenerateApprovalURLResponse
         type Scopes ProductsGenerateApprovalURL =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient ProductsGenerateApprovalURL{..}
+        requestClient ProductsGenerateApprovalURL'{..}
           = go _pgauEnterpriseId _pgauProductId
               _pgauLanguageCode
               (Just AltJSON)

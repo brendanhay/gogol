@@ -73,7 +73,7 @@ type UsersDataSourcesDataSetsDeleteResource =
 -- will be deleted.
 --
 -- /See:/ 'usersDataSourcesDataSetsDelete' smart constructor.
-data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete
+data UsersDataSourcesDataSetsDelete = UsersDataSourcesDataSetsDelete'
     { _udsdsdDataSourceId       :: !Text
     , _udsdsdUserId             :: !Text
     , _udsdsdDataSetId          :: !Text
@@ -100,7 +100,7 @@ usersDataSourcesDataSetsDelete
     -> Text -- ^ 'udsdsdDataSetId'
     -> UsersDataSourcesDataSetsDelete
 usersDataSourcesDataSetsDelete pUdsdsdDataSourceId_ pUdsdsdUserId_ pUdsdsdDataSetId_ =
-    UsersDataSourcesDataSetsDelete
+    UsersDataSourcesDataSetsDelete'
     { _udsdsdDataSourceId = pUdsdsdDataSourceId_
     , _udsdsdUserId = pUdsdsdUserId_
     , _udsdsdDataSetId = pUdsdsdDataSetId_
@@ -150,7 +150,7 @@ instance GoogleRequest UsersDataSourcesDataSetsDelete
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesDataSetsDelete{..}
+        requestClient UsersDataSourcesDataSetsDelete'{..}
           = go _udsdsdUserId _udsdsdDataSourceId
               _udsdsdDataSetId
               _udsdsdModifiedTimeMillis

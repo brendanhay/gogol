@@ -61,7 +61,7 @@ type ManagementGoalsGetResource =
 -- | Gets a goal to which the user has access.
 --
 -- /See:/ 'managementGoalsGet' smart constructor.
-data ManagementGoalsGet = ManagementGoalsGet
+data ManagementGoalsGet = ManagementGoalsGet'
     { _mggWebPropertyId :: !Text
     , _mggGoalId        :: !Text
     , _mggProFileId     :: !Text
@@ -86,7 +86,7 @@ managementGoalsGet
     -> Text -- ^ 'mggAccountId'
     -> ManagementGoalsGet
 managementGoalsGet pMggWebPropertyId_ pMggGoalId_ pMggProFileId_ pMggAccountId_ =
-    ManagementGoalsGet
+    ManagementGoalsGet'
     { _mggWebPropertyId = pMggWebPropertyId_
     , _mggGoalId = pMggGoalId_
     , _mggProFileId = pMggProFileId_
@@ -119,7 +119,7 @@ instance GoogleRequest ManagementGoalsGet where
         type Scopes ManagementGoalsGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementGoalsGet{..}
+        requestClient ManagementGoalsGet'{..}
           = go _mggAccountId _mggWebPropertyId _mggProFileId
               _mggGoalId
               (Just AltJSON)

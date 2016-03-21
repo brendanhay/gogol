@@ -55,7 +55,7 @@ type BlogsGetResource =
 -- | Gets one blog by ID.
 --
 -- /See:/ 'blogsGet' smart constructor.
-data BlogsGet = BlogsGet
+data BlogsGet = BlogsGet'
     { _bgBlogId   :: !Text
     , _bgMaxPosts :: !(Maybe (Textual Word32))
     , _bgView     :: !(Maybe BlogsGetView)
@@ -74,7 +74,7 @@ blogsGet
     :: Text -- ^ 'bgBlogId'
     -> BlogsGet
 blogsGet pBgBlogId_ =
-    BlogsGet
+    BlogsGet'
     { _bgBlogId = pBgBlogId_
     , _bgMaxPosts = Nothing
     , _bgView = Nothing
@@ -100,7 +100,7 @@ instance GoogleRequest BlogsGet where
         type Scopes BlogsGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient BlogsGet{..}
+        requestClient BlogsGet'{..}
           = go _bgBlogId _bgMaxPosts _bgView (Just AltJSON)
               bloggerService
           where go

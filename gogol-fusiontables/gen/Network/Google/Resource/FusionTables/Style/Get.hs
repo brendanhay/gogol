@@ -54,7 +54,7 @@ type StyleGetResource =
 -- | Gets a specific style.
 --
 -- /See:/ 'styleGet' smart constructor.
-data StyleGet = StyleGet
+data StyleGet = StyleGet'
     { _sgStyleId :: !(Textual Int32)
     , _sgTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ styleGet
     -> Text -- ^ 'sgTableId'
     -> StyleGet
 styleGet pSgStyleId_ pSgTableId_ =
-    StyleGet
+    StyleGet'
     { _sgStyleId = _Coerce # pSgStyleId_
     , _sgTableId = pSgTableId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest StyleGet where
         type Scopes StyleGet =
              '["https://www.googleapis.com/auth/fusiontables",
                "https://www.googleapis.com/auth/fusiontables.readonly"]
-        requestClient StyleGet{..}
+        requestClient StyleGet'{..}
           = go _sgTableId _sgStyleId (Just AltJSON)
               fusionTablesService
           where go

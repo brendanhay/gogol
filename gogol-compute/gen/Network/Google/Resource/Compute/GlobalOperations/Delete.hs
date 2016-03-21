@@ -55,7 +55,7 @@ type GlobalOperationsDeleteResource =
 -- | Deletes the specified Operations resource.
 --
 -- /See:/ 'globalOperationsDelete' smart constructor.
-data GlobalOperationsDelete = GlobalOperationsDelete
+data GlobalOperationsDelete = GlobalOperationsDelete'
     { _godProject   :: !Text
     , _godOperation :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalOperationsDelete
     -> Text -- ^ 'godOperation'
     -> GlobalOperationsDelete
 globalOperationsDelete pGodProject_ pGodOperation_ =
-    GlobalOperationsDelete
+    GlobalOperationsDelete'
     { _godProject = pGodProject_
     , _godOperation = pGodOperation_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest GlobalOperationsDelete where
         type Scopes GlobalOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient GlobalOperationsDelete{..}
+        requestClient GlobalOperationsDelete'{..}
           = go _godProject _godOperation (Just AltJSON)
               computeService
           where go

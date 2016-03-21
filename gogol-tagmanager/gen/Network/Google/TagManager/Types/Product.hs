@@ -23,7 +23,7 @@ import           Network.Google.TagManager.Types.Sum
 -- | List Variables Response.
 --
 -- /See:/ 'listVariablesResponse' smart constructor.
-newtype ListVariablesResponse = ListVariablesResponse
+newtype ListVariablesResponse = ListVariablesResponse'
     { _lvrVariables :: Maybe [Variable]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype ListVariablesResponse = ListVariablesResponse
 listVariablesResponse
     :: ListVariablesResponse
 listVariablesResponse =
-    ListVariablesResponse
+    ListVariablesResponse'
     { _lvrVariables = Nothing
     }
 
@@ -50,18 +50,18 @@ instance FromJSON ListVariablesResponse where
         parseJSON
           = withObject "ListVariablesResponse"
               (\ o ->
-                 ListVariablesResponse <$>
+                 ListVariablesResponse' <$>
                    (o .:? "variables" .!= mempty))
 
 instance ToJSON ListVariablesResponse where
-        toJSON ListVariablesResponse{..}
+        toJSON ListVariablesResponse'{..}
           = object
               (catMaybes [("variables" .=) <$> _lvrVariables])
 
 -- | List Folders Response.
 --
 -- /See:/ 'listFoldersResponse' smart constructor.
-newtype ListFoldersResponse = ListFoldersResponse
+newtype ListFoldersResponse = ListFoldersResponse'
     { _lfrFolders :: Maybe [Folder]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -73,7 +73,7 @@ newtype ListFoldersResponse = ListFoldersResponse
 listFoldersResponse
     :: ListFoldersResponse
 listFoldersResponse =
-    ListFoldersResponse
+    ListFoldersResponse'
     { _lfrFolders = Nothing
     }
 
@@ -88,16 +88,17 @@ instance FromJSON ListFoldersResponse where
         parseJSON
           = withObject "ListFoldersResponse"
               (\ o ->
-                 ListFoldersResponse <$> (o .:? "folders" .!= mempty))
+                 ListFoldersResponse' <$>
+                   (o .:? "folders" .!= mempty))
 
 instance ToJSON ListFoldersResponse where
-        toJSON ListFoldersResponse{..}
+        toJSON ListFoldersResponse'{..}
           = object (catMaybes [("folders" .=) <$> _lfrFolders])
 
 -- | List Environments Response.
 --
 -- /See:/ 'listEnvironmentsResponse' smart constructor.
-newtype ListEnvironmentsResponse = ListEnvironmentsResponse
+newtype ListEnvironmentsResponse = ListEnvironmentsResponse'
     { _lerEnvironments :: Maybe [Environment]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,7 +110,7 @@ newtype ListEnvironmentsResponse = ListEnvironmentsResponse
 listEnvironmentsResponse
     :: ListEnvironmentsResponse
 listEnvironmentsResponse =
-    ListEnvironmentsResponse
+    ListEnvironmentsResponse'
     { _lerEnvironments = Nothing
     }
 
@@ -125,11 +126,11 @@ instance FromJSON ListEnvironmentsResponse where
         parseJSON
           = withObject "ListEnvironmentsResponse"
               (\ o ->
-                 ListEnvironmentsResponse <$>
+                 ListEnvironmentsResponse' <$>
                    (o .:? "environments" .!= mempty))
 
 instance ToJSON ListEnvironmentsResponse where
-        toJSON ListEnvironmentsResponse{..}
+        toJSON ListEnvironmentsResponse'{..}
           = object
               (catMaybes
                  [("environments" .=) <$> _lerEnvironments])
@@ -137,7 +138,7 @@ instance ToJSON ListEnvironmentsResponse where
 -- | Publish container version response.
 --
 -- /See:/ 'publishContainerVersionResponse' smart constructor.
-data PublishContainerVersionResponse = PublishContainerVersionResponse
+data PublishContainerVersionResponse = PublishContainerVersionResponse'
     { _pcvrCompilerError    :: !(Maybe Bool)
     , _pcvrContainerVersion :: !(Maybe ContainerVersion)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -152,7 +153,7 @@ data PublishContainerVersionResponse = PublishContainerVersionResponse
 publishContainerVersionResponse
     :: PublishContainerVersionResponse
 publishContainerVersionResponse =
-    PublishContainerVersionResponse
+    PublishContainerVersionResponse'
     { _pcvrCompilerError = Nothing
     , _pcvrContainerVersion = Nothing
     }
@@ -174,12 +175,12 @@ instance FromJSON PublishContainerVersionResponse
         parseJSON
           = withObject "PublishContainerVersionResponse"
               (\ o ->
-                 PublishContainerVersionResponse <$>
+                 PublishContainerVersionResponse' <$>
                    (o .:? "compilerError") <*>
                      (o .:? "containerVersion"))
 
 instance ToJSON PublishContainerVersionResponse where
-        toJSON PublishContainerVersionResponse{..}
+        toJSON PublishContainerVersionResponse'{..}
           = object
               (catMaybes
                  [("compilerError" .=) <$> _pcvrCompilerError,
@@ -188,7 +189,7 @@ instance ToJSON PublishContainerVersionResponse where
 -- | Represents a Google Tag Manager Container Version Header.
 --
 -- /See:/ 'containerVersionHeader' smart constructor.
-data ContainerVersionHeader = ContainerVersionHeader
+data ContainerVersionHeader = ContainerVersionHeader'
     { _cvhNumTags            :: !(Maybe Text)
     , _cvhNumMacros          :: !(Maybe Text)
     , _cvhContainerId        :: !(Maybe Text)
@@ -227,7 +228,7 @@ data ContainerVersionHeader = ContainerVersionHeader
 containerVersionHeader
     :: ContainerVersionHeader
 containerVersionHeader =
-    ContainerVersionHeader
+    ContainerVersionHeader'
     { _cvhNumTags = Nothing
     , _cvhNumMacros = Nothing
     , _cvhContainerId = Nothing
@@ -297,7 +298,7 @@ instance FromJSON ContainerVersionHeader where
         parseJSON
           = withObject "ContainerVersionHeader"
               (\ o ->
-                 ContainerVersionHeader <$>
+                 ContainerVersionHeader' <$>
                    (o .:? "numTags") <*> (o .:? "numMacros") <*>
                      (o .:? "containerId")
                      <*> (o .:? "containerVersionId")
@@ -309,7 +310,7 @@ instance FromJSON ContainerVersionHeader where
                      <*> (o .:? "numVariables"))
 
 instance ToJSON ContainerVersionHeader where
-        toJSON ContainerVersionHeader{..}
+        toJSON ContainerVersionHeader'{..}
           = object
               (catMaybes
                  [("numTags" .=) <$> _cvhNumTags,
@@ -325,7 +326,7 @@ instance ToJSON ContainerVersionHeader where
 
 --
 -- /See:/ 'teardownTag' smart constructor.
-data TeardownTag = TeardownTag
+data TeardownTag = TeardownTag'
     { _ttStopTeardownOnFailure :: !(Maybe Bool)
     , _ttTagName               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -340,7 +341,7 @@ data TeardownTag = TeardownTag
 teardownTag
     :: TeardownTag
 teardownTag =
-    TeardownTag
+    TeardownTag'
     { _ttStopTeardownOnFailure = Nothing
     , _ttTagName = Nothing
     }
@@ -362,12 +363,12 @@ instance FromJSON TeardownTag where
         parseJSON
           = withObject "TeardownTag"
               (\ o ->
-                 TeardownTag <$>
+                 TeardownTag' <$>
                    (o .:? "stopTeardownOnFailure") <*>
                      (o .:? "tagName"))
 
 instance ToJSON TeardownTag where
-        toJSON TeardownTag{..}
+        toJSON TeardownTag'{..}
           = object
               (catMaybes
                  [("stopTeardownOnFailure" .=) <$>
@@ -377,7 +378,7 @@ instance ToJSON TeardownTag where
 -- | List triggers response.
 --
 -- /See:/ 'listTriggersResponse' smart constructor.
-newtype ListTriggersResponse = ListTriggersResponse
+newtype ListTriggersResponse = ListTriggersResponse'
     { _ltrTriggers :: Maybe [Trigger]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -389,7 +390,7 @@ newtype ListTriggersResponse = ListTriggersResponse
 listTriggersResponse
     :: ListTriggersResponse
 listTriggersResponse =
-    ListTriggersResponse
+    ListTriggersResponse'
     { _ltrTriggers = Nothing
     }
 
@@ -404,18 +405,18 @@ instance FromJSON ListTriggersResponse where
         parseJSON
           = withObject "ListTriggersResponse"
               (\ o ->
-                 ListTriggersResponse <$>
+                 ListTriggersResponse' <$>
                    (o .:? "triggers" .!= mempty))
 
 instance ToJSON ListTriggersResponse where
-        toJSON ListTriggersResponse{..}
+        toJSON ListTriggersResponse'{..}
           = object
               (catMaybes [("triggers" .=) <$> _ltrTriggers])
 
 -- | Represents a Google Tag Manager Macro.
 --
 -- /See:/ 'macro' smart constructor.
-data Macro = Macro
+data Macro = Macro'
     { _mScheduleEndMs   :: !(Maybe (Textual Int64))
     , _mParentFolderId  :: !(Maybe Text)
     , _mContainerId     :: !(Maybe Text)
@@ -463,7 +464,7 @@ data Macro = Macro
 macro
     :: Macro
 macro =
-    Macro
+    Macro'
     { _mScheduleEndMs = Nothing
     , _mParentFolderId = Nothing
     , _mContainerId = Nothing
@@ -562,7 +563,7 @@ instance FromJSON Macro where
         parseJSON
           = withObject "Macro"
               (\ o ->
-                 Macro <$>
+                 Macro' <$>
                    (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
                      <*> (o .:? "containerId")
                      <*> (o .:? "disablingRuleId" .!= mempty)
@@ -577,7 +578,7 @@ instance FromJSON Macro where
                      <*> (o .:? "parameter" .!= mempty))
 
 instance ToJSON Macro where
-        toJSON Macro{..}
+        toJSON Macro'{..}
           = object
               (catMaybes
                  [("scheduleEndMs" .=) <$> _mScheduleEndMs,
@@ -596,7 +597,7 @@ instance ToJSON Macro where
 -- | Represents a Google Tag Manager Tag.
 --
 -- /See:/ 'tag' smart constructor.
-data Tag = Tag
+data Tag = Tag'
     { _tBlockingTriggerId :: !(Maybe [Text])
     , _tScheduleEndMs     :: !(Maybe (Textual Int64))
     , _tParentFolderId    :: !(Maybe Text)
@@ -665,7 +666,7 @@ data Tag = Tag
 tag
     :: Tag
 tag =
-    Tag
+    Tag'
     { _tBlockingTriggerId = Nothing
     , _tScheduleEndMs = Nothing
     , _tParentFolderId = Nothing
@@ -821,7 +822,7 @@ instance FromJSON Tag where
         parseJSON
           = withObject "Tag"
               (\ o ->
-                 Tag <$>
+                 Tag' <$>
                    (o .:? "blockingTriggerId" .!= mempty) <*>
                      (o .:? "scheduleEndMs")
                      <*> (o .:? "parentFolderId")
@@ -844,7 +845,7 @@ instance FromJSON Tag where
                      <*> (o .:? "parameter" .!= mempty))
 
 instance ToJSON Tag where
-        toJSON Tag{..}
+        toJSON Tag'{..}
           = object
               (catMaybes
                  [("blockingTriggerId" .=) <$> _tBlockingTriggerId,
@@ -870,7 +871,7 @@ instance ToJSON Tag where
 -- | Create container versions response.
 --
 -- /See:/ 'createContainerVersionResponse' smart constructor.
-data CreateContainerVersionResponse = CreateContainerVersionResponse
+data CreateContainerVersionResponse = CreateContainerVersionResponse'
     { _ccvrCompilerError    :: !(Maybe Bool)
     , _ccvrContainerVersion :: !(Maybe ContainerVersion)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -885,7 +886,7 @@ data CreateContainerVersionResponse = CreateContainerVersionResponse
 createContainerVersionResponse
     :: CreateContainerVersionResponse
 createContainerVersionResponse =
-    CreateContainerVersionResponse
+    CreateContainerVersionResponse'
     { _ccvrCompilerError = Nothing
     , _ccvrContainerVersion = Nothing
     }
@@ -907,12 +908,12 @@ instance FromJSON CreateContainerVersionResponse
         parseJSON
           = withObject "CreateContainerVersionResponse"
               (\ o ->
-                 CreateContainerVersionResponse <$>
+                 CreateContainerVersionResponse' <$>
                    (o .:? "compilerError") <*>
                      (o .:? "containerVersion"))
 
 instance ToJSON CreateContainerVersionResponse where
-        toJSON CreateContainerVersionResponse{..}
+        toJSON CreateContainerVersionResponse'{..}
           = object
               (catMaybes
                  [("compilerError" .=) <$> _ccvrCompilerError,
@@ -921,7 +922,7 @@ instance ToJSON CreateContainerVersionResponse where
 -- | Options for new container versions.
 --
 -- /See:/ 'createContainerVersionRequestVersionOptions' smart constructor.
-data CreateContainerVersionRequestVersionOptions = CreateContainerVersionRequestVersionOptions
+data CreateContainerVersionRequestVersionOptions = CreateContainerVersionRequestVersionOptions'
     { _ccvrvoName         :: !(Maybe Text)
     , _ccvrvoQuickPreview :: !(Maybe Bool)
     , _ccvrvoNotes        :: !(Maybe Text)
@@ -939,7 +940,7 @@ data CreateContainerVersionRequestVersionOptions = CreateContainerVersionRequest
 createContainerVersionRequestVersionOptions
     :: CreateContainerVersionRequestVersionOptions
 createContainerVersionRequestVersionOptions =
-    CreateContainerVersionRequestVersionOptions
+    CreateContainerVersionRequestVersionOptions'
     { _ccvrvoName = Nothing
     , _ccvrvoQuickPreview = Nothing
     , _ccvrvoNotes = Nothing
@@ -968,14 +969,14 @@ instance FromJSON
           = withObject
               "CreateContainerVersionRequestVersionOptions"
               (\ o ->
-                 CreateContainerVersionRequestVersionOptions <$>
+                 CreateContainerVersionRequestVersionOptions' <$>
                    (o .:? "name") <*> (o .:? "quickPreview") <*>
                      (o .:? "notes"))
 
 instance ToJSON
          CreateContainerVersionRequestVersionOptions where
         toJSON
-          CreateContainerVersionRequestVersionOptions{..}
+          CreateContainerVersionRequestVersionOptions'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _ccvrvoName,
@@ -985,7 +986,7 @@ instance ToJSON
 -- | Represents a user\'s permissions to an account and its container.
 --
 -- /See:/ 'userAccess' smart constructor.
-data UserAccess = UserAccess
+data UserAccess = UserAccess'
     { _uaAccountAccess   :: !(Maybe AccountAccess)
     , _uaAccountId       :: !(Maybe Text)
     , _uaEmailAddress    :: !(Maybe Text)
@@ -1009,7 +1010,7 @@ data UserAccess = UserAccess
 userAccess
     :: UserAccess
 userAccess =
-    UserAccess
+    UserAccess'
     { _uaAccountAccess = Nothing
     , _uaAccountId = Nothing
     , _uaEmailAddress = Nothing
@@ -1052,14 +1053,14 @@ instance FromJSON UserAccess where
         parseJSON
           = withObject "UserAccess"
               (\ o ->
-                 UserAccess <$>
+                 UserAccess' <$>
                    (o .:? "accountAccess") <*> (o .:? "accountId") <*>
                      (o .:? "emailAddress")
                      <*> (o .:? "containerAccess" .!= mempty)
                      <*> (o .:? "permissionId"))
 
 instance ToJSON UserAccess where
-        toJSON UserAccess{..}
+        toJSON UserAccess'{..}
           = object
               (catMaybes
                  [("accountAccess" .=) <$> _uaAccountAccess,
@@ -1073,7 +1074,7 @@ instance ToJSON UserAccess where
 -- the enable_debug and url fields of environments of other types.
 --
 -- /See:/ 'environment' smart constructor.
-data Environment = Environment
+data Environment = Environment'
     { _eContainerId              :: !(Maybe Text)
     , _eFingerprint              :: !(Maybe Text)
     , _eContainerVersionId       :: !(Maybe Text)
@@ -1118,7 +1119,7 @@ data Environment = Environment
 environment
     :: Environment
 environment =
-    Environment
+    Environment'
     { _eContainerId = Nothing
     , _eFingerprint = Nothing
     , _eContainerVersionId = Nothing
@@ -1202,7 +1203,7 @@ instance FromJSON Environment where
         parseJSON
           = withObject "Environment"
               (\ o ->
-                 Environment <$>
+                 Environment' <$>
                    (o .:? "containerId") <*> (o .:? "fingerprint") <*>
                      (o .:? "containerVersionId")
                      <*> (o .:? "url")
@@ -1216,7 +1217,7 @@ instance FromJSON Environment where
                      <*> (o .:? "description"))
 
 instance ToJSON Environment where
-        toJSON Environment{..}
+        toJSON Environment'{..}
           = object
               (catMaybes
                  [("containerId" .=) <$> _eContainerId,
@@ -1236,7 +1237,7 @@ instance ToJSON Environment where
 -- | Defines the Google Tag Manager Account access permissions.
 --
 -- /See:/ 'accountAccess' smart constructor.
-newtype AccountAccess = AccountAccess
+newtype AccountAccess = AccountAccess'
     { _aaPermission :: Maybe [AccountAccessPermissionItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1248,7 +1249,7 @@ newtype AccountAccess = AccountAccess
 accountAccess
     :: AccountAccess
 accountAccess =
-    AccountAccess
+    AccountAccess'
     { _aaPermission = Nothing
     }
 
@@ -1264,17 +1265,17 @@ instance FromJSON AccountAccess where
         parseJSON
           = withObject "AccountAccess"
               (\ o ->
-                 AccountAccess <$> (o .:? "permission" .!= mempty))
+                 AccountAccess' <$> (o .:? "permission" .!= mempty))
 
 instance ToJSON AccountAccess where
-        toJSON AccountAccess{..}
+        toJSON AccountAccess'{..}
           = object
               (catMaybes [("permission" .=) <$> _aaPermission])
 
 -- | List Accounts Response.
 --
 -- /See:/ 'listAccountsResponse' smart constructor.
-newtype ListAccountsResponse = ListAccountsResponse
+newtype ListAccountsResponse = ListAccountsResponse'
     { _larAccounts :: Maybe [Account]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1286,7 +1287,7 @@ newtype ListAccountsResponse = ListAccountsResponse
 listAccountsResponse
     :: ListAccountsResponse
 listAccountsResponse =
-    ListAccountsResponse
+    ListAccountsResponse'
     { _larAccounts = Nothing
     }
 
@@ -1301,18 +1302,18 @@ instance FromJSON ListAccountsResponse where
         parseJSON
           = withObject "ListAccountsResponse"
               (\ o ->
-                 ListAccountsResponse <$>
+                 ListAccountsResponse' <$>
                    (o .:? "accounts" .!= mempty))
 
 instance ToJSON ListAccountsResponse where
-        toJSON ListAccountsResponse{..}
+        toJSON ListAccountsResponse'{..}
           = object
               (catMaybes [("accounts" .=) <$> _larAccounts])
 
 -- | Represents a Google Tag Manager Rule.
 --
 -- /See:/ 'rule' smart constructor.
-data Rule = Rule
+data Rule = Rule'
     { _rContainerId :: !(Maybe Text)
     , _rFingerprint :: !(Maybe Text)
     , _rRuleId      :: !(Maybe Text)
@@ -1342,7 +1343,7 @@ data Rule = Rule
 rule
     :: Rule
 rule =
-    Rule
+    Rule'
     { _rContainerId = Nothing
     , _rFingerprint = Nothing
     , _rRuleId = Nothing
@@ -1392,7 +1393,7 @@ instance FromJSON Rule where
         parseJSON
           = withObject "Rule"
               (\ o ->
-                 Rule <$>
+                 Rule' <$>
                    (o .:? "containerId") <*> (o .:? "fingerprint") <*>
                      (o .:? "ruleId")
                      <*> (o .:? "accountId")
@@ -1401,7 +1402,7 @@ instance FromJSON Rule where
                      <*> (o .:? "condition" .!= mempty))
 
 instance ToJSON Rule where
-        toJSON Rule{..}
+        toJSON Rule'{..}
           = object
               (catMaybes
                  [("containerId" .=) <$> _rContainerId,
@@ -1414,7 +1415,7 @@ instance ToJSON Rule where
 -- | Represents a Google Tag Manager Folder.
 --
 -- /See:/ 'folder' smart constructor.
-data Folder = Folder
+data Folder = Folder'
     { _fContainerId :: !(Maybe Text)
     , _fFingerprint :: !(Maybe Text)
     , _fFolderId    :: !(Maybe Text)
@@ -1438,7 +1439,7 @@ data Folder = Folder
 folder
     :: Folder
 folder =
-    Folder
+    Folder'
     { _fContainerId = Nothing
     , _fFingerprint = Nothing
     , _fFolderId = Nothing
@@ -1475,14 +1476,14 @@ instance FromJSON Folder where
         parseJSON
           = withObject "Folder"
               (\ o ->
-                 Folder <$>
+                 Folder' <$>
                    (o .:? "containerId") <*> (o .:? "fingerprint") <*>
                      (o .:? "folderId")
                      <*> (o .:? "accountId")
                      <*> (o .:? "name"))
 
 instance ToJSON Folder where
-        toJSON Folder{..}
+        toJSON Folder'{..}
           = object
               (catMaybes
                  [("containerId" .=) <$> _fContainerId,
@@ -1494,7 +1495,7 @@ instance ToJSON Folder where
 -- | Represents a Google Tag Manager Variable.
 --
 -- /See:/ 'variable' smart constructor.
-data Variable = Variable
+data Variable = Variable'
     { _vScheduleEndMs      :: !(Maybe (Textual Int64))
     , _vParentFolderId     :: !(Maybe Text)
     , _vContainerId        :: !(Maybe Text)
@@ -1542,7 +1543,7 @@ data Variable = Variable
 variable
     :: Variable
 variable =
-    Variable
+    Variable'
     { _vScheduleEndMs = Nothing
     , _vParentFolderId = Nothing
     , _vContainerId = Nothing
@@ -1644,7 +1645,7 @@ instance FromJSON Variable where
         parseJSON
           = withObject "Variable"
               (\ o ->
-                 Variable <$>
+                 Variable' <$>
                    (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
                      <*> (o .:? "containerId")
                      <*> (o .:? "fingerprint")
@@ -1659,7 +1660,7 @@ instance FromJSON Variable where
                      <*> (o .:? "parameter" .!= mempty))
 
 instance ToJSON Variable where
-        toJSON Variable{..}
+        toJSON Variable'{..}
           = object
               (catMaybes
                  [("scheduleEndMs" .=) <$> _vScheduleEndMs,
@@ -1678,7 +1679,7 @@ instance ToJSON Variable where
 -- | Represents a Google Tag Manager Account.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _aaShareData   :: !(Maybe Bool)
     , _aaFingerprint :: !(Maybe Text)
     , _aaAccountId   :: !(Maybe Text)
@@ -1699,7 +1700,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _aaShareData = Nothing
     , _aaFingerprint = Nothing
     , _aaAccountId = Nothing
@@ -1731,13 +1732,13 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "shareData") <*> (o .:? "fingerprint") <*>
                      (o .:? "accountId")
                      <*> (o .:? "name"))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("shareData" .=) <$> _aaShareData,
@@ -1748,7 +1749,7 @@ instance ToJSON Account where
 -- | List container versions response.
 --
 -- /See:/ 'listContainerVersionsResponse' smart constructor.
-data ListContainerVersionsResponse = ListContainerVersionsResponse
+data ListContainerVersionsResponse = ListContainerVersionsResponse'
     { _lcvrContainerVersionHeader :: !(Maybe [ContainerVersionHeader])
     , _lcvrContainerVersion       :: !(Maybe [ContainerVersion])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1763,7 +1764,7 @@ data ListContainerVersionsResponse = ListContainerVersionsResponse
 listContainerVersionsResponse
     :: ListContainerVersionsResponse
 listContainerVersionsResponse =
-    ListContainerVersionsResponse
+    ListContainerVersionsResponse'
     { _lcvrContainerVersionHeader = Nothing
     , _lcvrContainerVersion = Nothing
     }
@@ -1788,12 +1789,12 @@ instance FromJSON ListContainerVersionsResponse where
         parseJSON
           = withObject "ListContainerVersionsResponse"
               (\ o ->
-                 ListContainerVersionsResponse <$>
+                 ListContainerVersionsResponse' <$>
                    (o .:? "containerVersionHeader" .!= mempty) <*>
                      (o .:? "containerVersion" .!= mempty))
 
 instance ToJSON ListContainerVersionsResponse where
-        toJSON ListContainerVersionsResponse{..}
+        toJSON ListContainerVersionsResponse'{..}
           = object
               (catMaybes
                  [("containerVersionHeader" .=) <$>
@@ -1803,7 +1804,7 @@ instance ToJSON ListContainerVersionsResponse where
 -- | Represents a Google Tag Manager Container.
 --
 -- /See:/ 'container' smart constructor.
-data Container = Container
+data Container = Container'
     { _cPublicId               :: !(Maybe Text)
     , _cUsageContext           :: !(Maybe [ContainerUsageContextItem])
     , _cEnabledBuiltInVariable :: !(Maybe [ContainerEnabledBuiltInVariableItem])
@@ -1845,7 +1846,7 @@ data Container = Container
 container
     :: Container
 container =
-    Container
+    Container'
     { _cPublicId = Nothing
     , _cUsageContext = Nothing
     , _cEnabledBuiltInVariable = Nothing
@@ -1933,7 +1934,7 @@ instance FromJSON Container where
         parseJSON
           = withObject "Container"
               (\ o ->
-                 Container <$>
+                 Container' <$>
                    (o .:? "publicId") <*>
                      (o .:? "usageContext" .!= mempty)
                      <*> (o .:? "enabledBuiltInVariable" .!= mempty)
@@ -1947,7 +1948,7 @@ instance FromJSON Container where
                      <*> (o .:? "timeZoneId"))
 
 instance ToJSON Container where
-        toJSON Container{..}
+        toJSON Container'{..}
           = object
               (catMaybes
                  [("publicId" .=) <$> _cPublicId,
@@ -1965,7 +1966,7 @@ instance ToJSON Container where
 -- | List AccountUsers Response.
 --
 -- /See:/ 'listAccountUsersResponse' smart constructor.
-newtype ListAccountUsersResponse = ListAccountUsersResponse
+newtype ListAccountUsersResponse = ListAccountUsersResponse'
     { _laurUserAccess :: Maybe [UserAccess]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1977,7 +1978,7 @@ newtype ListAccountUsersResponse = ListAccountUsersResponse
 listAccountUsersResponse
     :: ListAccountUsersResponse
 listAccountUsersResponse =
-    ListAccountUsersResponse
+    ListAccountUsersResponse'
     { _laurUserAccess = Nothing
     }
 
@@ -1993,18 +1994,18 @@ instance FromJSON ListAccountUsersResponse where
         parseJSON
           = withObject "ListAccountUsersResponse"
               (\ o ->
-                 ListAccountUsersResponse <$>
+                 ListAccountUsersResponse' <$>
                    (o .:? "userAccess" .!= mempty))
 
 instance ToJSON ListAccountUsersResponse where
-        toJSON ListAccountUsersResponse{..}
+        toJSON ListAccountUsersResponse'{..}
           = object
               (catMaybes [("userAccess" .=) <$> _laurUserAccess])
 
 -- | Represents a Google Tag Manager Container Version.
 --
 -- /See:/ 'containerVersion' smart constructor.
-data ContainerVersion = ContainerVersion
+data ContainerVersion = ContainerVersion'
     { _cvMacro              :: !(Maybe [Macro])
     , _cvTag                :: !(Maybe [Tag])
     , _cvContainerId        :: !(Maybe Text)
@@ -2055,7 +2056,7 @@ data ContainerVersion = ContainerVersion
 containerVersion
     :: ContainerVersion
 containerVersion =
-    ContainerVersion
+    ContainerVersion'
     { _cvMacro = Nothing
     , _cvTag = Nothing
     , _cvContainerId = Nothing
@@ -2158,7 +2159,7 @@ instance FromJSON ContainerVersion where
         parseJSON
           = withObject "ContainerVersion"
               (\ o ->
-                 ContainerVersion <$>
+                 ContainerVersion' <$>
                    (o .:? "macro" .!= mempty) <*>
                      (o .:? "tag" .!= mempty)
                      <*> (o .:? "containerId")
@@ -2175,7 +2176,7 @@ instance FromJSON ContainerVersion where
                      <*> (o .:? "notes"))
 
 instance ToJSON ContainerVersion where
-        toJSON ContainerVersion{..}
+        toJSON ContainerVersion'{..}
           = object
               (catMaybes
                  [("macro" .=) <$> _cvMacro, ("tag" .=) <$> _cvTag,
@@ -2193,7 +2194,7 @@ instance ToJSON ContainerVersion where
 
 --
 -- /See:/ 'setupTag' smart constructor.
-data SetupTag = SetupTag
+data SetupTag = SetupTag'
     { _stTagName            :: !(Maybe Text)
     , _stStopOnSetupFailure :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2208,7 +2209,7 @@ data SetupTag = SetupTag
 setupTag
     :: SetupTag
 setupTag =
-    SetupTag
+    SetupTag'
     { _stTagName = Nothing
     , _stStopOnSetupFailure = Nothing
     }
@@ -2230,11 +2231,11 @@ instance FromJSON SetupTag where
         parseJSON
           = withObject "SetupTag"
               (\ o ->
-                 SetupTag <$>
+                 SetupTag' <$>
                    (o .:? "tagName") <*> (o .:? "stopOnSetupFailure"))
 
 instance ToJSON SetupTag where
-        toJSON SetupTag{..}
+        toJSON SetupTag'{..}
           = object
               (catMaybes
                  [("tagName" .=) <$> _stTagName,
@@ -2243,7 +2244,7 @@ instance ToJSON SetupTag where
 -- | List Containers Response.
 --
 -- /See:/ 'listContainersResponse' smart constructor.
-newtype ListContainersResponse = ListContainersResponse
+newtype ListContainersResponse = ListContainersResponse'
     { _lcrContainers :: Maybe [Container]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2255,7 +2256,7 @@ newtype ListContainersResponse = ListContainersResponse
 listContainersResponse
     :: ListContainersResponse
 listContainersResponse =
-    ListContainersResponse
+    ListContainersResponse'
     { _lcrContainers = Nothing
     }
 
@@ -2271,18 +2272,18 @@ instance FromJSON ListContainersResponse where
         parseJSON
           = withObject "ListContainersResponse"
               (\ o ->
-                 ListContainersResponse <$>
+                 ListContainersResponse' <$>
                    (o .:? "containers" .!= mempty))
 
 instance ToJSON ListContainersResponse where
-        toJSON ListContainersResponse{..}
+        toJSON ListContainersResponse'{..}
           = object
               (catMaybes [("containers" .=) <$> _lcrContainers])
 
 -- | Represents a Google Tag Manager Trigger
 --
 -- /See:/ 'trigger' smart constructor.
-data Trigger = Trigger
+data Trigger = Trigger'
     { _triCustomEventFilter   :: !(Maybe [Condition])
     , _triParentFolderId      :: !(Maybe Text)
     , _triContainerId         :: !(Maybe Text)
@@ -2348,7 +2349,7 @@ data Trigger = Trigger
 trigger
     :: Trigger
 trigger =
-    Trigger
+    Trigger'
     { _triCustomEventFilter = Nothing
     , _triParentFolderId = Nothing
     , _triContainerId = Nothing
@@ -2504,7 +2505,7 @@ instance FromJSON Trigger where
         parseJSON
           = withObject "Trigger"
               (\ o ->
-                 Trigger <$>
+                 Trigger' <$>
                    (o .:? "customEventFilter" .!= mempty) <*>
                      (o .:? "parentFolderId")
                      <*> (o .:? "containerId")
@@ -2526,7 +2527,7 @@ instance FromJSON Trigger where
                      <*> (o .:? "waitForTags"))
 
 instance ToJSON Trigger where
-        toJSON Trigger{..}
+        toJSON Trigger'{..}
           = object
               (catMaybes
                  [("customEventFilter" .=) <$> _triCustomEventFilter,
@@ -2553,7 +2554,7 @@ instance ToJSON Trigger where
 -- | List Tags Response.
 --
 -- /See:/ 'listTagsResponse' smart constructor.
-newtype ListTagsResponse = ListTagsResponse
+newtype ListTagsResponse = ListTagsResponse'
     { _ltrTags :: Maybe [Tag]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2565,7 +2566,7 @@ newtype ListTagsResponse = ListTagsResponse
 listTagsResponse
     :: ListTagsResponse
 listTagsResponse =
-    ListTagsResponse
+    ListTagsResponse'
     { _ltrTags = Nothing
     }
 
@@ -2579,16 +2580,16 @@ instance FromJSON ListTagsResponse where
         parseJSON
           = withObject "ListTagsResponse"
               (\ o ->
-                 ListTagsResponse <$> (o .:? "tags" .!= mempty))
+                 ListTagsResponse' <$> (o .:? "tags" .!= mempty))
 
 instance ToJSON ListTagsResponse where
-        toJSON ListTagsResponse{..}
+        toJSON ListTagsResponse'{..}
           = object (catMaybes [("tags" .=) <$> _ltrTags])
 
 -- | Represents a Google Tag Manager Folder\'s contents.
 --
 -- /See:/ 'folderEntities' smart constructor.
-data FolderEntities = FolderEntities
+data FolderEntities = FolderEntities'
     { _feTag      :: !(Maybe [Tag])
     , _feVariable :: !(Maybe [Variable])
     , _feTrigger  :: !(Maybe [Trigger])
@@ -2606,7 +2607,7 @@ data FolderEntities = FolderEntities
 folderEntities
     :: FolderEntities
 folderEntities =
-    FolderEntities
+    FolderEntities'
     { _feTag = Nothing
     , _feVariable = Nothing
     , _feTrigger = Nothing
@@ -2636,13 +2637,13 @@ instance FromJSON FolderEntities where
         parseJSON
           = withObject "FolderEntities"
               (\ o ->
-                 FolderEntities <$>
+                 FolderEntities' <$>
                    (o .:? "tag" .!= mempty) <*>
                      (o .:? "variable" .!= mempty)
                      <*> (o .:? "trigger" .!= mempty))
 
 instance ToJSON FolderEntities where
-        toJSON FolderEntities{..}
+        toJSON FolderEntities'{..}
           = object
               (catMaybes
                  [("tag" .=) <$> _feTag,
@@ -2652,7 +2653,7 @@ instance ToJSON FolderEntities where
 -- | Represents a predicate.
 --
 -- /See:/ 'condition' smart constructor.
-data Condition = Condition
+data Condition = Condition'
     { _cType      :: !(Maybe ConditionType)
     , _cParameter :: !(Maybe [Parameter])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2667,7 +2668,7 @@ data Condition = Condition
 condition
     :: Condition
 condition =
-    Condition
+    Condition'
     { _cType = Nothing
     , _cParameter = Nothing
     }
@@ -2695,11 +2696,11 @@ instance FromJSON Condition where
         parseJSON
           = withObject "Condition"
               (\ o ->
-                 Condition <$>
+                 Condition' <$>
                    (o .:? "type") <*> (o .:? "parameter" .!= mempty))
 
 instance ToJSON Condition where
-        toJSON Condition{..}
+        toJSON Condition'{..}
           = object
               (catMaybes
                  [("type" .=) <$> _cType,
@@ -2708,7 +2709,7 @@ instance ToJSON Condition where
 -- | Defines the Google Tag Manager Container access permissions.
 --
 -- /See:/ 'containerAccess' smart constructor.
-data ContainerAccess = ContainerAccess
+data ContainerAccess = ContainerAccess'
     { _caContainerId :: !(Maybe Text)
     , _caPermission  :: !(Maybe [ContainerAccessPermissionItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2723,7 +2724,7 @@ data ContainerAccess = ContainerAccess
 containerAccess
     :: ContainerAccess
 containerAccess =
-    ContainerAccess
+    ContainerAccess'
     { _caContainerId = Nothing
     , _caPermission = Nothing
     }
@@ -2746,12 +2747,12 @@ instance FromJSON ContainerAccess where
         parseJSON
           = withObject "ContainerAccess"
               (\ o ->
-                 ContainerAccess <$>
+                 ContainerAccess' <$>
                    (o .:? "containerId") <*>
                      (o .:? "permission" .!= mempty))
 
 instance ToJSON ContainerAccess where
-        toJSON ContainerAccess{..}
+        toJSON ContainerAccess'{..}
           = object
               (catMaybes
                  [("containerId" .=) <$> _caContainerId,
@@ -2760,7 +2761,7 @@ instance ToJSON ContainerAccess where
 -- | Represents a Google Tag Manager Parameter.
 --
 -- /See:/ 'parameter' smart constructor.
-data Parameter = Parameter
+data Parameter = Parameter'
     { _pList  :: !(Maybe [Parameter])
     , _pValue :: !(Maybe Text)
     , _pMap   :: !(Maybe [Parameter])
@@ -2784,7 +2785,7 @@ data Parameter = Parameter
 parameter
     :: Parameter
 parameter =
-    Parameter
+    Parameter'
     { _pList = Nothing
     , _pValue = Nothing
     , _pMap = Nothing
@@ -2828,14 +2829,14 @@ instance FromJSON Parameter where
         parseJSON
           = withObject "Parameter"
               (\ o ->
-                 Parameter <$>
+                 Parameter' <$>
                    (o .:? "list" .!= mempty) <*> (o .:? "value") <*>
                      (o .:? "map" .!= mempty)
                      <*> (o .:? "key")
                      <*> (o .:? "type"))
 
 instance ToJSON Parameter where
-        toJSON Parameter{..}
+        toJSON Parameter'{..}
           = object
               (catMaybes
                  [("list" .=) <$> _pList, ("value" .=) <$> _pValue,

@@ -60,7 +60,7 @@ type UsersAddPublicKeyResource =
 -- in the request.
 --
 -- /See:/ 'usersAddPublicKey' smart constructor.
-data UsersAddPublicKey = UsersAddPublicKey
+data UsersAddPublicKey = UsersAddPublicKey'
     { _uapkProject :: !Text
     , _uapkPayload :: !PublicKey
     , _uapkUser    :: !Text
@@ -81,7 +81,7 @@ usersAddPublicKey
     -> Text -- ^ 'uapkUser'
     -> UsersAddPublicKey
 usersAddPublicKey pUapkProject_ pUapkPayload_ pUapkUser_ =
-    UsersAddPublicKey
+    UsersAddPublicKey'
     { _uapkProject = pUapkProject_
     , _uapkPayload = pUapkPayload_
     , _uapkUser = pUapkUser_
@@ -106,7 +106,7 @@ instance GoogleRequest UsersAddPublicKey where
         type Scopes UsersAddPublicKey =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient UsersAddPublicKey{..}
+        requestClient UsersAddPublicKey'{..}
           = go _uapkProject _uapkUser (Just AltJSON)
               _uapkPayload
               userAccountsService

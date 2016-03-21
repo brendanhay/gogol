@@ -55,7 +55,7 @@ type PlacementGroupsGetResource =
 -- | Gets one placement group by ID.
 --
 -- /See:/ 'placementGroupsGet' smart constructor.
-data PlacementGroupsGet = PlacementGroupsGet
+data PlacementGroupsGet = PlacementGroupsGet'
     { _pggProFileId :: !(Textual Int64)
     , _pggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementGroupsGet
     -> Int64 -- ^ 'pggId'
     -> PlacementGroupsGet
 placementGroupsGet pPggProFileId_ pPggId_ =
-    PlacementGroupsGet
+    PlacementGroupsGet'
     { _pggProFileId = _Coerce # pPggProFileId_
     , _pggId = _Coerce # pPggId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PlacementGroupsGet where
         type Rs PlacementGroupsGet = PlacementGroup
         type Scopes PlacementGroupsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementGroupsGet{..}
+        requestClient PlacementGroupsGet'{..}
           = go _pggProFileId _pggId (Just AltJSON)
               dFAReportingService
           where go

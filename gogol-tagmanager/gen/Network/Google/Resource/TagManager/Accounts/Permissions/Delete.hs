@@ -56,7 +56,7 @@ type AccountsPermissionsDeleteResource =
 -- containers.
 --
 -- /See:/ 'accountsPermissionsDelete' smart constructor.
-data AccountsPermissionsDelete = AccountsPermissionsDelete
+data AccountsPermissionsDelete = AccountsPermissionsDelete'
     { _apdAccountId    :: !Text
     , _apdPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ accountsPermissionsDelete
     -> Text -- ^ 'apdPermissionId'
     -> AccountsPermissionsDelete
 accountsPermissionsDelete pApdAccountId_ pApdPermissionId_ =
-    AccountsPermissionsDelete
+    AccountsPermissionsDelete'
     { _apdAccountId = pApdAccountId_
     , _apdPermissionId = pApdPermissionId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest AccountsPermissionsDelete
         type Rs AccountsPermissionsDelete = ()
         type Scopes AccountsPermissionsDelete =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-        requestClient AccountsPermissionsDelete{..}
+        requestClient AccountsPermissionsDelete'{..}
           = go _apdAccountId _apdPermissionId (Just AltJSON)
               tagManagerService
           where go

@@ -54,7 +54,7 @@ type SitesUpdateResource =
 -- | Updates an existing site.
 --
 -- /See:/ 'sitesUpdate' smart constructor.
-data SitesUpdate = SitesUpdate
+data SitesUpdate = SitesUpdate'
     { _suProFileId :: !(Textual Int64)
     , _suPayload   :: !Site
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitesUpdate
     -> Site -- ^ 'suPayload'
     -> SitesUpdate
 sitesUpdate pSuProFileId_ pSuPayload_ =
-    SitesUpdate
+    SitesUpdate'
     { _suProFileId = _Coerce # pSuProFileId_
     , _suPayload = pSuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SitesUpdate where
         type Rs SitesUpdate = Site
         type Scopes SitesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SitesUpdate{..}
+        requestClient SitesUpdate'{..}
           = go _suProFileId (Just AltJSON) _suPayload
               dFAReportingService
           where go

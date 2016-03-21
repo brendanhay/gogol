@@ -57,7 +57,7 @@ type ResourcesCalendarsGetResource =
 -- | Retrieves a calendar resource.
 --
 -- /See:/ 'resourcesCalendarsGet' smart constructor.
-data ResourcesCalendarsGet = ResourcesCalendarsGet
+data ResourcesCalendarsGet = ResourcesCalendarsGet'
     { _rcgCustomer           :: !Text
     , _rcgCalendarResourceId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ resourcesCalendarsGet
     -> Text -- ^ 'rcgCalendarResourceId'
     -> ResourcesCalendarsGet
 resourcesCalendarsGet pRcgCustomer_ pRcgCalendarResourceId_ =
-    ResourcesCalendarsGet
+    ResourcesCalendarsGet'
     { _rcgCustomer = pRcgCustomer_
     , _rcgCalendarResourceId = pRcgCalendarResourceId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest ResourcesCalendarsGet where
         type Scopes ResourcesCalendarsGet =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
                "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
-        requestClient ResourcesCalendarsGet{..}
+        requestClient ResourcesCalendarsGet'{..}
           = go _rcgCustomer _rcgCalendarResourceId
               (Just AltJSON)
               directoryService

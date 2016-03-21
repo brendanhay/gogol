@@ -58,7 +58,7 @@ type AccountsAdUnitsGetAdCodeResource =
 -- | Get ad code for the specified ad unit.
 --
 -- /See:/ 'accountsAdUnitsGetAdCode' smart constructor.
-data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode
+data AccountsAdUnitsGetAdCode = AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId   :: !Text
     , _aaugacAdClientId :: !Text
     , _aaugacAccountId  :: !Text
@@ -79,7 +79,7 @@ accountsAdUnitsGetAdCode
     -> Text -- ^ 'aaugacAccountId'
     -> AccountsAdUnitsGetAdCode
 accountsAdUnitsGetAdCode pAaugacAdUnitId_ pAaugacAdClientId_ pAaugacAccountId_ =
-    AccountsAdUnitsGetAdCode
+    AccountsAdUnitsGetAdCode'
     { _aaugacAdUnitId = pAaugacAdUnitId_
     , _aaugacAdClientId = pAaugacAdClientId_
     , _aaugacAccountId = pAaugacAccountId_
@@ -108,7 +108,7 @@ instance GoogleRequest AccountsAdUnitsGetAdCode where
         type Scopes AccountsAdUnitsGetAdCode =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsAdUnitsGetAdCode{..}
+        requestClient AccountsAdUnitsGetAdCode'{..}
           = go _aaugacAccountId _aaugacAdClientId
               _aaugacAdUnitId
               (Just AltJSON)

@@ -73,7 +73,7 @@ type AppsServicesVersionsGetResource =
 -- | Gets application deployment information.
 --
 -- /See:/ 'appsServicesVersionsGet' smart constructor.
-data AppsServicesVersionsGet = AppsServicesVersionsGet
+data AppsServicesVersionsGet = AppsServicesVersionsGet'
     { _asvgXgafv          :: !(Maybe Text)
     , _asvgUploadProtocol :: !(Maybe Text)
     , _asvgPp             :: !Bool
@@ -118,7 +118,7 @@ appsServicesVersionsGet
     -> Text -- ^ 'asvgServicesId'
     -> AppsServicesVersionsGet
 appsServicesVersionsGet pAsvgVersionsId_ pAsvgAppsId_ pAsvgServicesId_ =
-    AppsServicesVersionsGet
+    AppsServicesVersionsGet'
     { _asvgXgafv = Nothing
     , _asvgUploadProtocol = Nothing
     , _asvgPp = True
@@ -196,7 +196,7 @@ instance GoogleRequest AppsServicesVersionsGet where
         type Rs AppsServicesVersionsGet = Version
         type Scopes AppsServicesVersionsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesVersionsGet{..}
+        requestClient AppsServicesVersionsGet'{..}
           = go _asvgAppsId _asvgServicesId _asvgVersionsId
               _asvgXgafv
               _asvgUploadProtocol

@@ -61,7 +61,7 @@ type ManagementExperimentsGetResource =
 -- | Returns an experiment to which the user has access.
 --
 -- /See:/ 'managementExperimentsGet' smart constructor.
-data ManagementExperimentsGet = ManagementExperimentsGet
+data ManagementExperimentsGet = ManagementExperimentsGet'
     { _megWebPropertyId :: !Text
     , _megProFileId     :: !Text
     , _megAccountId     :: !Text
@@ -86,7 +86,7 @@ managementExperimentsGet
     -> Text -- ^ 'megExperimentId'
     -> ManagementExperimentsGet
 managementExperimentsGet pMegWebPropertyId_ pMegProFileId_ pMegAccountId_ pMegExperimentId_ =
-    ManagementExperimentsGet
+    ManagementExperimentsGet'
     { _megWebPropertyId = pMegWebPropertyId_
     , _megProFileId = pMegProFileId_
     , _megAccountId = pMegAccountId_
@@ -121,7 +121,7 @@ instance GoogleRequest ManagementExperimentsGet where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementExperimentsGet{..}
+        requestClient ManagementExperimentsGet'{..}
           = go _megAccountId _megWebPropertyId _megProFileId
               _megExperimentId
               (Just AltJSON)

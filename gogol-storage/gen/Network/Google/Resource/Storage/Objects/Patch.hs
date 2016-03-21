@@ -72,7 +72,7 @@ type ObjectsPatchResource =
 -- | Updates an object\'s metadata. This method supports patch semantics.
 --
 -- /See:/ 'objectsPatch' smart constructor.
-data ObjectsPatch = ObjectsPatch
+data ObjectsPatch = ObjectsPatch'
     { _opIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _opIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _opIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -114,7 +114,7 @@ objectsPatch
     -> Text -- ^ 'opObject'
     -> ObjectsPatch
 objectsPatch pOpBucket_ pOpPayload_ pOpObject_ =
-    ObjectsPatch
+    ObjectsPatch'
     { _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
     , _opIfGenerationMatch = Nothing
@@ -197,7 +197,7 @@ instance GoogleRequest ObjectsPatch where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsPatch{..}
+        requestClient ObjectsPatch'{..}
           = go _opBucket _opObject _opIfMetagenerationMatch
               _opIfGenerationNotMatch
               _opIfGenerationMatch

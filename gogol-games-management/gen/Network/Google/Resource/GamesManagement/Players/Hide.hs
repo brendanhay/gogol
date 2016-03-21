@@ -59,7 +59,7 @@ type PlayersHideResource =
 -- console.
 --
 -- /See:/ 'playersHide' smart constructor.
-data PlayersHide = PlayersHide
+data PlayersHide = PlayersHide'
     { _phApplicationId :: !Text
     , _phPlayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ playersHide
     -> Text -- ^ 'phPlayerId'
     -> PlayersHide
 playersHide pPhApplicationId_ pPhPlayerId_ =
-    PlayersHide
+    PlayersHide'
     { _phApplicationId = pPhApplicationId_
     , _phPlayerId = pPhPlayerId_
     }
@@ -98,7 +98,7 @@ instance GoogleRequest PlayersHide where
         type Scopes PlayersHide =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PlayersHide{..}
+        requestClient PlayersHide'{..}
           = go _phApplicationId _phPlayerId (Just AltJSON)
               gamesManagementService
           where go

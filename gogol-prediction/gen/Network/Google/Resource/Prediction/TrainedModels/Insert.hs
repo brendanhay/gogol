@@ -54,7 +54,7 @@ type TrainedModelsInsertResource =
 -- | Train a Prediction API model.
 --
 -- /See:/ 'trainedModelsInsert' smart constructor.
-data TrainedModelsInsert = TrainedModelsInsert
+data TrainedModelsInsert = TrainedModelsInsert'
     { _tmiProject :: !Text
     , _tmiPayload :: !Insert
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ trainedModelsInsert
     -> Insert -- ^ 'tmiPayload'
     -> TrainedModelsInsert
 trainedModelsInsert pTmiProject_ pTmiPayload_ =
-    TrainedModelsInsert
+    TrainedModelsInsert'
     { _tmiProject = pTmiProject_
     , _tmiPayload = pTmiPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest TrainedModelsInsert where
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write",
                "https://www.googleapis.com/auth/prediction"]
-        requestClient TrainedModelsInsert{..}
+        requestClient TrainedModelsInsert'{..}
           = go _tmiProject (Just AltJSON) _tmiPayload
               predictionService
           where go

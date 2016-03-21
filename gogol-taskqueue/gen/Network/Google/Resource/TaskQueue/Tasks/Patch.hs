@@ -63,7 +63,7 @@ type TasksPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'tasksPatch' smart constructor.
-data TasksPatch = TasksPatch
+data TasksPatch = TasksPatch'
     { _tpTaskqueue       :: !Text
     , _tpProject         :: !Text
     , _tpPayload         :: !Task
@@ -92,7 +92,7 @@ tasksPatch
     -> Int32 -- ^ 'tpNewLeaseSeconds'
     -> TasksPatch
 tasksPatch pTpTaskqueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
-    TasksPatch
+    TasksPatch'
     { _tpTaskqueue = pTpTaskqueue_
     , _tpProject = pTpProject_
     , _tpPayload = pTpPayload_
@@ -129,7 +129,7 @@ instance GoogleRequest TasksPatch where
         type Scopes TasksPatch =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksPatch{..}
+        requestClient TasksPatch'{..}
           = go _tpProject _tpTaskqueue _tpTask
               (Just _tpNewLeaseSeconds)
               (Just AltJSON)

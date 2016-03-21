@@ -61,7 +61,7 @@ type PeopleListByActivityResource =
 -- activity.
 --
 -- /See:/ 'peopleListByActivity' smart constructor.
-data PeopleListByActivity = PeopleListByActivity
+data PeopleListByActivity = PeopleListByActivity'
     { _plbaActivityId :: !Text
     , _plbaCollection :: !PeopleListByActivityCollection
     , _plbaPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ peopleListByActivity
     -> PeopleListByActivityCollection -- ^ 'plbaCollection'
     -> PeopleListByActivity
 peopleListByActivity pPlbaActivityId_ pPlbaCollection_ =
-    PeopleListByActivity
+    PeopleListByActivity'
     { _plbaActivityId = pPlbaActivityId_
     , _plbaCollection = pPlbaCollection_
     , _plbaPageToken = Nothing
@@ -125,7 +125,7 @@ instance GoogleRequest PeopleListByActivity where
         type Scopes PeopleListByActivity =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient PeopleListByActivity{..}
+        requestClient PeopleListByActivity'{..}
           = go _plbaActivityId _plbaCollection _plbaPageToken
               (Just _plbaMaxResults)
               (Just AltJSON)

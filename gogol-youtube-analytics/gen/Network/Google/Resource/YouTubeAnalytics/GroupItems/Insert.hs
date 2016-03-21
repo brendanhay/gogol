@@ -54,7 +54,7 @@ type GroupItemsInsertResource =
 -- | Creates a group item.
 --
 -- /See:/ 'groupItemsInsert' smart constructor.
-data GroupItemsInsert = GroupItemsInsert
+data GroupItemsInsert = GroupItemsInsert'
     { _giiPayload                :: !GroupItem
     , _giiOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupItemsInsert
     :: GroupItem -- ^ 'giiPayload'
     -> GroupItemsInsert
 groupItemsInsert pGiiPayload_ =
-    GroupItemsInsert
+    GroupItemsInsert'
     { _giiPayload = pGiiPayload_
     , _giiOnBehalfOfContentOwner = Nothing
     }
@@ -100,7 +100,7 @@ instance GoogleRequest GroupItemsInsert where
         type Scopes GroupItemsInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient GroupItemsInsert{..}
+        requestClient GroupItemsInsert'{..}
           = go _giiOnBehalfOfContentOwner (Just AltJSON)
               _giiPayload
               youTubeAnalyticsService

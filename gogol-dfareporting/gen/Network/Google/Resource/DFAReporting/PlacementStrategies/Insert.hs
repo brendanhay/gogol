@@ -55,7 +55,7 @@ type PlacementStrategiesInsertResource =
 -- | Inserts a new placement strategy.
 --
 -- /See:/ 'placementStrategiesInsert' smart constructor.
-data PlacementStrategiesInsert = PlacementStrategiesInsert
+data PlacementStrategiesInsert = PlacementStrategiesInsert'
     { _psiProFileId :: !(Textual Int64)
     , _psiPayload   :: !PlacementStrategy
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementStrategiesInsert
     -> PlacementStrategy -- ^ 'psiPayload'
     -> PlacementStrategiesInsert
 placementStrategiesInsert pPsiProFileId_ pPsiPayload_ =
-    PlacementStrategiesInsert
+    PlacementStrategiesInsert'
     { _psiProFileId = _Coerce # pPsiProFileId_
     , _psiPayload = pPsiPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest PlacementStrategiesInsert
         type Rs PlacementStrategiesInsert = PlacementStrategy
         type Scopes PlacementStrategiesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementStrategiesInsert{..}
+        requestClient PlacementStrategiesInsert'{..}
           = go _psiProFileId (Just AltJSON) _psiPayload
               dFAReportingService
           where go

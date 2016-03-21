@@ -54,7 +54,7 @@ type CommentThreadsUpdateResource =
 -- | Modifies the top-level comment in a comment thread.
 --
 -- /See:/ 'commentThreadsUpdate' smart constructor.
-data CommentThreadsUpdate = CommentThreadsUpdate
+data CommentThreadsUpdate = CommentThreadsUpdate'
     { _ctuPart    :: !Text
     , _ctuPayload :: !CommentThread
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ commentThreadsUpdate
     -> CommentThread -- ^ 'ctuPayload'
     -> CommentThreadsUpdate
 commentThreadsUpdate pCtuPart_ pCtuPayload_ =
-    CommentThreadsUpdate
+    CommentThreadsUpdate'
     { _ctuPart = pCtuPart_
     , _ctuPayload = pCtuPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CommentThreadsUpdate where
         type Rs CommentThreadsUpdate = CommentThread
         type Scopes CommentThreadsUpdate =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentThreadsUpdate{..}
+        requestClient CommentThreadsUpdate'{..}
           = go (Just _ctuPart) (Just AltJSON) _ctuPayload
               youTubeService
           where go

@@ -75,7 +75,7 @@ type AccountsStoreInfosCountryGetResource =
 -- this method.
 --
 -- /See:/ 'accountsStoreInfosCountryGet' smart constructor.
-data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet
+data AccountsStoreInfosCountryGet = AccountsStoreInfosCountryGet'
     { _asicgXgafv          :: !(Maybe Text)
     , _asicgUploadProtocol :: !(Maybe Text)
     , _asicgCountry        :: !Text
@@ -117,7 +117,7 @@ accountsStoreInfosCountryGet
     -> Text -- ^ 'asicgAccountId'
     -> AccountsStoreInfosCountryGet
 accountsStoreInfosCountryGet pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
-    AccountsStoreInfosCountryGet
+    AccountsStoreInfosCountryGet'
     { _asicgXgafv = Nothing
     , _asicgUploadProtocol = Nothing
     , _asicgCountry = pAsicgCountry_
@@ -190,7 +190,7 @@ instance GoogleRequest AccountsStoreInfosCountryGet
         type Rs AccountsStoreInfosCountryGet = StoreInfo
         type Scopes AccountsStoreInfosCountryGet =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsStoreInfosCountryGet{..}
+        requestClient AccountsStoreInfosCountryGet'{..}
           = go _asicgAccountId _asicgVideoId _asicgCountry
               _asicgXgafv
               _asicgUploadProtocol

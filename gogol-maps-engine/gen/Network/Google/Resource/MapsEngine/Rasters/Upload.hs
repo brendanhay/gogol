@@ -52,7 +52,7 @@ type RastersUploadResource =
 -- | Create a skeleton raster asset for upload.
 --
 -- /See:/ 'rastersUpload' smart constructor.
-newtype RastersUpload = RastersUpload
+newtype RastersUpload = RastersUpload'
     { _ruPayload :: Raster
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ rastersUpload
     :: Raster -- ^ 'ruPayload'
     -> RastersUpload
 rastersUpload pRuPayload_ =
-    RastersUpload
+    RastersUpload'
     { _ruPayload = pRuPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest RastersUpload where
         type Rs RastersUpload = Raster
         type Scopes RastersUpload =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RastersUpload{..}
+        requestClient RastersUpload'{..}
           = go (Just AltJSON) _ruPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersUploadResource)

@@ -55,7 +55,7 @@ type LiveBroadcastsDeleteResource =
 -- | Deletes a broadcast.
 --
 -- /See:/ 'liveBroadcastsDelete' smart constructor.
-data LiveBroadcastsDelete = LiveBroadcastsDelete
+data LiveBroadcastsDelete = LiveBroadcastsDelete'
     { _lbdOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbdOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbdId                            :: !Text
@@ -74,7 +74,7 @@ liveBroadcastsDelete
     :: Text -- ^ 'lbdId'
     -> LiveBroadcastsDelete
 liveBroadcastsDelete pLbdId_ =
-    LiveBroadcastsDelete
+    LiveBroadcastsDelete'
     { _lbdOnBehalfOfContentOwner = Nothing
     , _lbdOnBehalfOfContentOwnerChannel = Nothing
     , _lbdId = pLbdId_
@@ -126,7 +126,7 @@ instance GoogleRequest LiveBroadcastsDelete where
         type Scopes LiveBroadcastsDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveBroadcastsDelete{..}
+        requestClient LiveBroadcastsDelete'{..}
           = go (Just _lbdId) _lbdOnBehalfOfContentOwner
               _lbdOnBehalfOfContentOwnerChannel
               (Just AltJSON)

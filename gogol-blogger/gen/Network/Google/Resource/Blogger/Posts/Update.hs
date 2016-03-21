@@ -66,7 +66,7 @@ type PostsUpdateResource =
 -- | Update a post.
 --
 -- /See:/ 'postsUpdate' smart constructor.
-data PostsUpdate = PostsUpdate
+data PostsUpdate = PostsUpdate'
     { _puFetchBody   :: !Bool
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
@@ -102,7 +102,7 @@ postsUpdate
     -> Text -- ^ 'puPostId'
     -> PostsUpdate
 postsUpdate pPuBlogId_ pPuPayload_ pPuPostId_ =
-    PostsUpdate
+    PostsUpdate'
     { _puFetchBody = True
     , _puFetchImages = Nothing
     , _puBlogId = pPuBlogId_
@@ -161,7 +161,7 @@ instance GoogleRequest PostsUpdate where
         type Rs PostsUpdate = Post'
         type Scopes PostsUpdate =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PostsUpdate{..}
+        requestClient PostsUpdate'{..}
           = go _puBlogId _puPostId (Just _puFetchBody)
               _puFetchImages
               _puMaxComments

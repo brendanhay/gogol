@@ -57,7 +57,7 @@ type EnterprisesDeleteResource =
 -- call.
 --
 -- /See:/ 'enterprisesDelete' smart constructor.
-newtype EnterprisesDelete = EnterprisesDelete
+newtype EnterprisesDelete = EnterprisesDelete'
     { _edEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ enterprisesDelete
     :: Text -- ^ 'edEnterpriseId'
     -> EnterprisesDelete
 enterprisesDelete pEdEnterpriseId_ =
-    EnterprisesDelete
+    EnterprisesDelete'
     { _edEnterpriseId = pEdEnterpriseId_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest EnterprisesDelete where
         type Rs EnterprisesDelete = ()
         type Scopes EnterprisesDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesDelete{..}
+        requestClient EnterprisesDelete'{..}
           = go _edEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

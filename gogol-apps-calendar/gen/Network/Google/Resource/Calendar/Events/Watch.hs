@@ -97,7 +97,7 @@ type EventsWatchResource =
 -- | Watch for changes to Events resources.
 --
 -- /See:/ 'eventsWatch' smart constructor.
-data EventsWatch = EventsWatch
+data EventsWatch = EventsWatch'
     { _ewSyncToken               :: !(Maybe Text)
     , _ewCalendarId              :: !Text
     , _ewTimeMin                 :: !(Maybe DateTime')
@@ -165,7 +165,7 @@ eventsWatch
     -> Channel -- ^ 'ewPayload'
     -> EventsWatch
 eventsWatch pEwCalendarId_ pEwPayload_ =
-    EventsWatch
+    EventsWatch'
     { _ewSyncToken = Nothing
     , _ewCalendarId = pEwCalendarId_
     , _ewTimeMin = Nothing
@@ -351,7 +351,7 @@ instance GoogleRequest EventsWatch where
         type Scopes EventsWatch =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient EventsWatch{..}
+        requestClient EventsWatch'{..}
           = go _ewCalendarId _ewSyncToken _ewTimeMin _ewOrderBy
               _ewSingleEvents
               (_ewPrivateExtendedProperty ^. _Default)

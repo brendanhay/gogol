@@ -57,7 +57,7 @@ type ScoresResetForAllPlayersResource =
 -- console. Only draft leaderboards can be reset.
 --
 -- /See:/ 'scoresResetForAllPlayers' smart constructor.
-newtype ScoresResetForAllPlayers = ScoresResetForAllPlayers
+newtype ScoresResetForAllPlayers = ScoresResetForAllPlayers'
     { _srfapLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ scoresResetForAllPlayers
     :: Text -- ^ 'srfapLeaderboardId'
     -> ScoresResetForAllPlayers
 scoresResetForAllPlayers pSrfapLeaderboardId_ =
-    ScoresResetForAllPlayers
+    ScoresResetForAllPlayers'
     { _srfapLeaderboardId = pSrfapLeaderboardId_
     }
 
@@ -85,7 +85,7 @@ instance GoogleRequest ScoresResetForAllPlayers where
         type Scopes ScoresResetForAllPlayers =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresResetForAllPlayers{..}
+        requestClient ScoresResetForAllPlayers'{..}
           = go _srfapLeaderboardId (Just AltJSON)
               gamesManagementService
           where go

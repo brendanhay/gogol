@@ -53,7 +53,7 @@ type CalendarsUpdateResource =
 -- | Updates metadata for a calendar.
 --
 -- /See:/ 'calendarsUpdate' smart constructor.
-data CalendarsUpdate = CalendarsUpdate
+data CalendarsUpdate = CalendarsUpdate'
     { _cuCalendarId :: !Text
     , _cuPayload    :: !Calendar
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ calendarsUpdate
     -> Calendar -- ^ 'cuPayload'
     -> CalendarsUpdate
 calendarsUpdate pCuCalendarId_ pCuPayload_ =
-    CalendarsUpdate
+    CalendarsUpdate'
     { _cuCalendarId = pCuCalendarId_
     , _cuPayload = pCuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CalendarsUpdate where
         type Rs CalendarsUpdate = Calendar
         type Scopes CalendarsUpdate =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient CalendarsUpdate{..}
+        requestClient CalendarsUpdate'{..}
           = go _cuCalendarId (Just AltJSON) _cuPayload
               appsCalendarService
           where go

@@ -55,7 +55,7 @@ type CreativeGroupsInsertResource =
 -- | Inserts a new creative group.
 --
 -- /See:/ 'creativeGroupsInsert' smart constructor.
-data CreativeGroupsInsert = CreativeGroupsInsert
+data CreativeGroupsInsert = CreativeGroupsInsert'
     { _cgiProFileId :: !(Textual Int64)
     , _cgiPayload   :: !CreativeGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeGroupsInsert
     -> CreativeGroup -- ^ 'cgiPayload'
     -> CreativeGroupsInsert
 creativeGroupsInsert pCgiProFileId_ pCgiPayload_ =
-    CreativeGroupsInsert
+    CreativeGroupsInsert'
     { _cgiProFileId = _Coerce # pCgiProFileId_
     , _cgiPayload = pCgiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CreativeGroupsInsert where
         type Rs CreativeGroupsInsert = CreativeGroup
         type Scopes CreativeGroupsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeGroupsInsert{..}
+        requestClient CreativeGroupsInsert'{..}
           = go _cgiProFileId (Just AltJSON) _cgiPayload
               dFAReportingService
           where go

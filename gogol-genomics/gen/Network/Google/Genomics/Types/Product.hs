@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- map (string key mapping to a list of string values).
 --
 -- /See:/ 'readInfo' smart constructor.
-newtype ReadInfo = ReadInfo
+newtype ReadInfo = ReadInfo'
     { _riAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -37,7 +37,7 @@ readInfo
     :: HashMap Text [JSONValue] -- ^ 'riAddtional'
     -> ReadInfo
 readInfo pRiAddtional_ =
-    ReadInfo
+    ReadInfo'
     { _riAddtional = _Coerce # pRiAddtional_
     }
 
@@ -49,7 +49,7 @@ riAddtional
 instance FromJSON ReadInfo where
         parseJSON
           = withObject "ReadInfo"
-              (\ o -> ReadInfo <$> (parseJSONObject o))
+              (\ o -> ReadInfo' <$> (parseJSONObject o))
 
 instance ToJSON ReadInfo where
         toJSON = toJSON . _riAddtional
@@ -91,7 +91,7 @@ instance ToJSON ReadInfo where
 -- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -109,7 +109,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -139,12 +139,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -155,7 +155,7 @@ instance ToJSON Status where
 -- Operation.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema
+newtype OperationSchema = OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -168,7 +168,7 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema
+    OperationSchema'
     { _osAddtional = _Coerce # pOsAddtional_
     }
 
@@ -181,7 +181,7 @@ osAddtional
 instance FromJSON OperationSchema where
         parseJSON
           = withObject "OperationSchema"
-              (\ o -> OperationSchema <$> (parseJSONObject o))
+              (\ o -> OperationSchema' <$> (parseJSONObject o))
 
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
@@ -198,7 +198,7 @@ instance ToJSON OperationSchema where
 -- calls typically from one sample.
 --
 -- /See:/ 'variant' smart constructor.
-data Variant = Variant
+data Variant = Variant'
     { _vVariantSetId   :: !(Maybe Text)
     , _vCreated        :: !(Maybe (Textual Int64))
     , _vStart          :: !(Maybe (Textual Int64))
@@ -246,7 +246,7 @@ data Variant = Variant
 variant
     :: Variant
 variant =
-    Variant
+    Variant'
     { _vVariantSetId = Nothing
     , _vCreated = Nothing
     , _vStart = Nothing
@@ -351,7 +351,7 @@ instance FromJSON Variant where
         parseJSON
           = withObject "Variant"
               (\ o ->
-                 Variant <$>
+                 Variant' <$>
                    (o .:? "variantSetId") <*> (o .:? "created") <*>
                      (o .:? "start")
                      <*> (o .:? "alternateBases" .!= mempty)
@@ -366,7 +366,7 @@ instance FromJSON Variant where
                      <*> (o .:? "calls" .!= mempty))
 
 instance ToJSON Variant where
-        toJSON Variant{..}
+        toJSON Variant'{..}
           = object
               (catMaybes
                  [("variantSetId" .=) <$> _vVariantSetId,
@@ -382,7 +382,7 @@ instance ToJSON Variant where
 
 --
 -- /See:/ 'listBasesResponse' smart constructor.
-data ListBasesResponse = ListBasesResponse
+data ListBasesResponse = ListBasesResponse'
     { _lbrNextPageToken :: !(Maybe Text)
     , _lbrOffSet        :: !(Maybe (Textual Int64))
     , _lbrSequence      :: !(Maybe Text)
@@ -400,7 +400,7 @@ data ListBasesResponse = ListBasesResponse
 listBasesResponse
     :: ListBasesResponse
 listBasesResponse =
-    ListBasesResponse
+    ListBasesResponse'
     { _lbrNextPageToken = Nothing
     , _lbrOffSet = Nothing
     , _lbrSequence = Nothing
@@ -432,12 +432,12 @@ instance FromJSON ListBasesResponse where
         parseJSON
           = withObject "ListBasesResponse"
               (\ o ->
-                 ListBasesResponse <$>
+                 ListBasesResponse' <$>
                    (o .:? "nextPageToken") <*> (o .:? "offset") <*>
                      (o .:? "sequence"))
 
 instance ToJSON ListBasesResponse where
-        toJSON ListBasesResponse{..}
+        toJSON ListBasesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lbrNextPageToken,
@@ -447,7 +447,7 @@ instance ToJSON ListBasesResponse where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse
+data ListOperationsResponse = ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -462,7 +462,7 @@ data ListOperationsResponse = ListOperationsResponse
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse
+    ListOperationsResponse'
     { _lorNextPageToken = Nothing
     , _lorOperations = Nothing
     }
@@ -485,12 +485,12 @@ instance FromJSON ListOperationsResponse where
         parseJSON
           = withObject "ListOperationsResponse"
               (\ o ->
-                 ListOperationsResponse <$>
+                 ListOperationsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON ListOperationsResponse where
-        toJSON ListOperationsResponse{..}
+        toJSON ListOperationsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lorNextPageToken,
@@ -500,19 +500,19 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'getIAMPolicyRequest' smart constructor.
 data GetIAMPolicyRequest =
-    GetIAMPolicyRequest
+    GetIAMPolicyRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetIAMPolicyRequest' with the minimum fields required to make a request.
 --
 getIAMPolicyRequest
     :: GetIAMPolicyRequest
-getIAMPolicyRequest = GetIAMPolicyRequest
+getIAMPolicyRequest = GetIAMPolicyRequest'
 
 instance FromJSON GetIAMPolicyRequest where
         parseJSON
           = withObject "GetIAMPolicyRequest"
-              (\ o -> pure GetIAMPolicyRequest)
+              (\ o -> pure GetIAMPolicyRequest')
 
 instance ToJSON GetIAMPolicyRequest where
         toJSON = const emptyObject
@@ -521,19 +521,19 @@ instance ToJSON GetIAMPolicyRequest where
 --
 -- /See:/ 'cancelOperationRequest' smart constructor.
 data CancelOperationRequest =
-    CancelOperationRequest
+    CancelOperationRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CancelOperationRequest' with the minimum fields required to make a request.
 --
 cancelOperationRequest
     :: CancelOperationRequest
-cancelOperationRequest = CancelOperationRequest
+cancelOperationRequest = CancelOperationRequest'
 
 instance FromJSON CancelOperationRequest where
         parseJSON
           = withObject "CancelOperationRequest"
-              (\ o -> pure CancelOperationRequest)
+              (\ o -> pure CancelOperationRequest')
 
 instance ToJSON CancelOperationRequest where
         toJSON = const emptyObject
@@ -543,7 +543,7 @@ instance ToJSON CancelOperationRequest where
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSet' smart constructor.
-data DataSet = DataSet
+data DataSet = DataSet'
     { _dsName       :: !(Maybe Text)
     , _dsId         :: !(Maybe Text)
     , _dsProjectId  :: !(Maybe Text)
@@ -564,7 +564,7 @@ data DataSet = DataSet
 dataSet
     :: DataSet
 dataSet =
-    DataSet
+    DataSet'
     { _dsName = Nothing
     , _dsId = Nothing
     , _dsProjectId = Nothing
@@ -593,13 +593,13 @@ instance FromJSON DataSet where
         parseJSON
           = withObject "DataSet"
               (\ o ->
-                 DataSet <$>
+                 DataSet' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "projectId")
                      <*> (o .:? "createTime"))
 
 instance ToJSON DataSet where
-        toJSON DataSet{..}
+        toJSON DataSet'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _dsName, ("id" .=) <$> _dsId,
@@ -650,7 +650,7 @@ instance ToJSON DataSet where
 -- c.operationLength + cigarMap[c.operation] } return cigarStr
 --
 -- /See:/ 'read'' smart constructor.
-data Read' = Read'
+data Read' = Read''
     { _rFragmentLength            :: !(Maybe (Textual Int32))
     , _rDuplicateFragment         :: !(Maybe Bool)
     , _rReadGroupSetId            :: !(Maybe Text)
@@ -710,7 +710,7 @@ data Read' = Read'
 read'
     :: Read'
 read' =
-    Read'
+    Read''
     { _rFragmentLength = Nothing
     , _rDuplicateFragment = Nothing
     , _rReadGroupSetId = Nothing
@@ -871,7 +871,7 @@ instance FromJSON Read' where
         parseJSON
           = withObject "Read"
               (\ o ->
-                 Read' <$>
+                 Read'' <$>
                    (o .:? "fragmentLength") <*>
                      (o .:? "duplicateFragment")
                      <*> (o .:? "readGroupSetId")
@@ -891,7 +891,7 @@ instance FromJSON Read' where
                      <*> (o .:? "alignedQuality" .!= mempty))
 
 instance ToJSON Read' where
-        toJSON Read'{..}
+        toJSON Read''{..}
           = object
               (catMaybes
                  [("fragmentLength" .=) <$> _rFragmentLength,
@@ -921,7 +921,7 @@ instance ToJSON Read' where
 -- NA12345.
 --
 -- /See:/ 'variantCall' smart constructor.
-data VariantCall = VariantCall
+data VariantCall = VariantCall'
     { _vcGenotypeLikelihood :: !(Maybe [Textual Double])
     , _vcCallSetName        :: !(Maybe Text)
     , _vcPhaseset           :: !(Maybe Text)
@@ -948,7 +948,7 @@ data VariantCall = VariantCall
 variantCall
     :: VariantCall
 variantCall =
-    VariantCall
+    VariantCall'
     { _vcGenotypeLikelihood = Nothing
     , _vcCallSetName = Nothing
     , _vcPhaseset = Nothing
@@ -1015,7 +1015,7 @@ instance FromJSON VariantCall where
         parseJSON
           = withObject "VariantCall"
               (\ o ->
-                 VariantCall <$>
+                 VariantCall' <$>
                    (o .:? "genotypeLikelihood" .!= mempty) <*>
                      (o .:? "callSetName")
                      <*> (o .:? "phaseset")
@@ -1024,7 +1024,7 @@ instance FromJSON VariantCall where
                      <*> (o .:? "info"))
 
 instance ToJSON VariantCall where
-        toJSON VariantCall{..}
+        toJSON VariantCall'{..}
           = object
               (catMaybes
                  [("genotypeLikelihood" .=) <$> _vcGenotypeLikelihood,
@@ -1036,7 +1036,7 @@ instance ToJSON VariantCall where
 
 --
 -- /See:/ 'mergeVariantsRequest' smart constructor.
-data MergeVariantsRequest = MergeVariantsRequest
+data MergeVariantsRequest = MergeVariantsRequest'
     { _mvrVariants     :: !(Maybe [Variant])
     , _mvrVariantSetId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1051,7 +1051,7 @@ data MergeVariantsRequest = MergeVariantsRequest
 mergeVariantsRequest
     :: MergeVariantsRequest
 mergeVariantsRequest =
-    MergeVariantsRequest
+    MergeVariantsRequest'
     { _mvrVariants = Nothing
     , _mvrVariantSetId = Nothing
     }
@@ -1073,12 +1073,12 @@ instance FromJSON MergeVariantsRequest where
         parseJSON
           = withObject "MergeVariantsRequest"
               (\ o ->
-                 MergeVariantsRequest <$>
+                 MergeVariantsRequest' <$>
                    (o .:? "variants" .!= mempty) <*>
                      (o .:? "variantSetId"))
 
 instance ToJSON MergeVariantsRequest where
-        toJSON MergeVariantsRequest{..}
+        toJSON MergeVariantsRequest'{..}
           = object
               (catMaybes
                  [("variants" .=) <$> _mvrVariants,
@@ -1088,7 +1088,7 @@ instance ToJSON MergeVariantsRequest where
 -- sequencer.
 --
 -- /See:/ 'readGroup' smart constructor.
-data ReadGroup = ReadGroup
+data ReadGroup = ReadGroup'
     { _reaReferenceSetId      :: !(Maybe Text)
     , _reaPrograms            :: !(Maybe [Program])
     , _reaExperiment          :: !(Maybe Experiment)
@@ -1127,7 +1127,7 @@ data ReadGroup = ReadGroup
 readGroup
     :: ReadGroup
 readGroup =
-    ReadGroup
+    ReadGroup'
     { _reaReferenceSetId = Nothing
     , _reaPrograms = Nothing
     , _reaExperiment = Nothing
@@ -1207,7 +1207,7 @@ instance FromJSON ReadGroup where
         parseJSON
           = withObject "ReadGroup"
               (\ o ->
-                 ReadGroup <$>
+                 ReadGroup' <$>
                    (o .:? "referenceSetId") <*>
                      (o .:? "programs" .!= mempty)
                      <*> (o .:? "experiment")
@@ -1220,7 +1220,7 @@ instance FromJSON ReadGroup where
                      <*> (o .:? "info"))
 
 instance ToJSON ReadGroup where
-        toJSON ReadGroup{..}
+        toJSON ReadGroup'{..}
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _reaReferenceSetId,
@@ -1239,7 +1239,7 @@ instance ToJSON ReadGroup where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
@@ -1263,7 +1263,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -1304,14 +1304,14 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "done") <*> (o .:? "error") <*>
                      (o .:? "response")
                      <*> (o .:? "name")
                      <*> (o .:? "metadata"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
@@ -1321,7 +1321,7 @@ instance ToJSON Operation where
 
 --
 -- /See:/ 'searchReferenceSetsRequest' smart constructor.
-data SearchReferenceSetsRequest = SearchReferenceSetsRequest
+data SearchReferenceSetsRequest = SearchReferenceSetsRequest'
     { _srsrMD5checksums :: !(Maybe [Text])
     , _srsrAccessions   :: !(Maybe [Text])
     , _srsrPageToken    :: !(Maybe Text)
@@ -1345,7 +1345,7 @@ data SearchReferenceSetsRequest = SearchReferenceSetsRequest
 searchReferenceSetsRequest
     :: SearchReferenceSetsRequest
 searchReferenceSetsRequest =
-    SearchReferenceSetsRequest
+    SearchReferenceSetsRequest'
     { _srsrMD5checksums = Nothing
     , _srsrAccessions = Nothing
     , _srsrPageToken = Nothing
@@ -1398,7 +1398,7 @@ instance FromJSON SearchReferenceSetsRequest where
         parseJSON
           = withObject "SearchReferenceSetsRequest"
               (\ o ->
-                 SearchReferenceSetsRequest <$>
+                 SearchReferenceSetsRequest' <$>
                    (o .:? "md5checksums" .!= mempty) <*>
                      (o .:? "accessions" .!= mempty)
                      <*> (o .:? "pageToken")
@@ -1406,7 +1406,7 @@ instance FromJSON SearchReferenceSetsRequest where
                      <*> (o .:? "pageSize"))
 
 instance ToJSON SearchReferenceSetsRequest where
-        toJSON SearchReferenceSetsRequest{..}
+        toJSON SearchReferenceSetsRequest'{..}
           = object
               (catMaybes
                  [("md5checksums" .=) <$> _srsrMD5checksums,
@@ -1423,24 +1423,24 @@ instance ToJSON SearchReferenceSetsRequest where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
 
 --
 -- /See:/ 'searchReferencesResponse' smart constructor.
-data SearchReferencesResponse = SearchReferencesResponse
+data SearchReferencesResponse = SearchReferencesResponse'
     { _srrNextPageToken :: !(Maybe Text)
     , _srrReferences    :: !(Maybe [Reference])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1455,7 +1455,7 @@ data SearchReferencesResponse = SearchReferencesResponse
 searchReferencesResponse
     :: SearchReferencesResponse
 searchReferencesResponse =
-    SearchReferencesResponse
+    SearchReferencesResponse'
     { _srrNextPageToken = Nothing
     , _srrReferences = Nothing
     }
@@ -1481,12 +1481,12 @@ instance FromJSON SearchReferencesResponse where
         parseJSON
           = withObject "SearchReferencesResponse"
               (\ o ->
-                 SearchReferencesResponse <$>
+                 SearchReferencesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "references" .!= mempty))
 
 instance ToJSON SearchReferencesResponse where
-        toJSON SearchReferencesResponse{..}
+        toJSON SearchReferencesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _srrNextPageToken,
@@ -1497,7 +1497,7 @@ instance ToJSON SearchReferencesResponse where
 -- list of key-value pairs (info.) Value and info are mutually exclusive.
 --
 -- /See:/ 'variantSetMetadata' smart constructor.
-data VariantSetMetadata = VariantSetMetadata
+data VariantSetMetadata = VariantSetMetadata'
     { _vsmValue       :: !(Maybe Text)
     , _vsmKey         :: !(Maybe Text)
     , _vsmId          :: !(Maybe Text)
@@ -1527,7 +1527,7 @@ data VariantSetMetadata = VariantSetMetadata
 variantSetMetadata
     :: VariantSetMetadata
 variantSetMetadata =
-    VariantSetMetadata
+    VariantSetMetadata'
     { _vsmValue = Nothing
     , _vsmKey = Nothing
     , _vsmId = Nothing
@@ -1577,7 +1577,7 @@ instance FromJSON VariantSetMetadata where
         parseJSON
           = withObject "VariantSetMetadata"
               (\ o ->
-                 VariantSetMetadata <$>
+                 VariantSetMetadata' <$>
                    (o .:? "value") <*> (o .:? "key") <*> (o .:? "id")
                      <*> (o .:? "type")
                      <*> (o .:? "number")
@@ -1585,7 +1585,7 @@ instance FromJSON VariantSetMetadata where
                      <*> (o .:? "info"))
 
 instance ToJSON VariantSetMetadata where
-        toJSON VariantSetMetadata{..}
+        toJSON VariantSetMetadata'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _vsmValue, ("key" .=) <$> _vsmKey,
@@ -1600,7 +1600,7 @@ instance ToJSON VariantSetMetadata where
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'callSet' smart constructor.
-data CallSet = CallSet
+data CallSet = CallSet'
     { _csCreated       :: !(Maybe (Textual Int64))
     , _csName          :: !(Maybe Text)
     , _csId            :: !(Maybe Text)
@@ -1627,7 +1627,7 @@ data CallSet = CallSet
 callSet
     :: CallSet
 callSet =
-    CallSet
+    CallSet'
     { _csCreated = Nothing
     , _csName = Nothing
     , _csId = Nothing
@@ -1675,14 +1675,14 @@ instance FromJSON CallSet where
         parseJSON
           = withObject "CallSet"
               (\ o ->
-                 CallSet <$>
+                 CallSet' <$>
                    (o .:? "created") <*> (o .:? "name") <*> (o .:? "id")
                      <*> (o .:? "sampleId")
                      <*> (o .:? "variantSetIds" .!= mempty)
                      <*> (o .:? "info"))
 
 instance ToJSON CallSet where
-        toJSON CallSet{..}
+        toJSON CallSet'{..}
           = object
               (catMaybes
                  [("created" .=) <$> _csCreated,
@@ -1695,7 +1695,7 @@ instance ToJSON CallSet where
 -- corresponds to a specific range of the reference sequence.
 --
 -- /See:/ 'coverageBucket' smart constructor.
-data CoverageBucket = CoverageBucket
+data CoverageBucket = CoverageBucket'
     { _cbRange        :: !(Maybe Range)
     , _cbMeanCoverage :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1710,7 +1710,7 @@ data CoverageBucket = CoverageBucket
 coverageBucket
     :: CoverageBucket
 coverageBucket =
-    CoverageBucket
+    CoverageBucket'
     { _cbRange = Nothing
     , _cbMeanCoverage = Nothing
     }
@@ -1731,11 +1731,11 @@ instance FromJSON CoverageBucket where
         parseJSON
           = withObject "CoverageBucket"
               (\ o ->
-                 CoverageBucket <$>
+                 CoverageBucket' <$>
                    (o .:? "range") <*> (o .:? "meanCoverage"))
 
 instance ToJSON CoverageBucket where
-        toJSON CoverageBucket{..}
+        toJSON CoverageBucket'{..}
           = object
               (catMaybes
                  [("range" .=) <$> _cbRange,
@@ -1744,7 +1744,7 @@ instance ToJSON CoverageBucket where
 -- | The read group set search request.
 --
 -- /See:/ 'searchReadGroupSetsRequest' smart constructor.
-data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest
+data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest'
     { _srgsrDataSetIds :: !(Maybe [Text])
     , _srgsrName       :: !(Maybe Text)
     , _srgsrPageToken  :: !(Maybe Text)
@@ -1765,7 +1765,7 @@ data SearchReadGroupSetsRequest = SearchReadGroupSetsRequest
 searchReadGroupSetsRequest
     :: SearchReadGroupSetsRequest
 searchReadGroupSetsRequest =
-    SearchReadGroupSetsRequest
+    SearchReadGroupSetsRequest'
     { _srgsrDataSetIds = Nothing
     , _srgsrName = Nothing
     , _srgsrPageToken = Nothing
@@ -1807,13 +1807,13 @@ instance FromJSON SearchReadGroupSetsRequest where
         parseJSON
           = withObject "SearchReadGroupSetsRequest"
               (\ o ->
-                 SearchReadGroupSetsRequest <$>
+                 SearchReadGroupSetsRequest' <$>
                    (o .:? "datasetIds" .!= mempty) <*> (o .:? "name")
                      <*> (o .:? "pageToken")
                      <*> (o .:? "pageSize"))
 
 instance ToJSON SearchReadGroupSetsRequest where
-        toJSON SearchReadGroupSetsRequest{..}
+        toJSON SearchReadGroupSetsRequest'{..}
           = object
               (catMaybes
                  [("datasetIds" .=) <$> _srgsrDataSetIds,
@@ -1829,7 +1829,7 @@ instance ToJSON SearchReadGroupSetsRequest where
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'reference' smart constructor.
-data Reference = Reference
+data Reference = Reference'
     { _refLength           :: !(Maybe (Textual Int64))
     , _refSourceAccessions :: !(Maybe [Text])
     , _refMD5checksum      :: !(Maybe Text)
@@ -1859,7 +1859,7 @@ data Reference = Reference
 reference
     :: Reference
 reference =
-    Reference
+    Reference'
     { _refLength = Nothing
     , _refSourceAccessions = Nothing
     , _refMD5checksum = Nothing
@@ -1918,7 +1918,7 @@ instance FromJSON Reference where
         parseJSON
           = withObject "Reference"
               (\ o ->
-                 Reference <$>
+                 Reference' <$>
                    (o .:? "length") <*>
                      (o .:? "sourceAccessions" .!= mempty)
                      <*> (o .:? "md5checksum")
@@ -1928,7 +1928,7 @@ instance FromJSON Reference where
                      <*> (o .:? "sourceUri"))
 
 instance ToJSON Reference where
-        toJSON Reference{..}
+        toJSON Reference'{..}
           = object
               (catMaybes
                  [("length" .=) <$> _refLength,
@@ -1943,7 +1943,7 @@ instance ToJSON Reference where
 -- map (string key mapping to a list of string values).
 --
 -- /See:/ 'variantCallInfo' smart constructor.
-newtype VariantCallInfo = VariantCallInfo
+newtype VariantCallInfo = VariantCallInfo'
     { _vciAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1956,7 +1956,7 @@ variantCallInfo
     :: HashMap Text [JSONValue] -- ^ 'vciAddtional'
     -> VariantCallInfo
 variantCallInfo pVciAddtional_ =
-    VariantCallInfo
+    VariantCallInfo'
     { _vciAddtional = _Coerce # pVciAddtional_
     }
 
@@ -1968,7 +1968,7 @@ vciAddtional
 instance FromJSON VariantCallInfo where
         parseJSON
           = withObject "VariantCallInfo"
-              (\ o -> VariantCallInfo <$> (parseJSONObject o))
+              (\ o -> VariantCallInfo' <$> (parseJSONObject o))
 
 instance ToJSON VariantCallInfo where
         toJSON = toJSON . _vciAddtional
@@ -1977,7 +1977,7 @@ instance ToJSON VariantCallInfo where
 -- (string key mapping to a list of string values).
 --
 -- /See:/ 'readGroupInfo' smart constructor.
-newtype ReadGroupInfo = ReadGroupInfo
+newtype ReadGroupInfo = ReadGroupInfo'
     { _rgiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1990,7 +1990,7 @@ readGroupInfo
     :: HashMap Text [JSONValue] -- ^ 'rgiAddtional'
     -> ReadGroupInfo
 readGroupInfo pRgiAddtional_ =
-    ReadGroupInfo
+    ReadGroupInfo'
     { _rgiAddtional = _Coerce # pRgiAddtional_
     }
 
@@ -2002,14 +2002,14 @@ rgiAddtional
 instance FromJSON ReadGroupInfo where
         parseJSON
           = withObject "ReadGroupInfo"
-              (\ o -> ReadGroupInfo <$> (parseJSONObject o))
+              (\ o -> ReadGroupInfo' <$> (parseJSONObject o))
 
 instance ToJSON ReadGroupInfo where
         toJSON = toJSON . _rgiAddtional
 
 --
 -- /See:/ 'streamVariantsResponse' smart constructor.
-newtype StreamVariantsResponse = StreamVariantsResponse
+newtype StreamVariantsResponse = StreamVariantsResponse'
     { _svrVariants :: Maybe [Variant]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2021,7 +2021,7 @@ newtype StreamVariantsResponse = StreamVariantsResponse
 streamVariantsResponse
     :: StreamVariantsResponse
 streamVariantsResponse =
-    StreamVariantsResponse
+    StreamVariantsResponse'
     { _svrVariants = Nothing
     }
 
@@ -2035,17 +2035,17 @@ instance FromJSON StreamVariantsResponse where
         parseJSON
           = withObject "StreamVariantsResponse"
               (\ o ->
-                 StreamVariantsResponse <$>
+                 StreamVariantsResponse' <$>
                    (o .:? "variants" .!= mempty))
 
 instance ToJSON StreamVariantsResponse where
-        toJSON StreamVariantsResponse{..}
+        toJSON StreamVariantsResponse'{..}
           = object
               (catMaybes [("variants" .=) <$> _svrVariants])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2058,7 +2058,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -2071,14 +2071,14 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
 
 --
 -- /See:/ 'streamReadsResponse' smart constructor.
-newtype StreamReadsResponse = StreamReadsResponse
+newtype StreamReadsResponse = StreamReadsResponse'
     { _srrAlignments :: Maybe [Read']
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2090,7 +2090,7 @@ newtype StreamReadsResponse = StreamReadsResponse
 streamReadsResponse
     :: StreamReadsResponse
 streamReadsResponse =
-    StreamReadsResponse
+    StreamReadsResponse'
     { _srrAlignments = Nothing
     }
 
@@ -2105,18 +2105,18 @@ instance FromJSON StreamReadsResponse where
         parseJSON
           = withObject "StreamReadsResponse"
               (\ o ->
-                 StreamReadsResponse <$>
+                 StreamReadsResponse' <$>
                    (o .:? "alignments" .!= mempty))
 
 instance ToJSON StreamReadsResponse where
-        toJSON StreamReadsResponse{..}
+        toJSON StreamReadsResponse'{..}
           = object
               (catMaybes [("alignments" .=) <$> _srrAlignments])
 
 -- | The call set search response.
 --
 -- /See:/ 'searchCallSetsResponse' smart constructor.
-data SearchCallSetsResponse = SearchCallSetsResponse
+data SearchCallSetsResponse = SearchCallSetsResponse'
     { _scsrNextPageToken :: !(Maybe Text)
     , _scsrCallSets      :: !(Maybe [CallSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2131,7 +2131,7 @@ data SearchCallSetsResponse = SearchCallSetsResponse
 searchCallSetsResponse
     :: SearchCallSetsResponse
 searchCallSetsResponse =
-    SearchCallSetsResponse
+    SearchCallSetsResponse'
     { _scsrNextPageToken = Nothing
     , _scsrCallSets = Nothing
     }
@@ -2156,12 +2156,12 @@ instance FromJSON SearchCallSetsResponse where
         parseJSON
           = withObject "SearchCallSetsResponse"
               (\ o ->
-                 SearchCallSetsResponse <$>
+                 SearchCallSetsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "callSets" .!= mempty))
 
 instance ToJSON SearchCallSetsResponse where
-        toJSON SearchCallSetsResponse{..}
+        toJSON SearchCallSetsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _scsrNextPageToken,
@@ -2170,7 +2170,7 @@ instance ToJSON SearchCallSetsResponse where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest
+newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2182,7 +2182,7 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest
+    SetIAMPolicyRequest'
     { _siprPolicy = Nothing
     }
 
@@ -2197,16 +2197,16 @@ siprPolicy
 instance FromJSON SetIAMPolicyRequest where
         parseJSON
           = withObject "SetIAMPolicyRequest"
-              (\ o -> SetIAMPolicyRequest <$> (o .:? "policy"))
+              (\ o -> SetIAMPolicyRequest' <$> (o .:? "policy"))
 
 instance ToJSON SetIAMPolicyRequest where
-        toJSON SetIAMPolicyRequest{..}
+        toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | The read search request.
 --
 -- /See:/ 'searchReadsRequest' smart constructor.
-data SearchReadsRequest = SearchReadsRequest
+data SearchReadsRequest = SearchReadsRequest'
     { _srrStart           :: !(Maybe (Textual Int64))
     , _srrReadGroupIds    :: !(Maybe [Text])
     , _srrReferenceName   :: !(Maybe Text)
@@ -2236,7 +2236,7 @@ data SearchReadsRequest = SearchReadsRequest
 searchReadsRequest
     :: SearchReadsRequest
 searchReadsRequest =
-    SearchReadsRequest
+    SearchReadsRequest'
     { _srrStart = Nothing
     , _srrReadGroupIds = Nothing
     , _srrReferenceName = Nothing
@@ -2307,7 +2307,7 @@ instance FromJSON SearchReadsRequest where
         parseJSON
           = withObject "SearchReadsRequest"
               (\ o ->
-                 SearchReadsRequest <$>
+                 SearchReadsRequest' <$>
                    (o .:? "start") <*> (o .:? "readGroupIds" .!= mempty)
                      <*> (o .:? "referenceName")
                      <*> (o .:? "end")
@@ -2316,7 +2316,7 @@ instance FromJSON SearchReadsRequest where
                      <*> (o .:? "readGroupSetIds" .!= mempty))
 
 instance ToJSON SearchReadsRequest where
-        toJSON SearchReadsRequest{..}
+        toJSON SearchReadsRequest'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _srrStart,
@@ -2333,7 +2333,7 @@ instance ToJSON SearchReadsRequest where
 -- returned.
 --
 -- /See:/ 'operationMetadataRequest' smart constructor.
-newtype OperationMetadataRequest = OperationMetadataRequest
+newtype OperationMetadataRequest = OperationMetadataRequest'
     { _omrAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2346,7 +2346,7 @@ operationMetadataRequest
     :: HashMap Text JSONValue -- ^ 'omrAddtional'
     -> OperationMetadataRequest
 operationMetadataRequest pOmrAddtional_ =
-    OperationMetadataRequest
+    OperationMetadataRequest'
     { _omrAddtional = _Coerce # pOmrAddtional_
     }
 
@@ -2360,7 +2360,7 @@ instance FromJSON OperationMetadataRequest where
         parseJSON
           = withObject "OperationMetadataRequest"
               (\ o ->
-                 OperationMetadataRequest <$> (parseJSONObject o))
+                 OperationMetadataRequest' <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadataRequest where
         toJSON = toJSON . _omrAddtional
@@ -2369,7 +2369,7 @@ instance ToJSON OperationMetadataRequest where
 -- (string key mapping to a list of string values).
 --
 -- /See:/ 'variantInfo' smart constructor.
-newtype VariantInfo = VariantInfo
+newtype VariantInfo = VariantInfo'
     { _viAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2382,7 +2382,7 @@ variantInfo
     :: HashMap Text [JSONValue] -- ^ 'viAddtional'
     -> VariantInfo
 variantInfo pViAddtional_ =
-    VariantInfo
+    VariantInfo'
     { _viAddtional = _Coerce # pViAddtional_
     }
 
@@ -2394,14 +2394,14 @@ viAddtional
 instance FromJSON VariantInfo where
         parseJSON
           = withObject "VariantInfo"
-              (\ o -> VariantInfo <$> (parseJSONObject o))
+              (\ o -> VariantInfo' <$> (parseJSONObject o))
 
 instance ToJSON VariantInfo where
         toJSON = toJSON . _viAddtional
 
 --
 -- /See:/ 'experiment' smart constructor.
-data Experiment = Experiment
+data Experiment = Experiment'
     { _eInstrumentModel  :: !(Maybe Text)
     , _ePlatformUnit     :: !(Maybe Text)
     , _eSequencingCenter :: !(Maybe Text)
@@ -2422,7 +2422,7 @@ data Experiment = Experiment
 experiment
     :: Experiment
 experiment =
-    Experiment
+    Experiment'
     { _eInstrumentModel = Nothing
     , _ePlatformUnit = Nothing
     , _eSequencingCenter = Nothing
@@ -2462,13 +2462,13 @@ instance FromJSON Experiment where
         parseJSON
           = withObject "Experiment"
               (\ o ->
-                 Experiment <$>
+                 Experiment' <$>
                    (o .:? "instrumentModel") <*> (o .:? "platformUnit")
                      <*> (o .:? "sequencingCenter")
                      <*> (o .:? "libraryId"))
 
 instance ToJSON Experiment where
-        toJSON Experiment{..}
+        toJSON Experiment'{..}
           = object
               (catMaybes
                  [("instrumentModel" .=) <$> _eInstrumentModel,
@@ -2479,7 +2479,7 @@ instance ToJSON Experiment where
 -- | The search variant sets request.
 --
 -- /See:/ 'searchVariantSetsRequest' smart constructor.
-data SearchVariantSetsRequest = SearchVariantSetsRequest
+data SearchVariantSetsRequest = SearchVariantSetsRequest'
     { _svsrDataSetIds :: !(Maybe [Text])
     , _svsrPageToken  :: !(Maybe Text)
     , _svsrPageSize   :: !(Maybe (Textual Int32))
@@ -2497,7 +2497,7 @@ data SearchVariantSetsRequest = SearchVariantSetsRequest
 searchVariantSetsRequest
     :: SearchVariantSetsRequest
 searchVariantSetsRequest =
-    SearchVariantSetsRequest
+    SearchVariantSetsRequest'
     { _svsrDataSetIds = Nothing
     , _svsrPageToken = Nothing
     , _svsrPageSize = Nothing
@@ -2531,13 +2531,13 @@ instance FromJSON SearchVariantSetsRequest where
         parseJSON
           = withObject "SearchVariantSetsRequest"
               (\ o ->
-                 SearchVariantSetsRequest <$>
+                 SearchVariantSetsRequest' <$>
                    (o .:? "datasetIds" .!= mempty) <*>
                      (o .:? "pageToken")
                      <*> (o .:? "pageSize"))
 
 instance ToJSON SearchVariantSetsRequest where
-        toJSON SearchVariantSetsRequest{..}
+        toJSON SearchVariantSetsRequest'{..}
           = object
               (catMaybes
                  [("datasetIds" .=) <$> _svsrDataSetIds,
@@ -2547,7 +2547,7 @@ instance ToJSON SearchVariantSetsRequest where
 -- | The variant search response.
 --
 -- /See:/ 'searchVariantsResponse' smart constructor.
-data SearchVariantsResponse = SearchVariantsResponse
+data SearchVariantsResponse = SearchVariantsResponse'
     { _sVariants      :: !(Maybe [Variant])
     , _sNextPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2562,7 +2562,7 @@ data SearchVariantsResponse = SearchVariantsResponse
 searchVariantsResponse
     :: SearchVariantsResponse
 searchVariantsResponse =
-    SearchVariantsResponse
+    SearchVariantsResponse'
     { _sVariants = Nothing
     , _sNextPageToken = Nothing
     }
@@ -2587,12 +2587,12 @@ instance FromJSON SearchVariantsResponse where
         parseJSON
           = withObject "SearchVariantsResponse"
               (\ o ->
-                 SearchVariantsResponse <$>
+                 SearchVariantsResponse' <$>
                    (o .:? "variants" .!= mempty) <*>
                      (o .:? "nextPageToken"))
 
 instance ToJSON SearchVariantsResponse where
-        toJSON SearchVariantsResponse{..}
+        toJSON SearchVariantsResponse'{..}
           = object
               (catMaybes
                  [("variants" .=) <$> _sVariants,
@@ -2601,7 +2601,7 @@ instance ToJSON SearchVariantsResponse where
 -- | The stream reads request.
 --
 -- /See:/ 'streamReadsRequest' smart constructor.
-data StreamReadsRequest = StreamReadsRequest
+data StreamReadsRequest = StreamReadsRequest'
     { _sShard          :: !(Maybe (Textual Int32))
     , _sReadGroupSetId :: !(Maybe Text)
     , _sTotalShards    :: !(Maybe (Textual Int32))
@@ -2631,7 +2631,7 @@ data StreamReadsRequest = StreamReadsRequest
 streamReadsRequest
     :: StreamReadsRequest
 streamReadsRequest =
-    StreamReadsRequest
+    StreamReadsRequest'
     { _sShard = Nothing
     , _sReadGroupSetId = Nothing
     , _sTotalShards = Nothing
@@ -2707,7 +2707,7 @@ instance FromJSON StreamReadsRequest where
         parseJSON
           = withObject "StreamReadsRequest"
               (\ o ->
-                 StreamReadsRequest <$>
+                 StreamReadsRequest' <$>
                    (o .:? "shard") <*> (o .:? "readGroupSetId") <*>
                      (o .:? "totalShards")
                      <*> (o .:? "start")
@@ -2716,7 +2716,7 @@ instance FromJSON StreamReadsRequest where
                      <*> (o .:? "projectId"))
 
 instance ToJSON StreamReadsRequest where
-        toJSON StreamReadsRequest{..}
+        toJSON StreamReadsRequest'{..}
           = object
               (catMaybes
                  [("shard" .=) <$> _sShard,
@@ -2730,7 +2730,7 @@ instance ToJSON StreamReadsRequest where
 -- | The call set search request.
 --
 -- /See:/ 'searchCallSetsRequest' smart constructor.
-data SearchCallSetsRequest = SearchCallSetsRequest
+data SearchCallSetsRequest = SearchCallSetsRequest'
     { _scsrName          :: !(Maybe Text)
     , _scsrPageToken     :: !(Maybe Text)
     , _scsrVariantSetIds :: !(Maybe [Text])
@@ -2751,7 +2751,7 @@ data SearchCallSetsRequest = SearchCallSetsRequest
 searchCallSetsRequest
     :: SearchCallSetsRequest
 searchCallSetsRequest =
-    SearchCallSetsRequest
+    SearchCallSetsRequest'
     { _scsrName = Nothing
     , _scsrPageToken = Nothing
     , _scsrVariantSetIds = Nothing
@@ -2791,13 +2791,13 @@ instance FromJSON SearchCallSetsRequest where
         parseJSON
           = withObject "SearchCallSetsRequest"
               (\ o ->
-                 SearchCallSetsRequest <$>
+                 SearchCallSetsRequest' <$>
                    (o .:? "name") <*> (o .:? "pageToken") <*>
                      (o .:? "variantSetIds" .!= mempty)
                      <*> (o .:? "pageSize"))
 
 instance ToJSON SearchCallSetsRequest where
-        toJSON SearchCallSetsRequest{..}
+        toJSON SearchCallSetsRequest'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _scsrName,
@@ -2808,7 +2808,7 @@ instance ToJSON SearchCallSetsRequest where
 -- | The read search response.
 --
 -- /See:/ 'searchReadsResponse' smart constructor.
-data SearchReadsResponse = SearchReadsResponse
+data SearchReadsResponse = SearchReadsResponse'
     { _seaNextPageToken :: !(Maybe Text)
     , _seaAlignments    :: !(Maybe [Read'])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2823,7 +2823,7 @@ data SearchReadsResponse = SearchReadsResponse
 searchReadsResponse
     :: SearchReadsResponse
 searchReadsResponse =
-    SearchReadsResponse
+    SearchReadsResponse'
     { _seaNextPageToken = Nothing
     , _seaAlignments = Nothing
     }
@@ -2852,12 +2852,12 @@ instance FromJSON SearchReadsResponse where
         parseJSON
           = withObject "SearchReadsResponse"
               (\ o ->
-                 SearchReadsResponse <$>
+                 SearchReadsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "alignments" .!= mempty))
 
 instance ToJSON SearchReadsResponse where
-        toJSON SearchReadsResponse{..}
+        toJSON SearchReadsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _seaNextPageToken,
@@ -2865,7 +2865,7 @@ instance ToJSON SearchReadsResponse where
 
 --
 -- /See:/ 'program' smart constructor.
-data Program = Program
+data Program = Program'
     { _pPrevProgramId :: !(Maybe Text)
     , _pName          :: !(Maybe Text)
     , _pVersion       :: !(Maybe Text)
@@ -2889,7 +2889,7 @@ data Program = Program
 program
     :: Program
 program =
-    Program
+    Program'
     { _pPrevProgramId = Nothing
     , _pName = Nothing
     , _pVersion = Nothing
@@ -2926,14 +2926,14 @@ instance FromJSON Program where
         parseJSON
           = withObject "Program"
               (\ o ->
-                 Program <$>
+                 Program' <$>
                    (o .:? "prevProgramId") <*> (o .:? "name") <*>
                      (o .:? "version")
                      <*> (o .:? "id")
                      <*> (o .:? "commandLine"))
 
 instance ToJSON Program where
-        toJSON Program{..}
+        toJSON Program'{..}
           = object
               (catMaybes
                  [("prevProgramId" .=) <$> _pPrevProgramId,
@@ -2943,7 +2943,7 @@ instance ToJSON Program where
 
 --
 -- /See:/ 'searchReferencesRequest' smart constructor.
-data SearchReferencesRequest = SearchReferencesRequest
+data SearchReferencesRequest = SearchReferencesRequest'
     { _sReferenceSetId :: !(Maybe Text)
     , _sMD5checksums   :: !(Maybe [Text])
     , _sAccessions     :: !(Maybe [Text])
@@ -2967,7 +2967,7 @@ data SearchReferencesRequest = SearchReferencesRequest
 searchReferencesRequest
     :: SearchReferencesRequest
 searchReferencesRequest =
-    SearchReferencesRequest
+    SearchReferencesRequest'
     { _sReferenceSetId = Nothing
     , _sMD5checksums = Nothing
     , _sAccessions = Nothing
@@ -3016,7 +3016,7 @@ instance FromJSON SearchReferencesRequest where
         parseJSON
           = withObject "SearchReferencesRequest"
               (\ o ->
-                 SearchReferencesRequest <$>
+                 SearchReferencesRequest' <$>
                    (o .:? "referenceSetId") <*>
                      (o .:? "md5checksums" .!= mempty)
                      <*> (o .:? "accessions" .!= mempty)
@@ -3024,7 +3024,7 @@ instance FromJSON SearchReferencesRequest where
                      <*> (o .:? "pageSize"))
 
 instance ToJSON SearchReferencesRequest where
-        toJSON SearchReferencesRequest{..}
+        toJSON SearchReferencesRequest'{..}
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _sReferenceSetId,
@@ -3035,7 +3035,7 @@ instance ToJSON SearchReferencesRequest where
 
 --
 -- /See:/ 'searchReferenceSetsResponse' smart constructor.
-data SearchReferenceSetsResponse = SearchReferenceSetsResponse
+data SearchReferenceSetsResponse = SearchReferenceSetsResponse'
     { _srsrNextPageToken :: !(Maybe Text)
     , _srsrReferenceSets :: !(Maybe [ReferenceSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3050,7 +3050,7 @@ data SearchReferenceSetsResponse = SearchReferenceSetsResponse
 searchReferenceSetsResponse
     :: SearchReferenceSetsResponse
 searchReferenceSetsResponse =
-    SearchReferenceSetsResponse
+    SearchReferenceSetsResponse'
     { _srsrNextPageToken = Nothing
     , _srsrReferenceSets = Nothing
     }
@@ -3076,12 +3076,12 @@ instance FromJSON SearchReferenceSetsResponse where
         parseJSON
           = withObject "SearchReferenceSetsResponse"
               (\ o ->
-                 SearchReferenceSetsResponse <$>
+                 SearchReferenceSetsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "referenceSets" .!= mempty))
 
 instance ToJSON SearchReferenceSetsResponse where
-        toJSON SearchReferenceSetsResponse{..}
+        toJSON SearchReferenceSetsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _srsrNextPageToken,
@@ -3090,7 +3090,7 @@ instance ToJSON SearchReferenceSetsResponse where
 -- | A 0-based half-open genomic coordinate range for search requests.
 --
 -- /See:/ 'range' smart constructor.
-data Range = Range
+data Range = Range'
     { _rStart         :: !(Maybe (Textual Int64))
     , _rReferenceName :: !(Maybe Text)
     , _rEnd           :: !(Maybe (Textual Int64))
@@ -3108,7 +3108,7 @@ data Range = Range
 range
     :: Range
 range =
-    Range
+    Range'
     { _rStart = Nothing
     , _rReferenceName = Nothing
     , _rEnd = Nothing
@@ -3136,12 +3136,12 @@ instance FromJSON Range where
         parseJSON
           = withObject "Range"
               (\ o ->
-                 Range <$>
+                 Range' <$>
                    (o .:? "start") <*> (o .:? "referenceName") <*>
                      (o .:? "end"))
 
 instance ToJSON Range where
-        toJSON Range{..}
+        toJSON Range'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _rStart,
@@ -3157,7 +3157,7 @@ instance ToJSON Range where
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'readGroupSet' smart constructor.
-data ReadGroupSet = ReadGroupSet
+data ReadGroupSet = ReadGroupSet'
     { _rgsReferenceSetId :: !(Maybe Text)
     , _rgsName           :: !(Maybe Text)
     , _rgsDataSetId      :: !(Maybe Text)
@@ -3187,7 +3187,7 @@ data ReadGroupSet = ReadGroupSet
 readGroupSet
     :: ReadGroupSet
 readGroupSet =
-    ReadGroupSet
+    ReadGroupSet'
     { _rgsReferenceSetId = Nothing
     , _rgsName = Nothing
     , _rgsDataSetId = Nothing
@@ -3240,7 +3240,7 @@ instance FromJSON ReadGroupSet where
         parseJSON
           = withObject "ReadGroupSet"
               (\ o ->
-                 ReadGroupSet <$>
+                 ReadGroupSet' <$>
                    (o .:? "referenceSetId") <*> (o .:? "name") <*>
                      (o .:? "datasetId")
                      <*> (o .:? "id")
@@ -3249,7 +3249,7 @@ instance FromJSON ReadGroupSet where
                      <*> (o .:? "filename"))
 
 instance ToJSON ReadGroupSet where
-        toJSON ReadGroupSet{..}
+        toJSON ReadGroupSet'{..}
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _rgsReferenceSetId,
@@ -3262,7 +3262,7 @@ instance ToJSON ReadGroupSet where
 -- | The read group set export request.
 --
 -- /See:/ 'exportReadGroupSetRequest' smart constructor.
-data ExportReadGroupSetRequest = ExportReadGroupSetRequest
+data ExportReadGroupSetRequest = ExportReadGroupSetRequest'
     { _ergsrReferenceNames :: !(Maybe [Text])
     , _ergsrExportURI      :: !(Maybe Text)
     , _ergsrProjectId      :: !(Maybe Text)
@@ -3280,7 +3280,7 @@ data ExportReadGroupSetRequest = ExportReadGroupSetRequest
 exportReadGroupSetRequest
     :: ExportReadGroupSetRequest
 exportReadGroupSetRequest =
-    ExportReadGroupSetRequest
+    ExportReadGroupSetRequest'
     { _ergsrReferenceNames = Nothing
     , _ergsrExportURI = Nothing
     , _ergsrProjectId = Nothing
@@ -3315,13 +3315,13 @@ instance FromJSON ExportReadGroupSetRequest where
         parseJSON
           = withObject "ExportReadGroupSetRequest"
               (\ o ->
-                 ExportReadGroupSetRequest <$>
+                 ExportReadGroupSetRequest' <$>
                    (o .:? "referenceNames" .!= mempty) <*>
                      (o .:? "exportUri")
                      <*> (o .:? "projectId"))
 
 instance ToJSON ExportReadGroupSetRequest where
-        toJSON ExportReadGroupSetRequest{..}
+        toJSON ExportReadGroupSetRequest'{..}
           = object
               (catMaybes
                  [("referenceNames" .=) <$> _ergsrReferenceNames,
@@ -3331,7 +3331,7 @@ instance ToJSON ExportReadGroupSetRequest where
 -- | The variant data import response.
 --
 -- /See:/ 'importVariantsResponse' smart constructor.
-newtype ImportVariantsResponse = ImportVariantsResponse
+newtype ImportVariantsResponse = ImportVariantsResponse'
     { _ivrCallSetIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3343,7 +3343,7 @@ newtype ImportVariantsResponse = ImportVariantsResponse
 importVariantsResponse
     :: ImportVariantsResponse
 importVariantsResponse =
-    ImportVariantsResponse
+    ImportVariantsResponse'
     { _ivrCallSetIds = Nothing
     }
 
@@ -3359,17 +3359,17 @@ instance FromJSON ImportVariantsResponse where
         parseJSON
           = withObject "ImportVariantsResponse"
               (\ o ->
-                 ImportVariantsResponse <$>
+                 ImportVariantsResponse' <$>
                    (o .:? "callSetIds" .!= mempty))
 
 instance ToJSON ImportVariantsResponse where
-        toJSON ImportVariantsResponse{..}
+        toJSON ImportVariantsResponse'{..}
           = object
               (catMaybes [("callSetIds" .=) <$> _ivrCallSetIds])
 
 --
 -- /See:/ 'listCoverageBucketsResponse' smart constructor.
-data ListCoverageBucketsResponse = ListCoverageBucketsResponse
+data ListCoverageBucketsResponse = ListCoverageBucketsResponse'
     { _lcbrNextPageToken   :: !(Maybe Text)
     , _lcbrBucketWidth     :: !(Maybe (Textual Int64))
     , _lcbrCoverageBuckets :: !(Maybe [CoverageBucket])
@@ -3387,7 +3387,7 @@ data ListCoverageBucketsResponse = ListCoverageBucketsResponse
 listCoverageBucketsResponse
     :: ListCoverageBucketsResponse
 listCoverageBucketsResponse =
-    ListCoverageBucketsResponse
+    ListCoverageBucketsResponse'
     { _lcbrNextPageToken = Nothing
     , _lcbrBucketWidth = Nothing
     , _lcbrCoverageBuckets = Nothing
@@ -3427,12 +3427,12 @@ instance FromJSON ListCoverageBucketsResponse where
         parseJSON
           = withObject "ListCoverageBucketsResponse"
               (\ o ->
-                 ListCoverageBucketsResponse <$>
+                 ListCoverageBucketsResponse' <$>
                    (o .:? "nextPageToken") <*> (o .:? "bucketWidth") <*>
                      (o .:? "coverageBuckets" .!= mempty))
 
 instance ToJSON ListCoverageBucketsResponse where
-        toJSON ListCoverageBucketsResponse{..}
+        toJSON ListCoverageBucketsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lcbrNextPageToken,
@@ -3442,7 +3442,7 @@ instance ToJSON ListCoverageBucketsResponse where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
+newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3454,7 +3454,7 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest
+    TestIAMPermissionsRequest'
     { _tiprPermissions = Nothing
     }
 
@@ -3475,18 +3475,18 @@ instance FromJSON TestIAMPermissionsRequest where
         parseJSON
           = withObject "TestIAMPermissionsRequest"
               (\ o ->
-                 TestIAMPermissionsRequest <$>
+                 TestIAMPermissionsRequest' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsRequest where
-        toJSON TestIAMPermissionsRequest{..}
+        toJSON TestIAMPermissionsRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
 -- | The read group set import response.
 --
 -- /See:/ 'importReadGroupSetsResponse' smart constructor.
-newtype ImportReadGroupSetsResponse = ImportReadGroupSetsResponse
+newtype ImportReadGroupSetsResponse = ImportReadGroupSetsResponse'
     { _irgsrReadGroupSetIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3498,7 +3498,7 @@ newtype ImportReadGroupSetsResponse = ImportReadGroupSetsResponse
 importReadGroupSetsResponse
     :: ImportReadGroupSetsResponse
 importReadGroupSetsResponse =
-    ImportReadGroupSetsResponse
+    ImportReadGroupSetsResponse'
     { _irgsrReadGroupSetIds = Nothing
     }
 
@@ -3514,11 +3514,11 @@ instance FromJSON ImportReadGroupSetsResponse where
         parseJSON
           = withObject "ImportReadGroupSetsResponse"
               (\ o ->
-                 ImportReadGroupSetsResponse <$>
+                 ImportReadGroupSetsResponse' <$>
                    (o .:? "readGroupSetIds" .!= mempty))
 
 instance ToJSON ImportReadGroupSetsResponse where
-        toJSON ImportReadGroupSetsResponse{..}
+        toJSON ImportReadGroupSetsResponse'{..}
           = object
               (catMaybes
                  [("readGroupSetIds" .=) <$> _irgsrReadGroupSetIds])
@@ -3527,7 +3527,7 @@ instance ToJSON ImportReadGroupSetsResponse where
 -- mapped position and local alignment of the read to the reference.
 --
 -- /See:/ 'linearAlignment' smart constructor.
-data LinearAlignment = LinearAlignment
+data LinearAlignment = LinearAlignment'
     { _laCigar          :: !(Maybe [CigarUnit])
     , _laMAppingQuality :: !(Maybe (Textual Int32))
     , _laPosition       :: !(Maybe Position)
@@ -3545,7 +3545,7 @@ data LinearAlignment = LinearAlignment
 linearAlignment
     :: LinearAlignment
 linearAlignment =
-    LinearAlignment
+    LinearAlignment'
     { _laCigar = Nothing
     , _laMAppingQuality = Nothing
     , _laPosition = Nothing
@@ -3577,13 +3577,13 @@ instance FromJSON LinearAlignment where
         parseJSON
           = withObject "LinearAlignment"
               (\ o ->
-                 LinearAlignment <$>
+                 LinearAlignment' <$>
                    (o .:? "cigar" .!= mempty) <*>
                      (o .:? "mappingQuality")
                      <*> (o .:? "position"))
 
 instance ToJSON LinearAlignment where
-        toJSON LinearAlignment{..}
+        toJSON LinearAlignment'{..}
           = object
               (catMaybes
                  [("cigar" .=) <$> _laCigar,
@@ -3597,7 +3597,7 @@ instance ToJSON LinearAlignment where
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSet' smart constructor.
-data VariantSet = VariantSet
+data VariantSet = VariantSet'
     { _vsReferenceSetId  :: !(Maybe Text)
     , _vsDataSetId       :: !(Maybe Text)
     , _vsReferenceBounds :: !(Maybe [ReferenceBound])
@@ -3621,7 +3621,7 @@ data VariantSet = VariantSet
 variantSet
     :: VariantSet
 variantSet =
-    VariantSet
+    VariantSet'
     { _vsReferenceSetId = Nothing
     , _vsDataSetId = Nothing
     , _vsReferenceBounds = Nothing
@@ -3672,14 +3672,14 @@ instance FromJSON VariantSet where
         parseJSON
           = withObject "VariantSet"
               (\ o ->
-                 VariantSet <$>
+                 VariantSet' <$>
                    (o .:? "referenceSetId") <*> (o .:? "datasetId") <*>
                      (o .:? "referenceBounds" .!= mempty)
                      <*> (o .:? "metadata" .!= mempty)
                      <*> (o .:? "id"))
 
 instance ToJSON VariantSet where
-        toJSON VariantSet{..}
+        toJSON VariantSet'{..}
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _vsReferenceSetId,
@@ -3691,7 +3691,7 @@ instance ToJSON VariantSet where
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
+newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3703,7 +3703,7 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse
+    TestIAMPermissionsResponse'
     { _tiamprPermissions = Nothing
     }
 
@@ -3720,11 +3720,11 @@ instance FromJSON TestIAMPermissionsResponse where
         parseJSON
           = withObject "TestIAMPermissionsResponse"
               (\ o ->
-                 TestIAMPermissionsResponse <$>
+                 TestIAMPermissionsResponse' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsResponse where
-        toJSON TestIAMPermissionsResponse{..}
+        toJSON TestIAMPermissionsResponse'{..}
           = object
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
@@ -3732,7 +3732,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- | The dataset list response.
 --
 -- /See:/ 'listDataSetsResponse' smart constructor.
-data ListDataSetsResponse = ListDataSetsResponse
+data ListDataSetsResponse = ListDataSetsResponse'
     { _ldsrNextPageToken :: !(Maybe Text)
     , _ldsrDataSets      :: !(Maybe [DataSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3747,7 +3747,7 @@ data ListDataSetsResponse = ListDataSetsResponse
 listDataSetsResponse
     :: ListDataSetsResponse
 listDataSetsResponse =
-    ListDataSetsResponse
+    ListDataSetsResponse'
     { _ldsrNextPageToken = Nothing
     , _ldsrDataSets = Nothing
     }
@@ -3772,12 +3772,12 @@ instance FromJSON ListDataSetsResponse where
         parseJSON
           = withObject "ListDataSetsResponse"
               (\ o ->
-                 ListDataSetsResponse <$>
+                 ListDataSetsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "datasets" .!= mempty))
 
 instance ToJSON ListDataSetsResponse where
-        toJSON ListDataSetsResponse{..}
+        toJSON ListDataSetsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ldsrNextPageToken,
@@ -3786,7 +3786,7 @@ instance ToJSON ListDataSetsResponse where
 -- | The read group set import request.
 --
 -- /See:/ 'importReadGroupSetsRequest' smart constructor.
-data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
+data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest'
     { _irgsrReferenceSetId    :: !(Maybe Text)
     , _irgsrDataSetId         :: !(Maybe Text)
     , _irgsrSourceURIs        :: !(Maybe [Text])
@@ -3807,7 +3807,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
 importReadGroupSetsRequest
     :: ImportReadGroupSetsRequest
 importReadGroupSetsRequest =
-    ImportReadGroupSetsRequest
+    ImportReadGroupSetsRequest'
     { _irgsrReferenceSetId = Nothing
     , _irgsrDataSetId = Nothing
     , _irgsrSourceURIs = Nothing
@@ -3852,13 +3852,13 @@ instance FromJSON ImportReadGroupSetsRequest where
         parseJSON
           = withObject "ImportReadGroupSetsRequest"
               (\ o ->
-                 ImportReadGroupSetsRequest <$>
+                 ImportReadGroupSetsRequest' <$>
                    (o .:? "referenceSetId") <*> (o .:? "datasetId") <*>
                      (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "partitionStrategy"))
 
 instance ToJSON ImportReadGroupSetsRequest where
-        toJSON ImportReadGroupSetsRequest{..}
+        toJSON ImportReadGroupSetsRequest'{..}
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _irgsrReferenceSetId,
@@ -3870,7 +3870,7 @@ instance ToJSON ImportReadGroupSetsRequest where
 -- | The variant data import request.
 --
 -- /See:/ 'importVariantsRequest' smart constructor.
-data ImportVariantsRequest = ImportVariantsRequest
+data ImportVariantsRequest = ImportVariantsRequest'
     { _ivrVariantSetId            :: !(Maybe Text)
     , _ivrFormat                  :: !(Maybe Text)
     , _ivrNormalizeReferenceNames :: !(Maybe Bool)
@@ -3891,7 +3891,7 @@ data ImportVariantsRequest = ImportVariantsRequest
 importVariantsRequest
     :: ImportVariantsRequest
 importVariantsRequest =
-    ImportVariantsRequest
+    ImportVariantsRequest'
     { _ivrVariantSetId = Nothing
     , _ivrFormat = Nothing
     , _ivrNormalizeReferenceNames = Nothing
@@ -3937,13 +3937,13 @@ instance FromJSON ImportVariantsRequest where
         parseJSON
           = withObject "ImportVariantsRequest"
               (\ o ->
-                 ImportVariantsRequest <$>
+                 ImportVariantsRequest' <$>
                    (o .:? "variantSetId") <*> (o .:? "format") <*>
                      (o .:? "normalizeReferenceNames")
                      <*> (o .:? "sourceUris" .!= mempty))
 
 instance ToJSON ImportVariantsRequest where
-        toJSON ImportVariantsRequest{..}
+        toJSON ImportVariantsRequest'{..}
           = object
               (catMaybes
                  [("variantSetId" .=) <$> _ivrVariantSetId,
@@ -3955,7 +3955,7 @@ instance ToJSON ImportVariantsRequest where
 -- | A single CIGAR operation.
 --
 -- /See:/ 'cigarUnit' smart constructor.
-data CigarUnit = CigarUnit
+data CigarUnit = CigarUnit'
     { _cuOperation         :: !(Maybe Text)
     , _cuOperationLength   :: !(Maybe (Textual Int64))
     , _cuReferenceSequence :: !(Maybe Text)
@@ -3973,7 +3973,7 @@ data CigarUnit = CigarUnit
 cigarUnit
     :: CigarUnit
 cigarUnit =
-    CigarUnit
+    CigarUnit'
     { _cuOperation = Nothing
     , _cuOperationLength = Nothing
     , _cuReferenceSequence = Nothing
@@ -4002,12 +4002,12 @@ instance FromJSON CigarUnit where
         parseJSON
           = withObject "CigarUnit"
               (\ o ->
-                 CigarUnit <$>
+                 CigarUnit' <$>
                    (o .:? "operation") <*> (o .:? "operationLength") <*>
                      (o .:? "referenceSequence"))
 
 instance ToJSON CigarUnit where
-        toJSON CigarUnit{..}
+        toJSON CigarUnit'{..}
           = object
               (catMaybes
                  [("operation" .=) <$> _cuOperation,
@@ -4029,7 +4029,7 @@ instance ToJSON CigarUnit where
 -- guide](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy
+data Policy = Policy'
     { _polEtag     :: !(Maybe (Textual Word8))
     , _polVersion  :: !(Maybe (Textual Int32))
     , _polBindings :: !(Maybe [Binding])
@@ -4047,7 +4047,7 @@ data Policy = Policy
 policy
     :: Policy
 policy =
-    Policy
+    Policy'
     { _polEtag = Nothing
     , _polVersion = Nothing
     , _polBindings = Nothing
@@ -4086,12 +4086,12 @@ instance FromJSON Policy where
         parseJSON
           = withObject "Policy"
               (\ o ->
-                 Policy <$>
+                 Policy' <$>
                    (o .:? "etag") <*> (o .:? "version") <*>
                      (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
-        toJSON Policy{..}
+        toJSON Policy'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _polEtag,
@@ -4101,7 +4101,7 @@ instance ToJSON Policy where
 -- | The variant data export request.
 --
 -- /See:/ 'exportVariantSetRequest' smart constructor.
-data ExportVariantSetRequest = ExportVariantSetRequest
+data ExportVariantSetRequest = ExportVariantSetRequest'
     { _evsrBigQueryDataSet :: !(Maybe Text)
     , _evsrBigQueryTable   :: !(Maybe Text)
     , _evsrFormat          :: !(Maybe Text)
@@ -4125,7 +4125,7 @@ data ExportVariantSetRequest = ExportVariantSetRequest
 exportVariantSetRequest
     :: ExportVariantSetRequest
 exportVariantSetRequest =
-    ExportVariantSetRequest
+    ExportVariantSetRequest'
     { _evsrBigQueryDataSet = Nothing
     , _evsrBigQueryTable = Nothing
     , _evsrFormat = Nothing
@@ -4174,14 +4174,14 @@ instance FromJSON ExportVariantSetRequest where
         parseJSON
           = withObject "ExportVariantSetRequest"
               (\ o ->
-                 ExportVariantSetRequest <$>
+                 ExportVariantSetRequest' <$>
                    (o .:? "bigqueryDataset") <*> (o .:? "bigqueryTable")
                      <*> (o .:? "format")
                      <*> (o .:? "callSetIds" .!= mempty)
                      <*> (o .:? "projectId"))
 
 instance ToJSON ExportVariantSetRequest where
-        toJSON ExportVariantSetRequest{..}
+        toJSON ExportVariantSetRequest'{..}
           = object
               (catMaybes
                  [("bigqueryDataset" .=) <$> _evsrBigQueryDataSet,
@@ -4193,7 +4193,7 @@ instance ToJSON ExportVariantSetRequest where
 -- | Metadata describing an Operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata
+data OperationMetadata = OperationMetadata'
     { _omEvents     :: !(Maybe [OperationEvent])
     , _omProjectId  :: !(Maybe Text)
     , _omCreateTime :: !(Maybe Text)
@@ -4214,7 +4214,7 @@ data OperationMetadata = OperationMetadata
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata
+    OperationMetadata'
     { _omEvents = Nothing
     , _omProjectId = Nothing
     , _omCreateTime = Nothing
@@ -4252,13 +4252,13 @@ instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
               (\ o ->
-                 OperationMetadata <$>
+                 OperationMetadata' <$>
                    (o .:? "events" .!= mempty) <*> (o .:? "projectId")
                      <*> (o .:? "createTime")
                      <*> (o .:? "request"))
 
 instance ToJSON OperationMetadata where
-        toJSON OperationMetadata{..}
+        toJSON OperationMetadata'{..}
           = object
               (catMaybes
                  [("events" .=) <$> _omEvents,
@@ -4269,7 +4269,7 @@ instance ToJSON OperationMetadata where
 -- | The search variant sets response.
 --
 -- /See:/ 'searchVariantSetsResponse' smart constructor.
-data SearchVariantSetsResponse = SearchVariantSetsResponse
+data SearchVariantSetsResponse = SearchVariantSetsResponse'
     { _svsrNextPageToken :: !(Maybe Text)
     , _svsrVariantSets   :: !(Maybe [VariantSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4284,7 +4284,7 @@ data SearchVariantSetsResponse = SearchVariantSetsResponse
 searchVariantSetsResponse
     :: SearchVariantSetsResponse
 searchVariantSetsResponse =
-    SearchVariantSetsResponse
+    SearchVariantSetsResponse'
     { _svsrNextPageToken = Nothing
     , _svsrVariantSets = Nothing
     }
@@ -4310,12 +4310,12 @@ instance FromJSON SearchVariantSetsResponse where
         parseJSON
           = withObject "SearchVariantSetsResponse"
               (\ o ->
-                 SearchVariantSetsResponse <$>
+                 SearchVariantSetsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "variantSets" .!= mempty))
 
 instance ToJSON SearchVariantSetsResponse where
-        toJSON SearchVariantSetsResponse{..}
+        toJSON SearchVariantSetsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _svsrNextPageToken,
@@ -4324,7 +4324,7 @@ instance ToJSON SearchVariantSetsResponse where
 -- | The variant search request.
 --
 -- /See:/ 'searchVariantsRequest' smart constructor.
-data SearchVariantsRequest = SearchVariantsRequest
+data SearchVariantsRequest = SearchVariantsRequest'
     { _svrStart         :: !(Maybe (Textual Int64))
     , _svrCallSetIds    :: !(Maybe [Text])
     , _svrReferenceName :: !(Maybe Text)
@@ -4360,7 +4360,7 @@ data SearchVariantsRequest = SearchVariantsRequest
 searchVariantsRequest
     :: SearchVariantsRequest
 searchVariantsRequest =
-    SearchVariantsRequest
+    SearchVariantsRequest'
     { _svrStart = Nothing
     , _svrCallSetIds = Nothing
     , _svrReferenceName = Nothing
@@ -4447,7 +4447,7 @@ instance FromJSON SearchVariantsRequest where
         parseJSON
           = withObject "SearchVariantsRequest"
               (\ o ->
-                 SearchVariantsRequest <$>
+                 SearchVariantsRequest' <$>
                    (o .:? "start") <*> (o .:? "callSetIds" .!= mempty)
                      <*> (o .:? "referenceName")
                      <*> (o .:? "end")
@@ -4458,7 +4458,7 @@ instance FromJSON SearchVariantsRequest where
                      <*> (o .:? "pageSize"))
 
 instance ToJSON SearchVariantsRequest where
-        toJSON SearchVariantsRequest{..}
+        toJSON SearchVariantsRequest'{..}
           = object
               (catMaybes
                  [("start" .=) <$> _svrStart,
@@ -4475,7 +4475,7 @@ instance ToJSON SearchVariantsRequest where
 -- (string key mapping to a list of string values).
 --
 -- /See:/ 'callSetInfo' smart constructor.
-newtype CallSetInfo = CallSetInfo
+newtype CallSetInfo = CallSetInfo'
     { _csiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4488,7 +4488,7 @@ callSetInfo
     :: HashMap Text [JSONValue] -- ^ 'csiAddtional'
     -> CallSetInfo
 callSetInfo pCsiAddtional_ =
-    CallSetInfo
+    CallSetInfo'
     { _csiAddtional = _Coerce # pCsiAddtional_
     }
 
@@ -4500,7 +4500,7 @@ csiAddtional
 instance FromJSON CallSetInfo where
         parseJSON
           = withObject "CallSetInfo"
-              (\ o -> CallSetInfo <$> (parseJSONObject o))
+              (\ o -> CallSetInfo' <$> (parseJSONObject o))
 
 instance ToJSON CallSetInfo where
         toJSON = toJSON . _csiAddtional
@@ -4509,7 +4509,7 @@ instance ToJSON CallSetInfo where
 -- map (string key mapping to a list of string values).
 --
 -- /See:/ 'variantSetMetadataInfo' smart constructor.
-newtype VariantSetMetadataInfo = VariantSetMetadataInfo
+newtype VariantSetMetadataInfo = VariantSetMetadataInfo'
     { _vsmiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4522,7 +4522,7 @@ variantSetMetadataInfo
     :: HashMap Text [JSONValue] -- ^ 'vsmiAddtional'
     -> VariantSetMetadataInfo
 variantSetMetadataInfo pVsmiAddtional_ =
-    VariantSetMetadataInfo
+    VariantSetMetadataInfo'
     { _vsmiAddtional = _Coerce # pVsmiAddtional_
     }
 
@@ -4536,7 +4536,7 @@ instance FromJSON VariantSetMetadataInfo where
         parseJSON
           = withObject "VariantSetMetadataInfo"
               (\ o ->
-                 VariantSetMetadataInfo <$> (parseJSONObject o))
+                 VariantSetMetadataInfo' <$> (parseJSONObject o))
 
 instance ToJSON VariantSetMetadataInfo where
         toJSON = toJSON . _vsmiAddtional
@@ -4546,7 +4546,7 @@ instance ToJSON VariantSetMetadataInfo where
 -- exports, an empty response is returned.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse
+newtype OperationResponse = OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4559,7 +4559,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse
+    OperationResponse'
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
@@ -4572,7 +4572,7 @@ orAddtional
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> OperationResponse <$> (parseJSONObject o))
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
@@ -4580,7 +4580,7 @@ instance ToJSON OperationResponse where
 -- | An event that occurred during an Operation.
 --
 -- /See:/ 'operationEvent' smart constructor.
-newtype OperationEvent = OperationEvent
+newtype OperationEvent = OperationEvent'
     { _oeDescription :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4592,7 +4592,7 @@ newtype OperationEvent = OperationEvent
 operationEvent
     :: OperationEvent
 operationEvent =
-    OperationEvent
+    OperationEvent'
     { _oeDescription = Nothing
     }
 
@@ -4605,17 +4605,17 @@ oeDescription
 instance FromJSON OperationEvent where
         parseJSON
           = withObject "OperationEvent"
-              (\ o -> OperationEvent <$> (o .:? "description"))
+              (\ o -> OperationEvent' <$> (o .:? "description"))
 
 instance ToJSON OperationEvent where
-        toJSON OperationEvent{..}
+        toJSON OperationEvent'{..}
           = object
               (catMaybes [("description" .=) <$> _oeDescription])
 
 -- | The stream variants request.
 --
 -- /See:/ 'streamVariantsRequest' smart constructor.
-data StreamVariantsRequest = StreamVariantsRequest
+data StreamVariantsRequest = StreamVariantsRequest'
     { _strVariantSetId  :: !(Maybe Text)
     , _strStart         :: !(Maybe (Textual Int64))
     , _strCallSetIds    :: !(Maybe [Text])
@@ -4642,7 +4642,7 @@ data StreamVariantsRequest = StreamVariantsRequest
 streamVariantsRequest
     :: StreamVariantsRequest
 streamVariantsRequest =
-    StreamVariantsRequest
+    StreamVariantsRequest'
     { _strVariantSetId = Nothing
     , _strStart = Nothing
     , _strCallSetIds = Nothing
@@ -4697,7 +4697,7 @@ instance FromJSON StreamVariantsRequest where
         parseJSON
           = withObject "StreamVariantsRequest"
               (\ o ->
-                 StreamVariantsRequest <$>
+                 StreamVariantsRequest' <$>
                    (o .:? "variantSetId") <*> (o .:? "start") <*>
                      (o .:? "callSetIds" .!= mempty)
                      <*> (o .:? "referenceName")
@@ -4705,7 +4705,7 @@ instance FromJSON StreamVariantsRequest where
                      <*> (o .:? "projectId"))
 
 instance ToJSON StreamVariantsRequest where
-        toJSON StreamVariantsRequest{..}
+        toJSON StreamVariantsRequest'{..}
           = object
               (catMaybes
                  [("variantSetId" .=) <$> _strVariantSetId,
@@ -4719,7 +4719,7 @@ instance ToJSON StreamVariantsRequest where
 -- variants in a particular reference.
 --
 -- /See:/ 'referenceBound' smart constructor.
-data ReferenceBound = ReferenceBound
+data ReferenceBound = ReferenceBound'
     { _rbUpperBound    :: !(Maybe (Textual Int64))
     , _rbReferenceName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4734,7 +4734,7 @@ data ReferenceBound = ReferenceBound
 referenceBound
     :: ReferenceBound
 referenceBound =
-    ReferenceBound
+    ReferenceBound'
     { _rbUpperBound = Nothing
     , _rbReferenceName = Nothing
     }
@@ -4756,11 +4756,11 @@ instance FromJSON ReferenceBound where
         parseJSON
           = withObject "ReferenceBound"
               (\ o ->
-                 ReferenceBound <$>
+                 ReferenceBound' <$>
                    (o .:? "upperBound") <*> (o .:? "referenceName"))
 
 instance ToJSON ReferenceBound where
-        toJSON ReferenceBound{..}
+        toJSON ReferenceBound'{..}
           = object
               (catMaybes
                  [("upperBound" .=) <$> _rbUpperBound,
@@ -4769,19 +4769,19 @@ instance ToJSON ReferenceBound where
 --
 -- /See:/ 'undeleteDataSetRequest' smart constructor.
 data UndeleteDataSetRequest =
-    UndeleteDataSetRequest
+    UndeleteDataSetRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UndeleteDataSetRequest' with the minimum fields required to make a request.
 --
 undeleteDataSetRequest
     :: UndeleteDataSetRequest
-undeleteDataSetRequest = UndeleteDataSetRequest
+undeleteDataSetRequest = UndeleteDataSetRequest'
 
 instance FromJSON UndeleteDataSetRequest where
         parseJSON
           = withObject "UndeleteDataSetRequest"
-              (\ o -> pure UndeleteDataSetRequest)
+              (\ o -> pure UndeleteDataSetRequest')
 
 instance ToJSON UndeleteDataSetRequest where
         toJSON = const emptyObject
@@ -4789,7 +4789,7 @@ instance ToJSON UndeleteDataSetRequest where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding
+data Binding = Binding'
     { _bMembers :: !(Maybe [Text])
     , _bRole    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4804,7 +4804,7 @@ data Binding = Binding
 binding
     :: Binding
 binding =
-    Binding
+    Binding'
     { _bMembers = Nothing
     , _bRole = Nothing
     }
@@ -4838,11 +4838,11 @@ instance FromJSON Binding where
         parseJSON
           = withObject "Binding"
               (\ o ->
-                 Binding <$>
+                 Binding' <$>
                    (o .:? "members" .!= mempty) <*> (o .:? "role"))
 
 instance ToJSON Binding where
-        toJSON Binding{..}
+        toJSON Binding'{..}
           = object
               (catMaybes
                  [("members" .=) <$> _bMembers,
@@ -4854,7 +4854,7 @@ instance ToJSON Binding where
 -- determination of forward or reverse strand.
 --
 -- /See:/ 'position' smart constructor.
-data Position = Position
+data Position = Position'
     { _pReverseStrand :: !(Maybe Bool)
     , _pReferenceName :: !(Maybe Text)
     , _pPosition      :: !(Maybe (Textual Int64))
@@ -4872,7 +4872,7 @@ data Position = Position
 position
     :: Position
 position =
-    Position
+    Position'
     { _pReverseStrand = Nothing
     , _pReferenceName = Nothing
     , _pPosition = Nothing
@@ -4902,12 +4902,12 @@ instance FromJSON Position where
         parseJSON
           = withObject "Position"
               (\ o ->
-                 Position <$>
+                 Position' <$>
                    (o .:? "reverseStrand") <*> (o .:? "referenceName")
                      <*> (o .:? "position"))
 
 instance ToJSON Position where
-        toJSON Position{..}
+        toJSON Position'{..}
           = object
               (catMaybes
                  [("reverseStrand" .=) <$> _pReverseStrand,
@@ -4917,7 +4917,7 @@ instance ToJSON Position where
 -- | The read group set search response.
 --
 -- /See:/ 'searchReadGroupSetsResponse' smart constructor.
-data SearchReadGroupSetsResponse = SearchReadGroupSetsResponse
+data SearchReadGroupSetsResponse = SearchReadGroupSetsResponse'
     { _srgsrNextPageToken :: !(Maybe Text)
     , _srgsrReadGroupSets :: !(Maybe [ReadGroupSet])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4932,7 +4932,7 @@ data SearchReadGroupSetsResponse = SearchReadGroupSetsResponse
 searchReadGroupSetsResponse
     :: SearchReadGroupSetsResponse
 searchReadGroupSetsResponse =
-    SearchReadGroupSetsResponse
+    SearchReadGroupSetsResponse'
     { _srgsrNextPageToken = Nothing
     , _srgsrReadGroupSets = Nothing
     }
@@ -4958,12 +4958,12 @@ instance FromJSON SearchReadGroupSetsResponse where
         parseJSON
           = withObject "SearchReadGroupSetsResponse"
               (\ o ->
-                 SearchReadGroupSetsResponse <$>
+                 SearchReadGroupSetsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "readGroupSets" .!= mempty))
 
 instance ToJSON SearchReadGroupSetsResponse where
-        toJSON SearchReadGroupSetsResponse{..}
+        toJSON SearchReadGroupSetsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _srgsrNextPageToken,
@@ -4972,7 +4972,7 @@ instance ToJSON SearchReadGroupSetsResponse where
 -- | A map of additional read group set information.
 --
 -- /See:/ 'readGroupSetInfo' smart constructor.
-newtype ReadGroupSetInfo = ReadGroupSetInfo
+newtype ReadGroupSetInfo = ReadGroupSetInfo'
     { _rgsiAddtional :: HashMap Text [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4985,7 +4985,7 @@ readGroupSetInfo
     :: HashMap Text [JSONValue] -- ^ 'rgsiAddtional'
     -> ReadGroupSetInfo
 readGroupSetInfo pRgsiAddtional_ =
-    ReadGroupSetInfo
+    ReadGroupSetInfo'
     { _rgsiAddtional = _Coerce # pRgsiAddtional_
     }
 
@@ -4998,7 +4998,7 @@ rgsiAddtional
 instance FromJSON ReadGroupSetInfo where
         parseJSON
           = withObject "ReadGroupSetInfo"
-              (\ o -> ReadGroupSetInfo <$> (parseJSONObject o))
+              (\ o -> ReadGroupSetInfo' <$> (parseJSONObject o))
 
 instance ToJSON ReadGroupSetInfo where
         toJSON = toJSON . _rgsiAddtional
@@ -5012,7 +5012,7 @@ instance ToJSON ReadGroupSetInfo where
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'referenceSet' smart constructor.
-data ReferenceSet = ReferenceSet
+data ReferenceSet = ReferenceSet'
     { _rsSourceAccessions :: !(Maybe [Text])
     , _rsReferenceIds     :: !(Maybe [Text])
     , _rsMD5checksum      :: !(Maybe Text)
@@ -5045,7 +5045,7 @@ data ReferenceSet = ReferenceSet
 referenceSet
     :: ReferenceSet
 referenceSet =
-    ReferenceSet
+    ReferenceSet'
     { _rsSourceAccessions = Nothing
     , _rsReferenceIds = Nothing
     , _rsMD5checksum = Nothing
@@ -5120,7 +5120,7 @@ instance FromJSON ReferenceSet where
         parseJSON
           = withObject "ReferenceSet"
               (\ o ->
-                 ReferenceSet <$>
+                 ReferenceSet' <$>
                    (o .:? "sourceAccessions" .!= mempty) <*>
                      (o .:? "referenceIds" .!= mempty)
                      <*> (o .:? "md5checksum")
@@ -5131,7 +5131,7 @@ instance FromJSON ReferenceSet where
                      <*> (o .:? "description"))
 
 instance ToJSON ReferenceSet where
-        toJSON ReferenceSet{..}
+        toJSON ReferenceSet'{..}
           = object
               (catMaybes
                  [("sourceAccessions" .=) <$> _rsSourceAccessions,

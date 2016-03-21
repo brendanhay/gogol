@@ -63,7 +63,7 @@ type DisksDeleteResource =
 -- delete snapshots.
 --
 -- /See:/ 'disksDelete' smart constructor.
-data DisksDelete = DisksDelete
+data DisksDelete = DisksDelete'
     { _ddProject :: !Text
     , _ddDisk    :: !Text
     , _ddZone    :: !Text
@@ -84,7 +84,7 @@ disksDelete
     -> Text -- ^ 'ddZone'
     -> DisksDelete
 disksDelete pDdProject_ pDdDisk_ pDdZone_ =
-    DisksDelete
+    DisksDelete'
     { _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
     , _ddZone = pDdZone_
@@ -108,7 +108,7 @@ instance GoogleRequest DisksDelete where
         type Scopes DisksDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient DisksDelete{..}
+        requestClient DisksDelete'{..}
           = go _ddProject _ddZone _ddDisk (Just AltJSON)
               computeService
           where go

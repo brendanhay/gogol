@@ -54,7 +54,7 @@ type RelyingPartyCreateAuthURIResource =
 -- | Creates the URI used by the IdP to authenticate the user.
 --
 -- /See:/ 'relyingPartyCreateAuthURI' smart constructor.
-newtype RelyingPartyCreateAuthURI = RelyingPartyCreateAuthURI
+newtype RelyingPartyCreateAuthURI = RelyingPartyCreateAuthURI'
     { _rpcauPayload :: IdentitytoolkitRelyingPartyCreateAuthURIRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyCreateAuthURI
     :: IdentitytoolkitRelyingPartyCreateAuthURIRequest -- ^ 'rpcauPayload'
     -> RelyingPartyCreateAuthURI
 relyingPartyCreateAuthURI pRpcauPayload_ =
-    RelyingPartyCreateAuthURI
+    RelyingPartyCreateAuthURI'
     { _rpcauPayload = pRpcauPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyCreateAuthURI
         type Rs RelyingPartyCreateAuthURI =
              CreateAuthURIResponse
         type Scopes RelyingPartyCreateAuthURI = '[]
-        requestClient RelyingPartyCreateAuthURI{..}
+        requestClient RelyingPartyCreateAuthURI'{..}
           = go (Just AltJSON) _rpcauPayload
               identityToolkitService
           where go

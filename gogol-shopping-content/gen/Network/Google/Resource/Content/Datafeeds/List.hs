@@ -56,7 +56,7 @@ type DatafeedsListResource =
 -- | Lists the datafeeds in your Merchant Center account.
 --
 -- /See:/ 'datafeedsList' smart constructor.
-data DatafeedsList = DatafeedsList
+data DatafeedsList = DatafeedsList'
     { _datMerchantId :: !(Textual Word64)
     , _datPageToken  :: !(Maybe Text)
     , _datMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ datafeedsList
     :: Word64 -- ^ 'datMerchantId'
     -> DatafeedsList
 datafeedsList pDatMerchantId_ =
-    DatafeedsList
+    DatafeedsList'
     { _datMerchantId = _Coerce # pDatMerchantId_
     , _datPageToken = Nothing
     , _datMaxResults = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest DatafeedsList where
         type Rs DatafeedsList = DatafeedsListResponse
         type Scopes DatafeedsList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient DatafeedsList{..}
+        requestClient DatafeedsList'{..}
           = go _datMerchantId _datPageToken _datMaxResults
               (Just AltJSON)
               shoppingContentService

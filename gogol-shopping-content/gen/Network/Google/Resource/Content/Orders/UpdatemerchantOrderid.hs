@@ -57,7 +57,7 @@ type OrdersUpdatemerchantOrderidResource =
 -- | Updates the merchant order ID for a given order.
 --
 -- /See:/ 'ordersUpdatemerchantOrderid' smart constructor.
-data OrdersUpdatemerchantOrderid = OrdersUpdatemerchantOrderid
+data OrdersUpdatemerchantOrderid = OrdersUpdatemerchantOrderid'
     { _ouoMerchantId :: !(Textual Word64)
     , _ouoPayload    :: !OrdersUpdateMerchantOrderIdRequest
     , _ouoOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersUpdatemerchantOrderid
     -> Text -- ^ 'ouoOrderId'
     -> OrdersUpdatemerchantOrderid
 ordersUpdatemerchantOrderid pOuoMerchantId_ pOuoPayload_ pOuoOrderId_ =
-    OrdersUpdatemerchantOrderid
+    OrdersUpdatemerchantOrderid'
     { _ouoMerchantId = _Coerce # pOuoMerchantId_
     , _ouoPayload = pOuoPayload_
     , _ouoOrderId = pOuoOrderId_
@@ -107,7 +107,7 @@ instance GoogleRequest OrdersUpdatemerchantOrderid
              OrdersUpdateMerchantOrderIdResponse
         type Scopes OrdersUpdatemerchantOrderid =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersUpdatemerchantOrderid{..}
+        requestClient OrdersUpdatemerchantOrderid'{..}
           = go _ouoMerchantId _ouoOrderId (Just AltJSON)
               _ouoPayload
               shoppingContentService

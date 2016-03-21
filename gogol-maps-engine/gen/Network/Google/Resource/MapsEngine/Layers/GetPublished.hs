@@ -53,7 +53,7 @@ type LayersGetPublishedResource =
 -- | Return the published metadata for a particular layer.
 --
 -- /See:/ 'layersGetPublished' smart constructor.
-newtype LayersGetPublished = LayersGetPublished
+newtype LayersGetPublished = LayersGetPublished'
     { _lgpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersGetPublished
     :: Text -- ^ 'lgpId'
     -> LayersGetPublished
 layersGetPublished pLgpId_ =
-    LayersGetPublished
+    LayersGetPublished'
     { _lgpId = pLgpId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest LayersGetPublished where
         type Scopes LayersGetPublished =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient LayersGetPublished{..}
+        requestClient LayersGetPublished'{..}
           = go _lgpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

@@ -59,7 +59,7 @@ type RepliesGetResource =
 -- | Gets a reply by ID.
 --
 -- /See:/ 'repliesGet' smart constructor.
-data RepliesGet = RepliesGet
+data RepliesGet = RepliesGet'
     { _rgReplyId        :: !Text
     , _rgFileId         :: !Text
     , _rgCommentId      :: !Text
@@ -83,7 +83,7 @@ repliesGet
     -> Text -- ^ 'rgCommentId'
     -> RepliesGet
 repliesGet pRgReplyId_ pRgFileId_ pRgCommentId_ =
-    RepliesGet
+    RepliesGet'
     { _rgReplyId = pRgReplyId_
     , _rgFileId = pRgFileId_
     , _rgCommentId = pRgCommentId_
@@ -117,7 +117,7 @@ instance GoogleRequest RepliesGet where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient RepliesGet{..}
+        requestClient RepliesGet'{..}
           = go _rgFileId _rgCommentId _rgReplyId
               (Just _rgIncludeDeleted)
               (Just AltJSON)

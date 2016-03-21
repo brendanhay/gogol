@@ -130,7 +130,7 @@ type AdsListResource =
 -- | Retrieves a list of ads, possibly filtered.
 --
 -- /See:/ 'adsList' smart constructor.
-data AdsList = AdsList
+data AdsList = AdsList'
     { _alRemarketingListIds                   :: !(Maybe [Textual Int64])
     , _alLandingPageIds                       :: !(Maybe [Textual Int64])
     , _alCreativeIds                          :: !(Maybe [Textual Int64])
@@ -215,7 +215,7 @@ adsList
     :: Int64 -- ^ 'alProFileId'
     -> AdsList
 adsList pAlProFileId_ =
-    AdsList
+    AdsList'
     { _alRemarketingListIds = Nothing
     , _alLandingPageIds = Nothing
     , _alCreativeIds = Nothing
@@ -422,7 +422,7 @@ instance GoogleRequest AdsList where
         type Rs AdsList = AdsListResponse
         type Scopes AdsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdsList{..}
+        requestClient AdsList'{..}
           = go _alProFileId (_alRemarketingListIds ^. _Default)
               (_alLandingPageIds ^. _Default)
               (_alCreativeIds ^. _Default)

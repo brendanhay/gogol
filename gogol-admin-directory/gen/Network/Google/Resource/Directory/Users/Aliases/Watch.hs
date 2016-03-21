@@ -58,7 +58,7 @@ type UsersAliasesWatchResource =
 -- | Watch for changes in user aliases list
 --
 -- /See:/ 'usersAliasesWatch' smart constructor.
-data UsersAliasesWatch = UsersAliasesWatch
+data UsersAliasesWatch = UsersAliasesWatch'
     { _uawEvent   :: !(Maybe UsersAliasesWatchEvent)
     , _uawPayload :: !Channel
     , _uawUserKey :: !Text
@@ -78,7 +78,7 @@ usersAliasesWatch
     -> Text -- ^ 'uawUserKey'
     -> UsersAliasesWatch
 usersAliasesWatch pUawPayload_ pUawUserKey_ =
-    UsersAliasesWatch
+    UsersAliasesWatch'
     { _uawEvent = Nothing
     , _uawPayload = pUawPayload_
     , _uawUserKey = pUawUserKey_
@@ -105,7 +105,7 @@ instance GoogleRequest UsersAliasesWatch where
                "https://www.googleapis.com/auth/admin.directory.user.alias",
                "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
                "https://www.googleapis.com/auth/admin.directory.user.readonly"]
-        requestClient UsersAliasesWatch{..}
+        requestClient UsersAliasesWatch'{..}
           = go _uawUserKey _uawEvent (Just AltJSON) _uawPayload
               directoryService
           where go

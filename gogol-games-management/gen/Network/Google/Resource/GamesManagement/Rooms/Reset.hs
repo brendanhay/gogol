@@ -54,21 +54,21 @@ type RoomsResetResource =
 --
 -- /See:/ 'roomsReset' smart constructor.
 data RoomsReset =
-    RoomsReset
+    RoomsReset'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsReset' with the minimum fields required to make a request.
 --
 roomsReset
     :: RoomsReset
-roomsReset = RoomsReset
+roomsReset = RoomsReset'
 
 instance GoogleRequest RoomsReset where
         type Rs RoomsReset = ()
         type Scopes RoomsReset =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsReset{}
+        requestClient RoomsReset'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy RoomsResetResource)

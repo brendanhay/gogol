@@ -64,7 +64,7 @@ type EventsPatchResource =
 -- | Updates an event. This method supports patch semantics.
 --
 -- /See:/ 'eventsPatch' smart constructor.
-data EventsPatch = EventsPatch
+data EventsPatch = EventsPatch'
     { _epCalendarId          :: !Text
     , _epPayload             :: !Event
     , _epMaxAttendees        :: !(Maybe (Textual Int32))
@@ -97,7 +97,7 @@ eventsPatch
     -> Text -- ^ 'epEventId'
     -> EventsPatch
 eventsPatch pEpCalendarId_ pEpPayload_ pEpEventId_ =
-    EventsPatch
+    EventsPatch'
     { _epCalendarId = pEpCalendarId_
     , _epPayload = pEpPayload_
     , _epMaxAttendees = Nothing
@@ -162,7 +162,7 @@ instance GoogleRequest EventsPatch where
         type Rs EventsPatch = Event
         type Scopes EventsPatch =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsPatch{..}
+        requestClient EventsPatch'{..}
           = go _epCalendarId _epEventId _epMaxAttendees
               _epSendNotifications
               _epSupportsAttachments

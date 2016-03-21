@@ -54,7 +54,7 @@ type ContentCategoriesDeleteResource =
 -- | Deletes an existing content category.
 --
 -- /See:/ 'contentCategoriesDelete' smart constructor.
-data ContentCategoriesDelete = ContentCategoriesDelete
+data ContentCategoriesDelete = ContentCategoriesDelete'
     { _ccdProFileId :: !(Textual Int64)
     , _ccdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ contentCategoriesDelete
     -> Int64 -- ^ 'ccdId'
     -> ContentCategoriesDelete
 contentCategoriesDelete pCcdProFileId_ pCcdId_ =
-    ContentCategoriesDelete
+    ContentCategoriesDelete'
     { _ccdProFileId = _Coerce # pCcdProFileId_
     , _ccdId = _Coerce # pCcdId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ContentCategoriesDelete where
         type Rs ContentCategoriesDelete = ()
         type Scopes ContentCategoriesDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ContentCategoriesDelete{..}
+        requestClient ContentCategoriesDelete'{..}
           = go _ccdProFileId _ccdId (Just AltJSON)
               dFAReportingService
           where go

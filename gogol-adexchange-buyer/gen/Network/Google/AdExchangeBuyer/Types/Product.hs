@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- associated with a deal and\/or revision number.
 --
 -- /See:/ 'marketplaceNote' smart constructor.
-data MarketplaceNote = MarketplaceNote
+data MarketplaceNote = MarketplaceNote'
     { _mnNote                   :: !(Maybe Text)
     , _mnKind                   :: !Text
     , _mnTimestampMs            :: !(Maybe (Textual Int64))
@@ -57,7 +57,7 @@ data MarketplaceNote = MarketplaceNote
 marketplaceNote
     :: MarketplaceNote
 marketplaceNote =
-    MarketplaceNote
+    MarketplaceNote'
     { _mnNote = Nothing
     , _mnKind = "adexchangebuyer#marketplaceNote"
     , _mnTimestampMs = Nothing
@@ -116,7 +116,7 @@ instance FromJSON MarketplaceNote where
         parseJSON
           = withObject "MarketplaceNote"
               (\ o ->
-                 MarketplaceNote <$>
+                 MarketplaceNote' <$>
                    (o .:? "note") <*>
                      (o .:? "kind" .!= "adexchangebuyer#marketplaceNote")
                      <*> (o .:? "timestampMs")
@@ -127,7 +127,7 @@ instance FromJSON MarketplaceNote where
                      <*> (o .:? "creatorRole"))
 
 instance ToJSON MarketplaceNote where
-        toJSON MarketplaceNote{..}
+        toJSON MarketplaceNote'{..}
           = object
               (catMaybes
                  [("note" .=) <$> _mnNote, Just ("kind" .= _mnKind),
@@ -142,7 +142,7 @@ instance ToJSON MarketplaceNote where
 -- | If nativeAd is set, HTMLSnippet and videoURL should not be set.
 --
 -- /See:/ 'creativeNATiveAd' smart constructor.
-data CreativeNATiveAd = CreativeNATiveAd
+data CreativeNATiveAd = CreativeNATiveAd'
     { _cnataImage                 :: !(Maybe CreativeNATiveAdImage)
     , _cnataAppIcon               :: !(Maybe CreativeNATiveAdAppIcon)
     , _cnataClickTrackingURL      :: !(Maybe Text)
@@ -187,7 +187,7 @@ data CreativeNATiveAd = CreativeNATiveAd
 creativeNATiveAd
     :: CreativeNATiveAd
 creativeNATiveAd =
-    CreativeNATiveAd
+    CreativeNATiveAd'
     { _cnataImage = Nothing
     , _cnataAppIcon = Nothing
     , _cnataClickTrackingURL = Nothing
@@ -274,7 +274,7 @@ instance FromJSON CreativeNATiveAd where
         parseJSON
           = withObject "CreativeNATiveAd"
               (\ o ->
-                 CreativeNATiveAd <$>
+                 CreativeNATiveAd' <$>
                    (o .:? "image") <*> (o .:? "appIcon") <*>
                      (o .:? "clickTrackingUrl")
                      <*> (o .:? "body")
@@ -288,7 +288,7 @@ instance FromJSON CreativeNATiveAd where
                      <*> (o .:? "logo"))
 
 instance ToJSON CreativeNATiveAd where
-        toJSON CreativeNATiveAd{..}
+        toJSON CreativeNATiveAd'{..}
           = object
               (catMaybes
                  [("image" .=) <$> _cnataImage,
@@ -307,7 +307,7 @@ instance ToJSON CreativeNATiveAd where
 
 --
 -- /See:/ 'editAllOrderDealsResponse' smart constructor.
-newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse
+newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse'
     { _eaodrDeals :: Maybe [MarketplaceDeal]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -319,7 +319,7 @@ newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse
 editAllOrderDealsResponse
     :: EditAllOrderDealsResponse
 editAllOrderDealsResponse =
-    EditAllOrderDealsResponse
+    EditAllOrderDealsResponse'
     { _eaodrDeals = Nothing
     }
 
@@ -334,11 +334,11 @@ instance FromJSON EditAllOrderDealsResponse where
         parseJSON
           = withObject "EditAllOrderDealsResponse"
               (\ o ->
-                 EditAllOrderDealsResponse <$>
+                 EditAllOrderDealsResponse' <$>
                    (o .:? "deals" .!= mempty))
 
 instance ToJSON EditAllOrderDealsResponse where
-        toJSON EditAllOrderDealsResponse{..}
+        toJSON EditAllOrderDealsResponse'{..}
           = object (catMaybes [("deals" .=) <$> _eaodrDeals])
 
 -- | The creatives feed lists the active creatives for the Ad Exchange buyer
@@ -346,7 +346,7 @@ instance ToJSON EditAllOrderDealsResponse where
 -- to a single creative.
 --
 -- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList
+data CreativesList = CreativesList'
     { _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
     , _clItems         :: !(Maybe [Creative])
@@ -364,7 +364,7 @@ data CreativesList = CreativesList
 creativesList
     :: CreativesList
 creativesList =
-    CreativesList
+    CreativesList'
     { _clNextPageToken = Nothing
     , _clKind = "adexchangebuyer#creativesList"
     , _clItems = Nothing
@@ -391,13 +391,13 @@ instance FromJSON CreativesList where
         parseJSON
           = withObject "CreativesList"
               (\ o ->
-                 CreativesList <$>
+                 CreativesList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "adexchangebuyer#creativesList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON CreativesList where
-        toJSON CreativesList{..}
+        toJSON CreativesList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _clNextPageToken,
@@ -405,7 +405,7 @@ instance ToJSON CreativesList where
 
 --
 -- /See:/ 'creativeServingRestrictionsItemContextsItem' smart constructor.
-data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsItemContextsItem
+data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsItemContextsItem'
     { _csriciPlatform      :: !(Maybe [Text])
     , _csriciContextType   :: !(Maybe Text)
     , _csriciAuctionType   :: !(Maybe [Text])
@@ -426,7 +426,7 @@ data CreativeServingRestrictionsItemContextsItem = CreativeServingRestrictionsIt
 creativeServingRestrictionsItemContextsItem
     :: CreativeServingRestrictionsItemContextsItem
 creativeServingRestrictionsItemContextsItem =
-    CreativeServingRestrictionsItemContextsItem
+    CreativeServingRestrictionsItemContextsItem'
     { _csriciPlatform = Nothing
     , _csriciContextType = Nothing
     , _csriciAuctionType = Nothing
@@ -472,7 +472,7 @@ instance FromJSON
           = withObject
               "CreativeServingRestrictionsItemContextsItem"
               (\ o ->
-                 CreativeServingRestrictionsItemContextsItem <$>
+                 CreativeServingRestrictionsItemContextsItem' <$>
                    (o .:? "platform" .!= mempty) <*>
                      (o .:? "contextType")
                      <*> (o .:? "auctionType" .!= mempty)
@@ -481,7 +481,7 @@ instance FromJSON
 instance ToJSON
          CreativeServingRestrictionsItemContextsItem where
         toJSON
-          CreativeServingRestrictionsItemContextsItem{..}
+          CreativeServingRestrictionsItemContextsItem'{..}
           = object
               (catMaybes
                  [("platform" .=) <$> _csriciPlatform,
@@ -491,7 +491,7 @@ instance ToJSON
 
 --
 -- /See:/ 'createOrdersResponse' smart constructor.
-newtype CreateOrdersResponse = CreateOrdersResponse
+newtype CreateOrdersResponse = CreateOrdersResponse'
     { _corProposals :: Maybe [Proposal]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -503,7 +503,7 @@ newtype CreateOrdersResponse = CreateOrdersResponse
 createOrdersResponse
     :: CreateOrdersResponse
 createOrdersResponse =
-    CreateOrdersResponse
+    CreateOrdersResponse'
     { _corProposals = Nothing
     }
 
@@ -518,17 +518,17 @@ instance FromJSON CreateOrdersResponse where
         parseJSON
           = withObject "CreateOrdersResponse"
               (\ o ->
-                 CreateOrdersResponse <$>
+                 CreateOrdersResponse' <$>
                    (o .:? "proposals" .!= mempty))
 
 instance ToJSON CreateOrdersResponse where
-        toJSON CreateOrdersResponse{..}
+        toJSON CreateOrdersResponse'{..}
           = object
               (catMaybes [("proposals" .=) <$> _corProposals])
 
 --
 -- /See:/ 'accountBidderLocationItem' smart constructor.
-data AccountBidderLocationItem = AccountBidderLocationItem
+data AccountBidderLocationItem = AccountBidderLocationItem'
     { _abliURL        :: !(Maybe Text)
     , _abliMaximumQps :: !(Maybe (Textual Int32))
     , _abliRegion     :: !(Maybe Text)
@@ -546,7 +546,7 @@ data AccountBidderLocationItem = AccountBidderLocationItem
 accountBidderLocationItem
     :: AccountBidderLocationItem
 accountBidderLocationItem =
-    AccountBidderLocationItem
+    AccountBidderLocationItem'
     { _abliURL = Nothing
     , _abliMaximumQps = Nothing
     , _abliRegion = Nothing
@@ -574,12 +574,12 @@ instance FromJSON AccountBidderLocationItem where
         parseJSON
           = withObject "AccountBidderLocationItem"
               (\ o ->
-                 AccountBidderLocationItem <$>
+                 AccountBidderLocationItem' <$>
                    (o .:? "url") <*> (o .:? "maximumQps") <*>
                      (o .:? "region"))
 
 instance ToJSON AccountBidderLocationItem where
-        toJSON AccountBidderLocationItem{..}
+        toJSON AccountBidderLocationItem'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _abliURL,
@@ -588,7 +588,7 @@ instance ToJSON AccountBidderLocationItem where
 
 --
 -- /See:/ 'privateData' smart constructor.
-data PrivateData = PrivateData
+data PrivateData = PrivateData'
     { _pdReferencePayload :: !(Maybe (Textual Word8))
     , _pdReferenceId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -603,7 +603,7 @@ data PrivateData = PrivateData
 privateData
     :: PrivateData
 privateData =
-    PrivateData
+    PrivateData'
     { _pdReferencePayload = Nothing
     , _pdReferenceId = Nothing
     }
@@ -623,11 +623,11 @@ instance FromJSON PrivateData where
         parseJSON
           = withObject "PrivateData"
               (\ o ->
-                 PrivateData <$>
+                 PrivateData' <$>
                    (o .:? "referencePayload") <*> (o .:? "referenceId"))
 
 instance ToJSON PrivateData where
-        toJSON PrivateData{..}
+        toJSON PrivateData'{..}
           = object
               (catMaybes
                  [("referencePayload" .=) <$> _pdReferencePayload,
@@ -636,7 +636,7 @@ instance ToJSON PrivateData where
 -- | The configuration data for Ad Exchange RTB - Budget API.
 --
 -- /See:/ 'budget' smart constructor.
-data Budget = Budget
+data Budget = Budget'
     { _bCurrencyCode :: !(Maybe Text)
     , _bKind         :: !Text
     , _bBudgetAmount :: !(Maybe (Textual Int64))
@@ -663,7 +663,7 @@ data Budget = Budget
 budget
     :: Budget
 budget =
-    Budget
+    Budget'
     { _bCurrencyCode = Nothing
     , _bKind = "adexchangebuyer#budget"
     , _bBudgetAmount = Nothing
@@ -711,7 +711,7 @@ instance FromJSON Budget where
         parseJSON
           = withObject "Budget"
               (\ o ->
-                 Budget <$>
+                 Budget' <$>
                    (o .:? "currencyCode") <*>
                      (o .:? "kind" .!= "adexchangebuyer#budget")
                      <*> (o .:? "budgetAmount")
@@ -720,7 +720,7 @@ instance FromJSON Budget where
                      <*> (o .:? "billingId"))
 
 instance ToJSON Budget where
-        toJSON Budget{..}
+        toJSON Budget'{..}
           = object
               (catMaybes
                  [("currencyCode" .=) <$> _bCurrencyCode,
@@ -731,7 +731,7 @@ instance ToJSON Budget where
 
 --
 -- /See:/ 'addOrderNotesRequest' smart constructor.
-newtype AddOrderNotesRequest = AddOrderNotesRequest
+newtype AddOrderNotesRequest = AddOrderNotesRequest'
     { _aonrNotes :: Maybe [MarketplaceNote]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -743,7 +743,7 @@ newtype AddOrderNotesRequest = AddOrderNotesRequest
 addOrderNotesRequest
     :: AddOrderNotesRequest
 addOrderNotesRequest =
-    AddOrderNotesRequest
+    AddOrderNotesRequest'
     { _aonrNotes = Nothing
     }
 
@@ -758,15 +758,15 @@ instance FromJSON AddOrderNotesRequest where
         parseJSON
           = withObject "AddOrderNotesRequest"
               (\ o ->
-                 AddOrderNotesRequest <$> (o .:? "notes" .!= mempty))
+                 AddOrderNotesRequest' <$> (o .:? "notes" .!= mempty))
 
 instance ToJSON AddOrderNotesRequest where
-        toJSON AddOrderNotesRequest{..}
+        toJSON AddOrderNotesRequest'{..}
           = object (catMaybes [("notes" .=) <$> _aonrNotes])
 
 --
 -- /See:/ 'deliveryControlFrequencyCap' smart constructor.
-data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap
+data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap'
     { _dcfcMaxImpressions :: !(Maybe (Textual Int32))
     , _dcfcNumTimeUnits   :: !(Maybe (Textual Int32))
     , _dcfcTimeUnitType   :: !(Maybe Text)
@@ -784,7 +784,7 @@ data DeliveryControlFrequencyCap = DeliveryControlFrequencyCap
 deliveryControlFrequencyCap
     :: DeliveryControlFrequencyCap
 deliveryControlFrequencyCap =
-    DeliveryControlFrequencyCap
+    DeliveryControlFrequencyCap'
     { _dcfcMaxImpressions = Nothing
     , _dcfcNumTimeUnits = Nothing
     , _dcfcTimeUnitType = Nothing
@@ -811,12 +811,12 @@ instance FromJSON DeliveryControlFrequencyCap where
         parseJSON
           = withObject "DeliveryControlFrequencyCap"
               (\ o ->
-                 DeliveryControlFrequencyCap <$>
+                 DeliveryControlFrequencyCap' <$>
                    (o .:? "maxImpressions") <*> (o .:? "numTimeUnits")
                      <*> (o .:? "timeUnitType"))
 
 instance ToJSON DeliveryControlFrequencyCap where
-        toJSON DeliveryControlFrequencyCap{..}
+        toJSON DeliveryControlFrequencyCap'{..}
           = object
               (catMaybes
                  [("maxImpressions" .=) <$> _dcfcMaxImpressions,
@@ -825,7 +825,7 @@ instance ToJSON DeliveryControlFrequencyCap where
 
 --
 -- /See:/ 'marketplaceDealParty' smart constructor.
-data MarketplaceDealParty = MarketplaceDealParty
+data MarketplaceDealParty = MarketplaceDealParty'
     { _mdpSeller :: !(Maybe Seller)
     , _mdpBuyer  :: !(Maybe Buyer)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -840,7 +840,7 @@ data MarketplaceDealParty = MarketplaceDealParty
 marketplaceDealParty
     :: MarketplaceDealParty
 marketplaceDealParty =
-    MarketplaceDealParty
+    MarketplaceDealParty'
     { _mdpSeller = Nothing
     , _mdpBuyer = Nothing
     }
@@ -860,11 +860,11 @@ instance FromJSON MarketplaceDealParty where
         parseJSON
           = withObject "MarketplaceDealParty"
               (\ o ->
-                 MarketplaceDealParty <$>
+                 MarketplaceDealParty' <$>
                    (o .:? "seller") <*> (o .:? "buyer"))
 
 instance ToJSON MarketplaceDealParty where
-        toJSON MarketplaceDealParty{..}
+        toJSON MarketplaceDealParty'{..}
           = object
               (catMaybes
                  [("seller" .=) <$> _mdpSeller,
@@ -872,7 +872,7 @@ instance ToJSON MarketplaceDealParty where
 
 --
 -- /See:/ 'getOrderNotesResponse' smart constructor.
-newtype GetOrderNotesResponse = GetOrderNotesResponse
+newtype GetOrderNotesResponse = GetOrderNotesResponse'
     { _gonrNotes :: Maybe [MarketplaceNote]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -884,7 +884,7 @@ newtype GetOrderNotesResponse = GetOrderNotesResponse
 getOrderNotesResponse
     :: GetOrderNotesResponse
 getOrderNotesResponse =
-    GetOrderNotesResponse
+    GetOrderNotesResponse'
     { _gonrNotes = Nothing
     }
 
@@ -899,15 +899,16 @@ instance FromJSON GetOrderNotesResponse where
         parseJSON
           = withObject "GetOrderNotesResponse"
               (\ o ->
-                 GetOrderNotesResponse <$> (o .:? "notes" .!= mempty))
+                 GetOrderNotesResponse' <$>
+                   (o .:? "notes" .!= mempty))
 
 instance ToJSON GetOrderNotesResponse where
-        toJSON GetOrderNotesResponse{..}
+        toJSON GetOrderNotesResponse'{..}
           = object (catMaybes [("notes" .=) <$> _gonrNotes])
 
 --
 -- /See:/ 'getOrdersResponse' smart constructor.
-newtype GetOrdersResponse = GetOrdersResponse
+newtype GetOrdersResponse = GetOrdersResponse'
     { _gorProposals :: Maybe [Proposal]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -919,7 +920,7 @@ newtype GetOrdersResponse = GetOrdersResponse
 getOrdersResponse
     :: GetOrdersResponse
 getOrdersResponse =
-    GetOrdersResponse
+    GetOrdersResponse'
     { _gorProposals = Nothing
     }
 
@@ -934,16 +935,17 @@ instance FromJSON GetOrdersResponse where
         parseJSON
           = withObject "GetOrdersResponse"
               (\ o ->
-                 GetOrdersResponse <$> (o .:? "proposals" .!= mempty))
+                 GetOrdersResponse' <$>
+                   (o .:? "proposals" .!= mempty))
 
 instance ToJSON GetOrdersResponse where
-        toJSON GetOrdersResponse{..}
+        toJSON GetOrdersResponse'{..}
           = object
               (catMaybes [("proposals" .=) <$> _gorProposals])
 
 --
 -- /See:/ 'creativeServingRestrictionsItemDisApprovalReasonsItem' smart constructor.
-data CreativeServingRestrictionsItemDisApprovalReasonsItem = CreativeServingRestrictionsItemDisApprovalReasonsItem
+data CreativeServingRestrictionsItemDisApprovalReasonsItem = CreativeServingRestrictionsItemDisApprovalReasonsItem'
     { _csridariReason  :: !(Maybe Text)
     , _csridariDetails :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -958,7 +960,7 @@ data CreativeServingRestrictionsItemDisApprovalReasonsItem = CreativeServingRest
 creativeServingRestrictionsItemDisApprovalReasonsItem
     :: CreativeServingRestrictionsItemDisApprovalReasonsItem
 creativeServingRestrictionsItemDisApprovalReasonsItem =
-    CreativeServingRestrictionsItemDisApprovalReasonsItem
+    CreativeServingRestrictionsItemDisApprovalReasonsItem'
     { _csridariReason = Nothing
     , _csridariDetails = Nothing
     }
@@ -984,7 +986,7 @@ instance FromJSON
           = withObject
               "CreativeServingRestrictionsItemDisApprovalReasonsItem"
               (\ o ->
-                 CreativeServingRestrictionsItemDisApprovalReasonsItem
+                 CreativeServingRestrictionsItemDisApprovalReasonsItem'
                    <$>
                    (o .:? "reason") <*> (o .:? "details" .!= mempty))
 
@@ -992,7 +994,7 @@ instance ToJSON
          CreativeServingRestrictionsItemDisApprovalReasonsItem
          where
         toJSON
-          CreativeServingRestrictionsItemDisApprovalReasonsItem{..}
+          CreativeServingRestrictionsItemDisApprovalReasonsItem'{..}
           = object
               (catMaybes
                  [("reason" .=) <$> _csridariReason,
@@ -1002,7 +1004,7 @@ instance ToJSON
 -- access to. Each entry in the feed corresponds to a single buyer account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _alKind  :: !Text
     , _alItems :: !(Maybe [Account])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1017,7 +1019,7 @@ data AccountsList = AccountsList
 accountsList
     :: AccountsList
 accountsList =
-    AccountsList
+    AccountsList'
     { _alKind = "adexchangebuyer#accountsList"
     , _alItems = Nothing
     }
@@ -1036,12 +1038,12 @@ instance FromJSON AccountsList where
         parseJSON
           = withObject "AccountsList"
               (\ o ->
-                 AccountsList <$>
+                 AccountsList' <$>
                    (o .:? "kind" .!= "adexchangebuyer#accountsList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON AccountsList where
-        toJSON AccountsList{..}
+        toJSON AccountsList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _alKind),
@@ -1049,7 +1051,7 @@ instance ToJSON AccountsList where
 
 --
 -- /See:/ 'createOrdersRequest' smart constructor.
-data CreateOrdersRequest = CreateOrdersRequest
+data CreateOrdersRequest = CreateOrdersRequest'
     { _cProposals       :: !(Maybe [Proposal])
     , _cWebPropertyCode :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1064,7 +1066,7 @@ data CreateOrdersRequest = CreateOrdersRequest
 createOrdersRequest
     :: CreateOrdersRequest
 createOrdersRequest =
-    CreateOrdersRequest
+    CreateOrdersRequest'
     { _cProposals = Nothing
     , _cWebPropertyCode = Nothing
     }
@@ -1085,12 +1087,12 @@ instance FromJSON CreateOrdersRequest where
         parseJSON
           = withObject "CreateOrdersRequest"
               (\ o ->
-                 CreateOrdersRequest <$>
+                 CreateOrdersRequest' <$>
                    (o .:? "proposals" .!= mempty) <*>
                      (o .:? "webPropertyCode"))
 
 instance ToJSON CreateOrdersRequest where
-        toJSON CreateOrdersRequest{..}
+        toJSON CreateOrdersRequest'{..}
           = object
               (catMaybes
                  [("proposals" .=) <$> _cProposals,
@@ -1098,7 +1100,7 @@ instance ToJSON CreateOrdersRequest where
 
 --
 -- /See:/ 'creativeCorrectionsItem' smart constructor.
-data CreativeCorrectionsItem = CreativeCorrectionsItem
+data CreativeCorrectionsItem = CreativeCorrectionsItem'
     { _cciReason  :: !(Maybe Text)
     , _cciDetails :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1113,7 +1115,7 @@ data CreativeCorrectionsItem = CreativeCorrectionsItem
 creativeCorrectionsItem
     :: CreativeCorrectionsItem
 creativeCorrectionsItem =
-    CreativeCorrectionsItem
+    CreativeCorrectionsItem'
     { _cciReason = Nothing
     , _cciDetails = Nothing
     }
@@ -1134,11 +1136,11 @@ instance FromJSON CreativeCorrectionsItem where
         parseJSON
           = withObject "CreativeCorrectionsItem"
               (\ o ->
-                 CreativeCorrectionsItem <$>
+                 CreativeCorrectionsItem' <$>
                    (o .:? "reason") <*> (o .:? "details" .!= mempty))
 
 instance ToJSON CreativeCorrectionsItem where
-        toJSON CreativeCorrectionsItem{..}
+        toJSON CreativeCorrectionsItem'{..}
           = object
               (catMaybes
                  [("reason" .=) <$> _cciReason,
@@ -1146,7 +1148,7 @@ instance ToJSON CreativeCorrectionsItem where
 
 --
 -- /See:/ 'addOrderDealsResponse' smart constructor.
-data AddOrderDealsResponse = AddOrderDealsResponse
+data AddOrderDealsResponse = AddOrderDealsResponse'
     { _aodrDeals                  :: !(Maybe [MarketplaceDeal])
     , _aodrProposalRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1161,7 +1163,7 @@ data AddOrderDealsResponse = AddOrderDealsResponse
 addOrderDealsResponse
     :: AddOrderDealsResponse
 addOrderDealsResponse =
-    AddOrderDealsResponse
+    AddOrderDealsResponse'
     { _aodrDeals = Nothing
     , _aodrProposalRevisionNumber = Nothing
     }
@@ -1184,12 +1186,12 @@ instance FromJSON AddOrderDealsResponse where
         parseJSON
           = withObject "AddOrderDealsResponse"
               (\ o ->
-                 AddOrderDealsResponse <$>
+                 AddOrderDealsResponse' <$>
                    (o .:? "deals" .!= mempty) <*>
                      (o .:? "proposalRevisionNumber"))
 
 instance ToJSON AddOrderDealsResponse where
-        toJSON AddOrderDealsResponse{..}
+        toJSON AddOrderDealsResponse'{..}
           = object
               (catMaybes
                  [("deals" .=) <$> _aodrDeals,
@@ -1198,7 +1200,7 @@ instance ToJSON AddOrderDealsResponse where
 
 --
 -- /See:/ 'deliveryControl' smart constructor.
-data DeliveryControl = DeliveryControl
+data DeliveryControl = DeliveryControl'
     { _dcCreativeBlockingLevel :: !(Maybe Text)
     , _dcFrequencyCaps         :: !(Maybe [DeliveryControlFrequencyCap])
     , _dcDeliveryRateType      :: !(Maybe Text)
@@ -1216,7 +1218,7 @@ data DeliveryControl = DeliveryControl
 deliveryControl
     :: DeliveryControl
 deliveryControl =
-    DeliveryControl
+    DeliveryControl'
     { _dcCreativeBlockingLevel = Nothing
     , _dcFrequencyCaps = Nothing
     , _dcDeliveryRateType = Nothing
@@ -1243,13 +1245,13 @@ instance FromJSON DeliveryControl where
         parseJSON
           = withObject "DeliveryControl"
               (\ o ->
-                 DeliveryControl <$>
+                 DeliveryControl' <$>
                    (o .:? "creativeBlockingLevel") <*>
                      (o .:? "frequencyCaps" .!= mempty)
                      <*> (o .:? "deliveryRateType"))
 
 instance ToJSON DeliveryControl where
-        toJSON DeliveryControl{..}
+        toJSON DeliveryControl'{..}
           = object
               (catMaybes
                  [("creativeBlockingLevel" .=) <$>
@@ -1266,7 +1268,7 @@ instance ToJSON DeliveryControl where
 -- buyer is set.
 --
 -- /See:/ 'pricePerBuyer' smart constructor.
-data PricePerBuyer = PricePerBuyer
+data PricePerBuyer = PricePerBuyer'
     { _ppbPrice :: !(Maybe Price)
     , _ppbBuyer :: !(Maybe Buyer)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1281,7 +1283,7 @@ data PricePerBuyer = PricePerBuyer
 pricePerBuyer
     :: PricePerBuyer
 pricePerBuyer =
-    PricePerBuyer
+    PricePerBuyer'
     { _ppbPrice = Nothing
     , _ppbBuyer = Nothing
     }
@@ -1300,11 +1302,11 @@ instance FromJSON PricePerBuyer where
         parseJSON
           = withObject "PricePerBuyer"
               (\ o ->
-                 PricePerBuyer <$>
+                 PricePerBuyer' <$>
                    (o .:? "price") <*> (o .:? "buyer"))
 
 instance ToJSON PricePerBuyer where
-        toJSON PricePerBuyer{..}
+        toJSON PricePerBuyer'{..}
           = object
               (catMaybes
                  [("price" .=) <$> _ppbPrice,
@@ -1313,7 +1315,7 @@ instance ToJSON PricePerBuyer where
 -- | A creative and its classification data.
 --
 -- /See:/ 'creative' smart constructor.
-data Creative = Creative
+data Creative = Creative'
     { _cAttribute             :: !(Maybe [Textual Int32])
     , _cNATiveAd              :: !(Maybe CreativeNATiveAd)
     , _cHeight                :: !(Maybe (Textual Int32))
@@ -1397,7 +1399,7 @@ data Creative = Creative
 creative
     :: Creative
 creative =
-    Creative
+    Creative'
     { _cAttribute = Nothing
     , _cNATiveAd = Nothing
     , _cHeight = Nothing
@@ -1612,7 +1614,7 @@ instance FromJSON Creative where
         parseJSON
           = withObject "Creative"
               (\ o ->
-                 Creative <$>
+                 Creative' <$>
                    (o .:? "attribute" .!= mempty) <*> (o .:? "nativeAd")
                      <*> (o .:? "height")
                      <*> (o .:? "buyerCreativeId")
@@ -1639,7 +1641,7 @@ instance FromJSON Creative where
                      <*> (o .:? "openAuctionStatus"))
 
 instance ToJSON Creative where
-        toJSON Creative{..}
+        toJSON Creative'{..}
           = object
               (catMaybes
                  [("attribute" .=) <$> _cAttribute,
@@ -1672,7 +1674,7 @@ instance ToJSON Creative where
 
 --
 -- /See:/ 'targetingValueDayPartTargetingDayPart' smart constructor.
-data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPart
+data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPart'
     { _tvdptdpEndHour     :: !(Maybe (Textual Int32))
     , _tvdptdpStartHour   :: !(Maybe (Textual Int32))
     , _tvdptdpStartMinute :: !(Maybe (Textual Int32))
@@ -1696,7 +1698,7 @@ data TargetingValueDayPartTargetingDayPart = TargetingValueDayPartTargetingDayPa
 targetingValueDayPartTargetingDayPart
     :: TargetingValueDayPartTargetingDayPart
 targetingValueDayPartTargetingDayPart =
-    TargetingValueDayPartTargetingDayPart
+    TargetingValueDayPartTargetingDayPart'
     { _tvdptdpEndHour = Nothing
     , _tvdptdpStartHour = Nothing
     , _tvdptdpStartMinute = Nothing
@@ -1738,7 +1740,7 @@ instance FromJSON
         parseJSON
           = withObject "TargetingValueDayPartTargetingDayPart"
               (\ o ->
-                 TargetingValueDayPartTargetingDayPart <$>
+                 TargetingValueDayPartTargetingDayPart' <$>
                    (o .:? "endHour") <*> (o .:? "startHour") <*>
                      (o .:? "startMinute")
                      <*> (o .:? "dayOfWeek")
@@ -1746,7 +1748,7 @@ instance FromJSON
 
 instance ToJSON TargetingValueDayPartTargetingDayPart
          where
-        toJSON TargetingValueDayPartTargetingDayPart{..}
+        toJSON TargetingValueDayPartTargetingDayPart'{..}
           = object
               (catMaybes
                  [("endHour" .=) <$> _tvdptdpEndHour,
@@ -1757,7 +1759,7 @@ instance ToJSON TargetingValueDayPartTargetingDayPart
 
 --
 -- /See:/ 'pretargetingConfigList' smart constructor.
-data PretargetingConfigList = PretargetingConfigList
+data PretargetingConfigList = PretargetingConfigList'
     { _pclKind  :: !Text
     , _pclItems :: !(Maybe [PretargetingConfig])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1772,7 +1774,7 @@ data PretargetingConfigList = PretargetingConfigList
 pretargetingConfigList
     :: PretargetingConfigList
 pretargetingConfigList =
-    PretargetingConfigList
+    PretargetingConfigList'
     { _pclKind = "adexchangebuyer#pretargetingConfigList"
     , _pclItems = Nothing
     }
@@ -1792,13 +1794,13 @@ instance FromJSON PretargetingConfigList where
         parseJSON
           = withObject "PretargetingConfigList"
               (\ o ->
-                 PretargetingConfigList <$>
+                 PretargetingConfigList' <$>
                    (o .:? "kind" .!=
                       "adexchangebuyer#pretargetingConfigList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON PretargetingConfigList where
-        toJSON PretargetingConfigList{..}
+        toJSON PretargetingConfigList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pclKind),
@@ -1806,7 +1808,7 @@ instance ToJSON PretargetingConfigList where
 
 --
 -- /See:/ 'dealTermsNonGuaranteedFixedPriceTerms' smart constructor.
-newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPriceTerms
+newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPriceTerms'
     { _dtngfptFixedPrices :: Maybe [PricePerBuyer]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1818,7 +1820,7 @@ newtype DealTermsNonGuaranteedFixedPriceTerms = DealTermsNonGuaranteedFixedPrice
 dealTermsNonGuaranteedFixedPriceTerms
     :: DealTermsNonGuaranteedFixedPriceTerms
 dealTermsNonGuaranteedFixedPriceTerms =
-    DealTermsNonGuaranteedFixedPriceTerms
+    DealTermsNonGuaranteedFixedPriceTerms'
     { _dtngfptFixedPrices = Nothing
     }
 
@@ -1835,12 +1837,12 @@ instance FromJSON
         parseJSON
           = withObject "DealTermsNonGuaranteedFixedPriceTerms"
               (\ o ->
-                 DealTermsNonGuaranteedFixedPriceTerms <$>
+                 DealTermsNonGuaranteedFixedPriceTerms' <$>
                    (o .:? "fixedPrices" .!= mempty))
 
 instance ToJSON DealTermsNonGuaranteedFixedPriceTerms
          where
-        toJSON DealTermsNonGuaranteedFixedPriceTerms{..}
+        toJSON DealTermsNonGuaranteedFixedPriceTerms'{..}
           = object
               (catMaybes
                  [("fixedPrices" .=) <$> _dtngfptFixedPrices])
@@ -1848,7 +1850,7 @@ instance ToJSON DealTermsNonGuaranteedFixedPriceTerms
 -- | The configuration data for an Ad Exchange performance report list.
 --
 -- /See:/ 'performanceReport' smart constructor.
-data PerformanceReport = PerformanceReport
+data PerformanceReport = PerformanceReport'
     { _prFilteredBidRate         :: !(Maybe (Textual Double))
     , _prKind                    :: !Text
     , _prLatency95thPercentile   :: !(Maybe (Textual Double))
@@ -1923,7 +1925,7 @@ data PerformanceReport = PerformanceReport
 performanceReport
     :: PerformanceReport
 performanceReport =
-    PerformanceReport
+    PerformanceReport'
     { _prFilteredBidRate = Nothing
     , _prKind = "adexchangebuyer#performanceReport"
     , _prLatency95thPercentile = Nothing
@@ -2109,7 +2111,7 @@ instance FromJSON PerformanceReport where
         parseJSON
           = withObject "PerformanceReport"
               (\ o ->
-                 PerformanceReport <$>
+                 PerformanceReport' <$>
                    (o .:? "filteredBidRate") <*>
                      (o .:? "kind" .!=
                         "adexchangebuyer#performanceReport")
@@ -2135,7 +2137,7 @@ instance FromJSON PerformanceReport where
                      <*> (o .:? "outOfQuota"))
 
 instance ToJSON PerformanceReport where
-        toJSON PerformanceReport{..}
+        toJSON PerformanceReport'{..}
           = object
               (catMaybes
                  [("filteredBidRate" .=) <$> _prFilteredBidRate,
@@ -2173,7 +2175,7 @@ instance ToJSON PerformanceReport where
 
 --
 -- /See:/ 'pretargetingConfigExcludedPlacementsItem' smart constructor.
-data PretargetingConfigExcludedPlacementsItem = PretargetingConfigExcludedPlacementsItem
+data PretargetingConfigExcludedPlacementsItem = PretargetingConfigExcludedPlacementsItem'
     { _pcepiToken :: !(Maybe Text)
     , _pcepiType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2188,7 +2190,7 @@ data PretargetingConfigExcludedPlacementsItem = PretargetingConfigExcludedPlacem
 pretargetingConfigExcludedPlacementsItem
     :: PretargetingConfigExcludedPlacementsItem
 pretargetingConfigExcludedPlacementsItem =
-    PretargetingConfigExcludedPlacementsItem
+    PretargetingConfigExcludedPlacementsItem'
     { _pcepiToken = Nothing
     , _pcepiType = Nothing
     }
@@ -2211,12 +2213,12 @@ instance FromJSON
           = withObject
               "PretargetingConfigExcludedPlacementsItem"
               (\ o ->
-                 PretargetingConfigExcludedPlacementsItem <$>
+                 PretargetingConfigExcludedPlacementsItem' <$>
                    (o .:? "token") <*> (o .:? "type"))
 
 instance ToJSON
          PretargetingConfigExcludedPlacementsItem where
-        toJSON PretargetingConfigExcludedPlacementsItem{..}
+        toJSON PretargetingConfigExcludedPlacementsItem'{..}
           = object
               (catMaybes
                  [("token" .=) <$> _pcepiToken,
@@ -2224,7 +2226,7 @@ instance ToJSON
 
 --
 -- /See:/ 'seller' smart constructor.
-data Seller = Seller
+data Seller = Seller'
     { _sAccountId    :: !(Maybe Text)
     , _sSubAccountId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2239,7 +2241,7 @@ data Seller = Seller
 seller
     :: Seller
 seller =
-    Seller
+    Seller'
     { _sAccountId = Nothing
     , _sSubAccountId = Nothing
     }
@@ -2260,11 +2262,11 @@ instance FromJSON Seller where
         parseJSON
           = withObject "Seller"
               (\ o ->
-                 Seller <$>
+                 Seller' <$>
                    (o .:? "accountId") <*> (o .:? "subAccountId"))
 
 instance ToJSON Seller where
-        toJSON Seller{..}
+        toJSON Seller'{..}
           = object
               (catMaybes
                  [("accountId" .=) <$> _sAccountId,
@@ -2273,7 +2275,7 @@ instance ToJSON Seller where
 -- | Configuration data for an Ad Exchange buyer account.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _aMaximumTotalQps        :: !(Maybe (Textual Int32))
     , _aKind                   :: !Text
     , _aCookieMatchingURL      :: !(Maybe Text)
@@ -2306,7 +2308,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _aMaximumTotalQps = Nothing
     , _aKind = "adexchangebuyer#account"
     , _aCookieMatchingURL = Nothing
@@ -2378,7 +2380,7 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "maximumTotalQps") <*>
                      (o .:? "kind" .!= "adexchangebuyer#account")
                      <*> (o .:? "cookieMatchingUrl")
@@ -2389,7 +2391,7 @@ instance FromJSON Account where
                      <*> (o .:? "bidderLocation" .!= mempty))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("maximumTotalQps" .=) <$> _aMaximumTotalQps,
@@ -2405,7 +2407,7 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'deleteOrderDealsRequest' smart constructor.
-data DeleteOrderDealsRequest = DeleteOrderDealsRequest
+data DeleteOrderDealsRequest = DeleteOrderDealsRequest'
     { _dodrUpdateAction           :: !(Maybe Text)
     , _dodrDealIds                :: !(Maybe [Text])
     , _dodrProposalRevisionNumber :: !(Maybe (Textual Int64))
@@ -2423,7 +2425,7 @@ data DeleteOrderDealsRequest = DeleteOrderDealsRequest
 deleteOrderDealsRequest
     :: DeleteOrderDealsRequest
 deleteOrderDealsRequest =
-    DeleteOrderDealsRequest
+    DeleteOrderDealsRequest'
     { _dodrUpdateAction = Nothing
     , _dodrDealIds = Nothing
     , _dodrProposalRevisionNumber = Nothing
@@ -2452,13 +2454,13 @@ instance FromJSON DeleteOrderDealsRequest where
         parseJSON
           = withObject "DeleteOrderDealsRequest"
               (\ o ->
-                 DeleteOrderDealsRequest <$>
+                 DeleteOrderDealsRequest' <$>
                    (o .:? "updateAction") <*>
                      (o .:? "dealIds" .!= mempty)
                      <*> (o .:? "proposalRevisionNumber"))
 
 instance ToJSON DeleteOrderDealsRequest where
-        toJSON DeleteOrderDealsRequest{..}
+        toJSON DeleteOrderDealsRequest'{..}
           = object
               (catMaybes
                  [("updateAction" .=) <$> _dodrUpdateAction,
@@ -2468,7 +2470,7 @@ instance ToJSON DeleteOrderDealsRequest where
 
 --
 -- /See:/ 'contactInformation' smart constructor.
-data ContactInformation = ContactInformation
+data ContactInformation = ContactInformation'
     { _ciEmail :: !(Maybe Text)
     , _ciName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2483,7 +2485,7 @@ data ContactInformation = ContactInformation
 contactInformation
     :: ContactInformation
 contactInformation =
-    ContactInformation
+    ContactInformation'
     { _ciEmail = Nothing
     , _ciName = Nothing
     }
@@ -2500,11 +2502,11 @@ instance FromJSON ContactInformation where
         parseJSON
           = withObject "ContactInformation"
               (\ o ->
-                 ContactInformation <$>
+                 ContactInformation' <$>
                    (o .:? "email") <*> (o .:? "name"))
 
 instance ToJSON ContactInformation where
-        toJSON ContactInformation{..}
+        toJSON ContactInformation'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _ciEmail, ("name" .=) <$> _ciName])
@@ -2512,7 +2514,7 @@ instance ToJSON ContactInformation where
 -- | A smaller image, for the advertiser logo.
 --
 -- /See:/ 'creativeNATiveAdLogo' smart constructor.
-data CreativeNATiveAdLogo = CreativeNATiveAdLogo
+data CreativeNATiveAdLogo = CreativeNATiveAdLogo'
     { _cnatalHeight :: !(Maybe (Textual Int32))
     , _cnatalURL    :: !(Maybe Text)
     , _cnatalWidth  :: !(Maybe (Textual Int32))
@@ -2530,7 +2532,7 @@ data CreativeNATiveAdLogo = CreativeNATiveAdLogo
 creativeNATiveAdLogo
     :: CreativeNATiveAdLogo
 creativeNATiveAdLogo =
-    CreativeNATiveAdLogo
+    CreativeNATiveAdLogo'
     { _cnatalHeight = Nothing
     , _cnatalURL = Nothing
     , _cnatalWidth = Nothing
@@ -2554,12 +2556,12 @@ instance FromJSON CreativeNATiveAdLogo where
         parseJSON
           = withObject "CreativeNATiveAdLogo"
               (\ o ->
-                 CreativeNATiveAdLogo <$>
+                 CreativeNATiveAdLogo' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width"))
 
 instance ToJSON CreativeNATiveAdLogo where
-        toJSON CreativeNATiveAdLogo{..}
+        toJSON CreativeNATiveAdLogo'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _cnatalHeight,
@@ -2568,7 +2570,7 @@ instance ToJSON CreativeNATiveAdLogo where
 
 --
 -- /See:/ 'getOrderDealsResponse' smart constructor.
-newtype GetOrderDealsResponse = GetOrderDealsResponse
+newtype GetOrderDealsResponse = GetOrderDealsResponse'
     { _godrDeals :: Maybe [MarketplaceDeal]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2580,7 +2582,7 @@ newtype GetOrderDealsResponse = GetOrderDealsResponse
 getOrderDealsResponse
     :: GetOrderDealsResponse
 getOrderDealsResponse =
-    GetOrderDealsResponse
+    GetOrderDealsResponse'
     { _godrDeals = Nothing
     }
 
@@ -2595,10 +2597,11 @@ instance FromJSON GetOrderDealsResponse where
         parseJSON
           = withObject "GetOrderDealsResponse"
               (\ o ->
-                 GetOrderDealsResponse <$> (o .:? "deals" .!= mempty))
+                 GetOrderDealsResponse' <$>
+                   (o .:? "deals" .!= mempty))
 
 instance ToJSON GetOrderDealsResponse where
-        toJSON GetOrderDealsResponse{..}
+        toJSON GetOrderDealsResponse'{..}
           = object (catMaybes [("deals" .=) <$> _godrDeals])
 
 -- | The configuration data for an Ad Exchange performance report list.
@@ -2606,7 +2609,7 @@ instance ToJSON GetOrderDealsResponse where
 -- https:\/\/cs.corp.google.com\/#piper\/\/\/depot\/google3\/contentads\/adx\/tools\/rtb_api\/adxrtb.py
 --
 -- /See:/ 'performanceReportList' smart constructor.
-data PerformanceReportList = PerformanceReportList
+data PerformanceReportList = PerformanceReportList'
     { _prlKind              :: !Text
     , _prlPerformanceReport :: !(Maybe [PerformanceReport])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2621,7 +2624,7 @@ data PerformanceReportList = PerformanceReportList
 performanceReportList
     :: PerformanceReportList
 performanceReportList =
-    PerformanceReportList
+    PerformanceReportList'
     { _prlKind = "adexchangebuyer#performanceReportList"
     , _prlPerformanceReport = Nothing
     }
@@ -2642,13 +2645,13 @@ instance FromJSON PerformanceReportList where
         parseJSON
           = withObject "PerformanceReportList"
               (\ o ->
-                 PerformanceReportList <$>
+                 PerformanceReportList' <$>
                    (o .:? "kind" .!=
                       "adexchangebuyer#performanceReportList")
                      <*> (o .:? "performanceReport" .!= mempty))
 
 instance ToJSON PerformanceReportList where
-        toJSON PerformanceReportList{..}
+        toJSON PerformanceReportList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _prlKind),
@@ -2656,7 +2659,7 @@ instance ToJSON PerformanceReportList where
 
 --
 -- /See:/ 'pretargetingConfig' smart constructor.
-data PretargetingConfig = PretargetingConfig
+data PretargetingConfig = PretargetingConfig'
     { _pcPlatforms                     :: !(Maybe [Text])
     , _pcMobileCarriers                :: !(Maybe [Textual Int64])
     , _pcVendorTypes                   :: !(Maybe [Textual Int64])
@@ -2737,7 +2740,7 @@ data PretargetingConfig = PretargetingConfig
 pretargetingConfig
     :: PretargetingConfig
 pretargetingConfig =
-    PretargetingConfig
+    PretargetingConfig'
     { _pcPlatforms = Nothing
     , _pcMobileCarriers = Nothing
     , _pcVendorTypes = Nothing
@@ -2957,7 +2960,7 @@ instance FromJSON PretargetingConfig where
         parseJSON
           = withObject "PretargetingConfig"
               (\ o ->
-                 PretargetingConfig <$>
+                 PretargetingConfig' <$>
                    (o .:? "platforms" .!= mempty) <*>
                      (o .:? "mobileCarriers" .!= mempty)
                      <*> (o .:? "vendorTypes" .!= mempty)
@@ -2987,7 +2990,7 @@ instance FromJSON PretargetingConfig where
                      (o .:? "mobileOperatingSystemVersions" .!= mempty))
 
 instance ToJSON PretargetingConfig where
-        toJSON PretargetingConfig{..}
+        toJSON PretargetingConfig'{..}
           = object
               (catMaybes
                  [("platforms" .=) <$> _pcPlatforms,
@@ -3023,7 +3026,7 @@ instance ToJSON PretargetingConfig where
 -- be set in requests.
 --
 -- /See:/ 'creativeFilteringReasons' smart constructor.
-data CreativeFilteringReasons = CreativeFilteringReasons
+data CreativeFilteringReasons = CreativeFilteringReasons'
     { _cfrReasons :: !(Maybe [CreativeFilteringReasonsReasonsItem])
     , _cfrDate    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3038,7 +3041,7 @@ data CreativeFilteringReasons = CreativeFilteringReasons
 creativeFilteringReasons
     :: CreativeFilteringReasons
 creativeFilteringReasons =
-    CreativeFilteringReasons
+    CreativeFilteringReasons'
     { _cfrReasons = Nothing
     , _cfrDate = Nothing
     }
@@ -3059,11 +3062,11 @@ instance FromJSON CreativeFilteringReasons where
         parseJSON
           = withObject "CreativeFilteringReasons"
               (\ o ->
-                 CreativeFilteringReasons <$>
+                 CreativeFilteringReasons' <$>
                    (o .:? "reasons" .!= mempty) <*> (o .:? "date"))
 
 instance ToJSON CreativeFilteringReasons where
-        toJSON CreativeFilteringReasons{..}
+        toJSON CreativeFilteringReasons'{..}
           = object
               (catMaybes
                  [("reasons" .=) <$> _cfrReasons,
@@ -3071,7 +3074,7 @@ instance ToJSON CreativeFilteringReasons where
 
 --
 -- /See:/ 'targetingValueCreativeSize' smart constructor.
-data TargetingValueCreativeSize = TargetingValueCreativeSize
+data TargetingValueCreativeSize = TargetingValueCreativeSize'
     { _tvcsSize             :: !(Maybe TargetingValueSize)
     , _tvcsCompanionSizes   :: !(Maybe [TargetingValueSize])
     , _tvcsCreativeSizeType :: !(Maybe Text)
@@ -3089,7 +3092,7 @@ data TargetingValueCreativeSize = TargetingValueCreativeSize
 targetingValueCreativeSize
     :: TargetingValueCreativeSize
 targetingValueCreativeSize =
-    TargetingValueCreativeSize
+    TargetingValueCreativeSize'
     { _tvcsSize = Nothing
     , _tvcsCompanionSizes = Nothing
     , _tvcsCreativeSizeType = Nothing
@@ -3118,13 +3121,13 @@ instance FromJSON TargetingValueCreativeSize where
         parseJSON
           = withObject "TargetingValueCreativeSize"
               (\ o ->
-                 TargetingValueCreativeSize <$>
+                 TargetingValueCreativeSize' <$>
                    (o .:? "size") <*>
                      (o .:? "companionSizes" .!= mempty)
                      <*> (o .:? "creativeSizeType"))
 
 instance ToJSON TargetingValueCreativeSize where
-        toJSON TargetingValueCreativeSize{..}
+        toJSON TargetingValueCreativeSize'{..}
           = object
               (catMaybes
                  [("size" .=) <$> _tvcsSize,
@@ -3140,7 +3143,7 @@ instance ToJSON TargetingValueCreativeSize where
 -- either buyer or the seller.
 --
 -- /See:/ 'proposal' smart constructor.
-data Proposal = Proposal
+data Proposal = Proposal'
     { _pBuyerPrivateData           :: !(Maybe PrivateData)
     , _pIsSetupComplete            :: !(Maybe Bool)
     , _pInventorySource            :: !(Maybe Text)
@@ -3212,7 +3215,7 @@ data Proposal = Proposal
 proposal
     :: Proposal
 proposal =
-    Proposal
+    Proposal'
     { _pBuyerPrivateData = Nothing
     , _pIsSetupComplete = Nothing
     , _pInventorySource = Nothing
@@ -3369,7 +3372,7 @@ instance FromJSON Proposal where
         parseJSON
           = withObject "Proposal"
               (\ o ->
-                 Proposal <$>
+                 Proposal' <$>
                    (o .:? "buyerPrivateData") <*>
                      (o .:? "isSetupComplete")
                      <*> (o .:? "inventorySource")
@@ -3393,7 +3396,7 @@ instance FromJSON Proposal where
                      <*> (o .:? "buyer"))
 
 instance ToJSON Proposal where
-        toJSON Proposal{..}
+        toJSON Proposal'{..}
           = object
               (catMaybes
                  [("buyerPrivateData" .=) <$> _pBuyerPrivateData,
@@ -3423,7 +3426,7 @@ instance ToJSON Proposal where
 -- access to. Each entry in the feed corresponds to a single billing info.
 --
 -- /See:/ 'billingInfoList' smart constructor.
-data BillingInfoList = BillingInfoList
+data BillingInfoList = BillingInfoList'
     { _bilKind  :: !Text
     , _bilItems :: !(Maybe [BillingInfo])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3438,7 +3441,7 @@ data BillingInfoList = BillingInfoList
 billingInfoList
     :: BillingInfoList
 billingInfoList =
-    BillingInfoList
+    BillingInfoList'
     { _bilKind = "adexchangebuyer#billingInfoList"
     , _bilItems = Nothing
     }
@@ -3458,12 +3461,12 @@ instance FromJSON BillingInfoList where
         parseJSON
           = withObject "BillingInfoList"
               (\ o ->
-                 BillingInfoList <$>
+                 BillingInfoList' <$>
                    (o .:? "kind" .!= "adexchangebuyer#billingInfoList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON BillingInfoList where
-        toJSON BillingInfoList{..}
+        toJSON BillingInfoList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _bilKind),
@@ -3471,7 +3474,7 @@ instance ToJSON BillingInfoList where
 
 --
 -- /See:/ 'addOrderNotesResponse' smart constructor.
-newtype AddOrderNotesResponse = AddOrderNotesResponse
+newtype AddOrderNotesResponse = AddOrderNotesResponse'
     { _aNotes :: Maybe [MarketplaceNote]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3483,7 +3486,7 @@ newtype AddOrderNotesResponse = AddOrderNotesResponse
 addOrderNotesResponse
     :: AddOrderNotesResponse
 addOrderNotesResponse =
-    AddOrderNotesResponse
+    AddOrderNotesResponse'
     { _aNotes = Nothing
     }
 
@@ -3496,15 +3499,16 @@ instance FromJSON AddOrderNotesResponse where
         parseJSON
           = withObject "AddOrderNotesResponse"
               (\ o ->
-                 AddOrderNotesResponse <$> (o .:? "notes" .!= mempty))
+                 AddOrderNotesResponse' <$>
+                   (o .:? "notes" .!= mempty))
 
 instance ToJSON AddOrderNotesResponse where
-        toJSON AddOrderNotesResponse{..}
+        toJSON AddOrderNotesResponse'{..}
           = object (catMaybes [("notes" .=) <$> _aNotes])
 
 --
 -- /See:/ 'targetingValueSize' smart constructor.
-data TargetingValueSize = TargetingValueSize
+data TargetingValueSize = TargetingValueSize'
     { _tvsHeight :: !(Maybe (Textual Int32))
     , _tvsWidth  :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3519,7 +3523,7 @@ data TargetingValueSize = TargetingValueSize
 targetingValueSize
     :: TargetingValueSize
 targetingValueSize =
-    TargetingValueSize
+    TargetingValueSize'
     { _tvsHeight = Nothing
     , _tvsWidth = Nothing
     }
@@ -3540,11 +3544,11 @@ instance FromJSON TargetingValueSize where
         parseJSON
           = withObject "TargetingValueSize"
               (\ o ->
-                 TargetingValueSize <$>
+                 TargetingValueSize' <$>
                    (o .:? "height") <*> (o .:? "width"))
 
 instance ToJSON TargetingValueSize where
-        toJSON TargetingValueSize{..}
+        toJSON TargetingValueSize'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _tvsHeight,
@@ -3552,7 +3556,7 @@ instance ToJSON TargetingValueSize where
 
 --
 -- /See:/ 'pretargetingConfigDimensionsItem' smart constructor.
-data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem
+data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem'
     { _pcdiHeight :: !(Maybe (Textual Int64))
     , _pcdiWidth  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3567,7 +3571,7 @@ data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem
 pretargetingConfigDimensionsItem
     :: PretargetingConfigDimensionsItem
 pretargetingConfigDimensionsItem =
-    PretargetingConfigDimensionsItem
+    PretargetingConfigDimensionsItem'
     { _pcdiHeight = Nothing
     , _pcdiWidth = Nothing
     }
@@ -3589,12 +3593,12 @@ instance FromJSON PretargetingConfigDimensionsItem
         parseJSON
           = withObject "PretargetingConfigDimensionsItem"
               (\ o ->
-                 PretargetingConfigDimensionsItem <$>
+                 PretargetingConfigDimensionsItem' <$>
                    (o .:? "height") <*> (o .:? "width"))
 
 instance ToJSON PretargetingConfigDimensionsItem
          where
-        toJSON PretargetingConfigDimensionsItem{..}
+        toJSON PretargetingConfigDimensionsItem'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _pcdiHeight,
@@ -3602,7 +3606,7 @@ instance ToJSON PretargetingConfigDimensionsItem
 
 --
 -- /See:/ 'targetingValue' smart constructor.
-data TargetingValue = TargetingValue
+data TargetingValue = TargetingValue'
     { _tvCreativeSizeValue     :: !(Maybe TargetingValueCreativeSize)
     , _tvStringValue           :: !(Maybe Text)
     , _tvLongValue             :: !(Maybe (Textual Int64))
@@ -3623,7 +3627,7 @@ data TargetingValue = TargetingValue
 targetingValue
     :: TargetingValue
 targetingValue =
-    TargetingValue
+    TargetingValue'
     { _tvCreativeSizeValue = Nothing
     , _tvStringValue = Nothing
     , _tvLongValue = Nothing
@@ -3659,13 +3663,13 @@ instance FromJSON TargetingValue where
         parseJSON
           = withObject "TargetingValue"
               (\ o ->
-                 TargetingValue <$>
+                 TargetingValue' <$>
                    (o .:? "creativeSizeValue") <*> (o .:? "stringValue")
                      <*> (o .:? "longValue")
                      <*> (o .:? "dayPartTargetingValue"))
 
 instance ToJSON TargetingValue where
-        toJSON TargetingValue{..}
+        toJSON TargetingValue'{..}
           = object
               (catMaybes
                  [("creativeSizeValue" .=) <$> _tvCreativeSizeValue,
@@ -3677,7 +3681,7 @@ instance ToJSON TargetingValue where
 -- | The app icon, for app download ads.
 --
 -- /See:/ 'creativeNATiveAdAppIcon' smart constructor.
-data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon
+data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon'
     { _cnataaiHeight :: !(Maybe (Textual Int32))
     , _cnataaiURL    :: !(Maybe Text)
     , _cnataaiWidth  :: !(Maybe (Textual Int32))
@@ -3695,7 +3699,7 @@ data CreativeNATiveAdAppIcon = CreativeNATiveAdAppIcon
 creativeNATiveAdAppIcon
     :: CreativeNATiveAdAppIcon
 creativeNATiveAdAppIcon =
-    CreativeNATiveAdAppIcon
+    CreativeNATiveAdAppIcon'
     { _cnataaiHeight = Nothing
     , _cnataaiURL = Nothing
     , _cnataaiWidth = Nothing
@@ -3720,12 +3724,12 @@ instance FromJSON CreativeNATiveAdAppIcon where
         parseJSON
           = withObject "CreativeNATiveAdAppIcon"
               (\ o ->
-                 CreativeNATiveAdAppIcon <$>
+                 CreativeNATiveAdAppIcon' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width"))
 
 instance ToJSON CreativeNATiveAdAppIcon where
-        toJSON CreativeNATiveAdAppIcon{..}
+        toJSON CreativeNATiveAdAppIcon'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _cnataaiHeight,
@@ -3734,7 +3738,7 @@ instance ToJSON CreativeNATiveAdAppIcon where
 
 --
 -- /See:/ 'price' smart constructor.
-data Price = Price
+data Price = Price'
     { _pCurrencyCode :: !(Maybe Text)
     , _pAmountMicros :: !(Maybe (Textual Double))
     , _pPricingType  :: !(Maybe Text)
@@ -3752,7 +3756,7 @@ data Price = Price
 price
     :: Price
 price =
-    Price
+    Price'
     { _pCurrencyCode = Nothing
     , _pAmountMicros = Nothing
     , _pPricingType = Nothing
@@ -3780,12 +3784,12 @@ instance FromJSON Price where
         parseJSON
           = withObject "Price"
               (\ o ->
-                 Price <$>
+                 Price' <$>
                    (o .:? "currencyCode") <*> (o .:? "amountMicros") <*>
                      (o .:? "pricingType"))
 
 instance ToJSON Price where
-        toJSON Price{..}
+        toJSON Price'{..}
           = object
               (catMaybes
                  [("currencyCode" .=) <$> _pCurrencyCode,
@@ -3794,7 +3798,7 @@ instance ToJSON Price where
 
 --
 -- /See:/ 'pretargetingConfigVideoPlayerSizesItem' smart constructor.
-data PretargetingConfigVideoPlayerSizesItem = PretargetingConfigVideoPlayerSizesItem
+data PretargetingConfigVideoPlayerSizesItem = PretargetingConfigVideoPlayerSizesItem'
     { _pcvpsiMinWidth    :: !(Maybe (Textual Int64))
     , _pcvpsiAspectRatio :: !(Maybe Text)
     , _pcvpsiMinHeight   :: !(Maybe (Textual Int64))
@@ -3812,7 +3816,7 @@ data PretargetingConfigVideoPlayerSizesItem = PretargetingConfigVideoPlayerSizes
 pretargetingConfigVideoPlayerSizesItem
     :: PretargetingConfigVideoPlayerSizesItem
 pretargetingConfigVideoPlayerSizesItem =
-    PretargetingConfigVideoPlayerSizesItem
+    PretargetingConfigVideoPlayerSizesItem'
     { _pcvpsiMinWidth = Nothing
     , _pcvpsiAspectRatio = Nothing
     , _pcvpsiMinHeight = Nothing
@@ -3846,13 +3850,13 @@ instance FromJSON
         parseJSON
           = withObject "PretargetingConfigVideoPlayerSizesItem"
               (\ o ->
-                 PretargetingConfigVideoPlayerSizesItem <$>
+                 PretargetingConfigVideoPlayerSizesItem' <$>
                    (o .:? "minWidth") <*> (o .:? "aspectRatio") <*>
                      (o .:? "minHeight"))
 
 instance ToJSON
          PretargetingConfigVideoPlayerSizesItem where
-        toJSON PretargetingConfigVideoPlayerSizesItem{..}
+        toJSON PretargetingConfigVideoPlayerSizesItem'{..}
           = object
               (catMaybes
                  [("minWidth" .=) <$> _pcvpsiMinWidth,
@@ -3861,7 +3865,7 @@ instance ToJSON
 
 --
 -- /See:/ 'editAllOrderDealsRequest' smart constructor.
-data EditAllOrderDealsRequest = EditAllOrderDealsRequest
+data EditAllOrderDealsRequest = EditAllOrderDealsRequest'
     { _eUpdateAction           :: !(Maybe Text)
     , _eDeals                  :: !(Maybe [MarketplaceDeal])
     , _eProposalRevisionNumber :: !(Maybe (Textual Int64))
@@ -3882,7 +3886,7 @@ data EditAllOrderDealsRequest = EditAllOrderDealsRequest
 editAllOrderDealsRequest
     :: EditAllOrderDealsRequest
 editAllOrderDealsRequest =
-    EditAllOrderDealsRequest
+    EditAllOrderDealsRequest'
     { _eUpdateAction = Nothing
     , _eDeals = Nothing
     , _eProposalRevisionNumber = Nothing
@@ -3929,13 +3933,13 @@ instance FromJSON EditAllOrderDealsRequest where
         parseJSON
           = withObject "EditAllOrderDealsRequest"
               (\ o ->
-                 EditAllOrderDealsRequest <$>
+                 EditAllOrderDealsRequest' <$>
                    (o .:? "updateAction") <*> (o .:? "deals" .!= mempty)
                      <*> (o .:? "proposalRevisionNumber")
                      <*> (o .:? "proposal"))
 
 instance ToJSON EditAllOrderDealsRequest where
-        toJSON EditAllOrderDealsRequest{..}
+        toJSON EditAllOrderDealsRequest'{..}
           = object
               (catMaybes
                  [("updateAction" .=) <$> _eUpdateAction,
@@ -3947,7 +3951,7 @@ instance ToJSON EditAllOrderDealsRequest where
 -- | The configuration data for an Ad Exchange billing info.
 --
 -- /See:/ 'billingInfo' smart constructor.
-data BillingInfo = BillingInfo
+data BillingInfo = BillingInfo'
     { _biKind        :: !Text
     , _biAccountName :: !(Maybe Text)
     , _biAccountId   :: !(Maybe (Textual Int32))
@@ -3968,7 +3972,7 @@ data BillingInfo = BillingInfo
 billingInfo
     :: BillingInfo
 billingInfo =
-    BillingInfo
+    BillingInfo'
     { _biKind = "adexchangebuyer#billingInfo"
     , _biAccountName = Nothing
     , _biAccountId = Nothing
@@ -4004,14 +4008,14 @@ instance FromJSON BillingInfo where
         parseJSON
           = withObject "BillingInfo"
               (\ o ->
-                 BillingInfo <$>
+                 BillingInfo' <$>
                    (o .:? "kind" .!= "adexchangebuyer#billingInfo") <*>
                      (o .:? "accountName")
                      <*> (o .:? "accountId")
                      <*> (o .:? "billingId" .!= mempty))
 
 instance ToJSON BillingInfo where
-        toJSON BillingInfo{..}
+        toJSON BillingInfo'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _biKind),
@@ -4021,7 +4025,7 @@ instance ToJSON BillingInfo where
 
 --
 -- /See:/ 'targetingValueDayPartTargeting' smart constructor.
-data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting
+data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting'
     { _tvdptTimeZoneType :: !(Maybe Text)
     , _tvdptDayParts     :: !(Maybe [TargetingValueDayPartTargetingDayPart])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4036,7 +4040,7 @@ data TargetingValueDayPartTargeting = TargetingValueDayPartTargeting
 targetingValueDayPartTargeting
     :: TargetingValueDayPartTargeting
 targetingValueDayPartTargeting =
-    TargetingValueDayPartTargeting
+    TargetingValueDayPartTargeting'
     { _tvdptTimeZoneType = Nothing
     , _tvdptDayParts = Nothing
     }
@@ -4058,12 +4062,12 @@ instance FromJSON TargetingValueDayPartTargeting
         parseJSON
           = withObject "TargetingValueDayPartTargeting"
               (\ o ->
-                 TargetingValueDayPartTargeting <$>
+                 TargetingValueDayPartTargeting' <$>
                    (o .:? "timeZoneType") <*>
                      (o .:? "dayParts" .!= mempty))
 
 instance ToJSON TargetingValueDayPartTargeting where
-        toJSON TargetingValueDayPartTargeting{..}
+        toJSON TargetingValueDayPartTargeting'{..}
           = object
               (catMaybes
                  [("timeZoneType" .=) <$> _tvdptTimeZoneType,
@@ -4071,7 +4075,7 @@ instance ToJSON TargetingValueDayPartTargeting where
 
 --
 -- /See:/ 'sharedTargeting' smart constructor.
-data SharedTargeting = SharedTargeting
+data SharedTargeting = SharedTargeting'
     { _stKey        :: !(Maybe Text)
     , _stExclusions :: !(Maybe [TargetingValue])
     , _stInclusions :: !(Maybe [TargetingValue])
@@ -4089,7 +4093,7 @@ data SharedTargeting = SharedTargeting
 sharedTargeting
     :: SharedTargeting
 sharedTargeting =
-    SharedTargeting
+    SharedTargeting'
     { _stKey = Nothing
     , _stExclusions = Nothing
     , _stInclusions = Nothing
@@ -4117,12 +4121,12 @@ instance FromJSON SharedTargeting where
         parseJSON
           = withObject "SharedTargeting"
               (\ o ->
-                 SharedTargeting <$>
+                 SharedTargeting' <$>
                    (o .:? "key") <*> (o .:? "exclusions" .!= mempty) <*>
                      (o .:? "inclusions" .!= mempty))
 
 instance ToJSON SharedTargeting where
-        toJSON SharedTargeting{..}
+        toJSON SharedTargeting'{..}
           = object
               (catMaybes
                  [("key" .=) <$> _stKey,
@@ -4132,7 +4136,7 @@ instance ToJSON SharedTargeting where
 -- | A large image.
 --
 -- /See:/ 'creativeNATiveAdImage' smart constructor.
-data CreativeNATiveAdImage = CreativeNATiveAdImage
+data CreativeNATiveAdImage = CreativeNATiveAdImage'
     { _cnataiHeight :: !(Maybe (Textual Int32))
     , _cnataiURL    :: !(Maybe Text)
     , _cnataiWidth  :: !(Maybe (Textual Int32))
@@ -4150,7 +4154,7 @@ data CreativeNATiveAdImage = CreativeNATiveAdImage
 creativeNATiveAdImage
     :: CreativeNATiveAdImage
 creativeNATiveAdImage =
-    CreativeNATiveAdImage
+    CreativeNATiveAdImage'
     { _cnataiHeight = Nothing
     , _cnataiURL = Nothing
     , _cnataiWidth = Nothing
@@ -4174,12 +4178,12 @@ instance FromJSON CreativeNATiveAdImage where
         parseJSON
           = withObject "CreativeNATiveAdImage"
               (\ o ->
-                 CreativeNATiveAdImage <$>
+                 CreativeNATiveAdImage' <$>
                    (o .:? "height") <*> (o .:? "url") <*>
                      (o .:? "width"))
 
 instance ToJSON CreativeNATiveAdImage where
-        toJSON CreativeNATiveAdImage{..}
+        toJSON CreativeNATiveAdImage'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _cnataiHeight,
@@ -4195,7 +4199,7 @@ instance ToJSON CreativeNATiveAdImage where
 -- field is updatable at all times by either buyer or the seller.
 --
 -- /See:/ 'product' smart constructor.
-data Product = Product
+data Product = Product'
     { _proState               :: !(Maybe Text)
     , _proInventorySource     :: !(Maybe Text)
     , _proWebPropertyCode     :: !(Maybe Text)
@@ -4258,7 +4262,7 @@ data Product = Product
 product
     :: Product
 product =
-    Product
+    Product'
     { _proState = Nothing
     , _proInventorySource = Nothing
     , _proWebPropertyCode = Nothing
@@ -4400,7 +4404,7 @@ instance FromJSON Product where
         parseJSON
           = withObject "Product"
               (\ o ->
-                 Product <$>
+                 Product' <$>
                    (o .:? "state") <*> (o .:? "inventorySource") <*>
                      (o .:? "webPropertyCode")
                      <*> (o .:? "creationTimeMs")
@@ -4420,7 +4424,7 @@ instance FromJSON Product where
                      <*> (o .:? "productId"))
 
 instance ToJSON Product where
-        toJSON Product{..}
+        toJSON Product'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _proState,
@@ -4445,7 +4449,7 @@ instance ToJSON Product where
 
 --
 -- /See:/ 'creativeServingRestrictionsItem' smart constructor.
-data CreativeServingRestrictionsItem = CreativeServingRestrictionsItem
+data CreativeServingRestrictionsItem = CreativeServingRestrictionsItem'
     { _csriContexts           :: !(Maybe [CreativeServingRestrictionsItemContextsItem])
     , _csriReason             :: !(Maybe Text)
     , _csriDisApprovalReasons :: !(Maybe [CreativeServingRestrictionsItemDisApprovalReasonsItem])
@@ -4463,7 +4467,7 @@ data CreativeServingRestrictionsItem = CreativeServingRestrictionsItem
 creativeServingRestrictionsItem
     :: CreativeServingRestrictionsItem
 creativeServingRestrictionsItem =
-    CreativeServingRestrictionsItem
+    CreativeServingRestrictionsItem'
     { _csriContexts = Nothing
     , _csriReason = Nothing
     , _csriDisApprovalReasons = Nothing
@@ -4499,12 +4503,12 @@ instance FromJSON CreativeServingRestrictionsItem
         parseJSON
           = withObject "CreativeServingRestrictionsItem"
               (\ o ->
-                 CreativeServingRestrictionsItem <$>
+                 CreativeServingRestrictionsItem' <$>
                    (o .:? "contexts" .!= mempty) <*> (o .:? "reason")
                      <*> (o .:? "disapprovalReasons" .!= mempty))
 
 instance ToJSON CreativeServingRestrictionsItem where
-        toJSON CreativeServingRestrictionsItem{..}
+        toJSON CreativeServingRestrictionsItem'{..}
           = object
               (catMaybes
                  [("contexts" .=) <$> _csriContexts,
@@ -4514,7 +4518,7 @@ instance ToJSON CreativeServingRestrictionsItem where
 
 --
 -- /See:/ 'deleteOrderDealsResponse' smart constructor.
-data DeleteOrderDealsResponse = DeleteOrderDealsResponse
+data DeleteOrderDealsResponse = DeleteOrderDealsResponse'
     { _dDeals                  :: !(Maybe [MarketplaceDeal])
     , _dProposalRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4529,7 +4533,7 @@ data DeleteOrderDealsResponse = DeleteOrderDealsResponse
 deleteOrderDealsResponse
     :: DeleteOrderDealsResponse
 deleteOrderDealsResponse =
-    DeleteOrderDealsResponse
+    DeleteOrderDealsResponse'
     { _dDeals = Nothing
     , _dProposalRevisionNumber = Nothing
     }
@@ -4551,12 +4555,12 @@ instance FromJSON DeleteOrderDealsResponse where
         parseJSON
           = withObject "DeleteOrderDealsResponse"
               (\ o ->
-                 DeleteOrderDealsResponse <$>
+                 DeleteOrderDealsResponse' <$>
                    (o .:? "deals" .!= mempty) <*>
                      (o .:? "proposalRevisionNumber"))
 
 instance ToJSON DeleteOrderDealsResponse where
-        toJSON DeleteOrderDealsResponse{..}
+        toJSON DeleteOrderDealsResponse'{..}
           = object
               (catMaybes
                  [("deals" .=) <$> _dDeals,
@@ -4565,7 +4569,7 @@ instance ToJSON DeleteOrderDealsResponse where
 
 --
 -- /See:/ 'pretargetingConfigPlacementsItem' smart constructor.
-data PretargetingConfigPlacementsItem = PretargetingConfigPlacementsItem
+data PretargetingConfigPlacementsItem = PretargetingConfigPlacementsItem'
     { _pcpiToken :: !(Maybe Text)
     , _pcpiType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4580,7 +4584,7 @@ data PretargetingConfigPlacementsItem = PretargetingConfigPlacementsItem
 pretargetingConfigPlacementsItem
     :: PretargetingConfigPlacementsItem
 pretargetingConfigPlacementsItem =
-    PretargetingConfigPlacementsItem
+    PretargetingConfigPlacementsItem'
     { _pcpiToken = Nothing
     , _pcpiType = Nothing
     }
@@ -4601,12 +4605,12 @@ instance FromJSON PretargetingConfigPlacementsItem
         parseJSON
           = withObject "PretargetingConfigPlacementsItem"
               (\ o ->
-                 PretargetingConfigPlacementsItem <$>
+                 PretargetingConfigPlacementsItem' <$>
                    (o .:? "token") <*> (o .:? "type"))
 
 instance ToJSON PretargetingConfigPlacementsItem
          where
-        toJSON PretargetingConfigPlacementsItem{..}
+        toJSON PretargetingConfigPlacementsItem'{..}
           = object
               (catMaybes
                  [("token" .=) <$> _pcpiToken,
@@ -4616,7 +4620,7 @@ instance ToJSON PretargetingConfigPlacementsItem
 -- targeting information that is used for serving.
 --
 -- /See:/ 'marketplaceDeal' smart constructor.
-data MarketplaceDeal = MarketplaceDeal
+data MarketplaceDeal = MarketplaceDeal'
     { _mdExternalDealId            :: !(Maybe Text)
     , _mdBuyerPrivateData          :: !(Maybe PrivateData)
     , _mdWebPropertyCode           :: !(Maybe Text)
@@ -4685,7 +4689,7 @@ data MarketplaceDeal = MarketplaceDeal
 marketplaceDeal
     :: MarketplaceDeal
 marketplaceDeal =
-    MarketplaceDeal
+    MarketplaceDeal'
     { _mdExternalDealId = Nothing
     , _mdBuyerPrivateData = Nothing
     , _mdWebPropertyCode = Nothing
@@ -4839,7 +4843,7 @@ instance FromJSON MarketplaceDeal where
         parseJSON
           = withObject "MarketplaceDeal"
               (\ o ->
-                 MarketplaceDeal <$>
+                 MarketplaceDeal' <$>
                    (o .:? "externalDealId") <*>
                      (o .:? "buyerPrivateData")
                      <*> (o .:? "webPropertyCode")
@@ -4863,7 +4867,7 @@ instance FromJSON MarketplaceDeal where
                      <*> (o .:? "productId"))
 
 instance ToJSON MarketplaceDeal where
-        toJSON MarketplaceDeal{..}
+        toJSON MarketplaceDeal'{..}
           = object
               (catMaybes
                  [("externalDealId" .=) <$> _mdExternalDealId,
@@ -4892,7 +4896,7 @@ instance ToJSON MarketplaceDeal where
 
 --
 -- /See:/ 'getOffersResponse' smart constructor.
-newtype GetOffersResponse = GetOffersResponse
+newtype GetOffersResponse = GetOffersResponse'
     { _gorProducts :: Maybe [Product]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4904,7 +4908,7 @@ newtype GetOffersResponse = GetOffersResponse
 getOffersResponse
     :: GetOffersResponse
 getOffersResponse =
-    GetOffersResponse
+    GetOffersResponse'
     { _gorProducts = Nothing
     }
 
@@ -4919,16 +4923,16 @@ instance FromJSON GetOffersResponse where
         parseJSON
           = withObject "GetOffersResponse"
               (\ o ->
-                 GetOffersResponse <$> (o .:? "products" .!= mempty))
+                 GetOffersResponse' <$> (o .:? "products" .!= mempty))
 
 instance ToJSON GetOffersResponse where
-        toJSON GetOffersResponse{..}
+        toJSON GetOffersResponse'{..}
           = object
               (catMaybes [("products" .=) <$> _gorProducts])
 
 --
 -- /See:/ 'dealTermsNonGuaranteedAuctionTerms' smart constructor.
-data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms
+data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms'
     { _dtngatReservePricePerBuyers :: !(Maybe [PricePerBuyer])
     , _dtngatPrivateAuctionId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4943,7 +4947,7 @@ data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms
 dealTermsNonGuaranteedAuctionTerms
     :: DealTermsNonGuaranteedAuctionTerms
 dealTermsNonGuaranteedAuctionTerms =
-    DealTermsNonGuaranteedAuctionTerms
+    DealTermsNonGuaranteedAuctionTerms'
     { _dtngatReservePricePerBuyers = Nothing
     , _dtngatPrivateAuctionId = Nothing
     }
@@ -4967,13 +4971,13 @@ instance FromJSON DealTermsNonGuaranteedAuctionTerms
         parseJSON
           = withObject "DealTermsNonGuaranteedAuctionTerms"
               (\ o ->
-                 DealTermsNonGuaranteedAuctionTerms <$>
+                 DealTermsNonGuaranteedAuctionTerms' <$>
                    (o .:? "reservePricePerBuyers" .!= mempty) <*>
                      (o .:? "privateAuctionId"))
 
 instance ToJSON DealTermsNonGuaranteedAuctionTerms
          where
-        toJSON DealTermsNonGuaranteedAuctionTerms{..}
+        toJSON DealTermsNonGuaranteedAuctionTerms'{..}
           = object
               (catMaybes
                  [("reservePricePerBuyers" .=) <$>
@@ -4982,7 +4986,7 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
 
 --
 -- /See:/ 'creativeFilteringReasonsReasonsItem' smart constructor.
-data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem
+data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem'
     { _cfrriFilteringStatus :: !(Maybe (Textual Int32))
     , _cfrriFilteringCount  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4997,7 +5001,7 @@ data CreativeFilteringReasonsReasonsItem = CreativeFilteringReasonsReasonsItem
 creativeFilteringReasonsReasonsItem
     :: CreativeFilteringReasonsReasonsItem
 creativeFilteringReasonsReasonsItem =
-    CreativeFilteringReasonsReasonsItem
+    CreativeFilteringReasonsReasonsItem'
     { _cfrriFilteringStatus = Nothing
     , _cfrriFilteringCount = Nothing
     }
@@ -5023,13 +5027,13 @@ instance FromJSON CreativeFilteringReasonsReasonsItem
         parseJSON
           = withObject "CreativeFilteringReasonsReasonsItem"
               (\ o ->
-                 CreativeFilteringReasonsReasonsItem <$>
+                 CreativeFilteringReasonsReasonsItem' <$>
                    (o .:? "filteringStatus") <*>
                      (o .:? "filteringCount"))
 
 instance ToJSON CreativeFilteringReasonsReasonsItem
          where
-        toJSON CreativeFilteringReasonsReasonsItem{..}
+        toJSON CreativeFilteringReasonsReasonsItem'{..}
           = object
               (catMaybes
                  [("filteringStatus" .=) <$> _cfrriFilteringStatus,
@@ -5037,7 +5041,7 @@ instance ToJSON CreativeFilteringReasonsReasonsItem
 
 --
 -- /See:/ 'dealTerms' smart constructor.
-data DealTerms = DealTerms
+data DealTerms = DealTerms'
     { _dtEstimatedGrossSpend          :: !(Maybe Price)
     , _dtNonGuaranteedFixedPriceTerms :: !(Maybe DealTermsNonGuaranteedFixedPriceTerms)
     , _dtNonGuaranteedAuctionTerms    :: !(Maybe DealTermsNonGuaranteedAuctionTerms)
@@ -5067,7 +5071,7 @@ data DealTerms = DealTerms
 dealTerms
     :: DealTerms
 dealTerms =
-    DealTerms
+    DealTerms'
     { _dtEstimatedGrossSpend = Nothing
     , _dtNonGuaranteedFixedPriceTerms = Nothing
     , _dtNonGuaranteedAuctionTerms = Nothing
@@ -5126,7 +5130,7 @@ instance FromJSON DealTerms where
         parseJSON
           = withObject "DealTerms"
               (\ o ->
-                 DealTerms <$>
+                 DealTerms' <$>
                    (o .:? "estimatedGrossSpend") <*>
                      (o .:? "nonGuaranteedFixedPriceTerms")
                      <*> (o .:? "nonGuaranteedAuctionTerms")
@@ -5136,7 +5140,7 @@ instance FromJSON DealTerms where
                      <*> (o .:? "description"))
 
 instance ToJSON DealTerms where
-        toJSON DealTerms{..}
+        toJSON DealTerms'{..}
           = object
               (catMaybes
                  [("estimatedGrossSpend" .=) <$>
@@ -5154,7 +5158,7 @@ instance ToJSON DealTerms where
 
 --
 -- /See:/ 'marketplaceLabel' smart constructor.
-data MarketplaceLabel = MarketplaceLabel
+data MarketplaceLabel = MarketplaceLabel'
     { _mlDeprecatedMarketplaceDealParty :: !(Maybe MarketplaceDealParty)
     , _mlAccountId                      :: !(Maybe Text)
     , _mlCreateTimeMs                   :: !(Maybe (Textual Int64))
@@ -5175,7 +5179,7 @@ data MarketplaceLabel = MarketplaceLabel
 marketplaceLabel
     :: MarketplaceLabel
 marketplaceLabel =
-    MarketplaceLabel
+    MarketplaceLabel'
     { _mlDeprecatedMarketplaceDealParty = Nothing
     , _mlAccountId = Nothing
     , _mlCreateTimeMs = Nothing
@@ -5208,14 +5212,14 @@ instance FromJSON MarketplaceLabel where
         parseJSON
           = withObject "MarketplaceLabel"
               (\ o ->
-                 MarketplaceLabel <$>
+                 MarketplaceLabel' <$>
                    (o .:? "deprecatedMarketplaceDealParty") <*>
                      (o .:? "accountId")
                      <*> (o .:? "createTimeMs")
                      <*> (o .:? "label"))
 
 instance ToJSON MarketplaceLabel where
-        toJSON MarketplaceLabel{..}
+        toJSON MarketplaceLabel'{..}
           = object
               (catMaybes
                  [("deprecatedMarketplaceDealParty" .=) <$>
@@ -5226,7 +5230,7 @@ instance ToJSON MarketplaceLabel where
 
 --
 -- /See:/ 'buyer' smart constructor.
-newtype Buyer = Buyer
+newtype Buyer = Buyer'
     { _buyAccountId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5238,7 +5242,7 @@ newtype Buyer = Buyer
 buyer
     :: Buyer
 buyer =
-    Buyer
+    Buyer'
     { _buyAccountId = Nothing
     }
 
@@ -5250,16 +5254,16 @@ buyAccountId
 instance FromJSON Buyer where
         parseJSON
           = withObject "Buyer"
-              (\ o -> Buyer <$> (o .:? "accountId"))
+              (\ o -> Buyer' <$> (o .:? "accountId"))
 
 instance ToJSON Buyer where
-        toJSON Buyer{..}
+        toJSON Buyer'{..}
           = object
               (catMaybes [("accountId" .=) <$> _buyAccountId])
 
 --
 -- /See:/ 'addOrderDealsRequest' smart constructor.
-data AddOrderDealsRequest = AddOrderDealsRequest
+data AddOrderDealsRequest = AddOrderDealsRequest'
     { _aUpdateAction           :: !(Maybe Text)
     , _aDeals                  :: !(Maybe [MarketplaceDeal])
     , _aProposalRevisionNumber :: !(Maybe (Textual Int64))
@@ -5277,7 +5281,7 @@ data AddOrderDealsRequest = AddOrderDealsRequest
 addOrderDealsRequest
     :: AddOrderDealsRequest
 addOrderDealsRequest =
-    AddOrderDealsRequest
+    AddOrderDealsRequest'
     { _aUpdateAction = Nothing
     , _aDeals = Nothing
     , _aProposalRevisionNumber = Nothing
@@ -5306,12 +5310,12 @@ instance FromJSON AddOrderDealsRequest where
         parseJSON
           = withObject "AddOrderDealsRequest"
               (\ o ->
-                 AddOrderDealsRequest <$>
+                 AddOrderDealsRequest' <$>
                    (o .:? "updateAction") <*> (o .:? "deals" .!= mempty)
                      <*> (o .:? "proposalRevisionNumber"))
 
 instance ToJSON AddOrderDealsRequest where
-        toJSON AddOrderDealsRequest{..}
+        toJSON AddOrderDealsRequest'{..}
           = object
               (catMaybes
                  [("updateAction" .=) <$> _aUpdateAction,
@@ -5321,7 +5325,7 @@ instance ToJSON AddOrderDealsRequest where
 
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTerms' smart constructor.
-data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms
+data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms'
     { _dtgfptGuaranteedLooks       :: !(Maybe (Textual Int64))
     , _dtgfptGuaranteedImpressions :: !(Maybe (Textual Int64))
     , _dtgfptFixedPrices           :: !(Maybe [PricePerBuyer])
@@ -5339,7 +5343,7 @@ data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms
 dealTermsGuaranteedFixedPriceTerms
     :: DealTermsGuaranteedFixedPriceTerms
 dealTermsGuaranteedFixedPriceTerms =
-    DealTermsGuaranteedFixedPriceTerms
+    DealTermsGuaranteedFixedPriceTerms'
     { _dtgfptGuaranteedLooks = Nothing
     , _dtgfptGuaranteedImpressions = Nothing
     , _dtgfptFixedPrices = Nothing
@@ -5373,14 +5377,14 @@ instance FromJSON DealTermsGuaranteedFixedPriceTerms
         parseJSON
           = withObject "DealTermsGuaranteedFixedPriceTerms"
               (\ o ->
-                 DealTermsGuaranteedFixedPriceTerms <$>
+                 DealTermsGuaranteedFixedPriceTerms' <$>
                    (o .:? "guaranteedLooks") <*>
                      (o .:? "guaranteedImpressions")
                      <*> (o .:? "fixedPrices" .!= mempty))
 
 instance ToJSON DealTermsGuaranteedFixedPriceTerms
          where
-        toJSON DealTermsGuaranteedFixedPriceTerms{..}
+        toJSON DealTermsGuaranteedFixedPriceTerms'{..}
           = object
               (catMaybes
                  [("guaranteedLooks" .=) <$> _dtgfptGuaranteedLooks,

@@ -77,7 +77,7 @@ type GoogleServiceAccountsGetResource =
 -- Service and can only be used by Storage Transfer Service.
 --
 -- /See:/ 'googleServiceAccountsGet' smart constructor.
-data GoogleServiceAccountsGet = GoogleServiceAccountsGet
+data GoogleServiceAccountsGet = GoogleServiceAccountsGet'
     { _gsagXgafv          :: !(Maybe Text)
     , _gsagUploadProtocol :: !(Maybe Text)
     , _gsagPp             :: !Bool
@@ -111,7 +111,7 @@ googleServiceAccountsGet
     :: Text -- ^ 'gsagProjectId'
     -> GoogleServiceAccountsGet
 googleServiceAccountsGet pGsagProjectId_ =
-    GoogleServiceAccountsGet
+    GoogleServiceAccountsGet'
     { _gsagXgafv = Nothing
     , _gsagUploadProtocol = Nothing
     , _gsagPp = True
@@ -172,7 +172,7 @@ instance GoogleRequest GoogleServiceAccountsGet where
              GoogleServiceAccount
         type Scopes GoogleServiceAccountsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient GoogleServiceAccountsGet{..}
+        requestClient GoogleServiceAccountsGet'{..}
           = go _gsagProjectId _gsagXgafv _gsagUploadProtocol
               (Just _gsagPp)
               _gsagAccessToken

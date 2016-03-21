@@ -67,7 +67,7 @@ type BeaconInfoGetforObservedResource =
 -- and attachments accessible to your application.
 --
 -- /See:/ 'beaconInfoGetforObserved' smart constructor.
-data BeaconInfoGetforObserved = BeaconInfoGetforObserved
+data BeaconInfoGetforObserved = BeaconInfoGetforObserved'
     { _bigoXgafv          :: !(Maybe Text)
     , _bigoUploadProtocol :: !(Maybe Text)
     , _bigoPp             :: !Bool
@@ -101,7 +101,7 @@ beaconInfoGetforObserved
     :: GetInfoForObservedBeaconsRequest -- ^ 'bigoPayload'
     -> BeaconInfoGetforObserved
 beaconInfoGetforObserved pBigoPayload_ =
-    BeaconInfoGetforObserved
+    BeaconInfoGetforObserved'
     { _bigoXgafv = Nothing
     , _bigoUploadProtocol = Nothing
     , _bigoPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest BeaconInfoGetforObserved where
         type Rs BeaconInfoGetforObserved =
              GetInfoForObservedBeaconsResponse
         type Scopes BeaconInfoGetforObserved = '[]
-        requestClient BeaconInfoGetforObserved{..}
+        requestClient BeaconInfoGetforObserved'{..}
           = go _bigoXgafv _bigoUploadProtocol (Just _bigoPp)
               _bigoAccessToken
               _bigoUploadType

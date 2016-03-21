@@ -51,14 +51,14 @@ type ChangesGetStartPageTokenResource =
 --
 -- /See:/ 'changesGetStartPageToken' smart constructor.
 data ChangesGetStartPageToken =
-    ChangesGetStartPageToken
+    ChangesGetStartPageToken'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesGetStartPageToken' with the minimum fields required to make a request.
 --
 changesGetStartPageToken
     :: ChangesGetStartPageToken
-changesGetStartPageToken = ChangesGetStartPageToken
+changesGetStartPageToken = ChangesGetStartPageToken'
 
 instance GoogleRequest ChangesGetStartPageToken where
         type Rs ChangesGetStartPageToken = StartPageToken
@@ -70,7 +70,7 @@ instance GoogleRequest ChangesGetStartPageToken where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient ChangesGetStartPageToken{}
+        requestClient ChangesGetStartPageToken'{}
           = go (Just AltJSON) driveService
           where go
                   = buildClient

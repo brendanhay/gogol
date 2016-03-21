@@ -62,7 +62,7 @@ type EditsAPKListingsGetResource =
 -- language code.
 --
 -- /See:/ 'editsAPKListingsGet' smart constructor.
-data EditsAPKListingsGet = EditsAPKListingsGet
+data EditsAPKListingsGet = EditsAPKListingsGet'
     { _eapklgPackageName    :: !Text
     , _eapklgAPKVersionCode :: !(Textual Int32)
     , _eapklgLanguage       :: !Text
@@ -87,7 +87,7 @@ editsAPKListingsGet
     -> Text -- ^ 'eapklgEditId'
     -> EditsAPKListingsGet
 editsAPKListingsGet pEapklgPackageName_ pEapklgAPKVersionCode_ pEapklgLanguage_ pEapklgEditId_ =
-    EditsAPKListingsGet
+    EditsAPKListingsGet'
     { _eapklgPackageName = pEapklgPackageName_
     , _eapklgAPKVersionCode = _Coerce # pEapklgAPKVersionCode_
     , _eapklgLanguage = pEapklgLanguage_
@@ -126,7 +126,7 @@ instance GoogleRequest EditsAPKListingsGet where
         type Rs EditsAPKListingsGet = APKListing
         type Scopes EditsAPKListingsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKListingsGet{..}
+        requestClient EditsAPKListingsGet'{..}
           = go _eapklgPackageName _eapklgEditId
               _eapklgAPKVersionCode
               _eapklgLanguage

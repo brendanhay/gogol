@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- user.
 --
 -- /See:/ 'notificationConfig' smart constructor.
-data NotificationConfig = NotificationConfig
+data NotificationConfig = NotificationConfig'
     { _ncDeliveryTime :: !(Maybe DateTime')
     , _ncLevel        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -39,7 +39,7 @@ data NotificationConfig = NotificationConfig
 notificationConfig
     :: NotificationConfig
 notificationConfig =
-    NotificationConfig
+    NotificationConfig'
     { _ncDeliveryTime = Nothing
     , _ncLevel = Nothing
     }
@@ -61,11 +61,11 @@ instance FromJSON NotificationConfig where
         parseJSON
           = withObject "NotificationConfig"
               (\ o ->
-                 NotificationConfig <$>
+                 NotificationConfig' <$>
                    (o .:? "deliveryTime") <*> (o .:? "level"))
 
 instance ToJSON NotificationConfig where
-        toJSON NotificationConfig{..}
+        toJSON NotificationConfig'{..}
           = object
               (catMaybes
                  [("deliveryTime" .=) <$> _ncDeliveryTime,
@@ -74,7 +74,7 @@ instance ToJSON NotificationConfig where
 -- | A single menu command that is part of a Contact.
 --
 -- /See:/ 'command' smart constructor.
-newtype Command = Command
+newtype Command = Command'
     { _cType :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,7 +86,7 @@ newtype Command = Command
 command
     :: Command
 command =
-    Command
+    Command'
     { _cType = Nothing
     }
 
@@ -101,17 +101,17 @@ cType = lens _cType (\ s a -> s{_cType = a})
 instance FromJSON Command where
         parseJSON
           = withObject "Command"
-              (\ o -> Command <$> (o .:? "type"))
+              (\ o -> Command' <$> (o .:? "type"))
 
 instance ToJSON Command where
-        toJSON Command{..}
+        toJSON Command'{..}
           = object (catMaybes [("type" .=) <$> _cType])
 
 -- | A list of Locations. This is the response from the server to GET
 -- requests on the locations collection.
 --
 -- /See:/ 'locationsListResponse' smart constructor.
-data LocationsListResponse = LocationsListResponse
+data LocationsListResponse = LocationsListResponse'
     { _llrKind  :: !Text
     , _llrItems :: !(Maybe [Location])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -126,7 +126,7 @@ data LocationsListResponse = LocationsListResponse
 locationsListResponse
     :: LocationsListResponse
 locationsListResponse =
-    LocationsListResponse
+    LocationsListResponse'
     { _llrKind = "mirror#locationsList"
     , _llrItems = Nothing
     }
@@ -146,12 +146,12 @@ instance FromJSON LocationsListResponse where
         parseJSON
           = withObject "LocationsListResponse"
               (\ o ->
-                 LocationsListResponse <$>
+                 LocationsListResponse' <$>
                    (o .:? "kind" .!= "mirror#locationsList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON LocationsListResponse where
-        toJSON LocationsListResponse{..}
+        toJSON LocationsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _llrKind),
@@ -160,7 +160,7 @@ instance ToJSON LocationsListResponse where
 -- | A geographic location that can be associated with a timeline item.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location
+data Location = Location'
     { _lKind        :: !Text
     , _lLatitude    :: !(Maybe (Textual Double))
     , _lAddress     :: !(Maybe Text)
@@ -193,7 +193,7 @@ data Location = Location
 location
     :: Location
 location =
-    Location
+    Location'
     { _lKind = "mirror#location"
     , _lLatitude = Nothing
     , _lAddress = Nothing
@@ -251,7 +251,7 @@ instance FromJSON Location where
         parseJSON
           = withObject "Location"
               (\ o ->
-                 Location <$>
+                 Location' <$>
                    (o .:? "kind" .!= "mirror#location") <*>
                      (o .:? "latitude")
                      <*> (o .:? "address")
@@ -262,7 +262,7 @@ instance FromJSON Location where
                      <*> (o .:? "timestamp"))
 
 instance ToJSON Location where
-        toJSON Location{..}
+        toJSON Location'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lKind),
@@ -276,7 +276,7 @@ instance ToJSON Location where
 -- | A notification delivered by the API.
 --
 -- /See:/ 'notification' smart constructor.
-data Notification = Notification
+data Notification = Notification'
     { _nOperation   :: !(Maybe Text)
     , _nItemId      :: !(Maybe Text)
     , _nCollection  :: !(Maybe Text)
@@ -303,7 +303,7 @@ data Notification = Notification
 notification
     :: Notification
 notification =
-    Notification
+    Notification'
     { _nOperation = Nothing
     , _nItemId = Nothing
     , _nCollection = Nothing
@@ -349,7 +349,7 @@ instance FromJSON Notification where
         parseJSON
           = withObject "Notification"
               (\ o ->
-                 Notification <$>
+                 Notification' <$>
                    (o .:? "operation") <*> (o .:? "itemId") <*>
                      (o .:? "collection")
                      <*> (o .:? "userActions" .!= mempty)
@@ -357,7 +357,7 @@ instance FromJSON Notification where
                      <*> (o .:? "userToken"))
 
 instance ToJSON Notification where
-        toJSON Notification{..}
+        toJSON Notification'{..}
           = object
               (catMaybes
                  [("operation" .=) <$> _nOperation,
@@ -370,7 +370,7 @@ instance ToJSON Notification where
 -- | A person or group that can be used as a creator or a contact.
 --
 -- /See:/ 'contact' smart constructor.
-data Contact = Contact
+data Contact = Contact'
     { _conAcceptCommands  :: !(Maybe [Command])
     , _conSharingFeatures :: !(Maybe [Text])
     , _conImageURLs       :: !(Maybe [Text])
@@ -415,7 +415,7 @@ data Contact = Contact
 contact
     :: Contact
 contact =
-    Contact
+    Contact'
     { _conAcceptCommands = Nothing
     , _conSharingFeatures = Nothing
     , _conImageURLs = Nothing
@@ -526,7 +526,7 @@ instance FromJSON Contact where
         parseJSON
           = withObject "Contact"
               (\ o ->
-                 Contact <$>
+                 Contact' <$>
                    (o .:? "acceptCommands" .!= mempty) <*>
                      (o .:? "sharingFeatures" .!= mempty)
                      <*> (o .:? "imageUrls" .!= mempty)
@@ -541,7 +541,7 @@ instance FromJSON Contact where
                      <*> (o .:? "speakableName"))
 
 instance ToJSON Contact where
-        toJSON Contact{..}
+        toJSON Contact'{..}
           = object
               (catMaybes
                  [("acceptCommands" .=) <$> _conAcceptCommands,
@@ -558,7 +558,7 @@ instance ToJSON Contact where
 
 --
 -- /See:/ 'authToken' smart constructor.
-data AuthToken = AuthToken
+data AuthToken = AuthToken'
     { _atAuthToken :: !(Maybe Text)
     , _atType      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -573,7 +573,7 @@ data AuthToken = AuthToken
 authToken
     :: AuthToken
 authToken =
-    AuthToken
+    AuthToken'
     { _atAuthToken = Nothing
     , _atType = Nothing
     }
@@ -589,10 +589,11 @@ instance FromJSON AuthToken where
         parseJSON
           = withObject "AuthToken"
               (\ o ->
-                 AuthToken <$> (o .:? "authToken") <*> (o .:? "type"))
+                 AuthToken' <$>
+                   (o .:? "authToken") <*> (o .:? "type"))
 
 instance ToJSON AuthToken where
-        toJSON AuthToken{..}
+        toJSON AuthToken'{..}
           = object
               (catMaybes
                  [("authToken" .=) <$> _atAuthToken,
@@ -602,7 +603,7 @@ instance ToJSON AuthToken where
 -- requests on the attachments collection.
 --
 -- /See:/ 'attachmentsListResponse' smart constructor.
-data AttachmentsListResponse = AttachmentsListResponse
+data AttachmentsListResponse = AttachmentsListResponse'
     { _alrKind  :: !Text
     , _alrItems :: !(Maybe [Attachment])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -617,7 +618,7 @@ data AttachmentsListResponse = AttachmentsListResponse
 attachmentsListResponse
     :: AttachmentsListResponse
 attachmentsListResponse =
-    AttachmentsListResponse
+    AttachmentsListResponse'
     { _alrKind = "mirror#attachmentsList"
     , _alrItems = Nothing
     }
@@ -637,12 +638,12 @@ instance FromJSON AttachmentsListResponse where
         parseJSON
           = withObject "AttachmentsListResponse"
               (\ o ->
-                 AttachmentsListResponse <$>
+                 AttachmentsListResponse' <$>
                    (o .:? "kind" .!= "mirror#attachmentsList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON AttachmentsListResponse where
-        toJSON AttachmentsListResponse{..}
+        toJSON AttachmentsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _alrKind),
@@ -651,7 +652,7 @@ instance ToJSON AttachmentsListResponse where
 -- | A custom menu item that can be presented to the user by a timeline item.
 --
 -- /See:/ 'menuItem' smart constructor.
-data MenuItem = MenuItem
+data MenuItem = MenuItem'
     { _miValues             :: !(Maybe [MenuValue])
     , _miRemoveWhenSelected :: !(Maybe Bool)
     , _miAction             :: !(Maybe Text)
@@ -678,7 +679,7 @@ data MenuItem = MenuItem
 menuItem
     :: MenuItem
 menuItem =
-    MenuItem
+    MenuItem'
     { _miValues = Nothing
     , _miRemoveWhenSelected = Nothing
     , _miAction = Nothing
@@ -763,7 +764,7 @@ instance FromJSON MenuItem where
         parseJSON
           = withObject "MenuItem"
               (\ o ->
-                 MenuItem <$>
+                 MenuItem' <$>
                    (o .:? "values" .!= mempty) <*>
                      (o .:? "removeWhenSelected")
                      <*> (o .:? "action")
@@ -772,7 +773,7 @@ instance FromJSON MenuItem where
                      <*> (o .:? "id"))
 
 instance ToJSON MenuItem where
-        toJSON MenuItem{..}
+        toJSON MenuItem'{..}
           = object
               (catMaybes
                  [("values" .=) <$> _miValues,
@@ -785,7 +786,7 @@ instance ToJSON MenuItem where
 -- | A setting for Glass.
 --
 -- /See:/ 'setting' smart constructor.
-data Setting = Setting
+data Setting = Setting'
     { _sKind  :: !Text
     , _sValue :: !(Maybe Text)
     , _sId    :: !(Maybe Text)
@@ -803,7 +804,7 @@ data Setting = Setting
 setting
     :: Setting
 setting =
-    Setting
+    Setting'
     { _sKind = "mirror#setting"
     , _sValue = Nothing
     , _sId = Nothing
@@ -829,13 +830,13 @@ instance FromJSON Setting where
         parseJSON
           = withObject "Setting"
               (\ o ->
-                 Setting <$>
+                 Setting' <$>
                    (o .:? "kind" .!= "mirror#setting") <*>
                      (o .:? "value")
                      <*> (o .:? "id"))
 
 instance ToJSON Setting where
-        toJSON Setting{..}
+        toJSON Setting'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sKind), ("value" .=) <$> _sValue,
@@ -845,7 +846,7 @@ instance ToJSON Setting where
 -- timeline item.
 --
 -- /See:/ 'attachment' smart constructor.
-data Attachment = Attachment
+data Attachment = Attachment'
     { _aContentURL          :: !(Maybe Text)
     , _aId                  :: !(Maybe Text)
     , _aIsProcessingContent :: !(Maybe Bool)
@@ -866,7 +867,7 @@ data Attachment = Attachment
 attachment
     :: Attachment
 attachment =
-    Attachment
+    Attachment'
     { _aContentURL = Nothing
     , _aId = Nothing
     , _aIsProcessingContent = Nothing
@@ -899,13 +900,13 @@ instance FromJSON Attachment where
         parseJSON
           = withObject "Attachment"
               (\ o ->
-                 Attachment <$>
+                 Attachment' <$>
                    (o .:? "contentUrl") <*> (o .:? "id") <*>
                      (o .:? "isProcessingContent")
                      <*> (o .:? "contentType"))
 
 instance ToJSON Attachment where
-        toJSON Attachment{..}
+        toJSON Attachment'{..}
           = object
               (catMaybes
                  [("contentUrl" .=) <$> _aContentURL,
@@ -916,7 +917,7 @@ instance ToJSON Attachment where
 -- | Represents an account passed into the Account Manager on Glass.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _aAuthTokens :: !(Maybe [AuthToken])
     , _aUserData   :: !(Maybe [UserData])
     , _aPassword   :: !(Maybe Text)
@@ -937,7 +938,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _aAuthTokens = Nothing
     , _aUserData = Nothing
     , _aPassword = Nothing
@@ -970,14 +971,14 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "authTokens" .!= mempty) <*>
                      (o .:? "userData" .!= mempty)
                      <*> (o .:? "password")
                      <*> (o .:? "features" .!= mempty))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("authTokens" .=) <$> _aAuthTokens,
@@ -987,7 +988,7 @@ instance ToJSON Account where
 
 --
 -- /See:/ 'userData' smart constructor.
-data UserData = UserData
+data UserData = UserData'
     { _udValue :: !(Maybe Text)
     , _udKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1002,7 +1003,7 @@ data UserData = UserData
 userData
     :: UserData
 userData =
-    UserData
+    UserData'
     { _udValue = Nothing
     , _udKey = Nothing
     }
@@ -1017,10 +1018,10 @@ instance FromJSON UserData where
         parseJSON
           = withObject "UserData"
               (\ o ->
-                 UserData <$> (o .:? "value") <*> (o .:? "key"))
+                 UserData' <$> (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON UserData where
-        toJSON UserData{..}
+        toJSON UserData'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _udValue, ("key" .=) <$> _udKey])
@@ -1028,7 +1029,7 @@ instance ToJSON UserData where
 -- | Represents an action taken by the user that triggered a notification.
 --
 -- /See:/ 'userAction' smart constructor.
-data UserAction = UserAction
+data UserAction = UserAction'
     { _uaPayload :: !(Maybe Text)
     , _uaType    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1043,7 +1044,7 @@ data UserAction = UserAction
 userAction
     :: UserAction
 userAction =
-    UserAction
+    UserAction'
     { _uaPayload = Nothing
     , _uaType = Nothing
     }
@@ -1069,10 +1070,10 @@ instance FromJSON UserAction where
         parseJSON
           = withObject "UserAction"
               (\ o ->
-                 UserAction <$> (o .:? "payload") <*> (o .:? "type"))
+                 UserAction' <$> (o .:? "payload") <*> (o .:? "type"))
 
 instance ToJSON UserAction where
-        toJSON UserAction{..}
+        toJSON UserAction'{..}
           = object
               (catMaybes
                  [("payload" .=) <$> _uaPayload,
@@ -1082,7 +1083,7 @@ instance ToJSON UserAction where
 -- requests on the timeline collection.
 --
 -- /See:/ 'timelineListResponse' smart constructor.
-data TimelineListResponse = TimelineListResponse
+data TimelineListResponse = TimelineListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrKind          :: !Text
     , _tlrItems         :: !(Maybe [TimelineItem])
@@ -1100,7 +1101,7 @@ data TimelineListResponse = TimelineListResponse
 timelineListResponse
     :: TimelineListResponse
 timelineListResponse =
-    TimelineListResponse
+    TimelineListResponse'
     { _tlrNextPageToken = Nothing
     , _tlrKind = "mirror#timeline"
     , _tlrItems = Nothing
@@ -1128,13 +1129,13 @@ instance FromJSON TimelineListResponse where
         parseJSON
           = withObject "TimelineListResponse"
               (\ o ->
-                 TimelineListResponse <$>
+                 TimelineListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "mirror#timeline")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON TimelineListResponse where
-        toJSON TimelineListResponse{..}
+        toJSON TimelineListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
@@ -1145,7 +1146,7 @@ instance ToJSON TimelineListResponse where
 -- server to GET requests on the contacts collection.
 --
 -- /See:/ 'contactsListResponse' smart constructor.
-data ContactsListResponse = ContactsListResponse
+data ContactsListResponse = ContactsListResponse'
     { _clrKind  :: !Text
     , _clrItems :: !(Maybe [Contact])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1160,7 +1161,7 @@ data ContactsListResponse = ContactsListResponse
 contactsListResponse
     :: ContactsListResponse
 contactsListResponse =
-    ContactsListResponse
+    ContactsListResponse'
     { _clrKind = "mirror#contacts"
     , _clrItems = Nothing
     }
@@ -1180,12 +1181,12 @@ instance FromJSON ContactsListResponse where
         parseJSON
           = withObject "ContactsListResponse"
               (\ o ->
-                 ContactsListResponse <$>
+                 ContactsListResponse' <$>
                    (o .:? "kind" .!= "mirror#contacts") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON ContactsListResponse where
-        toJSON ContactsListResponse{..}
+        toJSON ContactsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _clrKind),
@@ -1194,7 +1195,7 @@ instance ToJSON ContactsListResponse where
 -- | A single value that is part of a MenuItem.
 --
 -- /See:/ 'menuValue' smart constructor.
-data MenuValue = MenuValue
+data MenuValue = MenuValue'
     { _mvState       :: !(Maybe Text)
     , _mvDisplayName :: !(Maybe Text)
     , _mvIconURL     :: !(Maybe Text)
@@ -1212,7 +1213,7 @@ data MenuValue = MenuValue
 menuValue
     :: MenuValue
 menuValue =
-    MenuValue
+    MenuValue'
     { _mvState = Nothing
     , _mvDisplayName = Nothing
     , _mvIconURL = Nothing
@@ -1243,12 +1244,12 @@ instance FromJSON MenuValue where
         parseJSON
           = withObject "MenuValue"
               (\ o ->
-                 MenuValue <$>
+                 MenuValue' <$>
                    (o .:? "state") <*> (o .:? "displayName") <*>
                      (o .:? "iconUrl"))
 
 instance ToJSON MenuValue where
-        toJSON MenuValue{..}
+        toJSON MenuValue'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _mvState,
@@ -1258,7 +1259,7 @@ instance ToJSON MenuValue where
 -- | A subscription to events on a collection.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription
+data Subscription = Subscription'
     { _subCallbackURL  :: !(Maybe Text)
     , _subOperation    :: !(Maybe [Text])
     , _subNotification :: !(Maybe Notification)
@@ -1294,7 +1295,7 @@ data Subscription = Subscription
 subscription
     :: Subscription
 subscription =
-    Subscription
+    Subscription'
     { _subCallbackURL = Nothing
     , _subOperation = Nothing
     , _subNotification = Nothing
@@ -1371,7 +1372,7 @@ instance FromJSON Subscription where
         parseJSON
           = withObject "Subscription"
               (\ o ->
-                 Subscription <$>
+                 Subscription' <$>
                    (o .:? "callbackUrl") <*>
                      (o .:? "operation" .!= mempty)
                      <*> (o .:? "notification")
@@ -1383,7 +1384,7 @@ instance FromJSON Subscription where
                      <*> (o .:? "updated"))
 
 instance ToJSON Subscription where
-        toJSON Subscription{..}
+        toJSON Subscription'{..}
           = object
               (catMaybes
                  [("callbackUrl" .=) <$> _subCallbackURL,
@@ -1400,7 +1401,7 @@ instance ToJSON Subscription where
 -- structure, described below.
 --
 -- /See:/ 'timelineItem' smart constructor.
-data TimelineItem = TimelineItem
+data TimelineItem = TimelineItem'
     { _tiCreator       :: !(Maybe Contact)
     , _tiDisplayTime   :: !(Maybe DateTime')
     , _tiEtag          :: !(Maybe Text)
@@ -1487,7 +1488,7 @@ data TimelineItem = TimelineItem
 timelineItem
     :: TimelineItem
 timelineItem =
-    TimelineItem
+    TimelineItem'
     { _tiCreator = Nothing
     , _tiDisplayTime = Nothing
     , _tiEtag = Nothing
@@ -1720,7 +1721,7 @@ instance FromJSON TimelineItem where
         parseJSON
           = withObject "TimelineItem"
               (\ o ->
-                 TimelineItem <$>
+                 TimelineItem' <$>
                    (o .:? "creator") <*> (o .:? "displayTime") <*>
                      (o .:? "etag")
                      <*> (o .:? "isDeleted")
@@ -1748,7 +1749,7 @@ instance FromJSON TimelineItem where
                      <*> (o .:? "inReplyTo"))
 
 instance ToJSON TimelineItem where
-        toJSON TimelineItem{..}
+        toJSON TimelineItem'{..}
           = object
               (catMaybes
                  [("creator" .=) <$> _tiCreator,
@@ -1780,7 +1781,7 @@ instance ToJSON TimelineItem where
 -- requests on the subscription collection.
 --
 -- /See:/ 'subscriptionsListResponse' smart constructor.
-data SubscriptionsListResponse = SubscriptionsListResponse
+data SubscriptionsListResponse = SubscriptionsListResponse'
     { _slrKind  :: !Text
     , _slrItems :: !(Maybe [Subscription])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1795,7 +1796,7 @@ data SubscriptionsListResponse = SubscriptionsListResponse
 subscriptionsListResponse
     :: SubscriptionsListResponse
 subscriptionsListResponse =
-    SubscriptionsListResponse
+    SubscriptionsListResponse'
     { _slrKind = "mirror#subscriptionsList"
     , _slrItems = Nothing
     }
@@ -1815,12 +1816,12 @@ instance FromJSON SubscriptionsListResponse where
         parseJSON
           = withObject "SubscriptionsListResponse"
               (\ o ->
-                 SubscriptionsListResponse <$>
+                 SubscriptionsListResponse' <$>
                    (o .:? "kind" .!= "mirror#subscriptionsList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON SubscriptionsListResponse where
-        toJSON SubscriptionsListResponse{..}
+        toJSON SubscriptionsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _slrKind),

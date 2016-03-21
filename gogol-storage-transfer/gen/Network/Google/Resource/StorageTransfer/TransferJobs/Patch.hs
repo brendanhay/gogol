@@ -70,7 +70,7 @@ type TransferJobsPatchResource =
 -- a job is not allowed.
 --
 -- /See:/ 'transferJobsPatch' smart constructor.
-data TransferJobsPatch = TransferJobsPatch
+data TransferJobsPatch = TransferJobsPatch'
     { _tjpXgafv          :: !(Maybe Text)
     , _tjpUploadProtocol :: !(Maybe Text)
     , _tjpPp             :: !Bool
@@ -108,7 +108,7 @@ transferJobsPatch
     -> UpdateTransferJobRequest -- ^ 'tjpPayload'
     -> TransferJobsPatch
 transferJobsPatch pTjpJobName_ pTjpPayload_ =
-    TransferJobsPatch
+    TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpUploadProtocol = Nothing
     , _tjpPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest TransferJobsPatch where
         type Rs TransferJobsPatch = TransferJob
         type Scopes TransferJobsPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferJobsPatch{..}
+        requestClient TransferJobsPatch'{..}
           = go _tjpJobName _tjpXgafv _tjpUploadProtocol
               (Just _tjpPp)
               _tjpAccessToken

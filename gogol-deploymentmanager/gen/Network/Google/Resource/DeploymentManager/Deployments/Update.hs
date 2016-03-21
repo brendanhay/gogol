@@ -69,7 +69,7 @@ type DeploymentsUpdateResource =
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsUpdate' smart constructor.
-data DeploymentsUpdate = DeploymentsUpdate
+data DeploymentsUpdate = DeploymentsUpdate'
     { _duCreatePolicy :: !DeploymentsUpdateCreatePolicy
     , _duProject      :: !Text
     , _duPayload      :: !Deployment
@@ -99,7 +99,7 @@ deploymentsUpdate
     -> Text -- ^ 'duDeployment'
     -> DeploymentsUpdate
 deploymentsUpdate pDuProject_ pDuPayload_ pDuDeployment_ =
-    DeploymentsUpdate
+    DeploymentsUpdate'
     { _duCreatePolicy = CreateOrAcquire
     , _duProject = pDuProject_
     , _duPayload = pDuPayload_
@@ -154,7 +154,7 @@ instance GoogleRequest DeploymentsUpdate where
         type Scopes DeploymentsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient DeploymentsUpdate{..}
+        requestClient DeploymentsUpdate'{..}
           = go _duProject _duDeployment (Just _duCreatePolicy)
               (Just _duDeletePolicy)
               (Just _duPreview)

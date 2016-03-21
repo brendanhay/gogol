@@ -77,7 +77,7 @@ type BeaconsAttachmentsListResource =
 -- endpoint.
 --
 -- /See:/ 'beaconsAttachmentsList' smart constructor.
-data BeaconsAttachmentsList = BeaconsAttachmentsList
+data BeaconsAttachmentsList = BeaconsAttachmentsList'
     { _balXgafv          :: !(Maybe Text)
     , _balUploadProtocol :: !(Maybe Text)
     , _balPp             :: !Bool
@@ -114,7 +114,7 @@ beaconsAttachmentsList
     :: Text -- ^ 'balBeaconName'
     -> BeaconsAttachmentsList
 beaconsAttachmentsList pBalBeaconName_ =
-    BeaconsAttachmentsList
+    BeaconsAttachmentsList'
     { _balXgafv = Nothing
     , _balUploadProtocol = Nothing
     , _balPp = True
@@ -181,7 +181,7 @@ instance GoogleRequest BeaconsAttachmentsList where
         type Rs BeaconsAttachmentsList =
              ListBeaconAttachmentsResponse
         type Scopes BeaconsAttachmentsList = '[]
-        requestClient BeaconsAttachmentsList{..}
+        requestClient BeaconsAttachmentsList'{..}
           = go _balBeaconName _balXgafv _balUploadProtocol
               (Just _balPp)
               _balAccessToken

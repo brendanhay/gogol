@@ -68,7 +68,7 @@ type ProjectsGroupsCreateResource =
 -- | Creates a new group.
 --
 -- /See:/ 'projectsGroupsCreate' smart constructor.
-data ProjectsGroupsCreate = ProjectsGroupsCreate
+data ProjectsGroupsCreate = ProjectsGroupsCreate'
     { _pgcXgafv          :: !(Maybe Text)
     , _pgcValidateOnly   :: !(Maybe Bool)
     , _pgcUploadProtocol :: !(Maybe Text)
@@ -109,7 +109,7 @@ projectsGroupsCreate
     -> Text -- ^ 'pgcName'
     -> ProjectsGroupsCreate
 projectsGroupsCreate pPgcPayload_ pPgcName_ =
-    ProjectsGroupsCreate
+    ProjectsGroupsCreate'
     { _pgcXgafv = Nothing
     , _pgcValidateOnly = Nothing
     , _pgcUploadProtocol = Nothing
@@ -180,7 +180,7 @@ instance GoogleRequest ProjectsGroupsCreate where
         type Scopes ProjectsGroupsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient ProjectsGroupsCreate{..}
+        requestClient ProjectsGroupsCreate'{..}
           = go _pgcName _pgcXgafv _pgcValidateOnly
               _pgcUploadProtocol
               (Just _pgcPp)

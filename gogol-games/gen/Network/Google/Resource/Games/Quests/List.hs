@@ -61,7 +61,7 @@ type QuestsListResource =
 -- authenticated player.
 --
 -- /See:/ 'questsList' smart constructor.
-data QuestsList = QuestsList
+data QuestsList = QuestsList'
     { _qlLanguage   :: !(Maybe Text)
     , _qlPageToken  :: !(Maybe Text)
     , _qlPlayerId   :: !Text
@@ -83,7 +83,7 @@ questsList
     :: Text -- ^ 'qlPlayerId'
     -> QuestsList
 questsList pQlPlayerId_ =
-    QuestsList
+    QuestsList'
     { _qlLanguage = Nothing
     , _qlPageToken = Nothing
     , _qlPlayerId = pQlPlayerId_
@@ -120,7 +120,7 @@ instance GoogleRequest QuestsList where
         type Scopes QuestsList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestsList{..}
+        requestClient QuestsList'{..}
           = go _qlPlayerId _qlLanguage _qlPageToken
               _qlMaxResults
               (Just AltJSON)

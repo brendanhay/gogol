@@ -63,7 +63,7 @@ type RepresentativesRepresentativeInfoByDivisionResource
 -- | Looks up representative information for a single geographic division.
 --
 -- /See:/ 'representativesRepresentativeInfoByDivision' smart constructor.
-data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentativeInfoByDivision
+data RepresentativesRepresentativeInfoByDivision = RepresentativesRepresentativeInfoByDivision'
     { _rribdRoles     :: !(Maybe [RepresentativesRepresentativeInfoByDivisionRoles])
     , _rribdRecursive :: !(Maybe Bool)
     , _rribdOcdId     :: !Text
@@ -85,7 +85,7 @@ representativesRepresentativeInfoByDivision
     :: Text -- ^ 'rribdOcdId'
     -> RepresentativesRepresentativeInfoByDivision
 representativesRepresentativeInfoByDivision pRribdOcdId_ =
-    RepresentativesRepresentativeInfoByDivision
+    RepresentativesRepresentativeInfoByDivision'
     { _rribdRoles = Nothing
     , _rribdRecursive = Nothing
     , _rribdOcdId = pRribdOcdId_
@@ -132,7 +132,7 @@ instance GoogleRequest
                RepresentativesRepresentativeInfoByDivision
              = '[]
         requestClient
-          RepresentativesRepresentativeInfoByDivision{..}
+          RepresentativesRepresentativeInfoByDivision'{..}
           = go _rribdOcdId (_rribdRoles ^. _Default)
               _rribdRecursive
               (_rribdLevels ^. _Default)

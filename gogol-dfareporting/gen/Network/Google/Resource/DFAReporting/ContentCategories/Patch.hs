@@ -59,7 +59,7 @@ type ContentCategoriesPatchResource =
 -- semantics.
 --
 -- /See:/ 'contentCategoriesPatch' smart constructor.
-data ContentCategoriesPatch = ContentCategoriesPatch
+data ContentCategoriesPatch = ContentCategoriesPatch'
     { _ccpProFileId :: !(Textual Int64)
     , _ccpPayload   :: !ContentCategory
     , _ccpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ contentCategoriesPatch
     -> Int64 -- ^ 'ccpId'
     -> ContentCategoriesPatch
 contentCategoriesPatch pCcpProFileId_ pCcpPayload_ pCcpId_ =
-    ContentCategoriesPatch
+    ContentCategoriesPatch'
     { _ccpProFileId = _Coerce # pCcpProFileId_
     , _ccpPayload = pCcpPayload_
     , _ccpId = _Coerce # pCcpId_
@@ -106,7 +106,7 @@ instance GoogleRequest ContentCategoriesPatch where
         type Rs ContentCategoriesPatch = ContentCategory
         type Scopes ContentCategoriesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ContentCategoriesPatch{..}
+        requestClient ContentCategoriesPatch'{..}
           = go _ccpProFileId (Just _ccpId) (Just AltJSON)
               _ccpPayload
               dFAReportingService

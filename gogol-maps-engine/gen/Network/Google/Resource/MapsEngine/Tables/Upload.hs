@@ -60,7 +60,7 @@ type TablesUploadResource =
 -- insert in the reference documentation for more information.
 --
 -- /See:/ 'tablesUpload' smart constructor.
-newtype TablesUpload = TablesUpload
+newtype TablesUpload = TablesUpload'
     { _tuPayload :: Table
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -73,7 +73,7 @@ tablesUpload
     :: Table -- ^ 'tuPayload'
     -> TablesUpload
 tablesUpload pTuPayload_ =
-    TablesUpload
+    TablesUpload'
     { _tuPayload = pTuPayload_
     }
 
@@ -86,7 +86,7 @@ instance GoogleRequest TablesUpload where
         type Rs TablesUpload = Table
         type Scopes TablesUpload =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesUpload{..}
+        requestClient TablesUpload'{..}
           = go (Just AltJSON) _tuPayload mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesUploadResource)

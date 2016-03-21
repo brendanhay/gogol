@@ -57,7 +57,7 @@ type TablesInsertResource =
 -- | Creates a new, empty table in the dataset.
 --
 -- /See:/ 'tablesInsert' smart constructor.
-data TablesInsert = TablesInsert
+data TablesInsert = TablesInsert'
     { _tiPayload   :: !Table
     , _tiDataSetId :: !Text
     , _tiProjectId :: !Text
@@ -78,7 +78,7 @@ tablesInsert
     -> Text -- ^ 'tiProjectId'
     -> TablesInsert
 tablesInsert pTiPayload_ pTiDataSetId_ pTiProjectId_ =
-    TablesInsert
+    TablesInsert'
     { _tiPayload = pTiPayload_
     , _tiDataSetId = pTiDataSetId_
     , _tiProjectId = pTiProjectId_
@@ -104,7 +104,7 @@ instance GoogleRequest TablesInsert where
         type Scopes TablesInsert =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TablesInsert{..}
+        requestClient TablesInsert'{..}
           = go _tiProjectId _tiDataSetId (Just AltJSON)
               _tiPayload
               bigQueryService

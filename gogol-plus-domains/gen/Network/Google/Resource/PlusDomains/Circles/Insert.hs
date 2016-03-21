@@ -54,7 +54,7 @@ type CirclesInsertResource =
 -- | Create a new circle for the authenticated user.
 --
 -- /See:/ 'circlesInsert' smart constructor.
-data CirclesInsert = CirclesInsert
+data CirclesInsert = CirclesInsert'
     { _ciPayload :: !Circle
     , _ciUserId  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ circlesInsert
     -> Text -- ^ 'ciUserId'
     -> CirclesInsert
 circlesInsert pCiPayload_ pCiUserId_ =
-    CirclesInsert
+    CirclesInsert'
     { _ciPayload = pCiPayload_
     , _ciUserId = pCiUserId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CirclesInsert where
              '["https://www.googleapis.com/auth/plus.circles.write",
                "https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient CirclesInsert{..}
+        requestClient CirclesInsert'{..}
           = go _ciUserId (Just AltJSON) _ciPayload
               plusDomainsService
           where go

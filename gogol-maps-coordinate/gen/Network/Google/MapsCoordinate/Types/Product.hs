@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Response from a List Locations request.
 --
 -- /See:/ 'locationListResponse' smart constructor.
-data LocationListResponse = LocationListResponse
+data LocationListResponse = LocationListResponse'
     { _llrTokenPagination :: !(Maybe TokenPagination)
     , _llrNextPageToken   :: !(Maybe Text)
     , _llrKind            :: !Text
@@ -44,7 +44,7 @@ data LocationListResponse = LocationListResponse
 locationListResponse
     :: LocationListResponse
 locationListResponse =
-    LocationListResponse
+    LocationListResponse'
     { _llrTokenPagination = Nothing
     , _llrNextPageToken = Nothing
     , _llrKind = "coordinate#locationList"
@@ -78,13 +78,13 @@ instance FromJSON LocationListResponse where
         parseJSON
           = withObject "LocationListResponse"
               (\ o ->
-                 LocationListResponse <$>
+                 LocationListResponse' <$>
                    (o .:? "tokenPagination") <*> (o .:? "nextPageToken")
                      <*> (o .:? "kind" .!= "coordinate#locationList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON LocationListResponse where
-        toJSON LocationListResponse{..}
+        toJSON LocationListResponse'{..}
           = object
               (catMaybes
                  [("tokenPagination" .=) <$> _llrTokenPagination,
@@ -95,7 +95,7 @@ instance ToJSON LocationListResponse where
 -- | Pagination information.
 --
 -- /See:/ 'tokenPagination' smart constructor.
-data TokenPagination = TokenPagination
+data TokenPagination = TokenPagination'
     { _tpNextPageToken     :: !(Maybe Text)
     , _tpKind              :: !Text
     , _tpPreviousPageToken :: !(Maybe Text)
@@ -113,7 +113,7 @@ data TokenPagination = TokenPagination
 tokenPagination
     :: TokenPagination
 tokenPagination =
-    TokenPagination
+    TokenPagination'
     { _tpNextPageToken = Nothing
     , _tpKind = "coordinate#tokenPagination"
     , _tpPreviousPageToken = Nothing
@@ -139,13 +139,13 @@ instance FromJSON TokenPagination where
         parseJSON
           = withObject "TokenPagination"
               (\ o ->
-                 TokenPagination <$>
+                 TokenPagination' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "coordinate#tokenPagination")
                      <*> (o .:? "previousPageToken"))
 
 instance ToJSON TokenPagination where
-        toJSON TokenPagination{..}
+        toJSON TokenPagination'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tpNextPageToken,
@@ -155,7 +155,7 @@ instance ToJSON TokenPagination where
 -- | Response from a List Workers request.
 --
 -- /See:/ 'workerListResponse' smart constructor.
-data WorkerListResponse = WorkerListResponse
+data WorkerListResponse = WorkerListResponse'
     { _wlrKind  :: !Text
     , _wlrItems :: !(Maybe [Worker])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -170,7 +170,7 @@ data WorkerListResponse = WorkerListResponse
 workerListResponse
     :: WorkerListResponse
 workerListResponse =
-    WorkerListResponse
+    WorkerListResponse'
     { _wlrKind = "coordinate#workerList"
     , _wlrItems = Nothing
     }
@@ -190,12 +190,12 @@ instance FromJSON WorkerListResponse where
         parseJSON
           = withObject "WorkerListResponse"
               (\ o ->
-                 WorkerListResponse <$>
+                 WorkerListResponse' <$>
                    (o .:? "kind" .!= "coordinate#workerList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON WorkerListResponse where
-        toJSON WorkerListResponse{..}
+        toJSON WorkerListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _wlrKind),
@@ -204,7 +204,7 @@ instance ToJSON WorkerListResponse where
 -- | Job schedule.
 --
 -- /See:/ 'schedule' smart constructor.
-data Schedule = Schedule
+data Schedule = Schedule'
     { _sAllDay    :: !(Maybe Bool)
     , _sStartTime :: !(Maybe (Textual Word64))
     , _sKind      :: !Text
@@ -228,7 +228,7 @@ data Schedule = Schedule
 schedule
     :: Schedule
 schedule =
-    Schedule
+    Schedule'
     { _sAllDay = Nothing
     , _sStartTime = Nothing
     , _sKind = "coordinate#schedule"
@@ -267,14 +267,14 @@ instance FromJSON Schedule where
         parseJSON
           = withObject "Schedule"
               (\ o ->
-                 Schedule <$>
+                 Schedule' <$>
                    (o .:? "allDay") <*> (o .:? "startTime") <*>
                      (o .:? "kind" .!= "coordinate#schedule")
                      <*> (o .:? "endTime")
                      <*> (o .:? "duration"))
 
 instance ToJSON Schedule where
-        toJSON Schedule{..}
+        toJSON Schedule'{..}
           = object
               (catMaybes
                  [("allDay" .=) <$> _sAllDay,
@@ -286,7 +286,7 @@ instance ToJSON Schedule where
 -- | Location of a job.
 --
 -- /See:/ 'location' smart constructor.
-data Location = Location
+data Location = Location'
     { _lAddressLine :: !(Maybe [Text])
     , _lKind        :: !Text
     , _lLat         :: !(Maybe (Textual Double))
@@ -307,7 +307,7 @@ data Location = Location
 location
     :: Location
 location =
-    Location
+    Location'
     { _lAddressLine = Nothing
     , _lKind = "coordinate#location"
     , _lLat = Nothing
@@ -341,14 +341,14 @@ instance FromJSON Location where
         parseJSON
           = withObject "Location"
               (\ o ->
-                 Location <$>
+                 Location' <$>
                    (o .:? "addressLine" .!= mempty) <*>
                      (o .:? "kind" .!= "coordinate#location")
                      <*> (o .:? "lat")
                      <*> (o .:? "lng"))
 
 instance ToJSON Location where
-        toJSON Location{..}
+        toJSON Location'{..}
           = object
               (catMaybes
                  [("addressLine" .=) <$> _lAddressLine,
@@ -358,7 +358,7 @@ instance ToJSON Location where
 -- | Current state of a job.
 --
 -- /See:/ 'jobState' smart constructor.
-data JobState = JobState
+data JobState = JobState'
     { _jsLocation            :: !(Maybe Location)
     , _jsProgress            :: !(Maybe Text)
     , _jsNote                :: !(Maybe [Text])
@@ -394,7 +394,7 @@ data JobState = JobState
 jobState
     :: JobState
 jobState =
-    JobState
+    JobState'
     { _jsLocation = Nothing
     , _jsProgress = Nothing
     , _jsNote = Nothing
@@ -458,7 +458,7 @@ instance FromJSON JobState where
         parseJSON
           = withObject "JobState"
               (\ o ->
-                 JobState <$>
+                 JobState' <$>
                    (o .:? "location") <*> (o .:? "progress") <*>
                      (o .:? "note" .!= mempty)
                      <*> (o .:? "kind" .!= "coordinate#jobState")
@@ -469,7 +469,7 @@ instance FromJSON JobState where
                      <*> (o .:? "title"))
 
 instance ToJSON JobState where
-        toJSON JobState{..}
+        toJSON JobState'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _jsLocation,
@@ -485,7 +485,7 @@ instance ToJSON JobState where
 -- | Custom field definition.
 --
 -- /See:/ 'customFieldDef' smart constructor.
-data CustomFieldDef = CustomFieldDef
+data CustomFieldDef = CustomFieldDef'
     { _cfdEnabled             :: !(Maybe Bool)
     , _cfdKind                :: !Text
     , _cfdName                :: !(Maybe Text)
@@ -515,7 +515,7 @@ data CustomFieldDef = CustomFieldDef
 customFieldDef
     :: CustomFieldDef
 customFieldDef =
-    CustomFieldDef
+    CustomFieldDef'
     { _cfdEnabled = Nothing
     , _cfdKind = "coordinate#customFieldDef"
     , _cfdName = Nothing
@@ -567,7 +567,7 @@ instance FromJSON CustomFieldDef where
         parseJSON
           = withObject "CustomFieldDef"
               (\ o ->
-                 CustomFieldDef <$>
+                 CustomFieldDef' <$>
                    (o .:? "enabled") <*>
                      (o .:? "kind" .!= "coordinate#customFieldDef")
                      <*> (o .:? "name")
@@ -577,7 +577,7 @@ instance FromJSON CustomFieldDef where
                      <*> (o .:? "type"))
 
 instance ToJSON CustomFieldDef where
-        toJSON CustomFieldDef{..}
+        toJSON CustomFieldDef'{..}
           = object
               (catMaybes
                  [("enabled" .=) <$> _cfdEnabled,
@@ -591,7 +591,7 @@ instance ToJSON CustomFieldDef where
 -- | Response from a List Jobs request.
 --
 -- /See:/ 'jobListResponse' smart constructor.
-data JobListResponse = JobListResponse
+data JobListResponse = JobListResponse'
     { _jlrNextPageToken :: !(Maybe Text)
     , _jlrKind          :: !Text
     , _jlrItems         :: !(Maybe [Job])
@@ -609,7 +609,7 @@ data JobListResponse = JobListResponse
 jobListResponse
     :: JobListResponse
 jobListResponse =
-    JobListResponse
+    JobListResponse'
     { _jlrNextPageToken = Nothing
     , _jlrKind = "coordinate#jobList"
     , _jlrItems = Nothing
@@ -636,13 +636,13 @@ instance FromJSON JobListResponse where
         parseJSON
           = withObject "JobListResponse"
               (\ o ->
-                 JobListResponse <$>
+                 JobListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "coordinate#jobList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON JobListResponse where
-        toJSON JobListResponse{..}
+        toJSON JobListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _jlrNextPageToken,
@@ -652,7 +652,7 @@ instance ToJSON JobListResponse where
 -- | Change to a job. For example assigning the job to a different worker.
 --
 -- /See:/ 'jobChange' smart constructor.
-data JobChange = JobChange
+data JobChange = JobChange'
     { _jcState     :: !(Maybe JobState)
     , _jcKind      :: !Text
     , _jcTimestamp :: !(Maybe (Textual Word64))
@@ -670,7 +670,7 @@ data JobChange = JobChange
 jobChange
     :: JobChange
 jobChange =
-    JobChange
+    JobChange'
     { _jcState = Nothing
     , _jcKind = "coordinate#jobChange"
     , _jcTimestamp = Nothing
@@ -694,13 +694,13 @@ instance FromJSON JobChange where
         parseJSON
           = withObject "JobChange"
               (\ o ->
-                 JobChange <$>
+                 JobChange' <$>
                    (o .:? "state") <*>
                      (o .:? "kind" .!= "coordinate#jobChange")
                      <*> (o .:? "timestamp"))
 
 instance ToJSON JobChange where
-        toJSON JobChange{..}
+        toJSON JobChange'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _jcState, Just ("kind" .= _jcKind),
@@ -709,7 +709,7 @@ instance ToJSON JobChange where
 -- | Response from a List Teams request.
 --
 -- /See:/ 'teamListResponse' smart constructor.
-data TeamListResponse = TeamListResponse
+data TeamListResponse = TeamListResponse'
     { _tlrKind  :: !Text
     , _tlrItems :: !(Maybe [Team])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -724,7 +724,7 @@ data TeamListResponse = TeamListResponse
 teamListResponse
     :: TeamListResponse
 teamListResponse =
-    TeamListResponse
+    TeamListResponse'
     { _tlrKind = "coordinate#teamList"
     , _tlrItems = Nothing
     }
@@ -744,12 +744,12 @@ instance FromJSON TeamListResponse where
         parseJSON
           = withObject "TeamListResponse"
               (\ o ->
-                 TeamListResponse <$>
+                 TeamListResponse' <$>
                    (o .:? "kind" .!= "coordinate#teamList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON TeamListResponse where
-        toJSON TeamListResponse{..}
+        toJSON TeamListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tlrKind),
@@ -758,7 +758,7 @@ instance ToJSON TeamListResponse where
 -- | Collection of custom field definitions for a team.
 --
 -- /See:/ 'customFieldDefListResponse' smart constructor.
-data CustomFieldDefListResponse = CustomFieldDefListResponse
+data CustomFieldDefListResponse = CustomFieldDefListResponse'
     { _cfdlrKind  :: !Text
     , _cfdlrItems :: !(Maybe [CustomFieldDef])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -773,7 +773,7 @@ data CustomFieldDefListResponse = CustomFieldDefListResponse
 customFieldDefListResponse
     :: CustomFieldDefListResponse
 customFieldDefListResponse =
-    CustomFieldDefListResponse
+    CustomFieldDefListResponse'
     { _cfdlrKind = "coordinate#customFieldDefList"
     , _cfdlrItems = Nothing
     }
@@ -795,12 +795,12 @@ instance FromJSON CustomFieldDefListResponse where
         parseJSON
           = withObject "CustomFieldDefListResponse"
               (\ o ->
-                 CustomFieldDefListResponse <$>
+                 CustomFieldDefListResponse' <$>
                    (o .:? "kind" .!= "coordinate#customFieldDefList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON CustomFieldDefListResponse where
-        toJSON CustomFieldDefListResponse{..}
+        toJSON CustomFieldDefListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cfdlrKind),
@@ -809,7 +809,7 @@ instance ToJSON CustomFieldDefListResponse where
 -- | A job.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job
+data Job = Job'
     { _jState     :: !(Maybe JobState)
     , _jKind      :: !Text
     , _jJobChange :: !(Maybe [JobChange])
@@ -830,7 +830,7 @@ data Job = Job
 job
     :: Job
 job =
-    Job
+    Job'
     { _jState = Nothing
     , _jKind = "coordinate#job"
     , _jJobChange = Nothing
@@ -862,14 +862,14 @@ instance FromJSON Job where
         parseJSON
           = withObject "Job"
               (\ o ->
-                 Job <$>
+                 Job' <$>
                    (o .:? "state") <*>
                      (o .:? "kind" .!= "coordinate#job")
                      <*> (o .:? "jobChange" .!= mempty)
                      <*> (o .:? "id"))
 
 instance ToJSON Job where
-        toJSON Job{..}
+        toJSON Job'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _jState, Just ("kind" .= _jKind),
@@ -879,7 +879,7 @@ instance ToJSON Job where
 -- | Collection of custom fields.
 --
 -- /See:/ 'customFields' smart constructor.
-data CustomFields = CustomFields
+data CustomFields = CustomFields'
     { _cfKind        :: !Text
     , _cfCustomField :: !(Maybe [CustomField])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -894,7 +894,7 @@ data CustomFields = CustomFields
 customFields
     :: CustomFields
 customFields =
-    CustomFields
+    CustomFields'
     { _cfKind = "coordinate#customFields"
     , _cfCustomField = Nothing
     }
@@ -915,12 +915,12 @@ instance FromJSON CustomFields where
         parseJSON
           = withObject "CustomFields"
               (\ o ->
-                 CustomFields <$>
+                 CustomFields' <$>
                    (o .:? "kind" .!= "coordinate#customFields") <*>
                      (o .:? "customField" .!= mempty))
 
 instance ToJSON CustomFields where
-        toJSON CustomFields{..}
+        toJSON CustomFields'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _cfKind),
@@ -929,7 +929,7 @@ instance ToJSON CustomFields where
 -- | A Coordinate team.
 --
 -- /See:/ 'team' smart constructor.
-data Team = Team
+data Team = Team'
     { _tKind :: !Text
     , _tName :: !(Maybe Text)
     , _tId   :: !(Maybe Text)
@@ -947,7 +947,7 @@ data Team = Team
 team
     :: Team
 team =
-    Team
+    Team'
     { _tKind = "coordinate#team"
     , _tName = Nothing
     , _tId = Nothing
@@ -970,13 +970,13 @@ instance FromJSON Team where
         parseJSON
           = withObject "Team"
               (\ o ->
-                 Team <$>
+                 Team' <$>
                    (o .:? "kind" .!= "coordinate#team") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Team where
-        toJSON Team{..}
+        toJSON Team'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tKind), ("name" .=) <$> _tName,
@@ -985,7 +985,7 @@ instance ToJSON Team where
 -- | Recorded location of a worker.
 --
 -- /See:/ 'locationRecord' smart constructor.
-data LocationRecord = LocationRecord
+data LocationRecord = LocationRecord'
     { _lrKind             :: !Text
     , _lrLatitude         :: !(Maybe (Textual Double))
     , _lrConfidenceRadius :: !(Maybe (Textual Double))
@@ -1009,7 +1009,7 @@ data LocationRecord = LocationRecord
 locationRecord
     :: LocationRecord
 locationRecord =
-    LocationRecord
+    LocationRecord'
     { _lrKind = "coordinate#locationRecord"
     , _lrLatitude = Nothing
     , _lrConfidenceRadius = Nothing
@@ -1052,7 +1052,7 @@ instance FromJSON LocationRecord where
         parseJSON
           = withObject "LocationRecord"
               (\ o ->
-                 LocationRecord <$>
+                 LocationRecord' <$>
                    (o .:? "kind" .!= "coordinate#locationRecord") <*>
                      (o .:? "latitude")
                      <*> (o .:? "confidenceRadius")
@@ -1060,7 +1060,7 @@ instance FromJSON LocationRecord where
                      <*> (o .:? "collectionTime"))
 
 instance ToJSON LocationRecord where
-        toJSON LocationRecord{..}
+        toJSON LocationRecord'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lrKind),
@@ -1072,7 +1072,7 @@ instance ToJSON LocationRecord where
 -- | A worker in a Coordinate team.
 --
 -- /See:/ 'worker' smart constructor.
-data Worker = Worker
+data Worker = Worker'
     { _wKind :: !Text
     , _wId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1087,7 +1087,7 @@ data Worker = Worker
 worker
     :: Worker
 worker =
-    Worker
+    Worker'
     { _wKind = "coordinate#worker"
     , _wId = Nothing
     }
@@ -1105,12 +1105,12 @@ instance FromJSON Worker where
         parseJSON
           = withObject "Worker"
               (\ o ->
-                 Worker <$>
+                 Worker' <$>
                    (o .:? "kind" .!= "coordinate#worker") <*>
                      (o .:? "id"))
 
 instance ToJSON Worker where
-        toJSON Worker{..}
+        toJSON Worker'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _wKind), ("id" .=) <$> _wId])
@@ -1118,7 +1118,7 @@ instance ToJSON Worker where
 -- | Custom field.
 --
 -- /See:/ 'customField' smart constructor.
-data CustomField = CustomField
+data CustomField = CustomField'
     { _cCustomFieldId :: !(Maybe (Textual Int64))
     , _cKind          :: !Text
     , _cValue         :: !(Maybe Text)
@@ -1136,7 +1136,7 @@ data CustomField = CustomField
 customField
     :: CustomField
 customField =
-    CustomField
+    CustomField'
     { _cCustomFieldId = Nothing
     , _cKind = "coordinate#customField"
     , _cValue = Nothing
@@ -1161,13 +1161,13 @@ instance FromJSON CustomField where
         parseJSON
           = withObject "CustomField"
               (\ o ->
-                 CustomField <$>
+                 CustomField' <$>
                    (o .:? "customFieldId") <*>
                      (o .:? "kind" .!= "coordinate#customField")
                      <*> (o .:? "value"))
 
 instance ToJSON CustomField where
-        toJSON CustomField{..}
+        toJSON CustomField'{..}
           = object
               (catMaybes
                  [("customFieldId" .=) <$> _cCustomFieldId,
@@ -1176,7 +1176,7 @@ instance ToJSON CustomField where
 -- | Enum Item definition.
 --
 -- /See:/ 'enumItemDef' smart constructor.
-data EnumItemDef = EnumItemDef
+data EnumItemDef = EnumItemDef'
     { _eidKind   :: !Text
     , _eidValue  :: !(Maybe Text)
     , _eidActive :: !(Maybe Bool)
@@ -1194,7 +1194,7 @@ data EnumItemDef = EnumItemDef
 enumItemDef
     :: EnumItemDef
 enumItemDef =
-    EnumItemDef
+    EnumItemDef'
     { _eidKind = "coordinate#enumItemDef"
     , _eidValue = Nothing
     , _eidActive = Nothing
@@ -1219,13 +1219,13 @@ instance FromJSON EnumItemDef where
         parseJSON
           = withObject "EnumItemDef"
               (\ o ->
-                 EnumItemDef <$>
+                 EnumItemDef' <$>
                    (o .:? "kind" .!= "coordinate#enumItemDef") <*>
                      (o .:? "value")
                      <*> (o .:? "active"))
 
 instance ToJSON EnumItemDef where
-        toJSON EnumItemDef{..}
+        toJSON EnumItemDef'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _eidKind),

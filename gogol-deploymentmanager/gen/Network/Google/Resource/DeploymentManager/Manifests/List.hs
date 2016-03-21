@@ -63,7 +63,7 @@ type ManifestsListResource =
 -- | Lists all manifests for a given deployment.
 --
 -- /See:/ 'manifestsList' smart constructor.
-data ManifestsList = ManifestsList
+data ManifestsList = ManifestsList'
     { _mlProject    :: !Text
     , _mlFilter     :: !(Maybe Text)
     , _mlPageToken  :: !(Maybe Text)
@@ -89,7 +89,7 @@ manifestsList
     -> Text -- ^ 'mlDeployment'
     -> ManifestsList
 manifestsList pMlProject_ pMlDeployment_ =
-    ManifestsList
+    ManifestsList'
     { _mlProject = pMlProject_
     , _mlFilter = Nothing
     , _mlPageToken = Nothing
@@ -154,7 +154,7 @@ instance GoogleRequest ManifestsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ManifestsList{..}
+        requestClient ManifestsList'{..}
           = go _mlProject _mlDeployment _mlFilter _mlPageToken
               (Just _mlMaxResults)
               (Just AltJSON)

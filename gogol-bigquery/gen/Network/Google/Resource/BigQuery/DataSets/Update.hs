@@ -60,7 +60,7 @@ type DataSetsUpdateResource =
 -- fields that are provided in the submitted dataset resource.
 --
 -- /See:/ 'dataSetsUpdate' smart constructor.
-data DataSetsUpdate = DataSetsUpdate
+data DataSetsUpdate = DataSetsUpdate'
     { _dsuPayload   :: !DataSet
     , _dsuDataSetId :: !Text
     , _dsuProjectId :: !Text
@@ -81,7 +81,7 @@ dataSetsUpdate
     -> Text -- ^ 'dsuProjectId'
     -> DataSetsUpdate
 dataSetsUpdate pDsuPayload_ pDsuDataSetId_ pDsuProjectId_ =
-    DataSetsUpdate
+    DataSetsUpdate'
     { _dsuPayload = pDsuPayload_
     , _dsuDataSetId = pDsuDataSetId_
     , _dsuProjectId = pDsuProjectId_
@@ -107,7 +107,7 @@ instance GoogleRequest DataSetsUpdate where
         type Scopes DataSetsUpdate =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient DataSetsUpdate{..}
+        requestClient DataSetsUpdate'{..}
           = go _dsuProjectId _dsuDataSetId (Just AltJSON)
               _dsuPayload
               bigQueryService

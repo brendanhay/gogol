@@ -50,14 +50,14 @@ type MetagameGetMetagameConfigResource =
 --
 -- /See:/ 'metagameGetMetagameConfig' smart constructor.
 data MetagameGetMetagameConfig =
-    MetagameGetMetagameConfig
+    MetagameGetMetagameConfig'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameGetMetagameConfig' with the minimum fields required to make a request.
 --
 metagameGetMetagameConfig
     :: MetagameGetMetagameConfig
-metagameGetMetagameConfig = MetagameGetMetagameConfig
+metagameGetMetagameConfig = MetagameGetMetagameConfig'
 
 instance GoogleRequest MetagameGetMetagameConfig
          where
@@ -65,7 +65,7 @@ instance GoogleRequest MetagameGetMetagameConfig
         type Scopes MetagameGetMetagameConfig =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient MetagameGetMetagameConfig{}
+        requestClient MetagameGetMetagameConfig'{}
           = go (Just AltJSON) gamesService
           where go
                   = buildClient

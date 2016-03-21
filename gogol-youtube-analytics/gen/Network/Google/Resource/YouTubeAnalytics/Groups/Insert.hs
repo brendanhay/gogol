@@ -54,7 +54,7 @@ type GroupsInsertResource =
 -- | Creates a group.
 --
 -- /See:/ 'groupsInsert' smart constructor.
-data GroupsInsert = GroupsInsert
+data GroupsInsert = GroupsInsert'
     { _giPayload                :: !Group
     , _giOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsInsert
     :: Group -- ^ 'giPayload'
     -> GroupsInsert
 groupsInsert pGiPayload_ =
-    GroupsInsert
+    GroupsInsert'
     { _giPayload = pGiPayload_
     , _giOnBehalfOfContentOwner = Nothing
     }
@@ -100,7 +100,7 @@ instance GoogleRequest GroupsInsert where
         type Scopes GroupsInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient GroupsInsert{..}
+        requestClient GroupsInsert'{..}
           = go _giOnBehalfOfContentOwner (Just AltJSON)
               _giPayload
               youTubeAnalyticsService

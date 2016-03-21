@@ -51,7 +51,7 @@ type PeopleGetResource =
 -- | Get a person\'s profile.
 --
 -- /See:/ 'peopleGet' smart constructor.
-newtype PeopleGet = PeopleGet
+newtype PeopleGet = PeopleGet'
     { _pgUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ peopleGet
     :: Text -- ^ 'pgUserId'
     -> PeopleGet
 peopleGet pPgUserId_ =
-    PeopleGet
+    PeopleGet'
     { _pgUserId = pPgUserId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest PeopleGet where
                "https://www.googleapis.com/auth/plus.profiles.read",
                "https://www.googleapis.com/auth/userinfo.email",
                "https://www.googleapis.com/auth/userinfo.profile"]
-        requestClient PeopleGet{..}
+        requestClient PeopleGet'{..}
           = go _pgUserId (Just AltJSON) plusDomainsService
           where go
                   = buildClient (Proxy :: Proxy PeopleGetResource)

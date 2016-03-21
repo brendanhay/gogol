@@ -51,7 +51,7 @@ type SubscriptionsDeleteResource =
 -- | Deletes a subscription.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
-newtype SubscriptionsDelete = SubscriptionsDelete
+newtype SubscriptionsDelete = SubscriptionsDelete'
     { _sdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ subscriptionsDelete
     :: Text -- ^ 'sdId'
     -> SubscriptionsDelete
 subscriptionsDelete pSdId_ =
-    SubscriptionsDelete
+    SubscriptionsDelete'
     { _sdId = pSdId_
     }
 
@@ -76,7 +76,7 @@ instance GoogleRequest SubscriptionsDelete where
         type Rs SubscriptionsDelete = ()
         type Scopes SubscriptionsDelete =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient SubscriptionsDelete{..}
+        requestClient SubscriptionsDelete'{..}
           = go _sdId (Just AltJSON) mirrorService
           where go
                   = buildClient

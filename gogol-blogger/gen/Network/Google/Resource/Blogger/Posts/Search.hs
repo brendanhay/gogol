@@ -59,7 +59,7 @@ type PostsSearchResource =
 -- | Search for a post.
 --
 -- /See:/ 'postsSearch' smart constructor.
-data PostsSearch = PostsSearch
+data PostsSearch = PostsSearch'
     { _psOrderBy     :: !PostsSearchOrderBy
     , _psBlogId      :: !Text
     , _psQ           :: !Text
@@ -82,7 +82,7 @@ postsSearch
     -> Text -- ^ 'psQ'
     -> PostsSearch
 postsSearch pPsBlogId_ pPsQ_ =
-    PostsSearch
+    PostsSearch'
     { _psOrderBy = PSOBPublished
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
@@ -115,7 +115,7 @@ instance GoogleRequest PostsSearch where
         type Scopes PostsSearch =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PostsSearch{..}
+        requestClient PostsSearch'{..}
           = go _psBlogId (Just _psQ) (Just _psOrderBy)
               (Just _psFetchBodies)
               (Just AltJSON)

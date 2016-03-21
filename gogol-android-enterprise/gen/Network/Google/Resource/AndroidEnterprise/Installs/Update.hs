@@ -66,7 +66,7 @@ type InstallsUpdateResource =
 -- necessary.
 --
 -- /See:/ 'installsUpdate' smart constructor.
-data InstallsUpdate = InstallsUpdate
+data InstallsUpdate = InstallsUpdate'
     { _iuEnterpriseId :: !Text
     , _iuPayload      :: !Install
     , _iuUserId       :: !Text
@@ -95,7 +95,7 @@ installsUpdate
     -> Text -- ^ 'iuDeviceId'
     -> InstallsUpdate
 installsUpdate pIuEnterpriseId_ pIuPayload_ pIuUserId_ pIuInstallId_ pIuDeviceId_ =
-    InstallsUpdate
+    InstallsUpdate'
     { _iuEnterpriseId = pIuEnterpriseId_
     , _iuPayload = pIuPayload_
     , _iuUserId = pIuUserId_
@@ -133,7 +133,7 @@ instance GoogleRequest InstallsUpdate where
         type Rs InstallsUpdate = Install
         type Scopes InstallsUpdate =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient InstallsUpdate{..}
+        requestClient InstallsUpdate'{..}
           = go _iuEnterpriseId _iuUserId _iuDeviceId
               _iuInstallId
               (Just AltJSON)

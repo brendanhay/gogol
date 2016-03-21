@@ -54,7 +54,7 @@ type AdvertisersGetResource =
 -- | Gets one advertiser by ID.
 --
 -- /See:/ 'advertisersGet' smart constructor.
-data AdvertisersGet = AdvertisersGet
+data AdvertisersGet = AdvertisersGet'
     { _advProFileId :: !(Textual Int64)
     , _advId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ advertisersGet
     -> Int64 -- ^ 'advId'
     -> AdvertisersGet
 advertisersGet pAdvProFileId_ pAdvId_ =
-    AdvertisersGet
+    AdvertisersGet'
     { _advProFileId = _Coerce # pAdvProFileId_
     , _advId = _Coerce # pAdvId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AdvertisersGet where
         type Rs AdvertisersGet = Advertiser
         type Scopes AdvertisersGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertisersGet{..}
+        requestClient AdvertisersGet'{..}
           = go _advProFileId _advId (Just AltJSON)
               dFAReportingService
           where go

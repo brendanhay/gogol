@@ -62,7 +62,7 @@ type MachineTypesListResource =
 -- | Retrieves a list of machine types available to the specified project.
 --
 -- /See:/ 'machineTypesList' smart constructor.
-data MachineTypesList = MachineTypesList
+data MachineTypesList = MachineTypesList'
     { _mtlProject    :: !Text
     , _mtlZone       :: !Text
     , _mtlFilter     :: !(Maybe Text)
@@ -88,7 +88,7 @@ machineTypesList
     -> Text -- ^ 'mtlZone'
     -> MachineTypesList
 machineTypesList pMtlProject_ pMtlZone_ =
-    MachineTypesList
+    MachineTypesList'
     { _mtlProject = pMtlProject_
     , _mtlZone = pMtlZone_
     , _mtlFilter = Nothing
@@ -153,7 +153,7 @@ instance GoogleRequest MachineTypesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient MachineTypesList{..}
+        requestClient MachineTypesList'{..}
           = go _mtlProject _mtlZone _mtlFilter _mtlPageToken
               (Just _mtlMaxResults)
               (Just AltJSON)

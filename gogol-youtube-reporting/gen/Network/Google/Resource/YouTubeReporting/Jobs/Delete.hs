@@ -66,7 +66,7 @@ type JobsDeleteResource =
 -- | Deletes a job.
 --
 -- /See:/ 'jobsDelete' smart constructor.
-data JobsDelete = JobsDelete
+data JobsDelete = JobsDelete'
     { _jdXgafv                  :: !(Maybe Text)
     , _jdJobId                  :: !Text
     , _jdUploadProtocol         :: !(Maybe Text)
@@ -103,7 +103,7 @@ jobsDelete
     :: Text -- ^ 'jdJobId'
     -> JobsDelete
 jobsDelete pJdJobId_ =
-    JobsDelete
+    JobsDelete'
     { _jdXgafv = Nothing
     , _jdJobId = pJdJobId_
     , _jdUploadProtocol = Nothing
@@ -167,7 +167,7 @@ instance GoogleRequest JobsDelete where
         type Scopes JobsDelete =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient JobsDelete{..}
+        requestClient JobsDelete'{..}
           = go _jdJobId _jdXgafv _jdUploadProtocol (Just _jdPp)
               _jdAccessToken
               _jdUploadType

@@ -55,7 +55,7 @@ type BatchReportsListResource =
 -- | Retrieves a list of processed batch reports.
 --
 -- /See:/ 'batchReportsList' smart constructor.
-data BatchReportsList = BatchReportsList
+data BatchReportsList = BatchReportsList'
     { _brlBatchReportDefinitionId :: !Text
     , _brlOnBehalfOfContentOwner  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ batchReportsList
     -> Text -- ^ 'brlOnBehalfOfContentOwner'
     -> BatchReportsList
 batchReportsList pBrlBatchReportDefinitionId_ pBrlOnBehalfOfContentOwner_ =
-    BatchReportsList
+    BatchReportsList'
     { _brlBatchReportDefinitionId = pBrlBatchReportDefinitionId_
     , _brlOnBehalfOfContentOwner = pBrlOnBehalfOfContentOwner_
     }
@@ -96,7 +96,7 @@ instance GoogleRequest BatchReportsList where
         type Scopes BatchReportsList =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient BatchReportsList{..}
+        requestClient BatchReportsList'{..}
           = go (Just _brlBatchReportDefinitionId)
               (Just _brlOnBehalfOfContentOwner)
               (Just AltJSON)

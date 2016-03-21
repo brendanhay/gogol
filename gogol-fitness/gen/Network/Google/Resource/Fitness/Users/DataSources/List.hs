@@ -61,7 +61,7 @@ type UsersDataSourcesListResource =
 -- using other scopes.
 --
 -- /See:/ 'usersDataSourcesList' smart constructor.
-data UsersDataSourcesList = UsersDataSourcesList
+data UsersDataSourcesList = UsersDataSourcesList'
     { _udslDataTypeName :: !(Maybe [Text])
     , _udslUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -77,7 +77,7 @@ usersDataSourcesList
     :: Text -- ^ 'udslUserId'
     -> UsersDataSourcesList
 usersDataSourcesList pUdslUserId_ =
-    UsersDataSourcesList
+    UsersDataSourcesList'
     { _udslDataTypeName = Nothing
     , _udslUserId = pUdslUserId_
     }
@@ -107,7 +107,7 @@ instance GoogleRequest UsersDataSourcesList where
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesList{..}
+        requestClient UsersDataSourcesList'{..}
           = go _udslUserId (_udslDataTypeName ^. _Default)
               (Just AltJSON)
               fitnessService

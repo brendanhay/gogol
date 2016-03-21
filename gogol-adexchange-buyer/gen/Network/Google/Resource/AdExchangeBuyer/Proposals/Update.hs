@@ -57,7 +57,7 @@ type ProposalsUpdateResource =
 -- | Update the given proposal
 --
 -- /See:/ 'proposalsUpdate' smart constructor.
-data ProposalsUpdate = ProposalsUpdate
+data ProposalsUpdate = ProposalsUpdate'
     { _puUpdateAction   :: !ProposalsUpdateUpdateAction
     , _puRevisionNumber :: !(Textual Int64)
     , _puPayload        :: !Proposal
@@ -82,7 +82,7 @@ proposalsUpdate
     -> Text -- ^ 'puProposalId'
     -> ProposalsUpdate
 proposalsUpdate pPuUpdateAction_ pPuRevisionNumber_ pPuPayload_ pPuProposalId_ =
-    ProposalsUpdate
+    ProposalsUpdate'
     { _puUpdateAction = pPuUpdateAction_
     , _puRevisionNumber = _Coerce # pPuRevisionNumber_
     , _puPayload = pPuPayload_
@@ -119,7 +119,7 @@ instance GoogleRequest ProposalsUpdate where
         type Rs ProposalsUpdate = Proposal
         type Scopes ProposalsUpdate =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProposalsUpdate{..}
+        requestClient ProposalsUpdate'{..}
           = go _puProposalId _puRevisionNumber _puUpdateAction
               (Just AltJSON)
               _puPayload

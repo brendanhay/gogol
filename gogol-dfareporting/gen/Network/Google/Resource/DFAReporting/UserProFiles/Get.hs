@@ -51,7 +51,7 @@ type UserProFilesGetResource =
 -- | Gets one user profile by ID.
 --
 -- /See:/ 'userProFilesGet' smart constructor.
-newtype UserProFilesGet = UserProFilesGet
+newtype UserProFilesGet = UserProFilesGet'
     { _upfgProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ userProFilesGet
     :: Int64 -- ^ 'upfgProFileId'
     -> UserProFilesGet
 userProFilesGet pUpfgProFileId_ =
-    UserProFilesGet
+    UserProFilesGet'
     { _upfgProFileId = _Coerce # pUpfgProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest UserProFilesGet where
         type Scopes UserProFilesGet =
              '["https://www.googleapis.com/auth/dfareporting",
                "https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserProFilesGet{..}
+        requestClient UserProFilesGet'{..}
           = go _upfgProFileId (Just AltJSON)
               dFAReportingService
           where go

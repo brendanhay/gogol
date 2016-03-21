@@ -50,21 +50,21 @@ type LocationsListResource =
 --
 -- /See:/ 'locationsList' smart constructor.
 data LocationsList =
-    LocationsList
+    LocationsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsList' with the minimum fields required to make a request.
 --
 locationsList
     :: LocationsList
-locationsList = LocationsList
+locationsList = LocationsList'
 
 instance GoogleRequest LocationsList where
         type Rs LocationsList = LocationsListResponse
         type Scopes LocationsList =
              '["https://www.googleapis.com/auth/glass.location",
                "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient LocationsList{}
+        requestClient LocationsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsListResource)

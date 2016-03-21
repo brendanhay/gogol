@@ -58,7 +58,7 @@ type EventsResetResource =
 -- player that use the event will also be reset.
 --
 -- /See:/ 'eventsReset' smart constructor.
-newtype EventsReset = EventsReset
+newtype EventsReset = EventsReset'
     { _erEventId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -71,7 +71,7 @@ eventsReset
     :: Text -- ^ 'erEventId'
     -> EventsReset
 eventsReset pErEventId_ =
-    EventsReset
+    EventsReset'
     { _erEventId = pErEventId_
     }
 
@@ -85,7 +85,7 @@ instance GoogleRequest EventsReset where
         type Scopes EventsReset =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient EventsReset{..}
+        requestClient EventsReset'{..}
           = go _erEventId (Just AltJSON) gamesManagementService
           where go
                   = buildClient (Proxy :: Proxy EventsResetResource)

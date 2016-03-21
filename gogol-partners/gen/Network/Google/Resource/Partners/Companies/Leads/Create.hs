@@ -68,7 +68,7 @@ type CompaniesLeadsCreateResource =
 -- | Creates an advertiser lead for the given company ID.
 --
 -- /See:/ 'companiesLeadsCreate' smart constructor.
-data CompaniesLeadsCreate = CompaniesLeadsCreate
+data CompaniesLeadsCreate = CompaniesLeadsCreate'
     { _clcXgafv          :: !(Maybe Text)
     , _clcUploadProtocol :: !(Maybe Text)
     , _clcCompanyId      :: !Text
@@ -106,7 +106,7 @@ companiesLeadsCreate
     -> CreateLeadRequest -- ^ 'clcPayload'
     -> CompaniesLeadsCreate
 companiesLeadsCreate pClcCompanyId_ pClcPayload_ =
-    CompaniesLeadsCreate
+    CompaniesLeadsCreate'
     { _clcXgafv = Nothing
     , _clcUploadProtocol = Nothing
     , _clcCompanyId = pClcCompanyId_
@@ -168,7 +168,7 @@ clcCallback
 instance GoogleRequest CompaniesLeadsCreate where
         type Rs CompaniesLeadsCreate = CreateLeadResponse
         type Scopes CompaniesLeadsCreate = '[]
-        requestClient CompaniesLeadsCreate{..}
+        requestClient CompaniesLeadsCreate'{..}
           = go _clcCompanyId _clcXgafv _clcUploadProtocol
               (Just _clcPp)
               _clcAccessToken

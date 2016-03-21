@@ -58,7 +58,7 @@ type CommentsRemoveContentResource =
 -- | Removes the content of a comment.
 --
 -- /See:/ 'commentsRemoveContent' smart constructor.
-data CommentsRemoveContent = CommentsRemoveContent
+data CommentsRemoveContent = CommentsRemoveContent'
     { _crcBlogId    :: !Text
     , _crcPostId    :: !Text
     , _crcCommentId :: !Text
@@ -79,7 +79,7 @@ commentsRemoveContent
     -> Text -- ^ 'crcCommentId'
     -> CommentsRemoveContent
 commentsRemoveContent pCrcBlogId_ pCrcPostId_ pCrcCommentId_ =
-    CommentsRemoveContent
+    CommentsRemoveContent'
     { _crcBlogId = pCrcBlogId_
     , _crcPostId = pCrcPostId_
     , _crcCommentId = pCrcCommentId_
@@ -104,7 +104,7 @@ instance GoogleRequest CommentsRemoveContent where
         type Rs CommentsRemoveContent = Comment
         type Scopes CommentsRemoveContent =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient CommentsRemoveContent{..}
+        requestClient CommentsRemoveContent'{..}
           = go _crcBlogId _crcPostId _crcCommentId
               (Just AltJSON)
               bloggerService

@@ -55,7 +55,7 @@ type FloodlightActivitiesUpdateResource =
 -- | Updates an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesUpdate' smart constructor.
-data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate
+data FloodlightActivitiesUpdate = FloodlightActivitiesUpdate'
     { _fauProFileId :: !(Textual Int64)
     , _fauPayload   :: !FloodlightActivity
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesUpdate
     -> FloodlightActivity -- ^ 'fauPayload'
     -> FloodlightActivitiesUpdate
 floodlightActivitiesUpdate pFauProFileId_ pFauPayload_ =
-    FloodlightActivitiesUpdate
+    FloodlightActivitiesUpdate'
     { _fauProFileId = _Coerce # pFauProFileId_
     , _fauPayload = pFauPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest FloodlightActivitiesUpdate
              FloodlightActivity
         type Scopes FloodlightActivitiesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivitiesUpdate{..}
+        requestClient FloodlightActivitiesUpdate'{..}
           = go _fauProFileId (Just AltJSON) _fauPayload
               dFAReportingService
           where go

@@ -67,7 +67,7 @@ type LiveBroadcastsBindResource =
 -- broadcast.
 --
 -- /See:/ 'liveBroadcastsBind' smart constructor.
-data LiveBroadcastsBind = LiveBroadcastsBind
+data LiveBroadcastsBind = LiveBroadcastsBind'
     { _lbbPart                          :: !Text
     , _lbbOnBehalfOfContentOwner        :: !(Maybe Text)
     , _lbbOnBehalfOfContentOwnerChannel :: !(Maybe Text)
@@ -93,7 +93,7 @@ liveBroadcastsBind
     -> Text -- ^ 'lbbId'
     -> LiveBroadcastsBind
 liveBroadcastsBind pLbbPart_ pLbbId_ =
-    LiveBroadcastsBind
+    LiveBroadcastsBind'
     { _lbbPart = pLbbPart_
     , _lbbOnBehalfOfContentOwner = Nothing
     , _lbbOnBehalfOfContentOwnerChannel = Nothing
@@ -162,7 +162,7 @@ instance GoogleRequest LiveBroadcastsBind where
         type Scopes LiveBroadcastsBind =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveBroadcastsBind{..}
+        requestClient LiveBroadcastsBind'{..}
           = go (Just _lbbId) (Just _lbbPart)
               _lbbOnBehalfOfContentOwner
               _lbbOnBehalfOfContentOwnerChannel

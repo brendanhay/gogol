@@ -57,7 +57,7 @@ type GroupItemsListResource =
 -- parameters.
 --
 -- /See:/ 'groupItemsList' smart constructor.
-data GroupItemsList = GroupItemsList
+data GroupItemsList = GroupItemsList'
     { _gilOnBehalfOfContentOwner :: !(Maybe Text)
     , _gilGroupId                :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ groupItemsList
     :: Text -- ^ 'gilGroupId'
     -> GroupItemsList
 groupItemsList pGilGroupId_ =
-    GroupItemsList
+    GroupItemsList'
     { _gilOnBehalfOfContentOwner = Nothing
     , _gilGroupId = pGilGroupId_
     }
@@ -106,7 +106,7 @@ instance GoogleRequest GroupItemsList where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient GroupItemsList{..}
+        requestClient GroupItemsList'{..}
           = go (Just _gilGroupId) _gilOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeAnalyticsService

@@ -63,7 +63,7 @@ type ManagementCustomMetricsUpdateResource =
 -- | Updates an existing custom metric.
 --
 -- /See:/ 'managementCustomMetricsUpdate' smart constructor.
-data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate
+data ManagementCustomMetricsUpdate = ManagementCustomMetricsUpdate'
     { _mcmuCustomMetricId              :: !Text
     , _mcmuWebPropertyId               :: !Text
     , _mcmuIgnoreCustomDataSourceLinks :: !Bool
@@ -91,7 +91,7 @@ managementCustomMetricsUpdate
     -> Text -- ^ 'mcmuAccountId'
     -> ManagementCustomMetricsUpdate
 managementCustomMetricsUpdate pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuPayload_ pMcmuAccountId_ =
-    ManagementCustomMetricsUpdate
+    ManagementCustomMetricsUpdate'
     { _mcmuCustomMetricId = pMcmuCustomMetricId_
     , _mcmuWebPropertyId = pMcmuWebPropertyId_
     , _mcmuIgnoreCustomDataSourceLinks = False
@@ -134,7 +134,7 @@ instance GoogleRequest ManagementCustomMetricsUpdate
         type Rs ManagementCustomMetricsUpdate = CustomMetric
         type Scopes ManagementCustomMetricsUpdate =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementCustomMetricsUpdate{..}
+        requestClient ManagementCustomMetricsUpdate'{..}
           = go _mcmuAccountId _mcmuWebPropertyId
               _mcmuCustomMetricId
               (Just _mcmuIgnoreCustomDataSourceLinks)

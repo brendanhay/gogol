@@ -67,7 +67,7 @@ type UsersDataSourcesDataSetsPatchResource =
 -- than one dataset. This method does not use patch semantics.
 --
 -- /See:/ 'usersDataSourcesDataSetsPatch' smart constructor.
-data UsersDataSourcesDataSetsPatch = UsersDataSourcesDataSetsPatch
+data UsersDataSourcesDataSetsPatch = UsersDataSourcesDataSetsPatch'
     { _udsdspDataSourceId      :: !Text
     , _udsdspPayload           :: !DataSet
     , _udsdspUserId            :: !Text
@@ -95,7 +95,7 @@ usersDataSourcesDataSetsPatch
     -> Text -- ^ 'udsdspDataSetId'
     -> UsersDataSourcesDataSetsPatch
 usersDataSourcesDataSetsPatch pUdsdspDataSourceId_ pUdsdspPayload_ pUdsdspUserId_ pUdsdspDataSetId_ =
-    UsersDataSourcesDataSetsPatch
+    UsersDataSourcesDataSetsPatch'
     { _udsdspDataSourceId = pUdsdspDataSourceId_
     , _udsdspPayload = pUdsdspPayload_
     , _udsdspUserId = pUdsdspUserId_
@@ -146,7 +146,7 @@ instance GoogleRequest UsersDataSourcesDataSetsPatch
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesDataSetsPatch{..}
+        requestClient UsersDataSourcesDataSetsPatch'{..}
           = go _udsdspUserId _udsdspDataSourceId
               _udsdspDataSetId
               _udsdspCurrentTimeMillis

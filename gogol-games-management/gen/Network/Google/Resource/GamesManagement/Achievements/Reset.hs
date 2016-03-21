@@ -57,7 +57,7 @@ type AchievementsResetResource =
 -- for your application.
 --
 -- /See:/ 'achievementsReset' smart constructor.
-newtype AchievementsReset = AchievementsReset
+newtype AchievementsReset = AchievementsReset'
     { _arAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -70,7 +70,7 @@ achievementsReset
     :: Text -- ^ 'arAchievementId'
     -> AchievementsReset
 achievementsReset pArAchievementId_ =
-    AchievementsReset
+    AchievementsReset'
     { _arAchievementId = pArAchievementId_
     }
 
@@ -85,7 +85,7 @@ instance GoogleRequest AchievementsReset where
         type Scopes AchievementsReset =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsReset{..}
+        requestClient AchievementsReset'{..}
           = go _arAchievementId (Just AltJSON)
               gamesManagementService
           where go

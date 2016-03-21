@@ -55,7 +55,7 @@ type CustomChannelsDeleteResource =
 -- | Delete a specific custom channel from the host AdSense account.
 --
 -- /See:/ 'customChannelsDelete' smart constructor.
-data CustomChannelsDelete = CustomChannelsDelete
+data CustomChannelsDelete = CustomChannelsDelete'
     { _ccdCustomChannelId :: !Text
     , _ccdAdClientId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ customChannelsDelete
     -> Text -- ^ 'ccdAdClientId'
     -> CustomChannelsDelete
 customChannelsDelete pCcdCustomChannelId_ pCcdAdClientId_ =
-    CustomChannelsDelete
+    CustomChannelsDelete'
     { _ccdCustomChannelId = pCcdCustomChannelId_
     , _ccdAdClientId = pCcdAdClientId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest CustomChannelsDelete where
         type Rs CustomChannelsDelete = CustomChannel
         type Scopes CustomChannelsDelete =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient CustomChannelsDelete{..}
+        requestClient CustomChannelsDelete'{..}
           = go _ccdAdClientId _ccdCustomChannelId
               (Just AltJSON)
               adSenseHostService

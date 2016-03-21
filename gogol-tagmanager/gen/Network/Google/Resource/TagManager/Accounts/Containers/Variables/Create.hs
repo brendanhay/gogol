@@ -57,7 +57,7 @@ type AccountsContainersVariablesCreateResource =
 -- | Creates a GTM Variable.
 --
 -- /See:/ 'accountsContainersVariablesCreate' smart constructor.
-data AccountsContainersVariablesCreate = AccountsContainersVariablesCreate
+data AccountsContainersVariablesCreate = AccountsContainersVariablesCreate'
     { _acvcContainerId :: !Text
     , _acvcPayload     :: !Variable
     , _acvcAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersVariablesCreate
     -> Text -- ^ 'acvcAccountId'
     -> AccountsContainersVariablesCreate
 accountsContainersVariablesCreate pAcvcContainerId_ pAcvcPayload_ pAcvcAccountId_ =
-    AccountsContainersVariablesCreate
+    AccountsContainersVariablesCreate'
     { _acvcContainerId = pAcvcContainerId_
     , _acvcPayload = pAcvcPayload_
     , _acvcAccountId = pAcvcAccountId_
@@ -106,7 +106,7 @@ instance GoogleRequest
         type Rs AccountsContainersVariablesCreate = Variable
         type Scopes AccountsContainersVariablesCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersVariablesCreate{..}
+        requestClient AccountsContainersVariablesCreate'{..}
           = go _acvcAccountId _acvcContainerId (Just AltJSON)
               _acvcPayload
               tagManagerService

@@ -60,7 +60,7 @@ type PurchasesSubscriptionsRefundResource =
 -- valid until its expiration time and it will continue to recur.
 --
 -- /See:/ 'purchasesSubscriptionsRefund' smart constructor.
-data PurchasesSubscriptionsRefund = PurchasesSubscriptionsRefund
+data PurchasesSubscriptionsRefund = PurchasesSubscriptionsRefund'
     { _psrPackageName    :: !Text
     , _psrToken          :: !Text
     , _psrSubscriptionId :: !Text
@@ -81,7 +81,7 @@ purchasesSubscriptionsRefund
     -> Text -- ^ 'psrSubscriptionId'
     -> PurchasesSubscriptionsRefund
 purchasesSubscriptionsRefund pPsrPackageName_ pPsrToken_ pPsrSubscriptionId_ =
-    PurchasesSubscriptionsRefund
+    PurchasesSubscriptionsRefund'
     { _psrPackageName = pPsrPackageName_
     , _psrToken = pPsrToken_
     , _psrSubscriptionId = pPsrSubscriptionId_
@@ -110,7 +110,7 @@ instance GoogleRequest PurchasesSubscriptionsRefund
         type Rs PurchasesSubscriptionsRefund = ()
         type Scopes PurchasesSubscriptionsRefund =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient PurchasesSubscriptionsRefund{..}
+        requestClient PurchasesSubscriptionsRefund'{..}
           = go _psrPackageName _psrSubscriptionId _psrToken
               (Just AltJSON)
               androidPublisherService

@@ -63,7 +63,7 @@ type ProjectsServiceAccountsDeleteResource =
 -- | Deletes a service acount.
 --
 -- /See:/ 'projectsServiceAccountsDelete' smart constructor.
-data ProjectsServiceAccountsDelete = ProjectsServiceAccountsDelete
+data ProjectsServiceAccountsDelete = ProjectsServiceAccountsDelete'
     { _psadXgafv          :: !(Maybe Text)
     , _psadUploadProtocol :: !(Maybe Text)
     , _psadPp             :: !Bool
@@ -97,7 +97,7 @@ projectsServiceAccountsDelete
     :: Text -- ^ 'psadName'
     -> ProjectsServiceAccountsDelete
 projectsServiceAccountsDelete pPsadName_ =
-    ProjectsServiceAccountsDelete
+    ProjectsServiceAccountsDelete'
     { _psadXgafv = Nothing
     , _psadUploadProtocol = Nothing
     , _psadPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest ProjectsServiceAccountsDelete
         type Rs ProjectsServiceAccountsDelete = Empty
         type Scopes ProjectsServiceAccountsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsDelete{..}
+        requestClient ProjectsServiceAccountsDelete'{..}
           = go _psadName _psadXgafv _psadUploadProtocol
               (Just _psadPp)
               _psadAccessToken

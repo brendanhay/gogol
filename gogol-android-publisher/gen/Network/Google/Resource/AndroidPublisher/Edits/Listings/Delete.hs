@@ -57,7 +57,7 @@ type EditsListingsDeleteResource =
 -- | Deletes the specified localized store listing from an edit.
 --
 -- /See:/ 'editsListingsDelete' smart constructor.
-data EditsListingsDelete = EditsListingsDelete
+data EditsListingsDelete = EditsListingsDelete'
     { _eldPackageName :: !Text
     , _eldLanguage    :: !Text
     , _eldEditId      :: !Text
@@ -78,7 +78,7 @@ editsListingsDelete
     -> Text -- ^ 'eldEditId'
     -> EditsListingsDelete
 editsListingsDelete pEldPackageName_ pEldLanguage_ pEldEditId_ =
-    EditsListingsDelete
+    EditsListingsDelete'
     { _eldPackageName = pEldPackageName_
     , _eldLanguage = pEldLanguage_
     , _eldEditId = pEldEditId_
@@ -106,7 +106,7 @@ instance GoogleRequest EditsListingsDelete where
         type Rs EditsListingsDelete = ()
         type Scopes EditsListingsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsListingsDelete{..}
+        requestClient EditsListingsDelete'{..}
           = go _eldPackageName _eldEditId _eldLanguage
               (Just AltJSON)
               androidPublisherService

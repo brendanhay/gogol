@@ -57,7 +57,7 @@ type SubnetworksDeleteResource =
 -- | Deletes the specified subnetwork.
 --
 -- /See:/ 'subnetworksDelete' smart constructor.
-data SubnetworksDelete = SubnetworksDelete
+data SubnetworksDelete = SubnetworksDelete'
     { _sdProject    :: !Text
     , _sdSubnetwork :: !Text
     , _sdRegion     :: !Text
@@ -78,7 +78,7 @@ subnetworksDelete
     -> Text -- ^ 'sdRegion'
     -> SubnetworksDelete
 subnetworksDelete pSdProject_ pSdSubnetwork_ pSdRegion_ =
-    SubnetworksDelete
+    SubnetworksDelete'
     { _sdProject = pSdProject_
     , _sdSubnetwork = pSdSubnetwork_
     , _sdRegion = pSdRegion_
@@ -103,7 +103,7 @@ instance GoogleRequest SubnetworksDelete where
         type Scopes SubnetworksDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient SubnetworksDelete{..}
+        requestClient SubnetworksDelete'{..}
           = go _sdProject _sdRegion _sdSubnetwork
               (Just AltJSON)
               computeService

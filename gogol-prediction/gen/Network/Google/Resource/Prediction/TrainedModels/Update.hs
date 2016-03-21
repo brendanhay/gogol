@@ -56,7 +56,7 @@ type TrainedModelsUpdateResource =
 -- | Add new data to a trained model.
 --
 -- /See:/ 'trainedModelsUpdate' smart constructor.
-data TrainedModelsUpdate = TrainedModelsUpdate
+data TrainedModelsUpdate = TrainedModelsUpdate'
     { _tmuProject :: !Text
     , _tmuPayload :: !Update
     , _tmuId      :: !Text
@@ -77,7 +77,7 @@ trainedModelsUpdate
     -> Text -- ^ 'tmuId'
     -> TrainedModelsUpdate
 trainedModelsUpdate pTmuProject_ pTmuPayload_ pTmuId_ =
-    TrainedModelsUpdate
+    TrainedModelsUpdate'
     { _tmuProject = pTmuProject_
     , _tmuPayload = pTmuPayload_
     , _tmuId = pTmuId_
@@ -101,7 +101,7 @@ instance GoogleRequest TrainedModelsUpdate where
         type Rs TrainedModelsUpdate = Insert2
         type Scopes TrainedModelsUpdate =
              '["https://www.googleapis.com/auth/prediction"]
-        requestClient TrainedModelsUpdate{..}
+        requestClient TrainedModelsUpdate'{..}
           = go _tmuProject _tmuId (Just AltJSON) _tmuPayload
               predictionService
           where go

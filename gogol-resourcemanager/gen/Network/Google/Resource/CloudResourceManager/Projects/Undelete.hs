@@ -77,7 +77,7 @@ type ProjectsUndeleteResource =
 -- Project.
 --
 -- /See:/ 'projectsUndelete' smart constructor.
-data ProjectsUndelete = ProjectsUndelete
+data ProjectsUndelete = ProjectsUndelete'
     { _puXgafv          :: !(Maybe Text)
     , _puUploadProtocol :: !(Maybe Text)
     , _puPp             :: !Bool
@@ -115,7 +115,7 @@ projectsUndelete
     -> Text -- ^ 'puProjectId'
     -> ProjectsUndelete
 projectsUndelete pPuPayload_ pPuProjectId_ =
-    ProjectsUndelete
+    ProjectsUndelete'
     { _puXgafv = Nothing
     , _puUploadProtocol = Nothing
     , _puPp = True
@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsUndelete where
         type Rs ProjectsUndelete = Empty
         type Scopes ProjectsUndelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsUndelete{..}
+        requestClient ProjectsUndelete'{..}
           = go _puProjectId _puXgafv _puUploadProtocol
               (Just _puPp)
               _puAccessToken

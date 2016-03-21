@@ -61,7 +61,7 @@ type TasksUpdateResource =
 -- | Update tasks that are leased out of a TaskQueue.
 --
 -- /See:/ 'tasksUpdate' smart constructor.
-data TasksUpdate = TasksUpdate
+data TasksUpdate = TasksUpdate'
     { _tuTaskqueue       :: !Text
     , _tuProject         :: !Text
     , _tuPayload         :: !Task
@@ -90,7 +90,7 @@ tasksUpdate
     -> Int32 -- ^ 'tuNewLeaseSeconds'
     -> TasksUpdate
 tasksUpdate pTuTaskqueue_ pTuProject_ pTuPayload_ pTuTask_ pTuNewLeaseSeconds_ =
-    TasksUpdate
+    TasksUpdate'
     { _tuTaskqueue = pTuTaskqueue_
     , _tuProject = pTuProject_
     , _tuPayload = pTuPayload_
@@ -127,7 +127,7 @@ instance GoogleRequest TasksUpdate where
         type Scopes TasksUpdate =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksUpdate{..}
+        requestClient TasksUpdate'{..}
           = go _tuProject _tuTaskqueue _tuTask
               (Just _tuNewLeaseSeconds)
               (Just AltJSON)

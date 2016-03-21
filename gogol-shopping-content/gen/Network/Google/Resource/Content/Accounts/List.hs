@@ -56,7 +56,7 @@ type AccountsListResource =
 -- | Lists the sub-accounts in your Merchant Center account.
 --
 -- /See:/ 'accountsList' smart constructor.
-data AccountsList = AccountsList
+data AccountsList = AccountsList'
     { _alMerchantId :: !(Textual Word64)
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Word32))
@@ -75,7 +75,7 @@ accountsList
     :: Word64 -- ^ 'alMerchantId'
     -> AccountsList
 accountsList pAlMerchantId_ =
-    AccountsList
+    AccountsList'
     { _alMerchantId = _Coerce # pAlMerchantId_
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest AccountsList where
         type Rs AccountsList = AccountsListResponse
         type Scopes AccountsList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountsList{..}
+        requestClient AccountsList'{..}
           = go _alMerchantId _alPageToken _alMaxResults
               (Just AltJSON)
               shoppingContentService

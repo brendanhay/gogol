@@ -61,7 +61,7 @@ type ManagementUploadsGetResource =
 -- | List uploads to which the user has access.
 --
 -- /See:/ 'managementUploadsGet' smart constructor.
-data ManagementUploadsGet = ManagementUploadsGet
+data ManagementUploadsGet = ManagementUploadsGet'
     { _mugWebPropertyId      :: !Text
     , _mugCustomDataSourceId :: !Text
     , _mugAccountId          :: !Text
@@ -86,7 +86,7 @@ managementUploadsGet
     -> Text -- ^ 'mugUploadId'
     -> ManagementUploadsGet
 managementUploadsGet pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ pMugUploadId_ =
-    ManagementUploadsGet
+    ManagementUploadsGet'
     { _mugWebPropertyId = pMugWebPropertyId_
     , _mugCustomDataSourceId = pMugCustomDataSourceId_
     , _mugAccountId = pMugAccountId_
@@ -121,7 +121,7 @@ instance GoogleRequest ManagementUploadsGet where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementUploadsGet{..}
+        requestClient ManagementUploadsGet'{..}
           = go _mugAccountId _mugWebPropertyId
               _mugCustomDataSourceId
               _mugUploadId

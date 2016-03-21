@@ -56,7 +56,7 @@ type AccountsPatchResource =
 -- | Updates an existing account. This method supports patch semantics.
 --
 -- /See:/ 'accountsPatch' smart constructor.
-data AccountsPatch = AccountsPatch
+data AccountsPatch = AccountsPatch'
     { _appProFileId :: !(Textual Int64)
     , _appPayload   :: !Account
     , _appId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ accountsPatch
     -> Int64 -- ^ 'appId'
     -> AccountsPatch
 accountsPatch pAppProFileId_ pAppPayload_ pAppId_ =
-    AccountsPatch
+    AccountsPatch'
     { _appProFileId = _Coerce # pAppProFileId_
     , _appPayload = pAppPayload_
     , _appId = _Coerce # pAppId_
@@ -103,7 +103,7 @@ instance GoogleRequest AccountsPatch where
         type Rs AccountsPatch = Account
         type Scopes AccountsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountsPatch{..}
+        requestClient AccountsPatch'{..}
           = go _appProFileId (Just _appId) (Just AltJSON)
               _appPayload
               dFAReportingService

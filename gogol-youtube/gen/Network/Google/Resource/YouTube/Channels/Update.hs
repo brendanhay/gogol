@@ -59,7 +59,7 @@ type ChannelsUpdateResource =
 -- invideoPromotion objects and their child properties.
 --
 -- /See:/ 'channelsUpdate' smart constructor.
-data ChannelsUpdate = ChannelsUpdate
+data ChannelsUpdate = ChannelsUpdate'
     { _chaPart                   :: !Text
     , _chaPayload                :: !Channel
     , _chaOnBehalfOfContentOwner :: !(Maybe Text)
@@ -79,7 +79,7 @@ channelsUpdate
     -> Channel -- ^ 'chaPayload'
     -> ChannelsUpdate
 channelsUpdate pChaPart_ pChaPayload_ =
-    ChannelsUpdate
+    ChannelsUpdate'
     { _chaPart = pChaPart_
     , _chaPayload = pChaPayload_
     , _chaOnBehalfOfContentOwner = Nothing
@@ -120,7 +120,7 @@ instance GoogleRequest ChannelsUpdate where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient ChannelsUpdate{..}
+        requestClient ChannelsUpdate'{..}
           = go (Just _chaPart) _chaOnBehalfOfContentOwner
               (Just AltJSON)
               _chaPayload

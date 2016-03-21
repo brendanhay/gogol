@@ -60,7 +60,7 @@ type SubnetworksAggregatedListResource =
 -- | Retrieves an aggregated list of subnetworks.
 --
 -- /See:/ 'subnetworksAggregatedList' smart constructor.
-data SubnetworksAggregatedList = SubnetworksAggregatedList
+data SubnetworksAggregatedList = SubnetworksAggregatedList'
     { _salProject    :: !Text
     , _salFilter     :: !(Maybe Text)
     , _salPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ subnetworksAggregatedList
     :: Text -- ^ 'salProject'
     -> SubnetworksAggregatedList
 subnetworksAggregatedList pSalProject_ =
-    SubnetworksAggregatedList
+    SubnetworksAggregatedList'
     { _salProject = pSalProject_
     , _salFilter = Nothing
     , _salPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest SubnetworksAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SubnetworksAggregatedList{..}
+        requestClient SubnetworksAggregatedList'{..}
           = go _salProject _salFilter _salPageToken
               (Just _salMaxResults)
               (Just AltJSON)

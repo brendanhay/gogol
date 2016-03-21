@@ -71,7 +71,7 @@ type ImageConfigurationsUploadResource =
 -- | Uploads an image for a resource with the given ID and image type.
 --
 -- /See:/ 'imageConfigurationsUpload' smart constructor.
-data ImageConfigurationsUpload = ImageConfigurationsUpload
+data ImageConfigurationsUpload = ImageConfigurationsUpload'
     { _icuResourceId :: !Text
     , _icuImageType  :: !ImageConfigurationsUploadImageType
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,7 +88,7 @@ imageConfigurationsUpload
     -> ImageConfigurationsUploadImageType -- ^ 'icuImageType'
     -> ImageConfigurationsUpload
 imageConfigurationsUpload pIcuResourceId_ pIcuImageType_ =
-    ImageConfigurationsUpload
+    ImageConfigurationsUpload'
     { _icuResourceId = pIcuResourceId_
     , _icuImageType = pIcuImageType_
     }
@@ -110,7 +110,7 @@ instance GoogleRequest ImageConfigurationsUpload
              ImageConfiguration
         type Scopes ImageConfigurationsUpload =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient ImageConfigurationsUpload{..}
+        requestClient ImageConfigurationsUpload'{..}
           = go _icuResourceId _icuImageType (Just AltJSON)
               gamesConfigurationService
           where go :<|> _
@@ -125,7 +125,7 @@ instance GoogleRequest
         type Scopes (MediaUpload ImageConfigurationsUpload) =
              Scopes ImageConfigurationsUpload
         requestClient
-          (MediaUpload ImageConfigurationsUpload{..} body)
+          (MediaUpload ImageConfigurationsUpload'{..} body)
           = go _icuResourceId _icuImageType (Just AltJSON)
               (Just AltMedia)
               body

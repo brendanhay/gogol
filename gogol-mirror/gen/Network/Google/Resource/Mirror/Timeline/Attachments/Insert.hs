@@ -63,7 +63,7 @@ type TimelineAttachmentsInsertResource =
 -- | Adds a new attachment to a timeline item.
 --
 -- /See:/ 'timelineAttachmentsInsert' smart constructor.
-newtype TimelineAttachmentsInsert = TimelineAttachmentsInsert
+newtype TimelineAttachmentsInsert = TimelineAttachmentsInsert'
     { _taiItemId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -76,7 +76,7 @@ timelineAttachmentsInsert
     :: Text -- ^ 'taiItemId'
     -> TimelineAttachmentsInsert
 timelineAttachmentsInsert pTaiItemId_ =
-    TimelineAttachmentsInsert
+    TimelineAttachmentsInsert'
     { _taiItemId = pTaiItemId_
     }
 
@@ -90,7 +90,7 @@ instance GoogleRequest TimelineAttachmentsInsert
         type Rs TimelineAttachmentsInsert = Attachment
         type Scopes TimelineAttachmentsInsert =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineAttachmentsInsert{..}
+        requestClient TimelineAttachmentsInsert'{..}
           = go _taiItemId (Just AltJSON) mirrorService
           where go :<|> _
                   = buildClient
@@ -104,7 +104,7 @@ instance GoogleRequest
         type Scopes (MediaUpload TimelineAttachmentsInsert) =
              Scopes TimelineAttachmentsInsert
         requestClient
-          (MediaUpload TimelineAttachmentsInsert{..} body)
+          (MediaUpload TimelineAttachmentsInsert'{..} body)
           = go _taiItemId (Just AltJSON) (Just AltMedia) body
               mirrorService
           where _ :<|> go

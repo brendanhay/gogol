@@ -55,7 +55,7 @@ type RolesInsertResource =
 -- | Creates a role.
 --
 -- /See:/ 'rolesInsert' smart constructor.
-data RolesInsert = RolesInsert
+data RolesInsert = RolesInsert'
     { _riPayload  :: !Role
     , _riCustomer :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ rolesInsert
     -> Text -- ^ 'riCustomer'
     -> RolesInsert
 rolesInsert pRiPayload_ pRiCustomer_ =
-    RolesInsert
+    RolesInsert'
     { _riPayload = pRiPayload_
     , _riCustomer = pRiCustomer_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest RolesInsert where
         type Rs RolesInsert = Role
         type Scopes RolesInsert =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
-        requestClient RolesInsert{..}
+        requestClient RolesInsert'{..}
           = go _riCustomer (Just AltJSON) _riPayload
               directoryService
           where go

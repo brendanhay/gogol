@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Model metadata.
 --
 -- /See:/ 'insert2ModelInfo' smart constructor.
-data Insert2ModelInfo = Insert2ModelInfo
+data Insert2ModelInfo = Insert2ModelInfo'
     { _imiModelType              :: !(Maybe Text)
     , _imiClassWeightedAccuracy  :: !(Maybe Text)
     , _imiClassificationAccuracy :: !(Maybe Text)
@@ -50,7 +50,7 @@ data Insert2ModelInfo = Insert2ModelInfo
 insert2ModelInfo
     :: Insert2ModelInfo
 insert2ModelInfo =
-    Insert2ModelInfo
+    Insert2ModelInfo'
     { _imiModelType = Nothing
     , _imiClassWeightedAccuracy = Nothing
     , _imiClassificationAccuracy = Nothing
@@ -107,7 +107,7 @@ instance FromJSON Insert2ModelInfo where
         parseJSON
           = withObject "Insert2ModelInfo"
               (\ o ->
-                 Insert2ModelInfo <$>
+                 Insert2ModelInfo' <$>
                    (o .:? "modelType") <*>
                      (o .:? "classWeightedAccuracy")
                      <*> (o .:? "classificationAccuracy")
@@ -116,7 +116,7 @@ instance FromJSON Insert2ModelInfo where
                      <*> (o .:? "numberInstances"))
 
 instance ToJSON Insert2ModelInfo where
-        toJSON Insert2ModelInfo{..}
+        toJSON Insert2ModelInfo'{..}
           = object
               (catMaybes
                  [("modelType" .=) <$> _imiModelType,
@@ -131,7 +131,7 @@ instance ToJSON Insert2ModelInfo where
 -- | A list of the confusion matrix row totals.
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrixRowTotals' smart constructor.
-newtype AnalyzeModelDescriptionConfusionMatrixRowTotals = AnalyzeModelDescriptionConfusionMatrixRowTotals
+newtype AnalyzeModelDescriptionConfusionMatrixRowTotals = AnalyzeModelDescriptionConfusionMatrixRowTotals'
     { _amdcmrtAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -144,7 +144,7 @@ analyzeModelDescriptionConfusionMatrixRowTotals
     :: HashMap Text Text -- ^ 'amdcmrtAddtional'
     -> AnalyzeModelDescriptionConfusionMatrixRowTotals
 analyzeModelDescriptionConfusionMatrixRowTotals pAmdcmrtAddtional_ =
-    AnalyzeModelDescriptionConfusionMatrixRowTotals
+    AnalyzeModelDescriptionConfusionMatrixRowTotals'
     { _amdcmrtAddtional = _Coerce # pAmdcmrtAddtional_
     }
 
@@ -160,7 +160,7 @@ instance FromJSON
           = withObject
               "AnalyzeModelDescriptionConfusionMatrixRowTotals"
               (\ o ->
-                 AnalyzeModelDescriptionConfusionMatrixRowTotals <$>
+                 AnalyzeModelDescriptionConfusionMatrixRowTotals' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -169,7 +169,7 @@ instance ToJSON
 
 --
 -- /See:/ 'insert' smart constructor.
-data Insert = Insert
+data Insert = Insert'
     { _iStorageDataLocation      :: !(Maybe Text)
     , _iModelType                :: !(Maybe Text)
     , _iTrainingInstances        :: !(Maybe [InsertTrainingInstancesItem])
@@ -202,7 +202,7 @@ data Insert = Insert
 insert
     :: Insert
 insert =
-    Insert
+    Insert'
     { _iStorageDataLocation = Nothing
     , _iModelType = Nothing
     , _iTrainingInstances = Nothing
@@ -265,7 +265,7 @@ instance FromJSON Insert where
         parseJSON
           = withObject "Insert"
               (\ o ->
-                 Insert <$>
+                 Insert' <$>
                    (o .:? "storageDataLocation") <*> (o .:? "modelType")
                      <*> (o .:? "trainingInstances" .!= mempty)
                      <*> (o .:? "utility" .!= mempty)
@@ -275,7 +275,7 @@ instance FromJSON Insert where
                      <*> (o .:? "storagePMMLLocation"))
 
 instance ToJSON Insert where
-        toJSON Insert{..}
+        toJSON Insert'{..}
           = object
               (catMaybes
                  [("storageDataLocation" .=) <$>
@@ -292,7 +292,7 @@ instance ToJSON Insert where
 
 --
 -- /See:/ 'list' smart constructor.
-data List = List
+data List = List'
     { _lNextPageToken :: !(Maybe Text)
     , _lKind          :: !Text
     , _lItems         :: !(Maybe [Insert2])
@@ -313,7 +313,7 @@ data List = List
 list
     :: List
 list =
-    List
+    List'
     { _lNextPageToken = Nothing
     , _lKind = "prediction#list"
     , _lItems = Nothing
@@ -345,14 +345,14 @@ instance FromJSON List where
         parseJSON
           = withObject "List"
               (\ o ->
-                 List <$>
+                 List' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "prediction#list")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "selfLink"))
 
 instance ToJSON List where
-        toJSON List{..}
+        toJSON List'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lNextPageToken,
@@ -362,7 +362,7 @@ instance ToJSON List where
 -- | Class label (string).
 --
 -- /See:/ 'insertUtilityItem' smart constructor.
-newtype InsertUtilityItem = InsertUtilityItem
+newtype InsertUtilityItem = InsertUtilityItem'
     { _iuiAddtional :: HashMap Text (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -375,7 +375,7 @@ insertUtilityItem
     :: HashMap Text Double -- ^ 'iuiAddtional'
     -> InsertUtilityItem
 insertUtilityItem pIuiAddtional_ =
-    InsertUtilityItem
+    InsertUtilityItem'
     { _iuiAddtional = _Coerce # pIuiAddtional_
     }
 
@@ -387,14 +387,14 @@ iuiAddtional
 instance FromJSON InsertUtilityItem where
         parseJSON
           = withObject "InsertUtilityItem"
-              (\ o -> InsertUtilityItem <$> (parseJSONObject o))
+              (\ o -> InsertUtilityItem' <$> (parseJSONObject o))
 
 instance ToJSON InsertUtilityItem where
         toJSON = toJSON . _iuiAddtional
 
 --
 -- /See:/ 'insert2' smart constructor.
-data Insert2 = Insert2
+data Insert2 = Insert2'
     { _insStorageDataLocation      :: !(Maybe Text)
     , _insModelType                :: !(Maybe Text)
     , _insKind                     :: !Text
@@ -436,7 +436,7 @@ data Insert2 = Insert2
 insert2
     :: Insert2
 insert2 =
-    Insert2
+    Insert2'
     { _insStorageDataLocation = Nothing
     , _insModelType = Nothing
     , _insKind = "prediction#training"
@@ -515,7 +515,7 @@ instance FromJSON Insert2 where
         parseJSON
           = withObject "Insert2"
               (\ o ->
-                 Insert2 <$>
+                 Insert2' <$>
                    (o .:? "storageDataLocation") <*> (o .:? "modelType")
                      <*> (o .:? "kind" .!= "prediction#training")
                      <*> (o .:? "created")
@@ -528,7 +528,7 @@ instance FromJSON Insert2 where
                      <*> (o .:? "modelInfo"))
 
 instance ToJSON Insert2 where
-        toJSON Insert2{..}
+        toJSON Insert2'{..}
           = object
               (catMaybes
                  [("storageDataLocation" .=) <$>
@@ -548,7 +548,7 @@ instance ToJSON Insert2 where
 
 --
 -- /See:/ 'insertTrainingInstancesItem' smart constructor.
-data InsertTrainingInstancesItem = InsertTrainingInstancesItem
+data InsertTrainingInstancesItem = InsertTrainingInstancesItem'
     { _itiiCSVInstance :: !(Maybe [JSONValue])
     , _itiiOutput      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -563,7 +563,7 @@ data InsertTrainingInstancesItem = InsertTrainingInstancesItem
 insertTrainingInstancesItem
     :: InsertTrainingInstancesItem
 insertTrainingInstancesItem =
-    InsertTrainingInstancesItem
+    InsertTrainingInstancesItem'
     { _itiiCSVInstance = Nothing
     , _itiiOutput = Nothing
     }
@@ -585,12 +585,12 @@ instance FromJSON InsertTrainingInstancesItem where
         parseJSON
           = withObject "InsertTrainingInstancesItem"
               (\ o ->
-                 InsertTrainingInstancesItem <$>
+                 InsertTrainingInstancesItem' <$>
                    (o .:? "csvInstance" .!= mempty) <*>
                      (o .:? "output"))
 
 instance ToJSON InsertTrainingInstancesItem where
-        toJSON InsertTrainingInstancesItem{..}
+        toJSON InsertTrainingInstancesItem'{..}
           = object
               (catMaybes
                  [("csvInstance" .=) <$> _itiiCSVInstance,
@@ -599,7 +599,7 @@ instance ToJSON InsertTrainingInstancesItem where
 -- | Input to the model for a prediction.
 --
 -- /See:/ 'inputInput' smart constructor.
-newtype InputInput = InputInput
+newtype InputInput = InputInput'
     { _iiCSVInstance :: Maybe [JSONValue]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -611,7 +611,7 @@ newtype InputInput = InputInput
 inputInput
     :: InputInput
 inputInput =
-    InputInput
+    InputInput'
     { _iiCSVInstance = Nothing
     }
 
@@ -627,16 +627,16 @@ instance FromJSON InputInput where
         parseJSON
           = withObject "InputInput"
               (\ o ->
-                 InputInput <$> (o .:? "csvInstance" .!= mempty))
+                 InputInput' <$> (o .:? "csvInstance" .!= mempty))
 
 instance ToJSON InputInput where
-        toJSON InputInput{..}
+        toJSON InputInput'{..}
           = object
               (catMaybes [("csvInstance" .=) <$> _iiCSVInstance])
 
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategoricalValuesItem' smart constructor.
-data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem = AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
+data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem = AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem'
     { _addficviValue :: !(Maybe Text)
     , _addficviCount :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -651,7 +651,7 @@ data AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem = AnalyzeDataDescri
 analyzeDataDescriptionFeaturesItemCategoricalValuesItem
     :: AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
 analyzeDataDescriptionFeaturesItemCategoricalValuesItem =
-    AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
+    AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem'
     { _addficviValue = Nothing
     , _addficviCount = Nothing
     }
@@ -676,14 +676,14 @@ instance FromJSON
           = withObject
               "AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem"
               (\ o ->
-                 AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
+                 AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem'
                    <$> (o .:? "value") <*> (o .:? "count"))
 
 instance ToJSON
          AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem
          where
         toJSON
-          AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem{..}
+          AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _addficviValue,
@@ -692,7 +692,7 @@ instance ToJSON
 -- | Description of the numeric values of this feature.
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemNumeric' smart constructor.
-data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesItemNumeric
+data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesItemNumeric'
     { _addfinMean     :: !(Maybe Text)
     , _addfinCount    :: !(Maybe (Textual Int64))
     , _addfinVariance :: !(Maybe Text)
@@ -710,7 +710,7 @@ data AnalyzeDataDescriptionFeaturesItemNumeric = AnalyzeDataDescriptionFeaturesI
 analyzeDataDescriptionFeaturesItemNumeric
     :: AnalyzeDataDescriptionFeaturesItemNumeric
 analyzeDataDescriptionFeaturesItemNumeric =
-    AnalyzeDataDescriptionFeaturesItemNumeric
+    AnalyzeDataDescriptionFeaturesItemNumeric'
     { _addfinMean = Nothing
     , _addfinCount = Nothing
     , _addfinVariance = Nothing
@@ -739,13 +739,13 @@ instance FromJSON
           = withObject
               "AnalyzeDataDescriptionFeaturesItemNumeric"
               (\ o ->
-                 AnalyzeDataDescriptionFeaturesItemNumeric <$>
+                 AnalyzeDataDescriptionFeaturesItemNumeric' <$>
                    (o .:? "mean") <*> (o .:? "count") <*>
                      (o .:? "variance"))
 
 instance ToJSON
          AnalyzeDataDescriptionFeaturesItemNumeric where
-        toJSON AnalyzeDataDescriptionFeaturesItemNumeric{..}
+        toJSON AnalyzeDataDescriptionFeaturesItemNumeric'{..}
           = object
               (catMaybes
                  [("mean" .=) <$> _addfinMean,
@@ -754,7 +754,7 @@ instance ToJSON
 
 --
 -- /See:/ 'input' smart constructor.
-newtype Input = Input
+newtype Input = Input'
     { _iInput :: Maybe InputInput
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -766,7 +766,7 @@ newtype Input = Input
 input
     :: Input
 input =
-    Input
+    Input'
     { _iInput = Nothing
     }
 
@@ -777,16 +777,16 @@ iInput = lens _iInput (\ s a -> s{_iInput = a})
 instance FromJSON Input where
         parseJSON
           = withObject "Input"
-              (\ o -> Input <$> (o .:? "input"))
+              (\ o -> Input' <$> (o .:? "input"))
 
 instance ToJSON Input where
-        toJSON Input{..}
+        toJSON Input'{..}
           = object (catMaybes [("input" .=) <$> _iInput])
 
 -- | Description of the categorical values of this feature.
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemCategorical' smart constructor.
-data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeaturesItemCategorical
+data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeaturesItemCategorical'
     { _addficValues :: !(Maybe [AnalyzeDataDescriptionFeaturesItemCategoricalValuesItem])
     , _addficCount  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -801,7 +801,7 @@ data AnalyzeDataDescriptionFeaturesItemCategorical = AnalyzeDataDescriptionFeatu
 analyzeDataDescriptionFeaturesItemCategorical
     :: AnalyzeDataDescriptionFeaturesItemCategorical
 analyzeDataDescriptionFeaturesItemCategorical =
-    AnalyzeDataDescriptionFeaturesItemCategorical
+    AnalyzeDataDescriptionFeaturesItemCategorical'
     { _addficValues = Nothing
     , _addficCount = Nothing
     }
@@ -825,13 +825,13 @@ instance FromJSON
           = withObject
               "AnalyzeDataDescriptionFeaturesItemCategorical"
               (\ o ->
-                 AnalyzeDataDescriptionFeaturesItemCategorical <$>
+                 AnalyzeDataDescriptionFeaturesItemCategorical' <$>
                    (o .:? "values" .!= mempty) <*> (o .:? "count"))
 
 instance ToJSON
          AnalyzeDataDescriptionFeaturesItemCategorical where
         toJSON
-          AnalyzeDataDescriptionFeaturesItemCategorical{..}
+          AnalyzeDataDescriptionFeaturesItemCategorical'{..}
           = object
               (catMaybes
                  [("values" .=) <$> _addficValues,
@@ -839,7 +839,7 @@ instance ToJSON
 
 --
 -- /See:/ 'analyzeDataDescriptionOutputFeatureTextItem' smart constructor.
-data AnalyzeDataDescriptionOutputFeatureTextItem = AnalyzeDataDescriptionOutputFeatureTextItem
+data AnalyzeDataDescriptionOutputFeatureTextItem = AnalyzeDataDescriptionOutputFeatureTextItem'
     { _addoftiValue :: !(Maybe Text)
     , _addoftiCount :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -854,7 +854,7 @@ data AnalyzeDataDescriptionOutputFeatureTextItem = AnalyzeDataDescriptionOutputF
 analyzeDataDescriptionOutputFeatureTextItem
     :: AnalyzeDataDescriptionOutputFeatureTextItem
 analyzeDataDescriptionOutputFeatureTextItem =
-    AnalyzeDataDescriptionOutputFeatureTextItem
+    AnalyzeDataDescriptionOutputFeatureTextItem'
     { _addoftiValue = Nothing
     , _addoftiCount = Nothing
     }
@@ -876,13 +876,13 @@ instance FromJSON
           = withObject
               "AnalyzeDataDescriptionOutputFeatureTextItem"
               (\ o ->
-                 AnalyzeDataDescriptionOutputFeatureTextItem <$>
+                 AnalyzeDataDescriptionOutputFeatureTextItem' <$>
                    (o .:? "value") <*> (o .:? "count"))
 
 instance ToJSON
          AnalyzeDataDescriptionOutputFeatureTextItem where
         toJSON
-          AnalyzeDataDescriptionOutputFeatureTextItem{..}
+          AnalyzeDataDescriptionOutputFeatureTextItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _addoftiValue,
@@ -890,7 +890,7 @@ instance ToJSON
 
 --
 -- /See:/ 'outputOutputMultiItem' smart constructor.
-data OutputOutputMultiItem = OutputOutputMultiItem
+data OutputOutputMultiItem = OutputOutputMultiItem'
     { _oomiScore :: !(Maybe Text)
     , _oomiLabel :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -905,7 +905,7 @@ data OutputOutputMultiItem = OutputOutputMultiItem
 outputOutputMultiItem
     :: OutputOutputMultiItem
 outputOutputMultiItem =
-    OutputOutputMultiItem
+    OutputOutputMultiItem'
     { _oomiScore = Nothing
     , _oomiLabel = Nothing
     }
@@ -924,11 +924,11 @@ instance FromJSON OutputOutputMultiItem where
         parseJSON
           = withObject "OutputOutputMultiItem"
               (\ o ->
-                 OutputOutputMultiItem <$>
+                 OutputOutputMultiItem' <$>
                    (o .:? "score") <*> (o .:? "label"))
 
 instance ToJSON OutputOutputMultiItem where
-        toJSON OutputOutputMultiItem{..}
+        toJSON OutputOutputMultiItem'{..}
           = object
               (catMaybes
                  [("score" .=) <$> _oomiScore,
@@ -936,7 +936,7 @@ instance ToJSON OutputOutputMultiItem where
 
 --
 -- /See:/ 'analyze' smart constructor.
-data Analyze = Analyze
+data Analyze = Analyze'
     { _aKind             :: !Text
     , _aModelDescription :: !(Maybe AnalyzeModelDescription)
     , _aSelfLink         :: !(Maybe Text)
@@ -963,7 +963,7 @@ data Analyze = Analyze
 analyze
     :: Analyze
 analyze =
-    Analyze
+    Analyze'
     { _aKind = "prediction#analyze"
     , _aModelDescription = Nothing
     , _aSelfLink = Nothing
@@ -1007,7 +1007,7 @@ instance FromJSON Analyze where
         parseJSON
           = withObject "Analyze"
               (\ o ->
-                 Analyze <$>
+                 Analyze' <$>
                    (o .:? "kind" .!= "prediction#analyze") <*>
                      (o .:? "modelDescription")
                      <*> (o .:? "selfLink")
@@ -1016,7 +1016,7 @@ instance FromJSON Analyze where
                      <*> (o .:? "dataDescription"))
 
 instance ToJSON Analyze where
-        toJSON Analyze{..}
+        toJSON Analyze'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aKind),
@@ -1033,7 +1033,7 @@ instance ToJSON Analyze where
 -- more then 100 classes (Categorical models only).
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrix' smart constructor.
-newtype AnalyzeModelDescriptionConfusionMatrix = AnalyzeModelDescriptionConfusionMatrix
+newtype AnalyzeModelDescriptionConfusionMatrix = AnalyzeModelDescriptionConfusionMatrix'
     { _amdcmAddtional :: HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1046,7 +1046,7 @@ analyzeModelDescriptionConfusionMatrix
     :: HashMap Text AnalyzeModelDescriptionConfusionMatrixAdditional -- ^ 'amdcmAddtional'
     -> AnalyzeModelDescriptionConfusionMatrix
 analyzeModelDescriptionConfusionMatrix pAmdcmAddtional_ =
-    AnalyzeModelDescriptionConfusionMatrix
+    AnalyzeModelDescriptionConfusionMatrix'
     { _amdcmAddtional = _Coerce # pAmdcmAddtional_
     }
 
@@ -1062,7 +1062,7 @@ instance FromJSON
         parseJSON
           = withObject "AnalyzeModelDescriptionConfusionMatrix"
               (\ o ->
-                 AnalyzeModelDescriptionConfusionMatrix <$>
+                 AnalyzeModelDescriptionConfusionMatrix' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -1071,7 +1071,7 @@ instance ToJSON
 
 --
 -- /See:/ 'output' smart constructor.
-data Output = Output
+data Output = Output'
     { _oOutputValue :: !(Maybe Text)
     , _oKind        :: !Text
     , _oOutputLabel :: !(Maybe Text)
@@ -1098,7 +1098,7 @@ data Output = Output
 output
     :: Output
 output =
-    Output
+    Output'
     { _oOutputValue = Nothing
     , _oKind = "prediction#output"
     , _oOutputLabel = Nothing
@@ -1142,7 +1142,7 @@ instance FromJSON Output where
         parseJSON
           = withObject "Output"
               (\ o ->
-                 Output <$>
+                 Output' <$>
                    (o .:? "outputValue") <*>
                      (o .:? "kind" .!= "prediction#output")
                      <*> (o .:? "outputLabel")
@@ -1151,7 +1151,7 @@ instance FromJSON Output where
                      <*> (o .:? "outputMulti" .!= mempty))
 
 instance ToJSON Output where
-        toJSON Output{..}
+        toJSON Output'{..}
           = object
               (catMaybes
                  [("outputValue" .=) <$> _oOutputValue,
@@ -1163,7 +1163,7 @@ instance ToJSON Output where
 -- | Description of the output values in the data set.
 --
 -- /See:/ 'analyzeDataDescriptionOutputFeatureNumeric' smart constructor.
-data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFeatureNumeric
+data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFeatureNumeric'
     { _addofnMean     :: !(Maybe Text)
     , _addofnCount    :: !(Maybe (Textual Int64))
     , _addofnVariance :: !(Maybe Text)
@@ -1181,7 +1181,7 @@ data AnalyzeDataDescriptionOutputFeatureNumeric = AnalyzeDataDescriptionOutputFe
 analyzeDataDescriptionOutputFeatureNumeric
     :: AnalyzeDataDescriptionOutputFeatureNumeric
 analyzeDataDescriptionOutputFeatureNumeric =
-    AnalyzeDataDescriptionOutputFeatureNumeric
+    AnalyzeDataDescriptionOutputFeatureNumeric'
     { _addofnMean = Nothing
     , _addofnCount = Nothing
     , _addofnVariance = Nothing
@@ -1210,13 +1210,14 @@ instance FromJSON
           = withObject
               "AnalyzeDataDescriptionOutputFeatureNumeric"
               (\ o ->
-                 AnalyzeDataDescriptionOutputFeatureNumeric <$>
+                 AnalyzeDataDescriptionOutputFeatureNumeric' <$>
                    (o .:? "mean") <*> (o .:? "count") <*>
                      (o .:? "variance"))
 
 instance ToJSON
          AnalyzeDataDescriptionOutputFeatureNumeric where
-        toJSON AnalyzeDataDescriptionOutputFeatureNumeric{..}
+        toJSON
+          AnalyzeDataDescriptionOutputFeatureNumeric'{..}
           = object
               (catMaybes
                  [("mean" .=) <$> _addofnMean,
@@ -1225,7 +1226,7 @@ instance ToJSON
 
 --
 -- /See:/ 'analyzeErrorsItem' smart constructor.
-newtype AnalyzeErrorsItem = AnalyzeErrorsItem
+newtype AnalyzeErrorsItem = AnalyzeErrorsItem'
     { _aeiAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1238,7 +1239,7 @@ analyzeErrorsItem
     :: HashMap Text Text -- ^ 'aeiAddtional'
     -> AnalyzeErrorsItem
 analyzeErrorsItem pAeiAddtional_ =
-    AnalyzeErrorsItem
+    AnalyzeErrorsItem'
     { _aeiAddtional = _Coerce # pAeiAddtional_
     }
 
@@ -1251,7 +1252,7 @@ aeiAddtional
 instance FromJSON AnalyzeErrorsItem where
         parseJSON
           = withObject "AnalyzeErrorsItem"
-              (\ o -> AnalyzeErrorsItem <$> (parseJSONObject o))
+              (\ o -> AnalyzeErrorsItem' <$> (parseJSONObject o))
 
 instance ToJSON AnalyzeErrorsItem where
         toJSON = toJSON . _aeiAddtional
@@ -1259,7 +1260,7 @@ instance ToJSON AnalyzeErrorsItem where
 -- | Description of the data the model was trained on.
 --
 -- /See:/ 'analyzeDataDescription' smart constructor.
-data AnalyzeDataDescription = AnalyzeDataDescription
+data AnalyzeDataDescription = AnalyzeDataDescription'
     { _addOutputFeature :: !(Maybe AnalyzeDataDescriptionOutputFeature)
     , _addFeatures      :: !(Maybe [AnalyzeDataDescriptionFeaturesItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1274,7 +1275,7 @@ data AnalyzeDataDescription = AnalyzeDataDescription
 analyzeDataDescription
     :: AnalyzeDataDescription
 analyzeDataDescription =
-    AnalyzeDataDescription
+    AnalyzeDataDescription'
     { _addOutputFeature = Nothing
     , _addFeatures = Nothing
     }
@@ -1296,12 +1297,12 @@ instance FromJSON AnalyzeDataDescription where
         parseJSON
           = withObject "AnalyzeDataDescription"
               (\ o ->
-                 AnalyzeDataDescription <$>
+                 AnalyzeDataDescription' <$>
                    (o .:? "outputFeature") <*>
                      (o .:? "features" .!= mempty))
 
 instance ToJSON AnalyzeDataDescription where
-        toJSON AnalyzeDataDescription{..}
+        toJSON AnalyzeDataDescription'{..}
           = object
               (catMaybes
                  [("outputFeature" .=) <$> _addOutputFeature,
@@ -1310,7 +1311,7 @@ instance ToJSON AnalyzeDataDescription where
 -- | Description of the model.
 --
 -- /See:/ 'analyzeModelDescription' smart constructor.
-data AnalyzeModelDescription = AnalyzeModelDescription
+data AnalyzeModelDescription = AnalyzeModelDescription'
     { _amdConfusionMatrixRowTotals :: !(Maybe AnalyzeModelDescriptionConfusionMatrixRowTotals)
     , _amdConfusionMatrix          :: !(Maybe AnalyzeModelDescriptionConfusionMatrix)
     , _amdModelInfo                :: !(Maybe Insert2)
@@ -1328,7 +1329,7 @@ data AnalyzeModelDescription = AnalyzeModelDescription
 analyzeModelDescription
     :: AnalyzeModelDescription
 analyzeModelDescription =
-    AnalyzeModelDescription
+    AnalyzeModelDescription'
     { _amdConfusionMatrixRowTotals = Nothing
     , _amdConfusionMatrix = Nothing
     , _amdModelInfo = Nothing
@@ -1360,13 +1361,13 @@ instance FromJSON AnalyzeModelDescription where
         parseJSON
           = withObject "AnalyzeModelDescription"
               (\ o ->
-                 AnalyzeModelDescription <$>
+                 AnalyzeModelDescription' <$>
                    (o .:? "confusionMatrixRowTotals") <*>
                      (o .:? "confusionMatrix")
                      <*> (o .:? "modelinfo"))
 
 instance ToJSON AnalyzeModelDescription where
-        toJSON AnalyzeModelDescription{..}
+        toJSON AnalyzeModelDescription'{..}
           = object
               (catMaybes
                  [("confusionMatrixRowTotals" .=) <$>
@@ -1377,7 +1378,7 @@ instance ToJSON AnalyzeModelDescription where
 -- | Description of multiple-word text values of this feature.
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItemText' smart constructor.
-newtype AnalyzeDataDescriptionFeaturesItemText = AnalyzeDataDescriptionFeaturesItemText
+newtype AnalyzeDataDescriptionFeaturesItemText = AnalyzeDataDescriptionFeaturesItemText'
     { _addfitCount :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1389,7 +1390,7 @@ newtype AnalyzeDataDescriptionFeaturesItemText = AnalyzeDataDescriptionFeaturesI
 analyzeDataDescriptionFeaturesItemText
     :: AnalyzeDataDescriptionFeaturesItemText
 analyzeDataDescriptionFeaturesItemText =
-    AnalyzeDataDescriptionFeaturesItemText
+    AnalyzeDataDescriptionFeaturesItemText'
     { _addfitCount = Nothing
     }
 
@@ -1404,18 +1405,18 @@ instance FromJSON
         parseJSON
           = withObject "AnalyzeDataDescriptionFeaturesItemText"
               (\ o ->
-                 AnalyzeDataDescriptionFeaturesItemText <$>
+                 AnalyzeDataDescriptionFeaturesItemText' <$>
                    (o .:? "count"))
 
 instance ToJSON
          AnalyzeDataDescriptionFeaturesItemText where
-        toJSON AnalyzeDataDescriptionFeaturesItemText{..}
+        toJSON AnalyzeDataDescriptionFeaturesItemText'{..}
           = object (catMaybes [("count" .=) <$> _addfitCount])
 
 -- | Confusion matrix information for the true class label.
 --
 -- /See:/ 'analyzeModelDescriptionConfusionMatrixAdditional' smart constructor.
-newtype AnalyzeModelDescriptionConfusionMatrixAdditional = AnalyzeModelDescriptionConfusionMatrixAdditional
+newtype AnalyzeModelDescriptionConfusionMatrixAdditional = AnalyzeModelDescriptionConfusionMatrixAdditional'
     { _amdcmaAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1428,7 +1429,7 @@ analyzeModelDescriptionConfusionMatrixAdditional
     :: HashMap Text Text -- ^ 'amdcmaAddtional'
     -> AnalyzeModelDescriptionConfusionMatrixAdditional
 analyzeModelDescriptionConfusionMatrixAdditional pAmdcmaAddtional_ =
-    AnalyzeModelDescriptionConfusionMatrixAdditional
+    AnalyzeModelDescriptionConfusionMatrixAdditional'
     { _amdcmaAddtional = _Coerce # pAmdcmaAddtional_
     }
 
@@ -1448,7 +1449,7 @@ instance FromJSON
           = withObject
               "AnalyzeModelDescriptionConfusionMatrixAdditional"
               (\ o ->
-                 AnalyzeModelDescriptionConfusionMatrixAdditional <$>
+                 AnalyzeModelDescriptionConfusionMatrixAdditional' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -1458,7 +1459,7 @@ instance ToJSON
 
 --
 -- /See:/ 'analyzeDataDescriptionFeaturesItem' smart constructor.
-data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem
+data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem'
     { _addfiText        :: !(Maybe AnalyzeDataDescriptionFeaturesItemText)
     , _addfiNumeric     :: !(Maybe AnalyzeDataDescriptionFeaturesItemNumeric)
     , _addfiIndex       :: !(Maybe (Textual Int64))
@@ -1479,7 +1480,7 @@ data AnalyzeDataDescriptionFeaturesItem = AnalyzeDataDescriptionFeaturesItem
 analyzeDataDescriptionFeaturesItem
     :: AnalyzeDataDescriptionFeaturesItem
 analyzeDataDescriptionFeaturesItem =
-    AnalyzeDataDescriptionFeaturesItem
+    AnalyzeDataDescriptionFeaturesItem'
     { _addfiText = Nothing
     , _addfiNumeric = Nothing
     , _addfiIndex = Nothing
@@ -1513,14 +1514,14 @@ instance FromJSON AnalyzeDataDescriptionFeaturesItem
         parseJSON
           = withObject "AnalyzeDataDescriptionFeaturesItem"
               (\ o ->
-                 AnalyzeDataDescriptionFeaturesItem <$>
+                 AnalyzeDataDescriptionFeaturesItem' <$>
                    (o .:? "text") <*> (o .:? "numeric") <*>
                      (o .:? "index")
                      <*> (o .:? "categorical"))
 
 instance ToJSON AnalyzeDataDescriptionFeaturesItem
          where
-        toJSON AnalyzeDataDescriptionFeaturesItem{..}
+        toJSON AnalyzeDataDescriptionFeaturesItem'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _addfiText,
@@ -1530,7 +1531,7 @@ instance ToJSON AnalyzeDataDescriptionFeaturesItem
 
 --
 -- /See:/ 'update' smart constructor.
-data Update = Update
+data Update = Update'
     { _uCSVInstance :: !(Maybe [JSONValue])
     , _uOutput      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1545,7 +1546,7 @@ data Update = Update
 update
     :: Update
 update =
-    Update
+    Update'
     { _uCSVInstance = Nothing
     , _uOutput = Nothing
     }
@@ -1565,12 +1566,12 @@ instance FromJSON Update where
         parseJSON
           = withObject "Update"
               (\ o ->
-                 Update <$>
+                 Update' <$>
                    (o .:? "csvInstance" .!= mempty) <*>
                      (o .:? "output"))
 
 instance ToJSON Update where
-        toJSON Update{..}
+        toJSON Update'{..}
           = object
               (catMaybes
                  [("csvInstance" .=) <$> _uCSVInstance,
@@ -1579,7 +1580,7 @@ instance ToJSON Update where
 -- | Description of the output value or label.
 --
 -- /See:/ 'analyzeDataDescriptionOutputFeature' smart constructor.
-data AnalyzeDataDescriptionOutputFeature = AnalyzeDataDescriptionOutputFeature
+data AnalyzeDataDescriptionOutputFeature = AnalyzeDataDescriptionOutputFeature'
     { _addofText    :: !(Maybe [AnalyzeDataDescriptionOutputFeatureTextItem])
     , _addofNumeric :: !(Maybe AnalyzeDataDescriptionOutputFeatureNumeric)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1594,7 +1595,7 @@ data AnalyzeDataDescriptionOutputFeature = AnalyzeDataDescriptionOutputFeature
 analyzeDataDescriptionOutputFeature
     :: AnalyzeDataDescriptionOutputFeature
 analyzeDataDescriptionOutputFeature =
-    AnalyzeDataDescriptionOutputFeature
+    AnalyzeDataDescriptionOutputFeature'
     { _addofText = Nothing
     , _addofNumeric = Nothing
     }
@@ -1616,12 +1617,12 @@ instance FromJSON AnalyzeDataDescriptionOutputFeature
         parseJSON
           = withObject "AnalyzeDataDescriptionOutputFeature"
               (\ o ->
-                 AnalyzeDataDescriptionOutputFeature <$>
+                 AnalyzeDataDescriptionOutputFeature' <$>
                    (o .:? "text" .!= mempty) <*> (o .:? "numeric"))
 
 instance ToJSON AnalyzeDataDescriptionOutputFeature
          where
-        toJSON AnalyzeDataDescriptionOutputFeature{..}
+        toJSON AnalyzeDataDescriptionOutputFeature'{..}
           = object
               (catMaybes
                  [("text" .=) <$> _addofText,

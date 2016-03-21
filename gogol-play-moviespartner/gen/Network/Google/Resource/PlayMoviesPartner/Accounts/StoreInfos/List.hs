@@ -86,7 +86,7 @@ type AccountsStoreInfosListResource =
 -- this method.
 --
 -- /See:/ 'accountsStoreInfosList' smart constructor.
-data AccountsStoreInfosList = AccountsStoreInfosList
+data AccountsStoreInfosList = AccountsStoreInfosList'
     { _asilPphNames       :: !(Maybe [Text])
     , _asilXgafv          :: !(Maybe Text)
     , _asilStudioNames    :: !(Maybe [Text])
@@ -144,7 +144,7 @@ accountsStoreInfosList
     :: Text -- ^ 'asilAccountId'
     -> AccountsStoreInfosList
 accountsStoreInfosList pAsilAccountId_ =
-    AccountsStoreInfosList
+    AccountsStoreInfosList'
     { _asilPphNames = Nothing
     , _asilXgafv = Nothing
     , _asilStudioNames = Nothing
@@ -268,7 +268,7 @@ instance GoogleRequest AccountsStoreInfosList where
              ListStoreInfosResponse
         type Scopes AccountsStoreInfosList =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsStoreInfosList{..}
+        requestClient AccountsStoreInfosList'{..}
           = go _asilAccountId (_asilPphNames ^. _Default)
               _asilXgafv
               (_asilStudioNames ^. _Default)

@@ -55,7 +55,7 @@ type TurnBasedMatchesCreateResource =
 -- | Create a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesCreate' smart constructor.
-data TurnBasedMatchesCreate = TurnBasedMatchesCreate
+data TurnBasedMatchesCreate = TurnBasedMatchesCreate'
     { _tbmcPayload  :: !TurnBasedMatchCreateRequest
     , _tbmcLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ turnBasedMatchesCreate
     :: TurnBasedMatchCreateRequest -- ^ 'tbmcPayload'
     -> TurnBasedMatchesCreate
 turnBasedMatchesCreate pTbmcPayload_ =
-    TurnBasedMatchesCreate
+    TurnBasedMatchesCreate'
     { _tbmcPayload = pTbmcPayload_
     , _tbmcLanguage = Nothing
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TurnBasedMatchesCreate where
         type Scopes TurnBasedMatchesCreate =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesCreate{..}
+        requestClient TurnBasedMatchesCreate'{..}
           = go _tbmcLanguage (Just AltJSON) _tbmcPayload
               gamesService
           where go

@@ -76,7 +76,7 @@ type ActivitiesListResource =
 -- each user.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+data ActivitiesList = ActivitiesList'
     { _alPublishedAfter  :: !(Maybe DateTime')
     , _alPart            :: !Text
     , _alHome            :: !(Maybe Bool)
@@ -113,7 +113,7 @@ activitiesList
     :: Text -- ^ 'alPart'
     -> ActivitiesList
 activitiesList pAlPart_ =
-    ActivitiesList
+    ActivitiesList'
     { _alPublishedAfter = Nothing
     , _alPart = pAlPart_
     , _alHome = Nothing
@@ -205,7 +205,7 @@ instance GoogleRequest ActivitiesList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient ActivitiesList{..}
+        requestClient ActivitiesList'{..}
           = go (Just _alPart) _alPublishedAfter _alHome _alMine
               _alRegionCode
               _alChannelId

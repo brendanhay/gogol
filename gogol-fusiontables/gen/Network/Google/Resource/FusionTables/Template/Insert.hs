@@ -54,7 +54,7 @@ type TemplateInsertResource =
 -- | Creates a new template for the table.
 --
 -- /See:/ 'templateInsert' smart constructor.
-data TemplateInsert = TemplateInsert
+data TemplateInsert = TemplateInsert'
     { _temPayload :: !Template
     , _temTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ templateInsert
     -> Text -- ^ 'temTableId'
     -> TemplateInsert
 templateInsert pTemPayload_ pTemTableId_ =
-    TemplateInsert
+    TemplateInsert'
     { _temPayload = pTemPayload_
     , _temTableId = pTemTableId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest TemplateInsert where
         type Rs TemplateInsert = Template
         type Scopes TemplateInsert =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TemplateInsert{..}
+        requestClient TemplateInsert'{..}
           = go _temTableId (Just AltJSON) _temPayload
               fusionTablesService
           where go

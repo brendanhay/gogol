@@ -58,7 +58,7 @@ type SubscriptionsChangeSeatsResource =
 -- | Changes the seats configuration of a subscription
 --
 -- /See:/ 'subscriptionsChangeSeats' smart constructor.
-data SubscriptionsChangeSeats = SubscriptionsChangeSeats
+data SubscriptionsChangeSeats = SubscriptionsChangeSeats'
     { _scsPayload        :: !Seats
     , _scsCustomerId     :: !Text
     , _scsSubscriptionId :: !Text
@@ -79,7 +79,7 @@ subscriptionsChangeSeats
     -> Text -- ^ 'scsSubscriptionId'
     -> SubscriptionsChangeSeats
 subscriptionsChangeSeats pScsPayload_ pScsCustomerId_ pScsSubscriptionId_ =
-    SubscriptionsChangeSeats
+    SubscriptionsChangeSeats'
     { _scsPayload = pScsPayload_
     , _scsCustomerId = pScsCustomerId_
     , _scsSubscriptionId = pScsSubscriptionId_
@@ -106,7 +106,7 @@ instance GoogleRequest SubscriptionsChangeSeats where
         type Rs SubscriptionsChangeSeats = Subscription
         type Scopes SubscriptionsChangeSeats =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsChangeSeats{..}
+        requestClient SubscriptionsChangeSeats'{..}
           = go _scsCustomerId _scsSubscriptionId (Just AltJSON)
               _scsPayload
               appsResellerService

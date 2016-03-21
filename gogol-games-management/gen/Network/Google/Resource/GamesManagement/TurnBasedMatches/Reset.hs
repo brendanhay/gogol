@@ -52,21 +52,21 @@ type TurnBasedMatchesResetResource =
 --
 -- /See:/ 'turnBasedMatchesReset' smart constructor.
 data TurnBasedMatchesReset =
-    TurnBasedMatchesReset
+    TurnBasedMatchesReset'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesReset' with the minimum fields required to make a request.
 --
 turnBasedMatchesReset
     :: TurnBasedMatchesReset
-turnBasedMatchesReset = TurnBasedMatchesReset
+turnBasedMatchesReset = TurnBasedMatchesReset'
 
 instance GoogleRequest TurnBasedMatchesReset where
         type Rs TurnBasedMatchesReset = ()
         type Scopes TurnBasedMatchesReset =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesReset{}
+        requestClient TurnBasedMatchesReset'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

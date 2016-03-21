@@ -57,7 +57,7 @@ type URLMapsGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'urlMapsGet' smart constructor.
-data URLMapsGet = URLMapsGet
+data URLMapsGet = URLMapsGet'
     { _umgURLMap  :: !Text
     , _umgProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ urlMapsGet
     -> Text -- ^ 'umgProject'
     -> URLMapsGet
 urlMapsGet pUmgURLMap_ pUmgProject_ =
-    URLMapsGet
+    URLMapsGet'
     { _umgURLMap = pUmgURLMap_
     , _umgProject = pUmgProject_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest URLMapsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient URLMapsGet{..}
+        requestClient URLMapsGet'{..}
           = go _umgProject _umgURLMap (Just AltJSON)
               computeService
           where go

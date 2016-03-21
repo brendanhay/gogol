@@ -58,7 +58,7 @@ type ManagementProFilesInsertResource =
 -- | Create a new view (profile).
 --
 -- /See:/ 'managementProFilesInsert' smart constructor.
-data ManagementProFilesInsert = ManagementProFilesInsert
+data ManagementProFilesInsert = ManagementProFilesInsert'
     { _mpfiWebPropertyId :: !Text
     , _mpfiPayload       :: !ProFile
     , _mpfiAccountId     :: !Text
@@ -79,7 +79,7 @@ managementProFilesInsert
     -> Text -- ^ 'mpfiAccountId'
     -> ManagementProFilesInsert
 managementProFilesInsert pMpfiWebPropertyId_ pMpfiPayload_ pMpfiAccountId_ =
-    ManagementProFilesInsert
+    ManagementProFilesInsert'
     { _mpfiWebPropertyId = pMpfiWebPropertyId_
     , _mpfiPayload = pMpfiPayload_
     , _mpfiAccountId = pMpfiAccountId_
@@ -106,7 +106,7 @@ instance GoogleRequest ManagementProFilesInsert where
         type Rs ManagementProFilesInsert = ProFile
         type Scopes ManagementProFilesInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementProFilesInsert{..}
+        requestClient ManagementProFilesInsert'{..}
           = go _mpfiAccountId _mpfiWebPropertyId (Just AltJSON)
               _mpfiPayload
               analyticsService

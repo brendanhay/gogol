@@ -58,7 +58,7 @@ type AccountsContainersVersionsGetResource =
 -- | Gets a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsGet' smart constructor.
-data AccountsContainersVersionsGet = AccountsContainersVersionsGet
+data AccountsContainersVersionsGet = AccountsContainersVersionsGet'
     { _acvgcContainerId        :: !Text
     , _acvgcContainerVersionId :: !Text
     , _acvgcAccountId          :: !Text
@@ -79,7 +79,7 @@ accountsContainersVersionsGet
     -> Text -- ^ 'acvgcAccountId'
     -> AccountsContainersVersionsGet
 accountsContainersVersionsGet pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcvgcAccountId_ =
-    AccountsContainersVersionsGet
+    AccountsContainersVersionsGet'
     { _acvgcContainerId = pAcvgcContainerId_
     , _acvgcContainerVersionId = pAcvgcContainerVersionId_
     , _acvgcAccountId = pAcvgcAccountId_
@@ -112,7 +112,7 @@ instance GoogleRequest AccountsContainersVersionsGet
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.edit.containerversions",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersVersionsGet{..}
+        requestClient AccountsContainersVersionsGet'{..}
           = go _acvgcAccountId _acvgcContainerId
               _acvgcContainerVersionId
               (Just AltJSON)

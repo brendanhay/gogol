@@ -63,7 +63,7 @@ type TargetPoolsSetBackupResource =
 -- | Changes a backup target pool\'s configurations.
 --
 -- /See:/ 'targetPoolsSetBackup' smart constructor.
-data TargetPoolsSetBackup = TargetPoolsSetBackup
+data TargetPoolsSetBackup = TargetPoolsSetBackup'
     { _tpsbProject       :: !Text
     , _tpsbTargetPool    :: !Text
     , _tpsbPayload       :: !TargetReference
@@ -91,7 +91,7 @@ targetPoolsSetBackup
     -> Text -- ^ 'tpsbRegion'
     -> TargetPoolsSetBackup
 targetPoolsSetBackup pTpsbProject_ pTpsbTargetPool_ pTpsbPayload_ pTpsbRegion_ =
-    TargetPoolsSetBackup
+    TargetPoolsSetBackup'
     { _tpsbProject = pTpsbProject_
     , _tpsbTargetPool = pTpsbTargetPool_
     , _tpsbPayload = pTpsbPayload_
@@ -132,7 +132,7 @@ instance GoogleRequest TargetPoolsSetBackup where
         type Scopes TargetPoolsSetBackup =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsSetBackup{..}
+        requestClient TargetPoolsSetBackup'{..}
           = go _tpsbProject _tpsbRegion _tpsbTargetPool
               _tpsbFailoverRatio
               (Just AltJSON)

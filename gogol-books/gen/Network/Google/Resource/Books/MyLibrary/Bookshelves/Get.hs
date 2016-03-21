@@ -56,7 +56,7 @@ type MyLibraryBookshelvesGetResource =
 -- authenticated user.
 --
 -- /See:/ 'myLibraryBookshelvesGet' smart constructor.
-data MyLibraryBookshelvesGet = MyLibraryBookshelvesGet
+data MyLibraryBookshelvesGet = MyLibraryBookshelvesGet'
     { _mlbgShelf  :: !Text
     , _mlbgSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ myLibraryBookshelvesGet
     :: Text -- ^ 'mlbgShelf'
     -> MyLibraryBookshelvesGet
 myLibraryBookshelvesGet pMlbgShelf_ =
-    MyLibraryBookshelvesGet
+    MyLibraryBookshelvesGet'
     { _mlbgShelf = pMlbgShelf_
     , _mlbgSource = Nothing
     }
@@ -91,7 +91,7 @@ instance GoogleRequest MyLibraryBookshelvesGet where
         type Rs MyLibraryBookshelvesGet = Bookshelf
         type Scopes MyLibraryBookshelvesGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryBookshelvesGet{..}
+        requestClient MyLibraryBookshelvesGet'{..}
           = go _mlbgShelf _mlbgSource (Just AltJSON)
               booksService
           where go

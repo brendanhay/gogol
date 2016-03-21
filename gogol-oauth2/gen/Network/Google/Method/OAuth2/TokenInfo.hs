@@ -52,7 +52,7 @@ type TokenInfoMethod =
 
 --
 -- /See:/ 'tokenInfo'' smart constructor.
-data TokenInfo' = TokenInfo'
+data TokenInfo' = TokenInfo''
     { _tAccessToken :: !(Maybe Text)
     , _tTokenHandle :: !(Maybe Text)
     , _tIdToken     :: !(Maybe Text)
@@ -70,7 +70,7 @@ data TokenInfo' = TokenInfo'
 tokenInfo'
     :: TokenInfo'
 tokenInfo' =
-    TokenInfo'
+    TokenInfo''
     { _tAccessToken = Nothing
     , _tTokenHandle = Nothing
     , _tIdToken = Nothing
@@ -90,7 +90,7 @@ tIdToken = lens _tIdToken (\ s a -> s{_tIdToken = a})
 instance GoogleRequest TokenInfo' where
         type Rs TokenInfo' = TokenInfo
         type Scopes TokenInfo' = '[]
-        requestClient TokenInfo'{..}
+        requestClient TokenInfo''{..}
           = go _tAccessToken _tTokenHandle _tIdToken
               (Just AltJSON)
               oAuth2Service

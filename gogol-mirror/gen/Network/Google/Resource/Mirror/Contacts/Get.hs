@@ -51,7 +51,7 @@ type ContactsGetResource =
 -- | Gets a single contact by ID.
 --
 -- /See:/ 'contactsGet' smart constructor.
-newtype ContactsGet = ContactsGet
+newtype ContactsGet = ContactsGet'
     { _cgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ contactsGet
     :: Text -- ^ 'cgId'
     -> ContactsGet
 contactsGet pCgId_ =
-    ContactsGet
+    ContactsGet'
     { _cgId = pCgId_
     }
 
@@ -76,7 +76,7 @@ instance GoogleRequest ContactsGet where
         type Rs ContactsGet = Contact
         type Scopes ContactsGet =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient ContactsGet{..}
+        requestClient ContactsGet'{..}
           = go _cgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsGetResource)

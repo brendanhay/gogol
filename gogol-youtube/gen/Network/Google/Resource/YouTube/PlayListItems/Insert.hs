@@ -56,7 +56,7 @@ type PlayListItemsInsertResource =
 -- | Adds a resource to a playlist.
 --
 -- /See:/ 'playListItemsInsert' smart constructor.
-data PlayListItemsInsert = PlayListItemsInsert
+data PlayListItemsInsert = PlayListItemsInsert'
     { _pliiPart                   :: !Text
     , _pliiPayload                :: !PlayListItem
     , _pliiOnBehalfOfContentOwner :: !(Maybe Text)
@@ -76,7 +76,7 @@ playListItemsInsert
     -> PlayListItem -- ^ 'pliiPayload'
     -> PlayListItemsInsert
 playListItemsInsert pPliiPart_ pPliiPayload_ =
-    PlayListItemsInsert
+    PlayListItemsInsert'
     { _pliiPart = pPliiPart_
     , _pliiPayload = pPliiPayload_
     , _pliiOnBehalfOfContentOwner = Nothing
@@ -114,7 +114,7 @@ instance GoogleRequest PlayListItemsInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient PlayListItemsInsert{..}
+        requestClient PlayListItemsInsert'{..}
           = go (Just _pliiPart) _pliiOnBehalfOfContentOwner
               (Just AltJSON)
               _pliiPayload

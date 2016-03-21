@@ -65,7 +65,7 @@ type InstanceGroupsAddInstancesResource =
 -- Read Adding instances for more information.
 --
 -- /See:/ 'instanceGroupsAddInstances' smart constructor.
-data InstanceGroupsAddInstances = InstanceGroupsAddInstances
+data InstanceGroupsAddInstances = InstanceGroupsAddInstances'
     { _igaiProject       :: !Text
     , _igaiZone          :: !Text
     , _igaiPayload       :: !InstanceGroupsAddInstancesRequest
@@ -90,7 +90,7 @@ instanceGroupsAddInstances
     -> Text -- ^ 'igaiInstanceGroup'
     -> InstanceGroupsAddInstances
 instanceGroupsAddInstances pIgaiProject_ pIgaiZone_ pIgaiPayload_ pIgaiInstanceGroup_ =
-    InstanceGroupsAddInstances
+    InstanceGroupsAddInstances'
     { _igaiProject = pIgaiProject_
     , _igaiZone = pIgaiZone_
     , _igaiPayload = pIgaiPayload_
@@ -123,7 +123,7 @@ instance GoogleRequest InstanceGroupsAddInstances
         type Scopes InstanceGroupsAddInstances =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupsAddInstances{..}
+        requestClient InstanceGroupsAddInstances'{..}
           = go _igaiProject _igaiZone _igaiInstanceGroup
               (Just AltJSON)
               _igaiPayload

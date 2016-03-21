@@ -60,7 +60,7 @@ type TargetInstancesAggregatedListResource =
 -- | Retrieves an aggregated list of target instances.
 --
 -- /See:/ 'targetInstancesAggregatedList' smart constructor.
-data TargetInstancesAggregatedList = TargetInstancesAggregatedList
+data TargetInstancesAggregatedList = TargetInstancesAggregatedList'
     { _tialProject    :: !Text
     , _tialFilter     :: !(Maybe Text)
     , _tialPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ targetInstancesAggregatedList
     :: Text -- ^ 'tialProject'
     -> TargetInstancesAggregatedList
 targetInstancesAggregatedList pTialProject_ =
-    TargetInstancesAggregatedList
+    TargetInstancesAggregatedList'
     { _tialProject = pTialProject_
     , _tialFilter = Nothing
     , _tialPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest TargetInstancesAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetInstancesAggregatedList{..}
+        requestClient TargetInstancesAggregatedList'{..}
           = go _tialProject _tialFilter _tialPageToken
               (Just _tialMaxResults)
               (Just AltJSON)

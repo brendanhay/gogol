@@ -69,7 +69,7 @@ type CreativeGroupsListResource =
 -- | Retrieves a list of creative groups, possibly filtered.
 --
 -- /See:/ 'creativeGroupsList' smart constructor.
-data CreativeGroupsList = CreativeGroupsList
+data CreativeGroupsList = CreativeGroupsList'
     { _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe [Textual Int64])
     , _cglProFileId     :: !(Textual Int64)
@@ -106,7 +106,7 @@ creativeGroupsList
     :: Int64 -- ^ 'cglProFileId'
     -> CreativeGroupsList
 creativeGroupsList pCglProFileId_ =
-    CreativeGroupsList
+    CreativeGroupsList'
     { _cglSearchString = Nothing
     , _cglIds = Nothing
     , _cglProFileId = _Coerce # pCglProFileId_
@@ -185,7 +185,7 @@ instance GoogleRequest CreativeGroupsList where
              CreativeGroupsListResponse
         type Scopes CreativeGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeGroupsList{..}
+        requestClient CreativeGroupsList'{..}
           = go _cglProFileId _cglSearchString
               (_cglIds ^. _Default)
               _cglSortOrder

@@ -61,7 +61,7 @@ type RoomsReportStatusResource =
 -- unsupported.
 --
 -- /See:/ 'roomsReportStatus' smart constructor.
-data RoomsReportStatus = RoomsReportStatus
+data RoomsReportStatus = RoomsReportStatus'
     { _rrsPayload  :: !RoomP2PStatuses
     , _rrsRoomId   :: !Text
     , _rrsLanguage :: !(Maybe Text)
@@ -81,7 +81,7 @@ roomsReportStatus
     -> Text -- ^ 'rrsRoomId'
     -> RoomsReportStatus
 roomsReportStatus pRrsPayload_ pRrsRoomId_ =
-    RoomsReportStatus
+    RoomsReportStatus'
     { _rrsPayload = pRrsPayload_
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest RoomsReportStatus where
         type Scopes RoomsReportStatus =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsReportStatus{..}
+        requestClient RoomsReportStatus'{..}
           = go _rrsRoomId _rrsLanguage (Just AltJSON)
               _rrsPayload
               gamesService

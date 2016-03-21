@@ -53,7 +53,7 @@ type LanguagesListResource =
 -- | List the source\/target languages supported by the API
 --
 -- /See:/ 'languagesList' smart constructor.
-newtype LanguagesList = LanguagesList
+newtype LanguagesList = LanguagesList'
     { _llTarget :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ newtype LanguagesList = LanguagesList
 languagesList
     :: LanguagesList
 languagesList =
-    LanguagesList
+    LanguagesList'
     { _llTarget = Nothing
     }
 
@@ -77,7 +77,7 @@ llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 instance GoogleRequest LanguagesList where
         type Rs LanguagesList = LanguagesListResponse
         type Scopes LanguagesList = '[]
-        requestClient LanguagesList{..}
+        requestClient LanguagesList'{..}
           = go _llTarget (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy LanguagesListResource)

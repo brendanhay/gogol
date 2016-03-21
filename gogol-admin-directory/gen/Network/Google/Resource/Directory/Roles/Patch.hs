@@ -57,7 +57,7 @@ type RolesPatchResource =
 -- | Updates a role. This method supports patch semantics.
 --
 -- /See:/ 'rolesPatch' smart constructor.
-data RolesPatch = RolesPatch
+data RolesPatch = RolesPatch'
     { _rpPayload  :: !Role
     , _rpRoleId   :: !Text
     , _rpCustomer :: !Text
@@ -78,7 +78,7 @@ rolesPatch
     -> Text -- ^ 'rpCustomer'
     -> RolesPatch
 rolesPatch pRpPayload_ pRpRoleId_ pRpCustomer_ =
-    RolesPatch
+    RolesPatch'
     { _rpPayload = pRpPayload_
     , _rpRoleId = pRpRoleId_
     , _rpCustomer = pRpCustomer_
@@ -102,7 +102,7 @@ instance GoogleRequest RolesPatch where
         type Rs RolesPatch = Role
         type Scopes RolesPatch =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement"]
-        requestClient RolesPatch{..}
+        requestClient RolesPatch'{..}
           = go _rpCustomer _rpRoleId (Just AltJSON) _rpPayload
               directoryService
           where go

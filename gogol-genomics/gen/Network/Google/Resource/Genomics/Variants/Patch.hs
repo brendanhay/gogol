@@ -76,7 +76,7 @@ type VariantsPatchResource =
 -- without its calls.
 --
 -- /See:/ 'variantsPatch' smart constructor.
-data VariantsPatch = VariantsPatch
+data VariantsPatch = VariantsPatch'
     { _vpXgafv          :: !(Maybe Text)
     , _vpUploadProtocol :: !(Maybe Text)
     , _vpUpdateMask     :: !(Maybe Text)
@@ -117,7 +117,7 @@ variantsPatch
     -> Text -- ^ 'vpVariantId'
     -> VariantsPatch
 variantsPatch pVpPayload_ pVpVariantId_ =
-    VariantsPatch
+    VariantsPatch'
     { _vpXgafv = Nothing
     , _vpUploadProtocol = Nothing
     , _vpUpdateMask = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest VariantsPatch where
         type Scopes VariantsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantsPatch{..}
+        requestClient VariantsPatch'{..}
           = go _vpVariantId _vpXgafv _vpUploadProtocol
               _vpUpdateMask
               (Just _vpPp)

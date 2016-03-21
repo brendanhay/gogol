@@ -67,7 +67,7 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions' smart constructor.
-data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions
+data ProjectsSubscriptionsTestIAMPermissions = ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv          :: !(Maybe Text)
     , _pstipUploadProtocol :: !(Maybe Text)
     , _pstipPp             :: !Bool
@@ -105,7 +105,7 @@ projectsSubscriptionsTestIAMPermissions
     -> Text -- ^ 'pstipResource'
     -> ProjectsSubscriptionsTestIAMPermissions
 projectsSubscriptionsTestIAMPermissions pPstipPayload_ pPstipResource_ =
-    ProjectsSubscriptionsTestIAMPermissions
+    ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv = Nothing
     , _pstipUploadProtocol = Nothing
     , _pstipPp = True
@@ -179,7 +179,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
         requestClient
-          ProjectsSubscriptionsTestIAMPermissions{..}
+          ProjectsSubscriptionsTestIAMPermissions'{..}
           = go _pstipResource _pstipXgafv _pstipUploadProtocol
               (Just _pstipPp)
               _pstipAccessToken

@@ -160,7 +160,7 @@ type CompaniesListResource =
 -- | Lists companies.
 --
 -- /See:/ 'companiesList' smart constructor.
-data CompaniesList = CompaniesList
+data CompaniesList = CompaniesList'
     { _clLanguageCodes                               :: !(Maybe [Text])
     , _clXgafv                                       :: !(Maybe Text)
     , _clMaxMonthlyBudgetUnits                       :: !(Maybe (Textual Int64))
@@ -262,7 +262,7 @@ data CompaniesList = CompaniesList
 companiesList
     :: CompaniesList
 companiesList =
-    CompaniesList
+    CompaniesList'
     { _clLanguageCodes = Nothing
     , _clXgafv = Nothing
     , _clMaxMonthlyBudgetUnits = Nothing
@@ -516,7 +516,7 @@ clCallback
 instance GoogleRequest CompaniesList where
         type Rs CompaniesList = ListCompaniesResponse
         type Scopes CompaniesList = '[]
-        requestClient CompaniesList{..}
+        requestClient CompaniesList'{..}
           = go (_clLanguageCodes ^. _Default) _clXgafv
               _clMaxMonthlyBudgetUnits
               _clUploadProtocol

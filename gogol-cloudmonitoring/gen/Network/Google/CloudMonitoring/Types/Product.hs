@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- collected and what its data points look like.
 --
 -- /See:/ 'metricDescriptorTypeDescriptor' smart constructor.
-data MetricDescriptorTypeDescriptor = MetricDescriptorTypeDescriptor
+data MetricDescriptorTypeDescriptor = MetricDescriptorTypeDescriptor'
     { _mdtdMetricType :: !(Maybe Text)
     , _mdtdValueType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -39,7 +39,7 @@ data MetricDescriptorTypeDescriptor = MetricDescriptorTypeDescriptor
 metricDescriptorTypeDescriptor
     :: MetricDescriptorTypeDescriptor
 metricDescriptorTypeDescriptor =
-    MetricDescriptorTypeDescriptor
+    MetricDescriptorTypeDescriptor'
     { _mdtdMetricType = Nothing
     , _mdtdValueType = Nothing
     }
@@ -62,11 +62,11 @@ instance FromJSON MetricDescriptorTypeDescriptor
         parseJSON
           = withObject "MetricDescriptorTypeDescriptor"
               (\ o ->
-                 MetricDescriptorTypeDescriptor <$>
+                 MetricDescriptorTypeDescriptor' <$>
                    (o .:? "metricType") <*> (o .:? "valueType"))
 
 instance ToJSON MetricDescriptorTypeDescriptor where
-        toJSON MetricDescriptorTypeDescriptor{..}
+        toJSON MetricDescriptorTypeDescriptor'{..}
           = object
               (catMaybes
                  [("metricType" .=) <$> _mdtdMetricType,
@@ -75,7 +75,7 @@ instance ToJSON MetricDescriptorTypeDescriptor where
 -- | The response of cloudmonitoring.timeseries.list
 --
 -- /See:/ 'listTimeseriesResponse' smart constructor.
-data ListTimeseriesResponse = ListTimeseriesResponse
+data ListTimeseriesResponse = ListTimeseriesResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrKind          :: !Text
     , _ltrOldest        :: !(Maybe DateTime')
@@ -99,7 +99,7 @@ data ListTimeseriesResponse = ListTimeseriesResponse
 listTimeseriesResponse
     :: ListTimeseriesResponse
 listTimeseriesResponse =
-    ListTimeseriesResponse
+    ListTimeseriesResponse'
     { _ltrNextPageToken = Nothing
     , _ltrKind = "cloudmonitoring#listTimeseriesResponse"
     , _ltrOldest = Nothing
@@ -148,7 +148,7 @@ instance FromJSON ListTimeseriesResponse where
         parseJSON
           = withObject "ListTimeseriesResponse"
               (\ o ->
-                 ListTimeseriesResponse <$>
+                 ListTimeseriesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "cloudmonitoring#listTimeseriesResponse")
@@ -157,7 +157,7 @@ instance FromJSON ListTimeseriesResponse where
                      <*> (o .:? "timeseries" .!= mempty))
 
 instance ToJSON ListTimeseriesResponse where
-        toJSON ListTimeseriesResponse{..}
+        toJSON ListTimeseriesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
@@ -170,7 +170,7 @@ instance ToJSON ListTimeseriesResponse where
 -- particular metric.
 --
 -- /See:/ 'metricDescriptor' smart constructor.
-data MetricDescriptor = MetricDescriptor
+data MetricDescriptor = MetricDescriptor'
     { _mdProject        :: !(Maybe Text)
     , _mdTypeDescriptor :: !(Maybe MetricDescriptorTypeDescriptor)
     , _mdName           :: !(Maybe Text)
@@ -194,7 +194,7 @@ data MetricDescriptor = MetricDescriptor
 metricDescriptor
     :: MetricDescriptor
 metricDescriptor =
-    MetricDescriptor
+    MetricDescriptor'
     { _mdProject = Nothing
     , _mdTypeDescriptor = Nothing
     , _mdName = Nothing
@@ -234,14 +234,14 @@ instance FromJSON MetricDescriptor where
         parseJSON
           = withObject "MetricDescriptor"
               (\ o ->
-                 MetricDescriptor <$>
+                 MetricDescriptor' <$>
                    (o .:? "project") <*> (o .:? "typeDescriptor") <*>
                      (o .:? "name")
                      <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "description"))
 
 instance ToJSON MetricDescriptor where
-        toJSON MetricDescriptor{..}
+        toJSON MetricDescriptor'{..}
           = object
               (catMaybes
                  [("project" .=) <$> _mdProject,
@@ -252,7 +252,7 @@ instance ToJSON MetricDescriptor where
 -- | The request of cloudmonitoring.timeseries.write
 --
 -- /See:/ 'writeTimeseriesRequest' smart constructor.
-data WriteTimeseriesRequest = WriteTimeseriesRequest
+data WriteTimeseriesRequest = WriteTimeseriesRequest'
     { _wtrCommonLabels :: !(Maybe WriteTimeseriesRequestCommonLabels)
     , _wtrTimeseries   :: !(Maybe [TimeseriesPoint])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -267,7 +267,7 @@ data WriteTimeseriesRequest = WriteTimeseriesRequest
 writeTimeseriesRequest
     :: WriteTimeseriesRequest
 writeTimeseriesRequest =
-    WriteTimeseriesRequest
+    WriteTimeseriesRequest'
     { _wtrCommonLabels = Nothing
     , _wtrTimeseries = Nothing
     }
@@ -292,12 +292,12 @@ instance FromJSON WriteTimeseriesRequest where
         parseJSON
           = withObject "WriteTimeseriesRequest"
               (\ o ->
-                 WriteTimeseriesRequest <$>
+                 WriteTimeseriesRequest' <$>
                    (o .:? "commonLabels") <*>
                      (o .:? "timeseries" .!= mempty))
 
 instance ToJSON WriteTimeseriesRequest where
-        toJSON WriteTimeseriesRequest{..}
+        toJSON WriteTimeseriesRequest'{..}
           = object
               (catMaybes
                  [("commonLabels" .=) <$> _wtrCommonLabels,
@@ -306,7 +306,7 @@ instance ToJSON WriteTimeseriesRequest where
 -- | The label\'s name.
 --
 -- /See:/ 'writeTimeseriesRequestCommonLabels' smart constructor.
-newtype WriteTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels
+newtype WriteTimeseriesRequestCommonLabels = WriteTimeseriesRequestCommonLabels'
     { _wtrclAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -319,7 +319,7 @@ writeTimeseriesRequestCommonLabels
     :: HashMap Text Text -- ^ 'wtrclAddtional'
     -> WriteTimeseriesRequestCommonLabels
 writeTimeseriesRequestCommonLabels pWtrclAddtional_ =
-    WriteTimeseriesRequestCommonLabels
+    WriteTimeseriesRequestCommonLabels'
     { _wtrclAddtional = _Coerce # pWtrclAddtional_
     }
 
@@ -335,7 +335,7 @@ instance FromJSON WriteTimeseriesRequestCommonLabels
         parseJSON
           = withObject "WriteTimeseriesRequestCommonLabels"
               (\ o ->
-                 WriteTimeseriesRequestCommonLabels <$>
+                 WriteTimeseriesRequestCommonLabels' <$>
                    (parseJSONObject o))
 
 instance ToJSON WriteTimeseriesRequestCommonLabels
@@ -347,7 +347,7 @@ instance ToJSON WriteTimeseriesRequestCommonLabels
 -- description.
 --
 -- /See:/ 'metricDescriptorLabelDescriptor' smart constructor.
-data MetricDescriptorLabelDescriptor = MetricDescriptorLabelDescriptor
+data MetricDescriptorLabelDescriptor = MetricDescriptorLabelDescriptor'
     { _mdldKey         :: !(Maybe Text)
     , _mdldDescription :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -362,7 +362,7 @@ data MetricDescriptorLabelDescriptor = MetricDescriptorLabelDescriptor
 metricDescriptorLabelDescriptor
     :: MetricDescriptorLabelDescriptor
 metricDescriptorLabelDescriptor =
-    MetricDescriptorLabelDescriptor
+    MetricDescriptorLabelDescriptor'
     { _mdldKey = Nothing
     , _mdldDescription = Nothing
     }
@@ -382,11 +382,11 @@ instance FromJSON MetricDescriptorLabelDescriptor
         parseJSON
           = withObject "MetricDescriptorLabelDescriptor"
               (\ o ->
-                 MetricDescriptorLabelDescriptor <$>
+                 MetricDescriptorLabelDescriptor' <$>
                    (o .:? "key") <*> (o .:? "description"))
 
 instance ToJSON MetricDescriptorLabelDescriptor where
-        toJSON MetricDescriptorLabelDescriptor{..}
+        toJSON MetricDescriptorLabelDescriptor'{..}
           = object
               (catMaybes
                  [("key" .=) <$> _mdldKey,
@@ -397,7 +397,7 @@ instance ToJSON MetricDescriptorLabelDescriptor where
 -- upper bound.
 --
 -- /See:/ 'pointDistributionUnderflowBucket' smart constructor.
-data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket
+data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket'
     { _pdubUpperBound :: !(Maybe (Textual Double))
     , _pdubCount      :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -412,7 +412,7 @@ data PointDistributionUnderflowBucket = PointDistributionUnderflowBucket
 pointDistributionUnderflowBucket
     :: PointDistributionUnderflowBucket
 pointDistributionUnderflowBucket =
-    PointDistributionUnderflowBucket
+    PointDistributionUnderflowBucket'
     { _pdubUpperBound = Nothing
     , _pdubCount = Nothing
     }
@@ -436,12 +436,12 @@ instance FromJSON PointDistributionUnderflowBucket
         parseJSON
           = withObject "PointDistributionUnderflowBucket"
               (\ o ->
-                 PointDistributionUnderflowBucket <$>
+                 PointDistributionUnderflowBucket' <$>
                    (o .:? "upperBound") <*> (o .:? "count"))
 
 instance ToJSON PointDistributionUnderflowBucket
          where
-        toJSON PointDistributionUnderflowBucket{..}
+        toJSON PointDistributionUnderflowBucket'{..}
           = object
               (catMaybes
                  [("upperBound" .=) <$> _pdubUpperBound,
@@ -450,7 +450,7 @@ instance ToJSON PointDistributionUnderflowBucket
 -- | The response of cloudmonitoring.metricDescriptors.list.
 --
 -- /See:/ 'listMetricDescriptorsResponse' smart constructor.
-data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse
+data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse'
     { _lmdrMetrics       :: !(Maybe [MetricDescriptor])
     , _lmdrNextPageToken :: !(Maybe Text)
     , _lmdrKind          :: !Text
@@ -468,7 +468,7 @@ data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse
 listMetricDescriptorsResponse
     :: ListMetricDescriptorsResponse
 listMetricDescriptorsResponse =
-    ListMetricDescriptorsResponse
+    ListMetricDescriptorsResponse'
     { _lmdrMetrics = Nothing
     , _lmdrNextPageToken = Nothing
     , _lmdrKind = "cloudmonitoring#listMetricDescriptorsResponse"
@@ -498,7 +498,7 @@ instance FromJSON ListMetricDescriptorsResponse where
         parseJSON
           = withObject "ListMetricDescriptorsResponse"
               (\ o ->
-                 ListMetricDescriptorsResponse <$>
+                 ListMetricDescriptorsResponse' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "nextPageToken")
                      <*>
@@ -506,7 +506,7 @@ instance FromJSON ListMetricDescriptorsResponse where
                         "cloudmonitoring#listMetricDescriptorsResponse"))
 
 instance ToJSON ListMetricDescriptorsResponse where
-        toJSON ListMetricDescriptorsResponse{..}
+        toJSON ListMetricDescriptorsResponse'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _lmdrMetrics,
@@ -516,7 +516,7 @@ instance ToJSON ListMetricDescriptorsResponse where
 -- | The request of cloudmonitoring.timeseriesDescriptors.list
 --
 -- /See:/ 'listTimeseriesDescriptorsRequest' smart constructor.
-newtype ListTimeseriesDescriptorsRequest = ListTimeseriesDescriptorsRequest
+newtype ListTimeseriesDescriptorsRequest = ListTimeseriesDescriptorsRequest'
     { _ltdrKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -528,7 +528,7 @@ newtype ListTimeseriesDescriptorsRequest = ListTimeseriesDescriptorsRequest
 listTimeseriesDescriptorsRequest
     :: ListTimeseriesDescriptorsRequest
 listTimeseriesDescriptorsRequest =
-    ListTimeseriesDescriptorsRequest
+    ListTimeseriesDescriptorsRequest'
     { _ltdrKind = "cloudmonitoring#listTimeseriesDescriptorsRequest"
     }
 
@@ -542,19 +542,19 @@ instance FromJSON ListTimeseriesDescriptorsRequest
         parseJSON
           = withObject "ListTimeseriesDescriptorsRequest"
               (\ o ->
-                 ListTimeseriesDescriptorsRequest <$>
+                 ListTimeseriesDescriptorsRequest' <$>
                    (o .:? "kind" .!=
                       "cloudmonitoring#listTimeseriesDescriptorsRequest"))
 
 instance ToJSON ListTimeseriesDescriptorsRequest
          where
-        toJSON ListTimeseriesDescriptorsRequest{..}
+        toJSON ListTimeseriesDescriptorsRequest'{..}
           = object (catMaybes [Just ("kind" .= _ltdrKind)])
 
 -- | The label\'s name.
 --
 -- /See:/ 'timeseriesDescriptorLabels' smart constructor.
-newtype TimeseriesDescriptorLabels = TimeseriesDescriptorLabels
+newtype TimeseriesDescriptorLabels = TimeseriesDescriptorLabels'
     { _tdlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -567,7 +567,7 @@ timeseriesDescriptorLabels
     :: HashMap Text Text -- ^ 'tdlAddtional'
     -> TimeseriesDescriptorLabels
 timeseriesDescriptorLabels pTdlAddtional_ =
-    TimeseriesDescriptorLabels
+    TimeseriesDescriptorLabels'
     { _tdlAddtional = _Coerce # pTdlAddtional_
     }
 
@@ -581,7 +581,7 @@ instance FromJSON TimeseriesDescriptorLabels where
         parseJSON
           = withObject "TimeseriesDescriptorLabels"
               (\ o ->
-                 TimeseriesDescriptorLabels <$> (parseJSONObject o))
+                 TimeseriesDescriptorLabels' <$> (parseJSONObject o))
 
 instance ToJSON TimeseriesDescriptorLabels where
         toJSON = toJSON . _tdlAddtional
@@ -592,7 +592,7 @@ instance ToJSON TimeseriesDescriptorLabels where
 -- is no event in [U1, L2).
 --
 -- /See:/ 'pointDistributionBucket' smart constructor.
-data PointDistributionBucket = PointDistributionBucket
+data PointDistributionBucket = PointDistributionBucket'
     { _pdbUpperBound :: !(Maybe (Textual Double))
     , _pdbCount      :: !(Maybe (Textual Int64))
     , _pdbLowerBound :: !(Maybe (Textual Double))
@@ -610,7 +610,7 @@ data PointDistributionBucket = PointDistributionBucket
 pointDistributionBucket
     :: PointDistributionBucket
 pointDistributionBucket =
-    PointDistributionBucket
+    PointDistributionBucket'
     { _pdbUpperBound = Nothing
     , _pdbCount = Nothing
     , _pdbLowerBound = Nothing
@@ -641,12 +641,12 @@ instance FromJSON PointDistributionBucket where
         parseJSON
           = withObject "PointDistributionBucket"
               (\ o ->
-                 PointDistributionBucket <$>
+                 PointDistributionBucket' <$>
                    (o .:? "upperBound") <*> (o .:? "count") <*>
                      (o .:? "lowerBound"))
 
 instance ToJSON PointDistributionBucket where
-        toJSON PointDistributionBucket{..}
+        toJSON PointDistributionBucket'{..}
           = object
               (catMaybes
                  [("upperBound" .=) <$> _pdbUpperBound,
@@ -656,7 +656,7 @@ instance ToJSON PointDistributionBucket where
 -- | The response of cloudmonitoring.timeseries.write
 --
 -- /See:/ 'writeTimeseriesResponse' smart constructor.
-newtype WriteTimeseriesResponse = WriteTimeseriesResponse
+newtype WriteTimeseriesResponse = WriteTimeseriesResponse'
     { _wtrKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -668,7 +668,7 @@ newtype WriteTimeseriesResponse = WriteTimeseriesResponse
 writeTimeseriesResponse
     :: WriteTimeseriesResponse
 writeTimeseriesResponse =
-    WriteTimeseriesResponse
+    WriteTimeseriesResponse'
     { _wtrKind = "cloudmonitoring#writeTimeseriesResponse"
     }
 
@@ -681,17 +681,17 @@ instance FromJSON WriteTimeseriesResponse where
         parseJSON
           = withObject "WriteTimeseriesResponse"
               (\ o ->
-                 WriteTimeseriesResponse <$>
+                 WriteTimeseriesResponse' <$>
                    (o .:? "kind" .!=
                       "cloudmonitoring#writeTimeseriesResponse"))
 
 instance ToJSON WriteTimeseriesResponse where
-        toJSON WriteTimeseriesResponse{..}
+        toJSON WriteTimeseriesResponse'{..}
           = object (catMaybes [Just ("kind" .= _wtrKind)])
 
 --
 -- /See:/ 'timeseriesDescriptorLabel' smart constructor.
-data TimeseriesDescriptorLabel = TimeseriesDescriptorLabel
+data TimeseriesDescriptorLabel = TimeseriesDescriptorLabel'
     { _tdlValue :: !(Maybe Text)
     , _tdlKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -706,7 +706,7 @@ data TimeseriesDescriptorLabel = TimeseriesDescriptorLabel
 timeseriesDescriptorLabel
     :: TimeseriesDescriptorLabel
 timeseriesDescriptorLabel =
-    TimeseriesDescriptorLabel
+    TimeseriesDescriptorLabel'
     { _tdlValue = Nothing
     , _tdlKey = Nothing
     }
@@ -723,11 +723,11 @@ instance FromJSON TimeseriesDescriptorLabel where
         parseJSON
           = withObject "TimeseriesDescriptorLabel"
               (\ o ->
-                 TimeseriesDescriptorLabel <$>
+                 TimeseriesDescriptorLabel' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON TimeseriesDescriptorLabel where
-        toJSON TimeseriesDescriptorLabel{..}
+        toJSON TimeseriesDescriptorLabel'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _tdlValue, ("key" .=) <$> _tdlKey])
@@ -738,7 +738,7 @@ instance ToJSON TimeseriesDescriptorLabel where
 -- appending rather than skewing them.
 --
 -- /See:/ 'pointDistribution' smart constructor.
-data PointDistribution = PointDistribution
+data PointDistribution = PointDistribution'
     { _pdOverflowBucket  :: !(Maybe PointDistributionOverflowBucket)
     , _pdBuckets         :: !(Maybe [PointDistributionBucket])
     , _pdUnderflowBucket :: !(Maybe PointDistributionUnderflowBucket)
@@ -756,7 +756,7 @@ data PointDistribution = PointDistribution
 pointDistribution
     :: PointDistribution
 pointDistribution =
-    PointDistribution
+    PointDistribution'
     { _pdOverflowBucket = Nothing
     , _pdBuckets = Nothing
     , _pdUnderflowBucket = Nothing
@@ -785,13 +785,13 @@ instance FromJSON PointDistribution where
         parseJSON
           = withObject "PointDistribution"
               (\ o ->
-                 PointDistribution <$>
+                 PointDistribution' <$>
                    (o .:? "overflowBucket") <*>
                      (o .:? "buckets" .!= mempty)
                      <*> (o .:? "underflowBucket"))
 
 instance ToJSON PointDistribution where
-        toJSON PointDistribution{..}
+        toJSON PointDistribution'{..}
           = object
               (catMaybes
                  [("overflowBucket" .=) <$> _pdOverflowBucket,
@@ -802,7 +802,7 @@ instance ToJSON PointDistribution where
 -- an end time, and a value.
 --
 -- /See:/ 'point' smart constructor.
-data Point = Point
+data Point = Point'
     { _pBoolValue         :: !(Maybe Bool)
     , _pStart             :: !(Maybe DateTime')
     , _pDoubleValue       :: !(Maybe (Textual Double))
@@ -832,7 +832,7 @@ data Point = Point
 point
     :: Point
 point =
-    Point
+    Point'
     { _pBoolValue = Nothing
     , _pStart = Nothing
     , _pDoubleValue = Nothing
@@ -898,7 +898,7 @@ instance FromJSON Point where
         parseJSON
           = withObject "Point"
               (\ o ->
-                 Point <$>
+                 Point' <$>
                    (o .:? "boolValue") <*> (o .:? "start") <*>
                      (o .:? "doubleValue")
                      <*> (o .:? "stringValue")
@@ -907,7 +907,7 @@ instance FromJSON Point where
                      <*> (o .:? "int64Value"))
 
 instance ToJSON Point where
-        toJSON Point{..}
+        toJSON Point'{..}
           = object
               (catMaybes
                  [("boolValue" .=) <$> _pBoolValue,
@@ -923,7 +923,7 @@ instance ToJSON Point where
 -- its lower bound.
 --
 -- /See:/ 'pointDistributionOverflowBucket' smart constructor.
-data PointDistributionOverflowBucket = PointDistributionOverflowBucket
+data PointDistributionOverflowBucket = PointDistributionOverflowBucket'
     { _pdobCount      :: !(Maybe (Textual Int64))
     , _pdobLowerBound :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -938,7 +938,7 @@ data PointDistributionOverflowBucket = PointDistributionOverflowBucket
 pointDistributionOverflowBucket
     :: PointDistributionOverflowBucket
 pointDistributionOverflowBucket =
-    PointDistributionOverflowBucket
+    PointDistributionOverflowBucket'
     { _pdobCount = Nothing
     , _pdobLowerBound = Nothing
     }
@@ -962,11 +962,11 @@ instance FromJSON PointDistributionOverflowBucket
         parseJSON
           = withObject "PointDistributionOverflowBucket"
               (\ o ->
-                 PointDistributionOverflowBucket <$>
+                 PointDistributionOverflowBucket' <$>
                    (o .:? "count") <*> (o .:? "lowerBound"))
 
 instance ToJSON PointDistributionOverflowBucket where
-        toJSON PointDistributionOverflowBucket{..}
+        toJSON PointDistributionOverflowBucket'{..}
           = object
               (catMaybes
                  [("count" .=) <$> _pdobCount,
@@ -975,7 +975,7 @@ instance ToJSON PointDistributionOverflowBucket where
 -- | The response of cloudmonitoring.timeseriesDescriptors.list
 --
 -- /See:/ 'listTimeseriesDescriptorsResponse' smart constructor.
-data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
+data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse'
     { _lNextPageToken :: !(Maybe Text)
     , _lKind          :: !Text
     , _lOldest        :: !(Maybe DateTime')
@@ -999,7 +999,7 @@ data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
 listTimeseriesDescriptorsResponse
     :: ListTimeseriesDescriptorsResponse
 listTimeseriesDescriptorsResponse =
-    ListTimeseriesDescriptorsResponse
+    ListTimeseriesDescriptorsResponse'
     { _lNextPageToken = Nothing
     , _lKind = "cloudmonitoring#listTimeseriesDescriptorsResponse"
     , _lOldest = Nothing
@@ -1046,7 +1046,7 @@ instance FromJSON ListTimeseriesDescriptorsResponse
         parseJSON
           = withObject "ListTimeseriesDescriptorsResponse"
               (\ o ->
-                 ListTimeseriesDescriptorsResponse <$>
+                 ListTimeseriesDescriptorsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "cloudmonitoring#listTimeseriesDescriptorsResponse")
@@ -1056,7 +1056,7 @@ instance FromJSON ListTimeseriesDescriptorsResponse
 
 instance ToJSON ListTimeseriesDescriptorsResponse
          where
-        toJSON ListTimeseriesDescriptorsResponse{..}
+        toJSON ListTimeseriesDescriptorsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lNextPageToken,
@@ -1067,7 +1067,7 @@ instance ToJSON ListTimeseriesDescriptorsResponse
 -- | The request of cloudmonitoring.metricDescriptors.list.
 --
 -- /See:/ 'listMetricDescriptorsRequest' smart constructor.
-newtype ListMetricDescriptorsRequest = ListMetricDescriptorsRequest
+newtype ListMetricDescriptorsRequest = ListMetricDescriptorsRequest'
     { _lisKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1079,7 +1079,7 @@ newtype ListMetricDescriptorsRequest = ListMetricDescriptorsRequest
 listMetricDescriptorsRequest
     :: ListMetricDescriptorsRequest
 listMetricDescriptorsRequest =
-    ListMetricDescriptorsRequest
+    ListMetricDescriptorsRequest'
     { _lisKind = "cloudmonitoring#listMetricDescriptorsRequest"
     }
 
@@ -1092,12 +1092,12 @@ instance FromJSON ListMetricDescriptorsRequest where
         parseJSON
           = withObject "ListMetricDescriptorsRequest"
               (\ o ->
-                 ListMetricDescriptorsRequest <$>
+                 ListMetricDescriptorsRequest' <$>
                    (o .:? "kind" .!=
                       "cloudmonitoring#listMetricDescriptorsRequest"))
 
 instance ToJSON ListMetricDescriptorsRequest where
-        toJSON ListMetricDescriptorsRequest{..}
+        toJSON ListMetricDescriptorsRequest'{..}
           = object (catMaybes [Just ("kind" .= _lisKind)])
 
 -- | When writing time series, TimeseriesPoint should be used instead of
@@ -1105,7 +1105,7 @@ instance ToJSON ListMetricDescriptorsRequest where
 -- timeseries.write request.
 --
 -- /See:/ 'timeseriesPoint' smart constructor.
-data TimeseriesPoint = TimeseriesPoint
+data TimeseriesPoint = TimeseriesPoint'
     { _tpPoint          :: !(Maybe Point)
     , _tpTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1120,7 +1120,7 @@ data TimeseriesPoint = TimeseriesPoint
 timeseriesPoint
     :: TimeseriesPoint
 timeseriesPoint =
-    TimeseriesPoint
+    TimeseriesPoint'
     { _tpPoint = Nothing
     , _tpTimeseriesDesc = Nothing
     }
@@ -1139,11 +1139,11 @@ instance FromJSON TimeseriesPoint where
         parseJSON
           = withObject "TimeseriesPoint"
               (\ o ->
-                 TimeseriesPoint <$>
+                 TimeseriesPoint' <$>
                    (o .:? "point") <*> (o .:? "timeseriesDesc"))
 
 instance ToJSON TimeseriesPoint where
-        toJSON TimeseriesPoint{..}
+        toJSON TimeseriesPoint'{..}
           = object
               (catMaybes
                  [("point" .=) <$> _tpPoint,
@@ -1152,7 +1152,7 @@ instance ToJSON TimeseriesPoint where
 -- | The response of cloudmonitoring.metricDescriptors.delete.
 --
 -- /See:/ 'deleteMetricDescriptorResponse' smart constructor.
-newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse
+newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse'
     { _dmdrKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1164,7 +1164,7 @@ newtype DeleteMetricDescriptorResponse = DeleteMetricDescriptorResponse
 deleteMetricDescriptorResponse
     :: DeleteMetricDescriptorResponse
 deleteMetricDescriptorResponse =
-    DeleteMetricDescriptorResponse
+    DeleteMetricDescriptorResponse'
     { _dmdrKind = "cloudmonitoring#deleteMetricDescriptorResponse"
     }
 
@@ -1178,18 +1178,18 @@ instance FromJSON DeleteMetricDescriptorResponse
         parseJSON
           = withObject "DeleteMetricDescriptorResponse"
               (\ o ->
-                 DeleteMetricDescriptorResponse <$>
+                 DeleteMetricDescriptorResponse' <$>
                    (o .:? "kind" .!=
                       "cloudmonitoring#deleteMetricDescriptorResponse"))
 
 instance ToJSON DeleteMetricDescriptorResponse where
-        toJSON DeleteMetricDescriptorResponse{..}
+        toJSON DeleteMetricDescriptorResponse'{..}
           = object (catMaybes [Just ("kind" .= _dmdrKind)])
 
 -- | The request of cloudmonitoring.timeseries.list
 --
 -- /See:/ 'listTimeseriesRequest' smart constructor.
-newtype ListTimeseriesRequest = ListTimeseriesRequest
+newtype ListTimeseriesRequest = ListTimeseriesRequest'
     { _ltrtKind :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1201,7 +1201,7 @@ newtype ListTimeseriesRequest = ListTimeseriesRequest
 listTimeseriesRequest
     :: ListTimeseriesRequest
 listTimeseriesRequest =
-    ListTimeseriesRequest
+    ListTimeseriesRequest'
     { _ltrtKind = "cloudmonitoring#listTimeseriesRequest"
     }
 
@@ -1214,18 +1214,18 @@ instance FromJSON ListTimeseriesRequest where
         parseJSON
           = withObject "ListTimeseriesRequest"
               (\ o ->
-                 ListTimeseriesRequest <$>
+                 ListTimeseriesRequest' <$>
                    (o .:? "kind" .!=
                       "cloudmonitoring#listTimeseriesRequest"))
 
 instance ToJSON ListTimeseriesRequest where
-        toJSON ListTimeseriesRequest{..}
+        toJSON ListTimeseriesRequest'{..}
           = object (catMaybes [Just ("kind" .= _ltrtKind)])
 
 -- | TimeseriesDescriptor identifies a single time series.
 --
 -- /See:/ 'timeseriesDescriptor' smart constructor.
-data TimeseriesDescriptor = TimeseriesDescriptor
+data TimeseriesDescriptor = TimeseriesDescriptor'
     { _tdProject :: !(Maybe Text)
     , _tdMetric  :: !(Maybe Text)
     , _tdLabels  :: !(Maybe TimeseriesDescriptorLabels)
@@ -1243,7 +1243,7 @@ data TimeseriesDescriptor = TimeseriesDescriptor
 timeseriesDescriptor
     :: TimeseriesDescriptor
 timeseriesDescriptor =
-    TimeseriesDescriptor
+    TimeseriesDescriptor'
     { _tdProject = Nothing
     , _tdMetric = Nothing
     , _tdLabels = Nothing
@@ -1266,12 +1266,12 @@ instance FromJSON TimeseriesDescriptor where
         parseJSON
           = withObject "TimeseriesDescriptor"
               (\ o ->
-                 TimeseriesDescriptor <$>
+                 TimeseriesDescriptor' <$>
                    (o .:? "project") <*> (o .:? "metric") <*>
                      (o .:? "labels"))
 
 instance ToJSON TimeseriesDescriptor where
-        toJSON TimeseriesDescriptor{..}
+        toJSON TimeseriesDescriptor'{..}
           = object
               (catMaybes
                  [("project" .=) <$> _tdProject,
@@ -1284,7 +1284,7 @@ instance ToJSON TimeseriesDescriptor where
 -- these data points is called a time series.
 --
 -- /See:/ 'timeseries' smart constructor.
-data Timeseries = Timeseries
+data Timeseries = Timeseries'
     { _tPoints         :: !(Maybe [Point])
     , _tTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1299,7 +1299,7 @@ data Timeseries = Timeseries
 timeseries
     :: Timeseries
 timeseries =
-    Timeseries
+    Timeseries'
     { _tPoints = Nothing
     , _tTimeseriesDesc = Nothing
     }
@@ -1321,12 +1321,12 @@ instance FromJSON Timeseries where
         parseJSON
           = withObject "Timeseries"
               (\ o ->
-                 Timeseries <$>
+                 Timeseries' <$>
                    (o .:? "points" .!= mempty) <*>
                      (o .:? "timeseriesDesc"))
 
 instance ToJSON Timeseries where
-        toJSON Timeseries{..}
+        toJSON Timeseries'{..}
           = object
               (catMaybes
                  [("points" .=) <$> _tPoints,

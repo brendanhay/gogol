@@ -75,7 +75,7 @@ type ProjectsRegionsClustersPatchResource =
 -- | Updates a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersPatch' smart constructor.
-data ProjectsRegionsClustersPatch = ProjectsRegionsClustersPatch
+data ProjectsRegionsClustersPatch = ProjectsRegionsClustersPatch'
     { _prcpXgafv          :: !(Maybe Text)
     , _prcpUploadProtocol :: !(Maybe Text)
     , _prcpUpdateMask     :: !(Maybe Text)
@@ -124,7 +124,7 @@ projectsRegionsClustersPatch
     -> Text -- ^ 'prcpProjectId'
     -> ProjectsRegionsClustersPatch
 projectsRegionsClustersPatch pPrcpPayload_ pPrcpClusterName_ pPrcpRegion_ pPrcpProjectId_ =
-    ProjectsRegionsClustersPatch
+    ProjectsRegionsClustersPatch'
     { _prcpXgafv = Nothing
     , _prcpUploadProtocol = Nothing
     , _prcpUpdateMask = Nothing
@@ -218,7 +218,7 @@ instance GoogleRequest ProjectsRegionsClustersPatch
         type Rs ProjectsRegionsClustersPatch = Operation
         type Scopes ProjectsRegionsClustersPatch =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsClustersPatch{..}
+        requestClient ProjectsRegionsClustersPatch'{..}
           = go _prcpProjectId _prcpRegion _prcpClusterName
               _prcpXgafv
               _prcpUploadProtocol

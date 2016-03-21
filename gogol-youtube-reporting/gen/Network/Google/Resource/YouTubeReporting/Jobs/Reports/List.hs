@@ -80,7 +80,7 @@ type JobsReportsListResource =
 -- does not exist.
 --
 -- /See:/ 'jobsReportsList' smart constructor.
-data JobsReportsList = JobsReportsList
+data JobsReportsList = JobsReportsList'
     { _jrlCreatedAfter           :: !(Maybe Text)
     , _jrlXgafv                  :: !(Maybe Text)
     , _jrlJobId                  :: !Text
@@ -132,7 +132,7 @@ jobsReportsList
     :: Text -- ^ 'jrlJobId'
     -> JobsReportsList
 jobsReportsList pJrlJobId_ =
-    JobsReportsList
+    JobsReportsList'
     { _jrlCreatedAfter = Nothing
     , _jrlXgafv = Nothing
     , _jrlJobId = pJrlJobId_
@@ -237,7 +237,7 @@ instance GoogleRequest JobsReportsList where
         type Scopes JobsReportsList =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient JobsReportsList{..}
+        requestClient JobsReportsList'{..}
           = go _jrlJobId _jrlCreatedAfter _jrlXgafv
               _jrlUploadProtocol
               (Just _jrlPp)

@@ -65,7 +65,7 @@ type JobsInsertResource =
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
 -- /See:/ 'jobsInsert' smart constructor.
-data JobsInsert = JobsInsert
+data JobsInsert = JobsInsert'
     { _jiPayload   :: !Job
     , _jiProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ jobsInsert
     -> Text -- ^ 'jiProjectId'
     -> JobsInsert
 jobsInsert pJiPayload_ pJiProjectId_ =
-    JobsInsert
+    JobsInsert'
     { _jiPayload = pJiPayload_
     , _jiProjectId = pJiProjectId_
     }
@@ -105,7 +105,7 @@ instance GoogleRequest JobsInsert where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient JobsInsert{..}
+        requestClient JobsInsert'{..}
           = go _jiProjectId (Just AltJSON) _jiPayload
               bigQueryService
           where go :<|> _
@@ -116,7 +116,7 @@ instance GoogleRequest (MediaUpload JobsInsert) where
         type Rs (MediaUpload JobsInsert) = Job
         type Scopes (MediaUpload JobsInsert) =
              Scopes JobsInsert
-        requestClient (MediaUpload JobsInsert{..} body)
+        requestClient (MediaUpload JobsInsert'{..} body)
           = go _jiProjectId (Just AltJSON) (Just AltMedia)
               _jiPayload
               body

@@ -67,7 +67,7 @@ type ProjectsTracesGetResource =
 -- | Gets a single trace by its ID.
 --
 -- /See:/ 'projectsTracesGet' smart constructor.
-data ProjectsTracesGet = ProjectsTracesGet
+data ProjectsTracesGet = ProjectsTracesGet'
     { _ptgTraceId        :: !Text
     , _ptgXgafv          :: !(Maybe Text)
     , _ptgUploadProtocol :: !(Maybe Text)
@@ -105,7 +105,7 @@ projectsTracesGet
     -> Text -- ^ 'ptgProjectId'
     -> ProjectsTracesGet
 projectsTracesGet pPtgTraceId_ pPtgProjectId_ =
-    ProjectsTracesGet
+    ProjectsTracesGet'
     { _ptgTraceId = pPtgTraceId_
     , _ptgXgafv = Nothing
     , _ptgUploadProtocol = Nothing
@@ -168,7 +168,7 @@ instance GoogleRequest ProjectsTracesGet where
         type Rs ProjectsTracesGet = Trace
         type Scopes ProjectsTracesGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsTracesGet{..}
+        requestClient ProjectsTracesGet'{..}
           = go _ptgProjectId _ptgTraceId _ptgXgafv
               _ptgUploadProtocol
               (Just _ptgPp)

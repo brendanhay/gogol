@@ -69,7 +69,7 @@ type ProjectsTopicsListResource =
 -- | Lists matching topics.
 --
 -- /See:/ 'projectsTopicsList' smart constructor.
-data ProjectsTopicsList = ProjectsTopicsList
+data ProjectsTopicsList = ProjectsTopicsList'
     { _ptlXgafv          :: !(Maybe Text)
     , _ptlUploadProtocol :: !(Maybe Text)
     , _ptlProject        :: !Text
@@ -109,7 +109,7 @@ projectsTopicsList
     :: Text -- ^ 'ptlProject'
     -> ProjectsTopicsList
 projectsTopicsList pPtlProject_ =
-    ProjectsTopicsList
+    ProjectsTopicsList'
     { _ptlXgafv = Nothing
     , _ptlUploadProtocol = Nothing
     , _ptlProject = pPtlProject_
@@ -182,7 +182,7 @@ instance GoogleRequest ProjectsTopicsList where
         type Scopes ProjectsTopicsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsTopicsList{..}
+        requestClient ProjectsTopicsList'{..}
           = go _ptlProject _ptlXgafv _ptlUploadProtocol
               (Just _ptlPp)
               _ptlAccessToken

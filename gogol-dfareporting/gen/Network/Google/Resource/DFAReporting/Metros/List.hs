@@ -53,7 +53,7 @@ type MetrosListResource =
 -- | Retrieves a list of metros.
 --
 -- /See:/ 'metrosList' smart constructor.
-newtype MetrosList = MetrosList
+newtype MetrosList = MetrosList'
     { _mlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ metrosList
     :: Int64 -- ^ 'mlProFileId'
     -> MetrosList
 metrosList pMlProFileId_ =
-    MetrosList
+    MetrosList'
     { _mlProFileId = _Coerce # pMlProFileId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest MetrosList where
         type Rs MetrosList = MetrosListResponse
         type Scopes MetrosList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient MetrosList{..}
+        requestClient MetrosList'{..}
           = go _mlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient (Proxy :: Proxy MetrosListResource)

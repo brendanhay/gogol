@@ -54,7 +54,7 @@ type SitemapsSubmitResource =
 -- | Submits a sitemap for a site.
 --
 -- /See:/ 'sitemapsSubmit' smart constructor.
-data SitemapsSubmit = SitemapsSubmit
+data SitemapsSubmit = SitemapsSubmit'
     { _ssFeedpath :: !Text
     , _ssSiteURL  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitemapsSubmit
     -> Text -- ^ 'ssSiteURL'
     -> SitemapsSubmit
 sitemapsSubmit pSsFeedpath_ pSsSiteURL_ =
-    SitemapsSubmit
+    SitemapsSubmit'
     { _ssFeedpath = pSsFeedpath_
     , _ssSiteURL = pSsSiteURL_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest SitemapsSubmit where
         type Rs SitemapsSubmit = ()
         type Scopes SitemapsSubmit =
              '["https://www.googleapis.com/auth/webmasters"]
-        requestClient SitemapsSubmit{..}
+        requestClient SitemapsSubmit'{..}
           = go _ssSiteURL _ssFeedpath (Just AltJSON)
               webmasterToolsService
           where go

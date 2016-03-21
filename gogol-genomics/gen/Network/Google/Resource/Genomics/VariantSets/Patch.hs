@@ -73,7 +73,7 @@ type VariantSetsPatchResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsPatch' smart constructor.
-data VariantSetsPatch = VariantSetsPatch
+data VariantSetsPatch = VariantSetsPatch'
     { _vspXgafv          :: !(Maybe Text)
     , _vspUploadProtocol :: !(Maybe Text)
     , _vspUpdateMask     :: !(Maybe Text)
@@ -114,7 +114,7 @@ variantSetsPatch
     -> VariantSet -- ^ 'vspPayload'
     -> VariantSetsPatch
 variantSetsPatch pVspVariantSetId_ pVspPayload_ =
-    VariantSetsPatch
+    VariantSetsPatch'
     { _vspXgafv = Nothing
     , _vspUploadProtocol = Nothing
     , _vspUpdateMask = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest VariantSetsPatch where
         type Scopes VariantSetsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantSetsPatch{..}
+        requestClient VariantSetsPatch'{..}
           = go _vspVariantSetId _vspXgafv _vspUploadProtocol
               _vspUpdateMask
               (Just _vspPp)

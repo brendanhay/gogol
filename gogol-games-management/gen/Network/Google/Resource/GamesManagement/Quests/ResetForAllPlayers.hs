@@ -56,7 +56,7 @@ type QuestsResetForAllPlayersResource =
 -- developer console. Only draft quests can be reset.
 --
 -- /See:/ 'questsResetForAllPlayers' smart constructor.
-newtype QuestsResetForAllPlayers = QuestsResetForAllPlayers
+newtype QuestsResetForAllPlayers = QuestsResetForAllPlayers'
     { _qrfapQuestId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ questsResetForAllPlayers
     :: Text -- ^ 'qrfapQuestId'
     -> QuestsResetForAllPlayers
 questsResetForAllPlayers pQrfapQuestId_ =
-    QuestsResetForAllPlayers
+    QuestsResetForAllPlayers'
     { _qrfapQuestId = pQrfapQuestId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest QuestsResetForAllPlayers where
         type Scopes QuestsResetForAllPlayers =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestsResetForAllPlayers{..}
+        requestClient QuestsResetForAllPlayers'{..}
           = go _qrfapQuestId (Just AltJSON)
               gamesManagementService
           where go

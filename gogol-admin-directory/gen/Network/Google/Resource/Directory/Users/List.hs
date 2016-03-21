@@ -75,7 +75,7 @@ type UsersListResource =
 -- | Retrieve either deleted users or all users in a domain (paginated)
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulEvent           :: !(Maybe UsersListEvent)
     , _ulOrderBy         :: !(Maybe UsersListOrderBy)
     , _ulViewType        :: !UsersListViewType
@@ -120,7 +120,7 @@ data UsersList = UsersList
 usersList
     :: UsersList
 usersList =
-    UsersList
+    UsersList'
     { _ulEvent = Nothing
     , _ulOrderBy = Nothing
     , _ulViewType = AdminView
@@ -205,7 +205,7 @@ instance GoogleRequest UsersList where
         type Scopes UsersList =
              '["https://www.googleapis.com/auth/admin.directory.user",
                "https://www.googleapis.com/auth/admin.directory.user.readonly"]
-        requestClient UsersList{..}
+        requestClient UsersList'{..}
           = go _ulEvent _ulOrderBy (Just _ulViewType)
               _ulCustomFieldMask
               _ulDomain

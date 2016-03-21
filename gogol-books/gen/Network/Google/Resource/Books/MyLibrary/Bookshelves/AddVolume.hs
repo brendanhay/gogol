@@ -61,7 +61,7 @@ type MyLibraryBookshelvesAddVolumeResource =
 -- | Adds a volume to a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesAddVolume' smart constructor.
-data MyLibraryBookshelvesAddVolume = MyLibraryBookshelvesAddVolume
+data MyLibraryBookshelvesAddVolume = MyLibraryBookshelvesAddVolume'
     { _mlbavReason   :: !(Maybe MyLibraryBookshelvesAddVolumeReason)
     , _mlbavShelf    :: !Text
     , _mlbavVolumeId :: !Text
@@ -84,7 +84,7 @@ myLibraryBookshelvesAddVolume
     -> Text -- ^ 'mlbavVolumeId'
     -> MyLibraryBookshelvesAddVolume
 myLibraryBookshelvesAddVolume pMlbavShelf_ pMlbavVolumeId_ =
-    MyLibraryBookshelvesAddVolume
+    MyLibraryBookshelvesAddVolume'
     { _mlbavReason = Nothing
     , _mlbavShelf = pMlbavShelf_
     , _mlbavVolumeId = pMlbavVolumeId_
@@ -117,7 +117,7 @@ instance GoogleRequest MyLibraryBookshelvesAddVolume
         type Rs MyLibraryBookshelvesAddVolume = ()
         type Scopes MyLibraryBookshelvesAddVolume =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryBookshelvesAddVolume{..}
+        requestClient MyLibraryBookshelvesAddVolume'{..}
           = go _mlbavShelf (Just _mlbavVolumeId) _mlbavReason
               _mlbavSource
               (Just AltJSON)

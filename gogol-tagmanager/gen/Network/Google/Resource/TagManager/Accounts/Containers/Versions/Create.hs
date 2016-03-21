@@ -59,7 +59,7 @@ type AccountsContainersVersionsCreateResource =
 -- | Creates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsCreate' smart constructor.
-data AccountsContainersVersionsCreate = AccountsContainersVersionsCreate
+data AccountsContainersVersionsCreate = AccountsContainersVersionsCreate'
     { _aContainerId :: !Text
     , _aPayload     :: !CreateContainerVersionRequestVersionOptions
     , _aAccountId   :: !Text
@@ -80,7 +80,7 @@ accountsContainersVersionsCreate
     -> Text -- ^ 'aAccountId'
     -> AccountsContainersVersionsCreate
 accountsContainersVersionsCreate pAContainerId_ pAPayload_ pAAccountId_ =
-    AccountsContainersVersionsCreate
+    AccountsContainersVersionsCreate'
     { _aContainerId = pAContainerId_
     , _aPayload = pAPayload_
     , _aAccountId = pAAccountId_
@@ -106,7 +106,7 @@ instance GoogleRequest
              CreateContainerVersionResponse
         type Scopes AccountsContainersVersionsCreate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-        requestClient AccountsContainersVersionsCreate{..}
+        requestClient AccountsContainersVersionsCreate'{..}
           = go _aAccountId _aContainerId (Just AltJSON)
               _aPayload
               tagManagerService

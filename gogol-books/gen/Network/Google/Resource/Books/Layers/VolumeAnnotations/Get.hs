@@ -62,7 +62,7 @@ type LayersVolumeAnnotationsGetResource =
 -- | Gets the volume annotation.
 --
 -- /See:/ 'layersVolumeAnnotationsGet' smart constructor.
-data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet
+data LayersVolumeAnnotationsGet = LayersVolumeAnnotationsGet'
     { _lvagLocale       :: !(Maybe Text)
     , _lvagAnnotationId :: !Text
     , _lvagVolumeId     :: !Text
@@ -89,7 +89,7 @@ layersVolumeAnnotationsGet
     -> Text -- ^ 'lvagLayerId'
     -> LayersVolumeAnnotationsGet
 layersVolumeAnnotationsGet pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
-    LayersVolumeAnnotationsGet
+    LayersVolumeAnnotationsGet'
     { _lvagLocale = Nothing
     , _lvagAnnotationId = pLvagAnnotationId_
     , _lvagVolumeId = pLvagVolumeId_
@@ -129,7 +129,7 @@ instance GoogleRequest LayersVolumeAnnotationsGet
         type Rs LayersVolumeAnnotationsGet = Volumeannotation
         type Scopes LayersVolumeAnnotationsGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient LayersVolumeAnnotationsGet{..}
+        requestClient LayersVolumeAnnotationsGet'{..}
           = go _lvagVolumeId _lvagLayerId _lvagAnnotationId
               _lvagLocale
               _lvagSource

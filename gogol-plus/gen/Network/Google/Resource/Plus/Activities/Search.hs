@@ -59,7 +59,7 @@ type ActivitiesSearchResource =
 -- | Search public activities.
 --
 -- /See:/ 'activitiesSearch' smart constructor.
-data ActivitiesSearch = ActivitiesSearch
+data ActivitiesSearch = ActivitiesSearch'
     { _asOrderBy    :: !ActivitiesSearchOrderBy
     , _asQuery      :: !Text
     , _asLanguage   :: !Text
@@ -84,7 +84,7 @@ activitiesSearch
     :: Text -- ^ 'asQuery'
     -> ActivitiesSearch
 activitiesSearch pAsQuery_ =
-    ActivitiesSearch
+    ActivitiesSearch'
     { _asOrderBy = ASOBRecent
     , _asQuery = pAsQuery_
     , _asLanguage = "en-US"
@@ -128,7 +128,7 @@ instance GoogleRequest ActivitiesSearch where
         type Scopes ActivitiesSearch =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient ActivitiesSearch{..}
+        requestClient ActivitiesSearch'{..}
           = go (Just _asQuery) (Just _asOrderBy)
               (Just _asLanguage)
               _asPageToken

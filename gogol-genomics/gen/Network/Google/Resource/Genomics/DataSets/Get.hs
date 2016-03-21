@@ -68,7 +68,7 @@ type DataSetsGetResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsGet' smart constructor.
-data DataSetsGet = DataSetsGet
+data DataSetsGet = DataSetsGet'
     { _dsgXgafv          :: !(Maybe Text)
     , _dsgUploadProtocol :: !(Maybe Text)
     , _dsgPp             :: !Bool
@@ -102,7 +102,7 @@ dataSetsGet
     :: Text -- ^ 'dsgDataSetId'
     -> DataSetsGet
 dataSetsGet pDsgDataSetId_ =
-    DataSetsGet
+    DataSetsGet'
     { _dsgXgafv = Nothing
     , _dsgUploadProtocol = Nothing
     , _dsgPp = True
@@ -161,7 +161,7 @@ instance GoogleRequest DataSetsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient DataSetsGet{..}
+        requestClient DataSetsGet'{..}
           = go _dsgDataSetId _dsgXgafv _dsgUploadProtocol
               (Just _dsgPp)
               _dsgAccessToken

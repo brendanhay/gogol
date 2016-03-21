@@ -62,7 +62,7 @@ type EntitlementsUpdateResource =
 -- | Adds or updates an entitlement to an app for a user.
 --
 -- /See:/ 'entitlementsUpdate' smart constructor.
-data EntitlementsUpdate = EntitlementsUpdate
+data EntitlementsUpdate = EntitlementsUpdate'
     { _euEntitlementId :: !Text
     , _euEnterpriseId  :: !Text
     , _euPayload       :: !Entitlement
@@ -90,7 +90,7 @@ entitlementsUpdate
     -> Text -- ^ 'euUserId'
     -> EntitlementsUpdate
 entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
-    EntitlementsUpdate
+    EntitlementsUpdate'
     { _euEntitlementId = pEuEntitlementId_
     , _euEnterpriseId = pEuEnterpriseId_
     , _euPayload = pEuPayload_
@@ -131,7 +131,7 @@ instance GoogleRequest EntitlementsUpdate where
         type Rs EntitlementsUpdate = Entitlement
         type Scopes EntitlementsUpdate =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EntitlementsUpdate{..}
+        requestClient EntitlementsUpdate'{..}
           = go _euEnterpriseId _euUserId _euEntitlementId
               _euInstall
               (Just AltJSON)

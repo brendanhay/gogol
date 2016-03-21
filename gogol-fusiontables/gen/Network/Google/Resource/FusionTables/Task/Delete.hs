@@ -56,7 +56,7 @@ type TaskDeleteResource =
 -- running.
 --
 -- /See:/ 'taskDelete' smart constructor.
-data TaskDelete = TaskDelete
+data TaskDelete = TaskDelete'
     { _tdTaskId  :: !Text
     , _tdTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ taskDelete
     -> Text -- ^ 'tdTableId'
     -> TaskDelete
 taskDelete pTdTaskId_ pTdTableId_ =
-    TaskDelete
+    TaskDelete'
     { _tdTaskId = pTdTaskId_
     , _tdTableId = pTdTableId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest TaskDelete where
         type Rs TaskDelete = ()
         type Scopes TaskDelete =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TaskDelete{..}
+        requestClient TaskDelete'{..}
           = go _tdTableId _tdTaskId (Just AltJSON)
               fusionTablesService
           where go

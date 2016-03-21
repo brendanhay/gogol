@@ -54,7 +54,7 @@ type LeaderboardConfigurationsGetResource =
 -- ID.
 --
 -- /See:/ 'leaderboardConfigurationsGet' smart constructor.
-newtype LeaderboardConfigurationsGet = LeaderboardConfigurationsGet
+newtype LeaderboardConfigurationsGet = LeaderboardConfigurationsGet'
     { _lcgLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ leaderboardConfigurationsGet
     :: Text -- ^ 'lcgLeaderboardId'
     -> LeaderboardConfigurationsGet
 leaderboardConfigurationsGet pLcgLeaderboardId_ =
-    LeaderboardConfigurationsGet
+    LeaderboardConfigurationsGet'
     { _lcgLeaderboardId = pLcgLeaderboardId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest LeaderboardConfigurationsGet
              LeaderboardConfiguration
         type Scopes LeaderboardConfigurationsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient LeaderboardConfigurationsGet{..}
+        requestClient LeaderboardConfigurationsGet'{..}
           = go _lcgLeaderboardId (Just AltJSON)
               gamesConfigurationService
           where go

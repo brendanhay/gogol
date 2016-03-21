@@ -61,7 +61,7 @@ type OperationsListResource =
 -- Cloud SQL instance in the reverse chronological order of the start time.
 --
 -- /See:/ 'operationsList' smart constructor.
-data OperationsList = OperationsList
+data OperationsList = OperationsList'
     { _olProject    :: !Text
     , _olPageToken  :: !(Maybe Text)
     , _olMaxResults :: !(Maybe (Textual Word32))
@@ -84,7 +84,7 @@ operationsList
     -> Text -- ^ 'olInstance'
     -> OperationsList
 operationsList pOlProject_ pOlInstance_ =
-    OperationsList
+    OperationsList'
     { _olProject = pOlProject_
     , _olPageToken = Nothing
     , _olMaxResults = Nothing
@@ -118,7 +118,7 @@ instance GoogleRequest OperationsList where
         type Scopes OperationsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient OperationsList{..}
+        requestClient OperationsList'{..}
           = go _olProject (Just _olInstance) _olPageToken
               _olMaxResults
               (Just AltJSON)

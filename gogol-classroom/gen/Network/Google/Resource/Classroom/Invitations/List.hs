@@ -79,7 +79,7 @@ type InvitationsListResource =
 -- \`PERMISSION_DENIED\` for access errors.
 --
 -- /See:/ 'invitationsList' smart constructor.
-data InvitationsList = InvitationsList
+data InvitationsList = InvitationsList'
     { _ilXgafv          :: !(Maybe Text)
     , _ilUploadProtocol :: !(Maybe Text)
     , _ilPp             :: !Bool
@@ -121,7 +121,7 @@ data InvitationsList = InvitationsList
 invitationsList
     :: InvitationsList
 invitationsList =
-    InvitationsList
+    InvitationsList'
     { _ilXgafv = Nothing
     , _ilUploadProtocol = Nothing
     , _ilPp = True
@@ -203,7 +203,7 @@ instance GoogleRequest InvitationsList where
         type Scopes InvitationsList =
              '["https://www.googleapis.com/auth/classroom.rosters",
                "https://www.googleapis.com/auth/classroom.rosters.readonly"]
-        requestClient InvitationsList{..}
+        requestClient InvitationsList'{..}
           = go _ilXgafv _ilUploadProtocol (Just _ilPp)
               _ilCourseId
               _ilAccessToken

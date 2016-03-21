@@ -54,7 +54,7 @@ type PermissionsGetResource =
 -- | Gets a permission by ID.
 --
 -- /See:/ 'permissionsGet' smart constructor.
-data PermissionsGet = PermissionsGet
+data PermissionsGet = PermissionsGet'
     { _pgFileId       :: !Text
     , _pgPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ permissionsGet
     -> Text -- ^ 'pgPermissionId'
     -> PermissionsGet
 permissionsGet pPgFileId_ pPgPermissionId_ =
-    PermissionsGet
+    PermissionsGet'
     { _pgFileId = pPgFileId_
     , _pgPermissionId = pPgPermissionId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest PermissionsGet where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient PermissionsGet{..}
+        requestClient PermissionsGet'{..}
           = go _pgFileId _pgPermissionId (Just AltJSON)
               driveService
           where go

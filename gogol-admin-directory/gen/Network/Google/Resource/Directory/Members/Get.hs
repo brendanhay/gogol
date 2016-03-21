@@ -55,7 +55,7 @@ type MembersGetResource =
 -- | Retrieve Group Member
 --
 -- /See:/ 'membersGet' smart constructor.
-data MembersGet = MembersGet
+data MembersGet = MembersGet'
     { _mgMemberKey :: !Text
     , _mgGroupKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ membersGet
     -> Text -- ^ 'mgGroupKey'
     -> MembersGet
 membersGet pMgMemberKey_ pMgGroupKey_ =
-    MembersGet
+    MembersGet'
     { _mgMemberKey = pMgMemberKey_
     , _mgGroupKey = pMgGroupKey_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest MembersGet where
                "https://www.googleapis.com/auth/admin.directory.group.member",
                "https://www.googleapis.com/auth/admin.directory.group.member.readonly",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
-        requestClient MembersGet{..}
+        requestClient MembersGet'{..}
           = go _mgGroupKey _mgMemberKey (Just AltJSON)
               directoryService
           where go

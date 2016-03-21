@@ -54,7 +54,7 @@ type JobsGetResource =
 -- | Retrieves a job, including all the changes made to the job.
 --
 -- /See:/ 'jobsGet' smart constructor.
-data JobsGet = JobsGet
+data JobsGet = JobsGet'
     { _jgJobId  :: !(Textual Word64)
     , _jgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ jobsGet
     -> Text -- ^ 'jgTeamId'
     -> JobsGet
 jobsGet pJgJobId_ pJgTeamId_ =
-    JobsGet
+    JobsGet'
     { _jgJobId = _Coerce # pJgJobId_
     , _jgTeamId = pJgTeamId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest JobsGet where
         type Scopes JobsGet =
              '["https://www.googleapis.com/auth/coordinate",
                "https://www.googleapis.com/auth/coordinate.readonly"]
-        requestClient JobsGet{..}
+        requestClient JobsGet'{..}
           = go _jgTeamId _jgJobId (Just AltJSON)
               mapsCoordinateService
           where go

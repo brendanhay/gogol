@@ -55,7 +55,7 @@ type FloodlightActivitiesGetResource =
 -- | Gets one floodlight activity by ID.
 --
 -- /See:/ 'floodlightActivitiesGet' smart constructor.
-data FloodlightActivitiesGet = FloodlightActivitiesGet
+data FloodlightActivitiesGet = FloodlightActivitiesGet'
     { _fProFileId :: !(Textual Int64)
     , _fId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivitiesGet
     -> Int64 -- ^ 'fId'
     -> FloodlightActivitiesGet
 floodlightActivitiesGet pFProFileId_ pFId_ =
-    FloodlightActivitiesGet
+    FloodlightActivitiesGet'
     { _fProFileId = _Coerce # pFProFileId_
     , _fId = _Coerce # pFId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest FloodlightActivitiesGet where
         type Rs FloodlightActivitiesGet = FloodlightActivity
         type Scopes FloodlightActivitiesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivitiesGet{..}
+        requestClient FloodlightActivitiesGet'{..}
           = go _fProFileId _fId (Just AltJSON)
               dFAReportingService
           where go

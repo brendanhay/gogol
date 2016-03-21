@@ -59,7 +59,7 @@ type DeploymentsInsertResource =
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsInsert' smart constructor.
-data DeploymentsInsert = DeploymentsInsert
+data DeploymentsInsert = DeploymentsInsert'
     { _diProject :: !Text
     , _diPayload :: !Deployment
     , _diPreview :: !(Maybe Bool)
@@ -79,7 +79,7 @@ deploymentsInsert
     -> Deployment -- ^ 'diPayload'
     -> DeploymentsInsert
 deploymentsInsert pDiProject_ pDiPayload_ =
-    DeploymentsInsert
+    DeploymentsInsert'
     { _diProject = pDiProject_
     , _diPayload = pDiPayload_
     , _diPreview = Nothing
@@ -112,7 +112,7 @@ instance GoogleRequest DeploymentsInsert where
         type Scopes DeploymentsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient DeploymentsInsert{..}
+        requestClient DeploymentsInsert'{..}
           = go _diProject _diPreview (Just AltJSON) _diPayload
               deploymentManagerService
           where go

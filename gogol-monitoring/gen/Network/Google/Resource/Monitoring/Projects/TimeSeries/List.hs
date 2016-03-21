@@ -93,7 +93,7 @@ type ProjectsTimeSeriesListResource =
 -- | Lists time series that match a filter.
 --
 -- /See:/ 'projectsTimeSeriesList' smart constructor.
-data ProjectsTimeSeriesList = ProjectsTimeSeriesList
+data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
     { _ptslIntervalStartTime             :: !(Maybe Text)
     , _ptslXgafv                         :: !(Maybe Text)
     , _ptslUploadProtocol                :: !(Maybe Text)
@@ -160,7 +160,7 @@ projectsTimeSeriesList
     :: Text -- ^ 'ptslName'
     -> ProjectsTimeSeriesList
 projectsTimeSeriesList pPtslName_ =
-    ProjectsTimeSeriesList
+    ProjectsTimeSeriesList'
     { _ptslIntervalStartTime = Nothing
     , _ptslXgafv = Nothing
     , _ptslUploadProtocol = Nothing
@@ -340,7 +340,7 @@ instance GoogleRequest ProjectsTimeSeriesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.read"]
-        requestClient ProjectsTimeSeriesList{..}
+        requestClient ProjectsTimeSeriesList'{..}
           = go _ptslName _ptslIntervalStartTime _ptslXgafv
               _ptslUploadProtocol
               _ptslOrderBy

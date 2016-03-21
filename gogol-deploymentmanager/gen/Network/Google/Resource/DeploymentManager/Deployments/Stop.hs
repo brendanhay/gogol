@@ -61,7 +61,7 @@ type DeploymentsStopResource =
 -- already been completed, but prevents any new work from being started.
 --
 -- /See:/ 'deploymentsStop' smart constructor.
-data DeploymentsStop = DeploymentsStop
+data DeploymentsStop = DeploymentsStop'
     { _dsProject    :: !Text
     , _dsPayload    :: !DeploymentsStopRequest
     , _dsDeployment :: !Text
@@ -82,7 +82,7 @@ deploymentsStop
     -> Text -- ^ 'dsDeployment'
     -> DeploymentsStop
 deploymentsStop pDsProject_ pDsPayload_ pDsDeployment_ =
-    DeploymentsStop
+    DeploymentsStop'
     { _dsProject = pDsProject_
     , _dsPayload = pDsPayload_
     , _dsDeployment = pDsDeployment_
@@ -108,7 +108,7 @@ instance GoogleRequest DeploymentsStop where
         type Scopes DeploymentsStop =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient DeploymentsStop{..}
+        requestClient DeploymentsStop'{..}
           = go _dsProject _dsDeployment (Just AltJSON)
               _dsPayload
               deploymentManagerService

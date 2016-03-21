@@ -51,7 +51,7 @@ type TimelineDeleteResource =
 -- | Deletes a timeline item.
 --
 -- /See:/ 'timelineDelete' smart constructor.
-newtype TimelineDelete = TimelineDelete
+newtype TimelineDelete = TimelineDelete'
     { _tdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ timelineDelete
     :: Text -- ^ 'tdId'
     -> TimelineDelete
 timelineDelete pTdId_ =
-    TimelineDelete
+    TimelineDelete'
     { _tdId = pTdId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest TimelineDelete where
         type Scopes TimelineDelete =
              '["https://www.googleapis.com/auth/glass.location",
                "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineDelete{..}
+        requestClient TimelineDelete'{..}
           = go _tdId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelineDeleteResource)

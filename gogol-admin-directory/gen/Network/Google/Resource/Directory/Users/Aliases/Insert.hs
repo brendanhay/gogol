@@ -55,7 +55,7 @@ type UsersAliasesInsertResource =
 -- | Add a alias for the user
 --
 -- /See:/ 'usersAliasesInsert' smart constructor.
-data UsersAliasesInsert = UsersAliasesInsert
+data UsersAliasesInsert = UsersAliasesInsert'
     { _uaiPayload :: !Alias
     , _uaiUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersAliasesInsert
     -> Text -- ^ 'uaiUserKey'
     -> UsersAliasesInsert
 usersAliasesInsert pUaiPayload_ pUaiUserKey_ =
-    UsersAliasesInsert
+    UsersAliasesInsert'
     { _uaiPayload = pUaiPayload_
     , _uaiUserKey = pUaiUserKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersAliasesInsert where
         type Scopes UsersAliasesInsert =
              '["https://www.googleapis.com/auth/admin.directory.user",
                "https://www.googleapis.com/auth/admin.directory.user.alias"]
-        requestClient UsersAliasesInsert{..}
+        requestClient UsersAliasesInsert'{..}
           = go _uaiUserKey (Just AltJSON) _uaiPayload
               directoryService
           where go

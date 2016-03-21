@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | A row in a DoubleClick Search report.
 --
 -- /See:/ 'reportRow' smart constructor.
-newtype ReportRow = ReportRow
+newtype ReportRow = ReportRow'
     { _rrAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -36,7 +36,7 @@ reportRow
     :: HashMap Text JSONValue -- ^ 'rrAddtional'
     -> ReportRow
 reportRow pRrAddtional_ =
-    ReportRow
+    ReportRow'
     { _rrAddtional = _Coerce # pRrAddtional_
     }
 
@@ -50,7 +50,7 @@ rrAddtional
 instance FromJSON ReportRow where
         parseJSON
           = withObject "ReportRow"
-              (\ o -> ReportRow <$> (parseJSONObject o))
+              (\ o -> ReportRow' <$> (parseJSONObject o))
 
 instance ToJSON ReportRow where
         toJSON = toJSON . _rrAddtional
@@ -58,7 +58,7 @@ instance ToJSON ReportRow where
 -- | A request object used to create a DoubleClick Search report.
 --
 -- /See:/ 'reportRequest' smart constructor.
-data ReportRequest = ReportRequest
+data ReportRequest = ReportRequest'
     { _rrMaxRowsPerFile         :: !(Maybe (Textual Int32))
     , _rrReportScope            :: !(Maybe ReportRequestReportScope)
     , _rrStatisticsCurrency     :: !(Maybe Text)
@@ -109,7 +109,7 @@ data ReportRequest = ReportRequest
 reportRequest
     :: ReportRequest
 reportRequest =
-    ReportRequest
+    ReportRequest'
     { _rrMaxRowsPerFile = Nothing
     , _rrReportScope = Nothing
     , _rrStatisticsCurrency = Nothing
@@ -241,7 +241,7 @@ instance FromJSON ReportRequest where
         parseJSON
           = withObject "ReportRequest"
               (\ o ->
-                 ReportRequest <$>
+                 ReportRequest' <$>
                    (o .:? "maxRowsPerFile") <*> (o .:? "reportScope")
                      <*> (o .:? "statisticsCurrency")
                      <*> (o .:? "timeRange")
@@ -257,7 +257,7 @@ instance FromJSON ReportRequest where
                      <*> (o .:? "rowCount" .!= 10000))
 
 instance ToJSON ReportRequest where
-        toJSON ReportRequest{..}
+        toJSON ReportRequest'{..}
           = object
               (catMaybes
                  [("maxRowsPerFile" .=) <$> _rrMaxRowsPerFile,
@@ -282,7 +282,7 @@ instance ToJSON ReportRequest where
 
 --
 -- /See:/ 'reportRequestOrderByItem' smart constructor.
-data ReportRequestOrderByItem = ReportRequestOrderByItem
+data ReportRequestOrderByItem = ReportRequestOrderByItem'
     { _rrobiSortOrder :: !(Maybe Text)
     , _rrobiColumn    :: !(Maybe ReportAPIColumnSpec)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -297,7 +297,7 @@ data ReportRequestOrderByItem = ReportRequestOrderByItem
 reportRequestOrderByItem
     :: ReportRequestOrderByItem
 reportRequestOrderByItem =
-    ReportRequestOrderByItem
+    ReportRequestOrderByItem'
     { _rrobiSortOrder = Nothing
     , _rrobiColumn = Nothing
     }
@@ -318,11 +318,11 @@ instance FromJSON ReportRequestOrderByItem where
         parseJSON
           = withObject "ReportRequestOrderByItem"
               (\ o ->
-                 ReportRequestOrderByItem <$>
+                 ReportRequestOrderByItem' <$>
                    (o .:? "sortOrder") <*> (o .:? "column"))
 
 instance ToJSON ReportRequestOrderByItem where
-        toJSON ReportRequestOrderByItem{..}
+        toJSON ReportRequestOrderByItem'{..}
           = object
               (catMaybes
                  [("sortOrder" .=) <$> _rrobiSortOrder,
@@ -333,7 +333,7 @@ instance ToJSON ReportRequestOrderByItem where
 -- rows or report files.
 --
 -- /See:/ 'report' smart constructor.
-data Report = Report
+data Report = Report'
     { _rKind                   :: !Text
     , _rRows                   :: !(Maybe [ReportRow])
     , _rStatisticsCurrencyCode :: !(Maybe Text)
@@ -369,7 +369,7 @@ data Report = Report
 report
     :: Report
 report =
-    Report
+    Report'
     { _rKind = "doubleclicksearch#report"
     , _rRows = Nothing
     , _rStatisticsCurrencyCode = Nothing
@@ -442,7 +442,7 @@ instance FromJSON Report where
         parseJSON
           = withObject "Report"
               (\ o ->
-                 Report <$>
+                 Report' <$>
                    (o .:? "kind" .!= "doubleclicksearch#report") <*>
                      (o .:? "rows" .!= mempty)
                      <*> (o .:? "statisticsCurrencyCode")
@@ -454,7 +454,7 @@ instance FromJSON Report where
                      <*> (o .:? "request"))
 
 instance ToJSON Report where
-        toJSON Report{..}
+        toJSON Report'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rKind), ("rows" .=) <$> _rRows,
@@ -468,7 +468,7 @@ instance ToJSON Report where
 
 --
 -- /See:/ 'reportFilesItem' smart constructor.
-data ReportFilesItem = ReportFilesItem
+data ReportFilesItem = ReportFilesItem'
     { _rfiURL       :: !(Maybe Text)
     , _rfiByteCount :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -483,7 +483,7 @@ data ReportFilesItem = ReportFilesItem
 reportFilesItem
     :: ReportFilesItem
 reportFilesItem =
-    ReportFilesItem
+    ReportFilesItem'
     { _rfiURL = Nothing
     , _rfiByteCount = Nothing
     }
@@ -502,11 +502,11 @@ instance FromJSON ReportFilesItem where
         parseJSON
           = withObject "ReportFilesItem"
               (\ o ->
-                 ReportFilesItem <$>
+                 ReportFilesItem' <$>
                    (o .:? "url") <*> (o .:? "byteCount"))
 
 instance ToJSON ReportFilesItem where
-        toJSON ReportFilesItem{..}
+        toJSON ReportFilesItem'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _rfiURL,
@@ -514,7 +514,7 @@ instance ToJSON ReportFilesItem where
 
 --
 -- /See:/ 'reportRequestFiltersItem' smart constructor.
-data ReportRequestFiltersItem = ReportRequestFiltersItem
+data ReportRequestFiltersItem = ReportRequestFiltersItem'
     { _rrfiOperator :: !(Maybe Text)
     , _rrfiValues   :: !(Maybe [JSONValue])
     , _rrfiColumn   :: !(Maybe ReportAPIColumnSpec)
@@ -532,7 +532,7 @@ data ReportRequestFiltersItem = ReportRequestFiltersItem
 reportRequestFiltersItem
     :: ReportRequestFiltersItem
 reportRequestFiltersItem =
-    ReportRequestFiltersItem
+    ReportRequestFiltersItem'
     { _rrfiOperator = Nothing
     , _rrfiValues = Nothing
     , _rrfiColumn = Nothing
@@ -561,12 +561,12 @@ instance FromJSON ReportRequestFiltersItem where
         parseJSON
           = withObject "ReportRequestFiltersItem"
               (\ o ->
-                 ReportRequestFiltersItem <$>
+                 ReportRequestFiltersItem' <$>
                    (o .:? "operator") <*> (o .:? "values" .!= mempty)
                      <*> (o .:? "column"))
 
 instance ToJSON ReportRequestFiltersItem where
-        toJSON ReportRequestFiltersItem{..}
+        toJSON ReportRequestFiltersItem'{..}
           = object
               (catMaybes
                  [("operator" .=) <$> _rrfiOperator,
@@ -576,7 +576,7 @@ instance ToJSON ReportRequestFiltersItem where
 -- | A message containing availability data relevant to DoubleClick Search.
 --
 -- /See:/ 'availability' smart constructor.
-data Availability = Availability
+data Availability = Availability'
     { _aAgencyId              :: !(Maybe (Textual Int64))
     , _aAdvertiserId          :: !(Maybe (Textual Int64))
     , _aSegmentationId        :: !(Maybe (Textual Int64))
@@ -603,7 +603,7 @@ data Availability = Availability
 availability
     :: Availability
 availability =
-    Availability
+    Availability'
     { _aAgencyId = Nothing
     , _aAdvertiserId = Nothing
     , _aSegmentationId = Nothing
@@ -659,7 +659,7 @@ instance FromJSON Availability where
         parseJSON
           = withObject "Availability"
               (\ o ->
-                 Availability <$>
+                 Availability' <$>
                    (o .:? "agencyId") <*> (o .:? "advertiserId") <*>
                      (o .:? "segmentationId")
                      <*> (o .:? "segmentationName")
@@ -667,7 +667,7 @@ instance FromJSON Availability where
                      <*> (o .:? "segmentationType"))
 
 instance ToJSON Availability where
-        toJSON Availability{..}
+        toJSON Availability'{..}
           = object
               (catMaybes
                  [("agencyId" .=) <$> _aAgencyId,
@@ -681,7 +681,7 @@ instance ToJSON Availability where
 -- | The request to update availability.
 --
 -- /See:/ 'updateAvailabilityRequest' smart constructor.
-newtype UpdateAvailabilityRequest = UpdateAvailabilityRequest
+newtype UpdateAvailabilityRequest = UpdateAvailabilityRequest'
     { _uarAvailabilities :: Maybe [Availability]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -693,7 +693,7 @@ newtype UpdateAvailabilityRequest = UpdateAvailabilityRequest
 updateAvailabilityRequest
     :: UpdateAvailabilityRequest
 updateAvailabilityRequest =
-    UpdateAvailabilityRequest
+    UpdateAvailabilityRequest'
     { _uarAvailabilities = Nothing
     }
 
@@ -709,11 +709,11 @@ instance FromJSON UpdateAvailabilityRequest where
         parseJSON
           = withObject "UpdateAvailabilityRequest"
               (\ o ->
-                 UpdateAvailabilityRequest <$>
+                 UpdateAvailabilityRequest' <$>
                    (o .:? "availabilities" .!= mempty))
 
 instance ToJSON UpdateAvailabilityRequest where
-        toJSON UpdateAvailabilityRequest{..}
+        toJSON UpdateAvailabilityRequest'{..}
           = object
               (catMaybes
                  [("availabilities" .=) <$> _uarAvailabilities])
@@ -721,7 +721,7 @@ instance ToJSON UpdateAvailabilityRequest where
 -- | A message containing the custome metric.
 --
 -- /See:/ 'customMetric' smart constructor.
-data CustomMetric = CustomMetric
+data CustomMetric = CustomMetric'
     { _cmValue :: !(Maybe (Textual Double))
     , _cmName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -736,7 +736,7 @@ data CustomMetric = CustomMetric
 customMetric
     :: CustomMetric
 customMetric =
-    CustomMetric
+    CustomMetric'
     { _cmValue = Nothing
     , _cmName = Nothing
     }
@@ -755,10 +755,10 @@ instance FromJSON CustomMetric where
         parseJSON
           = withObject "CustomMetric"
               (\ o ->
-                 CustomMetric <$> (o .:? "value") <*> (o .:? "name"))
+                 CustomMetric' <$> (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON CustomMetric where
-        toJSON CustomMetric{..}
+        toJSON CustomMetric'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _cmValue, ("name" .=) <$> _cmName])
@@ -766,7 +766,7 @@ instance ToJSON CustomMetric where
 -- | A list of conversions.
 --
 -- /See:/ 'conversionList' smart constructor.
-data ConversionList = ConversionList
+data ConversionList = ConversionList'
     { _clKind       :: !Text
     , _clConversion :: !(Maybe [Conversion])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -781,7 +781,7 @@ data ConversionList = ConversionList
 conversionList
     :: ConversionList
 conversionList =
-    ConversionList
+    ConversionList'
     { _clKind = "doubleclicksearch#conversionList"
     , _clConversion = Nothing
     }
@@ -802,12 +802,12 @@ instance FromJSON ConversionList where
         parseJSON
           = withObject "ConversionList"
               (\ o ->
-                 ConversionList <$>
+                 ConversionList' <$>
                    (o .:? "kind" .!= "doubleclicksearch#conversionList")
                      <*> (o .:? "conversion" .!= mempty))
 
 instance ToJSON ConversionList where
-        toJSON ConversionList{..}
+        toJSON ConversionList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _clKind),
@@ -816,7 +816,7 @@ instance ToJSON ConversionList where
 -- | A request object used to create a DoubleClick Search report.
 --
 -- /See:/ 'reportAPIColumnSpec' smart constructor.
-data ReportAPIColumnSpec = ReportAPIColumnSpec
+data ReportAPIColumnSpec = ReportAPIColumnSpec'
     { _racsCustomDimensionName      :: !(Maybe Text)
     , _racsSavedColumnName          :: !(Maybe Text)
     , _racsGroupByColumn            :: !Bool
@@ -855,7 +855,7 @@ data ReportAPIColumnSpec = ReportAPIColumnSpec
 reportAPIColumnSpec
     :: ReportAPIColumnSpec
 reportAPIColumnSpec =
-    ReportAPIColumnSpec
+    ReportAPIColumnSpec'
     { _racsCustomDimensionName = Nothing
     , _racsSavedColumnName = Nothing
     , _racsGroupByColumn = False
@@ -953,7 +953,7 @@ instance FromJSON ReportAPIColumnSpec where
         parseJSON
           = withObject "ReportAPIColumnSpec"
               (\ o ->
-                 ReportAPIColumnSpec <$>
+                 ReportAPIColumnSpec' <$>
                    (o .:? "customDimensionName") <*>
                      (o .:? "savedColumnName")
                      <*> (o .:? "groupByColumn" .!= False)
@@ -966,7 +966,7 @@ instance FromJSON ReportAPIColumnSpec where
                      <*> (o .:? "columnName"))
 
 instance ToJSON ReportAPIColumnSpec where
-        toJSON ReportAPIColumnSpec{..}
+        toJSON ReportAPIColumnSpec'{..}
           = object
               (catMaybes
                  [("customDimensionName" .=) <$>
@@ -986,7 +986,7 @@ instance ToJSON ReportAPIColumnSpec where
 -- restrict the metrics to a specific time range.
 --
 -- /See:/ 'reportRequestTimeRange' smart constructor.
-data ReportRequestTimeRange = ReportRequestTimeRange
+data ReportRequestTimeRange = ReportRequestTimeRange'
     { _rrtrEndDate                         :: !(Maybe Text)
     , _rrtrChangedAttributesSinceTimestamp :: !(Maybe DateTime')
     , _rrtrStartDate                       :: !(Maybe Text)
@@ -1007,7 +1007,7 @@ data ReportRequestTimeRange = ReportRequestTimeRange
 reportRequestTimeRange
     :: ReportRequestTimeRange
 reportRequestTimeRange =
-    ReportRequestTimeRange
+    ReportRequestTimeRange'
     { _rrtrEndDate = Nothing
     , _rrtrChangedAttributesSinceTimestamp = Nothing
     , _rrtrStartDate = Nothing
@@ -1046,14 +1046,14 @@ instance FromJSON ReportRequestTimeRange where
         parseJSON
           = withObject "ReportRequestTimeRange"
               (\ o ->
-                 ReportRequestTimeRange <$>
+                 ReportRequestTimeRange' <$>
                    (o .:? "endDate") <*>
                      (o .:? "changedAttributesSinceTimestamp")
                      <*> (o .:? "startDate")
                      <*> (o .:? "changedMetricsSinceTimestamp"))
 
 instance ToJSON ReportRequestTimeRange where
-        toJSON ReportRequestTimeRange{..}
+        toJSON ReportRequestTimeRange'{..}
           = object
               (catMaybes
                  [("endDate" .=) <$> _rrtrEndDate,
@@ -1066,7 +1066,7 @@ instance ToJSON ReportRequestTimeRange where
 -- | A conversion containing data relevant to DoubleClick Search.
 --
 -- /See:/ 'conversion' smart constructor.
-data Conversion = Conversion
+data Conversion = Conversion'
     { _cAdGroupId                   :: !(Maybe (Textual Int64))
     , _cConversionModifiedTimestamp :: !(Maybe (Textual Word64))
     , _cState                       :: !(Maybe Text)
@@ -1174,7 +1174,7 @@ data Conversion = Conversion
 conversion
     :: Conversion
 conversion =
-    Conversion
+    Conversion'
     { _cAdGroupId = Nothing
     , _cConversionModifiedTimestamp = Nothing
     , _cState = Nothing
@@ -1434,7 +1434,7 @@ instance FromJSON Conversion where
         parseJSON
           = withObject "Conversion"
               (\ o ->
-                 Conversion <$>
+                 Conversion' <$>
                    (o .:? "adGroupId") <*>
                      (o .:? "conversionModifiedTimestamp")
                      <*> (o .:? "state")
@@ -1470,7 +1470,7 @@ instance FromJSON Conversion where
                      <*> (o .:? "productGroupId"))
 
 instance ToJSON Conversion where
-        toJSON Conversion{..}
+        toJSON Conversion'{..}
           = object
               (catMaybes
                  [("adGroupId" .=) <$> _cAdGroupId,
@@ -1511,7 +1511,7 @@ instance ToJSON Conversion where
 -- | A saved column
 --
 -- /See:/ 'savedColumn' smart constructor.
-data SavedColumn = SavedColumn
+data SavedColumn = SavedColumn'
     { _scSavedColumnName :: !(Maybe Text)
     , _scKind            :: !Text
     , _scType            :: !(Maybe Text)
@@ -1529,7 +1529,7 @@ data SavedColumn = SavedColumn
 savedColumn
     :: SavedColumn
 savedColumn =
-    SavedColumn
+    SavedColumn'
     { _scSavedColumnName = Nothing
     , _scKind = "doubleclicksearch#savedColumn"
     , _scType = Nothing
@@ -1554,13 +1554,13 @@ instance FromJSON SavedColumn where
         parseJSON
           = withObject "SavedColumn"
               (\ o ->
-                 SavedColumn <$>
+                 SavedColumn' <$>
                    (o .:? "savedColumnName") <*>
                      (o .:? "kind" .!= "doubleclicksearch#savedColumn")
                      <*> (o .:? "type"))
 
 instance ToJSON SavedColumn where
-        toJSON SavedColumn{..}
+        toJSON SavedColumn'{..}
           = object
               (catMaybes
                  [("savedColumnName" .=) <$> _scSavedColumnName,
@@ -1569,7 +1569,7 @@ instance ToJSON SavedColumn where
 -- | A message containing the custome dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
-data CustomDimension = CustomDimension
+data CustomDimension = CustomDimension'
     { _cdValue :: !(Maybe Text)
     , _cdName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1584,7 +1584,7 @@ data CustomDimension = CustomDimension
 customDimension
     :: CustomDimension
 customDimension =
-    CustomDimension
+    CustomDimension'
     { _cdValue = Nothing
     , _cdName = Nothing
     }
@@ -1601,11 +1601,11 @@ instance FromJSON CustomDimension where
         parseJSON
           = withObject "CustomDimension"
               (\ o ->
-                 CustomDimension <$>
+                 CustomDimension' <$>
                    (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON CustomDimension where
-        toJSON CustomDimension{..}
+        toJSON CustomDimension'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _cdValue, ("name" .=) <$> _cdName])
@@ -1613,7 +1613,7 @@ instance ToJSON CustomDimension where
 -- | The response to a update availability request.
 --
 -- /See:/ 'updateAvailabilityResponse' smart constructor.
-newtype UpdateAvailabilityResponse = UpdateAvailabilityResponse
+newtype UpdateAvailabilityResponse = UpdateAvailabilityResponse'
     { _uAvailabilities :: Maybe [Availability]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1625,7 +1625,7 @@ newtype UpdateAvailabilityResponse = UpdateAvailabilityResponse
 updateAvailabilityResponse
     :: UpdateAvailabilityResponse
 updateAvailabilityResponse =
-    UpdateAvailabilityResponse
+    UpdateAvailabilityResponse'
     { _uAvailabilities = Nothing
     }
 
@@ -1641,11 +1641,11 @@ instance FromJSON UpdateAvailabilityResponse where
         parseJSON
           = withObject "UpdateAvailabilityResponse"
               (\ o ->
-                 UpdateAvailabilityResponse <$>
+                 UpdateAvailabilityResponse' <$>
                    (o .:? "availabilities" .!= mempty))
 
 instance ToJSON UpdateAvailabilityResponse where
-        toJSON UpdateAvailabilityResponse{..}
+        toJSON UpdateAvailabilityResponse'{..}
           = object
               (catMaybes
                  [("availabilities" .=) <$> _uAvailabilities])
@@ -1655,7 +1655,7 @@ instance ToJSON UpdateAvailabilityResponse where
 -- the lowest scoped level desired up through agency is required.
 --
 -- /See:/ 'reportRequestReportScope' smart constructor.
-data ReportRequestReportScope = ReportRequestReportScope
+data ReportRequestReportScope = ReportRequestReportScope'
     { _rrrsKeywordId       :: !(Maybe (Textual Int64))
     , _rrrsAdGroupId       :: !(Maybe (Textual Int64))
     , _rrrsEngineAccountId :: !(Maybe (Textual Int64))
@@ -1685,7 +1685,7 @@ data ReportRequestReportScope = ReportRequestReportScope
 reportRequestReportScope
     :: ReportRequestReportScope
 reportRequestReportScope =
-    ReportRequestReportScope
+    ReportRequestReportScope'
     { _rrrsKeywordId = Nothing
     , _rrrsAdGroupId = Nothing
     , _rrrsEngineAccountId = Nothing
@@ -1746,7 +1746,7 @@ instance FromJSON ReportRequestReportScope where
         parseJSON
           = withObject "ReportRequestReportScope"
               (\ o ->
-                 ReportRequestReportScope <$>
+                 ReportRequestReportScope' <$>
                    (o .:? "keywordId") <*> (o .:? "adGroupId") <*>
                      (o .:? "engineAccountId")
                      <*> (o .:? "agencyId")
@@ -1755,7 +1755,7 @@ instance FromJSON ReportRequestReportScope where
                      <*> (o .:? "adId"))
 
 instance ToJSON ReportRequestReportScope where
-        toJSON ReportRequestReportScope{..}
+        toJSON ReportRequestReportScope'{..}
           = object
               (catMaybes
                  [("keywordId" .=) <$> _rrrsKeywordId,
@@ -1772,7 +1772,7 @@ instance ToJSON ReportRequestReportScope where
 -- that are available from this list.
 --
 -- /See:/ 'savedColumnList' smart constructor.
-data SavedColumnList = SavedColumnList
+data SavedColumnList = SavedColumnList'
     { _sclKind  :: !Text
     , _sclItems :: !(Maybe [SavedColumn])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1787,7 +1787,7 @@ data SavedColumnList = SavedColumnList
 savedColumnList
     :: SavedColumnList
 savedColumnList =
-    SavedColumnList
+    SavedColumnList'
     { _sclKind = "doubleclicksearch#savedColumnList"
     , _sclItems = Nothing
     }
@@ -1808,13 +1808,13 @@ instance FromJSON SavedColumnList where
         parseJSON
           = withObject "SavedColumnList"
               (\ o ->
-                 SavedColumnList <$>
+                 SavedColumnList' <$>
                    (o .:? "kind" .!=
                       "doubleclicksearch#savedColumnList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON SavedColumnList where
-        toJSON SavedColumnList{..}
+        toJSON SavedColumnList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sclKind),

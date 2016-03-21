@@ -58,7 +58,7 @@ type UsersMessagesModifyResource =
 -- | Modifies the labels on the specified message.
 --
 -- /See:/ 'usersMessagesModify' smart constructor.
-data UsersMessagesModify = UsersMessagesModify
+data UsersMessagesModify = UsersMessagesModify'
     { _ummPayload :: !ModifyMessageRequest
     , _ummUserId  :: !Text
     , _ummId      :: !Text
@@ -78,7 +78,7 @@ usersMessagesModify
     -> Text -- ^ 'ummId'
     -> UsersMessagesModify
 usersMessagesModify pUmmPayload_ pUmmId_ =
-    UsersMessagesModify
+    UsersMessagesModify'
     { _ummPayload = pUmmPayload_
     , _ummUserId = "me"
     , _ummId = pUmmId_
@@ -104,7 +104,7 @@ instance GoogleRequest UsersMessagesModify where
         type Scopes UsersMessagesModify =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersMessagesModify{..}
+        requestClient UsersMessagesModify'{..}
           = go _ummUserId _ummId (Just AltJSON) _ummPayload
               gmailService
           where go

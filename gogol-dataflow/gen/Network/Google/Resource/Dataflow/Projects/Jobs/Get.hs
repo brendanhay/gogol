@@ -69,7 +69,7 @@ type ProjectsJobsGetResource =
 -- | Gets the state of the specified dataflow job.
 --
 -- /See:/ 'projectsJobsGet' smart constructor.
-data ProjectsJobsGet = ProjectsJobsGet
+data ProjectsJobsGet = ProjectsJobsGet'
     { _pjgXgafv          :: !(Maybe Text)
     , _pjgJobId          :: !Text
     , _pjgUploadProtocol :: !(Maybe Text)
@@ -110,7 +110,7 @@ projectsJobsGet
     -> Text -- ^ 'pjgProjectId'
     -> ProjectsJobsGet
 projectsJobsGet pPjgJobId_ pPjgProjectId_ =
-    ProjectsJobsGet
+    ProjectsJobsGet'
     { _pjgXgafv = Nothing
     , _pjgJobId = pPjgJobId_
     , _pjgUploadProtocol = Nothing
@@ -178,7 +178,7 @@ instance GoogleRequest ProjectsJobsGet where
         type Scopes ProjectsJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ProjectsJobsGet{..}
+        requestClient ProjectsJobsGet'{..}
           = go _pjgProjectId _pjgJobId _pjgXgafv
               _pjgUploadProtocol
               (Just _pjgPp)

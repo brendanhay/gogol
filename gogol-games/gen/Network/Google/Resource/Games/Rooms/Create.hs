@@ -57,7 +57,7 @@ type RoomsCreateResource =
 -- method directly is unsupported.
 --
 -- /See:/ 'roomsCreate' smart constructor.
-data RoomsCreate = RoomsCreate
+data RoomsCreate = RoomsCreate'
     { _rcPayload  :: !RoomCreateRequest
     , _rcLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ roomsCreate
     :: RoomCreateRequest -- ^ 'rcPayload'
     -> RoomsCreate
 roomsCreate pRcPayload_ =
-    RoomsCreate
+    RoomsCreate'
     { _rcPayload = pRcPayload_
     , _rcLanguage = Nothing
     }
@@ -93,7 +93,7 @@ instance GoogleRequest RoomsCreate where
         type Scopes RoomsCreate =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsCreate{..}
+        requestClient RoomsCreate'{..}
           = go _rcLanguage (Just AltJSON) _rcPayload
               gamesService
           where go

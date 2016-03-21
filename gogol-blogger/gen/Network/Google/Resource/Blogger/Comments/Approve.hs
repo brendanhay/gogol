@@ -58,7 +58,7 @@ type CommentsApproveResource =
 -- | Marks a comment as not spam.
 --
 -- /See:/ 'commentsApprove' smart constructor.
-data CommentsApprove = CommentsApprove
+data CommentsApprove = CommentsApprove'
     { _caBlogId    :: !Text
     , _caPostId    :: !Text
     , _caCommentId :: !Text
@@ -79,7 +79,7 @@ commentsApprove
     -> Text -- ^ 'caCommentId'
     -> CommentsApprove
 commentsApprove pCaBlogId_ pCaPostId_ pCaCommentId_ =
-    CommentsApprove
+    CommentsApprove'
     { _caBlogId = pCaBlogId_
     , _caPostId = pCaPostId_
     , _caCommentId = pCaCommentId_
@@ -102,7 +102,7 @@ instance GoogleRequest CommentsApprove where
         type Rs CommentsApprove = Comment
         type Scopes CommentsApprove =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient CommentsApprove{..}
+        requestClient CommentsApprove'{..}
           = go _caBlogId _caPostId _caCommentId (Just AltJSON)
               bloggerService
           where go

@@ -81,7 +81,7 @@ type CampaignsListResource =
 -- | Retrieves a list of campaigns, possibly filtered.
 --
 -- /See:/ 'campaignsList' smart constructor.
-data CampaignsList = CampaignsList
+data CampaignsList = CampaignsList'
     { _clExcludedIds                    :: !(Maybe [Textual Int64])
     , _clSearchString                   :: !(Maybe Text)
     , _clIds                            :: !(Maybe [Textual Int64])
@@ -133,7 +133,7 @@ campaignsList
     :: Int64 -- ^ 'clProFileId'
     -> CampaignsList
 campaignsList pClProFileId_ =
-    CampaignsList
+    CampaignsList'
     { _clExcludedIds = Nothing
     , _clSearchString = Nothing
     , _clIds = Nothing
@@ -250,7 +250,7 @@ instance GoogleRequest CampaignsList where
         type Rs CampaignsList = CampaignsListResponse
         type Scopes CampaignsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignsList{..}
+        requestClient CampaignsList'{..}
           = go _clProFileId (_clExcludedIds ^. _Default)
               _clSearchString
               (_clIds ^. _Default)

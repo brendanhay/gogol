@@ -66,7 +66,7 @@ type RevisionsGetResource =
 -- | Gets a revision\'s metadata or content by ID.
 --
 -- /See:/ 'revisionsGet' smart constructor.
-data RevisionsGet = RevisionsGet
+data RevisionsGet = RevisionsGet'
     { _rggAcknowledgeAbuse :: !Bool
     , _rggFileId           :: !Text
     , _rggRevisionId       :: !Text
@@ -86,7 +86,7 @@ revisionsGet
     -> Text -- ^ 'rggRevisionId'
     -> RevisionsGet
 revisionsGet pRggFileId_ pRggRevisionId_ =
-    RevisionsGet
+    RevisionsGet'
     { _rggAcknowledgeAbuse = False
     , _rggFileId = pRggFileId_
     , _rggRevisionId = pRggRevisionId_
@@ -120,7 +120,7 @@ instance GoogleRequest RevisionsGet where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient RevisionsGet{..}
+        requestClient RevisionsGet'{..}
           = go _rggFileId _rggRevisionId
               (Just _rggAcknowledgeAbuse)
               (Just AltJSON)
@@ -134,7 +134,7 @@ instance GoogleRequest (MediaDownload RevisionsGet)
         type Rs (MediaDownload RevisionsGet) = Stream
         type Scopes (MediaDownload RevisionsGet) =
              Scopes RevisionsGet
-        requestClient (MediaDownload RevisionsGet{..})
+        requestClient (MediaDownload RevisionsGet'{..})
           = go _rggFileId _rggRevisionId
               (Just _rggAcknowledgeAbuse)
               (Just AltMedia)

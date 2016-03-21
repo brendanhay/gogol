@@ -53,7 +53,7 @@ type LineitemsUploadlineitemsResource =
 -- | Uploads line items in CSV format.
 --
 -- /See:/ 'lineitemsUploadlineitems' smart constructor.
-newtype LineitemsUploadlineitems = LineitemsUploadlineitems
+newtype LineitemsUploadlineitems = LineitemsUploadlineitems'
     { _luPayload :: UploadLineItemsRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ lineitemsUploadlineitems
     :: UploadLineItemsRequest -- ^ 'luPayload'
     -> LineitemsUploadlineitems
 lineitemsUploadlineitems pLuPayload_ =
-    LineitemsUploadlineitems
+    LineitemsUploadlineitems'
     { _luPayload = pLuPayload_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest LineitemsUploadlineitems where
         type Rs LineitemsUploadlineitems =
              UploadLineItemsResponse
         type Scopes LineitemsUploadlineitems = '[]
-        requestClient LineitemsUploadlineitems{..}
+        requestClient LineitemsUploadlineitems'{..}
           = go (Just AltJSON) _luPayload doubleClickBidsService
           where go
                   = buildClient

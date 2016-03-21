@@ -63,7 +63,7 @@ type TimelineAttachmentsGetResource =
 -- | Retrieves an attachment on a timeline item by item ID and attachment ID.
 --
 -- /See:/ 'timelineAttachmentsGet' smart constructor.
-data TimelineAttachmentsGet = TimelineAttachmentsGet
+data TimelineAttachmentsGet = TimelineAttachmentsGet'
     { _tagItemId       :: !Text
     , _tagAttachmentId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ timelineAttachmentsGet
     -> Text -- ^ 'tagAttachmentId'
     -> TimelineAttachmentsGet
 timelineAttachmentsGet pTagItemId_ pTagAttachmentId_ =
-    TimelineAttachmentsGet
+    TimelineAttachmentsGet'
     { _tagItemId = pTagItemId_
     , _tagAttachmentId = pTagAttachmentId_
     }
@@ -100,7 +100,7 @@ instance GoogleRequest TimelineAttachmentsGet where
         type Rs TimelineAttachmentsGet = Attachment
         type Scopes TimelineAttachmentsGet =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineAttachmentsGet{..}
+        requestClient TimelineAttachmentsGet'{..}
           = go _tagItemId _tagAttachmentId (Just AltJSON)
               mirrorService
           where go :<|> _
@@ -115,7 +115,7 @@ instance GoogleRequest
         type Scopes (MediaDownload TimelineAttachmentsGet) =
              Scopes TimelineAttachmentsGet
         requestClient
-          (MediaDownload TimelineAttachmentsGet{..})
+          (MediaDownload TimelineAttachmentsGet'{..})
           = go _tagItemId _tagAttachmentId (Just AltMedia)
               mirrorService
           where _ :<|> go

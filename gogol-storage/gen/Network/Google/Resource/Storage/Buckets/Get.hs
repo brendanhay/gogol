@@ -58,7 +58,7 @@ type BucketsGetResource =
 -- | Returns metadata for the specified bucket.
 --
 -- /See:/ 'bucketsGet' smart constructor.
-data BucketsGet = BucketsGet
+data BucketsGet = BucketsGet'
     { _bgIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _bgBucket                   :: !Text
     , _bgIfMetagenerationNotMatch :: !(Maybe (Textual Int64))
@@ -80,7 +80,7 @@ bucketsGet
     :: Text -- ^ 'bgBucket'
     -> BucketsGet
 bucketsGet pBgBucket_ =
-    BucketsGet
+    BucketsGet'
     { _bgIfMetagenerationMatch = Nothing
     , _bgBucket = pBgBucket_
     , _bgIfMetagenerationNotMatch = Nothing
@@ -120,7 +120,7 @@ instance GoogleRequest BucketsGet where
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_only",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient BucketsGet{..}
+        requestClient BucketsGet'{..}
           = go _bgBucket _bgIfMetagenerationMatch
               _bgIfMetagenerationNotMatch
               _bgProjection

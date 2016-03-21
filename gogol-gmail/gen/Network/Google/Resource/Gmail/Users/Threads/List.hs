@@ -63,7 +63,7 @@ type UsersThreadsListResource =
 -- | Lists the threads in the user\'s mailbox.
 --
 -- /See:/ 'usersThreadsList' smart constructor.
-data UsersThreadsList = UsersThreadsList
+data UsersThreadsList = UsersThreadsList'
     { _utlQ                :: !(Maybe Text)
     , _utlUserId           :: !Text
     , _utlIncludeSpamTrash :: !Bool
@@ -90,7 +90,7 @@ data UsersThreadsList = UsersThreadsList
 usersThreadsList
     :: UsersThreadsList
 usersThreadsList =
-    UsersThreadsList
+    UsersThreadsList'
     { _utlQ = Nothing
     , _utlUserId = "me"
     , _utlIncludeSpamTrash = False
@@ -143,7 +143,7 @@ instance GoogleRequest UsersThreadsList where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersThreadsList{..}
+        requestClient UsersThreadsList'{..}
           = go _utlUserId _utlQ (Just _utlIncludeSpamTrash)
               (_utlLabelIds ^. _Default)
               _utlPageToken

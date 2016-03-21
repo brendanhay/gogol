@@ -63,7 +63,7 @@ type ManagementGoalsPatchResource =
 -- | Updates an existing goal. This method supports patch semantics.
 --
 -- /See:/ 'managementGoalsPatch' smart constructor.
-data ManagementGoalsPatch = ManagementGoalsPatch
+data ManagementGoalsPatch = ManagementGoalsPatch'
     { _mgpWebPropertyId :: !Text
     , _mgpGoalId        :: !Text
     , _mgpProFileId     :: !Text
@@ -92,7 +92,7 @@ managementGoalsPatch
     -> Text -- ^ 'mgpAccountId'
     -> ManagementGoalsPatch
 managementGoalsPatch pMgpWebPropertyId_ pMgpGoalId_ pMgpProFileId_ pMgpPayload_ pMgpAccountId_ =
-    ManagementGoalsPatch
+    ManagementGoalsPatch'
     { _mgpWebPropertyId = pMgpWebPropertyId_
     , _mgpGoalId = pMgpGoalId_
     , _mgpProFileId = pMgpProFileId_
@@ -130,7 +130,7 @@ instance GoogleRequest ManagementGoalsPatch where
         type Rs ManagementGoalsPatch = Goal
         type Scopes ManagementGoalsPatch =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementGoalsPatch{..}
+        requestClient ManagementGoalsPatch'{..}
           = go _mgpAccountId _mgpWebPropertyId _mgpProFileId
               _mgpGoalId
               (Just AltJSON)

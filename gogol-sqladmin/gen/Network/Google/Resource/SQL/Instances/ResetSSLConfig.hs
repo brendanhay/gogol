@@ -61,7 +61,7 @@ type InstancesResetSSLConfigResource =
 -- will need to call this once to set a server certificate.
 --
 -- /See:/ 'instancesResetSSLConfig' smart constructor.
-data InstancesResetSSLConfig = InstancesResetSSLConfig
+data InstancesResetSSLConfig = InstancesResetSSLConfig'
     { _irscProject  :: !Text
     , _irscInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ instancesResetSSLConfig
     -> Text -- ^ 'irscInstance'
     -> InstancesResetSSLConfig
 instancesResetSSLConfig pIrscProject_ pIrscInstance_ =
-    InstancesResetSSLConfig
+    InstancesResetSSLConfig'
     { _irscProject = pIrscProject_
     , _irscInstance = pIrscInstance_
     }
@@ -98,7 +98,7 @@ instance GoogleRequest InstancesResetSSLConfig where
         type Scopes InstancesResetSSLConfig =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient InstancesResetSSLConfig{..}
+        requestClient InstancesResetSSLConfig'{..}
           = go _irscProject _irscInstance (Just AltJSON)
               sQLAdminService
           where go

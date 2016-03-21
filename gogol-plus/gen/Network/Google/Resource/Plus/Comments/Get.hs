@@ -51,7 +51,7 @@ type CommentsGetResource =
 -- | Get a comment.
 --
 -- /See:/ 'commentsGet' smart constructor.
-newtype CommentsGet = CommentsGet
+newtype CommentsGet = CommentsGet'
     { _cgCommentId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ commentsGet
     :: Text -- ^ 'cgCommentId'
     -> CommentsGet
 commentsGet pCgCommentId_ =
-    CommentsGet
+    CommentsGet'
     { _cgCommentId = pCgCommentId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest CommentsGet where
         type Scopes CommentsGet =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient CommentsGet{..}
+        requestClient CommentsGet'{..}
           = go _cgCommentId (Just AltJSON) plusService
           where go
                   = buildClient (Proxy :: Proxy CommentsGetResource)

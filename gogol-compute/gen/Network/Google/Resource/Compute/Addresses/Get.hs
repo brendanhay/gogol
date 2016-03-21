@@ -57,7 +57,7 @@ type AddressesGetResource =
 -- | Returns the specified address resource.
 --
 -- /See:/ 'addressesGet' smart constructor.
-data AddressesGet = AddressesGet
+data AddressesGet = AddressesGet'
     { _addProject :: !Text
     , _addAddress :: !Text
     , _addRegion  :: !Text
@@ -78,7 +78,7 @@ addressesGet
     -> Text -- ^ 'addRegion'
     -> AddressesGet
 addressesGet pAddProject_ pAddAddress_ pAddRegion_ =
-    AddressesGet
+    AddressesGet'
     { _addProject = pAddProject_
     , _addAddress = pAddAddress_
     , _addRegion = pAddRegion_
@@ -105,7 +105,7 @@ instance GoogleRequest AddressesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient AddressesGet{..}
+        requestClient AddressesGet'{..}
           = go _addProject _addRegion _addAddress
               (Just AltJSON)
               computeService

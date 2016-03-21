@@ -54,7 +54,7 @@ type VideosReportAbuseResource =
 -- | Report abuse for a video.
 --
 -- /See:/ 'videosReportAbuse' smart constructor.
-data VideosReportAbuse = VideosReportAbuse
+data VideosReportAbuse = VideosReportAbuse'
     { _vraPayload                :: !VideoAbuseReport
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ videosReportAbuse
     :: VideoAbuseReport -- ^ 'vraPayload'
     -> VideosReportAbuse
 videosReportAbuse pVraPayload_ =
-    VideosReportAbuse
+    VideosReportAbuse'
     { _vraPayload = pVraPayload_
     , _vraOnBehalfOfContentOwner = Nothing
     }
@@ -101,7 +101,7 @@ instance GoogleRequest VideosReportAbuse where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosReportAbuse{..}
+        requestClient VideosReportAbuse'{..}
           = go _vraOnBehalfOfContentOwner (Just AltJSON)
               _vraPayload
               youTubeService

@@ -57,7 +57,7 @@ type RepliesDeleteResource =
 -- | Deletes a reply.
 --
 -- /See:/ 'repliesDelete' smart constructor.
-data RepliesDelete = RepliesDelete
+data RepliesDelete = RepliesDelete'
     { _rdReplyId   :: !Text
     , _rdFileId    :: !Text
     , _rdCommentId :: !Text
@@ -78,7 +78,7 @@ repliesDelete
     -> Text -- ^ 'rdCommentId'
     -> RepliesDelete
 repliesDelete pRdReplyId_ pRdFileId_ pRdCommentId_ =
-    RepliesDelete
+    RepliesDelete'
     { _rdReplyId = pRdReplyId_
     , _rdFileId = pRdFileId_
     , _rdCommentId = pRdCommentId_
@@ -103,7 +103,7 @@ instance GoogleRequest RepliesDelete where
         type Scopes RepliesDelete =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient RepliesDelete{..}
+        requestClient RepliesDelete'{..}
           = go _rdFileId _rdCommentId _rdReplyId (Just AltJSON)
               driveService
           where go

@@ -54,7 +54,7 @@ type TurnBasedMatchesDismissResource =
 -- show up in the list and will not generate notifications.
 --
 -- /See:/ 'turnBasedMatchesDismiss' smart constructor.
-newtype TurnBasedMatchesDismiss = TurnBasedMatchesDismiss
+newtype TurnBasedMatchesDismiss = TurnBasedMatchesDismiss'
     { _tMatchId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ turnBasedMatchesDismiss
     :: Text -- ^ 'tMatchId'
     -> TurnBasedMatchesDismiss
 turnBasedMatchesDismiss pTMatchId_ =
-    TurnBasedMatchesDismiss
+    TurnBasedMatchesDismiss'
     { _tMatchId = pTMatchId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest TurnBasedMatchesDismiss where
         type Scopes TurnBasedMatchesDismiss =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesDismiss{..}
+        requestClient TurnBasedMatchesDismiss'{..}
           = go _tMatchId (Just AltJSON) gamesService
           where go
                   = buildClient

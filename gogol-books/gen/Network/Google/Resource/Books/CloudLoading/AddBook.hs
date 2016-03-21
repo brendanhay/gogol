@@ -59,7 +59,7 @@ type CloudLoadingAddBookResource =
 -- |
 --
 -- /See:/ 'cloudLoadingAddBook' smart constructor.
-data CloudLoadingAddBook = CloudLoadingAddBook
+data CloudLoadingAddBook = CloudLoadingAddBook'
     { _clabMimeType          :: !(Maybe Text)
     , _clabUploadClientToken :: !(Maybe Text)
     , _clabName              :: !(Maybe Text)
@@ -80,7 +80,7 @@ data CloudLoadingAddBook = CloudLoadingAddBook
 cloudLoadingAddBook
     :: CloudLoadingAddBook
 cloudLoadingAddBook =
-    CloudLoadingAddBook
+    CloudLoadingAddBook'
     { _clabMimeType = Nothing
     , _clabUploadClientToken = Nothing
     , _clabName = Nothing
@@ -113,7 +113,7 @@ instance GoogleRequest CloudLoadingAddBook where
              BooksCloudLoadingResource
         type Scopes CloudLoadingAddBook =
              '["https://www.googleapis.com/auth/books"]
-        requestClient CloudLoadingAddBook{..}
+        requestClient CloudLoadingAddBook'{..}
           = go _clabMimeType _clabUploadClientToken _clabName
               _clabDriveDocumentId
               (Just AltJSON)

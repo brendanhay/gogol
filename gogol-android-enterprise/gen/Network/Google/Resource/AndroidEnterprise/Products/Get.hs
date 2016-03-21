@@ -56,7 +56,7 @@ type ProductsGetResource =
 -- | Retrieves details of a product for display to an enterprise admin.
 --
 -- /See:/ 'productsGet' smart constructor.
-data ProductsGet = ProductsGet
+data ProductsGet = ProductsGet'
     { _proEnterpriseId :: !Text
     , _proLanguage     :: !(Maybe Text)
     , _proProductId    :: !Text
@@ -76,7 +76,7 @@ productsGet
     -> Text -- ^ 'proProductId'
     -> ProductsGet
 productsGet pProEnterpriseId_ pProProductId_ =
-    ProductsGet
+    ProductsGet'
     { _proEnterpriseId = pProEnterpriseId_
     , _proLanguage = Nothing
     , _proProductId = pProProductId_
@@ -103,7 +103,7 @@ instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
         type Scopes ProductsGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient ProductsGet{..}
+        requestClient ProductsGet'{..}
           = go _proEnterpriseId _proProductId _proLanguage
               (Just AltJSON)
               androidEnterpriseService

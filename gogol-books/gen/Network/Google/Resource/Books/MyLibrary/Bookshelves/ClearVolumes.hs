@@ -55,7 +55,7 @@ type MyLibraryBookshelvesClearVolumesResource =
 -- | Clears all volumes from a bookshelf.
 --
 -- /See:/ 'myLibraryBookshelvesClearVolumes' smart constructor.
-data MyLibraryBookshelvesClearVolumes = MyLibraryBookshelvesClearVolumes
+data MyLibraryBookshelvesClearVolumes = MyLibraryBookshelvesClearVolumes'
     { _mlbcvShelf  :: !Text
     , _mlbcvSource :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ myLibraryBookshelvesClearVolumes
     :: Text -- ^ 'mlbcvShelf'
     -> MyLibraryBookshelvesClearVolumes
 myLibraryBookshelvesClearVolumes pMlbcvShelf_ =
-    MyLibraryBookshelvesClearVolumes
+    MyLibraryBookshelvesClearVolumes'
     { _mlbcvShelf = pMlbcvShelf_
     , _mlbcvSource = Nothing
     }
@@ -91,7 +91,7 @@ instance GoogleRequest
         type Rs MyLibraryBookshelvesClearVolumes = ()
         type Scopes MyLibraryBookshelvesClearVolumes =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryBookshelvesClearVolumes{..}
+        requestClient MyLibraryBookshelvesClearVolumes'{..}
           = go _mlbcvShelf _mlbcvSource (Just AltJSON)
               booksService
           where go

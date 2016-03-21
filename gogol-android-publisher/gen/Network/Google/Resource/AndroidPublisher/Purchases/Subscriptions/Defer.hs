@@ -63,7 +63,7 @@ type PurchasesSubscriptionsDeferResource =
 -- expiration time.
 --
 -- /See:/ 'purchasesSubscriptionsDefer' smart constructor.
-data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer
+data PurchasesSubscriptionsDefer = PurchasesSubscriptionsDefer'
     { _psdPackageName    :: !Text
     , _psdToken          :: !Text
     , _psdPayload        :: !SubscriptionPurchasesDeferRequest
@@ -88,7 +88,7 @@ purchasesSubscriptionsDefer
     -> Text -- ^ 'psdSubscriptionId'
     -> PurchasesSubscriptionsDefer
 purchasesSubscriptionsDefer pPsdPackageName_ pPsdToken_ pPsdPayload_ pPsdSubscriptionId_ =
-    PurchasesSubscriptionsDefer
+    PurchasesSubscriptionsDefer'
     { _psdPackageName = pPsdPackageName_
     , _psdToken = pPsdToken_
     , _psdPayload = pPsdPayload_
@@ -124,7 +124,7 @@ instance GoogleRequest PurchasesSubscriptionsDefer
              SubscriptionPurchasesDeferResponse
         type Scopes PurchasesSubscriptionsDefer =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient PurchasesSubscriptionsDefer{..}
+        requestClient PurchasesSubscriptionsDefer'{..}
           = go _psdPackageName _psdSubscriptionId _psdToken
               (Just AltJSON)
               _psdPayload

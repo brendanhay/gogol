@@ -71,7 +71,7 @@ type ProjectsGetBillingInfoResource =
 -- ).
 --
 -- /See:/ 'projectsGetBillingInfo' smart constructor.
-data ProjectsGetBillingInfo = ProjectsGetBillingInfo
+data ProjectsGetBillingInfo = ProjectsGetBillingInfo'
     { _pgbiXgafv          :: !(Maybe Text)
     , _pgbiUploadProtocol :: !(Maybe Text)
     , _pgbiPp             :: !Bool
@@ -105,7 +105,7 @@ projectsGetBillingInfo
     :: Text -- ^ 'pgbiName'
     -> ProjectsGetBillingInfo
 projectsGetBillingInfo pPgbiName_ =
-    ProjectsGetBillingInfo
+    ProjectsGetBillingInfo'
     { _pgbiXgafv = Nothing
     , _pgbiUploadProtocol = Nothing
     , _pgbiPp = True
@@ -163,7 +163,7 @@ instance GoogleRequest ProjectsGetBillingInfo where
         type Rs ProjectsGetBillingInfo = ProjectBillingInfo
         type Scopes ProjectsGetBillingInfo =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsGetBillingInfo{..}
+        requestClient ProjectsGetBillingInfo'{..}
           = go _pgbiName _pgbiXgafv _pgbiUploadProtocol
               (Just _pgbiPp)
               _pgbiAccessToken

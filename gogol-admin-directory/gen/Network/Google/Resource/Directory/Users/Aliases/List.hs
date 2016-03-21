@@ -55,7 +55,7 @@ type UsersAliasesListResource =
 -- | List all aliases for a user
 --
 -- /See:/ 'usersAliasesList' smart constructor.
-data UsersAliasesList = UsersAliasesList
+data UsersAliasesList = UsersAliasesList'
     { _ualEvent   :: !(Maybe UsersAliasesListEvent)
     , _ualUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersAliasesList
     :: Text -- ^ 'ualUserKey'
     -> UsersAliasesList
 usersAliasesList pUalUserKey_ =
-    UsersAliasesList
+    UsersAliasesList'
     { _ualEvent = Nothing
     , _ualUserKey = pUalUserKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersAliasesList where
                "https://www.googleapis.com/auth/admin.directory.user.alias",
                "https://www.googleapis.com/auth/admin.directory.user.alias.readonly",
                "https://www.googleapis.com/auth/admin.directory.user.readonly"]
-        requestClient UsersAliasesList{..}
+        requestClient UsersAliasesList'{..}
           = go _ualUserKey _ualEvent (Just AltJSON)
               directoryService
           where go

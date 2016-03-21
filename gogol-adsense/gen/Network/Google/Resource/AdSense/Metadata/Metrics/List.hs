@@ -50,21 +50,21 @@ type MetadataMetricsListResource =
 --
 -- /See:/ 'metadataMetricsList' smart constructor.
 data MetadataMetricsList =
-    MetadataMetricsList
+    MetadataMetricsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataMetricsList' with the minimum fields required to make a request.
 --
 metadataMetricsList
     :: MetadataMetricsList
-metadataMetricsList = MetadataMetricsList
+metadataMetricsList = MetadataMetricsList'
 
 instance GoogleRequest MetadataMetricsList where
         type Rs MetadataMetricsList = Metadata
         type Scopes MetadataMetricsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient MetadataMetricsList{}
+        requestClient MetadataMetricsList'{}
           = go (Just AltJSON) adSenseService
           where go
                   = buildClient

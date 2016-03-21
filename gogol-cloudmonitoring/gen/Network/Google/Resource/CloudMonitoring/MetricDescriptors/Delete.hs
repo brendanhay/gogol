@@ -55,7 +55,7 @@ type MetricDescriptorsDeleteResource =
 -- | Delete an existing metric.
 --
 -- /See:/ 'metricDescriptorsDelete' smart constructor.
-data MetricDescriptorsDelete = MetricDescriptorsDelete
+data MetricDescriptorsDelete = MetricDescriptorsDelete'
     { _mddProject :: !Text
     , _mddMetric  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ metricDescriptorsDelete
     -> Text -- ^ 'mddMetric'
     -> MetricDescriptorsDelete
 metricDescriptorsDelete pMddProject_ pMddMetric_ =
-    MetricDescriptorsDelete
+    MetricDescriptorsDelete'
     { _mddProject = pMddProject_
     , _mddMetric = pMddMetric_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest MetricDescriptorsDelete where
         type Scopes MetricDescriptorsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient MetricDescriptorsDelete{..}
+        requestClient MetricDescriptorsDelete'{..}
           = go _mddProject _mddMetric (Just AltJSON)
               cloudMonitoringService
           where go

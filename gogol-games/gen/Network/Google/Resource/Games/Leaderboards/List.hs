@@ -56,7 +56,7 @@ type LeaderboardsListResource =
 -- | Lists all the leaderboard metadata for your application.
 --
 -- /See:/ 'leaderboardsList' smart constructor.
-data LeaderboardsList = LeaderboardsList
+data LeaderboardsList = LeaderboardsList'
     { _llLanguage   :: !(Maybe Text)
     , _llPageToken  :: !(Maybe Text)
     , _llMaxResults :: !(Maybe (Textual Int32))
@@ -74,7 +74,7 @@ data LeaderboardsList = LeaderboardsList
 leaderboardsList
     :: LeaderboardsList
 leaderboardsList =
-    LeaderboardsList
+    LeaderboardsList'
     { _llLanguage = Nothing
     , _llPageToken = Nothing
     , _llMaxResults = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest LeaderboardsList where
         type Scopes LeaderboardsList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient LeaderboardsList{..}
+        requestClient LeaderboardsList'{..}
           = go _llLanguage _llPageToken _llMaxResults
               (Just AltJSON)
               gamesService

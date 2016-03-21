@@ -57,7 +57,7 @@ type SchemasUpdateResource =
 -- | Update schema
 --
 -- /See:/ 'schemasUpdate' smart constructor.
-data SchemasUpdate = SchemasUpdate
+data SchemasUpdate = SchemasUpdate'
     { _suPayload    :: !Schema
     , _suCustomerId :: !Text
     , _suSchemaKey  :: !Text
@@ -78,7 +78,7 @@ schemasUpdate
     -> Text -- ^ 'suSchemaKey'
     -> SchemasUpdate
 schemasUpdate pSuPayload_ pSuCustomerId_ pSuSchemaKey_ =
-    SchemasUpdate
+    SchemasUpdate'
     { _suPayload = pSuPayload_
     , _suCustomerId = pSuCustomerId_
     , _suSchemaKey = pSuSchemaKey_
@@ -103,7 +103,7 @@ instance GoogleRequest SchemasUpdate where
         type Rs SchemasUpdate = Schema
         type Scopes SchemasUpdate =
              '["https://www.googleapis.com/auth/admin.directory.userschema"]
-        requestClient SchemasUpdate{..}
+        requestClient SchemasUpdate'{..}
           = go _suCustomerId _suSchemaKey (Just AltJSON)
               _suPayload
               directoryService

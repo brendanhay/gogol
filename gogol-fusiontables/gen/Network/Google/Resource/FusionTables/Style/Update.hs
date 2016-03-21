@@ -57,7 +57,7 @@ type StyleUpdateResource =
 -- | Updates an existing style.
 --
 -- /See:/ 'styleUpdate' smart constructor.
-data StyleUpdate = StyleUpdate
+data StyleUpdate = StyleUpdate'
     { _suPayload :: !StyleSetting
     , _suStyleId :: !(Textual Int32)
     , _suTableId :: !Text
@@ -78,7 +78,7 @@ styleUpdate
     -> Text -- ^ 'suTableId'
     -> StyleUpdate
 styleUpdate pSuPayload_ pSuStyleId_ pSuTableId_ =
-    StyleUpdate
+    StyleUpdate'
     { _suPayload = pSuPayload_
     , _suStyleId = _Coerce # pSuStyleId_
     , _suTableId = pSuTableId_
@@ -104,7 +104,7 @@ instance GoogleRequest StyleUpdate where
         type Rs StyleUpdate = StyleSetting
         type Scopes StyleUpdate =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient StyleUpdate{..}
+        requestClient StyleUpdate'{..}
           = go _suTableId _suStyleId (Just AltJSON) _suPayload
               fusionTablesService
           where go

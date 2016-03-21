@@ -58,7 +58,7 @@ type ManagementAccountUserLinksUpdateResource =
 -- | Updates permissions for an existing user on the given account.
 --
 -- /See:/ 'managementAccountUserLinksUpdate' smart constructor.
-data ManagementAccountUserLinksUpdate = ManagementAccountUserLinksUpdate
+data ManagementAccountUserLinksUpdate = ManagementAccountUserLinksUpdate'
     { _mauluPayload   :: !EntityUserLink
     , _mauluAccountId :: !Text
     , _mauluLinkId    :: !Text
@@ -79,7 +79,7 @@ managementAccountUserLinksUpdate
     -> Text -- ^ 'mauluLinkId'
     -> ManagementAccountUserLinksUpdate
 managementAccountUserLinksUpdate pMauluPayload_ pMauluAccountId_ pMauluLinkId_ =
-    ManagementAccountUserLinksUpdate
+    ManagementAccountUserLinksUpdate'
     { _mauluPayload = pMauluPayload_
     , _mauluAccountId = pMauluAccountId_
     , _mauluLinkId = pMauluLinkId_
@@ -107,7 +107,7 @@ instance GoogleRequest
              EntityUserLink
         type Scopes ManagementAccountUserLinksUpdate =
              '["https://www.googleapis.com/auth/analytics.manage.users"]
-        requestClient ManagementAccountUserLinksUpdate{..}
+        requestClient ManagementAccountUserLinksUpdate'{..}
           = go _mauluAccountId _mauluLinkId (Just AltJSON)
               _mauluPayload
               analyticsService

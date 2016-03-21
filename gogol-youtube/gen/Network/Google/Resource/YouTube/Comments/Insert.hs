@@ -55,7 +55,7 @@ type CommentsInsertResource =
 -- comment, use the commentThreads.insert method.
 --
 -- /See:/ 'commentsInsert' smart constructor.
-data CommentsInsert = CommentsInsert
+data CommentsInsert = CommentsInsert'
     { _comPart    :: !Text
     , _comPayload :: !Comment
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ commentsInsert
     -> Comment -- ^ 'comPayload'
     -> CommentsInsert
 commentsInsert pComPart_ pComPayload_ =
-    CommentsInsert
+    CommentsInsert'
     { _comPart = pComPart_
     , _comPayload = pComPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CommentsInsert where
         type Rs CommentsInsert = Comment
         type Scopes CommentsInsert =
              '["https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient CommentsInsert{..}
+        requestClient CommentsInsert'{..}
           = go (Just _comPart) (Just AltJSON) _comPayload
               youTubeService
           where go

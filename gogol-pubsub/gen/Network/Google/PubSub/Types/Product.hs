@@ -23,7 +23,7 @@ import           Network.Google.PubSub.Types.Sum
 -- | Configuration for a push delivery endpoint.
 --
 -- /See:/ 'pushConfig' smart constructor.
-data PushConfig = PushConfig
+data PushConfig = PushConfig'
     { _pcAttributes   :: !(Maybe PushConfigAttributes)
     , _pcPushEndpoint :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data PushConfig = PushConfig
 pushConfig
     :: PushConfig
 pushConfig =
-    PushConfig
+    PushConfig'
     { _pcAttributes = Nothing
     , _pcPushEndpoint = Nothing
     }
@@ -73,11 +73,11 @@ instance FromJSON PushConfig where
         parseJSON
           = withObject "PushConfig"
               (\ o ->
-                 PushConfig <$>
+                 PushConfig' <$>
                    (o .:? "attributes") <*> (o .:? "pushEndpoint"))
 
 instance ToJSON PushConfig where
-        toJSON PushConfig{..}
+        toJSON PushConfig'{..}
           = object
               (catMaybes
                  [("attributes" .=) <$> _pcAttributes,
@@ -86,7 +86,7 @@ instance ToJSON PushConfig where
 -- | A message and its corresponding acknowledgment ID.
 --
 -- /See:/ 'receivedMessage' smart constructor.
-data ReceivedMessage = ReceivedMessage
+data ReceivedMessage = ReceivedMessage'
     { _rmAckId   :: !(Maybe Text)
     , _rmMessage :: !(Maybe PubsubMessage)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -101,7 +101,7 @@ data ReceivedMessage = ReceivedMessage
 receivedMessage
     :: ReceivedMessage
 receivedMessage =
-    ReceivedMessage
+    ReceivedMessage'
     { _rmAckId = Nothing
     , _rmMessage = Nothing
     }
@@ -119,11 +119,11 @@ instance FromJSON ReceivedMessage where
         parseJSON
           = withObject "ReceivedMessage"
               (\ o ->
-                 ReceivedMessage <$>
+                 ReceivedMessage' <$>
                    (o .:? "ackId") <*> (o .:? "message"))
 
 instance ToJSON ReceivedMessage where
-        toJSON ReceivedMessage{..}
+        toJSON ReceivedMessage'{..}
           = object
               (catMaybes
                  [("ackId" .=) <$> _rmAckId,
@@ -132,7 +132,7 @@ instance ToJSON ReceivedMessage where
 -- | Request for the ModifyAckDeadline method.
 --
 -- /See:/ 'modifyAckDeadlineRequest' smart constructor.
-data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
+data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest'
     { _madrAckIds             :: !(Maybe [Text])
     , _madrAckDeadlineSeconds :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ data ModifyAckDeadlineRequest = ModifyAckDeadlineRequest
 modifyAckDeadlineRequest
     :: ModifyAckDeadlineRequest
 modifyAckDeadlineRequest =
-    ModifyAckDeadlineRequest
+    ModifyAckDeadlineRequest'
     { _madrAckIds = Nothing
     , _madrAckDeadlineSeconds = Nothing
     }
@@ -174,12 +174,12 @@ instance FromJSON ModifyAckDeadlineRequest where
         parseJSON
           = withObject "ModifyAckDeadlineRequest"
               (\ o ->
-                 ModifyAckDeadlineRequest <$>
+                 ModifyAckDeadlineRequest' <$>
                    (o .:? "ackIds" .!= mempty) <*>
                      (o .:? "ackDeadlineSeconds"))
 
 instance ToJSON ModifyAckDeadlineRequest where
-        toJSON ModifyAckDeadlineRequest{..}
+        toJSON ModifyAckDeadlineRequest'{..}
           = object
               (catMaybes
                  [("ackIds" .=) <$> _madrAckIds,
@@ -189,7 +189,7 @@ instance ToJSON ModifyAckDeadlineRequest where
 -- | Request for the ModifyPushConfig method.
 --
 -- /See:/ 'modifyPushConfigRequest' smart constructor.
-newtype ModifyPushConfigRequest = ModifyPushConfigRequest
+newtype ModifyPushConfigRequest = ModifyPushConfigRequest'
     { _mpcrPushConfig :: Maybe PushConfig
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -201,7 +201,7 @@ newtype ModifyPushConfigRequest = ModifyPushConfigRequest
 modifyPushConfigRequest
     :: ModifyPushConfigRequest
 modifyPushConfigRequest =
-    ModifyPushConfigRequest
+    ModifyPushConfigRequest'
     { _mpcrPushConfig = Nothing
     }
 
@@ -218,10 +218,10 @@ instance FromJSON ModifyPushConfigRequest where
         parseJSON
           = withObject "ModifyPushConfigRequest"
               (\ o ->
-                 ModifyPushConfigRequest <$> (o .:? "pushConfig"))
+                 ModifyPushConfigRequest' <$> (o .:? "pushConfig"))
 
 instance ToJSON ModifyPushConfigRequest where
-        toJSON ModifyPushConfigRequest{..}
+        toJSON ModifyPushConfigRequest'{..}
           = object
               (catMaybes [("pushConfig" .=) <$> _mpcrPushConfig])
 
@@ -233,17 +233,17 @@ instance ToJSON ModifyPushConfigRequest where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -253,7 +253,7 @@ instance ToJSON Empty where
 -- attribute.
 --
 -- /See:/ 'pubsubMessage' smart constructor.
-data PubsubMessage = PubsubMessage
+data PubsubMessage = PubsubMessage'
     { _pmData        :: !(Maybe (Textual Word8))
     , _pmPublishTime :: !(Maybe Text)
     , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
@@ -274,7 +274,7 @@ data PubsubMessage = PubsubMessage
 pubsubMessage
     :: PubsubMessage
 pubsubMessage =
-    PubsubMessage
+    PubsubMessage'
     { _pmData = Nothing
     , _pmPublishTime = Nothing
     , _pmAttributes = Nothing
@@ -314,13 +314,13 @@ instance FromJSON PubsubMessage where
         parseJSON
           = withObject "PubsubMessage"
               (\ o ->
-                 PubsubMessage <$>
+                 PubsubMessage' <$>
                    (o .:? "data") <*> (o .:? "publishTime") <*>
                      (o .:? "attributes")
                      <*> (o .:? "messageId"))
 
 instance ToJSON PubsubMessage where
-        toJSON PubsubMessage{..}
+        toJSON PubsubMessage'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _pmData,
@@ -331,7 +331,7 @@ instance ToJSON PubsubMessage where
 -- | Response for the \`ListTopicSubscriptions\` method.
 --
 -- /See:/ 'listTopicSubscriptionsResponse' smart constructor.
-data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse
+data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse'
     { _ltsrNextPageToken :: !(Maybe Text)
     , _ltsrSubscriptions :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -346,7 +346,7 @@ data ListTopicSubscriptionsResponse = ListTopicSubscriptionsResponse
 listTopicSubscriptionsResponse
     :: ListTopicSubscriptionsResponse
 listTopicSubscriptionsResponse =
-    ListTopicSubscriptionsResponse
+    ListTopicSubscriptionsResponse'
     { _ltsrNextPageToken = Nothing
     , _ltsrSubscriptions = Nothing
     }
@@ -372,12 +372,12 @@ instance FromJSON ListTopicSubscriptionsResponse
         parseJSON
           = withObject "ListTopicSubscriptionsResponse"
               (\ o ->
-                 ListTopicSubscriptionsResponse <$>
+                 ListTopicSubscriptionsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "subscriptions" .!= mempty))
 
 instance ToJSON ListTopicSubscriptionsResponse where
-        toJSON ListTopicSubscriptionsResponse{..}
+        toJSON ListTopicSubscriptionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltsrNextPageToken,
@@ -386,7 +386,7 @@ instance ToJSON ListTopicSubscriptionsResponse where
 -- | Response for the \`ListTopics\` method.
 --
 -- /See:/ 'listTopicsResponse' smart constructor.
-data ListTopicsResponse = ListTopicsResponse
+data ListTopicsResponse = ListTopicsResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTopics        :: !(Maybe [Topic])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -401,7 +401,7 @@ data ListTopicsResponse = ListTopicsResponse
 listTopicsResponse
     :: ListTopicsResponse
 listTopicsResponse =
-    ListTopicsResponse
+    ListTopicsResponse'
     { _ltrNextPageToken = Nothing
     , _ltrTopics = Nothing
     }
@@ -424,12 +424,12 @@ instance FromJSON ListTopicsResponse where
         parseJSON
           = withObject "ListTopicsResponse"
               (\ o ->
-                 ListTopicsResponse <$>
+                 ListTopicsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "topics" .!= mempty))
 
 instance ToJSON ListTopicsResponse where
-        toJSON ListTopicsResponse{..}
+        toJSON ListTopicsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
@@ -438,7 +438,7 @@ instance ToJSON ListTopicsResponse where
 -- | Response for the \`Pull\` method.
 --
 -- /See:/ 'pullResponse' smart constructor.
-newtype PullResponse = PullResponse
+newtype PullResponse = PullResponse'
     { _prReceivedMessages :: Maybe [ReceivedMessage]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -450,7 +450,7 @@ newtype PullResponse = PullResponse
 pullResponse
     :: PullResponse
 pullResponse =
-    PullResponse
+    PullResponse'
     { _prReceivedMessages = Nothing
     }
 
@@ -469,11 +469,11 @@ instance FromJSON PullResponse where
         parseJSON
           = withObject "PullResponse"
               (\ o ->
-                 PullResponse <$>
+                 PullResponse' <$>
                    (o .:? "receivedMessages" .!= mempty))
 
 instance ToJSON PullResponse where
-        toJSON PullResponse{..}
+        toJSON PullResponse'{..}
           = object
               (catMaybes
                  [("receivedMessages" .=) <$> _prReceivedMessages])
@@ -481,7 +481,7 @@ instance ToJSON PullResponse where
 -- | Request message for \`SetIamPolicy\` method.
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
-newtype SetIAMPolicyRequest = SetIAMPolicyRequest
+newtype SetIAMPolicyRequest = SetIAMPolicyRequest'
     { _siprPolicy :: Maybe Policy
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -493,7 +493,7 @@ newtype SetIAMPolicyRequest = SetIAMPolicyRequest
 setIAMPolicyRequest
     :: SetIAMPolicyRequest
 setIAMPolicyRequest =
-    SetIAMPolicyRequest
+    SetIAMPolicyRequest'
     { _siprPolicy = Nothing
     }
 
@@ -508,16 +508,16 @@ siprPolicy
 instance FromJSON SetIAMPolicyRequest where
         parseJSON
           = withObject "SetIAMPolicyRequest"
-              (\ o -> SetIAMPolicyRequest <$> (o .:? "policy"))
+              (\ o -> SetIAMPolicyRequest' <$> (o .:? "policy"))
 
 instance ToJSON SetIAMPolicyRequest where
-        toJSON SetIAMPolicyRequest{..}
+        toJSON SetIAMPolicyRequest'{..}
           = object (catMaybes [("policy" .=) <$> _siprPolicy])
 
 -- | A topic resource.
 --
 -- /See:/ 'topic' smart constructor.
-newtype Topic = Topic
+newtype Topic = Topic'
     { _tName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -529,7 +529,7 @@ newtype Topic = Topic
 topic
     :: Topic
 topic =
-    Topic
+    Topic'
     { _tName = Nothing
     }
 
@@ -546,16 +546,16 @@ tName = lens _tName (\ s a -> s{_tName = a})
 instance FromJSON Topic where
         parseJSON
           = withObject "Topic"
-              (\ o -> Topic <$> (o .:? "name"))
+              (\ o -> Topic' <$> (o .:? "name"))
 
 instance ToJSON Topic where
-        toJSON Topic{..}
+        toJSON Topic'{..}
           = object (catMaybes [("name" .=) <$> _tName])
 
 -- | Request for the \`Pull\` method.
 --
 -- /See:/ 'pullRequest' smart constructor.
-data PullRequest = PullRequest
+data PullRequest = PullRequest'
     { _prMaxMessages       :: !(Maybe (Textual Int32))
     , _prReturnImmediately :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -570,7 +570,7 @@ data PullRequest = PullRequest
 pullRequest
     :: PullRequest
 pullRequest =
-    PullRequest
+    PullRequest'
     { _prMaxMessages = Nothing
     , _prReturnImmediately = Nothing
     }
@@ -597,12 +597,12 @@ instance FromJSON PullRequest where
         parseJSON
           = withObject "PullRequest"
               (\ o ->
-                 PullRequest <$>
+                 PullRequest' <$>
                    (o .:? "maxMessages") <*>
                      (o .:? "returnImmediately"))
 
 instance ToJSON PullRequest where
-        toJSON PullRequest{..}
+        toJSON PullRequest'{..}
           = object
               (catMaybes
                  [("maxMessages" .=) <$> _prMaxMessages,
@@ -611,7 +611,7 @@ instance ToJSON PullRequest where
 -- | Optional attributes for this message.
 --
 -- /See:/ 'pubsubMessageAttributes' smart constructor.
-newtype PubsubMessageAttributes = PubsubMessageAttributes
+newtype PubsubMessageAttributes = PubsubMessageAttributes'
     { _pmaAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -624,7 +624,7 @@ pubsubMessageAttributes
     :: HashMap Text Text -- ^ 'pmaAddtional'
     -> PubsubMessageAttributes
 pubsubMessageAttributes pPmaAddtional_ =
-    PubsubMessageAttributes
+    PubsubMessageAttributes'
     { _pmaAddtional = _Coerce # pPmaAddtional_
     }
 
@@ -637,7 +637,7 @@ instance FromJSON PubsubMessageAttributes where
         parseJSON
           = withObject "PubsubMessageAttributes"
               (\ o ->
-                 PubsubMessageAttributes <$> (parseJSONObject o))
+                 PubsubMessageAttributes' <$> (parseJSONObject o))
 
 instance ToJSON PubsubMessageAttributes where
         toJSON = toJSON . _pmaAddtional
@@ -645,7 +645,7 @@ instance ToJSON PubsubMessageAttributes where
 -- | Request message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsRequest' smart constructor.
-newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
+newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest'
     { _tiprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -657,7 +657,7 @@ newtype TestIAMPermissionsRequest = TestIAMPermissionsRequest
 testIAMPermissionsRequest
     :: TestIAMPermissionsRequest
 testIAMPermissionsRequest =
-    TestIAMPermissionsRequest
+    TestIAMPermissionsRequest'
     { _tiprPermissions = Nothing
     }
 
@@ -674,18 +674,18 @@ instance FromJSON TestIAMPermissionsRequest where
         parseJSON
           = withObject "TestIAMPermissionsRequest"
               (\ o ->
-                 TestIAMPermissionsRequest <$>
+                 TestIAMPermissionsRequest' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsRequest where
-        toJSON TestIAMPermissionsRequest{..}
+        toJSON TestIAMPermissionsRequest'{..}
           = object
               (catMaybes [("permissions" .=) <$> _tiprPermissions])
 
 -- | Response for the \`Publish\` method.
 --
 -- /See:/ 'publishResponse' smart constructor.
-newtype PublishResponse = PublishResponse
+newtype PublishResponse = PublishResponse'
     { _prMessageIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -697,7 +697,7 @@ newtype PublishResponse = PublishResponse
 publishResponse
     :: PublishResponse
 publishResponse =
-    PublishResponse
+    PublishResponse'
     { _prMessageIds = Nothing
     }
 
@@ -714,17 +714,17 @@ instance FromJSON PublishResponse where
         parseJSON
           = withObject "PublishResponse"
               (\ o ->
-                 PublishResponse <$> (o .:? "messageIds" .!= mempty))
+                 PublishResponse' <$> (o .:? "messageIds" .!= mempty))
 
 instance ToJSON PublishResponse where
-        toJSON PublishResponse{..}
+        toJSON PublishResponse'{..}
           = object
               (catMaybes [("messageIds" .=) <$> _prMessageIds])
 
 -- | Request for the Publish method.
 --
 -- /See:/ 'publishRequest' smart constructor.
-newtype PublishRequest = PublishRequest
+newtype PublishRequest = PublishRequest'
     { _prMessages :: Maybe [PubsubMessage]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -736,7 +736,7 @@ newtype PublishRequest = PublishRequest
 publishRequest
     :: PublishRequest
 publishRequest =
-    PublishRequest
+    PublishRequest'
     { _prMessages = Nothing
     }
 
@@ -751,17 +751,17 @@ instance FromJSON PublishRequest where
         parseJSON
           = withObject "PublishRequest"
               (\ o ->
-                 PublishRequest <$> (o .:? "messages" .!= mempty))
+                 PublishRequest' <$> (o .:? "messages" .!= mempty))
 
 instance ToJSON PublishRequest where
-        toJSON PublishRequest{..}
+        toJSON PublishRequest'{..}
           = object
               (catMaybes [("messages" .=) <$> _prMessages])
 
 -- | Response message for \`TestIamPermissions\` method.
 --
 -- /See:/ 'testIAMPermissionsResponse' smart constructor.
-newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
+newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse'
     { _tiamprPermissions :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -773,7 +773,7 @@ newtype TestIAMPermissionsResponse = TestIAMPermissionsResponse
 testIAMPermissionsResponse
     :: TestIAMPermissionsResponse
 testIAMPermissionsResponse =
-    TestIAMPermissionsResponse
+    TestIAMPermissionsResponse'
     { _tiamprPermissions = Nothing
     }
 
@@ -790,11 +790,11 @@ instance FromJSON TestIAMPermissionsResponse where
         parseJSON
           = withObject "TestIAMPermissionsResponse"
               (\ o ->
-                 TestIAMPermissionsResponse <$>
+                 TestIAMPermissionsResponse' <$>
                    (o .:? "permissions" .!= mempty))
 
 instance ToJSON TestIAMPermissionsResponse where
-        toJSON TestIAMPermissionsResponse{..}
+        toJSON TestIAMPermissionsResponse'{..}
           = object
               (catMaybes
                  [("permissions" .=) <$> _tiamprPermissions])
@@ -814,7 +814,7 @@ instance ToJSON TestIAMPermissionsResponse where
 -- guide](https:\/\/cloud.google.com\/iam).
 --
 -- /See:/ 'policy' smart constructor.
-data Policy = Policy
+data Policy = Policy'
     { _pEtag     :: !(Maybe (Textual Word8))
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
@@ -832,7 +832,7 @@ data Policy = Policy
 policy
     :: Policy
 policy =
-    Policy
+    Policy'
     { _pEtag = Nothing
     , _pVersion = Nothing
     , _pBindings = Nothing
@@ -863,12 +863,12 @@ instance FromJSON Policy where
         parseJSON
           = withObject "Policy"
               (\ o ->
-                 Policy <$>
+                 Policy' <$>
                    (o .:? "etag") <*> (o .:? "version") <*>
                      (o .:? "bindings" .!= mempty))
 
 instance ToJSON Policy where
-        toJSON Policy{..}
+        toJSON Policy'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _pEtag,
@@ -892,7 +892,7 @@ instance ToJSON Policy where
 -- uses the push format defined in the v1 Pub\/Sub API.
 --
 -- /See:/ 'pushConfigAttributes' smart constructor.
-newtype PushConfigAttributes = PushConfigAttributes
+newtype PushConfigAttributes = PushConfigAttributes'
     { _pcaAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -905,7 +905,7 @@ pushConfigAttributes
     :: HashMap Text Text -- ^ 'pcaAddtional'
     -> PushConfigAttributes
 pushConfigAttributes pPcaAddtional_ =
-    PushConfigAttributes
+    PushConfigAttributes'
     { _pcaAddtional = _Coerce # pPcaAddtional_
     }
 
@@ -917,7 +917,8 @@ pcaAddtional
 instance FromJSON PushConfigAttributes where
         parseJSON
           = withObject "PushConfigAttributes"
-              (\ o -> PushConfigAttributes <$> (parseJSONObject o))
+              (\ o ->
+                 PushConfigAttributes' <$> (parseJSONObject o))
 
 instance ToJSON PushConfigAttributes where
         toJSON = toJSON . _pcaAddtional
@@ -925,7 +926,7 @@ instance ToJSON PushConfigAttributes where
 -- | A subscription resource.
 --
 -- /See:/ 'subscription' smart constructor.
-data Subscription = Subscription
+data Subscription = Subscription'
     { _sPushConfig         :: !(Maybe PushConfig)
     , _sTopic              :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
@@ -946,7 +947,7 @@ data Subscription = Subscription
 subscription
     :: Subscription
 subscription =
-    Subscription
+    Subscription'
     { _sPushConfig = Nothing
     , _sTopic = Nothing
     , _sName = Nothing
@@ -998,13 +999,13 @@ instance FromJSON Subscription where
         parseJSON
           = withObject "Subscription"
               (\ o ->
-                 Subscription <$>
+                 Subscription' <$>
                    (o .:? "pushConfig") <*> (o .:? "topic") <*>
                      (o .:? "name")
                      <*> (o .:? "ackDeadlineSeconds"))
 
 instance ToJSON Subscription where
-        toJSON Subscription{..}
+        toJSON Subscription'{..}
           = object
               (catMaybes
                  [("pushConfig" .=) <$> _sPushConfig,
@@ -1014,7 +1015,7 @@ instance ToJSON Subscription where
 -- | Response for the \`ListSubscriptions\` method.
 --
 -- /See:/ 'listSubscriptionsResponse' smart constructor.
-data ListSubscriptionsResponse = ListSubscriptionsResponse
+data ListSubscriptionsResponse = ListSubscriptionsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrSubscriptions :: !(Maybe [Subscription])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1029,7 +1030,7 @@ data ListSubscriptionsResponse = ListSubscriptionsResponse
 listSubscriptionsResponse
     :: ListSubscriptionsResponse
 listSubscriptionsResponse =
-    ListSubscriptionsResponse
+    ListSubscriptionsResponse'
     { _lsrNextPageToken = Nothing
     , _lsrSubscriptions = Nothing
     }
@@ -1054,12 +1055,12 @@ instance FromJSON ListSubscriptionsResponse where
         parseJSON
           = withObject "ListSubscriptionsResponse"
               (\ o ->
-                 ListSubscriptionsResponse <$>
+                 ListSubscriptionsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "subscriptions" .!= mempty))
 
 instance ToJSON ListSubscriptionsResponse where
-        toJSON ListSubscriptionsResponse{..}
+        toJSON ListSubscriptionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
@@ -1068,7 +1069,7 @@ instance ToJSON ListSubscriptionsResponse where
 -- | Associates \`members\` with a \`role\`.
 --
 -- /See:/ 'binding' smart constructor.
-data Binding = Binding
+data Binding = Binding'
     { _bMembers :: !(Maybe [Text])
     , _bRole    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1083,7 +1084,7 @@ data Binding = Binding
 binding
     :: Binding
 binding =
-    Binding
+    Binding'
     { _bMembers = Nothing
     , _bRole = Nothing
     }
@@ -1117,11 +1118,11 @@ instance FromJSON Binding where
         parseJSON
           = withObject "Binding"
               (\ o ->
-                 Binding <$>
+                 Binding' <$>
                    (o .:? "members" .!= mempty) <*> (o .:? "role"))
 
 instance ToJSON Binding where
-        toJSON Binding{..}
+        toJSON Binding'{..}
           = object
               (catMaybes
                  [("members" .=) <$> _bMembers,
@@ -1130,7 +1131,7 @@ instance ToJSON Binding where
 -- | Request for the Acknowledge method.
 --
 -- /See:/ 'acknowledgeRequest' smart constructor.
-newtype AcknowledgeRequest = AcknowledgeRequest
+newtype AcknowledgeRequest = AcknowledgeRequest'
     { _arAckIds :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1142,7 +1143,7 @@ newtype AcknowledgeRequest = AcknowledgeRequest
 acknowledgeRequest
     :: AcknowledgeRequest
 acknowledgeRequest =
-    AcknowledgeRequest
+    AcknowledgeRequest'
     { _arAckIds = Nothing
     }
 
@@ -1159,8 +1160,8 @@ instance FromJSON AcknowledgeRequest where
         parseJSON
           = withObject "AcknowledgeRequest"
               (\ o ->
-                 AcknowledgeRequest <$> (o .:? "ackIds" .!= mempty))
+                 AcknowledgeRequest' <$> (o .:? "ackIds" .!= mempty))
 
 instance ToJSON AcknowledgeRequest where
-        toJSON AcknowledgeRequest{..}
+        toJSON AcknowledgeRequest'{..}
           = object (catMaybes [("ackIds" .=) <$> _arAckIds])

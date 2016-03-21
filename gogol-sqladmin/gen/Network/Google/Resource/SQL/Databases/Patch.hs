@@ -61,7 +61,7 @@ type DatabasesPatchResource =
 -- Cloud SQL instance. This method supports patch semantics.
 --
 -- /See:/ 'databasesPatch' smart constructor.
-data DatabasesPatch = DatabasesPatch
+data DatabasesPatch = DatabasesPatch'
     { _dpProject  :: !Text
     , _dpDatabase :: !Text
     , _dpPayload  :: !Database
@@ -86,7 +86,7 @@ databasesPatch
     -> Text -- ^ 'dpInstance'
     -> DatabasesPatch
 databasesPatch pDpProject_ pDpDatabase_ pDpPayload_ pDpInstance_ =
-    DatabasesPatch
+    DatabasesPatch'
     { _dpProject = pDpProject_
     , _dpDatabase = pDpDatabase_
     , _dpPayload = pDpPayload_
@@ -118,7 +118,7 @@ instance GoogleRequest DatabasesPatch where
         type Scopes DatabasesPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient DatabasesPatch{..}
+        requestClient DatabasesPatch'{..}
           = go _dpProject _dpInstance _dpDatabase
               (Just AltJSON)
               _dpPayload

@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- Drive is a parent for all files within it.
 --
 -- /See:/ 'parent' smart constructor.
-data Parent = Parent
+data Parent = Parent'
     { _pIsRoot :: !(Maybe Bool)
     , _pId     :: !(Maybe Text)
     , _pTitle  :: !(Maybe Text)
@@ -42,7 +42,7 @@ data Parent = Parent
 parent
     :: Parent
 parent =
-    Parent
+    Parent'
     { _pIsRoot = Nothing
     , _pId = Nothing
     , _pTitle = Nothing
@@ -64,12 +64,12 @@ instance FromJSON Parent where
         parseJSON
           = withObject "Parent"
               (\ o ->
-                 Parent <$>
+                 Parent' <$>
                    (o .:? "isRoot") <*> (o .:? "id") <*>
                      (o .:? "title"))
 
 instance ToJSON Parent where
-        toJSON Parent{..}
+        toJSON Parent'{..}
           = object
               (catMaybes
                  [("isRoot" .=) <$> _pIsRoot, ("id" .=) <$> _pId,
@@ -78,7 +78,7 @@ instance ToJSON Parent where
 -- | Photo information for a user.
 --
 -- /See:/ 'photo' smart constructor.
-newtype Photo = Photo
+newtype Photo = Photo'
     { _pURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -90,7 +90,7 @@ newtype Photo = Photo
 photo
     :: Photo
 photo =
-    Photo
+    Photo'
     { _pURL = Nothing
     }
 
@@ -100,16 +100,17 @@ pURL = lens _pURL (\ s a -> s{_pURL = a})
 
 instance FromJSON Photo where
         parseJSON
-          = withObject "Photo" (\ o -> Photo <$> (o .:? "url"))
+          = withObject "Photo"
+              (\ o -> Photo' <$> (o .:? "url"))
 
 instance ToJSON Photo where
-        toJSON Photo{..}
+        toJSON Photo'{..}
           = object (catMaybes [("url" .=) <$> _pURL])
 
 -- | Represents the changes associated with an action taken by a user.
 --
 -- /See:/ 'event' smart constructor.
-data Event = Event
+data Event = Event'
     { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
     , _eUser                 :: !(Maybe User)
     , _eEventTimeMillis      :: !(Maybe (Textual Word64))
@@ -145,7 +146,7 @@ data Event = Event
 event
     :: Event
 event =
-    Event
+    Event'
     { _ePrimaryEventType = Nothing
     , _eUser = Nothing
     , _eEventTimeMillis = Nothing
@@ -218,7 +219,7 @@ instance FromJSON Event where
         parseJSON
           = withObject "Event"
               (\ o ->
-                 Event <$>
+                 Event' <$>
                    (o .:? "primaryEventType") <*> (o .:? "user") <*>
                      (o .:? "eventTimeMillis")
                      <*> (o .:? "rename")
@@ -229,7 +230,7 @@ instance FromJSON Event where
                      <*> (o .:? "move"))
 
 instance ToJSON Event where
-        toJSON Event{..}
+        toJSON Event'{..}
           = object
               (catMaybes
                  [("primaryEventType" .=) <$> _ePrimaryEventType,
@@ -246,7 +247,7 @@ instance ToJSON Event where
 -- token to retrieve the next page of results.
 --
 -- /See:/ 'listActivitiesResponse' smart constructor.
-data ListActivitiesResponse = ListActivitiesResponse
+data ListActivitiesResponse = ListActivitiesResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larActivities    :: !(Maybe [Activity])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -261,7 +262,7 @@ data ListActivitiesResponse = ListActivitiesResponse
 listActivitiesResponse
     :: ListActivitiesResponse
 listActivitiesResponse =
-    ListActivitiesResponse
+    ListActivitiesResponse'
     { _larNextPageToken = Nothing
     , _larActivities = Nothing
     }
@@ -284,12 +285,12 @@ instance FromJSON ListActivitiesResponse where
         parseJSON
           = withObject "ListActivitiesResponse"
               (\ o ->
-                 ListActivitiesResponse <$>
+                 ListActivitiesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "activities" .!= mempty))
 
 instance ToJSON ListActivitiesResponse where
-        toJSON ListActivitiesResponse{..}
+        toJSON ListActivitiesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _larNextPageToken,
@@ -299,7 +300,7 @@ instance ToJSON ListActivitiesResponse where
 -- a result of a permissionChange type event.
 --
 -- /See:/ 'permissionChange' smart constructor.
-data PermissionChange = PermissionChange
+data PermissionChange = PermissionChange'
     { _pcAddedPermissions   :: !(Maybe [Permission])
     , _pcRemovedPermissions :: !(Maybe [Permission])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -314,7 +315,7 @@ data PermissionChange = PermissionChange
 permissionChange
     :: PermissionChange
 permissionChange =
-    PermissionChange
+    PermissionChange'
     { _pcAddedPermissions = Nothing
     , _pcRemovedPermissions = Nothing
     }
@@ -339,12 +340,12 @@ instance FromJSON PermissionChange where
         parseJSON
           = withObject "PermissionChange"
               (\ o ->
-                 PermissionChange <$>
+                 PermissionChange' <$>
                    (o .:? "addedPermissions" .!= mempty) <*>
                      (o .:? "removedPermissions" .!= mempty))
 
 instance ToJSON PermissionChange where
-        toJSON PermissionChange{..}
+        toJSON PermissionChange'{..}
           = object
               (catMaybes
                  [("addedPermissions" .=) <$> _pcAddedPermissions,
@@ -353,7 +354,7 @@ instance ToJSON PermissionChange where
 -- | A representation of a user.
 --
 -- /See:/ 'user' smart constructor.
-data User = User
+data User = User'
     { _uPhoto        :: !(Maybe Photo)
     , _uIsDeleted    :: !(Maybe Bool)
     , _uName         :: !(Maybe Text)
@@ -374,7 +375,7 @@ data User = User
 user
     :: User
 user =
-    User
+    User'
     { _uPhoto = Nothing
     , _uIsDeleted = Nothing
     , _uName = Nothing
@@ -408,13 +409,13 @@ instance FromJSON User where
         parseJSON
           = withObject "User"
               (\ o ->
-                 User <$>
+                 User' <$>
                    (o .:? "photo") <*> (o .:? "isDeleted") <*>
                      (o .:? "name")
                      <*> (o .:? "permissionId"))
 
 instance ToJSON User where
-        toJSON User{..}
+        toJSON User'{..}
           = object
               (catMaybes
                  [("photo" .=) <$> _uPhoto,
@@ -427,7 +428,7 @@ instance ToJSON User where
 -- among all events.
 --
 -- /See:/ 'activity' smart constructor.
-data Activity = Activity
+data Activity = Activity'
     { _aSingleEvents  :: !(Maybe [Event])
     , _aCombinedEvent :: !(Maybe Event)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -442,7 +443,7 @@ data Activity = Activity
 activity
     :: Activity
 activity =
-    Activity
+    Activity'
     { _aSingleEvents = Nothing
     , _aCombinedEvent = Nothing
     }
@@ -465,12 +466,12 @@ instance FromJSON Activity where
         parseJSON
           = withObject "Activity"
               (\ o ->
-                 Activity <$>
+                 Activity' <$>
                    (o .:? "singleEvents" .!= mempty) <*>
                      (o .:? "combinedEvent"))
 
 instance ToJSON Activity where
-        toJSON Activity{..}
+        toJSON Activity'{..}
           = object
               (catMaybes
                  [("singleEvents" .=) <$> _aSingleEvents,
@@ -479,7 +480,7 @@ instance ToJSON Activity where
 -- | Contains information about a renametype event.
 --
 -- /See:/ 'rename' smart constructor.
-data Rename = Rename
+data Rename = Rename'
     { _rNewTitle :: !(Maybe Text)
     , _rOldTitle :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -494,7 +495,7 @@ data Rename = Rename
 rename
     :: Rename
 rename =
-    Rename
+    Rename'
     { _rNewTitle = Nothing
     , _rOldTitle = Nothing
     }
@@ -513,10 +514,11 @@ instance FromJSON Rename where
         parseJSON
           = withObject "Rename"
               (\ o ->
-                 Rename <$> (o .:? "newTitle") <*> (o .:? "oldTitle"))
+                 Rename' <$>
+                   (o .:? "newTitle") <*> (o .:? "oldTitle"))
 
 instance ToJSON Rename where
-        toJSON Rename{..}
+        toJSON Rename'{..}
           = object
               (catMaybes
                  [("newTitle" .=) <$> _rNewTitle,
@@ -527,7 +529,7 @@ instance ToJSON Rename where
 -- contained in a corresponding Drive Permissions object.
 --
 -- /See:/ 'permission' smart constructor.
-data Permission = Permission
+data Permission = Permission'
     { _pWithLink     :: !(Maybe Bool)
     , _pUser         :: !(Maybe User)
     , _pRole         :: !(Maybe PermissionRole)
@@ -554,7 +556,7 @@ data Permission = Permission
 permission
     :: Permission
 permission =
-    Permission
+    Permission'
     { _pWithLink = Nothing
     , _pUser = Nothing
     , _pRole = Nothing
@@ -596,7 +598,7 @@ instance FromJSON Permission where
         parseJSON
           = withObject "Permission"
               (\ o ->
-                 Permission <$>
+                 Permission' <$>
                    (o .:? "withLink") <*> (o .:? "user") <*>
                      (o .:? "role")
                      <*> (o .:? "name")
@@ -604,7 +606,7 @@ instance FromJSON Permission where
                      <*> (o .:? "permissionId"))
 
 instance ToJSON Permission where
-        toJSON Permission{..}
+        toJSON Permission'{..}
           = object
               (catMaybes
                  [("withLink" .=) <$> _pWithLink,
@@ -615,7 +617,7 @@ instance ToJSON Permission where
 -- | Information about the object modified by the event.
 --
 -- /See:/ 'target' smart constructor.
-data Target = Target
+data Target = Target'
     { _tMimeType :: !(Maybe Text)
     , _tName     :: !(Maybe Text)
     , _tId       :: !(Maybe Text)
@@ -633,7 +635,7 @@ data Target = Target
 target
     :: Target
 target =
-    Target
+    Target'
     { _tMimeType = Nothing
     , _tName = Nothing
     , _tId = Nothing
@@ -658,12 +660,12 @@ instance FromJSON Target where
         parseJSON
           = withObject "Target"
               (\ o ->
-                 Target <$>
+                 Target' <$>
                    (o .:? "mimeType") <*> (o .:? "name") <*>
                      (o .:? "id"))
 
 instance ToJSON Target where
-        toJSON Target{..}
+        toJSON Target'{..}
           = object
               (catMaybes
                  [("mimeType" .=) <$> _tMimeType,
@@ -673,7 +675,7 @@ instance ToJSON Target where
 -- of a move type event.
 --
 -- /See:/ 'move' smart constructor.
-data Move = Move
+data Move = Move'
     { _mAddedParents   :: !(Maybe [Parent])
     , _mRemovedParents :: !(Maybe [Parent])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -688,7 +690,7 @@ data Move = Move
 move
     :: Move
 move =
-    Move
+    Move'
     { _mAddedParents = Nothing
     , _mRemovedParents = Nothing
     }
@@ -713,12 +715,12 @@ instance FromJSON Move where
         parseJSON
           = withObject "Move"
               (\ o ->
-                 Move <$>
+                 Move' <$>
                    (o .:? "addedParents" .!= mempty) <*>
                      (o .:? "removedParents" .!= mempty))
 
 instance ToJSON Move where
-        toJSON Move{..}
+        toJSON Move'{..}
           = object
               (catMaybes
                  [("addedParents" .=) <$> _mAddedParents,

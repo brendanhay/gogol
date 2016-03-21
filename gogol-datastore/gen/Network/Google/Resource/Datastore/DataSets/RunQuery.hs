@@ -55,7 +55,7 @@ type DataSetsRunQueryResource =
 -- | Query for entities.
 --
 -- /See:/ 'dataSetsRunQuery' smart constructor.
-data DataSetsRunQuery = DataSetsRunQuery
+data DataSetsRunQuery = DataSetsRunQuery'
     { _dsrqPayload   :: !RunQueryRequest
     , _dsrqDataSetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ dataSetsRunQuery
     -> Text -- ^ 'dsrqDataSetId'
     -> DataSetsRunQuery
 dataSetsRunQuery pDsrqPayload_ pDsrqDataSetId_ =
-    DataSetsRunQuery
+    DataSetsRunQuery'
     { _dsrqPayload = pDsrqPayload_
     , _dsrqDataSetId = pDsrqDataSetId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest DataSetsRunQuery where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient DataSetsRunQuery{..}
+        requestClient DataSetsRunQuery'{..}
           = go _dsrqDataSetId (Just AltJSON) _dsrqPayload
               datastoreService
           where go

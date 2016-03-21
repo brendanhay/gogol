@@ -54,7 +54,7 @@ type RelyingPartyVerifyCustomTokenResource =
 -- | Verifies the developer asserted ID token.
 --
 -- /See:/ 'relyingPartyVerifyCustomToken' smart constructor.
-newtype RelyingPartyVerifyCustomToken = RelyingPartyVerifyCustomToken
+newtype RelyingPartyVerifyCustomToken = RelyingPartyVerifyCustomToken'
     { _rpvctPayload :: IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyVerifyCustomToken
     :: IdentitytoolkitRelyingPartyVerifyCustomTokenRequest -- ^ 'rpvctPayload'
     -> RelyingPartyVerifyCustomToken
 relyingPartyVerifyCustomToken pRpvctPayload_ =
-    RelyingPartyVerifyCustomToken
+    RelyingPartyVerifyCustomToken'
     { _rpvctPayload = pRpvctPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyVerifyCustomToken
         type Rs RelyingPartyVerifyCustomToken =
              VerifyCustomTokenResponse
         type Scopes RelyingPartyVerifyCustomToken = '[]
-        requestClient RelyingPartyVerifyCustomToken{..}
+        requestClient RelyingPartyVerifyCustomToken'{..}
           = go (Just AltJSON) _rpvctPayload
               identityToolkitService
           where go

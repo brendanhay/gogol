@@ -73,7 +73,7 @@ type ProjectsTimeSeriesCreateResource =
 -- response.
 --
 -- /See:/ 'projectsTimeSeriesCreate' smart constructor.
-data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate
+data ProjectsTimeSeriesCreate = ProjectsTimeSeriesCreate'
     { _ptscXgafv          :: !(Maybe Text)
     , _ptscUploadProtocol :: !(Maybe Text)
     , _ptscPp             :: !Bool
@@ -111,7 +111,7 @@ projectsTimeSeriesCreate
     -> Text -- ^ 'ptscName'
     -> ProjectsTimeSeriesCreate
 projectsTimeSeriesCreate pPtscPayload_ pPtscName_ =
-    ProjectsTimeSeriesCreate
+    ProjectsTimeSeriesCreate'
     { _ptscXgafv = Nothing
     , _ptscUploadProtocol = Nothing
     , _ptscPp = True
@@ -177,7 +177,7 @@ instance GoogleRequest ProjectsTimeSeriesCreate where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.write"]
-        requestClient ProjectsTimeSeriesCreate{..}
+        requestClient ProjectsTimeSeriesCreate'{..}
           = go _ptscName _ptscXgafv _ptscUploadProtocol
               (Just _ptscPp)
               _ptscAccessToken

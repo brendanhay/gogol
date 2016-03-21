@@ -59,7 +59,7 @@ type GroupsRemoveMemberResource =
 -- | Removes users from the specified group.
 --
 -- /See:/ 'groupsRemoveMember' smart constructor.
-data GroupsRemoveMember = GroupsRemoveMember
+data GroupsRemoveMember = GroupsRemoveMember'
     { _grmProject   :: !Text
     , _grmPayload   :: !GroupsRemoveMemberRequest
     , _grmGroupName :: !Text
@@ -80,7 +80,7 @@ groupsRemoveMember
     -> Text -- ^ 'grmGroupName'
     -> GroupsRemoveMember
 groupsRemoveMember pGrmProject_ pGrmPayload_ pGrmGroupName_ =
-    GroupsRemoveMember
+    GroupsRemoveMember'
     { _grmProject = pGrmProject_
     , _grmPayload = pGrmPayload_
     , _grmGroupName = pGrmGroupName_
@@ -106,7 +106,7 @@ instance GoogleRequest GroupsRemoveMember where
         type Scopes GroupsRemoveMember =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient GroupsRemoveMember{..}
+        requestClient GroupsRemoveMember'{..}
           = go _grmProject _grmGroupName (Just AltJSON)
               _grmPayload
               userAccountsService

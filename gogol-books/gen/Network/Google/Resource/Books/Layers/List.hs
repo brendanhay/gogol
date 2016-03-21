@@ -61,7 +61,7 @@ type LayersListResource =
 -- | List the layer summaries for a volume.
 --
 -- /See:/ 'layersList' smart constructor.
-data LayersList = LayersList
+data LayersList = LayersList'
     { _llContentVersion :: !(Maybe Text)
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
@@ -86,7 +86,7 @@ layersList
     :: Text -- ^ 'llVolumeId'
     -> LayersList
 layersList pLlVolumeId_ =
-    LayersList
+    LayersList'
     { _llContentVersion = Nothing
     , _llVolumeId = pLlVolumeId_
     , _llSource = Nothing
@@ -124,7 +124,7 @@ instance GoogleRequest LayersList where
         type Rs LayersList = Layersummaries
         type Scopes LayersList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient LayersList{..}
+        requestClient LayersList'{..}
           = go _llVolumeId _llContentVersion _llSource
               _llPageToken
               _llMaxResults

@@ -57,7 +57,7 @@ type DatafeedsUpdateResource =
 -- | Updates a datafeed of your Merchant Center account.
 --
 -- /See:/ 'datafeedsUpdate' smart constructor.
-data DatafeedsUpdate = DatafeedsUpdate
+data DatafeedsUpdate = DatafeedsUpdate'
     { _duMerchantId :: !(Textual Word64)
     , _duPayload    :: !Datafeed
     , _duDatafeedId :: !(Textual Word64)
@@ -81,7 +81,7 @@ datafeedsUpdate
     -> Word64 -- ^ 'duDatafeedId'
     -> DatafeedsUpdate
 datafeedsUpdate pDuMerchantId_ pDuPayload_ pDuDatafeedId_ =
-    DatafeedsUpdate
+    DatafeedsUpdate'
     { _duMerchantId = _Coerce # pDuMerchantId_
     , _duPayload = pDuPayload_
     , _duDatafeedId = _Coerce # pDuDatafeedId_
@@ -111,7 +111,7 @@ instance GoogleRequest DatafeedsUpdate where
         type Rs DatafeedsUpdate = Datafeed
         type Scopes DatafeedsUpdate =
              '["https://www.googleapis.com/auth/content"]
-        requestClient DatafeedsUpdate{..}
+        requestClient DatafeedsUpdate'{..}
           = go _duMerchantId _duDatafeedId _duDryRun
               (Just AltJSON)
               _duPayload

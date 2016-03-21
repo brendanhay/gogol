@@ -67,7 +67,7 @@ type TurnBasedMatchesSyncResource =
 -- of MATCH_DELETED.
 --
 -- /See:/ 'turnBasedMatchesSync' smart constructor.
-data TurnBasedMatchesSync = TurnBasedMatchesSync
+data TurnBasedMatchesSync = TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches :: !(Maybe (Textual Int32))
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
@@ -91,7 +91,7 @@ data TurnBasedMatchesSync = TurnBasedMatchesSync
 turnBasedMatchesSync
     :: TurnBasedMatchesSync
 turnBasedMatchesSync =
-    TurnBasedMatchesSync
+    TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches = Nothing
     , _tbmsIncludeMatchData = Nothing
     , _tbmsLanguage = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest TurnBasedMatchesSync where
         type Scopes TurnBasedMatchesSync =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesSync{..}
+        requestClient TurnBasedMatchesSync'{..}
           = go _tbmsMaxCompletedMatches _tbmsIncludeMatchData
               _tbmsLanguage
               _tbmsPageToken

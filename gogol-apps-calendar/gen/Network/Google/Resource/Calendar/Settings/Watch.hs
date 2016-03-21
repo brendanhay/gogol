@@ -60,7 +60,7 @@ type SettingsWatchResource =
 -- | Watch for changes to Settings resources.
 --
 -- /See:/ 'settingsWatch' smart constructor.
-data SettingsWatch = SettingsWatch
+data SettingsWatch = SettingsWatch'
     { _swSyncToken  :: !(Maybe Text)
     , _swPayload    :: !Channel
     , _swPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ settingsWatch
     :: Channel -- ^ 'swPayload'
     -> SettingsWatch
 settingsWatch pSwPayload_ =
-    SettingsWatch
+    SettingsWatch'
     { _swSyncToken = Nothing
     , _swPayload = pSwPayload_
     , _swPageToken = Nothing
@@ -123,7 +123,7 @@ instance GoogleRequest SettingsWatch where
         type Scopes SettingsWatch =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient SettingsWatch{..}
+        requestClient SettingsWatch'{..}
           = go _swSyncToken _swPageToken _swMaxResults
               (Just AltJSON)
               _swPayload

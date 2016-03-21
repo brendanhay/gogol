@@ -53,7 +53,7 @@ type MobileCarriersListResource =
 -- | Retrieves a list of mobile carriers.
 --
 -- /See:/ 'mobileCarriersList' smart constructor.
-newtype MobileCarriersList = MobileCarriersList
+newtype MobileCarriersList = MobileCarriersList'
     { _mclProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ mobileCarriersList
     :: Int64 -- ^ 'mclProFileId'
     -> MobileCarriersList
 mobileCarriersList pMclProFileId_ =
-    MobileCarriersList
+    MobileCarriersList'
     { _mclProFileId = _Coerce # pMclProFileId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest MobileCarriersList where
              MobileCarriersListResponse
         type Scopes MobileCarriersList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient MobileCarriersList{..}
+        requestClient MobileCarriersList'{..}
           = go _mclProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

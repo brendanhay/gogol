@@ -62,7 +62,7 @@ type TargetHTTPSProxiesListResource =
 -- specified project.
 --
 -- /See:/ 'targetHTTPSProxiesList' smart constructor.
-data TargetHTTPSProxiesList = TargetHTTPSProxiesList
+data TargetHTTPSProxiesList = TargetHTTPSProxiesList'
     { _thplProject    :: !Text
     , _thplFilter     :: !(Maybe Text)
     , _thplPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ targetHTTPSProxiesList
     :: Text -- ^ 'thplProject'
     -> TargetHTTPSProxiesList
 targetHTTPSProxiesList pThplProject_ =
-    TargetHTTPSProxiesList
+    TargetHTTPSProxiesList'
     { _thplProject = pThplProject_
     , _thplFilter = Nothing
     , _thplPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest TargetHTTPSProxiesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetHTTPSProxiesList{..}
+        requestClient TargetHTTPSProxiesList'{..}
           = go _thplProject _thplFilter _thplPageToken
               (Just _thplMaxResults)
               (Just AltJSON)

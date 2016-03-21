@@ -27,7 +27,7 @@ import           Network.Google.Prelude
 -- the Titles they own. Post-production houses cannot see any Avails.
 --
 -- /See:/ 'avail' smart constructor.
-data Avail = Avail
+data Avail = Avail'
     { _aAltId                     :: !(Maybe Text)
     , _aPphNames                  :: !(Maybe [Text])
     , _aCaptionExemption          :: !(Maybe Text)
@@ -132,7 +132,7 @@ data Avail = Avail
 avail
     :: Avail
 avail =
-    Avail
+    Avail'
     { _aAltId = Nothing
     , _aPphNames = Nothing
     , _aCaptionExemption = Nothing
@@ -379,7 +379,7 @@ instance FromJSON Avail where
         parseJSON
           = withObject "Avail"
               (\ o ->
-                 Avail <$>
+                 Avail' <$>
                    (o .:? "altId") <*> (o .:? "pphNames" .!= mempty) <*>
                      (o .:? "captionExemption")
                      <*> (o .:? "ratingSystem")
@@ -413,7 +413,7 @@ instance FromJSON Avail where
                      <*> (o .:? "titleInternalAlias"))
 
 instance ToJSON Avail where
-        toJSON Avail{..}
+        toJSON Avail'{..}
           = object
               (catMaybes
                  [("altId" .=) <$> _aAltId,
@@ -455,7 +455,7 @@ instance ToJSON Avail where
 -- | Response to the \'ListAvails\' method.
 --
 -- /See:/ 'listAvailsResponse' smart constructor.
-data ListAvailsResponse = ListAvailsResponse
+data ListAvailsResponse = ListAvailsResponse'
     { _larNextPageToken :: !(Maybe Text)
     , _larAvails        :: !(Maybe [Avail])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -470,7 +470,7 @@ data ListAvailsResponse = ListAvailsResponse
 listAvailsResponse
     :: ListAvailsResponse
 listAvailsResponse =
-    ListAvailsResponse
+    ListAvailsResponse'
     { _larNextPageToken = Nothing
     , _larAvails = Nothing
     }
@@ -492,12 +492,12 @@ instance FromJSON ListAvailsResponse where
         parseJSON
           = withObject "ListAvailsResponse"
               (\ o ->
-                 ListAvailsResponse <$>
+                 ListAvailsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "avails" .!= mempty))
 
 instance ToJSON ListAvailsResponse where
-        toJSON ListAvailsResponse{..}
+        toJSON ListAvailsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _larNextPageToken,
@@ -506,7 +506,7 @@ instance ToJSON ListAvailsResponse where
 -- | Response to the \'ListExperienceLocales\' method.
 --
 -- /See:/ 'listExperienceLocalesResponse' smart constructor.
-data ListExperienceLocalesResponse = ListExperienceLocalesResponse
+data ListExperienceLocalesResponse = ListExperienceLocalesResponse'
     { _lelrNextPageToken     :: !(Maybe Text)
     , _lelrExperienceLocales :: !(Maybe [ExperienceLocale])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -521,7 +521,7 @@ data ListExperienceLocalesResponse = ListExperienceLocalesResponse
 listExperienceLocalesResponse
     :: ListExperienceLocalesResponse
 listExperienceLocalesResponse =
-    ListExperienceLocalesResponse
+    ListExperienceLocalesResponse'
     { _lelrNextPageToken = Nothing
     , _lelrExperienceLocales = Nothing
     }
@@ -544,12 +544,12 @@ instance FromJSON ListExperienceLocalesResponse where
         parseJSON
           = withObject "ListExperienceLocalesResponse"
               (\ o ->
-                 ListExperienceLocalesResponse <$>
+                 ListExperienceLocalesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "experienceLocales" .!= mempty))
 
 instance ToJSON ListExperienceLocalesResponse where
-        toJSON ListExperienceLocalesResponse{..}
+        toJSON ListExperienceLocalesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lelrNextPageToken,
@@ -558,7 +558,7 @@ instance ToJSON ListExperienceLocalesResponse where
 -- | Response to the \'ListOrders\' method.
 --
 -- /See:/ 'listOrdersResponse' smart constructor.
-data ListOrdersResponse = ListOrdersResponse
+data ListOrdersResponse = ListOrdersResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOrders        :: !(Maybe [Order])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -573,7 +573,7 @@ data ListOrdersResponse = ListOrdersResponse
 listOrdersResponse
     :: ListOrdersResponse
 listOrdersResponse =
-    ListOrdersResponse
+    ListOrdersResponse'
     { _lorNextPageToken = Nothing
     , _lorOrders = Nothing
     }
@@ -595,12 +595,12 @@ instance FromJSON ListOrdersResponse where
         parseJSON
           = withObject "ListOrdersResponse"
               (\ o ->
-                 ListOrdersResponse <$>
+                 ListOrdersResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "orders" .!= mempty))
 
 instance ToJSON ListOrdersResponse where
-        toJSON ListOrdersResponse{..}
+        toJSON ListOrdersResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lorNextPageToken,
@@ -609,7 +609,7 @@ instance ToJSON ListOrdersResponse where
 -- | Response to the \'ListStoreInfos\' method.
 --
 -- /See:/ 'listStoreInfosResponse' smart constructor.
-data ListStoreInfosResponse = ListStoreInfosResponse
+data ListStoreInfosResponse = ListStoreInfosResponse'
     { _lsirNextPageToken :: !(Maybe Text)
     , _lsirStoreInfos    :: !(Maybe [StoreInfo])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -624,7 +624,7 @@ data ListStoreInfosResponse = ListStoreInfosResponse
 listStoreInfosResponse
     :: ListStoreInfosResponse
 listStoreInfosResponse =
-    ListStoreInfosResponse
+    ListStoreInfosResponse'
     { _lsirNextPageToken = Nothing
     , _lsirStoreInfos = Nothing
     }
@@ -647,12 +647,12 @@ instance FromJSON ListStoreInfosResponse where
         parseJSON
           = withObject "ListStoreInfosResponse"
               (\ o ->
-                 ListStoreInfosResponse <$>
+                 ListStoreInfosResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "storeInfos" .!= mempty))
 
 instance ToJSON ListStoreInfosResponse where
-        toJSON ListStoreInfosResponse{..}
+        toJSON ListStoreInfosResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsirNextPageToken,
@@ -664,7 +664,7 @@ instance ToJSON ListStoreInfosResponse where
 -- also be identified by partners using its \`custom_id\` (when provided).
 --
 -- /See:/ 'order' smart constructor.
-data Order = Order
+data Order = Order'
     { _oStatus                 :: !(Maybe Text)
     , _oShowName               :: !(Maybe Text)
     , _oPphName                :: !(Maybe Text)
@@ -742,7 +742,7 @@ data Order = Order
 order
     :: Order
 order =
-    Order
+    Order'
     { _oStatus = Nothing
     , _oShowName = Nothing
     , _oPphName = Nothing
@@ -904,7 +904,7 @@ instance FromJSON Order where
         parseJSON
           = withObject "Order"
               (\ o ->
-                 Order <$>
+                 Order' <$>
                    (o .:? "status") <*> (o .:? "showName") <*>
                      (o .:? "pphName")
                      <*> (o .:? "earliestAvailStartTime")
@@ -929,7 +929,7 @@ instance FromJSON Order where
                      <*> (o .:? "episodeName"))
 
 instance ToJSON Order where
-        toJSON Order{..}
+        toJSON Order'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _oStatus,
@@ -967,7 +967,7 @@ instance ToJSON Order where
 -- AltCutID or \`custom_id\` (when provided).
 --
 -- /See:/ 'experienceLocale' smart constructor.
-data ExperienceLocale = ExperienceLocale
+data ExperienceLocale = ExperienceLocale'
     { _elTitleLevelEidr         :: !(Maybe Text)
     , _elStatus                 :: !(Maybe Text)
     , _elPphNames               :: !(Maybe [Text])
@@ -1045,7 +1045,7 @@ data ExperienceLocale = ExperienceLocale
 experienceLocale
     :: ExperienceLocale
 experienceLocale =
-    ExperienceLocale
+    ExperienceLocale'
     { _elTitleLevelEidr = Nothing
     , _elStatus = Nothing
     , _elPphNames = Nothing
@@ -1212,7 +1212,7 @@ instance FromJSON ExperienceLocale where
         parseJSON
           = withObject "ExperienceLocale"
               (\ o ->
-                 ExperienceLocale <$>
+                 ExperienceLocale' <$>
                    (o .:? "titleLevelEidr") <*> (o .:? "status") <*>
                      (o .:? "pphNames" .!= mempty)
                      <*> (o .:? "inventoryId")
@@ -1237,7 +1237,7 @@ instance FromJSON ExperienceLocale where
                      <*> (o .:? "normalizedPriority"))
 
 instance ToJSON ExperienceLocale where
-        toJSON ExperienceLocale{..}
+        toJSON ExperienceLocale'{..}
           = object
               (catMaybes
                  [("titleLevelEidr" .=) <$> _elTitleLevelEidr,
@@ -1272,7 +1272,7 @@ instance ToJSON ExperienceLocale where
 -- identify a specific title or edit in a country.
 --
 -- /See:/ 'storeInfo' smart constructor.
-data StoreInfo = StoreInfo
+data StoreInfo = StoreInfo'
     { _siTitleLevelEidr :: !(Maybe Text)
     , _siPphNames       :: !(Maybe [Text])
     , _siShowName       :: !(Maybe Text)
@@ -1356,7 +1356,7 @@ data StoreInfo = StoreInfo
 storeInfo
     :: StoreInfo
 storeInfo =
-    StoreInfo
+    StoreInfo'
     { _siTitleLevelEidr = Nothing
     , _siPphNames = Nothing
     , _siShowName = Nothing
@@ -1538,7 +1538,7 @@ instance FromJSON StoreInfo where
         parseJSON
           = withObject "StoreInfo"
               (\ o ->
-                 StoreInfo <$>
+                 StoreInfo' <$>
                    (o .:? "titleLevelEidr") <*>
                      (o .:? "pphNames" .!= mempty)
                      <*> (o .:? "showName")
@@ -1566,7 +1566,7 @@ instance FromJSON StoreInfo where
                      <*> (o .:? "showId"))
 
 instance ToJSON StoreInfo where
-        toJSON StoreInfo{..}
+        toJSON StoreInfo'{..}
           = object
               (catMaybes
                  [("titleLevelEidr" .=) <$> _siTitleLevelEidr,

@@ -46,14 +46,14 @@ type UserInfoV2MeGetResource =
 --
 -- /See:/ 'userInfoV2MeGet' smart constructor.
 data UserInfoV2MeGet =
-    UserInfoV2MeGet
+    UserInfoV2MeGet'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserInfoV2MeGet' with the minimum fields required to make a request.
 --
 userInfoV2MeGet
     :: UserInfoV2MeGet
-userInfoV2MeGet = UserInfoV2MeGet
+userInfoV2MeGet = UserInfoV2MeGet'
 
 instance GoogleRequest UserInfoV2MeGet where
         type Rs UserInfoV2MeGet = UserInfoplus
@@ -62,7 +62,7 @@ instance GoogleRequest UserInfoV2MeGet where
                "https://www.googleapis.com/auth/plus.me",
                "https://www.googleapis.com/auth/userinfo.email",
                "https://www.googleapis.com/auth/userinfo.profile"]
-        requestClient UserInfoV2MeGet{}
+        requestClient UserInfoV2MeGet'{}
           = go (Just AltJSON) oAuth2Service
           where go
                   = buildClient

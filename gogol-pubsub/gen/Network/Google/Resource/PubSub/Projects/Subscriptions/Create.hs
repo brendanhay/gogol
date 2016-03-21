@@ -74,7 +74,7 @@ type ProjectsSubscriptionsCreateResource =
 -- this subscription on the same project as the topic.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
-data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate
+data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'
     { _pscXgafv          :: !(Maybe Text)
     , _pscUploadProtocol :: !(Maybe Text)
     , _pscPp             :: !Bool
@@ -112,7 +112,7 @@ projectsSubscriptionsCreate
     -> Text -- ^ 'pscName'
     -> ProjectsSubscriptionsCreate
 projectsSubscriptionsCreate pPscPayload_ pPscName_ =
-    ProjectsSubscriptionsCreate
+    ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscUploadProtocol = Nothing
     , _pscPp = True
@@ -182,7 +182,7 @@ instance GoogleRequest ProjectsSubscriptionsCreate
         type Scopes ProjectsSubscriptionsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsCreate{..}
+        requestClient ProjectsSubscriptionsCreate'{..}
           = go _pscName _pscXgafv _pscUploadProtocol
               (Just _pscPp)
               _pscAccessToken

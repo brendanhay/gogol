@@ -68,7 +68,7 @@ type VariantsCreateResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantsCreate' smart constructor.
-data VariantsCreate = VariantsCreate
+data VariantsCreate = VariantsCreate'
     { _vcXgafv          :: !(Maybe Text)
     , _vcUploadProtocol :: !(Maybe Text)
     , _vcPp             :: !Bool
@@ -102,7 +102,7 @@ variantsCreate
     :: Variant -- ^ 'vcPayload'
     -> VariantsCreate
 variantsCreate pVcPayload_ =
-    VariantsCreate
+    VariantsCreate'
     { _vcXgafv = Nothing
     , _vcUploadProtocol = Nothing
     , _vcPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest VariantsCreate where
         type Scopes VariantsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantsCreate{..}
+        requestClient VariantsCreate'{..}
           = go _vcXgafv _vcUploadProtocol (Just _vcPp)
               _vcAccessToken
               _vcUploadType

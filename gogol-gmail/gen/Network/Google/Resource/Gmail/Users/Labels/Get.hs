@@ -54,7 +54,7 @@ type UsersLabelsGetResource =
 -- | Gets the specified label.
 --
 -- /See:/ 'usersLabelsGet' smart constructor.
-data UsersLabelsGet = UsersLabelsGet
+data UsersLabelsGet = UsersLabelsGet'
     { _ulgUserId :: !Text
     , _ulgId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ usersLabelsGet
     :: Text -- ^ 'ulgId'
     -> UsersLabelsGet
 usersLabelsGet pUlgId_ =
-    UsersLabelsGet
+    UsersLabelsGet'
     { _ulgUserId = "me"
     , _ulgId = pUlgId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest UsersLabelsGet where
                "https://www.googleapis.com/auth/gmail.labels",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersLabelsGet{..}
+        requestClient UsersLabelsGet'{..}
           = go _ulgUserId _ulgId (Just AltJSON) gmailService
           where go
                   = buildClient (Proxy :: Proxy UsersLabelsGetResource)

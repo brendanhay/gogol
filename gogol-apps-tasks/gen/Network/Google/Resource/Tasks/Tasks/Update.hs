@@ -56,7 +56,7 @@ type TasksUpdateResource =
 -- | Updates the specified task.
 --
 -- /See:/ 'tasksUpdate' smart constructor.
-data TasksUpdate = TasksUpdate
+data TasksUpdate = TasksUpdate'
     { _tuPayload  :: !Task
     , _tuTaskList :: !Text
     , _tuTask     :: !Text
@@ -77,7 +77,7 @@ tasksUpdate
     -> Text -- ^ 'tuTask'
     -> TasksUpdate
 tasksUpdate pTuPayload_ pTuTaskList_ pTuTask_ =
-    TasksUpdate
+    TasksUpdate'
     { _tuPayload = pTuPayload_
     , _tuTaskList = pTuTaskList_
     , _tuTask = pTuTask_
@@ -101,7 +101,7 @@ instance GoogleRequest TasksUpdate where
         type Rs TasksUpdate = Task
         type Scopes TasksUpdate =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TasksUpdate{..}
+        requestClient TasksUpdate'{..}
           = go _tuTaskList _tuTask (Just AltJSON) _tuPayload
               appsTasksService
           where go

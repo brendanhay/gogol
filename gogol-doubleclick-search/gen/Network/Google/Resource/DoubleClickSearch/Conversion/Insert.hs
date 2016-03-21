@@ -52,7 +52,7 @@ type ConversionInsertResource =
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
 -- /See:/ 'conversionInsert' smart constructor.
-newtype ConversionInsert = ConversionInsert
+newtype ConversionInsert = ConversionInsert'
     { _ciPayload :: ConversionList
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ conversionInsert
     :: ConversionList -- ^ 'ciPayload'
     -> ConversionInsert
 conversionInsert pCiPayload_ =
-    ConversionInsert
+    ConversionInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest ConversionInsert where
         type Rs ConversionInsert = ConversionList
         type Scopes ConversionInsert =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ConversionInsert{..}
+        requestClient ConversionInsert'{..}
           = go (Just AltJSON) _ciPayload
               doubleClickSearchService
           where go

@@ -75,7 +75,7 @@ type ProjectsPatchTracesResource =
 -- the ID does not match, a new trace is created.
 --
 -- /See:/ 'projectsPatchTraces' smart constructor.
-data ProjectsPatchTraces = ProjectsPatchTraces
+data ProjectsPatchTraces = ProjectsPatchTraces'
     { _pptXgafv          :: !(Maybe Text)
     , _pptUploadProtocol :: !(Maybe Text)
     , _pptPp             :: !Bool
@@ -113,7 +113,7 @@ projectsPatchTraces
     -> Text -- ^ 'pptProjectId'
     -> ProjectsPatchTraces
 projectsPatchTraces pPptPayload_ pPptProjectId_ =
-    ProjectsPatchTraces
+    ProjectsPatchTraces'
     { _pptXgafv = Nothing
     , _pptUploadProtocol = Nothing
     , _pptPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest ProjectsPatchTraces where
         type Rs ProjectsPatchTraces = Empty
         type Scopes ProjectsPatchTraces =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsPatchTraces{..}
+        requestClient ProjectsPatchTraces'{..}
           = go _pptProjectId _pptXgafv _pptUploadProtocol
               (Just _pptPp)
               _pptAccessToken

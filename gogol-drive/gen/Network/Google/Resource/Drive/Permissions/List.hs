@@ -53,7 +53,7 @@ type PermissionsListResource =
 -- | Lists a file\'s permissions.
 --
 -- /See:/ 'permissionsList' smart constructor.
-newtype PermissionsList = PermissionsList
+newtype PermissionsList = PermissionsList'
     { _plFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ permissionsList
     :: Text -- ^ 'plFileId'
     -> PermissionsList
 permissionsList pPlFileId_ =
-    PermissionsList
+    PermissionsList'
     { _plFileId = pPlFileId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest PermissionsList where
                "https://www.googleapis.com/auth/drive.metadata.readonly",
                "https://www.googleapis.com/auth/drive.photos.readonly",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient PermissionsList{..}
+        requestClient PermissionsList'{..}
           = go _plFileId (Just AltJSON) driveService
           where go
                   = buildClient

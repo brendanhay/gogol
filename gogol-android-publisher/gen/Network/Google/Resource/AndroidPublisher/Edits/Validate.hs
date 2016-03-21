@@ -56,7 +56,7 @@ type EditsValidateResource =
 -- are not applied to the live app.
 --
 -- /See:/ 'editsValidate' smart constructor.
-data EditsValidate = EditsValidate
+data EditsValidate = EditsValidate'
     { _evPackageName :: !Text
     , _evEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ editsValidate
     -> Text -- ^ 'evEditId'
     -> EditsValidate
 editsValidate pEvPackageName_ pEvEditId_ =
-    EditsValidate
+    EditsValidate'
     { _evPackageName = pEvPackageName_
     , _evEditId = pEvEditId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest EditsValidate where
         type Rs EditsValidate = AppEdit
         type Scopes EditsValidate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsValidate{..}
+        requestClient EditsValidate'{..}
           = go _evPackageName _evEditId (Just AltJSON)
               androidPublisherService
           where go

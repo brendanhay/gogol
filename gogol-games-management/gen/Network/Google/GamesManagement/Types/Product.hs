@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- experience.
 --
 -- /See:/ 'gamesPlayerExperienceInfoResource' smart constructor.
-data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource
+data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource'
     { _gpeirCurrentExperiencePoints    :: !(Maybe (Textual Int64))
     , _gpeirCurrentLevel               :: !(Maybe GamesPlayerLevelResource)
     , _gpeirNextLevel                  :: !(Maybe GamesPlayerLevelResource)
@@ -45,7 +45,7 @@ data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource
 gamesPlayerExperienceInfoResource
     :: GamesPlayerExperienceInfoResource
 gamesPlayerExperienceInfoResource =
-    GamesPlayerExperienceInfoResource
+    GamesPlayerExperienceInfoResource'
     { _gpeirCurrentExperiencePoints = Nothing
     , _gpeirCurrentLevel = Nothing
     , _gpeirNextLevel = Nothing
@@ -85,7 +85,7 @@ instance FromJSON GamesPlayerExperienceInfoResource
         parseJSON
           = withObject "GamesPlayerExperienceInfoResource"
               (\ o ->
-                 GamesPlayerExperienceInfoResource <$>
+                 GamesPlayerExperienceInfoResource' <$>
                    (o .:? "currentExperiencePoints") <*>
                      (o .:? "currentLevel")
                      <*> (o .:? "nextLevel")
@@ -93,7 +93,7 @@ instance FromJSON GamesPlayerExperienceInfoResource
 
 instance ToJSON GamesPlayerExperienceInfoResource
          where
-        toJSON GamesPlayerExperienceInfoResource{..}
+        toJSON GamesPlayerExperienceInfoResource'{..}
           = object
               (catMaybes
                  [("currentExperiencePoints" .=) <$>
@@ -107,7 +107,7 @@ instance ToJSON GamesPlayerExperienceInfoResource
 -- name. For some players, these fields may not be present.
 --
 -- /See:/ 'playerName' smart constructor.
-data PlayerName = PlayerName
+data PlayerName = PlayerName'
     { _pnGivenName  :: !(Maybe Text)
     , _pnFamilyName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -122,7 +122,7 @@ data PlayerName = PlayerName
 playerName
     :: PlayerName
 playerName =
-    PlayerName
+    PlayerName'
     { _pnGivenName = Nothing
     , _pnFamilyName = Nothing
     }
@@ -143,11 +143,11 @@ instance FromJSON PlayerName where
         parseJSON
           = withObject "PlayerName"
               (\ o ->
-                 PlayerName <$>
+                 PlayerName' <$>
                    (o .:? "givenName") <*> (o .:? "familyName"))
 
 instance ToJSON PlayerName where
-        toJSON PlayerName{..}
+        toJSON PlayerName'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _pnGivenName,
@@ -156,7 +156,7 @@ instance ToJSON PlayerName where
 -- | This is a JSON template for a list of leaderboard reset resources.
 --
 -- /See:/ 'playerScoreResetAllResponse' smart constructor.
-data PlayerScoreResetAllResponse = PlayerScoreResetAllResponse
+data PlayerScoreResetAllResponse = PlayerScoreResetAllResponse'
     { _psrarResults :: !(Maybe [PlayerScoreResetResponse])
     , _psrarKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -171,7 +171,7 @@ data PlayerScoreResetAllResponse = PlayerScoreResetAllResponse
 playerScoreResetAllResponse
     :: PlayerScoreResetAllResponse
 playerScoreResetAllResponse =
-    PlayerScoreResetAllResponse
+    PlayerScoreResetAllResponse'
     { _psrarResults = Nothing
     , _psrarKind = "gamesManagement#playerScoreResetAllResponse"
     }
@@ -193,13 +193,13 @@ instance FromJSON PlayerScoreResetAllResponse where
         parseJSON
           = withObject "PlayerScoreResetAllResponse"
               (\ o ->
-                 PlayerScoreResetAllResponse <$>
+                 PlayerScoreResetAllResponse' <$>
                    (o .:? "results" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "gamesManagement#playerScoreResetAllResponse"))
 
 instance ToJSON PlayerScoreResetAllResponse where
-        toJSON PlayerScoreResetAllResponse{..}
+        toJSON PlayerScoreResetAllResponse'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _psrarResults,
@@ -209,7 +209,7 @@ instance ToJSON PlayerScoreResetAllResponse where
 -- the currently authenticated user.
 --
 -- /See:/ 'gamesPlayedResource' smart constructor.
-data GamesPlayedResource = GamesPlayedResource
+data GamesPlayedResource = GamesPlayedResource'
     { _gprAutoMatched :: !(Maybe Bool)
     , _gprTimeMillis  :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -224,7 +224,7 @@ data GamesPlayedResource = GamesPlayedResource
 gamesPlayedResource
     :: GamesPlayedResource
 gamesPlayedResource =
-    GamesPlayedResource
+    GamesPlayedResource'
     { _gprAutoMatched = Nothing
     , _gprTimeMillis = Nothing
     }
@@ -248,11 +248,11 @@ instance FromJSON GamesPlayedResource where
         parseJSON
           = withObject "GamesPlayedResource"
               (\ o ->
-                 GamesPlayedResource <$>
+                 GamesPlayedResource' <$>
                    (o .:? "autoMatched") <*> (o .:? "timeMillis"))
 
 instance ToJSON GamesPlayedResource where
-        toJSON GamesPlayedResource{..}
+        toJSON GamesPlayedResource'{..}
           = object
               (catMaybes
                  [("autoMatched" .=) <$> _gprAutoMatched,
@@ -261,7 +261,7 @@ instance ToJSON GamesPlayedResource where
 -- | This is a JSON template for 1P\/3P metadata about a user\'s level.
 --
 -- /See:/ 'gamesPlayerLevelResource' smart constructor.
-data GamesPlayerLevelResource = GamesPlayerLevelResource
+data GamesPlayerLevelResource = GamesPlayerLevelResource'
     { _gplrMaxExperiencePoints :: !(Maybe (Textual Int64))
     , _gplrMinExperiencePoints :: !(Maybe (Textual Int64))
     , _gplrLevel               :: !(Maybe (Textual Int32))
@@ -279,7 +279,7 @@ data GamesPlayerLevelResource = GamesPlayerLevelResource
 gamesPlayerLevelResource
     :: GamesPlayerLevelResource
 gamesPlayerLevelResource =
-    GamesPlayerLevelResource
+    GamesPlayerLevelResource'
     { _gplrMaxExperiencePoints = Nothing
     , _gplrMinExperiencePoints = Nothing
     , _gplrLevel = Nothing
@@ -309,13 +309,13 @@ instance FromJSON GamesPlayerLevelResource where
         parseJSON
           = withObject "GamesPlayerLevelResource"
               (\ o ->
-                 GamesPlayerLevelResource <$>
+                 GamesPlayerLevelResource' <$>
                    (o .:? "maxExperiencePoints") <*>
                      (o .:? "minExperiencePoints")
                      <*> (o .:? "level"))
 
 instance ToJSON GamesPlayerLevelResource where
-        toJSON GamesPlayerLevelResource{..}
+        toJSON GamesPlayerLevelResource'{..}
           = object
               (catMaybes
                  [("maxExperiencePoints" .=) <$>
@@ -327,7 +327,7 @@ instance ToJSON GamesPlayerLevelResource where
 -- | This is a JSON template for a list of reset leaderboard entry resources.
 --
 -- /See:/ 'playerScoreResetResponse' smart constructor.
-data PlayerScoreResetResponse = PlayerScoreResetResponse
+data PlayerScoreResetResponse = PlayerScoreResetResponse'
     { _psrrKind                :: !Text
     , _psrrResetScoreTimeSpans :: !(Maybe [Text])
     , _psrrDefinitionId        :: !(Maybe Text)
@@ -345,7 +345,7 @@ data PlayerScoreResetResponse = PlayerScoreResetResponse
 playerScoreResetResponse
     :: PlayerScoreResetResponse
 playerScoreResetResponse =
-    PlayerScoreResetResponse
+    PlayerScoreResetResponse'
     { _psrrKind = "gamesManagement#playerScoreResetResponse"
     , _psrrResetScoreTimeSpans = Nothing
     , _psrrDefinitionId = Nothing
@@ -376,14 +376,14 @@ instance FromJSON PlayerScoreResetResponse where
         parseJSON
           = withObject "PlayerScoreResetResponse"
               (\ o ->
-                 PlayerScoreResetResponse <$>
+                 PlayerScoreResetResponse' <$>
                    (o .:? "kind" .!=
                       "gamesManagement#playerScoreResetResponse")
                      <*> (o .:? "resetScoreTimeSpans" .!= mempty)
                      <*> (o .:? "definitionId"))
 
 instance ToJSON PlayerScoreResetResponse where
-        toJSON PlayerScoreResetResponse{..}
+        toJSON PlayerScoreResetResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _psrrKind),
@@ -394,7 +394,7 @@ instance ToJSON PlayerScoreResetResponse where
 -- | This is a JSON template for multiple scores reset all request.
 --
 -- /See:/ 'scoresResetMultipleForAllRequest' smart constructor.
-data ScoresResetMultipleForAllRequest = ScoresResetMultipleForAllRequest
+data ScoresResetMultipleForAllRequest = ScoresResetMultipleForAllRequest'
     { _srmfarKind           :: !Text
     , _srmfarLeaderboardIds :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -409,7 +409,7 @@ data ScoresResetMultipleForAllRequest = ScoresResetMultipleForAllRequest
 scoresResetMultipleForAllRequest
     :: ScoresResetMultipleForAllRequest
 scoresResetMultipleForAllRequest =
-    ScoresResetMultipleForAllRequest
+    ScoresResetMultipleForAllRequest'
     { _srmfarKind = "gamesManagement#scoresResetMultipleForAllRequest"
     , _srmfarLeaderboardIds = Nothing
     }
@@ -433,14 +433,14 @@ instance FromJSON ScoresResetMultipleForAllRequest
         parseJSON
           = withObject "ScoresResetMultipleForAllRequest"
               (\ o ->
-                 ScoresResetMultipleForAllRequest <$>
+                 ScoresResetMultipleForAllRequest' <$>
                    (o .:? "kind" .!=
                       "gamesManagement#scoresResetMultipleForAllRequest")
                      <*> (o .:? "leaderboard_ids" .!= mempty))
 
 instance ToJSON ScoresResetMultipleForAllRequest
          where
-        toJSON ScoresResetMultipleForAllRequest{..}
+        toJSON ScoresResetMultipleForAllRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _srmfarKind),
@@ -449,7 +449,7 @@ instance ToJSON ScoresResetMultipleForAllRequest
 -- | This is a JSON template for multiple quests reset all request.
 --
 -- /See:/ 'questsResetMultipleForAllRequest' smart constructor.
-data QuestsResetMultipleForAllRequest = QuestsResetMultipleForAllRequest
+data QuestsResetMultipleForAllRequest = QuestsResetMultipleForAllRequest'
     { _qrmfarKind     :: !Text
     , _qrmfarQuestIds :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -464,7 +464,7 @@ data QuestsResetMultipleForAllRequest = QuestsResetMultipleForAllRequest
 questsResetMultipleForAllRequest
     :: QuestsResetMultipleForAllRequest
 questsResetMultipleForAllRequest =
-    QuestsResetMultipleForAllRequest
+    QuestsResetMultipleForAllRequest'
     { _qrmfarKind = "gamesManagement#questsResetMultipleForAllRequest"
     , _qrmfarQuestIds = Nothing
     }
@@ -488,14 +488,14 @@ instance FromJSON QuestsResetMultipleForAllRequest
         parseJSON
           = withObject "QuestsResetMultipleForAllRequest"
               (\ o ->
-                 QuestsResetMultipleForAllRequest <$>
+                 QuestsResetMultipleForAllRequest' <$>
                    (o .:? "kind" .!=
                       "gamesManagement#questsResetMultipleForAllRequest")
                      <*> (o .:? "quest_ids" .!= mempty))
 
 instance ToJSON QuestsResetMultipleForAllRequest
          where
-        toJSON QuestsResetMultipleForAllRequest{..}
+        toJSON QuestsResetMultipleForAllRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _qrmfarKind),
@@ -504,7 +504,7 @@ instance ToJSON QuestsResetMultipleForAllRequest
 -- | This is a JSON template for a list of hidden players.
 --
 -- /See:/ 'hiddenPlayerList' smart constructor.
-data HiddenPlayerList = HiddenPlayerList
+data HiddenPlayerList = HiddenPlayerList'
     { _hplNextPageToken :: !(Maybe Text)
     , _hplKind          :: !Text
     , _hplItems         :: !(Maybe [HiddenPlayer])
@@ -522,7 +522,7 @@ data HiddenPlayerList = HiddenPlayerList
 hiddenPlayerList
     :: HiddenPlayerList
 hiddenPlayerList =
-    HiddenPlayerList
+    HiddenPlayerList'
     { _hplNextPageToken = Nothing
     , _hplKind = "gamesManagement#hiddenPlayerList"
     , _hplItems = Nothing
@@ -550,13 +550,13 @@ instance FromJSON HiddenPlayerList where
         parseJSON
           = withObject "HiddenPlayerList"
               (\ o ->
-                 HiddenPlayerList <$>
+                 HiddenPlayerList' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "gamesManagement#hiddenPlayerList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON HiddenPlayerList where
-        toJSON HiddenPlayerList{..}
+        toJSON HiddenPlayerList'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _hplNextPageToken,
@@ -566,7 +566,7 @@ instance ToJSON HiddenPlayerList where
 -- | This is a JSON template for multiple events reset all request.
 --
 -- /See:/ 'eventsResetMultipleForAllRequest' smart constructor.
-data EventsResetMultipleForAllRequest = EventsResetMultipleForAllRequest
+data EventsResetMultipleForAllRequest = EventsResetMultipleForAllRequest'
     { _ermfarKind     :: !Text
     , _ermfarEventIds :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -581,7 +581,7 @@ data EventsResetMultipleForAllRequest = EventsResetMultipleForAllRequest
 eventsResetMultipleForAllRequest
     :: EventsResetMultipleForAllRequest
 eventsResetMultipleForAllRequest =
-    EventsResetMultipleForAllRequest
+    EventsResetMultipleForAllRequest'
     { _ermfarKind = "gamesManagement#eventsResetMultipleForAllRequest"
     , _ermfarEventIds = Nothing
     }
@@ -605,14 +605,14 @@ instance FromJSON EventsResetMultipleForAllRequest
         parseJSON
           = withObject "EventsResetMultipleForAllRequest"
               (\ o ->
-                 EventsResetMultipleForAllRequest <$>
+                 EventsResetMultipleForAllRequest' <$>
                    (o .:? "kind" .!=
                       "gamesManagement#eventsResetMultipleForAllRequest")
                      <*> (o .:? "event_ids" .!= mempty))
 
 instance ToJSON EventsResetMultipleForAllRequest
          where
-        toJSON EventsResetMultipleForAllRequest{..}
+        toJSON EventsResetMultipleForAllRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ermfarKind),
@@ -621,7 +621,7 @@ instance ToJSON EventsResetMultipleForAllRequest
 -- | This is a JSON template for multiple achievements reset all request.
 --
 -- /See:/ 'achievementResetMultipleForAllRequest' smart constructor.
-data AchievementResetMultipleForAllRequest = AchievementResetMultipleForAllRequest
+data AchievementResetMultipleForAllRequest = AchievementResetMultipleForAllRequest'
     { _armfarKind           :: !Text
     , _armfarAchievementIds :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -636,7 +636,7 @@ data AchievementResetMultipleForAllRequest = AchievementResetMultipleForAllReque
 achievementResetMultipleForAllRequest
     :: AchievementResetMultipleForAllRequest
 achievementResetMultipleForAllRequest =
-    AchievementResetMultipleForAllRequest
+    AchievementResetMultipleForAllRequest'
     { _armfarKind = "gamesManagement#achievementResetMultipleForAllRequest"
     , _armfarAchievementIds = Nothing
     }
@@ -660,14 +660,14 @@ instance FromJSON
         parseJSON
           = withObject "AchievementResetMultipleForAllRequest"
               (\ o ->
-                 AchievementResetMultipleForAllRequest <$>
+                 AchievementResetMultipleForAllRequest' <$>
                    (o .:? "kind" .!=
                       "gamesManagement#achievementResetMultipleForAllRequest")
                      <*> (o .:? "achievement_ids" .!= mempty))
 
 instance ToJSON AchievementResetMultipleForAllRequest
          where
-        toJSON AchievementResetMultipleForAllRequest{..}
+        toJSON AchievementResetMultipleForAllRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _armfarKind),
@@ -676,7 +676,7 @@ instance ToJSON AchievementResetMultipleForAllRequest
 -- | This is a JSON template for the HiddenPlayer resource.
 --
 -- /See:/ 'hiddenPlayer' smart constructor.
-data HiddenPlayer = HiddenPlayer
+data HiddenPlayer = HiddenPlayer'
     { _hpKind             :: !Text
     , _hpHiddenTimeMillis :: !(Maybe (Textual Int64))
     , _hpPlayer           :: !(Maybe Player)
@@ -694,7 +694,7 @@ data HiddenPlayer = HiddenPlayer
 hiddenPlayer
     :: HiddenPlayer
 hiddenPlayer =
-    HiddenPlayer
+    HiddenPlayer'
     { _hpKind = "gamesManagement#hiddenPlayer"
     , _hpHiddenTimeMillis = Nothing
     , _hpPlayer = Nothing
@@ -720,13 +720,13 @@ instance FromJSON HiddenPlayer where
         parseJSON
           = withObject "HiddenPlayer"
               (\ o ->
-                 HiddenPlayer <$>
+                 HiddenPlayer' <$>
                    (o .:? "kind" .!= "gamesManagement#hiddenPlayer") <*>
                      (o .:? "hiddenTimeMillis")
                      <*> (o .:? "player"))
 
 instance ToJSON HiddenPlayer where
-        toJSON HiddenPlayer{..}
+        toJSON HiddenPlayer'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _hpKind),
@@ -736,7 +736,7 @@ instance ToJSON HiddenPlayer where
 -- | This is a JSON template for achievement reset all response.
 --
 -- /See:/ 'achievementResetAllResponse' smart constructor.
-data AchievementResetAllResponse = AchievementResetAllResponse
+data AchievementResetAllResponse = AchievementResetAllResponse'
     { _ararResults :: !(Maybe [AchievementResetResponse])
     , _ararKind    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -751,7 +751,7 @@ data AchievementResetAllResponse = AchievementResetAllResponse
 achievementResetAllResponse
     :: AchievementResetAllResponse
 achievementResetAllResponse =
-    AchievementResetAllResponse
+    AchievementResetAllResponse'
     { _ararResults = Nothing
     , _ararKind = "gamesManagement#achievementResetAllResponse"
     }
@@ -772,13 +772,13 @@ instance FromJSON AchievementResetAllResponse where
         parseJSON
           = withObject "AchievementResetAllResponse"
               (\ o ->
-                 AchievementResetAllResponse <$>
+                 AchievementResetAllResponse' <$>
                    (o .:? "results" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "gamesManagement#achievementResetAllResponse"))
 
 instance ToJSON AchievementResetAllResponse where
-        toJSON AchievementResetAllResponse{..}
+        toJSON AchievementResetAllResponse'{..}
           = object
               (catMaybes
                  [("results" .=) <$> _ararResults,
@@ -787,7 +787,7 @@ instance ToJSON AchievementResetAllResponse where
 -- | This is a JSON template for a Player resource.
 --
 -- /See:/ 'player' smart constructor.
-data Player = Player
+data Player = Player'
     { _pBannerURLLandscape :: !(Maybe Text)
     , _pLastPlayedWith     :: !(Maybe GamesPlayedResource)
     , _pAvatarImageURL     :: !(Maybe Text)
@@ -829,7 +829,7 @@ data Player = Player
 player
     :: Player
 player =
-    Player
+    Player'
     { _pBannerURLLandscape = Nothing
     , _pLastPlayedWith = Nothing
     , _pAvatarImageURL = Nothing
@@ -913,7 +913,7 @@ instance FromJSON Player where
         parseJSON
           = withObject "Player"
               (\ o ->
-                 Player <$>
+                 Player' <$>
                    (o .:? "bannerUrlLandscape") <*>
                      (o .:? "lastPlayedWith")
                      <*> (o .:? "avatarImageUrl")
@@ -927,7 +927,7 @@ instance FromJSON Player where
                      <*> (o .:? "playerId"))
 
 instance ToJSON Player where
-        toJSON Player{..}
+        toJSON Player'{..}
           = object
               (catMaybes
                  [("bannerUrlLandscape" .=) <$> _pBannerURLLandscape,
@@ -945,7 +945,7 @@ instance ToJSON Player where
 -- | This is a JSON template for an achievement reset response.
 --
 -- /See:/ 'achievementResetResponse' smart constructor.
-data AchievementResetResponse = AchievementResetResponse
+data AchievementResetResponse = AchievementResetResponse'
     { _arrUpdateOccurred :: !(Maybe Bool)
     , _arrKind           :: !Text
     , _arrCurrentState   :: !(Maybe Text)
@@ -966,7 +966,7 @@ data AchievementResetResponse = AchievementResetResponse
 achievementResetResponse
     :: AchievementResetResponse
 achievementResetResponse =
-    AchievementResetResponse
+    AchievementResetResponse'
     { _arrUpdateOccurred = Nothing
     , _arrKind = "gamesManagement#achievementResetResponse"
     , _arrCurrentState = Nothing
@@ -1003,7 +1003,7 @@ instance FromJSON AchievementResetResponse where
         parseJSON
           = withObject "AchievementResetResponse"
               (\ o ->
-                 AchievementResetResponse <$>
+                 AchievementResetResponse' <$>
                    (o .:? "updateOccurred") <*>
                      (o .:? "kind" .!=
                         "gamesManagement#achievementResetResponse")
@@ -1011,7 +1011,7 @@ instance FromJSON AchievementResetResponse where
                      <*> (o .:? "definitionId"))
 
 instance ToJSON AchievementResetResponse where
-        toJSON AchievementResetResponse{..}
+        toJSON AchievementResetResponse'{..}
           = object
               (catMaybes
                  [("updateOccurred" .=) <$> _arrUpdateOccurred,

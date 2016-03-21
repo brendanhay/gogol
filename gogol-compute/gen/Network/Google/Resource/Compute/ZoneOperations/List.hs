@@ -63,7 +63,7 @@ type ZoneOperationsListResource =
 -- zone.
 --
 -- /See:/ 'zoneOperationsList' smart constructor.
-data ZoneOperationsList = ZoneOperationsList
+data ZoneOperationsList = ZoneOperationsList'
     { _zolProject    :: !Text
     , _zolZone       :: !Text
     , _zolFilter     :: !(Maybe Text)
@@ -89,7 +89,7 @@ zoneOperationsList
     -> Text -- ^ 'zolZone'
     -> ZoneOperationsList
 zoneOperationsList pZolProject_ pZolZone_ =
-    ZoneOperationsList
+    ZoneOperationsList'
     { _zolProject = pZolProject_
     , _zolZone = pZolZone_
     , _zolFilter = Nothing
@@ -154,7 +154,7 @@ instance GoogleRequest ZoneOperationsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ZoneOperationsList{..}
+        requestClient ZoneOperationsList'{..}
           = go _zolProject _zolZone _zolFilter _zolPageToken
               (Just _zolMaxResults)
               (Just AltJSON)

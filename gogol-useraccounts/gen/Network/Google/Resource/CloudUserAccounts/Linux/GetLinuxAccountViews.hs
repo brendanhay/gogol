@@ -68,7 +68,7 @@ type LinuxGetLinuxAccountViewsResource =
 -- project.
 --
 -- /See:/ 'linuxGetLinuxAccountViews' smart constructor.
-data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews
+data LinuxGetLinuxAccountViews = LinuxGetLinuxAccountViews'
     { _lglavOrderBy    :: !(Maybe Text)
     , _lglavProject    :: !Text
     , _lglavZone       :: !Text
@@ -101,7 +101,7 @@ linuxGetLinuxAccountViews
     -> Text -- ^ 'lglavInstance'
     -> LinuxGetLinuxAccountViews
 linuxGetLinuxAccountViews pLglavProject_ pLglavZone_ pLglavInstance_ =
-    LinuxGetLinuxAccountViews
+    LinuxGetLinuxAccountViews'
     { _lglavOrderBy = Nothing
     , _lglavProject = pLglavProject_
     , _lglavZone = pLglavZone_
@@ -191,7 +191,7 @@ instance GoogleRequest LinuxGetLinuxAccountViews
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/cloud.useraccounts",
                "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-        requestClient LinuxGetLinuxAccountViews{..}
+        requestClient LinuxGetLinuxAccountViews'{..}
           = go _lglavProject _lglavZone (Just _lglavInstance)
               _lglavOrderBy
               _lglavFilter

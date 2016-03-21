@@ -64,7 +64,7 @@ type TargetInstancesListResource =
 -- project and zone.
 --
 -- /See:/ 'targetInstancesList' smart constructor.
-data TargetInstancesList = TargetInstancesList
+data TargetInstancesList = TargetInstancesList'
     { _tilProject    :: !Text
     , _tilZone       :: !Text
     , _tilFilter     :: !(Maybe Text)
@@ -90,7 +90,7 @@ targetInstancesList
     -> Text -- ^ 'tilZone'
     -> TargetInstancesList
 targetInstancesList pTilProject_ pTilZone_ =
-    TargetInstancesList
+    TargetInstancesList'
     { _tilProject = pTilProject_
     , _tilZone = pTilZone_
     , _tilFilter = Nothing
@@ -155,7 +155,7 @@ instance GoogleRequest TargetInstancesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetInstancesList{..}
+        requestClient TargetInstancesList'{..}
           = go _tilProject _tilZone _tilFilter _tilPageToken
               (Just _tilMaxResults)
               (Just AltJSON)

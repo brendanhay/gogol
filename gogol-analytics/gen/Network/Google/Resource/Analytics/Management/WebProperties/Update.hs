@@ -58,7 +58,7 @@ type ManagementWebPropertiesUpdateResource =
 -- | Updates an existing web property.
 --
 -- /See:/ 'managementWebPropertiesUpdate' smart constructor.
-data ManagementWebPropertiesUpdate = ManagementWebPropertiesUpdate
+data ManagementWebPropertiesUpdate = ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId :: !Text
     , _mwpuPayload       :: !WebProperty
     , _mwpuAccountId     :: !Text
@@ -79,7 +79,7 @@ managementWebPropertiesUpdate
     -> Text -- ^ 'mwpuAccountId'
     -> ManagementWebPropertiesUpdate
 managementWebPropertiesUpdate pMwpuWebPropertyId_ pMwpuPayload_ pMwpuAccountId_ =
-    ManagementWebPropertiesUpdate
+    ManagementWebPropertiesUpdate'
     { _mwpuWebPropertyId = pMwpuWebPropertyId_
     , _mwpuPayload = pMwpuPayload_
     , _mwpuAccountId = pMwpuAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest ManagementWebPropertiesUpdate
         type Rs ManagementWebPropertiesUpdate = WebProperty
         type Scopes ManagementWebPropertiesUpdate =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementWebPropertiesUpdate{..}
+        requestClient ManagementWebPropertiesUpdate'{..}
           = go _mwpuAccountId _mwpuWebPropertyId (Just AltJSON)
               _mwpuPayload
               analyticsService

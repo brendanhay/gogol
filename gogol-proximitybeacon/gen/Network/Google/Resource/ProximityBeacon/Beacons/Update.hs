@@ -75,7 +75,7 @@ type BeaconsUpdateResource =
 -- separate methods on this API for (de)activation and decommissioning.
 --
 -- /See:/ 'beaconsUpdate' smart constructor.
-data BeaconsUpdate = BeaconsUpdate
+data BeaconsUpdate = BeaconsUpdate'
     { _buXgafv          :: !(Maybe Text)
     , _buUploadProtocol :: !(Maybe Text)
     , _buPp             :: !Bool
@@ -113,7 +113,7 @@ beaconsUpdate
     -> Beacon -- ^ 'buPayload'
     -> BeaconsUpdate
 beaconsUpdate pBuBeaconName_ pBuPayload_ =
-    BeaconsUpdate
+    BeaconsUpdate'
     { _buXgafv = Nothing
     , _buUploadProtocol = Nothing
     , _buPp = True
@@ -179,7 +179,7 @@ buCallback
 instance GoogleRequest BeaconsUpdate where
         type Rs BeaconsUpdate = Beacon
         type Scopes BeaconsUpdate = '[]
-        requestClient BeaconsUpdate{..}
+        requestClient BeaconsUpdate'{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)
               _buAccessToken

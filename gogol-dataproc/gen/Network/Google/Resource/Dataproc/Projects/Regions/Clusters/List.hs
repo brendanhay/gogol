@@ -73,7 +73,7 @@ type ProjectsRegionsClustersListResource =
 -- | Lists all regions\/{region}\/clusters in a project.
 --
 -- /See:/ 'projectsRegionsClustersList' smart constructor.
-data ProjectsRegionsClustersList = ProjectsRegionsClustersList
+data ProjectsRegionsClustersList = ProjectsRegionsClustersList'
     { _prclXgafv          :: !(Maybe Text)
     , _prclUploadProtocol :: !(Maybe Text)
     , _prclPp             :: !Bool
@@ -117,7 +117,7 @@ projectsRegionsClustersList
     -> Text -- ^ 'prclProjectId'
     -> ProjectsRegionsClustersList
 projectsRegionsClustersList pPrclRegion_ pPrclProjectId_ =
-    ProjectsRegionsClustersList
+    ProjectsRegionsClustersList'
     { _prclXgafv = Nothing
     , _prclUploadProtocol = Nothing
     , _prclPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest ProjectsRegionsClustersList
              ListClustersResponse
         type Scopes ProjectsRegionsClustersList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsClustersList{..}
+        requestClient ProjectsRegionsClustersList'{..}
           = go _prclProjectId _prclRegion _prclXgafv
               _prclUploadProtocol
               (Just _prclPp)

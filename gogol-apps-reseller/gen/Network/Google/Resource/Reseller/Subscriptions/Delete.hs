@@ -58,7 +58,7 @@ type SubscriptionsDeleteResource =
 -- | Cancels\/Downgrades a subscription.
 --
 -- /See:/ 'subscriptionsDelete' smart constructor.
-data SubscriptionsDelete = SubscriptionsDelete
+data SubscriptionsDelete = SubscriptionsDelete'
     { _sdCustomerId     :: !Text
     , _sdDeletionType   :: !SubscriptionsDeleteDeletionType
     , _sdSubscriptionId :: !Text
@@ -79,7 +79,7 @@ subscriptionsDelete
     -> Text -- ^ 'sdSubscriptionId'
     -> SubscriptionsDelete
 subscriptionsDelete pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
-    SubscriptionsDelete
+    SubscriptionsDelete'
     { _sdCustomerId = pSdCustomerId_
     , _sdDeletionType = pSdDeletionType_
     , _sdSubscriptionId = pSdSubscriptionId_
@@ -106,7 +106,7 @@ instance GoogleRequest SubscriptionsDelete where
         type Rs SubscriptionsDelete = ()
         type Scopes SubscriptionsDelete =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsDelete{..}
+        requestClient SubscriptionsDelete'{..}
           = go _sdCustomerId _sdSubscriptionId
               (Just _sdDeletionType)
               (Just AltJSON)

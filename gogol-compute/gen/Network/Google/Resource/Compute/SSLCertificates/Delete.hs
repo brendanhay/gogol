@@ -55,7 +55,7 @@ type SSLCertificatesDeleteResource =
 -- | Deletes the specified SslCertificate resource.
 --
 -- /See:/ 'sslCertificatesDelete' smart constructor.
-data SSLCertificatesDelete = SSLCertificatesDelete
+data SSLCertificatesDelete = SSLCertificatesDelete'
     { _scdProject        :: !Text
     , _scdSSLCertificate :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ sslCertificatesDelete
     -> Text -- ^ 'scdSSLCertificate'
     -> SSLCertificatesDelete
 sslCertificatesDelete pScdProject_ pScdSSLCertificate_ =
-    SSLCertificatesDelete
+    SSLCertificatesDelete'
     { _scdProject = pScdProject_
     , _scdSSLCertificate = pScdSSLCertificate_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SSLCertificatesDelete where
         type Scopes SSLCertificatesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient SSLCertificatesDelete{..}
+        requestClient SSLCertificatesDelete'{..}
           = go _scdProject _scdSSLCertificate (Just AltJSON)
               computeService
           where go

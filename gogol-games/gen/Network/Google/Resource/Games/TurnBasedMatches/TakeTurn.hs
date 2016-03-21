@@ -57,7 +57,7 @@ type TurnBasedMatchesTakeTurnResource =
 -- | Commit the results of a player turn.
 --
 -- /See:/ 'turnBasedMatchesTakeTurn' smart constructor.
-data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn
+data TurnBasedMatchesTakeTurn = TurnBasedMatchesTakeTurn'
     { _tbmttPayload  :: !TurnBasedMatchTurn
     , _tbmttLanguage :: !(Maybe Text)
     , _tbmttMatchId  :: !Text
@@ -77,7 +77,7 @@ turnBasedMatchesTakeTurn
     -> Text -- ^ 'tbmttMatchId'
     -> TurnBasedMatchesTakeTurn
 turnBasedMatchesTakeTurn pTbmttPayload_ pTbmttMatchId_ =
-    TurnBasedMatchesTakeTurn
+    TurnBasedMatchesTakeTurn'
     { _tbmttPayload = pTbmttPayload_
     , _tbmttLanguage = Nothing
     , _tbmttMatchId = pTbmttMatchId_
@@ -104,7 +104,7 @@ instance GoogleRequest TurnBasedMatchesTakeTurn where
         type Scopes TurnBasedMatchesTakeTurn =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesTakeTurn{..}
+        requestClient TurnBasedMatchesTakeTurn'{..}
           = go _tbmttMatchId _tbmttLanguage (Just AltJSON)
               _tbmttPayload
               gamesService

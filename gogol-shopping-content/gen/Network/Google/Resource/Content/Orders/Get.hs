@@ -53,7 +53,7 @@ type OrdersGetResource =
 -- | Retrieves an order from your Merchant Center account.
 --
 -- /See:/ 'ordersGet' smart constructor.
-data OrdersGet = OrdersGet
+data OrdersGet = OrdersGet'
     { _ogMerchantId :: !(Textual Word64)
     , _ogOrderId    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ ordersGet
     -> Text -- ^ 'ogOrderId'
     -> OrdersGet
 ordersGet pOgMerchantId_ pOgOrderId_ =
-    OrdersGet
+    OrdersGet'
     { _ogMerchantId = _Coerce # pOgMerchantId_
     , _ogOrderId = pOgOrderId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest OrdersGet where
         type Rs OrdersGet = Order
         type Scopes OrdersGet =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersGet{..}
+        requestClient OrdersGet'{..}
           = go _ogMerchantId _ogOrderId (Just AltJSON)
               shoppingContentService
           where go

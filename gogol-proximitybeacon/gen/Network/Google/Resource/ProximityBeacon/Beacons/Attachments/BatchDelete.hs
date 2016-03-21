@@ -77,7 +77,7 @@ type BeaconsAttachmentsBatchDeleteResource =
 -- delete all.
 --
 -- /See:/ 'beaconsAttachmentsBatchDelete' smart constructor.
-data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete
+data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete'
     { _babdXgafv          :: !(Maybe Text)
     , _babdUploadProtocol :: !(Maybe Text)
     , _babdPp             :: !Bool
@@ -114,7 +114,7 @@ beaconsAttachmentsBatchDelete
     :: Text -- ^ 'babdBeaconName'
     -> BeaconsAttachmentsBatchDelete
 beaconsAttachmentsBatchDelete pBabdBeaconName_ =
-    BeaconsAttachmentsBatchDelete
+    BeaconsAttachmentsBatchDelete'
     { _babdXgafv = Nothing
     , _babdUploadProtocol = Nothing
     , _babdPp = True
@@ -183,7 +183,7 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete
         type Rs BeaconsAttachmentsBatchDelete =
              DeleteAttachmentsResponse
         type Scopes BeaconsAttachmentsBatchDelete = '[]
-        requestClient BeaconsAttachmentsBatchDelete{..}
+        requestClient BeaconsAttachmentsBatchDelete'{..}
           = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)
               _babdAccessToken

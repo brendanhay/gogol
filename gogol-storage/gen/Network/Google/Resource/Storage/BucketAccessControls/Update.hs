@@ -57,7 +57,7 @@ type BucketAccessControlsUpdateResource =
 -- | Updates an ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsUpdate' smart constructor.
-data BucketAccessControlsUpdate = BucketAccessControlsUpdate
+data BucketAccessControlsUpdate = BucketAccessControlsUpdate'
     { _bacuBucket  :: !Text
     , _bacuPayload :: !BucketAccessControl
     , _bacuEntity  :: !Text
@@ -78,7 +78,7 @@ bucketAccessControlsUpdate
     -> Text -- ^ 'bacuEntity'
     -> BucketAccessControlsUpdate
 bucketAccessControlsUpdate pBacuBucket_ pBacuPayload_ pBacuEntity_ =
-    BucketAccessControlsUpdate
+    BucketAccessControlsUpdate'
     { _bacuBucket = pBacuBucket_
     , _bacuPayload = pBacuPayload_
     , _bacuEntity = pBacuEntity_
@@ -108,7 +108,7 @@ instance GoogleRequest BucketAccessControlsUpdate
         type Scopes BucketAccessControlsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient BucketAccessControlsUpdate{..}
+        requestClient BucketAccessControlsUpdate'{..}
           = go _bacuBucket _bacuEntity (Just AltJSON)
               _bacuPayload
               storageService

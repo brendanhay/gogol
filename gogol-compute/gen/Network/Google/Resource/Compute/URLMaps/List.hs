@@ -61,7 +61,7 @@ type URLMapsListResource =
 -- project.
 --
 -- /See:/ 'urlMapsList' smart constructor.
-data URLMapsList = URLMapsList
+data URLMapsList = URLMapsList'
     { _umlProject    :: !Text
     , _umlFilter     :: !(Maybe Text)
     , _umlPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ urlMapsList
     :: Text -- ^ 'umlProject'
     -> URLMapsList
 urlMapsList pUmlProject_ =
-    URLMapsList
+    URLMapsList'
     { _umlProject = pUmlProject_
     , _umlFilter = Nothing
     , _umlPageToken = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest URLMapsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient URLMapsList{..}
+        requestClient URLMapsList'{..}
           = go _umlProject _umlFilter _umlPageToken
               (Just _umlMaxResults)
               (Just AltJSON)

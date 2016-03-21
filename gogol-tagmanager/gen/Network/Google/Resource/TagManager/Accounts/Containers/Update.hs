@@ -58,7 +58,7 @@ type AccountsContainersUpdateResource =
 -- | Updates a Container.
 --
 -- /See:/ 'accountsContainersUpdate' smart constructor.
-data AccountsContainersUpdate = AccountsContainersUpdate
+data AccountsContainersUpdate = AccountsContainersUpdate'
     { _acuContainerId :: !Text
     , _acuFingerprint :: !(Maybe Text)
     , _acuPayload     :: !Container
@@ -82,7 +82,7 @@ accountsContainersUpdate
     -> Text -- ^ 'acuAccountId'
     -> AccountsContainersUpdate
 accountsContainersUpdate pAcuContainerId_ pAcuPayload_ pAcuAccountId_ =
-    AccountsContainersUpdate
+    AccountsContainersUpdate'
     { _acuContainerId = pAcuContainerId_
     , _acuFingerprint = Nothing
     , _acuPayload = pAcuPayload_
@@ -116,7 +116,7 @@ instance GoogleRequest AccountsContainersUpdate where
         type Rs AccountsContainersUpdate = Container
         type Scopes AccountsContainersUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersUpdate{..}
+        requestClient AccountsContainersUpdate'{..}
           = go _acuAccountId _acuContainerId _acuFingerprint
               (Just AltJSON)
               _acuPayload

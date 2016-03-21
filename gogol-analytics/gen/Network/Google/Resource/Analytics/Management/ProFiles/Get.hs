@@ -58,7 +58,7 @@ type ManagementProFilesGetResource =
 -- | Gets a view (profile) to which the user has access.
 --
 -- /See:/ 'managementProFilesGet' smart constructor.
-data ManagementProFilesGet = ManagementProFilesGet
+data ManagementProFilesGet = ManagementProFilesGet'
     { _mpfgWebPropertyId :: !Text
     , _mpfgProFileId     :: !Text
     , _mpfgAccountId     :: !Text
@@ -79,7 +79,7 @@ managementProFilesGet
     -> Text -- ^ 'mpfgAccountId'
     -> ManagementProFilesGet
 managementProFilesGet pMpfgWebPropertyId_ pMpfgProFileId_ pMpfgAccountId_ =
-    ManagementProFilesGet
+    ManagementProFilesGet'
     { _mpfgWebPropertyId = pMpfgWebPropertyId_
     , _mpfgProFileId = pMpfgProFileId_
     , _mpfgAccountId = pMpfgAccountId_
@@ -108,7 +108,7 @@ instance GoogleRequest ManagementProFilesGet where
         type Scopes ManagementProFilesGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementProFilesGet{..}
+        requestClient ManagementProFilesGet'{..}
           = go _mpfgAccountId _mpfgWebPropertyId _mpfgProFileId
               (Just AltJSON)
               analyticsService

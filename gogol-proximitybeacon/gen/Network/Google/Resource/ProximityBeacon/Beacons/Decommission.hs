@@ -69,7 +69,7 @@ type BeaconsDecommissionResource =
 -- again.
 --
 -- /See:/ 'beaconsDecommission' smart constructor.
-data BeaconsDecommission = BeaconsDecommission
+data BeaconsDecommission = BeaconsDecommission'
     { _beaXgafv          :: !(Maybe Text)
     , _beaUploadProtocol :: !(Maybe Text)
     , _beaPp             :: !Bool
@@ -103,7 +103,7 @@ beaconsDecommission
     :: Text -- ^ 'beaBeaconName'
     -> BeaconsDecommission
 beaconsDecommission pBeaBeaconName_ =
-    BeaconsDecommission
+    BeaconsDecommission'
     { _beaXgafv = Nothing
     , _beaUploadProtocol = Nothing
     , _beaPp = True
@@ -160,7 +160,7 @@ beaCallback
 instance GoogleRequest BeaconsDecommission where
         type Rs BeaconsDecommission = Empty
         type Scopes BeaconsDecommission = '[]
-        requestClient BeaconsDecommission{..}
+        requestClient BeaconsDecommission'{..}
           = go _beaBeaconName _beaXgafv _beaUploadProtocol
               (Just _beaPp)
               _beaAccessToken

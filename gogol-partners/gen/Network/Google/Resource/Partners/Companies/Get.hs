@@ -102,7 +102,7 @@ type CompaniesGetResource =
 -- | Gets a company.
 --
 -- /See:/ 'companiesGet' smart constructor.
-data CompaniesGet = CompaniesGet
+data CompaniesGet = CompaniesGet'
     { _cgXgafv                                       :: !(Maybe Text)
     , _cgCurrencyCode                                :: !(Maybe Text)
     , _cgUploadProtocol                              :: !(Maybe Text)
@@ -169,7 +169,7 @@ companiesGet
     :: Text -- ^ 'cgCompanyId'
     -> CompaniesGet
 companiesGet pCgCompanyId_ =
-    CompaniesGet
+    CompaniesGet'
     { _cgXgafv = Nothing
     , _cgCurrencyCode = Nothing
     , _cgUploadProtocol = Nothing
@@ -314,7 +314,7 @@ cgCallback
 instance GoogleRequest CompaniesGet where
         type Rs CompaniesGet = GetCompanyResponse
         type Scopes CompaniesGet = '[]
-        requestClient CompaniesGet{..}
+        requestClient CompaniesGet'{..}
           = go _cgCompanyId _cgXgafv _cgCurrencyCode
               _cgUploadProtocol
               _cgOrderBy

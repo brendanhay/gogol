@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Response when listing course aliases.
 --
 -- /See:/ 'listCourseAliasesResponse' smart constructor.
-data ListCourseAliasesResponse = ListCourseAliasesResponse
+data ListCourseAliasesResponse = ListCourseAliasesResponse'
     { _lcarNextPageToken :: !(Maybe Text)
     , _lcarAliases       :: !(Maybe [CourseAlias])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data ListCourseAliasesResponse = ListCourseAliasesResponse
 listCourseAliasesResponse
     :: ListCourseAliasesResponse
 listCourseAliasesResponse =
-    ListCourseAliasesResponse
+    ListCourseAliasesResponse'
     { _lcarNextPageToken = Nothing
     , _lcarAliases = Nothing
     }
@@ -61,12 +61,12 @@ instance FromJSON ListCourseAliasesResponse where
         parseJSON
           = withObject "ListCourseAliasesResponse"
               (\ o ->
-                 ListCourseAliasesResponse <$>
+                 ListCourseAliasesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "aliases" .!= mempty))
 
 instance ToJSON ListCourseAliasesResponse where
-        toJSON ListCourseAliasesResponse{..}
+        toJSON ListCourseAliasesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lcarNextPageToken,
@@ -80,17 +80,17 @@ instance ToJSON ListCourseAliasesResponse where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -98,7 +98,7 @@ instance ToJSON Empty where
 -- | Global user permission description.
 --
 -- /See:/ 'globalPermission' smart constructor.
-newtype GlobalPermission = GlobalPermission
+newtype GlobalPermission = GlobalPermission'
     { _gpPermission :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -110,7 +110,7 @@ newtype GlobalPermission = GlobalPermission
 globalPermission
     :: GlobalPermission
 globalPermission =
-    GlobalPermission
+    GlobalPermission'
     { _gpPermission = Nothing
     }
 
@@ -122,17 +122,17 @@ gpPermission
 instance FromJSON GlobalPermission where
         parseJSON
           = withObject "GlobalPermission"
-              (\ o -> GlobalPermission <$> (o .:? "permission"))
+              (\ o -> GlobalPermission' <$> (o .:? "permission"))
 
 instance ToJSON GlobalPermission where
-        toJSON GlobalPermission{..}
+        toJSON GlobalPermission'{..}
           = object
               (catMaybes [("permission" .=) <$> _gpPermission])
 
 -- | Response when listing invitations.
 --
 -- /See:/ 'listInvitationsResponse' smart constructor.
-data ListInvitationsResponse = ListInvitationsResponse
+data ListInvitationsResponse = ListInvitationsResponse'
     { _lirNextPageToken :: !(Maybe Text)
     , _lirInvitations   :: !(Maybe [Invitation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -147,7 +147,7 @@ data ListInvitationsResponse = ListInvitationsResponse
 listInvitationsResponse
     :: ListInvitationsResponse
 listInvitationsResponse =
-    ListInvitationsResponse
+    ListInvitationsResponse'
     { _lirNextPageToken = Nothing
     , _lirInvitations = Nothing
     }
@@ -171,12 +171,12 @@ instance FromJSON ListInvitationsResponse where
         parseJSON
           = withObject "ListInvitationsResponse"
               (\ o ->
-                 ListInvitationsResponse <$>
+                 ListInvitationsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "invitations" .!= mempty))
 
 instance ToJSON ListInvitationsResponse where
-        toJSON ListInvitationsResponse{..}
+        toJSON ListInvitationsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lirNextPageToken,
@@ -185,7 +185,7 @@ instance ToJSON ListInvitationsResponse where
 -- | An invitation to join a course.
 --
 -- /See:/ 'invitation' smart constructor.
-data Invitation = Invitation
+data Invitation = Invitation'
     { _iCourseId :: !(Maybe Text)
     , _iUserId   :: !(Maybe Text)
     , _iRole     :: !(Maybe Text)
@@ -206,7 +206,7 @@ data Invitation = Invitation
 invitation
     :: Invitation
 invitation =
-    Invitation
+    Invitation'
     { _iCourseId = Nothing
     , _iUserId = Nothing
     , _iRole = Nothing
@@ -238,13 +238,13 @@ instance FromJSON Invitation where
         parseJSON
           = withObject "Invitation"
               (\ o ->
-                 Invitation <$>
+                 Invitation' <$>
                    (o .:? "courseId") <*> (o .:? "userId") <*>
                      (o .:? "role")
                      <*> (o .:? "id"))
 
 instance ToJSON Invitation where
-        toJSON Invitation{..}
+        toJSON Invitation'{..}
           = object
               (catMaybes
                  [("courseId" .=) <$> _iCourseId,
@@ -254,7 +254,7 @@ instance ToJSON Invitation where
 -- | Teacher of a course.
 --
 -- /See:/ 'teacher' smart constructor.
-data Teacher = Teacher
+data Teacher = Teacher'
     { _tCourseId :: !(Maybe Text)
     , _tProFile  :: !(Maybe UserProFile)
     , _tUserId   :: !(Maybe Text)
@@ -272,7 +272,7 @@ data Teacher = Teacher
 teacher
     :: Teacher
 teacher =
-    Teacher
+    Teacher'
     { _tCourseId = Nothing
     , _tProFile = Nothing
     , _tUserId = Nothing
@@ -298,12 +298,12 @@ instance FromJSON Teacher where
         parseJSON
           = withObject "Teacher"
               (\ o ->
-                 Teacher <$>
+                 Teacher' <$>
                    (o .:? "courseId") <*> (o .:? "profile") <*>
                      (o .:? "userId"))
 
 instance ToJSON Teacher where
-        toJSON Teacher{..}
+        toJSON Teacher'{..}
           = object
               (catMaybes
                  [("courseId" .=) <$> _tCourseId,
@@ -313,7 +313,7 @@ instance ToJSON Teacher where
 -- | Details of the user\'s name.
 --
 -- /See:/ 'name' smart constructor.
-data Name = Name
+data Name = Name'
     { _nGivenName  :: !(Maybe Text)
     , _nFullName   :: !(Maybe Text)
     , _nFamilyName :: !(Maybe Text)
@@ -331,7 +331,7 @@ data Name = Name
 name
     :: Name
 name =
-    Name
+    Name'
     { _nGivenName = Nothing
     , _nFullName = Nothing
     , _nFamilyName = Nothing
@@ -357,12 +357,12 @@ instance FromJSON Name where
         parseJSON
           = withObject "Name"
               (\ o ->
-                 Name <$>
+                 Name' <$>
                    (o .:? "givenName") <*> (o .:? "fullName") <*>
                      (o .:? "familyName"))
 
 instance ToJSON Name where
-        toJSON Name{..}
+        toJSON Name'{..}
           = object
               (catMaybes
                  [("givenName" .=) <$> _nGivenName,
@@ -372,7 +372,7 @@ instance ToJSON Name where
 -- | Response when listing courses.
 --
 -- /See:/ 'listCoursesResponse' smart constructor.
-data ListCoursesResponse = ListCoursesResponse
+data ListCoursesResponse = ListCoursesResponse'
     { _lcrNextPageToken :: !(Maybe Text)
     , _lcrCourses       :: !(Maybe [Course])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -387,7 +387,7 @@ data ListCoursesResponse = ListCoursesResponse
 listCoursesResponse
     :: ListCoursesResponse
 listCoursesResponse =
-    ListCoursesResponse
+    ListCoursesResponse'
     { _lcrNextPageToken = Nothing
     , _lcrCourses = Nothing
     }
@@ -410,12 +410,12 @@ instance FromJSON ListCoursesResponse where
         parseJSON
           = withObject "ListCoursesResponse"
               (\ o ->
-                 ListCoursesResponse <$>
+                 ListCoursesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "courses" .!= mempty))
 
 instance ToJSON ListCoursesResponse where
-        toJSON ListCoursesResponse{..}
+        toJSON ListCoursesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lcrNextPageToken,
@@ -424,7 +424,7 @@ instance ToJSON ListCoursesResponse where
 -- | Global information for a user.
 --
 -- /See:/ 'userProFile' smart constructor.
-data UserProFile = UserProFile
+data UserProFile = UserProFile'
     { _upfPhotoURL     :: !(Maybe Text)
     , _upfName         :: !(Maybe Name)
     , _upfEmailAddress :: !(Maybe Text)
@@ -448,7 +448,7 @@ data UserProFile = UserProFile
 userProFile
     :: UserProFile
 userProFile =
-    UserProFile
+    UserProFile'
     { _upfPhotoURL = Nothing
     , _upfName = Nothing
     , _upfEmailAddress = Nothing
@@ -487,14 +487,14 @@ instance FromJSON UserProFile where
         parseJSON
           = withObject "UserProFile"
               (\ o ->
-                 UserProFile <$>
+                 UserProFile' <$>
                    (o .:? "photoUrl") <*> (o .:? "name") <*>
                      (o .:? "emailAddress")
                      <*> (o .:? "id")
                      <*> (o .:? "permissions" .!= mempty))
 
 instance ToJSON UserProFile where
-        toJSON UserProFile{..}
+        toJSON UserProFile'{..}
           = object
               (catMaybes
                  [("photoUrl" .=) <$> _upfPhotoURL,
@@ -506,7 +506,7 @@ instance ToJSON UserProFile where
 -- | A Course in Classroom.
 --
 -- /See:/ 'course' smart constructor.
-data Course = Course
+data Course = Course'
     { _cCreationTime       :: !(Maybe Text)
     , _cRoom               :: !(Maybe Text)
     , _cCourseState        :: !(Maybe Text)
@@ -551,7 +551,7 @@ data Course = Course
 course
     :: Course
 course =
-    Course
+    Course'
     { _cCreationTime = Nothing
     , _cRoom = Nothing
     , _cCourseState = Nothing
@@ -652,7 +652,7 @@ instance FromJSON Course where
         parseJSON
           = withObject "Course"
               (\ o ->
-                 Course <$>
+                 Course' <$>
                    (o .:? "creationTime") <*> (o .:? "room") <*>
                      (o .:? "courseState")
                      <*> (o .:? "enrollmentCode")
@@ -666,7 +666,7 @@ instance FromJSON Course where
                      <*> (o .:? "section"))
 
 instance ToJSON Course where
-        toJSON Course{..}
+        toJSON Course'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _cCreationTime,
@@ -684,7 +684,7 @@ instance ToJSON Course where
 -- | Response when listing students.
 --
 -- /See:/ 'listStudentsResponse' smart constructor.
-data ListStudentsResponse = ListStudentsResponse
+data ListStudentsResponse = ListStudentsResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrStudents      :: !(Maybe [Student])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -699,7 +699,7 @@ data ListStudentsResponse = ListStudentsResponse
 listStudentsResponse
     :: ListStudentsResponse
 listStudentsResponse =
-    ListStudentsResponse
+    ListStudentsResponse'
     { _lsrNextPageToken = Nothing
     , _lsrStudents = Nothing
     }
@@ -722,12 +722,12 @@ instance FromJSON ListStudentsResponse where
         parseJSON
           = withObject "ListStudentsResponse"
               (\ o ->
-                 ListStudentsResponse <$>
+                 ListStudentsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "students" .!= mempty))
 
 instance ToJSON ListStudentsResponse where
-        toJSON ListStudentsResponse{..}
+        toJSON ListStudentsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
@@ -747,7 +747,7 @@ instance ToJSON ListStudentsResponse where
 -- \`ALREADY_EXISTS\` if a previous one has succeeded.
 --
 -- /See:/ 'courseAlias' smart constructor.
-newtype CourseAlias = CourseAlias
+newtype CourseAlias = CourseAlias'
     { _caAlias :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -759,7 +759,7 @@ newtype CourseAlias = CourseAlias
 courseAlias
     :: CourseAlias
 courseAlias =
-    CourseAlias
+    CourseAlias'
     { _caAlias = Nothing
     }
 
@@ -773,16 +773,16 @@ caAlias = lens _caAlias (\ s a -> s{_caAlias = a})
 instance FromJSON CourseAlias where
         parseJSON
           = withObject "CourseAlias"
-              (\ o -> CourseAlias <$> (o .:? "alias"))
+              (\ o -> CourseAlias' <$> (o .:? "alias"))
 
 instance ToJSON CourseAlias where
-        toJSON CourseAlias{..}
+        toJSON CourseAlias'{..}
           = object (catMaybes [("alias" .=) <$> _caAlias])
 
 -- | Response when listing teachers.
 --
 -- /See:/ 'listTeachersResponse' smart constructor.
-data ListTeachersResponse = ListTeachersResponse
+data ListTeachersResponse = ListTeachersResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTeachers      :: !(Maybe [Teacher])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -797,7 +797,7 @@ data ListTeachersResponse = ListTeachersResponse
 listTeachersResponse
     :: ListTeachersResponse
 listTeachersResponse =
-    ListTeachersResponse
+    ListTeachersResponse'
     { _ltrNextPageToken = Nothing
     , _ltrTeachers = Nothing
     }
@@ -820,12 +820,12 @@ instance FromJSON ListTeachersResponse where
         parseJSON
           = withObject "ListTeachersResponse"
               (\ o ->
-                 ListTeachersResponse <$>
+                 ListTeachersResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "teachers" .!= mempty))
 
 instance ToJSON ListTeachersResponse where
-        toJSON ListTeachersResponse{..}
+        toJSON ListTeachersResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
@@ -834,7 +834,7 @@ instance ToJSON ListTeachersResponse where
 -- | Student in a course.
 --
 -- /See:/ 'student' smart constructor.
-data Student = Student
+data Student = Student'
     { _sCourseId :: !(Maybe Text)
     , _sProFile  :: !(Maybe UserProFile)
     , _sUserId   :: !(Maybe Text)
@@ -852,7 +852,7 @@ data Student = Student
 student
     :: Student
 student =
-    Student
+    Student'
     { _sCourseId = Nothing
     , _sProFile = Nothing
     , _sUserId = Nothing
@@ -878,12 +878,12 @@ instance FromJSON Student where
         parseJSON
           = withObject "Student"
               (\ o ->
-                 Student <$>
+                 Student' <$>
                    (o .:? "courseId") <*> (o .:? "profile") <*>
                      (o .:? "userId"))
 
 instance ToJSON Student where
-        toJSON Student{..}
+        toJSON Student'{..}
           = object
               (catMaybes
                  [("courseId" .=) <$> _sCourseId,

@@ -55,7 +55,7 @@ type DirectorySitesInsertResource =
 -- | Inserts a new directory site.
 --
 -- /See:/ 'directorySitesInsert' smart constructor.
-data DirectorySitesInsert = DirectorySitesInsert
+data DirectorySitesInsert = DirectorySitesInsert'
     { _dsiProFileId :: !(Textual Int64)
     , _dsiPayload   :: !DirectorySite
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ directorySitesInsert
     -> DirectorySite -- ^ 'dsiPayload'
     -> DirectorySitesInsert
 directorySitesInsert pDsiProFileId_ pDsiPayload_ =
-    DirectorySitesInsert
+    DirectorySitesInsert'
     { _dsiProFileId = _Coerce # pDsiProFileId_
     , _dsiPayload = pDsiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest DirectorySitesInsert where
         type Rs DirectorySitesInsert = DirectorySite
         type Scopes DirectorySitesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient DirectorySitesInsert{..}
+        requestClient DirectorySitesInsert'{..}
           = go _dsiProFileId (Just AltJSON) _dsiPayload
               dFAReportingService
           where go

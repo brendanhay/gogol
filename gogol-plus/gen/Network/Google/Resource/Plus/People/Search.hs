@@ -57,7 +57,7 @@ type PeopleSearchResource =
 -- | Search all public profiles.
 --
 -- /See:/ 'peopleSearch' smart constructor.
-data PeopleSearch = PeopleSearch
+data PeopleSearch = PeopleSearch'
     { _psQuery      :: !Text
     , _psLanguage   :: !Text
     , _psPageToken  :: !(Maybe Text)
@@ -79,7 +79,7 @@ peopleSearch
     :: Text -- ^ 'psQuery'
     -> PeopleSearch
 peopleSearch pPsQuery_ =
-    PeopleSearch
+    PeopleSearch'
     { _psQuery = pPsQuery_
     , _psLanguage = "en-US"
     , _psPageToken = Nothing
@@ -118,7 +118,7 @@ instance GoogleRequest PeopleSearch where
         type Scopes PeopleSearch =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient PeopleSearch{..}
+        requestClient PeopleSearch'{..}
           = go (Just _psQuery) (Just _psLanguage) _psPageToken
               (Just _psMaxResults)
               (Just AltJSON)

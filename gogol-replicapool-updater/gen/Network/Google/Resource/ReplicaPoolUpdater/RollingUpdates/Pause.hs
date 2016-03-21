@@ -60,7 +60,7 @@ type RollingUpdatesPauseResource =
 -- effect if invoked when the state of the update is PAUSED.
 --
 -- /See:/ 'rollingUpdatesPause' smart constructor.
-data RollingUpdatesPause = RollingUpdatesPause
+data RollingUpdatesPause = RollingUpdatesPause'
     { _rupRollingUpdate :: !Text
     , _rupProject       :: !Text
     , _rupZone          :: !Text
@@ -81,7 +81,7 @@ rollingUpdatesPause
     -> Text -- ^ 'rupZone'
     -> RollingUpdatesPause
 rollingUpdatesPause pRupRollingUpdate_ pRupProject_ pRupZone_ =
-    RollingUpdatesPause
+    RollingUpdatesPause'
     { _rupRollingUpdate = pRupRollingUpdate_
     , _rupProject = pRupProject_
     , _rupZone = pRupZone_
@@ -107,7 +107,7 @@ instance GoogleRequest RollingUpdatesPause where
         type Scopes RollingUpdatesPause =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/replicapool"]
-        requestClient RollingUpdatesPause{..}
+        requestClient RollingUpdatesPause'{..}
           = go _rupProject _rupZone _rupRollingUpdate
               (Just AltJSON)
               replicaPoolUpdaterService

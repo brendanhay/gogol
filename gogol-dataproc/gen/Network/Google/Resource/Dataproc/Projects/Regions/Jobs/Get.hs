@@ -70,7 +70,7 @@ type ProjectsRegionsJobsGetResource =
 -- | Gets the resource representation for a job in a project.
 --
 -- /See:/ 'projectsRegionsJobsGet' smart constructor.
-data ProjectsRegionsJobsGet = ProjectsRegionsJobsGet
+data ProjectsRegionsJobsGet = ProjectsRegionsJobsGet'
     { _prjgXgafv          :: !(Maybe Text)
     , _prjgJobId          :: !Text
     , _prjgUploadProtocol :: !(Maybe Text)
@@ -112,7 +112,7 @@ projectsRegionsJobsGet
     -> Text -- ^ 'prjgProjectId'
     -> ProjectsRegionsJobsGet
 projectsRegionsJobsGet pPrjgJobId_ pPrjgRegion_ pPrjgProjectId_ =
-    ProjectsRegionsJobsGet
+    ProjectsRegionsJobsGet'
     { _prjgXgafv = Nothing
     , _prjgJobId = pPrjgJobId_
     , _prjgUploadProtocol = Nothing
@@ -184,7 +184,7 @@ instance GoogleRequest ProjectsRegionsJobsGet where
         type Rs ProjectsRegionsJobsGet = Job
         type Scopes ProjectsRegionsJobsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsJobsGet{..}
+        requestClient ProjectsRegionsJobsGet'{..}
           = go _prjgProjectId _prjgRegion _prjgJobId _prjgXgafv
               _prjgUploadProtocol
               (Just _prjgPp)

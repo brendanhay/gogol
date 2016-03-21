@@ -62,7 +62,7 @@ type OnboardingListCategoryVolumesResource =
 -- | List available volumes under categories for onboarding experience.
 --
 -- /See:/ 'onboardingListCategoryVolumes' smart constructor.
-data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes
+data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes'
     { _olcvLocale                   :: !(Maybe Text)
     , _olcvMaxAllowedMaturityRating :: !(Maybe OnboardingListCategoryVolumesMaxAllowedMaturityRating)
     , _olcvCategoryId               :: !(Maybe [Text])
@@ -86,7 +86,7 @@ data OnboardingListCategoryVolumes = OnboardingListCategoryVolumes
 onboardingListCategoryVolumes
     :: OnboardingListCategoryVolumes
 onboardingListCategoryVolumes =
-    OnboardingListCategoryVolumes
+    OnboardingListCategoryVolumes'
     { _olcvLocale = Nothing
     , _olcvMaxAllowedMaturityRating = Nothing
     , _olcvCategoryId = Nothing
@@ -132,7 +132,7 @@ instance GoogleRequest OnboardingListCategoryVolumes
         type Rs OnboardingListCategoryVolumes = Volume2
         type Scopes OnboardingListCategoryVolumes =
              '["https://www.googleapis.com/auth/books"]
-        requestClient OnboardingListCategoryVolumes{..}
+        requestClient OnboardingListCategoryVolumes'{..}
           = go _olcvLocale _olcvMaxAllowedMaturityRating
               (_olcvCategoryId ^. _Default)
               _olcvPageToken

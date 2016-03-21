@@ -61,7 +61,7 @@ type AccountsContainersTagsUpdateResource =
 -- | Updates a GTM Tag.
 --
 -- /See:/ 'accountsContainersTagsUpdate' smart constructor.
-data AccountsContainersTagsUpdate = AccountsContainersTagsUpdate
+data AccountsContainersTagsUpdate = AccountsContainersTagsUpdate'
     { _actucContainerId :: !Text
     , _actucFingerprint :: !(Maybe Text)
     , _actucPayload     :: !Tag
@@ -89,7 +89,7 @@ accountsContainersTagsUpdate
     -> Text -- ^ 'actucTagId'
     -> AccountsContainersTagsUpdate
 accountsContainersTagsUpdate pActucContainerId_ pActucPayload_ pActucAccountId_ pActucTagId_ =
-    AccountsContainersTagsUpdate
+    AccountsContainersTagsUpdate'
     { _actucContainerId = pActucContainerId_
     , _actucFingerprint = Nothing
     , _actucPayload = pActucPayload_
@@ -131,7 +131,7 @@ instance GoogleRequest AccountsContainersTagsUpdate
         type Rs AccountsContainersTagsUpdate = Tag
         type Scopes AccountsContainersTagsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersTagsUpdate{..}
+        requestClient AccountsContainersTagsUpdate'{..}
           = go _actucAccountId _actucContainerId _actucTagId
               _actucFingerprint
               (Just AltJSON)

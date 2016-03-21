@@ -69,7 +69,7 @@ type JobsReportsGetResource =
 -- | Gets the metadata of a specific report.
 --
 -- /See:/ 'jobsReportsGet' smart constructor.
-data JobsReportsGet = JobsReportsGet
+data JobsReportsGet = JobsReportsGet'
     { _jrgXgafv                  :: !(Maybe Text)
     , _jrgJobId                  :: !Text
     , _jrgUploadProtocol         :: !(Maybe Text)
@@ -110,7 +110,7 @@ jobsReportsGet
     -> Text -- ^ 'jrgReportId'
     -> JobsReportsGet
 jobsReportsGet pJrgJobId_ pJrgReportId_ =
-    JobsReportsGet
+    JobsReportsGet'
     { _jrgXgafv = Nothing
     , _jrgJobId = pJrgJobId_
     , _jrgUploadProtocol = Nothing
@@ -181,7 +181,7 @@ instance GoogleRequest JobsReportsGet where
         type Scopes JobsReportsGet =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient JobsReportsGet{..}
+        requestClient JobsReportsGet'{..}
           = go _jrgJobId _jrgReportId _jrgXgafv
               _jrgUploadProtocol
               (Just _jrgPp)

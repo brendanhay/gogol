@@ -61,7 +61,7 @@ type ManagementExperimentsDeleteResource =
 -- | Delete an experiment.
 --
 -- /See:/ 'managementExperimentsDelete' smart constructor.
-data ManagementExperimentsDelete = ManagementExperimentsDelete
+data ManagementExperimentsDelete = ManagementExperimentsDelete'
     { _medWebPropertyId :: !Text
     , _medProFileId     :: !Text
     , _medAccountId     :: !Text
@@ -86,7 +86,7 @@ managementExperimentsDelete
     -> Text -- ^ 'medExperimentId'
     -> ManagementExperimentsDelete
 managementExperimentsDelete pMedWebPropertyId_ pMedProFileId_ pMedAccountId_ pMedExperimentId_ =
-    ManagementExperimentsDelete
+    ManagementExperimentsDelete'
     { _medWebPropertyId = pMedWebPropertyId_
     , _medProFileId = pMedProFileId_
     , _medAccountId = pMedAccountId_
@@ -121,7 +121,7 @@ instance GoogleRequest ManagementExperimentsDelete
         type Scopes ManagementExperimentsDelete =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementExperimentsDelete{..}
+        requestClient ManagementExperimentsDelete'{..}
           = go _medAccountId _medWebPropertyId _medProFileId
               _medExperimentId
               (Just AltJSON)

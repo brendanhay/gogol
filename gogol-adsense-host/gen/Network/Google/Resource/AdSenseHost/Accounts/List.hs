@@ -53,7 +53,7 @@ type AccountsListResource =
 -- id.
 --
 -- /See:/ 'accountsList' smart constructor.
-newtype AccountsList = AccountsList
+newtype AccountsList = AccountsList'
     { _alFilterAdClientId :: [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ accountsList
     :: [Text] -- ^ 'alFilterAdClientId'
     -> AccountsList
 accountsList pAlFilterAdClientId_ =
-    AccountsList
+    AccountsList'
     { _alFilterAdClientId = _Coerce # pAlFilterAdClientId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest AccountsList where
         type Rs AccountsList = Accounts
         type Scopes AccountsList =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsList{..}
+        requestClient AccountsList'{..}
           = go _alFilterAdClientId (Just AltJSON)
               adSenseHostService
           where go

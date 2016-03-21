@@ -52,7 +52,7 @@ type MetadataColumnsListResource =
 -- | Lists all columns for a report type
 --
 -- /See:/ 'metadataColumnsList' smart constructor.
-newtype MetadataColumnsList = MetadataColumnsList
+newtype MetadataColumnsList = MetadataColumnsList'
     { _mclReportType :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ metadataColumnsList
     :: Text -- ^ 'mclReportType'
     -> MetadataColumnsList
 metadataColumnsList pMclReportType_ =
-    MetadataColumnsList
+    MetadataColumnsList'
     { _mclReportType = pMclReportType_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest MetadataColumnsList where
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient MetadataColumnsList{..}
+        requestClient MetadataColumnsList'{..}
           = go _mclReportType (Just AltJSON) analyticsService
           where go
                   = buildClient

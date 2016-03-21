@@ -73,7 +73,7 @@ type VariantSetsExportResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'variantSetsExport' smart constructor.
-data VariantSetsExport = VariantSetsExport
+data VariantSetsExport = VariantSetsExport'
     { _vseXgafv          :: !(Maybe Text)
     , _vseUploadProtocol :: !(Maybe Text)
     , _vsePp             :: !Bool
@@ -111,7 +111,7 @@ variantSetsExport
     -> ExportVariantSetRequest -- ^ 'vsePayload'
     -> VariantSetsExport
 variantSetsExport pVseVariantSetId_ pVsePayload_ =
-    VariantSetsExport
+    VariantSetsExport'
     { _vseXgafv = Nothing
     , _vseUploadProtocol = Nothing
     , _vsePp = True
@@ -179,7 +179,7 @@ instance GoogleRequest VariantSetsExport where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient VariantSetsExport{..}
+        requestClient VariantSetsExport'{..}
           = go _vseVariantSetId _vseXgafv _vseUploadProtocol
               (Just _vsePp)
               _vseAccessToken

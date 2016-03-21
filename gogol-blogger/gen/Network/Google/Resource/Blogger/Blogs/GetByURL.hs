@@ -54,7 +54,7 @@ type BlogsGetByURLResource =
 -- | Retrieve a Blog by URL.
 --
 -- /See:/ 'blogsGetByURL' smart constructor.
-data BlogsGetByURL = BlogsGetByURL
+data BlogsGetByURL = BlogsGetByURL'
     { _bgbuURL  :: !Text
     , _bgbuView :: !(Maybe BlogsGetByURLView)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ blogsGetByURL
     :: Text -- ^ 'bgbuURL'
     -> BlogsGetByURL
 blogsGetByURL pBgbuURL_ =
-    BlogsGetByURL
+    BlogsGetByURL'
     { _bgbuURL = pBgbuURL_
     , _bgbuView = Nothing
     }
@@ -89,7 +89,7 @@ instance GoogleRequest BlogsGetByURL where
         type Scopes BlogsGetByURL =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient BlogsGetByURL{..}
+        requestClient BlogsGetByURL'{..}
           = go (Just _bgbuURL) _bgbuView (Just AltJSON)
               bloggerService
           where go

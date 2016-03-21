@@ -57,7 +57,7 @@ type AccountsAdUnitsGetResource =
 -- | Get the specified host ad unit in this AdSense account.
 --
 -- /See:/ 'accountsAdUnitsGet' smart constructor.
-data AccountsAdUnitsGet = AccountsAdUnitsGet
+data AccountsAdUnitsGet = AccountsAdUnitsGet'
     { _aaugAdUnitId   :: !Text
     , _aaugAdClientId :: !Text
     , _aaugAccountId  :: !Text
@@ -78,7 +78,7 @@ accountsAdUnitsGet
     -> Text -- ^ 'aaugAccountId'
     -> AccountsAdUnitsGet
 accountsAdUnitsGet pAaugAdUnitId_ pAaugAdClientId_ pAaugAccountId_ =
-    AccountsAdUnitsGet
+    AccountsAdUnitsGet'
     { _aaugAdUnitId = pAaugAdUnitId_
     , _aaugAdClientId = pAaugAdClientId_
     , _aaugAccountId = pAaugAccountId_
@@ -105,7 +105,7 @@ instance GoogleRequest AccountsAdUnitsGet where
         type Rs AccountsAdUnitsGet = AdUnit
         type Scopes AccountsAdUnitsGet =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AccountsAdUnitsGet{..}
+        requestClient AccountsAdUnitsGet'{..}
           = go _aaugAccountId _aaugAdClientId _aaugAdUnitId
               (Just AltJSON)
               adSenseHostService

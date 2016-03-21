@@ -67,7 +67,7 @@ type MyLibraryReadingPositionsSetPositionResource =
 -- | Sets my reading position information for a volume.
 --
 -- /See:/ 'myLibraryReadingPositionsSetPosition' smart constructor.
-data MyLibraryReadingPositionsSetPosition = MyLibraryReadingPositionsSetPosition
+data MyLibraryReadingPositionsSetPosition = MyLibraryReadingPositionsSetPosition'
     { _mlrpspDeviceCookie   :: !(Maybe Text)
     , _mlrpspContentVersion :: !(Maybe Text)
     , _mlrpspAction         :: !(Maybe MyLibraryReadingPositionsSetPositionAction)
@@ -100,7 +100,7 @@ myLibraryReadingPositionsSetPosition
     -> Text -- ^ 'mlrpspPosition'
     -> MyLibraryReadingPositionsSetPosition
 myLibraryReadingPositionsSetPosition pMlrpspVolumeId_ pMlrpspTimestamp_ pMlrpspPosition_ =
-    MyLibraryReadingPositionsSetPosition
+    MyLibraryReadingPositionsSetPosition'
     { _mlrpspDeviceCookie = Nothing
     , _mlrpspContentVersion = Nothing
     , _mlrpspAction = Nothing
@@ -156,7 +156,7 @@ instance GoogleRequest
         type Scopes MyLibraryReadingPositionsSetPosition =
              '["https://www.googleapis.com/auth/books"]
         requestClient
-          MyLibraryReadingPositionsSetPosition{..}
+          MyLibraryReadingPositionsSetPosition'{..}
           = go _mlrpspVolumeId (Just _mlrpspTimestamp)
               (Just _mlrpspPosition)
               _mlrpspDeviceCookie

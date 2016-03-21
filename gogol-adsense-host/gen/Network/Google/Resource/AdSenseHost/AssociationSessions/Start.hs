@@ -63,7 +63,7 @@ type AssociationSessionsStartResource =
 -- AdSense user.
 --
 -- /See:/ 'associationSessionsStart' smart constructor.
-data AssociationSessionsStart = AssociationSessionsStart
+data AssociationSessionsStart = AssociationSessionsStart'
     { _assWebsiteLocale :: !(Maybe Text)
     , _assUserLocale    :: !(Maybe Text)
     , _assWebsiteURL    :: !Text
@@ -86,7 +86,7 @@ associationSessionsStart
     -> [AssociationSessionsStartProductCode] -- ^ 'assProductCode'
     -> AssociationSessionsStart
 associationSessionsStart pAssWebsiteURL_ pAssProductCode_ =
-    AssociationSessionsStart
+    AssociationSessionsStart'
     { _assWebsiteLocale = Nothing
     , _assUserLocale = Nothing
     , _assWebsiteURL = pAssWebsiteURL_
@@ -122,7 +122,7 @@ instance GoogleRequest AssociationSessionsStart where
         type Rs AssociationSessionsStart = AssociationSession
         type Scopes AssociationSessionsStart =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient AssociationSessionsStart{..}
+        requestClient AssociationSessionsStart'{..}
           = go _assProductCode (Just _assWebsiteURL)
               _assWebsiteLocale
               _assUserLocale

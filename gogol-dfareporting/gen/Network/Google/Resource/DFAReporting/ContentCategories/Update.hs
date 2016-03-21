@@ -55,7 +55,7 @@ type ContentCategoriesUpdateResource =
 -- | Updates an existing content category.
 --
 -- /See:/ 'contentCategoriesUpdate' smart constructor.
-data ContentCategoriesUpdate = ContentCategoriesUpdate
+data ContentCategoriesUpdate = ContentCategoriesUpdate'
     { _ccuProFileId :: !(Textual Int64)
     , _ccuPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ contentCategoriesUpdate
     -> ContentCategory -- ^ 'ccuPayload'
     -> ContentCategoriesUpdate
 contentCategoriesUpdate pCcuProFileId_ pCcuPayload_ =
-    ContentCategoriesUpdate
+    ContentCategoriesUpdate'
     { _ccuProFileId = _Coerce # pCcuProFileId_
     , _ccuPayload = pCcuPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ContentCategoriesUpdate where
         type Rs ContentCategoriesUpdate = ContentCategory
         type Scopes ContentCategoriesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ContentCategoriesUpdate{..}
+        requestClient ContentCategoriesUpdate'{..}
           = go _ccuProFileId (Just AltJSON) _ccuPayload
               dFAReportingService
           where go

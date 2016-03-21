@@ -50,21 +50,21 @@ type SitesListResource =
 --
 -- /See:/ 'sitesList' smart constructor.
 data SitesList =
-    SitesList
+    SitesList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList' with the minimum fields required to make a request.
 --
 sitesList
     :: SitesList
-sitesList = SitesList
+sitesList = SitesList'
 
 instance GoogleRequest SitesList where
         type Rs SitesList = SitesListResponse
         type Scopes SitesList =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient SitesList{}
+        requestClient SitesList'{}
           = go (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesListResource)

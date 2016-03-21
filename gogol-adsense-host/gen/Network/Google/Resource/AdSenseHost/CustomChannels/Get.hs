@@ -54,7 +54,7 @@ type CustomChannelsGetResource =
 -- | Get a specific custom channel from the host AdSense account.
 --
 -- /See:/ 'customChannelsGet' smart constructor.
-data CustomChannelsGet = CustomChannelsGet
+data CustomChannelsGet = CustomChannelsGet'
     { _ccgCustomChannelId :: !Text
     , _ccgAdClientId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ customChannelsGet
     -> Text -- ^ 'ccgAdClientId'
     -> CustomChannelsGet
 customChannelsGet pCcgCustomChannelId_ pCcgAdClientId_ =
-    CustomChannelsGet
+    CustomChannelsGet'
     { _ccgCustomChannelId = pCcgCustomChannelId_
     , _ccgAdClientId = pCcgAdClientId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CustomChannelsGet where
         type Rs CustomChannelsGet = CustomChannel
         type Scopes CustomChannelsGet =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient CustomChannelsGet{..}
+        requestClient CustomChannelsGet'{..}
           = go _ccgAdClientId _ccgCustomChannelId
               (Just AltJSON)
               adSenseHostService

@@ -52,20 +52,20 @@ type SubscriptionsListResource =
 --
 -- /See:/ 'subscriptionsList' smart constructor.
 data SubscriptionsList =
-    SubscriptionsList
+    SubscriptionsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList' with the minimum fields required to make a request.
 --
 subscriptionsList
     :: SubscriptionsList
-subscriptionsList = SubscriptionsList
+subscriptionsList = SubscriptionsList'
 
 instance GoogleRequest SubscriptionsList where
         type Rs SubscriptionsList = SubscriptionsListResponse
         type Scopes SubscriptionsList =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient SubscriptionsList{}
+        requestClient SubscriptionsList'{}
           = go (Just AltJSON) mirrorService
           where go
                   = buildClient

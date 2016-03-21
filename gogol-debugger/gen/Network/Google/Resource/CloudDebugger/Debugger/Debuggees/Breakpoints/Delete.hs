@@ -71,7 +71,7 @@ type DebuggerDebuggeesBreakpointsDeleteResource =
 -- | Deletes the breakpoint from the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsDelete' smart constructor.
-data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete
+data DebuggerDebuggeesBreakpointsDelete = DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv          :: !(Maybe Text)
     , _ddbdUploadProtocol :: !(Maybe Text)
     , _ddbdPp             :: !Bool
@@ -112,7 +112,7 @@ debuggerDebuggeesBreakpointsDelete
     -> Text -- ^ 'ddbdDebuggeeId'
     -> DebuggerDebuggeesBreakpointsDelete
 debuggerDebuggeesBreakpointsDelete pDdbdBreakpointId_ pDdbdDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsDelete
+    DebuggerDebuggeesBreakpointsDelete'
     { _ddbdXgafv = Nothing
     , _ddbdUploadProtocol = Nothing
     , _ddbdPp = True
@@ -188,7 +188,7 @@ instance GoogleRequest
         type Scopes DebuggerDebuggeesBreakpointsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugger"]
-        requestClient DebuggerDebuggeesBreakpointsDelete{..}
+        requestClient DebuggerDebuggeesBreakpointsDelete'{..}
           = go _ddbdDebuggeeId _ddbdBreakpointId _ddbdXgafv
               _ddbdUploadProtocol
               (Just _ddbdPp)

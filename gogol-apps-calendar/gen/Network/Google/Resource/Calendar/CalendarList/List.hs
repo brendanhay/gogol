@@ -65,7 +65,7 @@ type CalendarListListResource =
 -- | Returns entries on the user\'s calendar list.
 --
 -- /See:/ 'calendarListList' smart constructor.
-data CalendarListList = CalendarListList
+data CalendarListList = CalendarListList'
     { _cllSyncToken     :: !(Maybe Text)
     , _cllMinAccessRole :: !(Maybe CalendarListListMinAccessRole)
     , _cllShowDeleted   :: !(Maybe Bool)
@@ -92,7 +92,7 @@ data CalendarListList = CalendarListList
 calendarListList
     :: CalendarListList
 calendarListList =
-    CalendarListList
+    CalendarListList'
     { _cllSyncToken = Nothing
     , _cllMinAccessRole = Nothing
     , _cllShowDeleted = Nothing
@@ -157,7 +157,7 @@ instance GoogleRequest CalendarListList where
         type Scopes CalendarListList =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient CalendarListList{..}
+        requestClient CalendarListList'{..}
           = go _cllSyncToken _cllMinAccessRole _cllShowDeleted
               _cllShowHidden
               _cllPageToken

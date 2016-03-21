@@ -56,7 +56,7 @@ type LandingPagesListResource =
 -- | Retrieves the list of landing pages for the specified campaign.
 --
 -- /See:/ 'landingPagesList' smart constructor.
-data LandingPagesList = LandingPagesList
+data LandingPagesList = LandingPagesList'
     { _lplCampaignId :: !(Textual Int64)
     , _lplProFileId  :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ landingPagesList
     -> Int64 -- ^ 'lplProFileId'
     -> LandingPagesList
 landingPagesList pLplCampaignId_ pLplProFileId_ =
-    LandingPagesList
+    LandingPagesList'
     { _lplCampaignId = _Coerce # pLplCampaignId_
     , _lplProFileId = _Coerce # pLplProFileId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest LandingPagesList where
         type Rs LandingPagesList = LandingPagesListResponse
         type Scopes LandingPagesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient LandingPagesList{..}
+        requestClient LandingPagesList'{..}
           = go _lplProFileId _lplCampaignId (Just AltJSON)
               dFAReportingService
           where go

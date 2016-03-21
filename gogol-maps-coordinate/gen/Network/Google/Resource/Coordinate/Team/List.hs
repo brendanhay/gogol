@@ -56,7 +56,7 @@ type TeamListResource =
 -- | Retrieves a list of teams for a user.
 --
 -- /See:/ 'teamList' smart constructor.
-data TeamList = TeamList
+data TeamList = TeamList'
     { _tlDispatcher :: !(Maybe Bool)
     , _tlAdmin      :: !(Maybe Bool)
     , _tlWorker     :: !(Maybe Bool)
@@ -74,7 +74,7 @@ data TeamList = TeamList
 teamList
     :: TeamList
 teamList =
-    TeamList
+    TeamList'
     { _tlDispatcher = Nothing
     , _tlAdmin = Nothing
     , _tlWorker = Nothing
@@ -98,7 +98,7 @@ instance GoogleRequest TeamList where
         type Scopes TeamList =
              '["https://www.googleapis.com/auth/coordinate",
                "https://www.googleapis.com/auth/coordinate.readonly"]
-        requestClient TeamList{..}
+        requestClient TeamList'{..}
           = go _tlDispatcher _tlAdmin _tlWorker (Just AltJSON)
               mapsCoordinateService
           where go

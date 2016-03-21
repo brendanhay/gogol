@@ -81,7 +81,7 @@ type ControllerDebuggeesRegisterResource =
 -- \`true\`.
 --
 -- /See:/ 'controllerDebuggeesRegister' smart constructor.
-data ControllerDebuggeesRegister = ControllerDebuggeesRegister
+data ControllerDebuggeesRegister = ControllerDebuggeesRegister'
     { _cdrXgafv          :: !(Maybe Text)
     , _cdrUploadProtocol :: !(Maybe Text)
     , _cdrPp             :: !Bool
@@ -115,7 +115,7 @@ controllerDebuggeesRegister
     :: RegisterDebuggeeRequest -- ^ 'cdrPayload'
     -> ControllerDebuggeesRegister
 controllerDebuggeesRegister pCdrPayload_ =
-    ControllerDebuggeesRegister
+    ControllerDebuggeesRegister'
     { _cdrXgafv = Nothing
     , _cdrUploadProtocol = Nothing
     , _cdrPp = True
@@ -175,7 +175,7 @@ instance GoogleRequest ControllerDebuggeesRegister
         type Scopes ControllerDebuggeesRegister =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugletcontroller"]
-        requestClient ControllerDebuggeesRegister{..}
+        requestClient ControllerDebuggeesRegister'{..}
           = go _cdrXgafv _cdrUploadProtocol (Just _cdrPp)
               _cdrAccessToken
               _cdrUploadType

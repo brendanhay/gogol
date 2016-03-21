@@ -52,7 +52,7 @@ type FreeBusyQueryResource =
 -- | Returns free\/busy information for a set of calendars.
 --
 -- /See:/ 'freeBusyQuery' smart constructor.
-newtype FreeBusyQuery = FreeBusyQuery
+newtype FreeBusyQuery = FreeBusyQuery'
     { _fbqPayload :: FreeBusyRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ freeBusyQuery
     :: FreeBusyRequest -- ^ 'fbqPayload'
     -> FreeBusyQuery
 freeBusyQuery pFbqPayload_ =
-    FreeBusyQuery
+    FreeBusyQuery'
     { _fbqPayload = pFbqPayload_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest FreeBusyQuery where
         type Scopes FreeBusyQuery =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient FreeBusyQuery{..}
+        requestClient FreeBusyQuery'{..}
           = go (Just AltJSON) _fbqPayload appsCalendarService
           where go
                   = buildClient (Proxy :: Proxy FreeBusyQueryResource)

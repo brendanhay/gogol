@@ -55,7 +55,7 @@ type MembersInsertResource =
 -- | Add user to the specified group.
 --
 -- /See:/ 'membersInsert' smart constructor.
-data MembersInsert = MembersInsert
+data MembersInsert = MembersInsert'
     { _miGroupKey :: !Text
     , _miPayload  :: !Member
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ membersInsert
     -> Member -- ^ 'miPayload'
     -> MembersInsert
 membersInsert pMiGroupKey_ pMiPayload_ =
-    MembersInsert
+    MembersInsert'
     { _miGroupKey = pMiGroupKey_
     , _miPayload = pMiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest MembersInsert where
         type Scopes MembersInsert =
              '["https://www.googleapis.com/auth/admin.directory.group",
                "https://www.googleapis.com/auth/admin.directory.group.member"]
-        requestClient MembersInsert{..}
+        requestClient MembersInsert'{..}
           = go _miGroupKey (Just AltJSON) _miPayload
               directoryService
           where go

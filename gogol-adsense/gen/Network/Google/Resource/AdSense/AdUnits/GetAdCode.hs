@@ -55,7 +55,7 @@ type AdUnitsGetAdCodeResource =
 -- | Get ad code for the specified ad unit.
 --
 -- /See:/ 'adUnitsGetAdCode' smart constructor.
-data AdUnitsGetAdCode = AdUnitsGetAdCode
+data AdUnitsGetAdCode = AdUnitsGetAdCode'
     { _augacAdUnitId   :: !Text
     , _augacAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ adUnitsGetAdCode
     -> Text -- ^ 'augacAdClientId'
     -> AdUnitsGetAdCode
 adUnitsGetAdCode pAugacAdUnitId_ pAugacAdClientId_ =
-    AdUnitsGetAdCode
+    AdUnitsGetAdCode'
     { _augacAdUnitId = pAugacAdUnitId_
     , _augacAdClientId = pAugacAdClientId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest AdUnitsGetAdCode where
         type Scopes AdUnitsGetAdCode =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AdUnitsGetAdCode{..}
+        requestClient AdUnitsGetAdCode'{..}
           = go _augacAdClientId _augacAdUnitId (Just AltJSON)
               adSenseService
           where go

@@ -69,7 +69,7 @@ type DeploymentsPatchResource =
 -- deployment manifest. This method supports patch semantics.
 --
 -- /See:/ 'deploymentsPatch' smart constructor.
-data DeploymentsPatch = DeploymentsPatch
+data DeploymentsPatch = DeploymentsPatch'
     { _dpCreatePolicy :: !DeploymentsPatchCreatePolicy
     , _dpProject      :: !Text
     , _dpPayload      :: !Deployment
@@ -99,7 +99,7 @@ deploymentsPatch
     -> Text -- ^ 'dpDeployment'
     -> DeploymentsPatch
 deploymentsPatch pDpProject_ pDpPayload_ pDpDeployment_ =
-    DeploymentsPatch
+    DeploymentsPatch'
     { _dpCreatePolicy = DPCPCreateOrAcquire
     , _dpProject = pDpProject_
     , _dpPayload = pDpPayload_
@@ -154,7 +154,7 @@ instance GoogleRequest DeploymentsPatch where
         type Scopes DeploymentsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient DeploymentsPatch{..}
+        requestClient DeploymentsPatch'{..}
           = go _dpProject _dpDeployment (Just _dpCreatePolicy)
               (Just _dpDeletePolicy)
               (Just _dpPreview)

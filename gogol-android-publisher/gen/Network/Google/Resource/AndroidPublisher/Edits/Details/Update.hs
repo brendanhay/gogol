@@ -57,7 +57,7 @@ type EditsDetailsUpdateResource =
 -- | Updates app details for this edit.
 --
 -- /See:/ 'editsDetailsUpdate' smart constructor.
-data EditsDetailsUpdate = EditsDetailsUpdate
+data EditsDetailsUpdate = EditsDetailsUpdate'
     { _eduPackageName :: !Text
     , _eduPayload     :: !AppDetails
     , _eduEditId      :: !Text
@@ -78,7 +78,7 @@ editsDetailsUpdate
     -> Text -- ^ 'eduEditId'
     -> EditsDetailsUpdate
 editsDetailsUpdate pEduPackageName_ pEduPayload_ pEduEditId_ =
-    EditsDetailsUpdate
+    EditsDetailsUpdate'
     { _eduPackageName = pEduPackageName_
     , _eduPayload = pEduPayload_
     , _eduEditId = pEduEditId_
@@ -105,7 +105,7 @@ instance GoogleRequest EditsDetailsUpdate where
         type Rs EditsDetailsUpdate = AppDetails
         type Scopes EditsDetailsUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsDetailsUpdate{..}
+        requestClient EditsDetailsUpdate'{..}
           = go _eduPackageName _eduEditId (Just AltJSON)
               _eduPayload
               androidPublisherService

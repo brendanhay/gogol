@@ -52,7 +52,7 @@ type LiveChatBansDeleteResource =
 -- | Removes a chat ban.
 --
 -- /See:/ 'liveChatBansDelete' smart constructor.
-newtype LiveChatBansDelete = LiveChatBansDelete
+newtype LiveChatBansDelete = LiveChatBansDelete'
     { _lcbdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ liveChatBansDelete
     :: Text -- ^ 'lcbdId'
     -> LiveChatBansDelete
 liveChatBansDelete pLcbdId_ =
-    LiveChatBansDelete
+    LiveChatBansDelete'
     { _lcbdId = pLcbdId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest LiveChatBansDelete where
         type Scopes LiveChatBansDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveChatBansDelete{..}
+        requestClient LiveChatBansDelete'{..}
           = go (Just _lcbdId) (Just AltJSON) youTubeService
           where go
                   = buildClient

@@ -70,7 +70,7 @@ type MyConfigSyncVolumeLicensesResource =
 -- shelf.
 --
 -- /See:/ 'myConfigSyncVolumeLicenses' smart constructor.
-data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses
+data MyConfigSyncVolumeLicenses = MyConfigSyncVolumeLicenses'
     { _mcsvlCpksver                :: !Text
     , _mcsvlLocale                 :: !(Maybe Text)
     , _mcsvlIncludeNonComicsSeries :: !(Maybe Bool)
@@ -106,7 +106,7 @@ myConfigSyncVolumeLicenses
     -> Text -- ^ 'mcsvlNonce'
     -> MyConfigSyncVolumeLicenses
 myConfigSyncVolumeLicenses pMcsvlCpksver_ pMcsvlSource_ pMcsvlNonce_ =
-    MyConfigSyncVolumeLicenses
+    MyConfigSyncVolumeLicenses'
     { _mcsvlCpksver = pMcsvlCpksver_
     , _mcsvlLocale = Nothing
     , _mcsvlIncludeNonComicsSeries = Nothing
@@ -170,7 +170,7 @@ instance GoogleRequest MyConfigSyncVolumeLicenses
         type Rs MyConfigSyncVolumeLicenses = Volumes
         type Scopes MyConfigSyncVolumeLicenses =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyConfigSyncVolumeLicenses{..}
+        requestClient MyConfigSyncVolumeLicenses'{..}
           = go (Just _mcsvlSource) (Just _mcsvlNonce)
               (Just _mcsvlCpksver)
               _mcsvlLocale

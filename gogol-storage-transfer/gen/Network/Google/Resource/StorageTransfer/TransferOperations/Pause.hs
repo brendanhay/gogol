@@ -66,7 +66,7 @@ type TransferOperationsPauseResource =
 -- | Pauses a transfer operation.
 --
 -- /See:/ 'transferOperationsPause' smart constructor.
-data TransferOperationsPause = TransferOperationsPause
+data TransferOperationsPause = TransferOperationsPause'
     { _topXgafv          :: !(Maybe Text)
     , _topUploadProtocol :: !(Maybe Text)
     , _topPp             :: !Bool
@@ -104,7 +104,7 @@ transferOperationsPause
     -> Text -- ^ 'topName'
     -> TransferOperationsPause
 transferOperationsPause pTopPayload_ pTopName_ =
-    TransferOperationsPause
+    TransferOperationsPause'
     { _topXgafv = Nothing
     , _topUploadProtocol = Nothing
     , _topPp = True
@@ -166,7 +166,7 @@ instance GoogleRequest TransferOperationsPause where
         type Rs TransferOperationsPause = Empty
         type Scopes TransferOperationsPause =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferOperationsPause{..}
+        requestClient TransferOperationsPause'{..}
           = go _topName _topXgafv _topUploadProtocol
               (Just _topPp)
               _topAccessToken

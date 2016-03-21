@@ -77,7 +77,7 @@ type ProjectsRegionsJobsListResource =
 -- | Lists regions\/{region}\/jobs in a project.
 --
 -- /See:/ 'projectsRegionsJobsList' smart constructor.
-data ProjectsRegionsJobsList = ProjectsRegionsJobsList
+data ProjectsRegionsJobsList = ProjectsRegionsJobsList'
     { _prjlJobStateMatcher :: !(Maybe Text)
     , _prjlXgafv           :: !(Maybe Text)
     , _prjlUploadProtocol  :: !(Maybe Text)
@@ -127,7 +127,7 @@ projectsRegionsJobsList
     -> Text -- ^ 'prjlProjectId'
     -> ProjectsRegionsJobsList
 projectsRegionsJobsList pPrjlRegion_ pPrjlProjectId_ =
-    ProjectsRegionsJobsList
+    ProjectsRegionsJobsList'
     { _prjlJobStateMatcher = Nothing
     , _prjlXgafv = Nothing
     , _prjlUploadProtocol = Nothing
@@ -223,7 +223,7 @@ instance GoogleRequest ProjectsRegionsJobsList where
         type Rs ProjectsRegionsJobsList = ListJobsResponse
         type Scopes ProjectsRegionsJobsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsJobsList{..}
+        requestClient ProjectsRegionsJobsList'{..}
           = go _prjlProjectId _prjlRegion _prjlJobStateMatcher
               _prjlXgafv
               _prjlUploadProtocol

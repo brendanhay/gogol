@@ -24,7 +24,7 @@ import           Network.Google.StorageTransfer.Types.Sum
 -- entries.
 --
 -- /See:/ 'errorSummary' smart constructor.
-data ErrorSummary = ErrorSummary
+data ErrorSummary = ErrorSummary'
     { _esErrorCount      :: !(Maybe (Textual Int64))
     , _esErrorCode       :: !(Maybe Text)
     , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
@@ -42,7 +42,7 @@ data ErrorSummary = ErrorSummary
 errorSummary
     :: ErrorSummary
 errorSummary =
-    ErrorSummary
+    ErrorSummary'
     { _esErrorCount = Nothing
     , _esErrorCode = Nothing
     , _esErrorLogEntries = Nothing
@@ -71,12 +71,12 @@ instance FromJSON ErrorSummary where
         parseJSON
           = withObject "ErrorSummary"
               (\ o ->
-                 ErrorSummary <$>
+                 ErrorSummary' <$>
                    (o .:? "errorCount") <*> (o .:? "errorCode") <*>
                      (o .:? "errorLogEntries" .!= mempty))
 
 instance ToJSON ErrorSummary where
-        toJSON ErrorSummary{..}
+        toJSON ErrorSummary'{..}
           = object
               (catMaybes
                  [("errorCount" .=) <$> _esErrorCount,
@@ -121,7 +121,7 @@ instance ToJSON ErrorSummary where
 -- security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -139,7 +139,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -171,12 +171,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -187,7 +187,7 @@ instance ToJSON Status where
 -- [Operations.ListOperations][google.longrunning.Operations.ListOperations].
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse
+data ListOperationsResponse = ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -202,7 +202,7 @@ data ListOperationsResponse = ListOperationsResponse
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse
+    ListOperationsResponse'
     { _lorNextPageToken = Nothing
     , _lorOperations = Nothing
     }
@@ -225,12 +225,12 @@ instance FromJSON ListOperationsResponse where
         parseJSON
           = withObject "ListOperationsResponse"
               (\ o ->
-                 ListOperationsResponse <$>
+                 ListOperationsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON ListOperationsResponse where
-        toJSON ListOperationsResponse{..}
+        toJSON ListOperationsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lorNextPageToken,
@@ -239,7 +239,7 @@ instance ToJSON ListOperationsResponse where
 -- | Transfers can be scheduled to recur or to run just once.
 --
 -- /See:/ 'schedule' smart constructor.
-data Schedule = Schedule
+data Schedule = Schedule'
     { _sScheduleEndDate   :: !(Maybe Date)
     , _sScheduleStartDate :: !(Maybe Date)
     , _sStartTimeOfDay    :: !(Maybe TimeOfDay')
@@ -257,7 +257,7 @@ data Schedule = Schedule
 schedule
     :: Schedule
 schedule =
-    Schedule
+    Schedule'
     { _sScheduleEndDate = Nothing
     , _sScheduleStartDate = Nothing
     , _sStartTimeOfDay = Nothing
@@ -289,13 +289,13 @@ instance FromJSON Schedule where
         parseJSON
           = withObject "Schedule"
               (\ o ->
-                 Schedule <$>
+                 Schedule' <$>
                    (o .:? "scheduleEndDate") <*>
                      (o .:? "scheduleStartDate")
                      <*> (o .:? "startTimeOfDay"))
 
 instance ToJSON Schedule where
-        toJSON Schedule{..}
+        toJSON Schedule'{..}
           = object
               (catMaybes
                  [("scheduleEndDate" .=) <$> _sScheduleEndDate,
@@ -305,7 +305,7 @@ instance ToJSON Schedule where
 -- | Conditions that determine which objects will be transferred.
 --
 -- /See:/ 'objectConditions' smart constructor.
-data ObjectConditions = ObjectConditions
+data ObjectConditions = ObjectConditions'
     { _ocMinTimeElapsedSinceLastModification :: !(Maybe Text)
     , _ocIncludePrefixes                     :: !(Maybe [Text])
     , _ocMaxTimeElapsedSinceLastModification :: !(Maybe Text)
@@ -326,7 +326,7 @@ data ObjectConditions = ObjectConditions
 objectConditions
     :: ObjectConditions
 objectConditions =
-    ObjectConditions
+    ObjectConditions'
     { _ocMinTimeElapsedSinceLastModification = Nothing
     , _ocIncludePrefixes = Nothing
     , _ocMaxTimeElapsedSinceLastModification = Nothing
@@ -392,14 +392,14 @@ instance FromJSON ObjectConditions where
         parseJSON
           = withObject "ObjectConditions"
               (\ o ->
-                 ObjectConditions <$>
+                 ObjectConditions' <$>
                    (o .:? "minTimeElapsedSinceLastModification") <*>
                      (o .:? "includePrefixes" .!= mempty)
                      <*> (o .:? "maxTimeElapsedSinceLastModification")
                      <*> (o .:? "excludePrefixes" .!= mempty))
 
 instance ToJSON ObjectConditions where
-        toJSON ObjectConditions{..}
+        toJSON ObjectConditions'{..}
           = object
               (catMaybes
                  [("minTimeElapsedSinceLastModification" .=) <$>
@@ -413,7 +413,7 @@ instance ToJSON ObjectConditions where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
@@ -437,7 +437,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -482,14 +482,14 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "done") <*> (o .:? "error") <*>
                      (o .:? "response")
                      <*> (o .:? "name")
                      <*> (o .:? "metadata"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
@@ -505,17 +505,17 @@ instance ToJSON Operation where
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -524,19 +524,19 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pauseTransferOperationRequest' smart constructor.
 data PauseTransferOperationRequest =
-    PauseTransferOperationRequest
+    PauseTransferOperationRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PauseTransferOperationRequest' with the minimum fields required to make a request.
 --
 pauseTransferOperationRequest
     :: PauseTransferOperationRequest
-pauseTransferOperationRequest = PauseTransferOperationRequest
+pauseTransferOperationRequest = PauseTransferOperationRequest'
 
 instance FromJSON PauseTransferOperationRequest where
         parseJSON
           = withObject "PauseTransferOperationRequest"
-              (\ o -> pure PauseTransferOperationRequest)
+              (\ o -> pure PauseTransferOperationRequest')
 
 instance ToJSON PauseTransferOperationRequest where
         toJSON = const emptyObject
@@ -544,7 +544,7 @@ instance ToJSON PauseTransferOperationRequest where
 -- | Google service account
 --
 -- /See:/ 'googleServiceAccount' smart constructor.
-newtype GoogleServiceAccount = GoogleServiceAccount
+newtype GoogleServiceAccount = GoogleServiceAccount'
     { _gsaAccountEmail :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -556,7 +556,7 @@ newtype GoogleServiceAccount = GoogleServiceAccount
 googleServiceAccount
     :: GoogleServiceAccount
 googleServiceAccount =
-    GoogleServiceAccount
+    GoogleServiceAccount'
     { _gsaAccountEmail = Nothing
     }
 
@@ -570,17 +570,17 @@ instance FromJSON GoogleServiceAccount where
         parseJSON
           = withObject "GoogleServiceAccount"
               (\ o ->
-                 GoogleServiceAccount <$> (o .:? "accountEmail"))
+                 GoogleServiceAccount' <$> (o .:? "accountEmail"))
 
 instance ToJSON GoogleServiceAccount where
-        toJSON GoogleServiceAccount{..}
+        toJSON GoogleServiceAccount'{..}
           = object
               (catMaybes
                  [("accountEmail" .=) <$> _gsaAccountEmail])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -593,7 +593,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -606,7 +606,7 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
@@ -621,7 +621,7 @@ instance ToJSON StatusDetailsItem where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'date' smart constructor.
-data Date = Date
+data Date = Date'
     { _dDay   :: !(Maybe (Textual Int32))
     , _dYear  :: !(Maybe (Textual Int32))
     , _dMonth :: !(Maybe (Textual Int32))
@@ -639,7 +639,7 @@ data Date = Date
 date
     :: Date
 date =
-    Date
+    Date'
     { _dDay = Nothing
     , _dYear = Nothing
     , _dMonth = Nothing
@@ -669,11 +669,11 @@ instance FromJSON Date where
         parseJSON
           = withObject "Date"
               (\ o ->
-                 Date <$>
+                 Date' <$>
                    (o .:? "day") <*> (o .:? "year") <*> (o .:? "month"))
 
 instance ToJSON Date where
-        toJSON Date{..}
+        toJSON Date'{..}
           = object
               (catMaybes
                  [("day" .=) <$> _dDay, ("year" .=) <$> _dYear,
@@ -682,7 +682,7 @@ instance ToJSON Date where
 -- | Request passed to UpdateTransferJob.
 --
 -- /See:/ 'updateTransferJobRequest' smart constructor.
-data UpdateTransferJobRequest = UpdateTransferJobRequest
+data UpdateTransferJobRequest = UpdateTransferJobRequest'
     { _utjrTransferJob                :: !(Maybe TransferJob)
     , _utjrProjectId                  :: !(Maybe Text)
     , _utjrUpdateTransferJobFieldMask :: !(Maybe Text)
@@ -700,7 +700,7 @@ data UpdateTransferJobRequest = UpdateTransferJobRequest
 updateTransferJobRequest
     :: UpdateTransferJobRequest
 updateTransferJobRequest =
-    UpdateTransferJobRequest
+    UpdateTransferJobRequest'
     { _utjrTransferJob = Nothing
     , _utjrProjectId = Nothing
     , _utjrUpdateTransferJobFieldMask = Nothing
@@ -734,12 +734,12 @@ instance FromJSON UpdateTransferJobRequest where
         parseJSON
           = withObject "UpdateTransferJobRequest"
               (\ o ->
-                 UpdateTransferJobRequest <$>
+                 UpdateTransferJobRequest' <$>
                    (o .:? "transferJob") <*> (o .:? "projectId") <*>
                      (o .:? "updateTransferJobFieldMask"))
 
 instance ToJSON UpdateTransferJobRequest where
-        toJSON UpdateTransferJobRequest{..}
+        toJSON UpdateTransferJobRequest'{..}
           = object
               (catMaybes
                  [("transferJob" .=) <$> _utjrTransferJob,
@@ -751,7 +751,7 @@ instance ToJSON UpdateTransferJobRequest where
 -- operation.
 --
 -- /See:/ 'transferCounters' smart constructor.
-data TransferCounters = TransferCounters
+data TransferCounters = TransferCounters'
     { _tcBytesFoundOnlyFromSink         :: !(Maybe (Textual Int64))
     , _tcBytesDeletedFromSink           :: !(Maybe (Textual Int64))
     , _tcObjectsDeletedFromSource       :: !(Maybe (Textual Int64))
@@ -808,7 +808,7 @@ data TransferCounters = TransferCounters
 transferCounters
     :: TransferCounters
 transferCounters =
-    TransferCounters
+    TransferCounters'
     { _tcBytesFoundOnlyFromSink = Nothing
     , _tcBytesDeletedFromSink = Nothing
     , _tcObjectsDeletedFromSource = Nothing
@@ -949,7 +949,7 @@ instance FromJSON TransferCounters where
         parseJSON
           = withObject "TransferCounters"
               (\ o ->
-                 TransferCounters <$>
+                 TransferCounters' <$>
                    (o .:? "bytesFoundOnlyFromSink") <*>
                      (o .:? "bytesDeletedFromSink")
                      <*> (o .:? "objectsDeletedFromSource")
@@ -968,7 +968,7 @@ instance FromJSON TransferCounters where
                      <*> (o .:? "objectsFromSourceSkippedBySync"))
 
 instance ToJSON TransferCounters where
-        toJSON TransferCounters{..}
+        toJSON TransferCounters'{..}
           = object
               (catMaybes
                  [("bytesFoundOnlyFromSink" .=) <$>
@@ -1007,7 +1007,7 @@ instance ToJSON TransferCounters where
 -- periodically.
 --
 -- /See:/ 'transferJob' smart constructor.
-data TransferJob = TransferJob
+data TransferJob = TransferJob'
     { _tjCreationTime         :: !(Maybe Text)
     , _tjStatus               :: !(Maybe Text)
     , _tjSchedule             :: !(Maybe Schedule)
@@ -1043,7 +1043,7 @@ data TransferJob = TransferJob
 transferJob
     :: TransferJob
 transferJob =
-    TransferJob
+    TransferJob'
     { _tjCreationTime = Nothing
     , _tjStatus = Nothing
     , _tjSchedule = Nothing
@@ -1117,7 +1117,7 @@ instance FromJSON TransferJob where
         parseJSON
           = withObject "TransferJob"
               (\ o ->
-                 TransferJob <$>
+                 TransferJob' <$>
                    (o .:? "creationTime") <*> (o .:? "status") <*>
                      (o .:? "schedule")
                      <*> (o .:? "deletionTime")
@@ -1128,7 +1128,7 @@ instance FromJSON TransferJob where
                      <*> (o .:? "lastModificationTime"))
 
 instance ToJSON TransferJob where
-        toJSON TransferJob{..}
+        toJSON TransferJob'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _tjCreationTime,
@@ -1148,7 +1148,7 @@ instance ToJSON TransferJob where
 -- updated.
 --
 -- /See:/ 'gcsData' smart constructor.
-newtype GcsData = GcsData
+newtype GcsData = GcsData'
     { _gdBucketName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1160,7 +1160,7 @@ newtype GcsData = GcsData
 gcsData
     :: GcsData
 gcsData =
-    GcsData
+    GcsData'
     { _gdBucketName = Nothing
     }
 
@@ -1174,10 +1174,10 @@ gdBucketName
 instance FromJSON GcsData where
         parseJSON
           = withObject "GcsData"
-              (\ o -> GcsData <$> (o .:? "bucketName"))
+              (\ o -> GcsData' <$> (o .:? "bucketName"))
 
 instance ToJSON GcsData where
-        toJSON GcsData{..}
+        toJSON GcsData'{..}
           = object
               (catMaybes [("bucketName" .=) <$> _gdBucketName])
 
@@ -1185,7 +1185,7 @@ instance ToJSON GcsData where
 -- an object\'s name is the S3 object\'s key name.
 --
 -- /See:/ 'awsS3Data' smart constructor.
-data AwsS3Data = AwsS3Data
+data AwsS3Data = AwsS3Data'
     { _asdBucketName   :: !(Maybe Text)
     , _asdAwsAccessKey :: !(Maybe AwsAccessKey)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1200,7 +1200,7 @@ data AwsS3Data = AwsS3Data
 awsS3Data
     :: AwsS3Data
 awsS3Data =
-    AwsS3Data
+    AwsS3Data'
     { _asdBucketName = Nothing
     , _asdAwsAccessKey = Nothing
     }
@@ -1225,11 +1225,11 @@ instance FromJSON AwsS3Data where
         parseJSON
           = withObject "AwsS3Data"
               (\ o ->
-                 AwsS3Data <$>
+                 AwsS3Data' <$>
                    (o .:? "bucketName") <*> (o .:? "awsAccessKey"))
 
 instance ToJSON AwsS3Data where
-        toJSON AwsS3Data{..}
+        toJSON AwsS3Data'{..}
           = object
               (catMaybes
                  [("bucketName" .=) <$> _asdBucketName,
@@ -1257,7 +1257,7 @@ instance ToJSON AwsS3Data where
 -- response.
 --
 -- /See:/ 'hTTPData' smart constructor.
-newtype HTTPData = HTTPData
+newtype HTTPData = HTTPData'
     { _httpdListURL :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1269,7 +1269,7 @@ newtype HTTPData = HTTPData
 hTTPData
     :: HTTPData
 hTTPData =
-    HTTPData
+    HTTPData'
     { _httpdListURL = Nothing
     }
 
@@ -1283,10 +1283,10 @@ httpdListURL
 instance FromJSON HTTPData where
         parseJSON
           = withObject "HTTPData"
-              (\ o -> HTTPData <$> (o .:? "listUrl"))
+              (\ o -> HTTPData' <$> (o .:? "listUrl"))
 
 instance ToJSON HTTPData where
-        toJSON HTTPData{..}
+        toJSON HTTPData'{..}
           = object
               (catMaybes [("listUrl" .=) <$> _httpdListURL])
 
@@ -1296,7 +1296,7 @@ instance ToJSON HTTPData where
 -- \`google.protobuf.Timestamp\`.
 --
 -- /See:/ 'timeOfDay' smart constructor.
-data TimeOfDay' = TimeOfDay'
+data TimeOfDay' = TimeOfDay''
     { _todNanos   :: !(Maybe (Textual Int32))
     , _todHours   :: !(Maybe (Textual Int32))
     , _todMinutes :: !(Maybe (Textual Int32))
@@ -1317,7 +1317,7 @@ data TimeOfDay' = TimeOfDay'
 timeOfDay
     :: TimeOfDay'
 timeOfDay =
-    TimeOfDay'
+    TimeOfDay''
     { _todNanos = Nothing
     , _todHours = Nothing
     , _todMinutes = Nothing
@@ -1355,13 +1355,13 @@ instance FromJSON TimeOfDay' where
         parseJSON
           = withObject "TimeOfDay"
               (\ o ->
-                 TimeOfDay' <$>
+                 TimeOfDay'' <$>
                    (o .:? "nanos") <*> (o .:? "hours") <*>
                      (o .:? "minutes")
                      <*> (o .:? "seconds"))
 
 instance ToJSON TimeOfDay' where
-        toJSON TimeOfDay'{..}
+        toJSON TimeOfDay''{..}
           = object
               (catMaybes
                  [("nanos" .=) <$> _todNanos,
@@ -1372,7 +1372,7 @@ instance ToJSON TimeOfDay' where
 -- | An entry describing an error that has occurred.
 --
 -- /See:/ 'errorLogEntry' smart constructor.
-data ErrorLogEntry = ErrorLogEntry
+data ErrorLogEntry = ErrorLogEntry'
     { _eleURL          :: !(Maybe Text)
     , _eleErrorDetails :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1387,7 +1387,7 @@ data ErrorLogEntry = ErrorLogEntry
 errorLogEntry
     :: ErrorLogEntry
 errorLogEntry =
-    ErrorLogEntry
+    ErrorLogEntry'
     { _eleURL = Nothing
     , _eleErrorDetails = Nothing
     }
@@ -1409,11 +1409,11 @@ instance FromJSON ErrorLogEntry where
         parseJSON
           = withObject "ErrorLogEntry"
               (\ o ->
-                 ErrorLogEntry <$>
+                 ErrorLogEntry' <$>
                    (o .:? "url") <*> (o .:? "errorDetails" .!= mempty))
 
 instance ToJSON ErrorLogEntry where
-        toJSON ErrorLogEntry{..}
+        toJSON ErrorLogEntry'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _eleURL,
@@ -1422,7 +1422,7 @@ instance ToJSON ErrorLogEntry where
 -- | Represents the transfer operation object.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata
+newtype OperationMetadata = OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1435,7 +1435,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata
+    OperationMetadata'
     { _omAddtional = _Coerce # pOmAddtional_
     }
 
@@ -1448,7 +1448,7 @@ omAddtional
 instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
-              (\ o -> OperationMetadata <$> (parseJSONObject o))
+              (\ o -> OperationMetadata' <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
@@ -1457,7 +1457,7 @@ instance ToJSON OperationMetadata where
 -- be performed on objects in a transfer.
 --
 -- /See:/ 'transferOptions' smart constructor.
-data TransferOptions = TransferOptions
+data TransferOptions = TransferOptions'
     { _toDeleteObjectsUniqueInSink             :: !(Maybe Bool)
     , _toDeleteObjectsFromSourceAfterTransfer  :: !(Maybe Bool)
     , _toOverwriteObjectsAlreadyExistingInSink :: !(Maybe Bool)
@@ -1475,7 +1475,7 @@ data TransferOptions = TransferOptions
 transferOptions
     :: TransferOptions
 transferOptions =
-    TransferOptions
+    TransferOptions'
     { _toDeleteObjectsUniqueInSink = Nothing
     , _toDeleteObjectsFromSourceAfterTransfer = Nothing
     , _toOverwriteObjectsAlreadyExistingInSink = Nothing
@@ -1506,13 +1506,13 @@ instance FromJSON TransferOptions where
         parseJSON
           = withObject "TransferOptions"
               (\ o ->
-                 TransferOptions <$>
+                 TransferOptions' <$>
                    (o .:? "deleteObjectsUniqueInSink") <*>
                      (o .:? "deleteObjectsFromSourceAfterTransfer")
                      <*> (o .:? "overwriteObjectsAlreadyExistingInSink"))
 
 instance ToJSON TransferOptions where
-        toJSON TransferOptions{..}
+        toJSON TransferOptions'{..}
           = object
               (catMaybes
                  [("deleteObjectsUniqueInSink" .=) <$>
@@ -1525,7 +1525,7 @@ instance ToJSON TransferOptions where
 -- | A description of the execution of a transfer.
 --
 -- /See:/ 'transferOperation' smart constructor.
-data TransferOperation = TransferOperation
+data TransferOperation = TransferOperation'
     { _toStatus          :: !(Maybe Text)
     , _toCounters        :: !(Maybe TransferCounters)
     , _toStartTime       :: !(Maybe Text)
@@ -1561,7 +1561,7 @@ data TransferOperation = TransferOperation
 transferOperation
     :: TransferOperation
 transferOperation =
-    TransferOperation
+    TransferOperation'
     { _toStatus = Nothing
     , _toCounters = Nothing
     , _toStartTime = Nothing
@@ -1626,7 +1626,7 @@ instance FromJSON TransferOperation where
         parseJSON
           = withObject "TransferOperation"
               (\ o ->
-                 TransferOperation <$>
+                 TransferOperation' <$>
                    (o .:? "status") <*> (o .:? "counters") <*>
                      (o .:? "startTime")
                      <*> (o .:? "transferJobName")
@@ -1637,7 +1637,7 @@ instance FromJSON TransferOperation where
                      <*> (o .:? "errorBreakdowns" .!= mempty))
 
 instance ToJSON TransferOperation where
-        toJSON TransferOperation{..}
+        toJSON TransferOperation'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _toStatus,
@@ -1653,7 +1653,7 @@ instance ToJSON TransferOperation where
 -- | Configuration for running a transfer.
 --
 -- /See:/ 'transferSpec' smart constructor.
-data TransferSpec = TransferSpec
+data TransferSpec = TransferSpec'
     { _tsGcsDataSource    :: !(Maybe GcsData)
     , _tsObjectConditions :: !(Maybe ObjectConditions)
     , _tsHTTPDataSource   :: !(Maybe HTTPData)
@@ -1680,7 +1680,7 @@ data TransferSpec = TransferSpec
 transferSpec
     :: TransferSpec
 transferSpec =
-    TransferSpec
+    TransferSpec'
     { _tsGcsDataSource = Nothing
     , _tsObjectConditions = Nothing
     , _tsHTTPDataSource = Nothing
@@ -1734,7 +1734,7 @@ instance FromJSON TransferSpec where
         parseJSON
           = withObject "TransferSpec"
               (\ o ->
-                 TransferSpec <$>
+                 TransferSpec' <$>
                    (o .:? "gcsDataSource") <*>
                      (o .:? "objectConditions")
                      <*> (o .:? "httpDataSource")
@@ -1743,7 +1743,7 @@ instance FromJSON TransferSpec where
                      <*> (o .:? "transferOptions"))
 
 instance ToJSON TransferSpec where
-        toJSON TransferSpec{..}
+        toJSON TransferSpec'{..}
           = object
               (catMaybes
                  [("gcsDataSource" .=) <$> _tsGcsDataSource,
@@ -1756,7 +1756,7 @@ instance ToJSON TransferSpec where
 -- | Response from ListTransferJobs.
 --
 -- /See:/ 'listTransferJobsResponse' smart constructor.
-data ListTransferJobsResponse = ListTransferJobsResponse
+data ListTransferJobsResponse = ListTransferJobsResponse'
     { _ltjrNextPageToken :: !(Maybe Text)
     , _ltjrTransferJobs  :: !(Maybe [TransferJob])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1771,7 +1771,7 @@ data ListTransferJobsResponse = ListTransferJobsResponse
 listTransferJobsResponse
     :: ListTransferJobsResponse
 listTransferJobsResponse =
-    ListTransferJobsResponse
+    ListTransferJobsResponse'
     { _ltjrNextPageToken = Nothing
     , _ltjrTransferJobs = Nothing
     }
@@ -1794,12 +1794,12 @@ instance FromJSON ListTransferJobsResponse where
         parseJSON
           = withObject "ListTransferJobsResponse"
               (\ o ->
-                 ListTransferJobsResponse <$>
+                 ListTransferJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "transferJobs" .!= mempty))
 
 instance ToJSON ListTransferJobsResponse where
-        toJSON ListTransferJobsResponse{..}
+        toJSON ListTransferJobsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltjrNextPageToken,
@@ -1815,7 +1815,7 @@ instance ToJSON ListTransferJobsResponse where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse
+newtype OperationResponse = OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1828,7 +1828,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse
+    OperationResponse'
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
@@ -1841,7 +1841,7 @@ orAddtional
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> OperationResponse <$> (parseJSONObject o))
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
@@ -1850,20 +1850,20 @@ instance ToJSON OperationResponse where
 --
 -- /See:/ 'resumeTransferOperationRequest' smart constructor.
 data ResumeTransferOperationRequest =
-    ResumeTransferOperationRequest
+    ResumeTransferOperationRequest'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResumeTransferOperationRequest' with the minimum fields required to make a request.
 --
 resumeTransferOperationRequest
     :: ResumeTransferOperationRequest
-resumeTransferOperationRequest = ResumeTransferOperationRequest
+resumeTransferOperationRequest = ResumeTransferOperationRequest'
 
 instance FromJSON ResumeTransferOperationRequest
          where
         parseJSON
           = withObject "ResumeTransferOperationRequest"
-              (\ o -> pure ResumeTransferOperationRequest)
+              (\ o -> pure ResumeTransferOperationRequest')
 
 instance ToJSON ResumeTransferOperationRequest where
         toJSON = const emptyObject
@@ -1872,7 +1872,7 @@ instance ToJSON ResumeTransferOperationRequest where
 -- Credentials](http:\/\/docs.aws.amazon.com\/general\/latest\/gr\/aws-security-credentials.html)).
 --
 -- /See:/ 'awsAccessKey' smart constructor.
-data AwsAccessKey = AwsAccessKey
+data AwsAccessKey = AwsAccessKey'
     { _aakSecretAccessKey :: !(Maybe Text)
     , _aakAccessKeyId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1887,7 +1887,7 @@ data AwsAccessKey = AwsAccessKey
 awsAccessKey
     :: AwsAccessKey
 awsAccessKey =
-    AwsAccessKey
+    AwsAccessKey'
     { _aakSecretAccessKey = Nothing
     , _aakAccessKeyId = Nothing
     }
@@ -1909,11 +1909,11 @@ instance FromJSON AwsAccessKey where
         parseJSON
           = withObject "AwsAccessKey"
               (\ o ->
-                 AwsAccessKey <$>
+                 AwsAccessKey' <$>
                    (o .:? "secretAccessKey") <*> (o .:? "accessKeyId"))
 
 instance ToJSON AwsAccessKey where
-        toJSON AwsAccessKey{..}
+        toJSON AwsAccessKey'{..}
           = object
               (catMaybes
                  [("secretAccessKey" .=) <$> _aakSecretAccessKey,

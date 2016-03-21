@@ -50,20 +50,20 @@ type MyConfigGetUserSettingsResource =
 --
 -- /See:/ 'myConfigGetUserSettings' smart constructor.
 data MyConfigGetUserSettings =
-    MyConfigGetUserSettings
+    MyConfigGetUserSettings'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MyConfigGetUserSettings' with the minimum fields required to make a request.
 --
 myConfigGetUserSettings
     :: MyConfigGetUserSettings
-myConfigGetUserSettings = MyConfigGetUserSettings
+myConfigGetUserSettings = MyConfigGetUserSettings'
 
 instance GoogleRequest MyConfigGetUserSettings where
         type Rs MyConfigGetUserSettings = UserSettings
         type Scopes MyConfigGetUserSettings =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyConfigGetUserSettings{}
+        requestClient MyConfigGetUserSettings'{}
           = go (Just AltJSON) booksService
           where go
                   = buildClient

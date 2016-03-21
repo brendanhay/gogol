@@ -68,7 +68,7 @@ type ProductsUpdatePermissionsResource =
 -- permissions for this app that have been accepted by the enterprise.
 --
 -- /See:/ 'productsUpdatePermissions' smart constructor.
-data ProductsUpdatePermissions = ProductsUpdatePermissions
+data ProductsUpdatePermissions = ProductsUpdatePermissions'
     { _pupEnterpriseId :: !Text
     , _pupPayload      :: !ProductPermissions
     , _pupProductId    :: !Text
@@ -89,7 +89,7 @@ productsUpdatePermissions
     -> Text -- ^ 'pupProductId'
     -> ProductsUpdatePermissions
 productsUpdatePermissions pPupEnterpriseId_ pPupPayload_ pPupProductId_ =
-    ProductsUpdatePermissions
+    ProductsUpdatePermissions'
     { _pupEnterpriseId = pPupEnterpriseId_
     , _pupPayload = pPupPayload_
     , _pupProductId = pPupProductId_
@@ -117,7 +117,7 @@ instance GoogleRequest ProductsUpdatePermissions
              ProductPermissions
         type Scopes ProductsUpdatePermissions =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient ProductsUpdatePermissions{..}
+        requestClient ProductsUpdatePermissions'{..}
           = go _pupEnterpriseId _pupProductId (Just AltJSON)
               _pupPayload
               androidEnterpriseService

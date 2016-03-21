@@ -58,7 +58,7 @@ type AccountshippingUpdateResource =
 -- | Updates the shipping settings of the account.
 --
 -- /See:/ 'accountshippingUpdate' smart constructor.
-data AccountshippingUpdate = AccountshippingUpdate
+data AccountshippingUpdate = AccountshippingUpdate'
     { _auMerchantId :: !(Textual Word64)
     , _auPayload    :: !AccountShipping
     , _auAccountId  :: !(Textual Word64)
@@ -82,7 +82,7 @@ accountshippingUpdate
     -> Word64 -- ^ 'auAccountId'
     -> AccountshippingUpdate
 accountshippingUpdate pAuMerchantId_ pAuPayload_ pAuAccountId_ =
-    AccountshippingUpdate
+    AccountshippingUpdate'
     { _auMerchantId = _Coerce # pAuMerchantId_
     , _auPayload = pAuPayload_
     , _auAccountId = _Coerce # pAuAccountId_
@@ -115,7 +115,7 @@ instance GoogleRequest AccountshippingUpdate where
         type Rs AccountshippingUpdate = AccountShipping
         type Scopes AccountshippingUpdate =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountshippingUpdate{..}
+        requestClient AccountshippingUpdate'{..}
           = go _auMerchantId _auAccountId _auDryRun
               (Just AltJSON)
               _auPayload

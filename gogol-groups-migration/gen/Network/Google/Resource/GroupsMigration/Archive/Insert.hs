@@ -63,7 +63,7 @@ type ArchiveInsertResource =
 -- | Inserts a new mail into the archive of the Google group.
 --
 -- /See:/ 'archiveInsert' smart constructor.
-newtype ArchiveInsert = ArchiveInsert
+newtype ArchiveInsert = ArchiveInsert'
     { _aiGroupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -76,7 +76,7 @@ archiveInsert
     :: Text -- ^ 'aiGroupId'
     -> ArchiveInsert
 archiveInsert pAiGroupId_ =
-    ArchiveInsert
+    ArchiveInsert'
     { _aiGroupId = pAiGroupId_
     }
 
@@ -89,7 +89,7 @@ instance GoogleRequest ArchiveInsert where
         type Rs ArchiveInsert = Groups
         type Scopes ArchiveInsert =
              '["https://www.googleapis.com/auth/apps.groups.migration"]
-        requestClient ArchiveInsert{..}
+        requestClient ArchiveInsert'{..}
           = go _aiGroupId (Just AltJSON) groupsMigrationService
           where go :<|> _
                   = buildClient (Proxy :: Proxy ArchiveInsertResource)
@@ -100,7 +100,7 @@ instance GoogleRequest (MediaUpload ArchiveInsert)
         type Rs (MediaUpload ArchiveInsert) = Groups
         type Scopes (MediaUpload ArchiveInsert) =
              Scopes ArchiveInsert
-        requestClient (MediaUpload ArchiveInsert{..} body)
+        requestClient (MediaUpload ArchiveInsert'{..} body)
           = go _aiGroupId (Just AltJSON) (Just AltMedia) body
               groupsMigrationService
           where _ :<|> go

@@ -57,7 +57,7 @@ type NetworksInsertResource =
 -- the request.
 --
 -- /See:/ 'networksInsert' smart constructor.
-data NetworksInsert = NetworksInsert
+data NetworksInsert = NetworksInsert'
     { _niProject :: !Text
     , _niPayload :: !Network
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ networksInsert
     -> Network -- ^ 'niPayload'
     -> NetworksInsert
 networksInsert pNiProject_ pNiPayload_ =
-    NetworksInsert
+    NetworksInsert'
     { _niProject = pNiProject_
     , _niPayload = pNiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest NetworksInsert where
         type Scopes NetworksInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient NetworksInsert{..}
+        requestClient NetworksInsert'{..}
           = go _niProject (Just AltJSON) _niPayload
               computeService
           where go

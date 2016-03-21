@@ -77,7 +77,7 @@ type ConversionGetResource =
 -- account.
 --
 -- /See:/ 'conversionGet' smart constructor.
-data ConversionGet = ConversionGet
+data ConversionGet = ConversionGet'
     { _cgAdGroupId       :: !(Maybe (Textual Int64))
     , _cgEngineAccountId :: !(Textual Int64)
     , _cgAgencyId        :: !(Textual Int64)
@@ -126,7 +126,7 @@ conversionGet
     -> Int32 -- ^ 'cgRowCount'
     -> ConversionGet
 conversionGet pCgEngineAccountId_ pCgAgencyId_ pCgAdvertiserId_ pCgEndDate_ pCgStartDate_ pCgStartRow_ pCgRowCount_ =
-    ConversionGet
+    ConversionGet'
     { _cgAdGroupId = Nothing
     , _cgEngineAccountId = _Coerce # pCgEngineAccountId_
     , _cgAgencyId = _Coerce # pCgAgencyId_
@@ -215,7 +215,7 @@ instance GoogleRequest ConversionGet where
         type Rs ConversionGet = ConversionList
         type Scopes ConversionGet =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ConversionGet{..}
+        requestClient ConversionGet'{..}
           = go _cgAgencyId _cgAdvertiserId _cgEngineAccountId
               (Just _cgEndDate)
               (Just _cgRowCount)

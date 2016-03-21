@@ -55,7 +55,7 @@ type AchievementsRevealResource =
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsReveal' smart constructor.
-newtype AchievementsReveal = AchievementsReveal
+newtype AchievementsReveal = AchievementsReveal'
     { _arAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ achievementsReveal
     :: Text -- ^ 'arAchievementId'
     -> AchievementsReveal
 achievementsReveal pArAchievementId_ =
-    AchievementsReveal
+    AchievementsReveal'
     { _arAchievementId = pArAchievementId_
     }
 
@@ -84,7 +84,7 @@ instance GoogleRequest AchievementsReveal where
         type Scopes AchievementsReveal =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsReveal{..}
+        requestClient AchievementsReveal'{..}
           = go _arAchievementId (Just AltJSON) gamesService
           where go
                   = buildClient

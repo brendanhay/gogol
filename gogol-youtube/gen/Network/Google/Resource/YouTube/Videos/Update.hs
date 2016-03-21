@@ -55,7 +55,7 @@ type VideosUpdateResource =
 -- | Updates a video\'s metadata.
 --
 -- /See:/ 'videosUpdate' smart constructor.
-data VideosUpdate = VideosUpdate
+data VideosUpdate = VideosUpdate'
     { _vuPart                   :: !Text
     , _vuPayload                :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
@@ -75,7 +75,7 @@ videosUpdate
     -> Video -- ^ 'vuPayload'
     -> VideosUpdate
 videosUpdate pVuPart_ pVuPayload_ =
-    VideosUpdate
+    VideosUpdate'
     { _vuPart = pVuPart_
     , _vuPayload = pVuPayload_
     , _vuOnBehalfOfContentOwner = Nothing
@@ -127,7 +127,7 @@ instance GoogleRequest VideosUpdate where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient VideosUpdate{..}
+        requestClient VideosUpdate'{..}
           = go (Just _vuPart) _vuOnBehalfOfContentOwner
               (Just AltJSON)
               _vuPayload

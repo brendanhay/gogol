@@ -59,7 +59,7 @@ type ResourcesCalendarsListResource =
 -- | Retrieves a list of calendar resources for an account.
 --
 -- /See:/ 'resourcesCalendarsList' smart constructor.
-data ResourcesCalendarsList = ResourcesCalendarsList
+data ResourcesCalendarsList = ResourcesCalendarsList'
     { _rclCustomer   :: !Text
     , _rclPageToken  :: !(Maybe Text)
     , _rclMaxResults :: !(Maybe (Textual Int32))
@@ -78,7 +78,7 @@ resourcesCalendarsList
     :: Text -- ^ 'rclCustomer'
     -> ResourcesCalendarsList
 resourcesCalendarsList pRclCustomer_ =
-    ResourcesCalendarsList
+    ResourcesCalendarsList'
     { _rclCustomer = pRclCustomer_
     , _rclPageToken = Nothing
     , _rclMaxResults = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest ResourcesCalendarsList where
         type Scopes ResourcesCalendarsList =
              '["https://www.googleapis.com/auth/admin.directory.resource.calendar",
                "https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly"]
-        requestClient ResourcesCalendarsList{..}
+        requestClient ResourcesCalendarsList'{..}
           = go _rclCustomer _rclPageToken _rclMaxResults
               (Just AltJSON)
               directoryService

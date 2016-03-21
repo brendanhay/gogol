@@ -61,7 +61,7 @@ type InAppProductsPatchResource =
 -- semantics.
 --
 -- /See:/ 'inAppProductsPatch' smart constructor.
-data InAppProductsPatch = InAppProductsPatch
+data InAppProductsPatch = InAppProductsPatch'
     { _iAppAutoConvertMissingPrices :: !(Maybe Bool)
     , _iAppPackageName              :: !Text
     , _iAppPayload                  :: !InAppProduct
@@ -85,7 +85,7 @@ inAppProductsPatch
     -> Text -- ^ 'iAppSKU'
     -> InAppProductsPatch
 inAppProductsPatch pIAppPackageName_ pIAppPayload_ pIAppSKU_ =
-    InAppProductsPatch
+    InAppProductsPatch'
     { _iAppAutoConvertMissingPrices = Nothing
     , _iAppPackageName = pIAppPackageName_
     , _iAppPayload = pIAppPayload_
@@ -121,7 +121,7 @@ instance GoogleRequest InAppProductsPatch where
         type Rs InAppProductsPatch = InAppProduct
         type Scopes InAppProductsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient InAppProductsPatch{..}
+        requestClient InAppProductsPatch'{..}
           = go _iAppPackageName _iAppSKU
               _iAppAutoConvertMissingPrices
               (Just AltJSON)

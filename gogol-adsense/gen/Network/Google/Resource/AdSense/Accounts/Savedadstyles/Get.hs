@@ -54,7 +54,7 @@ type AccountsSavedadstylesGetResource =
 -- | List a specific saved ad style for the specified account.
 --
 -- /See:/ 'accountsSavedadstylesGet' smart constructor.
-data AccountsSavedadstylesGet = AccountsSavedadstylesGet
+data AccountsSavedadstylesGet = AccountsSavedadstylesGet'
     { _asgSavedAdStyleId :: !Text
     , _asgAccountId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsSavedadstylesGet
     -> Text -- ^ 'asgAccountId'
     -> AccountsSavedadstylesGet
 accountsSavedadstylesGet pAsgSavedAdStyleId_ pAsgAccountId_ =
-    AccountsSavedadstylesGet
+    AccountsSavedadstylesGet'
     { _asgSavedAdStyleId = pAsgSavedAdStyleId_
     , _asgAccountId = pAsgAccountId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountsSavedadstylesGet where
         type Scopes AccountsSavedadstylesGet =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsSavedadstylesGet{..}
+        requestClient AccountsSavedadstylesGet'{..}
           = go _asgAccountId _asgSavedAdStyleId (Just AltJSON)
               adSenseService
           where go

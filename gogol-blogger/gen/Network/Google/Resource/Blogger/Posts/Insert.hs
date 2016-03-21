@@ -60,7 +60,7 @@ type PostsInsertResource =
 -- | Add a post.
 --
 -- /See:/ 'postsInsert' smart constructor.
-data PostsInsert = PostsInsert
+data PostsInsert = PostsInsert'
     { _posFetchBody   :: !Bool
     , _posIsDraft     :: !(Maybe Bool)
     , _posFetchImages :: !(Maybe Bool)
@@ -86,7 +86,7 @@ postsInsert
     -> Post' -- ^ 'posPayload'
     -> PostsInsert
 postsInsert pPosBlogId_ pPosPayload_ =
-    PostsInsert
+    PostsInsert'
     { _posFetchBody = True
     , _posIsDraft = Nothing
     , _posFetchImages = Nothing
@@ -126,7 +126,7 @@ instance GoogleRequest PostsInsert where
         type Rs PostsInsert = Post'
         type Scopes PostsInsert =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PostsInsert{..}
+        requestClient PostsInsert'{..}
           = go _posBlogId (Just _posFetchBody) _posIsDraft
               _posFetchImages
               (Just AltJSON)

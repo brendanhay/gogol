@@ -56,7 +56,7 @@ type ACLUpdateResource =
 -- | Updates an access control rule.
 --
 -- /See:/ 'aclUpdate' smart constructor.
-data ACLUpdate = ACLUpdate
+data ACLUpdate = ACLUpdate'
     { _auCalendarId :: !Text
     , _auRuleId     :: !Text
     , _auPayload    :: !ACLRule
@@ -77,7 +77,7 @@ aclUpdate
     -> ACLRule -- ^ 'auPayload'
     -> ACLUpdate
 aclUpdate pAuCalendarId_ pAuRuleId_ pAuPayload_ =
-    ACLUpdate
+    ACLUpdate'
     { _auCalendarId = pAuCalendarId_
     , _auRuleId = pAuRuleId_
     , _auPayload = pAuPayload_
@@ -103,7 +103,7 @@ instance GoogleRequest ACLUpdate where
         type Rs ACLUpdate = ACLRule
         type Scopes ACLUpdate =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient ACLUpdate{..}
+        requestClient ACLUpdate'{..}
           = go _auCalendarId _auRuleId (Just AltJSON)
               _auPayload
               appsCalendarService

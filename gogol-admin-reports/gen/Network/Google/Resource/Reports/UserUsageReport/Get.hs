@@ -69,7 +69,7 @@ type UserUsageReportGetResource =
 -- a set of users.
 --
 -- /See:/ 'userUsageReportGet' smart constructor.
-data UserUsageReportGet = UserUsageReportGet
+data UserUsageReportGet = UserUsageReportGet'
     { _uurgFilters    :: !(Maybe Text)
     , _uurgCustomerId :: !(Maybe Text)
     , _uurgDate       :: !Text
@@ -101,7 +101,7 @@ userUsageReportGet
     -> Text -- ^ 'uurgUserKey'
     -> UserUsageReportGet
 userUsageReportGet pUurgDate_ pUurgUserKey_ =
-    UserUsageReportGet
+    UserUsageReportGet'
     { _uurgFilters = Nothing
     , _uurgCustomerId = Nothing
     , _uurgDate = pUurgDate_
@@ -157,7 +157,7 @@ instance GoogleRequest UserUsageReportGet where
         type Rs UserUsageReportGet = UsageReports
         type Scopes UserUsageReportGet =
              '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
-        requestClient UserUsageReportGet{..}
+        requestClient UserUsageReportGet'{..}
           = go _uurgUserKey _uurgDate _uurgFilters
               _uurgCustomerId
               _uurgParameters

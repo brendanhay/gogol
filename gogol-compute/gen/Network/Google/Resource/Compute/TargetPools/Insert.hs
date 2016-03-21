@@ -59,7 +59,7 @@ type TargetPoolsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'targetPoolsInsert' smart constructor.
-data TargetPoolsInsert = TargetPoolsInsert
+data TargetPoolsInsert = TargetPoolsInsert'
     { _tpiProject :: !Text
     , _tpiPayload :: !TargetPool
     , _tpiRegion  :: !Text
@@ -80,7 +80,7 @@ targetPoolsInsert
     -> Text -- ^ 'tpiRegion'
     -> TargetPoolsInsert
 targetPoolsInsert pTpiProject_ pTpiPayload_ pTpiRegion_ =
-    TargetPoolsInsert
+    TargetPoolsInsert'
     { _tpiProject = pTpiProject_
     , _tpiPayload = pTpiPayload_
     , _tpiRegion = pTpiRegion_
@@ -106,7 +106,7 @@ instance GoogleRequest TargetPoolsInsert where
         type Scopes TargetPoolsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsInsert{..}
+        requestClient TargetPoolsInsert'{..}
           = go _tpiProject _tpiRegion (Just AltJSON)
               _tpiPayload
               computeService

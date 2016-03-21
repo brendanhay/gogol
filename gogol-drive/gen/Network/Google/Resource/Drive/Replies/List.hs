@@ -61,7 +61,7 @@ type RepliesListResource =
 -- | Lists a comment\'s replies.
 --
 -- /See:/ 'repliesList' smart constructor.
-data RepliesList = RepliesList
+data RepliesList = RepliesList'
     { _rlPageToken      :: !(Maybe Text)
     , _rlFileId         :: !Text
     , _rlCommentId      :: !Text
@@ -87,7 +87,7 @@ repliesList
     -> Text -- ^ 'rlCommentId'
     -> RepliesList
 repliesList pRlFileId_ pRlCommentId_ =
-    RepliesList
+    RepliesList'
     { _rlPageToken = Nothing
     , _rlFileId = pRlFileId_
     , _rlCommentId = pRlCommentId_
@@ -130,7 +130,7 @@ instance GoogleRequest RepliesList where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file",
                "https://www.googleapis.com/auth/drive.readonly"]
-        requestClient RepliesList{..}
+        requestClient RepliesList'{..}
           = go _rlFileId _rlCommentId _rlPageToken
               (Just _rlPageSize)
               (Just _rlIncludeDeleted)

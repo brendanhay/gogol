@@ -57,7 +57,7 @@ type FirewallsInsertResource =
 -- in the request.
 --
 -- /See:/ 'firewallsInsert' smart constructor.
-data FirewallsInsert = FirewallsInsert
+data FirewallsInsert = FirewallsInsert'
     { _fiProject :: !Text
     , _fiPayload :: !Firewall
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ firewallsInsert
     -> Firewall -- ^ 'fiPayload'
     -> FirewallsInsert
 firewallsInsert pFiProject_ pFiPayload_ =
-    FirewallsInsert
+    FirewallsInsert'
     { _fiProject = pFiProject_
     , _fiPayload = pFiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest FirewallsInsert where
         type Scopes FirewallsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient FirewallsInsert{..}
+        requestClient FirewallsInsert'{..}
           = go _fiProject (Just AltJSON) _fiPayload
               computeService
           where go

@@ -23,7 +23,7 @@ import           Network.Google.Spectrum.Types.Sum
 -- | A region is represented using the polygonal shape.
 --
 -- /See:/ 'geoLocationPolygon' smart constructor.
-newtype GeoLocationPolygon = GeoLocationPolygon
+newtype GeoLocationPolygon = GeoLocationPolygon'
     { _glpExterior :: Maybe [GeoLocationPoint]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -35,7 +35,7 @@ newtype GeoLocationPolygon = GeoLocationPolygon
 geoLocationPolygon
     :: GeoLocationPolygon
 geoLocationPolygon =
-    GeoLocationPolygon
+    GeoLocationPolygon'
     { _glpExterior = Nothing
     }
 
@@ -61,17 +61,18 @@ instance FromJSON GeoLocationPolygon where
         parseJSON
           = withObject "GeoLocationPolygon"
               (\ o ->
-                 GeoLocationPolygon <$> (o .:? "exterior" .!= mempty))
+                 GeoLocationPolygon' <$>
+                   (o .:? "exterior" .!= mempty))
 
 instance ToJSON GeoLocationPolygon where
-        toJSON GeoLocationPolygon{..}
+        toJSON GeoLocationPolygon'{..}
           = object
               (catMaybes [("exterior" .=) <$> _glpExterior])
 
 -- | A single geolocation on the globe.
 --
 -- /See:/ 'geoLocationPoint' smart constructor.
-data GeoLocationPoint = GeoLocationPoint
+data GeoLocationPoint = GeoLocationPoint'
     { _glpLatitude  :: !(Maybe (Textual Double))
     , _glpLongitude :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -86,7 +87,7 @@ data GeoLocationPoint = GeoLocationPoint
 geoLocationPoint
     :: GeoLocationPoint
 geoLocationPoint =
-    GeoLocationPoint
+    GeoLocationPoint'
     { _glpLatitude = Nothing
     , _glpLongitude = Nothing
     }
@@ -111,11 +112,11 @@ instance FromJSON GeoLocationPoint where
         parseJSON
           = withObject "GeoLocationPoint"
               (\ o ->
-                 GeoLocationPoint <$>
+                 GeoLocationPoint' <$>
                    (o .:? "latitude") <*> (o .:? "longitude"))
 
 instance ToJSON GeoLocationPoint where
-        toJSON GeoLocationPoint{..}
+        toJSON GeoLocationPoint'{..}
           = object
               (catMaybes
                  [("latitude" .=) <$> _glpLatitude,
@@ -125,7 +126,7 @@ instance ToJSON GeoLocationPoint where
 -- the requesting device.
 --
 -- /See:/ 'pawsInitResponse' smart constructor.
-data PawsInitResponse = PawsInitResponse
+data PawsInitResponse = PawsInitResponse'
     { _pirKind           :: !Text
     , _pirVersion        :: !(Maybe Text)
     , _pirRulesetInfo    :: !(Maybe RulesetInfo)
@@ -149,7 +150,7 @@ data PawsInitResponse = PawsInitResponse
 pawsInitResponse
     :: PawsInitResponse
 pawsInitResponse =
-    PawsInitResponse
+    PawsInitResponse'
     { _pirKind = "spectrum#pawsInitResponse"
     , _pirVersion = Nothing
     , _pirRulesetInfo = Nothing
@@ -196,7 +197,7 @@ instance FromJSON PawsInitResponse where
         parseJSON
           = withObject "PawsInitResponse"
               (\ o ->
-                 PawsInitResponse <$>
+                 PawsInitResponse' <$>
                    (o .:? "kind" .!= "spectrum#pawsInitResponse") <*>
                      (o .:? "version")
                      <*> (o .:? "rulesetInfo")
@@ -204,7 +205,7 @@ instance FromJSON PawsInitResponse where
                      <*> (o .:? "databaseChange"))
 
 instance ToJSON PawsInitResponse where
-        toJSON PawsInitResponse{..}
+        toJSON PawsInitResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pirKind),
@@ -217,7 +218,7 @@ instance ToJSON PawsInitResponse where
 -- request and is otherwise empty.
 --
 -- /See:/ 'pawsRegisterResponse' smart constructor.
-data PawsRegisterResponse = PawsRegisterResponse
+data PawsRegisterResponse = PawsRegisterResponse'
     { _prrKind           :: !Text
     , _prrVersion        :: !(Maybe Text)
     , _prrType           :: !(Maybe Text)
@@ -238,7 +239,7 @@ data PawsRegisterResponse = PawsRegisterResponse
 pawsRegisterResponse
     :: PawsRegisterResponse
 pawsRegisterResponse =
-    PawsRegisterResponse
+    PawsRegisterResponse'
     { _prrKind = "spectrum#pawsRegisterResponse"
     , _prrVersion = Nothing
     , _prrType = Nothing
@@ -274,14 +275,14 @@ instance FromJSON PawsRegisterResponse where
         parseJSON
           = withObject "PawsRegisterResponse"
               (\ o ->
-                 PawsRegisterResponse <$>
+                 PawsRegisterResponse' <$>
                    (o .:? "kind" .!= "spectrum#pawsRegisterResponse")
                      <*> (o .:? "version")
                      <*> (o .:? "type")
                      <*> (o .:? "databaseChange"))
 
 instance ToJSON PawsRegisterResponse where
-        toJSON PawsRegisterResponse{..}
+        toJSON PawsRegisterResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _prrKind),
@@ -293,7 +294,7 @@ instance ToJSON PawsRegisterResponse where
 -- of the Device and parameters required by the regulatory domain.
 --
 -- /See:/ 'pawsNotifySpectrumUseRequest' smart constructor.
-data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest
+data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest'
     { _pnsurSpectra    :: !(Maybe [SpectrumMessage])
     , _pnsurLocation   :: !(Maybe GeoLocation)
     , _pnsurVersion    :: !(Maybe Text)
@@ -317,7 +318,7 @@ data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest
 pawsNotifySpectrumUseRequest
     :: PawsNotifySpectrumUseRequest
 pawsNotifySpectrumUseRequest =
-    PawsNotifySpectrumUseRequest
+    PawsNotifySpectrumUseRequest'
     { _pnsurSpectra = Nothing
     , _pnsurLocation = Nothing
     , _pnsurVersion = Nothing
@@ -375,14 +376,14 @@ instance FromJSON PawsNotifySpectrumUseRequest where
         parseJSON
           = withObject "PawsNotifySpectrumUseRequest"
               (\ o ->
-                 PawsNotifySpectrumUseRequest <$>
+                 PawsNotifySpectrumUseRequest' <$>
                    (o .:? "spectra" .!= mempty) <*> (o .:? "location")
                      <*> (o .:? "version")
                      <*> (o .:? "type")
                      <*> (o .:? "deviceDesc"))
 
 instance ToJSON PawsNotifySpectrumUseRequest where
-        toJSON PawsNotifySpectrumUseRequest{..}
+        toJSON PawsNotifySpectrumUseRequest'{..}
           = object
               (catMaybes
                  [("spectra" .=) <$> _pnsurSpectra,
@@ -396,7 +397,7 @@ instance ToJSON PawsNotifySpectrumUseRequest where
 -- Address fields - tel: Telephone numbers - email: Email addresses
 --
 -- /See:/ 'vcard' smart constructor.
-data Vcard = Vcard
+data Vcard = Vcard'
     { _vEmail :: !(Maybe VcardTypedText)
     , _vAdr   :: !(Maybe VcardAddress)
     , _vOrg   :: !(Maybe VcardTypedText)
@@ -420,7 +421,7 @@ data Vcard = Vcard
 vcard
     :: Vcard
 vcard =
-    Vcard
+    Vcard'
     { _vEmail = Nothing
     , _vAdr = Nothing
     , _vOrg = Nothing
@@ -452,13 +453,13 @@ instance FromJSON Vcard where
         parseJSON
           = withObject "Vcard"
               (\ o ->
-                 Vcard <$>
+                 Vcard' <$>
                    (o .:? "email") <*> (o .:? "adr") <*> (o .:? "org")
                      <*> (o .:? "tel")
                      <*> (o .:? "fn"))
 
 instance ToJSON Vcard where
-        toJSON Vcard{..}
+        toJSON Vcard'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _vEmail, ("adr" .=) <$> _vAdr,
@@ -469,7 +470,7 @@ instance ToJSON Vcard where
 -- upcoming change to the database URI.
 --
 -- /See:/ 'dbUpdateSpec' smart constructor.
-newtype DBUpdateSpec = DBUpdateSpec
+newtype DBUpdateSpec = DBUpdateSpec'
     { _dusDatabases :: Maybe [DatabaseSpec]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -481,7 +482,7 @@ newtype DBUpdateSpec = DBUpdateSpec
 dbUpdateSpec
     :: DBUpdateSpec
 dbUpdateSpec =
-    DBUpdateSpec
+    DBUpdateSpec'
     { _dusDatabases = Nothing
     }
 
@@ -498,17 +499,17 @@ instance FromJSON DBUpdateSpec where
         parseJSON
           = withObject "DBUpdateSpec"
               (\ o ->
-                 DBUpdateSpec <$> (o .:? "databases" .!= mempty))
+                 DBUpdateSpec' <$> (o .:? "databases" .!= mempty))
 
 instance ToJSON DBUpdateSpec where
-        toJSON DBUpdateSpec{..}
+        toJSON DBUpdateSpec'{..}
           = object
               (catMaybes [("databases" .=) <$> _dusDatabases])
 
 -- | The request message for a batch available spectrum query protocol.
 --
 -- /See:/ 'pawsGetSpectrumBatchRequest' smart constructor.
-data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest
+data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest'
     { _pgsbrAntenna          :: !(Maybe AntennaCharacteristics)
     , _pgsbrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
     , _pgsbrOwner            :: !(Maybe DeviceOwner)
@@ -544,7 +545,7 @@ data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest
 pawsGetSpectrumBatchRequest
     :: PawsGetSpectrumBatchRequest
 pawsGetSpectrumBatchRequest =
-    PawsGetSpectrumBatchRequest
+    PawsGetSpectrumBatchRequest'
     { _pgsbrAntenna = Nothing
     , _pgsbrMasterDeviceDesc = Nothing
     , _pgsbrOwner = Nothing
@@ -650,7 +651,7 @@ instance FromJSON PawsGetSpectrumBatchRequest where
         parseJSON
           = withObject "PawsGetSpectrumBatchRequest"
               (\ o ->
-                 PawsGetSpectrumBatchRequest <$>
+                 PawsGetSpectrumBatchRequest' <$>
                    (o .:? "antenna") <*> (o .:? "masterDeviceDesc") <*>
                      (o .:? "owner")
                      <*> (o .:? "requestType")
@@ -661,7 +662,7 @@ instance FromJSON PawsGetSpectrumBatchRequest where
                      <*> (o .:? "deviceDesc"))
 
 instance ToJSON PawsGetSpectrumBatchRequest where
-        toJSON PawsGetSpectrumBatchRequest{..}
+        toJSON PawsGetSpectrumBatchRequest'{..}
           = object
               (catMaybes
                  [("antenna" .=) <$> _pgsbrAntenna,
@@ -677,7 +678,7 @@ instance ToJSON PawsGetSpectrumBatchRequest where
 -- | The schedule of spectrum profiles available at a particular geolocation.
 --
 -- /See:/ 'geoSpectrumSchedule' smart constructor.
-data GeoSpectrumSchedule = GeoSpectrumSchedule
+data GeoSpectrumSchedule = GeoSpectrumSchedule'
     { _gssLocation          :: !(Maybe GeoLocation)
     , _gssSpectrumSchedules :: !(Maybe [SpectrumSchedule])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -692,7 +693,7 @@ data GeoSpectrumSchedule = GeoSpectrumSchedule
 geoSpectrumSchedule
     :: GeoSpectrumSchedule
 geoSpectrumSchedule =
-    GeoSpectrumSchedule
+    GeoSpectrumSchedule'
     { _gssLocation = Nothing
     , _gssSpectrumSchedules = Nothing
     }
@@ -718,12 +719,12 @@ instance FromJSON GeoSpectrumSchedule where
         parseJSON
           = withObject "GeoSpectrumSchedule"
               (\ o ->
-                 GeoSpectrumSchedule <$>
+                 GeoSpectrumSchedule' <$>
                    (o .:? "location") <*>
                      (o .:? "spectrumSchedules" .!= mempty))
 
 instance ToJSON GeoSpectrumSchedule where
-        toJSON GeoSpectrumSchedule{..}
+        toJSON GeoSpectrumSchedule'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _gssLocation,
@@ -732,7 +733,7 @@ instance ToJSON GeoSpectrumSchedule where
 -- | The structure used to represent an organization and an email address.
 --
 -- /See:/ 'vcardTypedText' smart constructor.
-newtype VcardTypedText = VcardTypedText
+newtype VcardTypedText = VcardTypedText'
     { _vttText :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -744,7 +745,7 @@ newtype VcardTypedText = VcardTypedText
 vcardTypedText
     :: VcardTypedText
 vcardTypedText =
-    VcardTypedText
+    VcardTypedText'
     { _vttText = Nothing
     }
 
@@ -756,17 +757,17 @@ vttText = lens _vttText (\ s a -> s{_vttText = a})
 instance FromJSON VcardTypedText where
         parseJSON
           = withObject "VcardTypedText"
-              (\ o -> VcardTypedText <$> (o .:? "text"))
+              (\ o -> VcardTypedText' <$> (o .:? "text"))
 
 instance ToJSON VcardTypedText where
-        toJSON VcardTypedText{..}
+        toJSON VcardTypedText'{..}
           = object (catMaybes [("text" .=) <$> _vttText])
 
 -- | The spectrum schedule element combines an event time with spectrum
 -- profile to define a time period in which the profile is valid.
 --
 -- /See:/ 'spectrumSchedule' smart constructor.
-data SpectrumSchedule = SpectrumSchedule
+data SpectrumSchedule = SpectrumSchedule'
     { _ssSpectra   :: !(Maybe [SpectrumMessage])
     , _ssEventTime :: !(Maybe EventTime)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -781,7 +782,7 @@ data SpectrumSchedule = SpectrumSchedule
 spectrumSchedule
     :: SpectrumSchedule
 spectrumSchedule =
-    SpectrumSchedule
+    SpectrumSchedule'
     { _ssSpectra = Nothing
     , _ssEventTime = Nothing
     }
@@ -804,11 +805,11 @@ instance FromJSON SpectrumSchedule where
         parseJSON
           = withObject "SpectrumSchedule"
               (\ o ->
-                 SpectrumSchedule <$>
+                 SpectrumSchedule' <$>
                    (o .:? "spectra" .!= mempty) <*> (o .:? "eventTime"))
 
 instance ToJSON SpectrumSchedule where
-        toJSON SpectrumSchedule{..}
+        toJSON SpectrumSchedule'{..}
           = object
               (catMaybes
                  [("spectra" .=) <$> _ssSpectra,
@@ -817,7 +818,7 @@ instance ToJSON SpectrumSchedule where
 -- | The structure used to represent a telephone number.
 --
 -- /See:/ 'vcardTelephone' smart constructor.
-newtype VcardTelephone = VcardTelephone
+newtype VcardTelephone = VcardTelephone'
     { _vtURI :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -829,7 +830,7 @@ newtype VcardTelephone = VcardTelephone
 vcardTelephone
     :: VcardTelephone
 vcardTelephone =
-    VcardTelephone
+    VcardTelephone'
     { _vtURI = Nothing
     }
 
@@ -840,10 +841,10 @@ vtURI = lens _vtURI (\ s a -> s{_vtURI = a})
 instance FromJSON VcardTelephone where
         parseJSON
           = withObject "VcardTelephone"
-              (\ o -> VcardTelephone <$> (o .:? "uri"))
+              (\ o -> VcardTelephone' <$> (o .:? "uri"))
 
 instance ToJSON VcardTelephone where
-        toJSON VcardTelephone{..}
+        toJSON VcardTelephone'{..}
           = object (catMaybes [("uri" .=) <$> _vtURI])
 
 -- | This parameter contains device-owner information required as part of
@@ -856,7 +857,7 @@ instance ToJSON VcardTelephone where
 -- maximum lengths for each field.
 --
 -- /See:/ 'deviceOwner' smart constructor.
-data DeviceOwner = DeviceOwner
+data DeviceOwner = DeviceOwner'
     { _doOperator :: !(Maybe Vcard)
     , _doOwner    :: !(Maybe Vcard)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -871,7 +872,7 @@ data DeviceOwner = DeviceOwner
 deviceOwner
     :: DeviceOwner
 deviceOwner =
-    DeviceOwner
+    DeviceOwner'
     { _doOperator = Nothing
     , _doOwner = Nothing
     }
@@ -891,11 +892,11 @@ instance FromJSON DeviceOwner where
         parseJSON
           = withObject "DeviceOwner"
               (\ o ->
-                 DeviceOwner <$>
+                 DeviceOwner' <$>
                    (o .:? "operator") <*> (o .:? "owner"))
 
 instance ToJSON DeviceOwner where
-        toJSON DeviceOwner{..}
+        toJSON DeviceOwner'{..}
           = object
               (catMaybes
                  [("operator" .=) <$> _doOperator,
@@ -907,7 +908,7 @@ instance ToJSON DeviceOwner where
 -- must be expressed using UTC.
 --
 -- /See:/ 'eventTime' smart constructor.
-data EventTime = EventTime
+data EventTime = EventTime'
     { _etStartTime :: !(Maybe Text)
     , _etStopTime  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -922,7 +923,7 @@ data EventTime = EventTime
 eventTime
     :: EventTime
 eventTime =
-    EventTime
+    EventTime'
     { _etStartTime = Nothing
     , _etStopTime = Nothing
     }
@@ -941,11 +942,11 @@ instance FromJSON EventTime where
         parseJSON
           = withObject "EventTime"
               (\ o ->
-                 EventTime <$>
+                 EventTime' <$>
                    (o .:? "startTime") <*> (o .:? "stopTime"))
 
 instance ToJSON EventTime where
-        toJSON EventTime{..}
+        toJSON EventTime'{..}
           = object
               (catMaybes
                  [("startTime" .=) <$> _etStartTime,
@@ -955,7 +956,7 @@ instance ToJSON EventTime where
 -- include the device\'s geolocation.
 --
 -- /See:/ 'pawsGetSpectrumRequest' smart constructor.
-data PawsGetSpectrumRequest = PawsGetSpectrumRequest
+data PawsGetSpectrumRequest = PawsGetSpectrumRequest'
     { _pgsrAntenna          :: !(Maybe AntennaCharacteristics)
     , _pgsrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
     , _pgsrLocation         :: !(Maybe GeoLocation)
@@ -991,7 +992,7 @@ data PawsGetSpectrumRequest = PawsGetSpectrumRequest
 pawsGetSpectrumRequest
     :: PawsGetSpectrumRequest
 pawsGetSpectrumRequest =
-    PawsGetSpectrumRequest
+    PawsGetSpectrumRequest'
     { _pgsrAntenna = Nothing
     , _pgsrMasterDeviceDesc = Nothing
     , _pgsrLocation = Nothing
@@ -1089,7 +1090,7 @@ instance FromJSON PawsGetSpectrumRequest where
         parseJSON
           = withObject "PawsGetSpectrumRequest"
               (\ o ->
-                 PawsGetSpectrumRequest <$>
+                 PawsGetSpectrumRequest' <$>
                    (o .:? "antenna") <*> (o .:? "masterDeviceDesc") <*>
                      (o .:? "location")
                      <*> (o .:? "owner")
@@ -1100,7 +1101,7 @@ instance FromJSON PawsGetSpectrumRequest where
                      <*> (o .:? "deviceDesc"))
 
 instance ToJSON PawsGetSpectrumRequest where
-        toJSON PawsGetSpectrumRequest{..}
+        toJSON PawsGetSpectrumRequest'{..}
           = object
               (catMaybes
                  [("antenna" .=) <$> _pgsrAntenna,
@@ -1119,7 +1120,7 @@ instance ToJSON PawsGetSpectrumRequest where
 -- domain.
 --
 -- /See:/ 'antennaCharacteristics' smart constructor.
-data AntennaCharacteristics = AntennaCharacteristics
+data AntennaCharacteristics = AntennaCharacteristics'
     { _acHeight            :: !(Maybe (Textual Double))
     , _acHeightType        :: !(Maybe Text)
     , _acHeightUncertainty :: !(Maybe (Textual Double))
@@ -1137,7 +1138,7 @@ data AntennaCharacteristics = AntennaCharacteristics
 antennaCharacteristics
     :: AntennaCharacteristics
 antennaCharacteristics =
-    AntennaCharacteristics
+    AntennaCharacteristics'
     { _acHeight = Nothing
     , _acHeightType = Nothing
     , _acHeightUncertainty = Nothing
@@ -1170,12 +1171,12 @@ instance FromJSON AntennaCharacteristics where
         parseJSON
           = withObject "AntennaCharacteristics"
               (\ o ->
-                 AntennaCharacteristics <$>
+                 AntennaCharacteristics' <$>
                    (o .:? "height") <*> (o .:? "heightType") <*>
                      (o .:? "heightUncertainty"))
 
 instance ToJSON AntennaCharacteristics where
-        toJSON AntennaCharacteristics{..}
+        toJSON AntennaCharacteristics'{..}
           = object
               (catMaybes
                  [("height" .=) <$> _acHeight,
@@ -1185,7 +1186,7 @@ instance ToJSON AntennaCharacteristics where
 -- | The device validation response message.
 --
 -- /See:/ 'pawsVerifyDeviceResponse' smart constructor.
-data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse
+data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse'
     { _pvdrDeviceValidities :: !(Maybe [DeviceValidity])
     , _pvdrKind             :: !Text
     , _pvdrVersion          :: !(Maybe Text)
@@ -1209,7 +1210,7 @@ data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse
 pawsVerifyDeviceResponse
     :: PawsVerifyDeviceResponse
 pawsVerifyDeviceResponse =
-    PawsVerifyDeviceResponse
+    PawsVerifyDeviceResponse'
     { _pvdrDeviceValidities = Nothing
     , _pvdrKind = "spectrum#pawsVerifyDeviceResponse"
     , _pvdrVersion = Nothing
@@ -1257,7 +1258,7 @@ instance FromJSON PawsVerifyDeviceResponse where
         parseJSON
           = withObject "PawsVerifyDeviceResponse"
               (\ o ->
-                 PawsVerifyDeviceResponse <$>
+                 PawsVerifyDeviceResponse' <$>
                    (o .:? "deviceValidities" .!= mempty) <*>
                      (o .:? "kind" .!=
                         "spectrum#pawsVerifyDeviceResponse")
@@ -1266,7 +1267,7 @@ instance FromJSON PawsVerifyDeviceResponse where
                      <*> (o .:? "databaseChange"))
 
 instance ToJSON PawsVerifyDeviceResponse where
-        toJSON PawsVerifyDeviceResponse{..}
+        toJSON PawsVerifyDeviceResponse'{..}
           = object
               (catMaybes
                  [("deviceValidities" .=) <$> _pvdrDeviceValidities,
@@ -1278,7 +1279,7 @@ instance ToJSON PawsVerifyDeviceResponse where
 -- | The structure used to represent a street address.
 --
 -- /See:/ 'vcardAddress' smart constructor.
-data VcardAddress = VcardAddress
+data VcardAddress = VcardAddress'
     { _vaPobox    :: !(Maybe Text)
     , _vaCountry  :: !(Maybe Text)
     , _vaStreet   :: !(Maybe Text)
@@ -1305,7 +1306,7 @@ data VcardAddress = VcardAddress
 vcardAddress
     :: VcardAddress
 vcardAddress =
-    VcardAddress
+    VcardAddress'
     { _vaPobox = Nothing
     , _vaCountry = Nothing
     , _vaStreet = Nothing
@@ -1345,7 +1346,7 @@ instance FromJSON VcardAddress where
         parseJSON
           = withObject "VcardAddress"
               (\ o ->
-                 VcardAddress <$>
+                 VcardAddress' <$>
                    (o .:? "pobox") <*> (o .:? "country") <*>
                      (o .:? "street")
                      <*> (o .:? "locality")
@@ -1353,7 +1354,7 @@ instance FromJSON VcardAddress where
                      <*> (o .:? "region"))
 
 instance ToJSON VcardAddress where
-        toJSON VcardAddress{..}
+        toJSON VcardAddress'{..}
           = object
               (catMaybes
                  [("pobox" .=) <$> _vaPobox,
@@ -1367,7 +1368,7 @@ instance ToJSON VcardAddress where
 -- schedule of available spectrum for the device at multiple locations.
 --
 -- /See:/ 'pawsGetSpectrumBatchResponse' smart constructor.
-data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse
+data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse'
     { _pNeedsSpectrumReport  :: !(Maybe Bool)
     , _pKind                 :: !Text
     , _pGeoSpectrumSchedules :: !(Maybe [GeoSpectrumSchedule])
@@ -1409,7 +1410,7 @@ data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse
 pawsGetSpectrumBatchResponse
     :: PawsGetSpectrumBatchResponse
 pawsGetSpectrumBatchResponse =
-    PawsGetSpectrumBatchResponse
+    PawsGetSpectrumBatchResponse'
     { _pNeedsSpectrumReport = Nothing
     , _pKind = "spectrum#pawsGetSpectrumBatchResponse"
     , _pGeoSpectrumSchedules = Nothing
@@ -1529,7 +1530,7 @@ instance FromJSON PawsGetSpectrumBatchResponse where
         parseJSON
           = withObject "PawsGetSpectrumBatchResponse"
               (\ o ->
-                 PawsGetSpectrumBatchResponse <$>
+                 PawsGetSpectrumBatchResponse' <$>
                    (o .:? "needsSpectrumReport") <*>
                      (o .:? "kind" .!=
                         "spectrum#pawsGetSpectrumBatchResponse")
@@ -1544,7 +1545,7 @@ instance FromJSON PawsGetSpectrumBatchResponse where
                      <*> (o .:? "maxTotalBwHz"))
 
 instance ToJSON PawsGetSpectrumBatchResponse where
-        toJSON PawsGetSpectrumBatchResponse{..}
+        toJSON PawsGetSpectrumBatchResponse'{..}
           = object
               (catMaybes
                  [("needsSpectrumReport" .=) <$>
@@ -1565,7 +1566,7 @@ instance ToJSON PawsGetSpectrumBatchResponse where
 -- valid to operate in the regulatory domain.
 --
 -- /See:/ 'deviceValidity' smart constructor.
-data DeviceValidity = DeviceValidity
+data DeviceValidity = DeviceValidity'
     { _dvIsValid    :: !(Maybe Bool)
     , _dvReason     :: !(Maybe Text)
     , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
@@ -1583,7 +1584,7 @@ data DeviceValidity = DeviceValidity
 deviceValidity
     :: DeviceValidity
 deviceValidity =
-    DeviceValidity
+    DeviceValidity'
     { _dvIsValid = Nothing
     , _dvReason = Nothing
     , _dvDeviceDesc = Nothing
@@ -1611,12 +1612,12 @@ instance FromJSON DeviceValidity where
         parseJSON
           = withObject "DeviceValidity"
               (\ o ->
-                 DeviceValidity <$>
+                 DeviceValidity' <$>
                    (o .:? "isValid") <*> (o .:? "reason") <*>
                      (o .:? "deviceDesc"))
 
 instance ToJSON DeviceValidity where
-        toJSON DeviceValidity{..}
+        toJSON DeviceValidity'{..}
           = object
               (catMaybes
                  [("isValid" .=) <$> _dvIsValid,
@@ -1626,7 +1627,7 @@ instance ToJSON DeviceValidity where
 -- | A \"point\" with uncertainty is represented using the Ellipse shape.
 --
 -- /See:/ 'geoLocationEllipse' smart constructor.
-data GeoLocationEllipse = GeoLocationEllipse
+data GeoLocationEllipse = GeoLocationEllipse'
     { _gleSemiMajorAxis :: !(Maybe (Textual Double))
     , _gleCenter        :: !(Maybe GeoLocationPoint)
     , _gleOrientation   :: !(Maybe (Textual Double))
@@ -1647,7 +1648,7 @@ data GeoLocationEllipse = GeoLocationEllipse
 geoLocationEllipse
     :: GeoLocationEllipse
 geoLocationEllipse =
-    GeoLocationEllipse
+    GeoLocationEllipse'
     { _gleSemiMajorAxis = Nothing
     , _gleCenter = Nothing
     , _gleOrientation = Nothing
@@ -1694,13 +1695,13 @@ instance FromJSON GeoLocationEllipse where
         parseJSON
           = withObject "GeoLocationEllipse"
               (\ o ->
-                 GeoLocationEllipse <$>
+                 GeoLocationEllipse' <$>
                    (o .:? "semiMajorAxis") <*> (o .:? "center") <*>
                      (o .:? "orientation")
                      <*> (o .:? "semiMinorAxis"))
 
 instance ToJSON GeoLocationEllipse where
-        toJSON GeoLocationEllipse{..}
+        toJSON GeoLocationEllipse'{..}
           = object
               (catMaybes
                  [("semiMajorAxis" .=) <$> _gleSemiMajorAxis,
@@ -1712,7 +1713,7 @@ instance ToJSON GeoLocationEllipse where
 -- communicated using the initialization and available-spectrum processes.
 --
 -- /See:/ 'rulesetInfo' smart constructor.
-data RulesetInfo = RulesetInfo
+data RulesetInfo = RulesetInfo'
     { _riRulesetIds        :: !(Maybe [Text])
     , _riMaxPollingSecs    :: !(Maybe (Textual Int32))
     , _riMaxLocationChange :: !(Maybe (Textual Double))
@@ -1733,7 +1734,7 @@ data RulesetInfo = RulesetInfo
 rulesetInfo
     :: RulesetInfo
 rulesetInfo =
-    RulesetInfo
+    RulesetInfo'
     { _riRulesetIds = Nothing
     , _riMaxPollingSecs = Nothing
     , _riMaxLocationChange = Nothing
@@ -1796,14 +1797,14 @@ instance FromJSON RulesetInfo where
         parseJSON
           = withObject "RulesetInfo"
               (\ o ->
-                 RulesetInfo <$>
+                 RulesetInfo' <$>
                    (o .:? "rulesetIds" .!= mempty) <*>
                      (o .:? "maxPollingSecs")
                      <*> (o .:? "maxLocationChange")
                      <*> (o .:? "authority"))
 
 instance ToJSON RulesetInfo where
-        toJSON RulesetInfo{..}
+        toJSON RulesetInfo'{..}
           = object
               (catMaybes
                  [("rulesetIds" .=) <$> _riRulesetIds,
@@ -1815,7 +1816,7 @@ instance ToJSON RulesetInfo where
 -- parameters.
 --
 -- /See:/ 'pawsRegisterRequest' smart constructor.
-data PawsRegisterRequest = PawsRegisterRequest
+data PawsRegisterRequest = PawsRegisterRequest'
     { _pawAntenna     :: !(Maybe AntennaCharacteristics)
     , _pawLocation    :: !(Maybe GeoLocation)
     , _pawDeviceOwner :: !(Maybe DeviceOwner)
@@ -1842,7 +1843,7 @@ data PawsRegisterRequest = PawsRegisterRequest
 pawsRegisterRequest
     :: PawsRegisterRequest
 pawsRegisterRequest =
-    PawsRegisterRequest
+    PawsRegisterRequest'
     { _pawAntenna = Nothing
     , _pawLocation = Nothing
     , _pawDeviceOwner = Nothing
@@ -1887,7 +1888,7 @@ instance FromJSON PawsRegisterRequest where
         parseJSON
           = withObject "PawsRegisterRequest"
               (\ o ->
-                 PawsRegisterRequest <$>
+                 PawsRegisterRequest' <$>
                    (o .:? "antenna") <*> (o .:? "location") <*>
                      (o .:? "deviceOwner")
                      <*> (o .:? "version")
@@ -1895,7 +1896,7 @@ instance FromJSON PawsRegisterRequest where
                      <*> (o .:? "deviceDesc"))
 
 instance ToJSON PawsRegisterRequest where
-        toJSON PawsRegisterRequest{..}
+        toJSON PawsRegisterRequest'{..}
           = object
               (catMaybes
                  [("antenna" .=) <$> _pawAntenna,
@@ -1908,7 +1909,7 @@ instance ToJSON PawsRegisterRequest where
 -- | An empty response to the notification.
 --
 -- /See:/ 'pawsNotifySpectrumUseResponse' smart constructor.
-data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse
+data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse'
     { _pnsurnKind    :: !Text
     , _pnsurnVersion :: !(Maybe Text)
     , _pnsurnType    :: !(Maybe Text)
@@ -1926,7 +1927,7 @@ data PawsNotifySpectrumUseResponse = PawsNotifySpectrumUseResponse
 pawsNotifySpectrumUseResponse
     :: PawsNotifySpectrumUseResponse
 pawsNotifySpectrumUseResponse =
-    PawsNotifySpectrumUseResponse
+    PawsNotifySpectrumUseResponse'
     { _pnsurnKind = "spectrum#pawsNotifySpectrumUseResponse"
     , _pnsurnVersion = Nothing
     , _pnsurnType = Nothing
@@ -1954,14 +1955,14 @@ instance FromJSON PawsNotifySpectrumUseResponse where
         parseJSON
           = withObject "PawsNotifySpectrumUseResponse"
               (\ o ->
-                 PawsNotifySpectrumUseResponse <$>
+                 PawsNotifySpectrumUseResponse' <$>
                    (o .:? "kind" .!=
                       "spectrum#pawsNotifySpectrumUseResponse")
                      <*> (o .:? "version")
                      <*> (o .:? "type"))
 
 instance ToJSON PawsNotifySpectrumUseResponse where
-        toJSON PawsNotifySpectrumUseResponse{..}
+        toJSON PawsNotifySpectrumUseResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pnsurnKind),
@@ -1971,7 +1972,7 @@ instance ToJSON PawsNotifySpectrumUseResponse where
 -- | This message contains the name and URI of a database.
 --
 -- /See:/ 'databaseSpec' smart constructor.
-data DatabaseSpec = DatabaseSpec
+data DatabaseSpec = DatabaseSpec'
     { _dsURI  :: !(Maybe Text)
     , _dsName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1986,7 +1987,7 @@ data DatabaseSpec = DatabaseSpec
 databaseSpec
     :: DatabaseSpec
 databaseSpec =
-    DatabaseSpec
+    DatabaseSpec'
     { _dsURI = Nothing
     , _dsName = Nothing
     }
@@ -2003,10 +2004,10 @@ instance FromJSON DatabaseSpec where
         parseJSON
           = withObject "DatabaseSpec"
               (\ o ->
-                 DatabaseSpec <$> (o .:? "uri") <*> (o .:? "name"))
+                 DatabaseSpec' <$> (o .:? "uri") <*> (o .:? "name"))
 
 instance ToJSON DatabaseSpec where
-        toJSON DatabaseSpec{..}
+        toJSON DatabaseSpec'{..}
           = object
               (catMaybes
                  [("uri" .=) <$> _dsURI, ("name" .=) <$> _dsName])
@@ -2015,7 +2016,7 @@ instance ToJSON DatabaseSpec where
 -- ranges and permissible power levels for each range.
 --
 -- /See:/ 'spectrumMessage' smart constructor.
-data SpectrumMessage = SpectrumMessage
+data SpectrumMessage = SpectrumMessage'
     { _smBandwidth       :: !(Maybe (Textual Double))
     , _smFrequencyRanges :: !(Maybe [FrequencyRange])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2030,7 +2031,7 @@ data SpectrumMessage = SpectrumMessage
 spectrumMessage
     :: SpectrumMessage
 spectrumMessage =
-    SpectrumMessage
+    SpectrumMessage'
     { _smBandwidth = Nothing
     , _smFrequencyRanges = Nothing
     }
@@ -2059,12 +2060,12 @@ instance FromJSON SpectrumMessage where
         parseJSON
           = withObject "SpectrumMessage"
               (\ o ->
-                 SpectrumMessage <$>
+                 SpectrumMessage' <$>
                    (o .:? "bandwidth") <*>
                      (o .:? "frequencyRanges" .!= mempty))
 
 instance ToJSON SpectrumMessage where
-        toJSON SpectrumMessage{..}
+        toJSON SpectrumMessage'{..}
           = object
               (catMaybes
                  [("bandwidth" .=) <$> _smBandwidth,
@@ -2073,7 +2074,7 @@ instance ToJSON SpectrumMessage where
 -- | This parameter is used to specify the geolocation of the device.
 --
 -- /See:/ 'geoLocation' smart constructor.
-data GeoLocation = GeoLocation
+data GeoLocation = GeoLocation'
     { _glConfidence :: !(Maybe (Textual Int32))
     , _glPoint      :: !(Maybe GeoLocationEllipse)
     , _glRegion     :: !(Maybe GeoLocationPolygon)
@@ -2091,7 +2092,7 @@ data GeoLocation = GeoLocation
 geoLocation
     :: GeoLocation
 geoLocation =
-    GeoLocation
+    GeoLocation'
     { _glConfidence = Nothing
     , _glPoint = Nothing
     , _glRegion = Nothing
@@ -2125,12 +2126,12 @@ instance FromJSON GeoLocation where
         parseJSON
           = withObject "GeoLocation"
               (\ o ->
-                 GeoLocation <$>
+                 GeoLocation' <$>
                    (o .:? "confidence") <*> (o .:? "point") <*>
                      (o .:? "region"))
 
 instance ToJSON GeoLocation where
-        toJSON GeoLocation{..}
+        toJSON GeoLocation'{..}
           = object
               (catMaybes
                  [("confidence" .=) <$> _glConfidence,
@@ -2141,7 +2142,7 @@ instance ToJSON GeoLocation where
 -- power level and channel identifier.
 --
 -- /See:/ 'frequencyRange' smart constructor.
-data FrequencyRange = FrequencyRange
+data FrequencyRange = FrequencyRange'
     { _frStopHz      :: !(Maybe (Textual Double))
     , _frMaxPowerDBm :: !(Maybe (Textual Double))
     , _frChannelId   :: !(Maybe Text)
@@ -2162,7 +2163,7 @@ data FrequencyRange = FrequencyRange
 frequencyRange
     :: FrequencyRange
 frequencyRange =
-    FrequencyRange
+    FrequencyRange'
     { _frStopHz = Nothing
     , _frMaxPowerDBm = Nothing
     , _frChannelId = Nothing
@@ -2206,13 +2207,13 @@ instance FromJSON FrequencyRange where
         parseJSON
           = withObject "FrequencyRange"
               (\ o ->
-                 FrequencyRange <$>
+                 FrequencyRange' <$>
                    (o .:? "stopHz") <*> (o .:? "maxPowerDBm") <*>
                      (o .:? "channelId")
                      <*> (o .:? "startHz"))
 
 instance ToJSON FrequencyRange where
-        toJSON FrequencyRange{..}
+        toJSON FrequencyRange'{..}
           = object
               (catMaybes
                  [("stopHz" .=) <$> _frStopHz,
@@ -2224,7 +2225,7 @@ instance ToJSON FrequencyRange where
 -- schedule of available spectrum for the device.
 --
 -- /See:/ 'pawsGetSpectrumResponse' smart constructor.
-data PawsGetSpectrumResponse = PawsGetSpectrumResponse
+data PawsGetSpectrumResponse = PawsGetSpectrumResponse'
     { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
     , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
     , _pgsrgKind                :: !Text
@@ -2266,7 +2267,7 @@ data PawsGetSpectrumResponse = PawsGetSpectrumResponse
 pawsGetSpectrumResponse
     :: PawsGetSpectrumResponse
 pawsGetSpectrumResponse =
-    PawsGetSpectrumResponse
+    PawsGetSpectrumResponse'
     { _pgsrgNeedsSpectrumReport = Nothing
     , _pgsrgSpectrumSchedules = Nothing
     , _pgsrgKind = "spectrum#pawsGetSpectrumResponse"
@@ -2387,7 +2388,7 @@ instance FromJSON PawsGetSpectrumResponse where
         parseJSON
           = withObject "PawsGetSpectrumResponse"
               (\ o ->
-                 PawsGetSpectrumResponse <$>
+                 PawsGetSpectrumResponse' <$>
                    (o .:? "needsSpectrumReport") <*>
                      (o .:? "spectrumSchedules" .!= mempty)
                      <*>
@@ -2402,7 +2403,7 @@ instance FromJSON PawsGetSpectrumResponse where
                      <*> (o .:? "maxTotalBwHz"))
 
 instance ToJSON PawsGetSpectrumResponse where
-        toJSON PawsGetSpectrumResponse{..}
+        toJSON PawsGetSpectrumResponse'{..}
           = object
               (catMaybes
                  [("needsSpectrumReport" .=) <$>
@@ -2421,7 +2422,7 @@ instance ToJSON PawsGetSpectrumResponse where
 -- | The device validation request message.
 --
 -- /See:/ 'pawsVerifyDeviceRequest' smart constructor.
-data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest
+data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest'
     { _pvdrvVersion     :: !(Maybe Text)
     , _pvdrvDeviceDescs :: !(Maybe [DeviceDescriptor])
     , _pvdrvType        :: !(Maybe Text)
@@ -2439,7 +2440,7 @@ data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest
 pawsVerifyDeviceRequest
     :: PawsVerifyDeviceRequest
 pawsVerifyDeviceRequest =
-    PawsVerifyDeviceRequest
+    PawsVerifyDeviceRequest'
     { _pvdrvVersion = Nothing
     , _pvdrvDeviceDescs = Nothing
     , _pvdrvType = Nothing
@@ -2469,13 +2470,13 @@ instance FromJSON PawsVerifyDeviceRequest where
         parseJSON
           = withObject "PawsVerifyDeviceRequest"
               (\ o ->
-                 PawsVerifyDeviceRequest <$>
+                 PawsVerifyDeviceRequest' <$>
                    (o .:? "version") <*>
                      (o .:? "deviceDescs" .!= mempty)
                      <*> (o .:? "type"))
 
 instance ToJSON PawsVerifyDeviceRequest where
-        toJSON PawsVerifyDeviceRequest{..}
+        toJSON PawsVerifyDeviceRequest'{..}
           = object
               (catMaybes
                  [("version" .=) <$> _pvdrvVersion,
@@ -2488,7 +2489,7 @@ instance ToJSON PawsVerifyDeviceRequest where
 -- by regulatory domains.
 --
 -- /See:/ 'deviceDescriptor' smart constructor.
-data DeviceDescriptor = DeviceDescriptor
+data DeviceDescriptor = DeviceDescriptor'
     { _ddEtsiEnDeviceEmissionsClass :: !(Maybe Text)
     , _ddRulesetIds                 :: !(Maybe [Text])
     , _ddModelId                    :: !(Maybe Text)
@@ -2527,7 +2528,7 @@ data DeviceDescriptor = DeviceDescriptor
 deviceDescriptor
     :: DeviceDescriptor
 deviceDescriptor =
-    DeviceDescriptor
+    DeviceDescriptor'
     { _ddEtsiEnDeviceEmissionsClass = Nothing
     , _ddRulesetIds = Nothing
     , _ddModelId = Nothing
@@ -2627,7 +2628,7 @@ instance FromJSON DeviceDescriptor where
         parseJSON
           = withObject "DeviceDescriptor"
               (\ o ->
-                 DeviceDescriptor <$>
+                 DeviceDescriptor' <$>
                    (o .:? "etsiEnDeviceEmissionsClass") <*>
                      (o .:? "rulesetIds" .!= mempty)
                      <*> (o .:? "modelId")
@@ -2640,7 +2641,7 @@ instance FromJSON DeviceDescriptor where
                      <*> (o .:? "serialNumber"))
 
 instance ToJSON DeviceDescriptor where
-        toJSON DeviceDescriptor{..}
+        toJSON DeviceDescriptor'{..}
           = object
               (catMaybes
                  [("etsiEnDeviceEmissionsClass" .=) <$>
@@ -2660,7 +2661,7 @@ instance ToJSON DeviceDescriptor where
 -- exchange of capabilities with the database.
 --
 -- /See:/ 'pawsInitRequest' smart constructor.
-data PawsInitRequest = PawsInitRequest
+data PawsInitRequest = PawsInitRequest'
     { _piriLocation   :: !(Maybe GeoLocation)
     , _piriVersion    :: !(Maybe Text)
     , _piriType       :: !(Maybe Text)
@@ -2681,7 +2682,7 @@ data PawsInitRequest = PawsInitRequest
 pawsInitRequest
     :: PawsInitRequest
 pawsInitRequest =
-    PawsInitRequest
+    PawsInitRequest'
     { _piriLocation = Nothing
     , _piriVersion = Nothing
     , _piriType = Nothing
@@ -2716,13 +2717,13 @@ instance FromJSON PawsInitRequest where
         parseJSON
           = withObject "PawsInitRequest"
               (\ o ->
-                 PawsInitRequest <$>
+                 PawsInitRequest' <$>
                    (o .:? "location") <*> (o .:? "version") <*>
                      (o .:? "type")
                      <*> (o .:? "deviceDesc"))
 
 instance ToJSON PawsInitRequest where
-        toJSON PawsInitRequest{..}
+        toJSON PawsInitRequest'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _piriLocation,
@@ -2736,7 +2737,7 @@ instance ToJSON PawsInitRequest where
 -- device capabilities it will ignore the parameter altogether.
 --
 -- /See:/ 'deviceCapabilities' smart constructor.
-newtype DeviceCapabilities = DeviceCapabilities
+newtype DeviceCapabilities = DeviceCapabilities'
     { _dcFrequencyRanges :: Maybe [FrequencyRange]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2748,7 +2749,7 @@ newtype DeviceCapabilities = DeviceCapabilities
 deviceCapabilities
     :: DeviceCapabilities
 deviceCapabilities =
-    DeviceCapabilities
+    DeviceCapabilities'
     { _dcFrequencyRanges = Nothing
     }
 
@@ -2768,11 +2769,11 @@ instance FromJSON DeviceCapabilities where
         parseJSON
           = withObject "DeviceCapabilities"
               (\ o ->
-                 DeviceCapabilities <$>
+                 DeviceCapabilities' <$>
                    (o .:? "frequencyRanges" .!= mempty))
 
 instance ToJSON DeviceCapabilities where
-        toJSON DeviceCapabilities{..}
+        toJSON DeviceCapabilities'{..}
           = object
               (catMaybes
                  [("frequencyRanges" .=) <$> _dcFrequencyRanges])

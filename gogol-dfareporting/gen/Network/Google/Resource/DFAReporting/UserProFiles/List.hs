@@ -50,21 +50,21 @@ type UserProFilesListResource =
 --
 -- /See:/ 'userProFilesList' smart constructor.
 data UserProFilesList =
-    UserProFilesList
+    UserProFilesList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProFilesList' with the minimum fields required to make a request.
 --
 userProFilesList
     :: UserProFilesList
-userProFilesList = UserProFilesList
+userProFilesList = UserProFilesList'
 
 instance GoogleRequest UserProFilesList where
         type Rs UserProFilesList = UserProFileList
         type Scopes UserProFilesList =
              '["https://www.googleapis.com/auth/dfareporting",
                "https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserProFilesList{}
+        requestClient UserProFilesList'{}
           = go (Just AltJSON) dFAReportingService
           where go
                   = buildClient

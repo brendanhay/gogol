@@ -51,7 +51,7 @@ type LocationsGetResource =
 -- | Gets a single location by ID.
 --
 -- /See:/ 'locationsGet' smart constructor.
-newtype LocationsGet = LocationsGet
+newtype LocationsGet = LocationsGet'
     { _lgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ locationsGet
     :: Text -- ^ 'lgId'
     -> LocationsGet
 locationsGet pLgId_ =
-    LocationsGet
+    LocationsGet'
     { _lgId = pLgId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest LocationsGet where
         type Scopes LocationsGet =
              '["https://www.googleapis.com/auth/glass.location",
                "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient LocationsGet{..}
+        requestClient LocationsGet'{..}
           = go _lgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy LocationsGetResource)

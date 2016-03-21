@@ -58,7 +58,7 @@ type EditsDeleteResource =
 -- you want to preemptively abandon an edit.
 --
 -- /See:/ 'editsDelete' smart constructor.
-data EditsDelete = EditsDelete
+data EditsDelete = EditsDelete'
     { _edPackageName :: !Text
     , _edEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ editsDelete
     -> Text -- ^ 'edEditId'
     -> EditsDelete
 editsDelete pEdPackageName_ pEdEditId_ =
-    EditsDelete
+    EditsDelete'
     { _edPackageName = pEdPackageName_
     , _edEditId = pEdEditId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest EditsDelete where
         type Rs EditsDelete = ()
         type Scopes EditsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsDelete{..}
+        requestClient EditsDelete'{..}
           = go _edPackageName _edEditId (Just AltJSON)
               androidPublisherService
           where go

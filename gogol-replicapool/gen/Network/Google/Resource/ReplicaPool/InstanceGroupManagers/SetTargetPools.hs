@@ -64,7 +64,7 @@ type InstanceGroupManagersSetTargetPoolsResource =
 -- assigned. Existing instances in the group are not affected.
 --
 -- /See:/ 'instanceGroupManagersSetTargetPools' smart constructor.
-data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools
+data InstanceGroupManagersSetTargetPools = InstanceGroupManagersSetTargetPools'
     { _igmstpProject              :: !Text
     , _igmstpInstanceGroupManager :: !Text
     , _igmstpZone                 :: !Text
@@ -89,7 +89,7 @@ instanceGroupManagersSetTargetPools
     -> InstanceGroupManagersSetTargetPoolsRequest -- ^ 'igmstpPayload'
     -> InstanceGroupManagersSetTargetPools
 instanceGroupManagersSetTargetPools pIgmstpProject_ pIgmstpInstanceGroupManager_ pIgmstpZone_ pIgmstpPayload_ =
-    InstanceGroupManagersSetTargetPools
+    InstanceGroupManagersSetTargetPools'
     { _igmstpProject = pIgmstpProject_
     , _igmstpInstanceGroupManager = pIgmstpInstanceGroupManager_
     , _igmstpZone = pIgmstpZone_
@@ -126,7 +126,8 @@ instance GoogleRequest
         type Scopes InstanceGroupManagersSetTargetPools =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupManagersSetTargetPools{..}
+        requestClient
+          InstanceGroupManagersSetTargetPools'{..}
           = go _igmstpProject _igmstpZone
               _igmstpInstanceGroupManager
               (Just AltJSON)

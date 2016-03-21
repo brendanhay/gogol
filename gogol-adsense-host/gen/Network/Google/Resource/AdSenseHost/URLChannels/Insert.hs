@@ -54,7 +54,7 @@ type URLChannelsInsertResource =
 -- | Add a new URL channel to the host AdSense account.
 --
 -- /See:/ 'urlChannelsInsert' smart constructor.
-data URLChannelsInsert = URLChannelsInsert
+data URLChannelsInsert = URLChannelsInsert'
     { _uciPayload    :: !URLChannel
     , _uciAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ urlChannelsInsert
     -> Text -- ^ 'uciAdClientId'
     -> URLChannelsInsert
 urlChannelsInsert pUciPayload_ pUciAdClientId_ =
-    URLChannelsInsert
+    URLChannelsInsert'
     { _uciPayload = pUciPayload_
     , _uciAdClientId = pUciAdClientId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest URLChannelsInsert where
         type Rs URLChannelsInsert = URLChannel
         type Scopes URLChannelsInsert =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient URLChannelsInsert{..}
+        requestClient URLChannelsInsert'{..}
           = go _uciAdClientId (Just AltJSON) _uciPayload
               adSenseHostService
           where go

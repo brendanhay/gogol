@@ -65,7 +65,7 @@ type TablesPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'tablesPatch' smart constructor.
-data TablesPatch = TablesPatch
+data TablesPatch = TablesPatch'
     { _tpPayload   :: !Table
     , _tpDataSetId :: !Text
     , _tpProjectId :: !Text
@@ -90,7 +90,7 @@ tablesPatch
     -> Text -- ^ 'tpTableId'
     -> TablesPatch
 tablesPatch pTpPayload_ pTpDataSetId_ pTpProjectId_ pTpTableId_ =
-    TablesPatch
+    TablesPatch'
     { _tpPayload = pTpPayload_
     , _tpDataSetId = pTpDataSetId_
     , _tpProjectId = pTpProjectId_
@@ -122,7 +122,7 @@ instance GoogleRequest TablesPatch where
         type Scopes TablesPatch =
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TablesPatch{..}
+        requestClient TablesPatch'{..}
           = go _tpProjectId _tpDataSetId _tpTableId
               (Just AltJSON)
               _tpPayload

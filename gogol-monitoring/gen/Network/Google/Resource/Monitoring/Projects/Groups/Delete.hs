@@ -63,7 +63,7 @@ type ProjectsGroupsDeleteResource =
 -- | Deletes an existing group.
 --
 -- /See:/ 'projectsGroupsDelete' smart constructor.
-data ProjectsGroupsDelete = ProjectsGroupsDelete
+data ProjectsGroupsDelete = ProjectsGroupsDelete'
     { _pgdXgafv          :: !(Maybe Text)
     , _pgdUploadProtocol :: !(Maybe Text)
     , _pgdPp             :: !Bool
@@ -97,7 +97,7 @@ projectsGroupsDelete
     :: Text -- ^ 'pgdName'
     -> ProjectsGroupsDelete
 projectsGroupsDelete pPgdName_ =
-    ProjectsGroupsDelete
+    ProjectsGroupsDelete'
     { _pgdXgafv = Nothing
     , _pgdUploadProtocol = Nothing
     , _pgdPp = True
@@ -154,7 +154,7 @@ instance GoogleRequest ProjectsGroupsDelete where
         type Scopes ProjectsGroupsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient ProjectsGroupsDelete{..}
+        requestClient ProjectsGroupsDelete'{..}
           = go _pgdName _pgdXgafv _pgdUploadProtocol
               (Just _pgdPp)
               _pgdAccessToken

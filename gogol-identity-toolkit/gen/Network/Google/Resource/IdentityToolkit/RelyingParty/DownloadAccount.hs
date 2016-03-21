@@ -54,7 +54,7 @@ type RelyingPartyDownloadAccountResource =
 -- | Batch download user accounts.
 --
 -- /See:/ 'relyingPartyDownloadAccount' smart constructor.
-newtype RelyingPartyDownloadAccount = RelyingPartyDownloadAccount
+newtype RelyingPartyDownloadAccount = RelyingPartyDownloadAccount'
     { _rpdaPayload :: IdentitytoolkitRelyingPartyDownloadAccountRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyDownloadAccount
     :: IdentitytoolkitRelyingPartyDownloadAccountRequest -- ^ 'rpdaPayload'
     -> RelyingPartyDownloadAccount
 relyingPartyDownloadAccount pRpdaPayload_ =
-    RelyingPartyDownloadAccount
+    RelyingPartyDownloadAccount'
     { _rpdaPayload = pRpdaPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyDownloadAccount
         type Rs RelyingPartyDownloadAccount =
              DownloadAccountResponse
         type Scopes RelyingPartyDownloadAccount = '[]
-        requestClient RelyingPartyDownloadAccount{..}
+        requestClient RelyingPartyDownloadAccount'{..}
           = go (Just AltJSON) _rpdaPayload
               identityToolkitService
           where go

@@ -55,7 +55,7 @@ type NotificationsGetResource =
 -- | Retrieves a notification.
 --
 -- /See:/ 'notificationsGet' smart constructor.
-data NotificationsGet = NotificationsGet
+data NotificationsGet = NotificationsGet'
     { _ngCustomer       :: !Text
     , _ngNotificationId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ notificationsGet
     -> Text -- ^ 'ngNotificationId'
     -> NotificationsGet
 notificationsGet pNgCustomer_ pNgNotificationId_ =
-    NotificationsGet
+    NotificationsGet'
     { _ngCustomer = pNgCustomer_
     , _ngNotificationId = pNgNotificationId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest NotificationsGet where
         type Rs NotificationsGet = Notification
         type Scopes NotificationsGet =
              '["https://www.googleapis.com/auth/admin.directory.notifications"]
-        requestClient NotificationsGet{..}
+        requestClient NotificationsGet'{..}
           = go _ngCustomer _ngNotificationId (Just AltJSON)
               directoryService
           where go

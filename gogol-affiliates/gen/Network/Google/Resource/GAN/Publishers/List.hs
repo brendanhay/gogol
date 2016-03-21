@@ -71,7 +71,7 @@ type PublishersListResource =
 -- advertiser\/publisher has access to.
 --
 -- /See:/ 'publishersList' smart constructor.
-data PublishersList = PublishersList
+data PublishersList = PublishersList'
     { _plRelationshipStatus :: !(Maybe PublishersListRelationshipStatus)
     , _plMinSevenDayEpc     :: !(Maybe (Textual Double))
     , _plRoleId             :: !Text
@@ -109,7 +109,7 @@ publishersList
     -> PublishersListRole -- ^ 'plRole'
     -> PublishersList
 publishersList pPlRoleId_ pPlRole_ =
-    PublishersList
+    PublishersList'
     { _plRelationshipStatus = Nothing
     , _plMinSevenDayEpc = Nothing
     , _plRoleId = pPlRoleId_
@@ -187,7 +187,7 @@ plMaxResults
 instance GoogleRequest PublishersList where
         type Rs PublishersList = Publishers
         type Scopes PublishersList = '[]
-        requestClient PublishersList{..}
+        requestClient PublishersList'{..}
           = go _plRole _plRoleId _plRelationshipStatus
               _plMinSevenDayEpc
               _plMinNinetyDayEpc

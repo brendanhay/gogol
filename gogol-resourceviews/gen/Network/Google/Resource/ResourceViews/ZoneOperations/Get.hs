@@ -57,7 +57,7 @@ type ZoneOperationsGetResource =
 -- | Retrieves the specified zone-specific operation resource.
 --
 -- /See:/ 'zoneOperationsGet' smart constructor.
-data ZoneOperationsGet = ZoneOperationsGet
+data ZoneOperationsGet = ZoneOperationsGet'
     { _zogProject   :: !Text
     , _zogOperation :: !Text
     , _zogZone      :: !Text
@@ -78,7 +78,7 @@ zoneOperationsGet
     -> Text -- ^ 'zogZone'
     -> ZoneOperationsGet
 zoneOperationsGet pZogProject_ pZogOperation_ pZogZone_ =
-    ZoneOperationsGet
+    ZoneOperationsGet'
     { _zogProject = pZogProject_
     , _zogOperation = pZogOperation_
     , _zogZone = pZogZone_
@@ -107,7 +107,7 @@ instance GoogleRequest ZoneOperationsGet where
                "https://www.googleapis.com/auth/compute.readonly",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ZoneOperationsGet{..}
+        requestClient ZoneOperationsGet'{..}
           = go _zogProject _zogZone _zogOperation
               (Just AltJSON)
               resourceViewsService

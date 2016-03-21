@@ -55,7 +55,7 @@ type PlacementGroupsUpdateResource =
 -- | Updates an existing placement group.
 --
 -- /See:/ 'placementGroupsUpdate' smart constructor.
-data PlacementGroupsUpdate = PlacementGroupsUpdate
+data PlacementGroupsUpdate = PlacementGroupsUpdate'
     { _pguProFileId :: !(Textual Int64)
     , _pguPayload   :: !PlacementGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ placementGroupsUpdate
     -> PlacementGroup -- ^ 'pguPayload'
     -> PlacementGroupsUpdate
 placementGroupsUpdate pPguProFileId_ pPguPayload_ =
-    PlacementGroupsUpdate
+    PlacementGroupsUpdate'
     { _pguProFileId = _Coerce # pPguProFileId_
     , _pguPayload = pPguPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PlacementGroupsUpdate where
         type Rs PlacementGroupsUpdate = PlacementGroup
         type Scopes PlacementGroupsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementGroupsUpdate{..}
+        requestClient PlacementGroupsUpdate'{..}
           = go _pguProFileId (Just AltJSON) _pguPayload
               dFAReportingService
           where go

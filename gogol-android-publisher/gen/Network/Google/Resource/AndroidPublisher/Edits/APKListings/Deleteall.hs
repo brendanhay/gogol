@@ -58,7 +58,7 @@ type EditsAPKListingsDeleteallResource =
 -- | Deletes all the APK-specific localized listings for a specified APK.
 --
 -- /See:/ 'editsAPKListingsDeleteall' smart constructor.
-data EditsAPKListingsDeleteall = EditsAPKListingsDeleteall
+data EditsAPKListingsDeleteall = EditsAPKListingsDeleteall'
     { _eapkldaPackageName    :: !Text
     , _eapkldaAPKVersionCode :: !(Textual Int32)
     , _eapkldaEditId         :: !Text
@@ -79,7 +79,7 @@ editsAPKListingsDeleteall
     -> Text -- ^ 'eapkldaEditId'
     -> EditsAPKListingsDeleteall
 editsAPKListingsDeleteall pEapkldaPackageName_ pEapkldaAPKVersionCode_ pEapkldaEditId_ =
-    EditsAPKListingsDeleteall
+    EditsAPKListingsDeleteall'
     { _eapkldaPackageName = pEapkldaPackageName_
     , _eapkldaAPKVersionCode = _Coerce # pEapkldaAPKVersionCode_
     , _eapkldaEditId = pEapkldaEditId_
@@ -111,7 +111,7 @@ instance GoogleRequest EditsAPKListingsDeleteall
         type Rs EditsAPKListingsDeleteall = ()
         type Scopes EditsAPKListingsDeleteall =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKListingsDeleteall{..}
+        requestClient EditsAPKListingsDeleteall'{..}
           = go _eapkldaPackageName _eapkldaEditId
               _eapkldaAPKVersionCode
               (Just AltJSON)

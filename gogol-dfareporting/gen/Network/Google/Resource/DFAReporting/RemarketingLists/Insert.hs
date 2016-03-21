@@ -55,7 +55,7 @@ type RemarketingListsInsertResource =
 -- | Inserts a new remarketing list.
 --
 -- /See:/ 'remarketingListsInsert' smart constructor.
-data RemarketingListsInsert = RemarketingListsInsert
+data RemarketingListsInsert = RemarketingListsInsert'
     { _rliProFileId :: !(Textual Int64)
     , _rliPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListsInsert
     -> RemarketingList -- ^ 'rliPayload'
     -> RemarketingListsInsert
 remarketingListsInsert pRliProFileId_ pRliPayload_ =
-    RemarketingListsInsert
+    RemarketingListsInsert'
     { _rliProFileId = _Coerce # pRliProFileId_
     , _rliPayload = pRliPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest RemarketingListsInsert where
         type Rs RemarketingListsInsert = RemarketingList
         type Scopes RemarketingListsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListsInsert{..}
+        requestClient RemarketingListsInsert'{..}
           = go _rliProFileId (Just AltJSON) _rliPayload
               dFAReportingService
           where go

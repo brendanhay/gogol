@@ -58,7 +58,7 @@ type ScoresResetResource =
 -- tester accounts for your application.
 --
 -- /See:/ 'scoresReset' smart constructor.
-newtype ScoresReset = ScoresReset
+newtype ScoresReset = ScoresReset'
     { _srLeaderboardId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -71,7 +71,7 @@ scoresReset
     :: Text -- ^ 'srLeaderboardId'
     -> ScoresReset
 scoresReset pSrLeaderboardId_ =
-    ScoresReset
+    ScoresReset'
     { _srLeaderboardId = pSrLeaderboardId_
     }
 
@@ -86,7 +86,7 @@ instance GoogleRequest ScoresReset where
         type Scopes ScoresReset =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresReset{..}
+        requestClient ScoresReset'{..}
           = go _srLeaderboardId (Just AltJSON)
               gamesManagementService
           where go

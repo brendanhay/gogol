@@ -63,7 +63,7 @@ type TurnBasedMatchesRematchResource =
 -- created match; it will be the caller\'s turn.
 --
 -- /See:/ 'turnBasedMatchesRematch' smart constructor.
-data TurnBasedMatchesRematch = TurnBasedMatchesRematch
+data TurnBasedMatchesRematch = TurnBasedMatchesRematch'
     { _tbmrRequestId :: !(Maybe (Textual Int64))
     , _tbmrLanguage  :: !(Maybe Text)
     , _tbmrMatchId   :: !Text
@@ -82,7 +82,7 @@ turnBasedMatchesRematch
     :: Text -- ^ 'tbmrMatchId'
     -> TurnBasedMatchesRematch
 turnBasedMatchesRematch pTbmrMatchId_ =
-    TurnBasedMatchesRematch
+    TurnBasedMatchesRematch'
     { _tbmrRequestId = Nothing
     , _tbmrLanguage = Nothing
     , _tbmrMatchId = pTbmrMatchId_
@@ -113,7 +113,7 @@ instance GoogleRequest TurnBasedMatchesRematch where
         type Scopes TurnBasedMatchesRematch =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient TurnBasedMatchesRematch{..}
+        requestClient TurnBasedMatchesRematch'{..}
           = go _tbmrMatchId _tbmrRequestId _tbmrLanguage
               (Just AltJSON)
               gamesService

@@ -78,7 +78,7 @@ type ReportsGetResource =
 -- | Retrieves a report of the specified type.
 --
 -- /See:/ 'reportsGet' smart constructor.
-data ReportsGet = ReportsGet
+data ReportsGet = ReportsGet'
     { _rgStatus          :: !(Maybe ReportsGetStatus)
     , _rgAdvertiserId    :: !(Maybe [Text])
     , _rgEndDate         :: !(Maybe Text)
@@ -132,7 +132,7 @@ reportsGet
     -> ReportsGetReportType -- ^ 'rgReportType'
     -> ReportsGet
 reportsGet pRgRoleId_ pRgRole_ pRgReportType_ =
-    ReportsGet
+    ReportsGet'
     { _rgStatus = Nothing
     , _rgAdvertiserId = Nothing
     , _rgEndDate = Nothing
@@ -241,7 +241,7 @@ rgMaxResults
 instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
         type Scopes ReportsGet = '[]
-        requestClient ReportsGet{..}
+        requestClient ReportsGet'{..}
           = go _rgRole _rgRoleId _rgReportType _rgStatus
               (_rgAdvertiserId ^. _Default)
               _rgEndDate

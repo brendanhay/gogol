@@ -62,7 +62,7 @@ type BackendServicesListResource =
 -- specified project.
 --
 -- /See:/ 'backendServicesList' smart constructor.
-data BackendServicesList = BackendServicesList
+data BackendServicesList = BackendServicesList'
     { _bslProject    :: !Text
     , _bslFilter     :: !(Maybe Text)
     , _bslPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ backendServicesList
     :: Text -- ^ 'bslProject'
     -> BackendServicesList
 backendServicesList pBslProject_ =
-    BackendServicesList
+    BackendServicesList'
     { _bslProject = pBslProject_
     , _bslFilter = Nothing
     , _bslPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest BackendServicesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient BackendServicesList{..}
+        requestClient BackendServicesList'{..}
           = go _bslProject _bslFilter _bslPageToken
               (Just _bslMaxResults)
               (Just AltJSON)

@@ -55,7 +55,7 @@ type PawsGetSpectrumBatchResource =
 -- method always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsGetSpectrumBatch' smart constructor.
-newtype PawsGetSpectrumBatch = PawsGetSpectrumBatch
+newtype PawsGetSpectrumBatch = PawsGetSpectrumBatch'
     { _pgsbPayload :: PawsGetSpectrumBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ pawsGetSpectrumBatch
     :: PawsGetSpectrumBatchRequest -- ^ 'pgsbPayload'
     -> PawsGetSpectrumBatch
 pawsGetSpectrumBatch pPgsbPayload_ =
-    PawsGetSpectrumBatch
+    PawsGetSpectrumBatch'
     { _pgsbPayload = pPgsbPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest PawsGetSpectrumBatch where
         type Rs PawsGetSpectrumBatch =
              PawsGetSpectrumBatchResponse
         type Scopes PawsGetSpectrumBatch = '[]
-        requestClient PawsGetSpectrumBatch{..}
+        requestClient PawsGetSpectrumBatch'{..}
           = go (Just AltJSON) _pgsbPayload spectrumService
           where go
                   = buildClient

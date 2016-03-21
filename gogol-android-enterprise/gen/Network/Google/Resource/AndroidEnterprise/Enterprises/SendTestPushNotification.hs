@@ -56,7 +56,7 @@ type EnterprisesSendTestPushNotificationResource =
 -- Google Cloud Pub\/Sub service for this enterprise.
 --
 -- /See:/ 'enterprisesSendTestPushNotification' smart constructor.
-newtype EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification
+newtype EnterprisesSendTestPushNotification = EnterprisesSendTestPushNotification'
     { _estpnEnterpriseId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ enterprisesSendTestPushNotification
     :: Text -- ^ 'estpnEnterpriseId'
     -> EnterprisesSendTestPushNotification
 enterprisesSendTestPushNotification pEstpnEnterpriseId_ =
-    EnterprisesSendTestPushNotification
+    EnterprisesSendTestPushNotification'
     { _estpnEnterpriseId = pEstpnEnterpriseId_
     }
 
@@ -85,7 +85,8 @@ instance GoogleRequest
              EnterprisesSendTestPushNotificationResponse
         type Scopes EnterprisesSendTestPushNotification =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesSendTestPushNotification{..}
+        requestClient
+          EnterprisesSendTestPushNotification'{..}
           = go _estpnEnterpriseId (Just AltJSON)
               androidEnterpriseService
           where go

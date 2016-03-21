@@ -57,7 +57,7 @@ type EntitlementsDeleteResource =
 -- | Removes an entitlement to an app for a user and uninstalls it.
 --
 -- /See:/ 'entitlementsDelete' smart constructor.
-data EntitlementsDelete = EntitlementsDelete
+data EntitlementsDelete = EntitlementsDelete'
     { _entEntitlementId :: !Text
     , _entEnterpriseId  :: !Text
     , _entUserId        :: !Text
@@ -78,7 +78,7 @@ entitlementsDelete
     -> Text -- ^ 'entUserId'
     -> EntitlementsDelete
 entitlementsDelete pEntEntitlementId_ pEntEnterpriseId_ pEntUserId_ =
-    EntitlementsDelete
+    EntitlementsDelete'
     { _entEntitlementId = pEntEntitlementId_
     , _entEnterpriseId = pEntEnterpriseId_
     , _entUserId = pEntUserId_
@@ -105,7 +105,7 @@ instance GoogleRequest EntitlementsDelete where
         type Rs EntitlementsDelete = ()
         type Scopes EntitlementsDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EntitlementsDelete{..}
+        requestClient EntitlementsDelete'{..}
           = go _entEnterpriseId _entUserId _entEntitlementId
               (Just AltJSON)
               androidEnterpriseService

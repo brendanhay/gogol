@@ -59,7 +59,7 @@ type TargetHTTPSProxiesSetSSLCertificatesResource =
 -- | Replaces SslCertificates for TargetHttpsProxy.
 --
 -- /See:/ 'targetHTTPSProxiesSetSSLCertificates' smart constructor.
-data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates
+data TargetHTTPSProxiesSetSSLCertificates = TargetHTTPSProxiesSetSSLCertificates'
     { _thpsscProject          :: !Text
     , _thpsscPayload          :: !TargetHTTPSProxiesSetSSLCertificatesRequest
     , _thpsscTargetHTTPSProxy :: !Text
@@ -80,7 +80,7 @@ targetHTTPSProxiesSetSSLCertificates
     -> Text -- ^ 'thpsscTargetHTTPSProxy'
     -> TargetHTTPSProxiesSetSSLCertificates
 targetHTTPSProxiesSetSSLCertificates pThpsscProject_ pThpsscPayload_ pThpsscTargetHTTPSProxy_ =
-    TargetHTTPSProxiesSetSSLCertificates
+    TargetHTTPSProxiesSetSSLCertificates'
     { _thpsscProject = pThpsscProject_
     , _thpsscPayload = pThpsscPayload_
     , _thpsscTargetHTTPSProxy = pThpsscTargetHTTPSProxy_
@@ -113,7 +113,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient
-          TargetHTTPSProxiesSetSSLCertificates{..}
+          TargetHTTPSProxiesSetSSLCertificates'{..}
           = go _thpsscProject _thpsscTargetHTTPSProxy
               (Just AltJSON)
               _thpsscPayload

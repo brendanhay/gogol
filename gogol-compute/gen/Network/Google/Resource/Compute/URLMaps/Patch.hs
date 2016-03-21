@@ -59,7 +59,7 @@ type URLMapsPatchResource =
 -- patch semantics.
 --
 -- /See:/ 'urlMapsPatch' smart constructor.
-data URLMapsPatch = URLMapsPatch
+data URLMapsPatch = URLMapsPatch'
     { _umpURLMap  :: !Text
     , _umpProject :: !Text
     , _umpPayload :: !URLMap
@@ -80,7 +80,7 @@ urlMapsPatch
     -> URLMap -- ^ 'umpPayload'
     -> URLMapsPatch
 urlMapsPatch pUmpURLMap_ pUmpProject_ pUmpPayload_ =
-    URLMapsPatch
+    URLMapsPatch'
     { _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
     , _umpPayload = pUmpPayload_
@@ -106,7 +106,7 @@ instance GoogleRequest URLMapsPatch where
         type Scopes URLMapsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient URLMapsPatch{..}
+        requestClient URLMapsPatch'{..}
           = go _umpProject _umpURLMap (Just AltJSON)
               _umpPayload
               computeService

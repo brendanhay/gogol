@@ -58,7 +58,7 @@ type ManagementCustomMetricsGetResource =
 -- | Get a custom metric to which the user has access.
 --
 -- /See:/ 'managementCustomMetricsGet' smart constructor.
-data ManagementCustomMetricsGet = ManagementCustomMetricsGet
+data ManagementCustomMetricsGet = ManagementCustomMetricsGet'
     { _mcmgCustomMetricId :: !Text
     , _mcmgWebPropertyId  :: !Text
     , _mcmgAccountId      :: !Text
@@ -79,7 +79,7 @@ managementCustomMetricsGet
     -> Text -- ^ 'mcmgAccountId'
     -> ManagementCustomMetricsGet
 managementCustomMetricsGet pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccountId_ =
-    ManagementCustomMetricsGet
+    ManagementCustomMetricsGet'
     { _mcmgCustomMetricId = pMcmgCustomMetricId_
     , _mcmgWebPropertyId = pMcmgWebPropertyId_
     , _mcmgAccountId = pMcmgAccountId_
@@ -109,7 +109,7 @@ instance GoogleRequest ManagementCustomMetricsGet
         type Scopes ManagementCustomMetricsGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementCustomMetricsGet{..}
+        requestClient ManagementCustomMetricsGet'{..}
           = go _mcmgAccountId _mcmgWebPropertyId
               _mcmgCustomMetricId
               (Just AltJSON)

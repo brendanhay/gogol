@@ -61,7 +61,7 @@ type AccountsContainersVariablesUpdateResource =
 -- | Updates a GTM Variable.
 --
 -- /See:/ 'accountsContainersVariablesUpdate' smart constructor.
-data AccountsContainersVariablesUpdate = AccountsContainersVariablesUpdate
+data AccountsContainersVariablesUpdate = AccountsContainersVariablesUpdate'
     { _acvuContainerId :: !Text
     , _acvuFingerprint :: !(Maybe Text)
     , _acvuVariableId  :: !Text
@@ -89,7 +89,7 @@ accountsContainersVariablesUpdate
     -> Text -- ^ 'acvuAccountId'
     -> AccountsContainersVariablesUpdate
 accountsContainersVariablesUpdate pAcvuContainerId_ pAcvuVariableId_ pAcvuPayload_ pAcvuAccountId_ =
-    AccountsContainersVariablesUpdate
+    AccountsContainersVariablesUpdate'
     { _acvuContainerId = pAcvuContainerId_
     , _acvuFingerprint = Nothing
     , _acvuVariableId = pAcvuVariableId_
@@ -132,7 +132,7 @@ instance GoogleRequest
         type Rs AccountsContainersVariablesUpdate = Variable
         type Scopes AccountsContainersVariablesUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersVariablesUpdate{..}
+        requestClient AccountsContainersVariablesUpdate'{..}
           = go _acvuAccountId _acvuContainerId _acvuVariableId
               _acvuFingerprint
               (Just AltJSON)

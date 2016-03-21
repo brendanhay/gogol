@@ -57,7 +57,7 @@ type PlayListsUpdateResource =
 -- description, or privacy status.
 --
 -- /See:/ 'playListsUpdate' smart constructor.
-data PlayListsUpdate = PlayListsUpdate
+data PlayListsUpdate = PlayListsUpdate'
     { _pluPart                   :: !Text
     , _pluPayload                :: !PlayList
     , _pluOnBehalfOfContentOwner :: !(Maybe Text)
@@ -77,7 +77,7 @@ playListsUpdate
     -> PlayList -- ^ 'pluPayload'
     -> PlayListsUpdate
 playListsUpdate pPluPart_ pPluPayload_ =
-    PlayListsUpdate
+    PlayListsUpdate'
     { _pluPart = pPluPart_
     , _pluPayload = pPluPayload_
     , _pluOnBehalfOfContentOwner = Nothing
@@ -121,7 +121,7 @@ instance GoogleRequest PlayListsUpdate where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient PlayListsUpdate{..}
+        requestClient PlayListsUpdate'{..}
           = go (Just _pluPart) _pluOnBehalfOfContentOwner
               (Just AltJSON)
               _pluPayload

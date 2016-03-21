@@ -67,7 +67,7 @@ type TableDataListResource =
 -- dataset role.
 --
 -- /See:/ 'tableDataList'' smart constructor.
-data TableDataList' = TableDataList'
+data TableDataList' = TableDataList''
     { _tDataSetId  :: !Text
     , _tPageToken  :: !(Maybe Text)
     , _tProjectId  :: !Text
@@ -97,7 +97,7 @@ tableDataList'
     -> Text -- ^ 'tTableId'
     -> TableDataList'
 tableDataList' pTDataSetId_ pTProjectId_ pTTableId_ =
-    TableDataList'
+    TableDataList''
     { _tDataSetId = pTDataSetId_
     , _tPageToken = Nothing
     , _tProjectId = pTProjectId_
@@ -145,7 +145,7 @@ instance GoogleRequest TableDataList' where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient TableDataList'{..}
+        requestClient TableDataList''{..}
           = go _tProjectId _tDataSetId _tTableId _tPageToken
               _tStartIndex
               _tMaxResults

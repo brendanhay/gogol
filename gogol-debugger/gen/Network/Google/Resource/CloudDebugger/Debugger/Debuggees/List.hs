@@ -70,7 +70,7 @@ type DebuggerDebuggeesListResource =
 -- | Lists all the debuggees that the user can set breakpoints to.
 --
 -- /See:/ 'debuggerDebuggeesList' smart constructor.
-data DebuggerDebuggeesList = DebuggerDebuggeesList
+data DebuggerDebuggeesList = DebuggerDebuggeesList'
     { _ddlXgafv           :: !(Maybe Text)
     , _ddlIncludeInactive :: !(Maybe Bool)
     , _ddlUploadProtocol  :: !(Maybe Text)
@@ -109,7 +109,7 @@ data DebuggerDebuggeesList = DebuggerDebuggeesList
 debuggerDebuggeesList
     :: DebuggerDebuggeesList
 debuggerDebuggeesList =
-    DebuggerDebuggeesList
+    DebuggerDebuggeesList'
     { _ddlXgafv = Nothing
     , _ddlIncludeInactive = Nothing
     , _ddlUploadProtocol = Nothing
@@ -183,7 +183,7 @@ instance GoogleRequest DebuggerDebuggeesList where
         type Scopes DebuggerDebuggeesList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugger"]
-        requestClient DebuggerDebuggeesList{..}
+        requestClient DebuggerDebuggeesList'{..}
           = go _ddlXgafv _ddlIncludeInactive _ddlUploadProtocol
               _ddlProject
               (Just _ddlPp)

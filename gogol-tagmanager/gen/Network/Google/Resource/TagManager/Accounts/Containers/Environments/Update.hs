@@ -62,7 +62,7 @@ type AccountsContainersEnvironmentsUpdateResource =
 -- | Updates a GTM Environment.
 --
 -- /See:/ 'accountsContainersEnvironmentsUpdate' smart constructor.
-data AccountsContainersEnvironmentsUpdate = AccountsContainersEnvironmentsUpdate
+data AccountsContainersEnvironmentsUpdate = AccountsContainersEnvironmentsUpdate'
     { _aceuContainerId   :: !Text
     , _aceuFingerprint   :: !(Maybe Text)
     , _aceuPayload       :: !Environment
@@ -90,7 +90,7 @@ accountsContainersEnvironmentsUpdate
     -> Text -- ^ 'aceuEnvironmentId'
     -> AccountsContainersEnvironmentsUpdate
 accountsContainersEnvironmentsUpdate pAceuContainerId_ pAceuPayload_ pAceuAccountId_ pAceuEnvironmentId_ =
-    AccountsContainersEnvironmentsUpdate
+    AccountsContainersEnvironmentsUpdate'
     { _aceuContainerId = pAceuContainerId_
     , _aceuFingerprint = Nothing
     , _aceuPayload = pAceuPayload_
@@ -135,7 +135,7 @@ instance GoogleRequest
         type Scopes AccountsContainersEnvironmentsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
         requestClient
-          AccountsContainersEnvironmentsUpdate{..}
+          AccountsContainersEnvironmentsUpdate'{..}
           = go _aceuAccountId _aceuContainerId
               _aceuEnvironmentId
               _aceuFingerprint

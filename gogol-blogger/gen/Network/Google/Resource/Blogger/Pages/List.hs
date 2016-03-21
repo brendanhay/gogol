@@ -62,7 +62,7 @@ type PagesListResource =
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
 -- /See:/ 'pagesList' smart constructor.
-data PagesList = PagesList
+data PagesList = PagesList'
     { _plStatus      :: !(Maybe [PagesListStatus])
     , _plBlogId      :: !Text
     , _plFetchBodies :: !(Maybe Bool)
@@ -90,7 +90,7 @@ pagesList
     :: Text -- ^ 'plBlogId'
     -> PagesList
 pagesList pPlBlogId_ =
-    PagesList
+    PagesList'
     { _plStatus = Nothing
     , _plBlogId = pPlBlogId_
     , _plFetchBodies = Nothing
@@ -136,7 +136,7 @@ instance GoogleRequest PagesList where
         type Scopes PagesList =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PagesList{..}
+        requestClient PagesList'{..}
           = go _plBlogId (_plStatus ^. _Default) _plFetchBodies
               _plView
               _plPageToken

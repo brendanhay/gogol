@@ -53,7 +53,7 @@ type LeaderboardsGetResource =
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --
 -- /See:/ 'leaderboardsGet' smart constructor.
-data LeaderboardsGet = LeaderboardsGet
+data LeaderboardsGet = LeaderboardsGet'
     { _lgLeaderboardId :: !Text
     , _lgLanguage      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ leaderboardsGet
     :: Text -- ^ 'lgLeaderboardId'
     -> LeaderboardsGet
 leaderboardsGet pLgLeaderboardId_ =
-    LeaderboardsGet
+    LeaderboardsGet'
     { _lgLeaderboardId = pLgLeaderboardId_
     , _lgLanguage = Nothing
     }
@@ -90,7 +90,7 @@ instance GoogleRequest LeaderboardsGet where
         type Scopes LeaderboardsGet =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient LeaderboardsGet{..}
+        requestClient LeaderboardsGet'{..}
           = go _lgLeaderboardId _lgLanguage (Just AltJSON)
               gamesService
           where go

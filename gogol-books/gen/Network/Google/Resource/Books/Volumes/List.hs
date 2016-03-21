@@ -79,7 +79,7 @@ type VolumesListResource =
 -- | Performs a book search.
 --
 -- /See:/ 'volumesList' smart constructor.
-data VolumesList = VolumesList
+data VolumesList = VolumesList'
     { _vlOrderBy         :: !(Maybe VolumesListOrderBy)
     , _vlLibraryRestrict :: !(Maybe VolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
@@ -128,7 +128,7 @@ volumesList
     :: Text -- ^ 'vlQ'
     -> VolumesList
 volumesList pVlQ_ =
-    VolumesList
+    VolumesList'
     { _vlOrderBy = Nothing
     , _vlLibraryRestrict = Nothing
     , _vlPartner = Nothing
@@ -215,7 +215,7 @@ instance GoogleRequest VolumesList where
         type Rs VolumesList = Volumes
         type Scopes VolumesList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesList{..}
+        requestClient VolumesList'{..}
           = go (Just _vlQ) _vlOrderBy _vlLibraryRestrict
               _vlPartner
               _vlDownload

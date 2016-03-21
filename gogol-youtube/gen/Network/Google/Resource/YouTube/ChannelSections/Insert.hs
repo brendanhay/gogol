@@ -58,7 +58,7 @@ type ChannelSectionsInsertResource =
 -- | Adds a channelSection for the authenticated user\'s channel.
 --
 -- /See:/ 'channelSectionsInsert' smart constructor.
-data ChannelSectionsInsert = ChannelSectionsInsert
+data ChannelSectionsInsert = ChannelSectionsInsert'
     { _csiPart                          :: !Text
     , _csiPayload                       :: !ChannelSection
     , _csiOnBehalfOfContentOwner        :: !(Maybe Text)
@@ -81,7 +81,7 @@ channelSectionsInsert
     -> ChannelSection -- ^ 'csiPayload'
     -> ChannelSectionsInsert
 channelSectionsInsert pCsiPart_ pCsiPayload_ =
-    ChannelSectionsInsert
+    ChannelSectionsInsert'
     { _csiPart = pCsiPart_
     , _csiPayload = pCsiPayload_
     , _csiOnBehalfOfContentOwner = Nothing
@@ -142,7 +142,7 @@ instance GoogleRequest ChannelSectionsInsert where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient ChannelSectionsInsert{..}
+        requestClient ChannelSectionsInsert'{..}
           = go (Just _csiPart) _csiOnBehalfOfContentOwner
               _csiOnBehalfOfContentOwnerChannel
               (Just AltJSON)

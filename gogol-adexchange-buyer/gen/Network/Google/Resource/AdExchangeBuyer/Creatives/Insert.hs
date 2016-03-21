@@ -51,7 +51,7 @@ type CreativesInsertResource =
 -- | Submit a new creative.
 --
 -- /See:/ 'creativesInsert' smart constructor.
-newtype CreativesInsert = CreativesInsert
+newtype CreativesInsert = CreativesInsert'
     { _ciPayload :: Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ creativesInsert
     :: Creative -- ^ 'ciPayload'
     -> CreativesInsert
 creativesInsert pCiPayload_ =
-    CreativesInsert
+    CreativesInsert'
     { _ciPayload = pCiPayload_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest CreativesInsert where
         type Rs CreativesInsert = Creative
         type Scopes CreativesInsert =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient CreativesInsert{..}
+        requestClient CreativesInsert'{..}
           = go (Just AltJSON) _ciPayload adExchangeBuyerService
           where go
                   = buildClient

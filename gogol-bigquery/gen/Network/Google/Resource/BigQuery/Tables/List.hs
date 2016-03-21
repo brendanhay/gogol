@@ -61,7 +61,7 @@ type TablesListResource =
 -- role.
 --
 -- /See:/ 'tablesList' smart constructor.
-data TablesList = TablesList
+data TablesList = TablesList'
     { _tlDataSetId  :: !Text
     , _tlPageToken  :: !(Maybe Text)
     , _tlProjectId  :: !Text
@@ -84,7 +84,7 @@ tablesList
     -> Text -- ^ 'tlProjectId'
     -> TablesList
 tablesList pTlDataSetId_ pTlProjectId_ =
-    TablesList
+    TablesList'
     { _tlDataSetId = pTlDataSetId_
     , _tlPageToken = Nothing
     , _tlProjectId = pTlProjectId_
@@ -119,7 +119,7 @@ instance GoogleRequest TablesList where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient TablesList{..}
+        requestClient TablesList'{..}
           = go _tlProjectId _tlDataSetId _tlPageToken
               _tlMaxResults
               (Just AltJSON)

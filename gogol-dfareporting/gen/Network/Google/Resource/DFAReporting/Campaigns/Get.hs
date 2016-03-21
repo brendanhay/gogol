@@ -54,7 +54,7 @@ type CampaignsGetResource =
 -- | Gets one campaign by ID.
 --
 -- /See:/ 'campaignsGet' smart constructor.
-data CampaignsGet = CampaignsGet
+data CampaignsGet = CampaignsGet'
     { _cggProFileId :: !(Textual Int64)
     , _cggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ campaignsGet
     -> Int64 -- ^ 'cggId'
     -> CampaignsGet
 campaignsGet pCggProFileId_ pCggId_ =
-    CampaignsGet
+    CampaignsGet'
     { _cggProFileId = _Coerce # pCggProFileId_
     , _cggId = _Coerce # pCggId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CampaignsGet where
         type Rs CampaignsGet = Campaign
         type Scopes CampaignsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignsGet{..}
+        requestClient CampaignsGet'{..}
           = go _cggProFileId _cggId (Just AltJSON)
               dFAReportingService
           where go

@@ -56,7 +56,7 @@ type UsersDraftsGetResource =
 -- | Gets the specified draft.
 --
 -- /See:/ 'usersDraftsGet' smart constructor.
-data UsersDraftsGet = UsersDraftsGet
+data UsersDraftsGet = UsersDraftsGet'
     { _udgFormat :: !UsersDraftsGetFormat
     , _udgUserId :: !Text
     , _udgId     :: !Text
@@ -75,7 +75,7 @@ usersDraftsGet
     :: Text -- ^ 'udgId'
     -> UsersDraftsGet
 usersDraftsGet pUdgId_ =
-    UsersDraftsGet
+    UsersDraftsGet'
     { _udgFormat = UDGFFull
     , _udgUserId = "me"
     , _udgId = pUdgId_
@@ -103,7 +103,7 @@ instance GoogleRequest UsersDraftsGet where
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersDraftsGet{..}
+        requestClient UsersDraftsGet'{..}
           = go _udgUserId _udgId (Just _udgFormat)
               (Just AltJSON)
               gmailService

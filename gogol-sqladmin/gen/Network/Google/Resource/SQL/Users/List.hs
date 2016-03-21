@@ -56,7 +56,7 @@ type UsersListResource =
 -- | Lists users in the specified Cloud SQL instance.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulProject  :: !Text
     , _ulInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ usersList
     -> Text -- ^ 'ulInstance'
     -> UsersList
 usersList pUlProject_ pUlInstance_ =
-    UsersList
+    UsersList'
     { _ulProject = pUlProject_
     , _ulInstance = pUlInstance_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest UsersList where
         type Scopes UsersList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient UsersList{..}
+        requestClient UsersList'{..}
           = go _ulProject _ulInstance (Just AltJSON)
               sQLAdminService
           where go

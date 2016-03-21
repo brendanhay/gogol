@@ -59,7 +59,7 @@ type PostsPublishResource =
 -- publishDate parameter.
 --
 -- /See:/ 'postsPublish' smart constructor.
-data PostsPublish = PostsPublish
+data PostsPublish = PostsPublish'
     { _pppPublishDate :: !(Maybe DateTime')
     , _pppBlogId      :: !Text
     , _pppPostId      :: !Text
@@ -79,7 +79,7 @@ postsPublish
     -> Text -- ^ 'pppPostId'
     -> PostsPublish
 postsPublish pPppBlogId_ pPppPostId_ =
-    PostsPublish
+    PostsPublish'
     { _pppPublishDate = Nothing
     , _pppBlogId = pPppBlogId_
     , _pppPostId = pPppPostId_
@@ -109,7 +109,7 @@ instance GoogleRequest PostsPublish where
         type Rs PostsPublish = Post'
         type Scopes PostsPublish =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PostsPublish{..}
+        requestClient PostsPublish'{..}
           = go _pppBlogId _pppPostId _pppPublishDate
               (Just AltJSON)
               bloggerService

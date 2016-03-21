@@ -55,7 +55,7 @@ type AccountsInsertResource =
 -- | Creates a Merchant Center sub-account.
 --
 -- /See:/ 'accountsInsert' smart constructor.
-data AccountsInsert = AccountsInsert
+data AccountsInsert = AccountsInsert'
     { _aMerchantId :: !(Textual Word64)
     , _aPayload    :: !Account
     , _aDryRun     :: !(Maybe Bool)
@@ -75,7 +75,7 @@ accountsInsert
     -> Account -- ^ 'aPayload'
     -> AccountsInsert
 accountsInsert pAMerchantId_ pAPayload_ =
-    AccountsInsert
+    AccountsInsert'
     { _aMerchantId = _Coerce # pAMerchantId_
     , _aPayload = pAPayload_
     , _aDryRun = Nothing
@@ -99,7 +99,7 @@ instance GoogleRequest AccountsInsert where
         type Rs AccountsInsert = Account
         type Scopes AccountsInsert =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountsInsert{..}
+        requestClient AccountsInsert'{..}
           = go _aMerchantId _aDryRun (Just AltJSON) _aPayload
               shoppingContentService
           where go

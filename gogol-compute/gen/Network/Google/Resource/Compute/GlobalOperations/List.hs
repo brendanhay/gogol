@@ -61,7 +61,7 @@ type GlobalOperationsListResource =
 -- project.
 --
 -- /See:/ 'globalOperationsList' smart constructor.
-data GlobalOperationsList = GlobalOperationsList
+data GlobalOperationsList = GlobalOperationsList'
     { _golProject    :: !Text
     , _golFilter     :: !(Maybe Text)
     , _golPageToken  :: !(Maybe Text)
@@ -83,7 +83,7 @@ globalOperationsList
     :: Text -- ^ 'golProject'
     -> GlobalOperationsList
 globalOperationsList pGolProject_ =
-    GlobalOperationsList
+    GlobalOperationsList'
     { _golProject = pGolProject_
     , _golFilter = Nothing
     , _golPageToken = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest GlobalOperationsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient GlobalOperationsList{..}
+        requestClient GlobalOperationsList'{..}
           = go _golProject _golFilter _golPageToken
               (Just _golMaxResults)
               (Just AltJSON)

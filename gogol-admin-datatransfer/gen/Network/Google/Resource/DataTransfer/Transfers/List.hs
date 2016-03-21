@@ -65,7 +65,7 @@ type TransfersListResource =
 -- status.
 --
 -- /See:/ 'transfersList' smart constructor.
-data TransfersList = TransfersList
+data TransfersList = TransfersList'
     { _tlStatus         :: !(Maybe Text)
     , _tlOldOwnerUserId :: !(Maybe Text)
     , _tlNewOwnerUserId :: !(Maybe Text)
@@ -92,7 +92,7 @@ data TransfersList = TransfersList
 transfersList
     :: TransfersList
 transfersList =
-    TransfersList
+    TransfersList'
     { _tlStatus = Nothing
     , _tlOldOwnerUserId = Nothing
     , _tlNewOwnerUserId = Nothing
@@ -138,7 +138,7 @@ instance GoogleRequest TransfersList where
         type Scopes TransfersList =
              '["https://www.googleapis.com/auth/admin.datatransfer",
                "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
-        requestClient TransfersList{..}
+        requestClient TransfersList'{..}
           = go _tlStatus _tlOldOwnerUserId _tlNewOwnerUserId
               _tlCustomerId
               _tlPageToken

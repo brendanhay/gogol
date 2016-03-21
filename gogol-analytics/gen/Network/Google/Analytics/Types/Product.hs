@@ -26,7 +26,7 @@ import           Network.Google.Prelude
 -- corresponds to a single Analytics unsampled report.
 --
 -- /See:/ 'unSampledReports' smart constructor.
-data UnSampledReports = UnSampledReports
+data UnSampledReports = UnSampledReports'
     { _usrNextLink     :: !(Maybe Text)
     , _usrItemsPerPage :: !(Maybe (Textual Int32))
     , _usrKind         :: !Text
@@ -59,7 +59,7 @@ data UnSampledReports = UnSampledReports
 unSampledReports
     :: UnSampledReports
 unSampledReports =
-    UnSampledReports
+    UnSampledReports'
     { _usrNextLink = Nothing
     , _usrItemsPerPage = Nothing
     , _usrKind = "analytics#unsampledReports"
@@ -127,7 +127,7 @@ instance FromJSON UnSampledReports where
         parseJSON
           = withObject "UnSampledReports"
               (\ o ->
-                 UnSampledReports <$>
+                 UnSampledReports' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#unsampledReports")
                      <*> (o .:? "username")
@@ -137,7 +137,7 @@ instance FromJSON UnSampledReports where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON UnSampledReports where
-        toJSON UnSampledReports{..}
+        toJSON UnSampledReports'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _usrNextLink,
@@ -151,7 +151,7 @@ instance ToJSON UnSampledReports where
 
 --
 -- /See:/ 'goalURLDestinationDetailsStepsItem' smart constructor.
-data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem
+data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem'
     { _guddsiURL    :: !(Maybe Text)
     , _guddsiName   :: !(Maybe Text)
     , _guddsiNumber :: !(Maybe (Textual Int32))
@@ -169,7 +169,7 @@ data GoalURLDestinationDetailsStepsItem = GoalURLDestinationDetailsStepsItem
 goalURLDestinationDetailsStepsItem
     :: GoalURLDestinationDetailsStepsItem
 goalURLDestinationDetailsStepsItem =
-    GoalURLDestinationDetailsStepsItem
+    GoalURLDestinationDetailsStepsItem'
     { _guddsiURL = Nothing
     , _guddsiName = Nothing
     , _guddsiNumber = Nothing
@@ -196,13 +196,13 @@ instance FromJSON GoalURLDestinationDetailsStepsItem
         parseJSON
           = withObject "GoalURLDestinationDetailsStepsItem"
               (\ o ->
-                 GoalURLDestinationDetailsStepsItem <$>
+                 GoalURLDestinationDetailsStepsItem' <$>
                    (o .:? "url") <*> (o .:? "name") <*>
                      (o .:? "number"))
 
 instance ToJSON GoalURLDestinationDetailsStepsItem
          where
-        toJSON GoalURLDestinationDetailsStepsItem{..}
+        toJSON GoalURLDestinationDetailsStepsItem'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _guddsiURL,
@@ -212,7 +212,7 @@ instance ToJSON GoalURLDestinationDetailsStepsItem
 -- | Analytics data request query parameters.
 --
 -- /See:/ 'gaDataQuery' smart constructor.
-data GaDataQuery = GaDataQuery
+data GaDataQuery = GaDataQuery'
     { _gdqMetrics       :: !(Maybe [Text])
     , _gdqSamplingLevel :: !(Maybe Text)
     , _gdqFilters       :: !(Maybe Text)
@@ -254,7 +254,7 @@ data GaDataQuery = GaDataQuery
 gaDataQuery
     :: GaDataQuery
 gaDataQuery =
-    GaDataQuery
+    GaDataQuery'
     { _gdqMetrics = Nothing
     , _gdqSamplingLevel = Nothing
     , _gdqFilters = Nothing
@@ -335,7 +335,7 @@ instance FromJSON GaDataQuery where
         parseJSON
           = withObject "GaDataQuery"
               (\ o ->
-                 GaDataQuery <$>
+                 GaDataQuery' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "samplingLevel")
                      <*> (o .:? "filters")
@@ -349,7 +349,7 @@ instance FromJSON GaDataQuery where
                      <*> (o .:? "start-date"))
 
 instance ToJSON GaDataQuery where
-        toJSON GaDataQuery{..}
+        toJSON GaDataQuery'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _gdqMetrics,
@@ -366,7 +366,7 @@ instance ToJSON GaDataQuery where
 
 --
 -- /See:/ 'gaDataDataTableRowsItem' smart constructor.
-newtype GaDataDataTableRowsItem = GaDataDataTableRowsItem
+newtype GaDataDataTableRowsItem = GaDataDataTableRowsItem'
     { _gddtriC :: Maybe [GaDataDataTableRowsItemCItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -378,7 +378,7 @@ newtype GaDataDataTableRowsItem = GaDataDataTableRowsItem
 gaDataDataTableRowsItem
     :: GaDataDataTableRowsItem
 gaDataDataTableRowsItem =
-    GaDataDataTableRowsItem
+    GaDataDataTableRowsItem'
     { _gddtriC = Nothing
     }
 
@@ -391,16 +391,16 @@ instance FromJSON GaDataDataTableRowsItem where
         parseJSON
           = withObject "GaDataDataTableRowsItem"
               (\ o ->
-                 GaDataDataTableRowsItem <$> (o .:? "c" .!= mempty))
+                 GaDataDataTableRowsItem' <$> (o .:? "c" .!= mempty))
 
 instance ToJSON GaDataDataTableRowsItem where
-        toJSON GaDataDataTableRowsItem{..}
+        toJSON GaDataDataTableRowsItem'{..}
           = object (catMaybes [("c" .=) <$> _gddtriC])
 
 -- | JSON template for Analytics unsampled report resource.
 --
 -- /See:/ 'unSampledReport' smart constructor.
-data UnSampledReport = UnSampledReport
+data UnSampledReport = UnSampledReport'
     { _uDownloadType                :: !(Maybe Text)
     , _uStatus                      :: !(Maybe Text)
     , _uMetrics                     :: !(Maybe Text)
@@ -466,7 +466,7 @@ data UnSampledReport = UnSampledReport
 unSampledReport
     :: UnSampledReport
 unSampledReport =
-    UnSampledReport
+    UnSampledReport'
     { _uDownloadType = Nothing
     , _uStatus = Nothing
     , _uMetrics = Nothing
@@ -587,7 +587,7 @@ instance FromJSON UnSampledReport where
         parseJSON
           = withObject "UnSampledReport"
               (\ o ->
-                 UnSampledReport <$>
+                 UnSampledReport' <$>
                    (o .:? "downloadType") <*> (o .:? "status") <*>
                      (o .:? "metrics")
                      <*> (o .:? "driveDownloadDetails")
@@ -608,7 +608,7 @@ instance FromJSON UnSampledReport where
                      <*> (o .:? "start-date"))
 
 instance ToJSON UnSampledReport where
-        toJSON UnSampledReport{..}
+        toJSON UnSampledReport'{..}
           = object
               (catMaybes
                  [("downloadType" .=) <$> _uDownloadType,
@@ -634,7 +634,7 @@ instance ToJSON UnSampledReport where
 
 --
 -- /See:/ 'mcfDataColumnHeadersItem' smart constructor.
-data McfDataColumnHeadersItem = McfDataColumnHeadersItem
+data McfDataColumnHeadersItem = McfDataColumnHeadersItem'
     { _mdchiColumnType :: !(Maybe Text)
     , _mdchiName       :: !(Maybe Text)
     , _mdchiDataType   :: !(Maybe Text)
@@ -652,7 +652,7 @@ data McfDataColumnHeadersItem = McfDataColumnHeadersItem
 mcfDataColumnHeadersItem
     :: McfDataColumnHeadersItem
 mcfDataColumnHeadersItem =
-    McfDataColumnHeadersItem
+    McfDataColumnHeadersItem'
     { _mdchiColumnType = Nothing
     , _mdchiName = Nothing
     , _mdchiDataType = Nothing
@@ -680,12 +680,12 @@ instance FromJSON McfDataColumnHeadersItem where
         parseJSON
           = withObject "McfDataColumnHeadersItem"
               (\ o ->
-                 McfDataColumnHeadersItem <$>
+                 McfDataColumnHeadersItem' <$>
                    (o .:? "columnType") <*> (o .:? "name") <*>
                      (o .:? "dataType"))
 
 instance ToJSON McfDataColumnHeadersItem where
-        toJSON McfDataColumnHeadersItem{..}
+        toJSON McfDataColumnHeadersItem'{..}
           = object
               (catMaybes
                  [("columnType" .=) <$> _mdchiColumnType,
@@ -697,7 +697,7 @@ instance ToJSON McfDataColumnHeadersItem where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'gaDataTotalsForAllResults' smart constructor.
-newtype GaDataTotalsForAllResults = GaDataTotalsForAllResults
+newtype GaDataTotalsForAllResults = GaDataTotalsForAllResults'
     { _gdtfarAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -710,7 +710,7 @@ gaDataTotalsForAllResults
     :: HashMap Text Text -- ^ 'gdtfarAddtional'
     -> GaDataTotalsForAllResults
 gaDataTotalsForAllResults pGdtfarAddtional_ =
-    GaDataTotalsForAllResults
+    GaDataTotalsForAllResults'
     { _gdtfarAddtional = _Coerce # pGdtfarAddtional_
     }
 
@@ -726,7 +726,7 @@ instance FromJSON GaDataTotalsForAllResults where
         parseJSON
           = withObject "GaDataTotalsForAllResults"
               (\ o ->
-                 GaDataTotalsForAllResults <$> (parseJSONObject o))
+                 GaDataTotalsForAllResults' <$> (parseJSONObject o))
 
 instance ToJSON GaDataTotalsForAllResults where
         toJSON = toJSON . _gdtfarAddtional
@@ -735,7 +735,7 @@ instance ToJSON GaDataTotalsForAllResults where
 -- this view (profile) belongs.
 --
 -- /See:/ 'proFileParentLink' smart constructor.
-data ProFileParentLink = ProFileParentLink
+data ProFileParentLink = ProFileParentLink'
     { _pfplHref :: !(Maybe Text)
     , _pfplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -750,7 +750,7 @@ data ProFileParentLink = ProFileParentLink
 proFileParentLink
     :: ProFileParentLink
 proFileParentLink =
-    ProFileParentLink
+    ProFileParentLink'
     { _pfplHref = Nothing
     , _pfplType = "analytics#webproperty"
     }
@@ -767,12 +767,12 @@ instance FromJSON ProFileParentLink where
         parseJSON
           = withObject "ProFileParentLink"
               (\ o ->
-                 ProFileParentLink <$>
+                 ProFileParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#webproperty"))
 
 instance ToJSON ProFileParentLink where
-        toJSON ProFileParentLink{..}
+        toJSON ProFileParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _pfplHref,
@@ -780,7 +780,7 @@ instance ToJSON ProFileParentLink where
 
 --
 -- /See:/ 'gaDataDataTableRowsItemCItem' smart constructor.
-newtype GaDataDataTableRowsItemCItem = GaDataDataTableRowsItemCItem
+newtype GaDataDataTableRowsItemCItem = GaDataDataTableRowsItemCItem'
     { _gddtriciV :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -792,7 +792,7 @@ newtype GaDataDataTableRowsItemCItem = GaDataDataTableRowsItemCItem
 gaDataDataTableRowsItemCItem
     :: GaDataDataTableRowsItemCItem
 gaDataDataTableRowsItemCItem =
-    GaDataDataTableRowsItemCItem
+    GaDataDataTableRowsItemCItem'
     { _gddtriciV = Nothing
     }
 
@@ -803,16 +803,17 @@ gddtriciV
 instance FromJSON GaDataDataTableRowsItemCItem where
         parseJSON
           = withObject "GaDataDataTableRowsItemCItem"
-              (\ o -> GaDataDataTableRowsItemCItem <$> (o .:? "v"))
+              (\ o ->
+                 GaDataDataTableRowsItemCItem' <$> (o .:? "v"))
 
 instance ToJSON GaDataDataTableRowsItemCItem where
-        toJSON GaDataDataTableRowsItemCItem{..}
+        toJSON GaDataDataTableRowsItemCItem'{..}
           = object (catMaybes [("v" .=) <$> _gddtriciV])
 
 -- | Permissions the user has for this entity.
 --
 -- /See:/ 'entityUserLinkPermissions' smart constructor.
-data EntityUserLinkPermissions = EntityUserLinkPermissions
+data EntityUserLinkPermissions = EntityUserLinkPermissions'
     { _eulpLocal     :: !(Maybe [Text])
     , _eulpEffective :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -827,7 +828,7 @@ data EntityUserLinkPermissions = EntityUserLinkPermissions
 entityUserLinkPermissions
     :: EntityUserLinkPermissions
 entityUserLinkPermissions =
-    EntityUserLinkPermissions
+    EntityUserLinkPermissions'
     { _eulpLocal = Nothing
     , _eulpEffective = Nothing
     }
@@ -856,12 +857,12 @@ instance FromJSON EntityUserLinkPermissions where
         parseJSON
           = withObject "EntityUserLinkPermissions"
               (\ o ->
-                 EntityUserLinkPermissions <$>
+                 EntityUserLinkPermissions' <$>
                    (o .:? "local" .!= mempty) <*>
                      (o .:? "effective" .!= mempty))
 
 instance ToJSON EntityUserLinkPermissions where
-        toJSON EntityUserLinkPermissions{..}
+        toJSON EntityUserLinkPermissions'{..}
           = object
               (catMaybes
                  [("local" .=) <$> _eulpLocal,
@@ -871,7 +872,7 @@ instance ToJSON EntityUserLinkPermissions where
 -- requested.
 --
 -- /See:/ 'realtimeDataProFileInfo' smart constructor.
-data RealtimeDataProFileInfo = RealtimeDataProFileInfo
+data RealtimeDataProFileInfo = RealtimeDataProFileInfo'
     { _rdpfiWebPropertyId         :: !(Maybe Text)
     , _rdpfiProFileId             :: !(Maybe Text)
     , _rdpfiProFileName           :: !(Maybe Text)
@@ -898,7 +899,7 @@ data RealtimeDataProFileInfo = RealtimeDataProFileInfo
 realtimeDataProFileInfo
     :: RealtimeDataProFileInfo
 realtimeDataProFileInfo =
-    RealtimeDataProFileInfo
+    RealtimeDataProFileInfo'
     { _rdpfiWebPropertyId = Nothing
     , _rdpfiProFileId = Nothing
     , _rdpfiProFileName = Nothing
@@ -946,7 +947,7 @@ instance FromJSON RealtimeDataProFileInfo where
         parseJSON
           = withObject "RealtimeDataProFileInfo"
               (\ o ->
-                 RealtimeDataProFileInfo <$>
+                 RealtimeDataProFileInfo' <$>
                    (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
                      (o .:? "profileName")
                      <*> (o .:? "accountId")
@@ -954,7 +955,7 @@ instance FromJSON RealtimeDataProFileInfo where
                      <*> (o .:? "tableId"))
 
 instance ToJSON RealtimeDataProFileInfo where
-        toJSON RealtimeDataProFileInfo{..}
+        toJSON RealtimeDataProFileInfo'{..}
           = object
               (catMaybes
                  [("webPropertyId" .=) <$> _rdpfiWebPropertyId,
@@ -967,7 +968,7 @@ instance ToJSON RealtimeDataProFileInfo where
 
 --
 -- /See:/ 'mcfDataRowsItemItemConversionPathValueItem' smart constructor.
-data McfDataRowsItemItemConversionPathValueItem = McfDataRowsItemItemConversionPathValueItem
+data McfDataRowsItemItemConversionPathValueItem = McfDataRowsItemItemConversionPathValueItem'
     { _mdriicpviInteractionType :: !(Maybe Text)
     , _mdriicpviNodeValue       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -982,7 +983,7 @@ data McfDataRowsItemItemConversionPathValueItem = McfDataRowsItemItemConversionP
 mcfDataRowsItemItemConversionPathValueItem
     :: McfDataRowsItemItemConversionPathValueItem
 mcfDataRowsItemItemConversionPathValueItem =
-    McfDataRowsItemItemConversionPathValueItem
+    McfDataRowsItemItemConversionPathValueItem'
     { _mdriicpviInteractionType = Nothing
     , _mdriicpviNodeValue = Nothing
     }
@@ -1007,12 +1008,13 @@ instance FromJSON
           = withObject
               "McfDataRowsItemItemConversionPathValueItem"
               (\ o ->
-                 McfDataRowsItemItemConversionPathValueItem <$>
+                 McfDataRowsItemItemConversionPathValueItem' <$>
                    (o .:? "interactionType") <*> (o .:? "nodeValue"))
 
 instance ToJSON
          McfDataRowsItemItemConversionPathValueItem where
-        toJSON McfDataRowsItemItemConversionPathValueItem{..}
+        toJSON
+          McfDataRowsItemItemConversionPathValueItem'{..}
           = object
               (catMaybes
                  [("interactionType" .=) <$>
@@ -1022,7 +1024,7 @@ instance ToJSON
 -- | JSON template for an Analytics filter expression.
 --
 -- /See:/ 'filterExpression' smart constructor.
-data FilterExpression = FilterExpression
+data FilterExpression = FilterExpression'
     { _feFieldIndex      :: !(Maybe (Textual Int32))
     , _feField           :: !(Maybe Text)
     , _feKind            :: !Text
@@ -1049,7 +1051,7 @@ data FilterExpression = FilterExpression
 filterExpression
     :: FilterExpression
 filterExpression =
-    FilterExpression
+    FilterExpression'
     { _feFieldIndex = Nothing
     , _feField = Nothing
     , _feKind = "analytics#filterExpression"
@@ -1125,7 +1127,7 @@ instance FromJSON FilterExpression where
         parseJSON
           = withObject "FilterExpression"
               (\ o ->
-                 FilterExpression <$>
+                 FilterExpression' <$>
                    (o .:? "fieldIndex") <*> (o .:? "field") <*>
                      (o .:? "kind" .!= "analytics#filterExpression")
                      <*> (o .:? "matchType")
@@ -1133,7 +1135,7 @@ instance FromJSON FilterExpression where
                      <*> (o .:? "expressionValue"))
 
 instance ToJSON FilterExpression where
-        toJSON FilterExpression{..}
+        toJSON FilterExpression'{..}
           = object
               (catMaybes
                  [("fieldIndex" .=) <$> _feFieldIndex,
@@ -1145,7 +1147,7 @@ instance ToJSON FilterExpression where
 -- | JSON template for a linked view (profile).
 --
 -- /See:/ 'proFileRef' smart constructor.
-data ProFileRef = ProFileRef
+data ProFileRef = ProFileRef'
     { _pfrWebPropertyId         :: !(Maybe Text)
     , _pfrKind                  :: !Text
     , _pfrHref                  :: !(Maybe Text)
@@ -1175,7 +1177,7 @@ data ProFileRef = ProFileRef
 proFileRef
     :: ProFileRef
 proFileRef =
-    ProFileRef
+    ProFileRef'
     { _pfrWebPropertyId = Nothing
     , _pfrKind = "analytics#profileRef"
     , _pfrHref = Nothing
@@ -1223,7 +1225,7 @@ instance FromJSON ProFileRef where
         parseJSON
           = withObject "ProFileRef"
               (\ o ->
-                 ProFileRef <$>
+                 ProFileRef' <$>
                    (o .:? "webPropertyId") <*>
                      (o .:? "kind" .!= "analytics#profileRef")
                      <*> (o .:? "href")
@@ -1233,7 +1235,7 @@ instance FromJSON ProFileRef where
                      <*> (o .:? "id"))
 
 instance ToJSON ProFileRef where
-        toJSON ProFileRef{..}
+        toJSON ProFileRef'{..}
           = object
               (catMaybes
                  [("webPropertyId" .=) <$> _pfrWebPropertyId,
@@ -1250,7 +1252,7 @@ instance ToJSON ProFileRef where
 -- single Analytics account.
 --
 -- /See:/ 'accounts' smart constructor.
-data Accounts = Accounts
+data Accounts = Accounts'
     { _aNextLink     :: !(Maybe Text)
     , _aItemsPerPage :: !(Maybe (Textual Int32))
     , _aKind         :: !Text
@@ -1283,7 +1285,7 @@ data Accounts = Accounts
 accounts
     :: Accounts
 accounts =
-    Accounts
+    Accounts'
     { _aNextLink = Nothing
     , _aItemsPerPage = Nothing
     , _aKind = "analytics#accounts"
@@ -1349,7 +1351,7 @@ instance FromJSON Accounts where
         parseJSON
           = withObject "Accounts"
               (\ o ->
-                 Accounts <$>
+                 Accounts' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#accounts")
                      <*> (o .:? "username")
@@ -1359,7 +1361,7 @@ instance FromJSON Accounts where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON Accounts where
-        toJSON Accounts{..}
+        toJSON Accounts'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _aNextLink,
@@ -1377,7 +1379,7 @@ instance ToJSON Accounts where
 -- experiment.
 --
 -- /See:/ 'experiments' smart constructor.
-data Experiments = Experiments
+data Experiments = Experiments'
     { _eNextLink     :: !(Maybe Text)
     , _eItemsPerPage :: !(Maybe (Textual Int32))
     , _eKind         :: !Text
@@ -1410,7 +1412,7 @@ data Experiments = Experiments
 experiments
     :: Experiments
 experiments =
-    Experiments
+    Experiments'
     { _eNextLink = Nothing
     , _eItemsPerPage = Nothing
     , _eKind = "analytics#experiments"
@@ -1476,7 +1478,7 @@ instance FromJSON Experiments where
         parseJSON
           = withObject "Experiments"
               (\ o ->
-                 Experiments <$>
+                 Experiments' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#experiments")
                      <*> (o .:? "username")
@@ -1486,7 +1488,7 @@ instance FromJSON Experiments where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON Experiments where
-        toJSON Experiments{..}
+        toJSON Experiments'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _eNextLink,
@@ -1502,7 +1504,7 @@ instance ToJSON Experiments where
 -- this experiment belongs.
 --
 -- /See:/ 'experimentParentLink' smart constructor.
-data ExperimentParentLink = ExperimentParentLink
+data ExperimentParentLink = ExperimentParentLink'
     { _eplHref :: !(Maybe Text)
     , _eplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1517,7 +1519,7 @@ data ExperimentParentLink = ExperimentParentLink
 experimentParentLink
     :: ExperimentParentLink
 experimentParentLink =
-    ExperimentParentLink
+    ExperimentParentLink'
     { _eplHref = Nothing
     , _eplType = "analytics#profile"
     }
@@ -1535,12 +1537,12 @@ instance FromJSON ExperimentParentLink where
         parseJSON
           = withObject "ExperimentParentLink"
               (\ o ->
-                 ExperimentParentLink <$>
+                 ExperimentParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#profile"))
 
 instance ToJSON ExperimentParentLink where
-        toJSON ExperimentParentLink{..}
+        toJSON ExperimentParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _eplHref,
@@ -1549,7 +1551,7 @@ instance ToJSON ExperimentParentLink where
 -- | Download details for a file stored in Google Drive.
 --
 -- /See:/ 'unSampledReportDriveDownloadDetails' smart constructor.
-newtype UnSampledReportDriveDownloadDetails = UnSampledReportDriveDownloadDetails
+newtype UnSampledReportDriveDownloadDetails = UnSampledReportDriveDownloadDetails'
     { _usrdddDocumentId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1561,7 +1563,7 @@ newtype UnSampledReportDriveDownloadDetails = UnSampledReportDriveDownloadDetail
 unSampledReportDriveDownloadDetails
     :: UnSampledReportDriveDownloadDetails
 unSampledReportDriveDownloadDetails =
-    UnSampledReportDriveDownloadDetails
+    UnSampledReportDriveDownloadDetails'
     { _usrdddDocumentId = Nothing
     }
 
@@ -1576,12 +1578,12 @@ instance FromJSON UnSampledReportDriveDownloadDetails
         parseJSON
           = withObject "UnSampledReportDriveDownloadDetails"
               (\ o ->
-                 UnSampledReportDriveDownloadDetails <$>
+                 UnSampledReportDriveDownloadDetails' <$>
                    (o .:? "documentId"))
 
 instance ToJSON UnSampledReportDriveDownloadDetails
          where
-        toJSON UnSampledReportDriveDownloadDetails{..}
+        toJSON UnSampledReportDriveDownloadDetails'{..}
           = object
               (catMaybes [("documentId" .=) <$> _usrdddDocumentId])
 
@@ -1589,7 +1591,7 @@ instance ToJSON UnSampledReportDriveDownloadDetails
 -- requested.
 --
 -- /See:/ 'mcfDataProFileInfo' smart constructor.
-data McfDataProFileInfo = McfDataProFileInfo
+data McfDataProFileInfo = McfDataProFileInfo'
     { _mdpfiWebPropertyId         :: !(Maybe Text)
     , _mdpfiProFileId             :: !(Maybe Text)
     , _mdpfiProFileName           :: !(Maybe Text)
@@ -1616,7 +1618,7 @@ data McfDataProFileInfo = McfDataProFileInfo
 mcfDataProFileInfo
     :: McfDataProFileInfo
 mcfDataProFileInfo =
-    McfDataProFileInfo
+    McfDataProFileInfo'
     { _mdpfiWebPropertyId = Nothing
     , _mdpfiProFileId = Nothing
     , _mdpfiProFileName = Nothing
@@ -1664,7 +1666,7 @@ instance FromJSON McfDataProFileInfo where
         parseJSON
           = withObject "McfDataProFileInfo"
               (\ o ->
-                 McfDataProFileInfo <$>
+                 McfDataProFileInfo' <$>
                    (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
                      (o .:? "profileName")
                      <*> (o .:? "accountId")
@@ -1672,7 +1674,7 @@ instance FromJSON McfDataProFileInfo where
                      <*> (o .:? "tableId"))
 
 instance ToJSON McfDataProFileInfo where
-        toJSON McfDataProFileInfo{..}
+        toJSON McfDataProFileInfo'{..}
           = object
               (catMaybes
                  [("webPropertyId" .=) <$> _mdpfiWebPropertyId,
@@ -1688,7 +1690,7 @@ instance ToJSON McfDataProFileInfo where
 -- source.
 --
 -- /See:/ 'customDataSources' smart constructor.
-data CustomDataSources = CustomDataSources
+data CustomDataSources = CustomDataSources'
     { _cdsNextLink     :: !(Maybe Text)
     , _cdsItemsPerPage :: !(Maybe (Textual Int32))
     , _cdsKind         :: !Text
@@ -1721,7 +1723,7 @@ data CustomDataSources = CustomDataSources
 customDataSources
     :: CustomDataSources
 customDataSources =
-    CustomDataSources
+    CustomDataSources'
     { _cdsNextLink = Nothing
     , _cdsItemsPerPage = Nothing
     , _cdsKind = "analytics#customDataSources"
@@ -1789,7 +1791,7 @@ instance FromJSON CustomDataSources where
         parseJSON
           = withObject "CustomDataSources"
               (\ o ->
-                 CustomDataSources <$>
+                 CustomDataSources' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#customDataSources")
                      <*> (o .:? "username")
@@ -1799,7 +1801,7 @@ instance FromJSON CustomDataSources where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON CustomDataSources where
-        toJSON CustomDataSources{..}
+        toJSON CustomDataSources'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _cdsNextLink,
@@ -1815,7 +1817,7 @@ instance ToJSON CustomDataSources where
 -- for this web property.
 --
 -- /See:/ 'webPropertyChildLink' smart constructor.
-data WebPropertyChildLink = WebPropertyChildLink
+data WebPropertyChildLink = WebPropertyChildLink'
     { _wpclHref :: !(Maybe Text)
     , _wpclType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1830,7 +1832,7 @@ data WebPropertyChildLink = WebPropertyChildLink
 webPropertyChildLink
     :: WebPropertyChildLink
 webPropertyChildLink =
-    WebPropertyChildLink
+    WebPropertyChildLink'
     { _wpclHref = Nothing
     , _wpclType = "analytics#profiles"
     }
@@ -1847,12 +1849,12 @@ instance FromJSON WebPropertyChildLink where
         parseJSON
           = withObject "WebPropertyChildLink"
               (\ o ->
-                 WebPropertyChildLink <$>
+                 WebPropertyChildLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#profiles"))
 
 instance ToJSON WebPropertyChildLink where
-        toJSON WebPropertyChildLink{..}
+        toJSON WebPropertyChildLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _wpclHref,
@@ -1861,7 +1863,7 @@ instance ToJSON WebPropertyChildLink where
 -- | Multi-Channel Funnels data for a given view (profile).
 --
 -- /See:/ 'mcfData' smart constructor.
-data McfData = McfData
+data McfData = McfData'
     { _mdNextLink            :: !(Maybe Text)
     , _mdSampleSpace         :: !(Maybe (Textual Int64))
     , _mdItemsPerPage        :: !(Maybe (Textual Int32))
@@ -1915,7 +1917,7 @@ data McfData = McfData
 mcfData
     :: McfData
 mcfData =
-    McfData
+    McfData'
     { _mdNextLink = Nothing
     , _mdSampleSpace = Nothing
     , _mdItemsPerPage = Nothing
@@ -2034,7 +2036,7 @@ instance FromJSON McfData where
         parseJSON
           = withObject "McfData"
               (\ o ->
-                 McfData <$>
+                 McfData' <$>
                    (o .:? "nextLink") <*> (o .:? "sampleSpace") <*>
                      (o .:? "itemsPerPage")
                      <*> (o .:? "profileInfo")
@@ -2051,7 +2053,7 @@ instance FromJSON McfData where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON McfData where
-        toJSON McfData{..}
+        toJSON McfData'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _mdNextLink,
@@ -2075,7 +2077,7 @@ instance ToJSON McfData where
 -- | JSON template for a user reference.
 --
 -- /See:/ 'userRef' smart constructor.
-data UserRef = UserRef
+data UserRef = UserRef'
     { _urEmail :: !(Maybe Text)
     , _urKind  :: !Text
     , _urId    :: !(Maybe Text)
@@ -2093,7 +2095,7 @@ data UserRef = UserRef
 userRef
     :: UserRef
 userRef =
-    UserRef
+    UserRef'
     { _urEmail = Nothing
     , _urKind = "analytics#userRef"
     , _urId = Nothing
@@ -2114,13 +2116,13 @@ instance FromJSON UserRef where
         parseJSON
           = withObject "UserRef"
               (\ o ->
-                 UserRef <$>
+                 UserRef' <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!= "analytics#userRef")
                      <*> (o .:? "id"))
 
 instance ToJSON UserRef where
-        toJSON UserRef{..}
+        toJSON UserRef'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _urEmail, Just ("kind" .= _urKind),
@@ -2129,7 +2131,7 @@ instance ToJSON UserRef where
 -- | Details for the goal of the type VISIT_NUM_PAGES.
 --
 -- /See:/ 'goalVisitNumPagesDetails' smart constructor.
-data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails
+data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails'
     { _gvnpdComparisonValue :: !(Maybe (Textual Int64))
     , _gvnpdComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2144,7 +2146,7 @@ data GoalVisitNumPagesDetails = GoalVisitNumPagesDetails
 goalVisitNumPagesDetails
     :: GoalVisitNumPagesDetails
 goalVisitNumPagesDetails =
-    GoalVisitNumPagesDetails
+    GoalVisitNumPagesDetails'
     { _gvnpdComparisonValue = Nothing
     , _gvnpdComparisonType = Nothing
     }
@@ -2167,12 +2169,12 @@ instance FromJSON GoalVisitNumPagesDetails where
         parseJSON
           = withObject "GoalVisitNumPagesDetails"
               (\ o ->
-                 GoalVisitNumPagesDetails <$>
+                 GoalVisitNumPagesDetails' <$>
                    (o .:? "comparisonValue") <*>
                      (o .:? "comparisonType"))
 
 instance ToJSON GoalVisitNumPagesDetails where
-        toJSON GoalVisitNumPagesDetails{..}
+        toJSON GoalVisitNumPagesDetails'{..}
           = object
               (catMaybes
                  [("comparisonValue" .=) <$> _gvnpdComparisonValue,
@@ -2180,7 +2182,7 @@ instance ToJSON GoalVisitNumPagesDetails where
 
 --
 -- /See:/ 'realtimeDataColumnHeadersItem' smart constructor.
-data RealtimeDataColumnHeadersItem = RealtimeDataColumnHeadersItem
+data RealtimeDataColumnHeadersItem = RealtimeDataColumnHeadersItem'
     { _rdchiColumnType :: !(Maybe Text)
     , _rdchiName       :: !(Maybe Text)
     , _rdchiDataType   :: !(Maybe Text)
@@ -2198,7 +2200,7 @@ data RealtimeDataColumnHeadersItem = RealtimeDataColumnHeadersItem
 realtimeDataColumnHeadersItem
     :: RealtimeDataColumnHeadersItem
 realtimeDataColumnHeadersItem =
-    RealtimeDataColumnHeadersItem
+    RealtimeDataColumnHeadersItem'
     { _rdchiColumnType = Nothing
     , _rdchiName = Nothing
     , _rdchiDataType = Nothing
@@ -2227,12 +2229,12 @@ instance FromJSON RealtimeDataColumnHeadersItem where
         parseJSON
           = withObject "RealtimeDataColumnHeadersItem"
               (\ o ->
-                 RealtimeDataColumnHeadersItem <$>
+                 RealtimeDataColumnHeadersItem' <$>
                    (o .:? "columnType") <*> (o .:? "name") <*>
                      (o .:? "dataType"))
 
 instance ToJSON RealtimeDataColumnHeadersItem where
-        toJSON RealtimeDataColumnHeadersItem{..}
+        toJSON RealtimeDataColumnHeadersItem'{..}
           = object
               (catMaybes
                  [("columnType" .=) <$> _rdchiColumnType,
@@ -2242,7 +2244,7 @@ instance ToJSON RealtimeDataColumnHeadersItem where
 -- | JSON template for a linked account.
 --
 -- /See:/ 'accountRef' smart constructor.
-data AccountRef = AccountRef
+data AccountRef = AccountRef'
     { _arKind :: !Text
     , _arHref :: !(Maybe Text)
     , _arName :: !(Maybe Text)
@@ -2263,7 +2265,7 @@ data AccountRef = AccountRef
 accountRef
     :: AccountRef
 accountRef =
-    AccountRef
+    AccountRef'
     { _arKind = "analytics#accountRef"
     , _arHref = Nothing
     , _arName = Nothing
@@ -2290,14 +2292,14 @@ instance FromJSON AccountRef where
         parseJSON
           = withObject "AccountRef"
               (\ o ->
-                 AccountRef <$>
+                 AccountRef' <$>
                    (o .:? "kind" .!= "analytics#accountRef") <*>
                      (o .:? "href")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON AccountRef where
-        toJSON AccountRef{..}
+        toJSON AccountRef'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _arKind), ("href" .=) <$> _arHref,
@@ -2307,7 +2309,7 @@ instance ToJSON AccountRef where
 -- Each resource in this collection corresponds to a single link.
 --
 -- /See:/ 'entityAdWordsLinks' smart constructor.
-data EntityAdWordsLinks = EntityAdWordsLinks
+data EntityAdWordsLinks = EntityAdWordsLinks'
     { _eawlNextLink     :: !(Maybe Text)
     , _eawlItemsPerPage :: !(Maybe (Textual Int32))
     , _eawlKind         :: !Text
@@ -2337,7 +2339,7 @@ data EntityAdWordsLinks = EntityAdWordsLinks
 entityAdWordsLinks
     :: EntityAdWordsLinks
 entityAdWordsLinks =
-    EntityAdWordsLinks
+    EntityAdWordsLinks'
     { _eawlNextLink = Nothing
     , _eawlItemsPerPage = Nothing
     , _eawlKind = "analytics#entityAdWordsLinks"
@@ -2399,7 +2401,7 @@ instance FromJSON EntityAdWordsLinks where
         parseJSON
           = withObject "EntityAdWordsLinks"
               (\ o ->
-                 EntityAdWordsLinks <$>
+                 EntityAdWordsLinks' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#entityAdWordsLinks")
                      <*> (o .:? "items" .!= mempty)
@@ -2408,7 +2410,7 @@ instance FromJSON EntityAdWordsLinks where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON EntityAdWordsLinks where
-        toJSON EntityAdWordsLinks{..}
+        toJSON EntityAdWordsLinks'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _eawlNextLink,
@@ -2424,7 +2426,7 @@ instance ToJSON EntityAdWordsLinks where
 -- single Analytics view (profile).
 --
 -- /See:/ 'proFiles' smart constructor.
-data ProFiles = ProFiles
+data ProFiles = ProFiles'
     { _pfNextLink     :: !(Maybe Text)
     , _pfItemsPerPage :: !(Maybe (Textual Int32))
     , _pfKind         :: !Text
@@ -2457,7 +2459,7 @@ data ProFiles = ProFiles
 proFiles
     :: ProFiles
 proFiles =
-    ProFiles
+    ProFiles'
     { _pfNextLink = Nothing
     , _pfItemsPerPage = Nothing
     , _pfKind = "analytics#profiles"
@@ -2523,7 +2525,7 @@ instance FromJSON ProFiles where
         parseJSON
           = withObject "ProFiles"
               (\ o ->
-                 ProFiles <$>
+                 ProFiles' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#profiles")
                      <*> (o .:? "username")
@@ -2533,7 +2535,7 @@ instance FromJSON ProFiles where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON ProFiles where
-        toJSON ProFiles{..}
+        toJSON ProFiles'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _pfNextLink,
@@ -2548,7 +2550,7 @@ instance ToJSON ProFiles where
 -- | Request template for the delete upload data request.
 --
 -- /See:/ 'analyticsDataimportDeleteUploadDataRequest' smart constructor.
-newtype AnalyticsDataimportDeleteUploadDataRequest = AnalyticsDataimportDeleteUploadDataRequest
+newtype AnalyticsDataimportDeleteUploadDataRequest = AnalyticsDataimportDeleteUploadDataRequest'
     { _addudrCustomDataImportUids :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2560,7 +2562,7 @@ newtype AnalyticsDataimportDeleteUploadDataRequest = AnalyticsDataimportDeleteUp
 analyticsDataimportDeleteUploadDataRequest
     :: AnalyticsDataimportDeleteUploadDataRequest
 analyticsDataimportDeleteUploadDataRequest =
-    AnalyticsDataimportDeleteUploadDataRequest
+    AnalyticsDataimportDeleteUploadDataRequest'
     { _addudrCustomDataImportUids = Nothing
     }
 
@@ -2578,12 +2580,13 @@ instance FromJSON
           = withObject
               "AnalyticsDataimportDeleteUploadDataRequest"
               (\ o ->
-                 AnalyticsDataimportDeleteUploadDataRequest <$>
+                 AnalyticsDataimportDeleteUploadDataRequest' <$>
                    (o .:? "customDataImportUids" .!= mempty))
 
 instance ToJSON
          AnalyticsDataimportDeleteUploadDataRequest where
-        toJSON AnalyticsDataimportDeleteUploadDataRequest{..}
+        toJSON
+          AnalyticsDataimportDeleteUploadDataRequest'{..}
           = object
               (catMaybes
                  [("customDataImportUids" .=) <$>
@@ -2592,7 +2595,7 @@ instance ToJSON
 -- | JSON template for Analytics Entity AdWords Link.
 --
 -- /See:/ 'entityAdWordsLink' smart constructor.
-data EntityAdWordsLink = EntityAdWordsLink
+data EntityAdWordsLink = EntityAdWordsLink'
     { _entAdWordsAccounts :: !(Maybe [AdWordsAccount])
     , _entProFileIds      :: !(Maybe [Text])
     , _entKind            :: !Text
@@ -2622,7 +2625,7 @@ data EntityAdWordsLink = EntityAdWordsLink
 entityAdWordsLink
     :: EntityAdWordsLink
 entityAdWordsLink =
-    EntityAdWordsLink
+    EntityAdWordsLink'
     { _entAdWordsAccounts = Nothing
     , _entProFileIds = Nothing
     , _entKind = "analytics#entityAdWordsLink"
@@ -2675,7 +2678,7 @@ instance FromJSON EntityAdWordsLink where
         parseJSON
           = withObject "EntityAdWordsLink"
               (\ o ->
-                 EntityAdWordsLink <$>
+                 EntityAdWordsLink' <$>
                    (o .:? "adWordsAccounts" .!= mempty) <*>
                      (o .:? "profileIds" .!= mempty)
                      <*> (o .:? "kind" .!= "analytics#entityAdWordsLink")
@@ -2685,7 +2688,7 @@ instance FromJSON EntityAdWordsLink where
                      <*> (o .:? "entity"))
 
 instance ToJSON EntityAdWordsLink where
-        toJSON EntityAdWordsLink{..}
+        toJSON EntityAdWordsLink'{..}
           = object
               (catMaybes
                  [("adWordsAccounts" .=) <$> _entAdWordsAccounts,
@@ -2698,7 +2701,7 @@ instance ToJSON EntityAdWordsLink where
 -- | Details for the filter of the type SEARCH_AND_REPLACE.
 --
 -- /See:/ 'filterSearchAndReplaceDetails' smart constructor.
-data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails
+data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails'
     { _fsardFieldIndex    :: !(Maybe (Textual Int32))
     , _fsardField         :: !(Maybe Text)
     , _fsardSearchString  :: !(Maybe Text)
@@ -2722,7 +2725,7 @@ data FilterSearchAndReplaceDetails = FilterSearchAndReplaceDetails
 filterSearchAndReplaceDetails
     :: FilterSearchAndReplaceDetails
 filterSearchAndReplaceDetails =
-    FilterSearchAndReplaceDetails
+    FilterSearchAndReplaceDetails'
     { _fsardFieldIndex = Nothing
     , _fsardField = Nothing
     , _fsardSearchString = Nothing
@@ -2765,14 +2768,14 @@ instance FromJSON FilterSearchAndReplaceDetails where
         parseJSON
           = withObject "FilterSearchAndReplaceDetails"
               (\ o ->
-                 FilterSearchAndReplaceDetails <$>
+                 FilterSearchAndReplaceDetails' <$>
                    (o .:? "fieldIndex") <*> (o .:? "field") <*>
                      (o .:? "searchString")
                      <*> (o .:? "replaceString")
                      <*> (o .:? "caseSensitive"))
 
 instance ToJSON FilterSearchAndReplaceDetails where
-        toJSON FilterSearchAndReplaceDetails{..}
+        toJSON FilterSearchAndReplaceDetails'{..}
           = object
               (catMaybes
                  [("fieldIndex" .=) <$> _fsardFieldIndex,
@@ -2784,7 +2787,7 @@ instance ToJSON FilterSearchAndReplaceDetails where
 -- | Permissions the user has for this view (profile).
 --
 -- /See:/ 'proFilePermissions' smart constructor.
-newtype ProFilePermissions = ProFilePermissions
+newtype ProFilePermissions = ProFilePermissions'
     { _pfpEffective :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2796,7 +2799,7 @@ newtype ProFilePermissions = ProFilePermissions
 proFilePermissions
     :: ProFilePermissions
 proFilePermissions =
-    ProFilePermissions
+    ProFilePermissions'
     { _pfpEffective = Nothing
     }
 
@@ -2813,18 +2816,18 @@ instance FromJSON ProFilePermissions where
         parseJSON
           = withObject "ProFilePermissions"
               (\ o ->
-                 ProFilePermissions <$>
+                 ProFilePermissions' <$>
                    (o .:? "effective" .!= mempty))
 
 instance ToJSON ProFilePermissions where
-        toJSON ProFilePermissions{..}
+        toJSON ProFilePermissions'{..}
           = object
               (catMaybes [("effective" .=) <$> _pfpEffective])
 
 -- | JSON template for an Analytics view (profile).
 --
 -- /See:/ 'proFile' smart constructor.
-data ProFile = ProFile
+data ProFile = ProFile'
     { _pParentLink                        :: !(Maybe ProFileParentLink)
     , _pECommerceTracking                 :: !(Maybe Bool)
     , _pSiteSearchCategoryParameters      :: !(Maybe Text)
@@ -2911,7 +2914,7 @@ data ProFile = ProFile
 proFile
     :: ProFile
 proFile =
-    ProFile
+    ProFile'
     { _pParentLink = Nothing
     , _pECommerceTracking = Nothing
     , _pSiteSearchCategoryParameters = Nothing
@@ -3092,7 +3095,7 @@ instance FromJSON ProFile where
         parseJSON
           = withObject "ProFile"
               (\ o ->
-                 ProFile <$>
+                 ProFile' <$>
                    (o .:? "parentLink") <*> (o .:? "eCommerceTracking")
                      <*> (o .:? "siteSearchCategoryParameters")
                      <*> (o .:? "webPropertyId")
@@ -3120,7 +3123,7 @@ instance FromJSON ProFile where
                      <*> (o .:? "stripSiteSearchQueryParameters"))
 
 instance ToJSON ProFile where
-        toJSON ProFile{..}
+        toJSON ProFile'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _pParentLink,
@@ -3161,7 +3164,7 @@ instance ToJSON ProFile where
 -- collection corresponds to a single AccountSummary.
 --
 -- /See:/ 'accountSummaries' smart constructor.
-data AccountSummaries = AccountSummaries
+data AccountSummaries = AccountSummaries'
     { _asNextLink     :: !(Maybe Text)
     , _asItemsPerPage :: !(Maybe (Textual Int32))
     , _asKind         :: !Text
@@ -3194,7 +3197,7 @@ data AccountSummaries = AccountSummaries
 accountSummaries
     :: AccountSummaries
 accountSummaries =
-    AccountSummaries
+    AccountSummaries'
     { _asNextLink = Nothing
     , _asItemsPerPage = Nothing
     , _asKind = "analytics#accountSummaries"
@@ -3260,7 +3263,7 @@ instance FromJSON AccountSummaries where
         parseJSON
           = withObject "AccountSummaries"
               (\ o ->
-                 AccountSummaries <$>
+                 AccountSummaries' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#accountSummaries")
                      <*> (o .:? "username")
@@ -3270,7 +3273,7 @@ instance FromJSON AccountSummaries where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON AccountSummaries where
-        toJSON AccountSummaries{..}
+        toJSON AccountSummaries'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _asNextLink,
@@ -3285,7 +3288,7 @@ instance ToJSON AccountSummaries where
 -- | Details for the goal of the type EVENT.
 --
 -- /See:/ 'goalEventDetails' smart constructor.
-data GoalEventDetails = GoalEventDetails
+data GoalEventDetails = GoalEventDetails'
     { _gedUseEventValue   :: !(Maybe Bool)
     , _gedEventConditions :: !(Maybe [GoalEventDetailsEventConditionsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3300,7 +3303,7 @@ data GoalEventDetails = GoalEventDetails
 goalEventDetails
     :: GoalEventDetails
 goalEventDetails =
-    GoalEventDetails
+    GoalEventDetails'
     { _gedUseEventValue = Nothing
     , _gedEventConditions = Nothing
     }
@@ -3323,12 +3326,12 @@ instance FromJSON GoalEventDetails where
         parseJSON
           = withObject "GoalEventDetails"
               (\ o ->
-                 GoalEventDetails <$>
+                 GoalEventDetails' <$>
                    (o .:? "useEventValue") <*>
                      (o .:? "eventConditions" .!= mempty))
 
 instance ToJSON GoalEventDetails where
-        toJSON GoalEventDetails{..}
+        toJSON GoalEventDetails'{..}
           = object
               (catMaybes
                  [("useEventValue" .=) <$> _gedUseEventValue,
@@ -3338,7 +3341,7 @@ instance ToJSON GoalEventDetails where
 -- returns basic information (i.e., summary) for a web property.
 --
 -- /See:/ 'webPropertySummary' smart constructor.
-data WebPropertySummary = WebPropertySummary
+data WebPropertySummary = WebPropertySummary'
     { _wpsKind                  :: !Text
     , _wpsProFiles              :: !(Maybe [ProFileSummary])
     , _wpsName                  :: !(Maybe Text)
@@ -3371,7 +3374,7 @@ data WebPropertySummary = WebPropertySummary
 webPropertySummary
     :: WebPropertySummary
 webPropertySummary =
-    WebPropertySummary
+    WebPropertySummary'
     { _wpsKind = "analytics#webPropertySummary"
     , _wpsProFiles = Nothing
     , _wpsName = Nothing
@@ -3426,7 +3429,7 @@ instance FromJSON WebPropertySummary where
         parseJSON
           = withObject "WebPropertySummary"
               (\ o ->
-                 WebPropertySummary <$>
+                 WebPropertySummary' <$>
                    (o .:? "kind" .!= "analytics#webPropertySummary") <*>
                      (o .:? "profiles" .!= mempty)
                      <*> (o .:? "name")
@@ -3437,7 +3440,7 @@ instance FromJSON WebPropertySummary where
                      <*> (o .:? "level"))
 
 instance ToJSON WebPropertySummary where
-        toJSON WebPropertySummary{..}
+        toJSON WebPropertySummary'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _wpsKind),
@@ -3454,7 +3457,7 @@ instance ToJSON WebPropertySummary where
 -- account. Each resource in the collection corresponds to a filter.
 --
 -- /See:/ 'filters' smart constructor.
-data Filters = Filters
+data Filters = Filters'
     { _fNextLink     :: !(Maybe Text)
     , _fItemsPerPage :: !(Maybe (Textual Int32))
     , _fKind         :: !Text
@@ -3487,7 +3490,7 @@ data Filters = Filters
 filters
     :: Filters
 filters =
-    Filters
+    Filters'
     { _fNextLink = Nothing
     , _fItemsPerPage = Nothing
     , _fKind = "analytics#filters"
@@ -3553,7 +3556,7 @@ instance FromJSON Filters where
         parseJSON
           = withObject "Filters"
               (\ o ->
-                 Filters <$>
+                 Filters' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#filters")
                      <*> (o .:? "username")
@@ -3563,7 +3566,7 @@ instance FromJSON Filters where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON Filters where
-        toJSON Filters{..}
+        toJSON Filters'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _fNextLink,
@@ -3578,7 +3581,7 @@ instance ToJSON Filters where
 -- | Analytics data for a given view (profile).
 --
 -- /See:/ 'gaData' smart constructor.
-data GaData = GaData
+data GaData = GaData'
     { _gdNextLink            :: !(Maybe Text)
     , _gdSampleSpace         :: !(Maybe (Textual Int64))
     , _gdItemsPerPage        :: !(Maybe (Textual Int32))
@@ -3635,7 +3638,7 @@ data GaData = GaData
 gaData
     :: GaData
 gaData =
-    GaData
+    GaData'
     { _gdNextLink = Nothing
     , _gdSampleSpace = Nothing
     , _gdItemsPerPage = Nothing
@@ -3759,7 +3762,7 @@ instance FromJSON GaData where
         parseJSON
           = withObject "GaData"
               (\ o ->
-                 GaData <$>
+                 GaData' <$>
                    (o .:? "nextLink") <*> (o .:? "sampleSpace") <*>
                      (o .:? "itemsPerPage")
                      <*> (o .:? "profileInfo")
@@ -3777,7 +3780,7 @@ instance FromJSON GaData where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON GaData where
-        toJSON GaData{..}
+        toJSON GaData'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _gdNextLink,
@@ -3804,7 +3807,7 @@ instance ToJSON GaData where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'realtimeDataTotalsForAllResults' smart constructor.
-newtype RealtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults
+newtype RealtimeDataTotalsForAllResults = RealtimeDataTotalsForAllResults'
     { _rdtfarAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3817,7 +3820,7 @@ realtimeDataTotalsForAllResults
     :: HashMap Text Text -- ^ 'rdtfarAddtional'
     -> RealtimeDataTotalsForAllResults
 realtimeDataTotalsForAllResults pRdtfarAddtional_ =
-    RealtimeDataTotalsForAllResults
+    RealtimeDataTotalsForAllResults'
     { _rdtfarAddtional = _Coerce # pRdtfarAddtional_
     }
 
@@ -3834,7 +3837,7 @@ instance FromJSON RealtimeDataTotalsForAllResults
         parseJSON
           = withObject "RealtimeDataTotalsForAllResults"
               (\ o ->
-                 RealtimeDataTotalsForAllResults <$>
+                 RealtimeDataTotalsForAllResults' <$>
                    (parseJSONObject o))
 
 instance ToJSON RealtimeDataTotalsForAllResults where
@@ -3843,7 +3846,7 @@ instance ToJSON RealtimeDataTotalsForAllResults where
 -- | JSON template for an Analytics custom data source.
 --
 -- /See:/ 'customDataSource' smart constructor.
-data CustomDataSource = CustomDataSource
+data CustomDataSource = CustomDataSource'
     { _cParentLink     :: !(Maybe CustomDataSourceParentLink)
     , _cWebPropertyId  :: !(Maybe Text)
     , _cChildLink      :: !(Maybe CustomDataSourceChildLink)
@@ -3897,7 +3900,7 @@ data CustomDataSource = CustomDataSource
 customDataSource
     :: CustomDataSource
 customDataSource =
-    CustomDataSource
+    CustomDataSource'
     { _cParentLink = Nothing
     , _cWebPropertyId = Nothing
     , _cChildLink = Nothing
@@ -3996,7 +3999,7 @@ instance FromJSON CustomDataSource where
         parseJSON
           = withObject "CustomDataSource"
               (\ o ->
-                 CustomDataSource <$>
+                 CustomDataSource' <$>
                    (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
                      (o .:? "childLink")
                      <*> (o .:? "kind" .!= "analytics#customDataSource")
@@ -4013,7 +4016,7 @@ instance FromJSON CustomDataSource where
                      <*> (o .:? "profilesLinked" .!= mempty))
 
 instance ToJSON CustomDataSource where
-        toJSON CustomDataSource{..}
+        toJSON CustomDataSource'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _cParentLink,
@@ -4033,7 +4036,7 @@ instance ToJSON CustomDataSource where
 -- | JSON template for a web property reference.
 --
 -- /See:/ 'webPropertyRef' smart constructor.
-data WebPropertyRef = WebPropertyRef
+data WebPropertyRef = WebPropertyRef'
     { _wprKind                  :: !Text
     , _wprHref                  :: !(Maybe Text)
     , _wprAccountId             :: !(Maybe Text)
@@ -4060,7 +4063,7 @@ data WebPropertyRef = WebPropertyRef
 webPropertyRef
     :: WebPropertyRef
 webPropertyRef =
-    WebPropertyRef
+    WebPropertyRef'
     { _wprKind = "analytics#webPropertyRef"
     , _wprHref = Nothing
     , _wprAccountId = Nothing
@@ -4100,7 +4103,7 @@ instance FromJSON WebPropertyRef where
         parseJSON
           = withObject "WebPropertyRef"
               (\ o ->
-                 WebPropertyRef <$>
+                 WebPropertyRef' <$>
                    (o .:? "kind" .!= "analytics#webPropertyRef") <*>
                      (o .:? "href")
                      <*> (o .:? "accountId")
@@ -4109,7 +4112,7 @@ instance FromJSON WebPropertyRef where
                      <*> (o .:? "id"))
 
 instance ToJSON WebPropertyRef where
-        toJSON WebPropertyRef{..}
+        toJSON WebPropertyRef'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _wprKind), ("href" .=) <$> _wprHref,
@@ -4124,7 +4127,7 @@ instance ToJSON WebPropertyRef where
 -- collection corresponds to a single Analytics goal.
 --
 -- /See:/ 'goals' smart constructor.
-data Goals = Goals
+data Goals = Goals'
     { _gNextLink     :: !(Maybe Text)
     , _gItemsPerPage :: !(Maybe (Textual Int32))
     , _gKind         :: !Text
@@ -4157,7 +4160,7 @@ data Goals = Goals
 goals
     :: Goals
 goals =
-    Goals
+    Goals'
     { _gNextLink = Nothing
     , _gItemsPerPage = Nothing
     , _gKind = "analytics#goals"
@@ -4223,7 +4226,7 @@ instance FromJSON Goals where
         parseJSON
           = withObject "Goals"
               (\ o ->
-                 Goals <$>
+                 Goals' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#goals")
                      <*> (o .:? "username")
@@ -4233,7 +4236,7 @@ instance FromJSON Goals where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON Goals where
-        toJSON Goals{..}
+        toJSON Goals'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _gNextLink,
@@ -4250,7 +4253,7 @@ instance ToJSON Goals where
 -- populated.
 --
 -- /See:/ 'mcfDataRowsItemItem' smart constructor.
-data McfDataRowsItemItem = McfDataRowsItemItem
+data McfDataRowsItemItem = McfDataRowsItemItem'
     { _mdriiPrimitiveValue      :: !(Maybe Text)
     , _mdriiConversionPathValue :: !(Maybe [McfDataRowsItemItemConversionPathValueItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4265,7 +4268,7 @@ data McfDataRowsItemItem = McfDataRowsItemItem
 mcfDataRowsItemItem
     :: McfDataRowsItemItem
 mcfDataRowsItemItem =
-    McfDataRowsItemItem
+    McfDataRowsItemItem'
     { _mdriiPrimitiveValue = Nothing
     , _mdriiConversionPathValue = Nothing
     }
@@ -4289,12 +4292,12 @@ instance FromJSON McfDataRowsItemItem where
         parseJSON
           = withObject "McfDataRowsItemItem"
               (\ o ->
-                 McfDataRowsItemItem <$>
+                 McfDataRowsItemItem' <$>
                    (o .:? "primitiveValue") <*>
                      (o .:? "conversionPathValue" .!= mempty))
 
 instance ToJSON McfDataRowsItemItem where
-        toJSON McfDataRowsItemItem{..}
+        toJSON McfDataRowsItemItem'{..}
           = object
               (catMaybes
                  [("primitiveValue" .=) <$> _mdriiPrimitiveValue,
@@ -4304,7 +4307,7 @@ instance ToJSON McfDataRowsItemItem where
 -- | Permissions the user has for this account.
 --
 -- /See:/ 'accountPermissions' smart constructor.
-newtype AccountPermissions = AccountPermissions
+newtype AccountPermissions = AccountPermissions'
     { _apEffective :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4316,7 +4319,7 @@ newtype AccountPermissions = AccountPermissions
 accountPermissions
     :: AccountPermissions
 accountPermissions =
-    AccountPermissions
+    AccountPermissions'
     { _apEffective = Nothing
     }
 
@@ -4332,11 +4335,11 @@ instance FromJSON AccountPermissions where
         parseJSON
           = withObject "AccountPermissions"
               (\ o ->
-                 AccountPermissions <$>
+                 AccountPermissions' <$>
                    (o .:? "effective" .!= mempty))
 
 instance ToJSON AccountPermissions where
-        toJSON AccountPermissions{..}
+        toJSON AccountPermissions'{..}
           = object
               (catMaybes [("effective" .=) <$> _apEffective])
 
@@ -4344,7 +4347,7 @@ instance ToJSON AccountPermissions where
 -- (profile).
 --
 -- /See:/ 'entityUserLinkEntity' smart constructor.
-data EntityUserLinkEntity = EntityUserLinkEntity
+data EntityUserLinkEntity = EntityUserLinkEntity'
     { _euleProFileRef     :: !(Maybe ProFileRef)
     , _euleAccountRef     :: !(Maybe AccountRef)
     , _euleWebPropertyRef :: !(Maybe WebPropertyRef)
@@ -4362,7 +4365,7 @@ data EntityUserLinkEntity = EntityUserLinkEntity
 entityUserLinkEntity
     :: EntityUserLinkEntity
 entityUserLinkEntity =
-    EntityUserLinkEntity
+    EntityUserLinkEntity'
     { _euleProFileRef = Nothing
     , _euleAccountRef = Nothing
     , _euleWebPropertyRef = Nothing
@@ -4390,12 +4393,12 @@ instance FromJSON EntityUserLinkEntity where
         parseJSON
           = withObject "EntityUserLinkEntity"
               (\ o ->
-                 EntityUserLinkEntity <$>
+                 EntityUserLinkEntity' <$>
                    (o .:? "profileRef") <*> (o .:? "accountRef") <*>
                      (o .:? "webPropertyRef"))
 
 instance ToJSON EntityUserLinkEntity where
-        toJSON EntityUserLinkEntity{..}
+        toJSON EntityUserLinkEntity'{..}
           = object
               (catMaybes
                  [("profileRef" .=) <$> _euleProFileRef,
@@ -4405,7 +4408,7 @@ instance ToJSON EntityUserLinkEntity where
 -- | JSON template for Analytics account entry.
 --
 -- /See:/ 'account' smart constructor.
-data Account = Account
+data Account = Account'
     { _accChildLink   :: !(Maybe AccountChildLink)
     , _accKind        :: !Text
     , _accCreated     :: !(Maybe DateTime')
@@ -4441,7 +4444,7 @@ data Account = Account
 account
     :: Account
 account =
-    Account
+    Account'
     { _accChildLink = Nothing
     , _accKind = "analytics#account"
     , _accCreated = Nothing
@@ -4503,7 +4506,7 @@ instance FromJSON Account where
         parseJSON
           = withObject "Account"
               (\ o ->
-                 Account <$>
+                 Account' <$>
                    (o .:? "childLink") <*>
                      (o .:? "kind" .!= "analytics#account")
                      <*> (o .:? "created")
@@ -4515,7 +4518,7 @@ instance FromJSON Account where
                      <*> (o .:? "permissions"))
 
 instance ToJSON Account where
-        toJSON Account{..}
+        toJSON Account'{..}
           = object
               (catMaybes
                  [("childLink" .=) <$> _accChildLink,
@@ -4530,7 +4533,7 @@ instance ToJSON Account where
 -- | JSON template for Analytics experiment resource.
 --
 -- /See:/ 'experiment' smart constructor.
-data Experiment = Experiment
+data Experiment = Experiment'
     { _expParentLink                     :: !(Maybe ExperimentParentLink)
     , _expEqualWeighting                 :: !(Maybe Bool)
     , _expStatus                         :: !(Maybe Text)
@@ -4623,7 +4626,7 @@ data Experiment = Experiment
 experiment
     :: Experiment
 experiment =
-    Experiment
+    Experiment'
     { _expParentLink = Nothing
     , _expEqualWeighting = Nothing
     , _expStatus = Nothing
@@ -4872,7 +4875,7 @@ instance FromJSON Experiment where
         parseJSON
           = withObject "Experiment"
               (\ o ->
-                 Experiment <$>
+                 Experiment' <$>
                    (o .:? "parentLink") <*> (o .:? "equalWeighting") <*>
                      (o .:? "status")
                      <*> (o .:? "webPropertyId")
@@ -4902,7 +4905,7 @@ instance FromJSON Experiment where
                      <*> (o .:? "description"))
 
 instance ToJSON Experiment where
-        toJSON Experiment{..}
+        toJSON Experiment'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _expParentLink,
@@ -4942,7 +4945,7 @@ instance ToJSON Experiment where
 -- Each resource in this collection corresponds to a single link.
 --
 -- /See:/ 'entityUserLinks' smart constructor.
-data EntityUserLinks = EntityUserLinks
+data EntityUserLinks = EntityUserLinks'
     { _eulNextLink     :: !(Maybe Text)
     , _eulItemsPerPage :: !(Maybe (Textual Int32))
     , _eulKind         :: !Text
@@ -4972,7 +4975,7 @@ data EntityUserLinks = EntityUserLinks
 entityUserLinks
     :: EntityUserLinks
 entityUserLinks =
-    EntityUserLinks
+    EntityUserLinks'
     { _eulNextLink = Nothing
     , _eulItemsPerPage = Nothing
     , _eulKind = "analytics#entityUserLinks"
@@ -5034,7 +5037,7 @@ instance FromJSON EntityUserLinks where
         parseJSON
           = withObject "EntityUserLinks"
               (\ o ->
-                 EntityUserLinks <$>
+                 EntityUserLinks' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#entityUserLinks")
                      <*> (o .:? "items" .!= mempty)
@@ -5043,7 +5046,7 @@ instance FromJSON EntityUserLinks where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON EntityUserLinks where
-        toJSON EntityUserLinks{..}
+        toJSON EntityUserLinks'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _eulNextLink,
@@ -5057,7 +5060,7 @@ instance ToJSON EntityUserLinks where
 -- | JSON template for an AdWords account.
 --
 -- /See:/ 'adWordsAccount' smart constructor.
-data AdWordsAccount = AdWordsAccount
+data AdWordsAccount = AdWordsAccount'
     { _awaAutoTaggingEnabled :: !(Maybe Bool)
     , _awaKind               :: !Text
     , _awaCustomerId         :: !(Maybe Text)
@@ -5075,7 +5078,7 @@ data AdWordsAccount = AdWordsAccount
 adWordsAccount
     :: AdWordsAccount
 adWordsAccount =
-    AdWordsAccount
+    AdWordsAccount'
     { _awaAutoTaggingEnabled = Nothing
     , _awaKind = "analytics#adWordsAccount"
     , _awaCustomerId = Nothing
@@ -5102,13 +5105,13 @@ instance FromJSON AdWordsAccount where
         parseJSON
           = withObject "AdWordsAccount"
               (\ o ->
-                 AdWordsAccount <$>
+                 AdWordsAccount' <$>
                    (o .:? "autoTaggingEnabled") <*>
                      (o .:? "kind" .!= "analytics#adWordsAccount")
                      <*> (o .:? "customerId"))
 
 instance ToJSON AdWordsAccount where
-        toJSON AdWordsAccount{..}
+        toJSON AdWordsAccount'{..}
           = object
               (catMaybes
                  [("autoTaggingEnabled" .=) <$>
@@ -5119,7 +5122,7 @@ instance ToJSON AdWordsAccount where
 -- | JSON template for a profile filter link.
 --
 -- /See:/ 'filterRef' smart constructor.
-data FilterRef = FilterRef
+data FilterRef = FilterRef'
     { _frKind      :: !Text
     , _frHref      :: !(Maybe Text)
     , _frAccountId :: !(Maybe Text)
@@ -5143,7 +5146,7 @@ data FilterRef = FilterRef
 filterRef
     :: FilterRef
 filterRef =
-    FilterRef
+    FilterRef'
     { _frKind = "analytics#filterRef"
     , _frHref = Nothing
     , _frAccountId = Nothing
@@ -5176,7 +5179,7 @@ instance FromJSON FilterRef where
         parseJSON
           = withObject "FilterRef"
               (\ o ->
-                 FilterRef <$>
+                 FilterRef' <$>
                    (o .:? "kind" .!= "analytics#filterRef") <*>
                      (o .:? "href")
                      <*> (o .:? "accountId")
@@ -5184,7 +5187,7 @@ instance FromJSON FilterRef where
                      <*> (o .:? "id"))
 
 instance ToJSON FilterRef where
-        toJSON FilterRef{..}
+        toJSON FilterRef'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _frKind), ("href" .=) <$> _frHref,
@@ -5194,7 +5197,7 @@ instance ToJSON FilterRef where
 -- | Details for the goal of the type VISIT_TIME_ON_SITE.
 --
 -- /See:/ 'goalVisitTimeOnSiteDetails' smart constructor.
-data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails
+data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails'
     { _gvtosdComparisonValue :: !(Maybe (Textual Int64))
     , _gvtosdComparisonType  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5209,7 +5212,7 @@ data GoalVisitTimeOnSiteDetails = GoalVisitTimeOnSiteDetails
 goalVisitTimeOnSiteDetails
     :: GoalVisitTimeOnSiteDetails
 goalVisitTimeOnSiteDetails =
-    GoalVisitTimeOnSiteDetails
+    GoalVisitTimeOnSiteDetails'
     { _gvtosdComparisonValue = Nothing
     , _gvtosdComparisonType = Nothing
     }
@@ -5231,12 +5234,12 @@ instance FromJSON GoalVisitTimeOnSiteDetails where
         parseJSON
           = withObject "GoalVisitTimeOnSiteDetails"
               (\ o ->
-                 GoalVisitTimeOnSiteDetails <$>
+                 GoalVisitTimeOnSiteDetails' <$>
                    (o .:? "comparisonValue") <*>
                      (o .:? "comparisonType"))
 
 instance ToJSON GoalVisitTimeOnSiteDetails where
-        toJSON GoalVisitTimeOnSiteDetails{..}
+        toJSON GoalVisitTimeOnSiteDetails'{..}
           = object
               (catMaybes
                  [("comparisonValue" .=) <$> _gvtosdComparisonValue,
@@ -5247,7 +5250,7 @@ instance ToJSON GoalVisitTimeOnSiteDetails where
 -- Analytics web property.
 --
 -- /See:/ 'webProperties' smart constructor.
-data WebProperties = WebProperties
+data WebProperties = WebProperties'
     { _wpNextLink     :: !(Maybe Text)
     , _wpItemsPerPage :: !(Maybe (Textual Int32))
     , _wpKind         :: !Text
@@ -5280,7 +5283,7 @@ data WebProperties = WebProperties
 webProperties
     :: WebProperties
 webProperties =
-    WebProperties
+    WebProperties'
     { _wpNextLink = Nothing
     , _wpItemsPerPage = Nothing
     , _wpKind = "analytics#webproperties"
@@ -5346,7 +5349,7 @@ instance FromJSON WebProperties where
         parseJSON
           = withObject "WebProperties"
               (\ o ->
-                 WebProperties <$>
+                 WebProperties' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#webproperties")
                      <*> (o .:? "username")
@@ -5356,7 +5359,7 @@ instance FromJSON WebProperties where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON WebProperties where
-        toJSON WebProperties{..}
+        toJSON WebProperties'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _wpNextLink,
@@ -5373,7 +5376,7 @@ instance ToJSON WebProperties where
 -- Analytics custom metric.
 --
 -- /See:/ 'customMetrics' smart constructor.
-data CustomMetrics = CustomMetrics
+data CustomMetrics = CustomMetrics'
     { _cmNextLink     :: !(Maybe Text)
     , _cmItemsPerPage :: !(Maybe (Textual Int32))
     , _cmKind         :: !Text
@@ -5406,7 +5409,7 @@ data CustomMetrics = CustomMetrics
 customMetrics
     :: CustomMetrics
 customMetrics =
-    CustomMetrics
+    CustomMetrics'
     { _cmNextLink = Nothing
     , _cmItemsPerPage = Nothing
     , _cmKind = "analytics#customMetrics"
@@ -5472,7 +5475,7 @@ instance FromJSON CustomMetrics where
         parseJSON
           = withObject "CustomMetrics"
               (\ o ->
-                 CustomMetrics <$>
+                 CustomMetrics' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#customMetrics")
                      <*> (o .:? "username")
@@ -5482,7 +5485,7 @@ instance FromJSON CustomMetrics where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON CustomMetrics where
-        toJSON CustomMetrics{..}
+        toJSON CustomMetrics'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _cmNextLink,
@@ -5497,7 +5500,7 @@ instance ToJSON CustomMetrics where
 -- | Details for the filter of the type ADVANCED.
 --
 -- /See:/ 'filterAdvancedDetails' smart constructor.
-data FilterAdvancedDetails = FilterAdvancedDetails
+data FilterAdvancedDetails = FilterAdvancedDetails'
     { _fadExtractA            :: !(Maybe Text)
     , _fadFieldARequired      :: !(Maybe Bool)
     , _fadFieldA              :: !(Maybe Text)
@@ -5545,7 +5548,7 @@ data FilterAdvancedDetails = FilterAdvancedDetails
 filterAdvancedDetails
     :: FilterAdvancedDetails
 filterAdvancedDetails =
-    FilterAdvancedDetails
+    FilterAdvancedDetails'
     { _fadExtractA = Nothing
     , _fadFieldARequired = Nothing
     , _fadFieldA = Nothing
@@ -5646,7 +5649,7 @@ instance FromJSON FilterAdvancedDetails where
         parseJSON
           = withObject "FilterAdvancedDetails"
               (\ o ->
-                 FilterAdvancedDetails <$>
+                 FilterAdvancedDetails' <$>
                    (o .:? "extractA") <*> (o .:? "fieldARequired") <*>
                      (o .:? "fieldA")
                      <*> (o .:? "fieldBIndex")
@@ -5661,7 +5664,7 @@ instance FromJSON FilterAdvancedDetails where
                      <*> (o .:? "overrideOutputField"))
 
 instance ToJSON FilterAdvancedDetails where
-        toJSON FilterAdvancedDetails{..}
+        toJSON FilterAdvancedDetails'{..}
           = object
               (catMaybes
                  [("extractA" .=) <$> _fadExtractA,
@@ -5682,7 +5685,7 @@ instance ToJSON FilterAdvancedDetails where
 -- | Details for the filter of the type UPPER.
 --
 -- /See:/ 'filterUppercaseDetails' smart constructor.
-data FilterUppercaseDetails = FilterUppercaseDetails
+data FilterUppercaseDetails = FilterUppercaseDetails'
     { _fudFieldIndex :: !(Maybe (Textual Int32))
     , _fudField      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5697,7 +5700,7 @@ data FilterUppercaseDetails = FilterUppercaseDetails
 filterUppercaseDetails
     :: FilterUppercaseDetails
 filterUppercaseDetails =
-    FilterUppercaseDetails
+    FilterUppercaseDetails'
     { _fudFieldIndex = Nothing
     , _fudField = Nothing
     }
@@ -5718,11 +5721,11 @@ instance FromJSON FilterUppercaseDetails where
         parseJSON
           = withObject "FilterUppercaseDetails"
               (\ o ->
-                 FilterUppercaseDetails <$>
+                 FilterUppercaseDetails' <$>
                    (o .:? "fieldIndex") <*> (o .:? "field"))
 
 instance ToJSON FilterUppercaseDetails where
-        toJSON FilterUppercaseDetails{..}
+        toJSON FilterUppercaseDetails'{..}
           = object
               (catMaybes
                  [("fieldIndex" .=) <$> _fudFieldIndex,
@@ -5730,7 +5733,7 @@ instance ToJSON FilterUppercaseDetails where
 
 --
 -- /See:/ 'customDataSourceChildLink' smart constructor.
-data CustomDataSourceChildLink = CustomDataSourceChildLink
+data CustomDataSourceChildLink = CustomDataSourceChildLink'
     { _cdsclHref :: !(Maybe Text)
     , _cdsclType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5745,7 +5748,7 @@ data CustomDataSourceChildLink = CustomDataSourceChildLink
 customDataSourceChildLink
     :: CustomDataSourceChildLink
 customDataSourceChildLink =
-    CustomDataSourceChildLink
+    CustomDataSourceChildLink'
     { _cdsclHref = Nothing
     , _cdsclType = Nothing
     }
@@ -5765,11 +5768,11 @@ instance FromJSON CustomDataSourceChildLink where
         parseJSON
           = withObject "CustomDataSourceChildLink"
               (\ o ->
-                 CustomDataSourceChildLink <$>
+                 CustomDataSourceChildLink' <$>
                    (o .:? "href") <*> (o .:? "type"))
 
 instance ToJSON CustomDataSourceChildLink where
-        toJSON CustomDataSourceChildLink{..}
+        toJSON CustomDataSourceChildLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _cdsclHref,
@@ -5779,7 +5782,7 @@ instance ToJSON CustomDataSourceChildLink where
 -- belongs.
 --
 -- /See:/ 'filterParentLink' smart constructor.
-data FilterParentLink = FilterParentLink
+data FilterParentLink = FilterParentLink'
     { _fplHref :: !(Maybe Text)
     , _fplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5794,7 +5797,7 @@ data FilterParentLink = FilterParentLink
 filterParentLink
     :: FilterParentLink
 filterParentLink =
-    FilterParentLink
+    FilterParentLink'
     { _fplHref = Nothing
     , _fplType = "analytics#account"
     }
@@ -5811,12 +5814,12 @@ instance FromJSON FilterParentLink where
         parseJSON
           = withObject "FilterParentLink"
               (\ o ->
-                 FilterParentLink <$>
+                 FilterParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#account"))
 
 instance ToJSON FilterParentLink where
-        toJSON FilterParentLink{..}
+        toJSON FilterParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _fplHref,
@@ -5825,7 +5828,7 @@ instance ToJSON FilterParentLink where
 -- | Real time data for a given view (profile).
 --
 -- /See:/ 'realtimeData' smart constructor.
-data RealtimeData = RealtimeData
+data RealtimeData = RealtimeData'
     { _rdProFileInfo         :: !(Maybe RealtimeDataProFileInfo)
     , _rdKind                :: !Text
     , _rdRows                :: !(Maybe [[Text]])
@@ -5861,7 +5864,7 @@ data RealtimeData = RealtimeData
 realtimeData
     :: RealtimeData
 realtimeData =
-    RealtimeData
+    RealtimeData'
     { _rdProFileInfo = Nothing
     , _rdKind = "analytics#realtimeData"
     , _rdRows = Nothing
@@ -5934,7 +5937,7 @@ instance FromJSON RealtimeData where
         parseJSON
           = withObject "RealtimeData"
               (\ o ->
-                 RealtimeData <$>
+                 RealtimeData' <$>
                    (o .:? "profileInfo") <*>
                      (o .:? "kind" .!= "analytics#realtimeData")
                      <*> (o .:? "rows" .!= mempty)
@@ -5946,7 +5949,7 @@ instance FromJSON RealtimeData where
                      <*> (o .:? "totalsForAllResults"))
 
 instance ToJSON RealtimeData where
-        toJSON RealtimeData{..}
+        toJSON RealtimeData'{..}
           = object
               (catMaybes
                  [("profileInfo" .=) <$> _rdProFileInfo,
@@ -5962,7 +5965,7 @@ instance ToJSON RealtimeData where
 -- | JSON template for Analytics Custom Metric.
 --
 -- /See:/ 'customMetric' smart constructor.
-data CustomMetric = CustomMetric
+data CustomMetric = CustomMetric'
     { _cusParentLink    :: !(Maybe CustomMetricParentLink)
     , _cusWebPropertyId :: !(Maybe Text)
     , _cusKind          :: !Text
@@ -6016,7 +6019,7 @@ data CustomMetric = CustomMetric
 customMetric
     :: CustomMetric
 customMetric =
-    CustomMetric
+    CustomMetric'
     { _cusParentLink = Nothing
     , _cusWebPropertyId = Nothing
     , _cusKind = "analytics#customMetric"
@@ -6115,7 +6118,7 @@ instance FromJSON CustomMetric where
         parseJSON
           = withObject "CustomMetric"
               (\ o ->
-                 CustomMetric <$>
+                 CustomMetric' <$>
                    (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
                      (o .:? "kind" .!= "analytics#customMetric")
                      <*> (o .:? "max_value")
@@ -6132,7 +6135,7 @@ instance FromJSON CustomMetric where
                      <*> (o .:? "index"))
 
 instance ToJSON CustomMetric where
-        toJSON CustomMetric{..}
+        toJSON CustomMetric'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _cusParentLink,
@@ -6153,7 +6156,7 @@ instance ToJSON CustomMetric where
 -- basic information (i.e., summary) for a profile.
 --
 -- /See:/ 'proFileSummary' smart constructor.
-data ProFileSummary = ProFileSummary
+data ProFileSummary = ProFileSummary'
     { _pfsKind    :: !Text
     , _pfsName    :: !(Maybe Text)
     , _pfsStarred :: !(Maybe Bool)
@@ -6177,7 +6180,7 @@ data ProFileSummary = ProFileSummary
 proFileSummary
     :: ProFileSummary
 proFileSummary =
-    ProFileSummary
+    ProFileSummary'
     { _pfsKind = "analytics#profileSummary"
     , _pfsName = Nothing
     , _pfsStarred = Nothing
@@ -6210,7 +6213,7 @@ instance FromJSON ProFileSummary where
         parseJSON
           = withObject "ProFileSummary"
               (\ o ->
-                 ProFileSummary <$>
+                 ProFileSummary' <$>
                    (o .:? "kind" .!= "analytics#profileSummary") <*>
                      (o .:? "name")
                      <*> (o .:? "starred")
@@ -6218,7 +6221,7 @@ instance FromJSON ProFileSummary where
                      <*> (o .:? "type"))
 
 instance ToJSON ProFileSummary where
-        toJSON ProFileSummary{..}
+        toJSON ProFileSummary'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _pfsKind), ("name" .=) <$> _pfsName,
@@ -6229,7 +6232,7 @@ instance ToJSON ProFileSummary where
 -- the custom dimension belongs.
 --
 -- /See:/ 'customDimensionParentLink' smart constructor.
-data CustomDimensionParentLink = CustomDimensionParentLink
+data CustomDimensionParentLink = CustomDimensionParentLink'
     { _cdplHref :: !(Maybe Text)
     , _cdplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6244,7 +6247,7 @@ data CustomDimensionParentLink = CustomDimensionParentLink
 customDimensionParentLink
     :: CustomDimensionParentLink
 customDimensionParentLink =
-    CustomDimensionParentLink
+    CustomDimensionParentLink'
     { _cdplHref = Nothing
     , _cdplType = "analytics#webproperty"
     }
@@ -6261,12 +6264,12 @@ instance FromJSON CustomDimensionParentLink where
         parseJSON
           = withObject "CustomDimensionParentLink"
               (\ o ->
-                 CustomDimensionParentLink <$>
+                 CustomDimensionParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#webproperty"))
 
 instance ToJSON CustomDimensionParentLink where
-        toJSON CustomDimensionParentLink{..}
+        toJSON CustomDimensionParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _cdplHref,
@@ -6275,7 +6278,7 @@ instance ToJSON CustomDimensionParentLink where
 -- | JSON template for an Analytics web property.
 --
 -- /See:/ 'webProperty' smart constructor.
-data WebProperty = WebProperty
+data WebProperty = WebProperty'
     { _wParentLink            :: !(Maybe WebPropertyParentLink)
     , _wChildLink             :: !(Maybe WebPropertyChildLink)
     , _wDefaultProFileId      :: !(Maybe (Textual Int64))
@@ -6335,7 +6338,7 @@ data WebProperty = WebProperty
 webProperty
     :: WebProperty
 webProperty =
-    WebProperty
+    WebProperty'
     { _wParentLink = Nothing
     , _wChildLink = Nothing
     , _wDefaultProFileId = Nothing
@@ -6449,7 +6452,7 @@ instance FromJSON WebProperty where
         parseJSON
           = withObject "WebProperty"
               (\ o ->
-                 WebProperty <$>
+                 WebProperty' <$>
                    (o .:? "parentLink") <*> (o .:? "childLink") <*>
                      (o .:? "defaultProfileId")
                      <*> (o .:? "kind" .!= "analytics#webproperty")
@@ -6468,7 +6471,7 @@ instance FromJSON WebProperty where
                      <*> (o .:? "level"))
 
 instance ToJSON WebProperty where
-        toJSON WebProperty{..}
+        toJSON WebProperty'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _wParentLink,
@@ -6491,7 +6494,7 @@ instance ToJSON WebProperty where
 -- | Permissions the user has for this web property.
 --
 -- /See:/ 'webPropertyPermissions' smart constructor.
-newtype WebPropertyPermissions = WebPropertyPermissions
+newtype WebPropertyPermissions = WebPropertyPermissions'
     { _wppEffective :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6503,7 +6506,7 @@ newtype WebPropertyPermissions = WebPropertyPermissions
 webPropertyPermissions
     :: WebPropertyPermissions
 webPropertyPermissions =
-    WebPropertyPermissions
+    WebPropertyPermissions'
     { _wppEffective = Nothing
     }
 
@@ -6520,11 +6523,11 @@ instance FromJSON WebPropertyPermissions where
         parseJSON
           = withObject "WebPropertyPermissions"
               (\ o ->
-                 WebPropertyPermissions <$>
+                 WebPropertyPermissions' <$>
                    (o .:? "effective" .!= mempty))
 
 instance ToJSON WebPropertyPermissions where
-        toJSON WebPropertyPermissions{..}
+        toJSON WebPropertyPermissions'{..}
           = object
               (catMaybes [("effective" .=) <$> _wppEffective])
 
@@ -6532,7 +6535,7 @@ instance ToJSON WebPropertyPermissions where
 -- that a user has for an entity.
 --
 -- /See:/ 'entityUserLink' smart constructor.
-data EntityUserLink = EntityUserLink
+data EntityUserLink = EntityUserLink'
     { _euluKind        :: !Text
     , _euluUserRef     :: !(Maybe UserRef)
     , _euluSelfLink    :: !(Maybe Text)
@@ -6559,7 +6562,7 @@ data EntityUserLink = EntityUserLink
 entityUserLink
     :: EntityUserLink
 entityUserLink =
-    EntityUserLink
+    EntityUserLink'
     { _euluKind = "analytics#entityUserLink"
     , _euluUserRef = Nothing
     , _euluSelfLink = Nothing
@@ -6602,7 +6605,7 @@ instance FromJSON EntityUserLink where
         parseJSON
           = withObject "EntityUserLink"
               (\ o ->
-                 EntityUserLink <$>
+                 EntityUserLink' <$>
                    (o .:? "kind" .!= "analytics#entityUserLink") <*>
                      (o .:? "userRef")
                      <*> (o .:? "selfLink")
@@ -6611,7 +6614,7 @@ instance FromJSON EntityUserLink where
                      <*> (o .:? "entity"))
 
 instance ToJSON EntityUserLink where
-        toJSON EntityUserLink{..}
+        toJSON EntityUserLink'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _euluKind),
@@ -6625,7 +6628,7 @@ instance ToJSON EntityUserLink where
 -- which this custom data source belongs.
 --
 -- /See:/ 'customDataSourceParentLink' smart constructor.
-data CustomDataSourceParentLink = CustomDataSourceParentLink
+data CustomDataSourceParentLink = CustomDataSourceParentLink'
     { _cdsplHref :: !(Maybe Text)
     , _cdsplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6640,7 +6643,7 @@ data CustomDataSourceParentLink = CustomDataSourceParentLink
 customDataSourceParentLink
     :: CustomDataSourceParentLink
 customDataSourceParentLink =
-    CustomDataSourceParentLink
+    CustomDataSourceParentLink'
     { _cdsplHref = Nothing
     , _cdsplType = "analytics#webproperty"
     }
@@ -6659,12 +6662,12 @@ instance FromJSON CustomDataSourceParentLink where
         parseJSON
           = withObject "CustomDataSourceParentLink"
               (\ o ->
-                 CustomDataSourceParentLink <$>
+                 CustomDataSourceParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#webproperty"))
 
 instance ToJSON CustomDataSourceParentLink where
-        toJSON CustomDataSourceParentLink{..}
+        toJSON CustomDataSourceParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _cdsplHref,
@@ -6672,7 +6675,7 @@ instance ToJSON CustomDataSourceParentLink where
 
 --
 -- /See:/ 'goalEventDetailsEventConditionsItem' smart constructor.
-data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem
+data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem'
     { _gedeciMatchType       :: !(Maybe Text)
     , _gedeciExpression      :: !(Maybe Text)
     , _gedeciComparisonValue :: !(Maybe (Textual Int64))
@@ -6696,7 +6699,7 @@ data GoalEventDetailsEventConditionsItem = GoalEventDetailsEventConditionsItem
 goalEventDetailsEventConditionsItem
     :: GoalEventDetailsEventConditionsItem
 goalEventDetailsEventConditionsItem =
-    GoalEventDetailsEventConditionsItem
+    GoalEventDetailsEventConditionsItem'
     { _gedeciMatchType = Nothing
     , _gedeciExpression = Nothing
     , _gedeciComparisonValue = Nothing
@@ -6742,7 +6745,7 @@ instance FromJSON GoalEventDetailsEventConditionsItem
         parseJSON
           = withObject "GoalEventDetailsEventConditionsItem"
               (\ o ->
-                 GoalEventDetailsEventConditionsItem <$>
+                 GoalEventDetailsEventConditionsItem' <$>
                    (o .:? "matchType") <*> (o .:? "expression") <*>
                      (o .:? "comparisonValue")
                      <*> (o .:? "type")
@@ -6750,7 +6753,7 @@ instance FromJSON GoalEventDetailsEventConditionsItem
 
 instance ToJSON GoalEventDetailsEventConditionsItem
          where
-        toJSON GoalEventDetailsEventConditionsItem{..}
+        toJSON GoalEventDetailsEventConditionsItem'{..}
           = object
               (catMaybes
                  [("matchType" .=) <$> _gedeciMatchType,
@@ -6762,7 +6765,7 @@ instance ToJSON GoalEventDetailsEventConditionsItem
 -- | Analytics data request query parameters.
 --
 -- /See:/ 'mcfDataQuery' smart constructor.
-data McfDataQuery = McfDataQuery
+data McfDataQuery = McfDataQuery'
     { _mdqMetrics       :: !(Maybe [Text])
     , _mdqSamplingLevel :: !(Maybe Text)
     , _mdqFilters       :: !(Maybe Text)
@@ -6804,7 +6807,7 @@ data McfDataQuery = McfDataQuery
 mcfDataQuery
     :: McfDataQuery
 mcfDataQuery =
-    McfDataQuery
+    McfDataQuery'
     { _mdqMetrics = Nothing
     , _mdqSamplingLevel = Nothing
     , _mdqFilters = Nothing
@@ -6885,7 +6888,7 @@ instance FromJSON McfDataQuery where
         parseJSON
           = withObject "McfDataQuery"
               (\ o ->
-                 McfDataQuery <$>
+                 McfDataQuery' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "samplingLevel")
                      <*> (o .:? "filters")
@@ -6899,7 +6902,7 @@ instance FromJSON McfDataQuery where
                      <*> (o .:? "start-date"))
 
 instance ToJSON McfDataQuery where
-        toJSON McfDataQuery{..}
+        toJSON McfDataQuery'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _mdqMetrics,
@@ -6917,7 +6920,7 @@ instance ToJSON McfDataQuery where
 -- | JSON template for Analytics goal resource.
 --
 -- /See:/ 'goal' smart constructor.
-data Goal = Goal
+data Goal = Goal'
     { _goaParentLink             :: !(Maybe GoalParentLink)
     , _goaWebPropertyId          :: !(Maybe Text)
     , _goaKind                   :: !Text
@@ -6980,7 +6983,7 @@ data Goal = Goal
 goal
     :: Goal
 goal =
-    Goal
+    Goal'
     { _goaParentLink = Nothing
     , _goaWebPropertyId = Nothing
     , _goaKind = "analytics#goal"
@@ -7104,7 +7107,7 @@ instance FromJSON Goal where
         parseJSON
           = withObject "Goal"
               (\ o ->
-                 Goal <$>
+                 Goal' <$>
                    (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
                      (o .:? "kind" .!= "analytics#goal")
                      <*> (o .:? "created")
@@ -7124,7 +7127,7 @@ instance FromJSON Goal where
                      <*> (o .:? "type"))
 
 instance ToJSON Goal where
-        toJSON Goal{..}
+        toJSON Goal'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _goaParentLink,
@@ -7155,7 +7158,7 @@ instance ToJSON Goal where
 -- property and profile.
 --
 -- /See:/ 'accountTicket' smart constructor.
-data AccountTicket = AccountTicket
+data AccountTicket = AccountTicket'
     { _atRedirectURI :: !(Maybe Text)
     , _atKind        :: !Text
     , _atProFile     :: !(Maybe ProFile)
@@ -7182,7 +7185,7 @@ data AccountTicket = AccountTicket
 accountTicket
     :: AccountTicket
 accountTicket =
-    AccountTicket
+    AccountTicket'
     { _atRedirectURI = Nothing
     , _atKind = "analytics#accountTicket"
     , _atProFile = Nothing
@@ -7226,7 +7229,7 @@ instance FromJSON AccountTicket where
         parseJSON
           = withObject "AccountTicket"
               (\ o ->
-                 AccountTicket <$>
+                 AccountTicket' <$>
                    (o .:? "redirectUri") <*>
                      (o .:? "kind" .!= "analytics#accountTicket")
                      <*> (o .:? "profile")
@@ -7235,7 +7238,7 @@ instance FromJSON AccountTicket where
                      <*> (o .:? "id"))
 
 instance ToJSON AccountTicket where
-        toJSON AccountTicket{..}
+        toJSON AccountTicket'{..}
           = object
               (catMaybes
                  [("redirectUri" .=) <$> _atRedirectURI,
@@ -7249,7 +7252,7 @@ instance ToJSON AccountTicket where
 -- lightweight tree comprised of properties\/profiles.
 --
 -- /See:/ 'accountSummary' smart constructor.
-data AccountSummary = AccountSummary
+data AccountSummary = AccountSummary'
     { _assKind          :: !Text
     , _assWebProperties :: !(Maybe [WebPropertySummary])
     , _assName          :: !(Maybe Text)
@@ -7273,7 +7276,7 @@ data AccountSummary = AccountSummary
 accountSummary
     :: AccountSummary
 accountSummary =
-    AccountSummary
+    AccountSummary'
     { _assKind = "analytics#accountSummary"
     , _assWebProperties = Nothing
     , _assName = Nothing
@@ -7310,7 +7313,7 @@ instance FromJSON AccountSummary where
         parseJSON
           = withObject "AccountSummary"
               (\ o ->
-                 AccountSummary <$>
+                 AccountSummary' <$>
                    (o .:? "kind" .!= "analytics#accountSummary") <*>
                      (o .:? "webProperties" .!= mempty)
                      <*> (o .:? "name")
@@ -7318,7 +7321,7 @@ instance FromJSON AccountSummary where
                      <*> (o .:? "id"))
 
 instance ToJSON AccountSummary where
-        toJSON AccountSummary{..}
+        toJSON AccountSummary'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _assKind),
@@ -7330,7 +7333,7 @@ instance ToJSON AccountSummary where
 -- | Real time data request query parameters.
 --
 -- /See:/ 'realtimeDataQuery' smart constructor.
-data RealtimeDataQuery = RealtimeDataQuery
+data RealtimeDataQuery = RealtimeDataQuery'
     { _rdqMetrics    :: !(Maybe [Text])
     , _rdqFilters    :: !(Maybe Text)
     , _rdqIds        :: !(Maybe Text)
@@ -7357,7 +7360,7 @@ data RealtimeDataQuery = RealtimeDataQuery
 realtimeDataQuery
     :: RealtimeDataQuery
 realtimeDataQuery =
-    RealtimeDataQuery
+    RealtimeDataQuery'
     { _rdqMetrics = Nothing
     , _rdqFilters = Nothing
     , _rdqIds = Nothing
@@ -7405,7 +7408,7 @@ instance FromJSON RealtimeDataQuery where
         parseJSON
           = withObject "RealtimeDataQuery"
               (\ o ->
-                 RealtimeDataQuery <$>
+                 RealtimeDataQuery' <$>
                    (o .:? "metrics" .!= mempty) <*> (o .:? "filters")
                      <*> (o .:? "ids")
                      <*> (o .:? "sort" .!= mempty)
@@ -7413,7 +7416,7 @@ instance FromJSON RealtimeDataQuery where
                      <*> (o .:? "max-results"))
 
 instance ToJSON RealtimeDataQuery where
-        toJSON RealtimeDataQuery{..}
+        toJSON RealtimeDataQuery'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _rdqMetrics,
@@ -7425,7 +7428,7 @@ instance ToJSON RealtimeDataQuery where
 -- | Lists columns (dimensions and metrics) for a particular report type.
 --
 -- /See:/ 'columns' smart constructor.
-data Columns = Columns
+data Columns = Columns'
     { _colEtag           :: !(Maybe Text)
     , _colKind           :: !Text
     , _colItems          :: !(Maybe [Column])
@@ -7449,7 +7452,7 @@ data Columns = Columns
 columns
     :: Columns
 columns =
-    Columns
+    Columns'
     { _colEtag = Nothing
     , _colKind = "analytics#columns"
     , _colItems = Nothing
@@ -7492,7 +7495,7 @@ instance FromJSON Columns where
         parseJSON
           = withObject "Columns"
               (\ o ->
-                 Columns <$>
+                 Columns' <$>
                    (o .:? "etag") <*>
                      (o .:? "kind" .!= "analytics#columns")
                      <*> (o .:? "items" .!= mempty)
@@ -7500,7 +7503,7 @@ instance FromJSON Columns where
                      <*> (o .:? "attributeNames" .!= mempty))
 
 instance ToJSON Columns where
-        toJSON Columns{..}
+        toJSON Columns'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _colEtag, Just ("kind" .= _colKind),
@@ -7511,7 +7514,7 @@ instance ToJSON Columns where
 -- | Details for the filter of the type LOWER.
 --
 -- /See:/ 'filterLowercaseDetails' smart constructor.
-data FilterLowercaseDetails = FilterLowercaseDetails
+data FilterLowercaseDetails = FilterLowercaseDetails'
     { _fldFieldIndex :: !(Maybe (Textual Int32))
     , _fldField      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -7526,7 +7529,7 @@ data FilterLowercaseDetails = FilterLowercaseDetails
 filterLowercaseDetails
     :: FilterLowercaseDetails
 filterLowercaseDetails =
-    FilterLowercaseDetails
+    FilterLowercaseDetails'
     { _fldFieldIndex = Nothing
     , _fldField = Nothing
     }
@@ -7547,11 +7550,11 @@ instance FromJSON FilterLowercaseDetails where
         parseJSON
           = withObject "FilterLowercaseDetails"
               (\ o ->
-                 FilterLowercaseDetails <$>
+                 FilterLowercaseDetails' <$>
                    (o .:? "fieldIndex") <*> (o .:? "field"))
 
 instance ToJSON FilterLowercaseDetails where
-        toJSON FilterLowercaseDetails{..}
+        toJSON FilterLowercaseDetails'{..}
           = object
               (catMaybes
                  [("fieldIndex" .=) <$> _fldFieldIndex,
@@ -7560,7 +7563,7 @@ instance ToJSON FilterLowercaseDetails where
 -- | JSON template for an Analytics account filter.
 --
 -- /See:/ 'filter'' smart constructor.
-data Filter = Filter
+data Filter = Filter'
     { _filParentLink              :: !(Maybe FilterParentLink)
     , _filAdvancedDetails         :: !(Maybe FilterAdvancedDetails)
     , _filUppercaseDetails        :: !(Maybe FilterUppercaseDetails)
@@ -7614,7 +7617,7 @@ data Filter = Filter
 filter'
     :: Filter
 filter' =
-    Filter
+    Filter'
     { _filParentLink = Nothing
     , _filAdvancedDetails = Nothing
     , _filUppercaseDetails = Nothing
@@ -7718,7 +7721,7 @@ instance FromJSON Filter where
         parseJSON
           = withObject "Filter"
               (\ o ->
-                 Filter <$>
+                 Filter' <$>
                    (o .:? "parentLink") <*> (o .:? "advancedDetails")
                      <*> (o .:? "uppercaseDetails")
                      <*> (o .:? "lowercaseDetails")
@@ -7735,7 +7738,7 @@ instance FromJSON Filter where
                      <*> (o .:? "searchAndReplaceDetails"))
 
 instance ToJSON Filter where
-        toJSON Filter{..}
+        toJSON Filter'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _filParentLink,
@@ -7759,7 +7762,7 @@ instance ToJSON Filter where
 -- upload collection corresponds to a single Analytics data upload.
 --
 -- /See:/ 'uploads' smart constructor.
-data Uploads = Uploads
+data Uploads = Uploads'
     { _uplNextLink     :: !(Maybe Text)
     , _uplItemsPerPage :: !(Maybe (Textual Int32))
     , _uplKind         :: !Text
@@ -7789,7 +7792,7 @@ data Uploads = Uploads
 uploads
     :: Uploads
 uploads =
-    Uploads
+    Uploads'
     { _uplNextLink = Nothing
     , _uplItemsPerPage = Nothing
     , _uplKind = "analytics#uploads"
@@ -7851,7 +7854,7 @@ instance FromJSON Uploads where
         parseJSON
           = withObject "Uploads"
               (\ o ->
-                 Uploads <$>
+                 Uploads' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#uploads")
                      <*> (o .:? "items" .!= mempty)
@@ -7860,7 +7863,7 @@ instance FromJSON Uploads where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON Uploads where
-        toJSON Uploads{..}
+        toJSON Uploads'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _uplNextLink,
@@ -7876,7 +7879,7 @@ instance ToJSON Uploads where
 -- single Analytics custom dimension.
 --
 -- /See:/ 'customDimensions' smart constructor.
-data CustomDimensions = CustomDimensions
+data CustomDimensions = CustomDimensions'
     { _cdNextLink     :: !(Maybe Text)
     , _cdItemsPerPage :: !(Maybe (Textual Int32))
     , _cdKind         :: !Text
@@ -7909,7 +7912,7 @@ data CustomDimensions = CustomDimensions
 customDimensions
     :: CustomDimensions
 customDimensions =
-    CustomDimensions
+    CustomDimensions'
     { _cdNextLink = Nothing
     , _cdItemsPerPage = Nothing
     , _cdKind = "analytics#customDimensions"
@@ -7975,7 +7978,7 @@ instance FromJSON CustomDimensions where
         parseJSON
           = withObject "CustomDimensions"
               (\ o ->
-                 CustomDimensions <$>
+                 CustomDimensions' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#customDimensions")
                      <*> (o .:? "username")
@@ -7985,7 +7988,7 @@ instance FromJSON CustomDimensions where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON CustomDimensions where
-        toJSON CustomDimensions{..}
+        toJSON CustomDimensions'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _cdNextLink,
@@ -8002,7 +8005,7 @@ instance ToJSON CustomDimensions where
 -- segment.
 --
 -- /See:/ 'segments' smart constructor.
-data Segments = Segments
+data Segments = Segments'
     { _sNextLink     :: !(Maybe Text)
     , _sItemsPerPage :: !(Maybe (Textual Int32))
     , _sKind         :: !Text
@@ -8035,7 +8038,7 @@ data Segments = Segments
 segments
     :: Segments
 segments =
-    Segments
+    Segments'
     { _sNextLink = Nothing
     , _sItemsPerPage = Nothing
     , _sKind = "analytics#segments"
@@ -8101,7 +8104,7 @@ instance FromJSON Segments where
         parseJSON
           = withObject "Segments"
               (\ o ->
-                 Segments <$>
+                 Segments' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#segments")
                      <*> (o .:? "username")
@@ -8111,7 +8114,7 @@ instance FromJSON Segments where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON Segments where
-        toJSON Segments{..}
+        toJSON Segments'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _sNextLink,
@@ -8125,7 +8128,7 @@ instance ToJSON Segments where
 
 --
 -- /See:/ 'gaDataDataTable' smart constructor.
-data GaDataDataTable = GaDataDataTable
+data GaDataDataTable = GaDataDataTable'
     { _gddtCols :: !(Maybe [GaDataDataTableColsItem])
     , _gddtRows :: !(Maybe [GaDataDataTableRowsItem])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8140,7 +8143,7 @@ data GaDataDataTable = GaDataDataTable
 gaDataDataTable
     :: GaDataDataTable
 gaDataDataTable =
-    GaDataDataTable
+    GaDataDataTable'
     { _gddtCols = Nothing
     , _gddtRows = Nothing
     }
@@ -8161,12 +8164,12 @@ instance FromJSON GaDataDataTable where
         parseJSON
           = withObject "GaDataDataTable"
               (\ o ->
-                 GaDataDataTable <$>
+                 GaDataDataTable' <$>
                    (o .:? "cols" .!= mempty) <*>
                      (o .:? "rows" .!= mempty))
 
 instance ToJSON GaDataDataTable where
-        toJSON GaDataDataTable{..}
+        toJSON GaDataDataTable'{..}
           = object
               (catMaybes
                  [("cols" .=) <$> _gddtCols,
@@ -8175,7 +8178,7 @@ instance ToJSON GaDataDataTable where
 -- | Web property being linked.
 --
 -- /See:/ 'entityAdWordsLinkEntity' smart constructor.
-newtype EntityAdWordsLinkEntity = EntityAdWordsLinkEntity
+newtype EntityAdWordsLinkEntity = EntityAdWordsLinkEntity'
     { _eawleWebPropertyRef :: Maybe WebPropertyRef
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8187,7 +8190,7 @@ newtype EntityAdWordsLinkEntity = EntityAdWordsLinkEntity
 entityAdWordsLinkEntity
     :: EntityAdWordsLinkEntity
 entityAdWordsLinkEntity =
-    EntityAdWordsLinkEntity
+    EntityAdWordsLinkEntity'
     { _eawleWebPropertyRef = Nothing
     }
 
@@ -8200,10 +8203,11 @@ instance FromJSON EntityAdWordsLinkEntity where
         parseJSON
           = withObject "EntityAdWordsLinkEntity"
               (\ o ->
-                 EntityAdWordsLinkEntity <$> (o .:? "webPropertyRef"))
+                 EntityAdWordsLinkEntity' <$>
+                   (o .:? "webPropertyRef"))
 
 instance ToJSON EntityAdWordsLinkEntity where
-        toJSON EntityAdWordsLinkEntity{..}
+        toJSON EntityAdWordsLinkEntity'{..}
           = object
               (catMaybes
                  [("webPropertyRef" .=) <$> _eawleWebPropertyRef])
@@ -8211,7 +8215,7 @@ instance ToJSON EntityAdWordsLinkEntity where
 -- | Details for the goal of the type URL_DESTINATION.
 --
 -- /See:/ 'goalURLDestinationDetails' smart constructor.
-data GoalURLDestinationDetails = GoalURLDestinationDetails
+data GoalURLDestinationDetails = GoalURLDestinationDetails'
     { _guddURL               :: !(Maybe Text)
     , _guddMatchType         :: !(Maybe Text)
     , _guddSteps             :: !(Maybe [GoalURLDestinationDetailsStepsItem])
@@ -8235,7 +8239,7 @@ data GoalURLDestinationDetails = GoalURLDestinationDetails
 goalURLDestinationDetails
     :: GoalURLDestinationDetails
 goalURLDestinationDetails =
-    GoalURLDestinationDetails
+    GoalURLDestinationDetails'
     { _guddURL = Nothing
     , _guddMatchType = Nothing
     , _guddSteps = Nothing
@@ -8277,14 +8281,14 @@ instance FromJSON GoalURLDestinationDetails where
         parseJSON
           = withObject "GoalURLDestinationDetails"
               (\ o ->
-                 GoalURLDestinationDetails <$>
+                 GoalURLDestinationDetails' <$>
                    (o .:? "url") <*> (o .:? "matchType") <*>
                      (o .:? "steps" .!= mempty)
                      <*> (o .:? "caseSensitive")
                      <*> (o .:? "firstStepRequired"))
 
 instance ToJSON GoalURLDestinationDetails where
-        toJSON GoalURLDestinationDetails{..}
+        toJSON GoalURLDestinationDetails'{..}
           = object
               (catMaybes
                  [("url" .=) <$> _guddURL,
@@ -8298,7 +8302,7 @@ instance ToJSON GoalURLDestinationDetails where
 -- profile filter link.
 --
 -- /See:/ 'proFileFilterLinks' smart constructor.
-data ProFileFilterLinks = ProFileFilterLinks
+data ProFileFilterLinks = ProFileFilterLinks'
     { _pfflNextLink     :: !(Maybe Text)
     , _pfflItemsPerPage :: !(Maybe (Textual Int32))
     , _pfflKind         :: !Text
@@ -8331,7 +8335,7 @@ data ProFileFilterLinks = ProFileFilterLinks
 proFileFilterLinks
     :: ProFileFilterLinks
 proFileFilterLinks =
-    ProFileFilterLinks
+    ProFileFilterLinks'
     { _pfflNextLink = Nothing
     , _pfflItemsPerPage = Nothing
     , _pfflKind = "analytics#profileFilterLinks"
@@ -8399,7 +8403,7 @@ instance FromJSON ProFileFilterLinks where
         parseJSON
           = withObject "ProFileFilterLinks"
               (\ o ->
-                 ProFileFilterLinks <$>
+                 ProFileFilterLinks' <$>
                    (o .:? "nextLink") <*> (o .:? "itemsPerPage") <*>
                      (o .:? "kind" .!= "analytics#profileFilterLinks")
                      <*> (o .:? "username")
@@ -8409,7 +8413,7 @@ instance FromJSON ProFileFilterLinks where
                      <*> (o .:? "previousLink"))
 
 instance ToJSON ProFileFilterLinks where
-        toJSON ProFileFilterLinks{..}
+        toJSON ProFileFilterLinks'{..}
           = object
               (catMaybes
                  [("nextLink" .=) <$> _pfflNextLink,
@@ -8425,7 +8429,7 @@ instance ToJSON ProFileFilterLinks where
 -- web property belongs.
 --
 -- /See:/ 'webPropertyParentLink' smart constructor.
-data WebPropertyParentLink = WebPropertyParentLink
+data WebPropertyParentLink = WebPropertyParentLink'
     { _wpplHref :: !(Maybe Text)
     , _wpplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8440,7 +8444,7 @@ data WebPropertyParentLink = WebPropertyParentLink
 webPropertyParentLink
     :: WebPropertyParentLink
 webPropertyParentLink =
-    WebPropertyParentLink
+    WebPropertyParentLink'
     { _wpplHref = Nothing
     , _wpplType = "analytics#account"
     }
@@ -8457,12 +8461,12 @@ instance FromJSON WebPropertyParentLink where
         parseJSON
           = withObject "WebPropertyParentLink"
               (\ o ->
-                 WebPropertyParentLink <$>
+                 WebPropertyParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#account"))
 
 instance ToJSON WebPropertyParentLink where
-        toJSON WebPropertyParentLink{..}
+        toJSON WebPropertyParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _wpplHref,
@@ -8472,7 +8476,7 @@ instance ToJSON WebPropertyParentLink where
 -- requested.
 --
 -- /See:/ 'gaDataProFileInfo' smart constructor.
-data GaDataProFileInfo = GaDataProFileInfo
+data GaDataProFileInfo = GaDataProFileInfo'
     { _gdpfiWebPropertyId         :: !(Maybe Text)
     , _gdpfiProFileId             :: !(Maybe Text)
     , _gdpfiProFileName           :: !(Maybe Text)
@@ -8499,7 +8503,7 @@ data GaDataProFileInfo = GaDataProFileInfo
 gaDataProFileInfo
     :: GaDataProFileInfo
 gaDataProFileInfo =
-    GaDataProFileInfo
+    GaDataProFileInfo'
     { _gdpfiWebPropertyId = Nothing
     , _gdpfiProFileId = Nothing
     , _gdpfiProFileName = Nothing
@@ -8547,7 +8551,7 @@ instance FromJSON GaDataProFileInfo where
         parseJSON
           = withObject "GaDataProFileInfo"
               (\ o ->
-                 GaDataProFileInfo <$>
+                 GaDataProFileInfo' <$>
                    (o .:? "webPropertyId") <*> (o .:? "profileId") <*>
                      (o .:? "profileName")
                      <*> (o .:? "accountId")
@@ -8555,7 +8559,7 @@ instance FromJSON GaDataProFileInfo where
                      <*> (o .:? "tableId"))
 
 instance ToJSON GaDataProFileInfo where
-        toJSON GaDataProFileInfo{..}
+        toJSON GaDataProFileInfo'{..}
           = object
               (catMaybes
                  [("webPropertyId" .=) <$> _gdpfiWebPropertyId,
@@ -8569,7 +8573,7 @@ instance ToJSON GaDataProFileInfo where
 -- | Metadata returned for an upload operation.
 --
 -- /See:/ 'upload' smart constructor.
-data Upload = Upload
+data Upload = Upload'
     { _uuStatus             :: !(Maybe Text)
     , _uuKind               :: !Text
     , _uuCustomDataSourceId :: !(Maybe Text)
@@ -8596,7 +8600,7 @@ data Upload = Upload
 upload
     :: Upload
 upload =
-    Upload
+    Upload'
     { _uuStatus = Nothing
     , _uuKind = "analytics#upload"
     , _uuCustomDataSourceId = Nothing
@@ -8641,7 +8645,7 @@ instance FromJSON Upload where
         parseJSON
           = withObject "Upload"
               (\ o ->
-                 Upload <$>
+                 Upload' <$>
                    (o .:? "status") <*>
                      (o .:? "kind" .!= "analytics#upload")
                      <*> (o .:? "customDataSourceId")
@@ -8650,7 +8654,7 @@ instance FromJSON Upload where
                      <*> (o .:? "errors" .!= mempty))
 
 instance ToJSON Upload where
-        toJSON Upload{..}
+        toJSON Upload'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _uuStatus,
@@ -8662,7 +8666,7 @@ instance ToJSON Upload where
 -- | JSON template for Analytics Custom Dimension.
 --
 -- /See:/ 'customDimension' smart constructor.
-data CustomDimension = CustomDimension
+data CustomDimension = CustomDimension'
     { _cddParentLink    :: !(Maybe CustomDimensionParentLink)
     , _cddWebPropertyId :: !(Maybe Text)
     , _cddKind          :: !Text
@@ -8707,7 +8711,7 @@ data CustomDimension = CustomDimension
 customDimension
     :: CustomDimension
 customDimension =
-    CustomDimension
+    CustomDimension'
     { _cddParentLink = Nothing
     , _cddWebPropertyId = Nothing
     , _cddKind = "analytics#customDimension"
@@ -8789,7 +8793,7 @@ instance FromJSON CustomDimension where
         parseJSON
           = withObject "CustomDimension"
               (\ o ->
-                 CustomDimension <$>
+                 CustomDimension' <$>
                    (o .:? "parentLink") <*> (o .:? "webPropertyId") <*>
                      (o .:? "kind" .!= "analytics#customDimension")
                      <*> (o .:? "created")
@@ -8803,7 +8807,7 @@ instance FromJSON CustomDimension where
                      <*> (o .:? "index"))
 
 instance ToJSON CustomDimension where
-        toJSON CustomDimension{..}
+        toJSON CustomDimension'{..}
           = object
               (catMaybes
                  [("parentLink" .=) <$> _cddParentLink,
@@ -8820,7 +8824,7 @@ instance ToJSON CustomDimension where
 -- | JSON template for an Analytics segment.
 --
 -- /See:/ 'segment' smart constructor.
-data Segment = Segment
+data Segment = Segment'
     { _segDefinition :: !(Maybe Text)
     , _segKind       :: !Text
     , _segCreated    :: !(Maybe DateTime')
@@ -8856,7 +8860,7 @@ data Segment = Segment
 segment
     :: Segment
 segment =
-    Segment
+    Segment'
     { _segDefinition = Nothing
     , _segKind = "analytics#segment"
     , _segCreated = Nothing
@@ -8917,7 +8921,7 @@ instance FromJSON Segment where
         parseJSON
           = withObject "Segment"
               (\ o ->
-                 Segment <$>
+                 Segment' <$>
                    (o .:? "definition") <*>
                      (o .:? "kind" .!= "analytics#segment")
                      <*> (o .:? "created")
@@ -8929,7 +8933,7 @@ instance FromJSON Segment where
                      <*> (o .:? "segmentId"))
 
 instance ToJSON Segment where
-        toJSON Segment{..}
+        toJSON Segment'{..}
           = object
               (catMaybes
                  [("definition" .=) <$> _segDefinition,
@@ -8945,7 +8949,7 @@ instance ToJSON Segment where
 -- for this account.
 --
 -- /See:/ 'accountChildLink' smart constructor.
-data AccountChildLink = AccountChildLink
+data AccountChildLink = AccountChildLink'
     { _aclHref :: !(Maybe Text)
     , _aclType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -8960,7 +8964,7 @@ data AccountChildLink = AccountChildLink
 accountChildLink
     :: AccountChildLink
 accountChildLink =
-    AccountChildLink
+    AccountChildLink'
     { _aclHref = Nothing
     , _aclType = "analytics#webproperties"
     }
@@ -8977,12 +8981,12 @@ instance FromJSON AccountChildLink where
         parseJSON
           = withObject "AccountChildLink"
               (\ o ->
-                 AccountChildLink <$>
+                 AccountChildLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#webproperties"))
 
 instance ToJSON AccountChildLink where
-        toJSON AccountChildLink{..}
+        toJSON AccountChildLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _aclHref,
@@ -8991,7 +8995,7 @@ instance ToJSON AccountChildLink where
 -- | JSON template for an Analytics profile filter link.
 --
 -- /See:/ 'proFileFilterLink' smart constructor.
-data ProFileFilterLink = ProFileFilterLink
+data ProFileFilterLink = ProFileFilterLink'
     { _proProFileRef :: !(Maybe ProFileRef)
     , _proKind       :: !Text
     , _proFilterRef  :: !(Maybe FilterRef)
@@ -9018,7 +9022,7 @@ data ProFileFilterLink = ProFileFilterLink
 proFileFilterLink
     :: ProFileFilterLink
 proFileFilterLink =
-    ProFileFilterLink
+    ProFileFilterLink'
     { _proProFileRef = Nothing
     , _proKind = "analytics#profileFilterLink"
     , _proFilterRef = Nothing
@@ -9071,7 +9075,7 @@ instance FromJSON ProFileFilterLink where
         parseJSON
           = withObject "ProFileFilterLink"
               (\ o ->
-                 ProFileFilterLink <$>
+                 ProFileFilterLink' <$>
                    (o .:? "profileRef") <*>
                      (o .:? "kind" .!= "analytics#profileFilterLink")
                      <*> (o .:? "filterRef")
@@ -9080,7 +9084,7 @@ instance FromJSON ProFileFilterLink where
                      <*> (o .:? "rank"))
 
 instance ToJSON ProFileFilterLink where
-        toJSON ProFileFilterLink{..}
+        toJSON ProFileFilterLink'{..}
           = object
               (catMaybes
                  [("profileRef" .=) <$> _proProFileRef,
@@ -9093,7 +9097,7 @@ instance ToJSON ProFileFilterLink where
 -- custom metric belongs.
 --
 -- /See:/ 'customMetricParentLink' smart constructor.
-data CustomMetricParentLink = CustomMetricParentLink
+data CustomMetricParentLink = CustomMetricParentLink'
     { _cmplHref :: !(Maybe Text)
     , _cmplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9108,7 +9112,7 @@ data CustomMetricParentLink = CustomMetricParentLink
 customMetricParentLink
     :: CustomMetricParentLink
 customMetricParentLink =
-    CustomMetricParentLink
+    CustomMetricParentLink'
     { _cmplHref = Nothing
     , _cmplType = "analytics#webproperty"
     }
@@ -9125,12 +9129,12 @@ instance FromJSON CustomMetricParentLink where
         parseJSON
           = withObject "CustomMetricParentLink"
               (\ o ->
-                 CustomMetricParentLink <$>
+                 CustomMetricParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#webproperty"))
 
 instance ToJSON CustomMetricParentLink where
-        toJSON CustomMetricParentLink{..}
+        toJSON CustomMetricParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _cmplHref,
@@ -9139,7 +9143,7 @@ instance ToJSON CustomMetricParentLink where
 -- | JSON template for a metadata column.
 --
 -- /See:/ 'column' smart constructor.
-data Column = Column
+data Column = Column'
     { _ccKind       :: !Text
     , _ccAttributes :: !(Maybe ColumnAttributes)
     , _ccId         :: !(Maybe Text)
@@ -9157,7 +9161,7 @@ data Column = Column
 column
     :: Column
 column =
-    Column
+    Column'
     { _ccKind = "analytics#column"
     , _ccAttributes = Nothing
     , _ccId = Nothing
@@ -9180,13 +9184,13 @@ instance FromJSON Column where
         parseJSON
           = withObject "Column"
               (\ o ->
-                 Column <$>
+                 Column' <$>
                    (o .:? "kind" .!= "analytics#column") <*>
                      (o .:? "attributes")
                      <*> (o .:? "id"))
 
 instance ToJSON Column where
-        toJSON Column{..}
+        toJSON Column'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _ccKind),
@@ -9195,7 +9199,7 @@ instance ToJSON Column where
 
 --
 -- /See:/ 'gaDataDataTableColsItem' smart constructor.
-data GaDataDataTableColsItem = GaDataDataTableColsItem
+data GaDataDataTableColsItem = GaDataDataTableColsItem'
     { _gddtciId    :: !(Maybe Text)
     , _gddtciType  :: !(Maybe Text)
     , _gddtciLabel :: !(Maybe Text)
@@ -9213,7 +9217,7 @@ data GaDataDataTableColsItem = GaDataDataTableColsItem
 gaDataDataTableColsItem
     :: GaDataDataTableColsItem
 gaDataDataTableColsItem =
-    GaDataDataTableColsItem
+    GaDataDataTableColsItem'
     { _gddtciId = Nothing
     , _gddtciType = Nothing
     , _gddtciLabel = Nothing
@@ -9234,11 +9238,11 @@ instance FromJSON GaDataDataTableColsItem where
         parseJSON
           = withObject "GaDataDataTableColsItem"
               (\ o ->
-                 GaDataDataTableColsItem <$>
+                 GaDataDataTableColsItem' <$>
                    (o .:? "id") <*> (o .:? "type") <*> (o .:? "label"))
 
 instance ToJSON GaDataDataTableColsItem where
-        toJSON GaDataDataTableColsItem{..}
+        toJSON GaDataDataTableColsItem'{..}
           = object
               (catMaybes
                  [("id" .=) <$> _gddtciId,
@@ -9247,7 +9251,7 @@ instance ToJSON GaDataDataTableColsItem where
 
 --
 -- /See:/ 'experimentVariationsItem' smart constructor.
-data ExperimentVariationsItem = ExperimentVariationsItem
+data ExperimentVariationsItem = ExperimentVariationsItem'
     { _eviStatus :: !(Maybe Text)
     , _eviWeight :: !(Maybe (Textual Double))
     , _eviURL    :: !(Maybe Text)
@@ -9271,7 +9275,7 @@ data ExperimentVariationsItem = ExperimentVariationsItem
 experimentVariationsItem
     :: ExperimentVariationsItem
 experimentVariationsItem =
-    ExperimentVariationsItem
+    ExperimentVariationsItem'
     { _eviStatus = Nothing
     , _eviWeight = Nothing
     , _eviURL = Nothing
@@ -9314,14 +9318,14 @@ instance FromJSON ExperimentVariationsItem where
         parseJSON
           = withObject "ExperimentVariationsItem"
               (\ o ->
-                 ExperimentVariationsItem <$>
+                 ExperimentVariationsItem' <$>
                    (o .:? "status") <*> (o .:? "weight") <*>
                      (o .:? "url")
                      <*> (o .:? "won")
                      <*> (o .:? "name"))
 
 instance ToJSON ExperimentVariationsItem where
-        toJSON ExperimentVariationsItem{..}
+        toJSON ExperimentVariationsItem'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _eviStatus,
@@ -9333,7 +9337,7 @@ instance ToJSON ExperimentVariationsItem where
 -- same as the metric order specified in the request.
 --
 -- /See:/ 'mcfDataTotalsForAllResults' smart constructor.
-newtype McfDataTotalsForAllResults = McfDataTotalsForAllResults
+newtype McfDataTotalsForAllResults = McfDataTotalsForAllResults'
     { _mdtfarAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9346,7 +9350,7 @@ mcfDataTotalsForAllResults
     :: HashMap Text Text -- ^ 'mdtfarAddtional'
     -> McfDataTotalsForAllResults
 mcfDataTotalsForAllResults pMdtfarAddtional_ =
-    McfDataTotalsForAllResults
+    McfDataTotalsForAllResults'
     { _mdtfarAddtional = _Coerce # pMdtfarAddtional_
     }
 
@@ -9362,7 +9366,7 @@ instance FromJSON McfDataTotalsForAllResults where
         parseJSON
           = withObject "McfDataTotalsForAllResults"
               (\ o ->
-                 McfDataTotalsForAllResults <$> (parseJSONObject o))
+                 McfDataTotalsForAllResults' <$> (parseJSONObject o))
 
 instance ToJSON McfDataTotalsForAllResults where
         toJSON = toJSON . _mdtfarAddtional
@@ -9370,7 +9374,7 @@ instance ToJSON McfDataTotalsForAllResults where
 -- | Download details for a file stored in Google Cloud Storage.
 --
 -- /See:/ 'unSampledReportCloudStorageDownloadDetails' smart constructor.
-data UnSampledReportCloudStorageDownloadDetails = UnSampledReportCloudStorageDownloadDetails
+data UnSampledReportCloudStorageDownloadDetails = UnSampledReportCloudStorageDownloadDetails'
     { _usrcsddObjectId :: !(Maybe Text)
     , _usrcsddBucketId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9385,7 +9389,7 @@ data UnSampledReportCloudStorageDownloadDetails = UnSampledReportCloudStorageDow
 unSampledReportCloudStorageDownloadDetails
     :: UnSampledReportCloudStorageDownloadDetails
 unSampledReportCloudStorageDownloadDetails =
-    UnSampledReportCloudStorageDownloadDetails
+    UnSampledReportCloudStorageDownloadDetails'
     { _usrcsddObjectId = Nothing
     , _usrcsddBucketId = Nothing
     }
@@ -9408,12 +9412,13 @@ instance FromJSON
           = withObject
               "UnSampledReportCloudStorageDownloadDetails"
               (\ o ->
-                 UnSampledReportCloudStorageDownloadDetails <$>
+                 UnSampledReportCloudStorageDownloadDetails' <$>
                    (o .:? "objectId") <*> (o .:? "bucketId"))
 
 instance ToJSON
          UnSampledReportCloudStorageDownloadDetails where
-        toJSON UnSampledReportCloudStorageDownloadDetails{..}
+        toJSON
+          UnSampledReportCloudStorageDownloadDetails'{..}
           = object
               (catMaybes
                  [("objectId" .=) <$> _usrcsddObjectId,
@@ -9423,7 +9428,7 @@ instance ToJSON
 -- view (profile).
 --
 -- /See:/ 'proFileChildLink' smart constructor.
-data ProFileChildLink = ProFileChildLink
+data ProFileChildLink = ProFileChildLink'
     { _pfclHref :: !(Maybe Text)
     , _pfclType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9438,7 +9443,7 @@ data ProFileChildLink = ProFileChildLink
 proFileChildLink
     :: ProFileChildLink
 proFileChildLink =
-    ProFileChildLink
+    ProFileChildLink'
     { _pfclHref = Nothing
     , _pfclType = "analytics#goals"
     }
@@ -9455,12 +9460,12 @@ instance FromJSON ProFileChildLink where
         parseJSON
           = withObject "ProFileChildLink"
               (\ o ->
-                 ProFileChildLink <$>
+                 ProFileChildLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#goals"))
 
 instance ToJSON ProFileChildLink where
-        toJSON ProFileChildLink{..}
+        toJSON ProFileChildLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _pfclHref,
@@ -9468,7 +9473,7 @@ instance ToJSON ProFileChildLink where
 
 --
 -- /See:/ 'gaDataColumnHeadersItem' smart constructor.
-data GaDataColumnHeadersItem = GaDataColumnHeadersItem
+data GaDataColumnHeadersItem = GaDataColumnHeadersItem'
     { _gdchiColumnType :: !(Maybe Text)
     , _gdchiName       :: !(Maybe Text)
     , _gdchiDataType   :: !(Maybe Text)
@@ -9486,7 +9491,7 @@ data GaDataColumnHeadersItem = GaDataColumnHeadersItem
 gaDataColumnHeadersItem
     :: GaDataColumnHeadersItem
 gaDataColumnHeadersItem =
-    GaDataColumnHeadersItem
+    GaDataColumnHeadersItem'
     { _gdchiColumnType = Nothing
     , _gdchiName = Nothing
     , _gdchiDataType = Nothing
@@ -9515,12 +9520,12 @@ instance FromJSON GaDataColumnHeadersItem where
         parseJSON
           = withObject "GaDataColumnHeadersItem"
               (\ o ->
-                 GaDataColumnHeadersItem <$>
+                 GaDataColumnHeadersItem' <$>
                    (o .:? "columnType") <*> (o .:? "name") <*>
                      (o .:? "dataType"))
 
 instance ToJSON GaDataColumnHeadersItem where
-        toJSON GaDataColumnHeadersItem{..}
+        toJSON GaDataColumnHeadersItem'{..}
           = object
               (catMaybes
                  [("columnType" .=) <$> _gdchiColumnType,
@@ -9531,7 +9536,7 @@ instance ToJSON GaDataColumnHeadersItem where
 -- belongs.
 --
 -- /See:/ 'goalParentLink' smart constructor.
-data GoalParentLink = GoalParentLink
+data GoalParentLink = GoalParentLink'
     { _gplHref :: !(Maybe Text)
     , _gplType :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -9546,7 +9551,7 @@ data GoalParentLink = GoalParentLink
 goalParentLink
     :: GoalParentLink
 goalParentLink =
-    GoalParentLink
+    GoalParentLink'
     { _gplHref = Nothing
     , _gplType = "analytics#profile"
     }
@@ -9563,12 +9568,12 @@ instance FromJSON GoalParentLink where
         parseJSON
           = withObject "GoalParentLink"
               (\ o ->
-                 GoalParentLink <$>
+                 GoalParentLink' <$>
                    (o .:? "href") <*>
                      (o .:? "type" .!= "analytics#profile"))
 
 instance ToJSON GoalParentLink where
-        toJSON GoalParentLink{..}
+        toJSON GoalParentLink'{..}
           = object
               (catMaybes
                  [("href" .=) <$> _gplHref,
@@ -9577,7 +9582,7 @@ instance ToJSON GoalParentLink where
 -- | Map of attribute name and value for this column.
 --
 -- /See:/ 'columnAttributes' smart constructor.
-newtype ColumnAttributes = ColumnAttributes
+newtype ColumnAttributes = ColumnAttributes'
     { _caAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -9590,7 +9595,7 @@ columnAttributes
     :: HashMap Text Text -- ^ 'caAddtional'
     -> ColumnAttributes
 columnAttributes pCaAddtional_ =
-    ColumnAttributes
+    ColumnAttributes'
     { _caAddtional = _Coerce # pCaAddtional_
     }
 
@@ -9603,7 +9608,7 @@ caAddtional
 instance FromJSON ColumnAttributes where
         parseJSON
           = withObject "ColumnAttributes"
-              (\ o -> ColumnAttributes <$> (parseJSONObject o))
+              (\ o -> ColumnAttributes' <$> (parseJSONObject o))
 
 instance ToJSON ColumnAttributes where
         toJSON = toJSON . _caAddtional

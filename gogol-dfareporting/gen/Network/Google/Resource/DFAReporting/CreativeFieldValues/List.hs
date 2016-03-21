@@ -72,7 +72,7 @@ type CreativeFieldValuesListResource =
 -- | Retrieves a list of creative field values, possibly filtered.
 --
 -- /See:/ 'creativeFieldValuesList' smart constructor.
-data CreativeFieldValuesList = CreativeFieldValuesList
+data CreativeFieldValuesList = CreativeFieldValuesList'
     { _cfvlCreativeFieldId :: !(Textual Int64)
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe [Textual Int64])
@@ -107,7 +107,7 @@ creativeFieldValuesList
     -> Int64 -- ^ 'cfvlProFileId'
     -> CreativeFieldValuesList
 creativeFieldValuesList pCfvlCreativeFieldId_ pCfvlProFileId_ =
-    CreativeFieldValuesList
+    CreativeFieldValuesList'
     { _cfvlCreativeFieldId = _Coerce # pCfvlCreativeFieldId_
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing
@@ -175,7 +175,7 @@ instance GoogleRequest CreativeFieldValuesList where
              CreativeFieldValuesListResponse
         type Scopes CreativeFieldValuesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldValuesList{..}
+        requestClient CreativeFieldValuesList'{..}
           = go _cfvlProFileId _cfvlCreativeFieldId
               _cfvlSearchString
               (_cfvlIds ^. _Default)

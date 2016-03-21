@@ -54,7 +54,7 @@ type EventTagsInsertResource =
 -- | Inserts a new event tag.
 --
 -- /See:/ 'eventTagsInsert' smart constructor.
-data EventTagsInsert = EventTagsInsert
+data EventTagsInsert = EventTagsInsert'
     { _etiProFileId :: !(Textual Int64)
     , _etiPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsInsert
     -> EventTag -- ^ 'etiPayload'
     -> EventTagsInsert
 eventTagsInsert pEtiProFileId_ pEtiPayload_ =
-    EventTagsInsert
+    EventTagsInsert'
     { _etiProFileId = _Coerce # pEtiProFileId_
     , _etiPayload = pEtiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest EventTagsInsert where
         type Rs EventTagsInsert = EventTag
         type Scopes EventTagsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient EventTagsInsert{..}
+        requestClient EventTagsInsert'{..}
           = go _etiProFileId (Just AltJSON) _etiPayload
               dFAReportingService
           where go

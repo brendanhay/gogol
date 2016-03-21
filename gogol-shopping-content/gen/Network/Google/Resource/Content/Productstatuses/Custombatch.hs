@@ -53,7 +53,7 @@ type ProductstatusesCustombatchResource =
 -- | Gets the statuses of multiple products in a single request.
 --
 -- /See:/ 'productstatusesCustombatch' smart constructor.
-newtype ProductstatusesCustombatch = ProductstatusesCustombatch
+newtype ProductstatusesCustombatch = ProductstatusesCustombatch'
     { _pPayload :: ProductstatusesCustomBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ productstatusesCustombatch
     :: ProductstatusesCustomBatchRequest -- ^ 'pPayload'
     -> ProductstatusesCustombatch
 productstatusesCustombatch pPPayload_ =
-    ProductstatusesCustombatch
+    ProductstatusesCustombatch'
     { _pPayload = pPPayload_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest ProductstatusesCustombatch
              ProductstatusesCustomBatchResponse
         type Scopes ProductstatusesCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductstatusesCustombatch{..}
+        requestClient ProductstatusesCustombatch'{..}
           = go (Just AltJSON) _pPayload shoppingContentService
           where go
                   = buildClient

@@ -23,7 +23,7 @@ import           Network.Google.SQLAdmin.Types.Sum
 -- | SslCerts Resource
 --
 -- /See:/ 'sslCert' smart constructor.
-data SSLCert = SSLCert
+data SSLCert = SSLCert'
     { _scCommonName       :: !(Maybe Text)
     , _scKind             :: !Text
     , _scCertSerialNumber :: !(Maybe Text)
@@ -59,7 +59,7 @@ data SSLCert = SSLCert
 sslCert
     :: SSLCert
 sslCert =
-    SSLCert
+    SSLCert'
     { _scCommonName = Nothing
     , _scKind = "sql#sslCert"
     , _scCertSerialNumber = Nothing
@@ -125,7 +125,7 @@ instance FromJSON SSLCert where
         parseJSON
           = withObject "SSLCert"
               (\ o ->
-                 SSLCert <$>
+                 SSLCert' <$>
                    (o .:? "commonName") <*>
                      (o .:? "kind" .!= "sql#sslCert")
                      <*> (o .:? "certSerialNumber")
@@ -137,7 +137,7 @@ instance FromJSON SSLCert where
                      <*> (o .:? "instance"))
 
 instance ToJSON SSLCert where
-        toJSON SSLCert{..}
+        toJSON SSLCert'{..}
           = object
               (catMaybes
                  [("commonName" .=) <$> _scCommonName,
@@ -153,7 +153,7 @@ instance ToJSON SSLCert where
 -- | Database list response.
 --
 -- /See:/ 'databasesListResponse' smart constructor.
-data DatabasesListResponse = DatabasesListResponse
+data DatabasesListResponse = DatabasesListResponse'
     { _dlrKind  :: !Text
     , _dlrItems :: !(Maybe [Database])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -168,7 +168,7 @@ data DatabasesListResponse = DatabasesListResponse
 databasesListResponse
     :: DatabasesListResponse
 databasesListResponse =
-    DatabasesListResponse
+    DatabasesListResponse'
     { _dlrKind = "sql#databasesList"
     , _dlrItems = Nothing
     }
@@ -188,12 +188,12 @@ instance FromJSON DatabasesListResponse where
         parseJSON
           = withObject "DatabasesListResponse"
               (\ o ->
-                 DatabasesListResponse <$>
+                 DatabasesListResponse' <$>
                    (o .:? "kind" .!= "sql#databasesList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON DatabasesListResponse where
-        toJSON DatabasesListResponse{..}
+        toJSON DatabasesListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _dlrKind),
@@ -202,7 +202,7 @@ instance ToJSON DatabasesListResponse where
 -- | Database instance export request.
 --
 -- /See:/ 'instancesExportRequest' smart constructor.
-newtype InstancesExportRequest = InstancesExportRequest
+newtype InstancesExportRequest = InstancesExportRequest'
     { _ierExportContext :: Maybe ExportContext
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -214,7 +214,7 @@ newtype InstancesExportRequest = InstancesExportRequest
 instancesExportRequest
     :: InstancesExportRequest
 instancesExportRequest =
-    InstancesExportRequest
+    InstancesExportRequest'
     { _ierExportContext = Nothing
     }
 
@@ -228,10 +228,10 @@ instance FromJSON InstancesExportRequest where
         parseJSON
           = withObject "InstancesExportRequest"
               (\ o ->
-                 InstancesExportRequest <$> (o .:? "exportContext"))
+                 InstancesExportRequest' <$> (o .:? "exportContext"))
 
 instance ToJSON InstancesExportRequest where
-        toJSON InstancesExportRequest{..}
+        toJSON InstancesExportRequest'{..}
           = object
               (catMaybes
                  [("exportContext" .=) <$> _ierExportContext])
@@ -239,7 +239,7 @@ instance ToJSON InstancesExportRequest where
 -- | On-premises instance configuration.
 --
 -- /See:/ 'onPremisesConfiguration' smart constructor.
-data OnPremisesConfiguration = OnPremisesConfiguration
+data OnPremisesConfiguration = OnPremisesConfiguration'
     { _opcKind     :: !Text
     , _opcHostPort :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -254,7 +254,7 @@ data OnPremisesConfiguration = OnPremisesConfiguration
 onPremisesConfiguration
     :: OnPremisesConfiguration
 onPremisesConfiguration =
-    OnPremisesConfiguration
+    OnPremisesConfiguration'
     { _opcKind = "sql#onPremisesConfiguration"
     , _opcHostPort = Nothing
     }
@@ -272,12 +272,12 @@ instance FromJSON OnPremisesConfiguration where
         parseJSON
           = withObject "OnPremisesConfiguration"
               (\ o ->
-                 OnPremisesConfiguration <$>
+                 OnPremisesConfiguration' <$>
                    (o .:? "kind" .!= "sql#onPremisesConfiguration") <*>
                      (o .:? "hostPort"))
 
 instance ToJSON OnPremisesConfiguration where
-        toJSON OnPremisesConfiguration{..}
+        toJSON OnPremisesConfiguration'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _opcKind),
@@ -286,7 +286,7 @@ instance ToJSON OnPremisesConfiguration where
 -- | Database instance list operations response.
 --
 -- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse
+data OperationsListResponse = OperationsListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
     , _olrItems         :: !(Maybe [Operation])
@@ -304,7 +304,7 @@ data OperationsListResponse = OperationsListResponse
 operationsListResponse
     :: OperationsListResponse
 operationsListResponse =
-    OperationsListResponse
+    OperationsListResponse'
     { _olrNextPageToken = Nothing
     , _olrKind = "sql#operationsList"
     , _olrItems = Nothing
@@ -332,13 +332,13 @@ instance FromJSON OperationsListResponse where
         parseJSON
           = withObject "OperationsListResponse"
               (\ o ->
-                 OperationsListResponse <$>
+                 OperationsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "sql#operationsList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON OperationsListResponse where
-        toJSON OperationsListResponse{..}
+        toJSON OperationsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olrNextPageToken,
@@ -348,7 +348,7 @@ instance ToJSON OperationsListResponse where
 -- | Database instance import context.
 --
 -- /See:/ 'importContext' smart constructor.
-data ImportContext = ImportContext
+data ImportContext = ImportContext'
     { _icDatabase         :: !(Maybe Text)
     , _icKind             :: !Text
     , _icCSVImportOptions :: !(Maybe ImportContextCSVImportOptions)
@@ -372,7 +372,7 @@ data ImportContext = ImportContext
 importContext
     :: ImportContext
 importContext =
-    ImportContext
+    ImportContext'
     { _icDatabase = Nothing
     , _icKind = "sql#importContext"
     , _icCSVImportOptions = Nothing
@@ -414,7 +414,7 @@ instance FromJSON ImportContext where
         parseJSON
           = withObject "ImportContext"
               (\ o ->
-                 ImportContext <$>
+                 ImportContext' <$>
                    (o .:? "database") <*>
                      (o .:? "kind" .!= "sql#importContext")
                      <*> (o .:? "csvImportOptions")
@@ -422,7 +422,7 @@ instance FromJSON ImportContext where
                      <*> (o .:? "fileType"))
 
 instance ToJSON ImportContext where
-        toJSON ImportContext{..}
+        toJSON ImportContext'{..}
           = object
               (catMaybes
                  [("database" .=) <$> _icDatabase,
@@ -437,7 +437,7 @@ instance ToJSON ImportContext where
 -- them directly.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId      :: !(Maybe Text)
     , _oTargetProject :: !(Maybe Text)
     , _oStatus        :: !(Maybe Text)
@@ -491,7 +491,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oTargetProject = Nothing
     , _oStatus = Nothing
@@ -599,7 +599,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "targetProject") <*>
                      (o .:? "status")
                      <*> (o .:? "insertTime")
@@ -616,7 +616,7 @@ instance FromJSON Operation where
                      <*> (o .:? "targetLink"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -636,7 +636,7 @@ instance ToJSON Operation where
 -- | Database instance settings.
 --
 -- /See:/ 'settings' smart constructor.
-data Settings = Settings
+data Settings = Settings'
     { _sReplicationType             :: !(Maybe Text)
     , _sActivationPolicy            :: !(Maybe Text)
     , _sSettingsVersion             :: !(Maybe (Textual Int64))
@@ -693,7 +693,7 @@ data Settings = Settings
 settings
     :: Settings
 settings =
-    Settings
+    Settings'
     { _sReplicationType = Nothing
     , _sActivationPolicy = Nothing
     , _sSettingsVersion = Nothing
@@ -840,7 +840,7 @@ instance FromJSON Settings where
         parseJSON
           = withObject "Settings"
               (\ o ->
-                 Settings <$>
+                 Settings' <$>
                    (o .:? "replicationType") <*>
                      (o .:? "activationPolicy")
                      <*> (o .:? "settingsVersion")
@@ -859,7 +859,7 @@ instance FromJSON Settings where
                      <*> (o .:? "backupConfiguration"))
 
 instance ToJSON Settings where
-        toJSON Settings{..}
+        toJSON Settings'{..}
           = object
               (catMaybes
                  [("replicationType" .=) <$> _sReplicationType,
@@ -886,7 +886,7 @@ instance ToJSON Settings where
 -- | Database instance IP Mapping.
 --
 -- /See:/ 'ipMApping' smart constructor.
-data IPMApping = IPMApping
+data IPMApping = IPMApping'
     { _imaIPAddress    :: !(Maybe Text)
     , _imaTimeToRetire :: !(Maybe DateTime')
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -901,7 +901,7 @@ data IPMApping = IPMApping
 ipMApping
     :: IPMApping
 ipMApping =
-    IPMApping
+    IPMApping'
     { _imaIPAddress = Nothing
     , _imaTimeToRetire = Nothing
     }
@@ -924,11 +924,11 @@ instance FromJSON IPMApping where
         parseJSON
           = withObject "IPMApping"
               (\ o ->
-                 IPMApping <$>
+                 IPMApping' <$>
                    (o .:? "ipAddress") <*> (o .:? "timeToRetire"))
 
 instance ToJSON IPMApping where
-        toJSON IPMApping{..}
+        toJSON IPMApping'{..}
           = object
               (catMaybes
                  [("ipAddress" .=) <$> _imaIPAddress,
@@ -937,7 +937,7 @@ instance ToJSON IPMApping where
 -- | A database resource inside a Cloud SQL instance.
 --
 -- /See:/ 'database' smart constructor.
-data Database = Database
+data Database = Database'
     { _dEtag      :: !(Maybe Text)
     , _dProject   :: !(Maybe Text)
     , _dKind      :: !Text
@@ -970,7 +970,7 @@ data Database = Database
 database
     :: Database
 database =
-    Database
+    Database'
     { _dEtag = Nothing
     , _dProject = Nothing
     , _dKind = "sql#database"
@@ -1023,7 +1023,7 @@ instance FromJSON Database where
         parseJSON
           = withObject "Database"
               (\ o ->
-                 Database <$>
+                 Database' <$>
                    (o .:? "etag") <*> (o .:? "project") <*>
                      (o .:? "kind" .!= "sql#database")
                      <*> (o .:? "collation")
@@ -1033,7 +1033,7 @@ instance FromJSON Database where
                      <*> (o .:? "instance"))
 
 instance ToJSON Database where
-        toJSON Database{..}
+        toJSON Database'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _dEtag,
@@ -1047,7 +1047,7 @@ instance ToJSON Database where
 -- | SslCerts create ephemeral certificate request.
 --
 -- /See:/ 'sslCertsCreateEphemeralRequest' smart constructor.
-newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest
+newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest'
     { _sccerPublicKey :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1059,7 +1059,7 @@ newtype SSLCertsCreateEphemeralRequest = SSLCertsCreateEphemeralRequest
 sslCertsCreateEphemeralRequest
     :: SSLCertsCreateEphemeralRequest
 sslCertsCreateEphemeralRequest =
-    SSLCertsCreateEphemeralRequest
+    SSLCertsCreateEphemeralRequest'
     { _sccerPublicKey = Nothing
     }
 
@@ -1074,18 +1074,18 @@ instance FromJSON SSLCertsCreateEphemeralRequest
         parseJSON
           = withObject "SSLCertsCreateEphemeralRequest"
               (\ o ->
-                 SSLCertsCreateEphemeralRequest <$>
+                 SSLCertsCreateEphemeralRequest' <$>
                    (o .:? "public_key"))
 
 instance ToJSON SSLCertsCreateEphemeralRequest where
-        toJSON SSLCertsCreateEphemeralRequest{..}
+        toJSON SSLCertsCreateEphemeralRequest'{..}
           = object
               (catMaybes [("public_key" .=) <$> _sccerPublicKey])
 
 -- | Binary log coordinates.
 --
 -- /See:/ 'binLogCoordinates' smart constructor.
-data BinLogCoordinates = BinLogCoordinates
+data BinLogCoordinates = BinLogCoordinates'
     { _blcBinLogPosition :: !(Maybe (Textual Int64))
     , _blcKind           :: !Text
     , _blcBinLogFileName :: !(Maybe Text)
@@ -1103,7 +1103,7 @@ data BinLogCoordinates = BinLogCoordinates
 binLogCoordinates
     :: BinLogCoordinates
 binLogCoordinates =
-    BinLogCoordinates
+    BinLogCoordinates'
     { _blcBinLogPosition = Nothing
     , _blcKind = "sql#binLogCoordinates"
     , _blcBinLogFileName = Nothing
@@ -1130,13 +1130,13 @@ instance FromJSON BinLogCoordinates where
         parseJSON
           = withObject "BinLogCoordinates"
               (\ o ->
-                 BinLogCoordinates <$>
+                 BinLogCoordinates' <$>
                    (o .:? "binLogPosition") <*>
                      (o .:? "kind" .!= "sql#binLogCoordinates")
                      <*> (o .:? "binLogFileName"))
 
 instance ToJSON BinLogCoordinates where
-        toJSON BinLogCoordinates{..}
+        toJSON BinLogCoordinates'{..}
           = object
               (catMaybes
                  [("binLogPosition" .=) <$> _blcBinLogPosition,
@@ -1147,7 +1147,7 @@ instance ToJSON BinLogCoordinates where
 -- only to Second Generation instances.
 --
 -- /See:/ 'databaseInstanceFailoverReplica' smart constructor.
-data DatabaseInstanceFailoverReplica = DatabaseInstanceFailoverReplica
+data DatabaseInstanceFailoverReplica = DatabaseInstanceFailoverReplica'
     { _difrName      :: !(Maybe Text)
     , _difrAvailable :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1162,7 +1162,7 @@ data DatabaseInstanceFailoverReplica = DatabaseInstanceFailoverReplica
 databaseInstanceFailoverReplica
     :: DatabaseInstanceFailoverReplica
 databaseInstanceFailoverReplica =
-    DatabaseInstanceFailoverReplica
+    DatabaseInstanceFailoverReplica'
     { _difrName = Nothing
     , _difrAvailable = Nothing
     }
@@ -1184,11 +1184,11 @@ instance FromJSON DatabaseInstanceFailoverReplica
         parseJSON
           = withObject "DatabaseInstanceFailoverReplica"
               (\ o ->
-                 DatabaseInstanceFailoverReplica <$>
+                 DatabaseInstanceFailoverReplica' <$>
                    (o .:? "name") <*> (o .:? "available"))
 
 instance ToJSON DatabaseInstanceFailoverReplica where
-        toJSON DatabaseInstanceFailoverReplica{..}
+        toJSON DatabaseInstanceFailoverReplica'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _difrName,
@@ -1197,7 +1197,7 @@ instance ToJSON DatabaseInstanceFailoverReplica where
 -- | Tiers list response.
 --
 -- /See:/ 'tiersListResponse' smart constructor.
-data TiersListResponse = TiersListResponse
+data TiersListResponse = TiersListResponse'
     { _tlrKind  :: !Text
     , _tlrItems :: !(Maybe [Tier])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1212,7 +1212,7 @@ data TiersListResponse = TiersListResponse
 tiersListResponse
     :: TiersListResponse
 tiersListResponse =
-    TiersListResponse
+    TiersListResponse'
     { _tlrKind = "sql#tiersList"
     , _tlrItems = Nothing
     }
@@ -1232,12 +1232,12 @@ instance FromJSON TiersListResponse where
         parseJSON
           = withObject "TiersListResponse"
               (\ o ->
-                 TiersListResponse <$>
+                 TiersListResponse' <$>
                    (o .:? "kind" .!= "sql#tiersList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON TiersListResponse where
-        toJSON TiersListResponse{..}
+        toJSON TiersListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tlrKind),
@@ -1246,7 +1246,7 @@ instance ToJSON TiersListResponse where
 -- | User list response.
 --
 -- /See:/ 'usersListResponse' smart constructor.
-data UsersListResponse = UsersListResponse
+data UsersListResponse = UsersListResponse'
     { _ulrNextPageToken :: !(Maybe Text)
     , _ulrKind          :: !Text
     , _ulrItems         :: !(Maybe [User])
@@ -1264,7 +1264,7 @@ data UsersListResponse = UsersListResponse
 usersListResponse
     :: UsersListResponse
 usersListResponse =
-    UsersListResponse
+    UsersListResponse'
     { _ulrNextPageToken = Nothing
     , _ulrKind = "sql#usersList"
     , _ulrItems = Nothing
@@ -1293,13 +1293,13 @@ instance FromJSON UsersListResponse where
         parseJSON
           = withObject "UsersListResponse"
               (\ o ->
-                 UsersListResponse <$>
+                 UsersListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "sql#usersList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON UsersListResponse where
-        toJSON UsersListResponse{..}
+        toJSON UsersListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ulrNextPageToken,
@@ -1309,7 +1309,7 @@ instance ToJSON UsersListResponse where
 -- | Database instance export context.
 --
 -- /See:/ 'exportContext' smart constructor.
-data ExportContext = ExportContext
+data ExportContext = ExportContext'
     { _ecCSVExportOptions :: !(Maybe ExportContextCSVExportOptions)
     , _ecKind             :: !Text
     , _ecURI              :: !(Maybe Text)
@@ -1336,7 +1336,7 @@ data ExportContext = ExportContext
 exportContext
     :: ExportContext
 exportContext =
-    ExportContext
+    ExportContext'
     { _ecCSVExportOptions = Nothing
     , _ecKind = "sql#exportContext"
     , _ecURI = Nothing
@@ -1389,7 +1389,7 @@ instance FromJSON ExportContext where
         parseJSON
           = withObject "ExportContext"
               (\ o ->
-                 ExportContext <$>
+                 ExportContext' <$>
                    (o .:? "csvExportOptions") <*>
                      (o .:? "kind" .!= "sql#exportContext")
                      <*> (o .:? "uri")
@@ -1398,7 +1398,7 @@ instance FromJSON ExportContext where
                      <*> (o .:? "databases" .!= mempty))
 
 instance ToJSON ExportContext where
-        toJSON ExportContext{..}
+        toJSON ExportContext'{..}
           = object
               (catMaybes
                  [("csvExportOptions" .=) <$> _ecCSVExportOptions,
@@ -1410,7 +1410,7 @@ instance ToJSON ExportContext where
 -- | Database instance operation errors list wrapper.
 --
 -- /See:/ 'operationErrors' smart constructor.
-data OperationErrors = OperationErrors
+data OperationErrors = OperationErrors'
     { _oeKind   :: !Text
     , _oeErrors :: !(Maybe [OperationError])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1425,7 +1425,7 @@ data OperationErrors = OperationErrors
 operationErrors
     :: OperationErrors
 operationErrors =
-    OperationErrors
+    OperationErrors'
     { _oeKind = "sql#operationErrors"
     , _oeErrors = Nothing
     }
@@ -1445,12 +1445,12 @@ instance FromJSON OperationErrors where
         parseJSON
           = withObject "OperationErrors"
               (\ o ->
-                 OperationErrors <$>
+                 OperationErrors' <$>
                    (o .:? "kind" .!= "sql#operationErrors") <*>
                      (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationErrors where
-        toJSON OperationErrors{..}
+        toJSON OperationErrors'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oeKind),
@@ -1459,7 +1459,7 @@ instance ToJSON OperationErrors where
 -- | SslCerts list response.
 --
 -- /See:/ 'sslCertsListResponse' smart constructor.
-data SSLCertsListResponse = SSLCertsListResponse
+data SSLCertsListResponse = SSLCertsListResponse'
     { _sclrKind  :: !Text
     , _sclrItems :: !(Maybe [SSLCert])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1474,7 +1474,7 @@ data SSLCertsListResponse = SSLCertsListResponse
 sslCertsListResponse
     :: SSLCertsListResponse
 sslCertsListResponse =
-    SSLCertsListResponse
+    SSLCertsListResponse'
     { _sclrKind = "sql#sslCertsList"
     , _sclrItems = Nothing
     }
@@ -1494,12 +1494,12 @@ instance FromJSON SSLCertsListResponse where
         parseJSON
           = withObject "SSLCertsListResponse"
               (\ o ->
-                 SSLCertsListResponse <$>
+                 SSLCertsListResponse' <$>
                    (o .:? "kind" .!= "sql#sslCertsList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON SSLCertsListResponse where
-        toJSON SSLCertsListResponse{..}
+        toJSON SSLCertsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _sclrKind),
@@ -1508,7 +1508,7 @@ instance ToJSON SSLCertsListResponse where
 -- | SslCerts insert request.
 --
 -- /See:/ 'sslCertsInsertRequest' smart constructor.
-newtype SSLCertsInsertRequest = SSLCertsInsertRequest
+newtype SSLCertsInsertRequest = SSLCertsInsertRequest'
     { _scirCommonName :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1520,7 +1520,7 @@ newtype SSLCertsInsertRequest = SSLCertsInsertRequest
 sslCertsInsertRequest
     :: SSLCertsInsertRequest
 sslCertsInsertRequest =
-    SSLCertsInsertRequest
+    SSLCertsInsertRequest'
     { _scirCommonName = Nothing
     }
 
@@ -1536,17 +1536,17 @@ instance FromJSON SSLCertsInsertRequest where
         parseJSON
           = withObject "SSLCertsInsertRequest"
               (\ o ->
-                 SSLCertsInsertRequest <$> (o .:? "commonName"))
+                 SSLCertsInsertRequest' <$> (o .:? "commonName"))
 
 instance ToJSON SSLCertsInsertRequest where
-        toJSON SSLCertsInsertRequest{..}
+        toJSON SSLCertsInsertRequest'{..}
           = object
               (catMaybes [("commonName" .=) <$> _scirCommonName])
 
 -- | IP Management configuration.
 --
 -- /See:/ 'ipConfiguration' smart constructor.
-data IPConfiguration = IPConfiguration
+data IPConfiguration = IPConfiguration'
     { _icAuthorizedNetworks :: !(Maybe [ACLEntry])
     , _icRequireSSL         :: !(Maybe Bool)
     , _icIPv4Enabled        :: !(Maybe Bool)
@@ -1564,7 +1564,7 @@ data IPConfiguration = IPConfiguration
 ipConfiguration
     :: IPConfiguration
 ipConfiguration =
-    IPConfiguration
+    IPConfiguration'
     { _icAuthorizedNetworks = Nothing
     , _icRequireSSL = Nothing
     , _icIPv4Enabled = Nothing
@@ -1596,13 +1596,13 @@ instance FromJSON IPConfiguration where
         parseJSON
           = withObject "IPConfiguration"
               (\ o ->
-                 IPConfiguration <$>
+                 IPConfiguration' <$>
                    (o .:? "authorizedNetworks" .!= mempty) <*>
                      (o .:? "requireSsl")
                      <*> (o .:? "ipv4Enabled"))
 
 instance ToJSON IPConfiguration where
-        toJSON IPConfiguration{..}
+        toJSON IPConfiguration'{..}
           = object
               (catMaybes
                  [("authorizedNetworks" .=) <$> _icAuthorizedNetworks,
@@ -1613,7 +1613,7 @@ instance ToJSON IPConfiguration where
 -- preferably be restarted for system maintenance puruposes.
 --
 -- /See:/ 'maintenanceWindow' smart constructor.
-data MaintenanceWindow = MaintenanceWindow
+data MaintenanceWindow = MaintenanceWindow'
     { _mwKind        :: !Text
     , _mwDay         :: !(Maybe (Textual Int32))
     , _mwHour        :: !(Maybe (Textual Int32))
@@ -1634,7 +1634,7 @@ data MaintenanceWindow = MaintenanceWindow
 maintenanceWindow
     :: MaintenanceWindow
 maintenanceWindow =
-    MaintenanceWindow
+    MaintenanceWindow'
     { _mwKind = "sql#maintenanceWindow"
     , _mwDay = Nothing
     , _mwHour = Nothing
@@ -1666,14 +1666,14 @@ instance FromJSON MaintenanceWindow where
         parseJSON
           = withObject "MaintenanceWindow"
               (\ o ->
-                 MaintenanceWindow <$>
+                 MaintenanceWindow' <$>
                    (o .:? "kind" .!= "sql#maintenanceWindow") <*>
                      (o .:? "day")
                      <*> (o .:? "hour")
                      <*> (o .:? "updateTrack"))
 
 instance ToJSON MaintenanceWindow where
-        toJSON MaintenanceWindow{..}
+        toJSON MaintenanceWindow'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _mwKind), ("day" .=) <$> _mwDay,
@@ -1683,7 +1683,7 @@ instance ToJSON MaintenanceWindow where
 -- | Options for importing data as CSV.
 --
 -- /See:/ 'importContextCSVImportOptions' smart constructor.
-data ImportContextCSVImportOptions = ImportContextCSVImportOptions
+data ImportContextCSVImportOptions = ImportContextCSVImportOptions'
     { _iccioColumns :: !(Maybe [Text])
     , _iccioTable   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1698,7 +1698,7 @@ data ImportContextCSVImportOptions = ImportContextCSVImportOptions
 importContextCSVImportOptions
     :: ImportContextCSVImportOptions
 importContextCSVImportOptions =
-    ImportContextCSVImportOptions
+    ImportContextCSVImportOptions'
     { _iccioColumns = Nothing
     , _iccioTable = Nothing
     }
@@ -1720,11 +1720,11 @@ instance FromJSON ImportContextCSVImportOptions where
         parseJSON
           = withObject "ImportContextCSVImportOptions"
               (\ o ->
-                 ImportContextCSVImportOptions <$>
+                 ImportContextCSVImportOptions' <$>
                    (o .:? "columns" .!= mempty) <*> (o .:? "table"))
 
 instance ToJSON ImportContextCSVImportOptions where
-        toJSON ImportContextCSVImportOptions{..}
+        toJSON ImportContextCSVImportOptions'{..}
           = object
               (catMaybes
                  [("columns" .=) <$> _iccioColumns,
@@ -1733,7 +1733,7 @@ instance ToJSON ImportContextCSVImportOptions where
 -- | Options for exporting data as CSV.
 --
 -- /See:/ 'exportContextCSVExportOptions' smart constructor.
-newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions
+newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions'
     { _ecceoSelectQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1745,7 +1745,7 @@ newtype ExportContextCSVExportOptions = ExportContextCSVExportOptions
 exportContextCSVExportOptions
     :: ExportContextCSVExportOptions
 exportContextCSVExportOptions =
-    ExportContextCSVExportOptions
+    ExportContextCSVExportOptions'
     { _ecceoSelectQuery = Nothing
     }
 
@@ -1759,11 +1759,11 @@ instance FromJSON ExportContextCSVExportOptions where
         parseJSON
           = withObject "ExportContextCSVExportOptions"
               (\ o ->
-                 ExportContextCSVExportOptions <$>
+                 ExportContextCSVExportOptions' <$>
                    (o .:? "selectQuery"))
 
 instance ToJSON ExportContextCSVExportOptions where
-        toJSON ExportContextCSVExportOptions{..}
+        toJSON ExportContextCSVExportOptions'{..}
           = object
               (catMaybes
                  [("selectQuery" .=) <$> _ecceoSelectQuery])
@@ -1771,7 +1771,7 @@ instance ToJSON ExportContextCSVExportOptions where
 -- | A Cloud SQL user resource.
 --
 -- /See:/ 'user' smart constructor.
-data User = User
+data User = User'
     { _uEtag     :: !(Maybe Text)
     , _uProject  :: !(Maybe Text)
     , _uKind     :: !Text
@@ -1801,7 +1801,7 @@ data User = User
 user
     :: User
 user =
-    User
+    User'
     { _uEtag = Nothing
     , _uProject = Nothing
     , _uKind = "sql#user"
@@ -1852,7 +1852,7 @@ instance FromJSON User where
         parseJSON
           = withObject "User"
               (\ o ->
-                 User <$>
+                 User' <$>
                    (o .:? "etag") <*> (o .:? "project") <*>
                      (o .:? "kind" .!= "sql#user")
                      <*> (o .:? "name")
@@ -1861,7 +1861,7 @@ instance FromJSON User where
                      <*> (o .:? "instance"))
 
 instance ToJSON User where
-        toJSON User{..}
+        toJSON User'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _uEtag,
@@ -1874,7 +1874,7 @@ instance ToJSON User where
 -- | A Cloud SQL instance resource.
 --
 -- /See:/ 'databaseInstance' smart constructor.
-data DatabaseInstance = DatabaseInstance
+data DatabaseInstance = DatabaseInstance'
     { _datBackendType                :: !(Maybe Text)
     , _datMaxDiskSize                :: !(Maybe (Textual Int64))
     , _datOnPremisesConfiguration    :: !(Maybe OnPremisesConfiguration)
@@ -1952,7 +1952,7 @@ data DatabaseInstance = DatabaseInstance
 databaseInstance
     :: DatabaseInstance
 databaseInstance =
-    DatabaseInstance
+    DatabaseInstance'
     { _datBackendType = Nothing
     , _datMaxDiskSize = Nothing
     , _datOnPremisesConfiguration = Nothing
@@ -2144,7 +2144,7 @@ instance FromJSON DatabaseInstance where
         parseJSON
           = withObject "DatabaseInstance"
               (\ o ->
-                 DatabaseInstance <$>
+                 DatabaseInstance' <$>
                    (o .:? "backendType") <*> (o .:? "maxDiskSize") <*>
                      (o .:? "onPremisesConfiguration")
                      <*> (o .:? "etag")
@@ -2169,7 +2169,7 @@ instance FromJSON DatabaseInstance where
                      <*> (o .:? "suspensionReason" .!= mempty))
 
 instance ToJSON DatabaseInstance where
-        toJSON DatabaseInstance{..}
+        toJSON DatabaseInstance'{..}
           = object
               (catMaybes
                  [("backendType" .=) <$> _datBackendType,
@@ -2201,7 +2201,7 @@ instance ToJSON DatabaseInstance where
 -- | Database instance clone context.
 --
 -- /See:/ 'cloneContext' smart constructor.
-data CloneContext = CloneContext
+data CloneContext = CloneContext'
     { _ccDestinationInstanceName :: !(Maybe Text)
     , _ccBinLogCoordinates       :: !(Maybe BinLogCoordinates)
     , _ccKind                    :: !Text
@@ -2219,7 +2219,7 @@ data CloneContext = CloneContext
 cloneContext
     :: CloneContext
 cloneContext =
-    CloneContext
+    CloneContext'
     { _ccDestinationInstanceName = Nothing
     , _ccBinLogCoordinates = Nothing
     , _ccKind = "sql#cloneContext"
@@ -2247,13 +2247,13 @@ instance FromJSON CloneContext where
         parseJSON
           = withObject "CloneContext"
               (\ o ->
-                 CloneContext <$>
+                 CloneContext' <$>
                    (o .:? "destinationInstanceName") <*>
                      (o .:? "binLogCoordinates")
                      <*> (o .:? "kind" .!= "sql#cloneContext"))
 
 instance ToJSON CloneContext where
-        toJSON CloneContext{..}
+        toJSON CloneContext'{..}
           = object
               (catMaybes
                  [("destinationInstanceName" .=) <$>
@@ -2264,7 +2264,7 @@ instance ToJSON CloneContext where
 -- | A Google Cloud SQL service flag resource.
 --
 -- /See:/ 'flag' smart constructor.
-data Flag = Flag
+data Flag = Flag'
     { _fMaxValue            :: !(Maybe (Textual Int64))
     , _fKind                :: !Text
     , _fAppliesTo           :: !(Maybe [Text])
@@ -2297,7 +2297,7 @@ data Flag = Flag
 flag
     :: Flag
 flag =
-    Flag
+    Flag'
     { _fMaxValue = Nothing
     , _fKind = "sql#flag"
     , _fAppliesTo = Nothing
@@ -2362,7 +2362,7 @@ instance FromJSON Flag where
         parseJSON
           = withObject "Flag"
               (\ o ->
-                 Flag <$>
+                 Flag' <$>
                    (o .:? "maxValue") <*> (o .:? "kind" .!= "sql#flag")
                      <*> (o .:? "appliesTo" .!= mempty)
                      <*> (o .:? "name")
@@ -2372,7 +2372,7 @@ instance FromJSON Flag where
                      <*> (o .:? "requiresRestart"))
 
 instance ToJSON Flag where
-        toJSON Flag{..}
+        toJSON Flag'{..}
           = object
               (catMaybes
                  [("maxValue" .=) <$> _fMaxValue,
@@ -2387,7 +2387,7 @@ instance ToJSON Flag where
 -- | Instance failover request.
 --
 -- /See:/ 'instancesFailoverRequest' smart constructor.
-newtype InstancesFailoverRequest = InstancesFailoverRequest
+newtype InstancesFailoverRequest = InstancesFailoverRequest'
     { _ifrFailoverContext :: Maybe FailoverContext
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2399,7 +2399,7 @@ newtype InstancesFailoverRequest = InstancesFailoverRequest
 instancesFailoverRequest
     :: InstancesFailoverRequest
 instancesFailoverRequest =
-    InstancesFailoverRequest
+    InstancesFailoverRequest'
     { _ifrFailoverContext = Nothing
     }
 
@@ -2413,11 +2413,11 @@ instance FromJSON InstancesFailoverRequest where
         parseJSON
           = withObject "InstancesFailoverRequest"
               (\ o ->
-                 InstancesFailoverRequest <$>
+                 InstancesFailoverRequest' <$>
                    (o .:? "failoverContext"))
 
 instance ToJSON InstancesFailoverRequest where
-        toJSON InstancesFailoverRequest{..}
+        toJSON InstancesFailoverRequest'{..}
           = object
               (catMaybes
                  [("failoverContext" .=) <$> _ifrFailoverContext])
@@ -2425,7 +2425,7 @@ instance ToJSON InstancesFailoverRequest where
 -- | A database instance backup run resource.
 --
 -- /See:/ 'backupRun' smart constructor.
-data BackupRun = BackupRun
+data BackupRun = BackupRun'
     { _brStatus          :: !(Maybe Text)
     , _brStartTime       :: !(Maybe DateTime')
     , _brKind            :: !Text
@@ -2464,7 +2464,7 @@ data BackupRun = BackupRun
 backupRun
     :: BackupRun
 backupRun =
-    BackupRun
+    BackupRun'
     { _brStatus = Nothing
     , _brStartTime = Nothing
     , _brKind = "sql#backupRun"
@@ -2541,7 +2541,7 @@ instance FromJSON BackupRun where
         parseJSON
           = withObject "BackupRun"
               (\ o ->
-                 BackupRun <$>
+                 BackupRun' <$>
                    (o .:? "status") <*> (o .:? "startTime") <*>
                      (o .:? "kind" .!= "sql#backupRun")
                      <*> (o .:? "error")
@@ -2553,7 +2553,7 @@ instance FromJSON BackupRun where
                      <*> (o .:? "instance"))
 
 instance ToJSON BackupRun where
-        toJSON BackupRun{..}
+        toJSON BackupRun'{..}
           = object
               (catMaybes
                  [("status" .=) <$> _brStatus,
@@ -2568,7 +2568,7 @@ instance ToJSON BackupRun where
 -- | An entry for an Access Control list.
 --
 -- /See:/ 'aclEntry' smart constructor.
-data ACLEntry = ACLEntry
+data ACLEntry = ACLEntry'
     { _aeKind           :: !Text
     , _aeValue          :: !(Maybe Text)
     , _aeName           :: !(Maybe Text)
@@ -2589,7 +2589,7 @@ data ACLEntry = ACLEntry
 aclEntry
     :: ACLEntry
 aclEntry =
-    ACLEntry
+    ACLEntry'
     { _aeKind = "sql#aclEntry"
     , _aeValue = Nothing
     , _aeName = Nothing
@@ -2620,13 +2620,13 @@ instance FromJSON ACLEntry where
         parseJSON
           = withObject "ACLEntry"
               (\ o ->
-                 ACLEntry <$>
+                 ACLEntry' <$>
                    (o .:? "kind" .!= "sql#aclEntry") <*> (o .:? "value")
                      <*> (o .:? "name")
                      <*> (o .:? "expirationTime"))
 
 instance ToJSON ACLEntry where
-        toJSON ACLEntry{..}
+        toJSON ACLEntry'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _aeKind), ("value" .=) <$> _aeValue,
@@ -2636,7 +2636,7 @@ instance ToJSON ACLEntry where
 -- | MySQL flags for Cloud SQL instances.
 --
 -- /See:/ 'databaseFlags' smart constructor.
-data DatabaseFlags = DatabaseFlags
+data DatabaseFlags = DatabaseFlags'
     { _dfValue :: !(Maybe Text)
     , _dfName  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2651,7 +2651,7 @@ data DatabaseFlags = DatabaseFlags
 databaseFlags
     :: DatabaseFlags
 databaseFlags =
-    DatabaseFlags
+    DatabaseFlags'
     { _dfValue = Nothing
     , _dfName = Nothing
     }
@@ -2674,10 +2674,11 @@ instance FromJSON DatabaseFlags where
         parseJSON
           = withObject "DatabaseFlags"
               (\ o ->
-                 DatabaseFlags <$> (o .:? "value") <*> (o .:? "name"))
+                 DatabaseFlags' <$>
+                   (o .:? "value") <*> (o .:? "name"))
 
 instance ToJSON DatabaseFlags where
-        toJSON DatabaseFlags{..}
+        toJSON DatabaseFlags'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dfValue, ("name" .=) <$> _dfName])
@@ -2685,7 +2686,7 @@ instance ToJSON DatabaseFlags where
 -- | A Google Cloud SQL service tier resource.
 --
 -- /See:/ 'tier' smart constructor.
-data Tier = Tier
+data Tier = Tier'
     { _tKind      :: !Text
     , _tTier      :: !(Maybe Text)
     , _tRegion    :: !(Maybe [Text])
@@ -2709,7 +2710,7 @@ data Tier = Tier
 tier
     :: Tier
 tier =
-    Tier
+    Tier'
     { _tKind = "sql#tier"
     , _tTier = Nothing
     , _tRegion = Nothing
@@ -2749,14 +2750,14 @@ instance FromJSON Tier where
         parseJSON
           = withObject "Tier"
               (\ o ->
-                 Tier <$>
+                 Tier' <$>
                    (o .:? "kind" .!= "sql#tier") <*> (o .:? "tier") <*>
                      (o .:? "region" .!= mempty)
                      <*> (o .:? "DiskQuota")
                      <*> (o .:? "RAM"))
 
 instance ToJSON Tier where
-        toJSON Tier{..}
+        toJSON Tier'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _tKind), ("tier" .=) <$> _tTier,
@@ -2767,7 +2768,7 @@ instance ToJSON Tier where
 -- | Read-replica configuration specific to MySQL databases.
 --
 -- /See:/ 'mySQLReplicaConfiguration' smart constructor.
-data MySQLReplicaConfiguration = MySQLReplicaConfiguration
+data MySQLReplicaConfiguration = MySQLReplicaConfiguration'
     { _msqlrcVerifyServerCertificate :: !(Maybe Bool)
     , _msqlrcKind                    :: !Text
     , _msqlrcClientKey               :: !(Maybe Text)
@@ -2809,7 +2810,7 @@ data MySQLReplicaConfiguration = MySQLReplicaConfiguration
 mySQLReplicaConfiguration
     :: MySQLReplicaConfiguration
 mySQLReplicaConfiguration =
-    MySQLReplicaConfiguration
+    MySQLReplicaConfiguration'
     { _msqlrcVerifyServerCertificate = Nothing
     , _msqlrcKind = "sql#mysqlReplicaConfiguration"
     , _msqlrcClientKey = Nothing
@@ -2901,7 +2902,7 @@ instance FromJSON MySQLReplicaConfiguration where
         parseJSON
           = withObject "MySQLReplicaConfiguration"
               (\ o ->
-                 MySQLReplicaConfiguration <$>
+                 MySQLReplicaConfiguration' <$>
                    (o .:? "verifyServerCertificate") <*>
                      (o .:? "kind" .!= "sql#mysqlReplicaConfiguration")
                      <*> (o .:? "clientKey")
@@ -2915,7 +2916,7 @@ instance FromJSON MySQLReplicaConfiguration where
                      <*> (o .:? "password"))
 
 instance ToJSON MySQLReplicaConfiguration where
-        toJSON MySQLReplicaConfiguration{..}
+        toJSON MySQLReplicaConfiguration'{..}
           = object
               (catMaybes
                  [("verifyServerCertificate" .=) <$>
@@ -2937,7 +2938,7 @@ instance ToJSON MySQLReplicaConfiguration where
 -- | SslCertDetail.
 --
 -- /See:/ 'sslCertDetail' smart constructor.
-data SSLCertDetail = SSLCertDetail
+data SSLCertDetail = SSLCertDetail'
     { _scdCertInfo       :: !(Maybe SSLCert)
     , _scdCertPrivateKey :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2952,7 +2953,7 @@ data SSLCertDetail = SSLCertDetail
 sslCertDetail
     :: SSLCertDetail
 sslCertDetail =
-    SSLCertDetail
+    SSLCertDetail'
     { _scdCertInfo = Nothing
     , _scdCertPrivateKey = Nothing
     }
@@ -2973,11 +2974,11 @@ instance FromJSON SSLCertDetail where
         parseJSON
           = withObject "SSLCertDetail"
               (\ o ->
-                 SSLCertDetail <$>
+                 SSLCertDetail' <$>
                    (o .:? "certInfo") <*> (o .:? "certPrivateKey"))
 
 instance ToJSON SSLCertDetail where
-        toJSON SSLCertDetail{..}
+        toJSON SSLCertDetail'{..}
           = object
               (catMaybes
                  [("certInfo" .=) <$> _scdCertInfo,
@@ -2986,7 +2987,7 @@ instance ToJSON SSLCertDetail where
 -- | Database instance restore backup request.
 --
 -- /See:/ 'instancesRestoreBackupRequest' smart constructor.
-newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
+newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest'
     { _irbrRestoreBackupContext :: Maybe RestoreBackupContext
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2998,7 +2999,7 @@ newtype InstancesRestoreBackupRequest = InstancesRestoreBackupRequest
 instancesRestoreBackupRequest
     :: InstancesRestoreBackupRequest
 instancesRestoreBackupRequest =
-    InstancesRestoreBackupRequest
+    InstancesRestoreBackupRequest'
     { _irbrRestoreBackupContext = Nothing
     }
 
@@ -3012,11 +3013,11 @@ instance FromJSON InstancesRestoreBackupRequest where
         parseJSON
           = withObject "InstancesRestoreBackupRequest"
               (\ o ->
-                 InstancesRestoreBackupRequest <$>
+                 InstancesRestoreBackupRequest' <$>
                    (o .:? "restoreBackupContext"))
 
 instance ToJSON InstancesRestoreBackupRequest where
-        toJSON InstancesRestoreBackupRequest{..}
+        toJSON InstancesRestoreBackupRequest'{..}
           = object
               (catMaybes
                  [("restoreBackupContext" .=) <$>
@@ -3025,7 +3026,7 @@ instance ToJSON InstancesRestoreBackupRequest where
 -- | Backup run list results.
 --
 -- /See:/ 'backupRunsListResponse' smart constructor.
-data BackupRunsListResponse = BackupRunsListResponse
+data BackupRunsListResponse = BackupRunsListResponse'
     { _brlrNextPageToken :: !(Maybe Text)
     , _brlrKind          :: !Text
     , _brlrItems         :: !(Maybe [BackupRun])
@@ -3043,7 +3044,7 @@ data BackupRunsListResponse = BackupRunsListResponse
 backupRunsListResponse
     :: BackupRunsListResponse
 backupRunsListResponse =
-    BackupRunsListResponse
+    BackupRunsListResponse'
     { _brlrNextPageToken = Nothing
     , _brlrKind = "sql#backupRunsList"
     , _brlrItems = Nothing
@@ -3072,13 +3073,13 @@ instance FromJSON BackupRunsListResponse where
         parseJSON
           = withObject "BackupRunsListResponse"
               (\ o ->
-                 BackupRunsListResponse <$>
+                 BackupRunsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "sql#backupRunsList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON BackupRunsListResponse where
-        toJSON BackupRunsListResponse{..}
+        toJSON BackupRunsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _brlrNextPageToken,
@@ -3088,7 +3089,7 @@ instance ToJSON BackupRunsListResponse where
 -- | Database instance operation error.
 --
 -- /See:/ 'operationError' smart constructor.
-data OperationError = OperationError
+data OperationError = OperationError'
     { _opeKind    :: !Text
     , _opeCode    :: !(Maybe Text)
     , _opeMessage :: !(Maybe Text)
@@ -3106,7 +3107,7 @@ data OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _opeKind = "sql#operationError"
     , _opeCode = Nothing
     , _opeMessage = Nothing
@@ -3129,13 +3130,13 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$>
+                 OperationError' <$>
                    (o .:? "kind" .!= "sql#operationError") <*>
                      (o .:? "code")
                      <*> (o .:? "message"))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _opeKind), ("code" .=) <$> _opeCode,
@@ -3144,7 +3145,7 @@ instance ToJSON OperationError where
 -- | Database instance clone request.
 --
 -- /See:/ 'instancesCloneRequest' smart constructor.
-newtype InstancesCloneRequest = InstancesCloneRequest
+newtype InstancesCloneRequest = InstancesCloneRequest'
     { _icrCloneContext :: Maybe CloneContext
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3156,7 +3157,7 @@ newtype InstancesCloneRequest = InstancesCloneRequest
 instancesCloneRequest
     :: InstancesCloneRequest
 instancesCloneRequest =
-    InstancesCloneRequest
+    InstancesCloneRequest'
     { _icrCloneContext = Nothing
     }
 
@@ -3170,10 +3171,10 @@ instance FromJSON InstancesCloneRequest where
         parseJSON
           = withObject "InstancesCloneRequest"
               (\ o ->
-                 InstancesCloneRequest <$> (o .:? "cloneContext"))
+                 InstancesCloneRequest' <$> (o .:? "cloneContext"))
 
 instance ToJSON InstancesCloneRequest where
-        toJSON InstancesCloneRequest{..}
+        toJSON InstancesCloneRequest'{..}
           = object
               (catMaybes
                  [("cloneContext" .=) <$> _icrCloneContext])
@@ -3181,7 +3182,7 @@ instance ToJSON InstancesCloneRequest where
 -- | Read-replica configuration for connecting to the master.
 --
 -- /See:/ 'replicaConfiguration' smart constructor.
-data ReplicaConfiguration = ReplicaConfiguration
+data ReplicaConfiguration = ReplicaConfiguration'
     { _rcFailoverTarget            :: !(Maybe Bool)
     , _rcKind                      :: !Text
     , _rcMysqlReplicaConfiguration :: !(Maybe MySQLReplicaConfiguration)
@@ -3199,7 +3200,7 @@ data ReplicaConfiguration = ReplicaConfiguration
 replicaConfiguration
     :: ReplicaConfiguration
 replicaConfiguration =
-    ReplicaConfiguration
+    ReplicaConfiguration'
     { _rcFailoverTarget = Nothing
     , _rcKind = "sql#replicaConfiguration"
     , _rcMysqlReplicaConfiguration = Nothing
@@ -3234,13 +3235,13 @@ instance FromJSON ReplicaConfiguration where
         parseJSON
           = withObject "ReplicaConfiguration"
               (\ o ->
-                 ReplicaConfiguration <$>
+                 ReplicaConfiguration' <$>
                    (o .:? "failoverTarget") <*>
                      (o .:? "kind" .!= "sql#replicaConfiguration")
                      <*> (o .:? "mysqlReplicaConfiguration"))
 
 instance ToJSON ReplicaConfiguration where
-        toJSON ReplicaConfiguration{..}
+        toJSON ReplicaConfiguration'{..}
           = object
               (catMaybes
                  [("failoverTarget" .=) <$> _rcFailoverTarget,
@@ -3251,7 +3252,7 @@ instance ToJSON ReplicaConfiguration where
 -- | Database instance failover context.
 --
 -- /See:/ 'failoverContext' smart constructor.
-data FailoverContext = FailoverContext
+data FailoverContext = FailoverContext'
     { _fcSettingsVersion :: !(Maybe (Textual Int64))
     , _fcKind            :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3266,7 +3267,7 @@ data FailoverContext = FailoverContext
 failoverContext
     :: FailoverContext
 failoverContext =
-    FailoverContext
+    FailoverContext'
     { _fcSettingsVersion = Nothing
     , _fcKind = "sql#failoverContext"
     }
@@ -3287,12 +3288,12 @@ instance FromJSON FailoverContext where
         parseJSON
           = withObject "FailoverContext"
               (\ o ->
-                 FailoverContext <$>
+                 FailoverContext' <$>
                    (o .:? "settingsVersion") <*>
                      (o .:? "kind" .!= "sql#failoverContext"))
 
 instance ToJSON FailoverContext where
-        toJSON FailoverContext{..}
+        toJSON FailoverContext'{..}
           = object
               (catMaybes
                  [("settingsVersion" .=) <$> _fcSettingsVersion,
@@ -3301,7 +3302,7 @@ instance ToJSON FailoverContext where
 -- | SslCert insert response.
 --
 -- /See:/ 'sslCertsInsertResponse' smart constructor.
-data SSLCertsInsertResponse = SSLCertsInsertResponse
+data SSLCertsInsertResponse = SSLCertsInsertResponse'
     { _scirServerCaCert :: !(Maybe SSLCert)
     , _scirKind         :: !Text
     , _scirClientCert   :: !(Maybe SSLCertDetail)
@@ -3319,7 +3320,7 @@ data SSLCertsInsertResponse = SSLCertsInsertResponse
 sslCertsInsertResponse
     :: SSLCertsInsertResponse
 sslCertsInsertResponse =
-    SSLCertsInsertResponse
+    SSLCertsInsertResponse'
     { _scirServerCaCert = Nothing
     , _scirKind = "sql#sslCertsInsert"
     , _scirClientCert = Nothing
@@ -3348,13 +3349,13 @@ instance FromJSON SSLCertsInsertResponse where
         parseJSON
           = withObject "SSLCertsInsertResponse"
               (\ o ->
-                 SSLCertsInsertResponse <$>
+                 SSLCertsInsertResponse' <$>
                    (o .:? "serverCaCert") <*>
                      (o .:? "kind" .!= "sql#sslCertsInsert")
                      <*> (o .:? "clientCert"))
 
 instance ToJSON SSLCertsInsertResponse where
-        toJSON SSLCertsInsertResponse{..}
+        toJSON SSLCertsInsertResponse'{..}
           = object
               (catMaybes
                  [("serverCaCert" .=) <$> _scirServerCaCert,
@@ -3364,7 +3365,7 @@ instance ToJSON SSLCertsInsertResponse where
 -- | Database instances list response.
 --
 -- /See:/ 'instancesListResponse' smart constructor.
-data InstancesListResponse = InstancesListResponse
+data InstancesListResponse = InstancesListResponse'
     { _ilrNextPageToken :: !(Maybe Text)
     , _ilrKind          :: !Text
     , _ilrItems         :: !(Maybe [DatabaseInstance])
@@ -3382,7 +3383,7 @@ data InstancesListResponse = InstancesListResponse
 instancesListResponse
     :: InstancesListResponse
 instancesListResponse =
-    InstancesListResponse
+    InstancesListResponse'
     { _ilrNextPageToken = Nothing
     , _ilrKind = "sql#instancesList"
     , _ilrItems = Nothing
@@ -3410,13 +3411,13 @@ instance FromJSON InstancesListResponse where
         parseJSON
           = withObject "InstancesListResponse"
               (\ o ->
-                 InstancesListResponse <$>
+                 InstancesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "sql#instancesList")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON InstancesListResponse where
-        toJSON InstancesListResponse{..}
+        toJSON InstancesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ilrNextPageToken,
@@ -3426,7 +3427,7 @@ instance ToJSON InstancesListResponse where
 -- | Database instance backup configuration.
 --
 -- /See:/ 'backupConfiguration' smart constructor.
-data BackupConfiguration = BackupConfiguration
+data BackupConfiguration = BackupConfiguration'
     { _bcEnabled          :: !(Maybe Bool)
     , _bcStartTime        :: !(Maybe Text)
     , _bcKind             :: !Text
@@ -3447,7 +3448,7 @@ data BackupConfiguration = BackupConfiguration
 backupConfiguration
     :: BackupConfiguration
 backupConfiguration =
-    BackupConfiguration
+    BackupConfiguration'
     { _bcEnabled = Nothing
     , _bcStartTime = Nothing
     , _bcKind = "sql#backupConfiguration"
@@ -3480,13 +3481,13 @@ instance FromJSON BackupConfiguration where
         parseJSON
           = withObject "BackupConfiguration"
               (\ o ->
-                 BackupConfiguration <$>
+                 BackupConfiguration' <$>
                    (o .:? "enabled") <*> (o .:? "startTime") <*>
                      (o .:? "kind" .!= "sql#backupConfiguration")
                      <*> (o .:? "binaryLogEnabled"))
 
 instance ToJSON BackupConfiguration where
-        toJSON BackupConfiguration{..}
+        toJSON BackupConfiguration'{..}
           = object
               (catMaybes
                  [("enabled" .=) <$> _bcEnabled,
@@ -3497,7 +3498,7 @@ instance ToJSON BackupConfiguration where
 -- | Database instance import request.
 --
 -- /See:/ 'instancesImportRequest' smart constructor.
-newtype InstancesImportRequest = InstancesImportRequest
+newtype InstancesImportRequest = InstancesImportRequest'
     { _iirImportContext :: Maybe ImportContext
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3509,7 +3510,7 @@ newtype InstancesImportRequest = InstancesImportRequest
 instancesImportRequest
     :: InstancesImportRequest
 instancesImportRequest =
-    InstancesImportRequest
+    InstancesImportRequest'
     { _iirImportContext = Nothing
     }
 
@@ -3523,10 +3524,10 @@ instance FromJSON InstancesImportRequest where
         parseJSON
           = withObject "InstancesImportRequest"
               (\ o ->
-                 InstancesImportRequest <$> (o .:? "importContext"))
+                 InstancesImportRequest' <$> (o .:? "importContext"))
 
 instance ToJSON InstancesImportRequest where
-        toJSON InstancesImportRequest{..}
+        toJSON InstancesImportRequest'{..}
           = object
               (catMaybes
                  [("importContext" .=) <$> _iirImportContext])
@@ -3538,7 +3539,7 @@ instance ToJSON InstancesImportRequest where
 -- possible within the region. Only one location may be specified.
 --
 -- /See:/ 'locationPreference' smart constructor.
-data LocationPreference = LocationPreference
+data LocationPreference = LocationPreference'
     { _lpKind                 :: !Text
     , _lpFollowGaeApplication :: !(Maybe Text)
     , _lpZone                 :: !(Maybe Text)
@@ -3556,7 +3557,7 @@ data LocationPreference = LocationPreference
 locationPreference
     :: LocationPreference
 locationPreference =
-    LocationPreference
+    LocationPreference'
     { _lpKind = "sql#locationPreference"
     , _lpFollowGaeApplication = Nothing
     , _lpZone = Nothing
@@ -3582,13 +3583,13 @@ instance FromJSON LocationPreference where
         parseJSON
           = withObject "LocationPreference"
               (\ o ->
-                 LocationPreference <$>
+                 LocationPreference' <$>
                    (o .:? "kind" .!= "sql#locationPreference") <*>
                      (o .:? "followGaeApplication")
                      <*> (o .:? "zone"))
 
 instance ToJSON LocationPreference where
-        toJSON LocationPreference{..}
+        toJSON LocationPreference'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _lpKind),
@@ -3599,7 +3600,7 @@ instance ToJSON LocationPreference where
 -- | Flags list response.
 --
 -- /See:/ 'flagsListResponse' smart constructor.
-data FlagsListResponse = FlagsListResponse
+data FlagsListResponse = FlagsListResponse'
     { _flrKind  :: !Text
     , _flrItems :: !(Maybe [Flag])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3614,7 +3615,7 @@ data FlagsListResponse = FlagsListResponse
 flagsListResponse
     :: FlagsListResponse
 flagsListResponse =
-    FlagsListResponse
+    FlagsListResponse'
     { _flrKind = "sql#flagsList"
     , _flrItems = Nothing
     }
@@ -3634,12 +3635,12 @@ instance FromJSON FlagsListResponse where
         parseJSON
           = withObject "FlagsListResponse"
               (\ o ->
-                 FlagsListResponse <$>
+                 FlagsListResponse' <$>
                    (o .:? "kind" .!= "sql#flagsList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON FlagsListResponse where
-        toJSON FlagsListResponse{..}
+        toJSON FlagsListResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _flrKind),
@@ -3648,7 +3649,7 @@ instance ToJSON FlagsListResponse where
 -- | Options for exporting data as SQL statements.
 --
 -- /See:/ 'exportContextSQLExportOptions' smart constructor.
-data ExportContextSQLExportOptions = ExportContextSQLExportOptions
+data ExportContextSQLExportOptions = ExportContextSQLExportOptions'
     { _ecsqleoSchemaOnly :: !(Maybe Bool)
     , _ecsqleoTables     :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3663,7 +3664,7 @@ data ExportContextSQLExportOptions = ExportContextSQLExportOptions
 exportContextSQLExportOptions
     :: ExportContextSQLExportOptions
 exportContextSQLExportOptions =
-    ExportContextSQLExportOptions
+    ExportContextSQLExportOptions'
     { _ecsqleoSchemaOnly = Nothing
     , _ecsqleoTables = Nothing
     }
@@ -3687,11 +3688,11 @@ instance FromJSON ExportContextSQLExportOptions where
         parseJSON
           = withObject "ExportContextSQLExportOptions"
               (\ o ->
-                 ExportContextSQLExportOptions <$>
+                 ExportContextSQLExportOptions' <$>
                    (o .:? "schemaOnly") <*> (o .:? "tables" .!= mempty))
 
 instance ToJSON ExportContextSQLExportOptions where
-        toJSON ExportContextSQLExportOptions{..}
+        toJSON ExportContextSQLExportOptions'{..}
           = object
               (catMaybes
                  [("schemaOnly" .=) <$> _ecsqleoSchemaOnly,
@@ -3700,7 +3701,7 @@ instance ToJSON ExportContextSQLExportOptions where
 -- | Database instance restore from backup context.
 --
 -- /See:/ 'restoreBackupContext' smart constructor.
-data RestoreBackupContext = RestoreBackupContext
+data RestoreBackupContext = RestoreBackupContext'
     { _rbcInstanceId  :: !(Maybe Text)
     , _rbcBackupRunId :: !(Maybe (Textual Int64))
     , _rbcKind        :: !Text
@@ -3718,7 +3719,7 @@ data RestoreBackupContext = RestoreBackupContext
 restoreBackupContext
     :: RestoreBackupContext
 restoreBackupContext =
-    RestoreBackupContext
+    RestoreBackupContext'
     { _rbcInstanceId = Nothing
     , _rbcBackupRunId = Nothing
     , _rbcKind = "sql#restoreBackupContext"
@@ -3745,12 +3746,12 @@ instance FromJSON RestoreBackupContext where
         parseJSON
           = withObject "RestoreBackupContext"
               (\ o ->
-                 RestoreBackupContext <$>
+                 RestoreBackupContext' <$>
                    (o .:? "instanceId") <*> (o .:? "backupRunId") <*>
                      (o .:? "kind" .!= "sql#restoreBackupContext"))
 
 instance ToJSON RestoreBackupContext where
-        toJSON RestoreBackupContext{..}
+        toJSON RestoreBackupContext'{..}
           = object
               (catMaybes
                  [("instanceId" .=) <$> _rbcInstanceId,

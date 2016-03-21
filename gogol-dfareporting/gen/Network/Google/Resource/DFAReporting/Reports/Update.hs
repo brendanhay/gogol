@@ -56,7 +56,7 @@ type ReportsUpdateResource =
 -- | Updates a report.
 --
 -- /See:/ 'reportsUpdate' smart constructor.
-data ReportsUpdate = ReportsUpdate
+data ReportsUpdate = ReportsUpdate'
     { _ruReportId  :: !(Textual Int64)
     , _ruProFileId :: !(Textual Int64)
     , _ruPayload   :: !Report
@@ -77,7 +77,7 @@ reportsUpdate
     -> Report -- ^ 'ruPayload'
     -> ReportsUpdate
 reportsUpdate pRuReportId_ pRuProFileId_ pRuPayload_ =
-    ReportsUpdate
+    ReportsUpdate'
     { _ruReportId = _Coerce # pRuReportId_
     , _ruProFileId = _Coerce # pRuProFileId_
     , _ruPayload = pRuPayload_
@@ -104,7 +104,7 @@ instance GoogleRequest ReportsUpdate where
         type Rs ReportsUpdate = Report
         type Scopes ReportsUpdate =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsUpdate{..}
+        requestClient ReportsUpdate'{..}
           = go _ruProFileId _ruReportId (Just AltJSON)
               _ruPayload
               dFAReportingService

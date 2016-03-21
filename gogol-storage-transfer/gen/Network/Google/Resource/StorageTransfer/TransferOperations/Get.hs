@@ -67,7 +67,7 @@ type TransferOperationsGetResource =
 -- API service.
 --
 -- /See:/ 'transferOperationsGet' smart constructor.
-data TransferOperationsGet = TransferOperationsGet
+data TransferOperationsGet = TransferOperationsGet'
     { _togXgafv          :: !(Maybe Text)
     , _togUploadProtocol :: !(Maybe Text)
     , _togPp             :: !Bool
@@ -101,7 +101,7 @@ transferOperationsGet
     :: Text -- ^ 'togName'
     -> TransferOperationsGet
 transferOperationsGet pTogName_ =
-    TransferOperationsGet
+    TransferOperationsGet'
     { _togXgafv = Nothing
     , _togUploadProtocol = Nothing
     , _togPp = True
@@ -157,7 +157,7 @@ instance GoogleRequest TransferOperationsGet where
         type Rs TransferOperationsGet = Operation
         type Scopes TransferOperationsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferOperationsGet{..}
+        requestClient TransferOperationsGet'{..}
           = go _togName _togXgafv _togUploadProtocol
               (Just _togPp)
               _togAccessToken

@@ -54,7 +54,7 @@ type RelyingPartySetAccountInfoResource =
 -- | Set account info for a user.
 --
 -- /See:/ 'relyingPartySetAccountInfo' smart constructor.
-newtype RelyingPartySetAccountInfo = RelyingPartySetAccountInfo
+newtype RelyingPartySetAccountInfo = RelyingPartySetAccountInfo'
     { _rpsaiPayload :: IdentitytoolkitRelyingPartySetAccountInfoRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartySetAccountInfo
     :: IdentitytoolkitRelyingPartySetAccountInfoRequest -- ^ 'rpsaiPayload'
     -> RelyingPartySetAccountInfo
 relyingPartySetAccountInfo pRpsaiPayload_ =
-    RelyingPartySetAccountInfo
+    RelyingPartySetAccountInfo'
     { _rpsaiPayload = pRpsaiPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartySetAccountInfo
         type Rs RelyingPartySetAccountInfo =
              SetAccountInfoResponse
         type Scopes RelyingPartySetAccountInfo = '[]
-        requestClient RelyingPartySetAccountInfo{..}
+        requestClient RelyingPartySetAccountInfo'{..}
           = go (Just AltJSON) _rpsaiPayload
               identityToolkitService
           where go

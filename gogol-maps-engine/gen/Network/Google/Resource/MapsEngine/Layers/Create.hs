@@ -53,7 +53,7 @@ type LayersCreateResource =
 -- | Create a layer asset.
 --
 -- /See:/ 'layersCreate' smart constructor.
-data LayersCreate = LayersCreate
+data LayersCreate = LayersCreate'
     { _lcProcess :: !(Maybe Bool)
     , _lcPayload :: !Layer
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ layersCreate
     :: Layer -- ^ 'lcPayload'
     -> LayersCreate
 layersCreate pLcPayload_ =
-    LayersCreate
+    LayersCreate'
     { _lcProcess = Nothing
     , _lcPayload = pLcPayload_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest LayersCreate where
         type Rs LayersCreate = Layer
         type Scopes LayersCreate =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient LayersCreate{..}
+        requestClient LayersCreate'{..}
           = go _lcProcess (Just AltJSON) _lcPayload
               mapsEngineService
           where go

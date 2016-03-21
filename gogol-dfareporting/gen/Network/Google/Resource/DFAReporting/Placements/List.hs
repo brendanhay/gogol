@@ -119,7 +119,7 @@ type PlacementsListResource =
 -- | Retrieves a list of placements, possibly filtered.
 --
 -- /See:/ 'placementsList' smart constructor.
-data PlacementsList = PlacementsList
+data PlacementsList = PlacementsList'
     { _pPlacementStrategyIds :: !(Maybe [Textual Int64])
     , _pContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pMaxEndDate           :: !(Maybe Text)
@@ -198,7 +198,7 @@ placementsList
     :: Int64 -- ^ 'pProFileId'
     -> PlacementsList
 placementsList pPProFileId_ =
-    PlacementsList
+    PlacementsList'
     { _pPlacementStrategyIds = Nothing
     , _pContentCategoryIds = Nothing
     , _pMaxEndDate = Nothing
@@ -397,7 +397,7 @@ instance GoogleRequest PlacementsList where
         type Rs PlacementsList = PlacementsListResponse
         type Scopes PlacementsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementsList{..}
+        requestClient PlacementsList'{..}
           = go _pProFileId (_pPlacementStrategyIds ^. _Default)
               (_pContentCategoryIds ^. _Default)
               _pMaxEndDate

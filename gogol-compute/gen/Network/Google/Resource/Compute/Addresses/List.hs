@@ -61,7 +61,7 @@ type AddressesListResource =
 -- | Retrieves a list of addresses contained within the specified region.
 --
 -- /See:/ 'addressesList' smart constructor.
-data AddressesList = AddressesList
+data AddressesList = AddressesList'
     { _alProject    :: !Text
     , _alFilter     :: !(Maybe Text)
     , _alRegion     :: !Text
@@ -87,7 +87,7 @@ addressesList
     -> Text -- ^ 'alRegion'
     -> AddressesList
 addressesList pAlProject_ pAlRegion_ =
-    AddressesList
+    AddressesList'
     { _alProject = pAlProject_
     , _alFilter = Nothing
     , _alRegion = pAlRegion_
@@ -150,7 +150,7 @@ instance GoogleRequest AddressesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient AddressesList{..}
+        requestClient AddressesList'{..}
           = go _alProject _alRegion _alFilter _alPageToken
               (Just _alMaxResults)
               (Just AltJSON)

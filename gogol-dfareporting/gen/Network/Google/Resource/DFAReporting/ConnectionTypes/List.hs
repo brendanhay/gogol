@@ -53,7 +53,7 @@ type ConnectionTypesListResource =
 -- | Retrieves a list of connection types.
 --
 -- /See:/ 'connectionTypesList' smart constructor.
-newtype ConnectionTypesList = ConnectionTypesList
+newtype ConnectionTypesList = ConnectionTypesList'
     { _ctlProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ connectionTypesList
     :: Int64 -- ^ 'ctlProFileId'
     -> ConnectionTypesList
 connectionTypesList pCtlProFileId_ =
-    ConnectionTypesList
+    ConnectionTypesList'
     { _ctlProFileId = _Coerce # pCtlProFileId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest ConnectionTypesList where
              ConnectionTypesListResponse
         type Scopes ConnectionTypesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ConnectionTypesList{..}
+        requestClient ConnectionTypesList'{..}
           = go _ctlProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

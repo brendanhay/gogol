@@ -62,7 +62,7 @@ type RoleAssignmentsListResource =
 -- | Retrieves a paginated list of all roleAssignments.
 --
 -- /See:/ 'roleAssignmentsList' smart constructor.
-data RoleAssignmentsList = RoleAssignmentsList
+data RoleAssignmentsList = RoleAssignmentsList'
     { _ralRoleId     :: !(Maybe Text)
     , _ralCustomer   :: !Text
     , _ralPageToken  :: !(Maybe Text)
@@ -87,7 +87,7 @@ roleAssignmentsList
     :: Text -- ^ 'ralCustomer'
     -> RoleAssignmentsList
 roleAssignmentsList pRalCustomer_ =
-    RoleAssignmentsList
+    RoleAssignmentsList'
     { _ralRoleId = Nothing
     , _ralCustomer = pRalCustomer_
     , _ralPageToken = Nothing
@@ -130,7 +130,7 @@ instance GoogleRequest RoleAssignmentsList where
         type Scopes RoleAssignmentsList =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
-        requestClient RoleAssignmentsList{..}
+        requestClient RoleAssignmentsList'{..}
           = go _ralCustomer _ralRoleId _ralPageToken
               _ralUserKey
               _ralMaxResults

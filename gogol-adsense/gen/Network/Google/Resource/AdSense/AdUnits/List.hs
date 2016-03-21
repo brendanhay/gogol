@@ -58,7 +58,7 @@ type AdUnitsListResource =
 -- | List all ad units in the specified ad client for this AdSense account.
 --
 -- /See:/ 'adUnitsList' smart constructor.
-data AdUnitsList = AdUnitsList
+data AdUnitsList = AdUnitsList'
     { _aulIncludeInactive :: !(Maybe Bool)
     , _aulAdClientId      :: !Text
     , _aulPageToken       :: !(Maybe Text)
@@ -80,7 +80,7 @@ adUnitsList
     :: Text -- ^ 'aulAdClientId'
     -> AdUnitsList
 adUnitsList pAulAdClientId_ =
-    AdUnitsList
+    AdUnitsList'
     { _aulIncludeInactive = Nothing
     , _aulAdClientId = pAulAdClientId_
     , _aulPageToken = Nothing
@@ -119,7 +119,7 @@ instance GoogleRequest AdUnitsList where
         type Scopes AdUnitsList =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AdUnitsList{..}
+        requestClient AdUnitsList'{..}
           = go _aulAdClientId _aulIncludeInactive _aulPageToken
               _aulMaxResults
               (Just AltJSON)

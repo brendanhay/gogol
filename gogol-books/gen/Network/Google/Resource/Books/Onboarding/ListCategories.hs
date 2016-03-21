@@ -52,7 +52,7 @@ type OnboardingListCategoriesResource =
 -- | List categories for onboarding experience.
 --
 -- /See:/ 'onboardingListCategories' smart constructor.
-newtype OnboardingListCategories = OnboardingListCategories
+newtype OnboardingListCategories = OnboardingListCategories'
     { _olcLocale :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ newtype OnboardingListCategories = OnboardingListCategories
 onboardingListCategories
     :: OnboardingListCategories
 onboardingListCategories =
-    OnboardingListCategories
+    OnboardingListCategories'
     { _olcLocale = Nothing
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest OnboardingListCategories where
         type Rs OnboardingListCategories = Category
         type Scopes OnboardingListCategories =
              '["https://www.googleapis.com/auth/books"]
-        requestClient OnboardingListCategories{..}
+        requestClient OnboardingListCategories'{..}
           = go _olcLocale (Just AltJSON) booksService
           where go
                   = buildClient

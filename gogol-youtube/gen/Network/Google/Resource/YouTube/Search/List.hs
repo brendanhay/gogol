@@ -164,7 +164,7 @@ type SearchListResource =
 -- configure queries to only retrieve a specific type of resource.
 --
 -- /See:/ 'searchList' smart constructor.
-data SearchList = SearchList
+data SearchList = SearchList'
     { _slPublishedAfter         :: !(Maybe DateTime')
     , _slVideoDefinition        :: !(Maybe SearchListVideoDefinition)
     , _slPart                   :: !Text
@@ -267,7 +267,7 @@ searchList
     :: Text -- ^ 'slPart'
     -> SearchList
 searchList pSlPart_ =
-    SearchList
+    SearchList'
     { _slPublishedAfter = Nothing
     , _slVideoDefinition = Nothing
     , _slPart = pSlPart_
@@ -578,7 +578,7 @@ instance GoogleRequest SearchList where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient SearchList{..}
+        requestClient SearchList'{..}
           = go (Just _slPart) _slPublishedAfter
               _slVideoDefinition
               _slVideoDuration

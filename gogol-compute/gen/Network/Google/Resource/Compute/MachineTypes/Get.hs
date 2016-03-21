@@ -59,7 +59,7 @@ type MachineTypesGetResource =
 -- types by making a list() request.
 --
 -- /See:/ 'machineTypesGet' smart constructor.
-data MachineTypesGet = MachineTypesGet
+data MachineTypesGet = MachineTypesGet'
     { _mtgProject     :: !Text
     , _mtgZone        :: !Text
     , _mtgMachineType :: !Text
@@ -80,7 +80,7 @@ machineTypesGet
     -> Text -- ^ 'mtgMachineType'
     -> MachineTypesGet
 machineTypesGet pMtgProject_ pMtgZone_ pMtgMachineType_ =
-    MachineTypesGet
+    MachineTypesGet'
     { _mtgProject = pMtgProject_
     , _mtgZone = pMtgZone_
     , _mtgMachineType = pMtgMachineType_
@@ -107,7 +107,7 @@ instance GoogleRequest MachineTypesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient MachineTypesGet{..}
+        requestClient MachineTypesGet'{..}
           = go _mtgProject _mtgZone _mtgMachineType
               (Just AltJSON)
               computeService

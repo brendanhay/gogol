@@ -55,7 +55,7 @@ type AdvertiserGroupsUpdateResource =
 -- | Updates an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsUpdate' smart constructor.
-data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate
+data AdvertiserGroupsUpdate = AdvertiserGroupsUpdate'
     { _aguProFileId :: !(Textual Int64)
     , _aguPayload   :: !AdvertiserGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ advertiserGroupsUpdate
     -> AdvertiserGroup -- ^ 'aguPayload'
     -> AdvertiserGroupsUpdate
 advertiserGroupsUpdate pAguProFileId_ pAguPayload_ =
-    AdvertiserGroupsUpdate
+    AdvertiserGroupsUpdate'
     { _aguProFileId = _Coerce # pAguProFileId_
     , _aguPayload = pAguPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AdvertiserGroupsUpdate where
         type Rs AdvertiserGroupsUpdate = AdvertiserGroup
         type Scopes AdvertiserGroupsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertiserGroupsUpdate{..}
+        requestClient AdvertiserGroupsUpdate'{..}
           = go _aguProFileId (Just AltJSON) _aguPayload
               dFAReportingService
           where go

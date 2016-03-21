@@ -72,7 +72,7 @@ type DebuggerDebuggeesBreakpointsSetResource =
 -- | Sets the breakpoint to the debuggee.
 --
 -- /See:/ 'debuggerDebuggeesBreakpointsSet' smart constructor.
-data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet
+data DebuggerDebuggeesBreakpointsSet = DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv          :: !(Maybe Text)
     , _ddbsUploadProtocol :: !(Maybe Text)
     , _ddbsPp             :: !Bool
@@ -113,7 +113,7 @@ debuggerDebuggeesBreakpointsSet
     -> Text -- ^ 'ddbsDebuggeeId'
     -> DebuggerDebuggeesBreakpointsSet
 debuggerDebuggeesBreakpointsSet pDdbsPayload_ pDdbsDebuggeeId_ =
-    DebuggerDebuggeesBreakpointsSet
+    DebuggerDebuggeesBreakpointsSet'
     { _ddbsXgafv = Nothing
     , _ddbsUploadProtocol = Nothing
     , _ddbsPp = True
@@ -189,7 +189,7 @@ instance GoogleRequest
         type Scopes DebuggerDebuggeesBreakpointsSet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugger"]
-        requestClient DebuggerDebuggeesBreakpointsSet{..}
+        requestClient DebuggerDebuggeesBreakpointsSet'{..}
           = go _ddbsDebuggeeId _ddbsXgafv _ddbsUploadProtocol
               (Just _ddbsPp)
               _ddbsAccessToken

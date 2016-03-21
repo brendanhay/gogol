@@ -59,7 +59,7 @@ type GlobalAddressesListResource =
 -- | Retrieves a list of global addresses.
 --
 -- /See:/ 'globalAddressesList' smart constructor.
-data GlobalAddressesList = GlobalAddressesList
+data GlobalAddressesList = GlobalAddressesList'
     { _galProject    :: !Text
     , _galFilter     :: !(Maybe Text)
     , _galPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ globalAddressesList
     :: Text -- ^ 'galProject'
     -> GlobalAddressesList
 globalAddressesList pGalProject_ =
-    GlobalAddressesList
+    GlobalAddressesList'
     { _galProject = pGalProject_
     , _galFilter = Nothing
     , _galPageToken = Nothing
@@ -141,7 +141,7 @@ instance GoogleRequest GlobalAddressesList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient GlobalAddressesList{..}
+        requestClient GlobalAddressesList'{..}
           = go _galProject _galFilter _galPageToken
               (Just _galMaxResults)
               (Just AltJSON)

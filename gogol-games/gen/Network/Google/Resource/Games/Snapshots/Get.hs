@@ -53,7 +53,7 @@ type SnapshotsGetResource =
 -- | Retrieves the metadata for a given snapshot ID.
 --
 -- /See:/ 'snapshotsGet' smart constructor.
-data SnapshotsGet = SnapshotsGet
+data SnapshotsGet = SnapshotsGet'
     { _sLanguage   :: !(Maybe Text)
     , _sSnapshotId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ snapshotsGet
     :: Text -- ^ 'sSnapshotId'
     -> SnapshotsGet
 snapshotsGet pSSnapshotId_ =
-    SnapshotsGet
+    SnapshotsGet'
     { _sLanguage = Nothing
     , _sSnapshotId = pSSnapshotId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest SnapshotsGet where
              '["https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient SnapshotsGet{..}
+        requestClient SnapshotsGet'{..}
           = go _sSnapshotId _sLanguage (Just AltJSON)
               gamesService
           where go

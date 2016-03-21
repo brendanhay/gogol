@@ -64,7 +64,7 @@ type EntitlementsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'entitlementsPatch' smart constructor.
-data EntitlementsPatch = EntitlementsPatch
+data EntitlementsPatch = EntitlementsPatch'
     { _epEntitlementId :: !Text
     , _epEnterpriseId  :: !Text
     , _epPayload       :: !Entitlement
@@ -92,7 +92,7 @@ entitlementsPatch
     -> Text -- ^ 'epUserId'
     -> EntitlementsPatch
 entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
-    EntitlementsPatch
+    EntitlementsPatch'
     { _epEntitlementId = pEpEntitlementId_
     , _epEnterpriseId = pEpEnterpriseId_
     , _epPayload = pEpPayload_
@@ -133,7 +133,7 @@ instance GoogleRequest EntitlementsPatch where
         type Rs EntitlementsPatch = Entitlement
         type Scopes EntitlementsPatch =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EntitlementsPatch{..}
+        requestClient EntitlementsPatch'{..}
           = go _epEnterpriseId _epUserId _epEntitlementId
               _epInstall
               (Just AltJSON)

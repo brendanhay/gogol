@@ -55,7 +55,7 @@ type CreativeFieldsInsertResource =
 -- | Inserts a new creative field.
 --
 -- /See:/ 'creativeFieldsInsert' smart constructor.
-data CreativeFieldsInsert = CreativeFieldsInsert
+data CreativeFieldsInsert = CreativeFieldsInsert'
     { _cfiProFileId :: !(Textual Int64)
     , _cfiPayload   :: !CreativeField
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ creativeFieldsInsert
     -> CreativeField -- ^ 'cfiPayload'
     -> CreativeFieldsInsert
 creativeFieldsInsert pCfiProFileId_ pCfiPayload_ =
-    CreativeFieldsInsert
+    CreativeFieldsInsert'
     { _cfiProFileId = _Coerce # pCfiProFileId_
     , _cfiPayload = pCfiPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CreativeFieldsInsert where
         type Rs CreativeFieldsInsert = CreativeField
         type Scopes CreativeFieldsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeFieldsInsert{..}
+        requestClient CreativeFieldsInsert'{..}
           = go _cfiProFileId (Just AltJSON) _cfiPayload
               dFAReportingService
           where go

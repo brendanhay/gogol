@@ -55,7 +55,7 @@ type DataSetsLookupResource =
 -- | Look up some entities by key.
 --
 -- /See:/ 'dataSetsLookup' smart constructor.
-data DataSetsLookup = DataSetsLookup
+data DataSetsLookup = DataSetsLookup'
     { _dslPayload   :: !LookupRequest
     , _dslDataSetId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ dataSetsLookup
     -> Text -- ^ 'dslDataSetId'
     -> DataSetsLookup
 dataSetsLookup pDslPayload_ pDslDataSetId_ =
-    DataSetsLookup
+    DataSetsLookup'
     { _dslPayload = pDslPayload_
     , _dslDataSetId = pDslDataSetId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest DataSetsLookup where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/datastore",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient DataSetsLookup{..}
+        requestClient DataSetsLookup'{..}
           = go _dslDataSetId (Just AltJSON) _dslPayload
               datastoreService
           where go

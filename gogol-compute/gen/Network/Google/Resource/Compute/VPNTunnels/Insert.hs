@@ -59,7 +59,7 @@ type VPNTunnelsInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'vpnTunnelsInsert' smart constructor.
-data VPNTunnelsInsert = VPNTunnelsInsert
+data VPNTunnelsInsert = VPNTunnelsInsert'
     { _vtiProject :: !Text
     , _vtiPayload :: !VPNTunnel
     , _vtiRegion  :: !Text
@@ -80,7 +80,7 @@ vpnTunnelsInsert
     -> Text -- ^ 'vtiRegion'
     -> VPNTunnelsInsert
 vpnTunnelsInsert pVtiProject_ pVtiPayload_ pVtiRegion_ =
-    VPNTunnelsInsert
+    VPNTunnelsInsert'
     { _vtiProject = pVtiProject_
     , _vtiPayload = pVtiPayload_
     , _vtiRegion = pVtiRegion_
@@ -106,7 +106,7 @@ instance GoogleRequest VPNTunnelsInsert where
         type Scopes VPNTunnelsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient VPNTunnelsInsert{..}
+        requestClient VPNTunnelsInsert'{..}
           = go _vtiProject _vtiRegion (Just AltJSON)
               _vtiPayload
               computeService

@@ -57,7 +57,7 @@ type ManagementFiltersUpdateResource =
 -- | Updates an existing filter.
 --
 -- /See:/ 'managementFiltersUpdate' smart constructor.
-data ManagementFiltersUpdate = ManagementFiltersUpdate
+data ManagementFiltersUpdate = ManagementFiltersUpdate'
     { _mfuFilterId  :: !Text
     , _mfuPayload   :: !Filter
     , _mfuAccountId :: !Text
@@ -78,7 +78,7 @@ managementFiltersUpdate
     -> Text -- ^ 'mfuAccountId'
     -> ManagementFiltersUpdate
 managementFiltersUpdate pMfuFilterId_ pMfuPayload_ pMfuAccountId_ =
-    ManagementFiltersUpdate
+    ManagementFiltersUpdate'
     { _mfuFilterId = pMfuFilterId_
     , _mfuPayload = pMfuPayload_
     , _mfuAccountId = pMfuAccountId_
@@ -103,7 +103,7 @@ instance GoogleRequest ManagementFiltersUpdate where
         type Rs ManagementFiltersUpdate = Filter
         type Scopes ManagementFiltersUpdate =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementFiltersUpdate{..}
+        requestClient ManagementFiltersUpdate'{..}
           = go _mfuAccountId _mfuFilterId (Just AltJSON)
               _mfuPayload
               analyticsService

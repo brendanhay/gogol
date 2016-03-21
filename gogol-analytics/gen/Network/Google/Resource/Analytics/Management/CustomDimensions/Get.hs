@@ -59,7 +59,7 @@ type ManagementCustomDimensionsGetResource =
 -- | Get a custom dimension to which the user has access.
 --
 -- /See:/ 'managementCustomDimensionsGet' smart constructor.
-data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet
+data ManagementCustomDimensionsGet = ManagementCustomDimensionsGet'
     { _mcdgWebPropertyId     :: !Text
     , _mcdgAccountId         :: !Text
     , _mcdgCustomDimensionId :: !Text
@@ -80,7 +80,7 @@ managementCustomDimensionsGet
     -> Text -- ^ 'mcdgCustomDimensionId'
     -> ManagementCustomDimensionsGet
 managementCustomDimensionsGet pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDimensionId_ =
-    ManagementCustomDimensionsGet
+    ManagementCustomDimensionsGet'
     { _mcdgWebPropertyId = pMcdgWebPropertyId_
     , _mcdgAccountId = pMcdgAccountId_
     , _mcdgCustomDimensionId = pMcdgCustomDimensionId_
@@ -111,7 +111,7 @@ instance GoogleRequest ManagementCustomDimensionsGet
         type Scopes ManagementCustomDimensionsGet =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementCustomDimensionsGet{..}
+        requestClient ManagementCustomDimensionsGet'{..}
           = go _mcdgAccountId _mcdgWebPropertyId
               _mcdgCustomDimensionId
               (Just AltJSON)

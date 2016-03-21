@@ -51,7 +51,7 @@ type ProductsGetResource =
 -- | Gets the requested product by id.
 --
 -- /See:/ 'productsGet' smart constructor.
-newtype ProductsGet = ProductsGet
+newtype ProductsGet = ProductsGet'
     { _pgProductId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ productsGet
     :: Text -- ^ 'pgProductId'
     -> ProductsGet
 productsGet pPgProductId_ =
-    ProductsGet
+    ProductsGet'
     { _pgProductId = pPgProductId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest ProductsGet where
         type Rs ProductsGet = Product
         type Scopes ProductsGet =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProductsGet{..}
+        requestClient ProductsGet'{..}
           = go _pgProductId (Just AltJSON)
               adExchangeBuyerService
           where go

@@ -78,7 +78,7 @@ type RasterCollectionsListResource =
 -- | Return all raster collections readable by the current user.
 --
 -- /See:/ 'rasterCollectionsList' smart constructor.
-data RasterCollectionsList = RasterCollectionsList
+data RasterCollectionsList = RasterCollectionsList'
     { _rclCreatedAfter     :: !(Maybe DateTime')
     , _rclCreatorEmail     :: !(Maybe Text)
     , _rclRole             :: !(Maybe RasterCollectionsListRole)
@@ -126,7 +126,7 @@ data RasterCollectionsList = RasterCollectionsList
 rasterCollectionsList
     :: RasterCollectionsList
 rasterCollectionsList =
-    RasterCollectionsList
+    RasterCollectionsList'
     { _rclCreatedAfter = Nothing
     , _rclCreatorEmail = Nothing
     , _rclRole = Nothing
@@ -236,7 +236,7 @@ instance GoogleRequest RasterCollectionsList where
         type Scopes RasterCollectionsList =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient RasterCollectionsList{..}
+        requestClient RasterCollectionsList'{..}
           = go _rclCreatedAfter _rclCreatorEmail _rclRole
               _rclBbox
               _rclProcessingStatus

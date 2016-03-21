@@ -52,7 +52,7 @@ type RasterCollectionsCreateResource =
 -- | Create a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsCreate' smart constructor.
-newtype RasterCollectionsCreate = RasterCollectionsCreate
+newtype RasterCollectionsCreate = RasterCollectionsCreate'
     { _rccPayload :: RasterCollection
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ rasterCollectionsCreate
     :: RasterCollection -- ^ 'rccPayload'
     -> RasterCollectionsCreate
 rasterCollectionsCreate pRccPayload_ =
-    RasterCollectionsCreate
+    RasterCollectionsCreate'
     { _rccPayload = pRccPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest RasterCollectionsCreate where
         type Rs RasterCollectionsCreate = RasterCollection
         type Scopes RasterCollectionsCreate =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RasterCollectionsCreate{..}
+        requestClient RasterCollectionsCreate'{..}
           = go (Just AltJSON) _rccPayload mapsEngineService
           where go
                   = buildClient

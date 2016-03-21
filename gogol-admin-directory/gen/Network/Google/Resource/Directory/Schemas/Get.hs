@@ -55,7 +55,7 @@ type SchemasGetResource =
 -- | Retrieve schema
 --
 -- /See:/ 'schemasGet' smart constructor.
-data SchemasGet = SchemasGet
+data SchemasGet = SchemasGet'
     { _sgCustomerId :: !Text
     , _sgSchemaKey  :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ schemasGet
     -> Text -- ^ 'sgSchemaKey'
     -> SchemasGet
 schemasGet pSgCustomerId_ pSgSchemaKey_ =
-    SchemasGet
+    SchemasGet'
     { _sgCustomerId = pSgCustomerId_
     , _sgSchemaKey = pSgSchemaKey_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest SchemasGet where
         type Scopes SchemasGet =
              '["https://www.googleapis.com/auth/admin.directory.userschema",
                "https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
-        requestClient SchemasGet{..}
+        requestClient SchemasGet'{..}
           = go _sgCustomerId _sgSchemaKey (Just AltJSON)
               directoryService
           where go

@@ -68,7 +68,7 @@ type MonitoredResourceDescriptorsListResource =
 -- | Lists monitored resource descriptors that are used by Cloud Logging.
 --
 -- /See:/ 'monitoredResourceDescriptorsList' smart constructor.
-data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList
+data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList'
     { _mrdlXgafv          :: !(Maybe Text)
     , _mrdlUploadProtocol :: !(Maybe Text)
     , _mrdlPp             :: !Bool
@@ -104,7 +104,7 @@ data MonitoredResourceDescriptorsList = MonitoredResourceDescriptorsList
 monitoredResourceDescriptorsList
     :: MonitoredResourceDescriptorsList
 monitoredResourceDescriptorsList =
-    MonitoredResourceDescriptorsList
+    MonitoredResourceDescriptorsList'
     { _mrdlXgafv = Nothing
     , _mrdlUploadProtocol = Nothing
     , _mrdlPp = True
@@ -182,7 +182,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
-        requestClient MonitoredResourceDescriptorsList{..}
+        requestClient MonitoredResourceDescriptorsList'{..}
           = go _mrdlXgafv _mrdlUploadProtocol (Just _mrdlPp)
               _mrdlAccessToken
               _mrdlUploadType

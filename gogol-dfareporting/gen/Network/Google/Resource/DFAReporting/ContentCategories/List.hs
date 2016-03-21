@@ -67,7 +67,7 @@ type ContentCategoriesListResource =
 -- | Retrieves a list of content categories, possibly filtered.
 --
 -- /See:/ 'contentCategoriesList' smart constructor.
-data ContentCategoriesList = ContentCategoriesList
+data ContentCategoriesList = ContentCategoriesList'
     { _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe [Textual Int64])
     , _cclProFileId    :: !(Textual Int64)
@@ -98,7 +98,7 @@ contentCategoriesList
     :: Int64 -- ^ 'cclProFileId'
     -> ContentCategoriesList
 contentCategoriesList pCclProFileId_ =
-    ContentCategoriesList
+    ContentCategoriesList'
     { _cclSearchString = Nothing
     , _cclIds = Nothing
     , _cclProFileId = _Coerce # pCclProFileId_
@@ -160,7 +160,7 @@ instance GoogleRequest ContentCategoriesList where
              ContentCategoriesListResponse
         type Scopes ContentCategoriesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ContentCategoriesList{..}
+        requestClient ContentCategoriesList'{..}
           = go _cclProFileId _cclSearchString
               (_cclIds ^. _Default)
               _cclSortOrder

@@ -57,7 +57,7 @@ type AccountsContainersTriggersDeleteResource =
 -- | Deletes a GTM Trigger.
 --
 -- /See:/ 'accountsContainersTriggersDelete' smart constructor.
-data AccountsContainersTriggersDelete = AccountsContainersTriggersDelete
+data AccountsContainersTriggersDelete = AccountsContainersTriggersDelete'
     { _actdContainerId :: !Text
     , _actdTriggerId   :: !Text
     , _actdAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersTriggersDelete
     -> Text -- ^ 'actdAccountId'
     -> AccountsContainersTriggersDelete
 accountsContainersTriggersDelete pActdContainerId_ pActdTriggerId_ pActdAccountId_ =
-    AccountsContainersTriggersDelete
+    AccountsContainersTriggersDelete'
     { _actdContainerId = pActdContainerId_
     , _actdTriggerId = pActdTriggerId_
     , _actdAccountId = pActdAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest
         type Rs AccountsContainersTriggersDelete = ()
         type Scopes AccountsContainersTriggersDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersTriggersDelete{..}
+        requestClient AccountsContainersTriggersDelete'{..}
           = go _actdAccountId _actdContainerId _actdTriggerId
               (Just AltJSON)
               tagManagerService

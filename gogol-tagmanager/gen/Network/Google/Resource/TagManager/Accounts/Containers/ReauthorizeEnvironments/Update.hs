@@ -61,7 +61,7 @@ type AccountsContainersReauthorizeEnvironmentsUpdateResource
 -- | Re-generates the authorization code for a GTM Environment.
 --
 -- /See:/ 'accountsContainersReauthorizeEnvironmentsUpdate' smart constructor.
-data AccountsContainersReauthorizeEnvironmentsUpdate = AccountsContainersReauthorizeEnvironmentsUpdate
+data AccountsContainersReauthorizeEnvironmentsUpdate = AccountsContainersReauthorizeEnvironmentsUpdate'
     { _acreuContainerId   :: !Text
     , _acreuPayload       :: !Environment
     , _acreuAccountId     :: !Text
@@ -86,7 +86,7 @@ accountsContainersReauthorizeEnvironmentsUpdate
     -> Text -- ^ 'acreuEnvironmentId'
     -> AccountsContainersReauthorizeEnvironmentsUpdate
 accountsContainersReauthorizeEnvironmentsUpdate pAcreuContainerId_ pAcreuPayload_ pAcreuAccountId_ pAcreuEnvironmentId_ =
-    AccountsContainersReauthorizeEnvironmentsUpdate
+    AccountsContainersReauthorizeEnvironmentsUpdate'
     { _acreuContainerId = pAcreuContainerId_
     , _acreuPayload = pAcreuPayload_
     , _acreuAccountId = pAcreuAccountId_
@@ -126,7 +126,7 @@ instance GoogleRequest
              =
              '["https://www.googleapis.com/auth/tagmanager.publish"]
         requestClient
-          AccountsContainersReauthorizeEnvironmentsUpdate{..}
+          AccountsContainersReauthorizeEnvironmentsUpdate'{..}
           = go _acreuAccountId _acreuContainerId
               _acreuEnvironmentId
               (Just AltJSON)

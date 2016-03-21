@@ -68,7 +68,7 @@ type TablesFeaturesBatchInsertResource =
 -- guide.
 --
 -- /See:/ 'tablesFeaturesBatchInsert' smart constructor.
-data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert
+data TablesFeaturesBatchInsert = TablesFeaturesBatchInsert'
     { _tfbiPayload :: !FeaturesBatchInsertRequest
     , _tfbiId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -85,7 +85,7 @@ tablesFeaturesBatchInsert
     -> Text -- ^ 'tfbiId'
     -> TablesFeaturesBatchInsert
 tablesFeaturesBatchInsert pTfbiPayload_ pTfbiId_ =
-    TablesFeaturesBatchInsert
+    TablesFeaturesBatchInsert'
     { _tfbiPayload = pTfbiPayload_
     , _tfbiId = pTfbiId_
     }
@@ -104,7 +104,7 @@ instance GoogleRequest TablesFeaturesBatchInsert
         type Rs TablesFeaturesBatchInsert = ()
         type Scopes TablesFeaturesBatchInsert =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesFeaturesBatchInsert{..}
+        requestClient TablesFeaturesBatchInsert'{..}
           = go _tfbiId (Just AltJSON) _tfbiPayload
               mapsEngineService
           where go

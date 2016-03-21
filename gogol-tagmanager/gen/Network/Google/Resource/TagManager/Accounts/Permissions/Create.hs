@@ -54,7 +54,7 @@ type AccountsPermissionsCreateResource =
 -- | Creates a user\'s Account & Container Permissions.
 --
 -- /See:/ 'accountsPermissionsCreate' smart constructor.
-data AccountsPermissionsCreate = AccountsPermissionsCreate
+data AccountsPermissionsCreate = AccountsPermissionsCreate'
     { _apcPayload   :: !UserAccess
     , _apcAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsPermissionsCreate
     -> Text -- ^ 'apcAccountId'
     -> AccountsPermissionsCreate
 accountsPermissionsCreate pApcPayload_ pApcAccountId_ =
-    AccountsPermissionsCreate
+    AccountsPermissionsCreate'
     { _apcPayload = pApcPayload_
     , _apcAccountId = pApcAccountId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AccountsPermissionsCreate
         type Rs AccountsPermissionsCreate = UserAccess
         type Scopes AccountsPermissionsCreate =
              '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-        requestClient AccountsPermissionsCreate{..}
+        requestClient AccountsPermissionsCreate'{..}
           = go _apcAccountId (Just AltJSON) _apcPayload
               tagManagerService
           where go

@@ -54,7 +54,7 @@ type PlatformTypesGetResource =
 -- | Gets one platform type by ID.
 --
 -- /See:/ 'platformTypesGet' smart constructor.
-data PlatformTypesGet = PlatformTypesGet
+data PlatformTypesGet = PlatformTypesGet'
     { _ptgProFileId :: !(Textual Int64)
     , _ptgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ platformTypesGet
     -> Int64 -- ^ 'ptgId'
     -> PlatformTypesGet
 platformTypesGet pPtgProFileId_ pPtgId_ =
-    PlatformTypesGet
+    PlatformTypesGet'
     { _ptgProFileId = _Coerce # pPtgProFileId_
     , _ptgId = _Coerce # pPtgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PlatformTypesGet where
         type Rs PlatformTypesGet = PlatformType
         type Scopes PlatformTypesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlatformTypesGet{..}
+        requestClient PlatformTypesGet'{..}
           = go _ptgProFileId _ptgId (Just AltJSON)
               dFAReportingService
           where go

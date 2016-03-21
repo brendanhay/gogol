@@ -58,7 +58,7 @@ type ProductstatusesListResource =
 -- | Lists the statuses of the products in your Merchant Center account.
 --
 -- /See:/ 'productstatusesList' smart constructor.
-data ProductstatusesList = ProductstatusesList
+data ProductstatusesList = ProductstatusesList'
     { _plMerchantId                  :: !(Textual Word64)
     , _plIncludeInvalidInsertedItems :: !(Maybe Bool)
     , _plPageToken                   :: !(Maybe Text)
@@ -80,7 +80,7 @@ productstatusesList
     :: Word64 -- ^ 'plMerchantId'
     -> ProductstatusesList
 productstatusesList pPlMerchantId_ =
-    ProductstatusesList
+    ProductstatusesList'
     { _plMerchantId = _Coerce # pPlMerchantId_
     , _plIncludeInvalidInsertedItems = Nothing
     , _plPageToken = Nothing
@@ -118,7 +118,7 @@ instance GoogleRequest ProductstatusesList where
              ProductstatusesListResponse
         type Scopes ProductstatusesList =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductstatusesList{..}
+        requestClient ProductstatusesList'{..}
           = go _plMerchantId _plIncludeInvalidInsertedItems
               _plPageToken
               _plMaxResults

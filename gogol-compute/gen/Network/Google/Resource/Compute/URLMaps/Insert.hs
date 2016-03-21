@@ -57,7 +57,7 @@ type URLMapsInsertResource =
 -- included in the request.
 --
 -- /See:/ 'urlMapsInsert' smart constructor.
-data URLMapsInsert = URLMapsInsert
+data URLMapsInsert = URLMapsInsert'
     { _umiProject :: !Text
     , _umiPayload :: !URLMap
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ urlMapsInsert
     -> URLMap -- ^ 'umiPayload'
     -> URLMapsInsert
 urlMapsInsert pUmiProject_ pUmiPayload_ =
-    URLMapsInsert
+    URLMapsInsert'
     { _umiProject = pUmiProject_
     , _umiPayload = pUmiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest URLMapsInsert where
         type Scopes URLMapsInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient URLMapsInsert{..}
+        requestClient URLMapsInsert'{..}
           = go _umiProject (Just AltJSON) _umiPayload
               computeService
           where go

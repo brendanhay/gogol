@@ -55,7 +55,7 @@ type PrivilegesListResource =
 -- | Retrieves a paginated list of all privileges for a customer.
 --
 -- /See:/ 'privilegesList' smart constructor.
-newtype PrivilegesList = PrivilegesList
+newtype PrivilegesList = PrivilegesList'
     { _plCustomer :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ privilegesList
     :: Text -- ^ 'plCustomer'
     -> PrivilegesList
 privilegesList pPlCustomer_ =
-    PrivilegesList
+    PrivilegesList'
     { _plCustomer = pPlCustomer_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest PrivilegesList where
         type Scopes PrivilegesList =
              '["https://www.googleapis.com/auth/admin.directory.rolemanagement",
                "https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly"]
-        requestClient PrivilegesList{..}
+        requestClient PrivilegesList'{..}
           = go _plCustomer (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy PrivilegesListResource)

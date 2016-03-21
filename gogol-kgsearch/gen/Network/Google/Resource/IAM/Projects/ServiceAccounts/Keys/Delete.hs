@@ -63,7 +63,7 @@ type ProjectsServiceAccountsKeysDeleteResource =
 -- | Deletes a service account key.
 --
 -- /See:/ 'projectsServiceAccountsKeysDelete' smart constructor.
-data ProjectsServiceAccountsKeysDelete = ProjectsServiceAccountsKeysDelete
+data ProjectsServiceAccountsKeysDelete = ProjectsServiceAccountsKeysDelete'
     { _psakdXgafv          :: !(Maybe Text)
     , _psakdUploadProtocol :: !(Maybe Text)
     , _psakdPp             :: !Bool
@@ -97,7 +97,7 @@ projectsServiceAccountsKeysDelete
     :: Text -- ^ 'psakdName'
     -> ProjectsServiceAccountsKeysDelete
 projectsServiceAccountsKeysDelete pPsakdName_ =
-    ProjectsServiceAccountsKeysDelete
+    ProjectsServiceAccountsKeysDelete'
     { _psakdXgafv = Nothing
     , _psakdUploadProtocol = Nothing
     , _psakdPp = True
@@ -161,7 +161,7 @@ instance GoogleRequest
         type Rs ProjectsServiceAccountsKeysDelete = Empty
         type Scopes ProjectsServiceAccountsKeysDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsKeysDelete{..}
+        requestClient ProjectsServiceAccountsKeysDelete'{..}
           = go _psakdName _psakdXgafv _psakdUploadProtocol
               (Just _psakdPp)
               _psakdAccessToken

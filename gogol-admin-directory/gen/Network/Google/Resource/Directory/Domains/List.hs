@@ -53,7 +53,7 @@ type DomainsListResource =
 -- | Lists the domains of the customer.
 --
 -- /See:/ 'domainsList' smart constructor.
-newtype DomainsList = DomainsList
+newtype DomainsList = DomainsList'
     { _dlCustomer :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ domainsList
     :: Text -- ^ 'dlCustomer'
     -> DomainsList
 domainsList pDlCustomer_ =
-    DomainsList
+    DomainsList'
     { _dlCustomer = pDlCustomer_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest DomainsList where
         type Scopes DomainsList =
              '["https://www.googleapis.com/auth/admin.directory.domain",
                "https://www.googleapis.com/auth/admin.directory.domain.readonly"]
-        requestClient DomainsList{..}
+        requestClient DomainsList'{..}
           = go _dlCustomer (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy DomainsListResource)

@@ -57,7 +57,7 @@ type OrdersUpdateshipmentResource =
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ 'ordersUpdateshipment' smart constructor.
-data OrdersUpdateshipment = OrdersUpdateshipment
+data OrdersUpdateshipment = OrdersUpdateshipment'
     { _ouMerchantId :: !(Textual Word64)
     , _ouPayload    :: !OrdersUpdateShipmentRequest
     , _ouOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersUpdateshipment
     -> Text -- ^ 'ouOrderId'
     -> OrdersUpdateshipment
 ordersUpdateshipment pOuMerchantId_ pOuPayload_ pOuOrderId_ =
-    OrdersUpdateshipment
+    OrdersUpdateshipment'
     { _ouMerchantId = _Coerce # pOuMerchantId_
     , _ouPayload = pOuPayload_
     , _ouOrderId = pOuOrderId_
@@ -105,7 +105,7 @@ instance GoogleRequest OrdersUpdateshipment where
              OrdersUpdateShipmentResponse
         type Scopes OrdersUpdateshipment =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersUpdateshipment{..}
+        requestClient OrdersUpdateshipment'{..}
           = go _ouMerchantId _ouOrderId (Just AltJSON)
               _ouPayload
               shoppingContentService

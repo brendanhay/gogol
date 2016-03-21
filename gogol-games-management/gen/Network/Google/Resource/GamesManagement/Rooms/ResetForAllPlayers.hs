@@ -54,21 +54,21 @@ type RoomsResetForAllPlayersResource =
 --
 -- /See:/ 'roomsResetForAllPlayers' smart constructor.
 data RoomsResetForAllPlayers =
-    RoomsResetForAllPlayers
+    RoomsResetForAllPlayers'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsResetForAllPlayers' with the minimum fields required to make a request.
 --
 roomsResetForAllPlayers
     :: RoomsResetForAllPlayers
-roomsResetForAllPlayers = RoomsResetForAllPlayers
+roomsResetForAllPlayers = RoomsResetForAllPlayers'
 
 instance GoogleRequest RoomsResetForAllPlayers where
         type Rs RoomsResetForAllPlayers = ()
         type Scopes RoomsResetForAllPlayers =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsResetForAllPlayers{}
+        requestClient RoomsResetForAllPlayers'{}
           = go (Just AltJSON) gamesManagementService
           where go
                   = buildClient

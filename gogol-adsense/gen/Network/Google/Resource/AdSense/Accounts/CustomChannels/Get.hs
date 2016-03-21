@@ -59,7 +59,7 @@ type AccountsCustomChannelsGetResource =
 -- specified account.
 --
 -- /See:/ 'accountsCustomChannelsGet' smart constructor.
-data AccountsCustomChannelsGet = AccountsCustomChannelsGet
+data AccountsCustomChannelsGet = AccountsCustomChannelsGet'
     { _accgCustomChannelId :: !Text
     , _accgAdClientId      :: !Text
     , _accgAccountId       :: !Text
@@ -80,7 +80,7 @@ accountsCustomChannelsGet
     -> Text -- ^ 'accgAccountId'
     -> AccountsCustomChannelsGet
 accountsCustomChannelsGet pAccgCustomChannelId_ pAccgAdClientId_ pAccgAccountId_ =
-    AccountsCustomChannelsGet
+    AccountsCustomChannelsGet'
     { _accgCustomChannelId = pAccgCustomChannelId_
     , _accgAdClientId = pAccgAdClientId_
     , _accgAccountId = pAccgAccountId_
@@ -110,7 +110,7 @@ instance GoogleRequest AccountsCustomChannelsGet
         type Scopes AccountsCustomChannelsGet =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AccountsCustomChannelsGet{..}
+        requestClient AccountsCustomChannelsGet'{..}
           = go _accgAccountId _accgAdClientId
               _accgCustomChannelId
               (Just AltJSON)

@@ -56,7 +56,7 @@ type ManagementAccountUserLinksInsertResource =
 -- | Adds a new user to the given account.
 --
 -- /See:/ 'managementAccountUserLinksInsert' smart constructor.
-data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert
+data ManagementAccountUserLinksInsert = ManagementAccountUserLinksInsert'
     { _mauliPayload   :: !EntityUserLink
     , _mauliAccountId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ managementAccountUserLinksInsert
     -> Text -- ^ 'mauliAccountId'
     -> ManagementAccountUserLinksInsert
 managementAccountUserLinksInsert pMauliPayload_ pMauliAccountId_ =
-    ManagementAccountUserLinksInsert
+    ManagementAccountUserLinksInsert'
     { _mauliPayload = pMauliPayload_
     , _mauliAccountId = pMauliAccountId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest
              EntityUserLink
         type Scopes ManagementAccountUserLinksInsert =
              '["https://www.googleapis.com/auth/analytics.manage.users"]
-        requestClient ManagementAccountUserLinksInsert{..}
+        requestClient ManagementAccountUserLinksInsert'{..}
           = go _mauliAccountId (Just AltJSON) _mauliPayload
               analyticsService
           where go

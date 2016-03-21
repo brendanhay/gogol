@@ -54,7 +54,7 @@ type GroupsUpdateResource =
 -- | Modifies a group. For example, you could change a group\'s title.
 --
 -- /See:/ 'groupsUpdate' smart constructor.
-data GroupsUpdate = GroupsUpdate
+data GroupsUpdate = GroupsUpdate'
     { _guPayload                :: !Group
     , _guOnBehalfOfContentOwner :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ groupsUpdate
     :: Group -- ^ 'guPayload'
     -> GroupsUpdate
 groupsUpdate pGuPayload_ =
-    GroupsUpdate
+    GroupsUpdate'
     { _guPayload = pGuPayload_
     , _guOnBehalfOfContentOwner = Nothing
     }
@@ -100,7 +100,7 @@ instance GoogleRequest GroupsUpdate where
         type Scopes GroupsUpdate =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient GroupsUpdate{..}
+        requestClient GroupsUpdate'{..}
           = go _guOnBehalfOfContentOwner (Just AltJSON)
               _guPayload
               youTubeAnalyticsService

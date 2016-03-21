@@ -56,7 +56,7 @@ type UsersMessagesDeleteResource =
 -- operation cannot be undone. Prefer messages.trash instead.
 --
 -- /See:/ 'usersMessagesDelete' smart constructor.
-data UsersMessagesDelete = UsersMessagesDelete
+data UsersMessagesDelete = UsersMessagesDelete'
     { _umdUserId :: !Text
     , _umdId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersMessagesDelete
     :: Text -- ^ 'umdId'
     -> UsersMessagesDelete
 usersMessagesDelete pUmdId_ =
-    UsersMessagesDelete
+    UsersMessagesDelete'
     { _umdUserId = "me"
     , _umdId = pUmdId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersMessagesDelete where
         type Rs UsersMessagesDelete = ()
         type Scopes UsersMessagesDelete =
              '["https://mail.google.com/"]
-        requestClient UsersMessagesDelete{..}
+        requestClient UsersMessagesDelete'{..}
           = go _umdUserId _umdId (Just AltJSON) gmailService
           where go
                   = buildClient

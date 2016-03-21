@@ -66,7 +66,7 @@ type CaptionsListResource =
 -- caption track.
 --
 -- /See:/ 'captionsList' smart constructor.
-data CaptionsList = CaptionsList
+data CaptionsList = CaptionsList'
     { _clOnBehalfOf             :: !(Maybe Text)
     , _clPart                   :: !Text
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
@@ -92,7 +92,7 @@ captionsList
     -> Text -- ^ 'clVideoId'
     -> CaptionsList
 captionsList pClPart_ pClVideoId_ =
-    CaptionsList
+    CaptionsList'
     { _clOnBehalfOf = Nothing
     , _clPart = pClPart_
     , _clOnBehalfOfContentOwner = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest CaptionsList where
         type Scopes CaptionsList =
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient CaptionsList{..}
+        requestClient CaptionsList'{..}
           = go (Just _clPart) (Just _clVideoId) _clOnBehalfOf
               _clOnBehalfOfContentOwner
               _clId

@@ -56,7 +56,7 @@ type EditsTestersPatchResource =
 
 --
 -- /See:/ 'editsTestersPatch' smart constructor.
-data EditsTestersPatch = EditsTestersPatch
+data EditsTestersPatch = EditsTestersPatch'
     { _etpTrack       :: !EditsTestersPatchTrack
     , _etpPackageName :: !Text
     , _etpPayload     :: !Testers
@@ -81,7 +81,7 @@ editsTestersPatch
     -> Text -- ^ 'etpEditId'
     -> EditsTestersPatch
 editsTestersPatch pEtpTrack_ pEtpPackageName_ pEtpPayload_ pEtpEditId_ =
-    EditsTestersPatch
+    EditsTestersPatch'
     { _etpTrack = pEtpTrack_
     , _etpPackageName = pEtpPackageName_
     , _etpPayload = pEtpPayload_
@@ -112,7 +112,7 @@ instance GoogleRequest EditsTestersPatch where
         type Rs EditsTestersPatch = Testers
         type Scopes EditsTestersPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsTestersPatch{..}
+        requestClient EditsTestersPatch'{..}
           = go _etpPackageName _etpEditId _etpTrack
               (Just AltJSON)
               _etpPayload

@@ -61,7 +61,7 @@ type QuestMilestonesClaimResource =
 -- authorized user.
 --
 -- /See:/ 'questMilestonesClaim' smart constructor.
-data QuestMilestonesClaim = QuestMilestonesClaim
+data QuestMilestonesClaim = QuestMilestonesClaim'
     { _qmcRequestId   :: !(Textual Int64)
     , _qmcMilestoneId :: !Text
     , _qmcQuestId     :: !Text
@@ -82,7 +82,7 @@ questMilestonesClaim
     -> Text -- ^ 'qmcQuestId'
     -> QuestMilestonesClaim
 questMilestonesClaim pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
-    QuestMilestonesClaim
+    QuestMilestonesClaim'
     { _qmcRequestId = _Coerce # pQmcRequestId_
     , _qmcMilestoneId = pQmcMilestoneId_
     , _qmcQuestId = pQmcQuestId_
@@ -111,7 +111,7 @@ instance GoogleRequest QuestMilestonesClaim where
         type Scopes QuestMilestonesClaim =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient QuestMilestonesClaim{..}
+        requestClient QuestMilestonesClaim'{..}
           = go _qmcQuestId _qmcMilestoneId (Just _qmcRequestId)
               (Just AltJSON)
               gamesService

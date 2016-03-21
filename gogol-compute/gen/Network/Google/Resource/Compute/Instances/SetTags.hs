@@ -62,7 +62,7 @@ type InstancesSetTagsResource =
 -- request.
 --
 -- /See:/ 'instancesSetTags' smart constructor.
-data InstancesSetTags = InstancesSetTags
+data InstancesSetTags = InstancesSetTags'
     { _istProject  :: !Text
     , _istZone     :: !Text
     , _istPayload  :: !Tags
@@ -87,7 +87,7 @@ instancesSetTags
     -> Text -- ^ 'istInstance'
     -> InstancesSetTags
 instancesSetTags pIstProject_ pIstZone_ pIstPayload_ pIstInstance_ =
-    InstancesSetTags
+    InstancesSetTags'
     { _istProject = pIstProject_
     , _istZone = pIstZone_
     , _istPayload = pIstPayload_
@@ -118,7 +118,7 @@ instance GoogleRequest InstancesSetTags where
         type Scopes InstancesSetTags =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesSetTags{..}
+        requestClient InstancesSetTags'{..}
           = go _istProject _istZone _istInstance (Just AltJSON)
               _istPayload
               computeService

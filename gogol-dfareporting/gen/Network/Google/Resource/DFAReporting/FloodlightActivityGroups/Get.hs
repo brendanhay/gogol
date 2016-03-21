@@ -55,7 +55,7 @@ type FloodlightActivityGroupsGetResource =
 -- | Gets one floodlight activity group by ID.
 --
 -- /See:/ 'floodlightActivityGroupsGet' smart constructor.
-data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet
+data FloodlightActivityGroupsGet = FloodlightActivityGroupsGet'
     { _faggProFileId :: !(Textual Int64)
     , _faggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivityGroupsGet
     -> Int64 -- ^ 'faggId'
     -> FloodlightActivityGroupsGet
 floodlightActivityGroupsGet pFaggProFileId_ pFaggId_ =
-    FloodlightActivityGroupsGet
+    FloodlightActivityGroupsGet'
     { _faggProFileId = _Coerce # pFaggProFileId_
     , _faggId = _Coerce # pFaggId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest FloodlightActivityGroupsGet
              FloodlightActivityGroup
         type Scopes FloodlightActivityGroupsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivityGroupsGet{..}
+        requestClient FloodlightActivityGroupsGet'{..}
           = go _faggProFileId _faggId (Just AltJSON)
               dFAReportingService
           where go

@@ -56,7 +56,7 @@ type BookshelvesGetResource =
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
 -- /See:/ 'bookshelvesGet' smart constructor.
-data BookshelvesGet = BookshelvesGet
+data BookshelvesGet = BookshelvesGet'
     { _bgUserId :: !Text
     , _bgShelf  :: !Text
     , _bgSource :: !(Maybe Text)
@@ -76,7 +76,7 @@ bookshelvesGet
     -> Text -- ^ 'bgShelf'
     -> BookshelvesGet
 bookshelvesGet pBgUserId_ pBgShelf_ =
-    BookshelvesGet
+    BookshelvesGet'
     { _bgUserId = pBgUserId_
     , _bgShelf = pBgShelf_
     , _bgSource = Nothing
@@ -98,7 +98,7 @@ instance GoogleRequest BookshelvesGet where
         type Rs BookshelvesGet = Bookshelf
         type Scopes BookshelvesGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient BookshelvesGet{..}
+        requestClient BookshelvesGet'{..}
           = go _bgUserId _bgShelf _bgSource (Just AltJSON)
               booksService
           where go

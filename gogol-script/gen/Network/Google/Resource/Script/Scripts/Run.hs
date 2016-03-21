@@ -81,7 +81,7 @@ type ScriptsRunResource =
 -- and click the **Scopes** tab.
 --
 -- /See:/ 'scriptsRun' smart constructor.
-data ScriptsRun = ScriptsRun
+data ScriptsRun = ScriptsRun'
     { _srXgafv          :: !(Maybe Text)
     , _srUploadProtocol :: !(Maybe Text)
     , _srPp             :: !Bool
@@ -119,7 +119,7 @@ scriptsRun
     -> Text -- ^ 'srScriptId'
     -> ScriptsRun
 scriptsRun pSrPayload_ pSrScriptId_ =
-    ScriptsRun
+    ScriptsRun'
     { _srXgafv = Nothing
     , _srUploadProtocol = Nothing
     , _srPp = True
@@ -192,7 +192,7 @@ instance GoogleRequest ScriptsRun where
                "https://www.googleapis.com/auth/forms.currentonly",
                "https://www.googleapis.com/auth/groups",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ScriptsRun{..}
+        requestClient ScriptsRun'{..}
           = go _srScriptId _srXgafv _srUploadProtocol
               (Just _srPp)
               _srAccessToken

@@ -52,7 +52,7 @@ type UsersInsertResource =
 -- | create user.
 --
 -- /See:/ 'usersInsert' smart constructor.
-newtype UsersInsert = UsersInsert
+newtype UsersInsert = UsersInsert'
     { _uiPayload :: User
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ usersInsert
     :: User -- ^ 'uiPayload'
     -> UsersInsert
 usersInsert pUiPayload_ =
-    UsersInsert
+    UsersInsert'
     { _uiPayload = pUiPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest UsersInsert where
         type Rs UsersInsert = User
         type Scopes UsersInsert =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersInsert{..}
+        requestClient UsersInsert'{..}
           = go (Just AltJSON) _uiPayload directoryService
           where go
                   = buildClient (Proxy :: Proxy UsersInsertResource)

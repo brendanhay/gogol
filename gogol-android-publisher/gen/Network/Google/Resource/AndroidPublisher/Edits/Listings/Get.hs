@@ -57,7 +57,7 @@ type EditsListingsGetResource =
 -- | Fetches information about a localized store listing.
 --
 -- /See:/ 'editsListingsGet' smart constructor.
-data EditsListingsGet = EditsListingsGet
+data EditsListingsGet = EditsListingsGet'
     { _elgPackageName :: !Text
     , _elgLanguage    :: !Text
     , _elgEditId      :: !Text
@@ -78,7 +78,7 @@ editsListingsGet
     -> Text -- ^ 'elgEditId'
     -> EditsListingsGet
 editsListingsGet pElgPackageName_ pElgLanguage_ pElgEditId_ =
-    EditsListingsGet
+    EditsListingsGet'
     { _elgPackageName = pElgPackageName_
     , _elgLanguage = pElgLanguage_
     , _elgEditId = pElgEditId_
@@ -106,7 +106,7 @@ instance GoogleRequest EditsListingsGet where
         type Rs EditsListingsGet = Listing
         type Scopes EditsListingsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsListingsGet{..}
+        requestClient EditsListingsGet'{..}
           = go _elgPackageName _elgEditId _elgLanguage
               (Just AltJSON)
               androidPublisherService

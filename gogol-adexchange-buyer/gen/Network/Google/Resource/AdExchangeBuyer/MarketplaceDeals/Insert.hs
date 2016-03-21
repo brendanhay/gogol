@@ -56,7 +56,7 @@ type MarketplaceDealsInsertResource =
 -- | Add new deals for the specified proposal
 --
 -- /See:/ 'marketplaceDealsInsert' smart constructor.
-data MarketplaceDealsInsert = MarketplaceDealsInsert
+data MarketplaceDealsInsert = MarketplaceDealsInsert'
     { _mdiPayload    :: !AddOrderDealsRequest
     , _mdiProposalId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ marketplaceDealsInsert
     -> Text -- ^ 'mdiProposalId'
     -> MarketplaceDealsInsert
 marketplaceDealsInsert pMdiPayload_ pMdiProposalId_ =
-    MarketplaceDealsInsert
+    MarketplaceDealsInsert'
     { _mdiPayload = pMdiPayload_
     , _mdiProposalId = pMdiProposalId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest MarketplaceDealsInsert where
              AddOrderDealsResponse
         type Scopes MarketplaceDealsInsert =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient MarketplaceDealsInsert{..}
+        requestClient MarketplaceDealsInsert'{..}
           = go _mdiProposalId (Just AltJSON) _mdiPayload
               adExchangeBuyerService
           where go

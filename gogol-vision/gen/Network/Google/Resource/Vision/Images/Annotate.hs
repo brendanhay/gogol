@@ -65,7 +65,7 @@ type ImagesAnnotateResource =
 -- | Run image detection and annotation for a batch of images.
 --
 -- /See:/ 'imagesAnnotate' smart constructor.
-data ImagesAnnotate = ImagesAnnotate
+data ImagesAnnotate = ImagesAnnotate'
     { _iaXgafv          :: !(Maybe Xgafv)
     , _iaUploadProtocol :: !(Maybe Text)
     , _iaPp             :: !Bool
@@ -99,7 +99,7 @@ imagesAnnotate
     :: BatchAnnotateImagesRequest -- ^ 'iaPayload'
     -> ImagesAnnotate
 imagesAnnotate pIaPayload_ =
-    ImagesAnnotate
+    ImagesAnnotate'
     { _iaXgafv = Nothing
     , _iaUploadProtocol = Nothing
     , _iaPp = True
@@ -155,7 +155,7 @@ instance GoogleRequest ImagesAnnotate where
         type Rs ImagesAnnotate = BatchAnnotateImagesResponse
         type Scopes ImagesAnnotate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ImagesAnnotate{..}
+        requestClient ImagesAnnotate'{..}
           = go _iaXgafv _iaUploadProtocol (Just _iaPp)
               _iaAccessToken
               _iaUploadType

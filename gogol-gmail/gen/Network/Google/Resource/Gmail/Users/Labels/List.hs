@@ -53,7 +53,7 @@ type UsersLabelsListResource =
 -- | Lists all labels in the user\'s mailbox.
 --
 -- /See:/ 'usersLabelsList' smart constructor.
-newtype UsersLabelsList = UsersLabelsList
+newtype UsersLabelsList = UsersLabelsList'
     { _ullUserId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ newtype UsersLabelsList = UsersLabelsList
 usersLabelsList
     :: UsersLabelsList
 usersLabelsList =
-    UsersLabelsList
+    UsersLabelsList'
     { _ullUserId = "me"
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest UsersLabelsList where
                "https://www.googleapis.com/auth/gmail.labels",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersLabelsList{..}
+        requestClient UsersLabelsList'{..}
           = go _ullUserId (Just AltJSON) gmailService
           where go
                   = buildClient

@@ -57,7 +57,7 @@ type ProjectsMoveInstanceResource =
 -- another.
 --
 -- /See:/ 'projectsMoveInstance' smart constructor.
-data ProjectsMoveInstance = ProjectsMoveInstance
+data ProjectsMoveInstance = ProjectsMoveInstance'
     { _pmiProject :: !Text
     , _pmiPayload :: !InstanceMoveRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ projectsMoveInstance
     -> InstanceMoveRequest -- ^ 'pmiPayload'
     -> ProjectsMoveInstance
 projectsMoveInstance pPmiProject_ pPmiPayload_ =
-    ProjectsMoveInstance
+    ProjectsMoveInstance'
     { _pmiProject = pPmiProject_
     , _pmiPayload = pPmiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest ProjectsMoveInstance where
         type Scopes ProjectsMoveInstance =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient ProjectsMoveInstance{..}
+        requestClient ProjectsMoveInstance'{..}
           = go _pmiProject (Just AltJSON) _pmiPayload
               computeService
           where go

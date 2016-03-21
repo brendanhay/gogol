@@ -59,7 +59,7 @@ type CreativeGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'creativeGroupsPatch' smart constructor.
-data CreativeGroupsPatch = CreativeGroupsPatch
+data CreativeGroupsPatch = CreativeGroupsPatch'
     { _cgpProFileId :: !(Textual Int64)
     , _cgpPayload   :: !CreativeGroup
     , _cgpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ creativeGroupsPatch
     -> Int64 -- ^ 'cgpId'
     -> CreativeGroupsPatch
 creativeGroupsPatch pCgpProFileId_ pCgpPayload_ pCgpId_ =
-    CreativeGroupsPatch
+    CreativeGroupsPatch'
     { _cgpProFileId = _Coerce # pCgpProFileId_
     , _cgpPayload = pCgpPayload_
     , _cgpId = _Coerce # pCgpId_
@@ -106,7 +106,7 @@ instance GoogleRequest CreativeGroupsPatch where
         type Rs CreativeGroupsPatch = CreativeGroup
         type Scopes CreativeGroupsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeGroupsPatch{..}
+        requestClient CreativeGroupsPatch'{..}
           = go _cgpProFileId (Just _cgpId) (Just AltJSON)
               _cgpPayload
               dFAReportingService

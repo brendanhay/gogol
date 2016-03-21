@@ -93,7 +93,7 @@ type ProjectsSetIAMPolicyResource =
 -- account is being used before removing or updating its roles.
 --
 -- /See:/ 'projectsSetIAMPolicy' smart constructor.
-data ProjectsSetIAMPolicy = ProjectsSetIAMPolicy
+data ProjectsSetIAMPolicy = ProjectsSetIAMPolicy'
     { _psipXgafv          :: !(Maybe Text)
     , _psipUploadProtocol :: !(Maybe Text)
     , _psipPp             :: !Bool
@@ -131,7 +131,7 @@ projectsSetIAMPolicy
     -> Text -- ^ 'psipResource'
     -> ProjectsSetIAMPolicy
 projectsSetIAMPolicy pPsipPayload_ pPsipResource_ =
-    ProjectsSetIAMPolicy
+    ProjectsSetIAMPolicy'
     { _psipXgafv = Nothing
     , _psipUploadProtocol = Nothing
     , _psipPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest ProjectsSetIAMPolicy where
         type Rs ProjectsSetIAMPolicy = Policy
         type Scopes ProjectsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsSetIAMPolicy{..}
+        requestClient ProjectsSetIAMPolicy'{..}
           = go _psipResource _psipXgafv _psipUploadProtocol
               (Just _psipPp)
               _psipAccessToken

@@ -65,7 +65,7 @@ type EditsAPKListingsPatchResource =
 -- APK and language code. This method supports patch semantics.
 --
 -- /See:/ 'editsAPKListingsPatch' smart constructor.
-data EditsAPKListingsPatch = EditsAPKListingsPatch
+data EditsAPKListingsPatch = EditsAPKListingsPatch'
     { _eapklpPackageName    :: !Text
     , _eapklpAPKVersionCode :: !(Textual Int32)
     , _eapklpPayload        :: !APKListing
@@ -94,7 +94,7 @@ editsAPKListingsPatch
     -> Text -- ^ 'eapklpEditId'
     -> EditsAPKListingsPatch
 editsAPKListingsPatch pEapklpPackageName_ pEapklpAPKVersionCode_ pEapklpPayload_ pEapklpLanguage_ pEapklpEditId_ =
-    EditsAPKListingsPatch
+    EditsAPKListingsPatch'
     { _eapklpPackageName = pEapklpPackageName_
     , _eapklpAPKVersionCode = _Coerce # pEapklpAPKVersionCode_
     , _eapklpPayload = pEapklpPayload_
@@ -140,7 +140,7 @@ instance GoogleRequest EditsAPKListingsPatch where
         type Rs EditsAPKListingsPatch = APKListing
         type Scopes EditsAPKListingsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKListingsPatch{..}
+        requestClient EditsAPKListingsPatch'{..}
           = go _eapklpPackageName _eapklpEditId
               _eapklpAPKVersionCode
               _eapklpLanguage

@@ -72,7 +72,7 @@ type ReferencesetsGetResource =
 -- [GlobalAllianceApi.getReferenceSet](https:\/\/github.com\/ga4gh\/schemas\/blob\/v0.5.1\/src\/main\/resources\/avro\/referencemethods.avdl#L83).
 --
 -- /See:/ 'referencesetsGet' smart constructor.
-data ReferencesetsGet = ReferencesetsGet
+data ReferencesetsGet = ReferencesetsGet'
     { _rgReferenceSetId :: !Text
     , _rgXgafv          :: !(Maybe Text)
     , _rgUploadProtocol :: !(Maybe Text)
@@ -106,7 +106,7 @@ referencesetsGet
     :: Text -- ^ 'rgReferenceSetId'
     -> ReferencesetsGet
 referencesetsGet pRgReferenceSetId_ =
-    ReferencesetsGet
+    ReferencesetsGet'
     { _rgReferenceSetId = pRgReferenceSetId_
     , _rgXgafv = Nothing
     , _rgUploadProtocol = Nothing
@@ -165,7 +165,7 @@ instance GoogleRequest ReferencesetsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics",
                "https://www.googleapis.com/auth/genomics.readonly"]
-        requestClient ReferencesetsGet{..}
+        requestClient ReferencesetsGet'{..}
           = go _rgReferenceSetId _rgXgafv _rgUploadProtocol
               (Just _rgPp)
               _rgAccessToken

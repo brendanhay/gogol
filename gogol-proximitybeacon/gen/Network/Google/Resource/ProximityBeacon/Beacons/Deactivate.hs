@@ -71,7 +71,7 @@ type BeaconsDeactivateResource =
 -- code).
 --
 -- /See:/ 'beaconsDeactivate' smart constructor.
-data BeaconsDeactivate = BeaconsDeactivate
+data BeaconsDeactivate = BeaconsDeactivate'
     { _bdXgafv          :: !(Maybe Text)
     , _bdUploadProtocol :: !(Maybe Text)
     , _bdPp             :: !Bool
@@ -105,7 +105,7 @@ beaconsDeactivate
     :: Text -- ^ 'bdBeaconName'
     -> BeaconsDeactivate
 beaconsDeactivate pBdBeaconName_ =
-    BeaconsDeactivate
+    BeaconsDeactivate'
     { _bdXgafv = Nothing
     , _bdUploadProtocol = Nothing
     , _bdPp = True
@@ -160,7 +160,7 @@ bdCallback
 instance GoogleRequest BeaconsDeactivate where
         type Rs BeaconsDeactivate = Empty
         type Scopes BeaconsDeactivate = '[]
-        requestClient BeaconsDeactivate{..}
+        requestClient BeaconsDeactivate'{..}
           = go _bdBeaconName _bdXgafv _bdUploadProtocol
               (Just _bdPp)
               _bdAccessToken

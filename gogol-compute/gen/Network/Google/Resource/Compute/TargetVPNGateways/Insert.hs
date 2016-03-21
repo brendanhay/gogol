@@ -60,7 +60,7 @@ type TargetVPNGatewaysInsertResource =
 -- the data included in the request.
 --
 -- /See:/ 'targetVPNGatewaysInsert' smart constructor.
-data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert
+data TargetVPNGatewaysInsert = TargetVPNGatewaysInsert'
     { _tvgiProject :: !Text
     , _tvgiPayload :: !TargetVPNGateway
     , _tvgiRegion  :: !Text
@@ -81,7 +81,7 @@ targetVPNGatewaysInsert
     -> Text -- ^ 'tvgiRegion'
     -> TargetVPNGatewaysInsert
 targetVPNGatewaysInsert pTvgiProject_ pTvgiPayload_ pTvgiRegion_ =
-    TargetVPNGatewaysInsert
+    TargetVPNGatewaysInsert'
     { _tvgiProject = pTvgiProject_
     , _tvgiPayload = pTvgiPayload_
     , _tvgiRegion = pTvgiRegion_
@@ -107,7 +107,7 @@ instance GoogleRequest TargetVPNGatewaysInsert where
         type Scopes TargetVPNGatewaysInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetVPNGatewaysInsert{..}
+        requestClient TargetVPNGatewaysInsert'{..}
           = go _tvgiProject _tvgiRegion (Just AltJSON)
               _tvgiPayload
               computeService

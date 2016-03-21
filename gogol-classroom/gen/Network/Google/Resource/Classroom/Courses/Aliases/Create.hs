@@ -74,7 +74,7 @@ type CoursesAliasesCreateResource =
 -- does not exist. * \`ALREADY_EXISTS\` if the alias already exists.
 --
 -- /See:/ 'coursesAliasesCreate' smart constructor.
-data CoursesAliasesCreate = CoursesAliasesCreate
+data CoursesAliasesCreate = CoursesAliasesCreate'
     { _cacXgafv          :: !(Maybe Text)
     , _cacUploadProtocol :: !(Maybe Text)
     , _cacPp             :: !Bool
@@ -112,7 +112,7 @@ coursesAliasesCreate
     -> CourseAlias -- ^ 'cacPayload'
     -> CoursesAliasesCreate
 coursesAliasesCreate pCacCourseId_ pCacPayload_ =
-    CoursesAliasesCreate
+    CoursesAliasesCreate'
     { _cacXgafv = Nothing
     , _cacUploadProtocol = Nothing
     , _cacPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest CoursesAliasesCreate where
         type Rs CoursesAliasesCreate = CourseAlias
         type Scopes CoursesAliasesCreate =
              '["https://www.googleapis.com/auth/classroom.courses"]
-        requestClient CoursesAliasesCreate{..}
+        requestClient CoursesAliasesCreate'{..}
           = go _cacCourseId _cacXgafv _cacUploadProtocol
               (Just _cacPp)
               _cacAccessToken

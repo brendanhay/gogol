@@ -56,7 +56,7 @@ type CustomersPatchResource =
 -- reseller. This method supports patch semantics.
 --
 -- /See:/ 'customersPatch' smart constructor.
-data CustomersPatch = CustomersPatch
+data CustomersPatch = CustomersPatch'
     { _cpPayload    :: !Customer
     , _cpCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ customersPatch
     -> Text -- ^ 'cpCustomerId'
     -> CustomersPatch
 customersPatch pCpPayload_ pCpCustomerId_ =
-    CustomersPatch
+    CustomersPatch'
     { _cpPayload = pCpPayload_
     , _cpCustomerId = pCpCustomerId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CustomersPatch where
         type Rs CustomersPatch = Customer
         type Scopes CustomersPatch =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient CustomersPatch{..}
+        requestClient CustomersPatch'{..}
           = go _cpCustomerId (Just AltJSON) _cpPayload
               appsResellerService
           where go

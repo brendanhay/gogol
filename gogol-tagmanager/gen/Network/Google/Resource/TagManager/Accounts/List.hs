@@ -50,14 +50,14 @@ type AccountsListResource =
 --
 -- /See:/ 'accountsList' smart constructor.
 data AccountsList =
-    AccountsList
+    AccountsList'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsList' with the minimum fields required to make a request.
 --
 accountsList
     :: AccountsList
-accountsList = AccountsList
+accountsList = AccountsList'
 
 instance GoogleRequest AccountsList where
         type Rs AccountsList = ListAccountsResponse
@@ -65,7 +65,7 @@ instance GoogleRequest AccountsList where
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.manage.accounts",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsList{}
+        requestClient AccountsList'{}
           = go (Just AltJSON) tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsListResource)

@@ -55,7 +55,7 @@ type DeploymentsDeleteResource =
 -- | Deletes a deployment and all of the resources in the deployment.
 --
 -- /See:/ 'deploymentsDelete' smart constructor.
-data DeploymentsDelete = DeploymentsDelete
+data DeploymentsDelete = DeploymentsDelete'
     { _ddProject    :: !Text
     , _ddDeployment :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ deploymentsDelete
     -> Text -- ^ 'ddDeployment'
     -> DeploymentsDelete
 deploymentsDelete pDdProject_ pDdDeployment_ =
-    DeploymentsDelete
+    DeploymentsDelete'
     { _ddProject = pDdProject_
     , _ddDeployment = pDdDeployment_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest DeploymentsDelete where
         type Scopes DeploymentsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient DeploymentsDelete{..}
+        requestClient DeploymentsDelete'{..}
           = go _ddProject _ddDeployment (Just AltJSON)
               deploymentManagerService
           where go

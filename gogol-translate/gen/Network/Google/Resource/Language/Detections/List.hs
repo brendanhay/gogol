@@ -53,7 +53,7 @@ type DetectionsListResource =
 -- | Detect the language of text.
 --
 -- /See:/ 'detectionsList' smart constructor.
-newtype DetectionsList = DetectionsList
+newtype DetectionsList = DetectionsList'
     { _dlQ :: [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ detectionsList
     :: [Text] -- ^ 'dlQ'
     -> DetectionsList
 detectionsList pDlQ_ =
-    DetectionsList
+    DetectionsList'
     { _dlQ = _Coerce # pDlQ_
     }
 
@@ -77,7 +77,7 @@ dlQ = lens _dlQ (\ s a -> s{_dlQ = a}) . _Coerce
 instance GoogleRequest DetectionsList where
         type Rs DetectionsList = DetectionsListResponse
         type Scopes DetectionsList = '[]
-        requestClient DetectionsList{..}
+        requestClient DetectionsList'{..}
           = go _dlQ (Just AltJSON) translateService
           where go
                   = buildClient (Proxy :: Proxy DetectionsListResource)

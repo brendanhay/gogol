@@ -55,7 +55,7 @@ type GroupsGetResource =
 -- | Returns the specified Group resource.
 --
 -- /See:/ 'groupsGet' smart constructor.
-data GroupsGet = GroupsGet
+data GroupsGet = GroupsGet'
     { _ggProject   :: !Text
     , _ggGroupName :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ groupsGet
     -> Text -- ^ 'ggGroupName'
     -> GroupsGet
 groupsGet pGgProject_ pGgGroupName_ =
-    GroupsGet
+    GroupsGet'
     { _ggProject = pGgProject_
     , _ggGroupName = pGgGroupName_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest GroupsGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/cloud.useraccounts",
                "https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-        requestClient GroupsGet{..}
+        requestClient GroupsGet'{..}
           = go _ggProject _ggGroupName (Just AltJSON)
               userAccountsService
           where go

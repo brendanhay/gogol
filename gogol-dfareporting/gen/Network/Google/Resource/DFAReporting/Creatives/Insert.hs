@@ -54,7 +54,7 @@ type CreativesInsertResource =
 -- | Inserts a new creative.
 --
 -- /See:/ 'creativesInsert' smart constructor.
-data CreativesInsert = CreativesInsert
+data CreativesInsert = CreativesInsert'
     { _ciProFileId :: !(Textual Int64)
     , _ciPayload   :: !Creative
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativesInsert
     -> Creative -- ^ 'ciPayload'
     -> CreativesInsert
 creativesInsert pCiProFileId_ pCiPayload_ =
-    CreativesInsert
+    CreativesInsert'
     { _ciProFileId = _Coerce # pCiProFileId_
     , _ciPayload = pCiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest CreativesInsert where
         type Rs CreativesInsert = Creative
         type Scopes CreativesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativesInsert{..}
+        requestClient CreativesInsert'{..}
           = go _ciProFileId (Just AltJSON) _ciPayload
               dFAReportingService
           where go

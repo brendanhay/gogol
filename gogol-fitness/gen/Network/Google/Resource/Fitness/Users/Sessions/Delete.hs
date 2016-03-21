@@ -56,7 +56,7 @@ type UsersSessionsDeleteResource =
 -- | Deletes a session specified by the given session ID.
 --
 -- /See:/ 'usersSessionsDelete' smart constructor.
-data UsersSessionsDelete = UsersSessionsDelete
+data UsersSessionsDelete = UsersSessionsDelete'
     { _usdUserId            :: !Text
     , _usdCurrentTimeMillis :: !(Maybe (Textual Int64))
     , _usdSessionId         :: !Text
@@ -76,7 +76,7 @@ usersSessionsDelete
     -> Text -- ^ 'usdSessionId'
     -> UsersSessionsDelete
 usersSessionsDelete pUsdUserId_ pUsdSessionId_ =
-    UsersSessionsDelete
+    UsersSessionsDelete'
     { _usdUserId = pUsdUserId_
     , _usdCurrentTimeMillis = Nothing
     , _usdSessionId = pUsdSessionId_
@@ -104,7 +104,7 @@ instance GoogleRequest UsersSessionsDelete where
         type Rs UsersSessionsDelete = ()
         type Scopes UsersSessionsDelete =
              '["https://www.googleapis.com/auth/fitness.activity.write"]
-        requestClient UsersSessionsDelete{..}
+        requestClient UsersSessionsDelete'{..}
           = go _usdUserId _usdSessionId _usdCurrentTimeMillis
               (Just AltJSON)
               fitnessService

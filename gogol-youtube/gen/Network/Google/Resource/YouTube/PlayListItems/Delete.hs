@@ -51,7 +51,7 @@ type PlayListItemsDeleteResource =
 -- | Deletes a playlist item.
 --
 -- /See:/ 'playListItemsDelete' smart constructor.
-newtype PlayListItemsDelete = PlayListItemsDelete
+newtype PlayListItemsDelete = PlayListItemsDelete'
     { _plidId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ playListItemsDelete
     :: Text -- ^ 'plidId'
     -> PlayListItemsDelete
 playListItemsDelete pPlidId_ =
-    PlayListItemsDelete
+    PlayListItemsDelete'
     { _plidId = pPlidId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest PlayListItemsDelete where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient PlayListItemsDelete{..}
+        requestClient PlayListItemsDelete'{..}
           = go (Just _plidId) (Just AltJSON) youTubeService
           where go
                   = buildClient

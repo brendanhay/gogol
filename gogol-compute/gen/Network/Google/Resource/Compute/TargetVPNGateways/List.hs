@@ -64,7 +64,7 @@ type TargetVPNGatewaysListResource =
 -- project and region.
 --
 -- /See:/ 'targetVPNGatewaysList' smart constructor.
-data TargetVPNGatewaysList = TargetVPNGatewaysList
+data TargetVPNGatewaysList = TargetVPNGatewaysList'
     { _tvglProject    :: !Text
     , _tvglFilter     :: !(Maybe Text)
     , _tvglRegion     :: !Text
@@ -90,7 +90,7 @@ targetVPNGatewaysList
     -> Text -- ^ 'tvglRegion'
     -> TargetVPNGatewaysList
 targetVPNGatewaysList pTvglProject_ pTvglRegion_ =
-    TargetVPNGatewaysList
+    TargetVPNGatewaysList'
     { _tvglProject = pTvglProject_
     , _tvglFilter = Nothing
     , _tvglRegion = pTvglRegion_
@@ -157,7 +157,7 @@ instance GoogleRequest TargetVPNGatewaysList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetVPNGatewaysList{..}
+        requestClient TargetVPNGatewaysList'{..}
           = go _tvglProject _tvglRegion _tvglFilter
               _tvglPageToken
               (Just _tvglMaxResults)

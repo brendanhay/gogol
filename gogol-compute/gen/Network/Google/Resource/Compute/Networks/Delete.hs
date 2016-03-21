@@ -55,7 +55,7 @@ type NetworksDeleteResource =
 -- | Deletes the specified network.
 --
 -- /See:/ 'networksDelete' smart constructor.
-data NetworksDelete = NetworksDelete
+data NetworksDelete = NetworksDelete'
     { _ndProject :: !Text
     , _ndNetwork :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ networksDelete
     -> Text -- ^ 'ndNetwork'
     -> NetworksDelete
 networksDelete pNdProject_ pNdNetwork_ =
-    NetworksDelete
+    NetworksDelete'
     { _ndProject = pNdProject_
     , _ndNetwork = pNdNetwork_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest NetworksDelete where
         type Scopes NetworksDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient NetworksDelete{..}
+        requestClient NetworksDelete'{..}
           = go _ndProject _ndNetwork (Just AltJSON)
               computeService
           where go

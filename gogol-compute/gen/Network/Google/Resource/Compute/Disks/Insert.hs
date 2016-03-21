@@ -67,7 +67,7 @@ type DisksInsertResource =
 -- the sizeGb property.
 --
 -- /See:/ 'disksInsert' smart constructor.
-data DisksInsert = DisksInsert
+data DisksInsert = DisksInsert'
     { _diSourceImage :: !(Maybe Text)
     , _diProject     :: !Text
     , _diZone        :: !Text
@@ -91,7 +91,7 @@ disksInsert
     -> Disk -- ^ 'diPayload'
     -> DisksInsert
 disksInsert pDiProject_ pDiZone_ pDiPayload_ =
-    DisksInsert
+    DisksInsert'
     { _diSourceImage = Nothing
     , _diProject = pDiProject_
     , _diZone = pDiZone_
@@ -123,7 +123,7 @@ instance GoogleRequest DisksInsert where
         type Scopes DisksInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient DisksInsert{..}
+        requestClient DisksInsert'{..}
           = go _diProject _diZone _diSourceImage (Just AltJSON)
               _diPayload
               computeService

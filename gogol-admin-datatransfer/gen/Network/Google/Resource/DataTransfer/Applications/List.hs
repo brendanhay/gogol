@@ -57,7 +57,7 @@ type ApplicationsListResource =
 -- | Lists the applications available for data transfer for a customer.
 --
 -- /See:/ 'applicationsList' smart constructor.
-data ApplicationsList = ApplicationsList
+data ApplicationsList = ApplicationsList'
     { _alCustomerId :: !(Maybe Text)
     , _alPageToken  :: !(Maybe Text)
     , _alMaxResults :: !(Maybe (Textual Int32))
@@ -75,7 +75,7 @@ data ApplicationsList = ApplicationsList
 applicationsList
     :: ApplicationsList
 applicationsList =
-    ApplicationsList
+    ApplicationsList'
     { _alCustomerId = Nothing
     , _alPageToken = Nothing
     , _alMaxResults = Nothing
@@ -102,7 +102,7 @@ instance GoogleRequest ApplicationsList where
         type Scopes ApplicationsList =
              '["https://www.googleapis.com/auth/admin.datatransfer",
                "https://www.googleapis.com/auth/admin.datatransfer.readonly"]
-        requestClient ApplicationsList{..}
+        requestClient ApplicationsList'{..}
           = go _alCustomerId _alPageToken _alMaxResults
               (Just AltJSON)
               dataTransferService

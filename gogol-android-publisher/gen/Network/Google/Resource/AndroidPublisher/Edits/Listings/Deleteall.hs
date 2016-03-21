@@ -55,7 +55,7 @@ type EditsListingsDeleteallResource =
 -- | Deletes all localized listings from an edit.
 --
 -- /See:/ 'editsListingsDeleteall' smart constructor.
-data EditsListingsDeleteall = EditsListingsDeleteall
+data EditsListingsDeleteall = EditsListingsDeleteall'
     { _eldlPackageName :: !Text
     , _eldlEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ editsListingsDeleteall
     -> Text -- ^ 'eldlEditId'
     -> EditsListingsDeleteall
 editsListingsDeleteall pEldlPackageName_ pEldlEditId_ =
-    EditsListingsDeleteall
+    EditsListingsDeleteall'
     { _eldlPackageName = pEldlPackageName_
     , _eldlEditId = pEldlEditId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest EditsListingsDeleteall where
         type Rs EditsListingsDeleteall = ()
         type Scopes EditsListingsDeleteall =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsListingsDeleteall{..}
+        requestClient EditsListingsDeleteall'{..}
           = go _eldlPackageName _eldlEditId (Just AltJSON)
               androidPublisherService
           where go

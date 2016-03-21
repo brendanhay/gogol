@@ -59,7 +59,7 @@ type ManagementWebPropertyAdWordsLinksGetResource =
 -- | Returns a web property-AdWords link to which the user has access.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksGet' smart constructor.
-data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet
+data ManagementWebPropertyAdWordsLinksGet = ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgWebPropertyId            :: !Text
     , _mwpawlgAccountId                :: !Text
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
@@ -80,7 +80,7 @@ managementWebPropertyAdWordsLinksGet
     -> Text -- ^ 'mwpawlgWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksGet
 managementWebPropertyAdWordsLinksGet pMwpawlgWebPropertyId_ pMwpawlgAccountId_ pMwpawlgWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksGet
+    ManagementWebPropertyAdWordsLinksGet'
     { _mwpawlgWebPropertyId = pMwpawlgWebPropertyId_
     , _mwpawlgAccountId = pMwpawlgAccountId_
     , _mwpawlgWebPropertyAdWordsLinkId = pMwpawlgWebPropertyAdWordsLinkId_
@@ -112,7 +112,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
         requestClient
-          ManagementWebPropertyAdWordsLinksGet{..}
+          ManagementWebPropertyAdWordsLinksGet'{..}
           = go _mwpawlgAccountId _mwpawlgWebPropertyId
               _mwpawlgWebPropertyAdWordsLinkId
               (Just AltJSON)

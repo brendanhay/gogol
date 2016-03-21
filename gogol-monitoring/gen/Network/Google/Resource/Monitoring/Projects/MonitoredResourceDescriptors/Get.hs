@@ -65,7 +65,7 @@ type ProjectsMonitoredResourceDescriptorsGetResource
 -- | Gets a single monitored resource descriptor.
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsGet' smart constructor.
-data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescriptorsGet
+data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescriptorsGet'
     { _pmrdgXgafv          :: !(Maybe Text)
     , _pmrdgUploadProtocol :: !(Maybe Text)
     , _pmrdgPp             :: !Bool
@@ -99,7 +99,7 @@ projectsMonitoredResourceDescriptorsGet
     :: Text -- ^ 'pmrdgName'
     -> ProjectsMonitoredResourceDescriptorsGet
 projectsMonitoredResourceDescriptorsGet pPmrdgName_ =
-    ProjectsMonitoredResourceDescriptorsGet
+    ProjectsMonitoredResourceDescriptorsGet'
     { _pmrdgXgafv = Nothing
     , _pmrdgUploadProtocol = Nothing
     , _pmrdgPp = True
@@ -166,7 +166,7 @@ instance GoogleRequest
                "https://www.googleapis.com/auth/monitoring.read",
                "https://www.googleapis.com/auth/monitoring.write"]
         requestClient
-          ProjectsMonitoredResourceDescriptorsGet{..}
+          ProjectsMonitoredResourceDescriptorsGet'{..}
           = go _pmrdgName _pmrdgXgafv _pmrdgUploadProtocol
               (Just _pmrdgPp)
               _pmrdgAccessToken

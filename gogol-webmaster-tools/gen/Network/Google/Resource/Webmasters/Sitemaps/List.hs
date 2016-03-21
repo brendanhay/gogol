@@ -57,7 +57,7 @@ type SitemapsListResource =
 -- sitemap index file (if sitemapIndex is specified in the request).
 --
 -- /See:/ 'sitemapsList' smart constructor.
-data SitemapsList = SitemapsList
+data SitemapsList = SitemapsList'
     { _slSiteURL      :: !Text
     , _slSitemapIndex :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ sitemapsList
     :: Text -- ^ 'slSiteURL'
     -> SitemapsList
 sitemapsList pSlSiteURL_ =
-    SitemapsList
+    SitemapsList'
     { _slSiteURL = pSlSiteURL_
     , _slSitemapIndex = Nothing
     }
@@ -96,7 +96,7 @@ instance GoogleRequest SitemapsList where
         type Scopes SitemapsList =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient SitemapsList{..}
+        requestClient SitemapsList'{..}
           = go _slSiteURL _slSitemapIndex (Just AltJSON)
               webmasterToolsService
           where go

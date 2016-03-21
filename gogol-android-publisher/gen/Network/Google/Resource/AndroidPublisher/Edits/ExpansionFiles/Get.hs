@@ -62,7 +62,7 @@ type EditsExpansionFilesGetResource =
 -- | Fetches the Expansion File configuration for the APK specified.
 --
 -- /See:/ 'editsExpansionFilesGet' smart constructor.
-data EditsExpansionFilesGet = EditsExpansionFilesGet
+data EditsExpansionFilesGet = EditsExpansionFilesGet'
     { _eefgPackageName       :: !Text
     , _eefgAPKVersionCode    :: !(Textual Int32)
     , _eefgExpansionFileType :: !EditsExpansionFilesGetExpansionFileType
@@ -87,7 +87,7 @@ editsExpansionFilesGet
     -> Text -- ^ 'eefgEditId'
     -> EditsExpansionFilesGet
 editsExpansionFilesGet pEefgPackageName_ pEefgAPKVersionCode_ pEefgExpansionFileType_ pEefgEditId_ =
-    EditsExpansionFilesGet
+    EditsExpansionFilesGet'
     { _eefgPackageName = pEefgPackageName_
     , _eefgAPKVersionCode = _Coerce # pEefgAPKVersionCode_
     , _eefgExpansionFileType = pEefgExpansionFileType_
@@ -123,7 +123,7 @@ instance GoogleRequest EditsExpansionFilesGet where
         type Rs EditsExpansionFilesGet = ExpansionFile
         type Scopes EditsExpansionFilesGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsExpansionFilesGet{..}
+        requestClient EditsExpansionFilesGet'{..}
           = go _eefgPackageName _eefgEditId _eefgAPKVersionCode
               _eefgExpansionFileType
               (Just AltJSON)

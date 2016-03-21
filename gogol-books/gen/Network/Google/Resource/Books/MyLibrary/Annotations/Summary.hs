@@ -56,7 +56,7 @@ type MyLibraryAnnotationsSummaryResource =
 -- | Gets the summary of specified layers.
 --
 -- /See:/ 'myLibraryAnnotationsSummary' smart constructor.
-data MyLibraryAnnotationsSummary = MyLibraryAnnotationsSummary
+data MyLibraryAnnotationsSummary = MyLibraryAnnotationsSummary'
     { _mlasLayerIds :: ![Text]
     , _mlasVolumeId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ myLibraryAnnotationsSummary
     -> Text -- ^ 'mlasVolumeId'
     -> MyLibraryAnnotationsSummary
 myLibraryAnnotationsSummary pMlasLayerIds_ pMlasVolumeId_ =
-    MyLibraryAnnotationsSummary
+    MyLibraryAnnotationsSummary'
     { _mlasLayerIds = _Coerce # pMlasLayerIds_
     , _mlasVolumeId = pMlasVolumeId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest MyLibraryAnnotationsSummary
              AnnotationsSummary
         type Scopes MyLibraryAnnotationsSummary =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryAnnotationsSummary{..}
+        requestClient MyLibraryAnnotationsSummary'{..}
           = go _mlasLayerIds (Just _mlasVolumeId)
               (Just AltJSON)
               booksService

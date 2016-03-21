@@ -65,7 +65,7 @@ type AccountsContainersMoveFoldersUpdateResource =
 -- | Moves entities to a GTM Folder.
 --
 -- /See:/ 'accountsContainersMoveFoldersUpdate' smart constructor.
-data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate
+data AccountsContainersMoveFoldersUpdate = AccountsContainersMoveFoldersUpdate'
     { _acmfuContainerId :: !Text
     , _acmfuTriggerId   :: !(Maybe [Text])
     , _acmfuVariableId  :: !(Maybe [Text])
@@ -99,7 +99,7 @@ accountsContainersMoveFoldersUpdate
     -> Text -- ^ 'acmfuAccountId'
     -> AccountsContainersMoveFoldersUpdate
 accountsContainersMoveFoldersUpdate pAcmfuContainerId_ pAcmfuFolderId_ pAcmfuPayload_ pAcmfuAccountId_ =
-    AccountsContainersMoveFoldersUpdate
+    AccountsContainersMoveFoldersUpdate'
     { _acmfuContainerId = pAcmfuContainerId_
     , _acmfuTriggerId = Nothing
     , _acmfuVariableId = Nothing
@@ -160,7 +160,8 @@ instance GoogleRequest
         type Rs AccountsContainersMoveFoldersUpdate = ()
         type Scopes AccountsContainersMoveFoldersUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersMoveFoldersUpdate{..}
+        requestClient
+          AccountsContainersMoveFoldersUpdate'{..}
           = go _acmfuAccountId _acmfuContainerId _acmfuFolderId
               (_acmfuTriggerId ^. _Default)
               (_acmfuVariableId ^. _Default)

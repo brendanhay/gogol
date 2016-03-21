@@ -70,7 +70,7 @@ type CoursesDeleteResource =
 -- exists with the requested ID.
 --
 -- /See:/ 'coursesDelete' smart constructor.
-data CoursesDelete = CoursesDelete
+data CoursesDelete = CoursesDelete'
     { _cdXgafv          :: !(Maybe Text)
     , _cdUploadProtocol :: !(Maybe Text)
     , _cdPp             :: !Bool
@@ -104,7 +104,7 @@ coursesDelete
     :: Text -- ^ 'cdId'
     -> CoursesDelete
 coursesDelete pCdId_ =
-    CoursesDelete
+    CoursesDelete'
     { _cdXgafv = Nothing
     , _cdUploadProtocol = Nothing
     , _cdPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest CoursesDelete where
         type Rs CoursesDelete = Empty
         type Scopes CoursesDelete =
              '["https://www.googleapis.com/auth/classroom.courses"]
-        requestClient CoursesDelete{..}
+        requestClient CoursesDelete'{..}
           = go _cdId _cdXgafv _cdUploadProtocol (Just _cdPp)
               _cdAccessToken
               _cdUploadType

@@ -64,7 +64,7 @@ type ChangesListResource =
 -- | Enumerate Changes to a ResourceRecordSet collection.
 --
 -- /See:/ 'changesList' smart constructor.
-data ChangesList = ChangesList
+data ChangesList = ChangesList'
     { _clProject     :: !Text
     , _clSortOrder   :: !(Maybe Text)
     , _clPageToken   :: !(Maybe Text)
@@ -93,7 +93,7 @@ changesList
     -> Text -- ^ 'clManagedZone'
     -> ChangesList
 changesList pClProject_ pClManagedZone_ =
-    ChangesList
+    ChangesList'
     { _clProject = pClProject_
     , _clSortOrder = Nothing
     , _clPageToken = Nothing
@@ -143,7 +143,7 @@ instance GoogleRequest ChangesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.clouddns.readonly",
                "https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-        requestClient ChangesList{..}
+        requestClient ChangesList'{..}
           = go _clProject _clManagedZone _clSortOrder
               _clPageToken
               _clMaxResults

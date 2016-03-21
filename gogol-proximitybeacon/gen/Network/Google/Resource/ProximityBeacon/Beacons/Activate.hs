@@ -69,7 +69,7 @@ type BeaconsActivateResource =
 -- will return a successful response code).
 --
 -- /See:/ 'beaconsActivate' smart constructor.
-data BeaconsActivate = BeaconsActivate
+data BeaconsActivate = BeaconsActivate'
     { _baXgafv          :: !(Maybe Text)
     , _baUploadProtocol :: !(Maybe Text)
     , _baPp             :: !Bool
@@ -103,7 +103,7 @@ beaconsActivate
     :: Text -- ^ 'baBeaconName'
     -> BeaconsActivate
 beaconsActivate pBaBeaconName_ =
-    BeaconsActivate
+    BeaconsActivate'
     { _baXgafv = Nothing
     , _baUploadProtocol = Nothing
     , _baPp = True
@@ -158,7 +158,7 @@ baCallback
 instance GoogleRequest BeaconsActivate where
         type Rs BeaconsActivate = Empty
         type Scopes BeaconsActivate = '[]
-        requestClient BeaconsActivate{..}
+        requestClient BeaconsActivate'{..}
           = go _baBeaconName _baXgafv _baUploadProtocol
               (Just _baPp)
               _baAccessToken

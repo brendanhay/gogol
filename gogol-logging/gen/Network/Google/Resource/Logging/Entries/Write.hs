@@ -67,7 +67,7 @@ type EntriesWriteResource =
 -- are written by this method.
 --
 -- /See:/ 'entriesWrite' smart constructor.
-data EntriesWrite = EntriesWrite
+data EntriesWrite = EntriesWrite'
     { _ewXgafv          :: !(Maybe Text)
     , _ewUploadProtocol :: !(Maybe Text)
     , _ewPp             :: !Bool
@@ -101,7 +101,7 @@ entriesWrite
     :: WriteLogEntriesRequest -- ^ 'ewPayload'
     -> EntriesWrite
 entriesWrite pEwPayload_ =
-    EntriesWrite
+    EntriesWrite'
     { _ewXgafv = Nothing
     , _ewUploadProtocol = Nothing
     , _ewPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest EntriesWrite where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.write"]
-        requestClient EntriesWrite{..}
+        requestClient EntriesWrite'{..}
           = go _ewXgafv _ewUploadProtocol (Just _ewPp)
               _ewAccessToken
               _ewUploadType

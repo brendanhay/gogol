@@ -53,7 +53,7 @@ type OperatingSystemsListResource =
 -- | Retrieves a list of operating systems.
 --
 -- /See:/ 'operatingSystemsList' smart constructor.
-newtype OperatingSystemsList = OperatingSystemsList
+newtype OperatingSystemsList = OperatingSystemsList'
     { _oslProFileId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ operatingSystemsList
     :: Int64 -- ^ 'oslProFileId'
     -> OperatingSystemsList
 operatingSystemsList pOslProFileId_ =
-    OperatingSystemsList
+    OperatingSystemsList'
     { _oslProFileId = _Coerce # pOslProFileId_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest OperatingSystemsList where
              OperatingSystemsListResponse
         type Scopes OperatingSystemsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient OperatingSystemsList{..}
+        requestClient OperatingSystemsList'{..}
           = go _oslProFileId (Just AltJSON) dFAReportingService
           where go
                   = buildClient

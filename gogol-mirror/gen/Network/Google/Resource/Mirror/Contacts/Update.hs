@@ -53,7 +53,7 @@ type ContactsUpdateResource =
 -- | Updates a contact in place.
 --
 -- /See:/ 'contactsUpdate' smart constructor.
-data ContactsUpdate = ContactsUpdate
+data ContactsUpdate = ContactsUpdate'
     { _cuPayload :: !Contact
     , _cuId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ contactsUpdate
     -> Text -- ^ 'cuId'
     -> ContactsUpdate
 contactsUpdate pCuPayload_ pCuId_ =
-    ContactsUpdate
+    ContactsUpdate'
     { _cuPayload = pCuPayload_
     , _cuId = pCuId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest ContactsUpdate where
         type Rs ContactsUpdate = Contact
         type Scopes ContactsUpdate =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient ContactsUpdate{..}
+        requestClient ContactsUpdate'{..}
           = go _cuId (Just AltJSON) _cuPayload mirrorService
           where go
                   = buildClient (Proxy :: Proxy ContactsUpdateResource)

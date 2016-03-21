@@ -59,7 +59,7 @@ type InstancesGetResource =
 -- instances by making a list() request.
 --
 -- /See:/ 'instancesGet' smart constructor.
-data InstancesGet = InstancesGet
+data InstancesGet = InstancesGet'
     { _igProject  :: !Text
     , _igZone     :: !Text
     , _igInstance :: !Text
@@ -80,7 +80,7 @@ instancesGet
     -> Text -- ^ 'igInstance'
     -> InstancesGet
 instancesGet pIgProject_ pIgZone_ pIgInstance_ =
-    InstancesGet
+    InstancesGet'
     { _igProject = pIgProject_
     , _igZone = pIgZone_
     , _igInstance = pIgInstance_
@@ -106,7 +106,7 @@ instance GoogleRequest InstancesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient InstancesGet{..}
+        requestClient InstancesGet'{..}
           = go _igProject _igZone _igInstance (Just AltJSON)
               computeService
           where go

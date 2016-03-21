@@ -53,7 +53,7 @@ type RastersProcessResource =
 -- | Process a raster asset.
 --
 -- /See:/ 'rastersProcess' smart constructor.
-newtype RastersProcess = RastersProcess
+newtype RastersProcess = RastersProcess'
     { _rpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rastersProcess
     :: Text -- ^ 'rpId'
     -> RastersProcess
 rastersProcess pRpId_ =
-    RastersProcess
+    RastersProcess'
     { _rpId = pRpId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest RastersProcess where
         type Rs RastersProcess = ProcessResponse
         type Scopes RastersProcess =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RastersProcess{..}
+        requestClient RastersProcess'{..}
           = go _rpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersProcessResource)

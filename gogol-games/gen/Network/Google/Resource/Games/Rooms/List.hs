@@ -55,7 +55,7 @@ type RoomsListResource =
 -- | Returns invitations to join rooms.
 --
 -- /See:/ 'roomsList' smart constructor.
-data RoomsList = RoomsList
+data RoomsList = RoomsList'
     { _rLanguage   :: !(Maybe Text)
     , _rPageToken  :: !(Maybe Text)
     , _rMaxResults :: !(Maybe (Textual Int32))
@@ -73,7 +73,7 @@ data RoomsList = RoomsList
 roomsList
     :: RoomsList
 roomsList =
-    RoomsList
+    RoomsList'
     { _rLanguage = Nothing
     , _rPageToken = Nothing
     , _rMaxResults = Nothing
@@ -102,7 +102,7 @@ instance GoogleRequest RoomsList where
         type Scopes RoomsList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsList{..}
+        requestClient RoomsList'{..}
           = go _rLanguage _rPageToken _rMaxResults
               (Just AltJSON)
               gamesService

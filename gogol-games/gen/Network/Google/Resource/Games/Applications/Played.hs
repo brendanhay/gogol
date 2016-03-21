@@ -52,21 +52,21 @@ type ApplicationsPlayedResource =
 --
 -- /See:/ 'applicationsPlayed' smart constructor.
 data ApplicationsPlayed =
-    ApplicationsPlayed
+    ApplicationsPlayed'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsPlayed' with the minimum fields required to make a request.
 --
 applicationsPlayed
     :: ApplicationsPlayed
-applicationsPlayed = ApplicationsPlayed
+applicationsPlayed = ApplicationsPlayed'
 
 instance GoogleRequest ApplicationsPlayed where
         type Rs ApplicationsPlayed = ()
         type Scopes ApplicationsPlayed =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ApplicationsPlayed{}
+        requestClient ApplicationsPlayed'{}
           = go (Just AltJSON) gamesService
           where go
                   = buildClient

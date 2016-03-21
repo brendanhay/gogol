@@ -63,7 +63,7 @@ type ResourcesListResource =
 -- | Lists all resources in a given deployment.
 --
 -- /See:/ 'resourcesList' smart constructor.
-data ResourcesList = ResourcesList
+data ResourcesList = ResourcesList'
     { _rlProject    :: !Text
     , _rlFilter     :: !(Maybe Text)
     , _rlPageToken  :: !(Maybe Text)
@@ -89,7 +89,7 @@ resourcesList
     -> Text -- ^ 'rlDeployment'
     -> ResourcesList
 resourcesList pRlProject_ pRlDeployment_ =
-    ResourcesList
+    ResourcesList'
     { _rlProject = pRlProject_
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
@@ -154,7 +154,7 @@ instance GoogleRequest ResourcesList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ResourcesList{..}
+        requestClient ResourcesList'{..}
           = go _rlProject _rlDeployment _rlFilter _rlPageToken
               (Just _rlMaxResults)
               (Just AltJSON)

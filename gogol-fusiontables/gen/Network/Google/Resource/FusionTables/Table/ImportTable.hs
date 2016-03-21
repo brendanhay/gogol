@@ -69,7 +69,7 @@ type TableImportTableResource =
 -- | Imports a new table.
 --
 -- /See:/ 'tableImportTable' smart constructor.
-data TableImportTable = TableImportTable
+data TableImportTable = TableImportTable'
     { _titName      :: !Text
     , _titDelimiter :: !(Maybe Text)
     , _titEncoding  :: !(Maybe Text)
@@ -88,7 +88,7 @@ tableImportTable
     :: Text -- ^ 'titName'
     -> TableImportTable
 tableImportTable pTitName_ =
-    TableImportTable
+    TableImportTable'
     { _titName = pTitName_
     , _titDelimiter = Nothing
     , _titEncoding = Nothing
@@ -114,7 +114,7 @@ instance GoogleRequest TableImportTable where
         type Rs TableImportTable = Table
         type Scopes TableImportTable =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient TableImportTable{..}
+        requestClient TableImportTable'{..}
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               fusionTablesService
@@ -128,7 +128,8 @@ instance GoogleRequest (MediaUpload TableImportTable)
         type Rs (MediaUpload TableImportTable) = Table
         type Scopes (MediaUpload TableImportTable) =
              Scopes TableImportTable
-        requestClient (MediaUpload TableImportTable{..} body)
+        requestClient
+          (MediaUpload TableImportTable'{..} body)
           = go (Just _titName) _titDelimiter _titEncoding
               (Just AltJSON)
               (Just AltMedia)

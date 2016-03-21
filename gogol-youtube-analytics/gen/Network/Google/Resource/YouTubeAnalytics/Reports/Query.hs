@@ -71,7 +71,7 @@ type ReportsQueryResource =
 -- | Retrieve your YouTube Analytics reports.
 --
 -- /See:/ 'reportsQuery' smart constructor.
-data ReportsQuery = ReportsQuery
+data ReportsQuery = ReportsQuery'
     { _rqMetrics    :: !Text
     , _rqFilters    :: !(Maybe Text)
     , _rqIds        :: !Text
@@ -114,7 +114,7 @@ reportsQuery
     -> Text -- ^ 'rqStartDate'
     -> ReportsQuery
 reportsQuery pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
-    ReportsQuery
+    ReportsQuery'
     { _rqMetrics = pRqMetrics_
     , _rqFilters = Nothing
     , _rqIds = pRqIds_
@@ -212,7 +212,7 @@ instance GoogleRequest ReportsQuery where
                "https://www.googleapis.com/auth/youtube.readonly",
                "https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient ReportsQuery{..}
+        requestClient ReportsQuery'{..}
           = go (Just _rqIds) (Just _rqStartDate)
               (Just _rqEndDate)
               (Just _rqMetrics)

@@ -72,7 +72,7 @@ type ProjectsSubscriptionsPullResource =
 -- subscription.
 --
 -- /See:/ 'projectsSubscriptionsPull' smart constructor.
-data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull
+data ProjectsSubscriptionsPull = ProjectsSubscriptionsPull'
     { _pspXgafv          :: !(Maybe Text)
     , _pspUploadProtocol :: !(Maybe Text)
     , _pspPp             :: !Bool
@@ -110,7 +110,7 @@ projectsSubscriptionsPull
     -> Text -- ^ 'pspSubscription'
     -> ProjectsSubscriptionsPull
 projectsSubscriptionsPull pPspPayload_ pPspSubscription_ =
-    ProjectsSubscriptionsPull
+    ProjectsSubscriptionsPull'
     { _pspXgafv = Nothing
     , _pspUploadProtocol = Nothing
     , _pspPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest ProjectsSubscriptionsPull
         type Scopes ProjectsSubscriptionsPull =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsSubscriptionsPull{..}
+        requestClient ProjectsSubscriptionsPull'{..}
           = go _pspSubscription _pspXgafv _pspUploadProtocol
               (Just _pspPp)
               _pspAccessToken

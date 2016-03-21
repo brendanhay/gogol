@@ -76,7 +76,7 @@ type CaptionsUpdateResource =
 -- both.
 --
 -- /See:/ 'captionsUpdate' smart constructor.
-data CaptionsUpdate = CaptionsUpdate
+data CaptionsUpdate = CaptionsUpdate'
     { _capOnBehalfOf             :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPayload                :: !Caption
@@ -102,7 +102,7 @@ captionsUpdate
     -> Caption -- ^ 'capPayload'
     -> CaptionsUpdate
 captionsUpdate pCapPart_ pCapPayload_ =
-    CaptionsUpdate
+    CaptionsUpdate'
     { _capOnBehalfOf = Nothing
     , _capPart = pCapPart_
     , _capPayload = pCapPayload_
@@ -158,7 +158,7 @@ instance GoogleRequest CaptionsUpdate where
         type Scopes CaptionsUpdate =
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient CaptionsUpdate{..}
+        requestClient CaptionsUpdate'{..}
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync
@@ -174,7 +174,7 @@ instance GoogleRequest (MediaUpload CaptionsUpdate)
         type Rs (MediaUpload CaptionsUpdate) = Caption
         type Scopes (MediaUpload CaptionsUpdate) =
              Scopes CaptionsUpdate
-        requestClient (MediaUpload CaptionsUpdate{..} body)
+        requestClient (MediaUpload CaptionsUpdate'{..} body)
           = go (Just _capPart) _capOnBehalfOf
               _capOnBehalfOfContentOwner
               _capSync

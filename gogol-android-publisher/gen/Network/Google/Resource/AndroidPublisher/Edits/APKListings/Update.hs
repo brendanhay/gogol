@@ -64,7 +64,7 @@ type EditsAPKListingsUpdateResource =
 -- APK and language code.
 --
 -- /See:/ 'editsAPKListingsUpdate' smart constructor.
-data EditsAPKListingsUpdate = EditsAPKListingsUpdate
+data EditsAPKListingsUpdate = EditsAPKListingsUpdate'
     { _eapkluPackageName    :: !Text
     , _eapkluAPKVersionCode :: !(Textual Int32)
     , _eapkluPayload        :: !APKListing
@@ -93,7 +93,7 @@ editsAPKListingsUpdate
     -> Text -- ^ 'eapkluEditId'
     -> EditsAPKListingsUpdate
 editsAPKListingsUpdate pEapkluPackageName_ pEapkluAPKVersionCode_ pEapkluPayload_ pEapkluLanguage_ pEapkluEditId_ =
-    EditsAPKListingsUpdate
+    EditsAPKListingsUpdate'
     { _eapkluPackageName = pEapkluPackageName_
     , _eapkluAPKVersionCode = _Coerce # pEapkluAPKVersionCode_
     , _eapkluPayload = pEapkluPayload_
@@ -139,7 +139,7 @@ instance GoogleRequest EditsAPKListingsUpdate where
         type Rs EditsAPKListingsUpdate = APKListing
         type Scopes EditsAPKListingsUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKListingsUpdate{..}
+        requestClient EditsAPKListingsUpdate'{..}
           = go _eapkluPackageName _eapkluEditId
               _eapkluAPKVersionCode
               _eapkluLanguage

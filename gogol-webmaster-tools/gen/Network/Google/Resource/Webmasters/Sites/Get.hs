@@ -51,7 +51,7 @@ type SitesGetResource =
 -- | Retrieves information about specific site.
 --
 -- /See:/ 'sitesGet' smart constructor.
-newtype SitesGet = SitesGet
+newtype SitesGet = SitesGet'
     { _sitSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ sitesGet
     :: Text -- ^ 'sitSiteURL'
     -> SitesGet
 sitesGet pSitSiteURL_ =
-    SitesGet
+    SitesGet'
     { _sitSiteURL = pSitSiteURL_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest SitesGet where
         type Scopes SitesGet =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient SitesGet{..}
+        requestClient SitesGet'{..}
           = go _sitSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesGetResource)

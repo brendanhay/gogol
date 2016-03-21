@@ -55,7 +55,7 @@ type AccountUserProFilesInsertResource =
 -- | Inserts a new account user profile.
 --
 -- /See:/ 'accountUserProFilesInsert' smart constructor.
-data AccountUserProFilesInsert = AccountUserProFilesInsert
+data AccountUserProFilesInsert = AccountUserProFilesInsert'
     { _aupfiProFileId :: !(Textual Int64)
     , _aupfiPayload   :: !AccountUserProFile
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountUserProFilesInsert
     -> AccountUserProFile -- ^ 'aupfiPayload'
     -> AccountUserProFilesInsert
 accountUserProFilesInsert pAupfiProFileId_ pAupfiPayload_ =
-    AccountUserProFilesInsert
+    AccountUserProFilesInsert'
     { _aupfiProFileId = _Coerce # pAupfiProFileId_
     , _aupfiPayload = pAupfiPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest AccountUserProFilesInsert
              AccountUserProFile
         type Scopes AccountUserProFilesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountUserProFilesInsert{..}
+        requestClient AccountUserProFilesInsert'{..}
           = go _aupfiProFileId (Just AltJSON) _aupfiPayload
               dFAReportingService
           where go

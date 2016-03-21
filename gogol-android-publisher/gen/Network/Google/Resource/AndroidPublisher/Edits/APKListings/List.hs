@@ -59,7 +59,7 @@ type EditsAPKListingsListResource =
 -- | Lists all the APK-specific localized listings for a specified APK.
 --
 -- /See:/ 'editsAPKListingsList' smart constructor.
-data EditsAPKListingsList = EditsAPKListingsList
+data EditsAPKListingsList = EditsAPKListingsList'
     { _eapkllPackageName    :: !Text
     , _eapkllAPKVersionCode :: !(Textual Int32)
     , _eapkllEditId         :: !Text
@@ -80,7 +80,7 @@ editsAPKListingsList
     -> Text -- ^ 'eapkllEditId'
     -> EditsAPKListingsList
 editsAPKListingsList pEapkllPackageName_ pEapkllAPKVersionCode_ pEapkllEditId_ =
-    EditsAPKListingsList
+    EditsAPKListingsList'
     { _eapkllPackageName = pEapkllPackageName_
     , _eapkllAPKVersionCode = _Coerce # pEapkllAPKVersionCode_
     , _eapkllEditId = pEapkllEditId_
@@ -111,7 +111,7 @@ instance GoogleRequest EditsAPKListingsList where
              APKListingsListResponse
         type Scopes EditsAPKListingsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKListingsList{..}
+        requestClient EditsAPKListingsList'{..}
           = go _eapkllPackageName _eapkllEditId
               _eapkllAPKVersionCode
               (Just AltJSON)

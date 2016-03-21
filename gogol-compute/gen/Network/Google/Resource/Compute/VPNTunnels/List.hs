@@ -63,7 +63,7 @@ type VPNTunnelsListResource =
 -- project and region.
 --
 -- /See:/ 'vpnTunnelsList' smart constructor.
-data VPNTunnelsList = VPNTunnelsList
+data VPNTunnelsList = VPNTunnelsList'
     { _vtlProject    :: !Text
     , _vtlFilter     :: !(Maybe Text)
     , _vtlRegion     :: !Text
@@ -89,7 +89,7 @@ vpnTunnelsList
     -> Text -- ^ 'vtlRegion'
     -> VPNTunnelsList
 vpnTunnelsList pVtlProject_ pVtlRegion_ =
-    VPNTunnelsList
+    VPNTunnelsList'
     { _vtlProject = pVtlProject_
     , _vtlFilter = Nothing
     , _vtlRegion = pVtlRegion_
@@ -155,7 +155,7 @@ instance GoogleRequest VPNTunnelsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient VPNTunnelsList{..}
+        requestClient VPNTunnelsList'{..}
           = go _vtlProject _vtlRegion _vtlFilter _vtlPageToken
               (Just _vtlMaxResults)
               (Just AltJSON)

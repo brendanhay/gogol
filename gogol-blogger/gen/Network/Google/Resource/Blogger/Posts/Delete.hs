@@ -54,7 +54,7 @@ type PostsDeleteResource =
 -- | Delete a post by ID.
 --
 -- /See:/ 'postsDelete' smart constructor.
-data PostsDelete = PostsDelete
+data PostsDelete = PostsDelete'
     { _pdBlogId :: !Text
     , _pdPostId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ postsDelete
     -> Text -- ^ 'pdPostId'
     -> PostsDelete
 postsDelete pPdBlogId_ pPdPostId_ =
-    PostsDelete
+    PostsDelete'
     { _pdBlogId = pPdBlogId_
     , _pdPostId = pPdPostId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest PostsDelete where
         type Rs PostsDelete = ()
         type Scopes PostsDelete =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PostsDelete{..}
+        requestClient PostsDelete'{..}
           = go _pdBlogId _pdPostId (Just AltJSON)
               bloggerService
           where go

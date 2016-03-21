@@ -54,7 +54,7 @@ type OrdersCreatetestOrderResource =
 -- | Sandbox only. Creates a test order.
 --
 -- /See:/ 'ordersCreatetestOrder' smart constructor.
-data OrdersCreatetestOrder = OrdersCreatetestOrder
+data OrdersCreatetestOrder = OrdersCreatetestOrder'
     { _ocoMerchantId :: !(Textual Word64)
     , _ocoPayload    :: !OrdersCreateTestOrderRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ ordersCreatetestOrder
     -> OrdersCreateTestOrderRequest -- ^ 'ocoPayload'
     -> OrdersCreatetestOrder
 ordersCreatetestOrder pOcoMerchantId_ pOcoPayload_ =
-    OrdersCreatetestOrder
+    OrdersCreatetestOrder'
     { _ocoMerchantId = _Coerce # pOcoMerchantId_
     , _ocoPayload = pOcoPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest OrdersCreatetestOrder where
              OrdersCreateTestOrderResponse
         type Scopes OrdersCreatetestOrder =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersCreatetestOrder{..}
+        requestClient OrdersCreatetestOrder'{..}
           = go _ocoMerchantId (Just AltJSON) _ocoPayload
               shoppingContentService
           where go

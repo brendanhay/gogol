@@ -68,7 +68,7 @@ type ProjectsWorkerMessagesResource =
 -- | Send a worker_message to the service.
 --
 -- /See:/ 'projectsWorkerMessages' smart constructor.
-data ProjectsWorkerMessages = ProjectsWorkerMessages
+data ProjectsWorkerMessages = ProjectsWorkerMessages'
     { _pwmXgafv          :: !(Maybe Text)
     , _pwmUploadProtocol :: !(Maybe Text)
     , _pwmPp             :: !Bool
@@ -106,7 +106,7 @@ projectsWorkerMessages
     -> Text -- ^ 'pwmProjectId'
     -> ProjectsWorkerMessages
 projectsWorkerMessages pPwmPayload_ pPwmProjectId_ =
-    ProjectsWorkerMessages
+    ProjectsWorkerMessages'
     { _pwmXgafv = Nothing
     , _pwmUploadProtocol = Nothing
     , _pwmPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest ProjectsWorkerMessages where
         type Scopes ProjectsWorkerMessages =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/userinfo.email"]
-        requestClient ProjectsWorkerMessages{..}
+        requestClient ProjectsWorkerMessages'{..}
           = go _pwmProjectId _pwmXgafv _pwmUploadProtocol
               (Just _pwmPp)
               _pwmAccessToken

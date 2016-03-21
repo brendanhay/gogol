@@ -80,7 +80,7 @@ type AppsOperationsListResource =
 -- \`users\/*\/operations\`.
 --
 -- /See:/ 'appsOperationsList' smart constructor.
-data AppsOperationsList = AppsOperationsList
+data AppsOperationsList = AppsOperationsList'
     { _aolXgafv          :: !(Maybe Text)
     , _aolUploadProtocol :: !(Maybe Text)
     , _aolPp             :: !Bool
@@ -123,7 +123,7 @@ appsOperationsList
     :: Text -- ^ 'aolAppsId'
     -> AppsOperationsList
 appsOperationsList pAolAppsId_ =
-    AppsOperationsList
+    AppsOperationsList'
     { _aolXgafv = Nothing
     , _aolUploadProtocol = Nothing
     , _aolPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest AppsOperationsList where
         type Rs AppsOperationsList = ListOperationsResponse
         type Scopes AppsOperationsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsOperationsList{..}
+        requestClient AppsOperationsList'{..}
           = go _aolAppsId _aolXgafv _aolUploadProtocol
               (Just _aolPp)
               _aolAccessToken

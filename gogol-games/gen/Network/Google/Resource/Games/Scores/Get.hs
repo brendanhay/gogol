@@ -75,7 +75,7 @@ type ScoresGetResource =
 -- same request; only one parameter may be set to \'ALL\'.
 --
 -- /See:/ 'scoresGet' smart constructor.
-data ScoresGet = ScoresGet
+data ScoresGet = ScoresGet'
     { _sgTimeSpan        :: !ScoresGetTimeSpan
     , _sgLeaderboardId   :: !Text
     , _sgIncludeRankType :: !(Maybe ScoresGetIncludeRankType)
@@ -108,7 +108,7 @@ scoresGet
     -> Text -- ^ 'sgPlayerId'
     -> ScoresGet
 scoresGet pSgTimeSpan_ pSgLeaderboardId_ pSgPlayerId_ =
-    ScoresGet
+    ScoresGet'
     { _sgTimeSpan = pSgTimeSpan_
     , _sgLeaderboardId = pSgLeaderboardId_
     , _sgIncludeRankType = Nothing
@@ -167,7 +167,7 @@ instance GoogleRequest ScoresGet where
         type Scopes ScoresGet =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient ScoresGet{..}
+        requestClient ScoresGet'{..}
           = go _sgPlayerId _sgLeaderboardId _sgTimeSpan
               _sgIncludeRankType
               _sgLanguage

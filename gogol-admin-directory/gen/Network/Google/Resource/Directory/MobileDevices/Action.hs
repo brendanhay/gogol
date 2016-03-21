@@ -59,7 +59,7 @@ type MobileDevicesActionResource =
 -- | Take action on Mobile Device
 --
 -- /See:/ 'mobileDevicesAction' smart constructor.
-data MobileDevicesAction = MobileDevicesAction
+data MobileDevicesAction = MobileDevicesAction'
     { _mdaResourceId :: !Text
     , _mdaPayload    :: !MobileDeviceAction
     , _mdaCustomerId :: !Text
@@ -80,7 +80,7 @@ mobileDevicesAction
     -> Text -- ^ 'mdaCustomerId'
     -> MobileDevicesAction
 mobileDevicesAction pMdaResourceId_ pMdaPayload_ pMdaCustomerId_ =
-    MobileDevicesAction
+    MobileDevicesAction'
     { _mdaResourceId = pMdaResourceId_
     , _mdaPayload = pMdaPayload_
     , _mdaCustomerId = pMdaCustomerId_
@@ -108,7 +108,7 @@ instance GoogleRequest MobileDevicesAction where
         type Scopes MobileDevicesAction =
              '["https://www.googleapis.com/auth/admin.directory.device.mobile",
                "https://www.googleapis.com/auth/admin.directory.device.mobile.action"]
-        requestClient MobileDevicesAction{..}
+        requestClient MobileDevicesAction'{..}
           = go _mdaCustomerId _mdaResourceId (Just AltJSON)
               _mdaPayload
               directoryService

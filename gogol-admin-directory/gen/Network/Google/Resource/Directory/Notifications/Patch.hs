@@ -58,7 +58,7 @@ type NotificationsPatchResource =
 -- | Updates a notification. This method supports patch semantics.
 --
 -- /See:/ 'notificationsPatch' smart constructor.
-data NotificationsPatch = NotificationsPatch
+data NotificationsPatch = NotificationsPatch'
     { _npPayload        :: !Notification
     , _npCustomer       :: !Text
     , _npNotificationId :: !Text
@@ -79,7 +79,7 @@ notificationsPatch
     -> Text -- ^ 'npNotificationId'
     -> NotificationsPatch
 notificationsPatch pNpPayload_ pNpCustomer_ pNpNotificationId_ =
-    NotificationsPatch
+    NotificationsPatch'
     { _npPayload = pNpPayload_
     , _npCustomer = pNpCustomer_
     , _npNotificationId = pNpNotificationId_
@@ -105,7 +105,7 @@ instance GoogleRequest NotificationsPatch where
         type Rs NotificationsPatch = Notification
         type Scopes NotificationsPatch =
              '["https://www.googleapis.com/auth/admin.directory.notifications"]
-        requestClient NotificationsPatch{..}
+        requestClient NotificationsPatch'{..}
           = go _npCustomer _npNotificationId (Just AltJSON)
               _npPayload
               directoryService

@@ -59,7 +59,7 @@ type EditsTracksGetResource =
 -- the APK version codes that are in this track.
 --
 -- /See:/ 'editsTracksGet' smart constructor.
-data EditsTracksGet = EditsTracksGet
+data EditsTracksGet = EditsTracksGet'
     { _etgtTrack       :: !EditsTracksGetTrack
     , _etgtPackageName :: !Text
     , _etgtEditId      :: !Text
@@ -80,7 +80,7 @@ editsTracksGet
     -> Text -- ^ 'etgtEditId'
     -> EditsTracksGet
 editsTracksGet pEtgtTrack_ pEtgtPackageName_ pEtgtEditId_ =
-    EditsTracksGet
+    EditsTracksGet'
     { _etgtTrack = pEtgtTrack_
     , _etgtPackageName = pEtgtPackageName_
     , _etgtEditId = pEtgtEditId_
@@ -107,7 +107,7 @@ instance GoogleRequest EditsTracksGet where
         type Rs EditsTracksGet = Track
         type Scopes EditsTracksGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsTracksGet{..}
+        requestClient EditsTracksGet'{..}
           = go _etgtPackageName _etgtEditId _etgtTrack
               (Just AltJSON)
               androidPublisherService

@@ -57,7 +57,7 @@ type TargetVPNGatewaysDeleteResource =
 -- | Deletes the specified target VPN gateway.
 --
 -- /See:/ 'targetVPNGatewaysDelete' smart constructor.
-data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete
+data TargetVPNGatewaysDelete = TargetVPNGatewaysDelete'
     { _tvgdProject          :: !Text
     , _tvgdTargetVPNGateway :: !Text
     , _tvgdRegion           :: !Text
@@ -78,7 +78,7 @@ targetVPNGatewaysDelete
     -> Text -- ^ 'tvgdRegion'
     -> TargetVPNGatewaysDelete
 targetVPNGatewaysDelete pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
-    TargetVPNGatewaysDelete
+    TargetVPNGatewaysDelete'
     { _tvgdProject = pTvgdProject_
     , _tvgdTargetVPNGateway = pTvgdTargetVPNGateway_
     , _tvgdRegion = pTvgdRegion_
@@ -105,7 +105,7 @@ instance GoogleRequest TargetVPNGatewaysDelete where
         type Scopes TargetVPNGatewaysDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetVPNGatewaysDelete{..}
+        requestClient TargetVPNGatewaysDelete'{..}
           = go _tvgdProject _tvgdRegion _tvgdTargetVPNGateway
               (Just AltJSON)
               computeService

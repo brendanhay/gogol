@@ -60,7 +60,7 @@ type GlobalOperationsAggregatedListResource =
 -- | Retrieves an aggregated list of all operations.
 --
 -- /See:/ 'globalOperationsAggregatedList' smart constructor.
-data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList
+data GlobalOperationsAggregatedList = GlobalOperationsAggregatedList'
     { _goalProject    :: !Text
     , _goalFilter     :: !(Maybe Text)
     , _goalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ globalOperationsAggregatedList
     :: Text -- ^ 'goalProject'
     -> GlobalOperationsAggregatedList
 globalOperationsAggregatedList pGoalProject_ =
-    GlobalOperationsAggregatedList
+    GlobalOperationsAggregatedList'
     { _goalProject = pGoalProject_
     , _goalFilter = Nothing
     , _goalPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest GlobalOperationsAggregatedList
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient GlobalOperationsAggregatedList{..}
+        requestClient GlobalOperationsAggregatedList'{..}
           = go _goalProject _goalFilter _goalPageToken
               (Just _goalMaxResults)
               (Just AltJSON)

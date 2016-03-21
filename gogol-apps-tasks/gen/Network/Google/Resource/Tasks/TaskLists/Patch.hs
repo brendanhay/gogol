@@ -57,7 +57,7 @@ type TaskListsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'taskListsPatch' smart constructor.
-data TaskListsPatch = TaskListsPatch
+data TaskListsPatch = TaskListsPatch'
     { _tlpPayload  :: !TaskList
     , _tlpTaskList :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ taskListsPatch
     -> Text -- ^ 'tlpTaskList'
     -> TaskListsPatch
 taskListsPatch pTlpPayload_ pTlpTaskList_ =
-    TaskListsPatch
+    TaskListsPatch'
     { _tlpPayload = pTlpPayload_
     , _tlpTaskList = pTlpTaskList_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest TaskListsPatch where
         type Rs TaskListsPatch = TaskList
         type Scopes TaskListsPatch =
              '["https://www.googleapis.com/auth/tasks"]
-        requestClient TaskListsPatch{..}
+        requestClient TaskListsPatch'{..}
           = go _tlpTaskList (Just AltJSON) _tlpPayload
               appsTasksService
           where go

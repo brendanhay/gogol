@@ -68,7 +68,7 @@ type BeaconsRegisterResource =
 -- once.
 --
 -- /See:/ 'beaconsRegister' smart constructor.
-data BeaconsRegister = BeaconsRegister
+data BeaconsRegister = BeaconsRegister'
     { _brXgafv          :: !(Maybe Text)
     , _brUploadProtocol :: !(Maybe Text)
     , _brPp             :: !Bool
@@ -102,7 +102,7 @@ beaconsRegister
     :: Beacon -- ^ 'brPayload'
     -> BeaconsRegister
 beaconsRegister pBrPayload_ =
-    BeaconsRegister
+    BeaconsRegister'
     { _brXgafv = Nothing
     , _brUploadProtocol = Nothing
     , _brPp = True
@@ -157,7 +157,7 @@ brCallback
 instance GoogleRequest BeaconsRegister where
         type Rs BeaconsRegister = Beacon
         type Scopes BeaconsRegister = '[]
-        requestClient BeaconsRegister{..}
+        requestClient BeaconsRegister'{..}
           = go _brXgafv _brUploadProtocol (Just _brPp)
               _brAccessToken
               _brUploadType

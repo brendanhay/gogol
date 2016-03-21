@@ -87,7 +87,7 @@ type ProjectsZonesClustersCreateResource =
 -- the cluster.
 --
 -- /See:/ 'projectsZonesClustersCreate' smart constructor.
-data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate
+data ProjectsZonesClustersCreate = ProjectsZonesClustersCreate'
     { _pzccXgafv          :: !(Maybe Text)
     , _pzccUploadProtocol :: !(Maybe Text)
     , _pzccPp             :: !Bool
@@ -129,7 +129,7 @@ projectsZonesClustersCreate
     -> Text -- ^ 'pzccProjectId'
     -> ProjectsZonesClustersCreate
 projectsZonesClustersCreate pPzccZone_ pPzccPayload_ pPzccProjectId_ =
-    ProjectsZonesClustersCreate
+    ProjectsZonesClustersCreate'
     { _pzccXgafv = Nothing
     , _pzccUploadProtocol = Nothing
     , _pzccPp = True
@@ -202,7 +202,7 @@ instance GoogleRequest ProjectsZonesClustersCreate
         type Rs ProjectsZonesClustersCreate = Operation
         type Scopes ProjectsZonesClustersCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesClustersCreate{..}
+        requestClient ProjectsZonesClustersCreate'{..}
           = go _pzccProjectId _pzccZone _pzccXgafv
               _pzccUploadProtocol
               (Just _pzccPp)

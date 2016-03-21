@@ -58,7 +58,7 @@ type CampaignsInsertResource =
 -- | Inserts a new campaign.
 --
 -- /See:/ 'campaignsInsert' smart constructor.
-data CampaignsInsert = CampaignsInsert
+data CampaignsInsert = CampaignsInsert'
     { _camProFileId              :: !(Textual Int64)
     , _camPayload                :: !Campaign
     , _camDefaultLandingPageURL  :: !Text
@@ -83,7 +83,7 @@ campaignsInsert
     -> Text -- ^ 'camDefaultLandingPageName'
     -> CampaignsInsert
 campaignsInsert pCamProFileId_ pCamPayload_ pCamDefaultLandingPageURL_ pCamDefaultLandingPageName_ =
-    CampaignsInsert
+    CampaignsInsert'
     { _camProFileId = _Coerce # pCamProFileId_
     , _camPayload = pCamPayload_
     , _camDefaultLandingPageURL = pCamDefaultLandingPageURL_
@@ -118,7 +118,7 @@ instance GoogleRequest CampaignsInsert where
         type Rs CampaignsInsert = Campaign
         type Scopes CampaignsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CampaignsInsert{..}
+        requestClient CampaignsInsert'{..}
           = go _camProFileId (Just _camDefaultLandingPageName)
               (Just _camDefaultLandingPageURL)
               (Just AltJSON)

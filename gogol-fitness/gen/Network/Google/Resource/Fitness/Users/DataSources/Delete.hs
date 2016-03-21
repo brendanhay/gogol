@@ -54,7 +54,7 @@ type UsersDataSourcesDeleteResource =
 -- | Delete the data source if there are no datapoints associated with it
 --
 -- /See:/ 'usersDataSourcesDelete' smart constructor.
-data UsersDataSourcesDelete = UsersDataSourcesDelete
+data UsersDataSourcesDelete = UsersDataSourcesDelete'
     { _udsdDataSourceId :: !Text
     , _udsdUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersDataSourcesDelete
     -> Text -- ^ 'udsdUserId'
     -> UsersDataSourcesDelete
 usersDataSourcesDelete pUdsdDataSourceId_ pUdsdUserId_ =
-    UsersDataSourcesDelete
+    UsersDataSourcesDelete'
     { _udsdDataSourceId = pUdsdDataSourceId_
     , _udsdUserId = pUdsdUserId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest UsersDataSourcesDelete where
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesDelete{..}
+        requestClient UsersDataSourcesDelete'{..}
           = go _udsdUserId _udsdDataSourceId (Just AltJSON)
               fitnessService
           where go

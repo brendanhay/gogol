@@ -58,7 +58,7 @@ type EditsDetailsPatchResource =
 -- | Updates app details for this edit. This method supports patch semantics.
 --
 -- /See:/ 'editsDetailsPatch' smart constructor.
-data EditsDetailsPatch = EditsDetailsPatch
+data EditsDetailsPatch = EditsDetailsPatch'
     { _edpPackageName :: !Text
     , _edpPayload     :: !AppDetails
     , _edpEditId      :: !Text
@@ -79,7 +79,7 @@ editsDetailsPatch
     -> Text -- ^ 'edpEditId'
     -> EditsDetailsPatch
 editsDetailsPatch pEdpPackageName_ pEdpPayload_ pEdpEditId_ =
-    EditsDetailsPatch
+    EditsDetailsPatch'
     { _edpPackageName = pEdpPackageName_
     , _edpPayload = pEdpPayload_
     , _edpEditId = pEdpEditId_
@@ -106,7 +106,7 @@ instance GoogleRequest EditsDetailsPatch where
         type Rs EditsDetailsPatch = AppDetails
         type Scopes EditsDetailsPatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsDetailsPatch{..}
+        requestClient EditsDetailsPatch'{..}
           = go _edpPackageName _edpEditId (Just AltJSON)
               _edpPayload
               androidPublisherService

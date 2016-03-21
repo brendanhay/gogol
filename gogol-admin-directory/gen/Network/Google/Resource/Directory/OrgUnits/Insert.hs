@@ -55,7 +55,7 @@ type OrgUnitsInsertResource =
 -- | Add Organization Unit
 --
 -- /See:/ 'orgUnitsInsert' smart constructor.
-data OrgUnitsInsert = OrgUnitsInsert
+data OrgUnitsInsert = OrgUnitsInsert'
     { _ouiPayload    :: !OrgUnit
     , _ouiCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ orgUnitsInsert
     -> Text -- ^ 'ouiCustomerId'
     -> OrgUnitsInsert
 orgUnitsInsert pOuiPayload_ pOuiCustomerId_ =
-    OrgUnitsInsert
+    OrgUnitsInsert'
     { _ouiPayload = pOuiPayload_
     , _ouiCustomerId = pOuiCustomerId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest OrgUnitsInsert where
         type Rs OrgUnitsInsert = OrgUnit
         type Scopes OrgUnitsInsert =
              '["https://www.googleapis.com/auth/admin.directory.orgunit"]
-        requestClient OrgUnitsInsert{..}
+        requestClient OrgUnitsInsert'{..}
           = go _ouiCustomerId (Just AltJSON) _ouiPayload
               directoryService
           where go

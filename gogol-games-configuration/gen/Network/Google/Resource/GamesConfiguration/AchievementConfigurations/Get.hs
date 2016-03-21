@@ -54,7 +54,7 @@ type AchievementConfigurationsGetResource =
 -- ID.
 --
 -- /See:/ 'achievementConfigurationsGet' smart constructor.
-newtype AchievementConfigurationsGet = AchievementConfigurationsGet
+newtype AchievementConfigurationsGet = AchievementConfigurationsGet'
     { _acgAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ achievementConfigurationsGet
     :: Text -- ^ 'acgAchievementId'
     -> AchievementConfigurationsGet
 achievementConfigurationsGet pAcgAchievementId_ =
-    AchievementConfigurationsGet
+    AchievementConfigurationsGet'
     { _acgAchievementId = pAcgAchievementId_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest AchievementConfigurationsGet
              AchievementConfiguration
         type Scopes AchievementConfigurationsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient AchievementConfigurationsGet{..}
+        requestClient AchievementConfigurationsGet'{..}
           = go _acgAchievementId (Just AltJSON)
               gamesConfigurationService
           where go

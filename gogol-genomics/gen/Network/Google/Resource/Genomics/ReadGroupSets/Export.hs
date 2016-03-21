@@ -81,7 +81,7 @@ type ReadGroupSetsExportResource =
 -- for caveats.
 --
 -- /See:/ 'readGroupSetsExport' smart constructor.
-data ReadGroupSetsExport = ReadGroupSetsExport
+data ReadGroupSetsExport = ReadGroupSetsExport'
     { _rgseXgafv          :: !(Maybe Text)
     , _rgseReadGroupSetId :: !Text
     , _rgseUploadProtocol :: !(Maybe Text)
@@ -119,7 +119,7 @@ readGroupSetsExport
     -> ExportReadGroupSetRequest -- ^ 'rgsePayload'
     -> ReadGroupSetsExport
 readGroupSetsExport pRgseReadGroupSetId_ pRgsePayload_ =
-    ReadGroupSetsExport
+    ReadGroupSetsExport'
     { _rgseXgafv = Nothing
     , _rgseReadGroupSetId = pRgseReadGroupSetId_
     , _rgseUploadProtocol = Nothing
@@ -187,7 +187,7 @@ instance GoogleRequest ReadGroupSetsExport where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.read_write",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient ReadGroupSetsExport{..}
+        requestClient ReadGroupSetsExport'{..}
           = go _rgseReadGroupSetId _rgseXgafv
               _rgseUploadProtocol
               (Just _rgsePp)

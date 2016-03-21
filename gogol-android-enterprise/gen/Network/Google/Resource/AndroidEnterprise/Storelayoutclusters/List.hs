@@ -57,7 +57,7 @@ type StorelayoutclustersListResource =
 -- | Retrieves the details of all clusters on the specified page.
 --
 -- /See:/ 'storelayoutclustersList' smart constructor.
-data StorelayoutclustersList = StorelayoutclustersList
+data StorelayoutclustersList = StorelayoutclustersList'
     { _sllEnterpriseId :: !Text
     , _sllPageId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ storelayoutclustersList
     -> Text -- ^ 'sllPageId'
     -> StorelayoutclustersList
 storelayoutclustersList pSllEnterpriseId_ pSllPageId_ =
-    StorelayoutclustersList
+    StorelayoutclustersList'
     { _sllEnterpriseId = pSllEnterpriseId_
     , _sllPageId = pSllPageId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest StorelayoutclustersList where
              StoreLayoutClustersListResponse
         type Scopes StorelayoutclustersList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutclustersList{..}
+        requestClient StorelayoutclustersList'{..}
           = go _sllEnterpriseId _sllPageId (Just AltJSON)
               androidEnterpriseService
           where go

@@ -58,7 +58,7 @@ type LandingPagesUpdateResource =
 -- | Updates an existing campaign landing page.
 --
 -- /See:/ 'landingPagesUpdate' smart constructor.
-data LandingPagesUpdate = LandingPagesUpdate
+data LandingPagesUpdate = LandingPagesUpdate'
     { _lpuCampaignId :: !(Textual Int64)
     , _lpuProFileId  :: !(Textual Int64)
     , _lpuPayload    :: !LandingPage
@@ -79,7 +79,7 @@ landingPagesUpdate
     -> LandingPage -- ^ 'lpuPayload'
     -> LandingPagesUpdate
 landingPagesUpdate pLpuCampaignId_ pLpuProFileId_ pLpuPayload_ =
-    LandingPagesUpdate
+    LandingPagesUpdate'
     { _lpuCampaignId = _Coerce # pLpuCampaignId_
     , _lpuProFileId = _Coerce # pLpuProFileId_
     , _lpuPayload = pLpuPayload_
@@ -107,7 +107,7 @@ instance GoogleRequest LandingPagesUpdate where
         type Rs LandingPagesUpdate = LandingPage
         type Scopes LandingPagesUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient LandingPagesUpdate{..}
+        requestClient LandingPagesUpdate'{..}
           = go _lpuProFileId _lpuCampaignId (Just AltJSON)
               _lpuPayload
               dFAReportingService

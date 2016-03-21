@@ -56,7 +56,7 @@ type RevisionsDeleteResource =
 -- with binary content in Drive.
 --
 -- /See:/ 'revisionsDelete' smart constructor.
-data RevisionsDelete = RevisionsDelete
+data RevisionsDelete = RevisionsDelete'
     { _rFileId     :: !Text
     , _rRevisionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ revisionsDelete
     -> Text -- ^ 'rRevisionId'
     -> RevisionsDelete
 revisionsDelete pRFileId_ pRRevisionId_ =
-    RevisionsDelete
+    RevisionsDelete'
     { _rFileId = pRFileId_
     , _rRevisionId = pRRevisionId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest RevisionsDelete where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient RevisionsDelete{..}
+        requestClient RevisionsDelete'{..}
           = go _rFileId _rRevisionId (Just AltJSON)
               driveService
           where go

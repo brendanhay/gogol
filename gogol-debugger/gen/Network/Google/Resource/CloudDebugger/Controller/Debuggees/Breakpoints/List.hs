@@ -89,7 +89,7 @@ type ControllerDebuggeesBreakpointsListResource =
 -- avoid setting those breakpoints again.
 --
 -- /See:/ 'controllerDebuggeesBreakpointsList' smart constructor.
-data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList
+data ControllerDebuggeesBreakpointsList = ControllerDebuggeesBreakpointsList'
     { _cdblXgafv            :: !(Maybe Text)
     , _cdblUploadProtocol   :: !(Maybe Text)
     , _cdblPp               :: !Bool
@@ -129,7 +129,7 @@ controllerDebuggeesBreakpointsList
     :: Text -- ^ 'cdblDebuggeeId'
     -> ControllerDebuggeesBreakpointsList
 controllerDebuggeesBreakpointsList pCdblDebuggeeId_ =
-    ControllerDebuggeesBreakpointsList
+    ControllerDebuggeesBreakpointsList'
     { _cdblXgafv = Nothing
     , _cdblUploadProtocol = Nothing
     , _cdblPp = True
@@ -211,7 +211,7 @@ instance GoogleRequest
         type Scopes ControllerDebuggeesBreakpointsList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugletcontroller"]
-        requestClient ControllerDebuggeesBreakpointsList{..}
+        requestClient ControllerDebuggeesBreakpointsList'{..}
           = go _cdblDebuggeeId _cdblXgafv _cdblUploadProtocol
               (Just _cdblPp)
               _cdblAccessToken

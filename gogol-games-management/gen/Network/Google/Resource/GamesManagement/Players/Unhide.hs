@@ -59,7 +59,7 @@ type PlayersUnhideResource =
 -- developer console.
 --
 -- /See:/ 'playersUnhide' smart constructor.
-data PlayersUnhide = PlayersUnhide
+data PlayersUnhide = PlayersUnhide'
     { _puApplicationId :: !Text
     , _puPlayerId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -76,7 +76,7 @@ playersUnhide
     -> Text -- ^ 'puPlayerId'
     -> PlayersUnhide
 playersUnhide pPuApplicationId_ pPuPlayerId_ =
-    PlayersUnhide
+    PlayersUnhide'
     { _puApplicationId = pPuApplicationId_
     , _puPlayerId = pPuPlayerId_
     }
@@ -98,7 +98,7 @@ instance GoogleRequest PlayersUnhide where
         type Scopes PlayersUnhide =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PlayersUnhide{..}
+        requestClient PlayersUnhide'{..}
           = go _puApplicationId _puPlayerId (Just AltJSON)
               gamesManagementService
           where go

@@ -59,7 +59,7 @@ type UsersDraftsListResource =
 -- | Lists the drafts in the user\'s mailbox.
 --
 -- /See:/ 'usersDraftsList' smart constructor.
-data UsersDraftsList = UsersDraftsList
+data UsersDraftsList = UsersDraftsList'
     { _udlUserId           :: !Text
     , _udlIncludeSpamTrash :: !Bool
     , _udlPageToken        :: !(Maybe Text)
@@ -80,7 +80,7 @@ data UsersDraftsList = UsersDraftsList
 usersDraftsList
     :: UsersDraftsList
 usersDraftsList =
-    UsersDraftsList
+    UsersDraftsList'
     { _udlUserId = "me"
     , _udlIncludeSpamTrash = False
     , _udlPageToken = Nothing
@@ -118,7 +118,7 @@ instance GoogleRequest UsersDraftsList where
                "https://www.googleapis.com/auth/gmail.compose",
                "https://www.googleapis.com/auth/gmail.modify",
                "https://www.googleapis.com/auth/gmail.readonly"]
-        requestClient UsersDraftsList{..}
+        requestClient UsersDraftsList'{..}
           = go _udlUserId (Just _udlIncludeSpamTrash)
               _udlPageToken
               (Just _udlMaxResults)

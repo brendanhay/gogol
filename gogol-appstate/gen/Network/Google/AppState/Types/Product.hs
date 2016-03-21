@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | This is a JSON template for an app state write result.
 --
 -- /See:/ 'writeResult' smart constructor.
-data WriteResult = WriteResult
+data WriteResult = WriteResult'
     { _wrCurrentStateVersion :: !(Maybe Text)
     , _wrKind                :: !Text
     , _wrStateKey            :: !(Maybe (Textual Int32))
@@ -41,7 +41,7 @@ data WriteResult = WriteResult
 writeResult
     :: WriteResult
 writeResult =
-    WriteResult
+    WriteResult'
     { _wrCurrentStateVersion = Nothing
     , _wrKind = "appstate#writeResult"
     , _wrStateKey = Nothing
@@ -68,13 +68,13 @@ instance FromJSON WriteResult where
         parseJSON
           = withObject "WriteResult"
               (\ o ->
-                 WriteResult <$>
+                 WriteResult' <$>
                    (o .:? "currentStateVersion") <*>
                      (o .:? "kind" .!= "appstate#writeResult")
                      <*> (o .:? "stateKey"))
 
 instance ToJSON WriteResult where
-        toJSON WriteResult{..}
+        toJSON WriteResult'{..}
           = object
               (catMaybes
                  [("currentStateVersion" .=) <$>
@@ -85,7 +85,7 @@ instance ToJSON WriteResult where
 -- | This is a JSON template to convert a list-response for app state.
 --
 -- /See:/ 'listResponse' smart constructor.
-data ListResponse = ListResponse
+data ListResponse = ListResponse'
     { _lrMaximumKeyCount :: !(Maybe (Textual Int32))
     , _lrKind            :: !Text
     , _lrItems           :: !(Maybe [GetResponse])
@@ -103,7 +103,7 @@ data ListResponse = ListResponse
 listResponse
     :: ListResponse
 listResponse =
-    ListResponse
+    ListResponse'
     { _lrMaximumKeyCount = Nothing
     , _lrKind = "appstate#listResponse"
     , _lrItems = Nothing
@@ -131,13 +131,13 @@ instance FromJSON ListResponse where
         parseJSON
           = withObject "ListResponse"
               (\ o ->
-                 ListResponse <$>
+                 ListResponse' <$>
                    (o .:? "maximumKeyCount") <*>
                      (o .:? "kind" .!= "appstate#listResponse")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON ListResponse where
-        toJSON ListResponse{..}
+        toJSON ListResponse'{..}
           = object
               (catMaybes
                  [("maximumKeyCount" .=) <$> _lrMaximumKeyCount,
@@ -146,7 +146,7 @@ instance ToJSON ListResponse where
 -- | This is a JSON template for an app state resource.
 --
 -- /See:/ 'getResponse' smart constructor.
-data GetResponse = GetResponse
+data GetResponse = GetResponse'
     { _grCurrentStateVersion :: !(Maybe Text)
     , _grKind                :: !Text
     , _grData                :: !(Maybe Text)
@@ -167,7 +167,7 @@ data GetResponse = GetResponse
 getResponse
     :: GetResponse
 getResponse =
-    GetResponse
+    GetResponse'
     { _grCurrentStateVersion = Nothing
     , _grKind = "appstate#getResponse"
     , _grData = Nothing
@@ -199,14 +199,14 @@ instance FromJSON GetResponse where
         parseJSON
           = withObject "GetResponse"
               (\ o ->
-                 GetResponse <$>
+                 GetResponse' <$>
                    (o .:? "currentStateVersion") <*>
                      (o .:? "kind" .!= "appstate#getResponse")
                      <*> (o .:? "data")
                      <*> (o .:? "stateKey"))
 
 instance ToJSON GetResponse where
-        toJSON GetResponse{..}
+        toJSON GetResponse'{..}
           = object
               (catMaybes
                  [("currentStateVersion" .=) <$>
@@ -217,7 +217,7 @@ instance ToJSON GetResponse where
 -- | This is a JSON template for a requests which update app state
 --
 -- /See:/ 'updateRequest' smart constructor.
-data UpdateRequest = UpdateRequest
+data UpdateRequest = UpdateRequest'
     { _urKind :: !Text
     , _urData :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -232,7 +232,7 @@ data UpdateRequest = UpdateRequest
 updateRequest
     :: UpdateRequest
 updateRequest =
-    UpdateRequest
+    UpdateRequest'
     { _urKind = "appstate#updateRequest"
     , _urData = Nothing
     }
@@ -250,12 +250,12 @@ instance FromJSON UpdateRequest where
         parseJSON
           = withObject "UpdateRequest"
               (\ o ->
-                 UpdateRequest <$>
+                 UpdateRequest' <$>
                    (o .:? "kind" .!= "appstate#updateRequest") <*>
                      (o .:? "data"))
 
 instance ToJSON UpdateRequest where
-        toJSON UpdateRequest{..}
+        toJSON UpdateRequest'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _urKind), ("data" .=) <$> _urData])

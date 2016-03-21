@@ -54,7 +54,7 @@ type AccountsContainersGetResource =
 -- | Gets a Container.
 --
 -- /See:/ 'accountsContainersGet' smart constructor.
-data AccountsContainersGet = AccountsContainersGet
+data AccountsContainersGet = AccountsContainersGet'
     { _acgContainerId :: !Text
     , _acgAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsContainersGet
     -> Text -- ^ 'acgAccountId'
     -> AccountsContainersGet
 accountsContainersGet pAcgContainerId_ pAcgAccountId_ =
-    AccountsContainersGet
+    AccountsContainersGet'
     { _acgContainerId = pAcgContainerId_
     , _acgAccountId = pAcgAccountId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountsContainersGet where
         type Scopes AccountsContainersGet =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersGet{..}
+        requestClient AccountsContainersGet'{..}
           = go _acgAccountId _acgContainerId (Just AltJSON)
               tagManagerService
           where go

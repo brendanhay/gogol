@@ -56,7 +56,7 @@ type VerificationCodesListResource =
 -- specified user.
 --
 -- /See:/ 'verificationCodesList' smart constructor.
-newtype VerificationCodesList = VerificationCodesList
+newtype VerificationCodesList = VerificationCodesList'
     { _vclUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -69,7 +69,7 @@ verificationCodesList
     :: Text -- ^ 'vclUserKey'
     -> VerificationCodesList
 verificationCodesList pVclUserKey_ =
-    VerificationCodesList
+    VerificationCodesList'
     { _vclUserKey = pVclUserKey_
     }
 
@@ -83,7 +83,7 @@ instance GoogleRequest VerificationCodesList where
         type Rs VerificationCodesList = VerificationCodes
         type Scopes VerificationCodesList =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient VerificationCodesList{..}
+        requestClient VerificationCodesList'{..}
           = go _vclUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

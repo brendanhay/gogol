@@ -57,7 +57,7 @@ type VPNTunnelsDeleteResource =
 -- | Deletes the specified VpnTunnel resource.
 --
 -- /See:/ 'vpnTunnelsDelete' smart constructor.
-data VPNTunnelsDelete = VPNTunnelsDelete
+data VPNTunnelsDelete = VPNTunnelsDelete'
     { _vtdProject   :: !Text
     , _vtdVPNTunnel :: !Text
     , _vtdRegion    :: !Text
@@ -78,7 +78,7 @@ vpnTunnelsDelete
     -> Text -- ^ 'vtdRegion'
     -> VPNTunnelsDelete
 vpnTunnelsDelete pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
-    VPNTunnelsDelete
+    VPNTunnelsDelete'
     { _vtdProject = pVtdProject_
     , _vtdVPNTunnel = pVtdVPNTunnel_
     , _vtdRegion = pVtdRegion_
@@ -104,7 +104,7 @@ instance GoogleRequest VPNTunnelsDelete where
         type Scopes VPNTunnelsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient VPNTunnelsDelete{..}
+        requestClient VPNTunnelsDelete'{..}
           = go _vtdProject _vtdRegion _vtdVPNTunnel
               (Just AltJSON)
               computeService

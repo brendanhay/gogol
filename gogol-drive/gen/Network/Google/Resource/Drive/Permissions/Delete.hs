@@ -54,7 +54,7 @@ type PermissionsDeleteResource =
 -- | Deletes a permission.
 --
 -- /See:/ 'permissionsDelete' smart constructor.
-data PermissionsDelete = PermissionsDelete
+data PermissionsDelete = PermissionsDelete'
     { _pdFileId       :: !Text
     , _pdPermissionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ permissionsDelete
     -> Text -- ^ 'pdPermissionId'
     -> PermissionsDelete
 permissionsDelete pPdFileId_ pPdPermissionId_ =
-    PermissionsDelete
+    PermissionsDelete'
     { _pdFileId = pPdFileId_
     , _pdPermissionId = pPdPermissionId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PermissionsDelete where
         type Scopes PermissionsDelete =
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient PermissionsDelete{..}
+        requestClient PermissionsDelete'{..}
           = go _pdFileId _pdPermissionId (Just AltJSON)
               driveService
           where go

@@ -60,7 +60,7 @@ type EditsImagesDeleteallResource =
 -- | Deletes all images for the specified language and image type.
 --
 -- /See:/ 'editsImagesDeleteall' smart constructor.
-data EditsImagesDeleteall = EditsImagesDeleteall
+data EditsImagesDeleteall = EditsImagesDeleteall'
     { _ediPackageName :: !Text
     , _ediImageType   :: !EditsImagesDeleteallImageType
     , _ediLanguage    :: !Text
@@ -85,7 +85,7 @@ editsImagesDeleteall
     -> Text -- ^ 'ediEditId'
     -> EditsImagesDeleteall
 editsImagesDeleteall pEdiPackageName_ pEdiImageType_ pEdiLanguage_ pEdiEditId_ =
-    EditsImagesDeleteall
+    EditsImagesDeleteall'
     { _ediPackageName = pEdiPackageName_
     , _ediImageType = pEdiImageType_
     , _ediLanguage = pEdiLanguage_
@@ -120,7 +120,7 @@ instance GoogleRequest EditsImagesDeleteall where
              ImagesDeleteAllResponse
         type Scopes EditsImagesDeleteall =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsImagesDeleteall{..}
+        requestClient EditsImagesDeleteall'{..}
           = go _ediPackageName _ediEditId _ediLanguage
               _ediImageType
               (Just AltJSON)

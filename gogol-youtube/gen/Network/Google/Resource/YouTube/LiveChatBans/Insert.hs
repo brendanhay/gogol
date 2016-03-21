@@ -55,7 +55,7 @@ type LiveChatBansInsertResource =
 -- | Adds a new ban to the chat.
 --
 -- /See:/ 'liveChatBansInsert' smart constructor.
-data LiveChatBansInsert = LiveChatBansInsert
+data LiveChatBansInsert = LiveChatBansInsert'
     { _lcbiPart    :: !Text
     , _lcbiPayload :: !LiveChatBan
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ liveChatBansInsert
     -> LiveChatBan -- ^ 'lcbiPayload'
     -> LiveChatBansInsert
 liveChatBansInsert pLcbiPart_ pLcbiPayload_ =
-    LiveChatBansInsert
+    LiveChatBansInsert'
     { _lcbiPart = pLcbiPart_
     , _lcbiPayload = pLcbiPayload_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest LiveChatBansInsert where
         type Scopes LiveChatBansInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveChatBansInsert{..}
+        requestClient LiveChatBansInsert'{..}
           = go (Just _lcbiPart) (Just AltJSON) _lcbiPayload
               youTubeService
           where go

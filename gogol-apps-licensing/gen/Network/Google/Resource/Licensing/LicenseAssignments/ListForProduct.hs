@@ -60,7 +60,7 @@ type LicenseAssignmentsListForProductResource =
 -- | List license assignments for given product of the customer.
 --
 -- /See:/ 'licenseAssignmentsListForProduct' smart constructor.
-data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct
+data LicenseAssignmentsListForProduct = LicenseAssignmentsListForProduct'
     { _lalfpCustomerId :: !Text
     , _lalfpPageToken  :: !Text
     , _lalfpProductId  :: !Text
@@ -83,7 +83,7 @@ licenseAssignmentsListForProduct
     -> Text -- ^ 'lalfpProductId'
     -> LicenseAssignmentsListForProduct
 licenseAssignmentsListForProduct pLalfpCustomerId_ pLalfpProductId_ =
-    LicenseAssignmentsListForProduct
+    LicenseAssignmentsListForProduct'
     { _lalfpCustomerId = pLalfpCustomerId_
     , _lalfpPageToken = ""
     , _lalfpProductId = pLalfpProductId_
@@ -124,7 +124,7 @@ instance GoogleRequest
              LicenseAssignmentList
         type Scopes LicenseAssignmentsListForProduct =
              '["https://www.googleapis.com/auth/apps.licensing"]
-        requestClient LicenseAssignmentsListForProduct{..}
+        requestClient LicenseAssignmentsListForProduct'{..}
           = go _lalfpProductId (Just _lalfpCustomerId)
               (Just _lalfpPageToken)
               (Just _lalfpMaxResults)

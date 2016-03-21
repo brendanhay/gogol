@@ -58,7 +58,7 @@ type OrdersGettestOrdertemplateResource =
 -- create a new order in sandbox.
 --
 -- /See:/ 'ordersGettestOrdertemplate' smart constructor.
-data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate
+data OrdersGettestOrdertemplate = OrdersGettestOrdertemplate'
     { _ogoMerchantId   :: !(Textual Word64)
     , _ogoTemplateName :: !OrdersGettestOrdertemplateTemplateName
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ ordersGettestOrdertemplate
     -> OrdersGettestOrdertemplateTemplateName -- ^ 'ogoTemplateName'
     -> OrdersGettestOrdertemplate
 ordersGettestOrdertemplate pOgoMerchantId_ pOgoTemplateName_ =
-    OrdersGettestOrdertemplate
+    OrdersGettestOrdertemplate'
     { _ogoMerchantId = _Coerce # pOgoMerchantId_
     , _ogoTemplateName = pOgoTemplateName_
     }
@@ -99,7 +99,7 @@ instance GoogleRequest OrdersGettestOrdertemplate
              OrdersGetTestOrderTemplateResponse
         type Scopes OrdersGettestOrdertemplate =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersGettestOrdertemplate{..}
+        requestClient OrdersGettestOrdertemplate'{..}
           = go _ogoMerchantId _ogoTemplateName (Just AltJSON)
               shoppingContentService
           where go

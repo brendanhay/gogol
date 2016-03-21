@@ -54,7 +54,7 @@ type RelyingPartyResetPasswordResource =
 -- | Reset password for a user.
 --
 -- /See:/ 'relyingPartyResetPassword' smart constructor.
-newtype RelyingPartyResetPassword = RelyingPartyResetPassword
+newtype RelyingPartyResetPassword = RelyingPartyResetPassword'
     { _rprpPayload :: IdentitytoolkitRelyingPartyResetPasswordRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ relyingPartyResetPassword
     :: IdentitytoolkitRelyingPartyResetPasswordRequest -- ^ 'rprpPayload'
     -> RelyingPartyResetPassword
 relyingPartyResetPassword pRprpPayload_ =
-    RelyingPartyResetPassword
+    RelyingPartyResetPassword'
     { _rprpPayload = pRprpPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest RelyingPartyResetPassword
         type Rs RelyingPartyResetPassword =
              ResetPasswordResponse
         type Scopes RelyingPartyResetPassword = '[]
-        requestClient RelyingPartyResetPassword{..}
+        requestClient RelyingPartyResetPassword'{..}
           = go (Just AltJSON) _rprpPayload
               identityToolkitService
           where go

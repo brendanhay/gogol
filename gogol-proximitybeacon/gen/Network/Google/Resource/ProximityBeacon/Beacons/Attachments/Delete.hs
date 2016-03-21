@@ -71,7 +71,7 @@ type BeaconsAttachmentsDeleteResource =
 -- cannot be undone.
 --
 -- /See:/ 'beaconsAttachmentsDelete' smart constructor.
-data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete
+data BeaconsAttachmentsDelete = BeaconsAttachmentsDelete'
     { _badXgafv          :: !(Maybe Text)
     , _badUploadProtocol :: !(Maybe Text)
     , _badPp             :: !Bool
@@ -105,7 +105,7 @@ beaconsAttachmentsDelete
     :: Text -- ^ 'badAttachmentName'
     -> BeaconsAttachmentsDelete
 beaconsAttachmentsDelete pBadAttachmentName_ =
-    BeaconsAttachmentsDelete
+    BeaconsAttachmentsDelete'
     { _badXgafv = Nothing
     , _badUploadProtocol = Nothing
     , _badPp = True
@@ -165,7 +165,7 @@ badCallback
 instance GoogleRequest BeaconsAttachmentsDelete where
         type Rs BeaconsAttachmentsDelete = Empty
         type Scopes BeaconsAttachmentsDelete = '[]
-        requestClient BeaconsAttachmentsDelete{..}
+        requestClient BeaconsAttachmentsDelete'{..}
           = go _badAttachmentName _badXgafv _badUploadProtocol
               (Just _badPp)
               _badAccessToken

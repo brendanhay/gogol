@@ -75,7 +75,7 @@ type ProjectsGroupsListResource =
 -- | Lists the existing groups.
 --
 -- /See:/ 'projectsGroupsList' smart constructor.
-data ProjectsGroupsList = ProjectsGroupsList
+data ProjectsGroupsList = ProjectsGroupsList'
     { _pglXgafv              :: !(Maybe Text)
     , _pglUploadProtocol     :: !(Maybe Text)
     , _pglChildrenOfGroup    :: !(Maybe Text)
@@ -124,7 +124,7 @@ projectsGroupsList
     :: Text -- ^ 'pglName'
     -> ProjectsGroupsList
 projectsGroupsList pPglName_ =
-    ProjectsGroupsList
+    ProjectsGroupsList'
     { _pglXgafv = Nothing
     , _pglUploadProtocol = Nothing
     , _pglChildrenOfGroup = Nothing
@@ -225,7 +225,7 @@ instance GoogleRequest ProjectsGroupsList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring",
                "https://www.googleapis.com/auth/monitoring.read"]
-        requestClient ProjectsGroupsList{..}
+        requestClient ProjectsGroupsList'{..}
           = go _pglName _pglXgafv _pglUploadProtocol
               _pglChildrenOfGroup
               (Just _pglPp)

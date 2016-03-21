@@ -57,7 +57,7 @@ type DefaultObjectAccessControlsGetResource =
 -- specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsGet' smart constructor.
-data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet
+data DefaultObjectAccessControlsGet = DefaultObjectAccessControlsGet'
     { _doacgBucket :: !Text
     , _doacgEntity :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ defaultObjectAccessControlsGet
     -> Text -- ^ 'doacgEntity'
     -> DefaultObjectAccessControlsGet
 defaultObjectAccessControlsGet pDoacgBucket_ pDoacgEntity_ =
-    DefaultObjectAccessControlsGet
+    DefaultObjectAccessControlsGet'
     { _doacgBucket = pDoacgBucket_
     , _doacgEntity = pDoacgEntity_
     }
@@ -98,7 +98,7 @@ instance GoogleRequest DefaultObjectAccessControlsGet
         type Scopes DefaultObjectAccessControlsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient DefaultObjectAccessControlsGet{..}
+        requestClient DefaultObjectAccessControlsGet'{..}
           = go _doacgBucket _doacgEntity (Just AltJSON)
               storageService
           where go

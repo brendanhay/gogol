@@ -63,7 +63,7 @@ type TargetPoolsGetHealthResource =
 -- that is referenced by the given target pool.
 --
 -- /See:/ 'targetPoolsGetHealth' smart constructor.
-data TargetPoolsGetHealth = TargetPoolsGetHealth
+data TargetPoolsGetHealth = TargetPoolsGetHealth'
     { _tpghProject    :: !Text
     , _tpghTargetPool :: !Text
     , _tpghPayload    :: !InstanceReference
@@ -88,7 +88,7 @@ targetPoolsGetHealth
     -> Text -- ^ 'tpghRegion'
     -> TargetPoolsGetHealth
 targetPoolsGetHealth pTpghProject_ pTpghTargetPool_ pTpghPayload_ pTpghRegion_ =
-    TargetPoolsGetHealth
+    TargetPoolsGetHealth'
     { _tpghProject = pTpghProject_
     , _tpghTargetPool = pTpghTargetPool_
     , _tpghPayload = pTpghPayload_
@@ -123,7 +123,7 @@ instance GoogleRequest TargetPoolsGetHealth where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient TargetPoolsGetHealth{..}
+        requestClient TargetPoolsGetHealth'{..}
           = go _tpghProject _tpghRegion _tpghTargetPool
               (Just AltJSON)
               _tpghPayload

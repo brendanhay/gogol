@@ -55,7 +55,7 @@ type GlobalAddressesDeleteResource =
 -- | Deletes the specified address resource.
 --
 -- /See:/ 'globalAddressesDelete' smart constructor.
-data GlobalAddressesDelete = GlobalAddressesDelete
+data GlobalAddressesDelete = GlobalAddressesDelete'
     { _gadProject :: !Text
     , _gadAddress :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ globalAddressesDelete
     -> Text -- ^ 'gadAddress'
     -> GlobalAddressesDelete
 globalAddressesDelete pGadProject_ pGadAddress_ =
-    GlobalAddressesDelete
+    GlobalAddressesDelete'
     { _gadProject = pGadProject_
     , _gadAddress = pGadAddress_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest GlobalAddressesDelete where
         type Scopes GlobalAddressesDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient GlobalAddressesDelete{..}
+        requestClient GlobalAddressesDelete'{..}
           = go _gadProject _gadAddress (Just AltJSON)
               computeService
           where go

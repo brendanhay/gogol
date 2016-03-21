@@ -71,7 +71,7 @@ type JobsListResource =
 -- | Lists jobs.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+data JobsList = JobsList'
     { _jlXgafv                  :: !(Maybe Text)
     , _jlUploadProtocol         :: !(Maybe Text)
     , _jlPp                     :: !Bool
@@ -113,7 +113,7 @@ data JobsList = JobsList
 jobsList
     :: JobsList
 jobsList =
-    JobsList
+    JobsList'
     { _jlXgafv = Nothing
     , _jlUploadProtocol = Nothing
     , _jlPp = True
@@ -197,7 +197,7 @@ instance GoogleRequest JobsList where
         type Scopes JobsList =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient JobsList{..}
+        requestClient JobsList'{..}
           = go _jlXgafv _jlUploadProtocol (Just _jlPp)
               _jlAccessToken
               _jlUploadType

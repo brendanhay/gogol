@@ -51,7 +51,7 @@ type AccountsGetResource =
 -- | Gets a GTM Account.
 --
 -- /See:/ 'accountsGet' smart constructor.
-newtype AccountsGet = AccountsGet
+newtype AccountsGet = AccountsGet'
     { _agAccountId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ accountsGet
     :: Text -- ^ 'agAccountId'
     -> AccountsGet
 accountsGet pAgAccountId_ =
-    AccountsGet
+    AccountsGet'
     { _agAccountId = pAgAccountId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest AccountsGet where
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.manage.accounts",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsGet{..}
+        requestClient AccountsGet'{..}
           = go _agAccountId (Just AltJSON) tagManagerService
           where go
                   = buildClient (Proxy :: Proxy AccountsGetResource)

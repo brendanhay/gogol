@@ -60,7 +60,7 @@ type AccountsContainersVersionsListResource =
 -- | Lists all Container Versions of a GTM Container.
 --
 -- /See:/ 'accountsContainersVersionsList' smart constructor.
-data AccountsContainersVersionsList = AccountsContainersVersionsList
+data AccountsContainersVersionsList = AccountsContainersVersionsList'
     { _acvlContainerId    :: !Text
     , _acvlHeaders        :: !Bool
     , _acvlAccountId      :: !Text
@@ -83,7 +83,7 @@ accountsContainersVersionsList
     -> Text -- ^ 'acvlAccountId'
     -> AccountsContainersVersionsList
 accountsContainersVersionsList pAcvlContainerId_ pAcvlAccountId_ =
-    AccountsContainersVersionsList
+    AccountsContainersVersionsList'
     { _acvlContainerId = pAcvlContainerId_
     , _acvlHeaders = False
     , _acvlAccountId = pAcvlAccountId_
@@ -121,7 +121,7 @@ instance GoogleRequest AccountsContainersVersionsList
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.edit.containerversions",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersVersionsList{..}
+        requestClient AccountsContainersVersionsList'{..}
           = go _acvlAccountId _acvlContainerId
               (Just _acvlHeaders)
               (Just _acvlIncludeDeleted)

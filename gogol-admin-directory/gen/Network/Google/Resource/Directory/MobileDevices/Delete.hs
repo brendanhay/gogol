@@ -56,7 +56,7 @@ type MobileDevicesDeleteResource =
 -- | Delete Mobile Device
 --
 -- /See:/ 'mobileDevicesDelete' smart constructor.
-data MobileDevicesDelete = MobileDevicesDelete
+data MobileDevicesDelete = MobileDevicesDelete'
     { _mddResourceId :: !Text
     , _mddCustomerId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ mobileDevicesDelete
     -> Text -- ^ 'mddCustomerId'
     -> MobileDevicesDelete
 mobileDevicesDelete pMddResourceId_ pMddCustomerId_ =
-    MobileDevicesDelete
+    MobileDevicesDelete'
     { _mddResourceId = pMddResourceId_
     , _mddCustomerId = pMddCustomerId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest MobileDevicesDelete where
         type Rs MobileDevicesDelete = ()
         type Scopes MobileDevicesDelete =
              '["https://www.googleapis.com/auth/admin.directory.device.mobile"]
-        requestClient MobileDevicesDelete{..}
+        requestClient MobileDevicesDelete'{..}
           = go _mddCustomerId _mddResourceId (Just AltJSON)
               directoryService
           where go

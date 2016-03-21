@@ -53,7 +53,7 @@ type TablesProcessResource =
 -- | Process a table asset.
 --
 -- /See:/ 'tablesProcess' smart constructor.
-newtype TablesProcess = TablesProcess
+newtype TablesProcess = TablesProcess'
     { _tpsId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ tablesProcess
     :: Text -- ^ 'tpsId'
     -> TablesProcess
 tablesProcess pTpsId_ =
-    TablesProcess
+    TablesProcess'
     { _tpsId = pTpsId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest TablesProcess where
         type Rs TablesProcess = ProcessResponse
         type Scopes TablesProcess =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesProcess{..}
+        requestClient TablesProcess'{..}
           = go _tpsId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy TablesProcessResource)

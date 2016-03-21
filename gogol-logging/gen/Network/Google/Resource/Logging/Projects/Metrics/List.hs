@@ -69,7 +69,7 @@ type ProjectsMetricsListResource =
 -- | Lists logs-based metrics.
 --
 -- /See:/ 'projectsMetricsList' smart constructor.
-data ProjectsMetricsList = ProjectsMetricsList
+data ProjectsMetricsList = ProjectsMetricsList'
     { _pmlXgafv          :: !(Maybe Text)
     , _pmlUploadProtocol :: !(Maybe Text)
     , _pmlPp             :: !Bool
@@ -109,7 +109,7 @@ projectsMetricsList
     :: Text -- ^ 'pmlProjectName'
     -> ProjectsMetricsList
 projectsMetricsList pPmlProjectName_ =
-    ProjectsMetricsList
+    ProjectsMetricsList'
     { _pmlXgafv = Nothing
     , _pmlUploadProtocol = Nothing
     , _pmlPp = True
@@ -192,7 +192,7 @@ instance GoogleRequest ProjectsMetricsList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
-        requestClient ProjectsMetricsList{..}
+        requestClient ProjectsMetricsList'{..}
           = go _pmlProjectName _pmlXgafv _pmlUploadProtocol
               (Just _pmlPp)
               _pmlAccessToken

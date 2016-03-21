@@ -83,7 +83,7 @@ type ControllerDebuggeesBreakpointsUpdateResource =
 -- location to the correct line of code.
 --
 -- /See:/ 'controllerDebuggeesBreakpointsUpdate' smart constructor.
-data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate
+data ControllerDebuggeesBreakpointsUpdate = ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv          :: !(Maybe Text)
     , _cdbuUploadProtocol :: !(Maybe Text)
     , _cdbuPp             :: !Bool
@@ -125,7 +125,7 @@ controllerDebuggeesBreakpointsUpdate
     -> Text -- ^ 'cdbuDebuggeeId'
     -> ControllerDebuggeesBreakpointsUpdate
 controllerDebuggeesBreakpointsUpdate pCdbuPayload_ pCdbuId_ pCdbuDebuggeeId_ =
-    ControllerDebuggeesBreakpointsUpdate
+    ControllerDebuggeesBreakpointsUpdate'
     { _cdbuXgafv = Nothing
     , _cdbuUploadProtocol = Nothing
     , _cdbuPp = True
@@ -199,7 +199,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud_debugletcontroller"]
         requestClient
-          ControllerDebuggeesBreakpointsUpdate{..}
+          ControllerDebuggeesBreakpointsUpdate'{..}
           = go _cdbuDebuggeeId _cdbuId _cdbuXgafv
               _cdbuUploadProtocol
               (Just _cdbuPp)

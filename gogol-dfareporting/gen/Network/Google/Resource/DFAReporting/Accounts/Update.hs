@@ -54,7 +54,7 @@ type AccountsUpdateResource =
 -- | Updates an existing account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _auuProFileId :: !(Textual Int64)
     , _auuPayload   :: !Account
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsUpdate
     -> Account -- ^ 'auuPayload'
     -> AccountsUpdate
 accountsUpdate pAuuProFileId_ pAuuPayload_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _auuProFileId = _Coerce # pAuuProFileId_
     , _auuPayload = pAuuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
         type Scopes AccountsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountsUpdate{..}
+        requestClient AccountsUpdate'{..}
           = go _auuProFileId (Just AltJSON) _auuPayload
               dFAReportingService
           where go

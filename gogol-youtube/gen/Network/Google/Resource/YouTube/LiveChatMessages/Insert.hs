@@ -55,7 +55,7 @@ type LiveChatMessagesInsertResource =
 -- | Adds a message to a live chat.
 --
 -- /See:/ 'liveChatMessagesInsert' smart constructor.
-data LiveChatMessagesInsert = LiveChatMessagesInsert
+data LiveChatMessagesInsert = LiveChatMessagesInsert'
     { _lcmiPart    :: !Text
     , _lcmiPayload :: !LiveChatMessage
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ liveChatMessagesInsert
     -> LiveChatMessage -- ^ 'lcmiPayload'
     -> LiveChatMessagesInsert
 liveChatMessagesInsert pLcmiPart_ pLcmiPayload_ =
-    LiveChatMessagesInsert
+    LiveChatMessagesInsert'
     { _lcmiPart = pLcmiPart_
     , _lcmiPayload = pLcmiPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest LiveChatMessagesInsert where
         type Scopes LiveChatMessagesInsert =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveChatMessagesInsert{..}
+        requestClient LiveChatMessagesInsert'{..}
           = go (Just _lcmiPart) (Just AltJSON) _lcmiPayload
               youTubeService
           where go

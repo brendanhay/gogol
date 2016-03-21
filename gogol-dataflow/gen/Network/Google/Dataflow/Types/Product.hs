@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | A mapping from each stage to the information about that stage.
 --
 -- /See:/ 'jobExecutionInfoStages' smart constructor.
-newtype JobExecutionInfoStages = JobExecutionInfoStages
+newtype JobExecutionInfoStages = JobExecutionInfoStages'
     { _jeisAddtional :: HashMap Text JobExecutionStageInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -36,7 +36,7 @@ jobExecutionInfoStages
     :: HashMap Text JobExecutionStageInfo -- ^ 'jeisAddtional'
     -> JobExecutionInfoStages
 jobExecutionInfoStages pJeisAddtional_ =
-    JobExecutionInfoStages
+    JobExecutionInfoStages'
     { _jeisAddtional = _Coerce # pJeisAddtional_
     }
 
@@ -50,7 +50,7 @@ instance FromJSON JobExecutionInfoStages where
         parseJSON
           = withObject "JobExecutionInfoStages"
               (\ o ->
-                 JobExecutionInfoStages <$> (parseJSONObject o))
+                 JobExecutionInfoStages' <$> (parseJSONObject o))
 
 instance ToJSON JobExecutionInfoStages where
         toJSON = toJSON . _jeisAddtional
@@ -58,7 +58,7 @@ instance ToJSON JobExecutionInfoStages where
 -- | All configuration data for a particular Computation.
 --
 -- /See:/ 'computationTopology' smart constructor.
-data ComputationTopology = ComputationTopology
+data ComputationTopology = ComputationTopology'
     { _ctStateFamilies   :: !(Maybe [StateFamilyConfig])
     , _ctUserStageName   :: !(Maybe Text)
     , _ctInputs          :: !(Maybe [StreamLocation])
@@ -88,7 +88,7 @@ data ComputationTopology = ComputationTopology
 computationTopology
     :: ComputationTopology
 computationTopology =
-    ComputationTopology
+    ComputationTopology'
     { _ctStateFamilies = Nothing
     , _ctUserStageName = Nothing
     , _ctInputs = Nothing
@@ -149,7 +149,7 @@ instance FromJSON ComputationTopology where
         parseJSON
           = withObject "ComputationTopology"
               (\ o ->
-                 ComputationTopology <$>
+                 ComputationTopology' <$>
                    (o .:? "stateFamilies" .!= mempty) <*>
                      (o .:? "userStageName")
                      <*> (o .:? "inputs" .!= mempty)
@@ -159,7 +159,7 @@ instance FromJSON ComputationTopology where
                      <*> (o .:? "systemStageName"))
 
 instance ToJSON ComputationTopology where
-        toJSON ComputationTopology{..}
+        toJSON ComputationTopology'{..}
           = object
               (catMaybes
                  [("stateFamilies" .=) <$> _ctStateFamilies,
@@ -173,7 +173,7 @@ instance ToJSON ComputationTopology where
 -- | The response to a SourceSplitRequest.
 --
 -- /See:/ 'sourceSplitResponse' smart constructor.
-data SourceSplitResponse = SourceSplitResponse
+data SourceSplitResponse = SourceSplitResponse'
     { _ssrBundles :: !(Maybe [DerivedSource])
     , _ssrShards  :: !(Maybe [SourceSplitShard])
     , _ssrOutcome :: !(Maybe Text)
@@ -191,7 +191,7 @@ data SourceSplitResponse = SourceSplitResponse
 sourceSplitResponse
     :: SourceSplitResponse
 sourceSplitResponse =
-    SourceSplitResponse
+    SourceSplitResponse'
     { _ssrBundles = Nothing
     , _ssrShards = Nothing
     , _ssrOutcome = Nothing
@@ -226,13 +226,13 @@ instance FromJSON SourceSplitResponse where
         parseJSON
           = withObject "SourceSplitResponse"
               (\ o ->
-                 SourceSplitResponse <$>
+                 SourceSplitResponse' <$>
                    (o .:? "bundles" .!= mempty) <*>
                      (o .:? "shards" .!= mempty)
                      <*> (o .:? "outcome"))
 
 instance ToJSON SourceSplitResponse where
-        toJSON SourceSplitResponse{..}
+        toJSON SourceSplitResponse'{..}
           = object
               (catMaybes
                  [("bundles" .=) <$> _ssrBundles,
@@ -276,7 +276,7 @@ instance ToJSON SourceSplitResponse where
 -- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -294,7 +294,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -324,12 +324,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -340,7 +340,7 @@ instance ToJSON Status where
 -- the cloud.
 --
 -- /See:/ 'workItem' smart constructor.
-data WorkItem = WorkItem
+data WorkItem = WorkItem'
     { _wiJobId                    :: !(Maybe Text)
     , _wiReportStatusInterval     :: !(Maybe Text)
     , _wiShellTask                :: !(Maybe ShellTask)
@@ -391,7 +391,7 @@ data WorkItem = WorkItem
 workItem
     :: WorkItem
 workItem =
-    WorkItem
+    WorkItem'
     { _wiJobId = Nothing
     , _wiReportStatusInterval = Nothing
     , _wiShellTask = Nothing
@@ -493,7 +493,7 @@ instance FromJSON WorkItem where
         parseJSON
           = withObject "WorkItem"
               (\ o ->
-                 WorkItem <$>
+                 WorkItem' <$>
                    (o .:? "jobId") <*> (o .:? "reportStatusInterval")
                      <*> (o .:? "shellTask")
                      <*> (o .:? "streamingSetupTask")
@@ -509,7 +509,7 @@ instance FromJSON WorkItem where
                      <*> (o .:? "seqMapTask"))
 
 instance ToJSON WorkItem where
-        toJSON WorkItem{..}
+        toJSON WorkItem'{..}
           = object
               (catMaybes
                  [("jobId" .=) <$> _wiJobId,
@@ -535,7 +535,7 @@ instance ToJSON WorkItem where
 -- that this health ping belongs to.
 --
 -- /See:/ 'workerHealthReport' smart constructor.
-data WorkerHealthReport = WorkerHealthReport
+data WorkerHealthReport = WorkerHealthReport'
     { _whrVMIsHealthy    :: !(Maybe Bool)
     , _whrReportInterval :: !(Maybe Text)
     , _whrPods           :: !(Maybe [WorkerHealthReportPodsItem])
@@ -556,7 +556,7 @@ data WorkerHealthReport = WorkerHealthReport
 workerHealthReport
     :: WorkerHealthReport
 workerHealthReport =
-    WorkerHealthReport
+    WorkerHealthReport'
     { _whrVMIsHealthy = Nothing
     , _whrReportInterval = Nothing
     , _whrPods = Nothing
@@ -596,13 +596,13 @@ instance FromJSON WorkerHealthReport where
         parseJSON
           = withObject "WorkerHealthReport"
               (\ o ->
-                 WorkerHealthReport <$>
+                 WorkerHealthReport' <$>
                    (o .:? "vmIsHealthy") <*> (o .:? "reportInterval")
                      <*> (o .:? "pods" .!= mempty)
                      <*> (o .:? "vmStartupTime"))
 
 instance ToJSON WorkerHealthReport where
-        toJSON WorkerHealthReport{..}
+        toJSON WorkerHealthReport'{..}
           = object
               (catMaybes
                  [("vmIsHealthy" .=) <$> _whrVMIsHealthy,
@@ -614,7 +614,7 @@ instance ToJSON WorkerHealthReport where
 -- processing) using SourceSplitRequest.
 --
 -- /See:/ 'sourceSplitOptions' smart constructor.
-data SourceSplitOptions = SourceSplitOptions
+data SourceSplitOptions = SourceSplitOptions'
     { _ssoDesiredShardSizeBytes  :: !(Maybe (Textual Int64))
     , _ssoDesiredBundleSizeBytes :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -629,7 +629,7 @@ data SourceSplitOptions = SourceSplitOptions
 sourceSplitOptions
     :: SourceSplitOptions
 sourceSplitOptions =
-    SourceSplitOptions
+    SourceSplitOptions'
     { _ssoDesiredShardSizeBytes = Nothing
     , _ssoDesiredBundleSizeBytes = Nothing
     }
@@ -653,12 +653,12 @@ instance FromJSON SourceSplitOptions where
         parseJSON
           = withObject "SourceSplitOptions"
               (\ o ->
-                 SourceSplitOptions <$>
+                 SourceSplitOptions' <$>
                    (o .:? "desiredShardSizeBytes") <*>
                      (o .:? "desiredBundleSizeBytes"))
 
 instance ToJSON SourceSplitOptions where
-        toJSON SourceSplitOptions{..}
+        toJSON SourceSplitOptions'{..}
           = object
               (catMaybes
                  [("desiredShardSizeBytes" .=) <$>
@@ -669,7 +669,7 @@ instance ToJSON SourceSplitOptions where
 -- | Metadata to set on the Google Compute Engine VMs.
 --
 -- /See:/ 'workerPoolMetadata' smart constructor.
-newtype WorkerPoolMetadata = WorkerPoolMetadata
+newtype WorkerPoolMetadata = WorkerPoolMetadata'
     { _wpmAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -682,7 +682,7 @@ workerPoolMetadata
     :: HashMap Text Text -- ^ 'wpmAddtional'
     -> WorkerPoolMetadata
 workerPoolMetadata pWpmAddtional_ =
-    WorkerPoolMetadata
+    WorkerPoolMetadata'
     { _wpmAddtional = _Coerce # pWpmAddtional_
     }
 
@@ -694,7 +694,7 @@ wpmAddtional
 instance FromJSON WorkerPoolMetadata where
         parseJSON
           = withObject "WorkerPoolMetadata"
-              (\ o -> WorkerPoolMetadata <$> (parseJSONObject o))
+              (\ o -> WorkerPoolMetadata' <$> (parseJSONObject o))
 
 instance ToJSON WorkerPoolMetadata where
         toJSON = toJSON . _wpmAddtional
@@ -702,7 +702,7 @@ instance ToJSON WorkerPoolMetadata where
 -- | Settings for WorkerPool autoscaling.
 --
 -- /See:/ 'autoscalingSettings' smart constructor.
-data AutoscalingSettings = AutoscalingSettings
+data AutoscalingSettings = AutoscalingSettings'
     { _asMaxNumWorkers :: !(Maybe (Textual Int32))
     , _asAlgorithm     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -717,7 +717,7 @@ data AutoscalingSettings = AutoscalingSettings
 autoscalingSettings
     :: AutoscalingSettings
 autoscalingSettings =
-    AutoscalingSettings
+    AutoscalingSettings'
     { _asMaxNumWorkers = Nothing
     , _asAlgorithm = Nothing
     }
@@ -738,11 +738,11 @@ instance FromJSON AutoscalingSettings where
         parseJSON
           = withObject "AutoscalingSettings"
               (\ o ->
-                 AutoscalingSettings <$>
+                 AutoscalingSettings' <$>
                    (o .:? "maxNumWorkers") <*> (o .:? "algorithm"))
 
 instance ToJSON AutoscalingSettings where
-        toJSON AutoscalingSettings{..}
+        toJSON AutoscalingSettings'{..}
           = object
               (catMaybes
                  [("maxNumWorkers" .=) <$> _asMaxNumWorkers,
@@ -752,7 +752,7 @@ instance ToJSON AutoscalingSettings where
 -- will be executed.
 --
 -- /See:/ 'jobExecutionStageInfo' smart constructor.
-newtype JobExecutionStageInfo = JobExecutionStageInfo
+newtype JobExecutionStageInfo = JobExecutionStageInfo'
     { _jesiStepName :: Maybe [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -764,7 +764,7 @@ newtype JobExecutionStageInfo = JobExecutionStageInfo
 jobExecutionStageInfo
     :: JobExecutionStageInfo
 jobExecutionStageInfo =
-    JobExecutionStageInfo
+    JobExecutionStageInfo'
     { _jesiStepName = Nothing
     }
 
@@ -781,18 +781,18 @@ instance FromJSON JobExecutionStageInfo where
         parseJSON
           = withObject "JobExecutionStageInfo"
               (\ o ->
-                 JobExecutionStageInfo <$>
+                 JobExecutionStageInfo' <$>
                    (o .:? "stepName" .!= mempty))
 
 instance ToJSON JobExecutionStageInfo where
-        toJSON JobExecutionStageInfo{..}
+        toJSON JobExecutionStageInfo'{..}
           = object
               (catMaybes [("stepName" .=) <$> _jesiStepName])
 
 -- | An output of an instruction.
 --
 -- /See:/ 'instructionOutput' smart constructor.
-data InstructionOutput = InstructionOutput
+data InstructionOutput = InstructionOutput'
     { _ioCodec      :: !(Maybe InstructionOutputCodec)
     , _ioName       :: !(Maybe Text)
     , _ioSystemName :: !(Maybe Text)
@@ -810,7 +810,7 @@ data InstructionOutput = InstructionOutput
 instructionOutput
     :: InstructionOutput
 instructionOutput =
-    InstructionOutput
+    InstructionOutput'
     { _ioCodec = Nothing
     , _ioName = Nothing
     , _ioSystemName = Nothing
@@ -833,12 +833,12 @@ instance FromJSON InstructionOutput where
         parseJSON
           = withObject "InstructionOutput"
               (\ o ->
-                 InstructionOutput <$>
+                 InstructionOutput' <$>
                    (o .:? "codec") <*> (o .:? "name") <*>
                      (o .:? "systemName"))
 
 instance ToJSON InstructionOutput where
-        toJSON InstructionOutput{..}
+        toJSON InstructionOutput'{..}
           = object
               (catMaybes
                  [("codec" .=) <$> _ioCodec, ("name" .=) <$> _ioName,
@@ -847,7 +847,7 @@ instance ToJSON InstructionOutput where
 -- | Request to report the status of WorkItems.
 --
 -- /See:/ 'reportWorkItemStatusRequest' smart constructor.
-data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest
+data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest'
     { _rwisrCurrentWorkerTime :: !(Maybe Text)
     , _rwisrWorkItemStatuses  :: !(Maybe [WorkItemStatus])
     , _rwisrWorkerId          :: !(Maybe Text)
@@ -865,7 +865,7 @@ data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest
 reportWorkItemStatusRequest
     :: ReportWorkItemStatusRequest
 reportWorkItemStatusRequest =
-    ReportWorkItemStatusRequest
+    ReportWorkItemStatusRequest'
     { _rwisrCurrentWorkerTime = Nothing
     , _rwisrWorkItemStatuses = Nothing
     , _rwisrWorkerId = Nothing
@@ -900,13 +900,13 @@ instance FromJSON ReportWorkItemStatusRequest where
         parseJSON
           = withObject "ReportWorkItemStatusRequest"
               (\ o ->
-                 ReportWorkItemStatusRequest <$>
+                 ReportWorkItemStatusRequest' <$>
                    (o .:? "currentWorkerTime") <*>
                      (o .:? "workItemStatuses" .!= mempty)
                      <*> (o .:? "workerId"))
 
 instance ToJSON ReportWorkItemStatusRequest where
-        toJSON ReportWorkItemStatusRequest{..}
+        toJSON ReportWorkItemStatusRequest'{..}
           = object
               (catMaybes
                  [("currentWorkerTime" .=) <$>
@@ -918,7 +918,7 @@ instance ToJSON ReportWorkItemStatusRequest where
 -- service are required in order to run the job.
 --
 -- /See:/ 'environmentVersion' smart constructor.
-newtype EnvironmentVersion = EnvironmentVersion
+newtype EnvironmentVersion = EnvironmentVersion'
     { _evAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -931,7 +931,7 @@ environmentVersion
     :: HashMap Text JSONValue -- ^ 'evAddtional'
     -> EnvironmentVersion
 environmentVersion pEvAddtional_ =
-    EnvironmentVersion
+    EnvironmentVersion'
     { _evAddtional = _Coerce # pEvAddtional_
     }
 
@@ -944,7 +944,7 @@ evAddtional
 instance FromJSON EnvironmentVersion where
         parseJSON
           = withObject "EnvironmentVersion"
-              (\ o -> EnvironmentVersion <$> (parseJSONObject o))
+              (\ o -> EnvironmentVersion' <$> (parseJSONObject o))
 
 instance ToJSON EnvironmentVersion where
         toJSON = toJSON . _evAddtional
@@ -952,7 +952,7 @@ instance ToJSON EnvironmentVersion where
 -- | A sink that records can be encoded and written to.
 --
 -- /See:/ 'sink' smart constructor.
-data Sink = Sink
+data Sink = Sink'
     { _sCodec :: !(Maybe SinkCodec)
     , _sSpec  :: !(Maybe SinkSpec)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -967,7 +967,7 @@ data Sink = Sink
 sink
     :: Sink
 sink =
-    Sink
+    Sink'
     { _sCodec = Nothing
     , _sSpec = Nothing
     }
@@ -983,10 +983,10 @@ sSpec = lens _sSpec (\ s a -> s{_sSpec = a})
 instance FromJSON Sink where
         parseJSON
           = withObject "Sink"
-              (\ o -> Sink <$> (o .:? "codec") <*> (o .:? "spec"))
+              (\ o -> Sink' <$> (o .:? "codec") <*> (o .:? "spec"))
 
 instance ToJSON Sink where
-        toJSON Sink{..}
+        toJSON Sink'{..}
           = object
               (catMaybes
                  [("codec" .=) <$> _sCodec, ("spec" .=) <$> _sSpec])
@@ -995,7 +995,7 @@ instance ToJSON Sink where
 -- in response to a health ping.
 --
 -- /See:/ 'workerHealthReportResponse' smart constructor.
-newtype WorkerHealthReportResponse = WorkerHealthReportResponse
+newtype WorkerHealthReportResponse = WorkerHealthReportResponse'
     { _whrrReportInterval :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1007,7 +1007,7 @@ newtype WorkerHealthReportResponse = WorkerHealthReportResponse
 workerHealthReportResponse
     :: WorkerHealthReportResponse
 workerHealthReportResponse =
-    WorkerHealthReportResponse
+    WorkerHealthReportResponse'
     { _whrrReportInterval = Nothing
     }
 
@@ -1023,11 +1023,11 @@ instance FromJSON WorkerHealthReportResponse where
         parseJSON
           = withObject "WorkerHealthReportResponse"
               (\ o ->
-                 WorkerHealthReportResponse <$>
+                 WorkerHealthReportResponse' <$>
                    (o .:? "reportInterval"))
 
 instance ToJSON WorkerHealthReportResponse where
-        toJSON WorkerHealthReportResponse{..}
+        toJSON WorkerHealthReportResponse'{..}
           = object
               (catMaybes
                  [("reportInterval" .=) <$> _whrrReportInterval])
@@ -1036,7 +1036,7 @@ instance ToJSON WorkerHealthReportResponse where
 -- metric.
 --
 -- /See:/ 'metricStructuredName' smart constructor.
-data MetricStructuredName = MetricStructuredName
+data MetricStructuredName = MetricStructuredName'
     { _msnOrigin  :: !(Maybe Text)
     , _msnContext :: !(Maybe MetricStructuredNameContext)
     , _msnName    :: !(Maybe Text)
@@ -1054,7 +1054,7 @@ data MetricStructuredName = MetricStructuredName
 metricStructuredName
     :: MetricStructuredName
 metricStructuredName =
-    MetricStructuredName
+    MetricStructuredName'
     { _msnOrigin = Nothing
     , _msnContext = Nothing
     , _msnName = Nothing
@@ -1083,12 +1083,12 @@ instance FromJSON MetricStructuredName where
         parseJSON
           = withObject "MetricStructuredName"
               (\ o ->
-                 MetricStructuredName <$>
+                 MetricStructuredName' <$>
                    (o .:? "origin") <*> (o .:? "context") <*>
                      (o .:? "name"))
 
 instance ToJSON MetricStructuredName where
-        toJSON MetricStructuredName{..}
+        toJSON MetricStructuredName'{..}
           = object
               (catMaybes
                  [("origin" .=) <$> _msnOrigin,
@@ -1099,7 +1099,7 @@ instance ToJSON MetricStructuredName where
 -- outputs.
 --
 -- /See:/ 'writeInstruction' smart constructor.
-data WriteInstruction = WriteInstruction
+data WriteInstruction = WriteInstruction'
     { _wiSink  :: !(Maybe Sink)
     , _wiInput :: !(Maybe InstructionInput)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1114,7 +1114,7 @@ data WriteInstruction = WriteInstruction
 writeInstruction
     :: WriteInstruction
 writeInstruction =
-    WriteInstruction
+    WriteInstruction'
     { _wiSink = Nothing
     , _wiInput = Nothing
     }
@@ -1131,11 +1131,11 @@ instance FromJSON WriteInstruction where
         parseJSON
           = withObject "WriteInstruction"
               (\ o ->
-                 WriteInstruction <$>
+                 WriteInstruction' <$>
                    (o .:? "sink") <*> (o .:? "input"))
 
 instance ToJSON WriteInstruction where
-        toJSON WriteInstruction{..}
+        toJSON WriteInstruction'{..}
           = object
               (catMaybes
                  [("sink" .=) <$> _wiSink, ("input" .=) <$> _wiInput])
@@ -1143,7 +1143,7 @@ instance ToJSON WriteInstruction where
 -- | A description of the process that generated the request.
 --
 -- /See:/ 'environmentUserAgent' smart constructor.
-newtype EnvironmentUserAgent = EnvironmentUserAgent
+newtype EnvironmentUserAgent = EnvironmentUserAgent'
     { _euaAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1156,7 +1156,7 @@ environmentUserAgent
     :: HashMap Text JSONValue -- ^ 'euaAddtional'
     -> EnvironmentUserAgent
 environmentUserAgent pEuaAddtional_ =
-    EnvironmentUserAgent
+    EnvironmentUserAgent'
     { _euaAddtional = _Coerce # pEuaAddtional_
     }
 
@@ -1169,7 +1169,8 @@ euaAddtional
 instance FromJSON EnvironmentUserAgent where
         parseJSON
           = withObject "EnvironmentUserAgent"
-              (\ o -> EnvironmentUserAgent <$> (parseJSONObject o))
+              (\ o ->
+                 EnvironmentUserAgent' <$> (parseJSONObject o))
 
 instance ToJSON EnvironmentUserAgent where
         toJSON = toJSON . _euaAddtional
@@ -1177,7 +1178,7 @@ instance ToJSON EnvironmentUserAgent where
 -- | Describes the data disk used by a workflow job.
 --
 -- /See:/ 'disk' smart constructor.
-data Disk = Disk
+data Disk = Disk'
     { _dSizeGb     :: !(Maybe (Textual Int32))
     , _dDiskType   :: !(Maybe Text)
     , _dMountPoint :: !(Maybe Text)
@@ -1195,7 +1196,7 @@ data Disk = Disk
 disk
     :: Disk
 disk =
-    Disk
+    Disk'
     { _dSizeGb = Nothing
     , _dDiskType = Nothing
     , _dMountPoint = Nothing
@@ -1234,12 +1235,12 @@ instance FromJSON Disk where
         parseJSON
           = withObject "Disk"
               (\ o ->
-                 Disk <$>
+                 Disk' <$>
                    (o .:? "sizeGb") <*> (o .:? "diskType") <*>
                      (o .:? "mountPoint"))
 
 instance ToJSON Disk where
-        toJSON Disk{..}
+        toJSON Disk'{..}
           = object
               (catMaybes
                  [("sizeGb" .=) <$> _dSizeGb,
@@ -1249,7 +1250,7 @@ instance ToJSON Disk where
 -- | Describes the state of a metric.
 --
 -- /See:/ 'metricUpdate' smart constructor.
-data MetricUpdate = MetricUpdate
+data MetricUpdate = MetricUpdate'
     { _muMeanSum    :: !(Maybe JSONValue)
     , _muInternal   :: !(Maybe JSONValue)
     , _muSet        :: !(Maybe JSONValue)
@@ -1285,7 +1286,7 @@ data MetricUpdate = MetricUpdate
 metricUpdate
     :: MetricUpdate
 metricUpdate =
-    MetricUpdate
+    MetricUpdate'
     { _muMeanSum = Nothing
     , _muInternal = Nothing
     , _muSet = Nothing
@@ -1362,7 +1363,7 @@ instance FromJSON MetricUpdate where
         parseJSON
           = withObject "MetricUpdate"
               (\ o ->
-                 MetricUpdate <$>
+                 MetricUpdate' <$>
                    (o .:? "meanSum") <*> (o .:? "internal") <*>
                      (o .:? "set")
                      <*> (o .:? "cumulative")
@@ -1373,7 +1374,7 @@ instance FromJSON MetricUpdate where
                      <*> (o .:? "scalar"))
 
 instance ToJSON MetricUpdate where
-        toJSON MetricUpdate{..}
+        toJSON MetricUpdate'{..}
           = object
               (catMaybes
                  [("meanSum" .=) <$> _muMeanSum,
@@ -1389,7 +1390,7 @@ instance ToJSON MetricUpdate where
 -- | The result of a SourceGetMetadataOperation.
 --
 -- /See:/ 'sourceGetMetadataResponse' smart constructor.
-newtype SourceGetMetadataResponse = SourceGetMetadataResponse
+newtype SourceGetMetadataResponse = SourceGetMetadataResponse'
     { _sgmrMetadata :: Maybe SourceMetadata
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1401,7 +1402,7 @@ newtype SourceGetMetadataResponse = SourceGetMetadataResponse
 sourceGetMetadataResponse
     :: SourceGetMetadataResponse
 sourceGetMetadataResponse =
-    SourceGetMetadataResponse
+    SourceGetMetadataResponse'
     { _sgmrMetadata = Nothing
     }
 
@@ -1414,17 +1415,17 @@ instance FromJSON SourceGetMetadataResponse where
         parseJSON
           = withObject "SourceGetMetadataResponse"
               (\ o ->
-                 SourceGetMetadataResponse <$> (o .:? "metadata"))
+                 SourceGetMetadataResponse' <$> (o .:? "metadata"))
 
 instance ToJSON SourceGetMetadataResponse where
-        toJSON SourceGetMetadataResponse{..}
+        toJSON SourceGetMetadataResponse'{..}
           = object
               (catMaybes [("metadata" .=) <$> _sgmrMetadata])
 
 -- | Describes the environment in which a Dataflow Job runs.
 --
 -- /See:/ 'environment' smart constructor.
-data Environment = Environment
+data Environment = Environment'
     { _eDataSet                  :: !(Maybe Text)
     , _eExperiments              :: !(Maybe [Text])
     , _eWorkerPools              :: !(Maybe [WorkerPool])
@@ -1460,7 +1461,7 @@ data Environment = Environment
 environment
     :: Environment
 environment =
-    Environment
+    Environment'
     { _eDataSet = Nothing
     , _eExperiments = Nothing
     , _eWorkerPools = Nothing
@@ -1544,7 +1545,7 @@ instance FromJSON Environment where
         parseJSON
           = withObject "Environment"
               (\ o ->
-                 Environment <$>
+                 Environment' <$>
                    (o .:? "dataset") <*>
                      (o .:? "experiments" .!= mempty)
                      <*> (o .:? "workerPools" .!= mempty)
@@ -1556,7 +1557,7 @@ instance FromJSON Environment where
                      <*> (o .:? "sdkPipelineOptions"))
 
 instance ToJSON Environment where
-        toJSON Environment{..}
+        toJSON Environment'{..}
           = object
               (catMaybes
                  [("dataset" .=) <$> _eDataSet,
@@ -1575,7 +1576,7 @@ instance ToJSON Environment where
 -- that encapsulates a set of other sources.
 --
 -- /See:/ 'concatPosition' smart constructor.
-data ConcatPosition = ConcatPosition
+data ConcatPosition = ConcatPosition'
     { _cpIndex    :: !(Maybe (Textual Int32))
     , _cpPosition :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1590,7 +1591,7 @@ data ConcatPosition = ConcatPosition
 concatPosition
     :: ConcatPosition
 concatPosition =
-    ConcatPosition
+    ConcatPosition'
     { _cpIndex = Nothing
     , _cpPosition = Nothing
     }
@@ -1610,11 +1611,11 @@ instance FromJSON ConcatPosition where
         parseJSON
           = withObject "ConcatPosition"
               (\ o ->
-                 ConcatPosition <$>
+                 ConcatPosition' <$>
                    (o .:? "index") <*> (o .:? "position"))
 
 instance ToJSON ConcatPosition where
-        toJSON ConcatPosition{..}
+        toJSON ConcatPosition'{..}
           = object
               (catMaybes
                  [("index" .=) <$> _cpIndex,
@@ -1627,7 +1628,7 @@ instance ToJSON ConcatPosition where
 -- will have context[\'pcollection\'] = .
 --
 -- /See:/ 'metricStructuredNameContext' smart constructor.
-newtype MetricStructuredNameContext = MetricStructuredNameContext
+newtype MetricStructuredNameContext = MetricStructuredNameContext'
     { _msncAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1640,7 +1641,7 @@ metricStructuredNameContext
     :: HashMap Text Text -- ^ 'msncAddtional'
     -> MetricStructuredNameContext
 metricStructuredNameContext pMsncAddtional_ =
-    MetricStructuredNameContext
+    MetricStructuredNameContext'
     { _msncAddtional = _Coerce # pMsncAddtional_
     }
 
@@ -1654,7 +1655,7 @@ instance FromJSON MetricStructuredNameContext where
         parseJSON
           = withObject "MetricStructuredNameContext"
               (\ o ->
-                 MetricStructuredNameContext <$> (parseJSONObject o))
+                 MetricStructuredNameContext' <$> (parseJSONObject o))
 
 instance ToJSON MetricStructuredNameContext where
         toJSON = toJSON . _msncAddtional
@@ -1663,7 +1664,7 @@ instance ToJSON MetricStructuredNameContext where
 -- stage-to-stage communication.
 --
 -- /See:/ 'streamingStageLocation' smart constructor.
-newtype StreamingStageLocation = StreamingStageLocation
+newtype StreamingStageLocation = StreamingStageLocation'
     { _sslStreamId :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1675,7 +1676,7 @@ newtype StreamingStageLocation = StreamingStageLocation
 streamingStageLocation
     :: StreamingStageLocation
 streamingStageLocation =
-    StreamingStageLocation
+    StreamingStageLocation'
     { _sslStreamId = Nothing
     }
 
@@ -1688,10 +1689,10 @@ instance FromJSON StreamingStageLocation where
         parseJSON
           = withObject "StreamingStageLocation"
               (\ o ->
-                 StreamingStageLocation <$> (o .:? "streamId"))
+                 StreamingStageLocation' <$> (o .:? "streamId"))
 
 instance ToJSON StreamingStageLocation where
-        toJSON StreamingStageLocation{..}
+        toJSON StreamingStageLocation'{..}
           = object
               (catMaybes [("streamId" .=) <$> _sslStreamId])
 
@@ -1701,7 +1702,7 @@ instance ToJSON StreamingStageLocation where
 -- source being split.
 --
 -- /See:/ 'derivedSource' smart constructor.
-data DerivedSource = DerivedSource
+data DerivedSource = DerivedSource'
     { _dsDerivationMode :: !(Maybe Text)
     , _dsSource         :: !(Maybe Source)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1716,7 +1717,7 @@ data DerivedSource = DerivedSource
 derivedSource
     :: DerivedSource
 derivedSource =
-    DerivedSource
+    DerivedSource'
     { _dsDerivationMode = Nothing
     , _dsSource = Nothing
     }
@@ -1735,11 +1736,11 @@ instance FromJSON DerivedSource where
         parseJSON
           = withObject "DerivedSource"
               (\ o ->
-                 DerivedSource <$>
+                 DerivedSource' <$>
                    (o .:? "derivationMode") <*> (o .:? "source"))
 
 instance ToJSON DerivedSource where
-        toJSON DerivedSource{..}
+        toJSON DerivedSource'{..}
           = object
               (catMaybes
                  [("derivationMode" .=) <$> _dsDerivationMode,
@@ -1752,7 +1753,7 @@ instance ToJSON DerivedSource where
 -- (under the same metric names) from Cloud Monitoring.
 --
 -- /See:/ 'jobMetrics' smart constructor.
-data JobMetrics = JobMetrics
+data JobMetrics = JobMetrics'
     { _jmMetrics    :: !(Maybe [MetricUpdate])
     , _jmMetricTime :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1767,7 +1768,7 @@ data JobMetrics = JobMetrics
 jobMetrics
     :: JobMetrics
 jobMetrics =
-    JobMetrics
+    JobMetrics'
     { _jmMetrics = Nothing
     , _jmMetricTime = Nothing
     }
@@ -1788,12 +1789,12 @@ instance FromJSON JobMetrics where
         parseJSON
           = withObject "JobMetrics"
               (\ o ->
-                 JobMetrics <$>
+                 JobMetrics' <$>
                    (o .:? "metrics" .!= mempty) <*>
                      (o .:? "metricTime"))
 
 instance ToJSON JobMetrics where
-        toJSON JobMetrics{..}
+        toJSON JobMetrics'{..}
           = object
               (catMaybes
                  [("metrics" .=) <$> _jmMetrics,
@@ -1802,7 +1803,7 @@ instance ToJSON JobMetrics where
 -- | Conveys a worker\'s progress through the work described by a WorkItem.
 --
 -- /See:/ 'workItemStatus' smart constructor.
-data WorkItemStatus = WorkItemStatus
+data WorkItemStatus = WorkItemStatus'
     { _wisReportedProgress        :: !(Maybe ApproximateReportedProgress)
     , _wisProgress                :: !(Maybe ApproximateProgress)
     , _wisSourceOperationResponse :: !(Maybe SourceOperationResponse)
@@ -1847,7 +1848,7 @@ data WorkItemStatus = WorkItemStatus
 workItemStatus
     :: WorkItemStatus
 workItemStatus =
-    WorkItemStatus
+    WorkItemStatus'
     { _wisReportedProgress = Nothing
     , _wisProgress = Nothing
     , _wisSourceOperationResponse = Nothing
@@ -1975,7 +1976,7 @@ instance FromJSON WorkItemStatus where
         parseJSON
           = withObject "WorkItemStatus"
               (\ o ->
-                 WorkItemStatus <$>
+                 WorkItemStatus' <$>
                    (o .:? "reportedProgress") <*> (o .:? "progress") <*>
                      (o .:? "sourceOperationResponse")
                      <*> (o .:? "stopPosition")
@@ -1989,7 +1990,7 @@ instance FromJSON WorkItemStatus where
                      <*> (o .:? "workItemId"))
 
 instance ToJSON WorkItemStatus where
-        toJSON WorkItemStatus{..}
+        toJSON WorkItemStatus'{..}
           = object
               (catMaybes
                  [("reportedProgress" .=) <$> _wisReportedProgress,
@@ -2016,7 +2017,7 @@ instance ToJSON WorkItemStatus where
 -- not be used here.
 --
 -- /See:/ 'workerMessageLabels' smart constructor.
-newtype WorkerMessageLabels = WorkerMessageLabels
+newtype WorkerMessageLabels = WorkerMessageLabels'
     { _wmlAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2029,7 +2030,7 @@ workerMessageLabels
     :: HashMap Text Text -- ^ 'wmlAddtional'
     -> WorkerMessageLabels
 workerMessageLabels pWmlAddtional_ =
-    WorkerMessageLabels
+    WorkerMessageLabels'
     { _wmlAddtional = _Coerce # pWmlAddtional_
     }
 
@@ -2041,7 +2042,7 @@ wmlAddtional
 instance FromJSON WorkerMessageLabels where
         parseJSON
           = withObject "WorkerMessageLabels"
-              (\ o -> WorkerMessageLabels <$> (parseJSONObject o))
+              (\ o -> WorkerMessageLabels' <$> (parseJSONObject o))
 
 instance ToJSON WorkerMessageLabels where
         toJSON = toJSON . _wmlAddtional
@@ -2050,7 +2051,7 @@ instance ToJSON WorkerMessageLabels where
 -- output.
 --
 -- /See:/ 'flattenInstruction' smart constructor.
-newtype FlattenInstruction = FlattenInstruction
+newtype FlattenInstruction = FlattenInstruction'
     { _fiInputs :: Maybe [InstructionInput]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2062,7 +2063,7 @@ newtype FlattenInstruction = FlattenInstruction
 flattenInstruction
     :: FlattenInstruction
 flattenInstruction =
-    FlattenInstruction
+    FlattenInstruction'
     { _fiInputs = Nothing
     }
 
@@ -2077,10 +2078,10 @@ instance FromJSON FlattenInstruction where
         parseJSON
           = withObject "FlattenInstruction"
               (\ o ->
-                 FlattenInstruction <$> (o .:? "inputs" .!= mempty))
+                 FlattenInstruction' <$> (o .:? "inputs" .!= mempty))
 
 instance ToJSON FlattenInstruction where
-        toJSON FlattenInstruction{..}
+        toJSON FlattenInstruction'{..}
           = object (catMaybes [("inputs" .=) <$> _fiInputs])
 
 -- | A message code is used to report status and error messages to the
@@ -2091,7 +2092,7 @@ instance ToJSON FlattenInstruction where
 -- package staging failure).
 --
 -- /See:/ 'workerMessageCode' smart constructor.
-data WorkerMessageCode = WorkerMessageCode
+data WorkerMessageCode = WorkerMessageCode'
     { _wmcParameters :: !(Maybe WorkerMessageCodeParameters)
     , _wmcCode       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2106,7 +2107,7 @@ data WorkerMessageCode = WorkerMessageCode
 workerMessageCode
     :: WorkerMessageCode
 workerMessageCode =
-    WorkerMessageCode
+    WorkerMessageCode'
     { _wmcParameters = Nothing
     , _wmcCode = Nothing
     }
@@ -2143,11 +2144,11 @@ instance FromJSON WorkerMessageCode where
         parseJSON
           = withObject "WorkerMessageCode"
               (\ o ->
-                 WorkerMessageCode <$>
+                 WorkerMessageCode' <$>
                    (o .:? "parameters") <*> (o .:? "code"))
 
 instance ToJSON WorkerMessageCode where
-        toJSON WorkerMessageCode{..}
+        toJSON WorkerMessageCode'{..}
           = object
               (catMaybes
                  [("parameters" .=) <$> _wmcParameters,
@@ -2157,7 +2158,7 @@ instance ToJSON WorkerMessageCode where
 -- corresponding name prefixes of the new job.
 --
 -- /See:/ 'jobTransformNameMApping' smart constructor.
-newtype JobTransformNameMApping = JobTransformNameMApping
+newtype JobTransformNameMApping = JobTransformNameMApping'
     { _jtnmaAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2170,7 +2171,7 @@ jobTransformNameMApping
     :: HashMap Text Text -- ^ 'jtnmaAddtional'
     -> JobTransformNameMApping
 jobTransformNameMApping pJtnmaAddtional_ =
-    JobTransformNameMApping
+    JobTransformNameMApping'
     { _jtnmaAddtional = _Coerce # pJtnmaAddtional_
     }
 
@@ -2184,7 +2185,7 @@ instance FromJSON JobTransformNameMApping where
         parseJSON
           = withObject "JobTransformNameMApping"
               (\ o ->
-                 JobTransformNameMApping <$> (parseJSONObject o))
+                 JobTransformNameMApping' <$> (parseJSONObject o))
 
 instance ToJSON JobTransformNameMApping where
         toJSON = toJSON . _jtnmaAddtional
@@ -2192,7 +2193,7 @@ instance ToJSON JobTransformNameMApping where
 -- | The source to read from, plus its parameters.
 --
 -- /See:/ 'sourceSpec' smart constructor.
-newtype SourceSpec = SourceSpec
+newtype SourceSpec = SourceSpec'
     { _ssAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2205,7 +2206,7 @@ sourceSpec
     :: HashMap Text JSONValue -- ^ 'ssAddtional'
     -> SourceSpec
 sourceSpec pSsAddtional_ =
-    SourceSpec
+    SourceSpec'
     { _ssAddtional = _Coerce # pSsAddtional_
     }
 
@@ -2218,7 +2219,7 @@ ssAddtional
 instance FromJSON SourceSpec where
         parseJSON
           = withObject "SourceSpec"
-              (\ o -> SourceSpec <$> (parseJSONObject o))
+              (\ o -> SourceSpec' <$> (parseJSONObject o))
 
 instance ToJSON SourceSpec where
         toJSON = toJSON . _ssAddtional
@@ -2227,7 +2228,7 @@ instance ToJSON SourceSpec where
 -- the pipeline, etc.
 --
 -- /See:/ 'sourceMetadata' smart constructor.
-data SourceMetadata = SourceMetadata
+data SourceMetadata = SourceMetadata'
     { _smEstimatedSizeBytes :: !(Maybe (Textual Int64))
     , _smProducesSortedKeys :: !(Maybe Bool)
     , _smInfinite           :: !(Maybe Bool)
@@ -2245,7 +2246,7 @@ data SourceMetadata = SourceMetadata
 sourceMetadata
     :: SourceMetadata
 sourceMetadata =
-    SourceMetadata
+    SourceMetadata'
     { _smEstimatedSizeBytes = Nothing
     , _smProducesSortedKeys = Nothing
     , _smInfinite = Nothing
@@ -2277,13 +2278,13 @@ instance FromJSON SourceMetadata where
         parseJSON
           = withObject "SourceMetadata"
               (\ o ->
-                 SourceMetadata <$>
+                 SourceMetadata' <$>
                    (o .:? "estimatedSizeBytes") <*>
                      (o .:? "producesSortedKeys")
                      <*> (o .:? "infinite"))
 
 instance ToJSON SourceMetadata where
-        toJSON SourceMetadata{..}
+        toJSON SourceMetadata'{..}
           = object
               (catMaybes
                  [("estimatedSizeBytes" .=) <$> _smEstimatedSizeBytes,
@@ -2293,7 +2294,7 @@ instance ToJSON SourceMetadata where
 -- | Experimental settings.
 --
 -- /See:/ 'environmentInternalExperiments' smart constructor.
-newtype EnvironmentInternalExperiments = EnvironmentInternalExperiments
+newtype EnvironmentInternalExperiments = EnvironmentInternalExperiments'
     { _eieAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2306,7 +2307,7 @@ environmentInternalExperiments
     :: HashMap Text JSONValue -- ^ 'eieAddtional'
     -> EnvironmentInternalExperiments
 environmentInternalExperiments pEieAddtional_ =
-    EnvironmentInternalExperiments
+    EnvironmentInternalExperiments'
     { _eieAddtional = _Coerce # pEieAddtional_
     }
 
@@ -2321,7 +2322,7 @@ instance FromJSON EnvironmentInternalExperiments
         parseJSON
           = withObject "EnvironmentInternalExperiments"
               (\ o ->
-                 EnvironmentInternalExperiments <$>
+                 EnvironmentInternalExperiments' <$>
                    (parseJSONObject o))
 
 instance ToJSON EnvironmentInternalExperiments where
@@ -2330,7 +2331,7 @@ instance ToJSON EnvironmentInternalExperiments where
 -- | Taskrunner configuration settings.
 --
 -- /See:/ 'taskRunnerSettings' smart constructor.
-data TaskRunnerSettings = TaskRunnerSettings
+data TaskRunnerSettings = TaskRunnerSettings'
     { _trsContinueOnException      :: !(Maybe Bool)
     , _trsHarnessCommand           :: !(Maybe Text)
     , _trsWorkflowFileName         :: !(Maybe Text)
@@ -2396,7 +2397,7 @@ data TaskRunnerSettings = TaskRunnerSettings
 taskRunnerSettings
     :: TaskRunnerSettings
 taskRunnerSettings =
-    TaskRunnerSettings
+    TaskRunnerSettings'
     { _trsContinueOnException = Nothing
     , _trsHarnessCommand = Nothing
     , _trsWorkflowFileName = Nothing
@@ -2546,7 +2547,7 @@ instance FromJSON TaskRunnerSettings where
         parseJSON
           = withObject "TaskRunnerSettings"
               (\ o ->
-                 TaskRunnerSettings <$>
+                 TaskRunnerSettings' <$>
                    (o .:? "continueOnException") <*>
                      (o .:? "harnessCommand")
                      <*> (o .:? "workflowFileName")
@@ -2568,7 +2569,7 @@ instance FromJSON TaskRunnerSettings where
                      <*> (o .:? "languageHint"))
 
 instance ToJSON TaskRunnerSettings where
-        toJSON TaskRunnerSettings{..}
+        toJSON TaskRunnerSettings'{..}
           = object
               (catMaybes
                  [("continueOnException" .=) <$>
@@ -2601,7 +2602,7 @@ instance ToJSON TaskRunnerSettings where
 -- way.
 --
 -- /See:/ 'environmentSdkPipelineOptions' smart constructor.
-newtype EnvironmentSdkPipelineOptions = EnvironmentSdkPipelineOptions
+newtype EnvironmentSdkPipelineOptions = EnvironmentSdkPipelineOptions'
     { _espoAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2614,7 +2615,7 @@ environmentSdkPipelineOptions
     :: HashMap Text JSONValue -- ^ 'espoAddtional'
     -> EnvironmentSdkPipelineOptions
 environmentSdkPipelineOptions pEspoAddtional_ =
-    EnvironmentSdkPipelineOptions
+    EnvironmentSdkPipelineOptions'
     { _espoAddtional = _Coerce # pEspoAddtional_
     }
 
@@ -2629,7 +2630,7 @@ instance FromJSON EnvironmentSdkPipelineOptions where
         parseJSON
           = withObject "EnvironmentSdkPipelineOptions"
               (\ o ->
-                 EnvironmentSdkPipelineOptions <$>
+                 EnvironmentSdkPipelineOptions' <$>
                    (parseJSONObject o))
 
 instance ToJSON EnvironmentSdkPipelineOptions where
@@ -2638,7 +2639,7 @@ instance ToJSON EnvironmentSdkPipelineOptions where
 -- | Request to lease WorkItems.
 --
 -- /See:/ 'leaseWorkItemRequest' smart constructor.
-data LeaseWorkItemRequest = LeaseWorkItemRequest
+data LeaseWorkItemRequest = LeaseWorkItemRequest'
     { _lwirWorkItemTypes          :: !(Maybe [Text])
     , _lwirCurrentWorkerTime      :: !(Maybe Text)
     , _lwirWorkerCapabilities     :: !(Maybe [Text])
@@ -2662,7 +2663,7 @@ data LeaseWorkItemRequest = LeaseWorkItemRequest
 leaseWorkItemRequest
     :: LeaseWorkItemRequest
 leaseWorkItemRequest =
-    LeaseWorkItemRequest
+    LeaseWorkItemRequest'
     { _lwirWorkItemTypes = Nothing
     , _lwirCurrentWorkerTime = Nothing
     , _lwirWorkerCapabilities = Nothing
@@ -2709,7 +2710,7 @@ instance FromJSON LeaseWorkItemRequest where
         parseJSON
           = withObject "LeaseWorkItemRequest"
               (\ o ->
-                 LeaseWorkItemRequest <$>
+                 LeaseWorkItemRequest' <$>
                    (o .:? "workItemTypes" .!= mempty) <*>
                      (o .:? "currentWorkerTime")
                      <*> (o .:? "workerCapabilities" .!= mempty)
@@ -2717,7 +2718,7 @@ instance FromJSON LeaseWorkItemRequest where
                      <*> (o .:? "workerId"))
 
 instance ToJSON LeaseWorkItemRequest where
-        toJSON LeaseWorkItemRequest{..}
+        toJSON LeaseWorkItemRequest'{..}
           = object
               (catMaybes
                  [("workItemTypes" .=) <$> _lwirWorkItemTypes,
@@ -2733,7 +2734,7 @@ instance ToJSON LeaseWorkItemRequest where
 -- completed.
 --
 -- /See:/ 'sourceOperationResponse' smart constructor.
-data SourceOperationResponse = SourceOperationResponse
+data SourceOperationResponse = SourceOperationResponse'
     { _sorSplit       :: !(Maybe SourceSplitResponse)
     , _sorGetMetadata :: !(Maybe SourceGetMetadataResponse)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2748,7 +2749,7 @@ data SourceOperationResponse = SourceOperationResponse
 sourceOperationResponse
     :: SourceOperationResponse
 sourceOperationResponse =
-    SourceOperationResponse
+    SourceOperationResponse'
     { _sorSplit = Nothing
     , _sorGetMetadata = Nothing
     }
@@ -2767,11 +2768,11 @@ instance FromJSON SourceOperationResponse where
         parseJSON
           = withObject "SourceOperationResponse"
               (\ o ->
-                 SourceOperationResponse <$>
+                 SourceOperationResponse' <$>
                    (o .:? "split") <*> (o .:? "getMetadata"))
 
 instance ToJSON SourceOperationResponse where
-        toJSON SourceOperationResponse{..}
+        toJSON SourceOperationResponse'{..}
           = object
               (catMaybes
                  [("split" .=) <$> _sorSplit,
@@ -2780,7 +2781,7 @@ instance ToJSON SourceOperationResponse where
 -- | Maps user stage names to stable computation names.
 --
 -- /See:/ 'topologyConfigUserStageToComputationNameMap' smart constructor.
-newtype TopologyConfigUserStageToComputationNameMap = TopologyConfigUserStageToComputationNameMap
+newtype TopologyConfigUserStageToComputationNameMap = TopologyConfigUserStageToComputationNameMap'
     { _tcustcnmAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2793,7 +2794,7 @@ topologyConfigUserStageToComputationNameMap
     :: HashMap Text Text -- ^ 'tcustcnmAddtional'
     -> TopologyConfigUserStageToComputationNameMap
 topologyConfigUserStageToComputationNameMap pTcustcnmAddtional_ =
-    TopologyConfigUserStageToComputationNameMap
+    TopologyConfigUserStageToComputationNameMap'
     { _tcustcnmAddtional = _Coerce # pTcustcnmAddtional_
     }
 
@@ -2809,7 +2810,7 @@ instance FromJSON
           = withObject
               "TopologyConfigUserStageToComputationNameMap"
               (\ o ->
-                 TopologyConfigUserStageToComputationNameMap <$>
+                 TopologyConfigUserStageToComputationNameMap' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -2819,7 +2820,7 @@ instance ToJSON
 -- | A task which consists of a shell command for the worker to execute.
 --
 -- /See:/ 'shellTask' smart constructor.
-data ShellTask = ShellTask
+data ShellTask = ShellTask'
     { _stCommand  :: !(Maybe Text)
     , _stExitCode :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2834,7 +2835,7 @@ data ShellTask = ShellTask
 shellTask
     :: ShellTask
 shellTask =
-    ShellTask
+    ShellTask'
     { _stCommand = Nothing
     , _stExitCode = Nothing
     }
@@ -2854,11 +2855,11 @@ instance FromJSON ShellTask where
         parseJSON
           = withObject "ShellTask"
               (\ o ->
-                 ShellTask <$>
+                 ShellTask' <$>
                    (o .:? "command") <*> (o .:? "exitCode"))
 
 instance ToJSON ShellTask where
-        toJSON ShellTask{..}
+        toJSON ShellTask'{..}
           = object
               (catMaybes
                  [("command" .=) <$> _stCommand,
@@ -2866,7 +2867,7 @@ instance ToJSON ShellTask where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2879,7 +2880,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -2892,7 +2893,7 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
@@ -2901,7 +2902,7 @@ instance ToJSON StatusDetailsItem where
 -- the worker.
 --
 -- /See:/ 'reportedParallelism' smart constructor.
-data ReportedParallelism = ReportedParallelism
+data ReportedParallelism = ReportedParallelism'
     { _rpValue      :: !(Maybe (Textual Double))
     , _rpIsInfinite :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2916,7 +2917,7 @@ data ReportedParallelism = ReportedParallelism
 reportedParallelism
     :: ReportedParallelism
 reportedParallelism =
-    ReportedParallelism
+    ReportedParallelism'
     { _rpValue = Nothing
     , _rpIsInfinite = Nothing
     }
@@ -2940,11 +2941,11 @@ instance FromJSON ReportedParallelism where
         parseJSON
           = withObject "ReportedParallelism"
               (\ o ->
-                 ReportedParallelism <$>
+                 ReportedParallelism' <$>
                    (o .:? "value") <*> (o .:? "isInfinite"))
 
 instance ToJSON ReportedParallelism where
-        toJSON ReportedParallelism{..}
+        toJSON ReportedParallelism'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rpValue,
@@ -2954,7 +2955,7 @@ instance ToJSON ReportedParallelism where
 -- has its own required set of properties.
 --
 -- /See:/ 'stepProperties' smart constructor.
-newtype StepProperties = StepProperties
+newtype StepProperties = StepProperties'
     { _spAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2967,7 +2968,7 @@ stepProperties
     :: HashMap Text JSONValue -- ^ 'spAddtional'
     -> StepProperties
 stepProperties pSpAddtional_ =
-    StepProperties
+    StepProperties'
     { _spAddtional = _Coerce # pSpAddtional_
     }
 
@@ -2980,7 +2981,7 @@ spAddtional
 instance FromJSON StepProperties where
         parseJSON
           = withObject "StepProperties"
-              (\ o -> StepProperties <$> (parseJSONObject o))
+              (\ o -> StepProperties' <$> (parseJSONObject o))
 
 instance ToJSON StepProperties where
         toJSON = toJSON . _spAddtional
@@ -2989,7 +2990,7 @@ instance ToJSON StepProperties where
 -- computations and their sharded locations.
 --
 -- /See:/ 'topologyConfig' smart constructor.
-data TopologyConfig = TopologyConfig
+data TopologyConfig = TopologyConfig'
     { _tcDataDiskAssignments           :: !(Maybe [DataDiskAssignment])
     , _tcForwardingKeyBits             :: !(Maybe (Textual Int32))
     , _tcUserStageToComputationNameMap :: !(Maybe TopologyConfigUserStageToComputationNameMap)
@@ -3010,7 +3011,7 @@ data TopologyConfig = TopologyConfig
 topologyConfig
     :: TopologyConfig
 topologyConfig =
-    TopologyConfig
+    TopologyConfig'
     { _tcDataDiskAssignments = Nothing
     , _tcForwardingKeyBits = Nothing
     , _tcUserStageToComputationNameMap = Nothing
@@ -3050,14 +3051,14 @@ instance FromJSON TopologyConfig where
         parseJSON
           = withObject "TopologyConfig"
               (\ o ->
-                 TopologyConfig <$>
+                 TopologyConfig' <$>
                    (o .:? "dataDiskAssignments" .!= mempty) <*>
                      (o .:? "forwardingKeyBits")
                      <*> (o .:? "userStageToComputationNameMap")
                      <*> (o .:? "computations" .!= mempty))
 
 instance ToJSON TopologyConfig where
-        toJSON TopologyConfig{..}
+        toJSON TopologyConfig'{..}
           = object
               (catMaybes
                  [("dataDiskAssignments" .=) <$>
@@ -3071,7 +3072,7 @@ instance ToJSON TopologyConfig where
 -- WorkItem.
 --
 -- /See:/ 'approximateSplitRequest' smart constructor.
-data ApproximateSplitRequest = ApproximateSplitRequest
+data ApproximateSplitRequest = ApproximateSplitRequest'
     { _asrFractionConsumed :: !(Maybe (Textual Double))
     , _asrPosition         :: !(Maybe Position)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3086,7 +3087,7 @@ data ApproximateSplitRequest = ApproximateSplitRequest
 approximateSplitRequest
     :: ApproximateSplitRequest
 approximateSplitRequest =
-    ApproximateSplitRequest
+    ApproximateSplitRequest'
     { _asrFractionConsumed = Nothing
     , _asrPosition = Nothing
     }
@@ -3108,11 +3109,11 @@ instance FromJSON ApproximateSplitRequest where
         parseJSON
           = withObject "ApproximateSplitRequest"
               (\ o ->
-                 ApproximateSplitRequest <$>
+                 ApproximateSplitRequest' <$>
                    (o .:? "fractionConsumed") <*> (o .:? "position"))
 
 instance ToJSON ApproximateSplitRequest where
-        toJSON ApproximateSplitRequest{..}
+        toJSON ApproximateSplitRequest'{..}
           = object
               (catMaybes
                  [("fractionConsumed" .=) <$> _asrFractionConsumed,
@@ -3121,7 +3122,7 @@ instance ToJSON ApproximateSplitRequest where
 -- | Provides data to pass through to the worker harness.
 --
 -- /See:/ 'workerSettings' smart constructor.
-data WorkerSettings = WorkerSettings
+data WorkerSettings = WorkerSettings'
     { _wsServicePath        :: !(Maybe Text)
     , _wsBaseURL            :: !(Maybe Text)
     , _wsShuffleServicePath :: !(Maybe Text)
@@ -3148,7 +3149,7 @@ data WorkerSettings = WorkerSettings
 workerSettings
     :: WorkerSettings
 workerSettings =
-    WorkerSettings
+    WorkerSettings'
     { _wsServicePath = Nothing
     , _wsBaseURL = Nothing
     , _wsShuffleServicePath = Nothing
@@ -3205,7 +3206,7 @@ instance FromJSON WorkerSettings where
         parseJSON
           = withObject "WorkerSettings"
               (\ o ->
-                 WorkerSettings <$>
+                 WorkerSettings' <$>
                    (o .:? "servicePath") <*> (o .:? "baseUrl") <*>
                      (o .:? "shuffleServicePath")
                      <*> (o .:? "tempStoragePrefix")
@@ -3213,7 +3214,7 @@ instance FromJSON WorkerSettings where
                      <*> (o .:? "workerId"))
 
 instance ToJSON WorkerSettings where
-        toJSON WorkerSettings{..}
+        toJSON WorkerSettings'{..}
           = object
               (catMaybes
                  [("servicePath" .=) <$> _wsServicePath,
@@ -3227,7 +3228,7 @@ instance ToJSON WorkerSettings where
 -- harness.
 --
 -- /See:/ 'workItemServiceStateHarnessData' smart constructor.
-newtype WorkItemServiceStateHarnessData = WorkItemServiceStateHarnessData
+newtype WorkItemServiceStateHarnessData = WorkItemServiceStateHarnessData'
     { _wisshdAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3240,7 +3241,7 @@ workItemServiceStateHarnessData
     :: HashMap Text JSONValue -- ^ 'wisshdAddtional'
     -> WorkItemServiceStateHarnessData
 workItemServiceStateHarnessData pWisshdAddtional_ =
-    WorkItemServiceStateHarnessData
+    WorkItemServiceStateHarnessData'
     { _wisshdAddtional = _Coerce # pWisshdAddtional_
     }
 
@@ -3256,7 +3257,7 @@ instance FromJSON WorkItemServiceStateHarnessData
         parseJSON
           = withObject "WorkItemServiceStateHarnessData"
               (\ o ->
-                 WorkItemServiceStateHarnessData <$>
+                 WorkItemServiceStateHarnessData' <$>
                    (parseJSONObject o))
 
 instance ToJSON WorkItemServiceStateHarnessData where
@@ -3265,7 +3266,7 @@ instance ToJSON WorkItemServiceStateHarnessData where
 -- | Data disk assignment for a given VM instance.
 --
 -- /See:/ 'dataDiskAssignment' smart constructor.
-data DataDiskAssignment = DataDiskAssignment
+data DataDiskAssignment = DataDiskAssignment'
     { _ddaVMInstance :: !(Maybe Text)
     , _ddaDataDisks  :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3280,7 +3281,7 @@ data DataDiskAssignment = DataDiskAssignment
 dataDiskAssignment
     :: DataDiskAssignment
 dataDiskAssignment =
-    DataDiskAssignment
+    DataDiskAssignment'
     { _ddaVMInstance = Nothing
     , _ddaDataDisks = Nothing
     }
@@ -3306,12 +3307,12 @@ instance FromJSON DataDiskAssignment where
         parseJSON
           = withObject "DataDiskAssignment"
               (\ o ->
-                 DataDiskAssignment <$>
+                 DataDiskAssignment' <$>
                    (o .:? "vmInstance") <*>
                      (o .:? "dataDisks" .!= mempty))
 
 instance ToJSON DataDiskAssignment where
-        toJSON DataDiskAssignment{..}
+        toJSON DataDiskAssignment'{..}
           = object
               (catMaybes
                  [("vmInstance" .=) <$> _ddaVMInstance,
@@ -3321,7 +3322,7 @@ instance ToJSON DataDiskAssignment where
 -- sender.
 --
 -- /See:/ 'workerMessageResponse' smart constructor.
-newtype WorkerMessageResponse = WorkerMessageResponse
+newtype WorkerMessageResponse = WorkerMessageResponse'
     { _wmrWorkerHealthReportResponse :: Maybe WorkerHealthReportResponse
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3333,7 +3334,7 @@ newtype WorkerMessageResponse = WorkerMessageResponse
 workerMessageResponse
     :: WorkerMessageResponse
 workerMessageResponse =
-    WorkerMessageResponse
+    WorkerMessageResponse'
     { _wmrWorkerHealthReportResponse = Nothing
     }
 
@@ -3347,11 +3348,11 @@ instance FromJSON WorkerMessageResponse where
         parseJSON
           = withObject "WorkerMessageResponse"
               (\ o ->
-                 WorkerMessageResponse <$>
+                 WorkerMessageResponse' <$>
                    (o .:? "workerHealthReportResponse"))
 
 instance ToJSON WorkerMessageResponse where
-        toJSON WorkerMessageResponse{..}
+        toJSON WorkerMessageResponse'{..}
           = object
               (catMaybes
                  [("workerHealthReportResponse" .=) <$>
@@ -3361,7 +3362,7 @@ instance ToJSON WorkerMessageResponse where
 -- processed by a worker.
 --
 -- /See:/ 'workItemServiceState' smart constructor.
-data WorkItemServiceState = WorkItemServiceState
+data WorkItemServiceState = WorkItemServiceState'
     { _wissNextReportIndex       :: !(Maybe (Textual Int64))
     , _wissReportStatusInterval  :: !(Maybe Text)
     , _wissHarnessData           :: !(Maybe WorkItemServiceStateHarnessData)
@@ -3391,7 +3392,7 @@ data WorkItemServiceState = WorkItemServiceState
 workItemServiceState
     :: WorkItemServiceState
 workItemServiceState =
-    WorkItemServiceState
+    WorkItemServiceState'
     { _wissNextReportIndex = Nothing
     , _wissReportStatusInterval = Nothing
     , _wissHarnessData = Nothing
@@ -3452,7 +3453,7 @@ instance FromJSON WorkItemServiceState where
         parseJSON
           = withObject "WorkItemServiceState"
               (\ o ->
-                 WorkItemServiceState <$>
+                 WorkItemServiceState' <$>
                    (o .:? "nextReportIndex") <*>
                      (o .:? "reportStatusInterval")
                      <*> (o .:? "harnessData")
@@ -3462,7 +3463,7 @@ instance FromJSON WorkItemServiceState where
                      <*> (o .:? "splitRequest"))
 
 instance ToJSON WorkItemServiceState where
-        toJSON WorkItemServiceState{..}
+        toJSON WorkItemServiceState'{..}
           = object
               (catMaybes
                  [("nextReportIndex" .=) <$> _wissNextReportIndex,
@@ -3479,7 +3480,7 @@ instance ToJSON WorkItemServiceState where
 -- | A task which initializes part of a streaming Dataflow job.
 --
 -- /See:/ 'streamingSetupTask' smart constructor.
-data StreamingSetupTask = StreamingSetupTask
+data StreamingSetupTask = StreamingSetupTask'
     { _sstStreamingComputationTopology :: !(Maybe TopologyConfig)
     , _sstReceiveWorkPort              :: !(Maybe (Textual Int32))
     , _sstWorkerHarnessPort            :: !(Maybe (Textual Int32))
@@ -3500,7 +3501,7 @@ data StreamingSetupTask = StreamingSetupTask
 streamingSetupTask
     :: StreamingSetupTask
 streamingSetupTask =
-    StreamingSetupTask
+    StreamingSetupTask'
     { _sstStreamingComputationTopology = Nothing
     , _sstReceiveWorkPort = Nothing
     , _sstWorkerHarnessPort = Nothing
@@ -3537,14 +3538,14 @@ instance FromJSON StreamingSetupTask where
         parseJSON
           = withObject "StreamingSetupTask"
               (\ o ->
-                 StreamingSetupTask <$>
+                 StreamingSetupTask' <$>
                    (o .:? "streamingComputationTopology") <*>
                      (o .:? "receiveWorkPort")
                      <*> (o .:? "workerHarnessPort")
                      <*> (o .:? "drain"))
 
 instance ToJSON StreamingSetupTask where
-        toJSON StreamingSetupTask{..}
+        toJSON StreamingSetupTask'{..}
           = object
               (catMaybes
                  [("streamingComputationTopology" .=) <$>
@@ -3556,7 +3557,7 @@ instance ToJSON StreamingSetupTask where
 -- | The codec to use for interpreting an element in the input PTable.
 --
 -- /See:/ 'partialGroupByKeyInstructionInputElementCodec' smart constructor.
-newtype PartialGroupByKeyInstructionInputElementCodec = PartialGroupByKeyInstructionInputElementCodec
+newtype PartialGroupByKeyInstructionInputElementCodec = PartialGroupByKeyInstructionInputElementCodec'
     { _pgbkiiecAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3569,7 +3570,7 @@ partialGroupByKeyInstructionInputElementCodec
     :: HashMap Text JSONValue -- ^ 'pgbkiiecAddtional'
     -> PartialGroupByKeyInstructionInputElementCodec
 partialGroupByKeyInstructionInputElementCodec pPgbkiiecAddtional_ =
-    PartialGroupByKeyInstructionInputElementCodec
+    PartialGroupByKeyInstructionInputElementCodec'
     { _pgbkiiecAddtional = _Coerce # pPgbkiiecAddtional_
     }
 
@@ -3586,7 +3587,7 @@ instance FromJSON
           = withObject
               "PartialGroupByKeyInstructionInputElementCodec"
               (\ o ->
-                 PartialGroupByKeyInstructionInputElementCodec <$>
+                 PartialGroupByKeyInstructionInputElementCodec' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -3599,7 +3600,7 @@ instance ToJSON
 -- appear in the list before any instructions which depends on its output.
 --
 -- /See:/ 'mapTask' smart constructor.
-data MapTask = MapTask
+data MapTask = MapTask'
     { _mtInstructions :: !(Maybe [ParallelInstruction])
     , _mtSystemName   :: !(Maybe Text)
     , _mtStageName    :: !(Maybe Text)
@@ -3617,7 +3618,7 @@ data MapTask = MapTask
 mapTask
     :: MapTask
 mapTask =
-    MapTask
+    MapTask'
     { _mtInstructions = Nothing
     , _mtSystemName = Nothing
     , _mtStageName = Nothing
@@ -3646,13 +3647,13 @@ instance FromJSON MapTask where
         parseJSON
           = withObject "MapTask"
               (\ o ->
-                 MapTask <$>
+                 MapTask' <$>
                    (o .:? "instructions" .!= mempty) <*>
                      (o .:? "systemName")
                      <*> (o .:? "stageName"))
 
 instance ToJSON MapTask where
-        toJSON MapTask{..}
+        toJSON MapTask'{..}
           = object
               (catMaybes
                  [("instructions" .=) <$> _mtInstructions,
@@ -3662,7 +3663,7 @@ instance ToJSON MapTask where
 -- | Describes mounted data disk.
 --
 -- /See:/ 'mountedDataDisk' smart constructor.
-newtype MountedDataDisk = MountedDataDisk
+newtype MountedDataDisk = MountedDataDisk'
     { _mddDataDisk :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3674,7 +3675,7 @@ newtype MountedDataDisk = MountedDataDisk
 mountedDataDisk
     :: MountedDataDisk
 mountedDataDisk =
-    MountedDataDisk
+    MountedDataDisk'
     { _mddDataDisk = Nothing
     }
 
@@ -3688,17 +3689,17 @@ mddDataDisk
 instance FromJSON MountedDataDisk where
         parseJSON
           = withObject "MountedDataDisk"
-              (\ o -> MountedDataDisk <$> (o .:? "dataDisk"))
+              (\ o -> MountedDataDisk' <$> (o .:? "dataDisk"))
 
 instance ToJSON MountedDataDisk where
-        toJSON MountedDataDisk{..}
+        toJSON MountedDataDisk'{..}
           = object
               (catMaybes [("dataDisk" .=) <$> _mddDataDisk])
 
 -- | The codec to use to encode data written to the sink.
 --
 -- /See:/ 'sinkCodec' smart constructor.
-newtype SinkCodec = SinkCodec
+newtype SinkCodec = SinkCodec'
     { _scAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3711,7 +3712,7 @@ sinkCodec
     :: HashMap Text JSONValue -- ^ 'scAddtional'
     -> SinkCodec
 sinkCodec pScAddtional_ =
-    SinkCodec
+    SinkCodec'
     { _scAddtional = _Coerce # pScAddtional_
     }
 
@@ -3724,14 +3725,14 @@ scAddtional
 instance FromJSON SinkCodec where
         parseJSON
           = withObject "SinkCodec"
-              (\ o -> SinkCodec <$> (parseJSONObject o))
+              (\ o -> SinkCodec' <$> (parseJSONObject o))
 
 instance ToJSON SinkCodec where
         toJSON = toJSON . _scAddtional
 
 --
 -- /See:/ 'workerHealthReportPodsItem' smart constructor.
-newtype WorkerHealthReportPodsItem = WorkerHealthReportPodsItem
+newtype WorkerHealthReportPodsItem = WorkerHealthReportPodsItem'
     { _whrpiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3744,7 +3745,7 @@ workerHealthReportPodsItem
     :: HashMap Text JSONValue -- ^ 'whrpiAddtional'
     -> WorkerHealthReportPodsItem
 workerHealthReportPodsItem pWhrpiAddtional_ =
-    WorkerHealthReportPodsItem
+    WorkerHealthReportPodsItem'
     { _whrpiAddtional = _Coerce # pWhrpiAddtional_
     }
 
@@ -3759,7 +3760,7 @@ instance FromJSON WorkerHealthReportPodsItem where
         parseJSON
           = withObject "WorkerHealthReportPodsItem"
               (\ o ->
-                 WorkerHealthReportPodsItem <$> (parseJSONObject o))
+                 WorkerHealthReportPodsItem' <$> (parseJSONObject o))
 
 instance ToJSON WorkerHealthReportPodsItem where
         toJSON = toJSON . _whrpiAddtional
@@ -3767,7 +3768,7 @@ instance ToJSON WorkerHealthReportPodsItem where
 -- | The user function to invoke.
 --
 -- /See:/ 'parDoInstructionUserFn' smart constructor.
-newtype ParDoInstructionUserFn = ParDoInstructionUserFn
+newtype ParDoInstructionUserFn = ParDoInstructionUserFn'
     { _pdiufAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3780,7 +3781,7 @@ parDoInstructionUserFn
     :: HashMap Text JSONValue -- ^ 'pdiufAddtional'
     -> ParDoInstructionUserFn
 parDoInstructionUserFn pPdiufAddtional_ =
-    ParDoInstructionUserFn
+    ParDoInstructionUserFn'
     { _pdiufAddtional = _Coerce # pPdiufAddtional_
     }
 
@@ -3795,7 +3796,7 @@ instance FromJSON ParDoInstructionUserFn where
         parseJSON
           = withObject "ParDoInstructionUserFn"
               (\ o ->
-                 ParDoInstructionUserFn <$> (parseJSONObject o))
+                 ParDoInstructionUserFn' <$> (parseJSONObject o))
 
 instance ToJSON ParDoInstructionUserFn where
         toJSON = toJSON . _pdiufAddtional
@@ -3803,7 +3804,7 @@ instance ToJSON ParDoInstructionUserFn where
 -- | The codec to use to encode data being written via this output.
 --
 -- /See:/ 'instructionOutputCodec' smart constructor.
-newtype InstructionOutputCodec = InstructionOutputCodec
+newtype InstructionOutputCodec = InstructionOutputCodec'
     { _iocAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3816,7 +3817,7 @@ instructionOutputCodec
     :: HashMap Text JSONValue -- ^ 'iocAddtional'
     -> InstructionOutputCodec
 instructionOutputCodec pIocAddtional_ =
-    InstructionOutputCodec
+    InstructionOutputCodec'
     { _iocAddtional = _Coerce # pIocAddtional_
     }
 
@@ -3830,7 +3831,7 @@ instance FromJSON InstructionOutputCodec where
         parseJSON
           = withObject "InstructionOutputCodec"
               (\ o ->
-                 InstructionOutputCodec <$> (parseJSONObject o))
+                 InstructionOutputCodec' <$> (parseJSONObject o))
 
 instance ToJSON InstructionOutputCodec where
         toJSON = toJSON . _iocAddtional
@@ -3839,7 +3840,7 @@ instance ToJSON InstructionOutputCodec where
 -- of a streaming Dataflow job.
 --
 -- /See:/ 'streamLocation' smart constructor.
-data StreamLocation = StreamLocation
+data StreamLocation = StreamLocation'
     { _slStreamingStageLocation :: !(Maybe StreamingStageLocation)
     , _slSideInputLocation      :: !(Maybe StreamingSideInputLocation)
     , _slCustomSourceLocation   :: !(Maybe CustomSourceLocation)
@@ -3860,7 +3861,7 @@ data StreamLocation = StreamLocation
 streamLocation
     :: StreamLocation
 streamLocation =
-    StreamLocation
+    StreamLocation'
     { _slStreamingStageLocation = Nothing
     , _slSideInputLocation = Nothing
     , _slCustomSourceLocation = Nothing
@@ -3896,14 +3897,14 @@ instance FromJSON StreamLocation where
         parseJSON
           = withObject "StreamLocation"
               (\ o ->
-                 StreamLocation <$>
+                 StreamLocation' <$>
                    (o .:? "streamingStageLocation") <*>
                      (o .:? "sideInputLocation")
                      <*> (o .:? "customSourceLocation")
                      <*> (o .:? "pubsubLocation"))
 
 instance ToJSON StreamLocation where
-        toJSON StreamLocation{..}
+        toJSON StreamLocation'{..}
           = object
               (catMaybes
                  [("streamingStageLocation" .=) <$>
@@ -3916,7 +3917,7 @@ instance ToJSON StreamLocation where
 -- | Extra arguments for this worker pool.
 --
 -- /See:/ 'workerPoolPoolArgs' smart constructor.
-newtype WorkerPoolPoolArgs = WorkerPoolPoolArgs
+newtype WorkerPoolPoolArgs = WorkerPoolPoolArgs'
     { _wppaAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3929,7 +3930,7 @@ workerPoolPoolArgs
     :: HashMap Text JSONValue -- ^ 'wppaAddtional'
     -> WorkerPoolPoolArgs
 workerPoolPoolArgs pWppaAddtional_ =
-    WorkerPoolPoolArgs
+    WorkerPoolPoolArgs'
     { _wppaAddtional = _Coerce # pWppaAddtional_
     }
 
@@ -3943,7 +3944,7 @@ wppaAddtional
 instance FromJSON WorkerPoolPoolArgs where
         parseJSON
           = withObject "WorkerPoolPoolArgs"
-              (\ o -> WorkerPoolPoolArgs <$> (parseJSONObject o))
+              (\ o -> WorkerPoolPoolArgs' <$> (parseJSONObject o))
 
 instance ToJSON WorkerPoolPoolArgs where
         toJSON = toJSON . _wppaAddtional
@@ -3951,7 +3952,7 @@ instance ToJSON WorkerPoolPoolArgs where
 -- | The response to the worker messages.
 --
 -- /See:/ 'sendWorkerMessagesResponse' smart constructor.
-newtype SendWorkerMessagesResponse = SendWorkerMessagesResponse
+newtype SendWorkerMessagesResponse = SendWorkerMessagesResponse'
     { _swmrWorkerMessageResponses :: Maybe [WorkerMessageResponse]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3963,7 +3964,7 @@ newtype SendWorkerMessagesResponse = SendWorkerMessagesResponse
 sendWorkerMessagesResponse
     :: SendWorkerMessagesResponse
 sendWorkerMessagesResponse =
-    SendWorkerMessagesResponse
+    SendWorkerMessagesResponse'
     { _swmrWorkerMessageResponses = Nothing
     }
 
@@ -3979,11 +3980,11 @@ instance FromJSON SendWorkerMessagesResponse where
         parseJSON
           = withObject "SendWorkerMessagesResponse"
               (\ o ->
-                 SendWorkerMessagesResponse <$>
+                 SendWorkerMessagesResponse' <$>
                    (o .:? "workerMessageResponses" .!= mempty))
 
 instance ToJSON SendWorkerMessagesResponse where
-        toJSON SendWorkerMessagesResponse{..}
+        toJSON SendWorkerMessagesResponse'{..}
           = object
               (catMaybes
                  [("workerMessageResponses" .=) <$>
@@ -3992,7 +3993,7 @@ instance ToJSON SendWorkerMessagesResponse where
 -- | Identifies the location of a streaming side input.
 --
 -- /See:/ 'streamingSideInputLocation' smart constructor.
-data StreamingSideInputLocation = StreamingSideInputLocation
+data StreamingSideInputLocation = StreamingSideInputLocation'
     { _ssilTag         :: !(Maybe Text)
     , _ssilStateFamily :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4007,7 +4008,7 @@ data StreamingSideInputLocation = StreamingSideInputLocation
 streamingSideInputLocation
     :: StreamingSideInputLocation
 streamingSideInputLocation =
-    StreamingSideInputLocation
+    StreamingSideInputLocation'
     { _ssilTag = Nothing
     , _ssilStateFamily = Nothing
     }
@@ -4026,11 +4027,11 @@ instance FromJSON StreamingSideInputLocation where
         parseJSON
           = withObject "StreamingSideInputLocation"
               (\ o ->
-                 StreamingSideInputLocation <$>
+                 StreamingSideInputLocation' <$>
                    (o .:? "tag") <*> (o .:? "stateFamily"))
 
 instance ToJSON StreamingSideInputLocation where
-        toJSON StreamingSideInputLocation{..}
+        toJSON StreamingSideInputLocation'{..}
           = object
               (catMaybes
                  [("tag" .=) <$> _ssilTag,
@@ -4040,7 +4041,7 @@ instance ToJSON StreamingSideInputLocation where
 -- streaming computation ranges.
 --
 -- /See:/ 'streamingComputationTask' smart constructor.
-data StreamingComputationTask = StreamingComputationTask
+data StreamingComputationTask = StreamingComputationTask'
     { _sctTaskType          :: !(Maybe Text)
     , _sctDataDisks         :: !(Maybe [MountedDataDisk])
     , _sctComputationRanges :: !(Maybe [StreamingComputationRanges])
@@ -4058,7 +4059,7 @@ data StreamingComputationTask = StreamingComputationTask
 streamingComputationTask
     :: StreamingComputationTask
 streamingComputationTask =
-    StreamingComputationTask
+    StreamingComputationTask'
     { _sctTaskType = Nothing
     , _sctDataDisks = Nothing
     , _sctComputationRanges = Nothing
@@ -4088,12 +4089,12 @@ instance FromJSON StreamingComputationTask where
         parseJSON
           = withObject "StreamingComputationTask"
               (\ o ->
-                 StreamingComputationTask <$>
+                 StreamingComputationTask' <$>
                    (o .:? "taskType") <*> (o .:? "dataDisks" .!= mempty)
                      <*> (o .:? "computationRanges" .!= mempty))
 
 instance ToJSON StreamingComputationTask where
-        toJSON StreamingComputationTask{..}
+        toJSON StreamingComputationTask'{..}
           = object
               (catMaybes
                  [("taskType" .=) <$> _sctTaskType,
@@ -4103,7 +4104,7 @@ instance ToJSON StreamingComputationTask where
 -- | A particular message pertaining to a Dataflow job.
 --
 -- /See:/ 'jobMessage' smart constructor.
-data JobMessage = JobMessage
+data JobMessage = JobMessage'
     { _jmTime              :: !(Maybe Text)
     , _jmMessageText       :: !(Maybe Text)
     , _jmMessageImportance :: !(Maybe Text)
@@ -4124,7 +4125,7 @@ data JobMessage = JobMessage
 jobMessage
     :: JobMessage
 jobMessage =
-    JobMessage
+    JobMessage'
     { _jmTime = Nothing
     , _jmMessageText = Nothing
     , _jmMessageImportance = Nothing
@@ -4156,13 +4157,13 @@ instance FromJSON JobMessage where
         parseJSON
           = withObject "JobMessage"
               (\ o ->
-                 JobMessage <$>
+                 JobMessage' <$>
                    (o .:? "time") <*> (o .:? "messageText") <*>
                      (o .:? "messageImportance")
                      <*> (o .:? "id"))
 
 instance ToJSON JobMessage where
-        toJSON JobMessage{..}
+        toJSON JobMessage'{..}
           = object
               (catMaybes
                  [("time" .=) <$> _jmTime,
@@ -4173,7 +4174,7 @@ instance ToJSON JobMessage where
 -- | Information about an output of a SeqMapTask.
 --
 -- /See:/ 'seqMapTaskOutputInfo' smart constructor.
-data SeqMapTaskOutputInfo = SeqMapTaskOutputInfo
+data SeqMapTaskOutputInfo = SeqMapTaskOutputInfo'
     { _smtoiSink :: !(Maybe Sink)
     , _smtoiTag  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4188,7 +4189,7 @@ data SeqMapTaskOutputInfo = SeqMapTaskOutputInfo
 seqMapTaskOutputInfo
     :: SeqMapTaskOutputInfo
 seqMapTaskOutputInfo =
-    SeqMapTaskOutputInfo
+    SeqMapTaskOutputInfo'
     { _smtoiSink = Nothing
     , _smtoiTag = Nothing
     }
@@ -4206,11 +4207,11 @@ instance FromJSON SeqMapTaskOutputInfo where
         parseJSON
           = withObject "SeqMapTaskOutputInfo"
               (\ o ->
-                 SeqMapTaskOutputInfo <$>
+                 SeqMapTaskOutputInfo' <$>
                    (o .:? "sink") <*> (o .:? "tag"))
 
 instance ToJSON SeqMapTaskOutputInfo where
-        toJSON SeqMapTaskOutputInfo{..}
+        toJSON SeqMapTaskOutputInfo'{..}
           = object
               (catMaybes
                  [("sink" .=) <$> _smtoiSink,
@@ -4219,7 +4220,7 @@ instance ToJSON SeqMapTaskOutputInfo where
 -- | A request to compute the SourceMetadata of a Source.
 --
 -- /See:/ 'sourceGetMetadataRequest' smart constructor.
-newtype SourceGetMetadataRequest = SourceGetMetadataRequest
+newtype SourceGetMetadataRequest = SourceGetMetadataRequest'
     { _sgmrSource :: Maybe Source
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4231,7 +4232,7 @@ newtype SourceGetMetadataRequest = SourceGetMetadataRequest
 sourceGetMetadataRequest
     :: SourceGetMetadataRequest
 sourceGetMetadataRequest =
-    SourceGetMetadataRequest
+    SourceGetMetadataRequest'
     { _sgmrSource = Nothing
     }
 
@@ -4244,16 +4245,16 @@ instance FromJSON SourceGetMetadataRequest where
         parseJSON
           = withObject "SourceGetMetadataRequest"
               (\ o ->
-                 SourceGetMetadataRequest <$> (o .:? "source"))
+                 SourceGetMetadataRequest' <$> (o .:? "source"))
 
 instance ToJSON SourceGetMetadataRequest where
-        toJSON SourceGetMetadataRequest{..}
+        toJSON SourceGetMetadataRequest'{..}
           = object (catMaybes [("source" .=) <$> _sgmrSource])
 
 -- | The user function to invoke.
 --
 -- /See:/ 'seqMapTaskUserFn' smart constructor.
-newtype SeqMapTaskUserFn = SeqMapTaskUserFn
+newtype SeqMapTaskUserFn = SeqMapTaskUserFn'
     { _smtufAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4266,7 +4267,7 @@ seqMapTaskUserFn
     :: HashMap Text JSONValue -- ^ 'smtufAddtional'
     -> SeqMapTaskUserFn
 seqMapTaskUserFn pSmtufAddtional_ =
-    SeqMapTaskUserFn
+    SeqMapTaskUserFn'
     { _smtufAddtional = _Coerce # pSmtufAddtional_
     }
 
@@ -4280,7 +4281,7 @@ smtufAddtional
 instance FromJSON SeqMapTaskUserFn where
         parseJSON
           = withObject "SeqMapTaskUserFn"
-              (\ o -> SeqMapTaskUserFn <$> (parseJSONObject o))
+              (\ o -> SeqMapTaskUserFn' <$> (parseJSONObject o))
 
 instance ToJSON SeqMapTaskUserFn where
         toJSON = toJSON . _smtufAddtional
@@ -4288,7 +4289,7 @@ instance ToJSON SeqMapTaskUserFn where
 -- | The value combining function to invoke.
 --
 -- /See:/ 'partialGroupByKeyInstructionValueCombiningFn' smart constructor.
-newtype PartialGroupByKeyInstructionValueCombiningFn = PartialGroupByKeyInstructionValueCombiningFn
+newtype PartialGroupByKeyInstructionValueCombiningFn = PartialGroupByKeyInstructionValueCombiningFn'
     { _pgbkivcfAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4301,7 +4302,7 @@ partialGroupByKeyInstructionValueCombiningFn
     :: HashMap Text JSONValue -- ^ 'pgbkivcfAddtional'
     -> PartialGroupByKeyInstructionValueCombiningFn
 partialGroupByKeyInstructionValueCombiningFn pPgbkivcfAddtional_ =
-    PartialGroupByKeyInstructionValueCombiningFn
+    PartialGroupByKeyInstructionValueCombiningFn'
     { _pgbkivcfAddtional = _Coerce # pPgbkivcfAddtional_
     }
 
@@ -4318,7 +4319,7 @@ instance FromJSON
           = withObject
               "PartialGroupByKeyInstructionValueCombiningFn"
               (\ o ->
-                 PartialGroupByKeyInstructionValueCombiningFn <$>
+                 PartialGroupByKeyInstructionValueCombiningFn' <$>
                    (parseJSONObject o))
 
 instance ToJSON
@@ -4328,7 +4329,7 @@ instance ToJSON
 -- | Defines a job to be run by the Dataflow service.
 --
 -- /See:/ 'job' smart constructor.
-data Job = Job
+data Job = Job'
     { _jRequestedState       :: !(Maybe Text)
     , _jEnvironment          :: !(Maybe Environment)
     , _jClientRequestId      :: !(Maybe Text)
@@ -4385,7 +4386,7 @@ data Job = Job
 job
     :: Job
 job =
-    Job
+    Job'
     { _jRequestedState = Nothing
     , _jEnvironment = Nothing
     , _jClientRequestId = Nothing
@@ -4526,7 +4527,7 @@ instance FromJSON Job where
         parseJSON
           = withObject "Job"
               (\ o ->
-                 Job <$>
+                 Job' <$>
                    (o .:? "requestedState") <*> (o .:? "environment")
                      <*> (o .:? "clientRequestId")
                      <*> (o .:? "currentState")
@@ -4544,7 +4545,7 @@ instance FromJSON Job where
                      <*> (o .:? "createTime"))
 
 instance ToJSON Job where
-        toJSON Job{..}
+        toJSON Job'{..}
           = object
               (catMaybes
                  [("requestedState" .=) <$> _jRequestedState,
@@ -4567,7 +4568,7 @@ instance ToJSON Job where
 -- | An instruction that reads records. Takes no inputs, produces one output.
 --
 -- /See:/ 'readInstruction' smart constructor.
-newtype ReadInstruction = ReadInstruction
+newtype ReadInstruction = ReadInstruction'
     { _riSource :: Maybe Source
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4579,7 +4580,7 @@ newtype ReadInstruction = ReadInstruction
 readInstruction
     :: ReadInstruction
 readInstruction =
-    ReadInstruction
+    ReadInstruction'
     { _riSource = Nothing
     }
 
@@ -4590,16 +4591,16 @@ riSource = lens _riSource (\ s a -> s{_riSource = a})
 instance FromJSON ReadInstruction where
         parseJSON
           = withObject "ReadInstruction"
-              (\ o -> ReadInstruction <$> (o .:? "source"))
+              (\ o -> ReadInstruction' <$> (o .:? "source"))
 
 instance ToJSON ReadInstruction where
-        toJSON ReadInstruction{..}
+        toJSON ReadInstruction'{..}
           = object (catMaybes [("source" .=) <$> _riSource])
 
 -- | A progress measurement of a WorkItem by a worker.
 --
 -- /See:/ 'approximateReportedProgress' smart constructor.
-data ApproximateReportedProgress = ApproximateReportedProgress
+data ApproximateReportedProgress = ApproximateReportedProgress'
     { _arpFractionConsumed     :: !(Maybe (Textual Double))
     , _arpConsumedParallelism  :: !(Maybe ReportedParallelism)
     , _arpRemainingParallelism :: !(Maybe ReportedParallelism)
@@ -4620,7 +4621,7 @@ data ApproximateReportedProgress = ApproximateReportedProgress
 approximateReportedProgress
     :: ApproximateReportedProgress
 approximateReportedProgress =
-    ApproximateReportedProgress
+    ApproximateReportedProgress'
     { _arpFractionConsumed = Nothing
     , _arpConsumedParallelism = Nothing
     , _arpRemainingParallelism = Nothing
@@ -4677,14 +4678,14 @@ instance FromJSON ApproximateReportedProgress where
         parseJSON
           = withObject "ApproximateReportedProgress"
               (\ o ->
-                 ApproximateReportedProgress <$>
+                 ApproximateReportedProgress' <$>
                    (o .:? "fractionConsumed") <*>
                      (o .:? "consumedParallelism")
                      <*> (o .:? "remainingParallelism")
                      <*> (o .:? "position"))
 
 instance ToJSON ApproximateReportedProgress where
-        toJSON ApproximateReportedProgress{..}
+        toJSON ApproximateReportedProgress'{..}
           = object
               (catMaybes
                  [("fractionConsumed" .=) <$> _arpFractionConsumed,
@@ -4697,7 +4698,7 @@ instance ToJSON ApproximateReportedProgress where
 -- | The sink to write to, plus its parameters.
 --
 -- /See:/ 'sinkSpec' smart constructor.
-newtype SinkSpec = SinkSpec
+newtype SinkSpec = SinkSpec'
     { _sAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -4710,7 +4711,7 @@ sinkSpec
     :: HashMap Text JSONValue -- ^ 'sAddtional'
     -> SinkSpec
 sinkSpec pSAddtional_ =
-    SinkSpec
+    SinkSpec'
     { _sAddtional = _Coerce # pSAddtional_
     }
 
@@ -4723,7 +4724,7 @@ sAddtional
 instance FromJSON SinkSpec where
         parseJSON
           = withObject "SinkSpec"
-              (\ o -> SinkSpec <$> (parseJSONObject o))
+              (\ o -> SinkSpec' <$> (parseJSONObject o))
 
 instance ToJSON SinkSpec where
         toJSON = toJSON . _sAddtional
@@ -4734,7 +4735,7 @@ instance ToJSON SinkSpec where
 -- the various computational requirements of the various stages of the job.
 --
 -- /See:/ 'workerPool' smart constructor.
-data WorkerPool = WorkerPool
+data WorkerPool = WorkerPool'
     { _wpAutoscalingSettings         :: !(Maybe AutoscalingSettings)
     , _wpDiskSizeGb                  :: !(Maybe (Textual Int32))
     , _wpKind                        :: !(Maybe Text)
@@ -4800,7 +4801,7 @@ data WorkerPool = WorkerPool
 workerPool
     :: WorkerPool
 workerPool =
-    WorkerPool
+    WorkerPool'
     { _wpAutoscalingSettings = Nothing
     , _wpDiskSizeGb = Nothing
     , _wpKind = Nothing
@@ -4957,7 +4958,7 @@ instance FromJSON WorkerPool where
         parseJSON
           = withObject "WorkerPool"
               (\ o ->
-                 WorkerPool <$>
+                 WorkerPool' <$>
                    (o .:? "autoscalingSettings") <*>
                      (o .:? "diskSizeGb")
                      <*> (o .:? "kind")
@@ -4979,7 +4980,7 @@ instance FromJSON WorkerPool where
                      <*> (o .:? "dataDisks" .!= mempty))
 
 instance ToJSON WorkerPool where
-        toJSON WorkerPool{..}
+        toJSON WorkerPool'{..}
           = object
               (catMaybes
                  [("autoscalingSettings" .=) <$>
@@ -5018,7 +5019,7 @@ instance ToJSON WorkerPool where
 -- used to run many different types of jobs, not just Map-Reduce).
 --
 -- /See:/ 'step' smart constructor.
-data Step = Step
+data Step = Step'
     { _sKind       :: !(Maybe Text)
     , _sName       :: !(Maybe Text)
     , _sProperties :: !(Maybe StepProperties)
@@ -5036,7 +5037,7 @@ data Step = Step
 step
     :: Step
 step =
-    Step
+    Step'
     { _sKind = Nothing
     , _sName = Nothing
     , _sProperties = Nothing
@@ -5061,12 +5062,12 @@ instance FromJSON Step where
         parseJSON
           = withObject "Step"
               (\ o ->
-                 Step <$>
+                 Step' <$>
                    (o .:? "kind") <*> (o .:? "name") <*>
                      (o .:? "properties"))
 
 instance ToJSON Step where
-        toJSON Step{..}
+        toJSON Step'{..}
           = object
               (catMaybes
                  [("kind" .=) <$> _sKind, ("name" .=) <$> _sName,
@@ -5080,7 +5081,7 @@ instance ToJSON Step where
 -- (libraries, data files, etc) required in order for that code to run.
 --
 -- /See:/ 'package' smart constructor.
-data Package = Package
+data Package = Package'
     { _pLocation :: !(Maybe Text)
     , _pName     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5095,7 +5096,7 @@ data Package = Package
 package
     :: Package
 package =
-    Package
+    Package'
     { _pLocation = Nothing
     , _pName = Nothing
     }
@@ -5115,10 +5116,10 @@ instance FromJSON Package where
         parseJSON
           = withObject "Package"
               (\ o ->
-                 Package <$> (o .:? "location") <*> (o .:? "name"))
+                 Package' <$> (o .:? "location") <*> (o .:? "name"))
 
 instance ToJSON Package where
-        toJSON Package{..}
+        toJSON Package'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _pLocation,
@@ -5139,7 +5140,7 @@ instance ToJSON Package where
 -- most messages.
 --
 -- /See:/ 'workerMessageCodeParameters' smart constructor.
-newtype WorkerMessageCodeParameters = WorkerMessageCodeParameters
+newtype WorkerMessageCodeParameters = WorkerMessageCodeParameters'
     { _wmcpAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5152,7 +5153,7 @@ workerMessageCodeParameters
     :: HashMap Text JSONValue -- ^ 'wmcpAddtional'
     -> WorkerMessageCodeParameters
 workerMessageCodeParameters pWmcpAddtional_ =
-    WorkerMessageCodeParameters
+    WorkerMessageCodeParameters'
     { _wmcpAddtional = _Coerce # pWmcpAddtional_
     }
 
@@ -5167,7 +5168,7 @@ instance FromJSON WorkerMessageCodeParameters where
         parseJSON
           = withObject "WorkerMessageCodeParameters"
               (\ o ->
-                 WorkerMessageCodeParameters <$> (parseJSONObject o))
+                 WorkerMessageCodeParameters' <$> (parseJSONObject o))
 
 instance ToJSON WorkerMessageCodeParameters where
         toJSON = toJSON . _wmcpAddtional
@@ -5177,7 +5178,7 @@ instance ToJSON WorkerMessageCodeParameters where
 -- of the current task\'s input.
 --
 -- /See:/ 'dynamicSourceSplit' smart constructor.
-data DynamicSourceSplit = DynamicSourceSplit
+data DynamicSourceSplit = DynamicSourceSplit'
     { _dssResidual :: !(Maybe DerivedSource)
     , _dssPrimary  :: !(Maybe DerivedSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5192,7 +5193,7 @@ data DynamicSourceSplit = DynamicSourceSplit
 dynamicSourceSplit
     :: DynamicSourceSplit
 dynamicSourceSplit =
-    DynamicSourceSplit
+    DynamicSourceSplit'
     { _dssResidual = Nothing
     , _dssPrimary = Nothing
     }
@@ -5213,11 +5214,11 @@ instance FromJSON DynamicSourceSplit where
         parseJSON
           = withObject "DynamicSourceSplit"
               (\ o ->
-                 DynamicSourceSplit <$>
+                 DynamicSourceSplit' <$>
                    (o .:? "residual") <*> (o .:? "primary"))
 
 instance ToJSON DynamicSourceSplit where
-        toJSON DynamicSourceSplit{..}
+        toJSON DynamicSourceSplit'{..}
           = object
               (catMaybes
                  [("residual" .=) <$> _dssResidual,
@@ -5226,7 +5227,7 @@ instance ToJSON DynamicSourceSplit where
 -- | Response from a request to report the status of WorkItems.
 --
 -- /See:/ 'reportWorkItemStatusResponse' smart constructor.
-newtype ReportWorkItemStatusResponse = ReportWorkItemStatusResponse
+newtype ReportWorkItemStatusResponse = ReportWorkItemStatusResponse'
     { _rwisrWorkItemServiceStates :: Maybe [WorkItemServiceState]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5238,7 +5239,7 @@ newtype ReportWorkItemStatusResponse = ReportWorkItemStatusResponse
 reportWorkItemStatusResponse
     :: ReportWorkItemStatusResponse
 reportWorkItemStatusResponse =
-    ReportWorkItemStatusResponse
+    ReportWorkItemStatusResponse'
     { _rwisrWorkItemServiceStates = Nothing
     }
 
@@ -5257,11 +5258,11 @@ instance FromJSON ReportWorkItemStatusResponse where
         parseJSON
           = withObject "ReportWorkItemStatusResponse"
               (\ o ->
-                 ReportWorkItemStatusResponse <$>
+                 ReportWorkItemStatusResponse' <$>
                    (o .:? "workItemServiceStates" .!= mempty))
 
 instance ToJSON ReportWorkItemStatusResponse where
-        toJSON ReportWorkItemStatusResponse{..}
+        toJSON ReportWorkItemStatusResponse'{..}
           = object
               (catMaybes
                  [("workItemServiceStates" .=) <$>
@@ -5270,7 +5271,7 @@ instance ToJSON ReportWorkItemStatusResponse where
 -- | DEPRECATED in favor of DynamicSourceSplit.
 --
 -- /See:/ 'sourceFork' smart constructor.
-data SourceFork = SourceFork
+data SourceFork = SourceFork'
     { _sfResidual       :: !(Maybe SourceSplitShard)
     , _sfPrimarySource  :: !(Maybe DerivedSource)
     , _sfPrimary        :: !(Maybe SourceSplitShard)
@@ -5291,7 +5292,7 @@ data SourceFork = SourceFork
 sourceFork
     :: SourceFork
 sourceFork =
-    SourceFork
+    SourceFork'
     { _sfResidual = Nothing
     , _sfPrimarySource = Nothing
     , _sfPrimary = Nothing
@@ -5324,13 +5325,13 @@ instance FromJSON SourceFork where
         parseJSON
           = withObject "SourceFork"
               (\ o ->
-                 SourceFork <$>
+                 SourceFork' <$>
                    (o .:? "residual") <*> (o .:? "primarySource") <*>
                      (o .:? "primary")
                      <*> (o .:? "residualSource"))
 
 instance ToJSON SourceFork where
-        toJSON SourceFork{..}
+        toJSON SourceFork'{..}
           = object
               (catMaybes
                  [("residual" .=) <$> _sfResidual,
@@ -5342,7 +5343,7 @@ instance ToJSON SourceFork where
 -- computation ranges.
 --
 -- /See:/ 'streamingComputationRanges' smart constructor.
-data StreamingComputationRanges = StreamingComputationRanges
+data StreamingComputationRanges = StreamingComputationRanges'
     { _scrRangeAssignments :: !(Maybe [KeyRangeDataDiskAssignment])
     , _scrComputationId    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5357,7 +5358,7 @@ data StreamingComputationRanges = StreamingComputationRanges
 streamingComputationRanges
     :: StreamingComputationRanges
 streamingComputationRanges =
-    StreamingComputationRanges
+    StreamingComputationRanges'
     { _scrRangeAssignments = Nothing
     , _scrComputationId = Nothing
     }
@@ -5380,12 +5381,12 @@ instance FromJSON StreamingComputationRanges where
         parseJSON
           = withObject "StreamingComputationRanges"
               (\ o ->
-                 StreamingComputationRanges <$>
+                 StreamingComputationRanges' <$>
                    (o .:? "rangeAssignments" .!= mempty) <*>
                      (o .:? "computationId"))
 
 instance ToJSON StreamingComputationRanges where
-        toJSON StreamingComputationRanges{..}
+        toJSON StreamingComputationRanges'{..}
           = object
               (catMaybes
                  [("rangeAssignments" .=) <$> _scrRangeAssignments,
@@ -5395,7 +5396,7 @@ instance ToJSON StreamingComputationRanges where
 -- response, depending on the page size in the ListJobsRequest.
 --
 -- /See:/ 'listJobsResponse' smart constructor.
-data ListJobsResponse = ListJobsResponse
+data ListJobsResponse = ListJobsResponse'
     { _ljrNextPageToken :: !(Maybe Text)
     , _ljrJobs          :: !(Maybe [Job])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5410,7 +5411,7 @@ data ListJobsResponse = ListJobsResponse
 listJobsResponse
     :: ListJobsResponse
 listJobsResponse =
-    ListJobsResponse
+    ListJobsResponse'
     { _ljrNextPageToken = Nothing
     , _ljrJobs = Nothing
     }
@@ -5431,12 +5432,12 @@ instance FromJSON ListJobsResponse where
         parseJSON
           = withObject "ListJobsResponse"
               (\ o ->
-                 ListJobsResponse <$>
+                 ListJobsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "jobs" .!= mempty))
 
 instance ToJSON ListJobsResponse where
-        toJSON ListJobsResponse{..}
+        toJSON ListJobsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ljrNextPageToken,
@@ -5445,7 +5446,7 @@ instance ToJSON ListJobsResponse where
 -- | A source that records can be read and decoded from.
 --
 -- /See:/ 'source' smart constructor.
-data Source = Source
+data Source = Source'
     { _souDoesNotNeedSplitting :: !(Maybe Bool)
     , _souBaseSpecs            :: !(Maybe [SourceBaseSpecsItem])
     , _souCodec                :: !(Maybe SourceCodec)
@@ -5469,7 +5470,7 @@ data Source = Source
 source
     :: Source
 source =
-    Source
+    Source'
     { _souDoesNotNeedSplitting = Nothing
     , _souBaseSpecs = Nothing
     , _souCodec = Nothing
@@ -5529,7 +5530,7 @@ instance FromJSON Source where
         parseJSON
           = withObject "Source"
               (\ o ->
-                 Source <$>
+                 Source' <$>
                    (o .:? "doesNotNeedSplitting") <*>
                      (o .:? "baseSpecs" .!= mempty)
                      <*> (o .:? "codec")
@@ -5537,7 +5538,7 @@ instance FromJSON Source where
                      <*> (o .:? "metadata"))
 
 instance ToJSON Source where
-        toJSON Source{..}
+        toJSON Source'{..}
           = object
               (catMaybes
                  [("doesNotNeedSplitting" .=) <$>
@@ -5550,7 +5551,7 @@ instance ToJSON Source where
 -- ApproximateSplitRequest.
 --
 -- /See:/ 'approximateProgress' smart constructor.
-data ApproximateProgress = ApproximateProgress
+data ApproximateProgress = ApproximateProgress'
     { _apRemainingTime   :: !(Maybe Text)
     , _apPercentComplete :: !(Maybe (Textual Double))
     , _apPosition        :: !(Maybe Position)
@@ -5568,7 +5569,7 @@ data ApproximateProgress = ApproximateProgress
 approximateProgress
     :: ApproximateProgress
 approximateProgress =
-    ApproximateProgress
+    ApproximateProgress'
     { _apRemainingTime = Nothing
     , _apPercentComplete = Nothing
     , _apPosition = Nothing
@@ -5596,12 +5597,12 @@ instance FromJSON ApproximateProgress where
         parseJSON
           = withObject "ApproximateProgress"
               (\ o ->
-                 ApproximateProgress <$>
+                 ApproximateProgress' <$>
                    (o .:? "remainingTime") <*> (o .:? "percentComplete")
                      <*> (o .:? "position"))
 
 instance ToJSON ApproximateProgress where
-        toJSON ApproximateProgress{..}
+        toJSON ApproximateProgress'{..}
           = object
               (catMaybes
                  [("remainingTime" .=) <$> _apRemainingTime,
@@ -5611,7 +5612,7 @@ instance ToJSON ApproximateProgress where
 -- | WorkerMessage provides information to the backend about a worker.
 --
 -- /See:/ 'workerMessage' smart constructor.
-data WorkerMessage = WorkerMessage
+data WorkerMessage = WorkerMessage'
     { _wmWorkerHealthReport :: !(Maybe WorkerHealthReport)
     , _wmTime               :: !(Maybe Text)
     , _wmWorkerMessageCode  :: !(Maybe WorkerMessageCode)
@@ -5632,7 +5633,7 @@ data WorkerMessage = WorkerMessage
 workerMessage
     :: WorkerMessage
 workerMessage =
-    WorkerMessage
+    WorkerMessage'
     { _wmWorkerHealthReport = Nothing
     , _wmTime = Nothing
     , _wmWorkerMessageCode = Nothing
@@ -5669,13 +5670,13 @@ instance FromJSON WorkerMessage where
         parseJSON
           = withObject "WorkerMessage"
               (\ o ->
-                 WorkerMessage <$>
+                 WorkerMessage' <$>
                    (o .:? "workerHealthReport") <*> (o .:? "time") <*>
                      (o .:? "workerMessageCode")
                      <*> (o .:? "labels"))
 
 instance ToJSON WorkerMessage where
-        toJSON WorkerMessage{..}
+        toJSON WorkerMessage'{..}
           = object
               (catMaybes
                  [("workerHealthReport" .=) <$> _wmWorkerHealthReport,
@@ -5688,7 +5689,7 @@ instance ToJSON WorkerMessage where
 -- into JSON.
 --
 -- /See:/ 'keyRangeLocation' smart constructor.
-data KeyRangeLocation = KeyRangeLocation
+data KeyRangeLocation = KeyRangeLocation'
     { _krlPersistentDirectory :: !(Maybe Text)
     , _krlDataDisk            :: !(Maybe Text)
     , _krlStart               :: !(Maybe Text)
@@ -5712,7 +5713,7 @@ data KeyRangeLocation = KeyRangeLocation
 keyRangeLocation
     :: KeyRangeLocation
 keyRangeLocation =
-    KeyRangeLocation
+    KeyRangeLocation'
     { _krlPersistentDirectory = Nothing
     , _krlDataDisk = Nothing
     , _krlStart = Nothing
@@ -5754,14 +5755,14 @@ instance FromJSON KeyRangeLocation where
         parseJSON
           = withObject "KeyRangeLocation"
               (\ o ->
-                 KeyRangeLocation <$>
+                 KeyRangeLocation' <$>
                    (o .:? "persistentDirectory") <*> (o .:? "dataDisk")
                      <*> (o .:? "start")
                      <*> (o .:? "deliveryEndpoint")
                      <*> (o .:? "end"))
 
 instance ToJSON KeyRangeLocation where
-        toJSON KeyRangeLocation{..}
+        toJSON KeyRangeLocation'{..}
           = object
               (catMaybes
                  [("persistentDirectory" .=) <$>
@@ -5774,7 +5775,7 @@ instance ToJSON KeyRangeLocation where
 -- | Information about an output of a multi-output DoFn.
 --
 -- /See:/ 'multiOutputInfo' smart constructor.
-newtype MultiOutputInfo = MultiOutputInfo
+newtype MultiOutputInfo = MultiOutputInfo'
     { _moiTag :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5786,7 +5787,7 @@ newtype MultiOutputInfo = MultiOutputInfo
 multiOutputInfo
     :: MultiOutputInfo
 multiOutputInfo =
-    MultiOutputInfo
+    MultiOutputInfo'
     { _moiTag = Nothing
     }
 
@@ -5798,17 +5799,17 @@ moiTag = lens _moiTag (\ s a -> s{_moiTag = a})
 instance FromJSON MultiOutputInfo where
         parseJSON
           = withObject "MultiOutputInfo"
-              (\ o -> MultiOutputInfo <$> (o .:? "tag"))
+              (\ o -> MultiOutputInfo' <$> (o .:? "tag"))
 
 instance ToJSON MultiOutputInfo where
-        toJSON MultiOutputInfo{..}
+        toJSON MultiOutputInfo'{..}
           = object (catMaybes [("tag" .=) <$> _moiTag])
 
 -- | An instruction that does a partial group-by-key. One input and one
 -- output.
 --
 -- /See:/ 'partialGroupByKeyInstruction' smart constructor.
-data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction
+data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction'
     { _pgbkiValueCombiningFn  :: !(Maybe PartialGroupByKeyInstructionValueCombiningFn)
     , _pgbkiSideInputs        :: !(Maybe [SideInputInfo])
     , _pgbkiInput             :: !(Maybe InstructionInput)
@@ -5829,7 +5830,7 @@ data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction
 partialGroupByKeyInstruction
     :: PartialGroupByKeyInstruction
 partialGroupByKeyInstruction =
-    PartialGroupByKeyInstruction
+    PartialGroupByKeyInstruction'
     { _pgbkiValueCombiningFn = Nothing
     , _pgbkiSideInputs = Nothing
     , _pgbkiInput = Nothing
@@ -5865,14 +5866,14 @@ instance FromJSON PartialGroupByKeyInstruction where
         parseJSON
           = withObject "PartialGroupByKeyInstruction"
               (\ o ->
-                 PartialGroupByKeyInstruction <$>
+                 PartialGroupByKeyInstruction' <$>
                    (o .:? "valueCombiningFn") <*>
                      (o .:? "sideInputs" .!= mempty)
                      <*> (o .:? "input")
                      <*> (o .:? "inputElementCodec"))
 
 instance ToJSON PartialGroupByKeyInstruction where
-        toJSON PartialGroupByKeyInstruction{..}
+        toJSON PartialGroupByKeyInstruction'{..}
           = object
               (catMaybes
                  [("valueCombiningFn" .=) <$> _pgbkiValueCombiningFn,
@@ -5886,7 +5887,7 @@ instance ToJSON PartialGroupByKeyInstruction where
 -- code.
 --
 -- /See:/ 'parDoInstruction' smart constructor.
-data ParDoInstruction = ParDoInstruction
+data ParDoInstruction = ParDoInstruction'
     { _pdiNumOutputs       :: !(Maybe (Textual Int32))
     , _pdiMultiOutputInfos :: !(Maybe [MultiOutputInfo])
     , _pdiSideInputs       :: !(Maybe [SideInputInfo])
@@ -5910,7 +5911,7 @@ data ParDoInstruction = ParDoInstruction
 parDoInstruction
     :: ParDoInstruction
 parDoInstruction =
-    ParDoInstruction
+    ParDoInstruction'
     { _pdiNumOutputs = Nothing
     , _pdiMultiOutputInfos = Nothing
     , _pdiSideInputs = Nothing
@@ -5954,7 +5955,7 @@ instance FromJSON ParDoInstruction where
         parseJSON
           = withObject "ParDoInstruction"
               (\ o ->
-                 ParDoInstruction <$>
+                 ParDoInstruction' <$>
                    (o .:? "numOutputs") <*>
                      (o .:? "multiOutputInfos" .!= mempty)
                      <*> (o .:? "sideInputs" .!= mempty)
@@ -5962,7 +5963,7 @@ instance FromJSON ParDoInstruction where
                      <*> (o .:? "userFn"))
 
 instance ToJSON ParDoInstruction where
-        toJSON ParDoInstruction{..}
+        toJSON ParDoInstruction'{..}
           = object
               (catMaybes
                  [("numOutputs" .=) <$> _pdiNumOutputs,
@@ -5974,7 +5975,7 @@ instance ToJSON ParDoInstruction where
 -- | Identifies the location of a custom souce.
 --
 -- /See:/ 'customSourceLocation' smart constructor.
-newtype CustomSourceLocation = CustomSourceLocation
+newtype CustomSourceLocation = CustomSourceLocation'
     { _cslStateful :: Maybe Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5986,7 +5987,7 @@ newtype CustomSourceLocation = CustomSourceLocation
 customSourceLocation
     :: CustomSourceLocation
 customSourceLocation =
-    CustomSourceLocation
+    CustomSourceLocation'
     { _cslStateful = Nothing
     }
 
@@ -5998,16 +5999,16 @@ cslStateful
 instance FromJSON CustomSourceLocation where
         parseJSON
           = withObject "CustomSourceLocation"
-              (\ o -> CustomSourceLocation <$> (o .:? "stateful"))
+              (\ o -> CustomSourceLocation' <$> (o .:? "stateful"))
 
 instance ToJSON CustomSourceLocation where
-        toJSON CustomSourceLocation{..}
+        toJSON CustomSourceLocation'{..}
           = object
               (catMaybes [("stateful" .=) <$> _cslStateful])
 
 --
 -- /See:/ 'sourceBaseSpecsItem' smart constructor.
-newtype SourceBaseSpecsItem = SourceBaseSpecsItem
+newtype SourceBaseSpecsItem = SourceBaseSpecsItem'
     { _sbsiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6020,7 +6021,7 @@ sourceBaseSpecsItem
     :: HashMap Text JSONValue -- ^ 'sbsiAddtional'
     -> SourceBaseSpecsItem
 sourceBaseSpecsItem pSbsiAddtional_ =
-    SourceBaseSpecsItem
+    SourceBaseSpecsItem'
     { _sbsiAddtional = _Coerce # pSbsiAddtional_
     }
 
@@ -6034,7 +6035,7 @@ sbsiAddtional
 instance FromJSON SourceBaseSpecsItem where
         parseJSON
           = withObject "SourceBaseSpecsItem"
-              (\ o -> SourceBaseSpecsItem <$> (parseJSONObject o))
+              (\ o -> SourceBaseSpecsItem' <$> (parseJSONObject o))
 
 instance ToJSON SourceBaseSpecsItem where
         toJSON = toJSON . _sbsiAddtional
@@ -6042,7 +6043,7 @@ instance ToJSON SourceBaseSpecsItem where
 -- | Describes a particular operation comprising a MapTask.
 --
 -- /See:/ 'parallelInstruction' smart constructor.
-data ParallelInstruction = ParallelInstruction
+data ParallelInstruction = ParallelInstruction'
     { _piRead              :: !(Maybe ReadInstruction)
     , _piWrite             :: !(Maybe WriteInstruction)
     , _piParDo             :: !(Maybe ParDoInstruction)
@@ -6075,7 +6076,7 @@ data ParallelInstruction = ParallelInstruction
 parallelInstruction
     :: ParallelInstruction
 parallelInstruction =
-    ParallelInstruction
+    ParallelInstruction'
     { _piRead = Nothing
     , _piWrite = Nothing
     , _piParDo = Nothing
@@ -6129,7 +6130,7 @@ instance FromJSON ParallelInstruction where
         parseJSON
           = withObject "ParallelInstruction"
               (\ o ->
-                 ParallelInstruction <$>
+                 ParallelInstruction' <$>
                    (o .:? "read") <*> (o .:? "write") <*>
                      (o .:? "parDo")
                      <*> (o .:? "partialGroupByKey")
@@ -6139,7 +6140,7 @@ instance FromJSON ParallelInstruction where
                      <*> (o .:? "flatten"))
 
 instance ToJSON ParallelInstruction where
-        toJSON ParallelInstruction{..}
+        toJSON ParallelInstruction'{..}
           = object
               (catMaybes
                  [("read" .=) <$> _piRead, ("write" .=) <$> _piWrite,
@@ -6153,7 +6154,7 @@ instance ToJSON ParallelInstruction where
 -- | How to interpret the source element(s) as a side input value.
 --
 -- /See:/ 'sideInputInfoKind' smart constructor.
-newtype SideInputInfoKind = SideInputInfoKind
+newtype SideInputInfoKind = SideInputInfoKind'
     { _siikAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6166,7 +6167,7 @@ sideInputInfoKind
     :: HashMap Text JSONValue -- ^ 'siikAddtional'
     -> SideInputInfoKind
 sideInputInfoKind pSiikAddtional_ =
-    SideInputInfoKind
+    SideInputInfoKind'
     { _siikAddtional = _Coerce # pSiikAddtional_
     }
 
@@ -6180,7 +6181,7 @@ siikAddtional
 instance FromJSON SideInputInfoKind where
         parseJSON
           = withObject "SideInputInfoKind"
-              (\ o -> SideInputInfoKind <$> (parseJSONObject o))
+              (\ o -> SideInputInfoKind' <$> (parseJSONObject o))
 
 instance ToJSON SideInputInfoKind where
         toJSON = toJSON . _siikAddtional
@@ -6188,7 +6189,7 @@ instance ToJSON SideInputInfoKind where
 -- | A request for sending worker messages to the service.
 --
 -- /See:/ 'sendWorkerMessagesRequest' smart constructor.
-newtype SendWorkerMessagesRequest = SendWorkerMessagesRequest
+newtype SendWorkerMessagesRequest = SendWorkerMessagesRequest'
     { _swmrWorkerMessages :: Maybe [WorkerMessage]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6200,7 +6201,7 @@ newtype SendWorkerMessagesRequest = SendWorkerMessagesRequest
 sendWorkerMessagesRequest
     :: SendWorkerMessagesRequest
 sendWorkerMessagesRequest =
-    SendWorkerMessagesRequest
+    SendWorkerMessagesRequest'
     { _swmrWorkerMessages = Nothing
     }
 
@@ -6216,11 +6217,11 @@ instance FromJSON SendWorkerMessagesRequest where
         parseJSON
           = withObject "SendWorkerMessagesRequest"
               (\ o ->
-                 SendWorkerMessagesRequest <$>
+                 SendWorkerMessagesRequest' <$>
                    (o .:? "workerMessages" .!= mempty))
 
 instance ToJSON SendWorkerMessagesRequest where
-        toJSON SendWorkerMessagesRequest{..}
+        toJSON SendWorkerMessagesRequest'{..}
           = object
               (catMaybes
                  [("workerMessages" .=) <$> _swmrWorkerMessages])
@@ -6228,7 +6229,7 @@ instance ToJSON SendWorkerMessagesRequest where
 -- | DEPRECATED in favor of DerivedSource.
 --
 -- /See:/ 'sourceSplitShard' smart constructor.
-data SourceSplitShard = SourceSplitShard
+data SourceSplitShard = SourceSplitShard'
     { _sssDerivationMode :: !(Maybe Text)
     , _sssSource         :: !(Maybe Source)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6243,7 +6244,7 @@ data SourceSplitShard = SourceSplitShard
 sourceSplitShard
     :: SourceSplitShard
 sourceSplitShard =
-    SourceSplitShard
+    SourceSplitShard'
     { _sssDerivationMode = Nothing
     , _sssSource = Nothing
     }
@@ -6263,11 +6264,11 @@ instance FromJSON SourceSplitShard where
         parseJSON
           = withObject "SourceSplitShard"
               (\ o ->
-                 SourceSplitShard <$>
+                 SourceSplitShard' <$>
                    (o .:? "derivationMode") <*> (o .:? "source"))
 
 instance ToJSON SourceSplitShard where
-        toJSON SourceSplitShard{..}
+        toJSON SourceSplitShard'{..}
           = object
               (catMaybes
                  [("derivationMode" .=) <$> _sssDerivationMode,
@@ -6276,7 +6277,7 @@ instance ToJSON SourceSplitShard where
 -- | Information about a side input of a DoFn or an input of a SeqDoFn.
 --
 -- /See:/ 'sideInputInfo' smart constructor.
-data SideInputInfo = SideInputInfo
+data SideInputInfo = SideInputInfo'
     { _siiTag     :: !(Maybe Text)
     , _siiKind    :: !(Maybe SideInputInfoKind)
     , _siiSources :: !(Maybe [Source])
@@ -6294,7 +6295,7 @@ data SideInputInfo = SideInputInfo
 sideInputInfo
     :: SideInputInfo
 sideInputInfo =
-    SideInputInfo
+    SideInputInfo'
     { _siiTag = Nothing
     , _siiKind = Nothing
     , _siiSources = Nothing
@@ -6323,12 +6324,12 @@ instance FromJSON SideInputInfo where
         parseJSON
           = withObject "SideInputInfo"
               (\ o ->
-                 SideInputInfo <$>
+                 SideInputInfo' <$>
                    (o .:? "tag") <*> (o .:? "kind") <*>
                      (o .:? "sources" .!= mempty))
 
 instance ToJSON SideInputInfo where
-        toJSON SideInputInfo{..}
+        toJSON SideInputInfo'{..}
           = object
               (catMaybes
                  [("tag" .=) <$> _siiTag, ("kind" .=) <$> _siiKind,
@@ -6338,7 +6339,7 @@ instance ToJSON SideInputInfo where
 -- isn’t contained in the submitted job.
 --
 -- /See:/ 'jobExecutionInfo' smart constructor.
-newtype JobExecutionInfo = JobExecutionInfo
+newtype JobExecutionInfo = JobExecutionInfo'
     { _jeiStages :: Maybe JobExecutionInfoStages
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6350,7 +6351,7 @@ newtype JobExecutionInfo = JobExecutionInfo
 jobExecutionInfo
     :: JobExecutionInfo
 jobExecutionInfo =
-    JobExecutionInfo
+    JobExecutionInfo'
     { _jeiStages = Nothing
     }
 
@@ -6362,16 +6363,16 @@ jeiStages
 instance FromJSON JobExecutionInfo where
         parseJSON
           = withObject "JobExecutionInfo"
-              (\ o -> JobExecutionInfo <$> (o .:? "stages"))
+              (\ o -> JobExecutionInfo' <$> (o .:? "stages"))
 
 instance ToJSON JobExecutionInfo where
-        toJSON JobExecutionInfo{..}
+        toJSON JobExecutionInfo'{..}
           = object (catMaybes [("stages" .=) <$> _jeiStages])
 
 -- | The codec to use to decode data read from the source.
 --
 -- /See:/ 'sourceCodec' smart constructor.
-newtype SourceCodec = SourceCodec
+newtype SourceCodec = SourceCodec'
     { _souAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6384,7 +6385,7 @@ sourceCodec
     :: HashMap Text JSONValue -- ^ 'souAddtional'
     -> SourceCodec
 sourceCodec pSouAddtional_ =
-    SourceCodec
+    SourceCodec'
     { _souAddtional = _Coerce # pSouAddtional_
     }
 
@@ -6397,7 +6398,7 @@ souAddtional
 instance FromJSON SourceCodec where
         parseJSON
           = withObject "SourceCodec"
-              (\ o -> SourceCodec <$> (parseJSONObject o))
+              (\ o -> SourceCodec' <$> (parseJSONObject o))
 
 instance ToJSON SourceCodec where
         toJSON = toJSON . _souAddtional
@@ -6405,7 +6406,7 @@ instance ToJSON SourceCodec where
 -- | State family configuration.
 --
 -- /See:/ 'stateFamilyConfig' smart constructor.
-data StateFamilyConfig = StateFamilyConfig
+data StateFamilyConfig = StateFamilyConfig'
     { _sfcIsRead      :: !(Maybe Bool)
     , _sfcStateFamily :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6420,7 +6421,7 @@ data StateFamilyConfig = StateFamilyConfig
 stateFamilyConfig
     :: StateFamilyConfig
 stateFamilyConfig =
-    StateFamilyConfig
+    StateFamilyConfig'
     { _sfcIsRead = Nothing
     , _sfcStateFamily = Nothing
     }
@@ -6440,11 +6441,11 @@ instance FromJSON StateFamilyConfig where
         parseJSON
           = withObject "StateFamilyConfig"
               (\ o ->
-                 StateFamilyConfig <$>
+                 StateFamilyConfig' <$>
                    (o .:? "isRead") <*> (o .:? "stateFamily"))
 
 instance ToJSON StateFamilyConfig where
-        toJSON StateFamilyConfig{..}
+        toJSON StateFamilyConfig'{..}
           = object
               (catMaybes
                  [("isRead" .=) <$> _sfcIsRead,
@@ -6455,7 +6456,7 @@ instance ToJSON StateFamilyConfig where
 -- simplify encoding into JSON.
 --
 -- /See:/ 'keyRangeDataDiskAssignment' smart constructor.
-data KeyRangeDataDiskAssignment = KeyRangeDataDiskAssignment
+data KeyRangeDataDiskAssignment = KeyRangeDataDiskAssignment'
     { _krddaDataDisk :: !(Maybe Text)
     , _krddaStart    :: !(Maybe Text)
     , _krddaEnd      :: !(Maybe Text)
@@ -6473,7 +6474,7 @@ data KeyRangeDataDiskAssignment = KeyRangeDataDiskAssignment
 keyRangeDataDiskAssignment
     :: KeyRangeDataDiskAssignment
 keyRangeDataDiskAssignment =
-    KeyRangeDataDiskAssignment
+    KeyRangeDataDiskAssignment'
     { _krddaDataDisk = Nothing
     , _krddaStart = Nothing
     , _krddaEnd = Nothing
@@ -6501,12 +6502,12 @@ instance FromJSON KeyRangeDataDiskAssignment where
         parseJSON
           = withObject "KeyRangeDataDiskAssignment"
               (\ o ->
-                 KeyRangeDataDiskAssignment <$>
+                 KeyRangeDataDiskAssignment' <$>
                    (o .:? "dataDisk") <*> (o .:? "start") <*>
                      (o .:? "end"))
 
 instance ToJSON KeyRangeDataDiskAssignment where
-        toJSON KeyRangeDataDiskAssignment{..}
+        toJSON KeyRangeDataDiskAssignment'{..}
           = object
               (catMaybes
                  [("dataDisk" .=) <$> _krddaDataDisk,
@@ -6526,7 +6527,7 @@ instance ToJSON KeyRangeDataDiskAssignment where
 -- and to bundles produced from it.
 --
 -- /See:/ 'sourceSplitRequest' smart constructor.
-data SourceSplitRequest = SourceSplitRequest
+data SourceSplitRequest = SourceSplitRequest'
     { _ssrSource  :: !(Maybe Source)
     , _ssrOptions :: !(Maybe SourceSplitOptions)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6541,7 +6542,7 @@ data SourceSplitRequest = SourceSplitRequest
 sourceSplitRequest
     :: SourceSplitRequest
 sourceSplitRequest =
-    SourceSplitRequest
+    SourceSplitRequest'
     { _ssrSource = Nothing
     , _ssrOptions = Nothing
     }
@@ -6560,11 +6561,11 @@ instance FromJSON SourceSplitRequest where
         parseJSON
           = withObject "SourceSplitRequest"
               (\ o ->
-                 SourceSplitRequest <$>
+                 SourceSplitRequest' <$>
                    (o .:? "source") <*> (o .:? "options"))
 
 instance ToJSON SourceSplitRequest where
-        toJSON SourceSplitRequest{..}
+        toJSON SourceSplitRequest'{..}
           = object
               (catMaybes
                  [("source" .=) <$> _ssrSource,
@@ -6573,7 +6574,7 @@ instance ToJSON SourceSplitRequest where
 -- | Response to a request to list job messages.
 --
 -- /See:/ 'listJobMessagesResponse' smart constructor.
-data ListJobMessagesResponse = ListJobMessagesResponse
+data ListJobMessagesResponse = ListJobMessagesResponse'
     { _ljmrJobMessages   :: !(Maybe [JobMessage])
     , _ljmrNextPageToken :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6588,7 +6589,7 @@ data ListJobMessagesResponse = ListJobMessagesResponse
 listJobMessagesResponse
     :: ListJobMessagesResponse
 listJobMessagesResponse =
-    ListJobMessagesResponse
+    ListJobMessagesResponse'
     { _ljmrJobMessages = Nothing
     , _ljmrNextPageToken = Nothing
     }
@@ -6611,12 +6612,12 @@ instance FromJSON ListJobMessagesResponse where
         parseJSON
           = withObject "ListJobMessagesResponse"
               (\ o ->
-                 ListJobMessagesResponse <$>
+                 ListJobMessagesResponse' <$>
                    (o .:? "jobMessages" .!= mempty) <*>
                      (o .:? "nextPageToken"))
 
 instance ToJSON ListJobMessagesResponse where
-        toJSON ListJobMessagesResponse{..}
+        toJSON ListJobMessagesResponse'{..}
           = object
               (catMaybes
                  [("jobMessages" .=) <$> _ljmrJobMessages,
@@ -6626,7 +6627,7 @@ instance ToJSON ListJobMessagesResponse where
 -- a streaming Dataflow job.
 --
 -- /See:/ 'pubsubLocation' smart constructor.
-data PubsubLocation = PubsubLocation
+data PubsubLocation = PubsubLocation'
     { _plTrackingSubscription :: !(Maybe Text)
     , _plDropLateData         :: !(Maybe Bool)
     , _plTimestampLabel       :: !(Maybe Text)
@@ -6653,7 +6654,7 @@ data PubsubLocation = PubsubLocation
 pubsubLocation
     :: PubsubLocation
 pubsubLocation =
-    PubsubLocation
+    PubsubLocation'
     { _plTrackingSubscription = Nothing
     , _plDropLateData = Nothing
     , _plTimestampLabel = Nothing
@@ -6703,7 +6704,7 @@ instance FromJSON PubsubLocation where
         parseJSON
           = withObject "PubsubLocation"
               (\ o ->
-                 PubsubLocation <$>
+                 PubsubLocation' <$>
                    (o .:? "trackingSubscription") <*>
                      (o .:? "dropLateData")
                      <*> (o .:? "timestampLabel")
@@ -6712,7 +6713,7 @@ instance FromJSON PubsubLocation where
                      <*> (o .:? "subscription"))
 
 instance ToJSON PubsubLocation where
-        toJSON PubsubLocation{..}
+        toJSON PubsubLocation'{..}
           = object
               (catMaybes
                  [("trackingSubscription" .=) <$>
@@ -6727,7 +6728,7 @@ instance ToJSON PubsubLocation where
 -- instruction.
 --
 -- /See:/ 'instructionInput' smart constructor.
-data InstructionInput = InstructionInput
+data InstructionInput = InstructionInput'
     { _iiProducerInstructionIndex :: !(Maybe (Textual Int32))
     , _iiOutputNum                :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6742,7 +6743,7 @@ data InstructionInput = InstructionInput
 instructionInput
     :: InstructionInput
 instructionInput =
-    InstructionInput
+    InstructionInput'
     { _iiProducerInstructionIndex = Nothing
     , _iiOutputNum = Nothing
     }
@@ -6766,12 +6767,12 @@ instance FromJSON InstructionInput where
         parseJSON
           = withObject "InstructionInput"
               (\ o ->
-                 InstructionInput <$>
+                 InstructionInput' <$>
                    (o .:? "producerInstructionIndex") <*>
                      (o .:? "outputNum"))
 
 instance ToJSON InstructionInput where
-        toJSON InstructionInput{..}
+        toJSON InstructionInput'{..}
           = object
               (catMaybes
                  [("producerInstructionIndex" .=) <$>
@@ -6781,7 +6782,7 @@ instance ToJSON InstructionInput where
 -- | Describes a particular function to invoke.
 --
 -- /See:/ 'seqMapTask' smart constructor.
-data SeqMapTask = SeqMapTask
+data SeqMapTask = SeqMapTask'
     { _smtInputs      :: !(Maybe [SideInputInfo])
     , _smtName        :: !(Maybe Text)
     , _smtOutputInfos :: !(Maybe [SeqMapTaskOutputInfo])
@@ -6808,7 +6809,7 @@ data SeqMapTask = SeqMapTask
 seqMapTask
     :: SeqMapTask
 seqMapTask =
-    SeqMapTask
+    SeqMapTask'
     { _smtInputs = Nothing
     , _smtName = Nothing
     , _smtOutputInfos = Nothing
@@ -6857,7 +6858,7 @@ instance FromJSON SeqMapTask where
         parseJSON
           = withObject "SeqMapTask"
               (\ o ->
-                 SeqMapTask <$>
+                 SeqMapTask' <$>
                    (o .:? "inputs" .!= mempty) <*> (o .:? "name") <*>
                      (o .:? "outputInfos" .!= mempty)
                      <*> (o .:? "systemName")
@@ -6865,7 +6866,7 @@ instance FromJSON SeqMapTask where
                      <*> (o .:? "userFn"))
 
 instance ToJSON SeqMapTask where
-        toJSON SeqMapTask{..}
+        toJSON SeqMapTask'{..}
           = object
               (catMaybes
                  [("inputs" .=) <$> _smtInputs,
@@ -6879,7 +6880,7 @@ instance ToJSON SeqMapTask where
 -- performed on a user-defined Source specification.
 --
 -- /See:/ 'sourceOperationRequest' smart constructor.
-data SourceOperationRequest = SourceOperationRequest
+data SourceOperationRequest = SourceOperationRequest'
     { _sSplit       :: !(Maybe SourceSplitRequest)
     , _sGetMetadata :: !(Maybe SourceGetMetadataRequest)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -6894,7 +6895,7 @@ data SourceOperationRequest = SourceOperationRequest
 sourceOperationRequest
     :: SourceOperationRequest
 sourceOperationRequest =
-    SourceOperationRequest
+    SourceOperationRequest'
     { _sSplit = Nothing
     , _sGetMetadata = Nothing
     }
@@ -6912,11 +6913,11 @@ instance FromJSON SourceOperationRequest where
         parseJSON
           = withObject "SourceOperationRequest"
               (\ o ->
-                 SourceOperationRequest <$>
+                 SourceOperationRequest' <$>
                    (o .:? "split") <*> (o .:? "getMetadata"))
 
 instance ToJSON SourceOperationRequest where
-        toJSON SourceOperationRequest{..}
+        toJSON SourceOperationRequest'{..}
           = object
               (catMaybes
                  [("split" .=) <$> _sSplit,
@@ -6925,7 +6926,7 @@ instance ToJSON SourceOperationRequest where
 -- | Response to a request to lease WorkItems.
 --
 -- /See:/ 'leaseWorkItemResponse' smart constructor.
-newtype LeaseWorkItemResponse = LeaseWorkItemResponse
+newtype LeaseWorkItemResponse = LeaseWorkItemResponse'
     { _lwirWorkItems :: Maybe [WorkItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6937,7 +6938,7 @@ newtype LeaseWorkItemResponse = LeaseWorkItemResponse
 leaseWorkItemResponse
     :: LeaseWorkItemResponse
 leaseWorkItemResponse =
-    LeaseWorkItemResponse
+    LeaseWorkItemResponse'
     { _lwirWorkItems = Nothing
     }
 
@@ -6953,11 +6954,11 @@ instance FromJSON LeaseWorkItemResponse where
         parseJSON
           = withObject "LeaseWorkItemResponse"
               (\ o ->
-                 LeaseWorkItemResponse <$>
+                 LeaseWorkItemResponse' <$>
                    (o .:? "workItems" .!= mempty))
 
 instance ToJSON LeaseWorkItemResponse where
-        toJSON LeaseWorkItemResponse{..}
+        toJSON LeaseWorkItemResponse'{..}
           = object
               (catMaybes [("workItems" .=) <$> _lwirWorkItems])
 
@@ -6966,7 +6967,7 @@ instance ToJSON LeaseWorkItemResponse where
 -- byte offset, or a record index.
 --
 -- /See:/ 'position' smart constructor.
-data Position = Position
+data Position = Position'
     { _pByteOffSet      :: !(Maybe (Textual Int64))
     , _pConcatPosition  :: !(Maybe ConcatPosition)
     , _pRecordIndex     :: !(Maybe (Textual Int64))
@@ -6993,7 +6994,7 @@ data Position = Position
 position
     :: Position
 position =
-    Position
+    Position'
     { _pByteOffSet = Nothing
     , _pConcatPosition = Nothing
     , _pRecordIndex = Nothing
@@ -7040,7 +7041,7 @@ instance FromJSON Position where
         parseJSON
           = withObject "Position"
               (\ o ->
-                 Position <$>
+                 Position' <$>
                    (o .:? "byteOffset") <*> (o .:? "concatPosition") <*>
                      (o .:? "recordIndex")
                      <*> (o .:? "shufflePosition")
@@ -7048,7 +7049,7 @@ instance FromJSON Position where
                      <*> (o .:? "end"))
 
 instance ToJSON Position where
-        toJSON Position{..}
+        toJSON Position'{..}
           = object
               (catMaybes
                  [("byteOffset" .=) <$> _pByteOffSet,

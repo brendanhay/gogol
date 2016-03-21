@@ -54,7 +54,7 @@ type PagesDeleteResource =
 -- | Delete a page by ID.
 --
 -- /See:/ 'pagesDelete' smart constructor.
-data PagesDelete = PagesDelete
+data PagesDelete = PagesDelete'
     { _pddBlogId :: !Text
     , _pddPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ pagesDelete
     -> Text -- ^ 'pddPageId'
     -> PagesDelete
 pagesDelete pPddBlogId_ pPddPageId_ =
-    PagesDelete
+    PagesDelete'
     { _pddBlogId = pPddBlogId_
     , _pddPageId = pPddPageId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest PagesDelete where
         type Rs PagesDelete = ()
         type Scopes PagesDelete =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PagesDelete{..}
+        requestClient PagesDelete'{..}
           = go _pddBlogId _pddPageId (Just AltJSON)
               bloggerService
           where go

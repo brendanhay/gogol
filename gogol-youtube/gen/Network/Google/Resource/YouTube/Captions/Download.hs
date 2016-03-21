@@ -76,7 +76,7 @@ type CaptionsDownloadResource =
 -- tlang parameter.
 --
 -- /See:/ 'captionsDownload' smart constructor.
-data CaptionsDownload = CaptionsDownload
+data CaptionsDownload = CaptionsDownload'
     { _capaOnBehalfOf             :: !(Maybe Text)
     , _capaTlang                  :: !(Maybe Text)
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
@@ -101,7 +101,7 @@ captionsDownload
     :: Text -- ^ 'capaId'
     -> CaptionsDownload
 captionsDownload pCapaId_ =
-    CaptionsDownload
+    CaptionsDownload'
     { _capaOnBehalfOf = Nothing
     , _capaTlang = Nothing
     , _capaOnBehalfOfContentOwner = Nothing
@@ -157,7 +157,7 @@ instance GoogleRequest CaptionsDownload where
         type Scopes CaptionsDownload =
              '["https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient CaptionsDownload{..}
+        requestClient CaptionsDownload'{..}
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt
@@ -173,7 +173,7 @@ instance GoogleRequest
         type Rs (MediaDownload CaptionsDownload) = Stream
         type Scopes (MediaDownload CaptionsDownload) =
              Scopes CaptionsDownload
-        requestClient (MediaDownload CaptionsDownload{..})
+        requestClient (MediaDownload CaptionsDownload'{..})
           = go _capaId _capaOnBehalfOf _capaTlang
               _capaOnBehalfOfContentOwner
               _capaTfmt

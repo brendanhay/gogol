@@ -68,7 +68,7 @@ type MobileDevicesListResource =
 -- | Retrieve all Mobile Devices of a customer (paginated)
 --
 -- /See:/ 'mobileDevicesList' smart constructor.
-data MobileDevicesList = MobileDevicesList
+data MobileDevicesList = MobileDevicesList'
     { _mdlOrderBy    :: !(Maybe MobileDevicesListOrderBy)
     , _mdlCustomerId :: !Text
     , _mdlSortOrder  :: !(Maybe MobileDevicesListSortOrder)
@@ -99,7 +99,7 @@ mobileDevicesList
     :: Text -- ^ 'mdlCustomerId'
     -> MobileDevicesList
 mobileDevicesList pMdlCustomerId_ =
-    MobileDevicesList
+    MobileDevicesList'
     { _mdlOrderBy = Nothing
     , _mdlCustomerId = pMdlCustomerId_
     , _mdlSortOrder = Nothing
@@ -155,7 +155,7 @@ instance GoogleRequest MobileDevicesList where
              '["https://www.googleapis.com/auth/admin.directory.device.mobile",
                "https://www.googleapis.com/auth/admin.directory.device.mobile.action",
                "https://www.googleapis.com/auth/admin.directory.device.mobile.readonly"]
-        requestClient MobileDevicesList{..}
+        requestClient MobileDevicesList'{..}
           = go _mdlCustomerId _mdlOrderBy _mdlSortOrder
               _mdlQuery
               _mdlProjection

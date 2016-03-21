@@ -70,7 +70,7 @@ type AppsServicesListResource =
 -- | Lists all the services in the application.
 --
 -- /See:/ 'appsServicesList' smart constructor.
-data AppsServicesList = AppsServicesList
+data AppsServicesList = AppsServicesList'
     { _aslXgafv          :: !(Maybe Text)
     , _aslUploadProtocol :: !(Maybe Text)
     , _aslPp             :: !Bool
@@ -110,7 +110,7 @@ appsServicesList
     :: Text -- ^ 'aslAppsId'
     -> AppsServicesList
 appsServicesList pAslAppsId_ =
-    AppsServicesList
+    AppsServicesList'
     { _aslXgafv = Nothing
     , _aslUploadProtocol = Nothing
     , _aslPp = True
@@ -181,7 +181,7 @@ instance GoogleRequest AppsServicesList where
         type Rs AppsServicesList = ListServicesResponse
         type Scopes AppsServicesList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesList{..}
+        requestClient AppsServicesList'{..}
           = go _aslAppsId _aslXgafv _aslUploadProtocol
               (Just _aslPp)
               _aslAccessToken

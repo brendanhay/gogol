@@ -68,7 +68,7 @@ type DataSetsDeleteResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsDelete' smart constructor.
-data DataSetsDelete = DataSetsDelete
+data DataSetsDelete = DataSetsDelete'
     { _dsdXgafv          :: !(Maybe Text)
     , _dsdUploadProtocol :: !(Maybe Text)
     , _dsdPp             :: !Bool
@@ -102,7 +102,7 @@ dataSetsDelete
     :: Text -- ^ 'dsdDataSetId'
     -> DataSetsDelete
 dataSetsDelete pDsdDataSetId_ =
-    DataSetsDelete
+    DataSetsDelete'
     { _dsdXgafv = Nothing
     , _dsdUploadProtocol = Nothing
     , _dsdPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest DataSetsDelete where
         type Scopes DataSetsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsDelete{..}
+        requestClient DataSetsDelete'{..}
           = go _dsdDataSetId _dsdXgafv _dsdUploadProtocol
               (Just _dsdPp)
               _dsdAccessToken

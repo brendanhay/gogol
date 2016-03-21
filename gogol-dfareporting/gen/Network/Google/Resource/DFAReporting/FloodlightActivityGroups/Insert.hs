@@ -55,7 +55,7 @@ type FloodlightActivityGroupsInsertResource =
 -- | Inserts a new floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsInsert' smart constructor.
-data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert
+data FloodlightActivityGroupsInsert = FloodlightActivityGroupsInsert'
     { _fagiProFileId :: !(Textual Int64)
     , _fagiPayload   :: !FloodlightActivityGroup
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightActivityGroupsInsert
     -> FloodlightActivityGroup -- ^ 'fagiPayload'
     -> FloodlightActivityGroupsInsert
 floodlightActivityGroupsInsert pFagiProFileId_ pFagiPayload_ =
-    FloodlightActivityGroupsInsert
+    FloodlightActivityGroupsInsert'
     { _fagiProFileId = _Coerce # pFagiProFileId_
     , _fagiPayload = pFagiPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest FloodlightActivityGroupsInsert
              FloodlightActivityGroup
         type Scopes FloodlightActivityGroupsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightActivityGroupsInsert{..}
+        requestClient FloodlightActivityGroupsInsert'{..}
           = go _fagiProFileId (Just AltJSON) _fagiPayload
               dFAReportingService
           where go

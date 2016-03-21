@@ -61,7 +61,7 @@ type SnapshotsListResource =
 -- corresponding to the player ID.
 --
 -- /See:/ 'snapshotsList' smart constructor.
-data SnapshotsList = SnapshotsList
+data SnapshotsList = SnapshotsList'
     { _slLanguage   :: !(Maybe Text)
     , _slPageToken  :: !(Maybe Text)
     , _slPlayerId   :: !Text
@@ -83,7 +83,7 @@ snapshotsList
     :: Text -- ^ 'slPlayerId'
     -> SnapshotsList
 snapshotsList pSlPlayerId_ =
-    SnapshotsList
+    SnapshotsList'
     { _slLanguage = Nothing
     , _slPageToken = Nothing
     , _slPlayerId = pSlPlayerId_
@@ -120,7 +120,7 @@ instance GoogleRequest SnapshotsList where
              '["https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient SnapshotsList{..}
+        requestClient SnapshotsList'{..}
           = go _slPlayerId _slLanguage _slPageToken
               _slMaxResults
               (Just AltJSON)

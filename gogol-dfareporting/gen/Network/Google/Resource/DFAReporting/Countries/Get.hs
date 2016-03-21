@@ -54,7 +54,7 @@ type CountriesGetResource =
 -- | Gets one country by ID.
 --
 -- /See:/ 'countriesGet' smart constructor.
-data CountriesGet = CountriesGet
+data CountriesGet = CountriesGet'
     { _cgProFileId :: !(Textual Int64)
     , _cgDartId    :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ countriesGet
     -> Int64 -- ^ 'cgDartId'
     -> CountriesGet
 countriesGet pCgProFileId_ pCgDartId_ =
-    CountriesGet
+    CountriesGet'
     { _cgProFileId = _Coerce # pCgProFileId_
     , _cgDartId = _Coerce # pCgDartId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CountriesGet where
         type Rs CountriesGet = Country
         type Scopes CountriesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CountriesGet{..}
+        requestClient CountriesGet'{..}
           = go _cgProFileId _cgDartId (Just AltJSON)
               dFAReportingService
           where go

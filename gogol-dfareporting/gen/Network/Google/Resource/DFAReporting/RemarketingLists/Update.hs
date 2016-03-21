@@ -55,7 +55,7 @@ type RemarketingListsUpdateResource =
 -- | Updates an existing remarketing list.
 --
 -- /See:/ 'remarketingListsUpdate' smart constructor.
-data RemarketingListsUpdate = RemarketingListsUpdate
+data RemarketingListsUpdate = RemarketingListsUpdate'
     { _rluProFileId :: !(Textual Int64)
     , _rluPayload   :: !RemarketingList
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ remarketingListsUpdate
     -> RemarketingList -- ^ 'rluPayload'
     -> RemarketingListsUpdate
 remarketingListsUpdate pRluProFileId_ pRluPayload_ =
-    RemarketingListsUpdate
+    RemarketingListsUpdate'
     { _rluProFileId = _Coerce # pRluProFileId_
     , _rluPayload = pRluPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest RemarketingListsUpdate where
         type Rs RemarketingListsUpdate = RemarketingList
         type Scopes RemarketingListsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient RemarketingListsUpdate{..}
+        requestClient RemarketingListsUpdate'{..}
           = go _rluProFileId (Just AltJSON) _rluPayload
               dFAReportingService
           where go

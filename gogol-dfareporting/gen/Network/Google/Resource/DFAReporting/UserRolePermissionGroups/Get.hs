@@ -55,7 +55,7 @@ type UserRolePermissionGroupsGetResource =
 -- | Gets one user role permission group by ID.
 --
 -- /See:/ 'userRolePermissionGroupsGet' smart constructor.
-data UserRolePermissionGroupsGet = UserRolePermissionGroupsGet
+data UserRolePermissionGroupsGet = UserRolePermissionGroupsGet'
     { _urpggProFileId :: !(Textual Int64)
     , _urpggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ userRolePermissionGroupsGet
     -> Int64 -- ^ 'urpggId'
     -> UserRolePermissionGroupsGet
 userRolePermissionGroupsGet pUrpggProFileId_ pUrpggId_ =
-    UserRolePermissionGroupsGet
+    UserRolePermissionGroupsGet'
     { _urpggProFileId = _Coerce # pUrpggProFileId_
     , _urpggId = _Coerce # pUrpggId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest UserRolePermissionGroupsGet
              UserRolePermissionGroup
         type Scopes UserRolePermissionGroupsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolePermissionGroupsGet{..}
+        requestClient UserRolePermissionGroupsGet'{..}
           = go _urpggProFileId _urpggId (Just AltJSON)
               dFAReportingService
           where go

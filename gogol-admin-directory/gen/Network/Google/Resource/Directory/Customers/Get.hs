@@ -52,7 +52,7 @@ type CustomersGetResource =
 -- | Retrives a customer.
 --
 -- /See:/ 'customersGet' smart constructor.
-newtype CustomersGet = CustomersGet
+newtype CustomersGet = CustomersGet'
     { _cgCustomerKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ customersGet
     :: Text -- ^ 'cgCustomerKey'
     -> CustomersGet
 customersGet pCgCustomerKey_ =
-    CustomersGet
+    CustomersGet'
     { _cgCustomerKey = pCgCustomerKey_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest CustomersGet where
         type Scopes CustomersGet =
              '["https://www.googleapis.com/auth/admin.directory.customer",
                "https://www.googleapis.com/auth/admin.directory.customer.readonly"]
-        requestClient CustomersGet{..}
+        requestClient CustomersGet'{..}
           = go _cgCustomerKey (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy CustomersGetResource)

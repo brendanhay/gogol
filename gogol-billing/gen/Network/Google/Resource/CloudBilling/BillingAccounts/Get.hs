@@ -68,7 +68,7 @@ type BillingAccountsGetResource =
 -- account](https:\/\/support.google.com\/cloud\/answer\/4430947).
 --
 -- /See:/ 'billingAccountsGet' smart constructor.
-data BillingAccountsGet = BillingAccountsGet
+data BillingAccountsGet = BillingAccountsGet'
     { _bagXgafv          :: !(Maybe Text)
     , _bagUploadProtocol :: !(Maybe Text)
     , _bagPp             :: !Bool
@@ -102,7 +102,7 @@ billingAccountsGet
     :: Text -- ^ 'bagName'
     -> BillingAccountsGet
 billingAccountsGet pBagName_ =
-    BillingAccountsGet
+    BillingAccountsGet'
     { _bagXgafv = Nothing
     , _bagUploadProtocol = Nothing
     , _bagPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest BillingAccountsGet where
         type Rs BillingAccountsGet = BillingAccount
         type Scopes BillingAccountsGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient BillingAccountsGet{..}
+        requestClient BillingAccountsGet'{..}
           = go _bagName _bagXgafv _bagUploadProtocol
               (Just _bagPp)
               _bagAccessToken

@@ -63,7 +63,7 @@ type ReportsFilesListResource =
 -- | Lists files for a report.
 --
 -- /See:/ 'reportsFilesList' smart constructor.
-data ReportsFilesList = ReportsFilesList
+data ReportsFilesList = ReportsFilesList'
     { _rflReportId   :: !(Textual Int64)
     , _rflProFileId  :: !(Textual Int64)
     , _rflSortOrder  :: !ReportsFilesListSortOrder
@@ -92,7 +92,7 @@ reportsFilesList
     -> Int64 -- ^ 'rflProFileId'
     -> ReportsFilesList
 reportsFilesList pRflReportId_ pRflProFileId_ =
-    ReportsFilesList
+    ReportsFilesList'
     { _rflReportId = _Coerce # pRflReportId_
     , _rflProFileId = _Coerce # pRflProFileId_
     , _rflSortOrder = RFLSODescending
@@ -139,7 +139,7 @@ instance GoogleRequest ReportsFilesList where
         type Rs ReportsFilesList = FileList
         type Scopes ReportsFilesList =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsFilesList{..}
+        requestClient ReportsFilesList'{..}
           = go _rflProFileId _rflReportId (Just _rflSortOrder)
               _rflPageToken
               (Just _rflSortField)

@@ -73,7 +73,7 @@ type ProjectsTopicsDeleteResource =
 -- \`_deleted-topic_\`.
 --
 -- /See:/ 'projectsTopicsDelete' smart constructor.
-data ProjectsTopicsDelete = ProjectsTopicsDelete
+data ProjectsTopicsDelete = ProjectsTopicsDelete'
     { _ptdXgafv          :: !(Maybe Text)
     , _ptdUploadProtocol :: !(Maybe Text)
     , _ptdPp             :: !Bool
@@ -107,7 +107,7 @@ projectsTopicsDelete
     :: Text -- ^ 'ptdTopic'
     -> ProjectsTopicsDelete
 projectsTopicsDelete pPtdTopic_ =
-    ProjectsTopicsDelete
+    ProjectsTopicsDelete'
     { _ptdXgafv = Nothing
     , _ptdUploadProtocol = Nothing
     , _ptdPp = True
@@ -164,7 +164,7 @@ instance GoogleRequest ProjectsTopicsDelete where
         type Scopes ProjectsTopicsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/pubsub"]
-        requestClient ProjectsTopicsDelete{..}
+        requestClient ProjectsTopicsDelete'{..}
           = go _ptdTopic _ptdXgafv _ptdUploadProtocol
               (Just _ptdPp)
               _ptdAccessToken

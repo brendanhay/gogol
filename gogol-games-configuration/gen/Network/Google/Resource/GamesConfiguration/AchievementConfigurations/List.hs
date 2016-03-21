@@ -57,7 +57,7 @@ type AchievementConfigurationsListResource =
 -- | Returns a list of the achievement configurations in this application.
 --
 -- /See:/ 'achievementConfigurationsList' smart constructor.
-data AchievementConfigurationsList = AchievementConfigurationsList
+data AchievementConfigurationsList = AchievementConfigurationsList'
     { _aclApplicationId :: !Text
     , _aclPageToken     :: !(Maybe Text)
     , _aclMaxResults    :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ achievementConfigurationsList
     :: Text -- ^ 'aclApplicationId'
     -> AchievementConfigurationsList
 achievementConfigurationsList pAclApplicationId_ =
-    AchievementConfigurationsList
+    AchievementConfigurationsList'
     { _aclApplicationId = pAclApplicationId_
     , _aclPageToken = Nothing
     , _aclMaxResults = Nothing
@@ -108,7 +108,7 @@ instance GoogleRequest AchievementConfigurationsList
              AchievementConfigurationListResponse
         type Scopes AchievementConfigurationsList =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient AchievementConfigurationsList{..}
+        requestClient AchievementConfigurationsList'{..}
           = go _aclApplicationId _aclPageToken _aclMaxResults
               (Just AltJSON)
               gamesConfigurationService

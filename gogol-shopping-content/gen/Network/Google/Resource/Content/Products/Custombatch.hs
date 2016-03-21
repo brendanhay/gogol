@@ -55,7 +55,7 @@ type ProductsCustombatchResource =
 -- | Retrieves, inserts, and deletes multiple products in a single request.
 --
 -- /See:/ 'productsCustombatch' smart constructor.
-data ProductsCustombatch = ProductsCustombatch
+data ProductsCustombatch = ProductsCustombatch'
     { _pcPayload :: !ProductsCustomBatchRequest
     , _pcDryRun  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ productsCustombatch
     :: ProductsCustomBatchRequest -- ^ 'pcPayload'
     -> ProductsCustombatch
 productsCustombatch pPcPayload_ =
-    ProductsCustombatch
+    ProductsCustombatch'
     { _pcPayload = pPcPayload_
     , _pcDryRun = Nothing
     }
@@ -90,7 +90,7 @@ instance GoogleRequest ProductsCustombatch where
              ProductsCustomBatchResponse
         type Scopes ProductsCustombatch =
              '["https://www.googleapis.com/auth/content"]
-        requestClient ProductsCustombatch{..}
+        requestClient ProductsCustombatch'{..}
           = go _pcDryRun (Just AltJSON) _pcPayload
               shoppingContentService
           where go

@@ -76,7 +76,7 @@ type ActivitiesWatchResource =
 -- | Push changes to activities
 --
 -- /See:/ 'activitiesWatch' smart constructor.
-data ActivitiesWatch = ActivitiesWatch
+data ActivitiesWatch = ActivitiesWatch'
     { _awStartTime       :: !(Maybe Text)
     , _awFilters         :: !(Maybe Text)
     , _awPayload         :: !Channel
@@ -121,7 +121,7 @@ activitiesWatch
     -> Text -- ^ 'awUserKey'
     -> ActivitiesWatch
 activitiesWatch pAwPayload_ pAwApplicationName_ pAwUserKey_ =
-    ActivitiesWatch
+    ActivitiesWatch'
     { _awStartTime = Nothing
     , _awFilters = Nothing
     , _awPayload = pAwPayload_
@@ -201,7 +201,7 @@ instance GoogleRequest ActivitiesWatch where
         type Rs ActivitiesWatch = Channel
         type Scopes ActivitiesWatch =
              '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-        requestClient ActivitiesWatch{..}
+        requestClient ActivitiesWatch'{..}
           = go _awUserKey _awApplicationName _awStartTime
               _awFilters
               _awCustomerId

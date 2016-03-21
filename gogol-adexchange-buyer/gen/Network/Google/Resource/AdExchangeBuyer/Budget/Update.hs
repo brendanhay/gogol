@@ -57,7 +57,7 @@ type BudgetUpdateResource =
 -- accountId and billingId, with the budget amount in the request.
 --
 -- /See:/ 'budgetUpdate' smart constructor.
-data BudgetUpdate = BudgetUpdate
+data BudgetUpdate = BudgetUpdate'
     { _buPayload   :: !Budget
     , _buAccountId :: !(Textual Int64)
     , _buBillingId :: !(Textual Int64)
@@ -78,7 +78,7 @@ budgetUpdate
     -> Int64 -- ^ 'buBillingId'
     -> BudgetUpdate
 budgetUpdate pBuPayload_ pBuAccountId_ pBuBillingId_ =
-    BudgetUpdate
+    BudgetUpdate'
     { _buPayload = pBuPayload_
     , _buAccountId = _Coerce # pBuAccountId_
     , _buBillingId = _Coerce # pBuBillingId_
@@ -105,7 +105,7 @@ instance GoogleRequest BudgetUpdate where
         type Rs BudgetUpdate = Budget
         type Scopes BudgetUpdate =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient BudgetUpdate{..}
+        requestClient BudgetUpdate'{..}
           = go _buAccountId _buBillingId (Just AltJSON)
               _buPayload
               adExchangeBuyerService

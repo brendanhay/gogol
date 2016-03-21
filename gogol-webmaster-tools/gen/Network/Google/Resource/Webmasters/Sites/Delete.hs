@@ -51,7 +51,7 @@ type SitesDeleteResource =
 -- | Removes a site from the set of the user\'s Search Console sites.
 --
 -- /See:/ 'sitesDelete' smart constructor.
-newtype SitesDelete = SitesDelete
+newtype SitesDelete = SitesDelete'
     { _sSiteURL :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ sitesDelete
     :: Text -- ^ 'sSiteURL'
     -> SitesDelete
 sitesDelete pSSiteURL_ =
-    SitesDelete
+    SitesDelete'
     { _sSiteURL = pSSiteURL_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest SitesDelete where
         type Rs SitesDelete = ()
         type Scopes SitesDelete =
              '["https://www.googleapis.com/auth/webmasters"]
-        requestClient SitesDelete{..}
+        requestClient SitesDelete'{..}
           = go _sSiteURL (Just AltJSON) webmasterToolsService
           where go
                   = buildClient (Proxy :: Proxy SitesDeleteResource)

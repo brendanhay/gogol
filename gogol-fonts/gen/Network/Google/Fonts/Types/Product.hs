@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'webfont' smart constructor.
-data Webfont = Webfont
+data Webfont = Webfont'
     { _wVariants     :: !(Maybe [Text])
     , _wKind         :: !Text
     , _wCategory     :: !(Maybe Text)
@@ -55,7 +55,7 @@ data Webfont = Webfont
 webfont
     :: Webfont
 webfont =
-    Webfont
+    Webfont'
     { _wVariants = Nothing
     , _wKind = "webfonts#webfont"
     , _wCategory = Nothing
@@ -114,7 +114,7 @@ instance FromJSON Webfont where
         parseJSON
           = withObject "Webfont"
               (\ o ->
-                 Webfont <$>
+                 Webfont' <$>
                    (o .:? "variants" .!= mempty) <*>
                      (o .:? "kind" .!= "webfonts#webfont")
                      <*> (o .:? "category")
@@ -125,7 +125,7 @@ instance FromJSON Webfont where
                      <*> (o .:? "lastModified"))
 
 instance ToJSON Webfont where
-        toJSON Webfont{..}
+        toJSON Webfont'{..}
           = object
               (catMaybes
                  [("variants" .=) <$> _wVariants,
@@ -139,7 +139,7 @@ instance ToJSON Webfont where
 
 --
 -- /See:/ 'webfontList' smart constructor.
-data WebfontList = WebfontList
+data WebfontList = WebfontList'
     { _wlKind  :: !Text
     , _wlItems :: !(Maybe [Webfont])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -154,7 +154,7 @@ data WebfontList = WebfontList
 webfontList
     :: WebfontList
 webfontList =
-    WebfontList
+    WebfontList'
     { _wlKind = "webfonts#webfontList"
     , _wlItems = Nothing
     }
@@ -173,12 +173,12 @@ instance FromJSON WebfontList where
         parseJSON
           = withObject "WebfontList"
               (\ o ->
-                 WebfontList <$>
+                 WebfontList' <$>
                    (o .:? "kind" .!= "webfonts#webfontList") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON WebfontList where
-        toJSON WebfontList{..}
+        toJSON WebfontList'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _wlKind),
@@ -188,7 +188,7 @@ instance ToJSON WebfontList where
 -- available variants, as a key : value map.
 --
 -- /See:/ 'webfontFiles' smart constructor.
-newtype WebfontFiles = WebfontFiles
+newtype WebfontFiles = WebfontFiles'
     { _wfAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -201,7 +201,7 @@ webfontFiles
     :: HashMap Text Text -- ^ 'wfAddtional'
     -> WebfontFiles
 webfontFiles pWfAddtional_ =
-    WebfontFiles
+    WebfontFiles'
     { _wfAddtional = _Coerce # pWfAddtional_
     }
 
@@ -214,7 +214,7 @@ wfAddtional
 instance FromJSON WebfontFiles where
         parseJSON
           = withObject "WebfontFiles"
-              (\ o -> WebfontFiles <$> (parseJSONObject o))
+              (\ o -> WebfontFiles' <$> (parseJSONObject o))
 
 instance ToJSON WebfontFiles where
         toJSON = toJSON . _wfAddtional

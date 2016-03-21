@@ -77,7 +77,7 @@ type EditsImagesUploadResource =
 -- language and image type.
 --
 -- /See:/ 'editsImagesUpload' smart constructor.
-data EditsImagesUpload = EditsImagesUpload
+data EditsImagesUpload = EditsImagesUpload'
     { _eiuPackageName :: !Text
     , _eiuImageType   :: !EditsImagesUploadImageType
     , _eiuLanguage    :: !Text
@@ -102,7 +102,7 @@ editsImagesUpload
     -> Text -- ^ 'eiuEditId'
     -> EditsImagesUpload
 editsImagesUpload pEiuPackageName_ pEiuImageType_ pEiuLanguage_ pEiuEditId_ =
-    EditsImagesUpload
+    EditsImagesUpload'
     { _eiuPackageName = pEiuPackageName_
     , _eiuImageType = pEiuImageType_
     , _eiuLanguage = pEiuLanguage_
@@ -136,7 +136,7 @@ instance GoogleRequest EditsImagesUpload where
         type Rs EditsImagesUpload = ImagesUploadResponse
         type Scopes EditsImagesUpload =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsImagesUpload{..}
+        requestClient EditsImagesUpload'{..}
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)
@@ -153,7 +153,7 @@ instance GoogleRequest
         type Scopes (MediaUpload EditsImagesUpload) =
              Scopes EditsImagesUpload
         requestClient
-          (MediaUpload EditsImagesUpload{..} body)
+          (MediaUpload EditsImagesUpload'{..} body)
           = go _eiuPackageName _eiuEditId _eiuLanguage
               _eiuImageType
               (Just AltJSON)

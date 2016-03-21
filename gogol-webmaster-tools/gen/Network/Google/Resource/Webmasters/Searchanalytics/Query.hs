@@ -66,7 +66,7 @@ type SearchanalyticsQueryResource =
 -- grouped by date for any metric, and see which day rows are returned.
 --
 -- /See:/ 'searchanalyticsQuery' smart constructor.
-data SearchanalyticsQuery = SearchanalyticsQuery
+data SearchanalyticsQuery = SearchanalyticsQuery'
     { _sqSiteURL :: !Text
     , _sqPayload :: !SearchAnalyticsQueryRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,7 +83,7 @@ searchanalyticsQuery
     -> SearchAnalyticsQueryRequest -- ^ 'sqPayload'
     -> SearchanalyticsQuery
 searchanalyticsQuery pSqSiteURL_ pSqPayload_ =
-    SearchanalyticsQuery
+    SearchanalyticsQuery'
     { _sqSiteURL = pSqSiteURL_
     , _sqPayload = pSqPayload_
     }
@@ -105,7 +105,7 @@ instance GoogleRequest SearchanalyticsQuery where
         type Scopes SearchanalyticsQuery =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient SearchanalyticsQuery{..}
+        requestClient SearchanalyticsQuery'{..}
           = go _sqSiteURL (Just AltJSON) _sqPayload
               webmasterToolsService
           where go

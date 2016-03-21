@@ -59,7 +59,7 @@ type AccountUserProFilesPatchResource =
 -- semantics.
 --
 -- /See:/ 'accountUserProFilesPatch' smart constructor.
-data AccountUserProFilesPatch = AccountUserProFilesPatch
+data AccountUserProFilesPatch = AccountUserProFilesPatch'
     { _aupfpProFileId :: !(Textual Int64)
     , _aupfpPayload   :: !AccountUserProFile
     , _aupfpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ accountUserProFilesPatch
     -> Int64 -- ^ 'aupfpId'
     -> AccountUserProFilesPatch
 accountUserProFilesPatch pAupfpProFileId_ pAupfpPayload_ pAupfpId_ =
-    AccountUserProFilesPatch
+    AccountUserProFilesPatch'
     { _aupfpProFileId = _Coerce # pAupfpProFileId_
     , _aupfpPayload = pAupfpPayload_
     , _aupfpId = _Coerce # pAupfpId_
@@ -107,7 +107,7 @@ instance GoogleRequest AccountUserProFilesPatch where
         type Rs AccountUserProFilesPatch = AccountUserProFile
         type Scopes AccountUserProFilesPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountUserProFilesPatch{..}
+        requestClient AccountUserProFilesPatch'{..}
           = go _aupfpProFileId (Just _aupfpId) (Just AltJSON)
               _aupfpPayload
               dFAReportingService

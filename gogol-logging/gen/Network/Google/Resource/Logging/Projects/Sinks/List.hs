@@ -69,7 +69,7 @@ type ProjectsSinksListResource =
 -- | Lists sinks.
 --
 -- /See:/ 'projectsSinksList' smart constructor.
-data ProjectsSinksList = ProjectsSinksList
+data ProjectsSinksList = ProjectsSinksList'
     { _pslXgafv          :: !(Maybe Text)
     , _pslUploadProtocol :: !(Maybe Text)
     , _pslPp             :: !Bool
@@ -109,7 +109,7 @@ projectsSinksList
     :: Text -- ^ 'pslProjectName'
     -> ProjectsSinksList
 projectsSinksList pPslProjectName_ =
-    ProjectsSinksList
+    ProjectsSinksList'
     { _pslXgafv = Nothing
     , _pslUploadProtocol = Nothing
     , _pslPp = True
@@ -193,7 +193,7 @@ instance GoogleRequest ProjectsSinksList where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
-        requestClient ProjectsSinksList{..}
+        requestClient ProjectsSinksList'{..}
           = go _pslProjectName _pslXgafv _pslUploadProtocol
               (Just _pslPp)
               _pslAccessToken

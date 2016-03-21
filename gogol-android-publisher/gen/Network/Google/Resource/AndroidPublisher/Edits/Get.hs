@@ -56,7 +56,7 @@ type EditsGetResource =
 -- edit is no long active (e.g. has been deleted, superseded or expired).
 --
 -- /See:/ 'editsGet' smart constructor.
-data EditsGet = EditsGet
+data EditsGet = EditsGet'
     { _egPackageName :: !Text
     , _egEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ editsGet
     -> Text -- ^ 'egEditId'
     -> EditsGet
 editsGet pEgPackageName_ pEgEditId_ =
-    EditsGet
+    EditsGet'
     { _egPackageName = pEgPackageName_
     , _egEditId = pEgEditId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest EditsGet where
         type Rs EditsGet = AppEdit
         type Scopes EditsGet =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsGet{..}
+        requestClient EditsGet'{..}
           = go _egPackageName _egEditId (Just AltJSON)
               androidPublisherService
           where go

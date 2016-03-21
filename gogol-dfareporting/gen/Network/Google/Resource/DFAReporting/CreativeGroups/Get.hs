@@ -54,7 +54,7 @@ type CreativeGroupsGetResource =
 -- | Gets one creative group by ID.
 --
 -- /See:/ 'creativeGroupsGet' smart constructor.
-data CreativeGroupsGet = CreativeGroupsGet
+data CreativeGroupsGet = CreativeGroupsGet'
     { _cgggProFileId :: !(Textual Int64)
     , _cgggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ creativeGroupsGet
     -> Int64 -- ^ 'cgggId'
     -> CreativeGroupsGet
 creativeGroupsGet pCgggProFileId_ pCgggId_ =
-    CreativeGroupsGet
+    CreativeGroupsGet'
     { _cgggProFileId = _Coerce # pCgggProFileId_
     , _cgggId = _Coerce # pCgggId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest CreativeGroupsGet where
         type Rs CreativeGroupsGet = CreativeGroup
         type Scopes CreativeGroupsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativeGroupsGet{..}
+        requestClient CreativeGroupsGet'{..}
           = go _cgggProFileId _cgggId (Just AltJSON)
               dFAReportingService
           where go

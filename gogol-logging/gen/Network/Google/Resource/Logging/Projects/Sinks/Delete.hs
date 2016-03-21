@@ -63,7 +63,7 @@ type ProjectsSinksDeleteResource =
 -- | Deletes a sink.
 --
 -- /See:/ 'projectsSinksDelete' smart constructor.
-data ProjectsSinksDelete = ProjectsSinksDelete
+data ProjectsSinksDelete = ProjectsSinksDelete'
     { _psdXgafv          :: !(Maybe Text)
     , _psdUploadProtocol :: !(Maybe Text)
     , _psdPp             :: !Bool
@@ -97,7 +97,7 @@ projectsSinksDelete
     :: Text -- ^ 'psdSinkName'
     -> ProjectsSinksDelete
 projectsSinksDelete pPsdSinkName_ =
-    ProjectsSinksDelete
+    ProjectsSinksDelete'
     { _psdXgafv = Nothing
     , _psdUploadProtocol = Nothing
     , _psdPp = True
@@ -156,7 +156,7 @@ instance GoogleRequest ProjectsSinksDelete where
         type Scopes ProjectsSinksDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
-        requestClient ProjectsSinksDelete{..}
+        requestClient ProjectsSinksDelete'{..}
           = go _psdSinkName _psdXgafv _psdUploadProtocol
               (Just _psdPp)
               _psdAccessToken

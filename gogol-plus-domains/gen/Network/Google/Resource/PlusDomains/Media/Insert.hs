@@ -74,7 +74,7 @@ type MediaInsertResource =
 -- videos are less than 15 minutes in length.
 --
 -- /See:/ 'mediaInsert' smart constructor.
-data MediaInsert = MediaInsert
+data MediaInsert = MediaInsert'
     { _miCollection :: !MediaInsertCollection
     , _miPayload    :: !Media
     , _miUserId     :: !Text
@@ -95,7 +95,7 @@ mediaInsert
     -> Text -- ^ 'miUserId'
     -> MediaInsert
 mediaInsert pMiCollection_ pMiPayload_ pMiUserId_ =
-    MediaInsert
+    MediaInsert'
     { _miCollection = pMiCollection_
     , _miPayload = pMiPayload_
     , _miUserId = pMiUserId_
@@ -120,7 +120,7 @@ instance GoogleRequest MediaInsert where
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me",
                "https://www.googleapis.com/auth/plus.media.upload"]
-        requestClient MediaInsert{..}
+        requestClient MediaInsert'{..}
           = go _miUserId _miCollection (Just AltJSON)
               _miPayload
               plusDomainsService
@@ -133,7 +133,7 @@ instance GoogleRequest (MediaUpload MediaInsert)
         type Rs (MediaUpload MediaInsert) = Media
         type Scopes (MediaUpload MediaInsert) =
              Scopes MediaInsert
-        requestClient (MediaUpload MediaInsert{..} body)
+        requestClient (MediaUpload MediaInsert'{..} body)
           = go _miUserId _miCollection (Just AltJSON)
               (Just AltMedia)
               _miPayload

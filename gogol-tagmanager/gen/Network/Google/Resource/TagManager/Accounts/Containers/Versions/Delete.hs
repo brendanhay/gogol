@@ -57,7 +57,7 @@ type AccountsContainersVersionsDeleteResource =
 -- | Deletes a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsDelete' smart constructor.
-data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete
+data AccountsContainersVersionsDelete = AccountsContainersVersionsDelete'
     { _acvdcContainerId        :: !Text
     , _acvdcContainerVersionId :: !Text
     , _acvdcAccountId          :: !Text
@@ -78,7 +78,7 @@ accountsContainersVersionsDelete
     -> Text -- ^ 'acvdcAccountId'
     -> AccountsContainersVersionsDelete
 accountsContainersVersionsDelete pAcvdcContainerId_ pAcvdcContainerVersionId_ pAcvdcAccountId_ =
-    AccountsContainersVersionsDelete
+    AccountsContainersVersionsDelete'
     { _acvdcContainerId = pAcvdcContainerId_
     , _acvdcContainerVersionId = pAcvdcContainerVersionId_
     , _acvdcAccountId = pAcvdcAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest
         type Rs AccountsContainersVersionsDelete = ()
         type Scopes AccountsContainersVersionsDelete =
              '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-        requestClient AccountsContainersVersionsDelete{..}
+        requestClient AccountsContainersVersionsDelete'{..}
           = go _acvdcAccountId _acvdcContainerId
               _acvdcContainerVersionId
               (Just AltJSON)

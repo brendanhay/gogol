@@ -60,7 +60,7 @@ type ReportsSavedGenerateResource =
 -- query parameters.
 --
 -- /See:/ 'reportsSavedGenerate' smart constructor.
-data ReportsSavedGenerate = ReportsSavedGenerate
+data ReportsSavedGenerate = ReportsSavedGenerate'
     { _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
     , _rsgStartIndex    :: !(Maybe (Textual Int32))
@@ -82,7 +82,7 @@ reportsSavedGenerate
     :: Text -- ^ 'rsgSavedReportId'
     -> ReportsSavedGenerate
 reportsSavedGenerate pRsgSavedReportId_ =
-    ReportsSavedGenerate
+    ReportsSavedGenerate'
     { _rsgLocale = Nothing
     , _rsgSavedReportId = pRsgSavedReportId_
     , _rsgStartIndex = Nothing
@@ -121,7 +121,7 @@ instance GoogleRequest ReportsSavedGenerate where
         type Scopes ReportsSavedGenerate =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient ReportsSavedGenerate{..}
+        requestClient ReportsSavedGenerate'{..}
           = go _rsgSavedReportId _rsgLocale _rsgStartIndex
               _rsgMaxResults
               (Just AltJSON)

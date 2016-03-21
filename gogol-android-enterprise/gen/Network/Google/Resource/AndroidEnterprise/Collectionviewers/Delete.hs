@@ -61,7 +61,7 @@ type CollectionviewersDeleteResource =
 -- only such users will see the collection.
 --
 -- /See:/ 'collectionviewersDelete' smart constructor.
-data CollectionviewersDelete = CollectionviewersDelete
+data CollectionviewersDelete = CollectionviewersDelete'
     { _cdEnterpriseId :: !Text
     , _cdCollectionId :: !Text
     , _cdUserId       :: !Text
@@ -82,7 +82,7 @@ collectionviewersDelete
     -> Text -- ^ 'cdUserId'
     -> CollectionviewersDelete
 collectionviewersDelete pCdEnterpriseId_ pCdCollectionId_ pCdUserId_ =
-    CollectionviewersDelete
+    CollectionviewersDelete'
     { _cdEnterpriseId = pCdEnterpriseId_
     , _cdCollectionId = pCdCollectionId_
     , _cdUserId = pCdUserId_
@@ -108,7 +108,7 @@ instance GoogleRequest CollectionviewersDelete where
         type Rs CollectionviewersDelete = ()
         type Scopes CollectionviewersDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionviewersDelete{..}
+        requestClient CollectionviewersDelete'{..}
           = go _cdEnterpriseId _cdCollectionId _cdUserId
               (Just AltJSON)
               androidEnterpriseService

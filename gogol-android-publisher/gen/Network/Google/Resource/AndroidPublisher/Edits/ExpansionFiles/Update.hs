@@ -69,7 +69,7 @@ type EditsExpansionFilesUpdateResource =
 -- method.
 --
 -- /See:/ 'editsExpansionFilesUpdate' smart constructor.
-data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate
+data EditsExpansionFilesUpdate = EditsExpansionFilesUpdate'
     { _eefuPackageName       :: !Text
     , _eefuAPKVersionCode    :: !(Textual Int32)
     , _eefuPayload           :: !ExpansionFile
@@ -98,7 +98,7 @@ editsExpansionFilesUpdate
     -> Text -- ^ 'eefuEditId'
     -> EditsExpansionFilesUpdate
 editsExpansionFilesUpdate pEefuPackageName_ pEefuAPKVersionCode_ pEefuPayload_ pEefuExpansionFileType_ pEefuEditId_ =
-    EditsExpansionFilesUpdate
+    EditsExpansionFilesUpdate'
     { _eefuPackageName = pEefuPackageName_
     , _eefuAPKVersionCode = _Coerce # pEefuAPKVersionCode_
     , _eefuPayload = pEefuPayload_
@@ -141,7 +141,7 @@ instance GoogleRequest EditsExpansionFilesUpdate
         type Rs EditsExpansionFilesUpdate = ExpansionFile
         type Scopes EditsExpansionFilesUpdate =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsExpansionFilesUpdate{..}
+        requestClient EditsExpansionFilesUpdate'{..}
           = go _eefuPackageName _eefuEditId _eefuAPKVersionCode
               _eefuExpansionFileType
               (Just AltJSON)

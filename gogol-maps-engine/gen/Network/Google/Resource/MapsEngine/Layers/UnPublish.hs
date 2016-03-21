@@ -53,7 +53,7 @@ type LayersUnPublishResource =
 -- | Unpublish a layer asset.
 --
 -- /See:/ 'layersUnPublish' smart constructor.
-newtype LayersUnPublish = LayersUnPublish
+newtype LayersUnPublish = LayersUnPublish'
     { _lupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ layersUnPublish
     :: Text -- ^ 'lupId'
     -> LayersUnPublish
 layersUnPublish pLupId_ =
-    LayersUnPublish
+    LayersUnPublish'
     { _lupId = pLupId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest LayersUnPublish where
         type Rs LayersUnPublish = PublishResponse
         type Scopes LayersUnPublish =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient LayersUnPublish{..}
+        requestClient LayersUnPublish'{..}
           = go _lupId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

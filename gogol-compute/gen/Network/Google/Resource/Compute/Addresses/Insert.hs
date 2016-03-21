@@ -59,7 +59,7 @@ type AddressesInsertResource =
 -- included in the request.
 --
 -- /See:/ 'addressesInsert' smart constructor.
-data AddressesInsert = AddressesInsert
+data AddressesInsert = AddressesInsert'
     { _aiProject :: !Text
     , _aiPayload :: !Address
     , _aiRegion  :: !Text
@@ -80,7 +80,7 @@ addressesInsert
     -> Text -- ^ 'aiRegion'
     -> AddressesInsert
 addressesInsert pAiProject_ pAiPayload_ pAiRegion_ =
-    AddressesInsert
+    AddressesInsert'
     { _aiProject = pAiProject_
     , _aiPayload = pAiPayload_
     , _aiRegion = pAiRegion_
@@ -105,7 +105,7 @@ instance GoogleRequest AddressesInsert where
         type Scopes AddressesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient AddressesInsert{..}
+        requestClient AddressesInsert'{..}
           = go _aiProject _aiRegion (Just AltJSON) _aiPayload
               computeService
           where go

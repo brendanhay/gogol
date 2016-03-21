@@ -71,7 +71,7 @@ type ProjectsZonesClustersListResource =
 -- all zones.
 --
 -- /See:/ 'projectsZonesClustersList' smart constructor.
-data ProjectsZonesClustersList = ProjectsZonesClustersList
+data ProjectsZonesClustersList = ProjectsZonesClustersList'
     { _pzclXgafv          :: !(Maybe Text)
     , _pzclUploadProtocol :: !(Maybe Text)
     , _pzclPp             :: !Bool
@@ -109,7 +109,7 @@ projectsZonesClustersList
     -> Text -- ^ 'pzclProjectId'
     -> ProjectsZonesClustersList
 projectsZonesClustersList pPzclZone_ pPzclProjectId_ =
-    ProjectsZonesClustersList
+    ProjectsZonesClustersList'
     { _pzclXgafv = Nothing
     , _pzclUploadProtocol = Nothing
     , _pzclPp = True
@@ -178,7 +178,7 @@ instance GoogleRequest ProjectsZonesClustersList
              ListClustersResponse
         type Scopes ProjectsZonesClustersList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesClustersList{..}
+        requestClient ProjectsZonesClustersList'{..}
           = go _pzclProjectId _pzclZone _pzclXgafv
               _pzclUploadProtocol
               (Just _pzclPp)

@@ -51,7 +51,7 @@ type QueriesGetQueryResource =
 -- | Retrieves a stored query.
 --
 -- /See:/ 'queriesGetQuery' smart constructor.
-newtype QueriesGetQuery = QueriesGetQuery
+newtype QueriesGetQuery = QueriesGetQuery'
     { _qgqQueryId :: Textual Int64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ queriesGetQuery
     :: Int64 -- ^ 'qgqQueryId'
     -> QueriesGetQuery
 queriesGetQuery pQgqQueryId_ =
-    QueriesGetQuery
+    QueriesGetQuery'
     { _qgqQueryId = _Coerce # pQgqQueryId_
     }
 
@@ -77,7 +77,7 @@ qgqQueryId
 instance GoogleRequest QueriesGetQuery where
         type Rs QueriesGetQuery = Query
         type Scopes QueriesGetQuery = '[]
-        requestClient QueriesGetQuery{..}
+        requestClient QueriesGetQuery'{..}
           = go _qgqQueryId (Just AltJSON)
               doubleClickBidsService
           where go

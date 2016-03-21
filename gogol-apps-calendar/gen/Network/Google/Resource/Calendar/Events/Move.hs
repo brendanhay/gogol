@@ -59,7 +59,7 @@ type EventsMoveResource =
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
 -- /See:/ 'eventsMove' smart constructor.
-data EventsMove = EventsMove
+data EventsMove = EventsMove'
     { _emDestination       :: !Text
     , _emCalendarId        :: !Text
     , _emSendNotifications :: !(Maybe Bool)
@@ -83,7 +83,7 @@ eventsMove
     -> Text -- ^ 'emEventId'
     -> EventsMove
 eventsMove pEmDestination_ pEmCalendarId_ pEmEventId_ =
-    EventsMove
+    EventsMove'
     { _emDestination = pEmDestination_
     , _emCalendarId = pEmCalendarId_
     , _emSendNotifications = Nothing
@@ -119,7 +119,7 @@ instance GoogleRequest EventsMove where
         type Rs EventsMove = Event
         type Scopes EventsMove =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsMove{..}
+        requestClient EventsMove'{..}
           = go _emCalendarId _emEventId (Just _emDestination)
               _emSendNotifications
               (Just AltJSON)

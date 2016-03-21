@@ -87,7 +87,7 @@ type UsersMessagesImportResource =
 -- not send a message.
 --
 -- /See:/ 'usersMessagesImport' smart constructor.
-data UsersMessagesImport = UsersMessagesImport
+data UsersMessagesImport = UsersMessagesImport'
     { _umiPayload            :: !Message
     , _umiUserId             :: !Text
     , _umiProcessForCalendar :: !Bool
@@ -115,7 +115,7 @@ usersMessagesImport
     :: Message -- ^ 'umiPayload'
     -> UsersMessagesImport
 usersMessagesImport pUmiPayload_ =
-    UsersMessagesImport
+    UsersMessagesImport'
     { _umiPayload = pUmiPayload_
     , _umiUserId = "me"
     , _umiProcessForCalendar = False
@@ -168,7 +168,7 @@ instance GoogleRequest UsersMessagesImport where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.insert",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersMessagesImport{..}
+        requestClient UsersMessagesImport'{..}
           = go _umiUserId (Just _umiProcessForCalendar)
               (Just _umiDeleted)
               (Just _umiNeverMarkSpam)
@@ -187,7 +187,7 @@ instance GoogleRequest
         type Scopes (MediaUpload UsersMessagesImport) =
              Scopes UsersMessagesImport
         requestClient
-          (MediaUpload UsersMessagesImport{..} body)
+          (MediaUpload UsersMessagesImport'{..} body)
           = go _umiUserId (Just _umiProcessForCalendar)
               (Just _umiDeleted)
               (Just _umiNeverMarkSpam)

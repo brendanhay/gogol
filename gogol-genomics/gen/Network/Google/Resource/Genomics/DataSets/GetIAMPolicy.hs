@@ -74,7 +74,7 @@ type DataSetsGetIAMPolicyResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsGetIAMPolicy' smart constructor.
-data DataSetsGetIAMPolicy = DataSetsGetIAMPolicy
+data DataSetsGetIAMPolicy = DataSetsGetIAMPolicy'
     { _dsgipXgafv          :: !(Maybe Text)
     , _dsgipUploadProtocol :: !(Maybe Text)
     , _dsgipPp             :: !Bool
@@ -112,7 +112,7 @@ dataSetsGetIAMPolicy
     -> Text -- ^ 'dsgipResource'
     -> DataSetsGetIAMPolicy
 dataSetsGetIAMPolicy pDsgipPayload_ pDsgipResource_ =
-    DataSetsGetIAMPolicy
+    DataSetsGetIAMPolicy'
     { _dsgipXgafv = Nothing
     , _dsgipUploadProtocol = Nothing
     , _dsgipPp = True
@@ -180,7 +180,7 @@ instance GoogleRequest DataSetsGetIAMPolicy where
         type Scopes DataSetsGetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsGetIAMPolicy{..}
+        requestClient DataSetsGetIAMPolicy'{..}
           = go _dsgipResource _dsgipXgafv _dsgipUploadProtocol
               (Just _dsgipPp)
               _dsgipAccessToken

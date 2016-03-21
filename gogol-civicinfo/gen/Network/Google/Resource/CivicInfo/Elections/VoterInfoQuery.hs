@@ -58,7 +58,7 @@ type ElectionsVoterInfoQueryResource =
 -- registered address.
 --
 -- /See:/ 'electionsVoterInfoQuery' smart constructor.
-data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery
+data ElectionsVoterInfoQuery = ElectionsVoterInfoQuery'
     { _eviqElectionId   :: !(Textual Int64)
     , _eviqAddress      :: !Text
     , _eviqOfficialOnly :: !Bool
@@ -77,7 +77,7 @@ electionsVoterInfoQuery
     :: Text -- ^ 'eviqAddress'
     -> ElectionsVoterInfoQuery
 electionsVoterInfoQuery pEviqAddress_ =
-    ElectionsVoterInfoQuery
+    ElectionsVoterInfoQuery'
     { _eviqElectionId = 0
     , _eviqAddress = pEviqAddress_
     , _eviqOfficialOnly = False
@@ -106,7 +106,7 @@ eviqOfficialOnly
 instance GoogleRequest ElectionsVoterInfoQuery where
         type Rs ElectionsVoterInfoQuery = VoterInfoResponse
         type Scopes ElectionsVoterInfoQuery = '[]
-        requestClient ElectionsVoterInfoQuery{..}
+        requestClient ElectionsVoterInfoQuery'{..}
           = go (Just _eviqAddress) (Just _eviqElectionId)
               (Just _eviqOfficialOnly)
               (Just AltJSON)

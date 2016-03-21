@@ -64,7 +64,7 @@ type ManagementProFileUserLinksListResource =
 -- | Lists profile-user links for a given view (profile).
 --
 -- /See:/ 'managementProFileUserLinksList' smart constructor.
-data ManagementProFileUserLinksList = ManagementProFileUserLinksList
+data ManagementProFileUserLinksList = ManagementProFileUserLinksList'
     { _mpfullWebPropertyId :: !Text
     , _mpfullProFileId     :: !Text
     , _mpfullAccountId     :: !Text
@@ -91,7 +91,7 @@ managementProFileUserLinksList
     -> Text -- ^ 'mpfullAccountId'
     -> ManagementProFileUserLinksList
 managementProFileUserLinksList pMpfullWebPropertyId_ pMpfullProFileId_ pMpfullAccountId_ =
-    ManagementProFileUserLinksList
+    ManagementProFileUserLinksList'
     { _mpfullWebPropertyId = pMpfullWebPropertyId_
     , _mpfullProFileId = pMpfullProFileId_
     , _mpfullAccountId = pMpfullAccountId_
@@ -143,7 +143,7 @@ instance GoogleRequest ManagementProFileUserLinksList
         type Scopes ManagementProFileUserLinksList =
              '["https://www.googleapis.com/auth/analytics.manage.users",
                "https://www.googleapis.com/auth/analytics.manage.users.readonly"]
-        requestClient ManagementProFileUserLinksList{..}
+        requestClient ManagementProFileUserLinksList'{..}
           = go _mpfullAccountId _mpfullWebPropertyId
               _mpfullProFileId
               _mpfullStartIndex

@@ -53,7 +53,7 @@ type LayersPatchResource =
 -- | Mutate a layer asset.
 --
 -- /See:/ 'layersPatch' smart constructor.
-data LayersPatch = LayersPatch
+data LayersPatch = LayersPatch'
     { _lppPayload :: !Layer
     , _lppId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ layersPatch
     -> Text -- ^ 'lppId'
     -> LayersPatch
 layersPatch pLppPayload_ pLppId_ =
-    LayersPatch
+    LayersPatch'
     { _lppPayload = pLppPayload_
     , _lppId = pLppId_
     }
@@ -88,7 +88,7 @@ instance GoogleRequest LayersPatch where
         type Rs LayersPatch = ()
         type Scopes LayersPatch =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient LayersPatch{..}
+        requestClient LayersPatch'{..}
           = go _lppId (Just AltJSON) _lppPayload
               mapsEngineService
           where go

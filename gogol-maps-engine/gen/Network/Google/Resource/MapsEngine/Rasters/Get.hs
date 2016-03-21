@@ -51,7 +51,7 @@ type RastersGetResource =
 -- | Return metadata for a single raster.
 --
 -- /See:/ 'rastersGet' smart constructor.
-newtype RastersGet = RastersGet
+newtype RastersGet = RastersGet'
     { _rgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ rastersGet
     :: Text -- ^ 'rgId'
     -> RastersGet
 rastersGet pRgId_ =
-    RastersGet
+    RastersGet'
     { _rgId = pRgId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest RastersGet where
         type Scopes RastersGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient RastersGet{..}
+        requestClient RastersGet'{..}
           = go _rgId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy RastersGetResource)

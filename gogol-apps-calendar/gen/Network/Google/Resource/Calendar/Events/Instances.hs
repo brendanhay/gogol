@@ -74,7 +74,7 @@ type EventsInstancesResource =
 -- | Returns instances of the specified recurring event.
 --
 -- /See:/ 'eventsInstances' smart constructor.
-data EventsInstances = EventsInstances
+data EventsInstances = EventsInstances'
     { _eCalendarId         :: !Text
     , _eTimeMin            :: !(Maybe DateTime')
     , _eShowDeleted        :: !(Maybe Bool)
@@ -118,7 +118,7 @@ eventsInstances
     -> Text -- ^ 'eEventId'
     -> EventsInstances
 eventsInstances pECalendarId_ pEEventId_ =
-    EventsInstances
+    EventsInstances'
     { _eCalendarId = pECalendarId_
     , _eTimeMin = Nothing
     , _eShowDeleted = Nothing
@@ -216,7 +216,7 @@ instance GoogleRequest EventsInstances where
         type Scopes EventsInstances =
              '["https://www.googleapis.com/auth/calendar",
                "https://www.googleapis.com/auth/calendar.readonly"]
-        requestClient EventsInstances{..}
+        requestClient EventsInstances'{..}
           = go _eCalendarId _eEventId _eTimeMin _eShowDeleted
               _eOriginalStart
               _eMaxAttendees

@@ -52,7 +52,7 @@ type MyLibraryBookshelvesListResource =
 -- | Retrieves a list of bookshelves belonging to the authenticated user.
 --
 -- /See:/ 'myLibraryBookshelvesList' smart constructor.
-newtype MyLibraryBookshelvesList = MyLibraryBookshelvesList
+newtype MyLibraryBookshelvesList = MyLibraryBookshelvesList'
     { _mlblSource :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ newtype MyLibraryBookshelvesList = MyLibraryBookshelvesList
 myLibraryBookshelvesList
     :: MyLibraryBookshelvesList
 myLibraryBookshelvesList =
-    MyLibraryBookshelvesList
+    MyLibraryBookshelvesList'
     { _mlblSource = Nothing
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest MyLibraryBookshelvesList where
         type Rs MyLibraryBookshelvesList = Bookshelves
         type Scopes MyLibraryBookshelvesList =
              '["https://www.googleapis.com/auth/books"]
-        requestClient MyLibraryBookshelvesList{..}
+        requestClient MyLibraryBookshelvesList'{..}
           = go _mlblSource (Just AltJSON) booksService
           where go
                   = buildClient

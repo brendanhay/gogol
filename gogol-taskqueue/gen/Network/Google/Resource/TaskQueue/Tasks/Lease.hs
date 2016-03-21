@@ -64,7 +64,7 @@ type TasksLeaseResource =
 -- | Lease 1 or more tasks from a TaskQueue.
 --
 -- /See:/ 'tasksLease' smart constructor.
-data TasksLease = TasksLease
+data TasksLease = TasksLease'
     { _tlTaskqueue  :: !Text
     , _tlTag        :: !(Maybe Text)
     , _tlProject    :: !Text
@@ -95,7 +95,7 @@ tasksLease
     -> Int32 -- ^ 'tlLeaseSecs'
     -> TasksLease
 tasksLease pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
-    TasksLease
+    TasksLease'
     { _tlTaskqueue = pTlTaskqueue_
     , _tlTag = Nothing
     , _tlProject = pTlProject_
@@ -143,7 +143,7 @@ instance GoogleRequest TasksLease where
         type Scopes TasksLease =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksLease{..}
+        requestClient TasksLease'{..}
           = go _tlProject _tlTaskqueue (Just _tlNumTasks)
               (Just _tlLeaseSecs)
               _tlTag

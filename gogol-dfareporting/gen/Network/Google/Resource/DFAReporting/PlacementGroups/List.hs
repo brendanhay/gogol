@@ -105,7 +105,7 @@ type PlacementGroupsListResource =
 -- | Retrieves a list of placement groups, possibly filtered.
 --
 -- /See:/ 'placementGroupsList' smart constructor.
-data PlacementGroupsList = PlacementGroupsList
+data PlacementGroupsList = PlacementGroupsList'
     { _pglPlacementStrategyIds :: !(Maybe [Textual Int64])
     , _pglContentCategoryIds   :: !(Maybe [Textual Int64])
     , _pglMaxEndDate           :: !(Maybe Text)
@@ -175,7 +175,7 @@ placementGroupsList
     :: Int64 -- ^ 'pglProFileId'
     -> PlacementGroupsList
 placementGroupsList pPglProFileId_ =
-    PlacementGroupsList
+    PlacementGroupsList'
     { _pglPlacementStrategyIds = Nothing
     , _pglContentCategoryIds = Nothing
     , _pglMaxEndDate = Nothing
@@ -357,7 +357,7 @@ instance GoogleRequest PlacementGroupsList where
              PlacementGroupsListResponse
         type Scopes PlacementGroupsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementGroupsList{..}
+        requestClient PlacementGroupsList'{..}
           = go _pglProFileId
               (_pglPlacementStrategyIds ^. _Default)
               (_pglContentCategoryIds ^. _Default)

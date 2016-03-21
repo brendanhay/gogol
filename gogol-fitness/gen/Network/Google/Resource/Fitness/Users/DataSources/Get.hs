@@ -54,7 +54,7 @@ type UsersDataSourcesGetResource =
 -- | Returns a data source identified by a data stream ID.
 --
 -- /See:/ 'usersDataSourcesGet' smart constructor.
-data UsersDataSourcesGet = UsersDataSourcesGet
+data UsersDataSourcesGet = UsersDataSourcesGet'
     { _udsgDataSourceId :: !Text
     , _udsgUserId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersDataSourcesGet
     -> Text -- ^ 'udsgUserId'
     -> UsersDataSourcesGet
 usersDataSourcesGet pUdsgDataSourceId_ pUdsgUserId_ =
-    UsersDataSourcesGet
+    UsersDataSourcesGet'
     { _udsgDataSourceId = pUdsgDataSourceId_
     , _udsgUserId = pUdsgUserId_
     }
@@ -97,7 +97,7 @@ instance GoogleRequest UsersDataSourcesGet where
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.read",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesGet{..}
+        requestClient UsersDataSourcesGet'{..}
           = go _udsgUserId _udsgDataSourceId (Just AltJSON)
               fitnessService
           where go

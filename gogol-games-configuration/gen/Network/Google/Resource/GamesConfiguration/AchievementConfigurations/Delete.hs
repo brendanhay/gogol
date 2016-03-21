@@ -51,7 +51,7 @@ type AchievementConfigurationsDeleteResource =
 -- | Delete the achievement configuration with the given ID.
 --
 -- /See:/ 'achievementConfigurationsDelete' smart constructor.
-newtype AchievementConfigurationsDelete = AchievementConfigurationsDelete
+newtype AchievementConfigurationsDelete = AchievementConfigurationsDelete'
     { _acdAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ achievementConfigurationsDelete
     :: Text -- ^ 'acdAchievementId'
     -> AchievementConfigurationsDelete
 achievementConfigurationsDelete pAcdAchievementId_ =
-    AchievementConfigurationsDelete
+    AchievementConfigurationsDelete'
     { _acdAchievementId = pAcdAchievementId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest
         type Rs AchievementConfigurationsDelete = ()
         type Scopes AchievementConfigurationsDelete =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient AchievementConfigurationsDelete{..}
+        requestClient AchievementConfigurationsDelete'{..}
           = go _acdAchievementId (Just AltJSON)
               gamesConfigurationService
           where go

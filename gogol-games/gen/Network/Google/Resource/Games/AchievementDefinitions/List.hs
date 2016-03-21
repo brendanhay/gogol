@@ -56,7 +56,7 @@ type AchievementDefinitionsListResource =
 -- | Lists all the achievement definitions for your application.
 --
 -- /See:/ 'achievementDefinitionsList' smart constructor.
-data AchievementDefinitionsList = AchievementDefinitionsList
+data AchievementDefinitionsList = AchievementDefinitionsList'
     { _adlLanguage   :: !(Maybe Text)
     , _adlPageToken  :: !(Maybe Text)
     , _adlMaxResults :: !(Maybe (Textual Int32))
@@ -74,7 +74,7 @@ data AchievementDefinitionsList = AchievementDefinitionsList
 achievementDefinitionsList
     :: AchievementDefinitionsList
 achievementDefinitionsList =
-    AchievementDefinitionsList
+    AchievementDefinitionsList'
     { _adlLanguage = Nothing
     , _adlPageToken = Nothing
     , _adlMaxResults = Nothing
@@ -106,7 +106,7 @@ instance GoogleRequest AchievementDefinitionsList
         type Scopes AchievementDefinitionsList =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementDefinitionsList{..}
+        requestClient AchievementDefinitionsList'{..}
           = go _adlLanguage _adlPageToken _adlMaxResults
               (Just AltJSON)
               gamesService

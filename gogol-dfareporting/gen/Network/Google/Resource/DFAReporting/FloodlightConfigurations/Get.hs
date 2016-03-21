@@ -55,7 +55,7 @@ type FloodlightConfigurationsGetResource =
 -- | Gets one floodlight configuration by ID.
 --
 -- /See:/ 'floodlightConfigurationsGet' smart constructor.
-data FloodlightConfigurationsGet = FloodlightConfigurationsGet
+data FloodlightConfigurationsGet = FloodlightConfigurationsGet'
     { _fcgProFileId :: !(Textual Int64)
     , _fcgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ floodlightConfigurationsGet
     -> Int64 -- ^ 'fcgId'
     -> FloodlightConfigurationsGet
 floodlightConfigurationsGet pFcgProFileId_ pFcgId_ =
-    FloodlightConfigurationsGet
+    FloodlightConfigurationsGet'
     { _fcgProFileId = _Coerce # pFcgProFileId_
     , _fcgId = _Coerce # pFcgId_
     }
@@ -94,7 +94,7 @@ instance GoogleRequest FloodlightConfigurationsGet
              FloodlightConfiguration
         type Scopes FloodlightConfigurationsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient FloodlightConfigurationsGet{..}
+        requestClient FloodlightConfigurationsGet'{..}
           = go _fcgProFileId _fcgId (Just AltJSON)
               dFAReportingService
           where go

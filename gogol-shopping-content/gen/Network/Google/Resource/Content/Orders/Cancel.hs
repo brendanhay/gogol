@@ -57,7 +57,7 @@ type OrdersCancelResource =
 -- | Cancels all line items in an order.
 --
 -- /See:/ 'ordersCancel' smart constructor.
-data OrdersCancel = OrdersCancel
+data OrdersCancel = OrdersCancel'
     { _occMerchantId :: !(Textual Word64)
     , _occPayload    :: !OrdersCancelRequest
     , _occOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersCancel
     -> Text -- ^ 'occOrderId'
     -> OrdersCancel
 ordersCancel pOccMerchantId_ pOccPayload_ pOccOrderId_ =
-    OrdersCancel
+    OrdersCancel'
     { _occMerchantId = _Coerce # pOccMerchantId_
     , _occPayload = pOccPayload_
     , _occOrderId = pOccOrderId_
@@ -105,7 +105,7 @@ instance GoogleRequest OrdersCancel where
         type Rs OrdersCancel = OrdersCancelResponse
         type Scopes OrdersCancel =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersCancel{..}
+        requestClient OrdersCancel'{..}
           = go _occMerchantId _occOrderId (Just AltJSON)
               _occPayload
               shoppingContentService

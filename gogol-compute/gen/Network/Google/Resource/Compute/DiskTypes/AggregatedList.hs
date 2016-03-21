@@ -60,7 +60,7 @@ type DiskTypesAggregatedListResource =
 -- | Retrieves an aggregated list of disk types.
 --
 -- /See:/ 'diskTypesAggregatedList' smart constructor.
-data DiskTypesAggregatedList = DiskTypesAggregatedList
+data DiskTypesAggregatedList = DiskTypesAggregatedList'
     { _dtalProject    :: !Text
     , _dtalFilter     :: !(Maybe Text)
     , _dtalPageToken  :: !(Maybe Text)
@@ -82,7 +82,7 @@ diskTypesAggregatedList
     :: Text -- ^ 'dtalProject'
     -> DiskTypesAggregatedList
 diskTypesAggregatedList pDtalProject_ =
-    DiskTypesAggregatedList
+    DiskTypesAggregatedList'
     { _dtalProject = pDtalProject_
     , _dtalFilter = Nothing
     , _dtalPageToken = Nothing
@@ -144,7 +144,7 @@ instance GoogleRequest DiskTypesAggregatedList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient DiskTypesAggregatedList{..}
+        requestClient DiskTypesAggregatedList'{..}
           = go _dtalProject _dtalFilter _dtalPageToken
               (Just _dtalMaxResults)
               (Just AltJSON)

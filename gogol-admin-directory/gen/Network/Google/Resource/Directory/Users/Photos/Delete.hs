@@ -54,7 +54,7 @@ type UsersPhotosDeleteResource =
 -- | Remove photos for the user
 --
 -- /See:/ 'usersPhotosDelete' smart constructor.
-newtype UsersPhotosDelete = UsersPhotosDelete
+newtype UsersPhotosDelete = UsersPhotosDelete'
     { _updUserKey :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ usersPhotosDelete
     :: Text -- ^ 'updUserKey'
     -> UsersPhotosDelete
 usersPhotosDelete pUpdUserKey_ =
-    UsersPhotosDelete
+    UsersPhotosDelete'
     { _updUserKey = pUpdUserKey_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest UsersPhotosDelete where
         type Rs UsersPhotosDelete = ()
         type Scopes UsersPhotosDelete =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersPhotosDelete{..}
+        requestClient UsersPhotosDelete'{..}
           = go _updUserKey (Just AltJSON) directoryService
           where go
                   = buildClient

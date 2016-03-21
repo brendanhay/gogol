@@ -53,7 +53,7 @@ type SchemasListResource =
 -- | Retrieve all schemas for a customer
 --
 -- /See:/ 'schemasList' smart constructor.
-newtype SchemasList = SchemasList
+newtype SchemasList = SchemasList'
     { _slCustomerId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ schemasList
     :: Text -- ^ 'slCustomerId'
     -> SchemasList
 schemasList pSlCustomerId_ =
-    SchemasList
+    SchemasList'
     { _slCustomerId = pSlCustomerId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest SchemasList where
         type Scopes SchemasList =
              '["https://www.googleapis.com/auth/admin.directory.userschema",
                "https://www.googleapis.com/auth/admin.directory.userschema.readonly"]
-        requestClient SchemasList{..}
+        requestClient SchemasList'{..}
           = go _slCustomerId (Just AltJSON) directoryService
           where go
                   = buildClient (Proxy :: Proxy SchemasListResource)

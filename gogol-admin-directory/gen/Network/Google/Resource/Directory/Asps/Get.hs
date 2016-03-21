@@ -55,7 +55,7 @@ type AspsGetResource =
 -- | Get information about an ASP issued by a user.
 --
 -- /See:/ 'aspsGet' smart constructor.
-data AspsGet = AspsGet
+data AspsGet = AspsGet'
     { _agCodeId  :: !(Textual Int32)
     , _agUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ aspsGet
     -> Text -- ^ 'agUserKey'
     -> AspsGet
 aspsGet pAgCodeId_ pAgUserKey_ =
-    AspsGet
+    AspsGet'
     { _agCodeId = _Coerce # pAgCodeId_
     , _agUserKey = pAgUserKey_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest AspsGet where
         type Rs AspsGet = Asp
         type Scopes AspsGet =
              '["https://www.googleapis.com/auth/admin.directory.user.security"]
-        requestClient AspsGet{..}
+        requestClient AspsGet'{..}
           = go _agUserKey _agCodeId (Just AltJSON)
               directoryService
           where go

@@ -61,7 +61,7 @@ type AutoscalersPatchResource =
 -- in the request. This method supports patch semantics.
 --
 -- /See:/ 'autoscalersPatch' smart constructor.
-data AutoscalersPatch = AutoscalersPatch
+data AutoscalersPatch = AutoscalersPatch'
     { _apProject    :: !Text
     , _apZone       :: !Text
     , _apPayload    :: !Autoscaler
@@ -86,7 +86,7 @@ autoscalersPatch
     -> Text -- ^ 'apAutoscaler'
     -> AutoscalersPatch
 autoscalersPatch pApProject_ pApZone_ pApPayload_ pApAutoscaler_ =
-    AutoscalersPatch
+    AutoscalersPatch'
     { _apProject = pApProject_
     , _apZone = pApZone_
     , _apPayload = pApPayload_
@@ -117,7 +117,7 @@ instance GoogleRequest AutoscalersPatch where
         type Scopes AutoscalersPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient AutoscalersPatch{..}
+        requestClient AutoscalersPatch'{..}
           = go _apProject _apZone (Just _apAutoscaler)
               (Just AltJSON)
               _apPayload

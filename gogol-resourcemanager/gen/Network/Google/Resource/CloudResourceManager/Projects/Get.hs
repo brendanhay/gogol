@@ -68,7 +68,7 @@ type ProjectsGetResource =
 -- this Project.
 --
 -- /See:/ 'projectsGet' smart constructor.
-data ProjectsGet = ProjectsGet
+data ProjectsGet = ProjectsGet'
     { _pgXgafv          :: !(Maybe Text)
     , _pgUploadProtocol :: !(Maybe Text)
     , _pgPp             :: !Bool
@@ -102,7 +102,7 @@ projectsGet
     :: Text -- ^ 'pgProjectId'
     -> ProjectsGet
 projectsGet pPgProjectId_ =
-    ProjectsGet
+    ProjectsGet'
     { _pgXgafv = Nothing
     , _pgUploadProtocol = Nothing
     , _pgPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest ProjectsGet where
         type Scopes ProjectsGet =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient ProjectsGet{..}
+        requestClient ProjectsGet'{..}
           = go _pgProjectId _pgXgafv _pgUploadProtocol
               (Just _pgPp)
               _pgAccessToken

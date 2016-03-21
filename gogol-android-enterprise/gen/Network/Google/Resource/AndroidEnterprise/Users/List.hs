@@ -55,7 +55,7 @@ type UsersListResource =
 -- | Looks up a user by their primary email address.
 --
 -- /See:/ 'usersList' smart constructor.
-data UsersList = UsersList
+data UsersList = UsersList'
     { _ulEmail        :: !Text
     , _ulEnterpriseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ usersList
     -> Text -- ^ 'ulEnterpriseId'
     -> UsersList
 usersList pUlEmail_ pUlEnterpriseId_ =
-    UsersList
+    UsersList'
     { _ulEmail = pUlEmail_
     , _ulEnterpriseId = pUlEnterpriseId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersList where
         type Rs UsersList = UsersListResponse
         type Scopes UsersList =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient UsersList{..}
+        requestClient UsersList'{..}
           = go _ulEnterpriseId (Just _ulEmail) (Just AltJSON)
               androidEnterpriseService
           where go

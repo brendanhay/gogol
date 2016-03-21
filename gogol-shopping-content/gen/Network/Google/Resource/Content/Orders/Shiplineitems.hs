@@ -57,7 +57,7 @@ type OrdersShiplineitemsResource =
 -- | Marks line item(s) as shipped.
 --
 -- /See:/ 'ordersShiplineitems' smart constructor.
-data OrdersShiplineitems = OrdersShiplineitems
+data OrdersShiplineitems = OrdersShiplineitems'
     { _osMerchantId :: !(Textual Word64)
     , _osPayload    :: !OrdersShipLineItemsRequest
     , _osOrderId    :: !Text
@@ -78,7 +78,7 @@ ordersShiplineitems
     -> Text -- ^ 'osOrderId'
     -> OrdersShiplineitems
 ordersShiplineitems pOsMerchantId_ pOsPayload_ pOsOrderId_ =
-    OrdersShiplineitems
+    OrdersShiplineitems'
     { _osMerchantId = _Coerce # pOsMerchantId_
     , _osPayload = pOsPayload_
     , _osOrderId = pOsOrderId_
@@ -105,7 +105,7 @@ instance GoogleRequest OrdersShiplineitems where
              OrdersShipLineItemsResponse
         type Scopes OrdersShiplineitems =
              '["https://www.googleapis.com/auth/content"]
-        requestClient OrdersShiplineitems{..}
+        requestClient OrdersShiplineitems'{..}
           = go _osMerchantId _osOrderId (Just AltJSON)
               _osPayload
               shoppingContentService

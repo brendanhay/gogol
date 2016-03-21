@@ -56,7 +56,7 @@ type SavedColumnsListResource =
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
 -- /See:/ 'savedColumnsList' smart constructor.
-data SavedColumnsList = SavedColumnsList
+data SavedColumnsList = SavedColumnsList'
     { _sclAgencyId     :: !(Textual Int64)
     , _sclAdvertiserId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ savedColumnsList
     -> Int64 -- ^ 'sclAdvertiserId'
     -> SavedColumnsList
 savedColumnsList pSclAgencyId_ pSclAdvertiserId_ =
-    SavedColumnsList
+    SavedColumnsList'
     { _sclAgencyId = _Coerce # pSclAgencyId_
     , _sclAdvertiserId = _Coerce # pSclAdvertiserId_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest SavedColumnsList where
         type Rs SavedColumnsList = SavedColumnList
         type Scopes SavedColumnsList =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient SavedColumnsList{..}
+        requestClient SavedColumnsList'{..}
           = go _sclAgencyId _sclAdvertiserId (Just AltJSON)
               doubleClickSearchService
           where go

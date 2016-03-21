@@ -57,7 +57,7 @@ type OrgUnitsListResource =
 -- | Retrieve all Organization Units
 --
 -- /See:/ 'orgUnitsList' smart constructor.
-data OrgUnitsList = OrgUnitsList
+data OrgUnitsList = OrgUnitsList'
     { _oulOrgUnitPath :: !Text
     , _oulCustomerId  :: !Text
     , _oulType        :: !(Maybe OrgUnitsListType)
@@ -76,7 +76,7 @@ orgUnitsList
     :: Text -- ^ 'oulCustomerId'
     -> OrgUnitsList
 orgUnitsList pOulCustomerId_ =
-    OrgUnitsList
+    OrgUnitsList'
     { _oulOrgUnitPath = ""
     , _oulCustomerId = pOulCustomerId_
     , _oulType = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest OrgUnitsList where
         type Scopes OrgUnitsList =
              '["https://www.googleapis.com/auth/admin.directory.orgunit",
                "https://www.googleapis.com/auth/admin.directory.orgunit.readonly"]
-        requestClient OrgUnitsList{..}
+        requestClient OrgUnitsList'{..}
           = go _oulCustomerId (Just _oulOrgUnitPath) _oulType
               (Just AltJSON)
               directoryService

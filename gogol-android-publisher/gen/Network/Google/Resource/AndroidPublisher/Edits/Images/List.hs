@@ -60,7 +60,7 @@ type EditsImagesListResource =
 -- | Lists all images for the specified language and image type.
 --
 -- /See:/ 'editsImagesList' smart constructor.
-data EditsImagesList = EditsImagesList
+data EditsImagesList = EditsImagesList'
     { _eilPackageName :: !Text
     , _eilImageType   :: !EditsImagesListImageType
     , _eilLanguage    :: !Text
@@ -85,7 +85,7 @@ editsImagesList
     -> Text -- ^ 'eilEditId'
     -> EditsImagesList
 editsImagesList pEilPackageName_ pEilImageType_ pEilLanguage_ pEilEditId_ =
-    EditsImagesList
+    EditsImagesList'
     { _eilPackageName = pEilPackageName_
     , _eilImageType = pEilImageType_
     , _eilLanguage = pEilLanguage_
@@ -119,7 +119,7 @@ instance GoogleRequest EditsImagesList where
         type Rs EditsImagesList = ImagesListResponse
         type Scopes EditsImagesList =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsImagesList{..}
+        requestClient EditsImagesList'{..}
           = go _eilPackageName _eilEditId _eilLanguage
               _eilImageType
               (Just AltJSON)

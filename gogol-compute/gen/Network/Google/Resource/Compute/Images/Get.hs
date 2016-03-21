@@ -57,7 +57,7 @@ type ImagesGetResource =
 -- list() request.
 --
 -- /See:/ 'imagesGet' smart constructor.
-data ImagesGet = ImagesGet
+data ImagesGet = ImagesGet'
     { _iImage   :: !Text
     , _iProject :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ imagesGet
     -> Text -- ^ 'iProject'
     -> ImagesGet
 imagesGet pIImage_ pIProject_ =
-    ImagesGet
+    ImagesGet'
     { _iImage = pIImage_
     , _iProject = pIProject_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest ImagesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ImagesGet{..}
+        requestClient ImagesGet'{..}
           = go _iProject _iImage (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ImagesGetResource)

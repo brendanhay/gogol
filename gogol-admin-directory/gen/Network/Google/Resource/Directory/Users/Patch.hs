@@ -54,7 +54,7 @@ type UsersPatchResource =
 -- | update user. This method supports patch semantics.
 --
 -- /See:/ 'usersPatch' smart constructor.
-data UsersPatch = UsersPatch
+data UsersPatch = UsersPatch'
     { _upPayload :: !User
     , _upUserKey :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersPatch
     -> Text -- ^ 'upUserKey'
     -> UsersPatch
 usersPatch pUpPayload_ pUpUserKey_ =
-    UsersPatch
+    UsersPatch'
     { _upPayload = pUpPayload_
     , _upUserKey = pUpUserKey_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersPatch where
         type Rs UsersPatch = User
         type Scopes UsersPatch =
              '["https://www.googleapis.com/auth/admin.directory.user"]
-        requestClient UsersPatch{..}
+        requestClient UsersPatch'{..}
           = go _upUserKey (Just AltJSON) _upPayload
               directoryService
           where go

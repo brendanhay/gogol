@@ -115,7 +115,7 @@ type ObjectsInsertResource =
 -- | Stores a new object and metadata.
 --
 -- /See:/ 'objectsInsert' smart constructor.
-data ObjectsInsert = ObjectsInsert
+data ObjectsInsert = ObjectsInsert'
     { _oiIfMetagenerationMatch    :: !(Maybe (Textual Int64))
     , _oiIfGenerationNotMatch     :: !(Maybe (Textual Int64))
     , _oiIfGenerationMatch        :: !(Maybe (Textual Int64))
@@ -156,7 +156,7 @@ objectsInsert
     -> Object -- ^ 'oiPayload'
     -> ObjectsInsert
 objectsInsert pOiBucket_ pOiPayload_ =
-    ObjectsInsert
+    ObjectsInsert'
     { _oiIfMetagenerationMatch = Nothing
     , _oiIfGenerationNotMatch = Nothing
     , _oiIfGenerationMatch = Nothing
@@ -246,7 +246,7 @@ instance GoogleRequest ObjectsInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control",
                "https://www.googleapis.com/auth/devstorage.read_write"]
-        requestClient ObjectsInsert{..}
+        requestClient ObjectsInsert'{..}
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch
@@ -267,7 +267,7 @@ instance GoogleRequest (MediaUpload ObjectsInsert)
         type Rs (MediaUpload ObjectsInsert) = Object
         type Scopes (MediaUpload ObjectsInsert) =
              Scopes ObjectsInsert
-        requestClient (MediaUpload ObjectsInsert{..} body)
+        requestClient (MediaUpload ObjectsInsert'{..} body)
           = go _oiBucket _oiIfMetagenerationMatch
               _oiIfGenerationNotMatch
               _oiIfGenerationMatch

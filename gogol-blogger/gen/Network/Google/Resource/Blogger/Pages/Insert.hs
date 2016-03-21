@@ -56,7 +56,7 @@ type PagesInsertResource =
 -- | Add a page.
 --
 -- /See:/ 'pagesInsert' smart constructor.
-data PagesInsert = PagesInsert
+data PagesInsert = PagesInsert'
     { _piIsDraft :: !(Maybe Bool)
     , _piBlogId  :: !Text
     , _piPayload :: !Page
@@ -76,7 +76,7 @@ pagesInsert
     -> Page -- ^ 'piPayload'
     -> PagesInsert
 pagesInsert pPiBlogId_ pPiPayload_ =
-    PagesInsert
+    PagesInsert'
     { _piIsDraft = Nothing
     , _piBlogId = pPiBlogId_
     , _piPayload = pPiPayload_
@@ -100,7 +100,7 @@ instance GoogleRequest PagesInsert where
         type Rs PagesInsert = Page
         type Scopes PagesInsert =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PagesInsert{..}
+        requestClient PagesInsert'{..}
           = go _piBlogId _piIsDraft (Just AltJSON) _piPayload
               bloggerService
           where go

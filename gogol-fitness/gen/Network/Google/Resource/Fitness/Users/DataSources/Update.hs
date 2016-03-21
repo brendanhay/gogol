@@ -64,7 +64,7 @@ type UsersDataSourcesUpdateResource =
 -- identified by their data stream ID.
 --
 -- /See:/ 'usersDataSourcesUpdate' smart constructor.
-data UsersDataSourcesUpdate = UsersDataSourcesUpdate
+data UsersDataSourcesUpdate = UsersDataSourcesUpdate'
     { _udsuDataSourceId :: !Text
     , _udsuPayload      :: !DataSource
     , _udsuUserId       :: !Text
@@ -85,7 +85,7 @@ usersDataSourcesUpdate
     -> Text -- ^ 'udsuUserId'
     -> UsersDataSourcesUpdate
 usersDataSourcesUpdate pUdsuDataSourceId_ pUdsuPayload_ pUdsuUserId_ =
-    UsersDataSourcesUpdate
+    UsersDataSourcesUpdate'
     { _udsuDataSourceId = pUdsuDataSourceId_
     , _udsuPayload = pUdsuPayload_
     , _udsuUserId = pUdsuUserId_
@@ -114,7 +114,7 @@ instance GoogleRequest UsersDataSourcesUpdate where
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesUpdate{..}
+        requestClient UsersDataSourcesUpdate'{..}
           = go _udsuUserId _udsuDataSourceId (Just AltJSON)
               _udsuPayload
               fitnessService

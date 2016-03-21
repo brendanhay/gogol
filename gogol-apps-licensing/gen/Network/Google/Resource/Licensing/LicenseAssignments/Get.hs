@@ -59,7 +59,7 @@ type LicenseAssignmentsGetResource =
 -- | Get license assignment of a particular product and sku for a user
 --
 -- /See:/ 'licenseAssignmentsGet' smart constructor.
-data LicenseAssignmentsGet = LicenseAssignmentsGet
+data LicenseAssignmentsGet = LicenseAssignmentsGet'
     { _lagSKUId     :: !Text
     , _lagUserId    :: !Text
     , _lagProductId :: !Text
@@ -80,7 +80,7 @@ licenseAssignmentsGet
     -> Text -- ^ 'lagProductId'
     -> LicenseAssignmentsGet
 licenseAssignmentsGet pLagSKUId_ pLagUserId_ pLagProductId_ =
-    LicenseAssignmentsGet
+    LicenseAssignmentsGet'
     { _lagSKUId = pLagSKUId_
     , _lagUserId = pLagUserId_
     , _lagProductId = pLagProductId_
@@ -104,7 +104,7 @@ instance GoogleRequest LicenseAssignmentsGet where
         type Rs LicenseAssignmentsGet = LicenseAssignment
         type Scopes LicenseAssignmentsGet =
              '["https://www.googleapis.com/auth/apps.licensing"]
-        requestClient LicenseAssignmentsGet{..}
+        requestClient LicenseAssignmentsGet'{..}
           = go _lagProductId _lagSKUId _lagUserId
               (Just AltJSON)
               appsLicensingService

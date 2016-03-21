@@ -72,7 +72,7 @@ type LayersAnnotationDataGetResource =
 -- | Gets the annotation data.
 --
 -- /See:/ 'layersAnnotationDataGet' smart constructor.
-data LayersAnnotationDataGet = LayersAnnotationDataGet
+data LayersAnnotationDataGet = LayersAnnotationDataGet'
     { _ladgW                   :: !(Maybe (Textual Int32))
     , _ladgScale               :: !(Maybe (Textual Int32))
     , _ladgLocale              :: !(Maybe Text)
@@ -115,7 +115,7 @@ layersAnnotationDataGet
     -> Text -- ^ 'ladgLayerId'
     -> LayersAnnotationDataGet
 layersAnnotationDataGet pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolumeId_ pLadgLayerId_ =
-    LayersAnnotationDataGet
+    LayersAnnotationDataGet'
     { _ladgW = Nothing
     , _ladgScale = Nothing
     , _ladgLocale = Nothing
@@ -191,7 +191,7 @@ instance GoogleRequest LayersAnnotationDataGet where
         type Rs LayersAnnotationDataGet = AnnotationData
         type Scopes LayersAnnotationDataGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient LayersAnnotationDataGet{..}
+        requestClient LayersAnnotationDataGet'{..}
           = go _ladgVolumeId _ladgLayerId _ladgAnnotationDataId
               (Just _ladgContentVersion)
               _ladgW

@@ -56,7 +56,7 @@ type DatabasesListResource =
 -- | Lists databases in the specified Cloud SQL instance.
 --
 -- /See:/ 'databasesList' smart constructor.
-data DatabasesList = DatabasesList
+data DatabasesList = DatabasesList'
     { _dlProject  :: !Text
     , _dlInstance :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ databasesList
     -> Text -- ^ 'dlInstance'
     -> DatabasesList
 databasesList pDlProject_ pDlInstance_ =
-    DatabasesList
+    DatabasesList'
     { _dlProject = pDlProject_
     , _dlInstance = pDlInstance_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest DatabasesList where
         type Scopes DatabasesList =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient DatabasesList{..}
+        requestClient DatabasesList'{..}
           = go _dlProject _dlInstance (Just AltJSON)
               sQLAdminService
           where go

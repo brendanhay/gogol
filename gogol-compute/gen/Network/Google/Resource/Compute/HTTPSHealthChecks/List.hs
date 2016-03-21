@@ -62,7 +62,7 @@ type HTTPSHealthChecksListResource =
 -- specified project.
 --
 -- /See:/ 'httpsHealthChecksList' smart constructor.
-data HTTPSHealthChecksList = HTTPSHealthChecksList
+data HTTPSHealthChecksList = HTTPSHealthChecksList'
     { _hhclProject    :: !Text
     , _hhclFilter     :: !(Maybe Text)
     , _hhclPageToken  :: !(Maybe Text)
@@ -84,7 +84,7 @@ httpsHealthChecksList
     :: Text -- ^ 'hhclProject'
     -> HTTPSHealthChecksList
 httpsHealthChecksList pHhclProject_ =
-    HTTPSHealthChecksList
+    HTTPSHealthChecksList'
     { _hhclProject = pHhclProject_
     , _hhclFilter = Nothing
     , _hhclPageToken = Nothing
@@ -145,7 +145,7 @@ instance GoogleRequest HTTPSHealthChecksList where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient HTTPSHealthChecksList{..}
+        requestClient HTTPSHealthChecksList'{..}
           = go _hhclProject _hhclFilter _hhclPageToken
               (Just _hhclMaxResults)
               (Just AltJSON)

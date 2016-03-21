@@ -59,7 +59,7 @@ type VPNTunnelsGetResource =
 -- tunnels by making a list() request.
 --
 -- /See:/ 'vpnTunnelsGet' smart constructor.
-data VPNTunnelsGet = VPNTunnelsGet
+data VPNTunnelsGet = VPNTunnelsGet'
     { _vtgProject   :: !Text
     , _vtgVPNTunnel :: !Text
     , _vtgRegion    :: !Text
@@ -80,7 +80,7 @@ vpnTunnelsGet
     -> Text -- ^ 'vtgRegion'
     -> VPNTunnelsGet
 vpnTunnelsGet pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
-    VPNTunnelsGet
+    VPNTunnelsGet'
     { _vtgProject = pVtgProject_
     , _vtgVPNTunnel = pVtgVPNTunnel_
     , _vtgRegion = pVtgRegion_
@@ -107,7 +107,7 @@ instance GoogleRequest VPNTunnelsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient VPNTunnelsGet{..}
+        requestClient VPNTunnelsGet'{..}
           = go _vtgProject _vtgRegion _vtgVPNTunnel
               (Just AltJSON)
               computeService

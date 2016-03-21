@@ -63,7 +63,7 @@ type ProjectsMetricsGetResource =
 -- | Gets a logs-based metric.
 --
 -- /See:/ 'projectsMetricsGet' smart constructor.
-data ProjectsMetricsGet = ProjectsMetricsGet
+data ProjectsMetricsGet = ProjectsMetricsGet'
     { _pmgXgafv          :: !(Maybe Text)
     , _pmgUploadProtocol :: !(Maybe Text)
     , _pmgPp             :: !Bool
@@ -97,7 +97,7 @@ projectsMetricsGet
     :: Text -- ^ 'pmgMetricName'
     -> ProjectsMetricsGet
 projectsMetricsGet pPmgMetricName_ =
-    ProjectsMetricsGet
+    ProjectsMetricsGet'
     { _pmgXgafv = Nothing
     , _pmgUploadProtocol = Nothing
     , _pmgPp = True
@@ -159,7 +159,7 @@ instance GoogleRequest ProjectsMetricsGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/logging.admin",
                "https://www.googleapis.com/auth/logging.read"]
-        requestClient ProjectsMetricsGet{..}
+        requestClient ProjectsMetricsGet'{..}
           = go _pmgMetricName _pmgXgafv _pmgUploadProtocol
               (Just _pmgPp)
               _pmgAccessToken

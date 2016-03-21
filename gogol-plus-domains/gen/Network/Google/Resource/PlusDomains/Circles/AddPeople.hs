@@ -58,7 +58,7 @@ type CirclesAddPeopleResource =
 -- including the number of circle adds. Learn More.
 --
 -- /See:/ 'circlesAddPeople' smart constructor.
-data CirclesAddPeople = CirclesAddPeople
+data CirclesAddPeople = CirclesAddPeople'
     { _capEmail    :: !(Maybe [Text])
     , _capUserId   :: !(Maybe [Text])
     , _capCircleId :: !Text
@@ -77,7 +77,7 @@ circlesAddPeople
     :: Text -- ^ 'capCircleId'
     -> CirclesAddPeople
 circlesAddPeople pCapCircleId_ =
-    CirclesAddPeople
+    CirclesAddPeople'
     { _capEmail = Nothing
     , _capUserId = Nothing
     , _capCircleId = pCapCircleId_
@@ -107,7 +107,7 @@ instance GoogleRequest CirclesAddPeople where
         type Scopes CirclesAddPeople =
              '["https://www.googleapis.com/auth/plus.circles.write",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient CirclesAddPeople{..}
+        requestClient CirclesAddPeople'{..}
           = go _capCircleId (_capEmail ^. _Default)
               (_capUserId ^. _Default)
               (Just AltJSON)

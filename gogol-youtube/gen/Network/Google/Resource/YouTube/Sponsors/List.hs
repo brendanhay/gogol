@@ -58,7 +58,7 @@ type SponsorsListResource =
 -- | Lists sponsors for a channel.
 --
 -- /See:/ 'sponsorsList' smart constructor.
-data SponsorsList = SponsorsList
+data SponsorsList = SponsorsList'
     { _sPart       :: !Text
     , _sFilter     :: !SponsorsListFilter
     , _sPageToken  :: !(Maybe Text)
@@ -80,7 +80,7 @@ sponsorsList
     :: Text -- ^ 'sPart'
     -> SponsorsList
 sponsorsList pSPart_ =
-    SponsorsList
+    SponsorsList'
     { _sPart = pSPart_
     , _sFilter = SLFNewest
     , _sPageToken = Nothing
@@ -116,7 +116,7 @@ instance GoogleRequest SponsorsList where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.readonly"]
-        requestClient SponsorsList{..}
+        requestClient SponsorsList'{..}
           = go (Just _sPart) (Just _sFilter) _sPageToken
               (Just _sMaxResults)
               (Just AltJSON)

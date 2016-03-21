@@ -73,7 +73,7 @@ type ChangeLogsListResource =
 -- | Retrieves a list of change logs.
 --
 -- /See:/ 'changeLogsList' smart constructor.
-data ChangeLogsList = ChangeLogsList
+data ChangeLogsList = ChangeLogsList'
     { _cllUserProFileIds :: !(Maybe [Textual Int64])
     , _cllObjectType     :: !(Maybe ChangeLogsListObjectType)
     , _cllSearchString   :: !(Maybe Text)
@@ -116,7 +116,7 @@ changeLogsList
     :: Int64 -- ^ 'cllProFileId'
     -> ChangeLogsList
 changeLogsList pCllProFileId_ =
-    ChangeLogsList
+    ChangeLogsList'
     { _cllUserProFileIds = Nothing
     , _cllObjectType = Nothing
     , _cllSearchString = Nothing
@@ -215,7 +215,7 @@ instance GoogleRequest ChangeLogsList where
         type Rs ChangeLogsList = ChangeLogsListResponse
         type Scopes ChangeLogsList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ChangeLogsList{..}
+        requestClient ChangeLogsList'{..}
           = go _cllProFileId (_cllUserProFileIds ^. _Default)
               _cllObjectType
               _cllSearchString

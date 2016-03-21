@@ -61,7 +61,7 @@ type ReconcileMethod =
 -- | Reconcile entities to Freebase open data.
 --
 -- /See:/ 'reconcile' smart constructor.
-data Reconcile = Reconcile
+data Reconcile = Reconcile'
     { _rKind       :: !(Maybe [Text])
     , _rLang       :: !(Maybe [Text])
     , _rConfidence :: !(Textual Double)
@@ -88,7 +88,7 @@ data Reconcile = Reconcile
 reconcile
     :: Reconcile
 reconcile =
-    Reconcile
+    Reconcile'
     { _rKind = Nothing
     , _rLang = Nothing
     , _rConfidence = 0.99
@@ -134,7 +134,7 @@ rProp
 instance GoogleRequest Reconcile where
         type Rs Reconcile = ReconcileGet
         type Scopes Reconcile = '[]
-        requestClient Reconcile{..}
+        requestClient Reconcile'{..}
           = go (_rKind ^. _Default) (_rLang ^. _Default)
               (Just _rConfidence)
               _rName

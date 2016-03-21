@@ -94,7 +94,7 @@ type CreativesListResource =
 -- | Retrieves a list of creatives, possibly filtered.
 --
 -- /See:/ 'creativesList' smart constructor.
-data CreativesList = CreativesList
+data CreativesList = CreativesList'
     { _cRenderingIds         :: !(Maybe [Textual Int64])
     , _cAdvertiserId         :: !(Maybe (Textual Int64))
     , _cSearchString         :: !(Maybe Text)
@@ -155,7 +155,7 @@ creativesList
     :: Int64 -- ^ 'cProFileId'
     -> CreativesList
 creativesList pCProFileId_ =
-    CreativesList
+    CreativesList'
     { _cRenderingIds = Nothing
     , _cAdvertiserId = Nothing
     , _cSearchString = Nothing
@@ -292,7 +292,7 @@ instance GoogleRequest CreativesList where
         type Rs CreativesList = CreativesListResponse
         type Scopes CreativesList =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient CreativesList{..}
+        requestClient CreativesList'{..}
           = go _cProFileId (_cRenderingIds ^. _Default)
               _cAdvertiserId
               _cSearchString

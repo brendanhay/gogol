@@ -64,7 +64,7 @@ type InstanceTemplatesInsertResource =
 -- template.
 --
 -- /See:/ 'instanceTemplatesInsert' smart constructor.
-data InstanceTemplatesInsert = InstanceTemplatesInsert
+data InstanceTemplatesInsert = InstanceTemplatesInsert'
     { _itiProject :: !Text
     , _itiPayload :: !InstanceTemplate
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -81,7 +81,7 @@ instanceTemplatesInsert
     -> InstanceTemplate -- ^ 'itiPayload'
     -> InstanceTemplatesInsert
 instanceTemplatesInsert pItiProject_ pItiPayload_ =
-    InstanceTemplatesInsert
+    InstanceTemplatesInsert'
     { _itiProject = pItiProject_
     , _itiPayload = pItiPayload_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest InstanceTemplatesInsert where
         type Scopes InstanceTemplatesInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceTemplatesInsert{..}
+        requestClient InstanceTemplatesInsert'{..}
           = go _itiProject (Just AltJSON) _itiPayload
               computeService
           where go

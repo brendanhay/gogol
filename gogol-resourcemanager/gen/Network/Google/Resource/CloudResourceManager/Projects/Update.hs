@@ -70,7 +70,7 @@ type ProjectsUpdateResource =
 -- modify permissions for this Project.
 --
 -- /See:/ 'projectsUpdate' smart constructor.
-data ProjectsUpdate = ProjectsUpdate
+data ProjectsUpdate = ProjectsUpdate'
     { _proXgafv          :: !(Maybe Text)
     , _proUploadProtocol :: !(Maybe Text)
     , _proPp             :: !Bool
@@ -108,7 +108,7 @@ projectsUpdate
     -> Text -- ^ 'proProjectId'
     -> ProjectsUpdate
 projectsUpdate pProPayload_ pProProjectId_ =
-    ProjectsUpdate
+    ProjectsUpdate'
     { _proXgafv = Nothing
     , _proUploadProtocol = Nothing
     , _proPp = True
@@ -171,7 +171,7 @@ instance GoogleRequest ProjectsUpdate where
         type Rs ProjectsUpdate = Project
         type Scopes ProjectsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsUpdate{..}
+        requestClient ProjectsUpdate'{..}
           = go _proProjectId _proXgafv _proUploadProtocol
               (Just _proPp)
               _proAccessToken

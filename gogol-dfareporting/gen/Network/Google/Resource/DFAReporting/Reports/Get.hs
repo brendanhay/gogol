@@ -54,7 +54,7 @@ type ReportsGetResource =
 -- | Retrieves a report by its ID.
 --
 -- /See:/ 'reportsGet' smart constructor.
-data ReportsGet = ReportsGet
+data ReportsGet = ReportsGet'
     { _rgReportId  :: !(Textual Int64)
     , _rgProFileId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ reportsGet
     -> Int64 -- ^ 'rgProFileId'
     -> ReportsGet
 reportsGet pRgReportId_ pRgProFileId_ =
-    ReportsGet
+    ReportsGet'
     { _rgReportId = _Coerce # pRgReportId_
     , _rgProFileId = _Coerce # pRgProFileId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ReportsGet where
         type Rs ReportsGet = Report
         type Scopes ReportsGet =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsGet{..}
+        requestClient ReportsGet'{..}
           = go _rgProFileId _rgReportId (Just AltJSON)
               dFAReportingService
           where go

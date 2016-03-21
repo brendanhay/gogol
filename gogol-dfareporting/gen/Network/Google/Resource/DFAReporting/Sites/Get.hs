@@ -54,7 +54,7 @@ type SitesGetResource =
 -- | Gets one site by ID.
 --
 -- /See:/ 'sitesGet' smart constructor.
-data SitesGet = SitesGet
+data SitesGet = SitesGet'
     { _sggProFileId :: !(Textual Int64)
     , _sggId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ sitesGet
     -> Int64 -- ^ 'sggId'
     -> SitesGet
 sitesGet pSggProFileId_ pSggId_ =
-    SitesGet
+    SitesGet'
     { _sggProFileId = _Coerce # pSggProFileId_
     , _sggId = _Coerce # pSggId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest SitesGet where
         type Rs SitesGet = Site
         type Scopes SitesGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient SitesGet{..}
+        requestClient SitesGet'{..}
           = go _sggProFileId _sggId (Just AltJSON)
               dFAReportingService
           where go

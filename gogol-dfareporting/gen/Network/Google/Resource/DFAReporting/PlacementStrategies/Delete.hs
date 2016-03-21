@@ -54,7 +54,7 @@ type PlacementStrategiesDeleteResource =
 -- | Deletes an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesDelete' smart constructor.
-data PlacementStrategiesDelete = PlacementStrategiesDelete
+data PlacementStrategiesDelete = PlacementStrategiesDelete'
     { _psdProFileId :: !(Textual Int64)
     , _psdId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementStrategiesDelete
     -> Int64 -- ^ 'psdId'
     -> PlacementStrategiesDelete
 placementStrategiesDelete pPsdProFileId_ pPsdId_ =
-    PlacementStrategiesDelete
+    PlacementStrategiesDelete'
     { _psdProFileId = _Coerce # pPsdProFileId_
     , _psdId = _Coerce # pPsdId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest PlacementStrategiesDelete
         type Rs PlacementStrategiesDelete = ()
         type Scopes PlacementStrategiesDelete =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementStrategiesDelete{..}
+        requestClient PlacementStrategiesDelete'{..}
           = go _psdProFileId _psdId (Just AltJSON)
               dFAReportingService
           where go

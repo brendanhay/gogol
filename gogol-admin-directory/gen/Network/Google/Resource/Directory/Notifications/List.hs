@@ -59,7 +59,7 @@ type NotificationsListResource =
 -- | Retrieves a list of notifications.
 --
 -- /See:/ 'notificationsList' smart constructor.
-data NotificationsList = NotificationsList
+data NotificationsList = NotificationsList'
     { _nlCustomer   :: !Text
     , _nlLanguage   :: !(Maybe Text)
     , _nlPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ notificationsList
     :: Text -- ^ 'nlCustomer'
     -> NotificationsList
 notificationsList pNlCustomer_ =
-    NotificationsList
+    NotificationsList'
     { _nlCustomer = pNlCustomer_
     , _nlLanguage = Nothing
     , _nlPageToken = Nothing
@@ -114,7 +114,7 @@ instance GoogleRequest NotificationsList where
         type Rs NotificationsList = Notifications
         type Scopes NotificationsList =
              '["https://www.googleapis.com/auth/admin.directory.notifications"]
-        requestClient NotificationsList{..}
+        requestClient NotificationsList'{..}
           = go _nlCustomer _nlLanguage _nlPageToken
               _nlMaxResults
               (Just AltJSON)

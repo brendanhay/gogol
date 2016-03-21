@@ -71,7 +71,7 @@ type AppsServicesVersionsCreateResource =
 -- | Deploys new code and resource files to a version.
 --
 -- /See:/ 'appsServicesVersionsCreate' smart constructor.
-data AppsServicesVersionsCreate = AppsServicesVersionsCreate
+data AppsServicesVersionsCreate = AppsServicesVersionsCreate'
     { _asvcXgafv          :: !(Maybe Text)
     , _asvcUploadProtocol :: !(Maybe Text)
     , _asvcPp             :: !Bool
@@ -113,7 +113,7 @@ appsServicesVersionsCreate
     -> Text -- ^ 'asvcServicesId'
     -> AppsServicesVersionsCreate
 appsServicesVersionsCreate pAsvcPayload_ pAsvcAppsId_ pAsvcServicesId_ =
-    AppsServicesVersionsCreate
+    AppsServicesVersionsCreate'
     { _asvcXgafv = Nothing
     , _asvcUploadProtocol = Nothing
     , _asvcPp = True
@@ -186,7 +186,7 @@ instance GoogleRequest AppsServicesVersionsCreate
         type Rs AppsServicesVersionsCreate = Operation
         type Scopes AppsServicesVersionsCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesVersionsCreate{..}
+        requestClient AppsServicesVersionsCreate'{..}
           = go _asvcAppsId _asvcServicesId _asvcXgafv
               _asvcUploadProtocol
               (Just _asvcPp)

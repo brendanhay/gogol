@@ -63,7 +63,7 @@ type InstanceGroupsRemoveInstancesResource =
 -- does not delete those instances.
 --
 -- /See:/ 'instanceGroupsRemoveInstances' smart constructor.
-data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances
+data InstanceGroupsRemoveInstances = InstanceGroupsRemoveInstances'
     { _igriProject       :: !Text
     , _igriZone          :: !Text
     , _igriPayload       :: !InstanceGroupsRemoveInstancesRequest
@@ -88,7 +88,7 @@ instanceGroupsRemoveInstances
     -> Text -- ^ 'igriInstanceGroup'
     -> InstanceGroupsRemoveInstances
 instanceGroupsRemoveInstances pIgriProject_ pIgriZone_ pIgriPayload_ pIgriInstanceGroup_ =
-    InstanceGroupsRemoveInstances
+    InstanceGroupsRemoveInstances'
     { _igriProject = pIgriProject_
     , _igriZone = pIgriZone_
     , _igriPayload = pIgriPayload_
@@ -122,7 +122,7 @@ instance GoogleRequest InstanceGroupsRemoveInstances
         type Scopes InstanceGroupsRemoveInstances =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstanceGroupsRemoveInstances{..}
+        requestClient InstanceGroupsRemoveInstances'{..}
           = go _igriProject _igriZone _igriInstanceGroup
               (Just AltJSON)
               _igriPayload

@@ -53,7 +53,7 @@ type TaskListsGetResource =
 -- | Returns the authenticated user\'s specified task list.
 --
 -- /See:/ 'taskListsGet' smart constructor.
-newtype TaskListsGet = TaskListsGet
+newtype TaskListsGet = TaskListsGet'
     { _tlgTaskList :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ taskListsGet
     :: Text -- ^ 'tlgTaskList'
     -> TaskListsGet
 taskListsGet pTlgTaskList_ =
-    TaskListsGet
+    TaskListsGet'
     { _tlgTaskList = pTlgTaskList_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest TaskListsGet where
         type Scopes TaskListsGet =
              '["https://www.googleapis.com/auth/tasks",
                "https://www.googleapis.com/auth/tasks.readonly"]
-        requestClient TaskListsGet{..}
+        requestClient TaskListsGet'{..}
           = go _tlgTaskList (Just AltJSON) appsTasksService
           where go
                   = buildClient (Proxy :: Proxy TaskListsGetResource)

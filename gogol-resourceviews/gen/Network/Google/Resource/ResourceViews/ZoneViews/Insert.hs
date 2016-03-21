@@ -58,7 +58,7 @@ type ZoneViewsInsertResource =
 -- | Create a resource view.
 --
 -- /See:/ 'zoneViewsInsert' smart constructor.
-data ZoneViewsInsert = ZoneViewsInsert
+data ZoneViewsInsert = ZoneViewsInsert'
     { _zviProject :: !Text
     , _zviZone    :: !Text
     , _zviPayload :: !ResourceView
@@ -79,7 +79,7 @@ zoneViewsInsert
     -> ResourceView -- ^ 'zviPayload'
     -> ZoneViewsInsert
 zoneViewsInsert pZviProject_ pZviZone_ pZviPayload_ =
-    ZoneViewsInsert
+    ZoneViewsInsert'
     { _zviProject = pZviProject_
     , _zviZone = pZviZone_
     , _zviPayload = pZviPayload_
@@ -105,7 +105,7 @@ instance GoogleRequest ZoneViewsInsert where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient ZoneViewsInsert{..}
+        requestClient ZoneViewsInsert'{..}
           = go _zviProject _zviZone (Just AltJSON) _zviPayload
               resourceViewsService
           where go

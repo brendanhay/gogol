@@ -54,7 +54,7 @@ type PlacementsInsertResource =
 -- | Inserts a new placement.
 --
 -- /See:/ 'placementsInsert' smart constructor.
-data PlacementsInsert = PlacementsInsert
+data PlacementsInsert = PlacementsInsert'
     { _piProFileId :: !(Textual Int64)
     , _piPayload   :: !Placement
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ placementsInsert
     -> Placement -- ^ 'piPayload'
     -> PlacementsInsert
 placementsInsert pPiProFileId_ pPiPayload_ =
-    PlacementsInsert
+    PlacementsInsert'
     { _piProFileId = _Coerce # pPiProFileId_
     , _piPayload = pPiPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PlacementsInsert where
         type Rs PlacementsInsert = Placement
         type Scopes PlacementsInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementsInsert{..}
+        requestClient PlacementsInsert'{..}
           = go _piProFileId (Just AltJSON) _piPayload
               dFAReportingService
           where go

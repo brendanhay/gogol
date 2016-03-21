@@ -59,7 +59,7 @@ type SubscriptionsChangeRenewalSettingsResource =
 -- | Changes the renewal settings of a subscription
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings' smart constructor.
-data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings
+data SubscriptionsChangeRenewalSettings = SubscriptionsChangeRenewalSettings'
     { _scrsPayload        :: !RenewalSettings
     , _scrsCustomerId     :: !Text
     , _scrsSubscriptionId :: !Text
@@ -80,7 +80,7 @@ subscriptionsChangeRenewalSettings
     -> Text -- ^ 'scrsSubscriptionId'
     -> SubscriptionsChangeRenewalSettings
 subscriptionsChangeRenewalSettings pScrsPayload_ pScrsCustomerId_ pScrsSubscriptionId_ =
-    SubscriptionsChangeRenewalSettings
+    SubscriptionsChangeRenewalSettings'
     { _scrsPayload = pScrsPayload_
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsSubscriptionId = pScrsSubscriptionId_
@@ -109,7 +109,7 @@ instance GoogleRequest
              Subscription
         type Scopes SubscriptionsChangeRenewalSettings =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsChangeRenewalSettings{..}
+        requestClient SubscriptionsChangeRenewalSettings'{..}
           = go _scrsCustomerId _scrsSubscriptionId
               (Just AltJSON)
               _scrsPayload

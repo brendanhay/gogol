@@ -62,7 +62,7 @@ type PostsGetResource =
 -- | Get a post by ID.
 --
 -- /See:/ 'postsGet' smart constructor.
-data PostsGet = PostsGet
+data PostsGet = PostsGet'
     { _pggFetchBody   :: !Bool
     , _pggFetchImages :: !(Maybe Bool)
     , _pggBlogId      :: !Text
@@ -91,7 +91,7 @@ postsGet
     -> Text -- ^ 'pggPostId'
     -> PostsGet
 postsGet pPggBlogId_ pPggPostId_ =
-    PostsGet
+    PostsGet'
     { _pggFetchBody = True
     , _pggFetchImages = Nothing
     , _pggBlogId = pPggBlogId_
@@ -140,7 +140,7 @@ instance GoogleRequest PostsGet where
         type Scopes PostsGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PostsGet{..}
+        requestClient PostsGet'{..}
           = go _pggBlogId _pggPostId (Just _pggFetchBody)
               _pggFetchImages
               _pggMaxComments

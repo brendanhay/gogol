@@ -62,7 +62,7 @@ type ManagementUnSampledReportsInsertResource =
 -- | Create a new unsampled report.
 --
 -- /See:/ 'managementUnSampledReportsInsert' smart constructor.
-data ManagementUnSampledReportsInsert = ManagementUnSampledReportsInsert
+data ManagementUnSampledReportsInsert = ManagementUnSampledReportsInsert'
     { _musriWebPropertyId :: !Text
     , _musriProFileId     :: !Text
     , _musriPayload       :: !UnSampledReport
@@ -87,7 +87,7 @@ managementUnSampledReportsInsert
     -> Text -- ^ 'musriAccountId'
     -> ManagementUnSampledReportsInsert
 managementUnSampledReportsInsert pMusriWebPropertyId_ pMusriProFileId_ pMusriPayload_ pMusriAccountId_ =
-    ManagementUnSampledReportsInsert
+    ManagementUnSampledReportsInsert'
     { _musriWebPropertyId = pMusriWebPropertyId_
     , _musriProFileId = pMusriProFileId_
     , _musriPayload = pMusriPayload_
@@ -124,7 +124,7 @@ instance GoogleRequest
         type Scopes ManagementUnSampledReportsInsert =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementUnSampledReportsInsert{..}
+        requestClient ManagementUnSampledReportsInsert'{..}
           = go _musriAccountId _musriWebPropertyId
               _musriProFileId
               (Just AltJSON)

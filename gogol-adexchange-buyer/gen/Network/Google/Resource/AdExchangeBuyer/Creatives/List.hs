@@ -67,7 +67,7 @@ type CreativesListResource =
 -- creative will be available 30-40 minutes after submission.
 --
 -- /See:/ 'creativesList'' smart constructor.
-data CreativesList' = CreativesList'
+data CreativesList' = CreativesList''
     { _clBuyerCreativeId         :: !(Maybe [Text])
     , _clOpenAuctionStatusFilter :: !(Maybe CreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe [Textual Int32])
@@ -94,7 +94,7 @@ data CreativesList' = CreativesList'
 creativesList'
     :: CreativesList'
 creativesList' =
-    CreativesList'
+    CreativesList''
     { _clBuyerCreativeId = Nothing
     , _clOpenAuctionStatusFilter = Nothing
     , _clAccountId = Nothing
@@ -151,7 +151,7 @@ instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
         type Scopes CreativesList' =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient CreativesList'{..}
+        requestClient CreativesList''{..}
           = go (_clBuyerCreativeId ^. _Default)
               _clOpenAuctionStatusFilter
               (_clAccountId ^. _Default)

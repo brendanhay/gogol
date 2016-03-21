@@ -55,7 +55,7 @@ type PagesRevertResource =
 -- | Revert a published or scheduled page to draft state.
 --
 -- /See:/ 'pagesRevert' smart constructor.
-data PagesRevert = PagesRevert
+data PagesRevert = PagesRevert'
     { _pagBlogId :: !Text
     , _pagPageId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ pagesRevert
     -> Text -- ^ 'pagPageId'
     -> PagesRevert
 pagesRevert pPagBlogId_ pPagPageId_ =
-    PagesRevert
+    PagesRevert'
     { _pagBlogId = pPagBlogId_
     , _pagPageId = pPagPageId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PagesRevert where
         type Rs PagesRevert = Page
         type Scopes PagesRevert =
              '["https://www.googleapis.com/auth/blogger"]
-        requestClient PagesRevert{..}
+        requestClient PagesRevert'{..}
           = go _pagBlogId _pagPageId (Just AltJSON)
               bloggerService
           where go

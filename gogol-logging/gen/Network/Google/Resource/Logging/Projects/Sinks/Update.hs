@@ -65,7 +65,7 @@ type ProjectsSinksUpdateResource =
 -- | Creates or updates a sink.
 --
 -- /See:/ 'projectsSinksUpdate' smart constructor.
-data ProjectsSinksUpdate = ProjectsSinksUpdate
+data ProjectsSinksUpdate = ProjectsSinksUpdate'
     { _psuXgafv          :: !(Maybe Text)
     , _psuUploadProtocol :: !(Maybe Text)
     , _psuPp             :: !Bool
@@ -103,7 +103,7 @@ projectsSinksUpdate
     -> Text -- ^ 'psuSinkName'
     -> ProjectsSinksUpdate
 projectsSinksUpdate pPsuPayload_ pPsuSinkName_ =
-    ProjectsSinksUpdate
+    ProjectsSinksUpdate'
     { _psuXgafv = Nothing
     , _psuUploadProtocol = Nothing
     , _psuPp = True
@@ -170,7 +170,7 @@ instance GoogleRequest ProjectsSinksUpdate where
         type Scopes ProjectsSinksUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/logging.admin"]
-        requestClient ProjectsSinksUpdate{..}
+        requestClient ProjectsSinksUpdate'{..}
           = go _psuSinkName _psuXgafv _psuUploadProtocol
               (Just _psuPp)
               _psuAccessToken

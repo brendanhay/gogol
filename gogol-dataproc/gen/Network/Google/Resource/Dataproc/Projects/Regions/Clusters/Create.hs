@@ -71,7 +71,7 @@ type ProjectsRegionsClustersCreateResource =
 -- | Creates a cluster in a project.
 --
 -- /See:/ 'projectsRegionsClustersCreate' smart constructor.
-data ProjectsRegionsClustersCreate = ProjectsRegionsClustersCreate
+data ProjectsRegionsClustersCreate = ProjectsRegionsClustersCreate'
     { _prccXgafv          :: !(Maybe Text)
     , _prccUploadProtocol :: !(Maybe Text)
     , _prccPp             :: !Bool
@@ -113,7 +113,7 @@ projectsRegionsClustersCreate
     -> Text -- ^ 'prccProjectId'
     -> ProjectsRegionsClustersCreate
 projectsRegionsClustersCreate pPrccPayload_ pPrccRegion_ pPrccProjectId_ =
-    ProjectsRegionsClustersCreate
+    ProjectsRegionsClustersCreate'
     { _prccXgafv = Nothing
     , _prccUploadProtocol = Nothing
     , _prccPp = True
@@ -186,7 +186,7 @@ instance GoogleRequest ProjectsRegionsClustersCreate
         type Rs ProjectsRegionsClustersCreate = Operation
         type Scopes ProjectsRegionsClustersCreate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsClustersCreate{..}
+        requestClient ProjectsRegionsClustersCreate'{..}
           = go _prccProjectId _prccRegion _prccXgafv
               _prccUploadProtocol
               (Just _prccPp)

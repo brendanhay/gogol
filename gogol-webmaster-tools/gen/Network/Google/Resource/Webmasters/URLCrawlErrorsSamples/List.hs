@@ -63,7 +63,7 @@ type URLCrawlErrorsSamplesListResource =
 -- platform.
 --
 -- /See:/ 'urlCrawlErrorsSamplesList' smart constructor.
-data URLCrawlErrorsSamplesList = URLCrawlErrorsSamplesList
+data URLCrawlErrorsSamplesList = URLCrawlErrorsSamplesList'
     { _uceslPlatform :: !URLCrawlErrorsSamplesListPlatform
     , _uceslCategory :: !URLCrawlErrorsSamplesListCategory
     , _uceslSiteURL  :: !Text
@@ -84,7 +84,7 @@ urlCrawlErrorsSamplesList
     -> Text -- ^ 'uceslSiteURL'
     -> URLCrawlErrorsSamplesList
 urlCrawlErrorsSamplesList pUceslPlatform_ pUceslCategory_ pUceslSiteURL_ =
-    URLCrawlErrorsSamplesList
+    URLCrawlErrorsSamplesList'
     { _uceslPlatform = pUceslPlatform_
     , _uceslCategory = pUceslCategory_
     , _uceslSiteURL = pUceslSiteURL_
@@ -115,7 +115,7 @@ instance GoogleRequest URLCrawlErrorsSamplesList
         type Scopes URLCrawlErrorsSamplesList =
              '["https://www.googleapis.com/auth/webmasters",
                "https://www.googleapis.com/auth/webmasters.readonly"]
-        requestClient URLCrawlErrorsSamplesList{..}
+        requestClient URLCrawlErrorsSamplesList'{..}
           = go _uceslSiteURL (Just _uceslCategory)
               (Just _uceslPlatform)
               (Just AltJSON)

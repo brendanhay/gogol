@@ -53,7 +53,7 @@ type ProductsSearchResource =
 -- | Gets the requested product.
 --
 -- /See:/ 'productsSearch' smart constructor.
-newtype ProductsSearch = ProductsSearch
+newtype ProductsSearch = ProductsSearch'
     { _psPqlQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ newtype ProductsSearch = ProductsSearch
 productsSearch
     :: ProductsSearch
 productsSearch =
-    ProductsSearch
+    ProductsSearch'
     { _psPqlQuery = Nothing
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest ProductsSearch where
         type Rs ProductsSearch = GetOffersResponse
         type Scopes ProductsSearch =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProductsSearch{..}
+        requestClient ProductsSearch'{..}
           = go _psPqlQuery (Just AltJSON)
               adExchangeBuyerService
           where go

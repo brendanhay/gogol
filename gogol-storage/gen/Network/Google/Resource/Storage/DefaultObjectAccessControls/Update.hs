@@ -57,7 +57,7 @@ type DefaultObjectAccessControlsUpdateResource =
 -- | Updates a default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsUpdate' smart constructor.
-data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate
+data DefaultObjectAccessControlsUpdate = DefaultObjectAccessControlsUpdate'
     { _doacuBucket  :: !Text
     , _doacuPayload :: !ObjectAccessControl
     , _doacuEntity  :: !Text
@@ -78,7 +78,7 @@ defaultObjectAccessControlsUpdate
     -> Text -- ^ 'doacuEntity'
     -> DefaultObjectAccessControlsUpdate
 defaultObjectAccessControlsUpdate pDoacuBucket_ pDoacuPayload_ pDoacuEntity_ =
-    DefaultObjectAccessControlsUpdate
+    DefaultObjectAccessControlsUpdate'
     { _doacuBucket = pDoacuBucket_
     , _doacuPayload = pDoacuPayload_
     , _doacuEntity = pDoacuEntity_
@@ -108,7 +108,7 @@ instance GoogleRequest
         type Scopes DefaultObjectAccessControlsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/devstorage.full_control"]
-        requestClient DefaultObjectAccessControlsUpdate{..}
+        requestClient DefaultObjectAccessControlsUpdate'{..}
           = go _doacuBucket _doacuEntity (Just AltJSON)
               _doacuPayload
               storageService

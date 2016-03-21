@@ -53,7 +53,7 @@ type RasterCollectionsCancelProcessingResource =
 -- | Cancel processing on a raster collection asset.
 --
 -- /See:/ 'rasterCollectionsCancelProcessing' smart constructor.
-newtype RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing
+newtype RasterCollectionsCancelProcessing = RasterCollectionsCancelProcessing'
     { _rccpId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rasterCollectionsCancelProcessing
     :: Text -- ^ 'rccpId'
     -> RasterCollectionsCancelProcessing
 rasterCollectionsCancelProcessing pRccpId_ =
-    RasterCollectionsCancelProcessing
+    RasterCollectionsCancelProcessing'
     { _rccpId = pRccpId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest
              ProcessResponse
         type Scopes RasterCollectionsCancelProcessing =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RasterCollectionsCancelProcessing{..}
+        requestClient RasterCollectionsCancelProcessing'{..}
           = go _rccpId (Just AltJSON) mapsEngineService
           where go
                   = buildClient

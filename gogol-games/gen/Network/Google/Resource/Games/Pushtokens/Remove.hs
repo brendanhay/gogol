@@ -54,7 +54,7 @@ type PushtokensRemoveResource =
 -- non-existent push token will report success.
 --
 -- /See:/ 'pushtokensRemove' smart constructor.
-newtype PushtokensRemove = PushtokensRemove
+newtype PushtokensRemove = PushtokensRemove'
     { _prPayload :: PushTokenId
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -67,7 +67,7 @@ pushtokensRemove
     :: PushTokenId -- ^ 'prPayload'
     -> PushtokensRemove
 pushtokensRemove pPrPayload_ =
-    PushtokensRemove
+    PushtokensRemove'
     { _prPayload = pPrPayload_
     }
 
@@ -81,7 +81,7 @@ instance GoogleRequest PushtokensRemove where
         type Scopes PushtokensRemove =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient PushtokensRemove{..}
+        requestClient PushtokensRemove'{..}
           = go (Just AltJSON) _prPayload gamesService
           where go
                   = buildClient

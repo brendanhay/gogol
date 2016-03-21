@@ -62,7 +62,7 @@ type InstancesSetMetadataResource =
 -- request.
 --
 -- /See:/ 'instancesSetMetadata' smart constructor.
-data InstancesSetMetadata = InstancesSetMetadata
+data InstancesSetMetadata = InstancesSetMetadata'
     { _ismProject  :: !Text
     , _ismZone     :: !Text
     , _ismPayload  :: !Metadata
@@ -87,7 +87,7 @@ instancesSetMetadata
     -> Text -- ^ 'ismInstance'
     -> InstancesSetMetadata
 instancesSetMetadata pIsmProject_ pIsmZone_ pIsmPayload_ pIsmInstance_ =
-    InstancesSetMetadata
+    InstancesSetMetadata'
     { _ismProject = pIsmProject_
     , _ismZone = pIsmZone_
     , _ismPayload = pIsmPayload_
@@ -118,7 +118,7 @@ instance GoogleRequest InstancesSetMetadata where
         type Scopes InstancesSetMetadata =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesSetMetadata{..}
+        requestClient InstancesSetMetadata'{..}
           = go _ismProject _ismZone _ismInstance (Just AltJSON)
               _ismPayload
               computeService

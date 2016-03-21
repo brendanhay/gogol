@@ -74,7 +74,7 @@ type DataSetsPatchResource =
 -- This method supports patch semantics.
 --
 -- /See:/ 'dataSetsPatch' smart constructor.
-data DataSetsPatch = DataSetsPatch
+data DataSetsPatch = DataSetsPatch'
     { _dspXgafv          :: !(Maybe Text)
     , _dspUploadProtocol :: !(Maybe Text)
     , _dspUpdateMask     :: !(Maybe Text)
@@ -115,7 +115,7 @@ dataSetsPatch
     -> Text -- ^ 'dspDataSetId'
     -> DataSetsPatch
 dataSetsPatch pDspPayload_ pDspDataSetId_ =
-    DataSetsPatch
+    DataSetsPatch'
     { _dspXgafv = Nothing
     , _dspUploadProtocol = Nothing
     , _dspUpdateMask = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest DataSetsPatch where
         type Scopes DataSetsPatch =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsPatch{..}
+        requestClient DataSetsPatch'{..}
           = go _dspDataSetId _dspXgafv _dspUploadProtocol
               _dspUpdateMask
               (Just _dspPp)

@@ -74,7 +74,7 @@ type InstanceGroupManagersDeleteInstancesResource =
 -- status of the deleting action with the listmanagedinstances method.
 --
 -- /See:/ 'instanceGroupManagersDeleteInstances' smart constructor.
-data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances
+data InstanceGroupManagersDeleteInstances = InstanceGroupManagersDeleteInstances'
     { _igmdiProject              :: !Text
     , _igmdiInstanceGroupManager :: !Text
     , _igmdiZone                 :: !Text
@@ -99,7 +99,7 @@ instanceGroupManagersDeleteInstances
     -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'igmdiPayload'
     -> InstanceGroupManagersDeleteInstances
 instanceGroupManagersDeleteInstances pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiPayload_ =
-    InstanceGroupManagersDeleteInstances
+    InstanceGroupManagersDeleteInstances'
     { _igmdiProject = pIgmdiProject_
     , _igmdiInstanceGroupManager = pIgmdiInstanceGroupManager_
     , _igmdiZone = pIgmdiZone_
@@ -135,7 +135,7 @@ instance GoogleRequest
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
         requestClient
-          InstanceGroupManagersDeleteInstances{..}
+          InstanceGroupManagersDeleteInstances'{..}
           = go _igmdiProject _igmdiZone
               _igmdiInstanceGroupManager
               (Just AltJSON)

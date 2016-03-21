@@ -51,7 +51,7 @@ type InAppProductsBatchResource =
 
 --
 -- /See:/ 'inAppProductsBatch' smart constructor.
-newtype InAppProductsBatch = InAppProductsBatch
+newtype InAppProductsBatch = InAppProductsBatch'
     { _iapbPayload :: InAppProductsBatchRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ inAppProductsBatch
     :: InAppProductsBatchRequest -- ^ 'iapbPayload'
     -> InAppProductsBatch
 inAppProductsBatch pIapbPayload_ =
-    InAppProductsBatch
+    InAppProductsBatch'
     { _iapbPayload = pIapbPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest InAppProductsBatch where
              InAppProductsBatchResponse
         type Scopes InAppProductsBatch =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient InAppProductsBatch{..}
+        requestClient InAppProductsBatch'{..}
           = go (Just AltJSON) _iapbPayload
               androidPublisherService
           where go

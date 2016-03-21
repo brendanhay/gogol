@@ -53,7 +53,7 @@ type RubiconNotifyproposalchangeResource =
 -- | Update proposal upon actions of Rubicon publisher.
 --
 -- /See:/ 'rubiconNotifyproposalchange' smart constructor.
-newtype RubiconNotifyproposalchange = RubiconNotifyproposalchange
+newtype RubiconNotifyproposalchange = RubiconNotifyproposalchange'
     { _rnPayload :: NotifyProposalChangeRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ rubiconNotifyproposalchange
     :: NotifyProposalChangeRequest -- ^ 'rnPayload'
     -> RubiconNotifyproposalchange
 rubiconNotifyproposalchange pRnPayload_ =
-    RubiconNotifyproposalchange
+    RubiconNotifyproposalchange'
     { _rnPayload = pRnPayload_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest RubiconNotifyproposalchange
          where
         type Rs RubiconNotifyproposalchange = ()
         type Scopes RubiconNotifyproposalchange = '[]
-        requestClient RubiconNotifyproposalchange{..}
+        requestClient RubiconNotifyproposalchange'{..}
           = go (Just AltJSON) _rnPayload doubleClickBidsService
           where go
                   = buildClient

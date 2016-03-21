@@ -54,7 +54,7 @@ type TrainedModelsDeleteResource =
 -- | Delete a trained model.
 --
 -- /See:/ 'trainedModelsDelete' smart constructor.
-data TrainedModelsDelete = TrainedModelsDelete
+data TrainedModelsDelete = TrainedModelsDelete'
     { _tmdProject :: !Text
     , _tmdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ trainedModelsDelete
     -> Text -- ^ 'tmdId'
     -> TrainedModelsDelete
 trainedModelsDelete pTmdProject_ pTmdId_ =
-    TrainedModelsDelete
+    TrainedModelsDelete'
     { _tmdProject = pTmdProject_
     , _tmdId = pTmdId_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest TrainedModelsDelete where
         type Rs TrainedModelsDelete = ()
         type Scopes TrainedModelsDelete =
              '["https://www.googleapis.com/auth/prediction"]
-        requestClient TrainedModelsDelete{..}
+        requestClient TrainedModelsDelete'{..}
           = go _tmdProject _tmdId (Just AltJSON)
               predictionService
           where go

@@ -52,7 +52,7 @@ type StatscollectionUpdateaggregatedstatsResource =
 -- | RPC to update the new TCP stats.
 --
 -- /See:/ 'statscollectionUpdateaggregatedstats' smart constructor.
-newtype StatscollectionUpdateaggregatedstats = StatscollectionUpdateaggregatedstats
+newtype StatscollectionUpdateaggregatedstats = StatscollectionUpdateaggregatedstats'
     { _sPayload :: AggregatedStats
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ statscollectionUpdateaggregatedstats
     :: AggregatedStats -- ^ 'sPayload'
     -> StatscollectionUpdateaggregatedstats
 statscollectionUpdateaggregatedstats pSPayload_ =
-    StatscollectionUpdateaggregatedstats
+    StatscollectionUpdateaggregatedstats'
     { _sPayload = pSPayload_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest
         type Scopes StatscollectionUpdateaggregatedstats =
              '["https://www.googleapis.com/auth/monitoring.readonly"]
         requestClient
-          StatscollectionUpdateaggregatedstats{..}
+          StatscollectionUpdateaggregatedstats'{..}
           = go (Just AltJSON) _sPayload latencyTestService
           where go
                   = buildClient

@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | JSON template for Group resource
 --
 -- /See:/ 'groups' smart constructor.
-data Groups = Groups
+data Groups = Groups'
     { _gEmail                              :: !(Maybe Text)
     , _gSendMessageDenyNotification        :: !(Maybe Text)
     , _gWhoCanPostMessage                  :: !(Maybe Text)
@@ -116,7 +116,7 @@ data Groups = Groups
 groups
     :: Groups
 groups =
-    Groups
+    Groups'
     { _gEmail = Nothing
     , _gSendMessageDenyNotification = Nothing
     , _gWhoCanPostMessage = Nothing
@@ -324,7 +324,7 @@ instance FromJSON Groups where
         parseJSON
           = withObject "Groups"
               (\ o ->
-                 Groups <$>
+                 Groups' <$>
                    (o .:? "email") <*>
                      (o .:? "sendMessageDenyNotification")
                      <*> (o .:? "whoCanPostMessage")
@@ -355,7 +355,7 @@ instance FromJSON Groups where
                      <*> (o .:? "allowWebPosting"))
 
 instance ToJSON Groups where
-        toJSON Groups{..}
+        toJSON Groups'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _gEmail,

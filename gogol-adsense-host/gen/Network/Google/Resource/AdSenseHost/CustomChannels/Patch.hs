@@ -59,7 +59,7 @@ type CustomChannelsPatchResource =
 -- supports patch semantics.
 --
 -- /See:/ 'customChannelsPatch' smart constructor.
-data CustomChannelsPatch = CustomChannelsPatch
+data CustomChannelsPatch = CustomChannelsPatch'
     { _ccpCustomChannelId :: !Text
     , _ccpPayload         :: !CustomChannel
     , _ccpAdClientId      :: !Text
@@ -80,7 +80,7 @@ customChannelsPatch
     -> Text -- ^ 'ccpAdClientId'
     -> CustomChannelsPatch
 customChannelsPatch pCcpCustomChannelId_ pCcpPayload_ pCcpAdClientId_ =
-    CustomChannelsPatch
+    CustomChannelsPatch'
     { _ccpCustomChannelId = pCcpCustomChannelId_
     , _ccpPayload = pCcpPayload_
     , _ccpAdClientId = pCcpAdClientId_
@@ -107,7 +107,7 @@ instance GoogleRequest CustomChannelsPatch where
         type Rs CustomChannelsPatch = CustomChannel
         type Scopes CustomChannelsPatch =
              '["https://www.googleapis.com/auth/adsensehost"]
-        requestClient CustomChannelsPatch{..}
+        requestClient CustomChannelsPatch'{..}
           = go _ccpAdClientId (Just _ccpCustomChannelId)
               (Just AltJSON)
               _ccpPayload

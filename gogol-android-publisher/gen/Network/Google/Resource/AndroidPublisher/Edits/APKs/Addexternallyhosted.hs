@@ -65,7 +65,7 @@ type EditsAPKsAddexternallyhostedResource =
 -- configured to restrict distribution to the enterprise domain.
 --
 -- /See:/ 'editsAPKsAddexternallyhosted' smart constructor.
-data EditsAPKsAddexternallyhosted = EditsAPKsAddexternallyhosted
+data EditsAPKsAddexternallyhosted = EditsAPKsAddexternallyhosted'
     { _eapkaPackageName :: !Text
     , _eapkaPayload     :: !APKsAddExternallyHostedRequest
     , _eapkaEditId      :: !Text
@@ -86,7 +86,7 @@ editsAPKsAddexternallyhosted
     -> Text -- ^ 'eapkaEditId'
     -> EditsAPKsAddexternallyhosted
 editsAPKsAddexternallyhosted pEapkaPackageName_ pEapkaPayload_ pEapkaEditId_ =
-    EditsAPKsAddexternallyhosted
+    EditsAPKsAddexternallyhosted'
     { _eapkaPackageName = pEapkaPackageName_
     , _eapkaPayload = pEapkaPayload_
     , _eapkaEditId = pEapkaEditId_
@@ -115,7 +115,7 @@ instance GoogleRequest EditsAPKsAddexternallyhosted
              APKsAddExternallyHostedResponse
         type Scopes EditsAPKsAddexternallyhosted =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsAPKsAddexternallyhosted{..}
+        requestClient EditsAPKsAddexternallyhosted'{..}
           = go _eapkaPackageName _eapkaEditId (Just AltJSON)
               _eapkaPayload
               androidPublisherService

@@ -61,7 +61,7 @@ type CustomerUsageReportsGetResource =
 -- a specific customer.
 --
 -- /See:/ 'customerUsageReportsGet' smart constructor.
-data CustomerUsageReportsGet = CustomerUsageReportsGet
+data CustomerUsageReportsGet = CustomerUsageReportsGet'
     { _curgCustomerId :: !(Maybe Text)
     , _curgDate       :: !Text
     , _curgParameters :: !(Maybe Text)
@@ -83,7 +83,7 @@ customerUsageReportsGet
     :: Text -- ^ 'curgDate'
     -> CustomerUsageReportsGet
 customerUsageReportsGet pCurgDate_ =
-    CustomerUsageReportsGet
+    CustomerUsageReportsGet'
     { _curgCustomerId = Nothing
     , _curgDate = pCurgDate_
     , _curgParameters = Nothing
@@ -118,7 +118,7 @@ instance GoogleRequest CustomerUsageReportsGet where
         type Rs CustomerUsageReportsGet = UsageReports
         type Scopes CustomerUsageReportsGet =
              '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
-        requestClient CustomerUsageReportsGet{..}
+        requestClient CustomerUsageReportsGet'{..}
           = go _curgDate _curgCustomerId _curgParameters
               _curgPageToken
               (Just AltJSON)

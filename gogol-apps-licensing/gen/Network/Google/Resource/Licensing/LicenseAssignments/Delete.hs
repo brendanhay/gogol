@@ -58,7 +58,7 @@ type LicenseAssignmentsDeleteResource =
 -- | Revoke License.
 --
 -- /See:/ 'licenseAssignmentsDelete' smart constructor.
-data LicenseAssignmentsDelete = LicenseAssignmentsDelete
+data LicenseAssignmentsDelete = LicenseAssignmentsDelete'
     { _ladSKUId     :: !Text
     , _ladUserId    :: !Text
     , _ladProductId :: !Text
@@ -79,7 +79,7 @@ licenseAssignmentsDelete
     -> Text -- ^ 'ladProductId'
     -> LicenseAssignmentsDelete
 licenseAssignmentsDelete pLadSKUId_ pLadUserId_ pLadProductId_ =
-    LicenseAssignmentsDelete
+    LicenseAssignmentsDelete'
     { _ladSKUId = pLadSKUId_
     , _ladUserId = pLadUserId_
     , _ladProductId = pLadProductId_
@@ -103,7 +103,7 @@ instance GoogleRequest LicenseAssignmentsDelete where
         type Rs LicenseAssignmentsDelete = ()
         type Scopes LicenseAssignmentsDelete =
              '["https://www.googleapis.com/auth/apps.licensing"]
-        requestClient LicenseAssignmentsDelete{..}
+        requestClient LicenseAssignmentsDelete'{..}
           = go _ladProductId _ladSKUId _ladUserId
               (Just AltJSON)
               appsLicensingService

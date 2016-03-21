@@ -53,7 +53,7 @@ type TimelineAttachmentsListResource =
 -- | Returns a list of attachments for a timeline item.
 --
 -- /See:/ 'timelineAttachmentsList' smart constructor.
-newtype TimelineAttachmentsList = TimelineAttachmentsList
+newtype TimelineAttachmentsList = TimelineAttachmentsList'
     { _talItemId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ timelineAttachmentsList
     :: Text -- ^ 'talItemId'
     -> TimelineAttachmentsList
 timelineAttachmentsList pTalItemId_ =
-    TimelineAttachmentsList
+    TimelineAttachmentsList'
     { _talItemId = pTalItemId_
     }
 
@@ -80,7 +80,7 @@ instance GoogleRequest TimelineAttachmentsList where
              AttachmentsListResponse
         type Scopes TimelineAttachmentsList =
              '["https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineAttachmentsList{..}
+        requestClient TimelineAttachmentsList'{..}
           = go _talItemId (Just AltJSON) mirrorService
           where go
                   = buildClient

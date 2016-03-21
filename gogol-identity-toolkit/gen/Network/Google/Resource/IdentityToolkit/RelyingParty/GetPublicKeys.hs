@@ -52,21 +52,21 @@ type RelyingPartyGetPublicKeysResource =
 --
 -- /See:/ 'relyingPartyGetPublicKeys' smart constructor.
 data RelyingPartyGetPublicKeys =
-    RelyingPartyGetPublicKeys
+    RelyingPartyGetPublicKeys'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RelyingPartyGetPublicKeys' with the minimum fields required to make a request.
 --
 relyingPartyGetPublicKeys
     :: RelyingPartyGetPublicKeys
-relyingPartyGetPublicKeys = RelyingPartyGetPublicKeys
+relyingPartyGetPublicKeys = RelyingPartyGetPublicKeys'
 
 instance GoogleRequest RelyingPartyGetPublicKeys
          where
         type Rs RelyingPartyGetPublicKeys =
              IdentitytoolkitRelyingPartyGetPublicKeysResponse
         type Scopes RelyingPartyGetPublicKeys = '[]
-        requestClient RelyingPartyGetPublicKeys{}
+        requestClient RelyingPartyGetPublicKeys'{}
           = go (Just AltJSON) identityToolkitService
           where go
                   = buildClient

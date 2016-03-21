@@ -54,7 +54,7 @@ type GrouplicensesGetResource =
 -- | Retrieves details of an enterprise\'s group license for a product.
 --
 -- /See:/ 'grouplicensesGet' smart constructor.
-data GrouplicensesGet = GrouplicensesGet
+data GrouplicensesGet = GrouplicensesGet'
     { _ggEnterpriseId   :: !Text
     , _ggGroupLicenseId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ grouplicensesGet
     -> Text -- ^ 'ggGroupLicenseId'
     -> GrouplicensesGet
 grouplicensesGet pGgEnterpriseId_ pGgGroupLicenseId_ =
-    GrouplicensesGet
+    GrouplicensesGet'
     { _ggEnterpriseId = pGgEnterpriseId_
     , _ggGroupLicenseId = pGgGroupLicenseId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest GrouplicensesGet where
         type Rs GrouplicensesGet = GroupLicense
         type Scopes GrouplicensesGet =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient GrouplicensesGet{..}
+        requestClient GrouplicensesGet'{..}
           = go _ggEnterpriseId _ggGroupLicenseId (Just AltJSON)
               androidEnterpriseService
           where go

@@ -63,7 +63,7 @@ type ManagementWebPropertyAdWordsLinksPatchResource =
 -- semantics.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksPatch' smart constructor.
-data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksPatch
+data ManagementWebPropertyAdWordsLinksPatch = ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpWebPropertyId            :: !Text
     , _mwpawlpPayload                  :: !EntityAdWordsLink
     , _mwpawlpAccountId                :: !Text
@@ -88,7 +88,7 @@ managementWebPropertyAdWordsLinksPatch
     -> Text -- ^ 'mwpawlpWebPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksPatch
 managementWebPropertyAdWordsLinksPatch pMwpawlpWebPropertyId_ pMwpawlpPayload_ pMwpawlpAccountId_ pMwpawlpWebPropertyAdWordsLinkId_ =
-    ManagementWebPropertyAdWordsLinksPatch
+    ManagementWebPropertyAdWordsLinksPatch'
     { _mwpawlpWebPropertyId = pMwpawlpWebPropertyId_
     , _mwpawlpPayload = pMwpawlpPayload_
     , _mwpawlpAccountId = pMwpawlpAccountId_
@@ -126,7 +126,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyAdWordsLinksPatch =
              '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
-          ManagementWebPropertyAdWordsLinksPatch{..}
+          ManagementWebPropertyAdWordsLinksPatch'{..}
           = go _mwpawlpAccountId _mwpawlpWebPropertyId
               _mwpawlpWebPropertyAdWordsLinkId
               (Just AltJSON)

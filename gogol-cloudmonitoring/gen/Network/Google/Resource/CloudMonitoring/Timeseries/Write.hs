@@ -67,7 +67,7 @@ type TimeseriesWriteResource =
 -- written sequentially in the order of their end time.
 --
 -- /See:/ 'timeseriesWrite' smart constructor.
-data TimeseriesWrite = TimeseriesWrite
+data TimeseriesWrite = TimeseriesWrite'
     { _twProject :: !Text
     , _twPayload :: !WriteTimeseriesRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -84,7 +84,7 @@ timeseriesWrite
     -> WriteTimeseriesRequest -- ^ 'twPayload'
     -> TimeseriesWrite
 timeseriesWrite pTwProject_ pTwPayload_ =
-    TimeseriesWrite
+    TimeseriesWrite'
     { _twProject = pTwProject_
     , _twPayload = pTwPayload_
     }
@@ -105,7 +105,7 @@ instance GoogleRequest TimeseriesWrite where
         type Scopes TimeseriesWrite =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient TimeseriesWrite{..}
+        requestClient TimeseriesWrite'{..}
           = go _twProject (Just AltJSON) _twPayload
               cloudMonitoringService
           where go

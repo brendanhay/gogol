@@ -56,7 +56,7 @@ type EventTagsPatchResource =
 -- | Updates an existing event tag. This method supports patch semantics.
 --
 -- /See:/ 'eventTagsPatch' smart constructor.
-data EventTagsPatch = EventTagsPatch
+data EventTagsPatch = EventTagsPatch'
     { _etpProFileId :: !(Textual Int64)
     , _etpPayload   :: !EventTag
     , _etpId        :: !(Textual Int64)
@@ -77,7 +77,7 @@ eventTagsPatch
     -> Int64 -- ^ 'etpId'
     -> EventTagsPatch
 eventTagsPatch pEtpProFileId_ pEtpPayload_ pEtpId_ =
-    EventTagsPatch
+    EventTagsPatch'
     { _etpProFileId = _Coerce # pEtpProFileId_
     , _etpPayload = pEtpPayload_
     , _etpId = _Coerce # pEtpId_
@@ -103,7 +103,7 @@ instance GoogleRequest EventTagsPatch where
         type Rs EventTagsPatch = EventTag
         type Scopes EventTagsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient EventTagsPatch{..}
+        requestClient EventTagsPatch'{..}
           = go _etpProFileId (Just _etpId) (Just AltJSON)
               _etpPayload
               dFAReportingService

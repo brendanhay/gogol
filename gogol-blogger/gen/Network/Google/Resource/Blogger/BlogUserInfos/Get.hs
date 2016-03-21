@@ -56,7 +56,7 @@ type BlogUserInfosGetResource =
 -- | Gets one blog and user info pair by blogId and userId.
 --
 -- /See:/ 'blogUserInfosGet' smart constructor.
-data BlogUserInfosGet = BlogUserInfosGet
+data BlogUserInfosGet = BlogUserInfosGet'
     { _buigBlogId   :: !Text
     , _buigUserId   :: !Text
     , _buigMaxPosts :: !(Maybe (Textual Word32))
@@ -76,7 +76,7 @@ blogUserInfosGet
     -> Text -- ^ 'buigUserId'
     -> BlogUserInfosGet
 blogUserInfosGet pBuigBlogId_ pBuigUserId_ =
-    BlogUserInfosGet
+    BlogUserInfosGet'
     { _buigBlogId = pBuigBlogId_
     , _buigUserId = pBuigUserId_
     , _buigMaxPosts = Nothing
@@ -104,7 +104,7 @@ instance GoogleRequest BlogUserInfosGet where
         type Scopes BlogUserInfosGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient BlogUserInfosGet{..}
+        requestClient BlogUserInfosGet'{..}
           = go _buigUserId _buigBlogId _buigMaxPosts
               (Just AltJSON)
               bloggerService

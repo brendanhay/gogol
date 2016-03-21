@@ -56,7 +56,7 @@ type CollectionsUpdateResource =
 -- | Updates a collection.
 --
 -- /See:/ 'collectionsUpdate' smart constructor.
-data CollectionsUpdate = CollectionsUpdate
+data CollectionsUpdate = CollectionsUpdate'
     { _cuuEnterpriseId :: !Text
     , _cuuCollectionId :: !Text
     , _cuuPayload      :: !Collection
@@ -77,7 +77,7 @@ collectionsUpdate
     -> Collection -- ^ 'cuuPayload'
     -> CollectionsUpdate
 collectionsUpdate pCuuEnterpriseId_ pCuuCollectionId_ pCuuPayload_ =
-    CollectionsUpdate
+    CollectionsUpdate'
     { _cuuEnterpriseId = pCuuEnterpriseId_
     , _cuuCollectionId = pCuuCollectionId_
     , _cuuPayload = pCuuPayload_
@@ -104,7 +104,7 @@ instance GoogleRequest CollectionsUpdate where
         type Rs CollectionsUpdate = Collection
         type Scopes CollectionsUpdate =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient CollectionsUpdate{..}
+        requestClient CollectionsUpdate'{..}
           = go _cuuEnterpriseId _cuuCollectionId (Just AltJSON)
               _cuuPayload
               androidEnterpriseService

@@ -55,7 +55,7 @@ type AccountPermissionsGetResource =
 -- | Gets one account permission by ID.
 --
 -- /See:/ 'accountPermissionsGet' smart constructor.
-data AccountPermissionsGet = AccountPermissionsGet
+data AccountPermissionsGet = AccountPermissionsGet'
     { _apgProFileId :: !(Textual Int64)
     , _apgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ accountPermissionsGet
     -> Int64 -- ^ 'apgId'
     -> AccountPermissionsGet
 accountPermissionsGet pApgProFileId_ pApgId_ =
-    AccountPermissionsGet
+    AccountPermissionsGet'
     { _apgProFileId = _Coerce # pApgProFileId_
     , _apgId = _Coerce # pApgId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AccountPermissionsGet where
         type Rs AccountPermissionsGet = AccountPermission
         type Scopes AccountPermissionsGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AccountPermissionsGet{..}
+        requestClient AccountPermissionsGet'{..}
           = go _apgProFileId _apgId (Just AltJSON)
               dFAReportingService
           where go

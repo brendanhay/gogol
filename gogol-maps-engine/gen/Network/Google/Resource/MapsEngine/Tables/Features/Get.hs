@@ -58,7 +58,7 @@ type TablesFeaturesGetResource =
 -- | Return a single feature, given its ID.
 --
 -- /See:/ 'tablesFeaturesGet' smart constructor.
-data TablesFeaturesGet = TablesFeaturesGet
+data TablesFeaturesGet = TablesFeaturesGet'
     { _tfgVersion :: !(Maybe TablesFeaturesGetVersion)
     , _tfgId      :: !Text
     , _tfgSelect  :: !(Maybe Text)
@@ -81,7 +81,7 @@ tablesFeaturesGet
     -> Text -- ^ 'tfgTableId'
     -> TablesFeaturesGet
 tablesFeaturesGet pTfgId_ pTfgTableId_ =
-    TablesFeaturesGet
+    TablesFeaturesGet'
     { _tfgVersion = Nothing
     , _tfgId = pTfgId_
     , _tfgSelect = Nothing
@@ -113,7 +113,7 @@ instance GoogleRequest TablesFeaturesGet where
         type Scopes TablesFeaturesGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient TablesFeaturesGet{..}
+        requestClient TablesFeaturesGet'{..}
           = go _tfgTableId _tfgId _tfgVersion _tfgSelect
               (Just AltJSON)
               mapsEngineService

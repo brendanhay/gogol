@@ -78,7 +78,7 @@ type ProjectsRegionsOperationsListResource =
 -- \`users\/*\/operations\`.
 --
 -- /See:/ 'projectsRegionsOperationsList' smart constructor.
-data ProjectsRegionsOperationsList = ProjectsRegionsOperationsList
+data ProjectsRegionsOperationsList = ProjectsRegionsOperationsList'
     { _prolXgafv          :: !(Maybe Text)
     , _prolUploadProtocol :: !(Maybe Text)
     , _prolPp             :: !Bool
@@ -121,7 +121,7 @@ projectsRegionsOperationsList
     :: Text -- ^ 'prolName'
     -> ProjectsRegionsOperationsList
 projectsRegionsOperationsList pProlName_ =
-    ProjectsRegionsOperationsList
+    ProjectsRegionsOperationsList'
     { _prolXgafv = Nothing
     , _prolUploadProtocol = Nothing
     , _prolPp = True
@@ -200,7 +200,7 @@ instance GoogleRequest ProjectsRegionsOperationsList
              ListOperationsResponse
         type Scopes ProjectsRegionsOperationsList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsOperationsList{..}
+        requestClient ProjectsRegionsOperationsList'{..}
           = go _prolName _prolXgafv _prolUploadProtocol
               (Just _prolPp)
               _prolAccessToken

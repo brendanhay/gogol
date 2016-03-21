@@ -73,7 +73,7 @@ type ActivitiesListResource =
 -- | Retrieves a list of activities for a specific customer and application.
 --
 -- /See:/ 'activitiesList' smart constructor.
-data ActivitiesList = ActivitiesList
+data ActivitiesList = ActivitiesList'
     { _alStartTime       :: !(Maybe Text)
     , _alFilters         :: !(Maybe Text)
     , _alCustomerId      :: !(Maybe Text)
@@ -114,7 +114,7 @@ activitiesList
     -> Text -- ^ 'alUserKey'
     -> ActivitiesList
 activitiesList pAlApplicationName_ pAlUserKey_ =
-    ActivitiesList
+    ActivitiesList'
     { _alStartTime = Nothing
     , _alFilters = Nothing
     , _alCustomerId = Nothing
@@ -188,7 +188,7 @@ instance GoogleRequest ActivitiesList where
         type Rs ActivitiesList = Activities
         type Scopes ActivitiesList =
              '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-        requestClient ActivitiesList{..}
+        requestClient ActivitiesList'{..}
           = go _alUserKey _alApplicationName _alStartTime
               _alFilters
               _alCustomerId

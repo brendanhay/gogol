@@ -60,7 +60,7 @@ type ManagementWebPropertyAdWordsLinksInsertResource
 -- | Creates a webProperty-AdWords link.
 --
 -- /See:/ 'managementWebPropertyAdWordsLinksInsert' smart constructor.
-data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert
+data ManagementWebPropertyAdWordsLinksInsert = ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId :: !Text
     , _mwpawliPayload       :: !EntityAdWordsLink
     , _mwpawliAccountId     :: !Text
@@ -81,7 +81,7 @@ managementWebPropertyAdWordsLinksInsert
     -> Text -- ^ 'mwpawliAccountId'
     -> ManagementWebPropertyAdWordsLinksInsert
 managementWebPropertyAdWordsLinksInsert pMwpawliWebPropertyId_ pMwpawliPayload_ pMwpawliAccountId_ =
-    ManagementWebPropertyAdWordsLinksInsert
+    ManagementWebPropertyAdWordsLinksInsert'
     { _mwpawliWebPropertyId = pMwpawliWebPropertyId_
     , _mwpawliPayload = pMwpawliPayload_
     , _mwpawliAccountId = pMwpawliAccountId_
@@ -112,7 +112,7 @@ instance GoogleRequest
         type Scopes ManagementWebPropertyAdWordsLinksInsert =
              '["https://www.googleapis.com/auth/analytics.edit"]
         requestClient
-          ManagementWebPropertyAdWordsLinksInsert{..}
+          ManagementWebPropertyAdWordsLinksInsert'{..}
           = go _mwpawliAccountId _mwpawliWebPropertyId
               (Just AltJSON)
               _mwpawliPayload

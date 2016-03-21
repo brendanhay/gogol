@@ -63,7 +63,7 @@ type InstancesSetMachineTypeResource =
 -- specified in the request.
 --
 -- /See:/ 'instancesSetMachineType' smart constructor.
-data InstancesSetMachineType = InstancesSetMachineType
+data InstancesSetMachineType = InstancesSetMachineType'
     { _ismtProject  :: !Text
     , _ismtZone     :: !Text
     , _ismtPayload  :: !InstancesSetMachineTypeRequest
@@ -88,7 +88,7 @@ instancesSetMachineType
     -> Text -- ^ 'ismtInstance'
     -> InstancesSetMachineType
 instancesSetMachineType pIsmtProject_ pIsmtZone_ pIsmtPayload_ pIsmtInstance_ =
-    InstancesSetMachineType
+    InstancesSetMachineType'
     { _ismtProject = pIsmtProject_
     , _ismtZone = pIsmtZone_
     , _ismtPayload = pIsmtPayload_
@@ -119,7 +119,7 @@ instance GoogleRequest InstancesSetMachineType where
         type Scopes InstancesSetMachineType =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesSetMachineType{..}
+        requestClient InstancesSetMachineType'{..}
           = go _ismtProject _ismtZone _ismtInstance
               (Just AltJSON)
               _ismtPayload

@@ -55,7 +55,7 @@ type FilesDeleteResource =
 -- also deleted.
 --
 -- /See:/ 'filesDelete' smart constructor.
-newtype FilesDelete = FilesDelete
+newtype FilesDelete = FilesDelete'
     { _fdFileId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -68,7 +68,7 @@ filesDelete
     :: Text -- ^ 'fdFileId'
     -> FilesDelete
 filesDelete pFdFileId_ =
-    FilesDelete
+    FilesDelete'
     { _fdFileId = pFdFileId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest FilesDelete where
              '["https://www.googleapis.com/auth/drive",
                "https://www.googleapis.com/auth/drive.appdata",
                "https://www.googleapis.com/auth/drive.file"]
-        requestClient FilesDelete{..}
+        requestClient FilesDelete'{..}
           = go _fdFileId (Just AltJSON) driveService
           where go
                   = buildClient (Proxy :: Proxy FilesDeleteResource)

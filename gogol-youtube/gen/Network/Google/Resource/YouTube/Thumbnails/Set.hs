@@ -67,7 +67,7 @@ type ThumbnailsSetResource =
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --
 -- /See:/ 'thumbnailsSet' smart constructor.
-data ThumbnailsSet = ThumbnailsSet
+data ThumbnailsSet = ThumbnailsSet'
     { _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -83,7 +83,7 @@ thumbnailsSet
     :: Text -- ^ 'tsVideoId'
     -> ThumbnailsSet
 thumbnailsSet pTsVideoId_ =
-    ThumbnailsSet
+    ThumbnailsSet'
     { _tsOnBehalfOfContentOwner = Nothing
     , _tsVideoId = pTsVideoId_
     }
@@ -116,7 +116,7 @@ instance GoogleRequest ThumbnailsSet where
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtube.upload",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient ThumbnailsSet{..}
+        requestClient ThumbnailsSet'{..}
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               youTubeService
@@ -130,7 +130,7 @@ instance GoogleRequest (MediaUpload ThumbnailsSet)
              ThumbnailSetResponse
         type Scopes (MediaUpload ThumbnailsSet) =
              Scopes ThumbnailsSet
-        requestClient (MediaUpload ThumbnailsSet{..} body)
+        requestClient (MediaUpload ThumbnailsSet'{..} body)
           = go (Just _tsVideoId) _tsOnBehalfOfContentOwner
               (Just AltJSON)
               (Just AltMedia)

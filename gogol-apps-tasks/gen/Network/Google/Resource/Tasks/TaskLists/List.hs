@@ -55,7 +55,7 @@ type TaskListsListResource =
 -- | Returns all the authenticated user\'s task lists.
 --
 -- /See:/ 'taskListsList' smart constructor.
-data TaskListsList = TaskListsList
+data TaskListsList = TaskListsList'
     { _tllPageToken  :: !(Maybe Text)
     , _tllMaxResults :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ data TaskListsList = TaskListsList
 taskListsList
     :: TaskListsList
 taskListsList =
-    TaskListsList
+    TaskListsList'
     { _tllPageToken = Nothing
     , _tllMaxResults = Nothing
     }
@@ -93,7 +93,7 @@ instance GoogleRequest TaskListsList where
         type Scopes TaskListsList =
              '["https://www.googleapis.com/auth/tasks",
                "https://www.googleapis.com/auth/tasks.readonly"]
-        requestClient TaskListsList{..}
+        requestClient TaskListsList'{..}
           = go _tllPageToken _tllMaxResults (Just AltJSON)
               appsTasksService
           where go

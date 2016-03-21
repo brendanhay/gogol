@@ -68,7 +68,7 @@ type ProjectsServiceAccountsUpdateResource =
 -- updatable: \'display_name\' . The \'etag\' is mandatory.
 --
 -- /See:/ 'projectsServiceAccountsUpdate' smart constructor.
-data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate
+data ProjectsServiceAccountsUpdate = ProjectsServiceAccountsUpdate'
     { _psauXgafv          :: !(Maybe Text)
     , _psauUploadProtocol :: !(Maybe Text)
     , _psauPp             :: !Bool
@@ -106,7 +106,7 @@ projectsServiceAccountsUpdate
     -> Text -- ^ 'psauName'
     -> ProjectsServiceAccountsUpdate
 projectsServiceAccountsUpdate pPsauPayload_ pPsauName_ =
-    ProjectsServiceAccountsUpdate
+    ProjectsServiceAccountsUpdate'
     { _psauXgafv = Nothing
     , _psauUploadProtocol = Nothing
     , _psauPp = True
@@ -176,7 +176,7 @@ instance GoogleRequest ProjectsServiceAccountsUpdate
              ServiceAccount
         type Scopes ProjectsServiceAccountsUpdate =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsUpdate{..}
+        requestClient ProjectsServiceAccountsUpdate'{..}
           = go _psauName _psauXgafv _psauUploadProtocol
               (Just _psauPp)
               _psauAccessToken

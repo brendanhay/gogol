@@ -53,7 +53,7 @@ type QueriesRunQueryResource =
 -- | Runs a stored query to generate a report.
 --
 -- /See:/ 'queriesRunQuery' smart constructor.
-data QueriesRunQuery = QueriesRunQuery
+data QueriesRunQuery = QueriesRunQuery'
     { _qrqQueryId :: !(Textual Int64)
     , _qrqPayload :: !RunQueryRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -70,7 +70,7 @@ queriesRunQuery
     -> RunQueryRequest -- ^ 'qrqPayload'
     -> QueriesRunQuery
 queriesRunQuery pQrqQueryId_ pQrqPayload_ =
-    QueriesRunQuery
+    QueriesRunQuery'
     { _qrqQueryId = _Coerce # pQrqQueryId_
     , _qrqPayload = pQrqPayload_
     }
@@ -89,7 +89,7 @@ qrqPayload
 instance GoogleRequest QueriesRunQuery where
         type Rs QueriesRunQuery = ()
         type Scopes QueriesRunQuery = '[]
-        requestClient QueriesRunQuery{..}
+        requestClient QueriesRunQuery'{..}
           = go _qrqQueryId (Just AltJSON) _qrqPayload
               doubleClickBidsService
           where go

@@ -53,7 +53,7 @@ type RoomsGetResource =
 -- | Get the data for a room.
 --
 -- /See:/ 'roomsGet' smart constructor.
-data RoomsGet = RoomsGet
+data RoomsGet = RoomsGet'
     { _rgRoomId   :: !Text
     , _rgLanguage :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -69,7 +69,7 @@ roomsGet
     :: Text -- ^ 'rgRoomId'
     -> RoomsGet
 roomsGet pRgRoomId_ =
-    RoomsGet
+    RoomsGet'
     { _rgRoomId = pRgRoomId_
     , _rgLanguage = Nothing
     }
@@ -88,7 +88,7 @@ instance GoogleRequest RoomsGet where
         type Scopes RoomsGet =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient RoomsGet{..}
+        requestClient RoomsGet'{..}
           = go _rgRoomId _rgLanguage (Just AltJSON)
               gamesService
           where go

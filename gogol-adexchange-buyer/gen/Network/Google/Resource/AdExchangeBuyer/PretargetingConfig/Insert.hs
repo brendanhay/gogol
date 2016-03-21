@@ -54,7 +54,7 @@ type PretargetingConfigInsertResource =
 -- | Inserts a new pretargeting configuration.
 --
 -- /See:/ 'pretargetingConfigInsert' smart constructor.
-data PretargetingConfigInsert = PretargetingConfigInsert
+data PretargetingConfigInsert = PretargetingConfigInsert'
     { _pciPayload   :: !PretargetingConfig
     , _pciAccountId :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ pretargetingConfigInsert
     -> Int64 -- ^ 'pciAccountId'
     -> PretargetingConfigInsert
 pretargetingConfigInsert pPciPayload_ pPciAccountId_ =
-    PretargetingConfigInsert
+    PretargetingConfigInsert'
     { _pciPayload = pPciPayload_
     , _pciAccountId = _Coerce # pPciAccountId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest PretargetingConfigInsert where
         type Rs PretargetingConfigInsert = PretargetingConfig
         type Scopes PretargetingConfigInsert =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient PretargetingConfigInsert{..}
+        requestClient PretargetingConfigInsert'{..}
           = go _pciAccountId (Just AltJSON) _pciPayload
               adExchangeBuyerService
           where go

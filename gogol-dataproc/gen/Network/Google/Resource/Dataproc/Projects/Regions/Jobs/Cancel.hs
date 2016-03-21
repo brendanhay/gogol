@@ -81,7 +81,7 @@ type ProjectsRegionsJobsCancelResource =
 -- [regions\/{region}\/jobs.get](\/dataproc\/reference\/rest\/v1\/projects.regions.jobs\/get).
 --
 -- /See:/ 'projectsRegionsJobsCancel' smart constructor.
-data ProjectsRegionsJobsCancel = ProjectsRegionsJobsCancel
+data ProjectsRegionsJobsCancel = ProjectsRegionsJobsCancel'
     { _prjcXgafv          :: !(Maybe Text)
     , _prjcJobId          :: !Text
     , _prjcUploadProtocol :: !(Maybe Text)
@@ -127,7 +127,7 @@ projectsRegionsJobsCancel
     -> Text -- ^ 'prjcProjectId'
     -> ProjectsRegionsJobsCancel
 projectsRegionsJobsCancel pPrjcJobId_ pPrjcPayload_ pPrjcRegion_ pPrjcProjectId_ =
-    ProjectsRegionsJobsCancel
+    ProjectsRegionsJobsCancel'
     { _prjcXgafv = Nothing
     , _prjcJobId = pPrjcJobId_
     , _prjcUploadProtocol = Nothing
@@ -206,7 +206,7 @@ instance GoogleRequest ProjectsRegionsJobsCancel
         type Rs ProjectsRegionsJobsCancel = Job
         type Scopes ProjectsRegionsJobsCancel =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsJobsCancel{..}
+        requestClient ProjectsRegionsJobsCancel'{..}
           = go _prjcProjectId _prjcRegion _prjcJobId _prjcXgafv
               _prjcUploadProtocol
               (Just _prjcPp)

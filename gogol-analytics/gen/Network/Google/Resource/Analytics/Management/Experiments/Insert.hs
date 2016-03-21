@@ -61,7 +61,7 @@ type ManagementExperimentsInsertResource =
 -- | Create a new experiment.
 --
 -- /See:/ 'managementExperimentsInsert' smart constructor.
-data ManagementExperimentsInsert = ManagementExperimentsInsert
+data ManagementExperimentsInsert = ManagementExperimentsInsert'
     { _meiWebPropertyId :: !Text
     , _meiProFileId     :: !Text
     , _meiPayload       :: !Experiment
@@ -86,7 +86,7 @@ managementExperimentsInsert
     -> Text -- ^ 'meiAccountId'
     -> ManagementExperimentsInsert
 managementExperimentsInsert pMeiWebPropertyId_ pMeiProFileId_ pMeiPayload_ pMeiAccountId_ =
-    ManagementExperimentsInsert
+    ManagementExperimentsInsert'
     { _meiWebPropertyId = pMeiWebPropertyId_
     , _meiProFileId = pMeiProFileId_
     , _meiPayload = pMeiPayload_
@@ -120,7 +120,7 @@ instance GoogleRequest ManagementExperimentsInsert
         type Scopes ManagementExperimentsInsert =
              '["https://www.googleapis.com/auth/analytics",
                "https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementExperimentsInsert{..}
+        requestClient ManagementExperimentsInsert'{..}
           = go _meiAccountId _meiWebPropertyId _meiProFileId
               (Just AltJSON)
               _meiPayload

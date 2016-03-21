@@ -67,7 +67,7 @@ type ProjectsServiceAccountsKeysListResource =
 -- | Lists service account keys
 --
 -- /See:/ 'projectsServiceAccountsKeysList' smart constructor.
-data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList
+data ProjectsServiceAccountsKeysList = ProjectsServiceAccountsKeysList'
     { _psaklKeyTypes       :: !(Maybe [Text])
     , _psaklXgafv          :: !(Maybe Text)
     , _psaklUploadProtocol :: !(Maybe Text)
@@ -104,7 +104,7 @@ projectsServiceAccountsKeysList
     :: Text -- ^ 'psaklName'
     -> ProjectsServiceAccountsKeysList
 projectsServiceAccountsKeysList pPsaklName_ =
-    ProjectsServiceAccountsKeysList
+    ProjectsServiceAccountsKeysList'
     { _psaklKeyTypes = Nothing
     , _psaklXgafv = Nothing
     , _psaklUploadProtocol = Nothing
@@ -179,7 +179,7 @@ instance GoogleRequest
              ListServiceAccountKeysResponse
         type Scopes ProjectsServiceAccountsKeysList =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsKeysList{..}
+        requestClient ProjectsServiceAccountsKeysList'{..}
           = go _psaklName (_psaklKeyTypes ^. _Default)
               _psaklXgafv
               _psaklUploadProtocol

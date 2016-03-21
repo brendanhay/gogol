@@ -60,7 +60,7 @@ type VolumesRecommendedRateResource =
 -- | Rate a recommended book for the current user.
 --
 -- /See:/ 'volumesRecommendedRate' smart constructor.
-data VolumesRecommendedRate = VolumesRecommendedRate
+data VolumesRecommendedRate = VolumesRecommendedRate'
     { _vrrRating   :: !VolumesRecommendedRateRating
     , _vrrLocale   :: !(Maybe Text)
     , _vrrVolumeId :: !Text
@@ -83,7 +83,7 @@ volumesRecommendedRate
     -> Text -- ^ 'vrrVolumeId'
     -> VolumesRecommendedRate
 volumesRecommendedRate pVrrRating_ pVrrVolumeId_ =
-    VolumesRecommendedRate
+    VolumesRecommendedRate'
     { _vrrRating = pVrrRating_
     , _vrrLocale = Nothing
     , _vrrVolumeId = pVrrVolumeId_
@@ -116,7 +116,7 @@ instance GoogleRequest VolumesRecommendedRate where
              BooksVolumesRecommendedRateResponse
         type Scopes VolumesRecommendedRate =
              '["https://www.googleapis.com/auth/books"]
-        requestClient VolumesRecommendedRate{..}
+        requestClient VolumesRecommendedRate'{..}
           = go (Just _vrrRating) (Just _vrrVolumeId) _vrrLocale
               _vrrSource
               (Just AltJSON)

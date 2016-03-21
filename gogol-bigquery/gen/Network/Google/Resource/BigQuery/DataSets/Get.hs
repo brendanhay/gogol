@@ -54,7 +54,7 @@ type DataSetsGetResource =
 -- | Returns the dataset specified by datasetID.
 --
 -- /See:/ 'dataSetsGet' smart constructor.
-data DataSetsGet = DataSetsGet
+data DataSetsGet = DataSetsGet'
     { _dsgDataSetId :: !Text
     , _dsgProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ dataSetsGet
     -> Text -- ^ 'dsgProjectId'
     -> DataSetsGet
 dataSetsGet pDsgDataSetId_ pDsgProjectId_ =
-    DataSetsGet
+    DataSetsGet'
     { _dsgDataSetId = pDsgDataSetId_
     , _dsgProjectId = pDsgProjectId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest DataSetsGet where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient DataSetsGet{..}
+        requestClient DataSetsGet'{..}
           = go _dsgProjectId _dsgDataSetId (Just AltJSON)
               bigQueryService
           where go

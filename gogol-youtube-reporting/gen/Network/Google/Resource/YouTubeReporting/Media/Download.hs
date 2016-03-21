@@ -79,7 +79,7 @@ type MediaDownloadResource =
 -- \`\/v1\/media\/{+name}?alt=media\`.
 --
 -- /See:/ 'mediaDownload' smart constructor.
-data MediaDownload' = MediaDownload'
+data MediaDownload' = MediaDownload''
     { _mdXgafv          :: !(Maybe Text)
     , _mdUploadProtocol :: !(Maybe Text)
     , _mdResourceName   :: !Text
@@ -113,7 +113,7 @@ mediaDownload
     :: Text -- ^ 'mdResourceName'
     -> MediaDownload'
 mediaDownload pMdResourceName_ =
-    MediaDownload'
+    MediaDownload''
     { _mdXgafv = Nothing
     , _mdUploadProtocol = Nothing
     , _mdResourceName = pMdResourceName_
@@ -172,7 +172,7 @@ instance GoogleRequest MediaDownload' where
         type Scopes MediaDownload' =
              '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
                "https://www.googleapis.com/auth/yt-analytics.readonly"]
-        requestClient MediaDownload'{..}
+        requestClient MediaDownload''{..}
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken
@@ -190,7 +190,7 @@ instance GoogleRequest (MediaDownload MediaDownload')
         type Rs (MediaDownload MediaDownload') = Stream
         type Scopes (MediaDownload MediaDownload') =
              Scopes MediaDownload'
-        requestClient (MediaDownload MediaDownload'{..})
+        requestClient (MediaDownload MediaDownload''{..})
           = go _mdResourceName _mdXgafv _mdUploadProtocol
               (Just _mdPp)
               _mdAccessToken

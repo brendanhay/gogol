@@ -66,7 +66,7 @@ type ProjectsServiceAccountsSetIAMPolicyResource =
 -- | Sets the IAM access control policy for the specified IAM resource.
 --
 -- /See:/ 'projectsServiceAccountsSetIAMPolicy' smart constructor.
-data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy
+data ProjectsServiceAccountsSetIAMPolicy = ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv          :: !(Maybe Text)
     , _psasipUploadProtocol :: !(Maybe Text)
     , _psasipPp             :: !Bool
@@ -104,7 +104,7 @@ projectsServiceAccountsSetIAMPolicy
     -> Text -- ^ 'psasipResource'
     -> ProjectsServiceAccountsSetIAMPolicy
 projectsServiceAccountsSetIAMPolicy pPsasipPayload_ pPsasipResource_ =
-    ProjectsServiceAccountsSetIAMPolicy
+    ProjectsServiceAccountsSetIAMPolicy'
     { _psasipXgafv = Nothing
     , _psasipUploadProtocol = Nothing
     , _psasipPp = True
@@ -176,7 +176,8 @@ instance GoogleRequest
         type Rs ProjectsServiceAccountsSetIAMPolicy = Policy
         type Scopes ProjectsServiceAccountsSetIAMPolicy =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsServiceAccountsSetIAMPolicy{..}
+        requestClient
+          ProjectsServiceAccountsSetIAMPolicy'{..}
           = go _psasipResource _psasipXgafv
               _psasipUploadProtocol
               (Just _psasipPp)

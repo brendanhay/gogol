@@ -61,7 +61,7 @@ type ReportsCompatibleFieldsQueryResource =
 -- input report and user permissions.
 --
 -- /See:/ 'reportsCompatibleFieldsQuery' smart constructor.
-data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery
+data ReportsCompatibleFieldsQuery = ReportsCompatibleFieldsQuery'
     { _rcfqProFileId :: !(Textual Int64)
     , _rcfqPayload   :: !Report
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -78,7 +78,7 @@ reportsCompatibleFieldsQuery
     -> Report -- ^ 'rcfqPayload'
     -> ReportsCompatibleFieldsQuery
 reportsCompatibleFieldsQuery pRcfqProFileId_ pRcfqPayload_ =
-    ReportsCompatibleFieldsQuery
+    ReportsCompatibleFieldsQuery'
     { _rcfqProFileId = _Coerce # pRcfqProFileId_
     , _rcfqPayload = pRcfqPayload_
     }
@@ -101,7 +101,7 @@ instance GoogleRequest ReportsCompatibleFieldsQuery
              CompatibleFields
         type Scopes ReportsCompatibleFieldsQuery =
              '["https://www.googleapis.com/auth/dfareporting"]
-        requestClient ReportsCompatibleFieldsQuery{..}
+        requestClient ReportsCompatibleFieldsQuery'{..}
           = go _rcfqProFileId (Just AltJSON) _rcfqPayload
               dFAReportingService
           where go

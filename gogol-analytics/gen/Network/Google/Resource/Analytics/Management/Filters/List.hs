@@ -57,7 +57,7 @@ type ManagementFiltersListResource =
 -- | Lists all filters for an account
 --
 -- /See:/ 'managementFiltersList' smart constructor.
-data ManagementFiltersList = ManagementFiltersList
+data ManagementFiltersList = ManagementFiltersList'
     { _mflAccountId  :: !Text
     , _mflStartIndex :: !(Maybe (Textual Int32))
     , _mflMaxResults :: !(Maybe (Textual Int32))
@@ -76,7 +76,7 @@ managementFiltersList
     :: Text -- ^ 'mflAccountId'
     -> ManagementFiltersList
 managementFiltersList pMflAccountId_ =
-    ManagementFiltersList
+    ManagementFiltersList'
     { _mflAccountId = pMflAccountId_
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing
@@ -107,7 +107,7 @@ instance GoogleRequest ManagementFiltersList where
         type Scopes ManagementFiltersList =
              '["https://www.googleapis.com/auth/analytics.edit",
                "https://www.googleapis.com/auth/analytics.readonly"]
-        requestClient ManagementFiltersList{..}
+        requestClient ManagementFiltersList'{..}
           = go _mflAccountId _mflStartIndex _mflMaxResults
               (Just AltJSON)
               analyticsService

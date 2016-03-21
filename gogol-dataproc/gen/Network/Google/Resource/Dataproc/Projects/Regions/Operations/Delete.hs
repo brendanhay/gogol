@@ -69,7 +69,7 @@ type ProjectsRegionsOperationsDeleteResource =
 -- \`google.rpc.Code.UNIMPLEMENTED\`.
 --
 -- /See:/ 'projectsRegionsOperationsDelete' smart constructor.
-data ProjectsRegionsOperationsDelete = ProjectsRegionsOperationsDelete
+data ProjectsRegionsOperationsDelete = ProjectsRegionsOperationsDelete'
     { _prodXgafv          :: !(Maybe Text)
     , _prodUploadProtocol :: !(Maybe Text)
     , _prodPp             :: !Bool
@@ -103,7 +103,7 @@ projectsRegionsOperationsDelete
     :: Text -- ^ 'prodName'
     -> ProjectsRegionsOperationsDelete
 projectsRegionsOperationsDelete pProdName_ =
-    ProjectsRegionsOperationsDelete
+    ProjectsRegionsOperationsDelete'
     { _prodXgafv = Nothing
     , _prodUploadProtocol = Nothing
     , _prodPp = True
@@ -161,7 +161,7 @@ instance GoogleRequest
         type Rs ProjectsRegionsOperationsDelete = Empty
         type Scopes ProjectsRegionsOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsOperationsDelete{..}
+        requestClient ProjectsRegionsOperationsDelete'{..}
           = go _prodName _prodXgafv _prodUploadProtocol
               (Just _prodPp)
               _prodAccessToken

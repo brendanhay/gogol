@@ -55,7 +55,7 @@ type AccountsUpdateResource =
 -- | Updates a GTM Account.
 --
 -- /See:/ 'accountsUpdate' smart constructor.
-data AccountsUpdate = AccountsUpdate
+data AccountsUpdate = AccountsUpdate'
     { _auFingerprint :: !(Maybe Text)
     , _auPayload     :: !Account
     , _auAccountId   :: !Text
@@ -75,7 +75,7 @@ accountsUpdate
     -> Text -- ^ 'auAccountId'
     -> AccountsUpdate
 accountsUpdate pAuPayload_ pAuAccountId_ =
-    AccountsUpdate
+    AccountsUpdate'
     { _auFingerprint = Nothing
     , _auPayload = pAuPayload_
     , _auAccountId = pAuAccountId_
@@ -102,7 +102,7 @@ instance GoogleRequest AccountsUpdate where
         type Rs AccountsUpdate = Account
         type Scopes AccountsUpdate =
              '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
-        requestClient AccountsUpdate{..}
+        requestClient AccountsUpdate'{..}
           = go _auAccountId _auFingerprint (Just AltJSON)
               _auPayload
               tagManagerService

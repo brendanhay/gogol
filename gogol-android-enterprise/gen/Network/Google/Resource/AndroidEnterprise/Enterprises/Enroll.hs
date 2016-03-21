@@ -54,7 +54,7 @@ type EnterprisesEnrollResource =
 -- | Enrolls an enterprise with the calling EMM.
 --
 -- /See:/ 'enterprisesEnroll' smart constructor.
-data EnterprisesEnroll = EnterprisesEnroll
+data EnterprisesEnroll = EnterprisesEnroll'
     { _eeToken   :: !Text
     , _eePayload :: !Enterprise
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ enterprisesEnroll
     -> Enterprise -- ^ 'eePayload'
     -> EnterprisesEnroll
 enterprisesEnroll pEeToken_ pEePayload_ =
-    EnterprisesEnroll
+    EnterprisesEnroll'
     { _eeToken = pEeToken_
     , _eePayload = pEePayload_
     }
@@ -89,7 +89,7 @@ instance GoogleRequest EnterprisesEnroll where
         type Rs EnterprisesEnroll = Enterprise
         type Scopes EnterprisesEnroll =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient EnterprisesEnroll{..}
+        requestClient EnterprisesEnroll'{..}
           = go (Just _eeToken) (Just AltJSON) _eePayload
               androidEnterpriseService
           where go

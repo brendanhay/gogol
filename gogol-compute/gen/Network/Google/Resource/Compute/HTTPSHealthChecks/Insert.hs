@@ -58,7 +58,7 @@ type HTTPSHealthChecksInsertResource =
 -- data included in the request.
 --
 -- /See:/ 'httpsHealthChecksInsert' smart constructor.
-data HTTPSHealthChecksInsert = HTTPSHealthChecksInsert
+data HTTPSHealthChecksInsert = HTTPSHealthChecksInsert'
     { _hhciProject :: !Text
     , _hhciPayload :: !HTTPSHealthCheck
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -75,7 +75,7 @@ httpsHealthChecksInsert
     -> HTTPSHealthCheck -- ^ 'hhciPayload'
     -> HTTPSHealthChecksInsert
 httpsHealthChecksInsert pHhciProject_ pHhciPayload_ =
-    HTTPSHealthChecksInsert
+    HTTPSHealthChecksInsert'
     { _hhciProject = pHhciProject_
     , _hhciPayload = pHhciPayload_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest HTTPSHealthChecksInsert where
         type Scopes HTTPSHealthChecksInsert =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient HTTPSHealthChecksInsert{..}
+        requestClient HTTPSHealthChecksInsert'{..}
           = go _hhciProject (Just AltJSON) _hhciPayload
               computeService
           where go

@@ -60,7 +60,7 @@ type PeopleListResource =
 -- | List all of the people in the specified collection.
 --
 -- /See:/ 'peopleList' smart constructor.
-data PeopleList = PeopleList
+data PeopleList = PeopleList'
     { _plOrderBy    :: !(Maybe PeopleListOrderBy)
     , _plCollection :: !PeopleListCollection
     , _plUserId     :: !Text
@@ -86,7 +86,7 @@ peopleList
     -> Text -- ^ 'plUserId'
     -> PeopleList
 peopleList pPlCollection_ pPlUserId_ =
-    PeopleList
+    PeopleList'
     { _plOrderBy = Nothing
     , _plCollection = pPlCollection_
     , _plUserId = pPlUserId_
@@ -130,7 +130,7 @@ instance GoogleRequest PeopleList where
              '["https://www.googleapis.com/auth/plus.circles.read",
                "https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient PeopleList{..}
+        requestClient PeopleList'{..}
           = go _plUserId _plCollection _plOrderBy _plPageToken
               (Just _plMaxResults)
               (Just AltJSON)

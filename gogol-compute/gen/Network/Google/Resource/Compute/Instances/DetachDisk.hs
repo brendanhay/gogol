@@ -60,7 +60,7 @@ type InstancesDetachDiskResource =
 -- | Detaches a disk from an instance.
 --
 -- /See:/ 'instancesDetachDisk' smart constructor.
-data InstancesDetachDisk = InstancesDetachDisk
+data InstancesDetachDisk = InstancesDetachDisk'
     { _iddProject    :: !Text
     , _iddZone       :: !Text
     , _iddDeviceName :: !Text
@@ -85,7 +85,7 @@ instancesDetachDisk
     -> Text -- ^ 'iddInstance'
     -> InstancesDetachDisk
 instancesDetachDisk pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
-    InstancesDetachDisk
+    InstancesDetachDisk'
     { _iddProject = pIddProject_
     , _iddZone = pIddZone_
     , _iddDeviceName = pIddDeviceName_
@@ -117,7 +117,7 @@ instance GoogleRequest InstancesDetachDisk where
         type Scopes InstancesDetachDisk =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient InstancesDetachDisk{..}
+        requestClient InstancesDetachDisk'{..}
           = go _iddProject _iddZone _iddInstance
               (Just _iddDeviceName)
               (Just AltJSON)

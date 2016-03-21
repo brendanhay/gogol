@@ -56,7 +56,7 @@ type EventsListDefinitionsResource =
 -- | Returns a list of the event definitions in this application.
 --
 -- /See:/ 'eventsListDefinitions' smart constructor.
-data EventsListDefinitions = EventsListDefinitions
+data EventsListDefinitions = EventsListDefinitions'
     { _eldLanguage   :: !(Maybe Text)
     , _eldPageToken  :: !(Maybe Text)
     , _eldMaxResults :: !(Maybe (Textual Int32))
@@ -74,7 +74,7 @@ data EventsListDefinitions = EventsListDefinitions
 eventsListDefinitions
     :: EventsListDefinitions
 eventsListDefinitions =
-    EventsListDefinitions
+    EventsListDefinitions'
     { _eldLanguage = Nothing
     , _eldPageToken = Nothing
     , _eldMaxResults = Nothing
@@ -105,7 +105,7 @@ instance GoogleRequest EventsListDefinitions where
         type Scopes EventsListDefinitions =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient EventsListDefinitions{..}
+        requestClient EventsListDefinitions'{..}
           = go _eldLanguage _eldPageToken _eldMaxResults
               (Just AltJSON)
               gamesService

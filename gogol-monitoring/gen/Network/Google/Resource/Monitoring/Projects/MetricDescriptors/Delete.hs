@@ -65,7 +65,7 @@ type ProjectsMetricDescriptorsDeleteResource =
 -- metrics](\/monitoring\/custom-metrics) can be deleted.
 --
 -- /See:/ 'projectsMetricDescriptorsDelete' smart constructor.
-data ProjectsMetricDescriptorsDelete = ProjectsMetricDescriptorsDelete
+data ProjectsMetricDescriptorsDelete = ProjectsMetricDescriptorsDelete'
     { _pmddXgafv          :: !(Maybe Text)
     , _pmddUploadProtocol :: !(Maybe Text)
     , _pmddPp             :: !Bool
@@ -99,7 +99,7 @@ projectsMetricDescriptorsDelete
     :: Text -- ^ 'pmddName'
     -> ProjectsMetricDescriptorsDelete
 projectsMetricDescriptorsDelete pPmddName_ =
-    ProjectsMetricDescriptorsDelete
+    ProjectsMetricDescriptorsDelete'
     { _pmddXgafv = Nothing
     , _pmddUploadProtocol = Nothing
     , _pmddPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest
         type Scopes ProjectsMetricDescriptorsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient ProjectsMetricDescriptorsDelete{..}
+        requestClient ProjectsMetricDescriptorsDelete'{..}
           = go _pmddName _pmddXgafv _pmddUploadProtocol
               (Just _pmddPp)
               _pmddAccessToken

@@ -79,7 +79,7 @@ type BeaconsAttachmentsCreateResource =
 -- length. Attachment data can be up to 1024 bytes long.
 --
 -- /See:/ 'beaconsAttachmentsCreate' smart constructor.
-data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate
+data BeaconsAttachmentsCreate = BeaconsAttachmentsCreate'
     { _bacXgafv          :: !(Maybe Text)
     , _bacUploadProtocol :: !(Maybe Text)
     , _bacPp             :: !Bool
@@ -117,7 +117,7 @@ beaconsAttachmentsCreate
     -> BeaconAttachment -- ^ 'bacPayload'
     -> BeaconsAttachmentsCreate
 beaconsAttachmentsCreate pBacBeaconName_ pBacPayload_ =
-    BeaconsAttachmentsCreate
+    BeaconsAttachmentsCreate'
     { _bacXgafv = Nothing
     , _bacUploadProtocol = Nothing
     , _bacPp = True
@@ -180,7 +180,7 @@ bacCallback
 instance GoogleRequest BeaconsAttachmentsCreate where
         type Rs BeaconsAttachmentsCreate = BeaconAttachment
         type Scopes BeaconsAttachmentsCreate = '[]
-        requestClient BeaconsAttachmentsCreate{..}
+        requestClient BeaconsAttachmentsCreate'{..}
           = go _bacBeaconName _bacXgafv _bacUploadProtocol
               (Just _bacPp)
               _bacAccessToken

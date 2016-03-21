@@ -64,7 +64,7 @@ type EventsUpdateResource =
 -- | Updates an event.
 --
 -- /See:/ 'eventsUpdate' smart constructor.
-data EventsUpdate = EventsUpdate
+data EventsUpdate = EventsUpdate'
     { _euCalendarId          :: !Text
     , _euPayload             :: !Event
     , _euMaxAttendees        :: !(Maybe (Textual Int32))
@@ -97,7 +97,7 @@ eventsUpdate
     -> Text -- ^ 'euEventId'
     -> EventsUpdate
 eventsUpdate pEuCalendarId_ pEuPayload_ pEuEventId_ =
-    EventsUpdate
+    EventsUpdate'
     { _euCalendarId = pEuCalendarId_
     , _euPayload = pEuPayload_
     , _euMaxAttendees = Nothing
@@ -162,7 +162,7 @@ instance GoogleRequest EventsUpdate where
         type Rs EventsUpdate = Event
         type Scopes EventsUpdate =
              '["https://www.googleapis.com/auth/calendar"]
-        requestClient EventsUpdate{..}
+        requestClient EventsUpdate'{..}
           = go _euCalendarId _euEventId _euMaxAttendees
               _euSendNotifications
               _euSupportsAttachments

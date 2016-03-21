@@ -58,7 +58,7 @@ type ResourcesGetResource =
 -- | Gets information about a single resource.
 --
 -- /See:/ 'resourcesGet' smart constructor.
-data ResourcesGet = ResourcesGet
+data ResourcesGet = ResourcesGet'
     { _rgProject    :: !Text
     , _rgResource   :: !Text
     , _rgDeployment :: !Text
@@ -79,7 +79,7 @@ resourcesGet
     -> Text -- ^ 'rgDeployment'
     -> ResourcesGet
 resourcesGet pRgProject_ pRgResource_ pRgDeployment_ =
-    ResourcesGet
+    ResourcesGet'
     { _rgProject = pRgProject_
     , _rgResource = pRgResource_
     , _rgDeployment = pRgDeployment_
@@ -107,7 +107,7 @@ instance GoogleRequest ResourcesGet where
                "https://www.googleapis.com/auth/cloud-platform.read-only",
                "https://www.googleapis.com/auth/ndev.cloudman",
                "https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-        requestClient ResourcesGet{..}
+        requestClient ResourcesGet'{..}
           = go _rgProject _rgDeployment _rgResource
               (Just AltJSON)
               deploymentManagerService

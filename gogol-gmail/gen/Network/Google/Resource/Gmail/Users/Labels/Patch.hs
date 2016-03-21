@@ -56,7 +56,7 @@ type UsersLabelsPatchResource =
 -- | Updates the specified label. This method supports patch semantics.
 --
 -- /See:/ 'usersLabelsPatch' smart constructor.
-data UsersLabelsPatch = UsersLabelsPatch
+data UsersLabelsPatch = UsersLabelsPatch'
     { _ulpPayload :: !Label
     , _ulpUserId  :: !Text
     , _ulpId      :: !Text
@@ -76,7 +76,7 @@ usersLabelsPatch
     -> Text -- ^ 'ulpId'
     -> UsersLabelsPatch
 usersLabelsPatch pUlpPayload_ pUlpId_ =
-    UsersLabelsPatch
+    UsersLabelsPatch'
     { _ulpPayload = pUlpPayload_
     , _ulpUserId = "me"
     , _ulpId = pUlpId_
@@ -103,7 +103,7 @@ instance GoogleRequest UsersLabelsPatch where
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.labels",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersLabelsPatch{..}
+        requestClient UsersLabelsPatch'{..}
           = go _ulpUserId _ulpId (Just AltJSON) _ulpPayload
               gmailService
           where go

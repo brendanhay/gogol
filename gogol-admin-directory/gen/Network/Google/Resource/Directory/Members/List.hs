@@ -59,7 +59,7 @@ type MembersListResource =
 -- | Retrieve all members in a group (paginated)
 --
 -- /See:/ 'membersList' smart constructor.
-data MembersList = MembersList
+data MembersList = MembersList'
     { _mlRoles      :: !(Maybe Text)
     , _mlGroupKey   :: !Text
     , _mlPageToken  :: !(Maybe Text)
@@ -81,7 +81,7 @@ membersList
     :: Text -- ^ 'mlGroupKey'
     -> MembersList
 membersList pMlGroupKey_ =
-    MembersList
+    MembersList'
     { _mlRoles = Nothing
     , _mlGroupKey = pMlGroupKey_
     , _mlPageToken = Nothing
@@ -115,7 +115,7 @@ instance GoogleRequest MembersList where
                "https://www.googleapis.com/auth/admin.directory.group.member",
                "https://www.googleapis.com/auth/admin.directory.group.member.readonly",
                "https://www.googleapis.com/auth/admin.directory.group.readonly"]
-        requestClient MembersList{..}
+        requestClient MembersList'{..}
           = go _mlGroupKey _mlRoles _mlPageToken _mlMaxResults
               (Just AltJSON)
               directoryService

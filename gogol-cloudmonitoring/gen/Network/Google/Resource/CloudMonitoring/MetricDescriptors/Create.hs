@@ -55,7 +55,7 @@ type MetricDescriptorsCreateResource =
 -- | Create a new metric.
 --
 -- /See:/ 'metricDescriptorsCreate' smart constructor.
-data MetricDescriptorsCreate = MetricDescriptorsCreate
+data MetricDescriptorsCreate = MetricDescriptorsCreate'
     { _mdcProject :: !Text
     , _mdcPayload :: !MetricDescriptor
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ metricDescriptorsCreate
     -> MetricDescriptor -- ^ 'mdcPayload'
     -> MetricDescriptorsCreate
 metricDescriptorsCreate pMdcProject_ pMdcPayload_ =
-    MetricDescriptorsCreate
+    MetricDescriptorsCreate'
     { _mdcProject = pMdcProject_
     , _mdcPayload = pMdcPayload_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest MetricDescriptorsCreate where
         type Scopes MetricDescriptorsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/monitoring"]
-        requestClient MetricDescriptorsCreate{..}
+        requestClient MetricDescriptorsCreate'{..}
           = go _mdcProject (Just AltJSON) _mdcPayload
               cloudMonitoringService
           where go

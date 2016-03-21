@@ -55,7 +55,7 @@ type ScheduleGetResource =
 -- | Retrieves the schedule for a job.
 --
 -- /See:/ 'scheduleGet' smart constructor.
-data ScheduleGet = ScheduleGet
+data ScheduleGet = ScheduleGet'
     { _sgJobId  :: !(Textual Word64)
     , _sgTeamId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ scheduleGet
     -> Text -- ^ 'sgTeamId'
     -> ScheduleGet
 scheduleGet pSgJobId_ pSgTeamId_ =
-    ScheduleGet
+    ScheduleGet'
     { _sgJobId = _Coerce # pSgJobId_
     , _sgTeamId = pSgTeamId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest ScheduleGet where
         type Scopes ScheduleGet =
              '["https://www.googleapis.com/auth/coordinate",
                "https://www.googleapis.com/auth/coordinate.readonly"]
-        requestClient ScheduleGet{..}
+        requestClient ScheduleGet'{..}
           = go _sgTeamId _sgJobId (Just AltJSON)
               mapsCoordinateService
           where go

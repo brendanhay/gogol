@@ -59,7 +59,7 @@ type BackendServicesGetHealthResource =
 -- | Gets the most recent health check results for this BackendService.
 --
 -- /See:/ 'backendServicesGetHealth' smart constructor.
-data BackendServicesGetHealth = BackendServicesGetHealth
+data BackendServicesGetHealth = BackendServicesGetHealth'
     { _bsghProject        :: !Text
     , _bsghPayload        :: !ResourceGroupReference
     , _bsghBackendService :: !Text
@@ -80,7 +80,7 @@ backendServicesGetHealth
     -> Text -- ^ 'bsghBackendService'
     -> BackendServicesGetHealth
 backendServicesGetHealth pBsghProject_ pBsghPayload_ pBsghBackendService_ =
-    BackendServicesGetHealth
+    BackendServicesGetHealth'
     { _bsghProject = pBsghProject_
     , _bsghPayload = pBsghPayload_
     , _bsghBackendService = pBsghBackendService_
@@ -109,7 +109,7 @@ instance GoogleRequest BackendServicesGetHealth where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient BackendServicesGetHealth{..}
+        requestClient BackendServicesGetHealth'{..}
           = go _bsghProject _bsghBackendService (Just AltJSON)
               _bsghPayload
               computeService

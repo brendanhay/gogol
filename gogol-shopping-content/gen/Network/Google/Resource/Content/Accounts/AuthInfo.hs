@@ -51,20 +51,20 @@ type AccountsAuthInfoResource =
 --
 -- /See:/ 'accountsAuthInfo' smart constructor.
 data AccountsAuthInfo =
-    AccountsAuthInfo
+    AccountsAuthInfo'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAuthInfo' with the minimum fields required to make a request.
 --
 accountsAuthInfo
     :: AccountsAuthInfo
-accountsAuthInfo = AccountsAuthInfo
+accountsAuthInfo = AccountsAuthInfo'
 
 instance GoogleRequest AccountsAuthInfo where
         type Rs AccountsAuthInfo = AccountsAuthInfoResponse
         type Scopes AccountsAuthInfo =
              '["https://www.googleapis.com/auth/content"]
-        requestClient AccountsAuthInfo{}
+        requestClient AccountsAuthInfo'{}
           = go (Just AltJSON) shoppingContentService
           where go
                   = buildClient

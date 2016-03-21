@@ -53,7 +53,7 @@ type ProposalsSearchResource =
 -- | Search for proposals using pql query
 --
 -- /See:/ 'proposalsSearch' smart constructor.
-newtype ProposalsSearch = ProposalsSearch
+newtype ProposalsSearch = ProposalsSearch'
     { _pPqlQuery :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ newtype ProposalsSearch = ProposalsSearch
 proposalsSearch
     :: ProposalsSearch
 proposalsSearch =
-    ProposalsSearch
+    ProposalsSearch'
     { _pPqlQuery = Nothing
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest ProposalsSearch where
         type Rs ProposalsSearch = GetOrdersResponse
         type Scopes ProposalsSearch =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient ProposalsSearch{..}
+        requestClient ProposalsSearch'{..}
           = go _pPqlQuery (Just AltJSON) adExchangeBuyerService
           where go
                   = buildClient

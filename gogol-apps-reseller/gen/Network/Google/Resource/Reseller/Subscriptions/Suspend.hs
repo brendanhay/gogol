@@ -56,7 +56,7 @@ type SubscriptionsSuspendResource =
 -- | Suspends an active subscription
 --
 -- /See:/ 'subscriptionsSuspend' smart constructor.
-data SubscriptionsSuspend = SubscriptionsSuspend
+data SubscriptionsSuspend = SubscriptionsSuspend'
     { _ssCustomerId     :: !Text
     , _ssSubscriptionId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ subscriptionsSuspend
     -> Text -- ^ 'ssSubscriptionId'
     -> SubscriptionsSuspend
 subscriptionsSuspend pSsCustomerId_ pSsSubscriptionId_ =
-    SubscriptionsSuspend
+    SubscriptionsSuspend'
     { _ssCustomerId = pSsCustomerId_
     , _ssSubscriptionId = pSsSubscriptionId_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest SubscriptionsSuspend where
         type Rs SubscriptionsSuspend = Subscription
         type Scopes SubscriptionsSuspend =
              '["https://www.googleapis.com/auth/apps.order"]
-        requestClient SubscriptionsSuspend{..}
+        requestClient SubscriptionsSuspend'{..}
           = go _ssCustomerId _ssSubscriptionId (Just AltJSON)
               appsResellerService
           where go

@@ -59,7 +59,7 @@ type LicenseAssignmentsInsertResource =
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsInsert' smart constructor.
-data LicenseAssignmentsInsert = LicenseAssignmentsInsert
+data LicenseAssignmentsInsert = LicenseAssignmentsInsert'
     { _laiSKUId     :: !Text
     , _laiPayload   :: !LicenseAssignmentInsert
     , _laiProductId :: !Text
@@ -80,7 +80,7 @@ licenseAssignmentsInsert
     -> Text -- ^ 'laiProductId'
     -> LicenseAssignmentsInsert
 licenseAssignmentsInsert pLaiSKUId_ pLaiPayload_ pLaiProductId_ =
-    LicenseAssignmentsInsert
+    LicenseAssignmentsInsert'
     { _laiSKUId = pLaiSKUId_
     , _laiPayload = pLaiPayload_
     , _laiProductId = pLaiProductId_
@@ -104,7 +104,7 @@ instance GoogleRequest LicenseAssignmentsInsert where
         type Rs LicenseAssignmentsInsert = LicenseAssignment
         type Scopes LicenseAssignmentsInsert =
              '["https://www.googleapis.com/auth/apps.licensing"]
-        requestClient LicenseAssignmentsInsert{..}
+        requestClient LicenseAssignmentsInsert'{..}
           = go _laiProductId _laiSKUId (Just AltJSON)
               _laiPayload
               appsLicensingService

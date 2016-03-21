@@ -56,7 +56,7 @@ type TablesFeaturesBatchDeleteResource =
 -- | Delete all features matching the given IDs.
 --
 -- /See:/ 'tablesFeaturesBatchDelete' smart constructor.
-data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete
+data TablesFeaturesBatchDelete = TablesFeaturesBatchDelete'
     { _tfbdPayload :: !FeaturesBatchDeleteRequest
     , _tfbdId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ tablesFeaturesBatchDelete
     -> Text -- ^ 'tfbdId'
     -> TablesFeaturesBatchDelete
 tablesFeaturesBatchDelete pTfbdPayload_ pTfbdId_ =
-    TablesFeaturesBatchDelete
+    TablesFeaturesBatchDelete'
     { _tfbdPayload = pTfbdPayload_
     , _tfbdId = pTfbdId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest TablesFeaturesBatchDelete
         type Rs TablesFeaturesBatchDelete = ()
         type Scopes TablesFeaturesBatchDelete =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesFeaturesBatchDelete{..}
+        requestClient TablesFeaturesBatchDelete'{..}
           = go _tfbdId (Just AltJSON) _tfbdPayload
               mapsEngineService
           where go

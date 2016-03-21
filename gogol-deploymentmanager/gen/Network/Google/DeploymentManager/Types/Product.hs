@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 
 --
 -- /See:/ 'operationWarningsItemDataItem' smart constructor.
-data OperationWarningsItemDataItem = OperationWarningsItemDataItem
+data OperationWarningsItemDataItem = OperationWarningsItemDataItem'
     { _owidiValue :: !(Maybe Text)
     , _owidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -37,7 +37,7 @@ data OperationWarningsItemDataItem = OperationWarningsItemDataItem
 operationWarningsItemDataItem
     :: OperationWarningsItemDataItem
 operationWarningsItemDataItem =
-    OperationWarningsItemDataItem
+    OperationWarningsItemDataItem'
     { _owidiValue = Nothing
     , _owidiKey = Nothing
     }
@@ -61,11 +61,11 @@ instance FromJSON OperationWarningsItemDataItem where
         parseJSON
           = withObject "OperationWarningsItemDataItem"
               (\ o ->
-                 OperationWarningsItemDataItem <$>
+                 OperationWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON OperationWarningsItemDataItem where
-        toJSON OperationWarningsItemDataItem{..}
+        toJSON OperationWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _owidiValue,
@@ -74,7 +74,7 @@ instance ToJSON OperationWarningsItemDataItem where
 -- |
 --
 -- /See:/ 'configFile' smart constructor.
-newtype ConfigFile = ConfigFile
+newtype ConfigFile = ConfigFile'
     { _cfContent :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -86,7 +86,7 @@ newtype ConfigFile = ConfigFile
 configFile
     :: ConfigFile
 configFile =
-    ConfigFile
+    ConfigFile'
     { _cfContent = Nothing
     }
 
@@ -98,17 +98,17 @@ cfContent
 instance FromJSON ConfigFile where
         parseJSON
           = withObject "ConfigFile"
-              (\ o -> ConfigFile <$> (o .:? "content"))
+              (\ o -> ConfigFile' <$> (o .:? "content"))
 
 instance ToJSON ConfigFile where
-        toJSON ConfigFile{..}
+        toJSON ConfigFile'{..}
           = object (catMaybes [("content" .=) <$> _cfContent])
 
 -- | A response containing a partial list of operations and a page token used
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'operationsListResponse' smart constructor.
-data OperationsListResponse = OperationsListResponse
+data OperationsListResponse = OperationsListResponse'
     { _olrNextPageToken :: !(Maybe Text)
     , _olrOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -123,7 +123,7 @@ data OperationsListResponse = OperationsListResponse
 operationsListResponse
     :: OperationsListResponse
 operationsListResponse =
-    OperationsListResponse
+    OperationsListResponse'
     { _olrNextPageToken = Nothing
     , _olrOperations = Nothing
     }
@@ -146,12 +146,12 @@ instance FromJSON OperationsListResponse where
         parseJSON
           = withObject "OperationsListResponse"
               (\ o ->
-                 OperationsListResponse <$>
+                 OperationsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON OperationsListResponse where
-        toJSON OperationsListResponse{..}
+        toJSON OperationsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _olrNextPageToken,
@@ -159,7 +159,7 @@ instance ToJSON OperationsListResponse where
 
 --
 -- /See:/ 'resourceUpdateWarningsItemDataItem' smart constructor.
-data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem
+data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem'
     { _ruwidiValue :: !(Maybe Text)
     , _ruwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -174,7 +174,7 @@ data ResourceUpdateWarningsItemDataItem = ResourceUpdateWarningsItemDataItem
 resourceUpdateWarningsItemDataItem
     :: ResourceUpdateWarningsItemDataItem
 resourceUpdateWarningsItemDataItem =
-    ResourceUpdateWarningsItemDataItem
+    ResourceUpdateWarningsItemDataItem'
     { _ruwidiValue = Nothing
     , _ruwidiKey = Nothing
     }
@@ -200,12 +200,12 @@ instance FromJSON ResourceUpdateWarningsItemDataItem
         parseJSON
           = withObject "ResourceUpdateWarningsItemDataItem"
               (\ o ->
-                 ResourceUpdateWarningsItemDataItem <$>
+                 ResourceUpdateWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON ResourceUpdateWarningsItemDataItem
          where
-        toJSON ResourceUpdateWarningsItemDataItem{..}
+        toJSON ResourceUpdateWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _ruwidiValue,
@@ -214,7 +214,7 @@ instance ToJSON ResourceUpdateWarningsItemDataItem
 -- | A response that returns all Types supported by Deployment Manager
 --
 -- /See:/ 'typesListResponse' smart constructor.
-data TypesListResponse = TypesListResponse
+data TypesListResponse = TypesListResponse'
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrTypes         :: !(Maybe [Type])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -229,7 +229,7 @@ data TypesListResponse = TypesListResponse
 typesListResponse
     :: TypesListResponse
 typesListResponse =
-    TypesListResponse
+    TypesListResponse'
     { _tlrNextPageToken = Nothing
     , _tlrTypes = Nothing
     }
@@ -251,12 +251,12 @@ instance FromJSON TypesListResponse where
         parseJSON
           = withObject "TypesListResponse"
               (\ o ->
-                 TypesListResponse <$>
+                 TypesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "types" .!= mempty))
 
 instance ToJSON TypesListResponse where
-        toJSON TypesListResponse{..}
+        toJSON TypesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _tlrNextPageToken,
@@ -265,7 +265,7 @@ instance ToJSON TypesListResponse where
 -- | An Operation resource, used to manage asynchronous API requests.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oTargetId            :: !(Maybe (Textual Word64))
     , _oStatus              :: !(Maybe Text)
     , _oInsertTime          :: !(Maybe Text)
@@ -343,7 +343,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oTargetId = Nothing
     , _oStatus = Nothing
     , _oInsertTime = Nothing
@@ -513,7 +513,7 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "targetId") <*> (o .:? "status") <*>
                      (o .:? "insertTime")
                      <*> (o .:? "progress")
@@ -538,7 +538,7 @@ instance FromJSON Operation where
                      <*> (o .:? "clientOperationId"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("targetId" .=) <$> _oTargetId,
@@ -567,7 +567,7 @@ instance ToJSON Operation where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'resourcesListResponse' smart constructor.
-data ResourcesListResponse = ResourcesListResponse
+data ResourcesListResponse = ResourcesListResponse'
     { _rlrNextPageToken :: !(Maybe Text)
     , _rlrResources     :: !(Maybe [Resource])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -582,7 +582,7 @@ data ResourcesListResponse = ResourcesListResponse
 resourcesListResponse
     :: ResourcesListResponse
 resourcesListResponse =
-    ResourcesListResponse
+    ResourcesListResponse'
     { _rlrNextPageToken = Nothing
     , _rlrResources = Nothing
     }
@@ -604,12 +604,12 @@ instance FromJSON ResourcesListResponse where
         parseJSON
           = withObject "ResourcesListResponse"
               (\ o ->
-                 ResourcesListResponse <$>
+                 ResourcesListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "resources" .!= mempty))
 
 instance ToJSON ResourcesListResponse where
-        toJSON ResourcesListResponse{..}
+        toJSON ResourcesListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _rlrNextPageToken,
@@ -618,7 +618,7 @@ instance ToJSON ResourcesListResponse where
 -- |
 --
 -- /See:/ 'deploymentUpdate' smart constructor.
-data DeploymentUpdate = DeploymentUpdate
+data DeploymentUpdate = DeploymentUpdate'
     { _duManifest :: !(Maybe Text)
     , _duLabels   :: !(Maybe [DeploymentUpdateLabelEntry])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -633,7 +633,7 @@ data DeploymentUpdate = DeploymentUpdate
 deploymentUpdate
     :: DeploymentUpdate
 deploymentUpdate =
-    DeploymentUpdate
+    DeploymentUpdate'
     { _duManifest = Nothing
     , _duLabels = Nothing
     }
@@ -660,11 +660,11 @@ instance FromJSON DeploymentUpdate where
         parseJSON
           = withObject "DeploymentUpdate"
               (\ o ->
-                 DeploymentUpdate <$>
+                 DeploymentUpdate' <$>
                    (o .:? "manifest") <*> (o .:? "labels" .!= mempty))
 
 instance ToJSON DeploymentUpdate where
-        toJSON DeploymentUpdate{..}
+        toJSON DeploymentUpdate'{..}
           = object
               (catMaybes
                  [("manifest" .=) <$> _duManifest,
@@ -673,7 +673,7 @@ instance ToJSON DeploymentUpdate where
 -- |
 --
 -- /See:/ 'resourceUpdate' smart constructor.
-data ResourceUpdate = ResourceUpdate
+data ResourceUpdate = ResourceUpdate'
     { _ruState           :: !(Maybe Text)
     , _ruError           :: !(Maybe ResourceUpdateError)
     , _ruWarnings        :: !(Maybe [ResourceUpdateWarningsItem])
@@ -703,7 +703,7 @@ data ResourceUpdate = ResourceUpdate
 resourceUpdate
     :: ResourceUpdate
 resourceUpdate =
-    ResourceUpdate
+    ResourceUpdate'
     { _ruState = Nothing
     , _ruError = Nothing
     , _ruWarnings = Nothing
@@ -757,7 +757,7 @@ instance FromJSON ResourceUpdate where
         parseJSON
           = withObject "ResourceUpdate"
               (\ o ->
-                 ResourceUpdate <$>
+                 ResourceUpdate' <$>
                    (o .:? "state") <*> (o .:? "error") <*>
                      (o .:? "warnings" .!= mempty)
                      <*> (o .:? "intent")
@@ -766,7 +766,7 @@ instance FromJSON ResourceUpdate where
                      <*> (o .:? "properties"))
 
 instance ToJSON ResourceUpdate where
-        toJSON ResourceUpdate{..}
+        toJSON ResourceUpdate'{..}
           = object
               (catMaybes
                  [("state" .=) <$> _ruState,
@@ -779,7 +779,7 @@ instance ToJSON ResourceUpdate where
 
 --
 -- /See:/ 'deploymentLabelEntry' smart constructor.
-data DeploymentLabelEntry = DeploymentLabelEntry
+data DeploymentLabelEntry = DeploymentLabelEntry'
     { _dleValue :: !(Maybe Text)
     , _dleKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -794,7 +794,7 @@ data DeploymentLabelEntry = DeploymentLabelEntry
 deploymentLabelEntry
     :: DeploymentLabelEntry
 deploymentLabelEntry =
-    DeploymentLabelEntry
+    DeploymentLabelEntry'
     { _dleValue = Nothing
     , _dleKey = Nothing
     }
@@ -809,11 +809,11 @@ instance FromJSON DeploymentLabelEntry where
         parseJSON
           = withObject "DeploymentLabelEntry"
               (\ o ->
-                 DeploymentLabelEntry <$>
+                 DeploymentLabelEntry' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON DeploymentLabelEntry where
-        toJSON DeploymentLabelEntry{..}
+        toJSON DeploymentLabelEntry'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _dleValue, ("key" .=) <$> _dleKey])
@@ -821,7 +821,7 @@ instance ToJSON DeploymentLabelEntry where
 -- |
 --
 -- /See:/ 'manifest' smart constructor.
-data Manifest = Manifest
+data Manifest = Manifest'
     { _mInsertTime     :: !(Maybe Text)
     , _mLayout         :: !(Maybe Text)
     , _mConfig         :: !(Maybe ConfigFile)
@@ -854,7 +854,7 @@ data Manifest = Manifest
 manifest
     :: Manifest
 manifest =
-    Manifest
+    Manifest'
     { _mInsertTime = Nothing
     , _mLayout = Nothing
     , _mConfig = Nothing
@@ -911,7 +911,7 @@ instance FromJSON Manifest where
         parseJSON
           = withObject "Manifest"
               (\ o ->
-                 Manifest <$>
+                 Manifest' <$>
                    (o .:? "insertTime") <*> (o .:? "layout") <*>
                      (o .:? "config")
                      <*> (o .:? "expandedConfig")
@@ -921,7 +921,7 @@ instance FromJSON Manifest where
                      <*> (o .:? "id"))
 
 instance ToJSON Manifest where
-        toJSON Manifest{..}
+        toJSON Manifest'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _mInsertTime,
@@ -934,7 +934,7 @@ instance ToJSON Manifest where
 
 --
 -- /See:/ 'resourceUpdateWarningsItem' smart constructor.
-data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem
+data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem'
     { _ruwiData    :: !(Maybe [ResourceUpdateWarningsItemDataItem])
     , _ruwiCode    :: !(Maybe Text)
     , _ruwiMessage :: !(Maybe Text)
@@ -952,7 +952,7 @@ data ResourceUpdateWarningsItem = ResourceUpdateWarningsItem
 resourceUpdateWarningsItem
     :: ResourceUpdateWarningsItem
 resourceUpdateWarningsItem =
-    ResourceUpdateWarningsItem
+    ResourceUpdateWarningsItem'
     { _ruwiData = Nothing
     , _ruwiCode = Nothing
     , _ruwiMessage = Nothing
@@ -981,12 +981,12 @@ instance FromJSON ResourceUpdateWarningsItem where
         parseJSON
           = withObject "ResourceUpdateWarningsItem"
               (\ o ->
-                 ResourceUpdateWarningsItem <$>
+                 ResourceUpdateWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ResourceUpdateWarningsItem where
-        toJSON ResourceUpdateWarningsItem{..}
+        toJSON ResourceUpdateWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _ruwiData,
@@ -996,7 +996,7 @@ instance ToJSON ResourceUpdateWarningsItem where
 -- |
 --
 -- /See:/ 'deploymentsCancelPreviewRequest' smart constructor.
-newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
+newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest'
     { _dcprFingerprint :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1008,7 +1008,7 @@ newtype DeploymentsCancelPreviewRequest = DeploymentsCancelPreviewRequest
 deploymentsCancelPreviewRequest
     :: DeploymentsCancelPreviewRequest
 deploymentsCancelPreviewRequest =
-    DeploymentsCancelPreviewRequest
+    DeploymentsCancelPreviewRequest'
     { _dcprFingerprint = Nothing
     }
 
@@ -1032,18 +1032,18 @@ instance FromJSON DeploymentsCancelPreviewRequest
         parseJSON
           = withObject "DeploymentsCancelPreviewRequest"
               (\ o ->
-                 DeploymentsCancelPreviewRequest <$>
+                 DeploymentsCancelPreviewRequest' <$>
                    (o .:? "fingerprint"))
 
 instance ToJSON DeploymentsCancelPreviewRequest where
-        toJSON DeploymentsCancelPreviewRequest{..}
+        toJSON DeploymentsCancelPreviewRequest'{..}
           = object
               (catMaybes [("fingerprint" .=) <$> _dcprFingerprint])
 
 -- |
 --
 -- /See:/ 'resource' smart constructor.
-data Resource = Resource
+data Resource = Resource'
     { _rInsertTime      :: !(Maybe Text)
     , _rURL             :: !(Maybe Text)
     , _rWarnings        :: !(Maybe [ResourceWarningsItem])
@@ -1085,7 +1085,7 @@ data Resource = Resource
 resource
     :: Resource
 resource =
-    Resource
+    Resource'
     { _rInsertTime = Nothing
     , _rURL = Nothing
     , _rWarnings = Nothing
@@ -1165,7 +1165,7 @@ instance FromJSON Resource where
         parseJSON
           = withObject "Resource"
               (\ o ->
-                 Resource <$>
+                 Resource' <$>
                    (o .:? "insertTime") <*> (o .:? "url") <*>
                      (o .:? "warnings" .!= mempty)
                      <*> (o .:? "updateTime")
@@ -1178,7 +1178,7 @@ instance FromJSON Resource where
                      <*> (o .:? "properties"))
 
 instance ToJSON Resource where
-        toJSON Resource{..}
+        toJSON Resource'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _rInsertTime,
@@ -1193,7 +1193,7 @@ instance ToJSON Resource where
 
 --
 -- /See:/ 'deploymentUpdateLabelEntry' smart constructor.
-data DeploymentUpdateLabelEntry = DeploymentUpdateLabelEntry
+data DeploymentUpdateLabelEntry = DeploymentUpdateLabelEntry'
     { _duleValue :: !(Maybe Text)
     , _duleKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1208,7 +1208,7 @@ data DeploymentUpdateLabelEntry = DeploymentUpdateLabelEntry
 deploymentUpdateLabelEntry
     :: DeploymentUpdateLabelEntry
 deploymentUpdateLabelEntry =
-    DeploymentUpdateLabelEntry
+    DeploymentUpdateLabelEntry'
     { _duleValue = Nothing
     , _duleKey = Nothing
     }
@@ -1224,11 +1224,11 @@ instance FromJSON DeploymentUpdateLabelEntry where
         parseJSON
           = withObject "DeploymentUpdateLabelEntry"
               (\ o ->
-                 DeploymentUpdateLabelEntry <$>
+                 DeploymentUpdateLabelEntry' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON DeploymentUpdateLabelEntry where
-        toJSON DeploymentUpdateLabelEntry{..}
+        toJSON DeploymentUpdateLabelEntry'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _duleValue,
@@ -1236,7 +1236,7 @@ instance ToJSON DeploymentUpdateLabelEntry where
 
 --
 -- /See:/ 'resourceUpdateErrorErrorsItem' smart constructor.
-data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem
+data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem'
     { _rueeiLocation :: !(Maybe Text)
     , _rueeiCode     :: !(Maybe Text)
     , _rueeiMessage  :: !(Maybe Text)
@@ -1254,7 +1254,7 @@ data ResourceUpdateErrorErrorsItem = ResourceUpdateErrorErrorsItem
 resourceUpdateErrorErrorsItem
     :: ResourceUpdateErrorErrorsItem
 resourceUpdateErrorErrorsItem =
-    ResourceUpdateErrorErrorsItem
+    ResourceUpdateErrorErrorsItem'
     { _rueeiLocation = Nothing
     , _rueeiCode = Nothing
     , _rueeiMessage = Nothing
@@ -1281,12 +1281,12 @@ instance FromJSON ResourceUpdateErrorErrorsItem where
         parseJSON
           = withObject "ResourceUpdateErrorErrorsItem"
               (\ o ->
-                 ResourceUpdateErrorErrorsItem <$>
+                 ResourceUpdateErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ResourceUpdateErrorErrorsItem where
-        toJSON ResourceUpdateErrorErrorsItem{..}
+        toJSON ResourceUpdateErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _rueeiLocation,
@@ -1297,7 +1297,7 @@ instance ToJSON ResourceUpdateErrorErrorsItem where
 -- to build the next request if the request has been truncated.
 --
 -- /See:/ 'manifestsListResponse' smart constructor.
-data ManifestsListResponse = ManifestsListResponse
+data ManifestsListResponse = ManifestsListResponse'
     { _mlrNextPageToken :: !(Maybe Text)
     , _mlrManifests     :: !(Maybe [Manifest])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1312,7 +1312,7 @@ data ManifestsListResponse = ManifestsListResponse
 manifestsListResponse
     :: ManifestsListResponse
 manifestsListResponse =
-    ManifestsListResponse
+    ManifestsListResponse'
     { _mlrNextPageToken = Nothing
     , _mlrManifests = Nothing
     }
@@ -1334,12 +1334,12 @@ instance FromJSON ManifestsListResponse where
         parseJSON
           = withObject "ManifestsListResponse"
               (\ o ->
-                 ManifestsListResponse <$>
+                 ManifestsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "manifests" .!= mempty))
 
 instance ToJSON ManifestsListResponse where
-        toJSON ManifestsListResponse{..}
+        toJSON ManifestsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _mlrNextPageToken,
@@ -1349,7 +1349,7 @@ instance ToJSON ManifestsListResponse where
 -- operation, this field will be populated.
 --
 -- /See:/ 'operationError' smart constructor.
-newtype OperationError = OperationError
+newtype OperationError = OperationError'
     { _oeErrors :: Maybe [OperationErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1361,7 +1361,7 @@ newtype OperationError = OperationError
 operationError
     :: OperationError
 operationError =
-    OperationError
+    OperationError'
     { _oeErrors = Nothing
     }
 
@@ -1377,16 +1377,16 @@ instance FromJSON OperationError where
         parseJSON
           = withObject "OperationError"
               (\ o ->
-                 OperationError <$> (o .:? "errors" .!= mempty))
+                 OperationError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON OperationError where
-        toJSON OperationError{..}
+        toJSON OperationError'{..}
           = object (catMaybes [("errors" .=) <$> _oeErrors])
 
 -- | A resource type supported by Deployment Manager.
 --
 -- /See:/ 'type'' smart constructor.
-data Type = Type
+data Type = Type'
     { _tInsertTime :: !(Maybe Text)
     , _tSelfLink   :: !(Maybe Text)
     , _tName       :: !(Maybe Text)
@@ -1407,7 +1407,7 @@ data Type = Type
 type'
     :: Type
 type' =
-    Type
+    Type'
     { _tInsertTime = Nothing
     , _tSelfLink = Nothing
     , _tName = Nothing
@@ -1438,13 +1438,13 @@ instance FromJSON Type where
         parseJSON
           = withObject "Type"
               (\ o ->
-                 Type <$>
+                 Type' <$>
                    (o .:? "insertTime") <*> (o .:? "selfLink") <*>
                      (o .:? "name")
                      <*> (o .:? "id"))
 
 instance ToJSON Type where
-        toJSON Type{..}
+        toJSON Type'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _tInsertTime,
@@ -1454,7 +1454,7 @@ instance ToJSON Type where
 -- |
 --
 -- /See:/ 'importFile' smart constructor.
-data ImportFile = ImportFile
+data ImportFile = ImportFile'
     { _ifContent :: !(Maybe Text)
     , _ifName    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1469,7 +1469,7 @@ data ImportFile = ImportFile
 importFile
     :: ImportFile
 importFile =
-    ImportFile
+    ImportFile'
     { _ifContent = Nothing
     , _ifName = Nothing
     }
@@ -1487,10 +1487,10 @@ instance FromJSON ImportFile where
         parseJSON
           = withObject "ImportFile"
               (\ o ->
-                 ImportFile <$> (o .:? "content") <*> (o .:? "name"))
+                 ImportFile' <$> (o .:? "content") <*> (o .:? "name"))
 
 instance ToJSON ImportFile where
-        toJSON ImportFile{..}
+        toJSON ImportFile'{..}
           = object
               (catMaybes
                  [("content" .=) <$> _ifContent,
@@ -1498,7 +1498,7 @@ instance ToJSON ImportFile where
 
 --
 -- /See:/ 'operationErrorErrorsItem' smart constructor.
-data OperationErrorErrorsItem = OperationErrorErrorsItem
+data OperationErrorErrorsItem = OperationErrorErrorsItem'
     { _oeeiLocation :: !(Maybe Text)
     , _oeeiCode     :: !(Maybe Text)
     , _oeeiMessage  :: !(Maybe Text)
@@ -1516,7 +1516,7 @@ data OperationErrorErrorsItem = OperationErrorErrorsItem
 operationErrorErrorsItem
     :: OperationErrorErrorsItem
 operationErrorErrorsItem =
-    OperationErrorErrorsItem
+    OperationErrorErrorsItem'
     { _oeeiLocation = Nothing
     , _oeeiCode = Nothing
     , _oeeiMessage = Nothing
@@ -1541,12 +1541,12 @@ instance FromJSON OperationErrorErrorsItem where
         parseJSON
           = withObject "OperationErrorErrorsItem"
               (\ o ->
-                 OperationErrorErrorsItem <$>
+                 OperationErrorErrorsItem' <$>
                    (o .:? "location") <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationErrorErrorsItem where
-        toJSON OperationErrorErrorsItem{..}
+        toJSON OperationErrorErrorsItem'{..}
           = object
               (catMaybes
                  [("location" .=) <$> _oeeiLocation,
@@ -1556,7 +1556,7 @@ instance ToJSON OperationErrorErrorsItem where
 -- |
 --
 -- /See:/ 'deploymentsStopRequest' smart constructor.
-newtype DeploymentsStopRequest = DeploymentsStopRequest
+newtype DeploymentsStopRequest = DeploymentsStopRequest'
     { _dsrFingerprint :: Maybe (Textual Word8)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1568,7 +1568,7 @@ newtype DeploymentsStopRequest = DeploymentsStopRequest
 deploymentsStopRequest
     :: DeploymentsStopRequest
 deploymentsStopRequest =
-    DeploymentsStopRequest
+    DeploymentsStopRequest'
     { _dsrFingerprint = Nothing
     }
 
@@ -1591,16 +1591,16 @@ instance FromJSON DeploymentsStopRequest where
         parseJSON
           = withObject "DeploymentsStopRequest"
               (\ o ->
-                 DeploymentsStopRequest <$> (o .:? "fingerprint"))
+                 DeploymentsStopRequest' <$> (o .:? "fingerprint"))
 
 instance ToJSON DeploymentsStopRequest where
-        toJSON DeploymentsStopRequest{..}
+        toJSON DeploymentsStopRequest'{..}
           = object
               (catMaybes [("fingerprint" .=) <$> _dsrFingerprint])
 
 --
 -- /See:/ 'resourceWarningsItemDataItem' smart constructor.
-data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem
+data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem'
     { _rwidiValue :: !(Maybe Text)
     , _rwidiKey   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1615,7 +1615,7 @@ data ResourceWarningsItemDataItem = ResourceWarningsItemDataItem
 resourceWarningsItemDataItem
     :: ResourceWarningsItemDataItem
 resourceWarningsItemDataItem =
-    ResourceWarningsItemDataItem
+    ResourceWarningsItemDataItem'
     { _rwidiValue = Nothing
     , _rwidiKey = Nothing
     }
@@ -1639,11 +1639,11 @@ instance FromJSON ResourceWarningsItemDataItem where
         parseJSON
           = withObject "ResourceWarningsItemDataItem"
               (\ o ->
-                 ResourceWarningsItemDataItem <$>
+                 ResourceWarningsItemDataItem' <$>
                    (o .:? "value") <*> (o .:? "key"))
 
 instance ToJSON ResourceWarningsItemDataItem where
-        toJSON ResourceWarningsItemDataItem{..}
+        toJSON ResourceWarningsItemDataItem'{..}
           = object
               (catMaybes
                  [("value" .=) <$> _rwidiValue,
@@ -1653,7 +1653,7 @@ instance ToJSON ResourceWarningsItemDataItem where
 -- this field will be populated.
 --
 -- /See:/ 'resourceUpdateError' smart constructor.
-newtype ResourceUpdateError = ResourceUpdateError
+newtype ResourceUpdateError = ResourceUpdateError'
     { _rueErrors :: Maybe [ResourceUpdateErrorErrorsItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1665,7 +1665,7 @@ newtype ResourceUpdateError = ResourceUpdateError
 resourceUpdateError
     :: ResourceUpdateError
 resourceUpdateError =
-    ResourceUpdateError
+    ResourceUpdateError'
     { _rueErrors = Nothing
     }
 
@@ -1681,17 +1681,17 @@ instance FromJSON ResourceUpdateError where
         parseJSON
           = withObject "ResourceUpdateError"
               (\ o ->
-                 ResourceUpdateError <$> (o .:? "errors" .!= mempty))
+                 ResourceUpdateError' <$> (o .:? "errors" .!= mempty))
 
 instance ToJSON ResourceUpdateError where
-        toJSON ResourceUpdateError{..}
+        toJSON ResourceUpdateError'{..}
           = object (catMaybes [("errors" .=) <$> _rueErrors])
 
 -- | A response containing a partial list of deployments and a page token
 -- used to build the next request if the request has been truncated.
 --
 -- /See:/ 'deploymentsListResponse' smart constructor.
-data DeploymentsListResponse = DeploymentsListResponse
+data DeploymentsListResponse = DeploymentsListResponse'
     { _dlrNextPageToken :: !(Maybe Text)
     , _dlrDeployments   :: !(Maybe [Deployment])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1706,7 +1706,7 @@ data DeploymentsListResponse = DeploymentsListResponse
 deploymentsListResponse
     :: DeploymentsListResponse
 deploymentsListResponse =
-    DeploymentsListResponse
+    DeploymentsListResponse'
     { _dlrNextPageToken = Nothing
     , _dlrDeployments = Nothing
     }
@@ -1729,12 +1729,12 @@ instance FromJSON DeploymentsListResponse where
         parseJSON
           = withObject "DeploymentsListResponse"
               (\ o ->
-                 DeploymentsListResponse <$>
+                 DeploymentsListResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "deployments" .!= mempty))
 
 instance ToJSON DeploymentsListResponse where
-        toJSON DeploymentsListResponse{..}
+        toJSON DeploymentsListResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _dlrNextPageToken,
@@ -1742,7 +1742,7 @@ instance ToJSON DeploymentsListResponse where
 
 --
 -- /See:/ 'resourceWarningsItem' smart constructor.
-data ResourceWarningsItem = ResourceWarningsItem
+data ResourceWarningsItem = ResourceWarningsItem'
     { _rwiData    :: !(Maybe [ResourceWarningsItemDataItem])
     , _rwiCode    :: !(Maybe Text)
     , _rwiMessage :: !(Maybe Text)
@@ -1760,7 +1760,7 @@ data ResourceWarningsItem = ResourceWarningsItem
 resourceWarningsItem
     :: ResourceWarningsItem
 resourceWarningsItem =
-    ResourceWarningsItem
+    ResourceWarningsItem'
     { _rwiData = Nothing
     , _rwiCode = Nothing
     , _rwiMessage = Nothing
@@ -1788,12 +1788,12 @@ instance FromJSON ResourceWarningsItem where
         parseJSON
           = withObject "ResourceWarningsItem"
               (\ o ->
-                 ResourceWarningsItem <$>
+                 ResourceWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON ResourceWarningsItem where
-        toJSON ResourceWarningsItem{..}
+        toJSON ResourceWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _rwiData, ("code" .=) <$> _rwiCode,
@@ -1802,7 +1802,7 @@ instance ToJSON ResourceWarningsItem where
 -- |
 --
 -- /See:/ 'targetConfiguration' smart constructor.
-data TargetConfiguration = TargetConfiguration
+data TargetConfiguration = TargetConfiguration'
     { _tcConfig  :: !(Maybe ConfigFile)
     , _tcImports :: !(Maybe [ImportFile])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1817,7 +1817,7 @@ data TargetConfiguration = TargetConfiguration
 targetConfiguration
     :: TargetConfiguration
 targetConfiguration =
-    TargetConfiguration
+    TargetConfiguration'
     { _tcConfig = Nothing
     , _tcImports = Nothing
     }
@@ -1839,11 +1839,11 @@ instance FromJSON TargetConfiguration where
         parseJSON
           = withObject "TargetConfiguration"
               (\ o ->
-                 TargetConfiguration <$>
+                 TargetConfiguration' <$>
                    (o .:? "config") <*> (o .:? "imports" .!= mempty))
 
 instance ToJSON TargetConfiguration where
-        toJSON TargetConfiguration{..}
+        toJSON TargetConfiguration'{..}
           = object
               (catMaybes
                  [("config" .=) <$> _tcConfig,
@@ -1851,7 +1851,7 @@ instance ToJSON TargetConfiguration where
 
 --
 -- /See:/ 'operationWarningsItem' smart constructor.
-data OperationWarningsItem = OperationWarningsItem
+data OperationWarningsItem = OperationWarningsItem'
     { _owiData    :: !(Maybe [OperationWarningsItemDataItem])
     , _owiCode    :: !(Maybe Text)
     , _owiMessage :: !(Maybe Text)
@@ -1869,7 +1869,7 @@ data OperationWarningsItem = OperationWarningsItem
 operationWarningsItem
     :: OperationWarningsItem
 operationWarningsItem =
-    OperationWarningsItem
+    OperationWarningsItem'
     { _owiData = Nothing
     , _owiCode = Nothing
     , _owiMessage = Nothing
@@ -1897,12 +1897,12 @@ instance FromJSON OperationWarningsItem where
         parseJSON
           = withObject "OperationWarningsItem"
               (\ o ->
-                 OperationWarningsItem <$>
+                 OperationWarningsItem' <$>
                    (o .:? "data" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON OperationWarningsItem where
-        toJSON OperationWarningsItem{..}
+        toJSON OperationWarningsItem'{..}
           = object
               (catMaybes
                  [("data" .=) <$> _owiData, ("code" .=) <$> _owiCode,
@@ -1911,7 +1911,7 @@ instance ToJSON OperationWarningsItem where
 -- |
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment
+data Deployment = Deployment'
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
     , _dFingerprint :: !(Maybe (Textual Word8))
@@ -1950,7 +1950,7 @@ data Deployment = Deployment
 deployment
     :: Deployment
 deployment =
-    Deployment
+    Deployment'
     { _dInsertTime = Nothing
     , _dOperation = Nothing
     , _dFingerprint = Nothing
@@ -2039,7 +2039,7 @@ instance FromJSON Deployment where
         parseJSON
           = withObject "Deployment"
               (\ o ->
-                 Deployment <$>
+                 Deployment' <$>
                    (o .:? "insertTime") <*> (o .:? "operation") <*>
                      (o .:? "fingerprint")
                      <*> (o .:? "name")
@@ -2051,7 +2051,7 @@ instance FromJSON Deployment where
                      <*> (o .:? "target"))
 
 instance ToJSON Deployment where
-        toJSON Deployment{..}
+        toJSON Deployment'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _dInsertTime,

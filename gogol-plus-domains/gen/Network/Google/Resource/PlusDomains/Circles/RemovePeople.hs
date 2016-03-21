@@ -56,7 +56,7 @@ type CirclesRemovePeopleResource =
 -- | Remove a person from a circle.
 --
 -- /See:/ 'circlesRemovePeople' smart constructor.
-data CirclesRemovePeople = CirclesRemovePeople
+data CirclesRemovePeople = CirclesRemovePeople'
     { _crpEmail    :: !(Maybe [Text])
     , _crpUserId   :: !(Maybe [Text])
     , _crpCircleId :: !Text
@@ -75,7 +75,7 @@ circlesRemovePeople
     :: Text -- ^ 'crpCircleId'
     -> CirclesRemovePeople
 circlesRemovePeople pCrpCircleId_ =
-    CirclesRemovePeople
+    CirclesRemovePeople'
     { _crpEmail = Nothing
     , _crpUserId = Nothing
     , _crpCircleId = pCrpCircleId_
@@ -105,7 +105,7 @@ instance GoogleRequest CirclesRemovePeople where
         type Scopes CirclesRemovePeople =
              '["https://www.googleapis.com/auth/plus.circles.write",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient CirclesRemovePeople{..}
+        requestClient CirclesRemovePeople'{..}
           = go _crpCircleId (_crpEmail ^. _Default)
               (_crpUserId ^. _Default)
               (Just AltJSON)

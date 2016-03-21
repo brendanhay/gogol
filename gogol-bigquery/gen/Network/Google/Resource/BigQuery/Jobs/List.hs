@@ -70,7 +70,7 @@ type JobsListResource =
 -- set the allUsers property.
 --
 -- /See:/ 'jobsList' smart constructor.
-data JobsList = JobsList
+data JobsList = JobsList'
     { _jlStateFilter :: !(Maybe [JobsListStateFilter])
     , _jlProjection  :: !(Maybe JobsListProjection)
     , _jlPageToken   :: !(Maybe Text)
@@ -98,7 +98,7 @@ jobsList
     :: Text -- ^ 'jlProjectId'
     -> JobsList
 jobsList pJlProjectId_ =
-    JobsList
+    JobsList'
     { _jlStateFilter = Nothing
     , _jlProjection = Nothing
     , _jlPageToken = Nothing
@@ -148,7 +148,7 @@ instance GoogleRequest JobsList where
              '["https://www.googleapis.com/auth/bigquery",
                "https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud-platform.read-only"]
-        requestClient JobsList{..}
+        requestClient JobsList'{..}
           = go _jlProjectId (_jlStateFilter ^. _Default)
               _jlProjection
               _jlPageToken

@@ -54,7 +54,7 @@ type ColumnDeleteResource =
 -- | Deletes the specified column.
 --
 -- /See:/ 'columnDelete' smart constructor.
-data ColumnDelete = ColumnDelete
+data ColumnDelete = ColumnDelete'
     { _cdTableId  :: !Text
     , _cdColumnId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ columnDelete
     -> Text -- ^ 'cdColumnId'
     -> ColumnDelete
 columnDelete pCdTableId_ pCdColumnId_ =
-    ColumnDelete
+    ColumnDelete'
     { _cdTableId = pCdTableId_
     , _cdColumnId = pCdColumnId_
     }
@@ -90,7 +90,7 @@ instance GoogleRequest ColumnDelete where
         type Rs ColumnDelete = ()
         type Scopes ColumnDelete =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient ColumnDelete{..}
+        requestClient ColumnDelete'{..}
           = go _cdTableId _cdColumnId (Just AltJSON)
               fusionTablesService
           where go

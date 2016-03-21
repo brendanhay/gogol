@@ -65,7 +65,7 @@ type RastersFilesInsertResource =
 -- | Upload a file to a raster asset.
 --
 -- /See:/ 'rastersFilesInsert' smart constructor.
-data RastersFilesInsert = RastersFilesInsert
+data RastersFilesInsert = RastersFilesInsert'
     { _rfiId       :: !Text
     , _rfiFilename :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -82,7 +82,7 @@ rastersFilesInsert
     -> Text -- ^ 'rfiFilename'
     -> RastersFilesInsert
 rastersFilesInsert pRfiId_ pRfiFilename_ =
-    RastersFilesInsert
+    RastersFilesInsert'
     { _rfiId = pRfiId_
     , _rfiFilename = pRfiFilename_
     }
@@ -100,7 +100,7 @@ instance GoogleRequest RastersFilesInsert where
         type Rs RastersFilesInsert = ()
         type Scopes RastersFilesInsert =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient RastersFilesInsert{..}
+        requestClient RastersFilesInsert'{..}
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -114,7 +114,7 @@ instance GoogleRequest
         type Scopes (MediaUpload RastersFilesInsert) =
              Scopes RastersFilesInsert
         requestClient
-          (MediaUpload RastersFilesInsert{..} body)
+          (MediaUpload RastersFilesInsert'{..} body)
           = go _rfiId (Just _rfiFilename) (Just AltJSON)
               (Just AltMedia)
               body

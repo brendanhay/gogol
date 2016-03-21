@@ -52,7 +52,7 @@ type SeriesGetResource =
 -- | Returns Series metadata for the given series ids.
 --
 -- /See:/ 'seriesGet' smart constructor.
-newtype SeriesGet = SeriesGet
+newtype SeriesGet = SeriesGet'
     { _sgSeriesId :: [Text]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ seriesGet
     :: [Text] -- ^ 'sgSeriesId'
     -> SeriesGet
 seriesGet pSgSeriesId_ =
-    SeriesGet
+    SeriesGet'
     { _sgSeriesId = _Coerce # pSgSeriesId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest SeriesGet where
         type Rs SeriesGet = Series
         type Scopes SeriesGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient SeriesGet{..}
+        requestClient SeriesGet'{..}
           = go _sgSeriesId (Just AltJSON) booksService
           where go
                   = buildClient (Proxy :: Proxy SeriesGetResource)

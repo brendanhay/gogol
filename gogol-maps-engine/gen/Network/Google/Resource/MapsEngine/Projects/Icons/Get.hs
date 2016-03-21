@@ -63,7 +63,7 @@ type ProjectsIconsGetResource =
 -- | Return an icon or its associated metadata
 --
 -- /See:/ 'projectsIconsGet' smart constructor.
-data ProjectsIconsGet = ProjectsIconsGet
+data ProjectsIconsGet = ProjectsIconsGet'
     { _pigId        :: !Text
     , _pigProjectId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -80,7 +80,7 @@ projectsIconsGet
     -> Text -- ^ 'pigProjectId'
     -> ProjectsIconsGet
 projectsIconsGet pPigId_ pPigProjectId_ =
-    ProjectsIconsGet
+    ProjectsIconsGet'
     { _pigId = pPigId_
     , _pigProjectId = pPigProjectId_
     }
@@ -99,7 +99,7 @@ instance GoogleRequest ProjectsIconsGet where
         type Scopes ProjectsIconsGet =
              '["https://www.googleapis.com/auth/mapsengine",
                "https://www.googleapis.com/auth/mapsengine.readonly"]
-        requestClient ProjectsIconsGet{..}
+        requestClient ProjectsIconsGet'{..}
           = go _pigProjectId _pigId (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -112,7 +112,7 @@ instance GoogleRequest
         type Rs (MediaDownload ProjectsIconsGet) = Stream
         type Scopes (MediaDownload ProjectsIconsGet) =
              Scopes ProjectsIconsGet
-        requestClient (MediaDownload ProjectsIconsGet{..})
+        requestClient (MediaDownload ProjectsIconsGet'{..})
           = go _pigProjectId _pigId (Just AltMedia)
               mapsEngineService
           where _ :<|> go

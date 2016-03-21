@@ -52,7 +52,7 @@ type LiveChatModeratorsDeleteResource =
 -- | Removes a chat moderator.
 --
 -- /See:/ 'liveChatModeratorsDelete' smart constructor.
-newtype LiveChatModeratorsDelete = LiveChatModeratorsDelete
+newtype LiveChatModeratorsDelete = LiveChatModeratorsDelete'
     { _lcmdId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ liveChatModeratorsDelete
     :: Text -- ^ 'lcmdId'
     -> LiveChatModeratorsDelete
 liveChatModeratorsDelete pLcmdId_ =
-    LiveChatModeratorsDelete
+    LiveChatModeratorsDelete'
     { _lcmdId = pLcmdId_
     }
 
@@ -79,7 +79,7 @@ instance GoogleRequest LiveChatModeratorsDelete where
         type Scopes LiveChatModeratorsDelete =
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl"]
-        requestClient LiveChatModeratorsDelete{..}
+        requestClient LiveChatModeratorsDelete'{..}
           = go (Just _lcmdId) (Just AltJSON) youTubeService
           where go
                   = buildClient

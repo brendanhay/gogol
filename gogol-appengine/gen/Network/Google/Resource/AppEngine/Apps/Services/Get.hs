@@ -67,7 +67,7 @@ type AppsServicesGetResource =
 -- | Gets the current configuration of the service.
 --
 -- /See:/ 'appsServicesGet' smart constructor.
-data AppsServicesGet = AppsServicesGet
+data AppsServicesGet = AppsServicesGet'
     { _asgXgafv          :: !(Maybe Text)
     , _asgUploadProtocol :: !(Maybe Text)
     , _asgPp             :: !Bool
@@ -105,7 +105,7 @@ appsServicesGet
     -> Text -- ^ 'asgServicesId'
     -> AppsServicesGet
 appsServicesGet pAsgAppsId_ pAsgServicesId_ =
-    AppsServicesGet
+    AppsServicesGet'
     { _asgXgafv = Nothing
     , _asgUploadProtocol = Nothing
     , _asgPp = True
@@ -170,7 +170,7 @@ instance GoogleRequest AppsServicesGet where
         type Rs AppsServicesGet = Service
         type Scopes AppsServicesGet =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient AppsServicesGet{..}
+        requestClient AppsServicesGet'{..}
           = go _asgAppsId _asgServicesId _asgXgafv
               _asgUploadProtocol
               (Just _asgPp)

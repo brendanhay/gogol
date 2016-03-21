@@ -75,7 +75,7 @@ type ProjectsZonesClustersDeleteResource =
 -- are also deleted.
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
-data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete
+data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
     { _pzcdXgafv          :: !(Maybe Text)
     , _pzcdUploadProtocol :: !(Maybe Text)
     , _pzcdPp             :: !Bool
@@ -117,7 +117,7 @@ projectsZonesClustersDelete
     -> Text -- ^ 'pzcdProjectId'
     -> ProjectsZonesClustersDelete
 projectsZonesClustersDelete pPzcdZone_ pPzcdClusterId_ pPzcdProjectId_ =
-    ProjectsZonesClustersDelete
+    ProjectsZonesClustersDelete'
     { _pzcdXgafv = Nothing
     , _pzcdUploadProtocol = Nothing
     , _pzcdPp = True
@@ -191,7 +191,7 @@ instance GoogleRequest ProjectsZonesClustersDelete
         type Rs ProjectsZonesClustersDelete = Operation
         type Scopes ProjectsZonesClustersDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsZonesClustersDelete{..}
+        requestClient ProjectsZonesClustersDelete'{..}
           = go _pzcdProjectId _pzcdZone _pzcdClusterId
               _pzcdXgafv
               _pzcdUploadProtocol

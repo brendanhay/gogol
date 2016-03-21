@@ -63,7 +63,7 @@ type ManagementCustomMetricsPatchResource =
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
 -- /See:/ 'managementCustomMetricsPatch' smart constructor.
-data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch
+data ManagementCustomMetricsPatch = ManagementCustomMetricsPatch'
     { _mcmpCustomMetricId              :: !Text
     , _mcmpWebPropertyId               :: !Text
     , _mcmpIgnoreCustomDataSourceLinks :: !Bool
@@ -91,7 +91,7 @@ managementCustomMetricsPatch
     -> Text -- ^ 'mcmpAccountId'
     -> ManagementCustomMetricsPatch
 managementCustomMetricsPatch pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpPayload_ pMcmpAccountId_ =
-    ManagementCustomMetricsPatch
+    ManagementCustomMetricsPatch'
     { _mcmpCustomMetricId = pMcmpCustomMetricId_
     , _mcmpWebPropertyId = pMcmpWebPropertyId_
     , _mcmpIgnoreCustomDataSourceLinks = False
@@ -134,7 +134,7 @@ instance GoogleRequest ManagementCustomMetricsPatch
         type Rs ManagementCustomMetricsPatch = CustomMetric
         type Scopes ManagementCustomMetricsPatch =
              '["https://www.googleapis.com/auth/analytics.edit"]
-        requestClient ManagementCustomMetricsPatch{..}
+        requestClient ManagementCustomMetricsPatch'{..}
           = go _mcmpAccountId _mcmpWebPropertyId
               _mcmpCustomMetricId
               (Just _mcmpIgnoreCustomDataSourceLinks)

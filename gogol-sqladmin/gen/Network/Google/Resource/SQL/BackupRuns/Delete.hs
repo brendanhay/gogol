@@ -57,7 +57,7 @@ type BackupRunsDeleteResource =
 -- | Deletes the backup taken by a backup run.
 --
 -- /See:/ 'backupRunsDelete' smart constructor.
-data BackupRunsDelete = BackupRunsDelete
+data BackupRunsDelete = BackupRunsDelete'
     { _brdProject  :: !Text
     , _brdId       :: !(Textual Int64)
     , _brdInstance :: !Text
@@ -78,7 +78,7 @@ backupRunsDelete
     -> Text -- ^ 'brdInstance'
     -> BackupRunsDelete
 backupRunsDelete pBrdProject_ pBrdId_ pBrdInstance_ =
-    BackupRunsDelete
+    BackupRunsDelete'
     { _brdProject = pBrdProject_
     , _brdId = _Coerce # pBrdId_
     , _brdInstance = pBrdInstance_
@@ -105,7 +105,7 @@ instance GoogleRequest BackupRunsDelete where
         type Scopes BackupRunsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/sqlservice.admin"]
-        requestClient BackupRunsDelete{..}
+        requestClient BackupRunsDelete'{..}
           = go _brdProject _brdInstance _brdId (Just AltJSON)
               sQLAdminService
           where go

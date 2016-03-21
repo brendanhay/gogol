@@ -52,7 +52,7 @@ type ReportsGenerateResource =
 -- | Generates and returns a report immediately.
 --
 -- /See:/ 'reportsGenerate' smart constructor.
-newtype ReportsGenerate = ReportsGenerate
+newtype ReportsGenerate = ReportsGenerate'
     { _rgPayload :: ReportRequest
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -65,7 +65,7 @@ reportsGenerate
     :: ReportRequest -- ^ 'rgPayload'
     -> ReportsGenerate
 reportsGenerate pRgPayload_ =
-    ReportsGenerate
+    ReportsGenerate'
     { _rgPayload = pRgPayload_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest ReportsGenerate where
         type Rs ReportsGenerate = Report
         type Scopes ReportsGenerate =
              '["https://www.googleapis.com/auth/doubleclicksearch"]
-        requestClient ReportsGenerate{..}
+        requestClient ReportsGenerate'{..}
           = go (Just AltJSON) _rgPayload
               doubleClickSearchService
           where go

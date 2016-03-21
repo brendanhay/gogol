@@ -67,7 +67,7 @@ type UsersDataSourcesPatchResource =
 -- semantics.
 --
 -- /See:/ 'usersDataSourcesPatch' smart constructor.
-data UsersDataSourcesPatch = UsersDataSourcesPatch
+data UsersDataSourcesPatch = UsersDataSourcesPatch'
     { _udspDataSourceId :: !Text
     , _udspPayload      :: !DataSource
     , _udspUserId       :: !Text
@@ -88,7 +88,7 @@ usersDataSourcesPatch
     -> Text -- ^ 'udspUserId'
     -> UsersDataSourcesPatch
 usersDataSourcesPatch pUdspDataSourceId_ pUdspPayload_ pUdspUserId_ =
-    UsersDataSourcesPatch
+    UsersDataSourcesPatch'
     { _udspDataSourceId = pUdspDataSourceId_
     , _udspPayload = pUdspPayload_
     , _udspUserId = pUdspUserId_
@@ -117,7 +117,7 @@ instance GoogleRequest UsersDataSourcesPatch where
              '["https://www.googleapis.com/auth/fitness.activity.write",
                "https://www.googleapis.com/auth/fitness.body.write",
                "https://www.googleapis.com/auth/fitness.location.write"]
-        requestClient UsersDataSourcesPatch{..}
+        requestClient UsersDataSourcesPatch'{..}
           = go _udspUserId _udspDataSourceId (Just AltJSON)
               _udspPayload
               fitnessService

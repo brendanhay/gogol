@@ -56,7 +56,7 @@ type ChannelSectionsUpdateResource =
 -- | Update a channelSection.
 --
 -- /See:/ 'channelSectionsUpdate' smart constructor.
-data ChannelSectionsUpdate = ChannelSectionsUpdate
+data ChannelSectionsUpdate = ChannelSectionsUpdate'
     { _csuPart                   :: !Text
     , _csuPayload                :: !ChannelSection
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
@@ -76,7 +76,7 @@ channelSectionsUpdate
     -> ChannelSection -- ^ 'csuPayload'
     -> ChannelSectionsUpdate
 channelSectionsUpdate pCsuPart_ pCsuPayload_ =
-    ChannelSectionsUpdate
+    ChannelSectionsUpdate'
     { _csuPart = pCsuPart_
     , _csuPayload = pCsuPayload_
     , _csuOnBehalfOfContentOwner = Nothing
@@ -115,7 +115,7 @@ instance GoogleRequest ChannelSectionsUpdate where
              '["https://www.googleapis.com/auth/youtube",
                "https://www.googleapis.com/auth/youtube.force-ssl",
                "https://www.googleapis.com/auth/youtubepartner"]
-        requestClient ChannelSectionsUpdate{..}
+        requestClient ChannelSectionsUpdate'{..}
           = go (Just _csuPart) _csuOnBehalfOfContentOwner
               (Just AltJSON)
               _csuPayload

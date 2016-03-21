@@ -56,7 +56,7 @@ type ZonesGetResource =
 -- making a list() request.
 --
 -- /See:/ 'zonesGet' smart constructor.
-data ZonesGet = ZonesGet
+data ZonesGet = ZonesGet'
     { _zgProject :: !Text
     , _zgZone    :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -73,7 +73,7 @@ zonesGet
     -> Text -- ^ 'zgZone'
     -> ZonesGet
 zonesGet pZgProject_ pZgZone_ =
-    ZonesGet
+    ZonesGet'
     { _zgProject = pZgProject_
     , _zgZone = pZgZone_
     }
@@ -93,7 +93,7 @@ instance GoogleRequest ZonesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient ZonesGet{..}
+        requestClient ZonesGet'{..}
           = go _zgProject _zgZone (Just AltJSON) computeService
           where go
                   = buildClient (Proxy :: Proxy ZonesGetResource)

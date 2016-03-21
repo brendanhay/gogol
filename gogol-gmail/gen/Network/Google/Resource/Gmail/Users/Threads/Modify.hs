@@ -60,7 +60,7 @@ type UsersThreadsModifyResource =
 -- in the thread.
 --
 -- /See:/ 'usersThreadsModify' smart constructor.
-data UsersThreadsModify = UsersThreadsModify
+data UsersThreadsModify = UsersThreadsModify'
     { _utmPayload :: !ModifyThreadRequest
     , _utmUserId  :: !Text
     , _utmId      :: !Text
@@ -80,7 +80,7 @@ usersThreadsModify
     -> Text -- ^ 'utmId'
     -> UsersThreadsModify
 usersThreadsModify pUtmPayload_ pUtmId_ =
-    UsersThreadsModify
+    UsersThreadsModify'
     { _utmPayload = pUtmPayload_
     , _utmUserId = "me"
     , _utmId = pUtmId_
@@ -106,7 +106,7 @@ instance GoogleRequest UsersThreadsModify where
         type Scopes UsersThreadsModify =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersThreadsModify{..}
+        requestClient UsersThreadsModify'{..}
           = go _utmUserId _utmId (Just AltJSON) _utmPayload
               gmailService
           where go

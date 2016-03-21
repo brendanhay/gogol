@@ -61,7 +61,7 @@ type ZoneViewsSetServiceResource =
 -- | Update the service information of a resource view or a resource.
 --
 -- /See:/ 'zoneViewsSetService' smart constructor.
-data ZoneViewsSetService = ZoneViewsSetService
+data ZoneViewsSetService = ZoneViewsSetService'
     { _zvssResourceView :: !Text
     , _zvssProject      :: !Text
     , _zvssZone         :: !Text
@@ -86,7 +86,7 @@ zoneViewsSetService
     -> ZoneViewsSetServiceRequest -- ^ 'zvssPayload'
     -> ZoneViewsSetService
 zoneViewsSetService pZvssResourceView_ pZvssProject_ pZvssZone_ pZvssPayload_ =
-    ZoneViewsSetService
+    ZoneViewsSetService'
     { _zvssResourceView = pZvssResourceView_
     , _zvssProject = pZvssProject_
     , _zvssZone = pZvssZone_
@@ -119,7 +119,7 @@ instance GoogleRequest ZoneViewsSetService where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/ndev.cloudman"]
-        requestClient ZoneViewsSetService{..}
+        requestClient ZoneViewsSetService'{..}
           = go _zvssProject _zvssZone _zvssResourceView
               (Just AltJSON)
               _zvssPayload

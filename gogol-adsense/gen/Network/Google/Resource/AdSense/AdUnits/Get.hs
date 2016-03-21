@@ -54,7 +54,7 @@ type AdUnitsGetResource =
 -- | Gets the specified ad unit in the specified ad client.
 --
 -- /See:/ 'adUnitsGet' smart constructor.
-data AdUnitsGet = AdUnitsGet
+data AdUnitsGet = AdUnitsGet'
     { _augAdUnitId   :: !Text
     , _augAdClientId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ adUnitsGet
     -> Text -- ^ 'augAdClientId'
     -> AdUnitsGet
 adUnitsGet pAugAdUnitId_ pAugAdClientId_ =
-    AdUnitsGet
+    AdUnitsGet'
     { _augAdUnitId = pAugAdUnitId_
     , _augAdClientId = pAugAdClientId_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest AdUnitsGet where
         type Scopes AdUnitsGet =
              '["https://www.googleapis.com/auth/adsense",
                "https://www.googleapis.com/auth/adsense.readonly"]
-        requestClient AdUnitsGet{..}
+        requestClient AdUnitsGet'{..}
           = go _augAdClientId _augAdUnitId (Just AltJSON)
               adSenseService
           where go

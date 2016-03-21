@@ -58,7 +58,7 @@ type CommentsListResource =
 -- | List all of the comments for an activity.
 --
 -- /See:/ 'commentsList' smart constructor.
-data CommentsList = CommentsList
+data CommentsList = CommentsList'
     { _clActivityId :: !Text
     , _clSortOrder  :: !CommentsListSortOrder
     , _clPageToken  :: !(Maybe Text)
@@ -80,7 +80,7 @@ commentsList
     :: Text -- ^ 'clActivityId'
     -> CommentsList
 commentsList pClActivityId_ =
-    CommentsList
+    CommentsList'
     { _clActivityId = pClActivityId_
     , _clSortOrder = Ascending
     , _clPageToken = Nothing
@@ -117,7 +117,7 @@ instance GoogleRequest CommentsList where
         type Scopes CommentsList =
              '["https://www.googleapis.com/auth/plus.login",
                "https://www.googleapis.com/auth/plus.me"]
-        requestClient CommentsList{..}
+        requestClient CommentsList'{..}
           = go _clActivityId (Just _clSortOrder) _clPageToken
               (Just _clMaxResults)
               (Just AltJSON)

@@ -59,7 +59,7 @@ type SubnetworksGetResource =
 -- making a list() request.
 --
 -- /See:/ 'subnetworksGet' smart constructor.
-data SubnetworksGet = SubnetworksGet
+data SubnetworksGet = SubnetworksGet'
     { _sgProject    :: !Text
     , _sgSubnetwork :: !Text
     , _sgRegion     :: !Text
@@ -80,7 +80,7 @@ subnetworksGet
     -> Text -- ^ 'sgRegion'
     -> SubnetworksGet
 subnetworksGet pSgProject_ pSgSubnetwork_ pSgRegion_ =
-    SubnetworksGet
+    SubnetworksGet'
     { _sgProject = pSgProject_
     , _sgSubnetwork = pSgSubnetwork_
     , _sgRegion = pSgRegion_
@@ -106,7 +106,7 @@ instance GoogleRequest SubnetworksGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient SubnetworksGet{..}
+        requestClient SubnetworksGet'{..}
           = go _sgProject _sgRegion _sgSubnetwork
               (Just AltJSON)
               computeService

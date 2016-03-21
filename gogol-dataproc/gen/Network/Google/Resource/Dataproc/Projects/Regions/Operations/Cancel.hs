@@ -75,7 +75,7 @@ type ProjectsRegionsOperationsCancelResource =
 -- cancellation.
 --
 -- /See:/ 'projectsRegionsOperationsCancel' smart constructor.
-data ProjectsRegionsOperationsCancel = ProjectsRegionsOperationsCancel
+data ProjectsRegionsOperationsCancel = ProjectsRegionsOperationsCancel'
     { _procXgafv          :: !(Maybe Text)
     , _procUploadProtocol :: !(Maybe Text)
     , _procPp             :: !Bool
@@ -109,7 +109,7 @@ projectsRegionsOperationsCancel
     :: Text -- ^ 'procName'
     -> ProjectsRegionsOperationsCancel
 projectsRegionsOperationsCancel pProcName_ =
-    ProjectsRegionsOperationsCancel
+    ProjectsRegionsOperationsCancel'
     { _procXgafv = Nothing
     , _procUploadProtocol = Nothing
     , _procPp = True
@@ -167,7 +167,7 @@ instance GoogleRequest
         type Rs ProjectsRegionsOperationsCancel = Empty
         type Scopes ProjectsRegionsOperationsCancel =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient ProjectsRegionsOperationsCancel{..}
+        requestClient ProjectsRegionsOperationsCancel'{..}
           = go _procName _procXgafv _procUploadProtocol
               (Just _procPp)
               _procAccessToken

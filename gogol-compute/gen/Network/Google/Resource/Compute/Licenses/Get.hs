@@ -57,7 +57,7 @@ type LicensesGetResource =
 -- by making a list() request.
 --
 -- /See:/ 'licensesGet' smart constructor.
-data LicensesGet = LicensesGet
+data LicensesGet = LicensesGet'
     { _lgProject :: !Text
     , _lgLicense :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -74,7 +74,7 @@ licensesGet
     -> Text -- ^ 'lgLicense'
     -> LicensesGet
 licensesGet pLgProject_ pLgLicense_ =
-    LicensesGet
+    LicensesGet'
     { _lgProject = pLgProject_
     , _lgLicense = pLgLicense_
     }
@@ -95,7 +95,7 @@ instance GoogleRequest LicensesGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient LicensesGet{..}
+        requestClient LicensesGet'{..}
           = go _lgProject _lgLicense (Just AltJSON)
               computeService
           where go

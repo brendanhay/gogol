@@ -59,7 +59,7 @@ type PersonalizedstreamGetResource =
 -- | Returns a stream of personalized book clusters
 --
 -- /See:/ 'personalizedstreamGet' smart constructor.
-data PersonalizedstreamGet = PersonalizedstreamGet
+data PersonalizedstreamGet = PersonalizedstreamGet'
     { _pgLocale                   :: !(Maybe Text)
     , _pgMaxAllowedMaturityRating :: !(Maybe PersonalizedstreamGetMaxAllowedMaturityRating)
     , _pgSource                   :: !(Maybe Text)
@@ -77,7 +77,7 @@ data PersonalizedstreamGet = PersonalizedstreamGet
 personalizedstreamGet
     :: PersonalizedstreamGet
 personalizedstreamGet =
-    PersonalizedstreamGet
+    PersonalizedstreamGet'
     { _pgLocale = Nothing
     , _pgMaxAllowedMaturityRating = Nothing
     , _pgSource = Nothing
@@ -103,7 +103,7 @@ instance GoogleRequest PersonalizedstreamGet where
         type Rs PersonalizedstreamGet = Discoveryclusters
         type Scopes PersonalizedstreamGet =
              '["https://www.googleapis.com/auth/books"]
-        requestClient PersonalizedstreamGet{..}
+        requestClient PersonalizedstreamGet'{..}
           = go _pgLocale _pgMaxAllowedMaturityRating _pgSource
               (Just AltJSON)
               booksService

@@ -28,17 +28,17 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'empty' smart constructor.
 data Empty =
-    Empty
+    Empty'
     deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Empty' with the minimum fields required to make a request.
 --
 empty
     :: Empty
-empty = Empty
+empty = Empty'
 
 instance FromJSON Empty where
-        parseJSON = withObject "Empty" (\ o -> pure Empty)
+        parseJSON = withObject "Empty" (\ o -> pure Empty')
 
 instance ToJSON Empty where
         toJSON = const emptyObject
@@ -46,7 +46,7 @@ instance ToJSON Empty where
 -- | Collection of labels associated with the span.
 --
 -- /See:/ 'traceSpanLabels' smart constructor.
-newtype TraceSpanLabels = TraceSpanLabels
+newtype TraceSpanLabels = TraceSpanLabels'
     { _tslAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -59,7 +59,7 @@ traceSpanLabels
     :: HashMap Text Text -- ^ 'tslAddtional'
     -> TraceSpanLabels
 traceSpanLabels pTslAddtional_ =
-    TraceSpanLabels
+    TraceSpanLabels'
     { _tslAddtional = _Coerce # pTslAddtional_
     }
 
@@ -71,7 +71,7 @@ tslAddtional
 instance FromJSON TraceSpanLabels where
         parseJSON
           = withObject "TraceSpanLabels"
-              (\ o -> TraceSpanLabels <$> (parseJSONObject o))
+              (\ o -> TraceSpanLabels' <$> (parseJSONObject o))
 
 instance ToJSON TraceSpanLabels where
         toJSON = toJSON . _tslAddtional
@@ -79,7 +79,7 @@ instance ToJSON TraceSpanLabels where
 -- | List of new or updated traces.
 --
 -- /See:/ 'traces' smart constructor.
-newtype Traces = Traces
+newtype Traces = Traces'
     { _tTraces :: Maybe [Trace]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -91,7 +91,7 @@ newtype Traces = Traces
 traces
     :: Traces
 traces =
-    Traces
+    Traces'
     { _tTraces = Nothing
     }
 
@@ -104,10 +104,10 @@ tTraces
 instance FromJSON Traces where
         parseJSON
           = withObject "Traces"
-              (\ o -> Traces <$> (o .:? "traces" .!= mempty))
+              (\ o -> Traces' <$> (o .:? "traces" .!= mempty))
 
 instance ToJSON Traces where
-        toJSON Traces{..}
+        toJSON Traces'{..}
           = object (catMaybes [("traces" .=) <$> _tTraces])
 
 -- | A span represents a single timed event within a trace. Spans can be
@@ -117,7 +117,7 @@ instance ToJSON Traces where
 -- There may be gaps between spans in a trace.
 --
 -- /See:/ 'traceSpan' smart constructor.
-data TraceSpan = TraceSpan
+data TraceSpan = TraceSpan'
     { _tsStartTime    :: !(Maybe Text)
     , _tsKind         :: !(Maybe Text)
     , _tsName         :: !(Maybe Text)
@@ -147,7 +147,7 @@ data TraceSpan = TraceSpan
 traceSpan
     :: TraceSpan
 traceSpan =
-    TraceSpan
+    TraceSpan'
     { _tsStartTime = Nothing
     , _tsKind = Nothing
     , _tsName = Nothing
@@ -203,7 +203,7 @@ instance FromJSON TraceSpan where
         parseJSON
           = withObject "TraceSpan"
               (\ o ->
-                 TraceSpan <$>
+                 TraceSpan' <$>
                    (o .:? "startTime") <*> (o .:? "kind") <*>
                      (o .:? "name")
                      <*> (o .:? "endTime")
@@ -212,7 +212,7 @@ instance FromJSON TraceSpan where
                      <*> (o .:? "spanId"))
 
 instance ToJSON TraceSpan where
-        toJSON TraceSpan{..}
+        toJSON TraceSpan'{..}
           = object
               (catMaybes
                  [("startTime" .=) <$> _tsStartTime,
@@ -225,7 +225,7 @@ instance ToJSON TraceSpan where
 -- | The response message for the \`ListTraces\` method.
 --
 -- /See:/ 'listTracesResponse' smart constructor.
-data ListTracesResponse = ListTracesResponse
+data ListTracesResponse = ListTracesResponse'
     { _ltrNextPageToken :: !(Maybe Text)
     , _ltrTraces        :: !(Maybe [Trace])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -240,7 +240,7 @@ data ListTracesResponse = ListTracesResponse
 listTracesResponse
     :: ListTracesResponse
 listTracesResponse =
-    ListTracesResponse
+    ListTracesResponse'
     { _ltrNextPageToken = Nothing
     , _ltrTraces = Nothing
     }
@@ -264,12 +264,12 @@ instance FromJSON ListTracesResponse where
         parseJSON
           = withObject "ListTracesResponse"
               (\ o ->
-                 ListTracesResponse <$>
+                 ListTracesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "traces" .!= mempty))
 
 instance ToJSON ListTracesResponse where
-        toJSON ListTracesResponse{..}
+        toJSON ListTracesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _ltrNextPageToken,
@@ -280,7 +280,7 @@ instance ToJSON ListTracesResponse where
 -- single timed event within the operation.
 --
 -- /See:/ 'trace' smart constructor.
-data Trace = Trace
+data Trace = Trace'
     { _tTraceId   :: !(Maybe Text)
     , _tSpans     :: !(Maybe [TraceSpan])
     , _tProjectId :: !(Maybe Text)
@@ -298,7 +298,7 @@ data Trace = Trace
 trace
     :: Trace
 trace =
-    Trace
+    Trace'
     { _tTraceId = Nothing
     , _tSpans = Nothing
     , _tProjectId = Nothing
@@ -324,12 +324,12 @@ instance FromJSON Trace where
         parseJSON
           = withObject "Trace"
               (\ o ->
-                 Trace <$>
+                 Trace' <$>
                    (o .:? "traceId") <*> (o .:? "spans" .!= mempty) <*>
                      (o .:? "projectId"))
 
 instance ToJSON Trace where
-        toJSON Trace{..}
+        toJSON Trace'{..}
           = object
               (catMaybes
                  [("traceId" .=) <$> _tTraceId,

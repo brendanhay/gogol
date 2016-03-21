@@ -63,7 +63,7 @@ type PostUserInfosGetResource =
 -- rights, specific to the user.
 --
 -- /See:/ 'postUserInfosGet' smart constructor.
-data PostUserInfosGet = PostUserInfosGet
+data PostUserInfosGet = PostUserInfosGet'
     { _puigBlogId      :: !Text
     , _puigMaxComments :: !(Maybe (Textual Word32))
     , _puigUserId      :: !Text
@@ -87,7 +87,7 @@ postUserInfosGet
     -> Text -- ^ 'puigPostId'
     -> PostUserInfosGet
 postUserInfosGet pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
-    PostUserInfosGet
+    PostUserInfosGet'
     { _puigBlogId = pPuigBlogId_
     , _puigMaxComments = Nothing
     , _puigUserId = pPuigUserId_
@@ -122,7 +122,7 @@ instance GoogleRequest PostUserInfosGet where
         type Scopes PostUserInfosGet =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient PostUserInfosGet{..}
+        requestClient PostUserInfosGet'{..}
           = go _puigUserId _puigBlogId _puigPostId
               _puigMaxComments
               (Just AltJSON)

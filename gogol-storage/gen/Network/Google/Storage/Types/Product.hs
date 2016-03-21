@@ -23,7 +23,7 @@ import           Network.Google.Storage.Types.Sum
 -- | The owner of the object. This will always be the uploader of the object.
 --
 -- /See:/ 'objectOwner' smart constructor.
-data ObjectOwner = ObjectOwner
+data ObjectOwner = ObjectOwner'
     { _ooEntity   :: !(Maybe Text)
     , _ooEntityId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -38,7 +38,7 @@ data ObjectOwner = ObjectOwner
 objectOwner
     :: ObjectOwner
 objectOwner =
-    ObjectOwner
+    ObjectOwner'
     { _ooEntity = Nothing
     , _ooEntityId = Nothing
     }
@@ -56,11 +56,11 @@ instance FromJSON ObjectOwner where
         parseJSON
           = withObject "ObjectOwner"
               (\ o ->
-                 ObjectOwner <$>
+                 ObjectOwner' <$>
                    (o .:? "entity") <*> (o .:? "entityId"))
 
 instance ToJSON ObjectOwner where
-        toJSON ObjectOwner{..}
+        toJSON ObjectOwner'{..}
           = object
               (catMaybes
                  [("entity" .=) <$> _ooEntity,
@@ -69,7 +69,7 @@ instance ToJSON ObjectOwner where
 -- | The bucket\'s versioning configuration.
 --
 -- /See:/ 'bucketVersioning' smart constructor.
-newtype BucketVersioning = BucketVersioning
+newtype BucketVersioning = BucketVersioning'
     { _bvEnabled :: Maybe Bool
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -81,7 +81,7 @@ newtype BucketVersioning = BucketVersioning
 bucketVersioning
     :: BucketVersioning
 bucketVersioning =
-    BucketVersioning
+    BucketVersioning'
     { _bvEnabled = Nothing
     }
 
@@ -93,16 +93,16 @@ bvEnabled
 instance FromJSON BucketVersioning where
         parseJSON
           = withObject "BucketVersioning"
-              (\ o -> BucketVersioning <$> (o .:? "enabled"))
+              (\ o -> BucketVersioning' <$> (o .:? "enabled"))
 
 instance ToJSON BucketVersioning where
-        toJSON BucketVersioning{..}
+        toJSON BucketVersioning'{..}
           = object (catMaybes [("enabled" .=) <$> _bvEnabled])
 
 -- | A list of buckets.
 --
 -- /See:/ 'buckets' smart constructor.
-data Buckets = Buckets
+data Buckets = Buckets'
     { _bNextPageToken :: !(Maybe Text)
     , _bKind          :: !Text
     , _bItems         :: !(Maybe [Bucket])
@@ -120,7 +120,7 @@ data Buckets = Buckets
 buckets
     :: Buckets
 buckets =
-    Buckets
+    Buckets'
     { _bNextPageToken = Nothing
     , _bKind = "storage#buckets"
     , _bItems = Nothing
@@ -148,13 +148,13 @@ instance FromJSON Buckets where
         parseJSON
           = withObject "Buckets"
               (\ o ->
-                 Buckets <$>
+                 Buckets' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "storage#buckets")
                      <*> (o .:? "items" .!= mempty))
 
 instance ToJSON Buckets where
-        toJSON Buckets{..}
+        toJSON Buckets'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _bNextPageToken,
@@ -164,7 +164,7 @@ instance ToJSON Buckets where
 -- bucket and optional name prefix for the current bucket\'s logs.
 --
 -- /See:/ 'bucketLogging' smart constructor.
-data BucketLogging = BucketLogging
+data BucketLogging = BucketLogging'
     { _blLogBucket       :: !(Maybe Text)
     , _blLogObjectPrefix :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -179,7 +179,7 @@ data BucketLogging = BucketLogging
 bucketLogging
     :: BucketLogging
 bucketLogging =
-    BucketLogging
+    BucketLogging'
     { _blLogBucket = Nothing
     , _blLogObjectPrefix = Nothing
     }
@@ -200,11 +200,11 @@ instance FromJSON BucketLogging where
         parseJSON
           = withObject "BucketLogging"
               (\ o ->
-                 BucketLogging <$>
+                 BucketLogging' <$>
                    (o .:? "logBucket") <*> (o .:? "logObjectPrefix"))
 
 instance ToJSON BucketLogging where
-        toJSON BucketLogging{..}
+        toJSON BucketLogging'{..}
           = object
               (catMaybes
                  [("logBucket" .=) <$> _blLogBucket,
@@ -213,7 +213,7 @@ instance ToJSON BucketLogging where
 -- | User-provided metadata, in key\/value pairs.
 --
 -- /See:/ 'objectMetadata' smart constructor.
-newtype ObjectMetadata = ObjectMetadata
+newtype ObjectMetadata = ObjectMetadata'
     { _omAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -226,7 +226,7 @@ objectMetadata
     :: HashMap Text Text -- ^ 'omAddtional'
     -> ObjectMetadata
 objectMetadata pOmAddtional_ =
-    ObjectMetadata
+    ObjectMetadata'
     { _omAddtional = _Coerce # pOmAddtional_
     }
 
@@ -239,7 +239,7 @@ omAddtional
 instance FromJSON ObjectMetadata where
         parseJSON
           = withObject "ObjectMetadata"
-              (\ o -> ObjectMetadata <$> (parseJSONObject o))
+              (\ o -> ObjectMetadata' <$> (parseJSONObject o))
 
 instance ToJSON ObjectMetadata where
         toJSON = toJSON . _omAddtional
@@ -247,7 +247,7 @@ instance ToJSON ObjectMetadata where
 -- | The condition(s) under which the action will be taken.
 --
 -- /See:/ 'bucketLifecycleRuleItemCondition' smart constructor.
-data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition
+data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition'
     { _blricAge              :: !(Maybe (Textual Int32))
     , _blricIsLive           :: !(Maybe Bool)
     , _blricNumNewerVersions :: !(Maybe (Textual Int32))
@@ -268,7 +268,7 @@ data BucketLifecycleRuleItemCondition = BucketLifecycleRuleItemCondition
 bucketLifecycleRuleItemCondition
     :: BucketLifecycleRuleItemCondition
 bucketLifecycleRuleItemCondition =
-    BucketLifecycleRuleItemCondition
+    BucketLifecycleRuleItemCondition'
     { _blricAge = Nothing
     , _blricIsLive = Nothing
     , _blricNumNewerVersions = Nothing
@@ -312,14 +312,14 @@ instance FromJSON BucketLifecycleRuleItemCondition
         parseJSON
           = withObject "BucketLifecycleRuleItemCondition"
               (\ o ->
-                 BucketLifecycleRuleItemCondition <$>
+                 BucketLifecycleRuleItemCondition' <$>
                    (o .:? "age") <*> (o .:? "isLive") <*>
                      (o .:? "numNewerVersions")
                      <*> (o .:? "createdBefore"))
 
 instance ToJSON BucketLifecycleRuleItemCondition
          where
-        toJSON BucketLifecycleRuleItemCondition{..}
+        toJSON BucketLifecycleRuleItemCondition'{..}
           = object
               (catMaybes
                  [("age" .=) <$> _blricAge,
@@ -331,7 +331,7 @@ instance ToJSON BucketLifecycleRuleItemCondition
 -- information.
 --
 -- /See:/ 'bucketLifecycle' smart constructor.
-newtype BucketLifecycle = BucketLifecycle
+newtype BucketLifecycle = BucketLifecycle'
     { _blRule :: Maybe [BucketLifecycleRuleItem]
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -343,7 +343,7 @@ newtype BucketLifecycle = BucketLifecycle
 bucketLifecycle
     :: BucketLifecycle
 bucketLifecycle =
-    BucketLifecycle
+    BucketLifecycle'
     { _blRule = Nothing
     }
 
@@ -358,16 +358,16 @@ instance FromJSON BucketLifecycle where
         parseJSON
           = withObject "BucketLifecycle"
               (\ o ->
-                 BucketLifecycle <$> (o .:? "rule" .!= mempty))
+                 BucketLifecycle' <$> (o .:? "rule" .!= mempty))
 
 instance ToJSON BucketLifecycle where
-        toJSON BucketLifecycle{..}
+        toJSON BucketLifecycle'{..}
           = object (catMaybes [("rule" .=) <$> _blRule])
 
 -- | An notification channel used to watch for resource changes.
 --
 -- /See:/ 'channel' smart constructor.
-data Channel = Channel
+data Channel = Channel'
     { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
@@ -406,7 +406,7 @@ data Channel = Channel
 channel
     :: Channel
 channel =
-    Channel
+    Channel'
     { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
@@ -471,7 +471,7 @@ instance FromJSON Channel where
         parseJSON
           = withObject "Channel"
               (\ o ->
-                 Channel <$>
+                 Channel' <$>
                    (o .:? "resourceUri") <*> (o .:? "resourceId") <*>
                      (o .:? "kind" .!= "api#channel")
                      <*> (o .:? "expiration")
@@ -483,7 +483,7 @@ instance FromJSON Channel where
                      <*> (o .:? "type"))
 
 instance ToJSON Channel where
-        toJSON Channel{..}
+        toJSON Channel'{..}
           = object
               (catMaybes
                  [("resourceUri" .=) <$> _cResourceURI,
@@ -498,7 +498,7 @@ instance ToJSON Channel where
 
 --
 -- /See:/ 'bucketLifecycleRuleItem' smart constructor.
-data BucketLifecycleRuleItem = BucketLifecycleRuleItem
+data BucketLifecycleRuleItem = BucketLifecycleRuleItem'
     { _blriAction    :: !(Maybe BucketLifecycleRuleItemAction)
     , _blriCondition :: !(Maybe BucketLifecycleRuleItemCondition)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -513,7 +513,7 @@ data BucketLifecycleRuleItem = BucketLifecycleRuleItem
 bucketLifecycleRuleItem
     :: BucketLifecycleRuleItem
 bucketLifecycleRuleItem =
-    BucketLifecycleRuleItem
+    BucketLifecycleRuleItem'
     { _blriAction = Nothing
     , _blriCondition = Nothing
     }
@@ -533,11 +533,11 @@ instance FromJSON BucketLifecycleRuleItem where
         parseJSON
           = withObject "BucketLifecycleRuleItem"
               (\ o ->
-                 BucketLifecycleRuleItem <$>
+                 BucketLifecycleRuleItem' <$>
                    (o .:? "action") <*> (o .:? "condition"))
 
 instance ToJSON BucketLifecycleRuleItem where
-        toJSON BucketLifecycleRuleItem{..}
+        toJSON BucketLifecycleRuleItem'{..}
           = object
               (catMaybes
                  [("action" .=) <$> _blriAction,
@@ -545,7 +545,7 @@ instance ToJSON BucketLifecycleRuleItem where
 
 --
 -- /See:/ 'bucketCORSItem' smart constructor.
-data BucketCORSItem = BucketCORSItem
+data BucketCORSItem = BucketCORSItem'
     { _bciMaxAgeSeconds  :: !(Maybe (Textual Int32))
     , _bciOrigin         :: !(Maybe [Text])
     , _bciResponseHeader :: !(Maybe [Text])
@@ -566,7 +566,7 @@ data BucketCORSItem = BucketCORSItem
 bucketCORSItem
     :: BucketCORSItem
 bucketCORSItem =
-    BucketCORSItem
+    BucketCORSItem'
     { _bciMaxAgeSeconds = Nothing
     , _bciOrigin = Nothing
     , _bciResponseHeader = Nothing
@@ -611,14 +611,14 @@ instance FromJSON BucketCORSItem where
         parseJSON
           = withObject "BucketCORSItem"
               (\ o ->
-                 BucketCORSItem <$>
+                 BucketCORSItem' <$>
                    (o .:? "maxAgeSeconds") <*>
                      (o .:? "origin" .!= mempty)
                      <*> (o .:? "responseHeader" .!= mempty)
                      <*> (o .:? "method" .!= mempty))
 
 instance ToJSON BucketCORSItem where
-        toJSON BucketCORSItem{..}
+        toJSON BucketCORSItem'{..}
           = object
               (catMaybes
                  [("maxAgeSeconds" .=) <$> _bciMaxAgeSeconds,
@@ -629,7 +629,7 @@ instance ToJSON BucketCORSItem where
 -- | The project team associated with the entity, if any.
 --
 -- /See:/ 'objectAccessControlProjectTeam' smart constructor.
-data ObjectAccessControlProjectTeam = ObjectAccessControlProjectTeam
+data ObjectAccessControlProjectTeam = ObjectAccessControlProjectTeam'
     { _oacptProjectNumber :: !(Maybe Text)
     , _oacptTeam          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -644,7 +644,7 @@ data ObjectAccessControlProjectTeam = ObjectAccessControlProjectTeam
 objectAccessControlProjectTeam
     :: ObjectAccessControlProjectTeam
 objectAccessControlProjectTeam =
-    ObjectAccessControlProjectTeam
+    ObjectAccessControlProjectTeam'
     { _oacptProjectNumber = Nothing
     , _oacptTeam = Nothing
     }
@@ -665,11 +665,11 @@ instance FromJSON ObjectAccessControlProjectTeam
         parseJSON
           = withObject "ObjectAccessControlProjectTeam"
               (\ o ->
-                 ObjectAccessControlProjectTeam <$>
+                 ObjectAccessControlProjectTeam' <$>
                    (o .:? "projectNumber") <*> (o .:? "team"))
 
 instance ToJSON ObjectAccessControlProjectTeam where
-        toJSON ObjectAccessControlProjectTeam{..}
+        toJSON ObjectAccessControlProjectTeam'{..}
           = object
               (catMaybes
                  [("projectNumber" .=) <$> _oacptProjectNumber,
@@ -679,7 +679,7 @@ instance ToJSON ObjectAccessControlProjectTeam where
 -- by such a key.
 --
 -- /See:/ 'objectCustomerEncryption' smart constructor.
-data ObjectCustomerEncryption = ObjectCustomerEncryption
+data ObjectCustomerEncryption = ObjectCustomerEncryption'
     { _oceKeySha256           :: !(Maybe Text)
     , _oceEncryptionAlgorithm :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -694,7 +694,7 @@ data ObjectCustomerEncryption = ObjectCustomerEncryption
 objectCustomerEncryption
     :: ObjectCustomerEncryption
 objectCustomerEncryption =
-    ObjectCustomerEncryption
+    ObjectCustomerEncryption'
     { _oceKeySha256 = Nothing
     , _oceEncryptionAlgorithm = Nothing
     }
@@ -714,12 +714,12 @@ instance FromJSON ObjectCustomerEncryption where
         parseJSON
           = withObject "ObjectCustomerEncryption"
               (\ o ->
-                 ObjectCustomerEncryption <$>
+                 ObjectCustomerEncryption' <$>
                    (o .:? "keySha256") <*>
                      (o .:? "encryptionAlgorithm"))
 
 instance ToJSON ObjectCustomerEncryption where
-        toJSON ObjectCustomerEncryption{..}
+        toJSON ObjectCustomerEncryption'{..}
           = object
               (catMaybes
                  [("keySha256" .=) <$> _oceKeySha256,
@@ -729,7 +729,7 @@ instance ToJSON ObjectCustomerEncryption where
 -- | A bucket.
 --
 -- /See:/ 'bucket' smart constructor.
-data Bucket = Bucket
+data Bucket = Bucket'
     { _bucEtag             :: !(Maybe Text)
     , _bucLocation         :: !(Maybe Text)
     , _bucKind             :: !Text
@@ -795,7 +795,7 @@ data Bucket = Bucket
 bucket
     :: Bucket
 bucket =
-    Bucket
+    Bucket'
     { _bucEtag = Nothing
     , _bucLocation = Nothing
     , _bucKind = "storage#bucket"
@@ -932,7 +932,7 @@ instance FromJSON Bucket where
         parseJSON
           = withObject "Bucket"
               (\ o ->
-                 Bucket <$>
+                 Bucket' <$>
                    (o .:? "etag") <*> (o .:? "location") <*>
                      (o .:? "kind" .!= "storage#bucket")
                      <*> (o .:? "website")
@@ -953,7 +953,7 @@ instance FromJSON Bucket where
                      <*> (o .:? "acl" .!= mempty))
 
 instance ToJSON Bucket where
-        toJSON Bucket{..}
+        toJSON Bucket'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _bucEtag,
@@ -978,7 +978,7 @@ instance ToJSON Bucket where
 -- | A list of objects.
 --
 -- /See:/ 'objects' smart constructor.
-data Objects = Objects
+data Objects = Objects'
     { _oNextPageToken :: !(Maybe Text)
     , _oKind          :: !Text
     , _oItems         :: !(Maybe [Object])
@@ -999,7 +999,7 @@ data Objects = Objects
 objects
     :: Objects
 objects =
-    Objects
+    Objects'
     { _oNextPageToken = Nothing
     , _oKind = "storage#objects"
     , _oItems = Nothing
@@ -1036,14 +1036,14 @@ instance FromJSON Objects where
         parseJSON
           = withObject "Objects"
               (\ o ->
-                 Objects <$>
+                 Objects' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "storage#objects")
                      <*> (o .:? "items" .!= mempty)
                      <*> (o .:? "prefixes" .!= mempty))
 
 instance ToJSON Objects where
-        toJSON Objects{..}
+        toJSON Objects'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _oNextPageToken,
@@ -1053,7 +1053,7 @@ instance ToJSON Objects where
 -- | An access-control list.
 --
 -- /See:/ 'bucketAccessControls' smart constructor.
-data BucketAccessControls = BucketAccessControls
+data BucketAccessControls = BucketAccessControls'
     { _bacKind  :: !Text
     , _bacItems :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1068,7 +1068,7 @@ data BucketAccessControls = BucketAccessControls
 bucketAccessControls
     :: BucketAccessControls
 bucketAccessControls =
-    BucketAccessControls
+    BucketAccessControls'
     { _bacKind = "storage#bucketAccessControls"
     , _bacItems = Nothing
     }
@@ -1089,12 +1089,12 @@ instance FromJSON BucketAccessControls where
         parseJSON
           = withObject "BucketAccessControls"
               (\ o ->
-                 BucketAccessControls <$>
+                 BucketAccessControls' <$>
                    (o .:? "kind" .!= "storage#bucketAccessControls") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON BucketAccessControls where
-        toJSON BucketAccessControls{..}
+        toJSON BucketAccessControls'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _bacKind),
@@ -1103,7 +1103,7 @@ instance ToJSON BucketAccessControls where
 -- | A Compose request.
 --
 -- /See:/ 'composeRequest' smart constructor.
-data ComposeRequest = ComposeRequest
+data ComposeRequest = ComposeRequest'
     { _crDestination   :: !(Maybe Object)
     , _crKind          :: !Text
     , _crSourceObjects :: !(Maybe [ComposeRequestSourceObjectsItem])
@@ -1121,7 +1121,7 @@ data ComposeRequest = ComposeRequest
 composeRequest
     :: ComposeRequest
 composeRequest =
-    ComposeRequest
+    ComposeRequest'
     { _crDestination = Nothing
     , _crKind = "storage#composeRequest"
     , _crSourceObjects = Nothing
@@ -1150,13 +1150,13 @@ instance FromJSON ComposeRequest where
         parseJSON
           = withObject "ComposeRequest"
               (\ o ->
-                 ComposeRequest <$>
+                 ComposeRequest' <$>
                    (o .:? "destination") <*>
                      (o .:? "kind" .!= "storage#composeRequest")
                      <*> (o .:? "sourceObjects" .!= mempty))
 
 instance ToJSON ComposeRequest where
-        toJSON ComposeRequest{..}
+        toJSON ComposeRequest'{..}
           = object
               (catMaybes
                  [("destination" .=) <$> _crDestination,
@@ -1166,7 +1166,7 @@ instance ToJSON ComposeRequest where
 -- | The owner of the bucket. This is always the project team\'s owner group.
 --
 -- /See:/ 'bucketOwner' smart constructor.
-data BucketOwner = BucketOwner
+data BucketOwner = BucketOwner'
     { _boEntity   :: !(Maybe Text)
     , _boEntityId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1181,7 +1181,7 @@ data BucketOwner = BucketOwner
 bucketOwner
     :: BucketOwner
 bucketOwner =
-    BucketOwner
+    BucketOwner'
     { _boEntity = Nothing
     , _boEntityId = Nothing
     }
@@ -1199,11 +1199,11 @@ instance FromJSON BucketOwner where
         parseJSON
           = withObject "BucketOwner"
               (\ o ->
-                 BucketOwner <$>
+                 BucketOwner' <$>
                    (o .:? "entity") <*> (o .:? "entityId"))
 
 instance ToJSON BucketOwner where
-        toJSON BucketOwner{..}
+        toJSON BucketOwner'{..}
           = object
               (catMaybes
                  [("entity" .=) <$> _boEntity,
@@ -1211,7 +1211,7 @@ instance ToJSON BucketOwner where
 
 --
 -- /See:/ 'composeRequestSourceObjectsItem' smart constructor.
-data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem
+data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem'
     { _crsoiName                :: !(Maybe Text)
     , _crsoiObjectPreconditions :: !(Maybe ComposeRequestSourceObjectsItemObjectPreconditions)
     , _crsoiGeneration          :: !(Maybe (Textual Int64))
@@ -1229,7 +1229,7 @@ data ComposeRequestSourceObjectsItem = ComposeRequestSourceObjectsItem
 composeRequestSourceObjectsItem
     :: ComposeRequestSourceObjectsItem
 composeRequestSourceObjectsItem =
-    ComposeRequestSourceObjectsItem
+    ComposeRequestSourceObjectsItem'
     { _crsoiName = Nothing
     , _crsoiObjectPreconditions = Nothing
     , _crsoiGeneration = Nothing
@@ -1259,12 +1259,12 @@ instance FromJSON ComposeRequestSourceObjectsItem
         parseJSON
           = withObject "ComposeRequestSourceObjectsItem"
               (\ o ->
-                 ComposeRequestSourceObjectsItem <$>
+                 ComposeRequestSourceObjectsItem' <$>
                    (o .:? "name") <*> (o .:? "objectPreconditions") <*>
                      (o .:? "generation"))
 
 instance ToJSON ComposeRequestSourceObjectsItem where
-        toJSON ComposeRequestSourceObjectsItem{..}
+        toJSON ComposeRequestSourceObjectsItem'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _crsoiName,
@@ -1275,7 +1275,7 @@ instance ToJSON ComposeRequestSourceObjectsItem where
 -- | Additional parameters controlling delivery channel behavior. Optional.
 --
 -- /See:/ 'channelParams' smart constructor.
-newtype ChannelParams = ChannelParams
+newtype ChannelParams = ChannelParams'
     { _cpAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1288,7 +1288,7 @@ channelParams
     :: HashMap Text Text -- ^ 'cpAddtional'
     -> ChannelParams
 channelParams pCpAddtional_ =
-    ChannelParams
+    ChannelParams'
     { _cpAddtional = _Coerce # pCpAddtional_
     }
 
@@ -1301,7 +1301,7 @@ cpAddtional
 instance FromJSON ChannelParams where
         parseJSON
           = withObject "ChannelParams"
-              (\ o -> ChannelParams <$> (parseJSONObject o))
+              (\ o -> ChannelParams' <$> (parseJSONObject o))
 
 instance ToJSON ChannelParams where
         toJSON = toJSON . _cpAddtional
@@ -1309,7 +1309,7 @@ instance ToJSON ChannelParams where
 -- | An object.
 --
 -- /See:/ 'object'' smart constructor.
-data Object = Object
+data Object = Object'
     { _objEtag               :: !(Maybe Text)
     , _objSize               :: !(Maybe (Textual Word64))
     , _objKind               :: !Text
@@ -1396,7 +1396,7 @@ data Object = Object
 object'
     :: Object
 object' =
-    Object
+    Object'
     { _objEtag = Nothing
     , _objSize = Nothing
     , _objKind = "storage#object"
@@ -1583,7 +1583,7 @@ instance FromJSON Object where
         parseJSON
           = withObject "Object"
               (\ o ->
-                 Object <$>
+                 Object' <$>
                    (o .:? "etag") <*> (o .:? "size") <*>
                      (o .:? "kind" .!= "storage#object")
                      <*> (o .:? "timeDeleted")
@@ -1611,7 +1611,7 @@ instance FromJSON Object where
                      <*> (o .:? "contentType"))
 
 instance ToJSON Object where
-        toJSON Object{..}
+        toJSON Object'{..}
           = object
               (catMaybes
                  [("etag" .=) <$> _objEtag, ("size" .=) <$> _objSize,
@@ -1642,7 +1642,7 @@ instance ToJSON Object where
 -- | Conditions that must be met for this operation to execute.
 --
 -- /See:/ 'composeRequestSourceObjectsItemObjectPreconditions' smart constructor.
-newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourceObjectsItemObjectPreconditions
+newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourceObjectsItemObjectPreconditions'
     { _crsoiopIfGenerationMatch :: Maybe (Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1654,7 +1654,7 @@ newtype ComposeRequestSourceObjectsItemObjectPreconditions = ComposeRequestSourc
 composeRequestSourceObjectsItemObjectPreconditions
     :: ComposeRequestSourceObjectsItemObjectPreconditions
 composeRequestSourceObjectsItemObjectPreconditions =
-    ComposeRequestSourceObjectsItemObjectPreconditions
+    ComposeRequestSourceObjectsItemObjectPreconditions'
     { _crsoiopIfGenerationMatch = Nothing
     }
 
@@ -1674,14 +1674,14 @@ instance FromJSON
           = withObject
               "ComposeRequestSourceObjectsItemObjectPreconditions"
               (\ o ->
-                 ComposeRequestSourceObjectsItemObjectPreconditions
+                 ComposeRequestSourceObjectsItemObjectPreconditions'
                    <$> (o .:? "ifGenerationMatch"))
 
 instance ToJSON
          ComposeRequestSourceObjectsItemObjectPreconditions
          where
         toJSON
-          ComposeRequestSourceObjectsItemObjectPreconditions{..}
+          ComposeRequestSourceObjectsItemObjectPreconditions'{..}
           = object
               (catMaybes
                  [("ifGenerationMatch" .=) <$>
@@ -1690,7 +1690,7 @@ instance ToJSON
 -- | The project team associated with the entity, if any.
 --
 -- /See:/ 'bucketAccessControlProjectTeam' smart constructor.
-data BucketAccessControlProjectTeam = BucketAccessControlProjectTeam
+data BucketAccessControlProjectTeam = BucketAccessControlProjectTeam'
     { _bacptProjectNumber :: !(Maybe Text)
     , _bacptTeam          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1705,7 +1705,7 @@ data BucketAccessControlProjectTeam = BucketAccessControlProjectTeam
 bucketAccessControlProjectTeam
     :: BucketAccessControlProjectTeam
 bucketAccessControlProjectTeam =
-    BucketAccessControlProjectTeam
+    BucketAccessControlProjectTeam'
     { _bacptProjectNumber = Nothing
     , _bacptTeam = Nothing
     }
@@ -1726,11 +1726,11 @@ instance FromJSON BucketAccessControlProjectTeam
         parseJSON
           = withObject "BucketAccessControlProjectTeam"
               (\ o ->
-                 BucketAccessControlProjectTeam <$>
+                 BucketAccessControlProjectTeam' <$>
                    (o .:? "projectNumber") <*> (o .:? "team"))
 
 instance ToJSON BucketAccessControlProjectTeam where
-        toJSON BucketAccessControlProjectTeam{..}
+        toJSON BucketAccessControlProjectTeam'{..}
           = object
               (catMaybes
                  [("projectNumber" .=) <$> _bacptProjectNumber,
@@ -1739,7 +1739,7 @@ instance ToJSON BucketAccessControlProjectTeam where
 -- | An access-control list.
 --
 -- /See:/ 'objectAccessControls' smart constructor.
-data ObjectAccessControls = ObjectAccessControls
+data ObjectAccessControls = ObjectAccessControls'
     { _oacKind  :: !Text
     , _oacItems :: !(Maybe [JSONValue])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1754,7 +1754,7 @@ data ObjectAccessControls = ObjectAccessControls
 objectAccessControls
     :: ObjectAccessControls
 objectAccessControls =
-    ObjectAccessControls
+    ObjectAccessControls'
     { _oacKind = "storage#objectAccessControls"
     , _oacItems = Nothing
     }
@@ -1775,12 +1775,12 @@ instance FromJSON ObjectAccessControls where
         parseJSON
           = withObject "ObjectAccessControls"
               (\ o ->
-                 ObjectAccessControls <$>
+                 ObjectAccessControls' <$>
                    (o .:? "kind" .!= "storage#objectAccessControls") <*>
                      (o .:? "items" .!= mempty))
 
 instance ToJSON ObjectAccessControls where
-        toJSON ObjectAccessControls{..}
+        toJSON ObjectAccessControls'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _oacKind),
@@ -1789,7 +1789,7 @@ instance ToJSON ObjectAccessControls where
 -- | The bucket\'s website configuration.
 --
 -- /See:/ 'bucketWebsite' smart constructor.
-data BucketWebsite = BucketWebsite
+data BucketWebsite = BucketWebsite'
     { _bwMainPageSuffix :: !(Maybe Text)
     , _bwNotFoundPage   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1804,7 +1804,7 @@ data BucketWebsite = BucketWebsite
 bucketWebsite
     :: BucketWebsite
 bucketWebsite =
-    BucketWebsite
+    BucketWebsite'
     { _bwMainPageSuffix = Nothing
     , _bwNotFoundPage = Nothing
     }
@@ -1826,11 +1826,11 @@ instance FromJSON BucketWebsite where
         parseJSON
           = withObject "BucketWebsite"
               (\ o ->
-                 BucketWebsite <$>
+                 BucketWebsite' <$>
                    (o .:? "mainPageSuffix") <*> (o .:? "notFoundPage"))
 
 instance ToJSON BucketWebsite where
-        toJSON BucketWebsite{..}
+        toJSON BucketWebsite'{..}
           = object
               (catMaybes
                  [("mainPageSuffix" .=) <$> _bwMainPageSuffix,
@@ -1839,7 +1839,7 @@ instance ToJSON BucketWebsite where
 -- | An access-control entry.
 --
 -- /See:/ 'bucketAccessControl' smart constructor.
-data BucketAccessControl = BucketAccessControl
+data BucketAccessControl = BucketAccessControl'
     { _bacaEmail       :: !(Maybe Text)
     , _bacaEtag        :: !(Maybe Text)
     , _bacaKind        :: !Text
@@ -1881,7 +1881,7 @@ data BucketAccessControl = BucketAccessControl
 bucketAccessControl
     :: BucketAccessControl
 bucketAccessControl =
-    BucketAccessControl
+    BucketAccessControl'
     { _bacaEmail = Nothing
     , _bacaEtag = Nothing
     , _bacaKind = "storage#bucketAccessControl"
@@ -1958,7 +1958,7 @@ instance FromJSON BucketAccessControl where
         parseJSON
           = withObject "BucketAccessControl"
               (\ o ->
-                 BucketAccessControl <$>
+                 BucketAccessControl' <$>
                    (o .:? "email") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "storage#bucketAccessControl")
                      <*> (o .:? "domain")
@@ -1971,7 +1971,7 @@ instance FromJSON BucketAccessControl where
                      <*> (o .:? "entityId"))
 
 instance ToJSON BucketAccessControl where
-        toJSON BucketAccessControl{..}
+        toJSON BucketAccessControl'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _bacaEmail,
@@ -1989,7 +1989,7 @@ instance ToJSON BucketAccessControl where
 -- | The action to take.
 --
 -- /See:/ 'bucketLifecycleRuleItemAction' smart constructor.
-newtype BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction
+newtype BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction'
     { _blriaType :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2001,7 +2001,7 @@ newtype BucketLifecycleRuleItemAction = BucketLifecycleRuleItemAction
 bucketLifecycleRuleItemAction
     :: BucketLifecycleRuleItemAction
 bucketLifecycleRuleItemAction =
-    BucketLifecycleRuleItemAction
+    BucketLifecycleRuleItemAction'
     { _blriaType = Nothing
     }
 
@@ -2014,16 +2014,16 @@ instance FromJSON BucketLifecycleRuleItemAction where
         parseJSON
           = withObject "BucketLifecycleRuleItemAction"
               (\ o ->
-                 BucketLifecycleRuleItemAction <$> (o .:? "type"))
+                 BucketLifecycleRuleItemAction' <$> (o .:? "type"))
 
 instance ToJSON BucketLifecycleRuleItemAction where
-        toJSON BucketLifecycleRuleItemAction{..}
+        toJSON BucketLifecycleRuleItemAction'{..}
           = object (catMaybes [("type" .=) <$> _blriaType])
 
 -- | An access-control entry.
 --
 -- /See:/ 'objectAccessControl' smart constructor.
-data ObjectAccessControl = ObjectAccessControl
+data ObjectAccessControl = ObjectAccessControl'
     { _oacaEmail       :: !(Maybe Text)
     , _oacaEtag        :: !(Maybe Text)
     , _oacaKind        :: !Text
@@ -2071,7 +2071,7 @@ data ObjectAccessControl = ObjectAccessControl
 objectAccessControl
     :: ObjectAccessControl
 objectAccessControl =
-    ObjectAccessControl
+    ObjectAccessControl'
     { _oacaEmail = Nothing
     , _oacaEtag = Nothing
     , _oacaKind = "storage#objectAccessControl"
@@ -2162,7 +2162,7 @@ instance FromJSON ObjectAccessControl where
         parseJSON
           = withObject "ObjectAccessControl"
               (\ o ->
-                 ObjectAccessControl <$>
+                 ObjectAccessControl' <$>
                    (o .:? "email") <*> (o .:? "etag") <*>
                      (o .:? "kind" .!= "storage#objectAccessControl")
                      <*> (o .:? "domain")
@@ -2177,7 +2177,7 @@ instance FromJSON ObjectAccessControl where
                      <*> (o .:? "entityId"))
 
 instance ToJSON ObjectAccessControl where
-        toJSON ObjectAccessControl{..}
+        toJSON ObjectAccessControl'{..}
           = object
               (catMaybes
                  [("email" .=) <$> _oacaEmail,
@@ -2196,7 +2196,7 @@ instance ToJSON ObjectAccessControl where
 -- | A rewrite response.
 --
 -- /See:/ 'rewriteResponse' smart constructor.
-data RewriteResponse = RewriteResponse
+data RewriteResponse = RewriteResponse'
     { _rrKind                :: !Text
     , _rrDone                :: !(Maybe Bool)
     , _rrResource            :: !(Maybe Object)
@@ -2223,7 +2223,7 @@ data RewriteResponse = RewriteResponse
 rewriteResponse
     :: RewriteResponse
 rewriteResponse =
-    RewriteResponse
+    RewriteResponse'
     { _rrKind = "storage#rewriteResponse"
     , _rrDone = Nothing
     , _rrResource = Nothing
@@ -2274,7 +2274,7 @@ instance FromJSON RewriteResponse where
         parseJSON
           = withObject "RewriteResponse"
               (\ o ->
-                 RewriteResponse <$>
+                 RewriteResponse' <$>
                    (o .:? "kind" .!= "storage#rewriteResponse") <*>
                      (o .:? "done")
                      <*> (o .:? "resource")
@@ -2283,7 +2283,7 @@ instance FromJSON RewriteResponse where
                      <*> (o .:? "rewriteToken"))
 
 instance ToJSON RewriteResponse where
-        toJSON RewriteResponse{..}
+        toJSON RewriteResponse'{..}
           = object
               (catMaybes
                  [Just ("kind" .= _rrKind), ("done" .=) <$> _rrDone,

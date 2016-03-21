@@ -57,7 +57,7 @@ type AccountsContainersFoldersGetResource =
 -- | Gets a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersGet' smart constructor.
-data AccountsContainersFoldersGet = AccountsContainersFoldersGet
+data AccountsContainersFoldersGet = AccountsContainersFoldersGet'
     { _acfgContainerId :: !Text
     , _acfgFolderId    :: !Text
     , _acfgAccountId   :: !Text
@@ -78,7 +78,7 @@ accountsContainersFoldersGet
     -> Text -- ^ 'acfgAccountId'
     -> AccountsContainersFoldersGet
 accountsContainersFoldersGet pAcfgContainerId_ pAcfgFolderId_ pAcfgAccountId_ =
-    AccountsContainersFoldersGet
+    AccountsContainersFoldersGet'
     { _acfgContainerId = pAcfgContainerId_
     , _acfgFolderId = pAcfgFolderId_
     , _acfgAccountId = pAcfgAccountId_
@@ -107,7 +107,7 @@ instance GoogleRequest AccountsContainersFoldersGet
         type Scopes AccountsContainersFoldersGet =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers",
                "https://www.googleapis.com/auth/tagmanager.readonly"]
-        requestClient AccountsContainersFoldersGet{..}
+        requestClient AccountsContainersFoldersGet'{..}
           = go _acfgAccountId _acfgContainerId _acfgFolderId
               (Just AltJSON)
               tagManagerService

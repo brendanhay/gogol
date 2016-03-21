@@ -61,7 +61,7 @@ type AccountsContainersFoldersUpdateResource =
 -- | Updates a GTM Folder.
 --
 -- /See:/ 'accountsContainersFoldersUpdate' smart constructor.
-data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate
+data AccountsContainersFoldersUpdate = AccountsContainersFoldersUpdate'
     { _acfuContainerId :: !Text
     , _acfuFingerprint :: !(Maybe Text)
     , _acfuFolderId    :: !Text
@@ -89,7 +89,7 @@ accountsContainersFoldersUpdate
     -> Text -- ^ 'acfuAccountId'
     -> AccountsContainersFoldersUpdate
 accountsContainersFoldersUpdate pAcfuContainerId_ pAcfuFolderId_ pAcfuPayload_ pAcfuAccountId_ =
-    AccountsContainersFoldersUpdate
+    AccountsContainersFoldersUpdate'
     { _acfuContainerId = pAcfuContainerId_
     , _acfuFingerprint = Nothing
     , _acfuFolderId = pAcfuFolderId_
@@ -131,7 +131,7 @@ instance GoogleRequest
         type Rs AccountsContainersFoldersUpdate = Folder
         type Scopes AccountsContainersFoldersUpdate =
              '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-        requestClient AccountsContainersFoldersUpdate{..}
+        requestClient AccountsContainersFoldersUpdate'{..}
           = go _acfuAccountId _acfuContainerId _acfuFolderId
               _acfuFingerprint
               (Just AltJSON)

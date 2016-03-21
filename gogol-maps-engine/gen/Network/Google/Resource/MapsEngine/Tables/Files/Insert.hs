@@ -71,7 +71,7 @@ type TablesFilesInsertResource =
 -- Engine help center.
 --
 -- /See:/ 'tablesFilesInsert' smart constructor.
-data TablesFilesInsert = TablesFilesInsert
+data TablesFilesInsert = TablesFilesInsert'
     { _tfiId       :: !Text
     , _tfiFilename :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -88,7 +88,7 @@ tablesFilesInsert
     -> Text -- ^ 'tfiFilename'
     -> TablesFilesInsert
 tablesFilesInsert pTfiId_ pTfiFilename_ =
-    TablesFilesInsert
+    TablesFilesInsert'
     { _tfiId = pTfiId_
     , _tfiFilename = pTfiFilename_
     }
@@ -106,7 +106,7 @@ instance GoogleRequest TablesFilesInsert where
         type Rs TablesFilesInsert = ()
         type Scopes TablesFilesInsert =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient TablesFilesInsert{..}
+        requestClient TablesFilesInsert'{..}
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               mapsEngineService
           where go :<|> _
@@ -120,7 +120,7 @@ instance GoogleRequest
         type Scopes (MediaUpload TablesFilesInsert) =
              Scopes TablesFilesInsert
         requestClient
-          (MediaUpload TablesFilesInsert{..} body)
+          (MediaUpload TablesFilesInsert'{..} body)
           = go _tfiId (Just _tfiFilename) (Just AltJSON)
               (Just AltMedia)
               body

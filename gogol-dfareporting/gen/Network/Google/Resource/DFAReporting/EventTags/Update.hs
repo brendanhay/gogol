@@ -54,7 +54,7 @@ type EventTagsUpdateResource =
 -- | Updates an existing event tag.
 --
 -- /See:/ 'eventTagsUpdate' smart constructor.
-data EventTagsUpdate = EventTagsUpdate
+data EventTagsUpdate = EventTagsUpdate'
     { _etuProFileId :: !(Textual Int64)
     , _etuPayload   :: !EventTag
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ eventTagsUpdate
     -> EventTag -- ^ 'etuPayload'
     -> EventTagsUpdate
 eventTagsUpdate pEtuProFileId_ pEtuPayload_ =
-    EventTagsUpdate
+    EventTagsUpdate'
     { _etuProFileId = _Coerce # pEtuProFileId_
     , _etuPayload = pEtuPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest EventTagsUpdate where
         type Rs EventTagsUpdate = EventTag
         type Scopes EventTagsUpdate =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient EventTagsUpdate{..}
+        requestClient EventTagsUpdate'{..}
           = go _etuProFileId (Just AltJSON) _etuPayload
               dFAReportingService
           where go

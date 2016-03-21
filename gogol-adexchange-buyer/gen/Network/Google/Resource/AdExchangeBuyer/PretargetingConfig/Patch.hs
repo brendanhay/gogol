@@ -58,7 +58,7 @@ type PretargetingConfigPatchResource =
 -- semantics.
 --
 -- /See:/ 'pretargetingConfigPatch' smart constructor.
-data PretargetingConfigPatch = PretargetingConfigPatch
+data PretargetingConfigPatch = PretargetingConfigPatch'
     { _pcpPayload   :: !PretargetingConfig
     , _pcpAccountId :: !(Textual Int64)
     , _pcpConfigId  :: !(Textual Int64)
@@ -79,7 +79,7 @@ pretargetingConfigPatch
     -> Int64 -- ^ 'pcpConfigId'
     -> PretargetingConfigPatch
 pretargetingConfigPatch pPcpPayload_ pPcpAccountId_ pPcpConfigId_ =
-    PretargetingConfigPatch
+    PretargetingConfigPatch'
     { _pcpPayload = pPcpPayload_
     , _pcpAccountId = _Coerce # pPcpAccountId_
     , _pcpConfigId = _Coerce # pPcpConfigId_
@@ -106,7 +106,7 @@ instance GoogleRequest PretargetingConfigPatch where
         type Rs PretargetingConfigPatch = PretargetingConfig
         type Scopes PretargetingConfigPatch =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
-        requestClient PretargetingConfigPatch{..}
+        requestClient PretargetingConfigPatch'{..}
           = go _pcpAccountId _pcpConfigId (Just AltJSON)
               _pcpPayload
               adExchangeBuyerService

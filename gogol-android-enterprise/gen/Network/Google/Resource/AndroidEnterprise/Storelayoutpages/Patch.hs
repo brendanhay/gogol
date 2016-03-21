@@ -59,7 +59,7 @@ type StorelayoutpagesPatchResource =
 -- semantics.
 --
 -- /See:/ 'storelayoutpagesPatch' smart constructor.
-data StorelayoutpagesPatch = StorelayoutpagesPatch
+data StorelayoutpagesPatch = StorelayoutpagesPatch'
     { _spEnterpriseId :: !Text
     , _spPageId       :: !Text
     , _spPayload      :: !StorePage
@@ -80,7 +80,7 @@ storelayoutpagesPatch
     -> StorePage -- ^ 'spPayload'
     -> StorelayoutpagesPatch
 storelayoutpagesPatch pSpEnterpriseId_ pSpPageId_ pSpPayload_ =
-    StorelayoutpagesPatch
+    StorelayoutpagesPatch'
     { _spEnterpriseId = pSpEnterpriseId_
     , _spPageId = pSpPageId_
     , _spPayload = pSpPayload_
@@ -105,7 +105,7 @@ instance GoogleRequest StorelayoutpagesPatch where
         type Rs StorelayoutpagesPatch = StorePage
         type Scopes StorelayoutpagesPatch =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutpagesPatch{..}
+        requestClient StorelayoutpagesPatch'{..}
           = go _spEnterpriseId _spPageId (Just AltJSON)
               _spPayload
               androidEnterpriseService

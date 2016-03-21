@@ -57,7 +57,7 @@ type TargetPoolsDeleteResource =
 -- | Deletes the specified target pool.
 --
 -- /See:/ 'targetPoolsDelete' smart constructor.
-data TargetPoolsDelete = TargetPoolsDelete
+data TargetPoolsDelete = TargetPoolsDelete'
     { _tpdProject    :: !Text
     , _tpdTargetPool :: !Text
     , _tpdRegion     :: !Text
@@ -78,7 +78,7 @@ targetPoolsDelete
     -> Text -- ^ 'tpdRegion'
     -> TargetPoolsDelete
 targetPoolsDelete pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
-    TargetPoolsDelete
+    TargetPoolsDelete'
     { _tpdProject = pTpdProject_
     , _tpdTargetPool = pTpdTargetPool_
     , _tpdRegion = pTpdRegion_
@@ -105,7 +105,7 @@ instance GoogleRequest TargetPoolsDelete where
         type Scopes TargetPoolsDelete =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute"]
-        requestClient TargetPoolsDelete{..}
+        requestClient TargetPoolsDelete'{..}
           = go _tpdProject _tpdRegion _tpdTargetPool
               (Just AltJSON)
               computeService

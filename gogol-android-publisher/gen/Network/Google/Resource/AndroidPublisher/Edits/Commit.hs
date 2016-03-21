@@ -54,7 +54,7 @@ type EditsCommitResource =
 -- | Commits\/applies the changes made in this edit back to the app.
 --
 -- /See:/ 'editsCommit' smart constructor.
-data EditsCommit = EditsCommit
+data EditsCommit = EditsCommit'
     { _ecPackageName :: !Text
     , _ecEditId      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ editsCommit
     -> Text -- ^ 'ecEditId'
     -> EditsCommit
 editsCommit pEcPackageName_ pEcEditId_ =
-    EditsCommit
+    EditsCommit'
     { _ecPackageName = pEcPackageName_
     , _ecEditId = pEcEditId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest EditsCommit where
         type Rs EditsCommit = AppEdit
         type Scopes EditsCommit =
              '["https://www.googleapis.com/auth/androidpublisher"]
-        requestClient EditsCommit{..}
+        requestClient EditsCommit'{..}
           = go _ecPackageName _ecEditId (Just AltJSON)
               androidPublisherService
           where go

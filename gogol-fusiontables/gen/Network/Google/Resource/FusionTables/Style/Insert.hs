@@ -55,7 +55,7 @@ type StyleInsertResource =
 -- | Adds a new style for the table.
 --
 -- /See:/ 'styleInsert' smart constructor.
-data StyleInsert = StyleInsert
+data StyleInsert = StyleInsert'
     { _siPayload :: !StyleSetting
     , _siTableId :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ styleInsert
     -> Text -- ^ 'siTableId'
     -> StyleInsert
 styleInsert pSiPayload_ pSiTableId_ =
-    StyleInsert
+    StyleInsert'
     { _siPayload = pSiPayload_
     , _siTableId = pSiTableId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest StyleInsert where
         type Rs StyleInsert = StyleSetting
         type Scopes StyleInsert =
              '["https://www.googleapis.com/auth/fusiontables"]
-        requestClient StyleInsert{..}
+        requestClient StyleInsert'{..}
           = go _siTableId (Just AltJSON) _siPayload
               fusionTablesService
           where go

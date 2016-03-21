@@ -58,7 +58,7 @@ type UsersRemovePublicKeyResource =
 -- | Removes the specified public key from the user.
 --
 -- /See:/ 'usersRemovePublicKey' smart constructor.
-data UsersRemovePublicKey = UsersRemovePublicKey
+data UsersRemovePublicKey = UsersRemovePublicKey'
     { _urpkProject     :: !Text
     , _urpkFingerprint :: !Text
     , _urpkUser        :: !Text
@@ -79,7 +79,7 @@ usersRemovePublicKey
     -> Text -- ^ 'urpkUser'
     -> UsersRemovePublicKey
 usersRemovePublicKey pUrpkProject_ pUrpkFingerprint_ pUrpkUser_ =
-    UsersRemovePublicKey
+    UsersRemovePublicKey'
     { _urpkProject = pUrpkProject_
     , _urpkFingerprint = pUrpkFingerprint_
     , _urpkUser = pUrpkUser_
@@ -107,7 +107,7 @@ instance GoogleRequest UsersRemovePublicKey where
         type Scopes UsersRemovePublicKey =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/cloud.useraccounts"]
-        requestClient UsersRemovePublicKey{..}
+        requestClient UsersRemovePublicKey'{..}
           = go _urpkProject _urpkUser (Just _urpkFingerprint)
               (Just AltJSON)
               userAccountsService

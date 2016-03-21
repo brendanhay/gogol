@@ -55,7 +55,7 @@ type UsersMessagesUntrashResource =
 -- | Removes the specified message from the trash.
 --
 -- /See:/ 'usersMessagesUntrash' smart constructor.
-data UsersMessagesUntrash = UsersMessagesUntrash
+data UsersMessagesUntrash = UsersMessagesUntrash'
     { _umuUserId :: !Text
     , _umuId     :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ usersMessagesUntrash
     :: Text -- ^ 'umuId'
     -> UsersMessagesUntrash
 usersMessagesUntrash pUmuId_ =
-    UsersMessagesUntrash
+    UsersMessagesUntrash'
     { _umuUserId = "me"
     , _umuId = pUmuId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UsersMessagesUntrash where
         type Scopes UsersMessagesUntrash =
              '["https://mail.google.com/",
                "https://www.googleapis.com/auth/gmail.modify"]
-        requestClient UsersMessagesUntrash{..}
+        requestClient UsersMessagesUntrash'{..}
           = go _umuUserId _umuId (Just AltJSON) gmailService
           where go
                   = buildClient

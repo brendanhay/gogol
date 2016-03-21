@@ -62,7 +62,7 @@ type PlacementsGeneratetagsResource =
 -- | Generates tags for a placement.
 --
 -- /See:/ 'placementsGeneratetags' smart constructor.
-data PlacementsGeneratetags = PlacementsGeneratetags
+data PlacementsGeneratetags = PlacementsGeneratetags'
     { _pgsTagFormats   :: !(Maybe [PlacementsGeneratetagsTagFormats])
     , _pgsCampaignId   :: !(Maybe (Textual Int64))
     , _pgsProFileId    :: !(Textual Int64)
@@ -84,7 +84,7 @@ placementsGeneratetags
     :: Int64 -- ^ 'pgsProFileId'
     -> PlacementsGeneratetags
 placementsGeneratetags pPgsProFileId_ =
-    PlacementsGeneratetags
+    PlacementsGeneratetags'
     { _pgsTagFormats = Nothing
     , _pgsCampaignId = Nothing
     , _pgsProFileId = _Coerce # pPgsProFileId_
@@ -126,7 +126,7 @@ instance GoogleRequest PlacementsGeneratetags where
              PlacementsGenerateTagsResponse
         type Scopes PlacementsGeneratetags =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient PlacementsGeneratetags{..}
+        requestClient PlacementsGeneratetags'{..}
           = go _pgsProFileId (_pgsTagFormats ^. _Default)
               _pgsCampaignId
               (_pgsPlacementIds ^. _Default)

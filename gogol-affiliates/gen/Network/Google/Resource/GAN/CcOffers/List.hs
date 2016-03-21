@@ -56,7 +56,7 @@ type CcOffersListResource =
 -- | Retrieves credit card offers for the given publisher.
 --
 -- /See:/ 'ccOffersList' smart constructor.
-data CcOffersList = CcOffersList
+data CcOffersList = CcOffersList'
     { _colAdvertiser :: !(Maybe [Text])
     , _colProjection :: !(Maybe CcOffersListProjection)
     , _colPublisher  :: !Text
@@ -75,7 +75,7 @@ ccOffersList
     :: Text -- ^ 'colPublisher'
     -> CcOffersList
 ccOffersList pColPublisher_ =
-    CcOffersList
+    CcOffersList'
     { _colAdvertiser = Nothing
     , _colProjection = Nothing
     , _colPublisher = pColPublisher_
@@ -104,7 +104,7 @@ colPublisher
 instance GoogleRequest CcOffersList where
         type Rs CcOffersList = CcOffers
         type Scopes CcOffersList = '[]
-        requestClient CcOffersList{..}
+        requestClient CcOffersList'{..}
           = go _colPublisher (_colAdvertiser ^. _Default)
               _colProjection
               (Just AltJSON)

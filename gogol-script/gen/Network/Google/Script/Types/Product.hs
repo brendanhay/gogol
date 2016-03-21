@@ -25,7 +25,7 @@ import           Network.Google.Script.Types.Sum
 -- contain this \`Status\` object.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -43,7 +43,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -73,12 +73,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -101,7 +101,7 @@ instance ToJSON Status where
 -- automatically convert a 4XX response into an exception class.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
@@ -125,7 +125,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -165,14 +165,14 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "done") <*> (o .:? "error") <*>
                      (o .:? "response")
                      <*> (o .:? "name")
                      <*> (o .:? "metadata"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
@@ -185,7 +185,7 @@ instance ToJSON Operation where
 -- return results based on the implementation of the script.
 --
 -- /See:/ 'executionRequest' smart constructor.
-data ExecutionRequest = ExecutionRequest
+data ExecutionRequest = ExecutionRequest'
     { _erFunction     :: !(Maybe Text)
     , _erSessionState :: !(Maybe Text)
     , _erDevMode      :: !(Maybe Bool)
@@ -206,7 +206,7 @@ data ExecutionRequest = ExecutionRequest
 executionRequest
     :: ExecutionRequest
 executionRequest =
-    ExecutionRequest
+    ExecutionRequest'
     { _erFunction = Nothing
     , _erSessionState = Nothing
     , _erDevMode = Nothing
@@ -247,13 +247,13 @@ instance FromJSON ExecutionRequest where
         parseJSON
           = withObject "ExecutionRequest"
               (\ o ->
-                 ExecutionRequest <$>
+                 ExecutionRequest' <$>
                    (o .:? "function") <*> (o .:? "sessionState") <*>
                      (o .:? "devMode")
                      <*> (o .:? "parameters" .!= mempty))
 
 instance ToJSON ExecutionRequest where
-        toJSON ExecutionRequest{..}
+        toJSON ExecutionRequest'{..}
           = object
               (catMaybes
                  [("function" .=) <$> _erFunction,
@@ -263,7 +263,7 @@ instance ToJSON ExecutionRequest where
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -276,7 +276,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -289,7 +289,7 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
@@ -297,7 +297,7 @@ instance ToJSON StatusDetailsItem where
 -- | A stack trace through the script that shows where the execution failed.
 --
 -- /See:/ 'scriptStackTraceElement' smart constructor.
-data ScriptStackTraceElement = ScriptStackTraceElement
+data ScriptStackTraceElement = ScriptStackTraceElement'
     { _ssteFunction   :: !(Maybe Text)
     , _ssteLineNumber :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -312,7 +312,7 @@ data ScriptStackTraceElement = ScriptStackTraceElement
 scriptStackTraceElement
     :: ScriptStackTraceElement
 scriptStackTraceElement =
-    ScriptStackTraceElement
+    ScriptStackTraceElement'
     { _ssteFunction = Nothing
     , _ssteLineNumber = Nothing
     }
@@ -333,11 +333,11 @@ instance FromJSON ScriptStackTraceElement where
         parseJSON
           = withObject "ScriptStackTraceElement"
               (\ o ->
-                 ScriptStackTraceElement <$>
+                 ScriptStackTraceElement' <$>
                    (o .:? "function") <*> (o .:? "lineNumber"))
 
 instance ToJSON ScriptStackTraceElement where
-        toJSON ScriptStackTraceElement{..}
+        toJSON ScriptStackTraceElement'{..}
           = object
               (catMaybes
                  [("function" .=) <$> _ssteFunction,
@@ -351,7 +351,7 @@ instance ToJSON ScriptStackTraceElement where
 -- these \`ExecutionError\` objects.
 --
 -- /See:/ 'executionError' smart constructor.
-data ExecutionError = ExecutionError
+data ExecutionError = ExecutionError'
     { _eeScriptStackTraceElements :: !(Maybe [ScriptStackTraceElement])
     , _eeErrorType                :: !(Maybe Text)
     , _eeErrorMessage             :: !(Maybe Text)
@@ -369,7 +369,7 @@ data ExecutionError = ExecutionError
 executionError
     :: ExecutionError
 executionError =
-    ExecutionError
+    ExecutionError'
     { _eeScriptStackTraceElements = Nothing
     , _eeErrorType = Nothing
     , _eeErrorMessage = Nothing
@@ -401,13 +401,13 @@ instance FromJSON ExecutionError where
         parseJSON
           = withObject "ExecutionError"
               (\ o ->
-                 ExecutionError <$>
+                 ExecutionError' <$>
                    (o .:? "scriptStackTraceElements" .!= mempty) <*>
                      (o .:? "errorType")
                      <*> (o .:? "errorMessage"))
 
 instance ToJSON ExecutionError where
-        toJSON ExecutionError{..}
+        toJSON ExecutionError'{..}
           = object
               (catMaybes
                  [("scriptStackTraceElements" .=) <$>
@@ -418,7 +418,7 @@ instance ToJSON ExecutionError where
 -- | This field is not used.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-newtype OperationMetadata = OperationMetadata
+newtype OperationMetadata = OperationMetadata'
     { _omAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -431,7 +431,7 @@ operationMetadata
     :: HashMap Text JSONValue -- ^ 'omAddtional'
     -> OperationMetadata
 operationMetadata pOmAddtional_ =
-    OperationMetadata
+    OperationMetadata'
     { _omAddtional = _Coerce # pOmAddtional_
     }
 
@@ -444,7 +444,7 @@ omAddtional
 instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
-              (\ o -> OperationMetadata <$> (parseJSONObject o))
+              (\ o -> OperationMetadata' <$> (parseJSONObject o))
 
 instance ToJSON OperationMetadata where
         toJSON = toJSON . _omAddtional
@@ -454,7 +454,7 @@ instance ToJSON OperationMetadata where
 -- object\'s \`result\` field.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse
+newtype OperationResponse = OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -467,7 +467,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse
+    OperationResponse'
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
@@ -480,7 +480,7 @@ orAddtional
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> OperationResponse <$> (parseJSONObject o))
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
@@ -491,7 +491,7 @@ instance ToJSON OperationResponse where
 -- field will contain this \`ExecutionResponse\` object.
 --
 -- /See:/ 'executionResponse' smart constructor.
-newtype ExecutionResponse = ExecutionResponse
+newtype ExecutionResponse = ExecutionResponse'
     { _erResult :: Maybe JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -503,7 +503,7 @@ newtype ExecutionResponse = ExecutionResponse
 executionResponse
     :: ExecutionResponse
 executionResponse =
-    ExecutionResponse
+    ExecutionResponse'
     { _erResult = Nothing
     }
 
@@ -518,8 +518,8 @@ erResult = lens _erResult (\ s a -> s{_erResult = a})
 instance FromJSON ExecutionResponse where
         parseJSON
           = withObject "ExecutionResponse"
-              (\ o -> ExecutionResponse <$> (o .:? "result"))
+              (\ o -> ExecutionResponse' <$> (o .:? "result"))
 
 instance ToJSON ExecutionResponse where
-        toJSON ExecutionResponse{..}
+        toJSON ExecutionResponse'{..}
           = object (catMaybes [("result" .=) <$> _erResult])

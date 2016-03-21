@@ -63,7 +63,7 @@ type TransferOperationsDeleteResource =
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
 -- /See:/ 'transferOperationsDelete' smart constructor.
-data TransferOperationsDelete = TransferOperationsDelete
+data TransferOperationsDelete = TransferOperationsDelete'
     { _todXgafv          :: !(Maybe Text)
     , _todUploadProtocol :: !(Maybe Text)
     , _todPp             :: !Bool
@@ -97,7 +97,7 @@ transferOperationsDelete
     :: Text -- ^ 'todName'
     -> TransferOperationsDelete
 transferOperationsDelete pTodName_ =
-    TransferOperationsDelete
+    TransferOperationsDelete'
     { _todXgafv = Nothing
     , _todUploadProtocol = Nothing
     , _todPp = True
@@ -153,7 +153,7 @@ instance GoogleRequest TransferOperationsDelete where
         type Rs TransferOperationsDelete = Empty
         type Scopes TransferOperationsDelete =
              '["https://www.googleapis.com/auth/cloud-platform"]
-        requestClient TransferOperationsDelete{..}
+        requestClient TransferOperationsDelete'{..}
           = go _todName _todXgafv _todUploadProtocol
               (Just _todPp)
               _todAccessToken

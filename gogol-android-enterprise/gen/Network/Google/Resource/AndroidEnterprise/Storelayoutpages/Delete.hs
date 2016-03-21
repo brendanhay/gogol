@@ -55,7 +55,7 @@ type StorelayoutpagesDeleteResource =
 -- | Deletes a store page.
 --
 -- /See:/ 'storelayoutpagesDelete' smart constructor.
-data StorelayoutpagesDelete = StorelayoutpagesDelete
+data StorelayoutpagesDelete = StorelayoutpagesDelete'
     { _sdEnterpriseId :: !Text
     , _sdPageId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ storelayoutpagesDelete
     -> Text -- ^ 'sdPageId'
     -> StorelayoutpagesDelete
 storelayoutpagesDelete pSdEnterpriseId_ pSdPageId_ =
-    StorelayoutpagesDelete
+    StorelayoutpagesDelete'
     { _sdEnterpriseId = pSdEnterpriseId_
     , _sdPageId = pSdPageId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest StorelayoutpagesDelete where
         type Rs StorelayoutpagesDelete = ()
         type Scopes StorelayoutpagesDelete =
              '["https://www.googleapis.com/auth/androidenterprise"]
-        requestClient StorelayoutpagesDelete{..}
+        requestClient StorelayoutpagesDelete'{..}
           = go _sdEnterpriseId _sdPageId (Just AltJSON)
               androidEnterpriseService
           where go

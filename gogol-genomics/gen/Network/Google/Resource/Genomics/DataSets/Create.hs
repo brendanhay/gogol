@@ -68,7 +68,7 @@ type DataSetsCreateResource =
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsCreate' smart constructor.
-data DataSetsCreate = DataSetsCreate
+data DataSetsCreate = DataSetsCreate'
     { _dscXgafv          :: !(Maybe Text)
     , _dscUploadProtocol :: !(Maybe Text)
     , _dscPp             :: !Bool
@@ -102,7 +102,7 @@ dataSetsCreate
     :: DataSet -- ^ 'dscPayload'
     -> DataSetsCreate
 dataSetsCreate pDscPayload_ =
-    DataSetsCreate
+    DataSetsCreate'
     { _dscXgafv = Nothing
     , _dscUploadProtocol = Nothing
     , _dscPp = True
@@ -160,7 +160,7 @@ instance GoogleRequest DataSetsCreate where
         type Scopes DataSetsCreate =
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/genomics"]
-        requestClient DataSetsCreate{..}
+        requestClient DataSetsCreate'{..}
           = go _dscXgafv _dscUploadProtocol (Just _dscPp)
               _dscAccessToken
               _dscUploadType

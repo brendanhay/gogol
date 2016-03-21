@@ -61,7 +61,7 @@ type LicenseAssignmentsUpdateResource =
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsUpdate' smart constructor.
-data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate
+data LicenseAssignmentsUpdate = LicenseAssignmentsUpdate'
     { _lauSKUId     :: !Text
     , _lauPayload   :: !LicenseAssignment
     , _lauUserId    :: !Text
@@ -86,7 +86,7 @@ licenseAssignmentsUpdate
     -> Text -- ^ 'lauProductId'
     -> LicenseAssignmentsUpdate
 licenseAssignmentsUpdate pLauSKUId_ pLauPayload_ pLauUserId_ pLauProductId_ =
-    LicenseAssignmentsUpdate
+    LicenseAssignmentsUpdate'
     { _lauSKUId = pLauSKUId_
     , _lauPayload = pLauPayload_
     , _lauUserId = pLauUserId_
@@ -116,7 +116,7 @@ instance GoogleRequest LicenseAssignmentsUpdate where
         type Rs LicenseAssignmentsUpdate = LicenseAssignment
         type Scopes LicenseAssignmentsUpdate =
              '["https://www.googleapis.com/auth/apps.licensing"]
-        requestClient LicenseAssignmentsUpdate{..}
+        requestClient LicenseAssignmentsUpdate'{..}
           = go _lauProductId _lauSKUId _lauUserId
               (Just AltJSON)
               _lauPayload

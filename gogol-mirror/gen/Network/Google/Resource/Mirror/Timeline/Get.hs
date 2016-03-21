@@ -51,7 +51,7 @@ type TimelineGetResource =
 -- | Gets a single timeline item by ID.
 --
 -- /See:/ 'timelineGet' smart constructor.
-newtype TimelineGet = TimelineGet
+newtype TimelineGet = TimelineGet'
     { _tgId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,7 +64,7 @@ timelineGet
     :: Text -- ^ 'tgId'
     -> TimelineGet
 timelineGet pTgId_ =
-    TimelineGet
+    TimelineGet'
     { _tgId = pTgId_
     }
 
@@ -77,7 +77,7 @@ instance GoogleRequest TimelineGet where
         type Scopes TimelineGet =
              '["https://www.googleapis.com/auth/glass.location",
                "https://www.googleapis.com/auth/glass.timeline"]
-        requestClient TimelineGet{..}
+        requestClient TimelineGet'{..}
           = go _tgId (Just AltJSON) mirrorService
           where go
                   = buildClient (Proxy :: Proxy TimelineGetResource)

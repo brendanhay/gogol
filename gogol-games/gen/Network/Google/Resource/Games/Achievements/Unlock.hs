@@ -53,7 +53,7 @@ type AchievementsUnlockResource =
 -- | Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ 'achievementsUnlock' smart constructor.
-newtype AchievementsUnlock = AchievementsUnlock
+newtype AchievementsUnlock = AchievementsUnlock'
     { _auAchievementId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ achievementsUnlock
     :: Text -- ^ 'auAchievementId'
     -> AchievementsUnlock
 achievementsUnlock pAuAchievementId_ =
-    AchievementsUnlock
+    AchievementsUnlock'
     { _auAchievementId = pAuAchievementId_
     }
 
@@ -82,7 +82,7 @@ instance GoogleRequest AchievementsUnlock where
         type Scopes AchievementsUnlock =
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
-        requestClient AchievementsUnlock{..}
+        requestClient AchievementsUnlock'{..}
           = go _auAchievementId (Just AltJSON) gamesService
           where go
                   = buildClient

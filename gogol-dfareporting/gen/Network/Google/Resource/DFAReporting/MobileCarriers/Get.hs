@@ -54,7 +54,7 @@ type MobileCarriersGetResource =
 -- | Gets one mobile carrier by ID.
 --
 -- /See:/ 'mobileCarriersGet' smart constructor.
-data MobileCarriersGet = MobileCarriersGet
+data MobileCarriersGet = MobileCarriersGet'
     { _mcgProFileId :: !(Textual Int64)
     , _mcgId        :: !(Textual Int64)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ mobileCarriersGet
     -> Int64 -- ^ 'mcgId'
     -> MobileCarriersGet
 mobileCarriersGet pMcgProFileId_ pMcgId_ =
-    MobileCarriersGet
+    MobileCarriersGet'
     { _mcgProFileId = _Coerce # pMcgProFileId_
     , _mcgId = _Coerce # pMcgId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest MobileCarriersGet where
         type Rs MobileCarriersGet = MobileCarrier
         type Scopes MobileCarriersGet =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient MobileCarriersGet{..}
+        requestClient MobileCarriersGet'{..}
           = go _mcgProFileId _mcgId (Just AltJSON)
               dFAReportingService
           where go

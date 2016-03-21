@@ -55,7 +55,7 @@ type ContentCategoriesInsertResource =
 -- | Inserts a new content category.
 --
 -- /See:/ 'contentCategoriesInsert' smart constructor.
-data ContentCategoriesInsert = ContentCategoriesInsert
+data ContentCategoriesInsert = ContentCategoriesInsert'
     { _cciProFileId :: !(Textual Int64)
     , _cciPayload   :: !ContentCategory
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -72,7 +72,7 @@ contentCategoriesInsert
     -> ContentCategory -- ^ 'cciPayload'
     -> ContentCategoriesInsert
 contentCategoriesInsert pCciProFileId_ pCciPayload_ =
-    ContentCategoriesInsert
+    ContentCategoriesInsert'
     { _cciProFileId = _Coerce # pCciProFileId_
     , _cciPayload = pCciPayload_
     }
@@ -92,7 +92,7 @@ instance GoogleRequest ContentCategoriesInsert where
         type Rs ContentCategoriesInsert = ContentCategory
         type Scopes ContentCategoriesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient ContentCategoriesInsert{..}
+        requestClient ContentCategoriesInsert'{..}
           = go _cciProFileId (Just AltJSON) _cciPayload
               dFAReportingService
           where go

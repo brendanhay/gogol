@@ -59,7 +59,7 @@ type AdvertiserGroupsPatchResource =
 -- semantics.
 --
 -- /See:/ 'advertiserGroupsPatch' smart constructor.
-data AdvertiserGroupsPatch = AdvertiserGroupsPatch
+data AdvertiserGroupsPatch = AdvertiserGroupsPatch'
     { _agpProFileId :: !(Textual Int64)
     , _agpPayload   :: !AdvertiserGroup
     , _agpId        :: !(Textual Int64)
@@ -80,7 +80,7 @@ advertiserGroupsPatch
     -> Int64 -- ^ 'agpId'
     -> AdvertiserGroupsPatch
 advertiserGroupsPatch pAgpProFileId_ pAgpPayload_ pAgpId_ =
-    AdvertiserGroupsPatch
+    AdvertiserGroupsPatch'
     { _agpProFileId = _Coerce # pAgpProFileId_
     , _agpPayload = pAgpPayload_
     , _agpId = _Coerce # pAgpId_
@@ -106,7 +106,7 @@ instance GoogleRequest AdvertiserGroupsPatch where
         type Rs AdvertiserGroupsPatch = AdvertiserGroup
         type Scopes AdvertiserGroupsPatch =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient AdvertiserGroupsPatch{..}
+        requestClient AdvertiserGroupsPatch'{..}
           = go _agpProFileId (Just _agpId) (Just AltJSON)
               _agpPayload
               dFAReportingService

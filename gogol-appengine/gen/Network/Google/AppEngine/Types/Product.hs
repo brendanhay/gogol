@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- | Target scaling by network usage (for VM runtimes only).
 --
 -- /See:/ 'networkUtilization' smart constructor.
-data NetworkUtilization = NetworkUtilization
+data NetworkUtilization = NetworkUtilization'
     { _nuTargetReceivedBytesPerSec   :: !(Maybe (Textual Int32))
     , _nuTargetSentPacketsPerSec     :: !(Maybe (Textual Int32))
     , _nuTargetReceivedPacketsPerSec :: !(Maybe (Textual Int32))
@@ -44,7 +44,7 @@ data NetworkUtilization = NetworkUtilization
 networkUtilization
     :: NetworkUtilization
 networkUtilization =
-    NetworkUtilization
+    NetworkUtilization'
     { _nuTargetReceivedBytesPerSec = Nothing
     , _nuTargetSentPacketsPerSec = Nothing
     , _nuTargetReceivedPacketsPerSec = Nothing
@@ -83,14 +83,14 @@ instance FromJSON NetworkUtilization where
         parseJSON
           = withObject "NetworkUtilization"
               (\ o ->
-                 NetworkUtilization <$>
+                 NetworkUtilization' <$>
                    (o .:? "targetReceivedBytesPerSec") <*>
                      (o .:? "targetSentPacketsPerSec")
                      <*> (o .:? "targetReceivedPacketsPerSec")
                      <*> (o .:? "targetSentBytesPerSec"))
 
 instance ToJSON NetworkUtilization where
-        toJSON NetworkUtilization{..}
+        toJSON NetworkUtilization'{..}
           = object
               (catMaybes
                  [("targetReceivedBytesPerSec" .=) <$>
@@ -139,7 +139,7 @@ instance ToJSON NetworkUtilization where
 -- for security\/privacy reasons.
 --
 -- /See:/ 'status' smart constructor.
-data Status = Status
+data Status = Status'
     { _sDetails :: !(Maybe [StatusDetailsItem])
     , _sCode    :: !(Maybe (Textual Int32))
     , _sMessage :: !(Maybe Text)
@@ -157,7 +157,7 @@ data Status = Status
 status
     :: Status
 status =
-    Status
+    Status'
     { _sDetails = Nothing
     , _sCode = Nothing
     , _sMessage = Nothing
@@ -187,12 +187,12 @@ instance FromJSON Status where
         parseJSON
           = withObject "Status"
               (\ o ->
-                 Status <$>
+                 Status' <$>
                    (o .:? "details" .!= mempty) <*> (o .:? "code") <*>
                      (o .:? "message"))
 
 instance ToJSON Status where
-        toJSON Status{..}
+        toJSON Status'{..}
           = object
               (catMaybes
                  [("details" .=) <$> _sDetails,
@@ -205,7 +205,7 @@ instance ToJSON Status where
 -- long-running operation should document the metadata type, if any.
 --
 -- /See:/ 'operationSchema' smart constructor.
-newtype OperationSchema = OperationSchema
+newtype OperationSchema = OperationSchema'
     { _osAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -218,7 +218,7 @@ operationSchema
     :: HashMap Text JSONValue -- ^ 'osAddtional'
     -> OperationSchema
 operationSchema pOsAddtional_ =
-    OperationSchema
+    OperationSchema'
     { _osAddtional = _Coerce # pOsAddtional_
     }
 
@@ -231,7 +231,7 @@ osAddtional
 instance FromJSON OperationSchema where
         parseJSON
           = withObject "OperationSchema"
-              (\ o -> OperationSchema <$> (parseJSONObject o))
+              (\ o -> OperationSchema' <$> (parseJSONObject o))
 
 instance ToJSON OperationSchema where
         toJSON = toJSON . _osAddtional
@@ -242,7 +242,7 @@ instance ToJSON OperationSchema where
 -- experiments and canarying new builds, for example.
 --
 -- /See:/ 'trafficSplit' smart constructor.
-data TrafficSplit = TrafficSplit
+data TrafficSplit = TrafficSplit'
     { _tsShardBy     :: !(Maybe Text)
     , _tsAllocations :: !(Maybe TrafficSplitAllocations)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -257,7 +257,7 @@ data TrafficSplit = TrafficSplit
 trafficSplit
     :: TrafficSplit
 trafficSplit =
-    TrafficSplit
+    TrafficSplit'
     { _tsShardBy = Nothing
     , _tsAllocations = Nothing
     }
@@ -286,11 +286,11 @@ instance FromJSON TrafficSplit where
         parseJSON
           = withObject "TrafficSplit"
               (\ o ->
-                 TrafficSplit <$>
+                 TrafficSplit' <$>
                    (o .:? "shardBy") <*> (o .:? "allocations"))
 
 instance ToJSON TrafficSplit where
-        toJSON TrafficSplit{..}
+        toJSON TrafficSplit'{..}
           = object
               (catMaybes
                  [("shardBy" .=) <$> _tsShardBy,
@@ -299,7 +299,7 @@ instance ToJSON TrafficSplit where
 -- | Executes a script to handle the request that matches the URL pattern.
 --
 -- /See:/ 'scriptHandler' smart constructor.
-newtype ScriptHandler = ScriptHandler
+newtype ScriptHandler = ScriptHandler'
     { _shScriptPath :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -311,7 +311,7 @@ newtype ScriptHandler = ScriptHandler
 scriptHandler
     :: ScriptHandler
 scriptHandler =
-    ScriptHandler
+    ScriptHandler'
     { _shScriptPath = Nothing
     }
 
@@ -323,17 +323,17 @@ shScriptPath
 instance FromJSON ScriptHandler where
         parseJSON
           = withObject "ScriptHandler"
-              (\ o -> ScriptHandler <$> (o .:? "scriptPath"))
+              (\ o -> ScriptHandler' <$> (o .:? "scriptPath"))
 
 instance ToJSON ScriptHandler where
-        toJSON ScriptHandler{..}
+        toJSON ScriptHandler'{..}
           = object
               (catMaybes [("scriptPath" .=) <$> _shScriptPath])
 
 -- | Response message for \`Services.ListServices\`.
 --
 -- /See:/ 'listServicesResponse' smart constructor.
-data ListServicesResponse = ListServicesResponse
+data ListServicesResponse = ListServicesResponse'
     { _lsrNextPageToken :: !(Maybe Text)
     , _lsrServices      :: !(Maybe [Service])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -348,7 +348,7 @@ data ListServicesResponse = ListServicesResponse
 listServicesResponse
     :: ListServicesResponse
 listServicesResponse =
-    ListServicesResponse
+    ListServicesResponse'
     { _lsrNextPageToken = Nothing
     , _lsrServices = Nothing
     }
@@ -370,12 +370,12 @@ instance FromJSON ListServicesResponse where
         parseJSON
           = withObject "ListServicesResponse"
               (\ o ->
-                 ListServicesResponse <$>
+                 ListServicesResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "services" .!= mempty))
 
 instance ToJSON ListServicesResponse where
-        toJSON ListServicesResponse{..}
+        toJSON ListServicesResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lsrNextPageToken,
@@ -386,7 +386,7 @@ instance ToJSON ListServicesResponse where
 -- files uploaded with the code, such as images, CSS or JavaScript.
 --
 -- /See:/ 'urlMap' smart constructor.
-data URLMap = URLMap
+data URLMap = URLMap'
     { _umScript                   :: !(Maybe ScriptHandler)
     , _umSecurityLevel            :: !(Maybe Text)
     , _umAPIEndpoint              :: !(Maybe APIEndpointHandler)
@@ -419,7 +419,7 @@ data URLMap = URLMap
 urlMap
     :: URLMap
 urlMap =
-    URLMap
+    URLMap'
     { _umScript = Nothing
     , _umSecurityLevel = Nothing
     , _umAPIEndpoint = Nothing
@@ -483,7 +483,7 @@ instance FromJSON URLMap where
         parseJSON
           = withObject "URLMap"
               (\ o ->
-                 URLMap <$>
+                 URLMap' <$>
                    (o .:? "script") <*> (o .:? "securityLevel") <*>
                      (o .:? "apiEndpoint")
                      <*> (o .:? "urlRegex")
@@ -493,7 +493,7 @@ instance FromJSON URLMap where
                      <*> (o .:? "login"))
 
 instance ToJSON URLMap where
-        toJSON URLMap{..}
+        toJSON URLMap'{..}
           = object
               (catMaybes
                  [("script" .=) <$> _umScript,
@@ -509,7 +509,7 @@ instance ToJSON URLMap where
 -- | A Python runtime third-party library required by the application.
 --
 -- /See:/ 'library' smart constructor.
-data Library = Library
+data Library = Library'
     { _lName    :: !(Maybe Text)
     , _lVersion :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -524,7 +524,7 @@ data Library = Library
 library
     :: Library
 library =
-    Library
+    Library'
     { _lName = Nothing
     , _lVersion = Nothing
     }
@@ -541,10 +541,10 @@ instance FromJSON Library where
         parseJSON
           = withObject "Library"
               (\ o ->
-                 Library <$> (o .:? "name") <*> (o .:? "version"))
+                 Library' <$> (o .:? "name") <*> (o .:? "version"))
 
 instance ToJSON Library where
-        toJSON Library{..}
+        toJSON Library'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _lName,
@@ -553,7 +553,7 @@ instance ToJSON Library where
 -- | Target scaling by disk usage (for VM runtimes only).
 --
 -- /See:/ 'diskUtilization' smart constructor.
-data DiskUtilization = DiskUtilization
+data DiskUtilization = DiskUtilization'
     { _duTargetWriteOpsPerSec   :: !(Maybe (Textual Int32))
     , _duTargetReadOpsPerSec    :: !(Maybe (Textual Int32))
     , _duTargetWriteBytesPerSec :: !(Maybe (Textual Int32))
@@ -574,7 +574,7 @@ data DiskUtilization = DiskUtilization
 diskUtilization
     :: DiskUtilization
 diskUtilization =
-    DiskUtilization
+    DiskUtilization'
     { _duTargetWriteOpsPerSec = Nothing
     , _duTargetReadOpsPerSec = Nothing
     , _duTargetWriteBytesPerSec = Nothing
@@ -613,14 +613,14 @@ instance FromJSON DiskUtilization where
         parseJSON
           = withObject "DiskUtilization"
               (\ o ->
-                 DiskUtilization <$>
+                 DiskUtilization' <$>
                    (o .:? "targetWriteOpsPerSec") <*>
                      (o .:? "targetReadOpsPerSec")
                      <*> (o .:? "targetWriteBytesPerSec")
                      <*> (o .:? "targetReadBytesPerSec"))
 
 instance ToJSON DiskUtilization where
-        toJSON DiskUtilization{..}
+        toJSON DiskUtilization'{..}
           = object
               (catMaybes
                  [("targetWriteOpsPerSec" .=) <$>
@@ -635,7 +635,7 @@ instance ToJSON DiskUtilization where
 -- | The response message for Operations.ListOperations.
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
-data ListOperationsResponse = ListOperationsResponse
+data ListOperationsResponse = ListOperationsResponse'
     { _lorNextPageToken :: !(Maybe Text)
     , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -650,7 +650,7 @@ data ListOperationsResponse = ListOperationsResponse
 listOperationsResponse
     :: ListOperationsResponse
 listOperationsResponse =
-    ListOperationsResponse
+    ListOperationsResponse'
     { _lorNextPageToken = Nothing
     , _lorOperations = Nothing
     }
@@ -673,12 +673,12 @@ instance FromJSON ListOperationsResponse where
         parseJSON
           = withObject "ListOperationsResponse"
               (\ o ->
-                 ListOperationsResponse <$>
+                 ListOperationsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "operations" .!= mempty))
 
 instance ToJSON ListOperationsResponse where
-        toJSON ListOperationsResponse{..}
+        toJSON ListOperationsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lorNextPageToken,
@@ -688,7 +688,7 @@ instance ToJSON ListOperationsResponse where
 -- will be killed and replaced with new instances.
 --
 -- /See:/ 'healthCheck' smart constructor.
-data HealthCheck = HealthCheck
+data HealthCheck = HealthCheck'
     { _hcHealthyThreshold   :: !(Maybe (Textual Word32))
     , _hcDisableHealthCheck :: !(Maybe Bool)
     , _hcCheckInterval      :: !(Maybe Text)
@@ -718,7 +718,7 @@ data HealthCheck = HealthCheck
 healthCheck
     :: HealthCheck
 healthCheck =
-    HealthCheck
+    HealthCheck'
     { _hcHealthyThreshold = Nothing
     , _hcDisableHealthCheck = Nothing
     , _hcCheckInterval = Nothing
@@ -777,7 +777,7 @@ instance FromJSON HealthCheck where
         parseJSON
           = withObject "HealthCheck"
               (\ o ->
-                 HealthCheck <$>
+                 HealthCheck' <$>
                    (o .:? "healthyThreshold") <*>
                      (o .:? "disableHealthCheck")
                      <*> (o .:? "checkInterval")
@@ -787,7 +787,7 @@ instance FromJSON HealthCheck where
                      <*> (o .:? "unhealthyThreshold"))
 
 instance ToJSON HealthCheck where
-        toJSON HealthCheck{..}
+        toJSON HealthCheck'{..}
           = object
               (catMaybes
                  [("healthyThreshold" .=) <$> _hcHealthyThreshold,
@@ -801,7 +801,7 @@ instance ToJSON HealthCheck where
 -- | API Serving configuration for Cloud Endpoints.
 --
 -- /See:/ 'apiConfigHandler' smart constructor.
-data APIConfigHandler = APIConfigHandler
+data APIConfigHandler = APIConfigHandler'
     { _achScript         :: !(Maybe Text)
     , _achSecurityLevel  :: !(Maybe Text)
     , _achURL            :: !(Maybe Text)
@@ -825,7 +825,7 @@ data APIConfigHandler = APIConfigHandler
 apiConfigHandler
     :: APIConfigHandler
 apiConfigHandler =
-    APIConfigHandler
+    APIConfigHandler'
     { _achScript = Nothing
     , _achSecurityLevel = Nothing
     , _achURL = Nothing
@@ -864,14 +864,14 @@ instance FromJSON APIConfigHandler where
         parseJSON
           = withObject "APIConfigHandler"
               (\ o ->
-                 APIConfigHandler <$>
+                 APIConfigHandler' <$>
                    (o .:? "script") <*> (o .:? "securityLevel") <*>
                      (o .:? "url")
                      <*> (o .:? "authFailAction")
                      <*> (o .:? "login"))
 
 instance ToJSON APIConfigHandler where
-        toJSON APIConfigHandler{..}
+        toJSON APIConfigHandler'{..}
           = object
               (catMaybes
                  [("script" .=) <$> _achScript,
@@ -885,7 +885,7 @@ instance ToJSON APIConfigHandler where
 -- requests; once created, is immutable.
 --
 -- /See:/ 'versionEnvVariables' smart constructor.
-newtype VersionEnvVariables = VersionEnvVariables
+newtype VersionEnvVariables = VersionEnvVariables'
     { _vevAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -898,7 +898,7 @@ versionEnvVariables
     :: HashMap Text Text -- ^ 'vevAddtional'
     -> VersionEnvVariables
 versionEnvVariables pVevAddtional_ =
-    VersionEnvVariables
+    VersionEnvVariables'
     { _vevAddtional = _Coerce # pVevAddtional_
     }
 
@@ -910,7 +910,7 @@ vevAddtional
 instance FromJSON VersionEnvVariables where
         parseJSON
           = withObject "VersionEnvVariables"
-              (\ o -> VersionEnvVariables <$> (parseJSONObject o))
+              (\ o -> VersionEnvVariables' <$> (parseJSONObject o))
 
 instance ToJSON VersionEnvVariables where
         toJSON = toJSON . _vevAddtional
@@ -919,7 +919,7 @@ instance ToJSON VersionEnvVariables where
 -- application.
 --
 -- /See:/ 'application' smart constructor.
-data Application = Application
+data Application = Application'
     { _aDefaultHostname         :: !(Maybe Text)
     , _aDefaultCookieExpiration :: !(Maybe Text)
     , _aLocation                :: !(Maybe Text)
@@ -955,7 +955,7 @@ data Application = Application
 application
     :: Application
 application =
-    Application
+    Application'
     { _aDefaultHostname = Nothing
     , _aDefaultCookieExpiration = Nothing
     , _aLocation = Nothing
@@ -1034,7 +1034,7 @@ instance FromJSON Application where
         parseJSON
           = withObject "Application"
               (\ o ->
-                 Application <$>
+                 Application' <$>
                    (o .:? "defaultHostname") <*>
                      (o .:? "defaultCookieExpiration")
                      <*> (o .:? "location")
@@ -1046,7 +1046,7 @@ instance FromJSON Application where
                      <*> (o .:? "id"))
 
 instance ToJSON Application where
-        toJSON Application{..}
+        toJSON Application'{..}
           = object
               (catMaybes
                  [("defaultHostname" .=) <$> _aDefaultHostname,
@@ -1063,7 +1063,7 @@ instance ToJSON Application where
 -- | Beta settings supplied to the application via metadata.
 --
 -- /See:/ 'versionBetaSettings' smart constructor.
-newtype VersionBetaSettings = VersionBetaSettings
+newtype VersionBetaSettings = VersionBetaSettings'
     { _vbsAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1076,7 +1076,7 @@ versionBetaSettings
     :: HashMap Text Text -- ^ 'vbsAddtional'
     -> VersionBetaSettings
 versionBetaSettings pVbsAddtional_ =
-    VersionBetaSettings
+    VersionBetaSettings'
     { _vbsAddtional = _Coerce # pVbsAddtional_
     }
 
@@ -1088,7 +1088,7 @@ vbsAddtional
 instance FromJSON VersionBetaSettings where
         parseJSON
           = withObject "VersionBetaSettings"
-              (\ o -> VersionBetaSettings <$> (parseJSONObject o))
+              (\ o -> VersionBetaSettings' <$> (parseJSONObject o))
 
 instance ToJSON VersionBetaSettings where
         toJSON = toJSON . _vbsAddtional
@@ -1102,7 +1102,7 @@ instance ToJSON VersionBetaSettings where
 -- that service.
 --
 -- /See:/ 'service' smart constructor.
-data Service = Service
+data Service = Service'
     { _sSplit :: !(Maybe TrafficSplit)
     , _sName  :: !(Maybe Text)
     , _sId    :: !(Maybe Text)
@@ -1120,7 +1120,7 @@ data Service = Service
 service
     :: Service
 service =
-    Service
+    Service'
     { _sSplit = Nothing
     , _sName = Nothing
     , _sId = Nothing
@@ -1145,11 +1145,11 @@ instance FromJSON Service where
         parseJSON
           = withObject "Service"
               (\ o ->
-                 Service <$>
+                 Service' <$>
                    (o .:? "split") <*> (o .:? "name") <*> (o .:? "id"))
 
 instance ToJSON Service where
-        toJSON Service{..}
+        toJSON Service'{..}
           = object
               (catMaybes
                  [("split" .=) <$> _sSplit, ("name" .=) <$> _sName,
@@ -1159,7 +1159,7 @@ instance ToJSON Service where
 -- a network API call.
 --
 -- /See:/ 'operation' smart constructor.
-data Operation = Operation
+data Operation = Operation'
     { _oDone     :: !(Maybe Bool)
     , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
@@ -1183,7 +1183,7 @@ data Operation = Operation
 operation
     :: Operation
 operation =
-    Operation
+    Operation'
     { _oDone = Nothing
     , _oError = Nothing
     , _oResponse = Nothing
@@ -1231,14 +1231,14 @@ instance FromJSON Operation where
         parseJSON
           = withObject "Operation"
               (\ o ->
-                 Operation <$>
+                 Operation' <$>
                    (o .:? "done") <*> (o .:? "error") <*>
                      (o .:? "response")
                      <*> (o .:? "name")
                      <*> (o .:? "metadata"))
 
 instance ToJSON Operation where
-        toJSON Operation{..}
+        toJSON Operation'{..}
           = object
               (catMaybes
                  [("done" .=) <$> _oDone, ("error" .=) <$> _oError,
@@ -1249,7 +1249,7 @@ instance ToJSON Operation where
 -- | Rules to match an HTTP request and dispatch that request to a service.
 --
 -- /See:/ 'urlDispatchRule' smart constructor.
-data URLDispatchRule = URLDispatchRule
+data URLDispatchRule = URLDispatchRule'
     { _udrPath    :: !(Maybe Text)
     , _udrService :: !(Maybe Text)
     , _udrDomain  :: !(Maybe Text)
@@ -1267,7 +1267,7 @@ data URLDispatchRule = URLDispatchRule
 urlDispatchRule
     :: URLDispatchRule
 urlDispatchRule =
-    URLDispatchRule
+    URLDispatchRule'
     { _udrPath = Nothing
     , _udrService = Nothing
     , _udrDomain = Nothing
@@ -1296,12 +1296,12 @@ instance FromJSON URLDispatchRule where
         parseJSON
           = withObject "URLDispatchRule"
               (\ o ->
-                 URLDispatchRule <$>
+                 URLDispatchRule' <$>
                    (o .:? "path") <*> (o .:? "service") <*>
                      (o .:? "domain"))
 
 instance ToJSON URLDispatchRule where
-        toJSON URLDispatchRule{..}
+        toJSON URLDispatchRule'{..}
           = object
               (catMaybes
                  [("path" .=) <$> _udrPath,
@@ -1311,7 +1311,7 @@ instance ToJSON URLDispatchRule where
 -- | Response message for \`Versions.ListVersions\`.
 --
 -- /See:/ 'listVersionsResponse' smart constructor.
-data ListVersionsResponse = ListVersionsResponse
+data ListVersionsResponse = ListVersionsResponse'
     { _lvrNextPageToken :: !(Maybe Text)
     , _lvrVersions      :: !(Maybe [Version])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1326,7 +1326,7 @@ data ListVersionsResponse = ListVersionsResponse
 listVersionsResponse
     :: ListVersionsResponse
 listVersionsResponse =
-    ListVersionsResponse
+    ListVersionsResponse'
     { _lvrNextPageToken = Nothing
     , _lvrVersions = Nothing
     }
@@ -1348,12 +1348,12 @@ instance FromJSON ListVersionsResponse where
         parseJSON
           = withObject "ListVersionsResponse"
               (\ o ->
-                 ListVersionsResponse <$>
+                 ListVersionsResponse' <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "versions" .!= mempty))
 
 instance ToJSON ListVersionsResponse where
-        toJSON ListVersionsResponse{..}
+        toJSON ListVersionsResponse'{..}
           = object
               (catMaybes
                  [("nextPageToken" .=) <$> _lvrNextPageToken,
@@ -1362,7 +1362,7 @@ instance ToJSON ListVersionsResponse where
 -- | A single source file which is part of the application to be deployed.
 --
 -- /See:/ 'fileInfo' smart constructor.
-data FileInfo = FileInfo
+data FileInfo = FileInfo'
     { _fiSha1Sum   :: !(Maybe Text)
     , _fiMimeType  :: !(Maybe Text)
     , _fiSourceURL :: !(Maybe Text)
@@ -1380,7 +1380,7 @@ data FileInfo = FileInfo
 fileInfo
     :: FileInfo
 fileInfo =
-    FileInfo
+    FileInfo'
     { _fiSha1Sum = Nothing
     , _fiMimeType = Nothing
     , _fiSourceURL = Nothing
@@ -1408,12 +1408,12 @@ instance FromJSON FileInfo where
         parseJSON
           = withObject "FileInfo"
               (\ o ->
-                 FileInfo <$>
+                 FileInfo' <$>
                    (o .:? "sha1Sum") <*> (o .:? "mimeType") <*>
                      (o .:? "sourceUrl"))
 
 instance ToJSON FileInfo where
-        toJSON FileInfo{..}
+        toJSON FileInfo'{..}
           = object
               (catMaybes
                  [("sha1Sum" .=) <$> _fiSha1Sum,
@@ -1425,7 +1425,7 @@ instance ToJSON FileInfo where
 -- other application metrics.
 --
 -- /See:/ 'automaticScaling' smart constructor.
-data AutomaticScaling = AutomaticScaling
+data AutomaticScaling = AutomaticScaling'
     { _asNetworkUtilization    :: !(Maybe NetworkUtilization)
     , _asMaxTotalInstances     :: !(Maybe (Textual Int32))
     , _asMinIdleInstances      :: !(Maybe (Textual Int32))
@@ -1470,7 +1470,7 @@ data AutomaticScaling = AutomaticScaling
 automaticScaling
     :: AutomaticScaling
 automaticScaling =
-    AutomaticScaling
+    AutomaticScaling'
     { _asNetworkUtilization = Nothing
     , _asMaxTotalInstances = Nothing
     , _asMinIdleInstances = Nothing
@@ -1576,7 +1576,7 @@ instance FromJSON AutomaticScaling where
         parseJSON
           = withObject "AutomaticScaling"
               (\ o ->
-                 AutomaticScaling <$>
+                 AutomaticScaling' <$>
                    (o .:? "networkUtilization") <*>
                      (o .:? "maxTotalInstances")
                      <*> (o .:? "minIdleInstances")
@@ -1591,7 +1591,7 @@ instance FromJSON AutomaticScaling where
                      <*> (o .:? "maxPendingLatency"))
 
 instance ToJSON AutomaticScaling where
-        toJSON AutomaticScaling{..}
+        toJSON AutomaticScaling'{..}
           = object
               (catMaybes
                  [("networkUtilization" .=) <$> _asNetworkUtilization,
@@ -1611,7 +1611,7 @@ instance ToJSON AutomaticScaling where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadataV1Beta5' smart constructor.
-data OperationMetadataV1Beta5 = OperationMetadataV1Beta5
+data OperationMetadataV1Beta5 = OperationMetadataV1Beta5'
     { _omvbInsertTime :: !(Maybe Text)
     , _omvbUser       :: !(Maybe Text)
     , _omvbMethod     :: !(Maybe Text)
@@ -1635,7 +1635,7 @@ data OperationMetadataV1Beta5 = OperationMetadataV1Beta5
 operationMetadataV1Beta5
     :: OperationMetadataV1Beta5
 operationMetadataV1Beta5 =
-    OperationMetadataV1Beta5
+    OperationMetadataV1Beta5'
     { _omvbInsertTime = Nothing
     , _omvbUser = Nothing
     , _omvbMethod = Nothing
@@ -1675,14 +1675,14 @@ instance FromJSON OperationMetadataV1Beta5 where
         parseJSON
           = withObject "OperationMetadataV1Beta5"
               (\ o ->
-                 OperationMetadataV1Beta5 <$>
+                 OperationMetadataV1Beta5' <$>
                    (o .:? "insertTime") <*> (o .:? "user") <*>
                      (o .:? "method")
                      <*> (o .:? "endTime")
                      <*> (o .:? "target"))
 
 instance ToJSON OperationMetadataV1Beta5 where
-        toJSON OperationMetadataV1Beta5{..}
+        toJSON OperationMetadataV1Beta5'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _omvbInsertTime,
@@ -1694,7 +1694,7 @@ instance ToJSON OperationMetadataV1Beta5 where
 -- | Use Google Cloud Endpoints to handle requests.
 --
 -- /See:/ 'apiEndpointHandler' smart constructor.
-newtype APIEndpointHandler = APIEndpointHandler
+newtype APIEndpointHandler = APIEndpointHandler'
     { _aehScriptPath :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1706,7 +1706,7 @@ newtype APIEndpointHandler = APIEndpointHandler
 apiEndpointHandler
     :: APIEndpointHandler
 apiEndpointHandler =
-    APIEndpointHandler
+    APIEndpointHandler'
     { _aehScriptPath = Nothing
     }
 
@@ -1719,16 +1719,16 @@ aehScriptPath
 instance FromJSON APIEndpointHandler where
         parseJSON
           = withObject "APIEndpointHandler"
-              (\ o -> APIEndpointHandler <$> (o .:? "scriptPath"))
+              (\ o -> APIEndpointHandler' <$> (o .:? "scriptPath"))
 
 instance ToJSON APIEndpointHandler where
-        toJSON APIEndpointHandler{..}
+        toJSON APIEndpointHandler'{..}
           = object
               (catMaybes [("scriptPath" .=) <$> _aehScriptPath])
 
 --
 -- /See:/ 'statusDetailsItem' smart constructor.
-newtype StatusDetailsItem = StatusDetailsItem
+newtype StatusDetailsItem = StatusDetailsItem'
     { _sdiAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1741,7 +1741,7 @@ statusDetailsItem
     :: HashMap Text JSONValue -- ^ 'sdiAddtional'
     -> StatusDetailsItem
 statusDetailsItem pSdiAddtional_ =
-    StatusDetailsItem
+    StatusDetailsItem'
     { _sdiAddtional = _Coerce # pSdiAddtional_
     }
 
@@ -1754,7 +1754,7 @@ sdiAddtional
 instance FromJSON StatusDetailsItem where
         parseJSON
           = withObject "StatusDetailsItem"
-              (\ o -> StatusDetailsItem <$> (parseJSONObject o))
+              (\ o -> StatusDetailsItem' <$> (parseJSONObject o))
 
 instance ToJSON StatusDetailsItem where
         toJSON = toJSON . _sdiAddtional
@@ -1762,7 +1762,7 @@ instance ToJSON StatusDetailsItem where
 -- | Used to specify extra network settings (for VM runtimes only).
 --
 -- /See:/ 'network' smart constructor.
-data Network = Network
+data Network = Network'
     { _nForwardedPorts :: !(Maybe [Text])
     , _nInstanceTag    :: !(Maybe Text)
     , _nName           :: !(Maybe Text)
@@ -1780,7 +1780,7 @@ data Network = Network
 network
     :: Network
 network =
-    Network
+    Network'
     { _nForwardedPorts = Nothing
     , _nInstanceTag = Nothing
     , _nName = Nothing
@@ -1810,13 +1810,13 @@ instance FromJSON Network where
         parseJSON
           = withObject "Network"
               (\ o ->
-                 Network <$>
+                 Network' <$>
                    (o .:? "forwardedPorts" .!= mempty) <*>
                      (o .:? "instanceTag")
                      <*> (o .:? "name"))
 
 instance ToJSON Network where
-        toJSON Network{..}
+        toJSON Network'{..}
           = object
               (catMaybes
                  [("forwardedPorts" .=) <$> _nForwardedPorts,
@@ -1826,7 +1826,7 @@ instance ToJSON Network where
 -- | HTTP headers to use for all responses from these URLs.
 --
 -- /See:/ 'staticFilesHandlerHTTPHeaders' smart constructor.
-newtype StaticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders
+newtype StaticFilesHandlerHTTPHeaders = StaticFilesHandlerHTTPHeaders'
     { _sfhhttphAddtional :: HashMap Text Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1839,7 +1839,7 @@ staticFilesHandlerHTTPHeaders
     :: HashMap Text Text -- ^ 'sfhhttphAddtional'
     -> StaticFilesHandlerHTTPHeaders
 staticFilesHandlerHTTPHeaders pSfhhttphAddtional_ =
-    StaticFilesHandlerHTTPHeaders
+    StaticFilesHandlerHTTPHeaders'
     { _sfhhttphAddtional = _Coerce # pSfhhttphAddtional_
     }
 
@@ -1853,7 +1853,7 @@ instance FromJSON StaticFilesHandlerHTTPHeaders where
         parseJSON
           = withObject "StaticFilesHandlerHTTPHeaders"
               (\ o ->
-                 StaticFilesHandlerHTTPHeaders <$>
+                 StaticFilesHandlerHTTPHeaders' <$>
                    (parseJSONObject o))
 
 instance ToJSON StaticFilesHandlerHTTPHeaders where
@@ -1862,7 +1862,7 @@ instance ToJSON StaticFilesHandlerHTTPHeaders where
 -- | Used to specify how many machine resources an app version needs.
 --
 -- /See:/ 'resources' smart constructor.
-data Resources = Resources
+data Resources = Resources'
     { _rMemoryGb :: !(Maybe (Textual Double))
     , _rDiskGb   :: !(Maybe (Textual Double))
     , _rCPU      :: !(Maybe (Textual Double))
@@ -1880,7 +1880,7 @@ data Resources = Resources
 resources
     :: Resources
 resources =
-    Resources
+    Resources'
     { _rMemoryGb = Nothing
     , _rDiskGb = Nothing
     , _rCPU = Nothing
@@ -1908,12 +1908,12 @@ instance FromJSON Resources where
         parseJSON
           = withObject "Resources"
               (\ o ->
-                 Resources <$>
+                 Resources' <$>
                    (o .:? "memoryGb") <*> (o .:? "diskGb") <*>
                      (o .:? "cpu"))
 
 instance ToJSON Resources where
-        toJSON Resources{..}
+        toJSON Resources'{..}
           = object
               (catMaybes
                  [("memoryGb" .=) <$> _rMemoryGb,
@@ -1924,7 +1924,7 @@ instance ToJSON Resources where
 -- the credentials supplied with this call.
 --
 -- /See:/ 'deploymentFiles' smart constructor.
-newtype DeploymentFiles = DeploymentFiles
+newtype DeploymentFiles = DeploymentFiles'
     { _dfAddtional :: HashMap Text FileInfo
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1937,7 +1937,7 @@ deploymentFiles
     :: HashMap Text FileInfo -- ^ 'dfAddtional'
     -> DeploymentFiles
 deploymentFiles pDfAddtional_ =
-    DeploymentFiles
+    DeploymentFiles'
     { _dfAddtional = _Coerce # pDfAddtional_
     }
 
@@ -1949,7 +1949,7 @@ dfAddtional
 instance FromJSON DeploymentFiles where
         parseJSON
           = withObject "DeploymentFiles"
-              (\ o -> DeploymentFiles <$> (parseJSONObject o))
+              (\ o -> DeploymentFiles' <$> (parseJSONObject o))
 
 instance ToJSON DeploymentFiles where
         toJSON = toJSON . _dfAddtional
@@ -1957,7 +1957,7 @@ instance ToJSON DeploymentFiles where
 -- | Target scaling by CPU usage.
 --
 -- /See:/ 'cpuUtilization' smart constructor.
-data CPUUtilization = CPUUtilization
+data CPUUtilization = CPUUtilization'
     { _cuAggregationWindowLength :: !(Maybe Text)
     , _cuTargetUtilization       :: !(Maybe (Textual Double))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -1972,7 +1972,7 @@ data CPUUtilization = CPUUtilization
 cpuUtilization
     :: CPUUtilization
 cpuUtilization =
-    CPUUtilization
+    CPUUtilization'
     { _cuAggregationWindowLength = Nothing
     , _cuTargetUtilization = Nothing
     }
@@ -1994,12 +1994,12 @@ instance FromJSON CPUUtilization where
         parseJSON
           = withObject "CPUUtilization"
               (\ o ->
-                 CPUUtilization <$>
+                 CPUUtilization' <$>
                    (o .:? "aggregationWindowLength") <*>
                      (o .:? "targetUtilization"))
 
 instance ToJSON CPUUtilization where
-        toJSON CPUUtilization{..}
+        toJSON CPUUtilization'{..}
           = object
               (catMaybes
                  [("aggregationWindowLength" .=) <$>
@@ -2016,7 +2016,7 @@ instance ToJSON CPUUtilization where
 -- for cookie-based splits.
 --
 -- /See:/ 'trafficSplitAllocations' smart constructor.
-newtype TrafficSplitAllocations = TrafficSplitAllocations
+newtype TrafficSplitAllocations = TrafficSplitAllocations'
     { _tsaAddtional :: HashMap Text (Textual Double)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2029,7 +2029,7 @@ trafficSplitAllocations
     :: HashMap Text Double -- ^ 'tsaAddtional'
     -> TrafficSplitAllocations
 trafficSplitAllocations pTsaAddtional_ =
-    TrafficSplitAllocations
+    TrafficSplitAllocations'
     { _tsaAddtional = _Coerce # pTsaAddtional_
     }
 
@@ -2042,7 +2042,7 @@ instance FromJSON TrafficSplitAllocations where
         parseJSON
           = withObject "TrafficSplitAllocations"
               (\ o ->
-                 TrafficSplitAllocations <$> (parseJSONObject o))
+                 TrafficSplitAllocations' <$> (parseJSONObject o))
 
 instance ToJSON TrafficSplitAllocations where
         toJSON = toJSON . _tsaAddtional
@@ -2051,7 +2051,7 @@ instance ToJSON TrafficSplitAllocations where
 -- complex initialization and rely on the state of its memory over time.
 --
 -- /See:/ 'manualScaling' smart constructor.
-newtype ManualScaling = ManualScaling
+newtype ManualScaling = ManualScaling'
     { _msInstances :: Maybe (Textual Int32)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2063,7 +2063,7 @@ newtype ManualScaling = ManualScaling
 manualScaling
     :: ManualScaling
 manualScaling =
-    ManualScaling
+    ManualScaling'
     { _msInstances = Nothing
     }
 
@@ -2079,10 +2079,10 @@ msInstances
 instance FromJSON ManualScaling where
         parseJSON
           = withObject "ManualScaling"
-              (\ o -> ManualScaling <$> (o .:? "instances"))
+              (\ o -> ManualScaling' <$> (o .:? "instances"))
 
 instance ToJSON ManualScaling where
-        toJSON ManualScaling{..}
+        toJSON ManualScaling'{..}
           = object
               (catMaybes [("instances" .=) <$> _msInstances])
 
@@ -2092,7 +2092,7 @@ instance ToJSON ManualScaling where
 -- intermittent or driven by user activity.
 --
 -- /See:/ 'basicScaling' smart constructor.
-data BasicScaling = BasicScaling
+data BasicScaling = BasicScaling'
     { _bsMaxInstances :: !(Maybe (Textual Int32))
     , _bsIdleTimeout  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2107,7 +2107,7 @@ data BasicScaling = BasicScaling
 basicScaling
     :: BasicScaling
 basicScaling =
-    BasicScaling
+    BasicScaling'
     { _bsMaxInstances = Nothing
     , _bsIdleTimeout = Nothing
     }
@@ -2131,11 +2131,11 @@ instance FromJSON BasicScaling where
         parseJSON
           = withObject "BasicScaling"
               (\ o ->
-                 BasicScaling <$>
+                 BasicScaling' <$>
                    (o .:? "maxInstances") <*> (o .:? "idleTimeout"))
 
 instance ToJSON BasicScaling where
-        toJSON BasicScaling{..}
+        toJSON BasicScaling'{..}
           = object
               (catMaybes
                  [("maxInstances" .=) <$> _bsMaxInstances,
@@ -2145,7 +2145,7 @@ instance ToJSON BasicScaling where
 -- deployed to a service.
 --
 -- /See:/ 'version' smart constructor.
-data Version = Version
+data Version = Version'
     { _vCreationTime      :: !(Maybe Text)
     , _vRuntime           :: !(Maybe Text)
     , _vDeployer          :: !(Maybe Text)
@@ -2235,7 +2235,7 @@ data Version = Version
 version
     :: Version
 version =
-    Version
+    Version'
     { _vCreationTime = Nothing
     , _vRuntime = Nothing
     , _vDeployer = Nothing
@@ -2463,7 +2463,7 @@ instance FromJSON Version where
         parseJSON
           = withObject "Version"
               (\ o ->
-                 Version <$>
+                 Version' <$>
                    (o .:? "creationTime") <*> (o .:? "runtime") <*>
                      (o .:? "deployer")
                      <*> (o .:? "nobuildFilesRegex")
@@ -2492,7 +2492,7 @@ instance FromJSON Version where
                      <*> (o .:? "deployment"))
 
 instance ToJSON Version where
-        toJSON Version{..}
+        toJSON Version'{..}
           = object
               (catMaybes
                  [("creationTime" .=) <$> _vCreationTime,
@@ -2527,7 +2527,7 @@ instance ToJSON Version where
 -- URLs serve them.
 --
 -- /See:/ 'staticFilesHandler' smart constructor.
-data StaticFilesHandler = StaticFilesHandler
+data StaticFilesHandler = StaticFilesHandler'
     { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
     , _sfhPath                :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
@@ -2557,7 +2557,7 @@ data StaticFilesHandler = StaticFilesHandler
 staticFilesHandler
     :: StaticFilesHandler
 staticFilesHandler =
-    StaticFilesHandler
+    StaticFilesHandler'
     { _sfhHTTPHeaders = Nothing
     , _sfhPath = Nothing
     , _sfhRequireMatchingFile = Nothing
@@ -2623,7 +2623,7 @@ instance FromJSON StaticFilesHandler where
         parseJSON
           = withObject "StaticFilesHandler"
               (\ o ->
-                 StaticFilesHandler <$>
+                 StaticFilesHandler' <$>
                    (o .:? "httpHeaders") <*> (o .:? "path") <*>
                      (o .:? "requireMatchingFile")
                      <*> (o .:? "expiration")
@@ -2632,7 +2632,7 @@ instance FromJSON StaticFilesHandler where
                      <*> (o .:? "uploadPathRegex"))
 
 instance ToJSON StaticFilesHandler where
-        toJSON StaticFilesHandler{..}
+        toJSON StaticFilesHandler'{..}
           = object
               (catMaybes
                  [("httpHeaders" .=) <$> _sfhHTTPHeaders,
@@ -2648,7 +2648,7 @@ instance ToJSON StaticFilesHandler where
 -- | A custom static error page to be served when an error occurs.
 --
 -- /See:/ 'errorHandler' smart constructor.
-data ErrorHandler = ErrorHandler
+data ErrorHandler = ErrorHandler'
     { _ehMimeType   :: !(Maybe Text)
     , _ehErrorCode  :: !(Maybe Text)
     , _ehStaticFile :: !(Maybe Text)
@@ -2666,7 +2666,7 @@ data ErrorHandler = ErrorHandler
 errorHandler
     :: ErrorHandler
 errorHandler =
-    ErrorHandler
+    ErrorHandler'
     { _ehMimeType = Nothing
     , _ehErrorCode = Nothing
     , _ehStaticFile = Nothing
@@ -2691,12 +2691,12 @@ instance FromJSON ErrorHandler where
         parseJSON
           = withObject "ErrorHandler"
               (\ o ->
-                 ErrorHandler <$>
+                 ErrorHandler' <$>
                    (o .:? "mimeType") <*> (o .:? "errorCode") <*>
                      (o .:? "staticFile"))
 
 instance ToJSON ErrorHandler where
-        toJSON ErrorHandler{..}
+        toJSON ErrorHandler'{..}
           = object
               (catMaybes
                  [("mimeType" .=) <$> _ehMimeType,
@@ -2706,7 +2706,7 @@ instance ToJSON ErrorHandler where
 -- | Metadata for the given google.longrunning.Operation.
 --
 -- /See:/ 'operationMetadata' smart constructor.
-data OperationMetadata = OperationMetadata
+data OperationMetadata = OperationMetadata'
     { _omInsertTime    :: !(Maybe Text)
     , _omUser          :: !(Maybe Text)
     , _omMethod        :: !(Maybe Text)
@@ -2733,7 +2733,7 @@ data OperationMetadata = OperationMetadata
 operationMetadata
     :: OperationMetadata
 operationMetadata =
-    OperationMetadata
+    OperationMetadata'
     { _omInsertTime = Nothing
     , _omUser = Nothing
     , _omMethod = Nothing
@@ -2778,7 +2778,7 @@ instance FromJSON OperationMetadata where
         parseJSON
           = withObject "OperationMetadata"
               (\ o ->
-                 OperationMetadata <$>
+                 OperationMetadata' <$>
                    (o .:? "insertTime") <*> (o .:? "user") <*>
                      (o .:? "method")
                      <*> (o .:? "endTime")
@@ -2786,7 +2786,7 @@ instance FromJSON OperationMetadata where
                      <*> (o .:? "target"))
 
 instance ToJSON OperationMetadata where
-        toJSON OperationMetadata{..}
+        toJSON OperationMetadata'{..}
           = object
               (catMaybes
                  [("insertTime" .=) <$> _omInsertTime,
@@ -2798,7 +2798,7 @@ instance ToJSON OperationMetadata where
 -- | Target scaling by request utilization (for VM runtimes only).
 --
 -- /See:/ 'requestUtilization' smart constructor.
-data RequestUtilization = RequestUtilization
+data RequestUtilization = RequestUtilization'
     { _ruTargetConcurrentRequests :: !(Maybe (Textual Int32))
     , _ruTargetRequestCountPerSec :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2813,7 +2813,7 @@ data RequestUtilization = RequestUtilization
 requestUtilization
     :: RequestUtilization
 requestUtilization =
-    RequestUtilization
+    RequestUtilization'
     { _ruTargetConcurrentRequests = Nothing
     , _ruTargetRequestCountPerSec = Nothing
     }
@@ -2836,12 +2836,12 @@ instance FromJSON RequestUtilization where
         parseJSON
           = withObject "RequestUtilization"
               (\ o ->
-                 RequestUtilization <$>
+                 RequestUtilization' <$>
                    (o .:? "targetConcurrentRequests") <*>
                      (o .:? "targetRequestCountPerSec"))
 
 instance ToJSON RequestUtilization where
-        toJSON RequestUtilization{..}
+        toJSON RequestUtilization'{..}
           = object
               (catMaybes
                  [("targetConcurrentRequests" .=) <$>
@@ -2853,7 +2853,7 @@ instance ToJSON RequestUtilization where
 -- and deploy the application.
 --
 -- /See:/ 'sourceReference' smart constructor.
-data SourceReference = SourceReference
+data SourceReference = SourceReference'
     { _srRepository :: !(Maybe Text)
     , _srRevisionId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -2868,7 +2868,7 @@ data SourceReference = SourceReference
 sourceReference
     :: SourceReference
 sourceReference =
-    SourceReference
+    SourceReference'
     { _srRepository = Nothing
     , _srRevisionId = Nothing
     }
@@ -2890,11 +2890,11 @@ instance FromJSON SourceReference where
         parseJSON
           = withObject "SourceReference"
               (\ o ->
-                 SourceReference <$>
+                 SourceReference' <$>
                    (o .:? "repository") <*> (o .:? "revisionId"))
 
 instance ToJSON SourceReference where
-        toJSON SourceReference{..}
+        toJSON SourceReference'{..}
           = object
               (catMaybes
                  [("repository" .=) <$> _srRepository,
@@ -2910,7 +2910,7 @@ instance ToJSON SourceReference where
 -- \`TakeSnapshotResponse\`.
 --
 -- /See:/ 'operationResponse' smart constructor.
-newtype OperationResponse = OperationResponse
+newtype OperationResponse = OperationResponse'
     { _orAddtional :: HashMap Text JSONValue
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2923,7 +2923,7 @@ operationResponse
     :: HashMap Text JSONValue -- ^ 'orAddtional'
     -> OperationResponse
 operationResponse pOrAddtional_ =
-    OperationResponse
+    OperationResponse'
     { _orAddtional = _Coerce # pOrAddtional_
     }
 
@@ -2936,7 +2936,7 @@ orAddtional
 instance FromJSON OperationResponse where
         parseJSON
           = withObject "OperationResponse"
-              (\ o -> OperationResponse <$> (parseJSONObject o))
+              (\ o -> OperationResponse' <$> (parseJSONObject o))
 
 instance ToJSON OperationResponse where
         toJSON = toJSON . _orAddtional
@@ -2945,7 +2945,7 @@ instance ToJSON OperationResponse where
 -- application.
 --
 -- /See:/ 'containerInfo' smart constructor.
-newtype ContainerInfo = ContainerInfo
+newtype ContainerInfo = ContainerInfo'
     { _ciImage :: Maybe Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2957,7 +2957,7 @@ newtype ContainerInfo = ContainerInfo
 containerInfo
     :: ContainerInfo
 containerInfo =
-    ContainerInfo
+    ContainerInfo'
     { _ciImage = Nothing
     }
 
@@ -2970,16 +2970,16 @@ ciImage = lens _ciImage (\ s a -> s{_ciImage = a})
 instance FromJSON ContainerInfo where
         parseJSON
           = withObject "ContainerInfo"
-              (\ o -> ContainerInfo <$> (o .:? "image"))
+              (\ o -> ContainerInfo' <$> (o .:? "image"))
 
 instance ToJSON ContainerInfo where
-        toJSON ContainerInfo{..}
+        toJSON ContainerInfo'{..}
           = object (catMaybes [("image" .=) <$> _ciImage])
 
 -- | Code and application artifacts used to deploy a version to App Engine.
 --
 -- /See:/ 'deployment' smart constructor.
-data Deployment = Deployment
+data Deployment = Deployment'
     { _dContainer        :: !(Maybe ContainerInfo)
     , _dFiles            :: !(Maybe DeploymentFiles)
     , _dSourceReferences :: !(Maybe [SourceReference])
@@ -2997,7 +2997,7 @@ data Deployment = Deployment
 deployment
     :: Deployment
 deployment =
-    Deployment
+    Deployment'
     { _dContainer = Nothing
     , _dFiles = Nothing
     , _dSourceReferences = Nothing
@@ -3029,12 +3029,12 @@ instance FromJSON Deployment where
         parseJSON
           = withObject "Deployment"
               (\ o ->
-                 Deployment <$>
+                 Deployment' <$>
                    (o .:? "container") <*> (o .:? "files") <*>
                      (o .:? "sourceReferences" .!= mempty))
 
 instance ToJSON Deployment where
-        toJSON Deployment{..}
+        toJSON Deployment'{..}
           = object
               (catMaybes
                  [("container" .=) <$> _dContainer,

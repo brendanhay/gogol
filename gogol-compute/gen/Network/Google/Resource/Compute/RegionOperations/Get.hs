@@ -57,7 +57,7 @@ type RegionOperationsGetResource =
 -- | Retrieves the specified region-specific Operations resource.
 --
 -- /See:/ 'regionOperationsGet' smart constructor.
-data RegionOperationsGet = RegionOperationsGet
+data RegionOperationsGet = RegionOperationsGet'
     { _rogProject   :: !Text
     , _rogOperation :: !Text
     , _rogRegion    :: !Text
@@ -78,7 +78,7 @@ regionOperationsGet
     -> Text -- ^ 'rogRegion'
     -> RegionOperationsGet
 regionOperationsGet pRogProject_ pRogOperation_ pRogRegion_ =
-    RegionOperationsGet
+    RegionOperationsGet'
     { _rogProject = pRogProject_
     , _rogOperation = pRogOperation_
     , _rogRegion = pRogRegion_
@@ -105,7 +105,7 @@ instance GoogleRequest RegionOperationsGet where
              '["https://www.googleapis.com/auth/cloud-platform",
                "https://www.googleapis.com/auth/compute",
                "https://www.googleapis.com/auth/compute.readonly"]
-        requestClient RegionOperationsGet{..}
+        requestClient RegionOperationsGet'{..}
           = go _rogProject _rogRegion _rogOperation
               (Just AltJSON)
               computeService

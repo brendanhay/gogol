@@ -54,7 +54,7 @@ type UserRolesInsertResource =
 -- | Inserts a new user role.
 --
 -- /See:/ 'userRolesInsert' smart constructor.
-data UserRolesInsert = UserRolesInsert
+data UserRolesInsert = UserRolesInsert'
     { _uriProFileId :: !(Textual Int64)
     , _uriPayload   :: !UserRole
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ userRolesInsert
     -> UserRole -- ^ 'uriPayload'
     -> UserRolesInsert
 userRolesInsert pUriProFileId_ pUriPayload_ =
-    UserRolesInsert
+    UserRolesInsert'
     { _uriProFileId = _Coerce # pUriProFileId_
     , _uriPayload = pUriPayload_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest UserRolesInsert where
         type Rs UserRolesInsert = UserRole
         type Scopes UserRolesInsert =
              '["https://www.googleapis.com/auth/dfatrafficking"]
-        requestClient UserRolesInsert{..}
+        requestClient UserRolesInsert'{..}
           = go _uriProFileId (Just AltJSON) _uriPayload
               dFAReportingService
           where go

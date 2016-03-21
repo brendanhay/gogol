@@ -54,7 +54,7 @@ type AccountsContainersDeleteResource =
 -- | Deletes a Container.
 --
 -- /See:/ 'accountsContainersDelete' smart constructor.
-data AccountsContainersDelete = AccountsContainersDelete
+data AccountsContainersDelete = AccountsContainersDelete'
     { _acdContainerId :: !Text
     , _acdAccountId   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -71,7 +71,7 @@ accountsContainersDelete
     -> Text -- ^ 'acdAccountId'
     -> AccountsContainersDelete
 accountsContainersDelete pAcdContainerId_ pAcdAccountId_ =
-    AccountsContainersDelete
+    AccountsContainersDelete'
     { _acdContainerId = pAcdContainerId_
     , _acdAccountId = pAcdAccountId_
     }
@@ -91,7 +91,7 @@ instance GoogleRequest AccountsContainersDelete where
         type Rs AccountsContainersDelete = ()
         type Scopes AccountsContainersDelete =
              '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
-        requestClient AccountsContainersDelete{..}
+        requestClient AccountsContainersDelete'{..}
           = go _acdAccountId _acdContainerId (Just AltJSON)
               tagManagerService
           where go

@@ -57,7 +57,7 @@ type TasksGetResource =
 -- | Get a particular task from a TaskQueue.
 --
 -- /See:/ 'tasksGet' smart constructor.
-data TasksGet = TasksGet
+data TasksGet = TasksGet'
     { _tgTaskqueue :: !Text
     , _tgProject   :: !Text
     , _tgTask      :: !Text
@@ -78,7 +78,7 @@ tasksGet
     -> Text -- ^ 'tgTask'
     -> TasksGet
 tasksGet pTgTaskqueue_ pTgProject_ pTgTask_ =
-    TasksGet
+    TasksGet'
     { _tgTaskqueue = pTgTaskqueue_
     , _tgProject = pTgProject_
     , _tgTask = pTgTask_
@@ -103,7 +103,7 @@ instance GoogleRequest TasksGet where
         type Scopes TasksGet =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TasksGet{..}
+        requestClient TasksGet'{..}
           = go _tgProject _tgTaskqueue _tgTask (Just AltJSON)
               taskQueueService
           where go

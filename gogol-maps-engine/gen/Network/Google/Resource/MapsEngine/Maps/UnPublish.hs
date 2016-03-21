@@ -53,7 +53,7 @@ type MapsUnPublishResource =
 -- | Unpublish a map asset.
 --
 -- /See:/ 'mapsUnPublish' smart constructor.
-newtype MapsUnPublish = MapsUnPublish
+newtype MapsUnPublish = MapsUnPublish'
     { _mupId :: Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -66,7 +66,7 @@ mapsUnPublish
     :: Text -- ^ 'mupId'
     -> MapsUnPublish
 mapsUnPublish pMupId_ =
-    MapsUnPublish
+    MapsUnPublish'
     { _mupId = pMupId_
     }
 
@@ -78,7 +78,7 @@ instance GoogleRequest MapsUnPublish where
         type Rs MapsUnPublish = PublishResponse
         type Scopes MapsUnPublish =
              '["https://www.googleapis.com/auth/mapsengine"]
-        requestClient MapsUnPublish{..}
+        requestClient MapsUnPublish'{..}
           = go _mupId (Just AltJSON) mapsEngineService
           where go
                   = buildClient (Proxy :: Proxy MapsUnPublishResource)

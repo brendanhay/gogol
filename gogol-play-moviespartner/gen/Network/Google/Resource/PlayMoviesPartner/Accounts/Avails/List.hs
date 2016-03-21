@@ -86,7 +86,7 @@ type AccountsAvailsListResource =
 -- this method.
 --
 -- /See:/ 'accountsAvailsList' smart constructor.
-data AccountsAvailsList = AccountsAvailsList
+data AccountsAvailsList = AccountsAvailsList'
     { _aalAltId          :: !(Maybe Text)
     , _aalPphNames       :: !(Maybe [Text])
     , _aalXgafv          :: !(Maybe Text)
@@ -144,7 +144,7 @@ accountsAvailsList
     :: Text -- ^ 'aalAccountId'
     -> AccountsAvailsList
 accountsAvailsList pAalAccountId_ =
-    AccountsAvailsList
+    AccountsAvailsList'
     { _aalAltId = Nothing
     , _aalPphNames = Nothing
     , _aalXgafv = Nothing
@@ -261,7 +261,7 @@ instance GoogleRequest AccountsAvailsList where
         type Rs AccountsAvailsList = ListAvailsResponse
         type Scopes AccountsAvailsList =
              '["https://www.googleapis.com/auth/playmovies_partner.readonly"]
-        requestClient AccountsAvailsList{..}
+        requestClient AccountsAvailsList'{..}
           = go _aalAccountId _aalAltId
               (_aalPphNames ^. _Default)
               _aalXgafv

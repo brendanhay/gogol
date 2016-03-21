@@ -60,7 +60,7 @@ type BlogsListByUserResource =
 -- | Retrieves a list of blogs, possibly filtered.
 --
 -- /See:/ 'blogsListByUser' smart constructor.
-data BlogsListByUser = BlogsListByUser
+data BlogsListByUser = BlogsListByUser'
     { _blbuStatus        :: ![BlogsListByUserStatus]
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
@@ -85,7 +85,7 @@ blogsListByUser
     :: Text -- ^ 'blbuUserId'
     -> BlogsListByUser
 blogsListByUser pBlbuUserId_ =
-    BlogsListByUser
+    BlogsListByUser'
     { _blbuStatus = [BLBUSLive]
     , _blbuFetchUserInfo = Nothing
     , _blbuUserId = pBlbuUserId_
@@ -132,7 +132,7 @@ instance GoogleRequest BlogsListByUser where
         type Scopes BlogsListByUser =
              '["https://www.googleapis.com/auth/blogger",
                "https://www.googleapis.com/auth/blogger.readonly"]
-        requestClient BlogsListByUser{..}
+        requestClient BlogsListByUser'{..}
           = go _blbuUserId _blbuStatus _blbuFetchUserInfo
               (_blbuRole ^. _Default)
               _blbuView
