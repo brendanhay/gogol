@@ -11,9 +11,9 @@
 -- Portability : non-portable (GHC extensions)
 --
 module Network.Google.Data.Time
-    ( Time'     (..)
-    , Date'     (..)
-    , DateTime' (..)
+    ( Time'
+    , Date'
+    , DateTime'
 
     , _Time
     , _Date
