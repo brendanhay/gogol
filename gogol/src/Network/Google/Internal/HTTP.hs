@@ -25,7 +25,7 @@ import qualified Data.Text.Encoding                as Text
 import qualified Data.Text.Lazy                    as LText
 import qualified Data.Text.Lazy.Builder            as Build
 import           GHC.Exts                          (toList)
-import           Network.Google.Auth               (Allow, authorize)
+import           Network.Google.Auth               (AllowScopes, authorize)
 import           Network.Google.Env                (Env (..))
 import           Network.Google.Internal.Logger    (logDebug)
 import           Network.Google.Internal.Multipart
@@ -43,7 +43,7 @@ import           Network.HTTP.Types
 --
 -- "resumable" or "multipart" needs to go into the "uploadType" param
 
-perform :: (MonadCatch m, MonadResource m, Allow s, GoogleRequest a)
+perform :: (MonadCatch m, MonadResource m, AllowScopes s, GoogleRequest a)
         => Env s
         -> a
         -> m (Either Error (Rs a))

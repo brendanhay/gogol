@@ -115,7 +115,7 @@ newtype Store (s :: [Symbol]) = Store (MVar (Auth s))
 
 -- | Construct storage containing the credentials which have not yet been
 -- exchanged or refreshed.
-initStore :: (MonadIO m, MonadCatch m, Allow s)
+initStore :: (MonadIO m, MonadCatch m, AllowScopes s)
           => Credentials s
           -> Logger
           -> Manager
@@ -124,7 +124,7 @@ initStore c l m = exchange c l m >>= fmap Store . liftIO . newMVar
 
 -- | Concurrently read the current token, and if expired, then
 -- safely perform a single serial refresh.
-getToken :: (MonadIO m, MonadCatch m, Allow s)
+getToken :: (MonadIO m, MonadCatch m, AllowScopes s)
          => Store s
          -> Logger
          -> Manager
@@ -144,7 +144,7 @@ getToken (Store s) l m = do
 
 -- | Perform the initial credentials exchange to obtain a valid 'OAuthToken'
 -- suitable for authorizing requests.
-exchange :: (MonadIO m, MonadCatch m, Allow s)
+exchange :: (MonadIO m, MonadCatch m, AllowScopes s)
          => Credentials s
          -> Logger
          -> Manager
@@ -158,7 +158,7 @@ exchange c l = fmap (Auth c) . action l
         FromUser     u    -> authorizedUserToken u Nothing
 
 -- | Refresh an existing 'OAuthToken' using
-refresh :: (MonadIO m, MonadCatch m, Allow s)
+refresh :: (MonadIO m, MonadCatch m, AllowScopes s)
         => Auth s
         -> Logger
         -> Manager
@@ -173,7 +173,7 @@ refresh (Auth c t) l = fmap (Auth c) . action l
 
 -- | Apply the (by way of possible token refresh) a bearer token to the
 -- authentication header of a request.
-authorize :: (MonadIO m, MonadCatch m, Allow s)
+authorize :: (MonadIO m, MonadCatch m, AllowScopes s)
           => Client.Request
           -> Store s
           -> Logger
