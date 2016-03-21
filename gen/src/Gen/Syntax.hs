@@ -235,7 +235,7 @@ downloadDecl n pre api url fs m =
     pat = downloadPat m
 
     prec = PApp (UnQual "MediaDownload")
-        [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
+        [ PRec (UnQual (dname' n)) [PFieldWildcard | not (null fs)]
         ]
 
 uploadDecl :: Global
@@ -269,7 +269,7 @@ uploadDecl n pre api url fs m =
     pat = uploadPat m
 
     prec = PApp (UnQual "MediaUpload")
-        [ PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
+        [ PRec (UnQual (dname' n)) [PFieldWildcard | not (null fs)]
         , PVar media
         ]
 
@@ -304,7 +304,7 @@ requestDecl n pre api url fs m =
 
     pat = metadataPat m
 
-    prec = PRec (UnQual (dname n)) [PFieldWildcard | not (null fs)]
+    prec = PRec (UnQual (dname' n)) [PFieldWildcard | not (null fs)]
 
 googleRequestDecl :: Type
                   -> [InstDecl]
@@ -413,7 +413,7 @@ wildcardD f n enc x = \case
     match p es =
         Match noLoc (name f) [p] Nothing (UnGuardedRhs (enc es)) noBinds
 
-    prec = PRec (UnQual (dname n)) [PFieldWildcard]
+    prec = PRec (UnQual (dname' n)) [PFieldWildcard]
 
 defJS :: Local -> Exp -> Exp
 defJS n x = infixApp (infixApp (var "o") ".:?" (fstr n)) ".!=" x
@@ -432,17 +432,16 @@ constD f x = InsDecl $
     sfun noLoc (name f) [] (UnGuardedRhs (app (var "const") x)) noBinds
 
 ctorE :: Global -> [Exp] -> Exp
-ctorE n = seqE (var (dname n)) . map paren
+ctorE n = seqE (var (dname' n)) . map paren
 
 seqE :: Exp -> [Exp] -> Exp
 seqE l []     = app (var "pure") l
 seqE l (r:rs) = infixApp l "<$>" (infixE r "<*>" rs)
 
 objDecl :: Global -> Prefix -> [Derive] -> Map Local Solved -> Decl
-objDecl n p ds rs = DataDecl noLoc arity [] d [] [conDecl d p rs] (der ds)
+objDecl n p ds rs =
+    DataDecl noLoc arity [] (dname n) [] [conDecl (dname' n) p rs] (der ds)
   where
-    d = dname n
-
     arity | Map.size rs == 1 = NewType
           | otherwise        = DataType
 
@@ -467,8 +466,8 @@ ctorSig n rs = TypeSig noLoc [cname n] ts
 ctorDecl :: Global -> Prefix -> Map Local Solved -> Decl
 ctorDecl n p rs = sfun noLoc c ps (UnGuardedRhs rhs) noBinds
   where
-    c = cname n
-    d = dname n
+    c = cname  n
+    d = dname' n
 
     rhs | Map.null rs = var d
         | otherwise   = RecConstr (UnQual d) $
