@@ -94,4 +94,4 @@ library
 
     build-depends:
           gogol-core == 0.0.1.*
-        , base       >= 4.7 && < 5
+        , base       >= 4.7
