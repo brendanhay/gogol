@@ -52,7 +52,7 @@ forbid = id
 -- | Append two sets of scopes.
 --
 -- /See:/ 'allow'.
-(!) :: proxy xs -> proxy ys -> Proxy (xs ++ ys)
+(!) :: proxy xs -> proxy ys -> Proxy (Nub (xs ++ ys))
 (!) _ _ = Proxy
 
 -- | Determine if _any_ of the scopes a request requires is
@@ -70,16 +70,27 @@ type family HasScope' s a where
     HasScope' s         '[] = 'True -- No scopes are required.
     HasScope' (x ': xs) a   = x ∈ a || HasScope' xs a
 
--- | Membership.
+-- | Membership predicate.
 type family (∈) a b where
     (∈) x '[]       = 'False
     (∈) x (y ': xs) = x == y || x ∈ xs
 
--- | Append.
+-- | Append two lists.
 type family (++) xs ys where
-    (++) a  '[]       = a
-    (++) '[] b        = b
-    (++) (a ': as) bs = a ': (as ++ bs)
+    (++) xs       '[]       = xs
+    (++) '[]       ys        = ys
+    (++) (x ': xs) ys = x ': (xs ++ ys)
+
+-- | Remove duplicates from a list.
+type family Nub xs where
+    Nub '[] = '[]
+    Nub (x ': xs) = x ': Nub (Delete x xs)
+
+-- | Remove a specific element from a list.
+type family Delete x xs where
+    Delete x '[]       = '[]
+    Delete x (x ': ys) = Delete x ys
+    Delete x (y ': ys) = y ': Delete x ys
 
 class AllowScopes a where
     -- | Obtain a list of supported 'OAuthScope' values from a proxy.
