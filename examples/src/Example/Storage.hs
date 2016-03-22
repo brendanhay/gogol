@@ -20,7 +20,7 @@ import           System.IO
 example :: Text -> FilePath -> IO ()
 example bkt f = do
     l <- newLogger Debug stdout
-    e <- newEnv <&> (envLogger .~ l) . allow authDevstorageReadWriteScope
+    e <- newEnv <&> (envLogger .~ l) . allow devstorageReadWriteScope
     b <- sourceBody f
 
     let key = Text.pack f
