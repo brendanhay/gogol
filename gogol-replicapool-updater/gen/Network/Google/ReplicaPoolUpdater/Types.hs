@@ -20,10 +20,10 @@ module Network.Google.ReplicaPoolUpdater.Types
       replicaPoolUpdaterService
 
     -- * OAuth Scopes
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authReplicapoolScope
-    , authReplicapoolReadonlyScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , replicapoolScope
+    , replicapoolReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -174,17 +174,17 @@ replicaPoolUpdaterService
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage replica pools
-authReplicapoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
-authReplicapoolScope = Proxy;
+replicapoolScope :: Proxy '["https://www.googleapis.com/auth/replicapool"]
+replicapoolScope = Proxy;
 
 -- | View replica pools
-authReplicapoolReadonlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
-authReplicapoolReadonlyScope = Proxy;
+replicapoolReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/replicapool.readonly"]
+replicapoolReadOnlyScope = Proxy;

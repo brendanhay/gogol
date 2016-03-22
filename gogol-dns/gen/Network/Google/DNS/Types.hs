@@ -20,10 +20,10 @@ module Network.Google.DNS.Types
       dNSService
 
     -- * OAuth Scopes
-    , authNdevClouddnsReadonlyScope
-    , authCloudPlatformReadOnlyScope
-    , authNdevClouddnsReadwriteScope
-    , authCloudPlatformScope
+    , ndevClouddnsReadOnlyScope
+    , cloudPlatformReadOnlyScope
+    , ndevClouddnsReadwriteScope
+    , cloudPlatformScope
 
     -- * ChangesListResponse
     , ChangesListResponse
@@ -114,17 +114,17 @@ dNSService
       "www.googleapis.com"
 
 -- | View your DNS records hosted by Google Cloud DNS
-authNdevClouddnsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readonly"]
-authNdevClouddnsReadonlyScope = Proxy;
+ndevClouddnsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readonly"]
+ndevClouddnsReadOnlyScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your DNS records hosted by Google Cloud DNS
-authNdevClouddnsReadwriteScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
-authNdevClouddnsReadwriteScope = Proxy;
+ndevClouddnsReadwriteScope :: Proxy '["https://www.googleapis.com/auth/ndev.clouddns.readwrite"]
+ndevClouddnsReadwriteScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

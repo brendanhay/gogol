@@ -20,10 +20,10 @@ module Network.Google.OAuth2.Types
       oAuth2Service
 
     -- * OAuth Scopes
-    , authUserinfoProfileScope
-    , authPlusLoginScope
-    , authUserinfoEmailScope
-    , authPlusMeScope
+    , userInfoProFileScope
+    , plusLoginScope
+    , userInfoEmailScope
+    , plusMeScope
 
     -- * TokenInfo
     , TokenInfo
@@ -80,17 +80,17 @@ oAuth2Service
       "www.googleapis.com"
 
 -- | View your basic profile info
-authUserinfoProfileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
-authUserinfoProfileScope = Proxy;
+userInfoProFileScope :: Proxy '["https://www.googleapis.com/auth/userinfo.profile"]
+userInfoProFileScope = Proxy;
 
 -- | Know the list of people in your circles, your age range, and language
-authPlusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
-authPlusLoginScope = Proxy;
+plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
+plusLoginScope = Proxy;
 
 -- | View your email address
-authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-authUserinfoEmailScope = Proxy;
+userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userInfoEmailScope = Proxy;
 
 -- | Know who you are on Google
-authPlusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
-authPlusMeScope = Proxy;
+plusMeScope :: Proxy '["https://www.googleapis.com/auth/plus.me"]
+plusMeScope = Proxy;

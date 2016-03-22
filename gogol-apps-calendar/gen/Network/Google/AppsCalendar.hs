@@ -22,8 +22,8 @@ module Network.Google.AppsCalendar
       appsCalendarService
 
     -- * OAuth Scopes
-    , authCalendarScope
-    , authCalendarReadonlyScope
+    , calendarScope
+    , calendarReadOnlyScope
 
     -- * API Declaration
     , AppsCalendarAPI

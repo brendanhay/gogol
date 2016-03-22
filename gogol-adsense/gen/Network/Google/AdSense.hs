@@ -23,8 +23,8 @@ module Network.Google.AdSense
       adSenseService
 
     -- * OAuth Scopes
-    , authAdsenseReadonlyScope
-    , authAdsenseScope
+    , adSenseReadOnlyScope
+    , adSenseScope
 
     -- * API Declaration
     , AdSenseAPI

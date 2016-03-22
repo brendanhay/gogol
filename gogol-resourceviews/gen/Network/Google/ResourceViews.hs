@@ -23,12 +23,12 @@ module Network.Google.ResourceViews
       resourceViewsService
 
     -- * OAuth Scopes
-    , authComputeScope
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authNdevCloudmanScope
-    , authNdevCloudmanReadonlyScope
-    , authComputeReadonlyScope
+    , computeScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
+    , computeReadOnlyScope
 
     -- * API Declaration
     , ResourceViewsAPI

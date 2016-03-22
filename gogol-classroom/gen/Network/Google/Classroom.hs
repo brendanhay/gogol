@@ -22,12 +22,12 @@ module Network.Google.Classroom
       classroomService
 
     -- * OAuth Scopes
-    , authClassroomRostersReadonlyScope
-    , authClassroomCoursesScope
-    , authClassroomProfileEmailsScope
-    , authClassroomProfilePhotosScope
-    , authClassroomRostersScope
-    , authClassroomCoursesReadonlyScope
+    , classroomRostersReadOnlyScope
+    , classroomCoursesScope
+    , classroomProFileEmailsScope
+    , classroomProFilePhotosScope
+    , classroomRostersScope
+    , classroomCoursesReadOnlyScope
 
     -- * API Declaration
     , ClassroomAPI

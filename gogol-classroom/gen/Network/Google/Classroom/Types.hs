@@ -20,12 +20,12 @@ module Network.Google.Classroom.Types
       classroomService
 
     -- * OAuth Scopes
-    , authClassroomRostersReadonlyScope
-    , authClassroomCoursesScope
-    , authClassroomProfileEmailsScope
-    , authClassroomProfilePhotosScope
-    , authClassroomRostersScope
-    , authClassroomCoursesReadonlyScope
+    , classroomRostersReadOnlyScope
+    , classroomCoursesScope
+    , classroomProFileEmailsScope
+    , classroomProFilePhotosScope
+    , classroomRostersScope
+    , classroomCoursesReadOnlyScope
 
     -- * ListCourseAliasesResponse
     , ListCourseAliasesResponse
@@ -137,25 +137,25 @@ classroomService
       "classroom.googleapis.com"
 
 -- | View your Google Classroom class rosters
-authClassroomRostersReadonlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters.readonly"]
-authClassroomRostersReadonlyScope = Proxy;
+classroomRostersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters.readonly"]
+classroomRostersReadOnlyScope = Proxy;
 
 -- | Manage your Google Classroom classes
-authClassroomCoursesScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses"]
-authClassroomCoursesScope = Proxy;
+classroomCoursesScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses"]
+classroomCoursesScope = Proxy;
 
 -- | View the email addresses of people in your classes
-authClassroomProfileEmailsScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.emails"]
-authClassroomProfileEmailsScope = Proxy;
+classroomProFileEmailsScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.emails"]
+classroomProFileEmailsScope = Proxy;
 
 -- | View the profile photos of people in your classes
-authClassroomProfilePhotosScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.photos"]
-authClassroomProfilePhotosScope = Proxy;
+classroomProFilePhotosScope :: Proxy '["https://www.googleapis.com/auth/classroom.profile.photos"]
+classroomProFilePhotosScope = Proxy;
 
 -- | Manage your Google Classroom class rosters
-authClassroomRostersScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters"]
-authClassroomRostersScope = Proxy;
+classroomRostersScope :: Proxy '["https://www.googleapis.com/auth/classroom.rosters"]
+classroomRostersScope = Proxy;
 
 -- | View your Google Classroom classes
-authClassroomCoursesReadonlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses.readonly"]
-authClassroomCoursesReadonlyScope = Proxy;
+classroomCoursesReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/classroom.courses.readonly"]
+classroomCoursesReadOnlyScope = Proxy;

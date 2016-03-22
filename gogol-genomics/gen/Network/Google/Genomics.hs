@@ -24,11 +24,11 @@ module Network.Google.Genomics
       genomicsService
 
     -- * OAuth Scopes
-    , authGenomicsScope
-    , authCloudPlatformScope
-    , authGenomicsReadonlyScope
-    , authDevstorageReadWriteScope
-    , authBigqueryScope
+    , genomicsScope
+    , cloudPlatformScope
+    , genomicsReadOnlyScope
+    , devstorageReadWriteScope
+    , bigQueryScope
 
     -- * API Declaration
     , GenomicsAPI

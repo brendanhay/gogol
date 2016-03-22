@@ -20,8 +20,8 @@ module Network.Google.AppsCalendar.Types
       appsCalendarService
 
     -- * OAuth Scopes
-    , authCalendarScope
-    , authCalendarReadonlyScope
+    , calendarScope
+    , calendarReadOnlyScope
 
     -- * CalendarListEntry
     , CalendarListEntry
@@ -395,9 +395,9 @@ appsCalendarService
       "www.googleapis.com"
 
 -- | Manage your calendars
-authCalendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
-authCalendarScope = Proxy;
+calendarScope :: Proxy '["https://www.googleapis.com/auth/calendar"]
+calendarScope = Proxy;
 
 -- | View your calendars
-authCalendarReadonlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
-authCalendarReadonlyScope = Proxy;
+calendarReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/calendar.readonly"]
+calendarReadOnlyScope = Proxy;

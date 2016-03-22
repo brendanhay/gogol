@@ -22,8 +22,8 @@ module Network.Google.MapsCoordinate
       mapsCoordinateService
 
     -- * OAuth Scopes
-    , authCoordinateScope
-    , authCoordinateReadonlyScope
+    , coordinateScope
+    , coordinateReadOnlyScope
 
     -- * API Declaration
     , MapsCoordinateAPI

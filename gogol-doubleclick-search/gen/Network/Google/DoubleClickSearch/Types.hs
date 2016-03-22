@@ -20,7 +20,7 @@ module Network.Google.DoubleClickSearch.Types
       doubleClickSearchService
 
     -- * OAuth Scopes
-    , authDoubleclicksearchScope
+    , doubleClickSearchScope
 
     -- * ReportRow
     , ReportRow
@@ -210,5 +210,5 @@ doubleClickSearchService
       "www.googleapis.com"
 
 -- | View and manage your advertising data in DoubleClick Search
-authDoubleclicksearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
-authDoubleclicksearchScope = Proxy;
+doubleClickSearchScope :: Proxy '["https://www.googleapis.com/auth/doubleclicksearch"]
+doubleClickSearchScope = Proxy;

@@ -23,16 +23,16 @@ module Network.Google.PlusDomains
       plusDomainsService
 
     -- * OAuth Scopes
-    , authUserinfoProfileScope
-    , authPlusLoginScope
-    , authPlusProfilesReadScope
-    , authUserinfoEmailScope
-    , authPlusStreamWriteScope
-    , authPlusStreamReadScope
-    , authPlusMeScope
-    , authPlusCirclesReadScope
-    , authPlusMediaUploadScope
-    , authPlusCirclesWriteScope
+    , userInfoProFileScope
+    , plusLoginScope
+    , plusProFilesReadScope
+    , userInfoEmailScope
+    , plusStreamWriteScope
+    , plusStreamReadScope
+    , plusMeScope
+    , plusCirclesReadScope
+    , plusMediaUploadScope
+    , plusCirclesWriteScope
 
     -- * API Declaration
     , PlusDomainsAPI

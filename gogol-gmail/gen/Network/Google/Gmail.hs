@@ -23,12 +23,12 @@ module Network.Google.Gmail
 
     -- * OAuth Scopes
     , mailGoogleComScope
-    , authGmailModifyScope
-    , authGmailLabelsScope
-    , authGmailSendScope
-    , authGmailInsertScope
-    , authGmailComposeScope
-    , authGmailReadonlyScope
+    , gmailModifyScope
+    , gmailLabelsScope
+    , gmailSendScope
+    , gmailInsertScope
+    , gmailComposeScope
+    , gmailReadOnlyScope
 
     -- * API Declaration
     , GmailAPI

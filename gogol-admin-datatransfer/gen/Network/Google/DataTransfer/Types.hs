@@ -20,8 +20,8 @@ module Network.Google.DataTransfer.Types
       dataTransferService
 
     -- * OAuth Scopes
-    , authAdminDatatransferReadonlyScope
-    , authAdminDatatransferScope
+    , adminDataTransferReadOnlyScope
+    , adminDataTransferScope
 
     -- * Application
     , Application
@@ -85,9 +85,9 @@ dataTransferService
       "www.googleapis.com"
 
 -- | View data transfers between users in your organization
-authAdminDatatransferReadonlyScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]
-authAdminDatatransferReadonlyScope = Proxy;
+adminDataTransferReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer.readonly"]
+adminDataTransferReadOnlyScope = Proxy;
 
 -- | View and manage data transfers between users in your organization
-authAdminDatatransferScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
-authAdminDatatransferScope = Proxy;
+adminDataTransferScope :: Proxy '["https://www.googleapis.com/auth/admin.datatransfer"]
+adminDataTransferScope = Proxy;

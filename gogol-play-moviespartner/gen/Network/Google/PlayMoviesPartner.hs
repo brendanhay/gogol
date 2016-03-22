@@ -23,7 +23,7 @@ module Network.Google.PlayMoviesPartner
       playMoviesPartnerService
 
     -- * OAuth Scopes
-    , authPlaymoviesPartnerReadonlyScope
+    , playmoviesPartnerReadOnlyScope
 
     -- * API Declaration
     , PlayMoviesPartnerAPI

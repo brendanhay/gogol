@@ -23,8 +23,8 @@ module Network.Google.PubSub
       pubSubService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
-    , authPubsubScope
+    , cloudPlatformScope
+    , pubSubScope
 
     -- * API Declaration
     , PubSubAPI

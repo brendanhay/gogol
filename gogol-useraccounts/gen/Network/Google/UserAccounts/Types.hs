@@ -20,10 +20,10 @@ module Network.Google.UserAccounts.Types
       userAccountsService
 
     -- * OAuth Scopes
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authCloudUseraccountsScope
-    , authCloudUseraccountsReadonlyScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , cloudUserAccountsScope
+    , cloudUserAccountsReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -205,17 +205,17 @@ userAccountsService
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | Manage your Google Cloud User Accounts
-authCloudUseraccountsScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts"]
-authCloudUseraccountsScope = Proxy;
+cloudUserAccountsScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts"]
+cloudUserAccountsScope = Proxy;
 
 -- | View your Google Cloud User Accounts
-authCloudUseraccountsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
-authCloudUseraccountsReadonlyScope = Proxy;
+cloudUserAccountsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud.useraccounts.readonly"]
+cloudUserAccountsReadOnlyScope = Proxy;

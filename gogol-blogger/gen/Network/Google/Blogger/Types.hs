@@ -20,8 +20,8 @@ module Network.Google.Blogger.Types
       bloggerService
 
     -- * OAuth Scopes
-    , authBloggerScope
-    , authBloggerReadonlyScope
+    , bloggerScope
+    , bloggerReadOnlyScope
 
     -- * PostsListOrderBy
     , PostsListOrderBy (..)
@@ -386,9 +386,9 @@ bloggerService
       "www.googleapis.com"
 
 -- | Manage your Blogger account
-authBloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]
-authBloggerScope = Proxy;
+bloggerScope :: Proxy '["https://www.googleapis.com/auth/blogger"]
+bloggerScope = Proxy;
 
 -- | View your Blogger account
-authBloggerReadonlyScope :: Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
-authBloggerReadonlyScope = Proxy;
+bloggerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/blogger.readonly"]
+bloggerReadOnlyScope = Proxy;

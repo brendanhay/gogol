@@ -23,10 +23,10 @@ module Network.Google.DeploymentManager
       deploymentManagerService
 
     -- * OAuth Scopes
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authNdevCloudmanScope
-    , authNdevCloudmanReadonlyScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
 
     -- * API Declaration
     , DeploymentManagerAPI

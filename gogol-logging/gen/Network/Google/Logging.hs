@@ -23,11 +23,11 @@ module Network.Google.Logging
       loggingService
 
     -- * OAuth Scopes
-    , authLoggingAdminScope
-    , authLoggingReadScope
-    , authLoggingWriteScope
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , LoggingAPI

@@ -20,7 +20,7 @@ module Network.Google.Container.Types
       containerService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
+    , cloudPlatformScope
 
     -- * ListOperationsResponse
     , ListOperationsResponse
@@ -117,5 +117,5 @@ containerService
       "container.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

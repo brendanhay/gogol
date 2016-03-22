@@ -20,7 +20,7 @@ module Network.Google.AppState.Types
       appStateService
 
     -- * OAuth Scopes
-    , authAppstateScope
+    , appStateScope
 
     -- * WriteResult
     , WriteResult
@@ -62,5 +62,5 @@ appStateService
       "www.googleapis.com"
 
 -- | View and manage your data for this application
-authAppstateScope :: Proxy '["https://www.googleapis.com/auth/appstate"]
-authAppstateScope = Proxy;
+appStateScope :: Proxy '["https://www.googleapis.com/auth/appstate"]
+appStateScope = Proxy;

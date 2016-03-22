@@ -20,8 +20,8 @@ module Network.Google.AppsReseller.Types
       appsResellerService
 
     -- * OAuth Scopes
-    , authAppsOrderReadonlyScope
-    , authAppsOrderScope
+    , appsOrderReadOnlyScope
+    , appsOrderScope
 
     -- * SubscriptionTrialSettings
     , SubscriptionTrialSettings
@@ -138,9 +138,9 @@ appsResellerService
       "www.googleapis.com"
 
 -- | Manage users on your domain
-authAppsOrderReadonlyScope :: Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
-authAppsOrderReadonlyScope = Proxy;
+appsOrderReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/apps.order.readonly"]
+appsOrderReadOnlyScope = Proxy;
 
 -- | Manage users on your domain
-authAppsOrderScope :: Proxy '["https://www.googleapis.com/auth/apps.order"]
-authAppsOrderScope = Proxy;
+appsOrderScope :: Proxy '["https://www.googleapis.com/auth/apps.order"]
+appsOrderScope = Proxy;

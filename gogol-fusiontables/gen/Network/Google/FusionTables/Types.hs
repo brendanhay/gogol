@@ -20,8 +20,8 @@ module Network.Google.FusionTables.Types
       fusionTablesService
 
     -- * OAuth Scopes
-    , authFusiontablesReadonlyScope
-    , authFusiontablesScope
+    , fusionTablesReadOnlyScope
+    , fusionTablesScope
 
     -- * ColumnList
     , ColumnList
@@ -239,9 +239,9 @@ fusionTablesService
       "www.googleapis.com"
 
 -- | View your Fusion Tables
-authFusiontablesReadonlyScope :: Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
-authFusiontablesReadonlyScope = Proxy;
+fusionTablesReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/fusiontables.readonly"]
+fusionTablesReadOnlyScope = Proxy;
 
 -- | Manage your Fusion Tables
-authFusiontablesScope :: Proxy '["https://www.googleapis.com/auth/fusiontables"]
-authFusiontablesScope = Proxy;
+fusionTablesScope :: Proxy '["https://www.googleapis.com/auth/fusiontables"]
+fusionTablesScope = Proxy;

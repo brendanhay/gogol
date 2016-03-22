@@ -22,7 +22,7 @@ module Network.Google.AppsLicensing
       appsLicensingService
 
     -- * OAuth Scopes
-    , authAppsLicensingScope
+    , appsLicensingScope
 
     -- * API Declaration
     , AppsLicensingAPI

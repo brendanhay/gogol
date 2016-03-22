@@ -20,7 +20,7 @@ module Network.Google.AndroidEnterprise.Types
       androidEnterpriseService
 
     -- * OAuth Scopes
-    , authAndroidenterpriseScope
+    , androidEnterpriseScope
 
     -- * GroupLicense
     , GroupLicense
@@ -300,5 +300,5 @@ androidEnterpriseService
       "www.googleapis.com"
 
 -- | Manage corporate Android devices
-authAndroidenterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
-authAndroidenterpriseScope = Proxy;
+androidEnterpriseScope :: Proxy '["https://www.googleapis.com/auth/androidenterprise"]
+androidEnterpriseScope = Proxy;

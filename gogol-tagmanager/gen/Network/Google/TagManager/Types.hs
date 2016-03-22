@@ -20,13 +20,13 @@ module Network.Google.TagManager.Types
       tagManagerService
 
     -- * OAuth Scopes
-    , authTagmanagerReadonlyScope
-    , authTagmanagerEditContainersScope
-    , authTagmanagerManageAccountsScope
-    , authTagmanagerDeleteContainersScope
-    , authTagmanagerManageUsersScope
-    , authTagmanagerPublishScope
-    , authTagmanagerEditContainerversionsScope
+    , tagManagerReadOnlyScope
+    , tagManagerEditContainersScope
+    , tagManagerManageAccountsScope
+    , tagManagerDeleteContainersScope
+    , tagManagerManageUsersScope
+    , tagManagerPublishScope
+    , tagManagerEditContainerversionsScope
 
     -- * ListVariablesResponse
     , ListVariablesResponse
@@ -358,29 +358,29 @@ tagManagerService
       "www.googleapis.com"
 
 -- | View your Google Tag Manager containers
-authTagmanagerReadonlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
-authTagmanagerReadonlyScope = Proxy;
+tagManagerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.readonly"]
+tagManagerReadOnlyScope = Proxy;
 
 -- | Manage your Google Tag Manager containers
-authTagmanagerEditContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
-authTagmanagerEditContainersScope = Proxy;
+tagManagerEditContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containers"]
+tagManagerEditContainersScope = Proxy;
 
 -- | Manage your Google Tag Manager accounts
-authTagmanagerManageAccountsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
-authTagmanagerManageAccountsScope = Proxy;
+tagManagerManageAccountsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.accounts"]
+tagManagerManageAccountsScope = Proxy;
 
 -- | Delete your Google Tag Manager containers
-authTagmanagerDeleteContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
-authTagmanagerDeleteContainersScope = Proxy;
+tagManagerDeleteContainersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.delete.containers"]
+tagManagerDeleteContainersScope = Proxy;
 
 -- | Manage user permissions of your Google Tag Manager data
-authTagmanagerManageUsersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
-authTagmanagerManageUsersScope = Proxy;
+tagManagerManageUsersScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.manage.users"]
+tagManagerManageUsersScope = Proxy;
 
 -- | Publish your Google Tag Manager containers
-authTagmanagerPublishScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
-authTagmanagerPublishScope = Proxy;
+tagManagerPublishScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.publish"]
+tagManagerPublishScope = Proxy;
 
 -- | Manage your Google Tag Manager container versions
-authTagmanagerEditContainerversionsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
-authTagmanagerEditContainerversionsScope = Proxy;
+tagManagerEditContainerversionsScope :: Proxy '["https://www.googleapis.com/auth/tagmanager.edit.containerversions"]
+tagManagerEditContainerversionsScope = Proxy;

@@ -20,8 +20,8 @@ module Network.Google.MapsEngine.Types
       mapsEngineService
 
     -- * OAuth Scopes
-    , authMapsengineScope
-    , authMapsengineReadonlyScope
+    , mapsEngineScope
+    , mapsEngineReadOnlyScope
 
     -- * ValueRange
     , ValueRange
@@ -770,9 +770,9 @@ mapsEngineService
       "www.googleapis.com"
 
 -- | View and manage your Google My Maps data
-authMapsengineScope :: Proxy '["https://www.googleapis.com/auth/mapsengine"]
-authMapsengineScope = Proxy;
+mapsEngineScope :: Proxy '["https://www.googleapis.com/auth/mapsengine"]
+mapsEngineScope = Proxy;
 
 -- | View your Google My Maps data
-authMapsengineReadonlyScope :: Proxy '["https://www.googleapis.com/auth/mapsengine.readonly"]
-authMapsengineReadonlyScope = Proxy;
+mapsEngineReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/mapsengine.readonly"]
+mapsEngineReadOnlyScope = Proxy;

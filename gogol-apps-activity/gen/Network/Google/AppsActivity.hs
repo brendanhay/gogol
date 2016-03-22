@@ -22,11 +22,11 @@ module Network.Google.AppsActivity
       appsActivityService
 
     -- * OAuth Scopes
-    , authDriveMetadataReadonlyScope
-    , authActivityScope
-    , authDriveReadonlyScope
-    , authDriveScope
-    , authDriveMetadataScope
+    , driveMetadataReadOnlyScope
+    , activityScope
+    , driveReadOnlyScope
+    , driveScope
+    , driveMetadataScope
 
     -- * API Declaration
     , AppsActivityAPI

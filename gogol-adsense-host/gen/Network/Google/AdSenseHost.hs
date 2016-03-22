@@ -23,7 +23,7 @@ module Network.Google.AdSenseHost
       adSenseHostService
 
     -- * OAuth Scopes
-    , authAdsensehostScope
+    , adSenseHostScope
 
     -- * API Declaration
     , AdSenseHostAPI

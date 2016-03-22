@@ -20,12 +20,12 @@ module Network.Google.Compute.Types
       computeService
 
     -- * OAuth Scopes
-    , authComputeScope
-    , authCloudPlatformScope
-    , authDevstorageReadOnlyScope
-    , authDevstorageReadWriteScope
-    , authComputeReadonlyScope
-    , authDevstorageFullControlScope
+    , computeScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , computeReadOnlyScope
+    , devstorageFullControlScope
 
     -- * TargetHTTPSProxyList
     , TargetHTTPSProxyList
@@ -1922,25 +1922,25 @@ computeService
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-authComputeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-authComputeScope = Proxy;
+computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
+computeScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-authDevstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-authDevstorageReadOnlyScope = Proxy;
+devstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+devstorageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-authDevstorageReadWriteScope = Proxy;
+devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+devstorageReadWriteScope = Proxy;
 
 -- | View your Google Compute Engine resources
-authComputeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-authComputeReadonlyScope = Proxy;
+computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
+computeReadOnlyScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-authDevstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-authDevstorageFullControlScope = Proxy;
+devstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+devstorageFullControlScope = Proxy;

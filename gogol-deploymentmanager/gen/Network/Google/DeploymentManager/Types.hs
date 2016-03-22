@@ -20,10 +20,10 @@ module Network.Google.DeploymentManager.Types
       deploymentManagerService
 
     -- * OAuth Scopes
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authNdevCloudmanScope
-    , authNdevCloudmanReadonlyScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -274,19 +274,19 @@ deploymentManagerService
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
-authNdevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-authNdevCloudmanScope = Proxy;
+ndevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+ndevCloudmanScope = Proxy;
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
-authNdevCloudmanReadonlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-authNdevCloudmanReadonlyScope = Proxy;
+ndevCloudmanReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+ndevCloudmanReadOnlyScope = Proxy;

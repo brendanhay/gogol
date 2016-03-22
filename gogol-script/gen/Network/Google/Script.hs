@@ -24,14 +24,14 @@ module Network.Google.Script
     -- * OAuth Scopes
     , mailGoogleComScope
     , m8FeedsScope
-    , authAdminDirectoryUserScope
-    , authUserinfoEmailScope
-    , authFormsCurrentonlyScope
-    , authDriveScope
-    , authAdminDirectoryGroupScope
+    , adminDirectoryUserScope
+    , userInfoEmailScope
+    , formsCurrentOnlyScope
+    , driveScope
+    , adminDirectoryGroupScope
     , calendarFeedsScope
-    , authFormsScope
-    , authGroupsScope
+    , formsScope
+    , groupsScope
 
     -- * API Declaration
     , ScriptAPI

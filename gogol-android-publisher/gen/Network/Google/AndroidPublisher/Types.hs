@@ -20,7 +20,7 @@ module Network.Google.AndroidPublisher.Types
       androidPublisherService
 
     -- * OAuth Scopes
-    , authAndroidpublisherScope
+    , androidPublisherScope
 
     -- * InAppProductListings
     , InAppProductListings
@@ -392,5 +392,5 @@ androidPublisherService
       "www.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-authAndroidpublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-authAndroidpublisherScope = Proxy;
+androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+androidPublisherScope = Proxy;

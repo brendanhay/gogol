@@ -24,7 +24,7 @@ module Network.Google.KnowledgeGraphSearch
       knowledgeGraphSearchService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , KnowledgeGraphSearchAPI

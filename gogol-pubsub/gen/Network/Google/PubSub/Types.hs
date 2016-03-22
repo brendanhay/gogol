@@ -20,8 +20,8 @@ module Network.Google.PubSub.Types
       pubSubService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
-    , authPubsubScope
+    , cloudPlatformScope
+    , pubSubScope
 
     -- * PushConfig
     , PushConfig
@@ -165,9 +165,9 @@ pubSubService
       "pubsub.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage Pub\/Sub topics and subscriptions
-authPubsubScope :: Proxy '["https://www.googleapis.com/auth/pubsub"]
-authPubsubScope = Proxy;
+pubSubScope :: Proxy '["https://www.googleapis.com/auth/pubsub"]
+pubSubScope = Proxy;

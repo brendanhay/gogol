@@ -20,7 +20,7 @@ module Network.Google.AppEngine.Types
       appEngineService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
+    , cloudPlatformScope
 
     -- * NetworkUtilization
     , NetworkUtilization
@@ -351,5 +351,5 @@ appEngineService
       "appengine.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

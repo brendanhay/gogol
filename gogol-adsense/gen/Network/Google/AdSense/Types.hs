@@ -20,8 +20,8 @@ module Network.Google.AdSense.Types
       adSenseService
 
     -- * OAuth Scopes
-    , authAdsenseReadonlyScope
-    , authAdsenseScope
+    , adSenseReadOnlyScope
+    , adSenseScope
 
     -- * AdClients
     , AdClients
@@ -291,9 +291,9 @@ adSenseService
       "www.googleapis.com"
 
 -- | View your AdSense data
-authAdsenseReadonlyScope :: Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
-authAdsenseReadonlyScope = Proxy;
+adSenseReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adsense.readonly"]
+adSenseReadOnlyScope = Proxy;
 
 -- | View and manage your AdSense data
-authAdsenseScope :: Proxy '["https://www.googleapis.com/auth/adsense"]
-authAdsenseScope = Proxy;
+adSenseScope :: Proxy '["https://www.googleapis.com/auth/adsense"]
+adSenseScope = Proxy;

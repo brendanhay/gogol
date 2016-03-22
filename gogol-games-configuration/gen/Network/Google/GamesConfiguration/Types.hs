@@ -20,7 +20,7 @@ module Network.Google.GamesConfiguration.Types
       gamesConfigurationService
 
     -- * OAuth Scopes
-    , authAndroidpublisherScope
+    , androidPublisherScope
 
     -- * ImageConfiguration
     , ImageConfiguration
@@ -134,5 +134,5 @@ gamesConfigurationService
       "www.googleapis.com"
 
 -- | View and manage your Google Play Developer account
-authAndroidpublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
-authAndroidpublisherScope = Proxy;
+androidPublisherScope :: Proxy '["https://www.googleapis.com/auth/androidpublisher"]
+androidPublisherScope = Proxy;

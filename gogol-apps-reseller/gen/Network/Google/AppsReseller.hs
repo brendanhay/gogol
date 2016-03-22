@@ -22,8 +22,8 @@ module Network.Google.AppsReseller
       appsResellerService
 
     -- * OAuth Scopes
-    , authAppsOrderReadonlyScope
-    , authAppsOrderScope
+    , appsOrderReadOnlyScope
+    , appsOrderScope
 
     -- * API Declaration
     , AppsResellerAPI

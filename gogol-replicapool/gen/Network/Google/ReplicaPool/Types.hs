@@ -20,10 +20,10 @@ module Network.Google.ReplicaPool.Types
       replicaPoolService
 
     -- * OAuth Scopes
-    , authComputeScope
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authComputeReadonlyScope
+    , computeScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , computeReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -165,17 +165,17 @@ replicaPoolService
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-authComputeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-authComputeScope = Proxy;
+computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
+computeScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View your Google Compute Engine resources
-authComputeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-authComputeReadonlyScope = Proxy;
+computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
+computeReadOnlyScope = Proxy;

@@ -20,12 +20,12 @@ module Network.Google.ResourceViews.Types
       resourceViewsService
 
     -- * OAuth Scopes
-    , authComputeScope
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authNdevCloudmanScope
-    , authNdevCloudmanReadonlyScope
-    , authComputeReadonlyScope
+    , computeScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , ndevCloudmanScope
+    , ndevCloudmanReadOnlyScope
+    , computeReadOnlyScope
 
     -- * OperationWarningsItemDataItem
     , OperationWarningsItemDataItem
@@ -182,27 +182,27 @@ resourceViewsService
       "www.googleapis.com"
 
 -- | View and manage your Google Compute Engine resources
-authComputeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
-authComputeScope = Proxy;
+computeScope :: Proxy '["https://www.googleapis.com/auth/compute"]
+computeScope = Proxy;
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Platform management resources and
 -- deployment status information
-authNdevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
-authNdevCloudmanScope = Proxy;
+ndevCloudmanScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman"]
+ndevCloudmanScope = Proxy;
 
 -- | View your Google Cloud Platform management resources and deployment
 -- status information
-authNdevCloudmanReadonlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
-authNdevCloudmanReadonlyScope = Proxy;
+ndevCloudmanReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/ndev.cloudman.readonly"]
+ndevCloudmanReadOnlyScope = Proxy;
 
 -- | View your Google Compute Engine resources
-authComputeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
-authComputeReadonlyScope = Proxy;
+computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
+computeReadOnlyScope = Proxy;

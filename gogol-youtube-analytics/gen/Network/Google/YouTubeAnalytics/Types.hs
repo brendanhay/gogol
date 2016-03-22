@@ -20,11 +20,11 @@ module Network.Google.YouTubeAnalytics.Types
       youTubeAnalyticsService
 
     -- * OAuth Scopes
-    , authYoutubeScope
-    , authYtAnalyticsReadonlyScope
-    , authYoutubepartnerScope
-    , authYtAnalyticsMonetaryReadonlyScope
-    , authYoutubeReadonlyScope
+    , youtubeScope
+    , ytAnalyticsReadOnlyScope
+    , youtubePartnerScope
+    , ytAnalyticsMonetaryReadOnlyScope
+    , youtubeReadOnlyScope
 
     -- * GroupContentDetails
     , GroupContentDetails
@@ -147,22 +147,22 @@ youTubeAnalyticsService
       "www.googleapis.com"
 
 -- | Manage your YouTube account
-authYoutubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
-authYoutubeScope = Proxy;
+youtubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+youtubeScope = Proxy;
 
 -- | View YouTube Analytics reports for your YouTube content
-authYtAnalyticsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
-authYtAnalyticsReadonlyScope = Proxy;
+ytAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
+ytAnalyticsReadOnlyScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-authYoutubepartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-authYoutubepartnerScope = Proxy;
+youtubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youtubePartnerScope = Proxy;
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
-authYtAnalyticsMonetaryReadonlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
-authYtAnalyticsMonetaryReadonlyScope = Proxy;
+ytAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics-monetary.readonly"]
+ytAnalyticsMonetaryReadOnlyScope = Proxy;
 
 -- | View your YouTube account
-authYoutubeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-authYoutubeReadonlyScope = Proxy;
+youtubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+youtubeReadOnlyScope = Proxy;

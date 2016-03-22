@@ -20,12 +20,12 @@ module Network.Google.Analytics.Types
       analyticsService
 
     -- * OAuth Scopes
-    , authAnalyticsManageUsersScope
-    , authAnalyticsProvisionScope
-    , authAnalyticsManageUsersReadonlyScope
-    , authAnalyticsScope
-    , authAnalyticsReadonlyScope
-    , authAnalyticsEditScope
+    , analyticsManageUsersScope
+    , analyticsProvisionScope
+    , analyticsManageUsersReadOnlyScope
+    , analyticsScope
+    , analyticsReadOnlyScope
+    , analyticsEditScope
 
     -- * UnSampledReports
     , UnSampledReports
@@ -1032,26 +1032,26 @@ analyticsService
       "www.googleapis.com"
 
 -- | Manage Google Analytics Account users by email address
-authAnalyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
-authAnalyticsManageUsersScope = Proxy;
+analyticsManageUsersScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users"]
+analyticsManageUsersScope = Proxy;
 
 -- | Create a new Google Analytics account along with its default property
 -- and view
-authAnalyticsProvisionScope :: Proxy '["https://www.googleapis.com/auth/analytics.provision"]
-authAnalyticsProvisionScope = Proxy;
+analyticsProvisionScope :: Proxy '["https://www.googleapis.com/auth/analytics.provision"]
+analyticsProvisionScope = Proxy;
 
 -- | View Google Analytics user permissions
-authAnalyticsManageUsersReadonlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
-authAnalyticsManageUsersReadonlyScope = Proxy;
+analyticsManageUsersReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.manage.users.readonly"]
+analyticsManageUsersReadOnlyScope = Proxy;
 
 -- | View and manage your Google Analytics data
-authAnalyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
-authAnalyticsScope = Proxy;
+analyticsScope :: Proxy '["https://www.googleapis.com/auth/analytics"]
+analyticsScope = Proxy;
 
 -- | View your Google Analytics data
-authAnalyticsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
-authAnalyticsReadonlyScope = Proxy;
+analyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/analytics.readonly"]
+analyticsReadOnlyScope = Proxy;
 
 -- | Edit Google Analytics management entities
-authAnalyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]
-authAnalyticsEditScope = Proxy;
+analyticsEditScope :: Proxy '["https://www.googleapis.com/auth/analytics.edit"]
+analyticsEditScope = Proxy;

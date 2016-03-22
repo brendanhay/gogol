@@ -20,7 +20,7 @@ module Network.Google.Books.Types
       booksService
 
     -- * OAuth Scopes
-    , authBooksScope
+    , booksScope
 
     -- * UserSettings
     , UserSettings
@@ -924,5 +924,5 @@ booksService
       "www.googleapis.com"
 
 -- | Manage your books
-authBooksScope :: Proxy '["https://www.googleapis.com/auth/books"]
-authBooksScope = Proxy;
+booksScope :: Proxy '["https://www.googleapis.com/auth/books"]
+booksScope = Proxy;

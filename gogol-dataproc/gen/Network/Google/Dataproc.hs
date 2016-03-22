@@ -23,10 +23,10 @@ module Network.Google.Dataproc
       dataprocService
 
     -- * OAuth Scopes
-    , authLoggingAdminScope
-    , authLoggingReadScope
-    , authLoggingWriteScope
-    , authCloudPlatformScope
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , DataprocAPI

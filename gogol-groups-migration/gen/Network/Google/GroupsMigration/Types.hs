@@ -20,7 +20,7 @@ module Network.Google.GroupsMigration.Types
       groupsMigrationService
 
     -- * OAuth Scopes
-    , authAppsGroupsMigrationScope
+    , appsGroupsMigrationScope
 
     -- * Groups
     , Groups
@@ -40,5 +40,5 @@ groupsMigrationService
       "www.googleapis.com"
 
 -- | Manage messages in groups on your domain
-authAppsGroupsMigrationScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]
-authAppsGroupsMigrationScope = Proxy;
+appsGroupsMigrationScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.migration"]
+appsGroupsMigrationScope = Proxy;

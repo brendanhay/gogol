@@ -21,12 +21,12 @@ module Network.Google.Gmail.Types
 
     -- * OAuth Scopes
     , mailGoogleComScope
-    , authGmailModifyScope
-    , authGmailLabelsScope
-    , authGmailSendScope
-    , authGmailInsertScope
-    , authGmailComposeScope
-    , authGmailReadonlyScope
+    , gmailModifyScope
+    , gmailLabelsScope
+    , gmailSendScope
+    , gmailInsertScope
+    , gmailComposeScope
+    , gmailReadOnlyScope
 
     -- * BatchDeleteMessagesRequest
     , BatchDeleteMessagesRequest
@@ -237,25 +237,25 @@ mailGoogleComScope :: Proxy '["https://mail.google.com/"]
 mailGoogleComScope = Proxy;
 
 -- | View and modify but not delete your email
-authGmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
-authGmailModifyScope = Proxy;
+gmailModifyScope :: Proxy '["https://www.googleapis.com/auth/gmail.modify"]
+gmailModifyScope = Proxy;
 
 -- | Manage mailbox labels
-authGmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
-authGmailLabelsScope = Proxy;
+gmailLabelsScope :: Proxy '["https://www.googleapis.com/auth/gmail.labels"]
+gmailLabelsScope = Proxy;
 
 -- | Send email on your behalf
-authGmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
-authGmailSendScope = Proxy;
+gmailSendScope :: Proxy '["https://www.googleapis.com/auth/gmail.send"]
+gmailSendScope = Proxy;
 
 -- | Insert mail into your mailbox
-authGmailInsertScope :: Proxy '["https://www.googleapis.com/auth/gmail.insert"]
-authGmailInsertScope = Proxy;
+gmailInsertScope :: Proxy '["https://www.googleapis.com/auth/gmail.insert"]
+gmailInsertScope = Proxy;
 
 -- | Manage drafts and send emails
-authGmailComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.compose"]
-authGmailComposeScope = Proxy;
+gmailComposeScope :: Proxy '["https://www.googleapis.com/auth/gmail.compose"]
+gmailComposeScope = Proxy;
 
 -- | View your emails messages and settings
-authGmailReadonlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
-authGmailReadonlyScope = Proxy;
+gmailReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/gmail.readonly"]
+gmailReadOnlyScope = Proxy;

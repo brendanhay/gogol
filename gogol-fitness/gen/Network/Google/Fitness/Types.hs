@@ -20,12 +20,12 @@ module Network.Google.Fitness.Types
       fitnessService
 
     -- * OAuth Scopes
-    , authFitnessBodyReadScope
-    , authFitnessActivityReadScope
-    , authFitnessActivityWriteScope
-    , authFitnessLocationReadScope
-    , authFitnessLocationWriteScope
-    , authFitnessBodyWriteScope
+    , fitnessBodyReadScope
+    , fitnessActivityReadScope
+    , fitnessActivityWriteScope
+    , fitnessLocationReadScope
+    , fitnessLocationWriteScope
+    , fitnessBodyWriteScope
 
     -- * AggregateBucketType
     , AggregateBucketType (..)
@@ -205,25 +205,25 @@ fitnessService
       "www.googleapis.com"
 
 -- | View body sensor information in Google Fit
-authFitnessBodyReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
-authFitnessBodyReadScope = Proxy;
+fitnessBodyReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.read"]
+fitnessBodyReadScope = Proxy;
 
 -- | View your activity information in Google Fit
-authFitnessActivityReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
-authFitnessActivityReadScope = Proxy;
+fitnessActivityReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.read"]
+fitnessActivityReadScope = Proxy;
 
 -- | View and store your activity information in Google Fit
-authFitnessActivityWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
-authFitnessActivityWriteScope = Proxy;
+fitnessActivityWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.activity.write"]
+fitnessActivityWriteScope = Proxy;
 
 -- | View your stored location data in Google Fit
-authFitnessLocationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
-authFitnessLocationReadScope = Proxy;
+fitnessLocationReadScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.read"]
+fitnessLocationReadScope = Proxy;
 
 -- | View and store your location data in Google Fit
-authFitnessLocationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
-authFitnessLocationWriteScope = Proxy;
+fitnessLocationWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.location.write"]
+fitnessLocationWriteScope = Proxy;
 
 -- | View and store body sensor data in Google Fit
-authFitnessBodyWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
-authFitnessBodyWriteScope = Proxy;
+fitnessBodyWriteScope :: Proxy '["https://www.googleapis.com/auth/fitness.body.write"]
+fitnessBodyWriteScope = Proxy;

@@ -20,10 +20,10 @@ module Network.Google.Dataproc.Types
       dataprocService
 
     -- * OAuth Scopes
-    , authLoggingAdminScope
-    , authLoggingReadScope
-    , authLoggingWriteScope
-    , authCloudPlatformScope
+    , loggingAdminScope
+    , loggingReadScope
+    , loggingWriteScope
+    , cloudPlatformScope
 
     -- * JobReference
     , JobReference
@@ -405,17 +405,17 @@ dataprocService
       "dataproc.googleapis.com"
 
 -- | Administrate log data for your projects
-authLoggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
-authLoggingAdminScope = Proxy;
+loggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
+loggingAdminScope = Proxy;
 
 -- | View log data for your projects
-authLoggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
-authLoggingReadScope = Proxy;
+loggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
+loggingReadScope = Proxy;
 
 -- | Submit log data for your projects
-authLoggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
-authLoggingWriteScope = Proxy;
+loggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
+loggingWriteScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

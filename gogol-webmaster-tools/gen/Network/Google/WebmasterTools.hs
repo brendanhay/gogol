@@ -22,8 +22,8 @@ module Network.Google.WebmasterTools
       webmasterToolsService
 
     -- * OAuth Scopes
-    , authWebmastersScope
-    , authWebmastersReadonlyScope
+    , webmastersScope
+    , webmastersReadOnlyScope
 
     -- * API Declaration
     , WebmasterToolsAPI

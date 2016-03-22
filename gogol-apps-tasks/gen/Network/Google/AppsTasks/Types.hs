@@ -20,8 +20,8 @@ module Network.Google.AppsTasks.Types
       appsTasksService
 
     -- * OAuth Scopes
-    , authTasksReadonlyScope
-    , authTasksScope
+    , tasksReadOnlyScope
+    , tasksScope
 
     -- * TaskLinksItem
     , TaskLinksItem
@@ -87,9 +87,9 @@ appsTasksService
       "www.googleapis.com"
 
 -- | View your tasks
-authTasksReadonlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
-authTasksReadonlyScope = Proxy;
+tasksReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/tasks.readonly"]
+tasksReadOnlyScope = Proxy;
 
 -- | Manage your tasks
-authTasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
-authTasksScope = Proxy;
+tasksScope :: Proxy '["https://www.googleapis.com/auth/tasks"]
+tasksScope = Proxy;

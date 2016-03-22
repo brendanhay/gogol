@@ -22,12 +22,12 @@ module Network.Google.Fitness
       fitnessService
 
     -- * OAuth Scopes
-    , authFitnessBodyReadScope
-    , authFitnessActivityReadScope
-    , authFitnessActivityWriteScope
-    , authFitnessLocationReadScope
-    , authFitnessLocationWriteScope
-    , authFitnessBodyWriteScope
+    , fitnessBodyReadScope
+    , fitnessActivityReadScope
+    , fitnessActivityWriteScope
+    , fitnessLocationReadScope
+    , fitnessLocationWriteScope
+    , fitnessBodyWriteScope
 
     -- * API Declaration
     , FitnessAPI

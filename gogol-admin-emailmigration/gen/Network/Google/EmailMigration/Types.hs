@@ -20,7 +20,7 @@ module Network.Google.EmailMigration.Types
       emailMigrationService
 
     -- * OAuth Scopes
-    , authEmailMigrationScope
+    , emailMigrationScope
 
     -- * MailItem
     , MailItem
@@ -48,5 +48,5 @@ emailMigrationService
       "www.googleapis.com"
 
 -- | Manage email messages of users on your domain
-authEmailMigrationScope :: Proxy '["https://www.googleapis.com/auth/email.migration"]
-authEmailMigrationScope = Proxy;
+emailMigrationScope :: Proxy '["https://www.googleapis.com/auth/email.migration"]
+emailMigrationScope = Proxy;

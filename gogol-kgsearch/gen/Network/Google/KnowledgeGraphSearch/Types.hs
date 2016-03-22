@@ -20,7 +20,7 @@ module Network.Google.KnowledgeGraphSearch.Types
       knowledgeGraphSearchService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
+    , cloudPlatformScope
 
     -- * CounterOptions
     , CounterOptions
@@ -162,5 +162,5 @@ knowledgeGraphSearchService
       "iam.googleapis.com"
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;

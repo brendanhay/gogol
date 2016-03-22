@@ -20,8 +20,8 @@ module Network.Google.AdExchangeSeller.Types
       adExchangeSellerService
 
     -- * OAuth Scopes
-    , authAdexchangeSellerReadonlyScope
-    , authAdexchangeSellerScope
+    , adExchangeSellerReadOnlyScope
+    , adExchangeSellerScope
 
     -- * AdClients
     , AdClients
@@ -190,9 +190,9 @@ adExchangeSellerService
       "www.googleapis.com"
 
 -- | View your Ad Exchange data
-authAdexchangeSellerReadonlyScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
-authAdexchangeSellerReadonlyScope = Proxy;
+adExchangeSellerReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller.readonly"]
+adExchangeSellerReadOnlyScope = Proxy;
 
 -- | View and manage your Ad Exchange data
-authAdexchangeSellerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
-authAdexchangeSellerScope = Proxy;
+adExchangeSellerScope :: Proxy '["https://www.googleapis.com/auth/adexchange.seller"]
+adExchangeSellerScope = Proxy;

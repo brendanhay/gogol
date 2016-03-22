@@ -22,14 +22,14 @@ module Network.Google.Script.Types
     -- * OAuth Scopes
     , mailGoogleComScope
     , m8FeedsScope
-    , authAdminDirectoryUserScope
-    , authUserinfoEmailScope
-    , authFormsCurrentonlyScope
-    , authDriveScope
-    , authAdminDirectoryGroupScope
+    , adminDirectoryUserScope
+    , userInfoEmailScope
+    , formsCurrentOnlyScope
+    , driveScope
+    , adminDirectoryGroupScope
     , calendarFeedsScope
-    , authFormsScope
-    , authGroupsScope
+    , formsScope
+    , groupsScope
 
     -- * Status
     , Status
@@ -108,33 +108,33 @@ m8FeedsScope :: Proxy '["https://www.google.com/m8/feeds"]
 m8FeedsScope = Proxy;
 
 -- | View and manage the provisioning of users on your domain
-authAdminDirectoryUserScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
-authAdminDirectoryUserScope = Proxy;
+adminDirectoryUserScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.user"]
+adminDirectoryUserScope = Proxy;
 
 -- | View your email address
-authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-authUserinfoEmailScope = Proxy;
+userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userInfoEmailScope = Proxy;
 
 -- | View and manage forms that this application has been installed in
-authFormsCurrentonlyScope :: Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
-authFormsCurrentonlyScope = Proxy;
+formsCurrentOnlyScope :: Proxy '["https://www.googleapis.com/auth/forms.currentonly"]
+formsCurrentOnlyScope = Proxy;
 
 -- | View and manage the files in your Google Drive
-authDriveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-authDriveScope = Proxy;
+driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
+driveScope = Proxy;
 
 -- | View and manage the provisioning of groups on your domain
-authAdminDirectoryGroupScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
-authAdminDirectoryGroupScope = Proxy;
+adminDirectoryGroupScope :: Proxy '["https://www.googleapis.com/auth/admin.directory.group"]
+adminDirectoryGroupScope = Proxy;
 
 -- | Manage your calendars
 calendarFeedsScope :: Proxy '["https://www.google.com/calendar/feeds"]
 calendarFeedsScope = Proxy;
 
 -- | View and manage your forms in Google Drive
-authFormsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
-authFormsScope = Proxy;
+formsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
+formsScope = Proxy;
 
 -- | View and manage your Google Groups
-authGroupsScope :: Proxy '["https://www.googleapis.com/auth/groups"]
-authGroupsScope = Proxy;
+groupsScope :: Proxy '["https://www.googleapis.com/auth/groups"]
+groupsScope = Proxy;

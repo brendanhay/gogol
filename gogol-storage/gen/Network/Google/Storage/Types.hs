@@ -20,11 +20,11 @@ module Network.Google.Storage.Types
       storageService
 
     -- * OAuth Scopes
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authDevstorageReadOnlyScope
-    , authDevstorageReadWriteScope
-    , authDevstorageFullControlScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , devstorageFullControlScope
 
     -- * ObjectOwner
     , ObjectOwner
@@ -357,21 +357,21 @@ storageService
       "www.googleapis.com"
 
 -- | View your data across Google Cloud Platform services
-authCloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
-authCloudPlatformReadOnlyScope = Proxy;
+cloudPlatformReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform.read-only"]
+cloudPlatformReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-authDevstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-authDevstorageReadOnlyScope = Proxy;
+devstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+devstorageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-authDevstorageReadWriteScope = Proxy;
+devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+devstorageReadWriteScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-authDevstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-authDevstorageFullControlScope = Proxy;
+devstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+devstorageFullControlScope = Proxy;

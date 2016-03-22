@@ -20,8 +20,8 @@ module Network.Google.SiteVerification.Types
       siteVerificationService
 
     -- * OAuth Scopes
-    , authSiteverificationVerifyOnlyScope
-    , authSiteverificationScope
+    , siteVerificationVerifyOnlyScope
+    , siteVerificationScope
 
     -- * SiteVerificationWebResourceGettokenRequestSite
     , SiteVerificationWebResourceGettokenRequestSite
@@ -71,9 +71,9 @@ siteVerificationService
       "www.googleapis.com"
 
 -- | Manage your new site verifications with Google
-authSiteverificationVerifyOnlyScope :: Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
-authSiteverificationVerifyOnlyScope = Proxy;
+siteVerificationVerifyOnlyScope :: Proxy '["https://www.googleapis.com/auth/siteverification.verify_only"]
+siteVerificationVerifyOnlyScope = Proxy;
 
 -- | Manage the list of sites and domains you control
-authSiteverificationScope :: Proxy '["https://www.googleapis.com/auth/siteverification"]
-authSiteverificationScope = Proxy;
+siteVerificationScope :: Proxy '["https://www.googleapis.com/auth/siteverification"]
+siteVerificationScope = Proxy;

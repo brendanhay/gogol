@@ -22,11 +22,11 @@ module Network.Google.YouTubeAnalytics
       youTubeAnalyticsService
 
     -- * OAuth Scopes
-    , authYoutubeScope
-    , authYtAnalyticsReadonlyScope
-    , authYoutubepartnerScope
-    , authYtAnalyticsMonetaryReadonlyScope
-    , authYoutubeReadonlyScope
+    , youtubeScope
+    , ytAnalyticsReadOnlyScope
+    , youtubePartnerScope
+    , ytAnalyticsMonetaryReadOnlyScope
+    , youtubeReadOnlyScope
 
     -- * API Declaration
     , YouTubeAnalyticsAPI

@@ -20,7 +20,7 @@ module Network.Google.GroupsSettings.Types
       groupsSettingsService
 
     -- * OAuth Scopes
-    , authAppsGroupsSettingsScope
+    , appsGroupsSettingsScope
 
     -- * Groups
     , Groups
@@ -66,5 +66,5 @@ groupsSettingsService
       "www.googleapis.com"
 
 -- | View and manage the settings of a Google Apps Group
-authAppsGroupsSettingsScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
-authAppsGroupsSettingsScope = Proxy;
+appsGroupsSettingsScope :: Proxy '["https://www.googleapis.com/auth/apps.groups.settings"]
+appsGroupsSettingsScope = Proxy;

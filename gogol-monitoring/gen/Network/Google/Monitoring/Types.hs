@@ -20,10 +20,10 @@ module Network.Google.Monitoring.Types
       monitoringService
 
     -- * OAuth Scopes
-    , authMonitoringReadScope
-    , authCloudPlatformScope
-    , authMonitoringScope
-    , authMonitoringWriteScope
+    , monitoringReadScope
+    , cloudPlatformScope
+    , monitoringScope
+    , monitoringWriteScope
 
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
@@ -280,18 +280,18 @@ monitoringService
 
 -- | View monitoring data for all of your Google Cloud and third-party
 -- projects
-authMonitoringReadScope :: Proxy '["https://www.googleapis.com/auth/monitoring.read"]
-authMonitoringReadScope = Proxy;
+monitoringReadScope :: Proxy '["https://www.googleapis.com/auth/monitoring.read"]
+monitoringReadScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and write monitoring data for all of your Google and third-party
 -- Cloud and API projects
-authMonitoringScope :: Proxy '["https://www.googleapis.com/auth/monitoring"]
-authMonitoringScope = Proxy;
+monitoringScope :: Proxy '["https://www.googleapis.com/auth/monitoring"]
+monitoringScope = Proxy;
 
 -- | Publish metric data to your Google Cloud projects
-authMonitoringWriteScope :: Proxy '["https://www.googleapis.com/auth/monitoring.write"]
-authMonitoringWriteScope = Proxy;
+monitoringWriteScope :: Proxy '["https://www.googleapis.com/auth/monitoring.write"]
+monitoringWriteScope = Proxy;

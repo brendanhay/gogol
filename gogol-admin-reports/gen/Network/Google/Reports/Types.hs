@@ -20,8 +20,8 @@ module Network.Google.Reports.Types
       reportsService
 
     -- * OAuth Scopes
-    , authAdminReportsUsageReadonlyScope
-    , authAdminReportsAuditReadonlyScope
+    , adminReportsUsageReadOnlyScope
+    , adminReportsAuditReadOnlyScope
 
     -- * UsageReportParametersItem
     , UsageReportParametersItem
@@ -160,9 +160,9 @@ reportsService
       "www.googleapis.com"
 
 -- | View usage reports of Google Apps for your domain
-authAdminReportsUsageReadonlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
-authAdminReportsUsageReadonlyScope = Proxy;
+adminReportsUsageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.usage.readonly"]
+adminReportsUsageReadOnlyScope = Proxy;
 
 -- | View audit reports of Google Apps for your domain
-authAdminReportsAuditReadonlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
-authAdminReportsAuditReadonlyScope = Proxy;
+adminReportsAuditReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/admin.reports.audit.readonly"]
+adminReportsAuditReadOnlyScope = Proxy;

@@ -20,9 +20,9 @@ module Network.Google.Datastore.Types
       datastoreService
 
     -- * OAuth Scopes
-    , authUserinfoEmailScope
-    , authCloudPlatformScope
-    , authDatastoreScope
+    , userInfoEmailScope
+    , cloudPlatformScope
+    , datastoreScope
 
     -- * PropertyOrderDirection
     , PropertyOrderDirection (..)
@@ -309,13 +309,13 @@ datastoreService
       "www.googleapis.com"
 
 -- | View your email address
-authUserinfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
-authUserinfoEmailScope = Proxy;
+userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]
+userInfoEmailScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View and manage your Google Cloud Datastore data
-authDatastoreScope :: Proxy '["https://www.googleapis.com/auth/datastore"]
-authDatastoreScope = Proxy;
+datastoreScope :: Proxy '["https://www.googleapis.com/auth/datastore"]
+datastoreScope = Proxy;

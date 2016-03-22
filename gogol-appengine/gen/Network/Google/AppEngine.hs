@@ -22,7 +22,7 @@ module Network.Google.AppEngine
       appEngineService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , AppEngineAPI

@@ -25,7 +25,7 @@ module Network.Google.Vision
       visionService
 
     -- * OAuth Scopes
-    , authCloudPlatformScope
+    , cloudPlatformScope
 
     -- * API Declaration
     , VisionAPI

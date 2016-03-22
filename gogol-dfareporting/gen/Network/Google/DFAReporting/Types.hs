@@ -20,8 +20,8 @@ module Network.Google.DFAReporting.Types
       dFAReportingService
 
     -- * OAuth Scopes
-    , authDfareportingScope
-    , authDfatraffickingScope
+    , dFAReportingScope
+    , dfatraffickingScope
 
     -- * PlacementsListSortOrder
     , PlacementsListSortOrder (..)
@@ -2540,10 +2540,10 @@ dFAReportingService
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports
-authDfareportingScope :: Proxy '["https://www.googleapis.com/auth/dfareporting"]
-authDfareportingScope = Proxy;
+dFAReportingScope :: Proxy '["https://www.googleapis.com/auth/dfareporting"]
+dFAReportingScope = Proxy;
 
 -- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad
 -- campaigns
-authDfatraffickingScope :: Proxy '["https://www.googleapis.com/auth/dfatrafficking"]
-authDfatraffickingScope = Proxy;
+dfatraffickingScope :: Proxy '["https://www.googleapis.com/auth/dfatrafficking"]
+dfatraffickingScope = Proxy;

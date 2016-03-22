@@ -22,11 +22,11 @@ module Network.Google.Storage
       storageService
 
     -- * OAuth Scopes
-    , authCloudPlatformReadOnlyScope
-    , authCloudPlatformScope
-    , authDevstorageReadOnlyScope
-    , authDevstorageReadWriteScope
-    , authDevstorageFullControlScope
+    , cloudPlatformReadOnlyScope
+    , cloudPlatformScope
+    , devstorageReadOnlyScope
+    , devstorageReadWriteScope
+    , devstorageFullControlScope
 
     -- * API Declaration
     , StorageAPI

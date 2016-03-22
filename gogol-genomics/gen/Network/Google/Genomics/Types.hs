@@ -20,11 +20,11 @@ module Network.Google.Genomics.Types
       genomicsService
 
     -- * OAuth Scopes
-    , authGenomicsScope
-    , authCloudPlatformScope
-    , authGenomicsReadonlyScope
-    , authDevstorageReadWriteScope
-    , authBigqueryScope
+    , genomicsScope
+    , cloudPlatformScope
+    , genomicsReadOnlyScope
+    , devstorageReadWriteScope
+    , bigQueryScope
 
     -- * ReadInfo
     , ReadInfo
@@ -569,21 +569,21 @@ genomicsService
       "genomics.googleapis.com"
 
 -- | View and manage Genomics data
-authGenomicsScope :: Proxy '["https://www.googleapis.com/auth/genomics"]
-authGenomicsScope = Proxy;
+genomicsScope :: Proxy '["https://www.googleapis.com/auth/genomics"]
+genomicsScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
-authCloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
-authCloudPlatformScope = Proxy;
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View Genomics data
-authGenomicsReadonlyScope :: Proxy '["https://www.googleapis.com/auth/genomics.readonly"]
-authGenomicsReadonlyScope = Proxy;
+genomicsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/genomics.readonly"]
+genomicsReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-authDevstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-authDevstorageReadWriteScope = Proxy;
+devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+devstorageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
-authBigqueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
-authBigqueryScope = Proxy;
+bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
+bigQueryScope = Proxy;

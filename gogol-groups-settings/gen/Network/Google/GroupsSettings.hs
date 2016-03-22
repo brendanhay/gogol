@@ -22,7 +22,7 @@ module Network.Google.GroupsSettings
       groupsSettingsService
 
     -- * OAuth Scopes
-    , authAppsGroupsSettingsScope
+    , appsGroupsSettingsScope
 
     -- * API Declaration
     , GroupsSettingsAPI

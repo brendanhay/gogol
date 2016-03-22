@@ -20,8 +20,8 @@ module Network.Google.TaskQueue.Types
       taskQueueService
 
     -- * OAuth Scopes
-    , authTaskqueueConsumerScope
-    , authTaskqueueScope
+    , taskQueueConsumerScope
+    , taskQueueScope
 
     -- * Tasks2
     , Tasks2
@@ -83,9 +83,9 @@ taskQueueService
       "www.googleapis.com"
 
 -- | Consume Tasks from your Taskqueues
-authTaskqueueConsumerScope :: Proxy '["https://www.googleapis.com/auth/taskqueue.consumer"]
-authTaskqueueConsumerScope = Proxy;
+taskQueueConsumerScope :: Proxy '["https://www.googleapis.com/auth/taskqueue.consumer"]
+taskQueueConsumerScope = Proxy;
 
 -- | Manage your Tasks and Taskqueues
-authTaskqueueScope :: Proxy '["https://www.googleapis.com/auth/taskqueue"]
-authTaskqueueScope = Proxy;
+taskQueueScope :: Proxy '["https://www.googleapis.com/auth/taskqueue"]
+taskQueueScope = Proxy;

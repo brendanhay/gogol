@@ -20,12 +20,12 @@ module Network.Google.YouTube.Types
       youTubeService
 
     -- * OAuth Scopes
-    , authYoutubeUploadScope
-    , authYoutubeScope
-    , authYoutubepartnerScope
-    , authYoutubeForceSslScope
-    , authYoutubeReadonlyScope
-    , authYoutubepartnerChannelAuditScope
+    , youTubeUploadScope
+    , youTubeScope
+    , youtubePartnerScope
+    , youTubeForceSslScope
+    , youTubeReadOnlyScope
+    , youtubePartnerChannelAuditScope
 
     -- * LiveChatMessageAuthorDetails
     , LiveChatMessageAuthorDetails
@@ -2038,26 +2038,26 @@ youTubeService
       "www.googleapis.com"
 
 -- | Manage your YouTube videos
-authYoutubeUploadScope :: Proxy '["https://www.googleapis.com/auth/youtube.upload"]
-authYoutubeUploadScope = Proxy;
+youTubeUploadScope :: Proxy '["https://www.googleapis.com/auth/youtube.upload"]
+youTubeUploadScope = Proxy;
 
 -- | Manage your YouTube account
-authYoutubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
-authYoutubeScope = Proxy;
+youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+youTubeScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-authYoutubepartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-authYoutubepartnerScope = Proxy;
+youtubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youtubePartnerScope = Proxy;
 
 -- | Manage your YouTube account
-authYoutubeForceSslScope :: Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
-authYoutubeForceSslScope = Proxy;
+youTubeForceSslScope :: Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
+youTubeForceSslScope = Proxy;
 
 -- | View your YouTube account
-authYoutubeReadonlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-authYoutubeReadonlyScope = Proxy;
+youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+youTubeReadOnlyScope = Proxy;
 
 -- | View private information of your YouTube channel relevant during the
 -- audit process with a YouTube partner
-authYoutubepartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
-authYoutubepartnerChannelAuditScope = Proxy;
+youtubePartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
+youtubePartnerChannelAuditScope = Proxy;

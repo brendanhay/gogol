@@ -20,8 +20,8 @@ module Network.Google.MapsCoordinate.Types
       mapsCoordinateService
 
     -- * OAuth Scopes
-    , authCoordinateScope
-    , authCoordinateReadonlyScope
+    , coordinateScope
+    , coordinateReadOnlyScope
 
     -- * LocationListResponse
     , LocationListResponse
@@ -179,9 +179,9 @@ mapsCoordinateService
       "www.googleapis.com"
 
 -- | View and manage your Google Maps Coordinate jobs
-authCoordinateScope :: Proxy '["https://www.googleapis.com/auth/coordinate"]
-authCoordinateScope = Proxy;
+coordinateScope :: Proxy '["https://www.googleapis.com/auth/coordinate"]
+coordinateScope = Proxy;
 
 -- | View your Google Coordinate jobs
-authCoordinateReadonlyScope :: Proxy '["https://www.googleapis.com/auth/coordinate.readonly"]
-authCoordinateReadonlyScope = Proxy;
+coordinateReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/coordinate.readonly"]
+coordinateReadOnlyScope = Proxy;

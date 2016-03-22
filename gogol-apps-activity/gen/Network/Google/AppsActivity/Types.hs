@@ -20,11 +20,11 @@ module Network.Google.AppsActivity.Types
       appsActivityService
 
     -- * OAuth Scopes
-    , authDriveMetadataReadonlyScope
-    , authActivityScope
-    , authDriveReadonlyScope
-    , authDriveScope
-    , authDriveMetadataScope
+    , driveMetadataReadOnlyScope
+    , activityScope
+    , driveReadOnlyScope
+    , driveScope
+    , driveMetadataScope
 
     -- * Parent
     , Parent
@@ -133,21 +133,21 @@ appsActivityService
       "www.googleapis.com"
 
 -- | View metadata for files in your Google Drive
-authDriveMetadataReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
-authDriveMetadataReadonlyScope = Proxy;
+driveMetadataReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata.readonly"]
+driveMetadataReadOnlyScope = Proxy;
 
 -- | View the activity history of your Google Apps
-authActivityScope :: Proxy '["https://www.googleapis.com/auth/activity"]
-authActivityScope = Proxy;
+activityScope :: Proxy '["https://www.googleapis.com/auth/activity"]
+activityScope = Proxy;
 
 -- | View the files in your Google Drive
-authDriveReadonlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
-authDriveReadonlyScope = Proxy;
+driveReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/drive.readonly"]
+driveReadOnlyScope = Proxy;
 
 -- | View and manage the files in your Google Drive
-authDriveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
-authDriveScope = Proxy;
+driveScope :: Proxy '["https://www.googleapis.com/auth/drive"]
+driveScope = Proxy;
 
 -- | View and manage metadata of files in your Google Drive
-authDriveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
-authDriveMetadataScope = Proxy;
+driveMetadataScope :: Proxy '["https://www.googleapis.com/auth/drive.metadata"]
+driveMetadataScope = Proxy;
