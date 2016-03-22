@@ -437,10 +437,10 @@ serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
-scopeName s k = Text.unpack . lowerHead $
+scopeName s k = Text.unpack . lowerHead . lowerFirstAcronym $
     case breakParts k of
-        [] -> _sCanonicalName s <> "AllScope"
-        xs -> foldMap named xs <> "Scope"
+        []  -> _sCanonicalName s <> "AllScope"
+        xs  -> foldMap named xs <> "Scope"
   where
     breakParts =
           concatMap (Text.split split)
@@ -465,6 +465,9 @@ scopeName s k = Text.unpack . lowerHead $
     lower  = Text.toLower (_sCanonicalName s)
 
     special =
-        [ ("only",   "Only")
-        , ("manage", "Manage")
+        [ ("only",       "Only")
+        , ("manage",     "Manage")
+        , ("devstorage", "Storage")
+        , ("number",     "Number")
+        , ("^yt$",       "youtube")
         ]

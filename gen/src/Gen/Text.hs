@@ -233,6 +233,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("Vpn",           "VPN")
          , ("Xml",           "XML")
          , ("Youtube",       "YouTube")
+         , ("youtube",       "YouTube")
 
          , ("([^a])data",  "$1Data")
          , ("([^ypn])load", "$1Load")
