@@ -21,7 +21,7 @@ library
           Example.Storage
 
     build-depends:
-          base          >= 4.7 && < 5
+          base          >= 4.7
         , bytestring
         , conduit
         , conduit-extra
