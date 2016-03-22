@@ -20,11 +20,11 @@ module Network.Google.YouTubeAnalytics.Types
       youTubeAnalyticsService
 
     -- * OAuth Scopes
-    , youtubeScope
+    , youTubeScope
     , ytAnalyticsReadOnlyScope
-    , youtubePartnerScope
+    , youTubePartnerScope
     , ytAnalyticsMonetaryReadOnlyScope
-    , youtubeReadOnlyScope
+    , youTubeReadOnlyScope
 
     -- * GroupContentDetails
     , GroupContentDetails
@@ -147,16 +147,16 @@ youTubeAnalyticsService
       "www.googleapis.com"
 
 -- | Manage your YouTube account
-youtubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
-youtubeScope = Proxy;
+youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
+youTubeScope = Proxy;
 
 -- | View YouTube Analytics reports for your YouTube content
 ytAnalyticsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-analytics.readonly"]
 ytAnalyticsReadOnlyScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-youtubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youtubePartnerScope = Proxy;
+youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youTubePartnerScope = Proxy;
 
 -- | View monetary and non-monetary YouTube Analytics reports for your
 -- YouTube content
@@ -164,5 +164,5 @@ ytAnalyticsMonetaryReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/yt-
 ytAnalyticsMonetaryReadOnlyScope = Proxy;
 
 -- | View your YouTube account
-youtubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
-youtubeReadOnlyScope = Proxy;
+youTubeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/youtube.readonly"]
+youTubeReadOnlyScope = Proxy;

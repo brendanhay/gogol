@@ -24,10 +24,10 @@ module Network.Google.YouTube
     -- * OAuth Scopes
     , youTubeUploadScope
     , youTubeScope
-    , youtubePartnerScope
+    , youTubePartnerScope
     , youTubeForceSslScope
     , youTubeReadOnlyScope
-    , youtubePartnerChannelAuditScope
+    , youTubePartnerChannelAuditScope
 
     -- * API Declaration
     , YouTubeAPI

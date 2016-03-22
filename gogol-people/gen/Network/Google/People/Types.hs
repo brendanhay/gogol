@@ -23,7 +23,7 @@ module Network.Google.People.Types
     , userBirthdayReadScope
     , userInfoProFileScope
     , plusLoginScope
-    , userPhonenumbersReadScope
+    , userPhoneNumbersReadScope
     , userInfoEmailScope
     , contactsReadOnlyScope
     , userAddressesReadScope
@@ -349,8 +349,8 @@ plusLoginScope :: Proxy '["https://www.googleapis.com/auth/plus.login"]
 plusLoginScope = Proxy;
 
 -- | View your phone numbers
-userPhonenumbersReadScope :: Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
-userPhonenumbersReadScope = Proxy;
+userPhoneNumbersReadScope :: Proxy '["https://www.googleapis.com/auth/user.phonenumbers.read"]
+userPhoneNumbersReadScope = Proxy;
 
 -- | View your email address
 userInfoEmailScope :: Proxy '["https://www.googleapis.com/auth/userinfo.email"]

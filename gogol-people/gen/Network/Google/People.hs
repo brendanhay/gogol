@@ -26,7 +26,7 @@ module Network.Google.People
     , userBirthdayReadScope
     , userInfoProFileScope
     , plusLoginScope
-    , userPhonenumbersReadScope
+    , userPhoneNumbersReadScope
     , userInfoEmailScope
     , contactsReadOnlyScope
     , userAddressesReadScope

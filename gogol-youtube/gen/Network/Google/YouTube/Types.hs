@@ -22,10 +22,10 @@ module Network.Google.YouTube.Types
     -- * OAuth Scopes
     , youTubeUploadScope
     , youTubeScope
-    , youtubePartnerScope
+    , youTubePartnerScope
     , youTubeForceSslScope
     , youTubeReadOnlyScope
-    , youtubePartnerChannelAuditScope
+    , youTubePartnerChannelAuditScope
 
     -- * LiveChatMessageAuthorDetails
     , LiveChatMessageAuthorDetails
@@ -2046,8 +2046,8 @@ youTubeScope :: Proxy '["https://www.googleapis.com/auth/youtube"]
 youTubeScope = Proxy;
 
 -- | View and manage your assets and associated content on YouTube
-youtubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
-youtubePartnerScope = Proxy;
+youTubePartnerScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner"]
+youTubePartnerScope = Proxy;
 
 -- | Manage your YouTube account
 youTubeForceSslScope :: Proxy '["https://www.googleapis.com/auth/youtube.force-ssl"]
@@ -2059,5 +2059,5 @@ youTubeReadOnlyScope = Proxy;
 
 -- | View private information of your YouTube channel relevant during the
 -- audit process with a YouTube partner
-youtubePartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
-youtubePartnerChannelAuditScope = Proxy;
+youTubePartnerChannelAuditScope :: Proxy '["https://www.googleapis.com/auth/youtubepartner-channel-audit"]
+youTubePartnerChannelAuditScope = Proxy;

@@ -20,7 +20,7 @@ module Network.Google.URLShortener.Types
       uRLShortenerService
 
     -- * OAuth Scopes
-    , uRLShortenerScope
+    , urlShortenerScope
 
     -- * URL
     , URL
@@ -84,5 +84,5 @@ uRLShortenerService
       "www.googleapis.com"
 
 -- | Manage your goo.gl short URLs
-uRLShortenerScope :: Proxy '["https://www.googleapis.com/auth/urlshortener"]
-uRLShortenerScope = Proxy;
+urlShortenerScope :: Proxy '["https://www.googleapis.com/auth/urlshortener"]
+urlShortenerScope = Proxy;
