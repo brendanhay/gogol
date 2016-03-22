@@ -437,11 +437,34 @@ serviceName :: Service a -> String
 serviceName = Text.unpack . (<> "Service") . toCamel . _sCanonicalName
 
 scopeName :: Service a -> Text -> String
-scopeName s k = Text.unpack . toCamel $
-    case filter (not . url) (Text.split (== '/') k) of
+scopeName s k = Text.unpack . lowerHead $
+    case breakParts k of
         [] -> _sCanonicalName s <> "AllScope"
-        xs -> foldMap upperHead xs <> "Scope"
+        xs -> foldMap named xs <> "Scope"
   where
-    url x = Text.null x
-         || Text.isPrefixOf "http" x
-         || Text.isPrefixOf "www"  x
+    breakParts =
+          concatMap (Text.split split)
+        . filter (not . ignore)
+        . Text.split (== '/')
+
+    split x =
+           dot x
+        || separator x
+
+    ignore x =
+           Text.null x
+        || "auth" == x
+        || Text.isPrefixOf "http" x
+        || Text.isPrefixOf "www"  x
+
+    named x
+        | x == lower = pascal
+        | otherwise  = replaceAll (upperHead (upperAcronym x)) special
+
+    pascal = toPascal (_sCanonicalName s)
+    lower  = Text.toLower (_sCanonicalName s)
+
+    special =
+        [ ("only",   "Only")
+        , ("manage", "Manage")
+        ]
