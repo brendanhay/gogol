@@ -31,7 +31,7 @@ module Network.Google.TaskQueue
     -- * Resources
 
     -- ** taskqueue.taskqueues.get
-    , module Network.Google.Resource.TaskQueue.Taskqueues.Get
+    , module Network.Google.Resource.TaskQueue.TaskQueues.Get
 
     -- ** taskqueue.tasks.delete
     , module Network.Google.Resource.TaskQueue.Tasks.Delete
@@ -96,7 +96,7 @@ module Network.Google.TaskQueue
     , Task
     , task
     , ttRetryCount
-    , ttEnqueueTimestamp
+    , ttEnQueueTimestamp
     , ttTag
     , ttKind
     , ttQueueName
@@ -106,7 +106,7 @@ module Network.Google.TaskQueue
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.TaskQueue.Taskqueues.Get
+import           Network.Google.Resource.TaskQueue.TaskQueues.Get
 import           Network.Google.Resource.TaskQueue.Tasks.Delete
 import           Network.Google.Resource.TaskQueue.Tasks.Get
 import           Network.Google.Resource.TaskQueue.Tasks.Insert
@@ -128,4 +128,4 @@ type TaskQueueAPI =
        :<|> TasksLeaseResource
        :<|> TasksDeleteResource
        :<|> TasksUpdateResource
-       :<|> TaskqueuesGetResource
+       :<|> TaskQueuesGetResource

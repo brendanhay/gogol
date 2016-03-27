@@ -22,11 +22,11 @@ module Network.Google.BigQuery.Types
     -- * OAuth Scopes
     , cloudPlatformReadOnlyScope
     , cloudPlatformScope
-    , devstorageReadOnlyScope
+    , storageReadOnlyScope
     , bigQueryInsertDataScope
-    , devstorageReadWriteScope
+    , storageReadWriteScope
     , bigQueryScope
-    , devstorageFullControlScope
+    , storageFullControlScope
 
     -- * JobReference
     , JobReference
@@ -537,21 +537,21 @@ cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-devstorageReadOnlyScope = Proxy;
+storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+storageReadOnlyScope = Proxy;
 
 -- | Insert data into Google BigQuery
 bigQueryInsertDataScope :: Proxy '["https://www.googleapis.com/auth/bigquery.insertdata"]
 bigQueryInsertDataScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-devstorageReadWriteScope = Proxy;
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
 bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]
 bigQueryScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-devstorageFullControlScope = Proxy;
+storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+storageFullControlScope = Proxy;

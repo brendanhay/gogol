@@ -22,10 +22,10 @@ module Network.Google.Compute.Types
     -- * OAuth Scopes
     , computeScope
     , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
     , computeReadOnlyScope
-    , devstorageFullControlScope
+    , storageFullControlScope
 
     -- * TargetHTTPSProxyList
     , TargetHTTPSProxyList
@@ -1930,17 +1930,17 @@ cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
 cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-devstorageReadOnlyScope = Proxy;
+storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+storageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-devstorageReadWriteScope = Proxy;
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | View your Google Compute Engine resources
 computeReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/compute.readonly"]
 computeReadOnlyScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-devstorageFullControlScope = Proxy;
+storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+storageFullControlScope = Proxy;

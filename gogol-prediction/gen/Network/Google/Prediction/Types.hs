@@ -20,10 +20,10 @@ module Network.Google.Prediction.Types
       predictionService
 
     -- * OAuth Scopes
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
     , predictionScope
-    , devstorageFullControlScope
+    , storageFullControlScope
 
     -- * Insert2ModelInfo
     , Insert2ModelInfo
@@ -219,17 +219,17 @@ predictionService
       "www.googleapis.com"
 
 -- | View your data in Google Cloud Storage
-devstorageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
-devstorageReadOnlyScope = Proxy;
+storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]
+storageReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-devstorageReadWriteScope = Proxy;
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | Manage your data in the Google Prediction API
 predictionScope :: Proxy '["https://www.googleapis.com/auth/prediction"]
 predictionScope = Proxy;
 
 -- | Manage your data and permissions in Google Cloud Storage
-devstorageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
-devstorageFullControlScope = Proxy;
+storageFullControlScope :: Proxy '["https://www.googleapis.com/auth/devstorage.full_control"]
+storageFullControlScope = Proxy;

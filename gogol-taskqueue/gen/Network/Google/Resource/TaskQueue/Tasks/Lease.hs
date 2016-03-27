@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Lease
     , TasksLease
 
     -- * Request Lenses
-    , tlTaskqueue
+    , tlTaskQueue
     , tlTag
     , tlProject
     , tlNumTasks
@@ -65,7 +65,7 @@ type TasksLeaseResource =
 --
 -- /See:/ 'tasksLease' smart constructor.
 data TasksLease = TasksLease'
-    { _tlTaskqueue  :: !Text
+    { _tlTaskQueue  :: !Text
     , _tlTag        :: !(Maybe Text)
     , _tlProject    :: !Text
     , _tlNumTasks   :: !(Textual Int32)
@@ -77,7 +77,7 @@ data TasksLease = TasksLease'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tlTaskqueue'
+-- * 'tlTaskQueue'
 --
 -- * 'tlTag'
 --
@@ -89,14 +89,14 @@ data TasksLease = TasksLease'
 --
 -- * 'tlGroupByTag'
 tasksLease
-    :: Text -- ^ 'tlTaskqueue'
+    :: Text -- ^ 'tlTaskQueue'
     -> Text -- ^ 'tlProject'
     -> Int32 -- ^ 'tlNumTasks'
     -> Int32 -- ^ 'tlLeaseSecs'
     -> TasksLease
-tasksLease pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
+tasksLease pTlTaskQueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
     TasksLease'
-    { _tlTaskqueue = pTlTaskqueue_
+    { _tlTaskQueue = pTlTaskQueue_
     , _tlTag = Nothing
     , _tlProject = pTlProject_
     , _tlNumTasks = _Coerce # pTlNumTasks_
@@ -105,9 +105,9 @@ tasksLease pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
     }
 
 -- | The taskqueue to lease a task from.
-tlTaskqueue :: Lens' TasksLease Text
-tlTaskqueue
-  = lens _tlTaskqueue (\ s a -> s{_tlTaskqueue = a})
+tlTaskQueue :: Lens' TasksLease Text
+tlTaskQueue
+  = lens _tlTaskQueue (\ s a -> s{_tlTaskQueue = a})
 
 -- | The tag allowed for tasks in the response. Must only be specified if
 -- group_by_tag is true. If group_by_tag is true and tag is not specified
@@ -144,7 +144,7 @@ instance GoogleRequest TasksLease where
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksLease'{..}
-          = go _tlProject _tlTaskqueue (Just _tlNumTasks)
+          = go _tlProject _tlTaskQueue (Just _tlNumTasks)
               (Just _tlLeaseSecs)
               _tlTag
               _tlGroupByTag

@@ -63,7 +63,7 @@ module Network.Google.TaskQueue.Types
     , Task
     , task
     , ttRetryCount
-    , ttEnqueueTimestamp
+    , ttEnQueueTimestamp
     , ttTag
     , ttKind
     , ttQueueName

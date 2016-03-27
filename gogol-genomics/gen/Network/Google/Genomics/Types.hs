@@ -23,7 +23,7 @@ module Network.Google.Genomics.Types
     , genomicsScope
     , cloudPlatformScope
     , genomicsReadOnlyScope
-    , devstorageReadWriteScope
+    , storageReadWriteScope
     , bigQueryScope
 
     -- * ReadInfo
@@ -581,8 +581,8 @@ genomicsReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/genomics.reado
 genomicsReadOnlyScope = Proxy;
 
 -- | Manage your data in Google Cloud Storage
-devstorageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
-devstorageReadWriteScope = Proxy;
+storageReadWriteScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_write"]
+storageReadWriteScope = Proxy;
 
 -- | View and manage your data in Google BigQuery
 bigQueryScope :: Proxy '["https://www.googleapis.com/auth/bigquery"]

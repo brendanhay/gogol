@@ -2434,7 +2434,7 @@ data BackupRun = BackupRun'
     , _brSelfLink        :: !(Maybe Text)
     , _brEndTime         :: !(Maybe DateTime')
     , _brId              :: !(Maybe (Textual Int64))
-    , _brEnqueuedTime    :: !(Maybe DateTime')
+    , _brEnQueuedTime    :: !(Maybe DateTime')
     , _brInstance        :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2458,7 +2458,7 @@ data BackupRun = BackupRun'
 --
 -- * 'brId'
 --
--- * 'brEnqueuedTime'
+-- * 'brEnQueuedTime'
 --
 -- * 'brInstance'
 backupRun
@@ -2473,7 +2473,7 @@ backupRun =
     , _brSelfLink = Nothing
     , _brEndTime = Nothing
     , _brId = Nothing
-    , _brEnqueuedTime = Nothing
+    , _brEnQueuedTime = Nothing
     , _brInstance = Nothing
     }
 
@@ -2526,10 +2526,10 @@ brId
 
 -- | The time the run was enqueued in UTC timezone in RFC 3339 format, for
 -- example 2012-11-15T16:19:00.094Z.
-brEnqueuedTime :: Lens' BackupRun (Maybe UTCTime)
-brEnqueuedTime
-  = lens _brEnqueuedTime
-      (\ s a -> s{_brEnqueuedTime = a})
+brEnQueuedTime :: Lens' BackupRun (Maybe UTCTime)
+brEnQueuedTime
+  = lens _brEnQueuedTime
+      (\ s a -> s{_brEnQueuedTime = a})
       . mapping _DateTime
 
 -- | Name of the database instance.
@@ -2562,7 +2562,7 @@ instance ToJSON BackupRun where
                   ("windowStartTime" .=) <$> _brWindowStartTime,
                   ("selfLink" .=) <$> _brSelfLink,
                   ("endTime" .=) <$> _brEndTime, ("id" .=) <$> _brId,
-                  ("enqueuedTime" .=) <$> _brEnqueuedTime,
+                  ("enqueuedTime" .=) <$> _brEnQueuedTime,
                   ("instance" .=) <$> _brInstance])
 
 -- | An entry for an Access Control list.

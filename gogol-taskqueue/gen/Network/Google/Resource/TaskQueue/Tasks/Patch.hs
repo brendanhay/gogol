@@ -34,7 +34,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Patch
     , TasksPatch
 
     -- * Request Lenses
-    , tpTaskqueue
+    , tpTaskQueue
     , tpProject
     , tpPayload
     , tpTask
@@ -64,7 +64,7 @@ type TasksPatchResource =
 --
 -- /See:/ 'tasksPatch' smart constructor.
 data TasksPatch = TasksPatch'
-    { _tpTaskqueue       :: !Text
+    { _tpTaskQueue       :: !Text
     , _tpProject         :: !Text
     , _tpPayload         :: !Task
     , _tpTask            :: !Text
@@ -75,7 +75,7 @@ data TasksPatch = TasksPatch'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tpTaskqueue'
+-- * 'tpTaskQueue'
 --
 -- * 'tpProject'
 --
@@ -85,24 +85,24 @@ data TasksPatch = TasksPatch'
 --
 -- * 'tpNewLeaseSeconds'
 tasksPatch
-    :: Text -- ^ 'tpTaskqueue'
+    :: Text -- ^ 'tpTaskQueue'
     -> Text -- ^ 'tpProject'
     -> Task -- ^ 'tpPayload'
     -> Text -- ^ 'tpTask'
     -> Int32 -- ^ 'tpNewLeaseSeconds'
     -> TasksPatch
-tasksPatch pTpTaskqueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
+tasksPatch pTpTaskQueue_ pTpProject_ pTpPayload_ pTpTask_ pTpNewLeaseSeconds_ =
     TasksPatch'
-    { _tpTaskqueue = pTpTaskqueue_
+    { _tpTaskQueue = pTpTaskQueue_
     , _tpProject = pTpProject_
     , _tpPayload = pTpPayload_
     , _tpTask = pTpTask_
     , _tpNewLeaseSeconds = _Coerce # pTpNewLeaseSeconds_
     }
 
-tpTaskqueue :: Lens' TasksPatch Text
-tpTaskqueue
-  = lens _tpTaskqueue (\ s a -> s{_tpTaskqueue = a})
+tpTaskQueue :: Lens' TasksPatch Text
+tpTaskQueue
+  = lens _tpTaskQueue (\ s a -> s{_tpTaskQueue = a})
 
 -- | The project under which the queue lies.
 tpProject :: Lens' TasksPatch Text
@@ -130,7 +130,7 @@ instance GoogleRequest TasksPatch where
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksPatch'{..}
-          = go _tpProject _tpTaskqueue _tpTask
+          = go _tpProject _tpTaskQueue _tpTask
               (Just _tpNewLeaseSeconds)
               (Just AltJSON)
               _tpPayload

@@ -406,7 +406,7 @@ module Network.Google.SQLAdmin
     , brSelfLink
     , brEndTime
     , brId
-    , brEnqueuedTime
+    , brEnQueuedTime
     , brInstance
 
     -- ** ACLEntry

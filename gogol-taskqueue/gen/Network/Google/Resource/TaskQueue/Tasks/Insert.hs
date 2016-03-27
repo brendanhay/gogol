@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Insert
     , TasksInsert
 
     -- * Request Lenses
-    , tiTaskqueue
+    , tiTaskQueue
     , tiProject
     , tiPayload
     ) where
@@ -58,7 +58,7 @@ type TasksInsertResource =
 --
 -- /See:/ 'tasksInsert' smart constructor.
 data TasksInsert = TasksInsert'
-    { _tiTaskqueue :: !Text
+    { _tiTaskQueue :: !Text
     , _tiProject   :: !Text
     , _tiPayload   :: !Task
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -67,27 +67,27 @@ data TasksInsert = TasksInsert'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tiTaskqueue'
+-- * 'tiTaskQueue'
 --
 -- * 'tiProject'
 --
 -- * 'tiPayload'
 tasksInsert
-    :: Text -- ^ 'tiTaskqueue'
+    :: Text -- ^ 'tiTaskQueue'
     -> Text -- ^ 'tiProject'
     -> Task -- ^ 'tiPayload'
     -> TasksInsert
-tasksInsert pTiTaskqueue_ pTiProject_ pTiPayload_ =
+tasksInsert pTiTaskQueue_ pTiProject_ pTiPayload_ =
     TasksInsert'
-    { _tiTaskqueue = pTiTaskqueue_
+    { _tiTaskQueue = pTiTaskQueue_
     , _tiProject = pTiProject_
     , _tiPayload = pTiPayload_
     }
 
 -- | The taskqueue to insert the task into
-tiTaskqueue :: Lens' TasksInsert Text
-tiTaskqueue
-  = lens _tiTaskqueue (\ s a -> s{_tiTaskqueue = a})
+tiTaskQueue :: Lens' TasksInsert Text
+tiTaskQueue
+  = lens _tiTaskQueue (\ s a -> s{_tiTaskQueue = a})
 
 -- | The project under which the queue lies
 tiProject :: Lens' TasksInsert Text
@@ -105,7 +105,7 @@ instance GoogleRequest TasksInsert where
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksInsert'{..}
-          = go _tiProject _tiTaskqueue (Just AltJSON)
+          = go _tiProject _tiTaskQueue (Just AltJSON)
               _tiPayload
               taskQueueService
           where go

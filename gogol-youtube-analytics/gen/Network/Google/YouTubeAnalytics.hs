@@ -23,9 +23,9 @@ module Network.Google.YouTubeAnalytics
 
     -- * OAuth Scopes
     , youTubeScope
-    , ytAnalyticsReadOnlyScope
+    , youTubeAnalyticsReadOnlyScope
     , youTubePartnerScope
-    , ytAnalyticsMonetaryReadOnlyScope
+    , youTubeAnalyticsMonetaryReadOnlyScope
     , youTubeReadOnlyScope
 
     -- * API Declaration

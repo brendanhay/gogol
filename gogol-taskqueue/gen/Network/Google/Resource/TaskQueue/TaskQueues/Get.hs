@@ -13,7 +13,7 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 
 -- |
--- Module      : Network.Google.Resource.TaskQueue.Taskqueues.Get
+-- Module      : Network.Google.Resource.TaskQueue.TaskQueues.Get
 -- Copyright   : (c) 2015-2016 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
 -- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
@@ -23,27 +23,27 @@
 -- Get detailed information about a TaskQueue.
 --
 -- /See:/ <https://developers.google.com/appengine/docs/python/taskqueue/rest TaskQueue API Reference> for @taskqueue.taskqueues.get@.
-module Network.Google.Resource.TaskQueue.Taskqueues.Get
+module Network.Google.Resource.TaskQueue.TaskQueues.Get
     (
     -- * REST Resource
-      TaskqueuesGetResource
+      TaskQueuesGetResource
 
     -- * Creating a Request
-    , taskqueuesGet
-    , TaskqueuesGet
+    , taskQueuesGet
+    , TaskQueuesGet
 
     -- * Request Lenses
-    , tasTaskqueue
-    , tasProject
-    , tasGetStats
+    , tqgTaskQueue
+    , tqgProject
+    , tqgGetStats
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TaskQueue.Types
 
 -- | A resource alias for @taskqueue.taskqueues.get@ method which the
--- 'TaskqueuesGet' request conforms to.
-type TaskqueuesGetResource =
+-- 'TaskQueuesGet' request conforms to.
+type TaskQueuesGetResource =
      "taskqueue" :>
        "v1beta2" :>
          "projects" :>
@@ -55,57 +55,57 @@ type TaskqueuesGetResource =
 
 -- | Get detailed information about a TaskQueue.
 --
--- /See:/ 'taskqueuesGet' smart constructor.
-data TaskqueuesGet = TaskqueuesGet'
-    { _tasTaskqueue :: !Text
-    , _tasProject   :: !Text
-    , _tasGetStats  :: !(Maybe Bool)
+-- /See:/ 'taskQueuesGet' smart constructor.
+data TaskQueuesGet = TaskQueuesGet'
+    { _tqgTaskQueue :: !Text
+    , _tqgProject   :: !Text
+    , _tqgGetStats  :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'TaskqueuesGet' with the minimum fields required to make a request.
+-- | Creates a value of 'TaskQueuesGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tasTaskqueue'
+-- * 'tqgTaskQueue'
 --
--- * 'tasProject'
+-- * 'tqgProject'
 --
--- * 'tasGetStats'
-taskqueuesGet
-    :: Text -- ^ 'tasTaskqueue'
-    -> Text -- ^ 'tasProject'
-    -> TaskqueuesGet
-taskqueuesGet pTasTaskqueue_ pTasProject_ =
-    TaskqueuesGet'
-    { _tasTaskqueue = pTasTaskqueue_
-    , _tasProject = pTasProject_
-    , _tasGetStats = Nothing
+-- * 'tqgGetStats'
+taskQueuesGet
+    :: Text -- ^ 'tqgTaskQueue'
+    -> Text -- ^ 'tqgProject'
+    -> TaskQueuesGet
+taskQueuesGet pTqgTaskQueue_ pTqgProject_ =
+    TaskQueuesGet'
+    { _tqgTaskQueue = pTqgTaskQueue_
+    , _tqgProject = pTqgProject_
+    , _tqgGetStats = Nothing
     }
 
 -- | The id of the taskqueue to get the properties of.
-tasTaskqueue :: Lens' TaskqueuesGet Text
-tasTaskqueue
-  = lens _tasTaskqueue (\ s a -> s{_tasTaskqueue = a})
+tqgTaskQueue :: Lens' TaskQueuesGet Text
+tqgTaskQueue
+  = lens _tqgTaskQueue (\ s a -> s{_tqgTaskQueue = a})
 
 -- | The project under which the queue lies.
-tasProject :: Lens' TaskqueuesGet Text
-tasProject
-  = lens _tasProject (\ s a -> s{_tasProject = a})
+tqgProject :: Lens' TaskQueuesGet Text
+tqgProject
+  = lens _tqgProject (\ s a -> s{_tqgProject = a})
 
 -- | Whether to get stats. Optional.
-tasGetStats :: Lens' TaskqueuesGet (Maybe Bool)
-tasGetStats
-  = lens _tasGetStats (\ s a -> s{_tasGetStats = a})
+tqgGetStats :: Lens' TaskQueuesGet (Maybe Bool)
+tqgGetStats
+  = lens _tqgGetStats (\ s a -> s{_tqgGetStats = a})
 
-instance GoogleRequest TaskqueuesGet where
-        type Rs TaskqueuesGet = TaskQueue
-        type Scopes TaskqueuesGet =
+instance GoogleRequest TaskQueuesGet where
+        type Rs TaskQueuesGet = TaskQueue
+        type Scopes TaskQueuesGet =
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
-        requestClient TaskqueuesGet'{..}
-          = go _tasProject _tasTaskqueue _tasGetStats
+        requestClient TaskQueuesGet'{..}
+          = go _tqgProject _tqgTaskQueue _tqgGetStats
               (Just AltJSON)
               taskQueueService
           where go
-                  = buildClient (Proxy :: Proxy TaskqueuesGetResource)
+                  = buildClient (Proxy :: Proxy TaskQueuesGetResource)
                       mempty

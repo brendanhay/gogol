@@ -27,7 +27,7 @@ module Network.Google.Genomics
     , genomicsScope
     , cloudPlatformScope
     , genomicsReadOnlyScope
-    , devstorageReadWriteScope
+    , storageReadWriteScope
     , bigQueryScope
 
     -- * API Declaration

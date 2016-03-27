@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.List
     , TasksList
 
     -- * Request Lenses
-    , tTaskqueue
+    , tTaskQueue
     , tProject
     ) where
 
@@ -56,7 +56,7 @@ type TasksListResource =
 --
 -- /See:/ 'tasksList' smart constructor.
 data TasksList = TasksList'
-    { _tTaskqueue :: !Text
+    { _tTaskQueue :: !Text
     , _tProject   :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -64,23 +64,23 @@ data TasksList = TasksList'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tTaskqueue'
+-- * 'tTaskQueue'
 --
 -- * 'tProject'
 tasksList
-    :: Text -- ^ 'tTaskqueue'
+    :: Text -- ^ 'tTaskQueue'
     -> Text -- ^ 'tProject'
     -> TasksList
-tasksList pTTaskqueue_ pTProject_ =
+tasksList pTTaskQueue_ pTProject_ =
     TasksList'
-    { _tTaskqueue = pTTaskqueue_
+    { _tTaskQueue = pTTaskQueue_
     , _tProject = pTProject_
     }
 
 -- | The id of the taskqueue to list tasks from.
-tTaskqueue :: Lens' TasksList Text
-tTaskqueue
-  = lens _tTaskqueue (\ s a -> s{_tTaskqueue = a})
+tTaskQueue :: Lens' TasksList Text
+tTaskQueue
+  = lens _tTaskQueue (\ s a -> s{_tTaskQueue = a})
 
 -- | The project under which the queue lies.
 tProject :: Lens' TasksList Text
@@ -92,7 +92,7 @@ instance GoogleRequest TasksList where
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksList'{..}
-          = go _tProject _tTaskqueue (Just AltJSON)
+          = go _tProject _tTaskQueue (Just AltJSON)
               taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksListResource)

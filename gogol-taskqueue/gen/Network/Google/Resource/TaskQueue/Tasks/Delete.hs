@@ -33,7 +33,7 @@ module Network.Google.Resource.TaskQueue.Tasks.Delete
     , TasksDelete
 
     -- * Request Lenses
-    , tdTaskqueue
+    , tdTaskQueue
     , tdProject
     , tdTask
     ) where
@@ -58,7 +58,7 @@ type TasksDeleteResource =
 --
 -- /See:/ 'tasksDelete' smart constructor.
 data TasksDelete = TasksDelete'
-    { _tdTaskqueue :: !Text
+    { _tdTaskQueue :: !Text
     , _tdProject   :: !Text
     , _tdTask      :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -67,27 +67,27 @@ data TasksDelete = TasksDelete'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tdTaskqueue'
+-- * 'tdTaskQueue'
 --
 -- * 'tdProject'
 --
 -- * 'tdTask'
 tasksDelete
-    :: Text -- ^ 'tdTaskqueue'
+    :: Text -- ^ 'tdTaskQueue'
     -> Text -- ^ 'tdProject'
     -> Text -- ^ 'tdTask'
     -> TasksDelete
-tasksDelete pTdTaskqueue_ pTdProject_ pTdTask_ =
+tasksDelete pTdTaskQueue_ pTdProject_ pTdTask_ =
     TasksDelete'
-    { _tdTaskqueue = pTdTaskqueue_
+    { _tdTaskQueue = pTdTaskQueue_
     , _tdProject = pTdProject_
     , _tdTask = pTdTask_
     }
 
 -- | The taskqueue to delete a task from.
-tdTaskqueue :: Lens' TasksDelete Text
-tdTaskqueue
-  = lens _tdTaskqueue (\ s a -> s{_tdTaskqueue = a})
+tdTaskQueue :: Lens' TasksDelete Text
+tdTaskQueue
+  = lens _tdTaskQueue (\ s a -> s{_tdTaskQueue = a})
 
 -- | The project under which the queue lies.
 tdProject :: Lens' TasksDelete Text
@@ -104,7 +104,7 @@ instance GoogleRequest TasksDelete where
              '["https://www.googleapis.com/auth/taskqueue",
                "https://www.googleapis.com/auth/taskqueue.consumer"]
         requestClient TasksDelete'{..}
-          = go _tdProject _tdTaskqueue _tdTask (Just AltJSON)
+          = go _tdProject _tdTaskQueue _tdTask (Just AltJSON)
               taskQueueService
           where go
                   = buildClient (Proxy :: Proxy TasksDeleteResource)

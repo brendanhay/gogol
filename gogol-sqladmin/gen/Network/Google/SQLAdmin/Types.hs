@@ -283,7 +283,7 @@ module Network.Google.SQLAdmin.Types
     , brSelfLink
     , brEndTime
     , brId
-    , brEnqueuedTime
+    , brEnQueuedTime
     , brInstance
 
     -- * ACLEntry

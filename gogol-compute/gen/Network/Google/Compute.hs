@@ -24,10 +24,10 @@ module Network.Google.Compute
     -- * OAuth Scopes
     , computeScope
     , cloudPlatformScope
-    , devstorageReadOnlyScope
-    , devstorageReadWriteScope
+    , storageReadOnlyScope
+    , storageReadWriteScope
     , computeReadOnlyScope
-    , devstorageFullControlScope
+    , storageFullControlScope
 
     -- * API Declaration
     , ComputeAPI

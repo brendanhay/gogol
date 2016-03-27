@@ -33,7 +33,7 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.TaskQueue.Taskqueues.Get
+          Network.Google.Resource.TaskQueue.TaskQueues.Get
         , Network.Google.Resource.TaskQueue.Tasks.Delete
         , Network.Google.Resource.TaskQueue.Tasks.Get
         , Network.Google.Resource.TaskQueue.Tasks.Insert

@@ -343,7 +343,7 @@ instance ToJSON Tasks where
 -- /See:/ 'task' smart constructor.
 data Task = Task'
     { _ttRetryCount       :: !(Maybe (Textual Int32))
-    , _ttEnqueueTimestamp :: !(Maybe (Textual Int64))
+    , _ttEnQueueTimestamp :: !(Maybe (Textual Int64))
     , _ttTag              :: !(Maybe Text)
     , _ttKind             :: !Text
     , _ttQueueName        :: !(Maybe Text)
@@ -358,7 +358,7 @@ data Task = Task'
 --
 -- * 'ttRetryCount'
 --
--- * 'ttEnqueueTimestamp'
+-- * 'ttEnQueueTimestamp'
 --
 -- * 'ttTag'
 --
@@ -376,7 +376,7 @@ task
 task =
     Task'
     { _ttRetryCount = Nothing
-    , _ttEnqueueTimestamp = Nothing
+    , _ttEnQueueTimestamp = Nothing
     , _ttTag = Nothing
     , _ttKind = "taskqueues#task"
     , _ttQueueName = Nothing
@@ -392,10 +392,10 @@ ttRetryCount
       . mapping _Coerce
 
 -- | Time (in seconds since the epoch) at which the task was enqueued.
-ttEnqueueTimestamp :: Lens' Task (Maybe Int64)
-ttEnqueueTimestamp
-  = lens _ttEnqueueTimestamp
-      (\ s a -> s{_ttEnqueueTimestamp = a})
+ttEnQueueTimestamp :: Lens' Task (Maybe Int64)
+ttEnQueueTimestamp
+  = lens _ttEnQueueTimestamp
+      (\ s a -> s{_ttEnQueueTimestamp = a})
       . mapping _Coerce
 
 -- | Tag for the task, could be used later to lease tasks grouped by a
@@ -449,7 +449,7 @@ instance ToJSON Task where
           = object
               (catMaybes
                  [("retry_count" .=) <$> _ttRetryCount,
-                  ("enqueueTimestamp" .=) <$> _ttEnqueueTimestamp,
+                  ("enqueueTimestamp" .=) <$> _ttEnQueueTimestamp,
                   ("tag" .=) <$> _ttTag, Just ("kind" .= _ttKind),
                   ("queueName" .=) <$> _ttQueueName,
                   ("payloadBase64" .=) <$> _ttPayloadBase64,
