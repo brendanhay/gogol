@@ -459,7 +459,7 @@ scopeName s k = Text.unpack . lowerHead . lowerFirstAcronym $
 
     named x
         | x == lower = pascal
-        | otherwise  = replaceAll (upperHead (upperAcronym x)) special
+        | otherwise  = upperHead (upperAcronym (replaceAll x special))
 
     pascal = toPascal (_sCanonicalName s)
     lower  = Text.toLower (_sCanonicalName s)

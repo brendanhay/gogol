@@ -276,6 +276,7 @@ upperAcronym x = Fold.foldl' (flip (uncurry RE.replaceAll)) x xs
          , ("proper",      "Proper")
          , ("publish",     "Publish")
          , ("query",       "Query")
+         , ("queue",       "Queue")
          , ("resource",    "Resource")
          , ("round",       "Round")
          , ("sample",      "Sample")
