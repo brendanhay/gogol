@@ -9,7 +9,6 @@ module Gen.AST where
 
 import           Control.Monad.Except
 import           Control.Monad.State.Strict
-import           Debug.Trace
 import           Gen.AST.Flatten            (flatten)
 import           Gen.AST.Render             (render)
 import           Gen.AST.Solve              (solve)

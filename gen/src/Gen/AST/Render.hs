@@ -25,17 +25,13 @@ module Gen.AST.Render
 import           Control.Applicative
 import           Control.Error
 import           Control.Lens                 hiding (enum, lens)
-import           Control.Monad.Except
 import           Data.Char                    (isSpace)
 import qualified Data.HashMap.Strict          as Map
 import           Data.Maybe
 import           Data.Semigroup               ((<>))
 import           Data.String
-import qualified Data.Text                    as Text
 import qualified Data.Text.Lazy               as LText
 import qualified Data.Text.Lazy.Builder       as Build
-import           Data.Text.Manipulate
-import           Debug.Trace
 import           Gen.AST.Solve                (getSolved)
 import           Gen.Formatting
 import           Gen.Syntax
@@ -74,9 +70,9 @@ renderSchema s = go (_schema s)
 
     object i (Obj aps ps) = do
         a <- traverse getSolved aps
-        p <- traverse getSolved ps
-        let ap = setAdditional <$> a
-            ts = maybe p (flip (Map.insert "addtional") p) ap
+        b <- traverse getSolved ps
+        let ab = setAdditional <$> a
+            ts = maybe b (flip (Map.insert "addtional") b) ab
         prod ts
       where
         prod ts = Prod (dname k) (i ^. iDescription)

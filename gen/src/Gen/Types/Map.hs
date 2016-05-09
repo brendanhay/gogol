@@ -14,9 +14,7 @@
 module Gen.Types.Map where
 
 import           Control.Lens
-import           Control.Monad
 import           Data.Aeson
-import           Data.Aeson.Types
 import           Data.Bifunctor
 import           Data.Hashable
 import qualified Data.HashMap.Strict as Map
@@ -44,6 +42,3 @@ class (Hashable a, Eq a) => TextKey a where
 instance (TextKey k, FromJSON v) => FromJSON (Map k v) where
     parseJSON = fmap (Map.fromList . map (first toKey) . Map.toList)
         . parseJSON
-
--- instance (TextKey k, ToJSON v) => ToJSON (Map k v) where
---     toJSON = toJSON . map (first fromKey) . Map.toList

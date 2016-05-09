@@ -228,17 +228,17 @@ extractPath x = either (error . err) id $ A.parseOnly path x
             <*> optional (A.char ':' *> A.takeWhile1 (A.notInClass "/{+*}:"))
 
 orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
-orderParams f xs ys = orderBy f zs (del zs [] ++ global)
+orderParams f xs ys = orderBy f zs (del zs [] ++ reserve)
   where
     zs = orderBy f (sortOn f xs) (nub (ys ++ map f xs))
 
     del _      [] = []
     del []     rs = reverse rs
     del (r:qs) rs
-        | f r `elem` global = del qs rs
-        | otherwise         = del qs (f r:rs)
+        | f r `elem` reserve = del qs rs
+        | otherwise          = del qs (f r:rs)
 
-    global =
+    reserve =
         [ "quotaUser"
         , "prettyPrint"
         , "userIp"
