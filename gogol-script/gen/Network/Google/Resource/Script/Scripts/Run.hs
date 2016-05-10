@@ -29,7 +29,7 @@
 -- project in the script editor, then select **File > Project properties**
 -- and click the **Scopes** tab.
 --
--- /See:/ <https://developers.google.com/apps-script/execution/rest/v1/run Google Apps Script Execution API Reference> for @script.scripts.run@.
+-- /See:/ <https://developers.google.com/apps-script/execution/rest/v1/scripts/run Google Apps Script Execution API Reference> for @script.scripts.run@.
 module Network.Google.Resource.Script.Scripts.Run
     (
     -- * REST Resource
@@ -191,6 +191,7 @@ instance GoogleRequest ScriptsRun where
                "https://www.googleapis.com/auth/forms",
                "https://www.googleapis.com/auth/forms.currentonly",
                "https://www.googleapis.com/auth/groups",
+               "https://www.googleapis.com/auth/spreadsheets",
                "https://www.googleapis.com/auth/userinfo.email"]
         requestClient ScriptsRun'{..}
           = go _srScriptId _srXgafv _srUploadProtocol

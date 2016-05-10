@@ -29,6 +29,7 @@ module Network.Google.Script.Types
     , adminDirectoryGroupScope
     , calendarFeedsScope
     , formsScope
+    , spreadsheetsScope
     , groupsScope
 
     -- * Status
@@ -134,6 +135,10 @@ calendarFeedsScope = Proxy;
 -- | View and manage your forms in Google Drive
 formsScope :: Proxy '["https://www.googleapis.com/auth/forms"]
 formsScope = Proxy;
+
+-- | View and manage your spreadsheets in Google Drive
+spreadsheetsScope :: Proxy '["https://www.googleapis.com/auth/spreadsheets"]
+spreadsheetsScope = Proxy;
 
 -- | View and manage your Google Groups
 groupsScope :: Proxy '["https://www.googleapis.com/auth/groups"]
