@@ -149,20 +149,19 @@ mrdlBearerToken
   = lens _mrdlBearerToken
       (\ s a -> s{_mrdlBearerToken = a})
 
--- | Optional. If the \`pageToken\` request parameter is supplied, then the
--- next page of results in the set are retrieved. The \`pageToken\`
--- parameter must be set with the value of the \`nextPageToken\` result
--- parameter from the previous request.
+-- | Optional. If the \`pageToken\` parameter is supplied, then the next page
+-- of results is retrieved. The \`pageToken\` parameter must be set to the
+-- value of the \`nextPageToken\` from the previous response.
 mrdlPageToken :: Lens' MonitoredResourceDescriptorsList (Maybe Text)
 mrdlPageToken
   = lens _mrdlPageToken
       (\ s a -> s{_mrdlPageToken = a})
 
--- | Optional. The maximum number of results to return from this request.
--- Fewer results might be returned. You must check for the
--- \`nextPageToken\` result to determine if additional results are
--- available, which you can retrieve by passing the \`nextPageToken\` value
--- in the \`pageToken\` parameter to the next request.
+-- | Optional. The maximum number of results to return from this request. You
+-- must check for presence of \`nextPageToken\` to determine if additional
+-- results are available, which you can retrieve by passing the
+-- \`nextPageToken\` value as the \`pageToken\` parameter in the next
+-- request.
 mrdlPageSize :: Lens' MonitoredResourceDescriptorsList (Maybe Int32)
 mrdlPageSize
   = lens _mrdlPageSize (\ s a -> s{_mrdlPageSize = a})

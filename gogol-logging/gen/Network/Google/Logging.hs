@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud Logging API lets you write log entries and manage your
--- logs, log sinks and logs-based metrics.
+-- Writes log entries and manages your logs, log sinks, and logs-based
+-- metrics.
 --
 -- /See:/ <https://cloud.google.com/logging/docs/ Google Cloud Logging API Reference>
 module Network.Google.Logging
@@ -81,16 +81,25 @@ module Network.Google.Logging
     -- ** MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
     , monitoredResourceDescriptor
+    , mrdName
     , mrdDisplayName
     , mrdLabels
     , mrdType
     , mrdDescription
+
+    -- ** Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
     -- ** ListLogEntriesResponse
     , ListLogEntriesResponse
     , listLogEntriesResponse
     , llerNextPageToken
     , llerEntries
+    , llerProjectIdErrors
 
     -- ** MonitoredResourceLabels
     , MonitoredResourceLabels
@@ -107,6 +116,7 @@ module Network.Google.Logging
     , WriteLogEntriesRequest
     , writeLogEntriesRequest
     , wlerEntries
+    , wlerPartialSuccess
     , wlerResource
     , wlerLabels
     , wlerLogName
@@ -140,6 +150,7 @@ module Network.Google.Logging
     , rlTaskName
     , rlPendingTime
     , rlWasLoadingRequest
+    , rlFirst
     , rlStartTime
     , rlLatency
     , rlURLMapEntry
@@ -178,6 +189,11 @@ module Network.Google.Logging
     , lsName
     , lsFilter
 
+    -- ** StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
     -- ** ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
     , listMonitoredResourceDescriptorsResponse
@@ -189,14 +205,21 @@ module Network.Google.Logging
     , hTTPRequest
     , httprStatus
     , httprRequestURL
+    , httprCacheFillBytes
     , httprRemoteIP
-    , httprValidatedWithOriginServer
     , httprRequestSize
+    , httprCacheValidatedWithOriginServer
     , httprUserAgent
+    , httprCacheLookup
     , httprResponseSize
     , httprRequestMethod
     , httprCacheHit
     , httprReferer
+
+    -- ** ListLogEntriesResponseProjectIdErrors
+    , ListLogEntriesResponseProjectIdErrors
+    , listLogEntriesResponseProjectIdErrors
+    , llerpieAddtional
 
     -- ** WriteLogEntriesRequestLabels
     , WriteLogEntriesRequestLabels
@@ -228,6 +251,7 @@ module Network.Google.Logging
     , ListLogEntriesRequest
     , listLogEntriesRequest
     , llerOrderBy
+    , llerPartialSuccess
     , llerProjectIds
     , llerFilter
     , llerPageToken
