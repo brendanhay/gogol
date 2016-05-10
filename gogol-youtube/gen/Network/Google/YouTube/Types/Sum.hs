@@ -23,6 +23,8 @@ import           Network.Google.Prelude
 data ContentRatingCceRating
     = CCEM12
       -- ^ @cceM12@
+    | CCEM14
+      -- ^ @cceM14@
     | CCEM16
       -- ^ @cceM16@
     | CCEM18
@@ -33,13 +35,14 @@ data ContentRatingCceRating
       -- ^ @cceM6@
     | CceUnrated
       -- ^ @cceUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCceRating
 
 instance FromHttpApiData ContentRatingCceRating where
     parseQueryParam = \case
         "cceM12" -> Right CCEM12
+        "cceM14" -> Right CCEM14
         "cceM16" -> Right CCEM16
         "cceM18" -> Right CCEM18
         "cceM4" -> Right CCEM4
@@ -50,6 +53,7 @@ instance FromHttpApiData ContentRatingCceRating where
 instance ToHttpApiData ContentRatingCceRating where
     toQueryParam = \case
         CCEM12 -> "cceM12"
+        CCEM14 -> "cceM14"
         CCEM16 -> "cceM16"
         CCEM18 -> "cceM18"
         CCEM4 -> "cceM4"
@@ -76,7 +80,7 @@ data ContentRatingChfilmRating
       -- ^ @chfilm6@
     | ChfilmUnrated
       -- ^ @chfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingChfilmRating
 
@@ -125,7 +129,7 @@ data ContentRatingMccaaRating
       -- ^ @mccaaU@
     | MccaaUnrated
       -- ^ @mccaaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMccaaRating
 
@@ -166,7 +170,7 @@ data VideosListChart
       -- ^ @mostPopular@
       -- Return the most popular videos for the specified content region and
       -- video category.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideosListChart
 
@@ -199,7 +203,7 @@ data ContentRatingMpaaRating
       -- ^ @mpaaR@
     | MpaaUnrated
       -- ^ @mpaaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMpaaRating
 
@@ -236,7 +240,7 @@ data CaptionSnippetTrackKind
       -- ^ @forced@
     | Standard
       -- ^ @standard@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CaptionSnippetTrackKind
 
@@ -268,7 +272,7 @@ data VideoSnippetLiveBroadcastContent
       -- ^ @none@
     | Upcoming
       -- ^ @upcoming@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSnippetLiveBroadcastContent
 
@@ -299,7 +303,7 @@ data ChannelConversionPingContext
       -- ^ @subscribe@
     | Unsubscribe
       -- ^ @unsubscribe@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChannelConversionPingContext
 
@@ -339,7 +343,7 @@ data ContentRatingRcnofRating
       -- ^ @rcnofV@
     | RcnofVi
       -- ^ @rcnofVi@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingRcnofRating
 
@@ -378,7 +382,7 @@ data VideoStatusPrivacyStatus
       -- ^ @public@
     | UnListed
       -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoStatusPrivacyStatus
 
@@ -426,7 +430,7 @@ data LiveBroadcastStatusLifeCycleStatus
       -- ^ @testStarting@
     | LBSLCSTesting
       -- ^ @testing@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastStatusLifeCycleStatus
 
@@ -474,7 +478,7 @@ data CaptionSnippetFailureReason
       -- ^ @unknownFormat@
     | UnsupportedFormat
       -- ^ @unsupportedFormat@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CaptionSnippetFailureReason
 
@@ -497,6 +501,33 @@ instance FromJSON CaptionSnippetFailureReason where
 instance ToJSON CaptionSnippetFailureReason where
     toJSON = toJSONText
 
+-- | The type of ban.
+data LiveChatUserBannedMessageDetailsBanType
+    = Permanent
+      -- ^ @permanent@
+    | Temporary
+      -- ^ @temporary@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LiveChatUserBannedMessageDetailsBanType
+
+instance FromHttpApiData LiveChatUserBannedMessageDetailsBanType where
+    parseQueryParam = \case
+        "permanent" -> Right Permanent
+        "temporary" -> Right Temporary
+        x -> Left ("Unable to parse LiveChatUserBannedMessageDetailsBanType from: " <> x)
+
+instance ToHttpApiData LiveChatUserBannedMessageDetailsBanType where
+    toQueryParam = \case
+        Permanent -> "permanent"
+        Temporary -> "temporary"
+
+instance FromJSON LiveChatUserBannedMessageDetailsBanType where
+    parseJSON = parseJSONText "LiveChatUserBannedMessageDetailsBanType"
+
+instance ToJSON LiveChatUserBannedMessageDetailsBanType where
+    toJSON = toJSONText
+
 -- | The reason that YouTube failed to process the video. This property will
 -- only have a value if the processingStatus property\'s value is failed.
 data VideoProcessingDetailsProcessingFailureReason
@@ -508,7 +539,7 @@ data VideoProcessingDetailsProcessingFailureReason
       -- ^ @transcodeFailed@
     | UploadFailed
       -- ^ @uploadFailed@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoProcessingDetailsProcessingFailureReason
 
@@ -537,7 +568,7 @@ instance ToJSON VideoProcessingDetailsProcessingFailureReason where
 data InvideoPositionType
     = Corner
       -- ^ @corner@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InvideoPositionType
 
@@ -571,7 +602,7 @@ data ContentRatingFskRating
       -- ^ @fsk6@
     | FskUnrated
       -- ^ @fskUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingFskRating
 
@@ -615,7 +646,7 @@ data ContentRatingMekuRating
       -- ^ @mekuS@
     | MekuUnrated
       -- ^ @mekuUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMekuRating
 
@@ -651,7 +682,7 @@ data VideoContentDetailsDefinition
       -- ^ @hd@
     | SD
       -- ^ @sd@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoContentDetailsDefinition
 
@@ -692,7 +723,7 @@ data ContentRatingEefilmRating
       -- ^ @eefilmPere@
     | EefilmUnrated
       -- ^ @eefilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingEefilmRating
 
@@ -739,7 +770,7 @@ data LiveBroadcastStatusPrivacyStatus
       -- ^ @public@
     | LBSPSUnListed
       -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastStatusPrivacyStatus
 
@@ -781,7 +812,7 @@ data CaptionsDownloadTfmt
     | Vtt
       -- ^ @vtt@
       -- Web Video Text Tracks caption.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CaptionsDownloadTfmt
 
@@ -816,7 +847,7 @@ data PromotedItemIdType
       -- ^ @video@
     | PIITWebsite
       -- ^ @website@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PromotedItemIdType
 
@@ -851,7 +882,7 @@ data ContentRatingPefilmRating
       -- ^ @pefilmPt@
     | PefilmUnrated
       -- ^ @pefilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingPefilmRating
 
@@ -878,6 +909,49 @@ instance FromJSON ContentRatingPefilmRating where
 instance ToJSON ContentRatingPefilmRating where
     toJSON = toJSONText
 
+-- | The resolution of the inbound video data.
+data CdnSettingsResolution
+    = CSR1080p
+      -- ^ @1080p@
+    | CSR1440p
+      -- ^ @1440p@
+    | CSR240p
+      -- ^ @240p@
+    | CSR360p
+      -- ^ @360p@
+    | CSR480p
+      -- ^ @480p@
+    | CSR720p
+      -- ^ @720p@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CdnSettingsResolution
+
+instance FromHttpApiData CdnSettingsResolution where
+    parseQueryParam = \case
+        "1080p" -> Right CSR1080p
+        "1440p" -> Right CSR1440p
+        "240p" -> Right CSR240p
+        "360p" -> Right CSR360p
+        "480p" -> Right CSR480p
+        "720p" -> Right CSR720p
+        x -> Left ("Unable to parse CdnSettingsResolution from: " <> x)
+
+instance ToHttpApiData CdnSettingsResolution where
+    toQueryParam = \case
+        CSR1080p -> "1080p"
+        CSR1440p -> "1440p"
+        CSR240p -> "240p"
+        CSR360p -> "360p"
+        CSR480p -> "480p"
+        CSR720p -> "720p"
+
+instance FromJSON CdnSettingsResolution where
+    parseJSON = parseJSONText "CdnSettingsResolution"
+
+instance ToJSON CdnSettingsResolution where
+    toJSON = toJSONText
+
 -- | It indicates if the resource (video or channel) has upcoming\/active
 -- live broadcast content. Or it\'s \"none\" if there is not any
 -- upcoming\/active live broadcasts.
@@ -888,7 +962,7 @@ data SearchResultSnippetLiveBroadcastContent
       -- ^ @none@
     | SRSLBCUpcoming
       -- ^ @upcoming@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchResultSnippetLiveBroadcastContent
 
@@ -930,7 +1004,7 @@ data ContentRatingAnatelRating
       -- ^ @anatelR@
     | AnatelUnrated
       -- ^ @anatelUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingAnatelRating
 
@@ -987,7 +1061,7 @@ data SearchListOrder
     | ViewCount
       -- ^ @viewCount@
       -- Resources are sorted from highest to lowest number of views.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListOrder
 
@@ -1032,7 +1106,7 @@ data ContentRatingCccRating
       -- ^ @cccTe@
     | CccUnrated
       -- ^ @cccUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCccRating
 
@@ -1073,7 +1147,7 @@ data CaptionSnippetAudioTrackType
       -- ^ @primary@
     | Unknown
       -- ^ @unknown@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CaptionSnippetAudioTrackType
 
@@ -1106,7 +1180,7 @@ data ChannelStatusPrivacyStatus
       -- ^ @public@
     | CSPSUnListed
       -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChannelStatusPrivacyStatus
 
@@ -1138,7 +1212,7 @@ data VideoSuggestionsEditorSuggestionsItem
       -- ^ @videoCrop@
     | VideoStabilize
       -- ^ @videoStabilize@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsEditorSuggestionsItem
 
@@ -1180,7 +1254,7 @@ data ContentRatingCatvfrRating
       -- ^ @catvfrG@
     | CatvfrUnrated
       -- ^ @catvfrUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCatvfrRating
 
@@ -1224,7 +1298,7 @@ data ContentRatingCnaRating
       -- ^ @cnaAp@
     | CnaUnrated
       -- ^ @cnaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCnaRating
 
@@ -1269,7 +1343,7 @@ data ContentRatingChvrsRating
       -- ^ @chvrsR@
     | ChvrsUnrated
       -- ^ @chvrsUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingChvrsRating
 
@@ -1315,7 +1389,7 @@ data ContentRatingIncaaRating
       -- ^ @incaaSam18@
     | IncaaUnrated
       -- ^ @incaaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingIncaaRating
 
@@ -1357,7 +1431,7 @@ data ContentRatingSmsaRating
       -- ^ @smsaA@
     | SmsaUnrated
       -- ^ @smsaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingSmsaRating
 
@@ -1396,7 +1470,7 @@ data ContentRatingCbfcRating
       -- ^ @cbfcUA@
     | CbfcUnrated
       -- ^ @cbfcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCbfcRating
 
@@ -1435,7 +1509,7 @@ data ContentRatingKfcbRating
       -- ^ @kfcbR@
     | KfcbUnrated
       -- ^ @kfcbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingKfcbRating
 
@@ -1470,7 +1544,7 @@ data LiveStreamConfigurationIssueSeverity
       -- ^ @info@
     | Warning
       -- ^ @warning@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveStreamConfigurationIssueSeverity
 
@@ -1509,7 +1583,7 @@ data SearchListVideoDefinition
     | SLVDStandard
       -- ^ @standard@
       -- Only retrieve videos in standard definition.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoDefinition
 
@@ -1542,7 +1616,7 @@ data VideoAgeGatingVideoGameRating
       -- ^ @m16Plus@
     | M17Plus
       -- ^ @m17Plus@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoAgeGatingVideoGameRating
 
@@ -1587,7 +1661,7 @@ data ContentRatingLsfRating
       -- ^ @lsfSu@
     | LsfUnrated
       -- ^ @lsfUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingLsfRating
 
@@ -1624,24 +1698,24 @@ instance ToJSON ContentRatingLsfRating where
 
 -- | The type of ban.
 data LiveChatBanSnippetType
-    = Permanent
+    = LCBSTPermanent
       -- ^ @permanent@
-    | Temporary
+    | LCBSTTemporary
       -- ^ @temporary@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveChatBanSnippetType
 
 instance FromHttpApiData LiveChatBanSnippetType where
     parseQueryParam = \case
-        "permanent" -> Right Permanent
-        "temporary" -> Right Temporary
+        "permanent" -> Right LCBSTPermanent
+        "temporary" -> Right LCBSTTemporary
         x -> Left ("Unable to parse LiveChatBanSnippetType from: " <> x)
 
 instance ToHttpApiData LiveChatBanSnippetType where
     toQueryParam = \case
-        Permanent -> "permanent"
-        Temporary -> "temporary"
+        LCBSTPermanent -> "permanent"
+        LCBSTTemporary -> "temporary"
 
 instance FromJSON LiveChatBanSnippetType where
     parseJSON = parseJSONText "LiveChatBanSnippetType"
@@ -1667,7 +1741,7 @@ data ContentRatingBfvcRating
       -- ^ @bfvcG@
     | BfvcUnrated
       -- ^ @bfvcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingBfvcRating
 
@@ -1704,7 +1778,7 @@ instance ToJSON ContentRatingBfvcRating where
 data LiveBroadcastTopicType
     = VideoGame
       -- ^ @videoGame@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastTopicType
 
@@ -1741,7 +1815,7 @@ data SearchListVideoDuration
     | Short
       -- ^ @short@
       -- Only include videos that are less than four minutes long.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoDuration
 
@@ -1780,7 +1854,7 @@ data SearchListVideoCaption
     | SLVCNone
       -- ^ @none@
       -- Only include videos that do not have captions.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoCaption
 
@@ -1812,7 +1886,7 @@ data VideosListMyRating
     | Like
       -- ^ @like@
       -- Returns only video liked by the authenticated user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideosListMyRating
 
@@ -1845,7 +1919,7 @@ data CommentSnippetViewerRating
       -- ^ @none@
     | CSVRUnspecified
       -- ^ @unspecified@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentSnippetViewerRating
 
@@ -1890,7 +1964,7 @@ data ContentRatingFcbmRating
       -- ^ @fcbmU@
     | FcbmUnrated
       -- ^ @fcbmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingFcbmRating
 
@@ -1940,7 +2014,7 @@ data LiveBroadcastsListBroadcastStatus
     | LBLBSUpcoming
       -- ^ @upcoming@
       -- Return broadcasts that have not yet started.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastsListBroadcastStatus
 
@@ -1975,9 +2049,13 @@ data ContentRatingMoctwRating
       -- ^ @moctwPg@
     | MoctwR
       -- ^ @moctwR@
+    | MOCTWR12
+      -- ^ @moctwR12@
+    | MOCTWR15
+      -- ^ @moctwR15@
     | MoctwUnrated
       -- ^ @moctwUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMoctwRating
 
@@ -1987,6 +2065,8 @@ instance FromHttpApiData ContentRatingMoctwRating where
         "moctwP" -> Right MoctwP
         "moctwPg" -> Right MoctwPg
         "moctwR" -> Right MoctwR
+        "moctwR12" -> Right MOCTWR12
+        "moctwR15" -> Right MOCTWR15
         "moctwUnrated" -> Right MoctwUnrated
         x -> Left ("Unable to parse ContentRatingMoctwRating from: " <> x)
 
@@ -1996,6 +2076,8 @@ instance ToHttpApiData ContentRatingMoctwRating where
         MoctwP -> "moctwP"
         MoctwPg -> "moctwPg"
         MoctwR -> "moctwR"
+        MOCTWR12 -> "moctwR12"
+        MOCTWR15 -> "moctwR15"
         MoctwUnrated -> "moctwUnrated"
 
 instance FromJSON ContentRatingMoctwRating where
@@ -2023,7 +2105,7 @@ data ContentRatingBmukkRating
       -- ^ @bmukkAa@
     | BmukkUnrated
       -- ^ @bmukkUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingBmukkRating
 
@@ -2075,7 +2157,7 @@ data ContentRatingIcaaRating
       -- ^ @icaaUnrated@
     | IcaaX
       -- ^ @icaaX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingIcaaRating
 
@@ -2132,7 +2214,7 @@ data VideoStatusRejectionReason
       -- ^ @uploaderAccountClosed@
     | UploaderAccountSuspended
       -- ^ @uploaderAccountSuspended@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoStatusRejectionReason
 
@@ -2181,7 +2263,7 @@ data ContentRatingCzfilmRating
       -- ^ @czfilmU@
     | CzfilmUnrated
       -- ^ @czfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCzfilmRating
 
@@ -2223,7 +2305,7 @@ data ContentRatingRussiaRating
       -- ^ @russia6@
     | RussiaUnrated
       -- ^ @russiaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingRussiaRating
 
@@ -2262,7 +2344,7 @@ data ContentRatingCicfRating
       -- ^ @cicfKtEa@
     | CicfUnrated
       -- ^ @cicfUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCicfRating
 
@@ -2304,7 +2386,7 @@ data ContentRatingFmocRating
       -- ^ @fmocU@
     | FmocUnrated
       -- ^ @fmocUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingFmocRating
 
@@ -2353,7 +2435,7 @@ data LiveBroadcastsTransitionBroadcastStatus
       -- monitor stream. Note that you can only transition a broadcast to the
       -- testing state if its contentDetails.monitorStream.enableMonitorStream
       -- property is set to true.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastsTransitionBroadcastStatus
 
@@ -2394,7 +2476,7 @@ data ContentRatingNbcRating
       -- ^ @nbcPu@
     | NbcUnrated
       -- ^ @nbcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingNbcRating
 
@@ -2435,7 +2517,7 @@ data LiveBroadcastStatusLiveBroadcastPriority
       -- ^ @low@
     | Normal
       -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastStatusLiveBroadcastPriority
 
@@ -2470,7 +2552,7 @@ data LiveStreamHealthStatusStatus
       -- ^ @ok@
     | Revoked
       -- ^ @revoked@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveStreamHealthStatusStatus
 
@@ -2506,7 +2588,7 @@ data VideoRatingRating
       -- ^ @none@
     | VRRUnspecified
       -- ^ @unspecified@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoRatingRating
 
@@ -2546,7 +2628,7 @@ data VideoSuggestionsProcessingWarningsItem
       -- ^ @unknownContainer@
     | UnknownVideoCodec
       -- ^ @unknownVideoCodec@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsProcessingWarningsItem
 
@@ -2587,7 +2669,7 @@ data InvideoPositionCornerPosition
       -- ^ @topLeft@
     | TopRight
       -- ^ @topRight@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InvideoPositionCornerPosition
 
@@ -2622,7 +2704,7 @@ data ChannelStatusLongUploadsStatus
       -- ^ @eligible@
     | LongUploadsUnspecified
       -- ^ @longUploadsUnspecified@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChannelStatusLongUploadsStatus
 
@@ -2666,7 +2748,7 @@ data ContentRatingCscfRating
       -- ^ @cscfAl@
     | CscfUnrated
       -- ^ @cscfUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCscfRating
 
@@ -2707,7 +2789,7 @@ data LiveBroadcastStatusRecordingStatus
       -- ^ @recorded@
     | Recording
       -- ^ @recording@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastStatusRecordingStatus
 
@@ -2743,7 +2825,7 @@ data VideoFileDetailsVideoStreamRotation
       -- ^ @other@
     | VFDVSRUpsideDown
       -- ^ @upsideDown@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoFileDetailsVideoStreamRotation
 
@@ -2787,7 +2869,7 @@ data ContentRatingRtcRating
       -- ^ @rtcD@
     | RtcUnrated
       -- ^ @rtcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingRtcRating
 
@@ -2838,7 +2920,7 @@ data CommentThreadsListModerationStatus
       -- Retrieve threads of published comments. This is the default value. A
       -- comment thread can be included in the response if its top-level comment
       -- has been published.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentThreadsListModerationStatus
 
@@ -2877,7 +2959,7 @@ data ContentRatingSmaisRating
       -- ^ @smaisL@
     | SmaisUnrated
       -- ^ @smaisUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingSmaisRating
 
@@ -2912,7 +2994,7 @@ instance ToJSON ContentRatingSmaisRating where
 data ContentRatingYtRating
     = YtAgeRestricted
       -- ^ @ytAgeRestricted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingYtRating
 
@@ -2937,7 +3019,7 @@ data VideoContentDetailsCaption
       -- ^ @false@
     | True'
       -- ^ @true@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoContentDetailsCaption
 
@@ -2970,7 +3052,7 @@ data SubscriptionsListOrder
     | SLOUnread
       -- ^ @unread@
       -- Sort by order of activity.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubscriptionsListOrder
 
@@ -3011,7 +3093,7 @@ data ContentRatingBbfcRating
       -- ^ @bbfcU@
     | BbfcUnrated
       -- ^ @bbfcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingBbfcRating
 
@@ -3062,7 +3144,7 @@ data ContentRatingTvpgRating
       -- ^ @tvpgY7@
     | TvpgY7Fv
       -- ^ @tvpgY7Fv@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingTvpgRating
 
@@ -3104,7 +3186,7 @@ data CommentsListTextFormat
     | PlainText
       -- ^ @plainText@
       -- Returns the comments in plain text format.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListTextFormat
 
@@ -3137,7 +3219,7 @@ data VideosRateRating
       -- ^ @none@
       -- Removes any rating that the authenticated user had previously set for
       -- the video.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideosRateRating
 
@@ -3160,6 +3242,33 @@ instance FromJSON VideosRateRating where
 instance ToJSON VideosRateRating where
     toJSON = toJSONText
 
+-- | The projection format of this broadcast. This defaults to rectangular.
+data LiveBroadcastContentDetailsProjection
+    = LBCDP360
+      -- ^ @360@
+    | LBCDPRectangular
+      -- ^ @rectangular@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable LiveBroadcastContentDetailsProjection
+
+instance FromHttpApiData LiveBroadcastContentDetailsProjection where
+    parseQueryParam = \case
+        "360" -> Right LBCDP360
+        "rectangular" -> Right LBCDPRectangular
+        x -> Left ("Unable to parse LiveBroadcastContentDetailsProjection from: " <> x)
+
+instance ToHttpApiData LiveBroadcastContentDetailsProjection where
+    toQueryParam = \case
+        LBCDP360 -> "360"
+        LBCDPRectangular -> "rectangular"
+
+instance FromJSON LiveBroadcastContentDetailsProjection where
+    parseJSON = parseJSONText "LiveBroadcastContentDetailsProjection"
+
+instance ToJSON LiveBroadcastContentDetailsProjection where
+    toJSON = toJSONText
+
 -- | The caption track\'s status.
 data CaptionSnippetStatus
     = Failed
@@ -3168,7 +3277,7 @@ data CaptionSnippetStatus
       -- ^ @serving@
     | Syncing
       -- ^ @syncing@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CaptionSnippetStatus
 
@@ -3203,7 +3312,7 @@ data ContentRatingSkfilmRating
       -- ^ @skfilmP8@
     | SkfilmUnrated
       -- ^ @skfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingSkfilmRating
 
@@ -3266,7 +3375,7 @@ data ChannelSectionSnippetType
       -- ^ @subscriptions@
     | UpcomingEvents
       -- ^ @upcomingEvents@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChannelSectionSnippetType
 
@@ -3330,7 +3439,7 @@ data LiveBroadcastsListBroadcastType
     | Persistent
       -- ^ @persistent@
       -- Return only persistent broadcasts.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastsListBroadcastType
 
@@ -3364,7 +3473,7 @@ data VideoProcessingDetailsProcessingStatus
       -- ^ @succeeded@
     | VPDPSTerminated
       -- ^ @terminated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoProcessingDetailsProcessingStatus
 
@@ -3396,7 +3505,7 @@ data ActivityContentDetailsPromotedItemCtaType
       -- ^ @unspecified@
     | VisitAdvertiserSite
       -- ^ @visitAdvertiserSite@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivityContentDetailsPromotedItemCtaType
 
@@ -3426,7 +3535,7 @@ data SearchListChannelType
     | SLCTShow
       -- ^ @show@
       -- Only retrieve shows.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListChannelType
 
@@ -3462,7 +3571,7 @@ data ContentRatingKmrbRating
       -- ^ @kmrbTeenr@
     | KmrbUnrated
       -- ^ @kmrbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingKmrbRating
 
@@ -3514,7 +3623,7 @@ data ContentRatingOflcRating
       -- ^ @oflcRp16@
     | OflcUnrated
       -- ^ @oflcUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingOflcRating
 
@@ -3567,7 +3676,7 @@ data ContentRatingCNCRating
       -- ^ @cncT@
     | CNCUnrated
       -- ^ @cncUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCNCRating
 
@@ -3619,7 +3728,7 @@ data ContentRatingEcbmctRating
       -- ^ @ecbmctG@
     | EcbmctUnrated
       -- ^ @ecbmctUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingEcbmctRating
 
@@ -3654,6 +3763,33 @@ instance FromJSON ContentRatingEcbmctRating where
 instance ToJSON ContentRatingEcbmctRating where
     toJSON = toJSONText
 
+-- | Specifies the projection format of the video.
+data VideoContentDetailsProjection
+    = VCDP360
+      -- ^ @360@
+    | VCDPRectangular
+      -- ^ @rectangular@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable VideoContentDetailsProjection
+
+instance FromHttpApiData VideoContentDetailsProjection where
+    parseQueryParam = \case
+        "360" -> Right VCDP360
+        "rectangular" -> Right VCDPRectangular
+        x -> Left ("Unable to parse VideoContentDetailsProjection from: " <> x)
+
+instance ToHttpApiData VideoContentDetailsProjection where
+    toQueryParam = \case
+        VCDP360 -> "360"
+        VCDPRectangular -> "rectangular"
+
+instance FromJSON VideoContentDetailsProjection where
+    parseJSON = parseJSONText "VideoContentDetailsProjection"
+
+instance ToJSON VideoContentDetailsProjection where
+    toJSON = toJSONText
+
 -- | The video\'s rating in Greece.
 data ContentRatingGrfilmRating
     = GrfilmE
@@ -3666,7 +3802,7 @@ data ContentRatingGrfilmRating
       -- ^ @grfilmK17@
     | GrfilmUnrated
       -- ^ @grfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingGrfilmRating
 
@@ -3705,7 +3841,7 @@ data CommentThreadsListOrder
     | CTLOTime
       -- ^ @time@
       -- Order by time.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentThreadsListOrder
 
@@ -3738,7 +3874,7 @@ data ContentRatingIlfilmRating
       -- ^ @ilfilmAa@
     | IlfilmUnrated
       -- ^ @ilfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingIlfilmRating
 
@@ -3779,7 +3915,7 @@ data ContentRatingNbcplRating
       -- ^ @nbcplIv@
     | NbcplUnrated
       -- ^ @nbcplUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingNbcplRating
 
@@ -3820,7 +3956,7 @@ data VideoStatusUploadStatus
       -- ^ @rejected@
     | VSUSUploaded
       -- ^ @uploaded@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoStatusUploadStatus
 
@@ -3859,7 +3995,7 @@ data ContentRatingRteRating
       -- ^ @rtePs@
     | RteUnrated
       -- ^ @rteUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingRteRating
 
@@ -3895,7 +4031,7 @@ data CommentThreadsListTextFormat
     | CTLTFPlainText
       -- ^ @plainText@
       -- Returns the comments in plain text format.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentThreadsListTextFormat
 
@@ -3937,7 +4073,7 @@ data ContentRatingIfcoRating
       -- ^ @ifcoPg@
     | IfcoUnrated
       -- ^ @ifcoUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingIfcoRating
 
@@ -3989,7 +4125,7 @@ data CommentsSetModerationStatusModerationStatus
       -- comment if you still know its ID. If you were to change the moderation
       -- status of a rejected comment, the comment replies would subsequently be
       -- discoverable again as well.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsSetModerationStatusModerationStatus
 
@@ -4022,7 +4158,7 @@ data ActivityContentDetailsSocialType
       -- ^ @twitter@
     | ACDSTUnspecified
       -- ^ @unspecified@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivityContentDetailsSocialType
 
@@ -4067,7 +4203,7 @@ data ContentRatingMedietilsynetRating
       -- ^ @medietilsynetA@
     | MedietilsynetUnrated
       -- ^ @medietilsynetUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMedietilsynetRating
 
@@ -4110,7 +4246,7 @@ data PlayListItemStatusPrivacyStatus
       -- ^ @public@
     | PLISPSUnListed
       -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlayListItemStatusPrivacyStatus
 
@@ -4140,7 +4276,7 @@ data SubscriptionContentDetailsActivityType
       -- ^ @all@
     | SCDATUploads
       -- ^ @uploads@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubscriptionContentDetailsActivityType
 
@@ -4185,7 +4321,7 @@ data ContentRatingFpbRating
       -- ^ @fpbX18@
     | FpbXx
       -- ^ @fpbXx@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingFpbRating
 
@@ -4231,7 +4367,7 @@ data LiveBroadcastContentDetailsClosedCaptionsType
       -- ^ @closedCaptionsEmbedded@
     | ClosedCaptionsHTTPPost
       -- ^ @closedCaptionsHttpPost@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveBroadcastContentDetailsClosedCaptionsType
 
@@ -4268,7 +4404,7 @@ data SearchListVideoDimension
       -- ^ @any@
       -- Include both 3D and non-3D videos in returned results. This is the
       -- default value.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoDimension
 
@@ -4304,7 +4440,7 @@ data ContentRatingNkclvRating
       -- ^ @nkclvU@
     | NkclvUnrated
       -- ^ @nkclvUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingNkclvRating
 
@@ -4339,7 +4475,7 @@ data SponsorsListFilter
     | SLFNewest
       -- ^ @newest@
       -- Return the most recent sponsors, from newest to oldest.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SponsorsListFilter
 
@@ -4373,7 +4509,7 @@ data SearchListVideoType
     | SLVTMovie
       -- ^ @movie@
       -- Only retrieve movies.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoType
 
@@ -4411,7 +4547,7 @@ data ContentRatingMibacRating
       -- ^ @mibacVm14@
     | MIBACVM18
       -- ^ @mibacVm18@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMibacRating
 
@@ -4454,7 +4590,7 @@ data ContentRatingResorteviolenciaRating
       -- ^ @resorteviolenciaE@
     | ResorteviolenciaUnrated
       -- ^ @resorteviolenciaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingResorteviolenciaRating
 
@@ -4493,7 +4629,7 @@ data ContentRatingEgfilmRating
       -- ^ @egfilmGn@
     | EgfilmUnrated
       -- ^ @egfilmUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingEgfilmRating
 
@@ -4531,7 +4667,7 @@ data ContentRatingMccypRating
       -- ^ @mccypA@
     | MccypUnrated
       -- ^ @mccypUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMccypRating
 
@@ -4566,7 +4702,7 @@ data PlayListStatusPrivacyStatus
       -- ^ @public@
     | PLSPSUnListed
       -- ^ @unlisted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlayListStatusPrivacyStatus
 
@@ -4606,7 +4742,7 @@ data ContentRatingCsaRating
       -- ^ @csaT@
     | CsaUnrated
       -- ^ @csaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCsaRating
 
@@ -4645,7 +4781,7 @@ data ChannelSectionSnippetStyle
       -- ^ @horizontalRow@
     | VerticalList
       -- ^ @verticalList@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChannelSectionSnippetStyle
 
@@ -4680,7 +4816,7 @@ data ContentRatingEirinRating
       -- ^ @eirinR18plus@
     | EirinUnrated
       -- ^ @eirinUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingEirinRating
 
@@ -4712,7 +4848,7 @@ data VideoSuggestionsProcessingHintsItem
       -- ^ @nonStreamableMov@
     | SendBestQualityVideo
       -- ^ @sendBestQualityVideo@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsProcessingHintsItem
 
@@ -4747,7 +4883,7 @@ data ContentRatingNfrcRating
       -- ^ @nfrcUnrated@
     | NfrcX
       -- ^ @nfrcX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingNfrcRating
 
@@ -4800,7 +4936,7 @@ data ActivitySnippetType
       -- ^ @subscription@
     | ASTUpload
       -- ^ @upload@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitySnippetType
 
@@ -4859,7 +4995,7 @@ data ContentRatingMocRating
       -- ^ @mocUnrated@
     | MocX
       -- ^ @mocX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMocRating
 
@@ -4904,7 +5040,7 @@ data SearchListVideoEmbeddable
     | SLVETrue'
       -- ^ @true@
       -- Only retrieve embeddable videos.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoEmbeddable
 
@@ -4938,7 +5074,7 @@ data SearchListEventType
     | SLETUpcoming
       -- ^ @upcoming@
       -- Only include upcoming broadcasts.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListEventType
 
@@ -4971,7 +5107,7 @@ data ActivityContentDetailsRecommendationReason
       -- ^ @videoLiked@
     | ACDRRVideoWatched
       -- ^ @videoWatched@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivityContentDetailsRecommendationReason
 
@@ -5012,7 +5148,7 @@ data ContentRatingKijkwijzerRating
       -- ^ @kijkwijzerAl@
     | KijkwijzerUnrated
       -- ^ @kijkwijzerUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingKijkwijzerRating
 
@@ -5056,7 +5192,7 @@ data VideoSuggestionsProcessingErrorsItem
       -- ^ @notAVideoFile@
     | ProjectFile
       -- ^ @projectFile@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoSuggestionsProcessingErrorsItem
 
@@ -5103,7 +5239,7 @@ data VideoFileDetailsFileType
       -- ^ @project@
     | VFDFTVideo
       -- ^ @video@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoFileDetailsFileType
 
@@ -5151,7 +5287,7 @@ data ContentRatingMtrcbRating
       -- ^ @mtrcbUnrated@
     | MtrcbX
       -- ^ @mtrcbX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMtrcbRating
 
@@ -5197,7 +5333,7 @@ data ContentRatingFcoRating
       -- ^ @fcoIii@
     | FcoUnrated
       -- ^ @fcoUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingFcoRating
 
@@ -5224,6 +5360,33 @@ instance FromJSON ContentRatingFcoRating where
     parseJSON = parseJSONText "ContentRatingFcoRating"
 
 instance ToJSON ContentRatingFcoRating where
+    toJSON = toJSONText
+
+-- | The frame rate of the inbound video data.
+data CdnSettingsFrameRate
+    = CSFR30fps
+      -- ^ @30fps@
+    | CSFR60fps
+      -- ^ @60fps@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CdnSettingsFrameRate
+
+instance FromHttpApiData CdnSettingsFrameRate where
+    parseQueryParam = \case
+        "30fps" -> Right CSFR30fps
+        "60fps" -> Right CSFR60fps
+        x -> Left ("Unable to parse CdnSettingsFrameRate from: " <> x)
+
+instance ToHttpApiData CdnSettingsFrameRate where
+    toQueryParam = \case
+        CSFR30fps -> "30fps"
+        CSFR60fps -> "60fps"
+
+instance FromJSON CdnSettingsFrameRate where
+    parseJSON = parseJSONText "CdnSettingsFrameRate"
+
+instance ToJSON CdnSettingsFrameRate where
     toJSON = toJSONText
 
 -- | The kind of error happening.
@@ -5294,7 +5457,7 @@ data LiveStreamConfigurationIssueType
       -- ^ @videoResolutionSuboptimal@
     | VideoResolutionUnsupported
       -- ^ @videoResolutionUnsupported@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveStreamConfigurationIssueType
 
@@ -5394,7 +5557,7 @@ data SearchListSafeSearch
       -- YouTube will try to exclude all restricted content from the search
       -- result set. Based on their content, search results could be removed from
       -- search results or demoted in search results.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListSafeSearch
 
@@ -5428,7 +5591,7 @@ data SearchListVideoSyndicated
     | SLVSTrue'
       -- ^ @true@
       -- Only retrieve syndicated videos.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoSyndicated
 
@@ -5474,7 +5637,7 @@ data ContentRatingDjctqRatingReasonsItem
       -- ^ @djctqSexualContent@
     | DjctqViolence
       -- ^ @djctqViolence@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingDjctqRatingReasonsItem
 
@@ -5521,7 +5684,7 @@ data CdnSettingsIngestionType
       -- ^ @dash@
     | Rtmp
       -- ^ @rtmp@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CdnSettingsIngestionType
 
@@ -5551,7 +5714,7 @@ data InvideoTimingType
       -- ^ @offsetFromEnd@
     | OffSetFromStart
       -- ^ @offsetFromStart@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InvideoTimingType
 
@@ -5583,7 +5746,7 @@ data ContentRatingAgcomRating
       -- ^ @agcomVm14@
     | AGCOMVM18
       -- ^ @agcomVm18@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingAgcomRating
 
@@ -5619,7 +5782,7 @@ data CommentSnippetModerationStatus
       -- ^ @published@
     | CSMSRejected
       -- ^ @rejected@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentSnippetModerationStatus
 
@@ -5661,7 +5824,7 @@ data SearchListVideoLicense
     | SLVLYouTube
       -- ^ @youtube@
       -- Only return videos that have the standard YouTube license.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SearchListVideoLicense
 
@@ -5691,6 +5854,10 @@ data LiveChatMessageSnippetType
       -- ^ @chatEndedEvent@
     | LCMSTFanFundingEvent
       -- ^ @fanFundingEvent@
+    | LCMSTMessageDeletedEvent
+      -- ^ @messageDeletedEvent@
+    | LCMSTMessageRetractedEvent
+      -- ^ @messageRetractedEvent@
     | LCMSTNewSponsorEvent
       -- ^ @newSponsorEvent@
     | LCMSTSponsorOnlyModeEndedEvent
@@ -5701,7 +5868,9 @@ data LiveChatMessageSnippetType
       -- ^ @textMessageEvent@
     | LCMSTTombstone
       -- ^ @tombstone@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+    | LCMSTUserBannedEvent
+      -- ^ @userBannedEvent@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveChatMessageSnippetType
 
@@ -5709,22 +5878,28 @@ instance FromHttpApiData LiveChatMessageSnippetType where
     parseQueryParam = \case
         "chatEndedEvent" -> Right LCMSTChatEndedEvent
         "fanFundingEvent" -> Right LCMSTFanFundingEvent
+        "messageDeletedEvent" -> Right LCMSTMessageDeletedEvent
+        "messageRetractedEvent" -> Right LCMSTMessageRetractedEvent
         "newSponsorEvent" -> Right LCMSTNewSponsorEvent
         "sponsorOnlyModeEndedEvent" -> Right LCMSTSponsorOnlyModeEndedEvent
         "sponsorOnlyModeStartedEvent" -> Right LCMSTSponsorOnlyModeStartedEvent
         "textMessageEvent" -> Right LCMSTTextMessageEvent
         "tombstone" -> Right LCMSTTombstone
+        "userBannedEvent" -> Right LCMSTUserBannedEvent
         x -> Left ("Unable to parse LiveChatMessageSnippetType from: " <> x)
 
 instance ToHttpApiData LiveChatMessageSnippetType where
     toQueryParam = \case
         LCMSTChatEndedEvent -> "chatEndedEvent"
         LCMSTFanFundingEvent -> "fanFundingEvent"
+        LCMSTMessageDeletedEvent -> "messageDeletedEvent"
+        LCMSTMessageRetractedEvent -> "messageRetractedEvent"
         LCMSTNewSponsorEvent -> "newSponsorEvent"
         LCMSTSponsorOnlyModeEndedEvent -> "sponsorOnlyModeEndedEvent"
         LCMSTSponsorOnlyModeStartedEvent -> "sponsorOnlyModeStartedEvent"
         LCMSTTextMessageEvent -> "textMessageEvent"
         LCMSTTombstone -> "tombstone"
+        LCMSTUserBannedEvent -> "userBannedEvent"
 
 instance FromJSON LiveChatMessageSnippetType where
     parseJSON = parseJSONText "LiveChatMessageSnippetType"
@@ -5743,7 +5918,7 @@ data LiveStreamStatusStreamStatus
       -- ^ @inactive@
     | LSSSSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LiveStreamStatusStreamStatus
 
@@ -5776,7 +5951,7 @@ data VideoStatusLicense
       -- ^ @creativeCommon@
     | YouTube
       -- ^ @youtube@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoStatusLicense
 
@@ -5816,7 +5991,7 @@ data ContentRatingNfvcbRating
       -- ^ @nfvcbRe@
     | NfvcbUnrated
       -- ^ @nfvcbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingNfvcbRating
 
@@ -5866,7 +6041,7 @@ data ContentRatingMdaRating
       -- ^ @mdaR21@
     | MdaUnrated
       -- ^ @mdaUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingMdaRating
 
@@ -5919,7 +6094,7 @@ data ContentRatingAcbRating
       -- ^ @acbR18plus@
     | AcbUnrated
       -- ^ @acbUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingAcbRating
 
@@ -5971,7 +6146,7 @@ data ContentRatingDjctqRating
       -- ^ @djctqL@
     | DjctqUnrated
       -- ^ @djctqUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingDjctqRating
 
@@ -6017,7 +6192,7 @@ data VideoStatusFailureReason
       -- ^ @tooSmall@
     | UploadAborted
       -- ^ @uploadAborted@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VideoStatusFailureReason
 
@@ -6066,7 +6241,7 @@ data ContentRatingCatvRating
       -- ^ @catvPg@
     | CatvUnrated
       -- ^ @catvUnrated@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentRatingCatvRating
 

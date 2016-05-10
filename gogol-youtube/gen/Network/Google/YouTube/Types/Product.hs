@@ -523,6 +523,44 @@ instance ToJSON ActivityContentDetailsRecommendation
                   ("reason" .=) <$> _acdrReason])
 
 --
+-- /See:/ 'liveChatMessageRetractedDetails' smart constructor.
+newtype LiveChatMessageRetractedDetails = LiveChatMessageRetractedDetails'
+    { _lcmrdRetractedMessageId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatMessageRetractedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcmrdRetractedMessageId'
+liveChatMessageRetractedDetails
+    :: LiveChatMessageRetractedDetails
+liveChatMessageRetractedDetails =
+    LiveChatMessageRetractedDetails'
+    { _lcmrdRetractedMessageId = Nothing
+    }
+
+lcmrdRetractedMessageId :: Lens' LiveChatMessageRetractedDetails (Maybe Text)
+lcmrdRetractedMessageId
+  = lens _lcmrdRetractedMessageId
+      (\ s a -> s{_lcmrdRetractedMessageId = a})
+
+instance FromJSON LiveChatMessageRetractedDetails
+         where
+        parseJSON
+          = withObject "LiveChatMessageRetractedDetails"
+              (\ o ->
+                 LiveChatMessageRetractedDetails' <$>
+                   (o .:? "retractedMessageId"))
+
+instance ToJSON LiveChatMessageRetractedDetails where
+        toJSON LiveChatMessageRetractedDetails'{..}
+          = object
+              (catMaybes
+                 [("retractedMessageId" .=) <$>
+                    _lcmrdRetractedMessageId])
+
+--
 -- /See:/ 'playListListResponse' smart constructor.
 data PlayListListResponse = PlayListListResponse'
     { _pllrEtag            :: !(Maybe Text)
@@ -1785,20 +1823,88 @@ instance ToJSON VideoAbuseReportReasonListResponse
                   ("visitorId" .=) <$> _varrlrVisitorId,
                   ("eventId" .=) <$> _varrlrEventId])
 
+--
+-- /See:/ 'liveChatUserBannedMessageDetails' smart constructor.
+data LiveChatUserBannedMessageDetails = LiveChatUserBannedMessageDetails'
+    { _lcubmdBanType            :: !(Maybe LiveChatUserBannedMessageDetailsBanType)
+    , _lcubmdBannedUserDetails  :: !(Maybe ChannelProFileDetails)
+    , _lcubmdBanDurationSeconds :: !(Maybe (Textual Word64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatUserBannedMessageDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcubmdBanType'
+--
+-- * 'lcubmdBannedUserDetails'
+--
+-- * 'lcubmdBanDurationSeconds'
+liveChatUserBannedMessageDetails
+    :: LiveChatUserBannedMessageDetails
+liveChatUserBannedMessageDetails =
+    LiveChatUserBannedMessageDetails'
+    { _lcubmdBanType = Nothing
+    , _lcubmdBannedUserDetails = Nothing
+    , _lcubmdBanDurationSeconds = Nothing
+    }
+
+-- | The type of ban.
+lcubmdBanType :: Lens' LiveChatUserBannedMessageDetails (Maybe LiveChatUserBannedMessageDetailsBanType)
+lcubmdBanType
+  = lens _lcubmdBanType
+      (\ s a -> s{_lcubmdBanType = a})
+
+-- | The details of the user that was banned.
+lcubmdBannedUserDetails :: Lens' LiveChatUserBannedMessageDetails (Maybe ChannelProFileDetails)
+lcubmdBannedUserDetails
+  = lens _lcubmdBannedUserDetails
+      (\ s a -> s{_lcubmdBannedUserDetails = a})
+
+-- | The duration of the ban. This property is only present if the banType is
+-- temporary.
+lcubmdBanDurationSeconds :: Lens' LiveChatUserBannedMessageDetails (Maybe Word64)
+lcubmdBanDurationSeconds
+  = lens _lcubmdBanDurationSeconds
+      (\ s a -> s{_lcubmdBanDurationSeconds = a})
+      . mapping _Coerce
+
+instance FromJSON LiveChatUserBannedMessageDetails
+         where
+        parseJSON
+          = withObject "LiveChatUserBannedMessageDetails"
+              (\ o ->
+                 LiveChatUserBannedMessageDetails' <$>
+                   (o .:? "banType") <*> (o .:? "bannedUserDetails") <*>
+                     (o .:? "banDurationSeconds"))
+
+instance ToJSON LiveChatUserBannedMessageDetails
+         where
+        toJSON LiveChatUserBannedMessageDetails'{..}
+          = object
+              (catMaybes
+                 [("banType" .=) <$> _lcubmdBanType,
+                  ("bannedUserDetails" .=) <$>
+                    _lcubmdBannedUserDetails,
+                  ("banDurationSeconds" .=) <$>
+                    _lcubmdBanDurationSeconds])
+
 -- | Detailed settings of a broadcast.
 --
 -- /See:/ 'liveBroadcastContentDetails' smart constructor.
 data LiveBroadcastContentDetails = LiveBroadcastContentDetails'
-    { _lbcdEnableContentEncryption :: !(Maybe Bool)
-    , _lbcdEnableLowLatency        :: !(Maybe Bool)
-    , _lbcdClosedCaptionsType      :: !(Maybe LiveBroadcastContentDetailsClosedCaptionsType)
-    , _lbcdEnableEmbed             :: !(Maybe Bool)
-    , _lbcdStartWithSlate          :: !(Maybe Bool)
-    , _lbcdMonitorStream           :: !(Maybe MonitorStreamInfo)
-    , _lbcdBoundStreamId           :: !(Maybe Text)
-    , _lbcdRecordFromStart         :: !(Maybe Bool)
-    , _lbcdEnableClosedCaptions    :: !(Maybe Bool)
-    , _lbcdEnableDvr               :: !(Maybe Bool)
+    { _lbcdEnableContentEncryption     :: !(Maybe Bool)
+    , _lbcdEnableLowLatency            :: !(Maybe Bool)
+    , _lbcdClosedCaptionsType          :: !(Maybe LiveBroadcastContentDetailsClosedCaptionsType)
+    , _lbcdEnableEmbed                 :: !(Maybe Bool)
+    , _lbcdStartWithSlate              :: !(Maybe Bool)
+    , _lbcdProjection                  :: !(Maybe LiveBroadcastContentDetailsProjection)
+    , _lbcdMonitorStream               :: !(Maybe MonitorStreamInfo)
+    , _lbcdBoundStreamId               :: !(Maybe Text)
+    , _lbcdRecordFromStart             :: !(Maybe Bool)
+    , _lbcdEnableClosedCaptions        :: !(Maybe Bool)
+    , _lbcdBoundStreamLastUpdateTimeMs :: !(Maybe DateTime')
+    , _lbcdEnableDvr                   :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastContentDetails' with the minimum fields required to make a request.
@@ -1815,6 +1921,8 @@ data LiveBroadcastContentDetails = LiveBroadcastContentDetails'
 --
 -- * 'lbcdStartWithSlate'
 --
+-- * 'lbcdProjection'
+--
 -- * 'lbcdMonitorStream'
 --
 -- * 'lbcdBoundStreamId'
@@ -1822,6 +1930,8 @@ data LiveBroadcastContentDetails = LiveBroadcastContentDetails'
 -- * 'lbcdRecordFromStart'
 --
 -- * 'lbcdEnableClosedCaptions'
+--
+-- * 'lbcdBoundStreamLastUpdateTimeMs'
 --
 -- * 'lbcdEnableDvr'
 liveBroadcastContentDetails
@@ -1833,10 +1943,12 @@ liveBroadcastContentDetails =
     , _lbcdClosedCaptionsType = Nothing
     , _lbcdEnableEmbed = Nothing
     , _lbcdStartWithSlate = Nothing
+    , _lbcdProjection = Nothing
     , _lbcdMonitorStream = Nothing
     , _lbcdBoundStreamId = Nothing
     , _lbcdRecordFromStart = Nothing
     , _lbcdEnableClosedCaptions = Nothing
+    , _lbcdBoundStreamLastUpdateTimeMs = Nothing
     , _lbcdEnableDvr = Nothing
     }
 
@@ -1877,6 +1989,12 @@ lbcdStartWithSlate
   = lens _lbcdStartWithSlate
       (\ s a -> s{_lbcdStartWithSlate = a})
 
+-- | The projection format of this broadcast. This defaults to rectangular.
+lbcdProjection :: Lens' LiveBroadcastContentDetails (Maybe LiveBroadcastContentDetailsProjection)
+lbcdProjection
+  = lens _lbcdProjection
+      (\ s a -> s{_lbcdProjection = a})
+
 -- | The monitorStream object contains information about the monitor stream,
 -- which the broadcaster can use to review the event content before the
 -- broadcast stream is shown publicly.
@@ -1913,6 +2031,14 @@ lbcdEnableClosedCaptions
   = lens _lbcdEnableClosedCaptions
       (\ s a -> s{_lbcdEnableClosedCaptions = a})
 
+-- | The date and time that the live stream referenced by boundStreamId was
+-- last updated.
+lbcdBoundStreamLastUpdateTimeMs :: Lens' LiveBroadcastContentDetails (Maybe UTCTime)
+lbcdBoundStreamLastUpdateTimeMs
+  = lens _lbcdBoundStreamLastUpdateTimeMs
+      (\ s a -> s{_lbcdBoundStreamLastUpdateTimeMs = a})
+      . mapping _DateTime
+
 -- | This setting determines whether viewers can access DVR controls while
 -- watching the video. DVR controls enable the viewer to control the video
 -- playback experience by pausing, rewinding, or fast forwarding content.
@@ -1935,10 +2061,12 @@ instance FromJSON LiveBroadcastContentDetails where
                      <*> (o .:? "closedCaptionsType")
                      <*> (o .:? "enableEmbed")
                      <*> (o .:? "startWithSlate")
+                     <*> (o .:? "projection")
                      <*> (o .:? "monitorStream")
                      <*> (o .:? "boundStreamId")
                      <*> (o .:? "recordFromStart")
                      <*> (o .:? "enableClosedCaptions")
+                     <*> (o .:? "boundStreamLastUpdateTimeMs")
                      <*> (o .:? "enableDvr"))
 
 instance ToJSON LiveBroadcastContentDetails where
@@ -1952,11 +2080,14 @@ instance ToJSON LiveBroadcastContentDetails where
                     _lbcdClosedCaptionsType,
                   ("enableEmbed" .=) <$> _lbcdEnableEmbed,
                   ("startWithSlate" .=) <$> _lbcdStartWithSlate,
+                  ("projection" .=) <$> _lbcdProjection,
                   ("monitorStream" .=) <$> _lbcdMonitorStream,
                   ("boundStreamId" .=) <$> _lbcdBoundStreamId,
                   ("recordFromStart" .=) <$> _lbcdRecordFromStart,
                   ("enableClosedCaptions" .=) <$>
                     _lbcdEnableClosedCaptions,
+                  ("boundStreamLastUpdateTimeMs" .=) <$>
+                    _lbcdBoundStreamLastUpdateTimeMs,
                   ("enableDvr" .=) <$> _lbcdEnableDvr])
 
 --
@@ -2309,6 +2440,7 @@ data VideoContentDetails = VideoContentDetails'
     , _vcdDimension          :: !(Maybe Text)
     , _vcdCaption            :: !(Maybe VideoContentDetailsCaption)
     , _vcdRegionRestriction  :: !(Maybe VideoContentDetailsRegionRestriction)
+    , _vcdProjection         :: !(Maybe VideoContentDetailsProjection)
     , _vcdDuration           :: !(Maybe Text)
     , _vcdContentRating      :: !(Maybe ContentRating)
     , _vcdLicensedContent    :: !(Maybe Bool)
@@ -2328,6 +2460,8 @@ data VideoContentDetails = VideoContentDetails'
 --
 -- * 'vcdRegionRestriction'
 --
+-- * 'vcdProjection'
+--
 -- * 'vcdDuration'
 --
 -- * 'vcdContentRating'
@@ -2342,6 +2476,7 @@ videoContentDetails =
     , _vcdDimension = Nothing
     , _vcdCaption = Nothing
     , _vcdRegionRestriction = Nothing
+    , _vcdProjection = Nothing
     , _vcdDuration = Nothing
     , _vcdContentRating = Nothing
     , _vcdLicensedContent = Nothing
@@ -2381,6 +2516,12 @@ vcdRegionRestriction
   = lens _vcdRegionRestriction
       (\ s a -> s{_vcdRegionRestriction = a})
 
+-- | Specifies the projection format of the video.
+vcdProjection :: Lens' VideoContentDetails (Maybe VideoContentDetailsProjection)
+vcdProjection
+  = lens _vcdProjection
+      (\ s a -> s{_vcdProjection = a})
+
 -- | The length of the video. The tag value is an ISO 8601 duration in the
 -- format PT#M#S, in which the letters PT indicate that the value specifies
 -- a period of time, and the letters M and S refer to length in minutes and
@@ -2415,6 +2556,7 @@ instance FromJSON VideoContentDetails where
                      <*> (o .:? "dimension")
                      <*> (o .:? "caption")
                      <*> (o .:? "regionRestriction")
+                     <*> (o .:? "projection")
                      <*> (o .:? "duration")
                      <*> (o .:? "contentRating")
                      <*> (o .:? "licensedContent"))
@@ -2429,6 +2571,7 @@ instance ToJSON VideoContentDetails where
                   ("dimension" .=) <$> _vcdDimension,
                   ("caption" .=) <$> _vcdCaption,
                   ("regionRestriction" .=) <$> _vcdRegionRestriction,
+                  ("projection" .=) <$> _vcdProjection,
                   ("duration" .=) <$> _vcdDuration,
                   ("contentRating" .=) <$> _vcdContentRating,
                   ("licensedContent" .=) <$> _vcdLicensedContent])
@@ -6379,25 +6522,34 @@ instance ToJSON MonitorStreamInfo where
 --
 -- /See:/ 'liveChatMessageSnippet' smart constructor.
 data LiveChatMessageSnippet = LiveChatMessageSnippet'
-    { _lcmsLiveChatId             :: !(Maybe Text)
-    , _lcmsPublishedAt            :: !(Maybe DateTime')
-    , _lcmsTextMessageDetails     :: !(Maybe LiveChatTextMessageDetails)
-    , _lcmsType                   :: !(Maybe LiveChatMessageSnippetType)
-    , _lcmsAuthorChannelId        :: !(Maybe Text)
-    , _lcmsFanFundingEventDetails :: !(Maybe LiveChatFanFundingEventDetails)
-    , _lcmsHasDisplayContent      :: !(Maybe Bool)
-    , _lcmsDisplayMessage         :: !(Maybe Text)
+    { _lcmsMessageDeletedDetails   :: !(Maybe LiveChatMessageDeletedDetails)
+    , _lcmsLiveChatId              :: !(Maybe Text)
+    , _lcmsPublishedAt             :: !(Maybe DateTime')
+    , _lcmsUserBannedDetails       :: !(Maybe LiveChatUserBannedMessageDetails)
+    , _lcmsTextMessageDetails      :: !(Maybe LiveChatTextMessageDetails)
+    , _lcmsMessageRetractedDetails :: !(Maybe LiveChatMessageRetractedDetails)
+    , _lcmsType                    :: !(Maybe LiveChatMessageSnippetType)
+    , _lcmsAuthorChannelId         :: !(Maybe Text)
+    , _lcmsFanFundingEventDetails  :: !(Maybe LiveChatFanFundingEventDetails)
+    , _lcmsHasDisplayContent       :: !(Maybe Bool)
+    , _lcmsDisplayMessage          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveChatMessageSnippet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lcmsMessageDeletedDetails'
+--
 -- * 'lcmsLiveChatId'
 --
 -- * 'lcmsPublishedAt'
 --
+-- * 'lcmsUserBannedDetails'
+--
 -- * 'lcmsTextMessageDetails'
+--
+-- * 'lcmsMessageRetractedDetails'
 --
 -- * 'lcmsType'
 --
@@ -6412,15 +6564,23 @@ liveChatMessageSnippet
     :: LiveChatMessageSnippet
 liveChatMessageSnippet =
     LiveChatMessageSnippet'
-    { _lcmsLiveChatId = Nothing
+    { _lcmsMessageDeletedDetails = Nothing
+    , _lcmsLiveChatId = Nothing
     , _lcmsPublishedAt = Nothing
+    , _lcmsUserBannedDetails = Nothing
     , _lcmsTextMessageDetails = Nothing
+    , _lcmsMessageRetractedDetails = Nothing
     , _lcmsType = Nothing
     , _lcmsAuthorChannelId = Nothing
     , _lcmsFanFundingEventDetails = Nothing
     , _lcmsHasDisplayContent = Nothing
     , _lcmsDisplayMessage = Nothing
     }
+
+lcmsMessageDeletedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatMessageDeletedDetails)
+lcmsMessageDeletedDetails
+  = lens _lcmsMessageDeletedDetails
+      (\ s a -> s{_lcmsMessageDeletedDetails = a})
 
 lcmsLiveChatId :: Lens' LiveChatMessageSnippet (Maybe Text)
 lcmsLiveChatId
@@ -6435,12 +6595,22 @@ lcmsPublishedAt
       (\ s a -> s{_lcmsPublishedAt = a})
       . mapping _DateTime
 
+lcmsUserBannedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatUserBannedMessageDetails)
+lcmsUserBannedDetails
+  = lens _lcmsUserBannedDetails
+      (\ s a -> s{_lcmsUserBannedDetails = a})
+
 -- | Details about the text message, this is only set if the type is
 -- \'textMessageEvent\'.
 lcmsTextMessageDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatTextMessageDetails)
 lcmsTextMessageDetails
   = lens _lcmsTextMessageDetails
       (\ s a -> s{_lcmsTextMessageDetails = a})
+
+lcmsMessageRetractedDetails :: Lens' LiveChatMessageSnippet (Maybe LiveChatMessageRetractedDetails)
+lcmsMessageRetractedDetails
+  = lens _lcmsMessageRetractedDetails
+      (\ s a -> s{_lcmsMessageRetractedDetails = a})
 
 -- | The type of message, this will always be present, it determines the
 -- contents of the message as well as which fields will be present.
@@ -6450,7 +6620,9 @@ lcmsType = lens _lcmsType (\ s a -> s{_lcmsType = a})
 -- | The ID of the user that authored this message, this field is not always
 -- filled. textMessageEvent - the user that wrote the message
 -- fanFundingEvent - the user that funded the broadcast newSponsorEvent -
--- the user that just became a sponsor
+-- the user that just became a sponsor messageDeletedEvent - the moderator
+-- that took the action messageRetractedEvent - the author that retracted
+-- their message userBannedEvent - the moderator that took the action
 lcmsAuthorChannelId :: Lens' LiveChatMessageSnippet (Maybe Text)
 lcmsAuthorChannelId
   = lens _lcmsAuthorChannelId
@@ -6483,8 +6655,12 @@ instance FromJSON LiveChatMessageSnippet where
           = withObject "LiveChatMessageSnippet"
               (\ o ->
                  LiveChatMessageSnippet' <$>
-                   (o .:? "liveChatId") <*> (o .:? "publishedAt") <*>
-                     (o .:? "textMessageDetails")
+                   (o .:? "messageDeletedDetails") <*>
+                     (o .:? "liveChatId")
+                     <*> (o .:? "publishedAt")
+                     <*> (o .:? "userBannedDetails")
+                     <*> (o .:? "textMessageDetails")
+                     <*> (o .:? "messageRetractedDetails")
                      <*> (o .:? "type")
                      <*> (o .:? "authorChannelId")
                      <*> (o .:? "fanFundingEventDetails")
@@ -6495,10 +6671,15 @@ instance ToJSON LiveChatMessageSnippet where
         toJSON LiveChatMessageSnippet'{..}
           = object
               (catMaybes
-                 [("liveChatId" .=) <$> _lcmsLiveChatId,
+                 [("messageDeletedDetails" .=) <$>
+                    _lcmsMessageDeletedDetails,
+                  ("liveChatId" .=) <$> _lcmsLiveChatId,
                   ("publishedAt" .=) <$> _lcmsPublishedAt,
+                  ("userBannedDetails" .=) <$> _lcmsUserBannedDetails,
                   ("textMessageDetails" .=) <$>
                     _lcmsTextMessageDetails,
+                  ("messageRetractedDetails" .=) <$>
+                    _lcmsMessageRetractedDetails,
                   ("type" .=) <$> _lcmsType,
                   ("authorChannelId" .=) <$> _lcmsAuthorChannelId,
                   ("fanFundingEventDetails" .=) <$>
@@ -8193,6 +8374,42 @@ instance ToJSON Sponsor where
                   Just ("kind" .= _sKind), ("id" .=) <$> _sId])
 
 --
+-- /See:/ 'liveChatMessageDeletedDetails' smart constructor.
+newtype LiveChatMessageDeletedDetails = LiveChatMessageDeletedDetails'
+    { _lcmddDeletedMessageId :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'LiveChatMessageDeletedDetails' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lcmddDeletedMessageId'
+liveChatMessageDeletedDetails
+    :: LiveChatMessageDeletedDetails
+liveChatMessageDeletedDetails =
+    LiveChatMessageDeletedDetails'
+    { _lcmddDeletedMessageId = Nothing
+    }
+
+lcmddDeletedMessageId :: Lens' LiveChatMessageDeletedDetails (Maybe Text)
+lcmddDeletedMessageId
+  = lens _lcmddDeletedMessageId
+      (\ s a -> s{_lcmddDeletedMessageId = a})
+
+instance FromJSON LiveChatMessageDeletedDetails where
+        parseJSON
+          = withObject "LiveChatMessageDeletedDetails"
+              (\ o ->
+                 LiveChatMessageDeletedDetails' <$>
+                   (o .:? "deletedMessageId"))
+
+instance ToJSON LiveChatMessageDeletedDetails where
+        toJSON LiveChatMessageDeletedDetails'{..}
+          = object
+              (catMaybes
+                 [("deletedMessageId" .=) <$> _lcmddDeletedMessageId])
+
+--
 -- /See:/ 'commentThreadListResponse' smart constructor.
 data CommentThreadListResponse = CommentThreadListResponse'
     { _ctlrEtag            :: !(Maybe Text)
@@ -8309,7 +8526,7 @@ instance ToJSON CommentThreadListResponse where
                   ("visitorId" .=) <$> _ctlrVisitorId,
                   ("eventId" .=) <$> _ctlrEventId])
 
--- | Branding properties for the watch.
+-- | Branding properties for the watch. All deprecated.
 --
 -- /See:/ 'watchSettings' smart constructor.
 data WatchSettings = WatchSettings'
@@ -8376,7 +8593,9 @@ instance ToJSON WatchSettings where
 -- /See:/ 'cdnSettings' smart constructor.
 data CdnSettings = CdnSettings'
     { _csIngestionInfo :: !(Maybe IngestionInfo)
+    , _csFrameRate     :: !(Maybe CdnSettingsFrameRate)
     , _csFormat        :: !(Maybe Text)
+    , _csResolution    :: !(Maybe CdnSettingsResolution)
     , _csIngestionType :: !(Maybe CdnSettingsIngestionType)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -8386,7 +8605,11 @@ data CdnSettings = CdnSettings'
 --
 -- * 'csIngestionInfo'
 --
+-- * 'csFrameRate'
+--
 -- * 'csFormat'
+--
+-- * 'csResolution'
 --
 -- * 'csIngestionType'
 cdnSettings
@@ -8394,7 +8617,9 @@ cdnSettings
 cdnSettings =
     CdnSettings'
     { _csIngestionInfo = Nothing
+    , _csFrameRate = Nothing
     , _csFormat = Nothing
+    , _csResolution = Nothing
     , _csIngestionType = Nothing
     }
 
@@ -8405,9 +8630,19 @@ csIngestionInfo
   = lens _csIngestionInfo
       (\ s a -> s{_csIngestionInfo = a})
 
+-- | The frame rate of the inbound video data.
+csFrameRate :: Lens' CdnSettings (Maybe CdnSettingsFrameRate)
+csFrameRate
+  = lens _csFrameRate (\ s a -> s{_csFrameRate = a})
+
 -- | The format of the video stream that you are sending to Youtube.
 csFormat :: Lens' CdnSettings (Maybe Text)
 csFormat = lens _csFormat (\ s a -> s{_csFormat = a})
+
+-- | The resolution of the inbound video data.
+csResolution :: Lens' CdnSettings (Maybe CdnSettingsResolution)
+csResolution
+  = lens _csResolution (\ s a -> s{_csResolution = a})
 
 -- | The method or protocol used to transmit the video stream.
 csIngestionType :: Lens' CdnSettings (Maybe CdnSettingsIngestionType)
@@ -8420,15 +8655,19 @@ instance FromJSON CdnSettings where
           = withObject "CdnSettings"
               (\ o ->
                  CdnSettings' <$>
-                   (o .:? "ingestionInfo") <*> (o .:? "format") <*>
-                     (o .:? "ingestionType"))
+                   (o .:? "ingestionInfo") <*> (o .:? "frameRate") <*>
+                     (o .:? "format")
+                     <*> (o .:? "resolution")
+                     <*> (o .:? "ingestionType"))
 
 instance ToJSON CdnSettings where
         toJSON CdnSettings'{..}
           = object
               (catMaybes
                  [("ingestionInfo" .=) <$> _csIngestionInfo,
+                  ("frameRate" .=) <$> _csFrameRate,
                   ("format" .=) <$> _csFormat,
+                  ("resolution" .=) <$> _csResolution,
                   ("ingestionType" .=) <$> _csIngestionType])
 
 -- | Statistics about the live broadcast. These represent a snapshot of the
