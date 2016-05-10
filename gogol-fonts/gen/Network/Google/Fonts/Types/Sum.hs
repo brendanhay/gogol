@@ -39,17 +39,17 @@ data WebfontsListSort
 
 instance Hashable WebfontsListSort
 
-instance FromText WebfontsListSort where
-    fromText = \case
-        "alpha" -> Just Alpha
-        "date" -> Just Date
-        "popularity" -> Just Popularity
-        "style" -> Just Style
-        "trending" -> Just Trending
-        _ -> Nothing
+instance FromHttpApiData WebfontsListSort where
+    parseQueryParam = \case
+        "alpha" -> Right Alpha
+        "date" -> Right Date
+        "popularity" -> Right Popularity
+        "style" -> Right Style
+        "trending" -> Right Trending
+        x -> Left ("Unable to parse WebfontsListSort from: " <> x)
 
-instance ToText WebfontsListSort where
-    toText = \case
+instance ToHttpApiData WebfontsListSort where
+    toQueryParam = \case
         Alpha -> "alpha"
         Date -> "date"
         Popularity -> "popularity"

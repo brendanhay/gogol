@@ -39,17 +39,17 @@ data AssociationSessionsStartProductCode
 
 instance Hashable AssociationSessionsStartProductCode
 
-instance FromText AssociationSessionsStartProductCode where
-    fromText = \case
-        "AFC" -> Just Afc
-        "AFG" -> Just Afg
-        "AFMC" -> Just Afmc
-        "AFS" -> Just Afs
-        "AFV" -> Just Afv
-        _ -> Nothing
+instance FromHttpApiData AssociationSessionsStartProductCode where
+    parseQueryParam = \case
+        "AFC" -> Right Afc
+        "AFG" -> Right Afg
+        "AFMC" -> Right Afmc
+        "AFS" -> Right Afs
+        "AFV" -> Right Afv
+        x -> Left ("Unable to parse AssociationSessionsStartProductCode from: " <> x)
 
-instance ToText AssociationSessionsStartProductCode where
-    toText = \case
+instance ToHttpApiData AssociationSessionsStartProductCode where
+    toQueryParam = \case
         Afc -> "AFC"
         Afg -> "AFG"
         Afmc -> "AFMC"

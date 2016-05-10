@@ -39,17 +39,17 @@ data UsersListEvent
 
 instance Hashable UsersListEvent
 
-instance FromText UsersListEvent where
-    fromText = \case
-        "add" -> Just Add
-        "delete" -> Just Delete'
-        "makeAdmin" -> Just MakeAdmin
-        "undelete" -> Just Undelete
-        "update" -> Just Update
-        _ -> Nothing
+instance FromHttpApiData UsersListEvent where
+    parseQueryParam = \case
+        "add" -> Right Add
+        "delete" -> Right Delete'
+        "makeAdmin" -> Right MakeAdmin
+        "undelete" -> Right Undelete
+        "update" -> Right Update
+        x -> Left ("Unable to parse UsersListEvent from: " <> x)
 
-instance ToText UsersListEvent where
-    toText = \case
+instance ToHttpApiData UsersListEvent where
+    toQueryParam = \case
         Add -> "add"
         Delete' -> "delete"
         MakeAdmin -> "makeAdmin"
@@ -74,14 +74,14 @@ data UsersAliasesListEvent
 
 instance Hashable UsersAliasesListEvent
 
-instance FromText UsersAliasesListEvent where
-    fromText = \case
-        "add" -> Just UALEAdd
-        "delete" -> Just UALEDelete'
-        _ -> Nothing
+instance FromHttpApiData UsersAliasesListEvent where
+    parseQueryParam = \case
+        "add" -> Right UALEAdd
+        "delete" -> Right UALEDelete'
+        x -> Left ("Unable to parse UsersAliasesListEvent from: " <> x)
 
-instance ToText UsersAliasesListEvent where
-    toText = \case
+instance ToHttpApiData UsersAliasesListEvent where
+    toQueryParam = \case
         UALEAdd -> "add"
         UALEDelete' -> "delete"
 
@@ -103,14 +103,14 @@ data UsersAliasesWatchEvent
 
 instance Hashable UsersAliasesWatchEvent
 
-instance FromText UsersAliasesWatchEvent where
-    fromText = \case
-        "add" -> Just UAWEAdd
-        "delete" -> Just UAWEDelete'
-        _ -> Nothing
+instance FromHttpApiData UsersAliasesWatchEvent where
+    parseQueryParam = \case
+        "add" -> Right UAWEAdd
+        "delete" -> Right UAWEDelete'
+        x -> Left ("Unable to parse UsersAliasesWatchEvent from: " <> x)
 
-instance ToText UsersAliasesWatchEvent where
-    toText = \case
+instance ToHttpApiData UsersAliasesWatchEvent where
+    toQueryParam = \case
         UAWEAdd -> "add"
         UAWEDelete' -> "delete"
 
@@ -141,17 +141,17 @@ data UsersWatchEvent
 
 instance Hashable UsersWatchEvent
 
-instance FromText UsersWatchEvent where
-    fromText = \case
-        "add" -> Just UWEAdd
-        "delete" -> Just UWEDelete'
-        "makeAdmin" -> Just UWEMakeAdmin
-        "undelete" -> Just UWEUndelete
-        "update" -> Just UWEUpdate
-        _ -> Nothing
+instance FromHttpApiData UsersWatchEvent where
+    parseQueryParam = \case
+        "add" -> Right UWEAdd
+        "delete" -> Right UWEDelete'
+        "makeAdmin" -> Right UWEMakeAdmin
+        "undelete" -> Right UWEUndelete
+        "update" -> Right UWEUpdate
+        x -> Left ("Unable to parse UsersWatchEvent from: " <> x)
 
-instance ToText UsersWatchEvent where
-    toText = \case
+instance ToHttpApiData UsersWatchEvent where
+    toQueryParam = \case
         UWEAdd -> "add"
         UWEDelete' -> "delete"
         UWEMakeAdmin -> "makeAdmin"
@@ -177,14 +177,14 @@ data ChromeosDevicesPatchProjection
 
 instance Hashable ChromeosDevicesPatchProjection
 
-instance FromText ChromeosDevicesPatchProjection where
-    fromText = \case
-        "BASIC" -> Just Basic
-        "FULL" -> Just Full
-        _ -> Nothing
+instance FromHttpApiData ChromeosDevicesPatchProjection where
+    parseQueryParam = \case
+        "BASIC" -> Right Basic
+        "FULL" -> Right Full
+        x -> Left ("Unable to parse ChromeosDevicesPatchProjection from: " <> x)
 
-instance ToText ChromeosDevicesPatchProjection where
-    toText = \case
+instance ToHttpApiData ChromeosDevicesPatchProjection where
+    toQueryParam = \case
         Basic -> "BASIC"
         Full -> "FULL"
 
@@ -207,14 +207,14 @@ data ChromeosDevicesGetProjection
 
 instance Hashable ChromeosDevicesGetProjection
 
-instance FromText ChromeosDevicesGetProjection where
-    fromText = \case
-        "BASIC" -> Just CDGPBasic
-        "FULL" -> Just CDGPFull
-        _ -> Nothing
+instance FromHttpApiData ChromeosDevicesGetProjection where
+    parseQueryParam = \case
+        "BASIC" -> Right CDGPBasic
+        "FULL" -> Right CDGPFull
+        x -> Left ("Unable to parse ChromeosDevicesGetProjection from: " <> x)
 
-instance ToText ChromeosDevicesGetProjection where
-    toText = \case
+instance ToHttpApiData ChromeosDevicesGetProjection where
+    toQueryParam = \case
         CDGPBasic -> "BASIC"
         CDGPFull -> "FULL"
 
@@ -236,14 +236,14 @@ data UsersListViewType
 
 instance Hashable UsersListViewType
 
-instance FromText UsersListViewType where
-    fromText = \case
-        "admin_view" -> Just AdminView
-        "domain_public" -> Just DomainPublic
-        _ -> Nothing
+instance FromHttpApiData UsersListViewType where
+    parseQueryParam = \case
+        "admin_view" -> Right AdminView
+        "domain_public" -> Right DomainPublic
+        x -> Left ("Unable to parse UsersListViewType from: " <> x)
 
-instance ToText UsersListViewType where
-    toText = \case
+instance ToHttpApiData UsersListViewType where
+    toQueryParam = \case
         AdminView -> "admin_view"
         DomainPublic -> "domain_public"
 
@@ -265,14 +265,14 @@ data OrgUnitsListType
 
 instance Hashable OrgUnitsListType
 
-instance FromText OrgUnitsListType where
-    fromText = \case
-        "all" -> Just All
-        "children" -> Just Children
-        _ -> Nothing
+instance FromHttpApiData OrgUnitsListType where
+    parseQueryParam = \case
+        "all" -> Right All
+        "children" -> Right Children
+        x -> Left ("Unable to parse OrgUnitsListType from: " <> x)
 
-instance ToText OrgUnitsListType where
-    toText = \case
+instance ToHttpApiData OrgUnitsListType where
+    toQueryParam = \case
         All -> "all"
         Children -> "children"
 
@@ -295,14 +295,14 @@ data MobileDevicesListSortOrder
 
 instance Hashable MobileDevicesListSortOrder
 
-instance FromText MobileDevicesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just Ascending
-        "DESCENDING" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData MobileDevicesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right Ascending
+        "DESCENDING" -> Right Descending
+        x -> Left ("Unable to parse MobileDevicesListSortOrder from: " <> x)
 
-instance ToText MobileDevicesListSortOrder where
-    toText = \case
+instance ToHttpApiData MobileDevicesListSortOrder where
+    toQueryParam = \case
         Ascending -> "ASCENDING"
         Descending -> "DESCENDING"
 
@@ -327,15 +327,15 @@ data UsersListOrderBy
 
 instance Hashable UsersListOrderBy
 
-instance FromText UsersListOrderBy where
-    fromText = \case
-        "email" -> Just Email
-        "familyName" -> Just FamilyName
-        "givenName" -> Just GivenName
-        _ -> Nothing
+instance FromHttpApiData UsersListOrderBy where
+    parseQueryParam = \case
+        "email" -> Right Email
+        "familyName" -> Right FamilyName
+        "givenName" -> Right GivenName
+        x -> Left ("Unable to parse UsersListOrderBy from: " <> x)
 
-instance ToText UsersListOrderBy where
-    toText = \case
+instance ToHttpApiData UsersListOrderBy where
+    toQueryParam = \case
         Email -> "email"
         FamilyName -> "familyName"
         GivenName -> "givenName"
@@ -358,14 +358,14 @@ data UsersWatchViewType
 
 instance Hashable UsersWatchViewType
 
-instance FromText UsersWatchViewType where
-    fromText = \case
-        "admin_view" -> Just UWVTAdminView
-        "domain_public" -> Just UWVTDomainPublic
-        _ -> Nothing
+instance FromHttpApiData UsersWatchViewType where
+    parseQueryParam = \case
+        "admin_view" -> Right UWVTAdminView
+        "domain_public" -> Right UWVTDomainPublic
+        x -> Left ("Unable to parse UsersWatchViewType from: " <> x)
 
-instance ToText UsersWatchViewType where
-    toText = \case
+instance ToHttpApiData UsersWatchViewType where
+    toQueryParam = \case
         UWVTAdminView -> "admin_view"
         UWVTDomainPublic -> "domain_public"
 
@@ -390,15 +390,15 @@ data UsersGetProjection
 
 instance Hashable UsersGetProjection
 
-instance FromText UsersGetProjection where
-    fromText = \case
-        "basic" -> Just UGPBasic
-        "custom" -> Just UGPCustom
-        "full" -> Just UGPFull
-        _ -> Nothing
+instance FromHttpApiData UsersGetProjection where
+    parseQueryParam = \case
+        "basic" -> Right UGPBasic
+        "custom" -> Right UGPCustom
+        "full" -> Right UGPFull
+        x -> Left ("Unable to parse UsersGetProjection from: " <> x)
 
-instance ToText UsersGetProjection where
-    toText = \case
+instance ToHttpApiData UsersGetProjection where
+    toQueryParam = \case
         UGPBasic -> "basic"
         UGPCustom -> "custom"
         UGPFull -> "full"
@@ -422,14 +422,14 @@ data MobileDevicesListProjection
 
 instance Hashable MobileDevicesListProjection
 
-instance FromText MobileDevicesListProjection where
-    fromText = \case
-        "BASIC" -> Just MDLPBasic
-        "FULL" -> Just MDLPFull
-        _ -> Nothing
+instance FromHttpApiData MobileDevicesListProjection where
+    parseQueryParam = \case
+        "BASIC" -> Right MDLPBasic
+        "FULL" -> Right MDLPFull
+        x -> Left ("Unable to parse MobileDevicesListProjection from: " <> x)
 
-instance ToText MobileDevicesListProjection where
-    toText = \case
+instance ToHttpApiData MobileDevicesListProjection where
+    toQueryParam = \case
         MDLPBasic -> "BASIC"
         MDLPFull -> "FULL"
 
@@ -469,20 +469,20 @@ data MobileDevicesListOrderBy
 
 instance Hashable MobileDevicesListOrderBy
 
-instance FromText MobileDevicesListOrderBy where
-    fromText = \case
-        "deviceId" -> Just MDLOBDeviceId
-        "email" -> Just MDLOBEmail
-        "lastSync" -> Just MDLOBLastSync
-        "model" -> Just MDLOBModel
-        "name" -> Just MDLOBName
-        "os" -> Just MDLOBOS
-        "status" -> Just MDLOBStatus
-        "type" -> Just MDLOBType
-        _ -> Nothing
+instance FromHttpApiData MobileDevicesListOrderBy where
+    parseQueryParam = \case
+        "deviceId" -> Right MDLOBDeviceId
+        "email" -> Right MDLOBEmail
+        "lastSync" -> Right MDLOBLastSync
+        "model" -> Right MDLOBModel
+        "name" -> Right MDLOBName
+        "os" -> Right MDLOBOS
+        "status" -> Right MDLOBStatus
+        "type" -> Right MDLOBType
+        x -> Left ("Unable to parse MobileDevicesListOrderBy from: " <> x)
 
-instance ToText MobileDevicesListOrderBy where
-    toText = \case
+instance ToHttpApiData MobileDevicesListOrderBy where
+    toQueryParam = \case
         MDLOBDeviceId -> "deviceId"
         MDLOBEmail -> "email"
         MDLOBLastSync -> "lastSync"
@@ -510,14 +510,14 @@ data UsersListSortOrder
 
 instance Hashable UsersListSortOrder
 
-instance FromText UsersListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just ULSOAscending
-        "DESCENDING" -> Just ULSODescending
-        _ -> Nothing
+instance FromHttpApiData UsersListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right ULSOAscending
+        "DESCENDING" -> Right ULSODescending
+        x -> Left ("Unable to parse UsersListSortOrder from: " <> x)
 
-instance ToText UsersListSortOrder where
-    toText = \case
+instance ToHttpApiData UsersListSortOrder where
+    toQueryParam = \case
         ULSOAscending -> "ASCENDING"
         ULSODescending -> "DESCENDING"
 
@@ -540,14 +540,14 @@ data ChromeosDevicesListSortOrder
 
 instance Hashable ChromeosDevicesListSortOrder
 
-instance FromText ChromeosDevicesListSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just CDLSOAscending
-        "DESCENDING" -> Just CDLSODescending
-        _ -> Nothing
+instance FromHttpApiData ChromeosDevicesListSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right CDLSOAscending
+        "DESCENDING" -> Right CDLSODescending
+        x -> Left ("Unable to parse ChromeosDevicesListSortOrder from: " <> x)
 
-instance ToText ChromeosDevicesListSortOrder where
-    toText = \case
+instance ToHttpApiData ChromeosDevicesListSortOrder where
+    toQueryParam = \case
         CDLSOAscending -> "ASCENDING"
         CDLSODescending -> "DESCENDING"
 
@@ -569,14 +569,14 @@ data UsersWatchSortOrder
 
 instance Hashable UsersWatchSortOrder
 
-instance FromText UsersWatchSortOrder where
-    fromText = \case
-        "ASCENDING" -> Just UWSOAscending
-        "DESCENDING" -> Just UWSODescending
-        _ -> Nothing
+instance FromHttpApiData UsersWatchSortOrder where
+    parseQueryParam = \case
+        "ASCENDING" -> Right UWSOAscending
+        "DESCENDING" -> Right UWSODescending
+        x -> Left ("Unable to parse UsersWatchSortOrder from: " <> x)
 
-instance ToText UsersWatchSortOrder where
-    toText = \case
+instance ToHttpApiData UsersWatchSortOrder where
+    toQueryParam = \case
         UWSOAscending -> "ASCENDING"
         UWSODescending -> "DESCENDING"
 
@@ -601,15 +601,15 @@ data UsersListProjection
 
 instance Hashable UsersListProjection
 
-instance FromText UsersListProjection where
-    fromText = \case
-        "basic" -> Just ULPBasic
-        "custom" -> Just ULPCustom
-        "full" -> Just ULPFull
-        _ -> Nothing
+instance FromHttpApiData UsersListProjection where
+    parseQueryParam = \case
+        "basic" -> Right ULPBasic
+        "custom" -> Right ULPCustom
+        "full" -> Right ULPFull
+        x -> Left ("Unable to parse UsersListProjection from: " <> x)
 
-instance ToText UsersListProjection where
-    toText = \case
+instance ToHttpApiData UsersListProjection where
+    toQueryParam = \case
         ULPBasic -> "basic"
         ULPCustom -> "custom"
         ULPFull -> "full"
@@ -633,14 +633,14 @@ data ChromeosDevicesUpdateProjection
 
 instance Hashable ChromeosDevicesUpdateProjection
 
-instance FromText ChromeosDevicesUpdateProjection where
-    fromText = \case
-        "BASIC" -> Just CDUPBasic
-        "FULL" -> Just CDUPFull
-        _ -> Nothing
+instance FromHttpApiData ChromeosDevicesUpdateProjection where
+    parseQueryParam = \case
+        "BASIC" -> Right CDUPBasic
+        "FULL" -> Right CDUPFull
+        x -> Left ("Unable to parse ChromeosDevicesUpdateProjection from: " <> x)
 
-instance ToText ChromeosDevicesUpdateProjection where
-    toText = \case
+instance ToHttpApiData ChromeosDevicesUpdateProjection where
+    toQueryParam = \case
         CDUPBasic -> "BASIC"
         CDUPFull -> "FULL"
 
@@ -663,14 +663,14 @@ data MobileDevicesGetProjection
 
 instance Hashable MobileDevicesGetProjection
 
-instance FromText MobileDevicesGetProjection where
-    fromText = \case
-        "BASIC" -> Just MDGPBasic
-        "FULL" -> Just MDGPFull
-        _ -> Nothing
+instance FromHttpApiData MobileDevicesGetProjection where
+    parseQueryParam = \case
+        "BASIC" -> Right MDGPBasic
+        "FULL" -> Right MDGPFull
+        x -> Left ("Unable to parse MobileDevicesGetProjection from: " <> x)
 
-instance ToText MobileDevicesGetProjection where
-    toText = \case
+instance ToHttpApiData MobileDevicesGetProjection where
+    toQueryParam = \case
         MDGPBasic -> "BASIC"
         MDGPFull -> "FULL"
 
@@ -707,19 +707,19 @@ data ChromeosDevicesListOrderBy
 
 instance Hashable ChromeosDevicesListOrderBy
 
-instance FromText ChromeosDevicesListOrderBy where
-    fromText = \case
-        "annotatedLocation" -> Just AnnotatedLocation
-        "annotatedUser" -> Just AnnotatedUser
-        "lastSync" -> Just LastSync
-        "notes" -> Just Notes
-        "serialNumber" -> Just SerialNumber
-        "status" -> Just Status
-        "supportEndDate" -> Just SupportEndDate
-        _ -> Nothing
+instance FromHttpApiData ChromeosDevicesListOrderBy where
+    parseQueryParam = \case
+        "annotatedLocation" -> Right AnnotatedLocation
+        "annotatedUser" -> Right AnnotatedUser
+        "lastSync" -> Right LastSync
+        "notes" -> Right Notes
+        "serialNumber" -> Right SerialNumber
+        "status" -> Right Status
+        "supportEndDate" -> Right SupportEndDate
+        x -> Left ("Unable to parse ChromeosDevicesListOrderBy from: " <> x)
 
-instance ToText ChromeosDevicesListOrderBy where
-    toText = \case
+instance ToHttpApiData ChromeosDevicesListOrderBy where
+    toQueryParam = \case
         AnnotatedLocation -> "annotatedLocation"
         AnnotatedUser -> "annotatedUser"
         LastSync -> "lastSync"
@@ -749,15 +749,15 @@ data UsersWatchProjection
 
 instance Hashable UsersWatchProjection
 
-instance FromText UsersWatchProjection where
-    fromText = \case
-        "basic" -> Just UWPBasic
-        "custom" -> Just UWPCustom
-        "full" -> Just UWPFull
-        _ -> Nothing
+instance FromHttpApiData UsersWatchProjection where
+    parseQueryParam = \case
+        "basic" -> Right UWPBasic
+        "custom" -> Right UWPCustom
+        "full" -> Right UWPFull
+        x -> Left ("Unable to parse UsersWatchProjection from: " <> x)
 
-instance ToText UsersWatchProjection where
-    toText = \case
+instance ToHttpApiData UsersWatchProjection where
+    toQueryParam = \case
         UWPBasic -> "basic"
         UWPCustom -> "custom"
         UWPFull -> "full"
@@ -783,15 +783,15 @@ data UsersWatchOrderBy
 
 instance Hashable UsersWatchOrderBy
 
-instance FromText UsersWatchOrderBy where
-    fromText = \case
-        "email" -> Just UWOBEmail
-        "familyName" -> Just UWOBFamilyName
-        "givenName" -> Just UWOBGivenName
-        _ -> Nothing
+instance FromHttpApiData UsersWatchOrderBy where
+    parseQueryParam = \case
+        "email" -> Right UWOBEmail
+        "familyName" -> Right UWOBFamilyName
+        "givenName" -> Right UWOBGivenName
+        x -> Left ("Unable to parse UsersWatchOrderBy from: " <> x)
 
-instance ToText UsersWatchOrderBy where
-    toText = \case
+instance ToHttpApiData UsersWatchOrderBy where
+    toQueryParam = \case
         UWOBEmail -> "email"
         UWOBFamilyName -> "familyName"
         UWOBGivenName -> "givenName"
@@ -815,14 +815,14 @@ data ChromeosDevicesListProjection
 
 instance Hashable ChromeosDevicesListProjection
 
-instance FromText ChromeosDevicesListProjection where
-    fromText = \case
-        "BASIC" -> Just CDLPBasic
-        "FULL" -> Just CDLPFull
-        _ -> Nothing
+instance FromHttpApiData ChromeosDevicesListProjection where
+    parseQueryParam = \case
+        "BASIC" -> Right CDLPBasic
+        "FULL" -> Right CDLPFull
+        x -> Left ("Unable to parse ChromeosDevicesListProjection from: " <> x)
 
-instance ToText ChromeosDevicesListProjection where
-    toText = \case
+instance ToHttpApiData ChromeosDevicesListProjection where
+    toQueryParam = \case
         CDLPBasic -> "BASIC"
         CDLPFull -> "FULL"
 
@@ -844,14 +844,14 @@ data UsersGetViewType
 
 instance Hashable UsersGetViewType
 
-instance FromText UsersGetViewType where
-    fromText = \case
-        "admin_view" -> Just UGVTAdminView
-        "domain_public" -> Just UGVTDomainPublic
-        _ -> Nothing
+instance FromHttpApiData UsersGetViewType where
+    parseQueryParam = \case
+        "admin_view" -> Right UGVTAdminView
+        "domain_public" -> Right UGVTDomainPublic
+        x -> Left ("Unable to parse UsersGetViewType from: " <> x)
 
-instance ToText UsersGetViewType where
-    toText = \case
+instance ToHttpApiData UsersGetViewType where
+    toQueryParam = \case
         UGVTAdminView -> "admin_view"
         UGVTDomainPublic -> "domain_public"
 

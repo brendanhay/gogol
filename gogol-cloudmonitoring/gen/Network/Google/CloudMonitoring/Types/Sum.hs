@@ -34,16 +34,16 @@ data TimeseriesListAggregator
 
 instance Hashable TimeseriesListAggregator
 
-instance FromText TimeseriesListAggregator where
-    fromText = \case
-        "max" -> Just Max
-        "mean" -> Just Mean
-        "min" -> Just Min
-        "sum" -> Just Sum
-        _ -> Nothing
+instance FromHttpApiData TimeseriesListAggregator where
+    parseQueryParam = \case
+        "max" -> Right Max
+        "mean" -> Right Mean
+        "min" -> Right Min
+        "sum" -> Right Sum
+        x -> Left ("Unable to parse TimeseriesListAggregator from: " <> x)
 
-instance ToText TimeseriesListAggregator where
-    toText = \case
+instance ToHttpApiData TimeseriesListAggregator where
+    toQueryParam = \case
         Max -> "max"
         Mean -> "mean"
         Min -> "min"
@@ -71,16 +71,16 @@ data TimeseriesDescriptorsListAggregator
 
 instance Hashable TimeseriesDescriptorsListAggregator
 
-instance FromText TimeseriesDescriptorsListAggregator where
-    fromText = \case
-        "max" -> Just TDLAMax
-        "mean" -> Just TDLAMean
-        "min" -> Just TDLAMin
-        "sum" -> Just TDLASum
-        _ -> Nothing
+instance FromHttpApiData TimeseriesDescriptorsListAggregator where
+    parseQueryParam = \case
+        "max" -> Right TDLAMax
+        "mean" -> Right TDLAMean
+        "min" -> Right TDLAMin
+        "sum" -> Right TDLASum
+        x -> Left ("Unable to parse TimeseriesDescriptorsListAggregator from: " <> x)
 
-instance ToText TimeseriesDescriptorsListAggregator where
-    toText = \case
+instance ToHttpApiData TimeseriesDescriptorsListAggregator where
+    toQueryParam = \case
         TDLAMax -> "max"
         TDLAMean -> "mean"
         TDLAMin -> "min"

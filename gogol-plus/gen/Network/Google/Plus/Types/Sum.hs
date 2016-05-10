@@ -30,14 +30,14 @@ data PeopleListByActivityCollection
 
 instance Hashable PeopleListByActivityCollection
 
-instance FromText PeopleListByActivityCollection where
-    fromText = \case
-        "plusoners" -> Just Plusoners
-        "resharers" -> Just Resharers
-        _ -> Nothing
+instance FromHttpApiData PeopleListByActivityCollection where
+    parseQueryParam = \case
+        "plusoners" -> Right Plusoners
+        "resharers" -> Right Resharers
+        x -> Left ("Unable to parse PeopleListByActivityCollection from: " <> x)
 
-instance ToText PeopleListByActivityCollection where
-    toText = \case
+instance ToHttpApiData PeopleListByActivityCollection where
+    toQueryParam = \case
         Plusoners -> "plusoners"
         Resharers -> "resharers"
 
@@ -59,14 +59,14 @@ data PeopleListOrderBy
 
 instance Hashable PeopleListOrderBy
 
-instance FromText PeopleListOrderBy where
-    fromText = \case
-        "alphabetical" -> Just Alphabetical
-        "best" -> Just Best
-        _ -> Nothing
+instance FromHttpApiData PeopleListOrderBy where
+    parseQueryParam = \case
+        "alphabetical" -> Right Alphabetical
+        "best" -> Right Best
+        x -> Left ("Unable to parse PeopleListOrderBy from: " <> x)
 
-instance ToText PeopleListOrderBy where
-    toText = \case
+instance ToHttpApiData PeopleListOrderBy where
+    toQueryParam = \case
         Alphabetical -> "alphabetical"
         Best -> "best"
 
@@ -85,13 +85,13 @@ data ActivitiesListCollection
 
 instance Hashable ActivitiesListCollection
 
-instance FromText ActivitiesListCollection where
-    fromText = \case
-        "public" -> Just Public
-        _ -> Nothing
+instance FromHttpApiData ActivitiesListCollection where
+    parseQueryParam = \case
+        "public" -> Right Public
+        x -> Left ("Unable to parse ActivitiesListCollection from: " <> x)
 
-instance ToText ActivitiesListCollection where
-    toText = \case
+instance ToHttpApiData ActivitiesListCollection where
+    toQueryParam = \case
         Public -> "public"
 
 instance FromJSON ActivitiesListCollection where
@@ -115,14 +115,14 @@ data PeopleListCollection
 
 instance Hashable PeopleListCollection
 
-instance FromText PeopleListCollection where
-    fromText = \case
-        "connected" -> Just Connected
-        "visible" -> Just Visible
-        _ -> Nothing
+instance FromHttpApiData PeopleListCollection where
+    parseQueryParam = \case
+        "connected" -> Right Connected
+        "visible" -> Right Visible
+        x -> Left ("Unable to parse PeopleListCollection from: " <> x)
 
-instance ToText PeopleListCollection where
-    toText = \case
+instance ToHttpApiData PeopleListCollection where
+    toQueryParam = \case
         Connected -> "connected"
         Visible -> "visible"
 
@@ -144,14 +144,14 @@ data ActivitiesSearchOrderBy
 
 instance Hashable ActivitiesSearchOrderBy
 
-instance FromText ActivitiesSearchOrderBy where
-    fromText = \case
-        "best" -> Just ASOBBest
-        "recent" -> Just ASOBRecent
-        _ -> Nothing
+instance FromHttpApiData ActivitiesSearchOrderBy where
+    parseQueryParam = \case
+        "best" -> Right ASOBBest
+        "recent" -> Right ASOBRecent
+        x -> Left ("Unable to parse ActivitiesSearchOrderBy from: " <> x)
 
-instance ToText ActivitiesSearchOrderBy where
-    toText = \case
+instance ToHttpApiData ActivitiesSearchOrderBy where
+    toQueryParam = \case
         ASOBBest -> "best"
         ASOBRecent -> "recent"
 
@@ -173,14 +173,14 @@ data CommentsListSortOrder
 
 instance Hashable CommentsListSortOrder
 
-instance FromText CommentsListSortOrder where
-    fromText = \case
-        "ascending" -> Just Ascending
-        "descending" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData CommentsListSortOrder where
+    parseQueryParam = \case
+        "ascending" -> Right Ascending
+        "descending" -> Right Descending
+        x -> Left ("Unable to parse CommentsListSortOrder from: " <> x)
 
-instance ToText CommentsListSortOrder where
-    toText = \case
+instance ToHttpApiData CommentsListSortOrder where
+    toQueryParam = \case
         Ascending -> "ascending"
         Descending -> "descending"
 

@@ -30,14 +30,14 @@ data FilesListCorpus
 
 instance Hashable FilesListCorpus
 
-instance FromText FilesListCorpus where
-    fromText = \case
-        "domain" -> Just FLCDomain
-        "user" -> Just FLCUser
-        _ -> Nothing
+instance FromHttpApiData FilesListCorpus where
+    parseQueryParam = \case
+        "domain" -> Right FLCDomain
+        "user" -> Right FLCUser
+        x -> Left ("Unable to parse FilesListCorpus from: " <> x)
 
-instance ToText FilesListCorpus where
-    toText = \case
+instance ToHttpApiData FilesListCorpus where
+    toQueryParam = \case
         FLCDomain -> "domain"
         FLCUser -> "user"
 

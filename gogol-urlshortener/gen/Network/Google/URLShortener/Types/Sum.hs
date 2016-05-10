@@ -30,14 +30,14 @@ data URLListProjection
 
 instance Hashable URLListProjection
 
-instance FromText URLListProjection where
-    fromText = \case
-        "ANALYTICS_CLICKS" -> Just AnalyticsClicks
-        "FULL" -> Just Full
-        _ -> Nothing
+instance FromHttpApiData URLListProjection where
+    parseQueryParam = \case
+        "ANALYTICS_CLICKS" -> Right AnalyticsClicks
+        "FULL" -> Right Full
+        x -> Left ("Unable to parse URLListProjection from: " <> x)
 
-instance ToText URLListProjection where
-    toText = \case
+instance ToHttpApiData URLListProjection where
+    toQueryParam = \case
         AnalyticsClicks -> "ANALYTICS_CLICKS"
         Full -> "FULL"
 
@@ -62,15 +62,15 @@ data URLGetProjection
 
 instance Hashable URLGetProjection
 
-instance FromText URLGetProjection where
-    fromText = \case
-        "ANALYTICS_CLICKS" -> Just UGPAnalyticsClicks
-        "ANALYTICS_TOP_STRINGS" -> Just UGPAnalyticsTopStrings
-        "FULL" -> Just UGPFull
-        _ -> Nothing
+instance FromHttpApiData URLGetProjection where
+    parseQueryParam = \case
+        "ANALYTICS_CLICKS" -> Right UGPAnalyticsClicks
+        "ANALYTICS_TOP_STRINGS" -> Right UGPAnalyticsTopStrings
+        "FULL" -> Right UGPFull
+        x -> Left ("Unable to parse URLGetProjection from: " <> x)
 
-instance ToText URLGetProjection where
-    toText = \case
+instance ToHttpApiData URLGetProjection where
+    toQueryParam = \case
         UGPAnalyticsClicks -> "ANALYTICS_CLICKS"
         UGPAnalyticsTopStrings -> "ANALYTICS_TOP_STRINGS"
         UGPFull -> "FULL"

@@ -42,18 +42,18 @@ data FaceAnnotationUnderExposedLikelihood
 
 instance Hashable FaceAnnotationUnderExposedLikelihood
 
-instance FromText FaceAnnotationUnderExposedLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just Unknown
-        "VERY_UNLIKELY" -> Just VeryUnlikely
-        "UNLIKELY" -> Just Unlikely
-        "POSSIBLE" -> Just Possible
-        "LIKELY" -> Just Likely
-        "VERY_LIKELY" -> Just VeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationUnderExposedLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right Unknown
+        "VERY_UNLIKELY" -> Right VeryUnlikely
+        "UNLIKELY" -> Right Unlikely
+        "POSSIBLE" -> Right Possible
+        "LIKELY" -> Right Likely
+        "VERY_LIKELY" -> Right VeryLikely
+        x -> Left ("Unable to parse FaceAnnotationUnderExposedLikelihood from: " <> x)
 
-instance ToText FaceAnnotationUnderExposedLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationUnderExposedLikelihood where
+    toQueryParam = \case
         Unknown -> "UNKNOWN"
         VeryUnlikely -> "VERY_UNLIKELY"
         Unlikely -> "UNLIKELY"
@@ -91,18 +91,18 @@ data FaceAnnotationHeadwearLikelihood
 
 instance Hashable FaceAnnotationHeadwearLikelihood
 
-instance FromText FaceAnnotationHeadwearLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just FAHLUnknown
-        "VERY_UNLIKELY" -> Just FAHLVeryUnlikely
-        "UNLIKELY" -> Just FAHLUnlikely
-        "POSSIBLE" -> Just FAHLPossible
-        "LIKELY" -> Just FAHLLikely
-        "VERY_LIKELY" -> Just FAHLVeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationHeadwearLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FAHLUnknown
+        "VERY_UNLIKELY" -> Right FAHLVeryUnlikely
+        "UNLIKELY" -> Right FAHLUnlikely
+        "POSSIBLE" -> Right FAHLPossible
+        "LIKELY" -> Right FAHLLikely
+        "VERY_LIKELY" -> Right FAHLVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationHeadwearLikelihood from: " <> x)
 
-instance ToText FaceAnnotationHeadwearLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationHeadwearLikelihood where
+    toQueryParam = \case
         FAHLUnknown -> "UNKNOWN"
         FAHLVeryUnlikely -> "VERY_UNLIKELY"
         FAHLUnlikely -> "UNLIKELY"
@@ -140,18 +140,18 @@ data SafeSearchAnnotationAdult
 
 instance Hashable SafeSearchAnnotationAdult
 
-instance FromText SafeSearchAnnotationAdult where
-    fromText = \case
-        "UNKNOWN" -> Just SSAAUnknown
-        "VERY_UNLIKELY" -> Just SSAAVeryUnlikely
-        "UNLIKELY" -> Just SSAAUnlikely
-        "POSSIBLE" -> Just SSAAPossible
-        "LIKELY" -> Just SSAALikely
-        "VERY_LIKELY" -> Just SSAAVeryLikely
-        _ -> Nothing
+instance FromHttpApiData SafeSearchAnnotationAdult where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right SSAAUnknown
+        "VERY_UNLIKELY" -> Right SSAAVeryUnlikely
+        "UNLIKELY" -> Right SSAAUnlikely
+        "POSSIBLE" -> Right SSAAPossible
+        "LIKELY" -> Right SSAALikely
+        "VERY_LIKELY" -> Right SSAAVeryLikely
+        x -> Left ("Unable to parse SafeSearchAnnotationAdult from: " <> x)
 
-instance ToText SafeSearchAnnotationAdult where
-    toText = \case
+instance ToHttpApiData SafeSearchAnnotationAdult where
+    toQueryParam = \case
         SSAAUnknown -> "UNKNOWN"
         SSAAVeryUnlikely -> "VERY_UNLIKELY"
         SSAAUnlikely -> "UNLIKELY"
@@ -189,18 +189,18 @@ data FaceAnnotationAngerLikelihood
 
 instance Hashable FaceAnnotationAngerLikelihood
 
-instance FromText FaceAnnotationAngerLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just FAALUnknown
-        "VERY_UNLIKELY" -> Just FAALVeryUnlikely
-        "UNLIKELY" -> Just FAALUnlikely
-        "POSSIBLE" -> Just FAALPossible
-        "LIKELY" -> Just FAALLikely
-        "VERY_LIKELY" -> Just FAALVeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationAngerLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FAALUnknown
+        "VERY_UNLIKELY" -> Right FAALVeryUnlikely
+        "UNLIKELY" -> Right FAALUnlikely
+        "POSSIBLE" -> Right FAALPossible
+        "LIKELY" -> Right FAALLikely
+        "VERY_LIKELY" -> Right FAALVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationAngerLikelihood from: " <> x)
 
-instance ToText FaceAnnotationAngerLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationAngerLikelihood where
+    toQueryParam = \case
         FAALUnknown -> "UNKNOWN"
         FAALVeryUnlikely -> "VERY_UNLIKELY"
         FAALUnlikely -> "UNLIKELY"
@@ -238,18 +238,18 @@ data SafeSearchAnnotationMedical
 
 instance Hashable SafeSearchAnnotationMedical
 
-instance FromText SafeSearchAnnotationMedical where
-    fromText = \case
-        "UNKNOWN" -> Just SSAMUnknown
-        "VERY_UNLIKELY" -> Just SSAMVeryUnlikely
-        "UNLIKELY" -> Just SSAMUnlikely
-        "POSSIBLE" -> Just SSAMPossible
-        "LIKELY" -> Just SSAMLikely
-        "VERY_LIKELY" -> Just SSAMVeryLikely
-        _ -> Nothing
+instance FromHttpApiData SafeSearchAnnotationMedical where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right SSAMUnknown
+        "VERY_UNLIKELY" -> Right SSAMVeryUnlikely
+        "UNLIKELY" -> Right SSAMUnlikely
+        "POSSIBLE" -> Right SSAMPossible
+        "LIKELY" -> Right SSAMLikely
+        "VERY_LIKELY" -> Right SSAMVeryLikely
+        x -> Left ("Unable to parse SafeSearchAnnotationMedical from: " <> x)
 
-instance ToText SafeSearchAnnotationMedical where
-    toText = \case
+instance ToHttpApiData SafeSearchAnnotationMedical where
+    toQueryParam = \case
         SSAMUnknown -> "UNKNOWN"
         SSAMVeryUnlikely -> "VERY_UNLIKELY"
         SSAMUnlikely -> "UNLIKELY"
@@ -287,18 +287,18 @@ data FaceAnnotationBlurredLikelihood
 
 instance Hashable FaceAnnotationBlurredLikelihood
 
-instance FromText FaceAnnotationBlurredLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just FABLUnknown
-        "VERY_UNLIKELY" -> Just FABLVeryUnlikely
-        "UNLIKELY" -> Just FABLUnlikely
-        "POSSIBLE" -> Just FABLPossible
-        "LIKELY" -> Just FABLLikely
-        "VERY_LIKELY" -> Just FABLVeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationBlurredLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FABLUnknown
+        "VERY_UNLIKELY" -> Right FABLVeryUnlikely
+        "UNLIKELY" -> Right FABLUnlikely
+        "POSSIBLE" -> Right FABLPossible
+        "LIKELY" -> Right FABLLikely
+        "VERY_LIKELY" -> Right FABLVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationBlurredLikelihood from: " <> x)
 
-instance ToText FaceAnnotationBlurredLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationBlurredLikelihood where
+    toQueryParam = \case
         FABLUnknown -> "UNKNOWN"
         FABLVeryUnlikely -> "VERY_UNLIKELY"
         FABLUnlikely -> "UNLIKELY"
@@ -336,18 +336,18 @@ data SafeSearchAnnotationViolence
 
 instance Hashable SafeSearchAnnotationViolence
 
-instance FromText SafeSearchAnnotationViolence where
-    fromText = \case
-        "UNKNOWN" -> Just SSAVUnknown
-        "VERY_UNLIKELY" -> Just SSAVVeryUnlikely
-        "UNLIKELY" -> Just SSAVUnlikely
-        "POSSIBLE" -> Just SSAVPossible
-        "LIKELY" -> Just SSAVLikely
-        "VERY_LIKELY" -> Just SSAVVeryLikely
-        _ -> Nothing
+instance FromHttpApiData SafeSearchAnnotationViolence where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right SSAVUnknown
+        "VERY_UNLIKELY" -> Right SSAVVeryUnlikely
+        "UNLIKELY" -> Right SSAVUnlikely
+        "POSSIBLE" -> Right SSAVPossible
+        "LIKELY" -> Right SSAVLikely
+        "VERY_LIKELY" -> Right SSAVVeryLikely
+        x -> Left ("Unable to parse SafeSearchAnnotationViolence from: " <> x)
 
-instance ToText SafeSearchAnnotationViolence where
-    toText = \case
+instance ToHttpApiData SafeSearchAnnotationViolence where
+    toQueryParam = \case
         SSAVUnknown -> "UNKNOWN"
         SSAVVeryUnlikely -> "VERY_UNLIKELY"
         SSAVUnlikely -> "UNLIKELY"
@@ -393,20 +393,20 @@ data FeatureType
 
 instance Hashable FeatureType
 
-instance FromText FeatureType where
-    fromText = \case
-        "TYPE_UNSPECIFIED" -> Just TypeUnspecified
-        "FACE_DETECTION" -> Just FaceDetection
-        "LANDMARK_DETECTION" -> Just LandmarkDetection
-        "LOGO_DETECTION" -> Just LogoDetection
-        "LABEL_DETECTION" -> Just LabelDetection
-        "TEXT_DETECTION" -> Just TextDetection
-        "SAFE_SEARCH_DETECTION" -> Just SafeSearchDetection
-        "IMAGE_PROPERTIES" -> Just ImageProperties
-        _ -> Nothing
+instance FromHttpApiData FeatureType where
+    parseQueryParam = \case
+        "TYPE_UNSPECIFIED" -> Right TypeUnspecified
+        "FACE_DETECTION" -> Right FaceDetection
+        "LANDMARK_DETECTION" -> Right LandmarkDetection
+        "LOGO_DETECTION" -> Right LogoDetection
+        "LABEL_DETECTION" -> Right LabelDetection
+        "TEXT_DETECTION" -> Right TextDetection
+        "SAFE_SEARCH_DETECTION" -> Right SafeSearchDetection
+        "IMAGE_PROPERTIES" -> Right ImageProperties
+        x -> Left ("Unable to parse FeatureType from: " <> x)
 
-instance ToText FeatureType where
-    toText = \case
+instance ToHttpApiData FeatureType where
+    toQueryParam = \case
         TypeUnspecified -> "TYPE_UNSPECIFIED"
         FaceDetection -> "FACE_DETECTION"
         LandmarkDetection -> "LANDMARK_DETECTION"
@@ -533,47 +533,47 @@ data LandmarkType
 
 instance Hashable LandmarkType
 
-instance FromText LandmarkType where
-    fromText = \case
-        "UNKNOWN_LANDMARK" -> Just UnknownLandmark
-        "LEFT_EYE" -> Just LeftEye
-        "RIGHT_EYE" -> Just RightEye
-        "LEFT_OF_LEFT_EYEBROW" -> Just LeftOfLeftEyebrow
-        "RIGHT_OF_LEFT_EYEBROW" -> Just RightOfLeftEyebrow
-        "LEFT_OF_RIGHT_EYEBROW" -> Just LeftOfRightEyebrow
-        "RIGHT_OF_RIGHT_EYEBROW" -> Just RightOfRightEyebrow
-        "MIDPOINT_BETWEEN_EYES" -> Just MidpointBetweenEyes
-        "NOSE_TIP" -> Just NoseTip
-        "UPPER_LIP" -> Just UpperLip
-        "LOWER_LIP" -> Just LowerLip
-        "MOUTH_LEFT" -> Just MouthLeft
-        "MOUTH_RIGHT" -> Just MouthRight
-        "MOUTH_CENTER" -> Just MouthCenter
-        "NOSE_BOTTOM_RIGHT" -> Just NoseBottomRight
-        "NOSE_BOTTOM_LEFT" -> Just NoseBottomLeft
-        "NOSE_BOTTOM_CENTER" -> Just NoseBottomCenter
-        "LEFT_EYE_TOP_BOUNDARY" -> Just LeftEyeTopBoundary
-        "LEFT_EYE_RIGHT_CORNER" -> Just LeftEyeRightCorner
-        "LEFT_EYE_BOTTOM_BOUNDARY" -> Just LeftEyeBottomBoundary
-        "LEFT_EYE_LEFT_CORNER" -> Just LeftEyeLeftCorner
-        "RIGHT_EYE_TOP_BOUNDARY" -> Just RightEyeTopBoundary
-        "RIGHT_EYE_RIGHT_CORNER" -> Just RightEyeRightCorner
-        "RIGHT_EYE_BOTTOM_BOUNDARY" -> Just RightEyeBottomBoundary
-        "RIGHT_EYE_LEFT_CORNER" -> Just RightEyeLeftCorner
-        "LEFT_EYEBROW_UPPER_MIDPOINT" -> Just LeftEyebrowUpperMidpoint
-        "RIGHT_EYEBROW_UPPER_MIDPOINT" -> Just RightEyebrowUpperMidpoint
-        "LEFT_EAR_TRAGION" -> Just LeftEarTragion
-        "RIGHT_EAR_TRAGION" -> Just RightEarTragion
-        "LEFT_EYE_PUPIL" -> Just LeftEyePupil
-        "RIGHT_EYE_PUPIL" -> Just RightEyePupil
-        "FOREHEAD_GLABELLA" -> Just ForeheadGlabella
-        "CHIN_GNATHION" -> Just ChinGnathion
-        "CHIN_LEFT_GONION" -> Just ChinLeftGonion
-        "CHIN_RIGHT_GONION" -> Just ChinRightGonion
-        _ -> Nothing
+instance FromHttpApiData LandmarkType where
+    parseQueryParam = \case
+        "UNKNOWN_LANDMARK" -> Right UnknownLandmark
+        "LEFT_EYE" -> Right LeftEye
+        "RIGHT_EYE" -> Right RightEye
+        "LEFT_OF_LEFT_EYEBROW" -> Right LeftOfLeftEyebrow
+        "RIGHT_OF_LEFT_EYEBROW" -> Right RightOfLeftEyebrow
+        "LEFT_OF_RIGHT_EYEBROW" -> Right LeftOfRightEyebrow
+        "RIGHT_OF_RIGHT_EYEBROW" -> Right RightOfRightEyebrow
+        "MIDPOINT_BETWEEN_EYES" -> Right MidpointBetweenEyes
+        "NOSE_TIP" -> Right NoseTip
+        "UPPER_LIP" -> Right UpperLip
+        "LOWER_LIP" -> Right LowerLip
+        "MOUTH_LEFT" -> Right MouthLeft
+        "MOUTH_RIGHT" -> Right MouthRight
+        "MOUTH_CENTER" -> Right MouthCenter
+        "NOSE_BOTTOM_RIGHT" -> Right NoseBottomRight
+        "NOSE_BOTTOM_LEFT" -> Right NoseBottomLeft
+        "NOSE_BOTTOM_CENTER" -> Right NoseBottomCenter
+        "LEFT_EYE_TOP_BOUNDARY" -> Right LeftEyeTopBoundary
+        "LEFT_EYE_RIGHT_CORNER" -> Right LeftEyeRightCorner
+        "LEFT_EYE_BOTTOM_BOUNDARY" -> Right LeftEyeBottomBoundary
+        "LEFT_EYE_LEFT_CORNER" -> Right LeftEyeLeftCorner
+        "RIGHT_EYE_TOP_BOUNDARY" -> Right RightEyeTopBoundary
+        "RIGHT_EYE_RIGHT_CORNER" -> Right RightEyeRightCorner
+        "RIGHT_EYE_BOTTOM_BOUNDARY" -> Right RightEyeBottomBoundary
+        "RIGHT_EYE_LEFT_CORNER" -> Right RightEyeLeftCorner
+        "LEFT_EYEBROW_UPPER_MIDPOINT" -> Right LeftEyebrowUpperMidpoint
+        "RIGHT_EYEBROW_UPPER_MIDPOINT" -> Right RightEyebrowUpperMidpoint
+        "LEFT_EAR_TRAGION" -> Right LeftEarTragion
+        "RIGHT_EAR_TRAGION" -> Right RightEarTragion
+        "LEFT_EYE_PUPIL" -> Right LeftEyePupil
+        "RIGHT_EYE_PUPIL" -> Right RightEyePupil
+        "FOREHEAD_GLABELLA" -> Right ForeheadGlabella
+        "CHIN_GNATHION" -> Right ChinGnathion
+        "CHIN_LEFT_GONION" -> Right ChinLeftGonion
+        "CHIN_RIGHT_GONION" -> Right ChinRightGonion
+        x -> Left ("Unable to parse LandmarkType from: " <> x)
 
-instance ToText LandmarkType where
-    toText = \case
+instance ToHttpApiData LandmarkType where
+    toQueryParam = \case
         UnknownLandmark -> "UNKNOWN_LANDMARK"
         LeftEye -> "LEFT_EYE"
         RightEye -> "RIGHT_EYE"
@@ -628,14 +628,14 @@ data Xgafv
 
 instance Hashable Xgafv
 
-instance FromText Xgafv where
-    fromText = \case
-        "1" -> Just X1
-        "2" -> Just X2
-        _ -> Nothing
+instance FromHttpApiData Xgafv where
+    parseQueryParam = \case
+        "1" -> Right X1
+        "2" -> Right X2
+        x -> Left ("Unable to parse Xgafv from: " <> x)
 
-instance ToText Xgafv where
-    toText = \case
+instance ToHttpApiData Xgafv where
+    toQueryParam = \case
         X1 -> "1"
         X2 -> "2"
 
@@ -670,18 +670,18 @@ data SafeSearchAnnotationSpoof
 
 instance Hashable SafeSearchAnnotationSpoof
 
-instance FromText SafeSearchAnnotationSpoof where
-    fromText = \case
-        "UNKNOWN" -> Just SSASUnknown
-        "VERY_UNLIKELY" -> Just SSASVeryUnlikely
-        "UNLIKELY" -> Just SSASUnlikely
-        "POSSIBLE" -> Just SSASPossible
-        "LIKELY" -> Just SSASLikely
-        "VERY_LIKELY" -> Just SSASVeryLikely
-        _ -> Nothing
+instance FromHttpApiData SafeSearchAnnotationSpoof where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right SSASUnknown
+        "VERY_UNLIKELY" -> Right SSASVeryUnlikely
+        "UNLIKELY" -> Right SSASUnlikely
+        "POSSIBLE" -> Right SSASPossible
+        "LIKELY" -> Right SSASLikely
+        "VERY_LIKELY" -> Right SSASVeryLikely
+        x -> Left ("Unable to parse SafeSearchAnnotationSpoof from: " <> x)
 
-instance ToText SafeSearchAnnotationSpoof where
-    toText = \case
+instance ToHttpApiData SafeSearchAnnotationSpoof where
+    toQueryParam = \case
         SSASUnknown -> "UNKNOWN"
         SSASVeryUnlikely -> "VERY_UNLIKELY"
         SSASUnlikely -> "UNLIKELY"
@@ -719,18 +719,18 @@ data FaceAnnotationSurpriseLikelihood
 
 instance Hashable FaceAnnotationSurpriseLikelihood
 
-instance FromText FaceAnnotationSurpriseLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just FASLUnknown
-        "VERY_UNLIKELY" -> Just FASLVeryUnlikely
-        "UNLIKELY" -> Just FASLUnlikely
-        "POSSIBLE" -> Just FASLPossible
-        "LIKELY" -> Just FASLLikely
-        "VERY_LIKELY" -> Just FASLVeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationSurpriseLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FASLUnknown
+        "VERY_UNLIKELY" -> Right FASLVeryUnlikely
+        "UNLIKELY" -> Right FASLUnlikely
+        "POSSIBLE" -> Right FASLPossible
+        "LIKELY" -> Right FASLLikely
+        "VERY_LIKELY" -> Right FASLVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationSurpriseLikelihood from: " <> x)
 
-instance ToText FaceAnnotationSurpriseLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationSurpriseLikelihood where
+    toQueryParam = \case
         FASLUnknown -> "UNKNOWN"
         FASLVeryUnlikely -> "VERY_UNLIKELY"
         FASLUnlikely -> "UNLIKELY"
@@ -768,18 +768,18 @@ data FaceAnnotationSorrowLikelihood
 
 instance Hashable FaceAnnotationSorrowLikelihood
 
-instance FromText FaceAnnotationSorrowLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just FUnknown
-        "VERY_UNLIKELY" -> Just FVeryUnlikely
-        "UNLIKELY" -> Just FUnlikely
-        "POSSIBLE" -> Just FPossible
-        "LIKELY" -> Just FLikely
-        "VERY_LIKELY" -> Just FVeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationSorrowLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FUnknown
+        "VERY_UNLIKELY" -> Right FVeryUnlikely
+        "UNLIKELY" -> Right FUnlikely
+        "POSSIBLE" -> Right FPossible
+        "LIKELY" -> Right FLikely
+        "VERY_LIKELY" -> Right FVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationSorrowLikelihood from: " <> x)
 
-instance ToText FaceAnnotationSorrowLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationSorrowLikelihood where
+    toQueryParam = \case
         FUnknown -> "UNKNOWN"
         FVeryUnlikely -> "VERY_UNLIKELY"
         FUnlikely -> "UNLIKELY"
@@ -817,18 +817,18 @@ data FaceAnnotationJoyLikelihood
 
 instance Hashable FaceAnnotationJoyLikelihood
 
-instance FromText FaceAnnotationJoyLikelihood where
-    fromText = \case
-        "UNKNOWN" -> Just FAJLUnknown
-        "VERY_UNLIKELY" -> Just FAJLVeryUnlikely
-        "UNLIKELY" -> Just FAJLUnlikely
-        "POSSIBLE" -> Just FAJLPossible
-        "LIKELY" -> Just FAJLLikely
-        "VERY_LIKELY" -> Just FAJLVeryLikely
-        _ -> Nothing
+instance FromHttpApiData FaceAnnotationJoyLikelihood where
+    parseQueryParam = \case
+        "UNKNOWN" -> Right FAJLUnknown
+        "VERY_UNLIKELY" -> Right FAJLVeryUnlikely
+        "UNLIKELY" -> Right FAJLUnlikely
+        "POSSIBLE" -> Right FAJLPossible
+        "LIKELY" -> Right FAJLLikely
+        "VERY_LIKELY" -> Right FAJLVeryLikely
+        x -> Left ("Unable to parse FaceAnnotationJoyLikelihood from: " <> x)
 
-instance ToText FaceAnnotationJoyLikelihood where
-    toText = \case
+instance ToHttpApiData FaceAnnotationJoyLikelihood where
+    toQueryParam = \case
         FAJLUnknown -> "UNKNOWN"
         FAJLVeryUnlikely -> "VERY_UNLIKELY"
         FAJLUnlikely -> "UNLIKELY"

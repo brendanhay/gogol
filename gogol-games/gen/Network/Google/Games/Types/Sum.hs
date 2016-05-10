@@ -28,13 +28,13 @@ data PlayersListCollection
 
 instance Hashable PlayersListCollection
 
-instance FromText PlayersListCollection where
-    fromText = \case
-        "played_with" -> Just PlayedWith
-        _ -> Nothing
+instance FromHttpApiData PlayersListCollection where
+    parseQueryParam = \case
+        "played_with" -> Right PlayedWith
+        x -> Left ("Unable to parse PlayersListCollection from: " <> x)
 
-instance ToText PlayersListCollection where
-    toText = \case
+instance ToHttpApiData PlayersListCollection where
+    toQueryParam = \case
         PlayedWith -> "played_with"
 
 instance FromJSON PlayersListCollection where
@@ -58,15 +58,15 @@ data ScoresListCollection
 
 instance Hashable ScoresListCollection
 
-instance FromText ScoresListCollection where
-    fromText = \case
-        "PUBLIC" -> Just Public
-        "SOCIAL" -> Just Social
-        "SOCIAL_1P" -> Just Social1P
-        _ -> Nothing
+instance FromHttpApiData ScoresListCollection where
+    parseQueryParam = \case
+        "PUBLIC" -> Right Public
+        "SOCIAL" -> Right Social
+        "SOCIAL_1P" -> Right Social1P
+        x -> Left ("Unable to parse ScoresListCollection from: " <> x)
 
-instance ToText ScoresListCollection where
-    toText = \case
+instance ToHttpApiData ScoresListCollection where
+    toQueryParam = \case
         Public -> "PUBLIC"
         Social -> "SOCIAL"
         Social1P -> "SOCIAL_1P"
@@ -92,15 +92,15 @@ data ApplicationsGetPlatformType
 
 instance Hashable ApplicationsGetPlatformType
 
-instance FromText ApplicationsGetPlatformType where
-    fromText = \case
-        "ANDROID" -> Just Android
-        "IOS" -> Just Ios
-        "WEB_APP" -> Just WebApp
-        _ -> Nothing
+instance FromHttpApiData ApplicationsGetPlatformType where
+    parseQueryParam = \case
+        "ANDROID" -> Right Android
+        "IOS" -> Right Ios
+        "WEB_APP" -> Right WebApp
+        x -> Left ("Unable to parse ApplicationsGetPlatformType from: " <> x)
 
-instance ToText ApplicationsGetPlatformType where
-    toText = \case
+instance ToHttpApiData ApplicationsGetPlatformType where
+    toQueryParam = \case
         Android -> "ANDROID"
         Ios -> "IOS"
         WebApp -> "WEB_APP"
@@ -126,15 +126,15 @@ data ScoresListWindowCollection
 
 instance Hashable ScoresListWindowCollection
 
-instance FromText ScoresListWindowCollection where
-    fromText = \case
-        "PUBLIC" -> Just SLWCPublic
-        "SOCIAL" -> Just SLWCSocial
-        "SOCIAL_1P" -> Just SLWCSocial1P
-        _ -> Nothing
+instance FromHttpApiData ScoresListWindowCollection where
+    parseQueryParam = \case
+        "PUBLIC" -> Right SLWCPublic
+        "SOCIAL" -> Right SLWCSocial
+        "SOCIAL_1P" -> Right SLWCSocial1P
+        x -> Left ("Unable to parse ScoresListWindowCollection from: " <> x)
 
-instance ToText ScoresListWindowCollection where
-    toText = \case
+instance ToHttpApiData ScoresListWindowCollection where
+    toQueryParam = \case
         SLWCPublic -> "PUBLIC"
         SLWCSocial -> "SOCIAL"
         SLWCSocial1P -> "SOCIAL_1P"
@@ -160,15 +160,15 @@ data ScoresListWindowTimeSpan
 
 instance Hashable ScoresListWindowTimeSpan
 
-instance FromText ScoresListWindowTimeSpan where
-    fromText = \case
-        "ALL_TIME" -> Just AllTime
-        "DAILY" -> Just Daily
-        "WEEKLY" -> Just Weekly
-        _ -> Nothing
+instance FromHttpApiData ScoresListWindowTimeSpan where
+    parseQueryParam = \case
+        "ALL_TIME" -> Right AllTime
+        "DAILY" -> Right Daily
+        "WEEKLY" -> Right Weekly
+        x -> Left ("Unable to parse ScoresListWindowTimeSpan from: " <> x)
 
-instance ToText ScoresListWindowTimeSpan where
-    toText = \case
+instance ToHttpApiData ScoresListWindowTimeSpan where
+    toQueryParam = \case
         AllTime -> "ALL_TIME"
         Daily -> "DAILY"
         Weekly -> "WEEKLY"
@@ -198,16 +198,16 @@ data ScoresGetTimeSpan
 
 instance Hashable ScoresGetTimeSpan
 
-instance FromText ScoresGetTimeSpan where
-    fromText = \case
-        "ALL" -> Just SGTSAll
-        "ALL_TIME" -> Just SGTSAllTime
-        "DAILY" -> Just SGTSDaily
-        "WEEKLY" -> Just SGTSWeekly
-        _ -> Nothing
+instance FromHttpApiData ScoresGetTimeSpan where
+    parseQueryParam = \case
+        "ALL" -> Right SGTSAll
+        "ALL_TIME" -> Right SGTSAllTime
+        "DAILY" -> Right SGTSDaily
+        "WEEKLY" -> Right SGTSWeekly
+        x -> Left ("Unable to parse ScoresGetTimeSpan from: " <> x)
 
-instance ToText ScoresGetTimeSpan where
-    toText = \case
+instance ToHttpApiData ScoresGetTimeSpan where
+    toQueryParam = \case
         SGTSAll -> "ALL"
         SGTSAllTime -> "ALL_TIME"
         SGTSDaily -> "DAILY"
@@ -236,15 +236,15 @@ data ScoresGetIncludeRankType
 
 instance Hashable ScoresGetIncludeRankType
 
-instance FromText ScoresGetIncludeRankType where
-    fromText = \case
-        "ALL" -> Just SGIRTAll
-        "PUBLIC" -> Just SGIRTPublic
-        "SOCIAL" -> Just SGIRTSocial
-        _ -> Nothing
+instance FromHttpApiData ScoresGetIncludeRankType where
+    parseQueryParam = \case
+        "ALL" -> Right SGIRTAll
+        "PUBLIC" -> Right SGIRTPublic
+        "SOCIAL" -> Right SGIRTSocial
+        x -> Left ("Unable to parse ScoresGetIncludeRankType from: " <> x)
 
-instance ToText ScoresGetIncludeRankType where
-    toText = \case
+instance ToHttpApiData ScoresGetIncludeRankType where
+    toQueryParam = \case
         SGIRTAll -> "ALL"
         SGIRTPublic -> "PUBLIC"
         SGIRTSocial -> "SOCIAL"
@@ -270,15 +270,15 @@ data ScoresListTimeSpan
 
 instance Hashable ScoresListTimeSpan
 
-instance FromText ScoresListTimeSpan where
-    fromText = \case
-        "ALL_TIME" -> Just SLTSAllTime
-        "DAILY" -> Just SLTSDaily
-        "WEEKLY" -> Just SLTSWeekly
-        _ -> Nothing
+instance FromHttpApiData ScoresListTimeSpan where
+    parseQueryParam = \case
+        "ALL_TIME" -> Right SLTSAllTime
+        "DAILY" -> Right SLTSDaily
+        "WEEKLY" -> Right SLTSWeekly
+        x -> Left ("Unable to parse ScoresListTimeSpan from: " <> x)
 
-instance ToText ScoresListTimeSpan where
-    toText = \case
+instance ToHttpApiData ScoresListTimeSpan where
+    toQueryParam = \case
         SLTSAllTime -> "ALL_TIME"
         SLTSDaily -> "DAILY"
         SLTSWeekly -> "WEEKLY"
@@ -298,13 +298,13 @@ data MetagameListCategoriesByPlayerCollection
 
 instance Hashable MetagameListCategoriesByPlayerCollection
 
-instance FromText MetagameListCategoriesByPlayerCollection where
-    fromText = \case
-        "all" -> Just All
-        _ -> Nothing
+instance FromHttpApiData MetagameListCategoriesByPlayerCollection where
+    parseQueryParam = \case
+        "all" -> Right All
+        x -> Left ("Unable to parse MetagameListCategoriesByPlayerCollection from: " <> x)
 
-instance ToText MetagameListCategoriesByPlayerCollection where
-    toText = \case
+instance ToHttpApiData MetagameListCategoriesByPlayerCollection where
+    toQueryParam = \case
         All -> "all"
 
 instance FromJSON MetagameListCategoriesByPlayerCollection where
@@ -332,16 +332,16 @@ data AchievementsListState
 
 instance Hashable AchievementsListState
 
-instance FromText AchievementsListState where
-    fromText = \case
-        "ALL" -> Just ALSAll
-        "HIDDEN" -> Just ALSHidden
-        "REVEALED" -> Just ALSRevealed
-        "UNLOCKED" -> Just ALSUnlocked
-        _ -> Nothing
+instance FromHttpApiData AchievementsListState where
+    parseQueryParam = \case
+        "ALL" -> Right ALSAll
+        "HIDDEN" -> Right ALSHidden
+        "REVEALED" -> Right ALSRevealed
+        "UNLOCKED" -> Right ALSUnlocked
+        x -> Left ("Unable to parse AchievementsListState from: " <> x)
 
-instance ToText AchievementsListState where
-    toText = \case
+instance ToHttpApiData AchievementsListState where
+    toQueryParam = \case
         ALSAll -> "ALL"
         ALSHidden -> "HIDDEN"
         ALSRevealed -> "REVEALED"

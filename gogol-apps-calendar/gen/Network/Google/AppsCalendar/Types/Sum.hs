@@ -32,14 +32,14 @@ data EventsListOrderBy
 
 instance Hashable EventsListOrderBy
 
-instance FromText EventsListOrderBy where
-    fromText = \case
-        "startTime" -> Just StartTime
-        "updated" -> Just Updated
-        _ -> Nothing
+instance FromHttpApiData EventsListOrderBy where
+    parseQueryParam = \case
+        "startTime" -> Right StartTime
+        "updated" -> Right Updated
+        x -> Left ("Unable to parse EventsListOrderBy from: " <> x)
 
-instance ToText EventsListOrderBy where
-    toText = \case
+instance ToHttpApiData EventsListOrderBy where
+    toQueryParam = \case
         StartTime -> "startTime"
         Updated -> "updated"
 
@@ -68,16 +68,16 @@ data CalendarListListMinAccessRole
 
 instance Hashable CalendarListListMinAccessRole
 
-instance FromText CalendarListListMinAccessRole where
-    fromText = \case
-        "freeBusyReader" -> Just FreeBusyReader
-        "owner" -> Just Owner
-        "reader" -> Just Reader
-        "writer" -> Just Writer
-        _ -> Nothing
+instance FromHttpApiData CalendarListListMinAccessRole where
+    parseQueryParam = \case
+        "freeBusyReader" -> Right FreeBusyReader
+        "owner" -> Right Owner
+        "reader" -> Right Reader
+        "writer" -> Right Writer
+        x -> Left ("Unable to parse CalendarListListMinAccessRole from: " <> x)
 
-instance ToText CalendarListListMinAccessRole where
-    toText = \case
+instance ToHttpApiData CalendarListListMinAccessRole where
+    toQueryParam = \case
         FreeBusyReader -> "freeBusyReader"
         Owner -> "owner"
         Reader -> "reader"
@@ -103,14 +103,14 @@ data EventsWatchOrderBy
 
 instance Hashable EventsWatchOrderBy
 
-instance FromText EventsWatchOrderBy where
-    fromText = \case
-        "startTime" -> Just EWOBStartTime
-        "updated" -> Just EWOBUpdated
-        _ -> Nothing
+instance FromHttpApiData EventsWatchOrderBy where
+    parseQueryParam = \case
+        "startTime" -> Right EWOBStartTime
+        "updated" -> Right EWOBUpdated
+        x -> Left ("Unable to parse EventsWatchOrderBy from: " <> x)
 
-instance ToText EventsWatchOrderBy where
-    toText = \case
+instance ToHttpApiData EventsWatchOrderBy where
+    toQueryParam = \case
         EWOBStartTime -> "startTime"
         EWOBUpdated -> "updated"
 
@@ -139,16 +139,16 @@ data CalendarListWatchMinAccessRole
 
 instance Hashable CalendarListWatchMinAccessRole
 
-instance FromText CalendarListWatchMinAccessRole where
-    fromText = \case
-        "freeBusyReader" -> Just CLWMARFreeBusyReader
-        "owner" -> Just CLWMAROwner
-        "reader" -> Just CLWMARReader
-        "writer" -> Just CLWMARWriter
-        _ -> Nothing
+instance FromHttpApiData CalendarListWatchMinAccessRole where
+    parseQueryParam = \case
+        "freeBusyReader" -> Right CLWMARFreeBusyReader
+        "owner" -> Right CLWMAROwner
+        "reader" -> Right CLWMARReader
+        "writer" -> Right CLWMARWriter
+        x -> Left ("Unable to parse CalendarListWatchMinAccessRole from: " <> x)
 
-instance ToText CalendarListWatchMinAccessRole where
-    toText = \case
+instance ToHttpApiData CalendarListWatchMinAccessRole where
+    toQueryParam = \case
         CLWMARFreeBusyReader -> "freeBusyReader"
         CLWMAROwner -> "owner"
         CLWMARReader -> "reader"

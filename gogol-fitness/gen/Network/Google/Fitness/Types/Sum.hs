@@ -35,17 +35,17 @@ data AggregateBucketType
 
 instance Hashable AggregateBucketType
 
-instance FromText AggregateBucketType where
-    fromText = \case
-        "activitySegment" -> Just ABTActivitySegment
-        "activityType" -> Just ABTActivityType
-        "session" -> Just ABTSession
-        "time" -> Just ABTTime
-        "unknown" -> Just ABTUnknown
-        _ -> Nothing
+instance FromHttpApiData AggregateBucketType where
+    parseQueryParam = \case
+        "activitySegment" -> Right ABTActivitySegment
+        "activityType" -> Right ABTActivityType
+        "session" -> Right ABTSession
+        "time" -> Right ABTTime
+        "unknown" -> Right ABTUnknown
+        x -> Left ("Unable to parse AggregateBucketType from: " <> x)
 
-instance ToText AggregateBucketType where
-    toText = \case
+instance ToHttpApiData AggregateBucketType where
+    toQueryParam = \case
         ABTActivitySegment -> "activitySegment"
         ABTActivityType -> "activityType"
         ABTSession -> "session"
@@ -69,14 +69,14 @@ data DataSourceType
 
 instance Hashable DataSourceType
 
-instance FromText DataSourceType where
-    fromText = \case
-        "derived" -> Just Derived
-        "raw" -> Just Raw
-        _ -> Nothing
+instance FromHttpApiData DataSourceType where
+    parseQueryParam = \case
+        "derived" -> Right Derived
+        "raw" -> Right Raw
+        x -> Left ("Unable to parse DataSourceType from: " <> x)
 
-instance ToText DataSourceType where
-    toText = \case
+instance ToHttpApiData DataSourceType where
+    toQueryParam = \case
         Derived -> "derived"
         Raw -> "raw"
 
@@ -104,18 +104,18 @@ data DeviceType
 
 instance Hashable DeviceType
 
-instance FromText DeviceType where
-    fromText = \case
-        "chestStrap" -> Just ChestStrap
-        "phone" -> Just Phone
-        "scale" -> Just Scale
-        "tablet" -> Just Tablet
-        "unknown" -> Just Unknown
-        "watch" -> Just Watch
-        _ -> Nothing
+instance FromHttpApiData DeviceType where
+    parseQueryParam = \case
+        "chestStrap" -> Right ChestStrap
+        "phone" -> Right Phone
+        "scale" -> Right Scale
+        "tablet" -> Right Tablet
+        "unknown" -> Right Unknown
+        "watch" -> Right Watch
+        x -> Left ("Unable to parse DeviceType from: " <> x)
 
-instance ToText DeviceType where
-    toText = \case
+instance ToHttpApiData DeviceType where
+    toQueryParam = \case
         ChestStrap -> "chestStrap"
         Phone -> "phone"
         Scale -> "scale"
@@ -149,19 +149,19 @@ data DataTypeFieldFormat
 
 instance Hashable DataTypeFieldFormat
 
-instance FromText DataTypeFieldFormat where
-    fromText = \case
-        "blob" -> Just Blob
-        "floatList" -> Just FloatList
-        "floatPoint" -> Just FloatPoint
-        "integer" -> Just Integer
-        "integerList" -> Just IntegerList
-        "map" -> Just Map
-        "string" -> Just String
-        _ -> Nothing
+instance FromHttpApiData DataTypeFieldFormat where
+    parseQueryParam = \case
+        "blob" -> Right Blob
+        "floatList" -> Right FloatList
+        "floatPoint" -> Right FloatPoint
+        "integer" -> Right Integer
+        "integerList" -> Right IntegerList
+        "map" -> Right Map
+        "string" -> Right String
+        x -> Left ("Unable to parse DataTypeFieldFormat from: " <> x)
 
-instance ToText DataTypeFieldFormat where
-    toText = \case
+instance ToHttpApiData DataTypeFieldFormat where
+    toQueryParam = \case
         Blob -> "blob"
         FloatList -> "floatList"
         FloatPoint -> "floatPoint"

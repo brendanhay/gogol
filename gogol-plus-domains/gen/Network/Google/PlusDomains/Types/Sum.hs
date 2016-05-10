@@ -26,13 +26,13 @@ data MediaInsertCollection
 
 instance Hashable MediaInsertCollection
 
-instance FromText MediaInsertCollection where
-    fromText = \case
-        "cloud" -> Just Cloud
-        _ -> Nothing
+instance FromHttpApiData MediaInsertCollection where
+    parseQueryParam = \case
+        "cloud" -> Right Cloud
+        x -> Left ("Unable to parse MediaInsertCollection from: " <> x)
 
-instance ToText MediaInsertCollection where
-    toText = \case
+instance ToHttpApiData MediaInsertCollection where
+    toQueryParam = \case
         Cloud -> "cloud"
 
 instance FromJSON MediaInsertCollection where
@@ -56,15 +56,15 @@ data PeopleListByActivityCollection
 
 instance Hashable PeopleListByActivityCollection
 
-instance FromText PeopleListByActivityCollection where
-    fromText = \case
-        "plusoners" -> Just Plusoners
-        "resharers" -> Just Resharers
-        "sharedto" -> Just Sharedto
-        _ -> Nothing
+instance FromHttpApiData PeopleListByActivityCollection where
+    parseQueryParam = \case
+        "plusoners" -> Right Plusoners
+        "resharers" -> Right Resharers
+        "sharedto" -> Right Sharedto
+        x -> Left ("Unable to parse PeopleListByActivityCollection from: " <> x)
 
-instance ToText PeopleListByActivityCollection where
-    toText = \case
+instance ToHttpApiData PeopleListByActivityCollection where
+    toQueryParam = \case
         Plusoners -> "plusoners"
         Resharers -> "resharers"
         Sharedto -> "sharedto"
@@ -87,14 +87,14 @@ data PeopleListOrderBy
 
 instance Hashable PeopleListOrderBy
 
-instance FromText PeopleListOrderBy where
-    fromText = \case
-        "alphabetical" -> Just Alphabetical
-        "best" -> Just Best
-        _ -> Nothing
+instance FromHttpApiData PeopleListOrderBy where
+    parseQueryParam = \case
+        "alphabetical" -> Right Alphabetical
+        "best" -> Right Best
+        x -> Left ("Unable to parse PeopleListOrderBy from: " <> x)
 
-instance ToText PeopleListOrderBy where
-    toText = \case
+instance ToHttpApiData PeopleListOrderBy where
+    toQueryParam = \case
         Alphabetical -> "alphabetical"
         Best -> "best"
 
@@ -114,13 +114,13 @@ data ActivitiesListCollection
 
 instance Hashable ActivitiesListCollection
 
-instance FromText ActivitiesListCollection where
-    fromText = \case
-        "user" -> Just User
-        _ -> Nothing
+instance FromHttpApiData ActivitiesListCollection where
+    parseQueryParam = \case
+        "user" -> Right User
+        x -> Left ("Unable to parse ActivitiesListCollection from: " <> x)
 
-instance ToText ActivitiesListCollection where
-    toText = \case
+instance ToHttpApiData ActivitiesListCollection where
+    toQueryParam = \case
         User -> "user"
 
 instance FromJSON ActivitiesListCollection where
@@ -138,13 +138,13 @@ data PeopleListCollection
 
 instance Hashable PeopleListCollection
 
-instance FromText PeopleListCollection where
-    fromText = \case
-        "circled" -> Just Circled
-        _ -> Nothing
+instance FromHttpApiData PeopleListCollection where
+    parseQueryParam = \case
+        "circled" -> Right Circled
+        x -> Left ("Unable to parse PeopleListCollection from: " <> x)
 
-instance ToText PeopleListCollection where
-    toText = \case
+instance ToHttpApiData PeopleListCollection where
+    toQueryParam = \case
         Circled -> "circled"
 
 instance FromJSON PeopleListCollection where
@@ -165,14 +165,14 @@ data CommentsListSortOrder
 
 instance Hashable CommentsListSortOrder
 
-instance FromText CommentsListSortOrder where
-    fromText = \case
-        "ascending" -> Just Ascending
-        "descending" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData CommentsListSortOrder where
+    parseQueryParam = \case
+        "ascending" -> Right Ascending
+        "descending" -> Right Descending
+        x -> Left ("Unable to parse CommentsListSortOrder from: " <> x)
 
-instance ToText CommentsListSortOrder where
-    toText = \case
+instance ToHttpApiData CommentsListSortOrder where
+    toQueryParam = \case
         Ascending -> "ascending"
         Descending -> "descending"
 

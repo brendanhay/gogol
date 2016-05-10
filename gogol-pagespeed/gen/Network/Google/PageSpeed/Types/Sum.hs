@@ -30,14 +30,14 @@ data PagespeedAPIRunPagespeedStrategy
 
 instance Hashable PagespeedAPIRunPagespeedStrategy
 
-instance FromText PagespeedAPIRunPagespeedStrategy where
-    fromText = \case
-        "desktop" -> Just Desktop
-        "mobile" -> Just Mobile
-        _ -> Nothing
+instance FromHttpApiData PagespeedAPIRunPagespeedStrategy where
+    parseQueryParam = \case
+        "desktop" -> Right Desktop
+        "mobile" -> Right Mobile
+        x -> Left ("Unable to parse PagespeedAPIRunPagespeedStrategy from: " <> x)
 
-instance ToText PagespeedAPIRunPagespeedStrategy where
-    toText = \case
+instance ToHttpApiData PagespeedAPIRunPagespeedStrategy where
+    toQueryParam = \case
         Desktop -> "desktop"
         Mobile -> "mobile"
 

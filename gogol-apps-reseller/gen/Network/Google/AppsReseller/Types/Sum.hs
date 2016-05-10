@@ -36,16 +36,16 @@ data SubscriptionsDeleteDeletionType
 
 instance Hashable SubscriptionsDeleteDeletionType
 
-instance FromText SubscriptionsDeleteDeletionType where
-    fromText = \case
-        "cancel" -> Just Cancel
-        "downgrade" -> Just Downgrade
-        "suspend" -> Just Suspend
-        "transfer_to_direct" -> Just TransferToDirect
-        _ -> Nothing
+instance FromHttpApiData SubscriptionsDeleteDeletionType where
+    parseQueryParam = \case
+        "cancel" -> Right Cancel
+        "downgrade" -> Right Downgrade
+        "suspend" -> Right Suspend
+        "transfer_to_direct" -> Right TransferToDirect
+        x -> Left ("Unable to parse SubscriptionsDeleteDeletionType from: " <> x)
 
-instance ToText SubscriptionsDeleteDeletionType where
-    toText = \case
+instance ToHttpApiData SubscriptionsDeleteDeletionType where
+    toQueryParam = \case
         Cancel -> "cancel"
         Downgrade -> "downgrade"
         Suspend -> "suspend"

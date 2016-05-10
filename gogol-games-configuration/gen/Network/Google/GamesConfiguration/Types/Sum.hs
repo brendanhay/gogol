@@ -30,14 +30,14 @@ data ImageConfigurationsUploadImageType
 
 instance Hashable ImageConfigurationsUploadImageType
 
-instance FromText ImageConfigurationsUploadImageType where
-    fromText = \case
-        "ACHIEVEMENT_ICON" -> Just AchievementIcon
-        "LEADERBOARD_ICON" -> Just LeaderboardIcon
-        _ -> Nothing
+instance FromHttpApiData ImageConfigurationsUploadImageType where
+    parseQueryParam = \case
+        "ACHIEVEMENT_ICON" -> Right AchievementIcon
+        "LEADERBOARD_ICON" -> Right LeaderboardIcon
+        x -> Left ("Unable to parse ImageConfigurationsUploadImageType from: " <> x)
 
-instance ToText ImageConfigurationsUploadImageType where
-    toText = \case
+instance ToHttpApiData ImageConfigurationsUploadImageType where
+    toQueryParam = \case
         AchievementIcon -> "ACHIEVEMENT_ICON"
         LeaderboardIcon -> "LEADERBOARD_ICON"
 

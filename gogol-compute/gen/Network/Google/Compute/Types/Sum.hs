@@ -31,14 +31,14 @@ data SchedulingOnHostMaintenance
 
 instance Hashable SchedulingOnHostMaintenance
 
-instance FromText SchedulingOnHostMaintenance where
-    fromText = \case
-        "MIGRATE" -> Just Migrate
-        "TERMINATE" -> Just Terminate
-        _ -> Nothing
+instance FromHttpApiData SchedulingOnHostMaintenance where
+    parseQueryParam = \case
+        "MIGRATE" -> Right Migrate
+        "TERMINATE" -> Right Terminate
+        x -> Left ("Unable to parse SchedulingOnHostMaintenance from: " <> x)
 
-instance ToText SchedulingOnHostMaintenance where
-    toText = \case
+instance ToHttpApiData SchedulingOnHostMaintenance where
+    toQueryParam = \case
         Migrate -> "MIGRATE"
         Terminate -> "TERMINATE"
 
@@ -62,15 +62,15 @@ data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
 
 instance Hashable AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
 
-instance FromText AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
-    fromText = \case
-        "DELTA_PER_MINUTE" -> Just DeltaPerMinute
-        "DELTA_PER_SECOND" -> Just DeltaPerSecond
-        "GAUGE" -> Just Gauge
-        _ -> Nothing
+instance FromHttpApiData AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
+    parseQueryParam = \case
+        "DELTA_PER_MINUTE" -> Right DeltaPerMinute
+        "DELTA_PER_SECOND" -> Right DeltaPerSecond
+        "GAUGE" -> Right Gauge
+        x -> Left ("Unable to parse AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType from: " <> x)
 
-instance ToText AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
-    toText = \case
+instance ToHttpApiData AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType where
+    toQueryParam = \case
         DeltaPerMinute -> "DELTA_PER_MINUTE"
         DeltaPerSecond -> "DELTA_PER_SECOND"
         Gauge -> "GAUGE"
@@ -118,27 +118,27 @@ data OperationWarningsItemCode
 
 instance Hashable OperationWarningsItemCode
 
-instance FromText OperationWarningsItemCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just CleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just InjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just NextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just NextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just NextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just NextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just NextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just NotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just NoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just RequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just ResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just SingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just Unreachable
-        _ -> Nothing
+instance FromHttpApiData OperationWarningsItemCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right CleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right DeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right InjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right RequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right ResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right SingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right Unreachable
+        x -> Left ("Unable to parse OperationWarningsItemCode from: " <> x)
 
-instance ToText OperationWarningsItemCode where
-    toText = \case
+instance ToHttpApiData OperationWarningsItemCode where
+    toQueryParam = \case
         CleanupFailed -> "CLEANUP_FAILED"
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -172,14 +172,14 @@ data BackendServiceProtocol
 
 instance Hashable BackendServiceProtocol
 
-instance FromText BackendServiceProtocol where
-    fromText = \case
-        "HTTP" -> Just HTTP
-        "HTTPS" -> Just HTTPS
-        _ -> Nothing
+instance FromHttpApiData BackendServiceProtocol where
+    parseQueryParam = \case
+        "HTTP" -> Right HTTP
+        "HTTPS" -> Right HTTPS
+        x -> Left ("Unable to parse BackendServiceProtocol from: " <> x)
 
-instance ToText BackendServiceProtocol where
-    toText = \case
+instance ToHttpApiData BackendServiceProtocol where
+    toQueryParam = \case
         HTTP -> "HTTP"
         HTTPS -> "HTTPS"
 
@@ -200,14 +200,14 @@ data AttachedDiskType
 
 instance Hashable AttachedDiskType
 
-instance FromText AttachedDiskType where
-    fromText = \case
-        "PERSISTENT" -> Just Persistent
-        "SCRATCH" -> Just Scratch
-        _ -> Nothing
+instance FromHttpApiData AttachedDiskType where
+    parseQueryParam = \case
+        "PERSISTENT" -> Right Persistent
+        "SCRATCH" -> Right Scratch
+        x -> Left ("Unable to parse AttachedDiskType from: " <> x)
 
-instance ToText AttachedDiskType where
-    toText = \case
+instance ToHttpApiData AttachedDiskType where
+    toQueryParam = \case
         Persistent -> "PERSISTENT"
         Scratch -> "SCRATCH"
 
@@ -226,13 +226,13 @@ data ImageSourceType
 
 instance Hashable ImageSourceType
 
-instance FromText ImageSourceType where
-    fromText = \case
-        "RAW" -> Just Raw
-        _ -> Nothing
+instance FromHttpApiData ImageSourceType where
+    parseQueryParam = \case
+        "RAW" -> Right Raw
+        x -> Left ("Unable to parse ImageSourceType from: " <> x)
 
-instance ToText ImageSourceType where
-    toText = \case
+instance ToHttpApiData ImageSourceType where
+    toQueryParam = \case
         Raw -> "RAW"
 
 instance FromJSON ImageSourceType where
@@ -278,27 +278,27 @@ data ForwardingRulesScopedListWarningCode
 
 instance Hashable ForwardingRulesScopedListWarningCode
 
-instance FromText ForwardingRulesScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just FRSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just FRSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just FRSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just FRSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just FRSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just FRSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just FRSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just FRSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just FRSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just FRSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just FRSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just FRSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just FRSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just FRSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just FRSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData ForwardingRulesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right FRSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right FRSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right FRSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right FRSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right FRSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right FRSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right FRSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right FRSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right FRSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right FRSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right FRSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right FRSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right FRSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right FRSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right FRSLWCUnreachable
+        x -> Left ("Unable to parse ForwardingRulesScopedListWarningCode from: " <> x)
 
-instance ToText ForwardingRulesScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData ForwardingRulesScopedListWarningCode where
+    toQueryParam = \case
         FRSLWCCleanupFailed -> "CLEANUP_FAILED"
         FRSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         FRSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -358,27 +358,27 @@ data OperationsScopedListWarningCode
 
 instance Hashable OperationsScopedListWarningCode
 
-instance FromText OperationsScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just OSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just OSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just OSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just OSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just OSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just OSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just OSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just OSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just OSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just OSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just OSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just OSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just OSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just OSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just OSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData OperationsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right OSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right OSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right OSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right OSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right OSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right OSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right OSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right OSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right OSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right OSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right OSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right OSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right OSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right OSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right OSLWCUnreachable
+        x -> Left ("Unable to parse OperationsScopedListWarningCode from: " <> x)
 
-instance ToText OperationsScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData OperationsScopedListWarningCode where
+    toQueryParam = \case
         OSLWCCleanupFailed -> "CLEANUP_FAILED"
         OSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         OSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -438,27 +438,27 @@ data DisksScopedListWarningCode
 
 instance Hashable DisksScopedListWarningCode
 
-instance FromText DisksScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just DSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just DSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just DSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just DSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just DSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just DSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just DSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just DSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just DSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just DSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just DSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just DSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just DSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just DSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData DisksScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right DSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right DSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right DSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right DSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right DSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right DSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right DSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right DSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right DSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right DSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right DSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right DSLWCUnreachable
+        x -> Left ("Unable to parse DisksScopedListWarningCode from: " <> x)
 
-instance ToText DisksScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData DisksScopedListWarningCode where
+    toQueryParam = \case
         DSLWCCleanupFailed -> "CLEANUP_FAILED"
         DSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -518,27 +518,27 @@ data InstanceGroupManagersScopedListWarningCode
 
 instance Hashable InstanceGroupManagersScopedListWarningCode
 
-instance FromText InstanceGroupManagersScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just IGMSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just IGMSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just IGMSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just IGMSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just IGMSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just IGMSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just IGMSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just IGMSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just IGMSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just IGMSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just IGMSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just IGMSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just IGMSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just IGMSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just IGMSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData InstanceGroupManagersScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right IGMSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right IGMSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right IGMSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right IGMSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGMSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGMSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right IGMSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right IGMSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right IGMSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right IGMSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right IGMSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right IGMSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right IGMSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right IGMSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right IGMSLWCUnreachable
+        x -> Left ("Unable to parse InstanceGroupManagersScopedListWarningCode from: " <> x)
 
-instance ToText InstanceGroupManagersScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData InstanceGroupManagersScopedListWarningCode where
+    toQueryParam = \case
         IGMSLWCCleanupFailed -> "CLEANUP_FAILED"
         IGMSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         IGMSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -598,27 +598,27 @@ data TargetPoolsScopedListWarningCode
 
 instance Hashable TargetPoolsScopedListWarningCode
 
-instance FromText TargetPoolsScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just TPSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just TPSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TPSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just TPSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just TPSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just TPSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just TPSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just TPSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just TPSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just TPSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just TPSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just TPSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just TPSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just TPSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just TPSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData TargetPoolsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right TPSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right TPSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TPSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right TPSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TPSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TPSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right TPSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right TPSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right TPSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right TPSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right TPSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right TPSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right TPSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right TPSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right TPSLWCUnreachable
+        x -> Left ("Unable to parse TargetPoolsScopedListWarningCode from: " <> x)
 
-instance ToText TargetPoolsScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData TargetPoolsScopedListWarningCode where
+    toQueryParam = \case
         TPSLWCCleanupFailed -> "CLEANUP_FAILED"
         TPSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TPSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -655,16 +655,16 @@ data TargetVPNGatewayStatus
 
 instance Hashable TargetVPNGatewayStatus
 
-instance FromText TargetVPNGatewayStatus where
-    fromText = \case
-        "CREATING" -> Just Creating
-        "DELETING" -> Just Deleting
-        "FAILED" -> Just Failed
-        "READY" -> Just Ready
-        _ -> Nothing
+instance FromHttpApiData TargetVPNGatewayStatus where
+    parseQueryParam = \case
+        "CREATING" -> Right Creating
+        "DELETING" -> Right Deleting
+        "FAILED" -> Right Failed
+        "READY" -> Right Ready
+        x -> Left ("Unable to parse TargetVPNGatewayStatus from: " <> x)
 
-instance ToText TargetVPNGatewayStatus where
-    toText = \case
+instance ToHttpApiData TargetVPNGatewayStatus where
+    toQueryParam = \case
         Creating -> "CREATING"
         Deleting -> "DELETING"
         Failed -> "FAILED"
@@ -693,17 +693,17 @@ data SnapshotStatus
 
 instance Hashable SnapshotStatus
 
-instance FromText SnapshotStatus where
-    fromText = \case
-        "CREATING" -> Just SSCreating
-        "DELETING" -> Just SSDeleting
-        "FAILED" -> Just SSFailed
-        "READY" -> Just SSReady
-        "UPLOADING" -> Just SSUploading
-        _ -> Nothing
+instance FromHttpApiData SnapshotStatus where
+    parseQueryParam = \case
+        "CREATING" -> Right SSCreating
+        "DELETING" -> Right SSDeleting
+        "FAILED" -> Right SSFailed
+        "READY" -> Right SSReady
+        "UPLOADING" -> Right SSUploading
+        x -> Left ("Unable to parse SnapshotStatus from: " <> x)
 
-instance ToText SnapshotStatus where
-    toText = \case
+instance ToHttpApiData SnapshotStatus where
+    toQueryParam = \case
         SSCreating -> "CREATING"
         SSDeleting -> "DELETING"
         SSFailed -> "FAILED"
@@ -753,27 +753,27 @@ data TargetInstancesScopedListWarningCode
 
 instance Hashable TargetInstancesScopedListWarningCode
 
-instance FromText TargetInstancesScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just TISLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just TISLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TISLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just TISLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just TISLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just TISLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just TISLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just TISLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just TISLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just TISLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just TISLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just TISLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just TISLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just TISLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just TISLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData TargetInstancesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right TISLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right TISLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TISLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right TISLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TISLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TISLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right TISLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right TISLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right TISLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right TISLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right TISLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right TISLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right TISLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right TISLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right TISLWCUnreachable
+        x -> Left ("Unable to parse TargetInstancesScopedListWarningCode from: " <> x)
 
-instance ToText TargetInstancesScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData TargetInstancesScopedListWarningCode where
+    toQueryParam = \case
         TISLWCCleanupFailed -> "CLEANUP_FAILED"
         TISLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TISLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -833,27 +833,27 @@ data RouteWarningsItemCode
 
 instance Hashable RouteWarningsItemCode
 
-instance FromText RouteWarningsItemCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just RWICCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just RWICDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just RWICDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just RWICInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just RWICNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just RWICNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just RWICNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just RWICNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just RWICNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just RWICNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just RWICNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just RWICRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just RWICResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just RWICSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just RWICUnreachable
-        _ -> Nothing
+instance FromHttpApiData RouteWarningsItemCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right RWICCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right RWICDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right RWICDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right RWICInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right RWICNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right RWICNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right RWICNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right RWICNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right RWICNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right RWICNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right RWICNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right RWICRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right RWICResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right RWICSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right RWICUnreachable
+        x -> Left ("Unable to parse RouteWarningsItemCode from: " <> x)
 
-instance ToText RouteWarningsItemCode where
-    toText = \case
+instance ToHttpApiData RouteWarningsItemCode where
+    toQueryParam = \case
         RWICCleanupFailed -> "CLEANUP_FAILED"
         RWICDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         RWICDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -889,14 +889,14 @@ data SnapshotStorageBytesStatus
 
 instance Hashable SnapshotStorageBytesStatus
 
-instance FromText SnapshotStorageBytesStatus where
-    fromText = \case
-        "UPDATING" -> Just Updating
-        "UP_TO_DATE" -> Just UpToDate
-        _ -> Nothing
+instance FromHttpApiData SnapshotStorageBytesStatus where
+    parseQueryParam = \case
+        "UPDATING" -> Right Updating
+        "UP_TO_DATE" -> Right UpToDate
+        x -> Left ("Unable to parse SnapshotStorageBytesStatus from: " <> x)
 
-instance ToText SnapshotStorageBytesStatus where
-    toText = \case
+instance ToHttpApiData SnapshotStorageBytesStatus where
+    toQueryParam = \case
         Updating -> "UPDATING"
         UpToDate -> "UP_TO_DATE"
 
@@ -943,27 +943,27 @@ data AddressesScopedListWarningCode
 
 instance Hashable AddressesScopedListWarningCode
 
-instance FromText AddressesScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just ASLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just ASLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ASLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just ASLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just ASLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just ASLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just ASLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just ASLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just ASLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just ASLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just ASLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just ASLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just ASLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just ASLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just ASLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData AddressesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right ASLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right ASLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ASLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right ASLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ASLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ASLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right ASLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right ASLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right ASLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right ASLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right ASLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right ASLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right ASLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right ASLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right ASLWCUnreachable
+        x -> Left ("Unable to parse AddressesScopedListWarningCode from: " <> x)
 
-instance ToText AddressesScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData AddressesScopedListWarningCode where
+    toQueryParam = \case
         ASLWCCleanupFailed -> "CLEANUP_FAILED"
         ASLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ASLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -1001,15 +1001,15 @@ data ImageStatus
 
 instance Hashable ImageStatus
 
-instance FromText ImageStatus where
-    fromText = \case
-        "FAILED" -> Just ISFailed
-        "PENDING" -> Just ISPending
-        "READY" -> Just ISReady
-        _ -> Nothing
+instance FromHttpApiData ImageStatus where
+    parseQueryParam = \case
+        "FAILED" -> Right ISFailed
+        "PENDING" -> Right ISPending
+        "READY" -> Right ISReady
+        x -> Left ("Unable to parse ImageStatus from: " <> x)
 
-instance ToText ImageStatus where
-    toText = \case
+instance ToHttpApiData ImageStatus where
+    toQueryParam = \case
         ISFailed -> "FAILED"
         ISPending -> "PENDING"
         ISReady -> "READY"
@@ -1030,14 +1030,14 @@ data HealthStatusHealthState
 
 instance Hashable HealthStatusHealthState
 
-instance FromText HealthStatusHealthState where
-    fromText = \case
-        "HEALTHY" -> Just Healthy
-        "UNHEALTHY" -> Just Unhealthy
-        _ -> Nothing
+instance FromHttpApiData HealthStatusHealthState where
+    parseQueryParam = \case
+        "HEALTHY" -> Right Healthy
+        "UNHEALTHY" -> Right Unhealthy
+        x -> Left ("Unable to parse HealthStatusHealthState from: " <> x)
 
-instance ToText HealthStatusHealthState where
-    toText = \case
+instance ToHttpApiData HealthStatusHealthState where
+    toQueryParam = \case
         Healthy -> "HEALTHY"
         Unhealthy -> "UNHEALTHY"
 
@@ -1064,15 +1064,15 @@ data DeprecationStatusState
 
 instance Hashable DeprecationStatusState
 
-instance FromText DeprecationStatusState where
-    fromText = \case
-        "DELETED" -> Just Deleted
-        "DEPRECATED" -> Just Deprecated
-        "OBSOLETE" -> Just Obsolete
-        _ -> Nothing
+instance FromHttpApiData DeprecationStatusState where
+    parseQueryParam = \case
+        "DELETED" -> Right Deleted
+        "DEPRECATED" -> Right Deprecated
+        "OBSOLETE" -> Right Obsolete
+        x -> Left ("Unable to parse DeprecationStatusState from: " <> x)
 
-instance ToText DeprecationStatusState where
-    toText = \case
+instance ToHttpApiData DeprecationStatusState where
+    toQueryParam = \case
         Deleted -> "DELETED"
         Deprecated -> "DEPRECATED"
         Obsolete -> "OBSOLETE"
@@ -1120,19 +1120,19 @@ data ManagedInstanceCurrentAction
 
 instance Hashable ManagedInstanceCurrentAction
 
-instance FromText ManagedInstanceCurrentAction where
-    fromText = \case
-        "ABANDONING" -> Just MICAAbandoning
-        "CREATING" -> Just MICACreating
-        "DELETING" -> Just MICADeleting
-        "NONE" -> Just MICANone
-        "RECREATING" -> Just MICARecreating
-        "REFRESHING" -> Just MICARefreshing
-        "RESTARTING" -> Just MICARestarting
-        _ -> Nothing
+instance FromHttpApiData ManagedInstanceCurrentAction where
+    parseQueryParam = \case
+        "ABANDONING" -> Right MICAAbandoning
+        "CREATING" -> Right MICACreating
+        "DELETING" -> Right MICADeleting
+        "NONE" -> Right MICANone
+        "RECREATING" -> Right MICARecreating
+        "REFRESHING" -> Right MICARefreshing
+        "RESTARTING" -> Right MICARestarting
+        x -> Left ("Unable to parse ManagedInstanceCurrentAction from: " <> x)
 
-instance ToText ManagedInstanceCurrentAction where
-    toText = \case
+instance ToHttpApiData ManagedInstanceCurrentAction where
+    toQueryParam = \case
         MICAAbandoning -> "ABANDONING"
         MICACreating -> "CREATING"
         MICADeleting -> "DELETING"
@@ -1156,13 +1156,13 @@ data TargetInstanceNATPolicy
 
 instance Hashable TargetInstanceNATPolicy
 
-instance FromText TargetInstanceNATPolicy where
-    fromText = \case
-        "NO_NAT" -> Just NoNAT
-        _ -> Nothing
+instance FromHttpApiData TargetInstanceNATPolicy where
+    parseQueryParam = \case
+        "NO_NAT" -> Right NoNAT
+        x -> Left ("Unable to parse TargetInstanceNATPolicy from: " <> x)
 
-instance ToText TargetInstanceNATPolicy where
-    toText = \case
+instance ToHttpApiData TargetInstanceNATPolicy where
+    toQueryParam = \case
         NoNAT -> "NO_NAT"
 
 instance FromJSON TargetInstanceNATPolicy where
@@ -1180,13 +1180,13 @@ data AccessConfigType
 
 instance Hashable AccessConfigType
 
-instance FromText AccessConfigType where
-    fromText = \case
-        "ONE_TO_ONE_NAT" -> Just OneToOneNAT
-        _ -> Nothing
+instance FromHttpApiData AccessConfigType where
+    parseQueryParam = \case
+        "ONE_TO_ONE_NAT" -> Right OneToOneNAT
+        x -> Left ("Unable to parse AccessConfigType from: " <> x)
 
-instance ToText AccessConfigType where
-    toText = \case
+instance ToHttpApiData AccessConfigType where
+    toQueryParam = \case
         OneToOneNAT -> "ONE_TO_ONE_NAT"
 
 instance FromJSON AccessConfigType where
@@ -1208,15 +1208,15 @@ data OperationStatus
 
 instance Hashable OperationStatus
 
-instance FromText OperationStatus where
-    fromText = \case
-        "DONE" -> Just Done
-        "PENDING" -> Just Pending
-        "RUNNING" -> Just Running
-        _ -> Nothing
+instance FromHttpApiData OperationStatus where
+    parseQueryParam = \case
+        "DONE" -> Right Done
+        "PENDING" -> Right Pending
+        "RUNNING" -> Right Running
+        x -> Left ("Unable to parse OperationStatus from: " <> x)
 
-instance ToText OperationStatus where
-    toText = \case
+instance ToHttpApiData OperationStatus where
+    toQueryParam = \case
         Done -> "DONE"
         Pending -> "PENDING"
         Running -> "RUNNING"
@@ -1264,27 +1264,27 @@ data TargetVPNGatewaysScopedListWarningCode
 
 instance Hashable TargetVPNGatewaysScopedListWarningCode
 
-instance FromText TargetVPNGatewaysScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just TVGSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just TVGSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just TVGSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just TVGSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just TVGSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just TVGSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just TVGSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just TVGSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just TVGSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just TVGSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just TVGSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just TVGSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just TVGSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just TVGSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just TVGSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData TargetVPNGatewaysScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right TVGSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right TVGSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right TVGSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right TVGSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right TVGSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right TVGSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right TVGSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right TVGSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right TVGSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right TVGSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right TVGSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right TVGSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right TVGSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right TVGSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right TVGSLWCUnreachable
+        x -> Left ("Unable to parse TargetVPNGatewaysScopedListWarningCode from: " <> x)
 
-instance ToText TargetVPNGatewaysScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData TargetVPNGatewaysScopedListWarningCode where
+    toQueryParam = \case
         TVGSLWCCleanupFailed -> "CLEANUP_FAILED"
         TVGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         TVGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -1322,16 +1322,16 @@ data DiskStatus
 
 instance Hashable DiskStatus
 
-instance FromText DiskStatus where
-    fromText = \case
-        "CREATING" -> Just DSCreating
-        "FAILED" -> Just DSFailed
-        "READY" -> Just DSReady
-        "RESTORING" -> Just DSRestoring
-        _ -> Nothing
+instance FromHttpApiData DiskStatus where
+    parseQueryParam = \case
+        "CREATING" -> Right DSCreating
+        "FAILED" -> Right DSFailed
+        "READY" -> Right DSReady
+        "RESTORING" -> Right DSRestoring
+        x -> Left ("Unable to parse DiskStatus from: " <> x)
 
-instance ToText DiskStatus where
-    toText = \case
+instance ToHttpApiData DiskStatus where
+    toQueryParam = \case
         DSCreating -> "CREATING"
         DSFailed -> "FAILED"
         DSReady -> "READY"
@@ -1366,20 +1366,20 @@ data ManagedInstanceInstanceStatus
 
 instance Hashable ManagedInstanceInstanceStatus
 
-instance FromText ManagedInstanceInstanceStatus where
-    fromText = \case
-        "PROVISIONING" -> Just MIISProvisioning
-        "RUNNING" -> Just MIISRunning
-        "STAGING" -> Just MIISStaging
-        "STOPPED" -> Just MIISStopped
-        "STOPPING" -> Just MIISStopping
-        "SUSPENDED" -> Just MIISSuspended
-        "SUSPENDING" -> Just MIISSuspending
-        "TERMINATED" -> Just MIISTerminated
-        _ -> Nothing
+instance FromHttpApiData ManagedInstanceInstanceStatus where
+    parseQueryParam = \case
+        "PROVISIONING" -> Right MIISProvisioning
+        "RUNNING" -> Right MIISRunning
+        "STAGING" -> Right MIISStaging
+        "STOPPED" -> Right MIISStopped
+        "STOPPING" -> Right MIISStopping
+        "SUSPENDED" -> Right MIISSuspended
+        "SUSPENDING" -> Right MIISSuspending
+        "TERMINATED" -> Right MIISTerminated
+        x -> Left ("Unable to parse ManagedInstanceInstanceStatus from: " <> x)
 
-instance ToText ManagedInstanceInstanceStatus where
-    toText = \case
+instance ToHttpApiData ManagedInstanceInstanceStatus where
+    toQueryParam = \case
         MIISProvisioning -> "PROVISIONING"
         MIISRunning -> "RUNNING"
         MIISStaging -> "STAGING"
@@ -1406,14 +1406,14 @@ data AttachedDiskMode
 
 instance Hashable AttachedDiskMode
 
-instance FromText AttachedDiskMode where
-    fromText = \case
-        "READ_ONLY" -> Just ReadOnly
-        "READ_WRITE" -> Just ReadWrite
-        _ -> Nothing
+instance FromHttpApiData AttachedDiskMode where
+    parseQueryParam = \case
+        "READ_ONLY" -> Right ReadOnly
+        "READ_WRITE" -> Right ReadWrite
+        x -> Left ("Unable to parse AttachedDiskMode from: " <> x)
 
-instance ToText AttachedDiskMode where
-    toText = \case
+instance ToHttpApiData AttachedDiskMode where
+    toQueryParam = \case
         ReadOnly -> "READ_ONLY"
         ReadWrite -> "READ_WRITE"
 
@@ -1433,14 +1433,14 @@ data RegionStatus
 
 instance Hashable RegionStatus
 
-instance FromText RegionStatus where
-    fromText = \case
-        "DOWN" -> Just Down
-        "UP" -> Just UP
-        _ -> Nothing
+instance FromHttpApiData RegionStatus where
+    parseQueryParam = \case
+        "DOWN" -> Right Down
+        "UP" -> Right UP
+        x -> Left ("Unable to parse RegionStatus from: " <> x)
 
-instance ToText RegionStatus where
-    toText = \case
+instance ToHttpApiData RegionStatus where
+    toQueryParam = \case
         Down -> "DOWN"
         UP -> "UP"
 
@@ -1480,24 +1480,24 @@ data VPNTunnelStatus
 
 instance Hashable VPNTunnelStatus
 
-instance FromText VPNTunnelStatus where
-    fromText = \case
-        "ALLOCATING_RESOURCES" -> Just VTSAllocatingResources
-        "AUTHORIZATION_ERROR" -> Just VTSAuthorizationError
-        "DEPROVISIONING" -> Just VTSDeprovisioning
-        "ESTABLISHED" -> Just VTSEstablished
-        "FAILED" -> Just VTSFailed
-        "FIRST_HANDSHAKE" -> Just VTSFirstHandshake
-        "NEGOTIATION_FAILURE" -> Just VTSNegotiationFailure
-        "NETWORK_ERROR" -> Just VTSNetworkError
-        "NO_INCOMING_PACKETS" -> Just VTSNoIncomingPackets
-        "PROVISIONING" -> Just VTSProvisioning
-        "REJECTED" -> Just VTSRejected
-        "WAITING_FOR_FULL_CONFIG" -> Just VTSWaitingForFullConfig
-        _ -> Nothing
+instance FromHttpApiData VPNTunnelStatus where
+    parseQueryParam = \case
+        "ALLOCATING_RESOURCES" -> Right VTSAllocatingResources
+        "AUTHORIZATION_ERROR" -> Right VTSAuthorizationError
+        "DEPROVISIONING" -> Right VTSDeprovisioning
+        "ESTABLISHED" -> Right VTSEstablished
+        "FAILED" -> Right VTSFailed
+        "FIRST_HANDSHAKE" -> Right VTSFirstHandshake
+        "NEGOTIATION_FAILURE" -> Right VTSNegotiationFailure
+        "NETWORK_ERROR" -> Right VTSNetworkError
+        "NO_INCOMING_PACKETS" -> Right VTSNoIncomingPackets
+        "PROVISIONING" -> Right VTSProvisioning
+        "REJECTED" -> Right VTSRejected
+        "WAITING_FOR_FULL_CONFIG" -> Right VTSWaitingForFullConfig
+        x -> Left ("Unable to parse VPNTunnelStatus from: " <> x)
 
-instance ToText VPNTunnelStatus where
-    toText = \case
+instance ToHttpApiData VPNTunnelStatus where
+    toQueryParam = \case
         VTSAllocatingResources -> "ALLOCATING_RESOURCES"
         VTSAuthorizationError -> "AUTHORIZATION_ERROR"
         VTSDeprovisioning -> "DEPROVISIONING"
@@ -1529,14 +1529,14 @@ data BackendBalancingMode
 
 instance Hashable BackendBalancingMode
 
-instance FromText BackendBalancingMode where
-    fromText = \case
-        "RATE" -> Just Rate
-        "UTILIZATION" -> Just Utilization
-        _ -> Nothing
+instance FromHttpApiData BackendBalancingMode where
+    parseQueryParam = \case
+        "RATE" -> Right Rate
+        "UTILIZATION" -> Right Utilization
+        x -> Left ("Unable to parse BackendBalancingMode from: " <> x)
 
-instance ToText BackendBalancingMode where
-    toText = \case
+instance ToHttpApiData BackendBalancingMode where
+    toQueryParam = \case
         Rate -> "RATE"
         Utilization -> "UTILIZATION"
 
@@ -1563,17 +1563,17 @@ data ForwardingRuleIPProtocol
 
 instance Hashable ForwardingRuleIPProtocol
 
-instance FromText ForwardingRuleIPProtocol where
-    fromText = \case
-        "AH" -> Just AH
-        "ESP" -> Just Esp
-        "SCTP" -> Just Sctp
-        "TCP" -> Just TCP
-        "UDP" -> Just Udp
-        _ -> Nothing
+instance FromHttpApiData ForwardingRuleIPProtocol where
+    parseQueryParam = \case
+        "AH" -> Right AH
+        "ESP" -> Right Esp
+        "SCTP" -> Right Sctp
+        "TCP" -> Right TCP
+        "UDP" -> Right Udp
+        x -> Left ("Unable to parse ForwardingRuleIPProtocol from: " <> x)
 
-instance ToText ForwardingRuleIPProtocol where
-    toText = \case
+instance ToHttpApiData ForwardingRuleIPProtocol where
+    toQueryParam = \case
         AH -> "AH"
         Esp -> "ESP"
         Sctp -> "SCTP"
@@ -1599,14 +1599,14 @@ data AddressStatus
 
 instance Hashable AddressStatus
 
-instance FromText AddressStatus where
-    fromText = \case
-        "IN_USE" -> Just InUse
-        "RESERVED" -> Just Reserved
-        _ -> Nothing
+instance FromHttpApiData AddressStatus where
+    parseQueryParam = \case
+        "IN_USE" -> Right InUse
+        "RESERVED" -> Right Reserved
+        x -> Left ("Unable to parse AddressStatus from: " <> x)
 
-instance ToText AddressStatus where
-    toText = \case
+instance ToHttpApiData AddressStatus where
+    toQueryParam = \case
         InUse -> "IN_USE"
         Reserved -> "RESERVED"
 
@@ -1628,14 +1628,14 @@ data InstanceGroupsListInstancesRequestInstanceState
 
 instance Hashable InstanceGroupsListInstancesRequestInstanceState
 
-instance FromText InstanceGroupsListInstancesRequestInstanceState where
-    fromText = \case
-        "ALL" -> Just IGLIRISAll
-        "RUNNING" -> Just IGLIRISRunning
-        _ -> Nothing
+instance FromHttpApiData InstanceGroupsListInstancesRequestInstanceState where
+    parseQueryParam = \case
+        "ALL" -> Right IGLIRISAll
+        "RUNNING" -> Right IGLIRISRunning
+        x -> Left ("Unable to parse InstanceGroupsListInstancesRequestInstanceState from: " <> x)
 
-instance ToText InstanceGroupsListInstancesRequestInstanceState where
-    toText = \case
+instance ToHttpApiData InstanceGroupsListInstancesRequestInstanceState where
+    toQueryParam = \case
         IGLIRISAll -> "ALL"
         IGLIRISRunning -> "RUNNING"
 
@@ -1660,14 +1660,14 @@ data AttachedDiskInterface
 
 instance Hashable AttachedDiskInterface
 
-instance FromText AttachedDiskInterface where
-    fromText = \case
-        "NVME" -> Just Nvme
-        "SCSI" -> Just Scsi
-        _ -> Nothing
+instance FromHttpApiData AttachedDiskInterface where
+    parseQueryParam = \case
+        "NVME" -> Right Nvme
+        "SCSI" -> Right Scsi
+        x -> Left ("Unable to parse AttachedDiskInterface from: " <> x)
 
-instance ToText AttachedDiskInterface where
-    toText = \case
+instance ToHttpApiData AttachedDiskInterface where
+    toQueryParam = \case
         Nvme -> "NVME"
         Scsi -> "SCSI"
 
@@ -1687,14 +1687,14 @@ data ZoneStatus
 
 instance Hashable ZoneStatus
 
-instance FromText ZoneStatus where
-    fromText = \case
-        "DOWN" -> Just ZSDown
-        "UP" -> Just ZSUP
-        _ -> Nothing
+instance FromHttpApiData ZoneStatus where
+    parseQueryParam = \case
+        "DOWN" -> Right ZSDown
+        "UP" -> Right ZSUP
+        x -> Left ("Unable to parse ZoneStatus from: " <> x)
 
-instance ToText ZoneStatus where
-    toText = \case
+instance ToHttpApiData ZoneStatus where
+    toQueryParam = \case
         ZSDown -> "DOWN"
         ZSUP -> "UP"
 
@@ -1741,27 +1741,27 @@ data SubnetworksScopedListWarningCode
 
 instance Hashable SubnetworksScopedListWarningCode
 
-instance FromText SubnetworksScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just SSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just SSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just SSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just SSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just SSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just SSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just SSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just SSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just SSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just SSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just SSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just SSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just SSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just SSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just SSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData SubnetworksScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right SSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right SSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right SSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right SSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right SSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right SSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right SSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right SSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right SSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right SSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right SSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right SSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right SSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right SSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right SSLWCUnreachable
+        x -> Left ("Unable to parse SubnetworksScopedListWarningCode from: " <> x)
 
-instance ToText SubnetworksScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData SubnetworksScopedListWarningCode where
+    toQueryParam = \case
         SSLWCCleanupFailed -> "CLEANUP_FAILED"
         SSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         SSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -1846,40 +1846,40 @@ data QuotaMetric
 
 instance Hashable QuotaMetric
 
-instance FromText QuotaMetric where
-    fromText = \case
-        "AUTOSCALERS" -> Just Autoscalers
-        "BACKEND_SERVICES" -> Just BackendServices
-        "CPUS" -> Just CPUs
-        "DISKS_TOTAL_GB" -> Just DisksTotalGb
-        "FIREWALLS" -> Just Firewalls
-        "FORWARDING_RULES" -> Just ForwardingRules
-        "HEALTH_CHECKS" -> Just HealthChecks
-        "IMAGES" -> Just Images
-        "INSTANCES" -> Just Instances
-        "INSTANCE_GROUPS" -> Just InstanceGroups
-        "INSTANCE_GROUP_MANAGERS" -> Just InstanceGroupManagers
-        "INSTANCE_TEMPLATES" -> Just InstanceTemplates
-        "IN_USE_ADDRESSES" -> Just InUseAddresses
-        "LOCAL_SSD_TOTAL_GB" -> Just LocalSsdTotalGb
-        "NETWORKS" -> Just Networks
-        "ROUTES" -> Just Routes
-        "SNAPSHOTS" -> Just Snapshots
-        "SSD_TOTAL_GB" -> Just SsdTotalGb
-        "SSL_CERTIFICATES" -> Just SSLCertificates
-        "STATIC_ADDRESSES" -> Just StaticAddresses
-        "SUBNETWORKS" -> Just Subnetworks
-        "TARGET_HTTPS_PROXIES" -> Just TargetHTTPSProxies
-        "TARGET_HTTP_PROXIES" -> Just TargetHTTPProxies
-        "TARGET_INSTANCES" -> Just TargetInstances
-        "TARGET_POOLS" -> Just TargetPools
-        "TARGET_VPN_GATEWAYS" -> Just TargetVPNGateways
-        "URL_MAPS" -> Just URLMaps
-        "VPN_TUNNELS" -> Just VPNTunnels
-        _ -> Nothing
+instance FromHttpApiData QuotaMetric where
+    parseQueryParam = \case
+        "AUTOSCALERS" -> Right Autoscalers
+        "BACKEND_SERVICES" -> Right BackendServices
+        "CPUS" -> Right CPUs
+        "DISKS_TOTAL_GB" -> Right DisksTotalGb
+        "FIREWALLS" -> Right Firewalls
+        "FORWARDING_RULES" -> Right ForwardingRules
+        "HEALTH_CHECKS" -> Right HealthChecks
+        "IMAGES" -> Right Images
+        "INSTANCES" -> Right Instances
+        "INSTANCE_GROUPS" -> Right InstanceGroups
+        "INSTANCE_GROUP_MANAGERS" -> Right InstanceGroupManagers
+        "INSTANCE_TEMPLATES" -> Right InstanceTemplates
+        "IN_USE_ADDRESSES" -> Right InUseAddresses
+        "LOCAL_SSD_TOTAL_GB" -> Right LocalSsdTotalGb
+        "NETWORKS" -> Right Networks
+        "ROUTES" -> Right Routes
+        "SNAPSHOTS" -> Right Snapshots
+        "SSD_TOTAL_GB" -> Right SsdTotalGb
+        "SSL_CERTIFICATES" -> Right SSLCertificates
+        "STATIC_ADDRESSES" -> Right StaticAddresses
+        "SUBNETWORKS" -> Right Subnetworks
+        "TARGET_HTTPS_PROXIES" -> Right TargetHTTPSProxies
+        "TARGET_HTTP_PROXIES" -> Right TargetHTTPProxies
+        "TARGET_INSTANCES" -> Right TargetInstances
+        "TARGET_POOLS" -> Right TargetPools
+        "TARGET_VPN_GATEWAYS" -> Right TargetVPNGateways
+        "URL_MAPS" -> Right URLMaps
+        "VPN_TUNNELS" -> Right VPNTunnels
+        x -> Left ("Unable to parse QuotaMetric from: " <> x)
 
-instance ToText QuotaMetric where
-    toText = \case
+instance ToHttpApiData QuotaMetric where
+    toQueryParam = \case
         Autoscalers -> "AUTOSCALERS"
         BackendServices -> "BACKEND_SERVICES"
         CPUs -> "CPUS"
@@ -1938,20 +1938,20 @@ data InstanceStatus
 
 instance Hashable InstanceStatus
 
-instance FromText InstanceStatus where
-    fromText = \case
-        "PROVISIONING" -> Just ISProvisioning
-        "RUNNING" -> Just ISRunning
-        "STAGING" -> Just ISStaging
-        "STOPPED" -> Just ISStopped
-        "STOPPING" -> Just ISStopping
-        "SUSPENDED" -> Just ISSuspended
-        "SUSPENDING" -> Just ISSuspending
-        "TERMINATED" -> Just ISTerminated
-        _ -> Nothing
+instance FromHttpApiData InstanceStatus where
+    parseQueryParam = \case
+        "PROVISIONING" -> Right ISProvisioning
+        "RUNNING" -> Right ISRunning
+        "STAGING" -> Right ISStaging
+        "STOPPED" -> Right ISStopped
+        "STOPPING" -> Right ISStopping
+        "SUSPENDED" -> Right ISSuspended
+        "SUSPENDING" -> Right ISSuspending
+        "TERMINATED" -> Right ISTerminated
+        x -> Left ("Unable to parse InstanceStatus from: " <> x)
 
-instance ToText InstanceStatus where
-    toText = \case
+instance ToHttpApiData InstanceStatus where
+    toQueryParam = \case
         ISProvisioning -> "PROVISIONING"
         ISRunning -> "RUNNING"
         ISStaging -> "STAGING"
@@ -2004,27 +2004,27 @@ data MachineTypesScopedListWarningCode
 
 instance Hashable MachineTypesScopedListWarningCode
 
-instance FromText MachineTypesScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just MTSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just MTSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just MTSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just MTSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just MTSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just MTSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just MTSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just MTSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just MTSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just MTSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just MTSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just MTSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just MTSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just MTSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just MTSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData MachineTypesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right MTSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right MTSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right MTSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right MTSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right MTSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right MTSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right MTSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right MTSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right MTSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right MTSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right MTSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right MTSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right MTSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right MTSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right MTSLWCUnreachable
+        x -> Left ("Unable to parse MachineTypesScopedListWarningCode from: " <> x)
 
-instance ToText MachineTypesScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData MachineTypesScopedListWarningCode where
+    toQueryParam = \case
         MTSLWCCleanupFailed -> "CLEANUP_FAILED"
         MTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         MTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -2084,27 +2084,27 @@ data DiskTypesScopedListWarningCode
 
 instance Hashable DiskTypesScopedListWarningCode
 
-instance FromText DiskTypesScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just DTSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just DTSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DTSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just DTSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just DTSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just DTSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just DTSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just DTSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just DTSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just DTSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just DTSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just DTSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just DTSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just DTSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just DTSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData DiskTypesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right DTSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right DTSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DTSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right DTSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right DTSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right DTSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right DTSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right DTSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right DTSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right DTSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right DTSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right DTSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right DTSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right DTSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right DTSLWCUnreachable
+        x -> Left ("Unable to parse DiskTypesScopedListWarningCode from: " <> x)
 
-instance ToText DiskTypesScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData DiskTypesScopedListWarningCode where
+    toQueryParam = \case
         DTSLWCCleanupFailed -> "CLEANUP_FAILED"
         DTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -2164,27 +2164,27 @@ data AutoscalersScopedListWarningCode
 
 instance Hashable AutoscalersScopedListWarningCode
 
-instance FromText AutoscalersScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just ACleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just ADeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ADiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just AInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just ANextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just ANextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just ANextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just ANextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just ANextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just ANotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just ANoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just ARequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just AResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just ASingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just AUnreachable
-        _ -> Nothing
+instance FromHttpApiData AutoscalersScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right ACleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right ADeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ADiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right AInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ANextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ANextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right ANextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right ANextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right ANextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right ANotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right ANoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right ARequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right AResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right ASingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right AUnreachable
+        x -> Left ("Unable to parse AutoscalersScopedListWarningCode from: " <> x)
 
-instance ToText AutoscalersScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData AutoscalersScopedListWarningCode where
+    toQueryParam = \case
         ACleanupFailed -> "CLEANUP_FAILED"
         ADeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ADiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -2244,27 +2244,27 @@ data VPNTunnelsScopedListWarningCode
 
 instance Hashable VPNTunnelsScopedListWarningCode
 
-instance FromText VPNTunnelsScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just VTSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just VTSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just VTSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just VTSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just VTSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just VTSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just VTSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just VTSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just VTSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just VTSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just VTSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just VTSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just VTSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just VTSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just VTSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData VPNTunnelsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right VTSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right VTSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right VTSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right VTSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right VTSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right VTSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right VTSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right VTSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right VTSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right VTSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right VTSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right VTSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right VTSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right VTSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right VTSLWCUnreachable
+        x -> Left ("Unable to parse VPNTunnelsScopedListWarningCode from: " <> x)
 
-instance ToText VPNTunnelsScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData VPNTunnelsScopedListWarningCode where
+    toQueryParam = \case
         VTSLWCCleanupFailed -> "CLEANUP_FAILED"
         VTSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         VTSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -2324,27 +2324,27 @@ data InstanceGroupsScopedListWarningCode
 
 instance Hashable InstanceGroupsScopedListWarningCode
 
-instance FromText InstanceGroupsScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just IGSLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just IGSLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just IGSLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just IGSLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just IGSLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just IGSLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just IGSLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just IGSLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just IGSLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just IGSLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just IGSLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just IGSLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just IGSLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just IGSLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just IGSLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData InstanceGroupsScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right IGSLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right IGSLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right IGSLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right IGSLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right IGSLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right IGSLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right IGSLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right IGSLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right IGSLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right IGSLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right IGSLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right IGSLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right IGSLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right IGSLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right IGSLWCUnreachable
+        x -> Left ("Unable to parse InstanceGroupsScopedListWarningCode from: " <> x)
 
-instance ToText InstanceGroupsScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData InstanceGroupsScopedListWarningCode where
+    toQueryParam = \case
         IGSLWCCleanupFailed -> "CLEANUP_FAILED"
         IGSLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         IGSLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -2389,20 +2389,20 @@ data InstanceWithNamedPortsStatus
 
 instance Hashable InstanceWithNamedPortsStatus
 
-instance FromText InstanceWithNamedPortsStatus where
-    fromText = \case
-        "PROVISIONING" -> Just IWNPSProvisioning
-        "RUNNING" -> Just IWNPSRunning
-        "STAGING" -> Just IWNPSStaging
-        "STOPPED" -> Just IWNPSStopped
-        "STOPPING" -> Just IWNPSStopping
-        "SUSPENDED" -> Just IWNPSSuspended
-        "SUSPENDING" -> Just IWNPSSuspending
-        "TERMINATED" -> Just IWNPSTerminated
-        _ -> Nothing
+instance FromHttpApiData InstanceWithNamedPortsStatus where
+    parseQueryParam = \case
+        "PROVISIONING" -> Right IWNPSProvisioning
+        "RUNNING" -> Right IWNPSRunning
+        "STAGING" -> Right IWNPSStaging
+        "STOPPED" -> Right IWNPSStopped
+        "STOPPING" -> Right IWNPSStopping
+        "SUSPENDED" -> Right IWNPSSuspended
+        "SUSPENDING" -> Right IWNPSSuspending
+        "TERMINATED" -> Right IWNPSTerminated
+        x -> Left ("Unable to parse InstanceWithNamedPortsStatus from: " <> x)
 
-instance ToText InstanceWithNamedPortsStatus where
-    toText = \case
+instance ToHttpApiData InstanceWithNamedPortsStatus where
+    toQueryParam = \case
         IWNPSProvisioning -> "PROVISIONING"
         IWNPSRunning -> "RUNNING"
         IWNPSStaging -> "STAGING"
@@ -2455,27 +2455,27 @@ data InstancesScopedListWarningCode
 
 instance Hashable InstancesScopedListWarningCode
 
-instance FromText InstancesScopedListWarningCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just ISLWCCleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just ISLWCDeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just ISLWCDiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just ISLWCInjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just ISLWCNextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just ISLWCNextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just ISLWCNextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just ISLWCNextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just ISLWCNextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just ISLWCNotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just ISLWCNoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just ISLWCRequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just ISLWCResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just ISLWCSingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just ISLWCUnreachable
-        _ -> Nothing
+instance FromHttpApiData InstancesScopedListWarningCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right ISLWCCleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right ISLWCDeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right ISLWCDiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right ISLWCInjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right ISLWCNextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right ISLWCNextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right ISLWCNextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right ISLWCNextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right ISLWCNextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right ISLWCNotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right ISLWCNoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right ISLWCRequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right ISLWCResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right ISLWCSingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right ISLWCUnreachable
+        x -> Left ("Unable to parse InstancesScopedListWarningCode from: " <> x)
 
-instance ToText InstancesScopedListWarningCode where
-    toText = \case
+instance ToHttpApiData InstancesScopedListWarningCode where
+    toQueryParam = \case
         ISLWCCleanupFailed -> "CLEANUP_FAILED"
         ISLWCDeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         ISLWCDiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -2516,15 +2516,15 @@ data TargetPoolSessionAffinity
 
 instance Hashable TargetPoolSessionAffinity
 
-instance FromText TargetPoolSessionAffinity where
-    fromText = \case
-        "CLIENT_IP" -> Just ClientIP
-        "CLIENT_IP_PROTO" -> Just ClientIPProto
-        "NONE" -> Just None
-        _ -> Nothing
+instance FromHttpApiData TargetPoolSessionAffinity where
+    parseQueryParam = \case
+        "CLIENT_IP" -> Right ClientIP
+        "CLIENT_IP_PROTO" -> Right ClientIPProto
+        "NONE" -> Right None
+        x -> Left ("Unable to parse TargetPoolSessionAffinity from: " <> x)
 
-instance ToText TargetPoolSessionAffinity where
-    toText = \case
+instance ToHttpApiData TargetPoolSessionAffinity where
+    toQueryParam = \case
         ClientIP -> "CLIENT_IP"
         ClientIPProto -> "CLIENT_IP_PROTO"
         None -> "NONE"
@@ -2545,13 +2545,13 @@ data ImageRawDiskContainerType
 
 instance Hashable ImageRawDiskContainerType
 
-instance FromText ImageRawDiskContainerType where
-    fromText = \case
-        "TAR" -> Just TAR
-        _ -> Nothing
+instance FromHttpApiData ImageRawDiskContainerType where
+    parseQueryParam = \case
+        "TAR" -> Right TAR
+        x -> Left ("Unable to parse ImageRawDiskContainerType from: " <> x)
 
-instance ToText ImageRawDiskContainerType where
-    toText = \case
+instance ToHttpApiData ImageRawDiskContainerType where
+    toQueryParam = \case
         TAR -> "TAR"
 
 instance FromJSON ImageRawDiskContainerType where

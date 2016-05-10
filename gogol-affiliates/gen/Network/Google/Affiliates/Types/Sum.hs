@@ -31,14 +31,14 @@ data PublishersGetRole
 
 instance Hashable PublishersGetRole
 
-instance FromText PublishersGetRole where
-    fromText = \case
-        "advertisers" -> Just PGRAdvertisers
-        "publishers" -> Just PGRPublishers
-        _ -> Nothing
+instance FromHttpApiData PublishersGetRole where
+    parseQueryParam = \case
+        "advertisers" -> Right PGRAdvertisers
+        "publishers" -> Right PGRPublishers
+        x -> Left ("Unable to parse PublishersGetRole from: " <> x)
 
-instance ToText PublishersGetRole where
-    toText = \case
+instance ToHttpApiData PublishersGetRole where
+    toQueryParam = \case
         PGRAdvertisers -> "advertisers"
         PGRPublishers -> "publishers"
 
@@ -64,15 +64,15 @@ data ReportsGetEventType
 
 instance Hashable ReportsGetEventType
 
-instance FromText ReportsGetEventType where
-    fromText = \case
-        "action" -> Just Action
-        "charge" -> Just Charge
-        "transaction" -> Just Transaction
-        _ -> Nothing
+instance FromHttpApiData ReportsGetEventType where
+    parseQueryParam = \case
+        "action" -> Right Action
+        "charge" -> Right Charge
+        "transaction" -> Right Transaction
+        x -> Left ("Unable to parse ReportsGetEventType from: " <> x)
 
-instance ToText ReportsGetEventType where
-    toText = \case
+instance ToHttpApiData ReportsGetEventType where
+    toQueryParam = \case
         Action -> "action"
         Charge -> "charge"
         Transaction -> "transaction"
@@ -99,15 +99,15 @@ data ReportsGetStatus
 
 instance Hashable ReportsGetStatus
 
-instance FromText ReportsGetStatus where
-    fromText = \case
-        "active" -> Just Active
-        "canceled" -> Just Canceled
-        "invalid" -> Just Invalid
-        _ -> Nothing
+instance FromHttpApiData ReportsGetStatus where
+    parseQueryParam = \case
+        "active" -> Right Active
+        "canceled" -> Right Canceled
+        "invalid" -> Right Invalid
+        x -> Left ("Unable to parse ReportsGetStatus from: " <> x)
 
-instance ToText ReportsGetStatus where
-    toText = \case
+instance ToHttpApiData ReportsGetStatus where
+    toQueryParam = \case
         Active -> "active"
         Canceled -> "canceled"
         Invalid -> "invalid"
@@ -134,17 +134,17 @@ data LinksListPromotionType
 
 instance Hashable LinksListPromotionType
 
-instance FromText LinksListPromotionType where
-    fromText = \case
-        "coupon" -> Just Coupon
-        "free_gift" -> Just FreeGift
-        "free_shipping" -> Just FreeShipping
-        "percent_off" -> Just PercentOff
-        "price_cut" -> Just PriceCut
-        _ -> Nothing
+instance FromHttpApiData LinksListPromotionType where
+    parseQueryParam = \case
+        "coupon" -> Right Coupon
+        "free_gift" -> Right FreeGift
+        "free_shipping" -> Right FreeShipping
+        "percent_off" -> Right PercentOff
+        "price_cut" -> Right PriceCut
+        x -> Left ("Unable to parse LinksListPromotionType from: " <> x)
 
-instance ToText LinksListPromotionType where
-    toText = \case
+instance ToHttpApiData LinksListPromotionType where
+    toQueryParam = \case
         Coupon -> "coupon"
         FreeGift -> "free_gift"
         FreeShipping -> "free_shipping"
@@ -178,15 +178,15 @@ data EventsListType
 
 instance Hashable EventsListType
 
-instance FromText EventsListType where
-    fromText = \case
-        "action" -> Just ELTAction
-        "charge" -> Just ELTCharge
-        "transaction" -> Just ELTTransaction
-        _ -> Nothing
+instance FromHttpApiData EventsListType where
+    parseQueryParam = \case
+        "action" -> Right ELTAction
+        "charge" -> Right ELTCharge
+        "transaction" -> Right ELTTransaction
+        x -> Left ("Unable to parse EventsListType from: " <> x)
 
-instance ToText EventsListType where
-    toText = \case
+instance ToHttpApiData EventsListType where
+    toQueryParam = \case
         ELTAction -> "action"
         ELTCharge -> "charge"
         ELTTransaction -> "transaction"
@@ -210,14 +210,14 @@ data LinksListRole
 
 instance Hashable LinksListRole
 
-instance FromText LinksListRole where
-    fromText = \case
-        "advertisers" -> Just LLRAdvertisers
-        "publishers" -> Just LLRPublishers
-        _ -> Nothing
+instance FromHttpApiData LinksListRole where
+    parseQueryParam = \case
+        "advertisers" -> Right LLRAdvertisers
+        "publishers" -> Right LLRPublishers
+        x -> Left ("Unable to parse LinksListRole from: " <> x)
 
-instance ToText LinksListRole where
-    toText = \case
+instance ToHttpApiData LinksListRole where
+    toQueryParam = \case
         LLRAdvertisers -> "advertisers"
         LLRPublishers -> "publishers"
 
@@ -237,13 +237,13 @@ data ReportsGetReportType
 
 instance Hashable ReportsGetReportType
 
-instance FromText ReportsGetReportType where
-    fromText = \case
-        "order_delta" -> Just OrderDelta
-        _ -> Nothing
+instance FromHttpApiData ReportsGetReportType where
+    parseQueryParam = \case
+        "order_delta" -> Right OrderDelta
+        x -> Left ("Unable to parse ReportsGetReportType from: " <> x)
 
-instance ToText ReportsGetReportType where
-    toText = \case
+instance ToHttpApiData ReportsGetReportType where
+    toQueryParam = \case
         OrderDelta -> "order_delta"
 
 instance FromJSON ReportsGetReportType where
@@ -265,14 +265,14 @@ data AdvertisersListRole
 
 instance Hashable AdvertisersListRole
 
-instance FromText AdvertisersListRole where
-    fromText = \case
-        "advertisers" -> Just ALRAdvertisers
-        "publishers" -> Just ALRPublishers
-        _ -> Nothing
+instance FromHttpApiData AdvertisersListRole where
+    parseQueryParam = \case
+        "advertisers" -> Right ALRAdvertisers
+        "publishers" -> Right ALRPublishers
+        x -> Left ("Unable to parse AdvertisersListRole from: " <> x)
 
-instance ToText AdvertisersListRole where
-    toText = \case
+instance ToHttpApiData AdvertisersListRole where
+    toQueryParam = \case
         ALRAdvertisers -> "advertisers"
         ALRPublishers -> "publishers"
 
@@ -295,14 +295,14 @@ data LinksInsertRole
 
 instance Hashable LinksInsertRole
 
-instance FromText LinksInsertRole where
-    fromText = \case
-        "advertisers" -> Just LIRAdvertisers
-        "publishers" -> Just LIRPublishers
-        _ -> Nothing
+instance FromHttpApiData LinksInsertRole where
+    parseQueryParam = \case
+        "advertisers" -> Right LIRAdvertisers
+        "publishers" -> Right LIRPublishers
+        x -> Left ("Unable to parse LinksInsertRole from: " <> x)
 
-instance ToText LinksInsertRole where
-    toText = \case
+instance ToHttpApiData LinksInsertRole where
+    toQueryParam = \case
         LIRAdvertisers -> "advertisers"
         LIRPublishers -> "publishers"
 
@@ -325,14 +325,14 @@ data PublishersListRole
 
 instance Hashable PublishersListRole
 
-instance FromText PublishersListRole where
-    fromText = \case
-        "advertisers" -> Just PLRAdvertisers
-        "publishers" -> Just PLRPublishers
-        _ -> Nothing
+instance FromHttpApiData PublishersListRole where
+    parseQueryParam = \case
+        "advertisers" -> Right PLRAdvertisers
+        "publishers" -> Right PLRPublishers
+        x -> Left ("Unable to parse PublishersListRole from: " <> x)
 
-instance ToText PublishersListRole where
-    toText = \case
+instance ToHttpApiData PublishersListRole where
+    toQueryParam = \case
         PLRAdvertisers -> "advertisers"
         PLRPublishers -> "publishers"
 
@@ -352,14 +352,14 @@ data LinksListAuthorship
 
 instance Hashable LinksListAuthorship
 
-instance FromText LinksListAuthorship where
-    fromText = \case
-        "advertiser" -> Just LLAAdvertiser
-        "publisher" -> Just LLAPublisher
-        _ -> Nothing
+instance FromHttpApiData LinksListAuthorship where
+    parseQueryParam = \case
+        "advertiser" -> Right LLAAdvertiser
+        "publisher" -> Right LLAPublisher
+        x -> Left ("Unable to parse LinksListAuthorship from: " <> x)
 
-instance ToText LinksListAuthorship where
-    toText = \case
+instance ToHttpApiData LinksListAuthorship where
+    toQueryParam = \case
         LLAAdvertiser -> "advertiser"
         LLAPublisher -> "publisher"
 
@@ -382,14 +382,14 @@ data LinksGetRole
 
 instance Hashable LinksGetRole
 
-instance FromText LinksGetRole where
-    fromText = \case
-        "advertisers" -> Just LGRAdvertisers
-        "publishers" -> Just LGRPublishers
-        _ -> Nothing
+instance FromHttpApiData LinksGetRole where
+    parseQueryParam = \case
+        "advertisers" -> Right LGRAdvertisers
+        "publishers" -> Right LGRPublishers
+        x -> Left ("Unable to parse LinksGetRole from: " <> x)
 
-instance ToText LinksGetRole where
-    toText = \case
+instance ToHttpApiData LinksGetRole where
+    toQueryParam = \case
         LGRAdvertisers -> "advertisers"
         LGRPublishers -> "publishers"
 
@@ -409,14 +409,14 @@ data LinksListLinkType
 
 instance Hashable LinksListLinkType
 
-instance FromText LinksListLinkType where
-    fromText = \case
-        "banner" -> Just Banner
-        "text" -> Just Text
-        _ -> Nothing
+instance FromHttpApiData LinksListLinkType where
+    parseQueryParam = \case
+        "banner" -> Right Banner
+        "text" -> Right Text
+        x -> Left ("Unable to parse LinksListLinkType from: " <> x)
 
-instance ToText LinksListLinkType where
-    toText = \case
+instance ToHttpApiData LinksListLinkType where
+    toQueryParam = \case
         Banner -> "banner"
         Text -> "text"
 
@@ -439,14 +439,14 @@ data EventsListRole
 
 instance Hashable EventsListRole
 
-instance FromText EventsListRole where
-    fromText = \case
-        "advertisers" -> Just ELRAdvertisers
-        "publishers" -> Just ELRPublishers
-        _ -> Nothing
+instance FromHttpApiData EventsListRole where
+    parseQueryParam = \case
+        "advertisers" -> Right ELRAdvertisers
+        "publishers" -> Right ELRPublishers
+        x -> Left ("Unable to parse EventsListRole from: " <> x)
 
-instance ToText EventsListRole where
-    toText = \case
+instance ToHttpApiData EventsListRole where
+    toQueryParam = \case
         ELRAdvertisers -> "advertisers"
         ELRPublishers -> "publishers"
 
@@ -481,17 +481,17 @@ data AdvertisersListRelationshipStatus
 
 instance Hashable AdvertisersListRelationshipStatus
 
-instance FromText AdvertisersListRelationshipStatus where
-    fromText = \case
-        "approved" -> Just Approved
-        "available" -> Just Available
-        "deactivated" -> Just Deactivated
-        "declined" -> Just Declined
-        "pending" -> Just Pending
-        _ -> Nothing
+instance FromHttpApiData AdvertisersListRelationshipStatus where
+    parseQueryParam = \case
+        "approved" -> Right Approved
+        "available" -> Right Available
+        "deactivated" -> Right Deactivated
+        "declined" -> Right Declined
+        "pending" -> Right Pending
+        x -> Left ("Unable to parse AdvertisersListRelationshipStatus from: " <> x)
 
-instance ToText AdvertisersListRelationshipStatus where
-    toText = \case
+instance ToHttpApiData AdvertisersListRelationshipStatus where
+    toQueryParam = \case
         Approved -> "approved"
         Available -> "available"
         Deactivated -> "deactivated"
@@ -516,14 +516,14 @@ data CcOffersListProjection
 
 instance Hashable CcOffersListProjection
 
-instance FromText CcOffersListProjection where
-    fromText = \case
-        "full" -> Just Full
-        "summary" -> Just Summary
-        _ -> Nothing
+instance FromHttpApiData CcOffersListProjection where
+    parseQueryParam = \case
+        "full" -> Right Full
+        "summary" -> Right Summary
+        x -> Left ("Unable to parse CcOffersListProjection from: " <> x)
 
-instance ToText CcOffersListProjection where
-    toText = \case
+instance ToHttpApiData CcOffersListProjection where
+    toQueryParam = \case
         Full -> "full"
         Summary -> "summary"
 
@@ -546,14 +546,14 @@ data AdvertisersGetRole
 
 instance Hashable AdvertisersGetRole
 
-instance FromText AdvertisersGetRole where
-    fromText = \case
-        "advertisers" -> Just AGRAdvertisers
-        "publishers" -> Just AGRPublishers
-        _ -> Nothing
+instance FromHttpApiData AdvertisersGetRole where
+    parseQueryParam = \case
+        "advertisers" -> Right AGRAdvertisers
+        "publishers" -> Right AGRPublishers
+        x -> Left ("Unable to parse AdvertisersGetRole from: " <> x)
 
-instance ToText AdvertisersGetRole where
-    toText = \case
+instance ToHttpApiData AdvertisersGetRole where
+    toQueryParam = \case
         AGRAdvertisers -> "advertisers"
         AGRPublishers -> "publishers"
 
@@ -593,18 +593,18 @@ data EventsListChargeType
 
 instance Hashable EventsListChargeType
 
-instance FromText EventsListChargeType where
-    fromText = \case
-        "credit" -> Just Credit
-        "debit" -> Just Debit
-        "monthly_minimum" -> Just MonthlyMinimum
-        "other" -> Just Other
-        "slotting_fee" -> Just SlottingFee
-        "tier_bonus" -> Just TierBonus
-        _ -> Nothing
+instance FromHttpApiData EventsListChargeType where
+    parseQueryParam = \case
+        "credit" -> Right Credit
+        "debit" -> Right Debit
+        "monthly_minimum" -> Right MonthlyMinimum
+        "other" -> Right Other
+        "slotting_fee" -> Right SlottingFee
+        "tier_bonus" -> Right TierBonus
+        x -> Left ("Unable to parse EventsListChargeType from: " <> x)
 
-instance ToText EventsListChargeType where
-    toText = \case
+instance ToHttpApiData EventsListChargeType where
+    toQueryParam = \case
         Credit -> "credit"
         Debit -> "debit"
         MonthlyMinimum -> "monthly_minimum"
@@ -642,17 +642,17 @@ data PublishersListRelationshipStatus
 
 instance Hashable PublishersListRelationshipStatus
 
-instance FromText PublishersListRelationshipStatus where
-    fromText = \case
-        "approved" -> Just PLRSApproved
-        "available" -> Just PLRSAvailable
-        "deactivated" -> Just PLRSDeactivated
-        "declined" -> Just PLRSDeclined
-        "pending" -> Just PLRSPending
-        _ -> Nothing
+instance FromHttpApiData PublishersListRelationshipStatus where
+    parseQueryParam = \case
+        "approved" -> Right PLRSApproved
+        "available" -> Right PLRSAvailable
+        "deactivated" -> Right PLRSDeactivated
+        "declined" -> Right PLRSDeclined
+        "pending" -> Right PLRSPending
+        x -> Left ("Unable to parse PublishersListRelationshipStatus from: " <> x)
 
-instance ToText PublishersListRelationshipStatus where
-    toText = \case
+instance ToHttpApiData PublishersListRelationshipStatus where
+    toQueryParam = \case
         PLRSApproved -> "approved"
         PLRSAvailable -> "available"
         PLRSDeactivated -> "deactivated"
@@ -678,14 +678,14 @@ data ReportsGetRole
 
 instance Hashable ReportsGetRole
 
-instance FromText ReportsGetRole where
-    fromText = \case
-        "advertisers" -> Just RGRAdvertisers
-        "publishers" -> Just RGRPublishers
-        _ -> Nothing
+instance FromHttpApiData ReportsGetRole where
+    parseQueryParam = \case
+        "advertisers" -> Right RGRAdvertisers
+        "publishers" -> Right RGRPublishers
+        x -> Left ("Unable to parse ReportsGetRole from: " <> x)
 
-instance ToText ReportsGetRole where
-    toText = \case
+instance ToHttpApiData ReportsGetRole where
+    toQueryParam = \case
         RGRAdvertisers -> "advertisers"
         RGRPublishers -> "publishers"
 
@@ -705,14 +705,14 @@ data LinksListRelationshipStatus
 
 instance Hashable LinksListRelationshipStatus
 
-instance FromText LinksListRelationshipStatus where
-    fromText = \case
-        "approved" -> Just LLRSApproved
-        "available" -> Just LLRSAvailable
-        _ -> Nothing
+instance FromHttpApiData LinksListRelationshipStatus where
+    parseQueryParam = \case
+        "approved" -> Right LLRSApproved
+        "available" -> Right LLRSAvailable
+        x -> Left ("Unable to parse LinksListRelationshipStatus from: " <> x)
 
-instance ToText LinksListRelationshipStatus where
-    toText = \case
+instance ToHttpApiData LinksListRelationshipStatus where
+    toQueryParam = \case
         LLRSApproved -> "approved"
         LLRSAvailable -> "available"
 
@@ -735,14 +735,14 @@ data EventsListStatus
 
 instance Hashable EventsListStatus
 
-instance FromText EventsListStatus where
-    fromText = \case
-        "active" -> Just ELSActive
-        "canceled" -> Just ELSCanceled
-        _ -> Nothing
+instance FromHttpApiData EventsListStatus where
+    parseQueryParam = \case
+        "active" -> Right ELSActive
+        "canceled" -> Right ELSCanceled
+        x -> Left ("Unable to parse EventsListStatus from: " <> x)
 
-instance ToText EventsListStatus where
-    toText = \case
+instance ToHttpApiData EventsListStatus where
+    toQueryParam = \case
         ELSActive -> "active"
         ELSCanceled -> "canceled"
 

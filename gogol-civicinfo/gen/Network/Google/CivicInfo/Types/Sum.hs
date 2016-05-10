@@ -44,21 +44,21 @@ data RepresentativesRepresentativeInfoByDivisionLevels
 
 instance Hashable RepresentativesRepresentativeInfoByDivisionLevels
 
-instance FromText RepresentativesRepresentativeInfoByDivisionLevels where
-    fromText = \case
-        "administrativeArea1" -> Just ADMINISTRATIVEAREA1
-        "administrativeArea2" -> Just ADMINISTRATIVEAREA2
-        "country" -> Just Country
-        "international" -> Just International
-        "locality" -> Just Locality
-        "regional" -> Just Regional
-        "special" -> Just Special
-        "subLocality1" -> Just SUBLOCALITY1
-        "subLocality2" -> Just SUBLOCALITY2
-        _ -> Nothing
+instance FromHttpApiData RepresentativesRepresentativeInfoByDivisionLevels where
+    parseQueryParam = \case
+        "administrativeArea1" -> Right ADMINISTRATIVEAREA1
+        "administrativeArea2" -> Right ADMINISTRATIVEAREA2
+        "country" -> Right Country
+        "international" -> Right International
+        "locality" -> Right Locality
+        "regional" -> Right Regional
+        "special" -> Right Special
+        "subLocality1" -> Right SUBLOCALITY1
+        "subLocality2" -> Right SUBLOCALITY2
+        x -> Left ("Unable to parse RepresentativesRepresentativeInfoByDivisionLevels from: " <> x)
 
-instance ToText RepresentativesRepresentativeInfoByDivisionLevels where
-    toText = \case
+instance ToHttpApiData RepresentativesRepresentativeInfoByDivisionLevels where
+    toQueryParam = \case
         ADMINISTRATIVEAREA1 -> "administrativeArea1"
         ADMINISTRATIVEAREA2 -> "administrativeArea2"
         Country -> "country"
@@ -101,21 +101,21 @@ data RepresentativesRepresentativeInfoByAddressLevels
 
 instance Hashable RepresentativesRepresentativeInfoByAddressLevels
 
-instance FromText RepresentativesRepresentativeInfoByAddressLevels where
-    fromText = \case
-        "administrativeArea1" -> Just RRIBALADMINISTRATIVEAREA1
-        "administrativeArea2" -> Just RRIBALADMINISTRATIVEAREA2
-        "country" -> Just RRIBALCountry
-        "international" -> Just RRIBALInternational
-        "locality" -> Just RRIBALLocality
-        "regional" -> Just RRIBALRegional
-        "special" -> Just RRIBALSpecial
-        "subLocality1" -> Just RRIBALSUBLOCALITY1
-        "subLocality2" -> Just RRIBALSUBLOCALITY2
-        _ -> Nothing
+instance FromHttpApiData RepresentativesRepresentativeInfoByAddressLevels where
+    parseQueryParam = \case
+        "administrativeArea1" -> Right RRIBALADMINISTRATIVEAREA1
+        "administrativeArea2" -> Right RRIBALADMINISTRATIVEAREA2
+        "country" -> Right RRIBALCountry
+        "international" -> Right RRIBALInternational
+        "locality" -> Right RRIBALLocality
+        "regional" -> Right RRIBALRegional
+        "special" -> Right RRIBALSpecial
+        "subLocality1" -> Right RRIBALSUBLOCALITY1
+        "subLocality2" -> Right RRIBALSUBLOCALITY2
+        x -> Left ("Unable to parse RepresentativesRepresentativeInfoByAddressLevels from: " <> x)
 
-instance ToText RepresentativesRepresentativeInfoByAddressLevels where
-    toText = \case
+instance ToHttpApiData RepresentativesRepresentativeInfoByAddressLevels where
+    toQueryParam = \case
         RRIBALADMINISTRATIVEAREA1 -> "administrativeArea1"
         RRIBALADMINISTRATIVEAREA2 -> "administrativeArea2"
         RRIBALCountry -> "country"
@@ -162,23 +162,23 @@ data RepresentativesRepresentativeInfoByDivisionRoles
 
 instance Hashable RepresentativesRepresentativeInfoByDivisionRoles
 
-instance FromText RepresentativesRepresentativeInfoByDivisionRoles where
-    fromText = \case
-        "deputyHeadOfGovernment" -> Just DeputyHeadOfGovernment
-        "executiveCouncil" -> Just ExecutiveCouncil
-        "governmentOfficer" -> Just GovernmentOfficer
-        "headOfGovernment" -> Just HeadOfGovernment
-        "headOfState" -> Just HeadOfState
-        "highestCourtJudge" -> Just HighestCourtJudge
-        "judge" -> Just Judge
-        "legislatorLowerBody" -> Just LegislatorLowerBody
-        "legislatorUpperBody" -> Just LegislatorUpperBody
-        "schoolBoard" -> Just SchoolBoard
-        "specialPurposeOfficer" -> Just SpecialPurposeOfficer
-        _ -> Nothing
+instance FromHttpApiData RepresentativesRepresentativeInfoByDivisionRoles where
+    parseQueryParam = \case
+        "deputyHeadOfGovernment" -> Right DeputyHeadOfGovernment
+        "executiveCouncil" -> Right ExecutiveCouncil
+        "governmentOfficer" -> Right GovernmentOfficer
+        "headOfGovernment" -> Right HeadOfGovernment
+        "headOfState" -> Right HeadOfState
+        "highestCourtJudge" -> Right HighestCourtJudge
+        "judge" -> Right Judge
+        "legislatorLowerBody" -> Right LegislatorLowerBody
+        "legislatorUpperBody" -> Right LegislatorUpperBody
+        "schoolBoard" -> Right SchoolBoard
+        "specialPurposeOfficer" -> Right SpecialPurposeOfficer
+        x -> Left ("Unable to parse RepresentativesRepresentativeInfoByDivisionRoles from: " <> x)
 
-instance ToText RepresentativesRepresentativeInfoByDivisionRoles where
-    toText = \case
+instance ToHttpApiData RepresentativesRepresentativeInfoByDivisionRoles where
+    toQueryParam = \case
         DeputyHeadOfGovernment -> "deputyHeadOfGovernment"
         ExecutiveCouncil -> "executiveCouncil"
         GovernmentOfficer -> "governmentOfficer"
@@ -227,23 +227,23 @@ data RepresentativesRepresentativeInfoByAddressRoles
 
 instance Hashable RepresentativesRepresentativeInfoByAddressRoles
 
-instance FromText RepresentativesRepresentativeInfoByAddressRoles where
-    fromText = \case
-        "deputyHeadOfGovernment" -> Just RRIBARDeputyHeadOfGovernment
-        "executiveCouncil" -> Just RRIBARExecutiveCouncil
-        "governmentOfficer" -> Just RRIBARGovernmentOfficer
-        "headOfGovernment" -> Just RRIBARHeadOfGovernment
-        "headOfState" -> Just RRIBARHeadOfState
-        "highestCourtJudge" -> Just RRIBARHighestCourtJudge
-        "judge" -> Just RRIBARJudge
-        "legislatorLowerBody" -> Just RRIBARLegislatorLowerBody
-        "legislatorUpperBody" -> Just RRIBARLegislatorUpperBody
-        "schoolBoard" -> Just RRIBARSchoolBoard
-        "specialPurposeOfficer" -> Just RRIBARSpecialPurposeOfficer
-        _ -> Nothing
+instance FromHttpApiData RepresentativesRepresentativeInfoByAddressRoles where
+    parseQueryParam = \case
+        "deputyHeadOfGovernment" -> Right RRIBARDeputyHeadOfGovernment
+        "executiveCouncil" -> Right RRIBARExecutiveCouncil
+        "governmentOfficer" -> Right RRIBARGovernmentOfficer
+        "headOfGovernment" -> Right RRIBARHeadOfGovernment
+        "headOfState" -> Right RRIBARHeadOfState
+        "highestCourtJudge" -> Right RRIBARHighestCourtJudge
+        "judge" -> Right RRIBARJudge
+        "legislatorLowerBody" -> Right RRIBARLegislatorLowerBody
+        "legislatorUpperBody" -> Right RRIBARLegislatorUpperBody
+        "schoolBoard" -> Right RRIBARSchoolBoard
+        "specialPurposeOfficer" -> Right RRIBARSpecialPurposeOfficer
+        x -> Left ("Unable to parse RepresentativesRepresentativeInfoByAddressRoles from: " <> x)
 
-instance ToText RepresentativesRepresentativeInfoByAddressRoles where
-    toText = \case
+instance ToHttpApiData RepresentativesRepresentativeInfoByAddressRoles where
+    toQueryParam = \case
         RRIBARDeputyHeadOfGovernment -> "deputyHeadOfGovernment"
         RRIBARExecutiveCouncil -> "executiveCouncil"
         RRIBARGovernmentOfficer -> "governmentOfficer"

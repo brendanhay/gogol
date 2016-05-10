@@ -32,16 +32,16 @@ data OrdersGettestOrdertemplateTemplateName
 
 instance Hashable OrdersGettestOrdertemplateTemplateName
 
-instance FromText OrdersGettestOrdertemplateTemplateName where
-    fromText = \case
-        "template1" -> Just TEMPLATE1
-        "template1a" -> Just Template1a
-        "template1b" -> Just Template1b
-        "template2" -> Just TEMPLATE2
-        _ -> Nothing
+instance FromHttpApiData OrdersGettestOrdertemplateTemplateName where
+    parseQueryParam = \case
+        "template1" -> Right TEMPLATE1
+        "template1a" -> Right Template1a
+        "template1b" -> Right Template1b
+        "template2" -> Right TEMPLATE2
+        x -> Left ("Unable to parse OrdersGettestOrdertemplateTemplateName from: " <> x)
 
-instance ToText OrdersGettestOrdertemplateTemplateName where
-    toText = \case
+instance ToHttpApiData OrdersGettestOrdertemplateTemplateName where
+    toQueryParam = \case
         TEMPLATE1 -> "template1"
         Template1a -> "template1a"
         Template1b -> "template1b"
@@ -68,14 +68,14 @@ data OrdersListOrderBy
 
 instance Hashable OrdersListOrderBy
 
-instance FromText OrdersListOrderBy where
-    fromText = \case
-        "placedDate asc" -> Just PlacedDateAsc
-        "placedDate desc" -> Just PlacedDateDesc
-        _ -> Nothing
+instance FromHttpApiData OrdersListOrderBy where
+    parseQueryParam = \case
+        "placedDate asc" -> Right PlacedDateAsc
+        "placedDate desc" -> Right PlacedDateDesc
+        x -> Left ("Unable to parse OrdersListOrderBy from: " <> x)
 
-instance ToText OrdersListOrderBy where
-    toText = \case
+instance ToHttpApiData OrdersListOrderBy where
+    toQueryParam = \case
         PlacedDateAsc -> "placedDate asc"
         PlacedDateDesc -> "placedDate desc"
 
@@ -117,23 +117,23 @@ data OrdersListStatuses
 
 instance Hashable OrdersListStatuses
 
-instance FromText OrdersListStatuses where
-    fromText = \case
-        "active" -> Just Active
-        "canceled" -> Just Canceled
-        "completed" -> Just Completed
-        "delivered" -> Just Delivered
-        "inProgress" -> Just InProgress
-        "partiallyDelivered" -> Just PartiallyDelivered
-        "partiallyReturned" -> Just PartiallyReturned
-        "partiallyShipped" -> Just PartiallyShipped
-        "pendingShipment" -> Just PendingShipment
-        "returned" -> Just Returned
-        "shipped" -> Just Shipped
-        _ -> Nothing
+instance FromHttpApiData OrdersListStatuses where
+    parseQueryParam = \case
+        "active" -> Right Active
+        "canceled" -> Right Canceled
+        "completed" -> Right Completed
+        "delivered" -> Right Delivered
+        "inProgress" -> Right InProgress
+        "partiallyDelivered" -> Right PartiallyDelivered
+        "partiallyReturned" -> Right PartiallyReturned
+        "partiallyShipped" -> Right PartiallyShipped
+        "pendingShipment" -> Right PendingShipment
+        "returned" -> Right Returned
+        "shipped" -> Right Shipped
+        x -> Left ("Unable to parse OrdersListStatuses from: " <> x)
 
-instance ToText OrdersListStatuses where
-    toText = \case
+instance ToHttpApiData OrdersListStatuses where
+    toQueryParam = \case
         Active -> "active"
         Canceled -> "canceled"
         Completed -> "completed"

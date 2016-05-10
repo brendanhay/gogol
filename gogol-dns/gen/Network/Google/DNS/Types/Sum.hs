@@ -26,13 +26,13 @@ data ChangesListSortBy
 
 instance Hashable ChangesListSortBy
 
-instance FromText ChangesListSortBy where
-    fromText = \case
-        "changeSequence" -> Just ChangeSequence
-        _ -> Nothing
+instance FromHttpApiData ChangesListSortBy where
+    parseQueryParam = \case
+        "changeSequence" -> Right ChangeSequence
+        x -> Left ("Unable to parse ChangesListSortBy from: " <> x)
 
-instance ToText ChangesListSortBy where
-    toText = \case
+instance ToHttpApiData ChangesListSortBy where
+    toQueryParam = \case
         ChangeSequence -> "changeSequence"
 
 instance FromJSON ChangesListSortBy where
@@ -51,14 +51,14 @@ data ChangeStatus
 
 instance Hashable ChangeStatus
 
-instance FromText ChangeStatus where
-    fromText = \case
-        "done" -> Just Done
-        "pending" -> Just Pending
-        _ -> Nothing
+instance FromHttpApiData ChangeStatus where
+    parseQueryParam = \case
+        "done" -> Right Done
+        "pending" -> Right Pending
+        x -> Left ("Unable to parse ChangeStatus from: " <> x)
 
-instance ToText ChangeStatus where
-    toText = \case
+instance ToHttpApiData ChangeStatus where
+    toQueryParam = \case
         Done -> "done"
         Pending -> "pending"
 

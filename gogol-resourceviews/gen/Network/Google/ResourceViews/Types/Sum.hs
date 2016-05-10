@@ -32,15 +32,15 @@ data ZoneViewsListResourcesFormat
 
 instance Hashable ZoneViewsListResourcesFormat
 
-instance FromText ZoneViewsListResourcesFormat where
-    fromText = \case
-        "NONE" -> Just None
-        "URL" -> Just URL
-        "URL_PORT" -> Just URLPort
-        _ -> Nothing
+instance FromHttpApiData ZoneViewsListResourcesFormat where
+    parseQueryParam = \case
+        "NONE" -> Right None
+        "URL" -> Right URL
+        "URL_PORT" -> Right URLPort
+        x -> Left ("Unable to parse ZoneViewsListResourcesFormat from: " <> x)
 
-instance ToText ZoneViewsListResourcesFormat where
-    toText = \case
+instance ToHttpApiData ZoneViewsListResourcesFormat where
+    toQueryParam = \case
         None -> "NONE"
         URL -> "URL"
         URLPort -> "URL_PORT"
@@ -61,14 +61,14 @@ data ZoneViewsListResourcesListState
 
 instance Hashable ZoneViewsListResourcesListState
 
-instance FromText ZoneViewsListResourcesListState where
-    fromText = \case
-        "ALL" -> Just All
-        "RUNNING" -> Just Running
-        _ -> Nothing
+instance FromHttpApiData ZoneViewsListResourcesListState where
+    parseQueryParam = \case
+        "ALL" -> Right All
+        "RUNNING" -> Right Running
+        x -> Left ("Unable to parse ZoneViewsListResourcesListState from: " <> x)
 
-instance ToText ZoneViewsListResourcesListState where
-    toText = \case
+instance ToHttpApiData ZoneViewsListResourcesListState where
+    toQueryParam = \case
         All -> "ALL"
         Running -> "RUNNING"
 

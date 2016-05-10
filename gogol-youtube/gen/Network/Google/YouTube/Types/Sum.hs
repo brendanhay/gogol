@@ -37,18 +37,18 @@ data ContentRatingCceRating
 
 instance Hashable ContentRatingCceRating
 
-instance FromText ContentRatingCceRating where
-    fromText = \case
-        "cceM12" -> Just CCEM12
-        "cceM16" -> Just CCEM16
-        "cceM18" -> Just CCEM18
-        "cceM4" -> Just CCEM4
-        "cceM6" -> Just CCEM6
-        "cceUnrated" -> Just CceUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCceRating where
+    parseQueryParam = \case
+        "cceM12" -> Right CCEM12
+        "cceM16" -> Right CCEM16
+        "cceM18" -> Right CCEM18
+        "cceM4" -> Right CCEM4
+        "cceM6" -> Right CCEM6
+        "cceUnrated" -> Right CceUnrated
+        x -> Left ("Unable to parse ContentRatingCceRating from: " <> x)
 
-instance ToText ContentRatingCceRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCceRating where
+    toQueryParam = \case
         CCEM12 -> "cceM12"
         CCEM16 -> "cceM16"
         CCEM18 -> "cceM18"
@@ -80,18 +80,18 @@ data ContentRatingChfilmRating
 
 instance Hashable ContentRatingChfilmRating
 
-instance FromText ContentRatingChfilmRating where
-    fromText = \case
-        "chfilm0" -> Just CHFILM0
-        "chfilm12" -> Just CHFILM12
-        "chfilm16" -> Just CHFILM16
-        "chfilm18" -> Just CHFILM18
-        "chfilm6" -> Just CHFILM6
-        "chfilmUnrated" -> Just ChfilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingChfilmRating where
+    parseQueryParam = \case
+        "chfilm0" -> Right CHFILM0
+        "chfilm12" -> Right CHFILM12
+        "chfilm16" -> Right CHFILM16
+        "chfilm18" -> Right CHFILM18
+        "chfilm6" -> Right CHFILM6
+        "chfilmUnrated" -> Right ChfilmUnrated
+        x -> Left ("Unable to parse ContentRatingChfilmRating from: " <> x)
 
-instance ToText ContentRatingChfilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingChfilmRating where
+    toQueryParam = \case
         CHFILM0 -> "chfilm0"
         CHFILM12 -> "chfilm12"
         CHFILM16 -> "chfilm16"
@@ -129,21 +129,21 @@ data ContentRatingMccaaRating
 
 instance Hashable ContentRatingMccaaRating
 
-instance FromText ContentRatingMccaaRating where
-    fromText = \case
-        "mccaa12" -> Just MCCAA12
-        "mccaa12a" -> Just Mccaa12a
-        "mccaa14" -> Just MCCAA14
-        "mccaa15" -> Just MCCAA15
-        "mccaa16" -> Just MCCAA16
-        "mccaa18" -> Just MCCAA18
-        "mccaaPg" -> Just MccaaPg
-        "mccaaU" -> Just MccaaU
-        "mccaaUnrated" -> Just MccaaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMccaaRating where
+    parseQueryParam = \case
+        "mccaa12" -> Right MCCAA12
+        "mccaa12a" -> Right Mccaa12a
+        "mccaa14" -> Right MCCAA14
+        "mccaa15" -> Right MCCAA15
+        "mccaa16" -> Right MCCAA16
+        "mccaa18" -> Right MCCAA18
+        "mccaaPg" -> Right MccaaPg
+        "mccaaU" -> Right MccaaU
+        "mccaaUnrated" -> Right MccaaUnrated
+        x -> Left ("Unable to parse ContentRatingMccaaRating from: " <> x)
 
-instance ToText ContentRatingMccaaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMccaaRating where
+    toQueryParam = \case
         MCCAA12 -> "mccaa12"
         Mccaa12a -> "mccaa12a"
         MCCAA14 -> "mccaa14"
@@ -170,13 +170,13 @@ data VideosListChart
 
 instance Hashable VideosListChart
 
-instance FromText VideosListChart where
-    fromText = \case
-        "mostPopular" -> Just MostPopular
-        _ -> Nothing
+instance FromHttpApiData VideosListChart where
+    parseQueryParam = \case
+        "mostPopular" -> Right MostPopular
+        x -> Left ("Unable to parse VideosListChart from: " <> x)
 
-instance ToText VideosListChart where
-    toText = \case
+instance ToHttpApiData VideosListChart where
+    toQueryParam = \case
         MostPopular -> "mostPopular"
 
 instance FromJSON VideosListChart where
@@ -203,18 +203,18 @@ data ContentRatingMpaaRating
 
 instance Hashable ContentRatingMpaaRating
 
-instance FromText ContentRatingMpaaRating where
-    fromText = \case
-        "mpaaG" -> Just MpaaG
-        "mpaaNc17" -> Just MPAANC17
-        "mpaaPg" -> Just MpaaPg
-        "mpaaPg13" -> Just MPAAPG13
-        "mpaaR" -> Just MpaaR
-        "mpaaUnrated" -> Just MpaaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMpaaRating where
+    parseQueryParam = \case
+        "mpaaG" -> Right MpaaG
+        "mpaaNc17" -> Right MPAANC17
+        "mpaaPg" -> Right MpaaPg
+        "mpaaPg13" -> Right MPAAPG13
+        "mpaaR" -> Right MpaaR
+        "mpaaUnrated" -> Right MpaaUnrated
+        x -> Left ("Unable to parse ContentRatingMpaaRating from: " <> x)
 
-instance ToText ContentRatingMpaaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMpaaRating where
+    toQueryParam = \case
         MpaaG -> "mpaaG"
         MPAANC17 -> "mpaaNc17"
         MpaaPg -> "mpaaPg"
@@ -240,15 +240,15 @@ data CaptionSnippetTrackKind
 
 instance Hashable CaptionSnippetTrackKind
 
-instance FromText CaptionSnippetTrackKind where
-    fromText = \case
-        "ASR" -> Just Asr
-        "forced" -> Just Forced
-        "standard" -> Just Standard
-        _ -> Nothing
+instance FromHttpApiData CaptionSnippetTrackKind where
+    parseQueryParam = \case
+        "ASR" -> Right Asr
+        "forced" -> Right Forced
+        "standard" -> Right Standard
+        x -> Left ("Unable to parse CaptionSnippetTrackKind from: " <> x)
 
-instance ToText CaptionSnippetTrackKind where
-    toText = \case
+instance ToHttpApiData CaptionSnippetTrackKind where
+    toQueryParam = \case
         Asr -> "ASR"
         Forced -> "forced"
         Standard -> "standard"
@@ -272,15 +272,15 @@ data VideoSnippetLiveBroadcastContent
 
 instance Hashable VideoSnippetLiveBroadcastContent
 
-instance FromText VideoSnippetLiveBroadcastContent where
-    fromText = \case
-        "live" -> Just Live
-        "none" -> Just None
-        "upcoming" -> Just Upcoming
-        _ -> Nothing
+instance FromHttpApiData VideoSnippetLiveBroadcastContent where
+    parseQueryParam = \case
+        "live" -> Right Live
+        "none" -> Right None
+        "upcoming" -> Right Upcoming
+        x -> Left ("Unable to parse VideoSnippetLiveBroadcastContent from: " <> x)
 
-instance ToText VideoSnippetLiveBroadcastContent where
-    toText = \case
+instance ToHttpApiData VideoSnippetLiveBroadcastContent where
+    toQueryParam = \case
         Live -> "live"
         None -> "none"
         Upcoming -> "upcoming"
@@ -303,15 +303,15 @@ data ChannelConversionPingContext
 
 instance Hashable ChannelConversionPingContext
 
-instance FromText ChannelConversionPingContext where
-    fromText = \case
-        "cview" -> Just Cview
-        "subscribe" -> Just Subscribe
-        "unsubscribe" -> Just Unsubscribe
-        _ -> Nothing
+instance FromHttpApiData ChannelConversionPingContext where
+    parseQueryParam = \case
+        "cview" -> Right Cview
+        "subscribe" -> Right Subscribe
+        "unsubscribe" -> Right Unsubscribe
+        x -> Left ("Unable to parse ChannelConversionPingContext from: " <> x)
 
-instance ToText ChannelConversionPingContext where
-    toText = \case
+instance ToHttpApiData ChannelConversionPingContext where
+    toQueryParam = \case
         Cview -> "cview"
         Subscribe -> "subscribe"
         Unsubscribe -> "unsubscribe"
@@ -343,19 +343,19 @@ data ContentRatingRcnofRating
 
 instance Hashable ContentRatingRcnofRating
 
-instance FromText ContentRatingRcnofRating where
-    fromText = \case
-        "rcnofI" -> Just RcnofI
-        "rcnofIi" -> Just RcnofIi
-        "rcnofIii" -> Just RcnofIii
-        "rcnofIv" -> Just RcnofIv
-        "rcnofUnrated" -> Just RcnofUnrated
-        "rcnofV" -> Just RcnofV
-        "rcnofVi" -> Just RcnofVi
-        _ -> Nothing
+instance FromHttpApiData ContentRatingRcnofRating where
+    parseQueryParam = \case
+        "rcnofI" -> Right RcnofI
+        "rcnofIi" -> Right RcnofIi
+        "rcnofIii" -> Right RcnofIii
+        "rcnofIv" -> Right RcnofIv
+        "rcnofUnrated" -> Right RcnofUnrated
+        "rcnofV" -> Right RcnofV
+        "rcnofVi" -> Right RcnofVi
+        x -> Left ("Unable to parse ContentRatingRcnofRating from: " <> x)
 
-instance ToText ContentRatingRcnofRating where
-    toText = \case
+instance ToHttpApiData ContentRatingRcnofRating where
+    toQueryParam = \case
         RcnofI -> "rcnofI"
         RcnofIi -> "rcnofIi"
         RcnofIii -> "rcnofIii"
@@ -382,15 +382,15 @@ data VideoStatusPrivacyStatus
 
 instance Hashable VideoStatusPrivacyStatus
 
-instance FromText VideoStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just Private
-        "public" -> Just Public
-        "unlisted" -> Just UnListed
-        _ -> Nothing
+instance FromHttpApiData VideoStatusPrivacyStatus where
+    parseQueryParam = \case
+        "private" -> Right Private
+        "public" -> Right Public
+        "unlisted" -> Right UnListed
+        x -> Left ("Unable to parse VideoStatusPrivacyStatus from: " <> x)
 
-instance ToText VideoStatusPrivacyStatus where
-    toText = \case
+instance ToHttpApiData VideoStatusPrivacyStatus where
+    toQueryParam = \case
         Private -> "private"
         Public -> "public"
         UnListed -> "unlisted"
@@ -430,23 +430,23 @@ data LiveBroadcastStatusLifeCycleStatus
 
 instance Hashable LiveBroadcastStatusLifeCycleStatus
 
-instance FromText LiveBroadcastStatusLifeCycleStatus where
-    fromText = \case
-        "abandoned" -> Just LBSLCSAbandoned
-        "complete" -> Just LBSLCSComplete
-        "completeStarting" -> Just LBSLCSCompleteStarting
-        "created" -> Just LBSLCSCreated
-        "live" -> Just LBSLCSLive
-        "liveStarting" -> Just LBSLCSLiveStarting
-        "ready" -> Just LBSLCSReady
-        "reclaimed" -> Just LBSLCSReclaimed
-        "revoked" -> Just LBSLCSRevoked
-        "testStarting" -> Just LBSLCSTestStarting
-        "testing" -> Just LBSLCSTesting
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastStatusLifeCycleStatus where
+    parseQueryParam = \case
+        "abandoned" -> Right LBSLCSAbandoned
+        "complete" -> Right LBSLCSComplete
+        "completeStarting" -> Right LBSLCSCompleteStarting
+        "created" -> Right LBSLCSCreated
+        "live" -> Right LBSLCSLive
+        "liveStarting" -> Right LBSLCSLiveStarting
+        "ready" -> Right LBSLCSReady
+        "reclaimed" -> Right LBSLCSReclaimed
+        "revoked" -> Right LBSLCSRevoked
+        "testStarting" -> Right LBSLCSTestStarting
+        "testing" -> Right LBSLCSTesting
+        x -> Left ("Unable to parse LiveBroadcastStatusLifeCycleStatus from: " <> x)
 
-instance ToText LiveBroadcastStatusLifeCycleStatus where
-    toText = \case
+instance ToHttpApiData LiveBroadcastStatusLifeCycleStatus where
+    toQueryParam = \case
         LBSLCSAbandoned -> "abandoned"
         LBSLCSComplete -> "complete"
         LBSLCSCompleteStarting -> "completeStarting"
@@ -478,15 +478,15 @@ data CaptionSnippetFailureReason
 
 instance Hashable CaptionSnippetFailureReason
 
-instance FromText CaptionSnippetFailureReason where
-    fromText = \case
-        "processingFailed" -> Just ProcessingFailed
-        "unknownFormat" -> Just UnknownFormat
-        "unsupportedFormat" -> Just UnsupportedFormat
-        _ -> Nothing
+instance FromHttpApiData CaptionSnippetFailureReason where
+    parseQueryParam = \case
+        "processingFailed" -> Right ProcessingFailed
+        "unknownFormat" -> Right UnknownFormat
+        "unsupportedFormat" -> Right UnsupportedFormat
+        x -> Left ("Unable to parse CaptionSnippetFailureReason from: " <> x)
 
-instance ToText CaptionSnippetFailureReason where
-    toText = \case
+instance ToHttpApiData CaptionSnippetFailureReason where
+    toQueryParam = \case
         ProcessingFailed -> "processingFailed"
         UnknownFormat -> "unknownFormat"
         UnsupportedFormat -> "unsupportedFormat"
@@ -512,16 +512,16 @@ data VideoProcessingDetailsProcessingFailureReason
 
 instance Hashable VideoProcessingDetailsProcessingFailureReason
 
-instance FromText VideoProcessingDetailsProcessingFailureReason where
-    fromText = \case
-        "other" -> Just Other
-        "streamingFailed" -> Just StreamingFailed
-        "transcodeFailed" -> Just TranscodeFailed
-        "uploadFailed" -> Just UploadFailed
-        _ -> Nothing
+instance FromHttpApiData VideoProcessingDetailsProcessingFailureReason where
+    parseQueryParam = \case
+        "other" -> Right Other
+        "streamingFailed" -> Right StreamingFailed
+        "transcodeFailed" -> Right TranscodeFailed
+        "uploadFailed" -> Right UploadFailed
+        x -> Left ("Unable to parse VideoProcessingDetailsProcessingFailureReason from: " <> x)
 
-instance ToText VideoProcessingDetailsProcessingFailureReason where
-    toText = \case
+instance ToHttpApiData VideoProcessingDetailsProcessingFailureReason where
+    toQueryParam = \case
         Other -> "other"
         StreamingFailed -> "streamingFailed"
         TranscodeFailed -> "transcodeFailed"
@@ -541,13 +541,13 @@ data InvideoPositionType
 
 instance Hashable InvideoPositionType
 
-instance FromText InvideoPositionType where
-    fromText = \case
-        "corner" -> Just Corner
-        _ -> Nothing
+instance FromHttpApiData InvideoPositionType where
+    parseQueryParam = \case
+        "corner" -> Right Corner
+        x -> Left ("Unable to parse InvideoPositionType from: " <> x)
 
-instance ToText InvideoPositionType where
-    toText = \case
+instance ToHttpApiData InvideoPositionType where
+    toQueryParam = \case
         Corner -> "corner"
 
 instance FromJSON InvideoPositionType where
@@ -575,18 +575,18 @@ data ContentRatingFskRating
 
 instance Hashable ContentRatingFskRating
 
-instance FromText ContentRatingFskRating where
-    fromText = \case
-        "fsk0" -> Just FSK0
-        "fsk12" -> Just FSK12
-        "fsk16" -> Just FSK16
-        "fsk18" -> Just FSK18
-        "fsk6" -> Just FSK6
-        "fskUnrated" -> Just FskUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingFskRating where
+    parseQueryParam = \case
+        "fsk0" -> Right FSK0
+        "fsk12" -> Right FSK12
+        "fsk16" -> Right FSK16
+        "fsk18" -> Right FSK18
+        "fsk6" -> Right FSK6
+        "fskUnrated" -> Right FskUnrated
+        x -> Left ("Unable to parse ContentRatingFskRating from: " <> x)
 
-instance ToText ContentRatingFskRating where
-    toText = \case
+instance ToHttpApiData ContentRatingFskRating where
+    toQueryParam = \case
         FSK0 -> "fsk0"
         FSK12 -> "fsk12"
         FSK16 -> "fsk16"
@@ -619,18 +619,18 @@ data ContentRatingMekuRating
 
 instance Hashable ContentRatingMekuRating
 
-instance FromText ContentRatingMekuRating where
-    fromText = \case
-        "meku12" -> Just MEKU12
-        "meku16" -> Just MEKU16
-        "meku18" -> Just MEKU18
-        "meku7" -> Just MEKU7
-        "mekuS" -> Just MekuS
-        "mekuUnrated" -> Just MekuUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMekuRating where
+    parseQueryParam = \case
+        "meku12" -> Right MEKU12
+        "meku16" -> Right MEKU16
+        "meku18" -> Right MEKU18
+        "meku7" -> Right MEKU7
+        "mekuS" -> Right MekuS
+        "mekuUnrated" -> Right MekuUnrated
+        x -> Left ("Unable to parse ContentRatingMekuRating from: " <> x)
 
-instance ToText ContentRatingMekuRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMekuRating where
+    toQueryParam = \case
         MEKU12 -> "meku12"
         MEKU16 -> "meku16"
         MEKU18 -> "meku18"
@@ -655,14 +655,14 @@ data VideoContentDetailsDefinition
 
 instance Hashable VideoContentDetailsDefinition
 
-instance FromText VideoContentDetailsDefinition where
-    fromText = \case
-        "hd" -> Just HD
-        "sd" -> Just SD
-        _ -> Nothing
+instance FromHttpApiData VideoContentDetailsDefinition where
+    parseQueryParam = \case
+        "hd" -> Right HD
+        "sd" -> Right SD
+        x -> Left ("Unable to parse VideoContentDetailsDefinition from: " <> x)
 
-instance ToText VideoContentDetailsDefinition where
-    toText = \case
+instance ToHttpApiData VideoContentDetailsDefinition where
+    toQueryParam = \case
         HD -> "hd"
         SD -> "sd"
 
@@ -696,21 +696,21 @@ data ContentRatingEefilmRating
 
 instance Hashable ContentRatingEefilmRating
 
-instance FromText ContentRatingEefilmRating where
-    fromText = \case
-        "eefilmK12" -> Just EEFILMK12
-        "eefilmK14" -> Just EEFILMK14
-        "eefilmK16" -> Just EEFILMK16
-        "eefilmK6" -> Just EEFILMK6
-        "eefilmL" -> Just EefilmL
-        "eefilmMs12" -> Just EEFILMMS12
-        "eefilmMs6" -> Just EEFILMMS6
-        "eefilmPere" -> Just EefilmPere
-        "eefilmUnrated" -> Just EefilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingEefilmRating where
+    parseQueryParam = \case
+        "eefilmK12" -> Right EEFILMK12
+        "eefilmK14" -> Right EEFILMK14
+        "eefilmK16" -> Right EEFILMK16
+        "eefilmK6" -> Right EEFILMK6
+        "eefilmL" -> Right EefilmL
+        "eefilmMs12" -> Right EEFILMMS12
+        "eefilmMs6" -> Right EEFILMMS6
+        "eefilmPere" -> Right EefilmPere
+        "eefilmUnrated" -> Right EefilmUnrated
+        x -> Left ("Unable to parse ContentRatingEefilmRating from: " <> x)
 
-instance ToText ContentRatingEefilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingEefilmRating where
+    toQueryParam = \case
         EEFILMK12 -> "eefilmK12"
         EEFILMK14 -> "eefilmK14"
         EEFILMK16 -> "eefilmK16"
@@ -743,15 +743,15 @@ data LiveBroadcastStatusPrivacyStatus
 
 instance Hashable LiveBroadcastStatusPrivacyStatus
 
-instance FromText LiveBroadcastStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just LBSPSPrivate
-        "public" -> Just LBSPSPublic
-        "unlisted" -> Just LBSPSUnListed
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastStatusPrivacyStatus where
+    parseQueryParam = \case
+        "private" -> Right LBSPSPrivate
+        "public" -> Right LBSPSPublic
+        "unlisted" -> Right LBSPSUnListed
+        x -> Left ("Unable to parse LiveBroadcastStatusPrivacyStatus from: " <> x)
 
-instance ToText LiveBroadcastStatusPrivacyStatus where
-    toText = \case
+instance ToHttpApiData LiveBroadcastStatusPrivacyStatus where
+    toQueryParam = \case
         LBSPSPrivate -> "private"
         LBSPSPublic -> "public"
         LBSPSUnListed -> "unlisted"
@@ -785,17 +785,17 @@ data CaptionsDownloadTfmt
 
 instance Hashable CaptionsDownloadTfmt
 
-instance FromText CaptionsDownloadTfmt where
-    fromText = \case
-        "sbv" -> Just Sbv
-        "scc" -> Just Scc
-        "srt" -> Just Srt
-        "ttml" -> Just Ttml
-        "vtt" -> Just Vtt
-        _ -> Nothing
+instance FromHttpApiData CaptionsDownloadTfmt where
+    parseQueryParam = \case
+        "sbv" -> Right Sbv
+        "scc" -> Right Scc
+        "srt" -> Right Srt
+        "ttml" -> Right Ttml
+        "vtt" -> Right Vtt
+        x -> Left ("Unable to parse CaptionsDownloadTfmt from: " <> x)
 
-instance ToText CaptionsDownloadTfmt where
-    toText = \case
+instance ToHttpApiData CaptionsDownloadTfmt where
+    toQueryParam = \case
         Sbv -> "sbv"
         Scc -> "scc"
         Srt -> "srt"
@@ -820,15 +820,15 @@ data PromotedItemIdType
 
 instance Hashable PromotedItemIdType
 
-instance FromText PromotedItemIdType where
-    fromText = \case
-        "recentUpload" -> Just PIITRecentUpload
-        "video" -> Just PIITVideo
-        "website" -> Just PIITWebsite
-        _ -> Nothing
+instance FromHttpApiData PromotedItemIdType where
+    parseQueryParam = \case
+        "recentUpload" -> Right PIITRecentUpload
+        "video" -> Right PIITVideo
+        "website" -> Right PIITWebsite
+        x -> Left ("Unable to parse PromotedItemIdType from: " <> x)
 
-instance ToText PromotedItemIdType where
-    toText = \case
+instance ToHttpApiData PromotedItemIdType where
+    toQueryParam = \case
         PIITRecentUpload -> "recentUpload"
         PIITVideo -> "video"
         PIITWebsite -> "website"
@@ -855,17 +855,17 @@ data ContentRatingPefilmRating
 
 instance Hashable ContentRatingPefilmRating
 
-instance FromText ContentRatingPefilmRating where
-    fromText = \case
-        "pefilm14" -> Just PEFILM14
-        "pefilm18" -> Just PEFILM18
-        "pefilmPg" -> Just PefilmPg
-        "pefilmPt" -> Just PefilmPt
-        "pefilmUnrated" -> Just PefilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingPefilmRating where
+    parseQueryParam = \case
+        "pefilm14" -> Right PEFILM14
+        "pefilm18" -> Right PEFILM18
+        "pefilmPg" -> Right PefilmPg
+        "pefilmPt" -> Right PefilmPt
+        "pefilmUnrated" -> Right PefilmUnrated
+        x -> Left ("Unable to parse ContentRatingPefilmRating from: " <> x)
 
-instance ToText ContentRatingPefilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingPefilmRating where
+    toQueryParam = \case
         PEFILM14 -> "pefilm14"
         PEFILM18 -> "pefilm18"
         PefilmPg -> "pefilmPg"
@@ -892,15 +892,15 @@ data SearchResultSnippetLiveBroadcastContent
 
 instance Hashable SearchResultSnippetLiveBroadcastContent
 
-instance FromText SearchResultSnippetLiveBroadcastContent where
-    fromText = \case
-        "live" -> Just SRSLBCLive
-        "none" -> Just SRSLBCNone
-        "upcoming" -> Just SRSLBCUpcoming
-        _ -> Nothing
+instance FromHttpApiData SearchResultSnippetLiveBroadcastContent where
+    parseQueryParam = \case
+        "live" -> Right SRSLBCLive
+        "none" -> Right SRSLBCNone
+        "upcoming" -> Right SRSLBCUpcoming
+        x -> Left ("Unable to parse SearchResultSnippetLiveBroadcastContent from: " <> x)
 
-instance ToText SearchResultSnippetLiveBroadcastContent where
-    toText = \case
+instance ToHttpApiData SearchResultSnippetLiveBroadcastContent where
+    toQueryParam = \case
         SRSLBCLive -> "live"
         SRSLBCNone -> "none"
         SRSLBCUpcoming -> "upcoming"
@@ -934,20 +934,20 @@ data ContentRatingAnatelRating
 
 instance Hashable ContentRatingAnatelRating
 
-instance FromText ContentRatingAnatelRating where
-    fromText = \case
-        "anatelA" -> Just AnatelA
-        "anatelF" -> Just AnatelF
-        "anatelI" -> Just AnatelI
-        "anatelI10" -> Just ANATELI10
-        "anatelI12" -> Just ANATELI12
-        "anatelI7" -> Just ANATELI7
-        "anatelR" -> Just AnatelR
-        "anatelUnrated" -> Just AnatelUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingAnatelRating where
+    parseQueryParam = \case
+        "anatelA" -> Right AnatelA
+        "anatelF" -> Right AnatelF
+        "anatelI" -> Right AnatelI
+        "anatelI10" -> Right ANATELI10
+        "anatelI12" -> Right ANATELI12
+        "anatelI7" -> Right ANATELI7
+        "anatelR" -> Right AnatelR
+        "anatelUnrated" -> Right AnatelUnrated
+        x -> Left ("Unable to parse ContentRatingAnatelRating from: " <> x)
 
-instance ToText ContentRatingAnatelRating where
-    toText = \case
+instance ToHttpApiData ContentRatingAnatelRating where
+    toQueryParam = \case
         AnatelA -> "anatelA"
         AnatelF -> "anatelF"
         AnatelI -> "anatelI"
@@ -991,18 +991,18 @@ data SearchListOrder
 
 instance Hashable SearchListOrder
 
-instance FromText SearchListOrder where
-    fromText = \case
-        "date" -> Just Date
-        "rating" -> Just Rating
-        "relevance" -> Just Relevance
-        "title" -> Just Title
-        "videoCount" -> Just VideoCount
-        "viewCount" -> Just ViewCount
-        _ -> Nothing
+instance FromHttpApiData SearchListOrder where
+    parseQueryParam = \case
+        "date" -> Right Date
+        "rating" -> Right Rating
+        "relevance" -> Right Relevance
+        "title" -> Right Title
+        "videoCount" -> Right VideoCount
+        "viewCount" -> Right ViewCount
+        x -> Left ("Unable to parse SearchListOrder from: " <> x)
 
-instance ToText SearchListOrder where
-    toText = \case
+instance ToHttpApiData SearchListOrder where
+    toQueryParam = \case
         Date -> "date"
         Rating -> "rating"
         Relevance -> "relevance"
@@ -1036,19 +1036,19 @@ data ContentRatingCccRating
 
 instance Hashable ContentRatingCccRating
 
-instance FromText ContentRatingCccRating where
-    fromText = \case
-        "ccc14" -> Just CCC14
-        "ccc18" -> Just CCC18
-        "ccc18s" -> Just Ccc18s
-        "ccc18v" -> Just Ccc18v
-        "ccc6" -> Just CCC6
-        "cccTe" -> Just CccTe
-        "cccUnrated" -> Just CccUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCccRating where
+    parseQueryParam = \case
+        "ccc14" -> Right CCC14
+        "ccc18" -> Right CCC18
+        "ccc18s" -> Right Ccc18s
+        "ccc18v" -> Right Ccc18v
+        "ccc6" -> Right CCC6
+        "cccTe" -> Right CccTe
+        "cccUnrated" -> Right CccUnrated
+        x -> Left ("Unable to parse ContentRatingCccRating from: " <> x)
 
-instance ToText ContentRatingCccRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCccRating where
+    toQueryParam = \case
         CCC14 -> "ccc14"
         CCC18 -> "ccc18"
         Ccc18s -> "ccc18s"
@@ -1077,16 +1077,16 @@ data CaptionSnippetAudioTrackType
 
 instance Hashable CaptionSnippetAudioTrackType
 
-instance FromText CaptionSnippetAudioTrackType where
-    fromText = \case
-        "commentary" -> Just Commentary
-        "descriptive" -> Just Descriptive
-        "primary" -> Just Primary
-        "unknown" -> Just Unknown
-        _ -> Nothing
+instance FromHttpApiData CaptionSnippetAudioTrackType where
+    parseQueryParam = \case
+        "commentary" -> Right Commentary
+        "descriptive" -> Right Descriptive
+        "primary" -> Right Primary
+        "unknown" -> Right Unknown
+        x -> Left ("Unable to parse CaptionSnippetAudioTrackType from: " <> x)
 
-instance ToText CaptionSnippetAudioTrackType where
-    toText = \case
+instance ToHttpApiData CaptionSnippetAudioTrackType where
+    toQueryParam = \case
         Commentary -> "commentary"
         Descriptive -> "descriptive"
         Primary -> "primary"
@@ -1110,15 +1110,15 @@ data ChannelStatusPrivacyStatus
 
 instance Hashable ChannelStatusPrivacyStatus
 
-instance FromText ChannelStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just CSPSPrivate
-        "public" -> Just CSPSPublic
-        "unlisted" -> Just CSPSUnListed
-        _ -> Nothing
+instance FromHttpApiData ChannelStatusPrivacyStatus where
+    parseQueryParam = \case
+        "private" -> Right CSPSPrivate
+        "public" -> Right CSPSPublic
+        "unlisted" -> Right CSPSUnListed
+        x -> Left ("Unable to parse ChannelStatusPrivacyStatus from: " <> x)
 
-instance ToText ChannelStatusPrivacyStatus where
-    toText = \case
+instance ToHttpApiData ChannelStatusPrivacyStatus where
+    toQueryParam = \case
         CSPSPrivate -> "private"
         CSPSPublic -> "public"
         CSPSUnListed -> "unlisted"
@@ -1142,16 +1142,16 @@ data VideoSuggestionsEditorSuggestionsItem
 
 instance Hashable VideoSuggestionsEditorSuggestionsItem
 
-instance FromText VideoSuggestionsEditorSuggestionsItem where
-    fromText = \case
-        "audioQuietAudioSwap" -> Just AudioQuietAudioSwap
-        "videoAutoLevels" -> Just VideoAutoLevels
-        "videoCrop" -> Just VideoCrop
-        "videoStabilize" -> Just VideoStabilize
-        _ -> Nothing
+instance FromHttpApiData VideoSuggestionsEditorSuggestionsItem where
+    parseQueryParam = \case
+        "audioQuietAudioSwap" -> Right AudioQuietAudioSwap
+        "videoAutoLevels" -> Right VideoAutoLevels
+        "videoCrop" -> Right VideoCrop
+        "videoStabilize" -> Right VideoStabilize
+        x -> Left ("Unable to parse VideoSuggestionsEditorSuggestionsItem from: " <> x)
 
-instance ToText VideoSuggestionsEditorSuggestionsItem where
-    toText = \case
+instance ToHttpApiData VideoSuggestionsEditorSuggestionsItem where
+    toQueryParam = \case
         AudioQuietAudioSwap -> "audioQuietAudioSwap"
         VideoAutoLevels -> "videoAutoLevels"
         VideoCrop -> "videoCrop"
@@ -1184,18 +1184,18 @@ data ContentRatingCatvfrRating
 
 instance Hashable ContentRatingCatvfrRating
 
-instance FromText ContentRatingCatvfrRating where
-    fromText = \case
-        "catvfr13plus" -> Just Catvfr13plus
-        "catvfr16plus" -> Just Catvfr16plus
-        "catvfr18plus" -> Just Catvfr18plus
-        "catvfr8plus" -> Just Catvfr8plus
-        "catvfrG" -> Just CatvfrG
-        "catvfrUnrated" -> Just CatvfrUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCatvfrRating where
+    parseQueryParam = \case
+        "catvfr13plus" -> Right Catvfr13plus
+        "catvfr16plus" -> Right Catvfr16plus
+        "catvfr18plus" -> Right Catvfr18plus
+        "catvfr8plus" -> Right Catvfr8plus
+        "catvfrG" -> Right CatvfrG
+        "catvfrUnrated" -> Right CatvfrUnrated
+        x -> Left ("Unable to parse ContentRatingCatvfrRating from: " <> x)
 
-instance ToText ContentRatingCatvfrRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCatvfrRating where
+    toQueryParam = \case
         Catvfr13plus -> "catvfr13plus"
         Catvfr16plus -> "catvfr16plus"
         Catvfr18plus -> "catvfr18plus"
@@ -1228,18 +1228,18 @@ data ContentRatingCnaRating
 
 instance Hashable ContentRatingCnaRating
 
-instance FromText ContentRatingCnaRating where
-    fromText = \case
-        "cna12" -> Just CNA12
-        "cna15" -> Just CNA15
-        "cna18" -> Just CNA18
-        "cna18plus" -> Just Cna18plus
-        "cnaAp" -> Just CnaAp
-        "cnaUnrated" -> Just CnaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCnaRating where
+    parseQueryParam = \case
+        "cna12" -> Right CNA12
+        "cna15" -> Right CNA15
+        "cna18" -> Right CNA18
+        "cna18plus" -> Right Cna18plus
+        "cnaAp" -> Right CnaAp
+        "cnaUnrated" -> Right CnaUnrated
+        x -> Left ("Unable to parse ContentRatingCnaRating from: " <> x)
 
-instance ToText ContentRatingCnaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCnaRating where
+    toQueryParam = \case
         CNA12 -> "cna12"
         CNA15 -> "cna15"
         CNA18 -> "cna18"
@@ -1273,19 +1273,19 @@ data ContentRatingChvrsRating
 
 instance Hashable ContentRatingChvrsRating
 
-instance FromText ContentRatingChvrsRating where
-    fromText = \case
-        "chvrs14a" -> Just Chvrs14a
-        "chvrs18a" -> Just Chvrs18a
-        "chvrsE" -> Just ChvrsE
-        "chvrsG" -> Just ChvrsG
-        "chvrsPg" -> Just ChvrsPg
-        "chvrsR" -> Just ChvrsR
-        "chvrsUnrated" -> Just ChvrsUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingChvrsRating where
+    parseQueryParam = \case
+        "chvrs14a" -> Right Chvrs14a
+        "chvrs18a" -> Right Chvrs18a
+        "chvrsE" -> Right ChvrsE
+        "chvrsG" -> Right ChvrsG
+        "chvrsPg" -> Right ChvrsPg
+        "chvrsR" -> Right ChvrsR
+        "chvrsUnrated" -> Right ChvrsUnrated
+        x -> Left ("Unable to parse ContentRatingChvrsRating from: " <> x)
 
-instance ToText ContentRatingChvrsRating where
-    toText = \case
+instance ToHttpApiData ContentRatingChvrsRating where
+    toQueryParam = \case
         Chvrs14a -> "chvrs14a"
         Chvrs18a -> "chvrs18a"
         ChvrsE -> "chvrsE"
@@ -1319,18 +1319,18 @@ data ContentRatingIncaaRating
 
 instance Hashable ContentRatingIncaaRating
 
-instance FromText ContentRatingIncaaRating where
-    fromText = \case
-        "incaaAtp" -> Just IncaaAtp
-        "incaaC" -> Just IncaaC
-        "incaaSam13" -> Just INCAASAM13
-        "incaaSam16" -> Just INCAASAM16
-        "incaaSam18" -> Just INCAASAM18
-        "incaaUnrated" -> Just IncaaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingIncaaRating where
+    parseQueryParam = \case
+        "incaaAtp" -> Right IncaaAtp
+        "incaaC" -> Right IncaaC
+        "incaaSam13" -> Right INCAASAM13
+        "incaaSam16" -> Right INCAASAM16
+        "incaaSam18" -> Right INCAASAM18
+        "incaaUnrated" -> Right IncaaUnrated
+        x -> Left ("Unable to parse ContentRatingIncaaRating from: " <> x)
 
-instance ToText ContentRatingIncaaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingIncaaRating where
+    toQueryParam = \case
         IncaaAtp -> "incaaAtp"
         IncaaC -> "incaaC"
         INCAASAM13 -> "incaaSam13"
@@ -1361,17 +1361,17 @@ data ContentRatingSmsaRating
 
 instance Hashable ContentRatingSmsaRating
 
-instance FromText ContentRatingSmsaRating where
-    fromText = \case
-        "smsa11" -> Just SMSA11
-        "smsa15" -> Just SMSA15
-        "smsa7" -> Just SMSA7
-        "smsaA" -> Just SmsaA
-        "smsaUnrated" -> Just SmsaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingSmsaRating where
+    parseQueryParam = \case
+        "smsa11" -> Right SMSA11
+        "smsa15" -> Right SMSA15
+        "smsa7" -> Right SMSA7
+        "smsaA" -> Right SmsaA
+        "smsaUnrated" -> Right SmsaUnrated
+        x -> Left ("Unable to parse ContentRatingSmsaRating from: " <> x)
 
-instance ToText ContentRatingSmsaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingSmsaRating where
+    toQueryParam = \case
         SMSA11 -> "smsa11"
         SMSA15 -> "smsa15"
         SMSA7 -> "smsa7"
@@ -1400,17 +1400,17 @@ data ContentRatingCbfcRating
 
 instance Hashable ContentRatingCbfcRating
 
-instance FromText ContentRatingCbfcRating where
-    fromText = \case
-        "cbfcA" -> Just CbfcA
-        "cbfcS" -> Just CbfcS
-        "cbfcU" -> Just CbfcU
-        "cbfcUA" -> Just CbfcUA
-        "cbfcUnrated" -> Just CbfcUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCbfcRating where
+    parseQueryParam = \case
+        "cbfcA" -> Right CbfcA
+        "cbfcS" -> Right CbfcS
+        "cbfcU" -> Right CbfcU
+        "cbfcUA" -> Right CbfcUA
+        "cbfcUnrated" -> Right CbfcUnrated
+        x -> Left ("Unable to parse ContentRatingCbfcRating from: " <> x)
 
-instance ToText ContentRatingCbfcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCbfcRating where
+    toQueryParam = \case
         CbfcA -> "cbfcA"
         CbfcS -> "cbfcS"
         CbfcU -> "cbfcU"
@@ -1439,17 +1439,17 @@ data ContentRatingKfcbRating
 
 instance Hashable ContentRatingKfcbRating
 
-instance FromText ContentRatingKfcbRating where
-    fromText = \case
-        "kfcb16plus" -> Just Kfcb16plus
-        "kfcbG" -> Just KfcbG
-        "kfcbPg" -> Just KfcbPg
-        "kfcbR" -> Just KfcbR
-        "kfcbUnrated" -> Just KfcbUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingKfcbRating where
+    parseQueryParam = \case
+        "kfcb16plus" -> Right Kfcb16plus
+        "kfcbG" -> Right KfcbG
+        "kfcbPg" -> Right KfcbPg
+        "kfcbR" -> Right KfcbR
+        "kfcbUnrated" -> Right KfcbUnrated
+        x -> Left ("Unable to parse ContentRatingKfcbRating from: " <> x)
 
-instance ToText ContentRatingKfcbRating where
-    toText = \case
+instance ToHttpApiData ContentRatingKfcbRating where
+    toQueryParam = \case
         Kfcb16plus -> "kfcb16plus"
         KfcbG -> "kfcbG"
         KfcbPg -> "kfcbPg"
@@ -1474,15 +1474,15 @@ data LiveStreamConfigurationIssueSeverity
 
 instance Hashable LiveStreamConfigurationIssueSeverity
 
-instance FromText LiveStreamConfigurationIssueSeverity where
-    fromText = \case
-        "error" -> Just Error'
-        "info" -> Just Info
-        "warning" -> Just Warning
-        _ -> Nothing
+instance FromHttpApiData LiveStreamConfigurationIssueSeverity where
+    parseQueryParam = \case
+        "error" -> Right Error'
+        "info" -> Right Info
+        "warning" -> Right Warning
+        x -> Left ("Unable to parse LiveStreamConfigurationIssueSeverity from: " <> x)
 
-instance ToText LiveStreamConfigurationIssueSeverity where
-    toText = \case
+instance ToHttpApiData LiveStreamConfigurationIssueSeverity where
+    toQueryParam = \case
         Error' -> "error"
         Info -> "info"
         Warning -> "warning"
@@ -1513,15 +1513,15 @@ data SearchListVideoDefinition
 
 instance Hashable SearchListVideoDefinition
 
-instance FromText SearchListVideoDefinition where
-    fromText = \case
-        "any" -> Just SLVDAny
-        "high" -> Just SLVDHigh
-        "standard" -> Just SLVDStandard
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoDefinition where
+    parseQueryParam = \case
+        "any" -> Right SLVDAny
+        "high" -> Right SLVDHigh
+        "standard" -> Right SLVDStandard
+        x -> Left ("Unable to parse SearchListVideoDefinition from: " <> x)
 
-instance ToText SearchListVideoDefinition where
-    toText = \case
+instance ToHttpApiData SearchListVideoDefinition where
+    toQueryParam = \case
         SLVDAny -> "any"
         SLVDHigh -> "high"
         SLVDStandard -> "standard"
@@ -1546,16 +1546,16 @@ data VideoAgeGatingVideoGameRating
 
 instance Hashable VideoAgeGatingVideoGameRating
 
-instance FromText VideoAgeGatingVideoGameRating where
-    fromText = \case
-        "anyone" -> Just Anyone
-        "m15Plus" -> Just M15Plus
-        "m16Plus" -> Just M16Plus
-        "m17Plus" -> Just M17Plus
-        _ -> Nothing
+instance FromHttpApiData VideoAgeGatingVideoGameRating where
+    parseQueryParam = \case
+        "anyone" -> Right Anyone
+        "m15Plus" -> Right M15Plus
+        "m16Plus" -> Right M16Plus
+        "m17Plus" -> Right M17Plus
+        x -> Left ("Unable to parse VideoAgeGatingVideoGameRating from: " <> x)
 
-instance ToText VideoAgeGatingVideoGameRating where
-    toText = \case
+instance ToHttpApiData VideoAgeGatingVideoGameRating where
+    toQueryParam = \case
         Anyone -> "anyone"
         M15Plus -> "m15Plus"
         M16Plus -> "m16Plus"
@@ -1591,21 +1591,21 @@ data ContentRatingLsfRating
 
 instance Hashable ContentRatingLsfRating
 
-instance FromText ContentRatingLsfRating where
-    fromText = \case
-        "lsf13" -> Just LSF13
-        "lsf17" -> Just LSF17
-        "lsf21" -> Just LSF21
-        "lsfA" -> Just LsfA
-        "lsfBo" -> Just LsfBo
-        "lsfD" -> Just LsfD
-        "lsfR" -> Just LsfR
-        "lsfSu" -> Just LsfSu
-        "lsfUnrated" -> Just LsfUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingLsfRating where
+    parseQueryParam = \case
+        "lsf13" -> Right LSF13
+        "lsf17" -> Right LSF17
+        "lsf21" -> Right LSF21
+        "lsfA" -> Right LsfA
+        "lsfBo" -> Right LsfBo
+        "lsfD" -> Right LsfD
+        "lsfR" -> Right LsfR
+        "lsfSu" -> Right LsfSu
+        "lsfUnrated" -> Right LsfUnrated
+        x -> Left ("Unable to parse ContentRatingLsfRating from: " <> x)
 
-instance ToText ContentRatingLsfRating where
-    toText = \case
+instance ToHttpApiData ContentRatingLsfRating where
+    toQueryParam = \case
         LSF13 -> "lsf13"
         LSF17 -> "lsf17"
         LSF21 -> "lsf21"
@@ -1632,14 +1632,14 @@ data LiveChatBanSnippetType
 
 instance Hashable LiveChatBanSnippetType
 
-instance FromText LiveChatBanSnippetType where
-    fromText = \case
-        "permanent" -> Just Permanent
-        "temporary" -> Just Temporary
-        _ -> Nothing
+instance FromHttpApiData LiveChatBanSnippetType where
+    parseQueryParam = \case
+        "permanent" -> Right Permanent
+        "temporary" -> Right Temporary
+        x -> Left ("Unable to parse LiveChatBanSnippetType from: " <> x)
 
-instance ToText LiveChatBanSnippetType where
-    toText = \case
+instance ToHttpApiData LiveChatBanSnippetType where
+    toQueryParam = \case
         Permanent -> "permanent"
         Temporary -> "temporary"
 
@@ -1671,20 +1671,20 @@ data ContentRatingBfvcRating
 
 instance Hashable ContentRatingBfvcRating
 
-instance FromText ContentRatingBfvcRating where
-    fromText = \case
-        "bfvc13" -> Just BFVC13
-        "bfvc15" -> Just BFVC15
-        "bfvc18" -> Just BFVC18
-        "bfvc20" -> Just BFVC20
-        "bfvcB" -> Just BfvcB
-        "bfvcE" -> Just BfvcE
-        "bfvcG" -> Just BfvcG
-        "bfvcUnrated" -> Just BfvcUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingBfvcRating where
+    parseQueryParam = \case
+        "bfvc13" -> Right BFVC13
+        "bfvc15" -> Right BFVC15
+        "bfvc18" -> Right BFVC18
+        "bfvc20" -> Right BFVC20
+        "bfvcB" -> Right BfvcB
+        "bfvcE" -> Right BfvcE
+        "bfvcG" -> Right BfvcG
+        "bfvcUnrated" -> Right BfvcUnrated
+        x -> Left ("Unable to parse ContentRatingBfvcRating from: " <> x)
 
-instance ToText ContentRatingBfvcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingBfvcRating where
+    toQueryParam = \case
         BFVC13 -> "bfvc13"
         BFVC15 -> "bfvc15"
         BFVC18 -> "bfvc18"
@@ -1708,13 +1708,13 @@ data LiveBroadcastTopicType
 
 instance Hashable LiveBroadcastTopicType
 
-instance FromText LiveBroadcastTopicType where
-    fromText = \case
-        "videoGame" -> Just VideoGame
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastTopicType where
+    parseQueryParam = \case
+        "videoGame" -> Right VideoGame
+        x -> Left ("Unable to parse LiveBroadcastTopicType from: " <> x)
 
-instance ToText LiveBroadcastTopicType where
-    toText = \case
+instance ToHttpApiData LiveBroadcastTopicType where
+    toQueryParam = \case
         VideoGame -> "videoGame"
 
 instance FromJSON LiveBroadcastTopicType where
@@ -1745,16 +1745,16 @@ data SearchListVideoDuration
 
 instance Hashable SearchListVideoDuration
 
-instance FromText SearchListVideoDuration where
-    fromText = \case
-        "any" -> Just Any
-        "long" -> Just Long
-        "medium" -> Just Medium
-        "short" -> Just Short
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoDuration where
+    parseQueryParam = \case
+        "any" -> Right Any
+        "long" -> Right Long
+        "medium" -> Right Medium
+        "short" -> Right Short
+        x -> Left ("Unable to parse SearchListVideoDuration from: " <> x)
 
-instance ToText SearchListVideoDuration where
-    toText = \case
+instance ToHttpApiData SearchListVideoDuration where
+    toQueryParam = \case
         Any -> "any"
         Long -> "long"
         Medium -> "medium"
@@ -1784,15 +1784,15 @@ data SearchListVideoCaption
 
 instance Hashable SearchListVideoCaption
 
-instance FromText SearchListVideoCaption where
-    fromText = \case
-        "any" -> Just SLVCAny
-        "closedCaption" -> Just SLVCClosedCaption
-        "none" -> Just SLVCNone
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoCaption where
+    parseQueryParam = \case
+        "any" -> Right SLVCAny
+        "closedCaption" -> Right SLVCClosedCaption
+        "none" -> Right SLVCNone
+        x -> Left ("Unable to parse SearchListVideoCaption from: " <> x)
 
-instance ToText SearchListVideoCaption where
-    toText = \case
+instance ToHttpApiData SearchListVideoCaption where
+    toQueryParam = \case
         SLVCAny -> "any"
         SLVCClosedCaption -> "closedCaption"
         SLVCNone -> "none"
@@ -1816,14 +1816,14 @@ data VideosListMyRating
 
 instance Hashable VideosListMyRating
 
-instance FromText VideosListMyRating where
-    fromText = \case
-        "dislike" -> Just Dislike
-        "like" -> Just Like
-        _ -> Nothing
+instance FromHttpApiData VideosListMyRating where
+    parseQueryParam = \case
+        "dislike" -> Right Dislike
+        "like" -> Right Like
+        x -> Left ("Unable to parse VideosListMyRating from: " <> x)
 
-instance ToText VideosListMyRating where
-    toText = \case
+instance ToHttpApiData VideosListMyRating where
+    toQueryParam = \case
         Dislike -> "dislike"
         Like -> "like"
 
@@ -1849,16 +1849,16 @@ data CommentSnippetViewerRating
 
 instance Hashable CommentSnippetViewerRating
 
-instance FromText CommentSnippetViewerRating where
-    fromText = \case
-        "dislike" -> Just CSVRDislike
-        "like" -> Just CSVRLike
-        "none" -> Just CSVRNone
-        "unspecified" -> Just CSVRUnspecified
-        _ -> Nothing
+instance FromHttpApiData CommentSnippetViewerRating where
+    parseQueryParam = \case
+        "dislike" -> Right CSVRDislike
+        "like" -> Right CSVRLike
+        "none" -> Right CSVRNone
+        "unspecified" -> Right CSVRUnspecified
+        x -> Left ("Unable to parse CommentSnippetViewerRating from: " <> x)
 
-instance ToText CommentSnippetViewerRating where
-    toText = \case
+instance ToHttpApiData CommentSnippetViewerRating where
+    toQueryParam = \case
         CSVRDislike -> "dislike"
         CSVRLike -> "like"
         CSVRNone -> "none"
@@ -1894,21 +1894,21 @@ data ContentRatingFcbmRating
 
 instance Hashable ContentRatingFcbmRating
 
-instance FromText ContentRatingFcbmRating where
-    fromText = \case
-        "fcbm18" -> Just FCBM18
-        "fcbm18pa" -> Just Fcbm18pa
-        "fcbm18pl" -> Just Fcbm18pl
-        "fcbm18sg" -> Just Fcbm18sg
-        "fcbm18sx" -> Just Fcbm18sx
-        "fcbmP13" -> Just FCBMP13
-        "fcbmPg13" -> Just FCBMPG13
-        "fcbmU" -> Just FcbmU
-        "fcbmUnrated" -> Just FcbmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingFcbmRating where
+    parseQueryParam = \case
+        "fcbm18" -> Right FCBM18
+        "fcbm18pa" -> Right Fcbm18pa
+        "fcbm18pl" -> Right Fcbm18pl
+        "fcbm18sg" -> Right Fcbm18sg
+        "fcbm18sx" -> Right Fcbm18sx
+        "fcbmP13" -> Right FCBMP13
+        "fcbmPg13" -> Right FCBMPG13
+        "fcbmU" -> Right FcbmU
+        "fcbmUnrated" -> Right FcbmUnrated
+        x -> Left ("Unable to parse ContentRatingFcbmRating from: " <> x)
 
-instance ToText ContentRatingFcbmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingFcbmRating where
+    toQueryParam = \case
         FCBM18 -> "fcbm18"
         Fcbm18pa -> "fcbm18pa"
         Fcbm18pl -> "fcbm18pl"
@@ -1944,16 +1944,16 @@ data LiveBroadcastsListBroadcastStatus
 
 instance Hashable LiveBroadcastsListBroadcastStatus
 
-instance FromText LiveBroadcastsListBroadcastStatus where
-    fromText = \case
-        "active" -> Just LBLBSActive
-        "all" -> Just LBLBSAll
-        "completed" -> Just LBLBSCompleted
-        "upcoming" -> Just LBLBSUpcoming
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastsListBroadcastStatus where
+    parseQueryParam = \case
+        "active" -> Right LBLBSActive
+        "all" -> Right LBLBSAll
+        "completed" -> Right LBLBSCompleted
+        "upcoming" -> Right LBLBSUpcoming
+        x -> Left ("Unable to parse LiveBroadcastsListBroadcastStatus from: " <> x)
 
-instance ToText LiveBroadcastsListBroadcastStatus where
-    toText = \case
+instance ToHttpApiData LiveBroadcastsListBroadcastStatus where
+    toQueryParam = \case
         LBLBSActive -> "active"
         LBLBSAll -> "all"
         LBLBSCompleted -> "completed"
@@ -1981,17 +1981,17 @@ data ContentRatingMoctwRating
 
 instance Hashable ContentRatingMoctwRating
 
-instance FromText ContentRatingMoctwRating where
-    fromText = \case
-        "moctwG" -> Just MoctwG
-        "moctwP" -> Just MoctwP
-        "moctwPg" -> Just MoctwPg
-        "moctwR" -> Just MoctwR
-        "moctwUnrated" -> Just MoctwUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMoctwRating where
+    parseQueryParam = \case
+        "moctwG" -> Right MoctwG
+        "moctwP" -> Right MoctwP
+        "moctwPg" -> Right MoctwPg
+        "moctwR" -> Right MoctwR
+        "moctwUnrated" -> Right MoctwUnrated
+        x -> Left ("Unable to parse ContentRatingMoctwRating from: " <> x)
 
-instance ToText ContentRatingMoctwRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMoctwRating where
+    toQueryParam = \case
         MoctwG -> "moctwG"
         MoctwP -> "moctwP"
         MoctwPg -> "moctwPg"
@@ -2027,20 +2027,20 @@ data ContentRatingBmukkRating
 
 instance Hashable ContentRatingBmukkRating
 
-instance FromText ContentRatingBmukkRating where
-    fromText = \case
-        "bmukk10" -> Just BMUKK10
-        "bmukk12" -> Just BMUKK12
-        "bmukk14" -> Just BMUKK14
-        "bmukk16" -> Just BMUKK16
-        "bmukk6" -> Just BMUKK6
-        "bmukk8" -> Just BMUKK8
-        "bmukkAa" -> Just BmukkAa
-        "bmukkUnrated" -> Just BmukkUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingBmukkRating where
+    parseQueryParam = \case
+        "bmukk10" -> Right BMUKK10
+        "bmukk12" -> Right BMUKK12
+        "bmukk14" -> Right BMUKK14
+        "bmukk16" -> Right BMUKK16
+        "bmukk6" -> Right BMUKK6
+        "bmukk8" -> Right BMUKK8
+        "bmukkAa" -> Right BmukkAa
+        "bmukkUnrated" -> Right BmukkUnrated
+        x -> Left ("Unable to parse ContentRatingBmukkRating from: " <> x)
 
-instance ToText ContentRatingBmukkRating where
-    toText = \case
+instance ToHttpApiData ContentRatingBmukkRating where
+    toQueryParam = \case
         BMUKK10 -> "bmukk10"
         BMUKK12 -> "bmukk12"
         BMUKK14 -> "bmukk14"
@@ -2079,20 +2079,20 @@ data ContentRatingIcaaRating
 
 instance Hashable ContentRatingIcaaRating
 
-instance FromText ContentRatingIcaaRating where
-    fromText = \case
-        "icaa12" -> Just ICAA12
-        "icaa13" -> Just ICAA13
-        "icaa16" -> Just ICAA16
-        "icaa18" -> Just ICAA18
-        "icaa7" -> Just ICAA7
-        "icaaApta" -> Just IcaaApta
-        "icaaUnrated" -> Just IcaaUnrated
-        "icaaX" -> Just IcaaX
-        _ -> Nothing
+instance FromHttpApiData ContentRatingIcaaRating where
+    parseQueryParam = \case
+        "icaa12" -> Right ICAA12
+        "icaa13" -> Right ICAA13
+        "icaa16" -> Right ICAA16
+        "icaa18" -> Right ICAA18
+        "icaa7" -> Right ICAA7
+        "icaaApta" -> Right IcaaApta
+        "icaaUnrated" -> Right IcaaUnrated
+        "icaaX" -> Right IcaaX
+        x -> Left ("Unable to parse ContentRatingIcaaRating from: " <> x)
 
-instance ToText ContentRatingIcaaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingIcaaRating where
+    toQueryParam = \case
         ICAA12 -> "icaa12"
         ICAA13 -> "icaa13"
         ICAA16 -> "icaa16"
@@ -2136,22 +2136,22 @@ data VideoStatusRejectionReason
 
 instance Hashable VideoStatusRejectionReason
 
-instance FromText VideoStatusRejectionReason where
-    fromText = \case
-        "claim" -> Just Claim
-        "copyright" -> Just Copyright
-        "duplicate" -> Just Duplicate
-        "inappropriate" -> Just InAppropriate
-        "legal" -> Just Legal
-        "length" -> Just Length
-        "termsOfUse" -> Just TermsOfUse
-        "trademark" -> Just Trademark
-        "uploaderAccountClosed" -> Just UploaderAccountClosed
-        "uploaderAccountSuspended" -> Just UploaderAccountSuspended
-        _ -> Nothing
+instance FromHttpApiData VideoStatusRejectionReason where
+    parseQueryParam = \case
+        "claim" -> Right Claim
+        "copyright" -> Right Copyright
+        "duplicate" -> Right Duplicate
+        "inappropriate" -> Right InAppropriate
+        "legal" -> Right Legal
+        "length" -> Right Length
+        "termsOfUse" -> Right TermsOfUse
+        "trademark" -> Right Trademark
+        "uploaderAccountClosed" -> Right UploaderAccountClosed
+        "uploaderAccountSuspended" -> Right UploaderAccountSuspended
+        x -> Left ("Unable to parse VideoStatusRejectionReason from: " <> x)
 
-instance ToText VideoStatusRejectionReason where
-    toText = \case
+instance ToHttpApiData VideoStatusRejectionReason where
+    toQueryParam = \case
         Claim -> "claim"
         Copyright -> "copyright"
         Duplicate -> "duplicate"
@@ -2185,17 +2185,17 @@ data ContentRatingCzfilmRating
 
 instance Hashable ContentRatingCzfilmRating
 
-instance FromText ContentRatingCzfilmRating where
-    fromText = \case
-        "czfilm12" -> Just CZFILM12
-        "czfilm14" -> Just CZFILM14
-        "czfilm18" -> Just CZFILM18
-        "czfilmU" -> Just CzfilmU
-        "czfilmUnrated" -> Just CzfilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCzfilmRating where
+    parseQueryParam = \case
+        "czfilm12" -> Right CZFILM12
+        "czfilm14" -> Right CZFILM14
+        "czfilm18" -> Right CZFILM18
+        "czfilmU" -> Right CzfilmU
+        "czfilmUnrated" -> Right CzfilmUnrated
+        x -> Left ("Unable to parse ContentRatingCzfilmRating from: " <> x)
 
-instance ToText ContentRatingCzfilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCzfilmRating where
+    toQueryParam = \case
         CZFILM12 -> "czfilm12"
         CZFILM14 -> "czfilm14"
         CZFILM18 -> "czfilm18"
@@ -2227,18 +2227,18 @@ data ContentRatingRussiaRating
 
 instance Hashable ContentRatingRussiaRating
 
-instance FromText ContentRatingRussiaRating where
-    fromText = \case
-        "russia0" -> Just RUSSIA0
-        "russia12" -> Just RUSSIA12
-        "russia16" -> Just RUSSIA16
-        "russia18" -> Just RUSSIA18
-        "russia6" -> Just RUSSIA6
-        "russiaUnrated" -> Just RussiaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingRussiaRating where
+    parseQueryParam = \case
+        "russia0" -> Right RUSSIA0
+        "russia12" -> Right RUSSIA12
+        "russia16" -> Right RUSSIA16
+        "russia18" -> Right RUSSIA18
+        "russia6" -> Right RUSSIA6
+        "russiaUnrated" -> Right RussiaUnrated
+        x -> Left ("Unable to parse ContentRatingRussiaRating from: " <> x)
 
-instance ToText ContentRatingRussiaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingRussiaRating where
+    toQueryParam = \case
         RUSSIA0 -> "russia0"
         RUSSIA12 -> "russia12"
         RUSSIA16 -> "russia16"
@@ -2266,16 +2266,16 @@ data ContentRatingCicfRating
 
 instance Hashable ContentRatingCicfRating
 
-instance FromText ContentRatingCicfRating where
-    fromText = \case
-        "cicfE" -> Just CicfE
-        "cicfKntEna" -> Just CicfKntEna
-        "cicfKtEa" -> Just CicfKtEa
-        "cicfUnrated" -> Just CicfUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCicfRating where
+    parseQueryParam = \case
+        "cicfE" -> Right CicfE
+        "cicfKntEna" -> Right CicfKntEna
+        "cicfKtEa" -> Right CicfKtEa
+        "cicfUnrated" -> Right CicfUnrated
+        x -> Left ("Unable to parse ContentRatingCicfRating from: " <> x)
 
-instance ToText ContentRatingCicfRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCicfRating where
+    toQueryParam = \case
         CicfE -> "cicfE"
         CicfKntEna -> "cicfKntEna"
         CicfKtEa -> "cicfKtEa"
@@ -2308,19 +2308,19 @@ data ContentRatingFmocRating
 
 instance Hashable ContentRatingFmocRating
 
-instance FromText ContentRatingFmocRating where
-    fromText = \case
-        "fmoc10" -> Just FMOC10
-        "fmoc12" -> Just FMOC12
-        "fmoc16" -> Just FMOC16
-        "fmoc18" -> Just FMOC18
-        "fmocE" -> Just FmocE
-        "fmocU" -> Just FmocU
-        "fmocUnrated" -> Just FmocUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingFmocRating where
+    parseQueryParam = \case
+        "fmoc10" -> Right FMOC10
+        "fmoc12" -> Right FMOC12
+        "fmoc16" -> Right FMOC16
+        "fmoc18" -> Right FMOC18
+        "fmocE" -> Right FmocE
+        "fmocU" -> Right FmocU
+        "fmocUnrated" -> Right FmocUnrated
+        x -> Left ("Unable to parse ContentRatingFmocRating from: " <> x)
 
-instance ToText ContentRatingFmocRating where
-    toText = \case
+instance ToHttpApiData ContentRatingFmocRating where
+    toQueryParam = \case
         FMOC10 -> "fmoc10"
         FMOC12 -> "fmoc12"
         FMOC16 -> "fmoc16"
@@ -2357,15 +2357,15 @@ data LiveBroadcastsTransitionBroadcastStatus
 
 instance Hashable LiveBroadcastsTransitionBroadcastStatus
 
-instance FromText LiveBroadcastsTransitionBroadcastStatus where
-    fromText = \case
-        "complete" -> Just LBTBSComplete
-        "live" -> Just LBTBSLive
-        "testing" -> Just LBTBSTesting
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastsTransitionBroadcastStatus where
+    parseQueryParam = \case
+        "complete" -> Right LBTBSComplete
+        "live" -> Right LBTBSLive
+        "testing" -> Right LBTBSTesting
+        x -> Left ("Unable to parse LiveBroadcastsTransitionBroadcastStatus from: " <> x)
 
-instance ToText LiveBroadcastsTransitionBroadcastStatus where
-    toText = \case
+instance ToHttpApiData LiveBroadcastsTransitionBroadcastStatus where
+    toQueryParam = \case
         LBTBSComplete -> "complete"
         LBTBSLive -> "live"
         LBTBSTesting -> "testing"
@@ -2398,20 +2398,20 @@ data ContentRatingNbcRating
 
 instance Hashable ContentRatingNbcRating
 
-instance FromText ContentRatingNbcRating where
-    fromText = \case
-        "nbc12plus" -> Just Nbc12plus
-        "nbc15plus" -> Just Nbc15plus
-        "nbc18plus" -> Just Nbc18plus
-        "nbc18plusr" -> Just Nbc18plusr
-        "nbcG" -> Just NbcG
-        "nbcPg" -> Just NbcPg
-        "nbcPu" -> Just NbcPu
-        "nbcUnrated" -> Just NbcUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingNbcRating where
+    parseQueryParam = \case
+        "nbc12plus" -> Right Nbc12plus
+        "nbc15plus" -> Right Nbc15plus
+        "nbc18plus" -> Right Nbc18plus
+        "nbc18plusr" -> Right Nbc18plusr
+        "nbcG" -> Right NbcG
+        "nbcPg" -> Right NbcPg
+        "nbcPu" -> Right NbcPu
+        "nbcUnrated" -> Right NbcUnrated
+        x -> Left ("Unable to parse ContentRatingNbcRating from: " <> x)
 
-instance ToText ContentRatingNbcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingNbcRating where
+    toQueryParam = \case
         Nbc12plus -> "nbc12plus"
         Nbc15plus -> "nbc15plus"
         Nbc18plus -> "nbc18plus"
@@ -2439,15 +2439,15 @@ data LiveBroadcastStatusLiveBroadcastPriority
 
 instance Hashable LiveBroadcastStatusLiveBroadcastPriority
 
-instance FromText LiveBroadcastStatusLiveBroadcastPriority where
-    fromText = \case
-        "high" -> Just High
-        "low" -> Just Low
-        "normal" -> Just Normal
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastStatusLiveBroadcastPriority where
+    parseQueryParam = \case
+        "high" -> Right High
+        "low" -> Right Low
+        "normal" -> Right Normal
+        x -> Left ("Unable to parse LiveBroadcastStatusLiveBroadcastPriority from: " <> x)
 
-instance ToText LiveBroadcastStatusLiveBroadcastPriority where
-    toText = \case
+instance ToHttpApiData LiveBroadcastStatusLiveBroadcastPriority where
+    toQueryParam = \case
         High -> "high"
         Low -> "low"
         Normal -> "normal"
@@ -2474,17 +2474,17 @@ data LiveStreamHealthStatusStatus
 
 instance Hashable LiveStreamHealthStatusStatus
 
-instance FromText LiveStreamHealthStatusStatus where
-    fromText = \case
-        "bad" -> Just Bad
-        "good" -> Just Good
-        "noData" -> Just NoData
-        "ok" -> Just OK
-        "revoked" -> Just Revoked
-        _ -> Nothing
+instance FromHttpApiData LiveStreamHealthStatusStatus where
+    parseQueryParam = \case
+        "bad" -> Right Bad
+        "good" -> Right Good
+        "noData" -> Right NoData
+        "ok" -> Right OK
+        "revoked" -> Right Revoked
+        x -> Left ("Unable to parse LiveStreamHealthStatusStatus from: " <> x)
 
-instance ToText LiveStreamHealthStatusStatus where
-    toText = \case
+instance ToHttpApiData LiveStreamHealthStatusStatus where
+    toQueryParam = \case
         Bad -> "bad"
         Good -> "good"
         NoData -> "noData"
@@ -2510,16 +2510,16 @@ data VideoRatingRating
 
 instance Hashable VideoRatingRating
 
-instance FromText VideoRatingRating where
-    fromText = \case
-        "dislike" -> Just VRRDislike
-        "like" -> Just VRRLike
-        "none" -> Just VRRNone
-        "unspecified" -> Just VRRUnspecified
-        _ -> Nothing
+instance FromHttpApiData VideoRatingRating where
+    parseQueryParam = \case
+        "dislike" -> Right VRRDislike
+        "like" -> Right VRRLike
+        "none" -> Right VRRNone
+        "unspecified" -> Right VRRUnspecified
+        x -> Left ("Unable to parse VideoRatingRating from: " <> x)
 
-instance ToText VideoRatingRating where
-    toText = \case
+instance ToHttpApiData VideoRatingRating where
+    toQueryParam = \case
         VRRDislike -> "dislike"
         VRRLike -> "like"
         VRRNone -> "none"
@@ -2550,19 +2550,19 @@ data VideoSuggestionsProcessingWarningsItem
 
 instance Hashable VideoSuggestionsProcessingWarningsItem
 
-instance FromText VideoSuggestionsProcessingWarningsItem where
-    fromText = \case
-        "hasEditlist" -> Just HasEditList
-        "inconsistentResolution" -> Just InconsistentResolution
-        "problematicAudioCodec" -> Just ProblematicAudioCodec
-        "problematicVideoCodec" -> Just ProblematicVideoCodec
-        "unknownAudioCodec" -> Just UnknownAudioCodec
-        "unknownContainer" -> Just UnknownContainer
-        "unknownVideoCodec" -> Just UnknownVideoCodec
-        _ -> Nothing
+instance FromHttpApiData VideoSuggestionsProcessingWarningsItem where
+    parseQueryParam = \case
+        "hasEditlist" -> Right HasEditList
+        "inconsistentResolution" -> Right InconsistentResolution
+        "problematicAudioCodec" -> Right ProblematicAudioCodec
+        "problematicVideoCodec" -> Right ProblematicVideoCodec
+        "unknownAudioCodec" -> Right UnknownAudioCodec
+        "unknownContainer" -> Right UnknownContainer
+        "unknownVideoCodec" -> Right UnknownVideoCodec
+        x -> Left ("Unable to parse VideoSuggestionsProcessingWarningsItem from: " <> x)
 
-instance ToText VideoSuggestionsProcessingWarningsItem where
-    toText = \case
+instance ToHttpApiData VideoSuggestionsProcessingWarningsItem where
+    toQueryParam = \case
         HasEditList -> "hasEditlist"
         InconsistentResolution -> "inconsistentResolution"
         ProblematicAudioCodec -> "problematicAudioCodec"
@@ -2591,16 +2591,16 @@ data InvideoPositionCornerPosition
 
 instance Hashable InvideoPositionCornerPosition
 
-instance FromText InvideoPositionCornerPosition where
-    fromText = \case
-        "bottomLeft" -> Just BottomLeft
-        "bottomRight" -> Just BottomRight
-        "topLeft" -> Just TopLeft
-        "topRight" -> Just TopRight
-        _ -> Nothing
+instance FromHttpApiData InvideoPositionCornerPosition where
+    parseQueryParam = \case
+        "bottomLeft" -> Right BottomLeft
+        "bottomRight" -> Right BottomRight
+        "topLeft" -> Right TopLeft
+        "topRight" -> Right TopRight
+        x -> Left ("Unable to parse InvideoPositionCornerPosition from: " <> x)
 
-instance ToText InvideoPositionCornerPosition where
-    toText = \case
+instance ToHttpApiData InvideoPositionCornerPosition where
+    toQueryParam = \case
         BottomLeft -> "bottomLeft"
         BottomRight -> "bottomRight"
         TopLeft -> "topLeft"
@@ -2626,16 +2626,16 @@ data ChannelStatusLongUploadsStatus
 
 instance Hashable ChannelStatusLongUploadsStatus
 
-instance FromText ChannelStatusLongUploadsStatus where
-    fromText = \case
-        "allowed" -> Just Allowed
-        "disallowed" -> Just Disallowed
-        "eligible" -> Just Eligible
-        "longUploadsUnspecified" -> Just LongUploadsUnspecified
-        _ -> Nothing
+instance FromHttpApiData ChannelStatusLongUploadsStatus where
+    parseQueryParam = \case
+        "allowed" -> Right Allowed
+        "disallowed" -> Right Disallowed
+        "eligible" -> Right Eligible
+        "longUploadsUnspecified" -> Right LongUploadsUnspecified
+        x -> Left ("Unable to parse ChannelStatusLongUploadsStatus from: " <> x)
 
-instance ToText ChannelStatusLongUploadsStatus where
-    toText = \case
+instance ToHttpApiData ChannelStatusLongUploadsStatus where
+    toQueryParam = \case
         Allowed -> "allowed"
         Disallowed -> "disallowed"
         Eligible -> "eligible"
@@ -2670,20 +2670,20 @@ data ContentRatingCscfRating
 
 instance Hashable ContentRatingCscfRating
 
-instance FromText ContentRatingCscfRating where
-    fromText = \case
-        "cscf12" -> Just CSCF12
-        "cscf16" -> Just CSCF16
-        "cscf18" -> Just CSCF18
-        "cscf6" -> Just CSCF6
-        "cscf9" -> Just CSCF9
-        "cscfA" -> Just CscfA
-        "cscfAl" -> Just CscfAl
-        "cscfUnrated" -> Just CscfUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCscfRating where
+    parseQueryParam = \case
+        "cscf12" -> Right CSCF12
+        "cscf16" -> Right CSCF16
+        "cscf18" -> Right CSCF18
+        "cscf6" -> Right CSCF6
+        "cscf9" -> Right CSCF9
+        "cscfA" -> Right CscfA
+        "cscfAl" -> Right CscfAl
+        "cscfUnrated" -> Right CscfUnrated
+        x -> Left ("Unable to parse ContentRatingCscfRating from: " <> x)
 
-instance ToText ContentRatingCscfRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCscfRating where
+    toQueryParam = \case
         CSCF12 -> "cscf12"
         CSCF16 -> "cscf16"
         CSCF18 -> "cscf18"
@@ -2711,15 +2711,15 @@ data LiveBroadcastStatusRecordingStatus
 
 instance Hashable LiveBroadcastStatusRecordingStatus
 
-instance FromText LiveBroadcastStatusRecordingStatus where
-    fromText = \case
-        "notRecording" -> Just NotRecording
-        "recorded" -> Just Recorded
-        "recording" -> Just Recording
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastStatusRecordingStatus where
+    parseQueryParam = \case
+        "notRecording" -> Right NotRecording
+        "recorded" -> Right Recorded
+        "recording" -> Right Recording
+        x -> Left ("Unable to parse LiveBroadcastStatusRecordingStatus from: " <> x)
 
-instance ToText LiveBroadcastStatusRecordingStatus where
-    toText = \case
+instance ToHttpApiData LiveBroadcastStatusRecordingStatus where
+    toQueryParam = \case
         NotRecording -> "notRecording"
         Recorded -> "recorded"
         Recording -> "recording"
@@ -2747,17 +2747,17 @@ data VideoFileDetailsVideoStreamRotation
 
 instance Hashable VideoFileDetailsVideoStreamRotation
 
-instance FromText VideoFileDetailsVideoStreamRotation where
-    fromText = \case
-        "clockwise" -> Just VFDVSRClockwise
-        "counterClockwise" -> Just VFDVSRCounterClockwise
-        "none" -> Just VFDVSRNone
-        "other" -> Just VFDVSROther
-        "upsideDown" -> Just VFDVSRUpsideDown
-        _ -> Nothing
+instance FromHttpApiData VideoFileDetailsVideoStreamRotation where
+    parseQueryParam = \case
+        "clockwise" -> Right VFDVSRClockwise
+        "counterClockwise" -> Right VFDVSRCounterClockwise
+        "none" -> Right VFDVSRNone
+        "other" -> Right VFDVSROther
+        "upsideDown" -> Right VFDVSRUpsideDown
+        x -> Left ("Unable to parse VideoFileDetailsVideoStreamRotation from: " <> x)
 
-instance ToText VideoFileDetailsVideoStreamRotation where
-    toText = \case
+instance ToHttpApiData VideoFileDetailsVideoStreamRotation where
+    toQueryParam = \case
         VFDVSRClockwise -> "clockwise"
         VFDVSRCounterClockwise -> "counterClockwise"
         VFDVSRNone -> "none"
@@ -2791,19 +2791,19 @@ data ContentRatingRtcRating
 
 instance Hashable ContentRatingRtcRating
 
-instance FromText ContentRatingRtcRating where
-    fromText = \case
-        "rtcA" -> Just RtcA
-        "rtcAa" -> Just RtcAa
-        "rtcB" -> Just RtcB
-        "rtcB15" -> Just RTCB15
-        "rtcC" -> Just RtcC
-        "rtcD" -> Just RtcD
-        "rtcUnrated" -> Just RtcUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingRtcRating where
+    parseQueryParam = \case
+        "rtcA" -> Right RtcA
+        "rtcAa" -> Right RtcAa
+        "rtcB" -> Right RtcB
+        "rtcB15" -> Right RTCB15
+        "rtcC" -> Right RtcC
+        "rtcD" -> Right RtcD
+        "rtcUnrated" -> Right RtcUnrated
+        x -> Left ("Unable to parse ContentRatingRtcRating from: " <> x)
 
-instance ToText ContentRatingRtcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingRtcRating where
+    toQueryParam = \case
         RtcA -> "rtcA"
         RtcAa -> "rtcAa"
         RtcB -> "rtcB"
@@ -2842,15 +2842,15 @@ data CommentThreadsListModerationStatus
 
 instance Hashable CommentThreadsListModerationStatus
 
-instance FromText CommentThreadsListModerationStatus where
-    fromText = \case
-        "heldForReview" -> Just HeldForReview
-        "likelySpam" -> Just LikelySpam
-        "published" -> Just Published
-        _ -> Nothing
+instance FromHttpApiData CommentThreadsListModerationStatus where
+    parseQueryParam = \case
+        "heldForReview" -> Right HeldForReview
+        "likelySpam" -> Right LikelySpam
+        "published" -> Right Published
+        x -> Left ("Unable to parse CommentThreadsListModerationStatus from: " <> x)
 
-instance ToText CommentThreadsListModerationStatus where
-    toText = \case
+instance ToHttpApiData CommentThreadsListModerationStatus where
+    toQueryParam = \case
         HeldForReview -> "heldForReview"
         LikelySpam -> "likelySpam"
         Published -> "published"
@@ -2881,19 +2881,19 @@ data ContentRatingSmaisRating
 
 instance Hashable ContentRatingSmaisRating
 
-instance FromText ContentRatingSmaisRating where
-    fromText = \case
-        "smais12" -> Just SMAIS12
-        "smais14" -> Just SMAIS14
-        "smais16" -> Just SMAIS16
-        "smais18" -> Just SMAIS18
-        "smais7" -> Just SMAIS7
-        "smaisL" -> Just SmaisL
-        "smaisUnrated" -> Just SmaisUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingSmaisRating where
+    parseQueryParam = \case
+        "smais12" -> Right SMAIS12
+        "smais14" -> Right SMAIS14
+        "smais16" -> Right SMAIS16
+        "smais18" -> Right SMAIS18
+        "smais7" -> Right SMAIS7
+        "smaisL" -> Right SmaisL
+        "smaisUnrated" -> Right SmaisUnrated
+        x -> Left ("Unable to parse ContentRatingSmaisRating from: " <> x)
 
-instance ToText ContentRatingSmaisRating where
-    toText = \case
+instance ToHttpApiData ContentRatingSmaisRating where
+    toQueryParam = \case
         SMAIS12 -> "smais12"
         SMAIS14 -> "smais14"
         SMAIS16 -> "smais16"
@@ -2916,13 +2916,13 @@ data ContentRatingYtRating
 
 instance Hashable ContentRatingYtRating
 
-instance FromText ContentRatingYtRating where
-    fromText = \case
-        "ytAgeRestricted" -> Just YtAgeRestricted
-        _ -> Nothing
+instance FromHttpApiData ContentRatingYtRating where
+    parseQueryParam = \case
+        "ytAgeRestricted" -> Right YtAgeRestricted
+        x -> Left ("Unable to parse ContentRatingYtRating from: " <> x)
 
-instance ToText ContentRatingYtRating where
-    toText = \case
+instance ToHttpApiData ContentRatingYtRating where
+    toQueryParam = \case
         YtAgeRestricted -> "ytAgeRestricted"
 
 instance FromJSON ContentRatingYtRating where
@@ -2941,14 +2941,14 @@ data VideoContentDetailsCaption
 
 instance Hashable VideoContentDetailsCaption
 
-instance FromText VideoContentDetailsCaption where
-    fromText = \case
-        "false" -> Just False'
-        "true" -> Just True'
-        _ -> Nothing
+instance FromHttpApiData VideoContentDetailsCaption where
+    parseQueryParam = \case
+        "false" -> Right False'
+        "true" -> Right True'
+        x -> Left ("Unable to parse VideoContentDetailsCaption from: " <> x)
 
-instance ToText VideoContentDetailsCaption where
-    toText = \case
+instance ToHttpApiData VideoContentDetailsCaption where
+    toQueryParam = \case
         False' -> "false"
         True' -> "true"
 
@@ -2974,15 +2974,15 @@ data SubscriptionsListOrder
 
 instance Hashable SubscriptionsListOrder
 
-instance FromText SubscriptionsListOrder where
-    fromText = \case
-        "alphabetical" -> Just SLOAlphabetical
-        "relevance" -> Just SLORelevance
-        "unread" -> Just SLOUnread
-        _ -> Nothing
+instance FromHttpApiData SubscriptionsListOrder where
+    parseQueryParam = \case
+        "alphabetical" -> Right SLOAlphabetical
+        "relevance" -> Right SLORelevance
+        "unread" -> Right SLOUnread
+        x -> Left ("Unable to parse SubscriptionsListOrder from: " <> x)
 
-instance ToText SubscriptionsListOrder where
-    toText = \case
+instance ToHttpApiData SubscriptionsListOrder where
+    toQueryParam = \case
         SLOAlphabetical -> "alphabetical"
         SLORelevance -> "relevance"
         SLOUnread -> "unread"
@@ -3015,20 +3015,20 @@ data ContentRatingBbfcRating
 
 instance Hashable ContentRatingBbfcRating
 
-instance FromText ContentRatingBbfcRating where
-    fromText = \case
-        "bbfc12" -> Just BBFC12
-        "bbfc12a" -> Just Bbfc12a
-        "bbfc15" -> Just BBFC15
-        "bbfc18" -> Just BBFC18
-        "bbfcPg" -> Just BbfcPg
-        "bbfcR18" -> Just BBFCR18
-        "bbfcU" -> Just BbfcU
-        "bbfcUnrated" -> Just BbfcUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingBbfcRating where
+    parseQueryParam = \case
+        "bbfc12" -> Right BBFC12
+        "bbfc12a" -> Right Bbfc12a
+        "bbfc15" -> Right BBFC15
+        "bbfc18" -> Right BBFC18
+        "bbfcPg" -> Right BbfcPg
+        "bbfcR18" -> Right BBFCR18
+        "bbfcU" -> Right BbfcU
+        "bbfcUnrated" -> Right BbfcUnrated
+        x -> Left ("Unable to parse ContentRatingBbfcRating from: " <> x)
 
-instance ToText ContentRatingBbfcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingBbfcRating where
+    toQueryParam = \case
         BBFC12 -> "bbfc12"
         Bbfc12a -> "bbfc12a"
         BBFC15 -> "bbfc15"
@@ -3066,20 +3066,20 @@ data ContentRatingTvpgRating
 
 instance Hashable ContentRatingTvpgRating
 
-instance FromText ContentRatingTvpgRating where
-    fromText = \case
-        "pg14" -> Just PG14
-        "tvpgG" -> Just TvpgG
-        "tvpgMa" -> Just TvpgMa
-        "tvpgPg" -> Just TvpgPg
-        "tvpgUnrated" -> Just TvpgUnrated
-        "tvpgY" -> Just TvpgY
-        "tvpgY7" -> Just TVPGY7
-        "tvpgY7Fv" -> Just TvpgY7Fv
-        _ -> Nothing
+instance FromHttpApiData ContentRatingTvpgRating where
+    parseQueryParam = \case
+        "pg14" -> Right PG14
+        "tvpgG" -> Right TvpgG
+        "tvpgMa" -> Right TvpgMa
+        "tvpgPg" -> Right TvpgPg
+        "tvpgUnrated" -> Right TvpgUnrated
+        "tvpgY" -> Right TvpgY
+        "tvpgY7" -> Right TVPGY7
+        "tvpgY7Fv" -> Right TvpgY7Fv
+        x -> Left ("Unable to parse ContentRatingTvpgRating from: " <> x)
 
-instance ToText ContentRatingTvpgRating where
-    toText = \case
+instance ToHttpApiData ContentRatingTvpgRating where
+    toQueryParam = \case
         PG14 -> "pg14"
         TvpgG -> "tvpgG"
         TvpgMa -> "tvpgMa"
@@ -3108,14 +3108,14 @@ data CommentsListTextFormat
 
 instance Hashable CommentsListTextFormat
 
-instance FromText CommentsListTextFormat where
-    fromText = \case
-        "html" -> Just HTML
-        "plainText" -> Just PlainText
-        _ -> Nothing
+instance FromHttpApiData CommentsListTextFormat where
+    parseQueryParam = \case
+        "html" -> Right HTML
+        "plainText" -> Right PlainText
+        x -> Left ("Unable to parse CommentsListTextFormat from: " <> x)
 
-instance ToText CommentsListTextFormat where
-    toText = \case
+instance ToHttpApiData CommentsListTextFormat where
+    toQueryParam = \case
         HTML -> "html"
         PlainText -> "plainText"
 
@@ -3141,15 +3141,15 @@ data VideosRateRating
 
 instance Hashable VideosRateRating
 
-instance FromText VideosRateRating where
-    fromText = \case
-        "dislike" -> Just VDislike
-        "like" -> Just VLike
-        "none" -> Just VNone
-        _ -> Nothing
+instance FromHttpApiData VideosRateRating where
+    parseQueryParam = \case
+        "dislike" -> Right VDislike
+        "like" -> Right VLike
+        "none" -> Right VNone
+        x -> Left ("Unable to parse VideosRateRating from: " <> x)
 
-instance ToText VideosRateRating where
-    toText = \case
+instance ToHttpApiData VideosRateRating where
+    toQueryParam = \case
         VDislike -> "dislike"
         VLike -> "like"
         VNone -> "none"
@@ -3172,15 +3172,15 @@ data CaptionSnippetStatus
 
 instance Hashable CaptionSnippetStatus
 
-instance FromText CaptionSnippetStatus where
-    fromText = \case
-        "failed" -> Just Failed
-        "serving" -> Just Serving
-        "syncing" -> Just Syncing
-        _ -> Nothing
+instance FromHttpApiData CaptionSnippetStatus where
+    parseQueryParam = \case
+        "failed" -> Right Failed
+        "serving" -> Right Serving
+        "syncing" -> Right Syncing
+        x -> Left ("Unable to parse CaptionSnippetStatus from: " <> x)
 
-instance ToText CaptionSnippetStatus where
-    toText = \case
+instance ToHttpApiData CaptionSnippetStatus where
+    toQueryParam = \case
         Failed -> "failed"
         Serving -> "serving"
         Syncing -> "syncing"
@@ -3207,17 +3207,17 @@ data ContentRatingSkfilmRating
 
 instance Hashable ContentRatingSkfilmRating
 
-instance FromText ContentRatingSkfilmRating where
-    fromText = \case
-        "skfilmG" -> Just SkfilmG
-        "skfilmP2" -> Just SKFILMP2
-        "skfilmP5" -> Just SKFILMP5
-        "skfilmP8" -> Just SKFILMP8
-        "skfilmUnrated" -> Just SkfilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingSkfilmRating where
+    parseQueryParam = \case
+        "skfilmG" -> Right SkfilmG
+        "skfilmP2" -> Right SKFILMP2
+        "skfilmP5" -> Right SKFILMP5
+        "skfilmP8" -> Right SKFILMP8
+        "skfilmUnrated" -> Right SkfilmUnrated
+        x -> Left ("Unable to parse ContentRatingSkfilmRating from: " <> x)
 
-instance ToText ContentRatingSkfilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingSkfilmRating where
+    toQueryParam = \case
         SkfilmG -> "skfilmG"
         SKFILMP2 -> "skfilmP2"
         SKFILMP5 -> "skfilmP5"
@@ -3270,29 +3270,29 @@ data ChannelSectionSnippetType
 
 instance Hashable ChannelSectionSnippetType
 
-instance FromText ChannelSectionSnippetType where
-    fromText = \case
-        "allPlaylists" -> Just AllPlayLists
-        "channelsectionTypeUndefined" -> Just ChannelsectionTypeUndefined
-        "completedEvents" -> Just CompletedEvents
-        "likedPlaylists" -> Just LikedPlayLists
-        "likes" -> Just Likes
-        "liveEvents" -> Just LiveEvents
-        "multipleChannels" -> Just MultipleChannels
-        "multiplePlaylists" -> Just MultiplePlayLists
-        "popularUploads" -> Just PopularUploads
-        "postedPlaylists" -> Just PostedPlayLists
-        "postedVideos" -> Just PostedVideos
-        "recentActivity" -> Just RecentActivity
-        "recentPosts" -> Just RecentPosts
-        "recentUploads" -> Just RecentUploads
-        "singlePlaylist" -> Just SinglePlayList
-        "subscriptions" -> Just Subscriptions
-        "upcomingEvents" -> Just UpcomingEvents
-        _ -> Nothing
+instance FromHttpApiData ChannelSectionSnippetType where
+    parseQueryParam = \case
+        "allPlaylists" -> Right AllPlayLists
+        "channelsectionTypeUndefined" -> Right ChannelsectionTypeUndefined
+        "completedEvents" -> Right CompletedEvents
+        "likedPlaylists" -> Right LikedPlayLists
+        "likes" -> Right Likes
+        "liveEvents" -> Right LiveEvents
+        "multipleChannels" -> Right MultipleChannels
+        "multiplePlaylists" -> Right MultiplePlayLists
+        "popularUploads" -> Right PopularUploads
+        "postedPlaylists" -> Right PostedPlayLists
+        "postedVideos" -> Right PostedVideos
+        "recentActivity" -> Right RecentActivity
+        "recentPosts" -> Right RecentPosts
+        "recentUploads" -> Right RecentUploads
+        "singlePlaylist" -> Right SinglePlayList
+        "subscriptions" -> Right Subscriptions
+        "upcomingEvents" -> Right UpcomingEvents
+        x -> Left ("Unable to parse ChannelSectionSnippetType from: " <> x)
 
-instance ToText ChannelSectionSnippetType where
-    toText = \case
+instance ToHttpApiData ChannelSectionSnippetType where
+    toQueryParam = \case
         AllPlayLists -> "allPlaylists"
         ChannelsectionTypeUndefined -> "channelsectionTypeUndefined"
         CompletedEvents -> "completedEvents"
@@ -3334,15 +3334,15 @@ data LiveBroadcastsListBroadcastType
 
 instance Hashable LiveBroadcastsListBroadcastType
 
-instance FromText LiveBroadcastsListBroadcastType where
-    fromText = \case
-        "all" -> Just All
-        "event" -> Just Event
-        "persistent" -> Just Persistent
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastsListBroadcastType where
+    parseQueryParam = \case
+        "all" -> Right All
+        "event" -> Right Event
+        "persistent" -> Right Persistent
+        x -> Left ("Unable to parse LiveBroadcastsListBroadcastType from: " <> x)
 
-instance ToText LiveBroadcastsListBroadcastType where
-    toText = \case
+instance ToHttpApiData LiveBroadcastsListBroadcastType where
+    toQueryParam = \case
         All -> "all"
         Event -> "event"
         Persistent -> "persistent"
@@ -3368,16 +3368,16 @@ data VideoProcessingDetailsProcessingStatus
 
 instance Hashable VideoProcessingDetailsProcessingStatus
 
-instance FromText VideoProcessingDetailsProcessingStatus where
-    fromText = \case
-        "failed" -> Just VPDPSFailed
-        "processing" -> Just VPDPSProcessing
-        "succeeded" -> Just VPDPSSucceeded
-        "terminated" -> Just VPDPSTerminated
-        _ -> Nothing
+instance FromHttpApiData VideoProcessingDetailsProcessingStatus where
+    parseQueryParam = \case
+        "failed" -> Right VPDPSFailed
+        "processing" -> Right VPDPSProcessing
+        "succeeded" -> Right VPDPSSucceeded
+        "terminated" -> Right VPDPSTerminated
+        x -> Left ("Unable to parse VideoProcessingDetailsProcessingStatus from: " <> x)
 
-instance ToText VideoProcessingDetailsProcessingStatus where
-    toText = \case
+instance ToHttpApiData VideoProcessingDetailsProcessingStatus where
+    toQueryParam = \case
         VPDPSFailed -> "failed"
         VPDPSProcessing -> "processing"
         VPDPSSucceeded -> "succeeded"
@@ -3400,14 +3400,14 @@ data ActivityContentDetailsPromotedItemCtaType
 
 instance Hashable ActivityContentDetailsPromotedItemCtaType
 
-instance FromText ActivityContentDetailsPromotedItemCtaType where
-    fromText = \case
-        "unspecified" -> Just Unspecified
-        "visitAdvertiserSite" -> Just VisitAdvertiserSite
-        _ -> Nothing
+instance FromHttpApiData ActivityContentDetailsPromotedItemCtaType where
+    parseQueryParam = \case
+        "unspecified" -> Right Unspecified
+        "visitAdvertiserSite" -> Right VisitAdvertiserSite
+        x -> Left ("Unable to parse ActivityContentDetailsPromotedItemCtaType from: " <> x)
 
-instance ToText ActivityContentDetailsPromotedItemCtaType where
-    toText = \case
+instance ToHttpApiData ActivityContentDetailsPromotedItemCtaType where
+    toQueryParam = \case
         Unspecified -> "unspecified"
         VisitAdvertiserSite -> "visitAdvertiserSite"
 
@@ -3430,14 +3430,14 @@ data SearchListChannelType
 
 instance Hashable SearchListChannelType
 
-instance FromText SearchListChannelType where
-    fromText = \case
-        "any" -> Just SLCTAny
-        "show" -> Just SLCTShow
-        _ -> Nothing
+instance FromHttpApiData SearchListChannelType where
+    parseQueryParam = \case
+        "any" -> Right SLCTAny
+        "show" -> Right SLCTShow
+        x -> Left ("Unable to parse SearchListChannelType from: " <> x)
 
-instance ToText SearchListChannelType where
-    toText = \case
+instance ToHttpApiData SearchListChannelType where
+    toQueryParam = \case
         SLCTAny -> "any"
         SLCTShow -> "show"
 
@@ -3466,18 +3466,18 @@ data ContentRatingKmrbRating
 
 instance Hashable ContentRatingKmrbRating
 
-instance FromText ContentRatingKmrbRating where
-    fromText = \case
-        "kmrb12plus" -> Just Kmrb12plus
-        "kmrb15plus" -> Just Kmrb15plus
-        "kmrbAll" -> Just KmrbAll
-        "kmrbR" -> Just KmrbR
-        "kmrbTeenr" -> Just KmrbTeenr
-        "kmrbUnrated" -> Just KmrbUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingKmrbRating where
+    parseQueryParam = \case
+        "kmrb12plus" -> Right Kmrb12plus
+        "kmrb15plus" -> Right Kmrb15plus
+        "kmrbAll" -> Right KmrbAll
+        "kmrbR" -> Right KmrbR
+        "kmrbTeenr" -> Right KmrbTeenr
+        "kmrbUnrated" -> Right KmrbUnrated
+        x -> Left ("Unable to parse ContentRatingKmrbRating from: " <> x)
 
-instance ToText ContentRatingKmrbRating where
-    toText = \case
+instance ToHttpApiData ContentRatingKmrbRating where
+    toQueryParam = \case
         Kmrb12plus -> "kmrb12plus"
         Kmrb15plus -> "kmrb15plus"
         KmrbAll -> "kmrbAll"
@@ -3518,22 +3518,22 @@ data ContentRatingOflcRating
 
 instance Hashable ContentRatingOflcRating
 
-instance FromText ContentRatingOflcRating where
-    fromText = \case
-        "oflcG" -> Just OflcG
-        "oflcM" -> Just OflcM
-        "oflcPg" -> Just OflcPg
-        "oflcR13" -> Just OFLCR13
-        "oflcR15" -> Just OFLCR15
-        "oflcR16" -> Just OFLCR16
-        "oflcR18" -> Just OFLCR18
-        "oflcRp13" -> Just OFLCRP13
-        "oflcRp16" -> Just OFLCRP16
-        "oflcUnrated" -> Just OflcUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingOflcRating where
+    parseQueryParam = \case
+        "oflcG" -> Right OflcG
+        "oflcM" -> Right OflcM
+        "oflcPg" -> Right OflcPg
+        "oflcR13" -> Right OFLCR13
+        "oflcR15" -> Right OFLCR15
+        "oflcR16" -> Right OFLCR16
+        "oflcR18" -> Right OFLCR18
+        "oflcRp13" -> Right OFLCRP13
+        "oflcRp16" -> Right OFLCRP16
+        "oflcUnrated" -> Right OflcUnrated
+        x -> Left ("Unable to parse ContentRatingOflcRating from: " <> x)
 
-instance ToText ContentRatingOflcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingOflcRating where
+    toQueryParam = \case
         OflcG -> "oflcG"
         OflcM -> "oflcM"
         OflcPg -> "oflcPg"
@@ -3571,19 +3571,19 @@ data ContentRatingCNCRating
 
 instance Hashable ContentRatingCNCRating
 
-instance FromText ContentRatingCNCRating where
-    fromText = \case
-        "cnc10" -> Just CNC10
-        "cnc12" -> Just CNC12
-        "cnc16" -> Just CNC16
-        "cnc18" -> Just CNC18
-        "cncE" -> Just CNCE
-        "cncT" -> Just CNCT
-        "cncUnrated" -> Just CNCUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCNCRating where
+    parseQueryParam = \case
+        "cnc10" -> Right CNC10
+        "cnc12" -> Right CNC12
+        "cnc16" -> Right CNC16
+        "cnc18" -> Right CNC18
+        "cncE" -> Right CNCE
+        "cncT" -> Right CNCT
+        "cncUnrated" -> Right CNCUnrated
+        x -> Left ("Unable to parse ContentRatingCNCRating from: " <> x)
 
-instance ToText ContentRatingCNCRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCNCRating where
+    toQueryParam = \case
         CNC10 -> "cnc10"
         CNC12 -> "cnc12"
         CNC16 -> "cnc16"
@@ -3623,21 +3623,21 @@ data ContentRatingEcbmctRating
 
 instance Hashable ContentRatingEcbmctRating
 
-instance FromText ContentRatingEcbmctRating where
-    fromText = \case
-        "ecbmct13a" -> Just Ecbmct13a
-        "ecbmct13plus" -> Just Ecbmct13plus
-        "ecbmct15a" -> Just Ecbmct15a
-        "ecbmct15plus" -> Just Ecbmct15plus
-        "ecbmct18plus" -> Just Ecbmct18plus
-        "ecbmct7a" -> Just Ecbmct7a
-        "ecbmct7plus" -> Just Ecbmct7plus
-        "ecbmctG" -> Just EcbmctG
-        "ecbmctUnrated" -> Just EcbmctUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingEcbmctRating where
+    parseQueryParam = \case
+        "ecbmct13a" -> Right Ecbmct13a
+        "ecbmct13plus" -> Right Ecbmct13plus
+        "ecbmct15a" -> Right Ecbmct15a
+        "ecbmct15plus" -> Right Ecbmct15plus
+        "ecbmct18plus" -> Right Ecbmct18plus
+        "ecbmct7a" -> Right Ecbmct7a
+        "ecbmct7plus" -> Right Ecbmct7plus
+        "ecbmctG" -> Right EcbmctG
+        "ecbmctUnrated" -> Right EcbmctUnrated
+        x -> Left ("Unable to parse ContentRatingEcbmctRating from: " <> x)
 
-instance ToText ContentRatingEcbmctRating where
-    toText = \case
+instance ToHttpApiData ContentRatingEcbmctRating where
+    toQueryParam = \case
         Ecbmct13a -> "ecbmct13a"
         Ecbmct13plus -> "ecbmct13plus"
         Ecbmct15a -> "ecbmct15a"
@@ -3670,17 +3670,17 @@ data ContentRatingGrfilmRating
 
 instance Hashable ContentRatingGrfilmRating
 
-instance FromText ContentRatingGrfilmRating where
-    fromText = \case
-        "grfilmE" -> Just GrfilmE
-        "grfilmK" -> Just GrfilmK
-        "grfilmK13" -> Just GRFILMK13
-        "grfilmK17" -> Just GRFILMK17
-        "grfilmUnrated" -> Just GrfilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingGrfilmRating where
+    parseQueryParam = \case
+        "grfilmE" -> Right GrfilmE
+        "grfilmK" -> Right GrfilmK
+        "grfilmK13" -> Right GRFILMK13
+        "grfilmK17" -> Right GRFILMK17
+        "grfilmUnrated" -> Right GrfilmUnrated
+        x -> Left ("Unable to parse ContentRatingGrfilmRating from: " <> x)
 
-instance ToText ContentRatingGrfilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingGrfilmRating where
+    toQueryParam = \case
         GrfilmE -> "grfilmE"
         GrfilmK -> "grfilmK"
         GRFILMK13 -> "grfilmK13"
@@ -3709,14 +3709,14 @@ data CommentThreadsListOrder
 
 instance Hashable CommentThreadsListOrder
 
-instance FromText CommentThreadsListOrder where
-    fromText = \case
-        "relevance" -> Just CTLORelevance
-        "time" -> Just CTLOTime
-        _ -> Nothing
+instance FromHttpApiData CommentThreadsListOrder where
+    parseQueryParam = \case
+        "relevance" -> Right CTLORelevance
+        "time" -> Right CTLOTime
+        x -> Left ("Unable to parse CommentThreadsListOrder from: " <> x)
 
-instance ToText CommentThreadsListOrder where
-    toText = \case
+instance ToHttpApiData CommentThreadsListOrder where
+    toQueryParam = \case
         CTLORelevance -> "relevance"
         CTLOTime -> "time"
 
@@ -3742,17 +3742,17 @@ data ContentRatingIlfilmRating
 
 instance Hashable ContentRatingIlfilmRating
 
-instance FromText ContentRatingIlfilmRating where
-    fromText = \case
-        "ilfilm12" -> Just ILFILM12
-        "ilfilm16" -> Just ILFILM16
-        "ilfilm18" -> Just ILFILM18
-        "ilfilmAa" -> Just IlfilmAa
-        "ilfilmUnrated" -> Just IlfilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingIlfilmRating where
+    parseQueryParam = \case
+        "ilfilm12" -> Right ILFILM12
+        "ilfilm16" -> Right ILFILM16
+        "ilfilm18" -> Right ILFILM18
+        "ilfilmAa" -> Right IlfilmAa
+        "ilfilmUnrated" -> Right IlfilmUnrated
+        x -> Left ("Unable to parse ContentRatingIlfilmRating from: " <> x)
 
-instance ToText ContentRatingIlfilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingIlfilmRating where
+    toQueryParam = \case
         ILFILM12 -> "ilfilm12"
         ILFILM16 -> "ilfilm16"
         ILFILM18 -> "ilfilm18"
@@ -3783,18 +3783,18 @@ data ContentRatingNbcplRating
 
 instance Hashable ContentRatingNbcplRating
 
-instance FromText ContentRatingNbcplRating where
-    fromText = \case
-        "nbcpl18plus" -> Just Nbcpl18plus
-        "nbcplI" -> Just NbcplI
-        "nbcplIi" -> Just NbcplIi
-        "nbcplIii" -> Just NbcplIii
-        "nbcplIv" -> Just NbcplIv
-        "nbcplUnrated" -> Just NbcplUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingNbcplRating where
+    parseQueryParam = \case
+        "nbcpl18plus" -> Right Nbcpl18plus
+        "nbcplI" -> Right NbcplI
+        "nbcplIi" -> Right NbcplIi
+        "nbcplIii" -> Right NbcplIii
+        "nbcplIv" -> Right NbcplIv
+        "nbcplUnrated" -> Right NbcplUnrated
+        x -> Left ("Unable to parse ContentRatingNbcplRating from: " <> x)
 
-instance ToText ContentRatingNbcplRating where
-    toText = \case
+instance ToHttpApiData ContentRatingNbcplRating where
+    toQueryParam = \case
         Nbcpl18plus -> "nbcpl18plus"
         NbcplI -> "nbcplI"
         NbcplIi -> "nbcplIi"
@@ -3824,17 +3824,17 @@ data VideoStatusUploadStatus
 
 instance Hashable VideoStatusUploadStatus
 
-instance FromText VideoStatusUploadStatus where
-    fromText = \case
-        "deleted" -> Just VSUSDeleted
-        "failed" -> Just VSUSFailed
-        "processed" -> Just VSUSProcessed
-        "rejected" -> Just VSUSRejected
-        "uploaded" -> Just VSUSUploaded
-        _ -> Nothing
+instance FromHttpApiData VideoStatusUploadStatus where
+    parseQueryParam = \case
+        "deleted" -> Right VSUSDeleted
+        "failed" -> Right VSUSFailed
+        "processed" -> Right VSUSProcessed
+        "rejected" -> Right VSUSRejected
+        "uploaded" -> Right VSUSUploaded
+        x -> Left ("Unable to parse VideoStatusUploadStatus from: " <> x)
 
-instance ToText VideoStatusUploadStatus where
-    toText = \case
+instance ToHttpApiData VideoStatusUploadStatus where
+    toQueryParam = \case
         VSUSDeleted -> "deleted"
         VSUSFailed -> "failed"
         VSUSProcessed -> "processed"
@@ -3863,17 +3863,17 @@ data ContentRatingRteRating
 
 instance Hashable ContentRatingRteRating
 
-instance FromText ContentRatingRteRating where
-    fromText = \case
-        "rteCh" -> Just RteCh
-        "rteGa" -> Just RteGa
-        "rteMa" -> Just RteMa
-        "rtePs" -> Just RtePs
-        "rteUnrated" -> Just RteUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingRteRating where
+    parseQueryParam = \case
+        "rteCh" -> Right RteCh
+        "rteGa" -> Right RteGa
+        "rteMa" -> Right RteMa
+        "rtePs" -> Right RtePs
+        "rteUnrated" -> Right RteUnrated
+        x -> Left ("Unable to parse ContentRatingRteRating from: " <> x)
 
-instance ToText ContentRatingRteRating where
-    toText = \case
+instance ToHttpApiData ContentRatingRteRating where
+    toQueryParam = \case
         RteCh -> "rteCh"
         RteGa -> "rteGa"
         RteMa -> "rteMa"
@@ -3899,14 +3899,14 @@ data CommentThreadsListTextFormat
 
 instance Hashable CommentThreadsListTextFormat
 
-instance FromText CommentThreadsListTextFormat where
-    fromText = \case
-        "html" -> Just CTLTFHTML
-        "plainText" -> Just CTLTFPlainText
-        _ -> Nothing
+instance FromHttpApiData CommentThreadsListTextFormat where
+    parseQueryParam = \case
+        "html" -> Right CTLTFHTML
+        "plainText" -> Right CTLTFPlainText
+        x -> Left ("Unable to parse CommentThreadsListTextFormat from: " <> x)
 
-instance ToText CommentThreadsListTextFormat where
-    toText = \case
+instance ToHttpApiData CommentThreadsListTextFormat where
+    toQueryParam = \case
         CTLTFHTML -> "html"
         CTLTFPlainText -> "plainText"
 
@@ -3941,21 +3941,21 @@ data ContentRatingIfcoRating
 
 instance Hashable ContentRatingIfcoRating
 
-instance FromText ContentRatingIfcoRating where
-    fromText = \case
-        "ifco12" -> Just IFCO12
-        "ifco12a" -> Just Ifco12a
-        "ifco15" -> Just IFCO15
-        "ifco15a" -> Just Ifco15a
-        "ifco16" -> Just IFCO16
-        "ifco18" -> Just IFCO18
-        "ifcoG" -> Just IfcoG
-        "ifcoPg" -> Just IfcoPg
-        "ifcoUnrated" -> Just IfcoUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingIfcoRating where
+    parseQueryParam = \case
+        "ifco12" -> Right IFCO12
+        "ifco12a" -> Right Ifco12a
+        "ifco15" -> Right IFCO15
+        "ifco15a" -> Right Ifco15a
+        "ifco16" -> Right IFCO16
+        "ifco18" -> Right IFCO18
+        "ifcoG" -> Right IfcoG
+        "ifcoPg" -> Right IfcoPg
+        "ifcoUnrated" -> Right IfcoUnrated
+        x -> Left ("Unable to parse ContentRatingIfcoRating from: " <> x)
 
-instance ToText ContentRatingIfcoRating where
-    toText = \case
+instance ToHttpApiData ContentRatingIfcoRating where
+    toQueryParam = \case
         IFCO12 -> "ifco12"
         Ifco12a -> "ifco12a"
         IFCO15 -> "ifco15"
@@ -3993,15 +3993,15 @@ data CommentsSetModerationStatusModerationStatus
 
 instance Hashable CommentsSetModerationStatusModerationStatus
 
-instance FromText CommentsSetModerationStatusModerationStatus where
-    fromText = \case
-        "heldForReview" -> Just CSMSMSHeldForReview
-        "published" -> Just CSMSMSPublished
-        "rejected" -> Just CSMSMSRejected
-        _ -> Nothing
+instance FromHttpApiData CommentsSetModerationStatusModerationStatus where
+    parseQueryParam = \case
+        "heldForReview" -> Right CSMSMSHeldForReview
+        "published" -> Right CSMSMSPublished
+        "rejected" -> Right CSMSMSRejected
+        x -> Left ("Unable to parse CommentsSetModerationStatusModerationStatus from: " <> x)
 
-instance ToText CommentsSetModerationStatusModerationStatus where
-    toText = \case
+instance ToHttpApiData CommentsSetModerationStatusModerationStatus where
+    toQueryParam = \case
         CSMSMSHeldForReview -> "heldForReview"
         CSMSMSPublished -> "published"
         CSMSMSRejected -> "rejected"
@@ -4026,16 +4026,16 @@ data ActivityContentDetailsSocialType
 
 instance Hashable ActivityContentDetailsSocialType
 
-instance FromText ActivityContentDetailsSocialType where
-    fromText = \case
-        "facebook" -> Just ACDSTFacebook
-        "googlePlus" -> Just ACDSTGooglePlus
-        "twitter" -> Just ACDSTTwitter
-        "unspecified" -> Just ACDSTUnspecified
-        _ -> Nothing
+instance FromHttpApiData ActivityContentDetailsSocialType where
+    parseQueryParam = \case
+        "facebook" -> Right ACDSTFacebook
+        "googlePlus" -> Right ACDSTGooglePlus
+        "twitter" -> Right ACDSTTwitter
+        "unspecified" -> Right ACDSTUnspecified
+        x -> Left ("Unable to parse ActivityContentDetailsSocialType from: " <> x)
 
-instance ToText ActivityContentDetailsSocialType where
-    toText = \case
+instance ToHttpApiData ActivityContentDetailsSocialType where
+    toQueryParam = \case
         ACDSTFacebook -> "facebook"
         ACDSTGooglePlus -> "googlePlus"
         ACDSTTwitter -> "twitter"
@@ -4071,21 +4071,21 @@ data ContentRatingMedietilsynetRating
 
 instance Hashable ContentRatingMedietilsynetRating
 
-instance FromText ContentRatingMedietilsynetRating where
-    fromText = \case
-        "medietilsynet11" -> Just MEDIETILSYNET11
-        "medietilsynet12" -> Just MEDIETILSYNET12
-        "medietilsynet15" -> Just MEDIETILSYNET15
-        "medietilsynet18" -> Just MEDIETILSYNET18
-        "medietilsynet6" -> Just MEDIETILSYNET6
-        "medietilsynet7" -> Just MEDIETILSYNET7
-        "medietilsynet9" -> Just MEDIETILSYNET9
-        "medietilsynetA" -> Just MedietilsynetA
-        "medietilsynetUnrated" -> Just MedietilsynetUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMedietilsynetRating where
+    parseQueryParam = \case
+        "medietilsynet11" -> Right MEDIETILSYNET11
+        "medietilsynet12" -> Right MEDIETILSYNET12
+        "medietilsynet15" -> Right MEDIETILSYNET15
+        "medietilsynet18" -> Right MEDIETILSYNET18
+        "medietilsynet6" -> Right MEDIETILSYNET6
+        "medietilsynet7" -> Right MEDIETILSYNET7
+        "medietilsynet9" -> Right MEDIETILSYNET9
+        "medietilsynetA" -> Right MedietilsynetA
+        "medietilsynetUnrated" -> Right MedietilsynetUnrated
+        x -> Left ("Unable to parse ContentRatingMedietilsynetRating from: " <> x)
 
-instance ToText ContentRatingMedietilsynetRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMedietilsynetRating where
+    toQueryParam = \case
         MEDIETILSYNET11 -> "medietilsynet11"
         MEDIETILSYNET12 -> "medietilsynet12"
         MEDIETILSYNET15 -> "medietilsynet15"
@@ -4114,15 +4114,15 @@ data PlayListItemStatusPrivacyStatus
 
 instance Hashable PlayListItemStatusPrivacyStatus
 
-instance FromText PlayListItemStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just PLISPSPrivate
-        "public" -> Just PLISPSPublic
-        "unlisted" -> Just PLISPSUnListed
-        _ -> Nothing
+instance FromHttpApiData PlayListItemStatusPrivacyStatus where
+    parseQueryParam = \case
+        "private" -> Right PLISPSPrivate
+        "public" -> Right PLISPSPublic
+        "unlisted" -> Right PLISPSUnListed
+        x -> Left ("Unable to parse PlayListItemStatusPrivacyStatus from: " <> x)
 
-instance ToText PlayListItemStatusPrivacyStatus where
-    toText = \case
+instance ToHttpApiData PlayListItemStatusPrivacyStatus where
+    toQueryParam = \case
         PLISPSPrivate -> "private"
         PLISPSPublic -> "public"
         PLISPSUnListed -> "unlisted"
@@ -4144,14 +4144,14 @@ data SubscriptionContentDetailsActivityType
 
 instance Hashable SubscriptionContentDetailsActivityType
 
-instance FromText SubscriptionContentDetailsActivityType where
-    fromText = \case
-        "all" -> Just SCDATAll
-        "uploads" -> Just SCDATUploads
-        _ -> Nothing
+instance FromHttpApiData SubscriptionContentDetailsActivityType where
+    parseQueryParam = \case
+        "all" -> Right SCDATAll
+        "uploads" -> Right SCDATUploads
+        x -> Left ("Unable to parse SubscriptionContentDetailsActivityType from: " <> x)
 
-instance ToText SubscriptionContentDetailsActivityType where
-    toText = \case
+instance ToHttpApiData SubscriptionContentDetailsActivityType where
+    toQueryParam = \case
         SCDATAll -> "all"
         SCDATUploads -> "uploads"
 
@@ -4189,23 +4189,23 @@ data ContentRatingFpbRating
 
 instance Hashable ContentRatingFpbRating
 
-instance FromText ContentRatingFpbRating where
-    fromText = \case
-        "fpb10" -> Just FPB10
-        "fpb1012Pg" -> Just Fpb1012Pg
-        "fpb13" -> Just FPB13
-        "fpb16" -> Just FPB16
-        "fpb18" -> Just FPB18
-        "fpb79Pg" -> Just Fpb79Pg
-        "fpbA" -> Just FpbA
-        "fpbPg" -> Just FpbPg
-        "fpbUnrated" -> Just FpbUnrated
-        "fpbX18" -> Just FPBX18
-        "fpbXx" -> Just FpbXx
-        _ -> Nothing
+instance FromHttpApiData ContentRatingFpbRating where
+    parseQueryParam = \case
+        "fpb10" -> Right FPB10
+        "fpb1012Pg" -> Right Fpb1012Pg
+        "fpb13" -> Right FPB13
+        "fpb16" -> Right FPB16
+        "fpb18" -> Right FPB18
+        "fpb79Pg" -> Right Fpb79Pg
+        "fpbA" -> Right FpbA
+        "fpbPg" -> Right FpbPg
+        "fpbUnrated" -> Right FpbUnrated
+        "fpbX18" -> Right FPBX18
+        "fpbXx" -> Right FpbXx
+        x -> Left ("Unable to parse ContentRatingFpbRating from: " <> x)
 
-instance ToText ContentRatingFpbRating where
-    toText = \case
+instance ToHttpApiData ContentRatingFpbRating where
+    toQueryParam = \case
         FPB10 -> "fpb10"
         Fpb1012Pg -> "fpb1012Pg"
         FPB13 -> "fpb13"
@@ -4235,15 +4235,15 @@ data LiveBroadcastContentDetailsClosedCaptionsType
 
 instance Hashable LiveBroadcastContentDetailsClosedCaptionsType
 
-instance FromText LiveBroadcastContentDetailsClosedCaptionsType where
-    fromText = \case
-        "closedCaptionsDisabled" -> Just ClosedCaptionsDisabled
-        "closedCaptionsEmbedded" -> Just ClosedCaptionsEmbedded
-        "closedCaptionsHttpPost" -> Just ClosedCaptionsHTTPPost
-        _ -> Nothing
+instance FromHttpApiData LiveBroadcastContentDetailsClosedCaptionsType where
+    parseQueryParam = \case
+        "closedCaptionsDisabled" -> Right ClosedCaptionsDisabled
+        "closedCaptionsEmbedded" -> Right ClosedCaptionsEmbedded
+        "closedCaptionsHttpPost" -> Right ClosedCaptionsHTTPPost
+        x -> Left ("Unable to parse LiveBroadcastContentDetailsClosedCaptionsType from: " <> x)
 
-instance ToText LiveBroadcastContentDetailsClosedCaptionsType where
-    toText = \case
+instance ToHttpApiData LiveBroadcastContentDetailsClosedCaptionsType where
+    toQueryParam = \case
         ClosedCaptionsDisabled -> "closedCaptionsDisabled"
         ClosedCaptionsEmbedded -> "closedCaptionsEmbedded"
         ClosedCaptionsHTTPPost -> "closedCaptionsHttpPost"
@@ -4272,15 +4272,15 @@ data SearchListVideoDimension
 
 instance Hashable SearchListVideoDimension
 
-instance FromText SearchListVideoDimension where
-    fromText = \case
-        "2d" -> Just S2D
-        "3d" -> Just S3D
-        "any" -> Just SAny
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoDimension where
+    parseQueryParam = \case
+        "2d" -> Right S2D
+        "3d" -> Right S3D
+        "any" -> Right SAny
+        x -> Left ("Unable to parse SearchListVideoDimension from: " <> x)
 
-instance ToText SearchListVideoDimension where
-    toText = \case
+instance ToHttpApiData SearchListVideoDimension where
+    toQueryParam = \case
         S2D -> "2d"
         S3D -> "3d"
         SAny -> "any"
@@ -4308,17 +4308,17 @@ data ContentRatingNkclvRating
 
 instance Hashable ContentRatingNkclvRating
 
-instance FromText ContentRatingNkclvRating where
-    fromText = \case
-        "nkclv12plus" -> Just Nkclv12plus
-        "nkclv18plus" -> Just Nkclv18plus
-        "nkclv7plus" -> Just Nkclv7plus
-        "nkclvU" -> Just NkclvU
-        "nkclvUnrated" -> Just NkclvUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingNkclvRating where
+    parseQueryParam = \case
+        "nkclv12plus" -> Right Nkclv12plus
+        "nkclv18plus" -> Right Nkclv18plus
+        "nkclv7plus" -> Right Nkclv7plus
+        "nkclvU" -> Right NkclvU
+        "nkclvUnrated" -> Right NkclvUnrated
+        x -> Left ("Unable to parse ContentRatingNkclvRating from: " <> x)
 
-instance ToText ContentRatingNkclvRating where
-    toText = \case
+instance ToHttpApiData ContentRatingNkclvRating where
+    toQueryParam = \case
         Nkclv12plus -> "nkclv12plus"
         Nkclv18plus -> "nkclv18plus"
         Nkclv7plus -> "nkclv7plus"
@@ -4343,14 +4343,14 @@ data SponsorsListFilter
 
 instance Hashable SponsorsListFilter
 
-instance FromText SponsorsListFilter where
-    fromText = \case
-        "all" -> Just SLFAll
-        "newest" -> Just SLFNewest
-        _ -> Nothing
+instance FromHttpApiData SponsorsListFilter where
+    parseQueryParam = \case
+        "all" -> Right SLFAll
+        "newest" -> Right SLFNewest
+        x -> Left ("Unable to parse SponsorsListFilter from: " <> x)
 
-instance ToText SponsorsListFilter where
-    toText = \case
+instance ToHttpApiData SponsorsListFilter where
+    toQueryParam = \case
         SLFAll -> "all"
         SLFNewest -> "newest"
 
@@ -4377,15 +4377,15 @@ data SearchListVideoType
 
 instance Hashable SearchListVideoType
 
-instance FromText SearchListVideoType where
-    fromText = \case
-        "any" -> Just SLVTAny
-        "episode" -> Just SLVTEpisode
-        "movie" -> Just SLVTMovie
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoType where
+    parseQueryParam = \case
+        "any" -> Right SLVTAny
+        "episode" -> Right SLVTEpisode
+        "movie" -> Right SLVTMovie
+        x -> Left ("Unable to parse SearchListVideoType from: " <> x)
 
-instance ToText SearchListVideoType where
-    toText = \case
+instance ToHttpApiData SearchListVideoType where
+    toQueryParam = \case
         SLVTAny -> "any"
         SLVTEpisode -> "episode"
         SLVTMovie -> "movie"
@@ -4415,18 +4415,18 @@ data ContentRatingMibacRating
 
 instance Hashable ContentRatingMibacRating
 
-instance FromText ContentRatingMibacRating where
-    fromText = \case
-        "mibacT" -> Just MibacT
-        "mibacUnrated" -> Just MibacUnrated
-        "mibacVap" -> Just MibacVap
-        "mibacVm12" -> Just MIBACVM12
-        "mibacVm14" -> Just MIBACVM14
-        "mibacVm18" -> Just MIBACVM18
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMibacRating where
+    parseQueryParam = \case
+        "mibacT" -> Right MibacT
+        "mibacUnrated" -> Right MibacUnrated
+        "mibacVap" -> Right MibacVap
+        "mibacVm12" -> Right MIBACVM12
+        "mibacVm14" -> Right MIBACVM14
+        "mibacVm18" -> Right MIBACVM18
+        x -> Left ("Unable to parse ContentRatingMibacRating from: " <> x)
 
-instance ToText ContentRatingMibacRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMibacRating where
+    toQueryParam = \case
         MibacT -> "mibacT"
         MibacUnrated -> "mibacUnrated"
         MibacVap -> "mibacVap"
@@ -4458,18 +4458,18 @@ data ContentRatingResorteviolenciaRating
 
 instance Hashable ContentRatingResorteviolenciaRating
 
-instance FromText ContentRatingResorteviolenciaRating where
-    fromText = \case
-        "resorteviolenciaA" -> Just ResorteviolenciaA
-        "resorteviolenciaB" -> Just ResorteviolenciaB
-        "resorteviolenciaC" -> Just ResorteviolenciaC
-        "resorteviolenciaD" -> Just ResorteviolenciaD
-        "resorteviolenciaE" -> Just ResorteviolenciaE
-        "resorteviolenciaUnrated" -> Just ResorteviolenciaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingResorteviolenciaRating where
+    parseQueryParam = \case
+        "resorteviolenciaA" -> Right ResorteviolenciaA
+        "resorteviolenciaB" -> Right ResorteviolenciaB
+        "resorteviolenciaC" -> Right ResorteviolenciaC
+        "resorteviolenciaD" -> Right ResorteviolenciaD
+        "resorteviolenciaE" -> Right ResorteviolenciaE
+        "resorteviolenciaUnrated" -> Right ResorteviolenciaUnrated
+        x -> Left ("Unable to parse ContentRatingResorteviolenciaRating from: " <> x)
 
-instance ToText ContentRatingResorteviolenciaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingResorteviolenciaRating where
+    toQueryParam = \case
         ResorteviolenciaA -> "resorteviolenciaA"
         ResorteviolenciaB -> "resorteviolenciaB"
         ResorteviolenciaC -> "resorteviolenciaC"
@@ -4497,16 +4497,16 @@ data ContentRatingEgfilmRating
 
 instance Hashable ContentRatingEgfilmRating
 
-instance FromText ContentRatingEgfilmRating where
-    fromText = \case
-        "egfilm18" -> Just EGFILM18
-        "egfilmBn" -> Just EgfilmBn
-        "egfilmGn" -> Just EgfilmGn
-        "egfilmUnrated" -> Just EgfilmUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingEgfilmRating where
+    parseQueryParam = \case
+        "egfilm18" -> Right EGFILM18
+        "egfilmBn" -> Right EgfilmBn
+        "egfilmGn" -> Right EgfilmGn
+        "egfilmUnrated" -> Right EgfilmUnrated
+        x -> Left ("Unable to parse ContentRatingEgfilmRating from: " <> x)
 
-instance ToText ContentRatingEgfilmRating where
-    toText = \case
+instance ToHttpApiData ContentRatingEgfilmRating where
+    toQueryParam = \case
         EGFILM18 -> "egfilm18"
         EgfilmBn -> "egfilmBn"
         EgfilmGn -> "egfilmGn"
@@ -4535,17 +4535,17 @@ data ContentRatingMccypRating
 
 instance Hashable ContentRatingMccypRating
 
-instance FromText ContentRatingMccypRating where
-    fromText = \case
-        "mccyp11" -> Just MCCYP11
-        "mccyp15" -> Just MCCYP15
-        "mccyp7" -> Just MCCYP7
-        "mccypA" -> Just MccypA
-        "mccypUnrated" -> Just MccypUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMccypRating where
+    parseQueryParam = \case
+        "mccyp11" -> Right MCCYP11
+        "mccyp15" -> Right MCCYP15
+        "mccyp7" -> Right MCCYP7
+        "mccypA" -> Right MccypA
+        "mccypUnrated" -> Right MccypUnrated
+        x -> Left ("Unable to parse ContentRatingMccypRating from: " <> x)
 
-instance ToText ContentRatingMccypRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMccypRating where
+    toQueryParam = \case
         MCCYP11 -> "mccyp11"
         MCCYP15 -> "mccyp15"
         MCCYP7 -> "mccyp7"
@@ -4570,15 +4570,15 @@ data PlayListStatusPrivacyStatus
 
 instance Hashable PlayListStatusPrivacyStatus
 
-instance FromText PlayListStatusPrivacyStatus where
-    fromText = \case
-        "private" -> Just PLSPSPrivate
-        "public" -> Just PLSPSPublic
-        "unlisted" -> Just PLSPSUnListed
-        _ -> Nothing
+instance FromHttpApiData PlayListStatusPrivacyStatus where
+    parseQueryParam = \case
+        "private" -> Right PLSPSPrivate
+        "public" -> Right PLSPSPublic
+        "unlisted" -> Right PLSPSUnListed
+        x -> Left ("Unable to parse PlayListStatusPrivacyStatus from: " <> x)
 
-instance ToText PlayListStatusPrivacyStatus where
-    toText = \case
+instance ToHttpApiData PlayListStatusPrivacyStatus where
+    toQueryParam = \case
         PLSPSPrivate -> "private"
         PLSPSPublic -> "public"
         PLSPSUnListed -> "unlisted"
@@ -4610,19 +4610,19 @@ data ContentRatingCsaRating
 
 instance Hashable ContentRatingCsaRating
 
-instance FromText ContentRatingCsaRating where
-    fromText = \case
-        "csa10" -> Just CSA10
-        "csa12" -> Just CSA12
-        "csa16" -> Just CSA16
-        "csa18" -> Just CSA18
-        "csaInterdiction" -> Just CsaInterdiction
-        "csaT" -> Just CsaT
-        "csaUnrated" -> Just CsaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCsaRating where
+    parseQueryParam = \case
+        "csa10" -> Right CSA10
+        "csa12" -> Right CSA12
+        "csa16" -> Right CSA16
+        "csa18" -> Right CSA18
+        "csaInterdiction" -> Right CsaInterdiction
+        "csaT" -> Right CsaT
+        "csaUnrated" -> Right CsaUnrated
+        x -> Left ("Unable to parse ContentRatingCsaRating from: " <> x)
 
-instance ToText ContentRatingCsaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCsaRating where
+    toQueryParam = \case
         CSA10 -> "csa10"
         CSA12 -> "csa12"
         CSA16 -> "csa16"
@@ -4649,15 +4649,15 @@ data ChannelSectionSnippetStyle
 
 instance Hashable ChannelSectionSnippetStyle
 
-instance FromText ChannelSectionSnippetStyle where
-    fromText = \case
-        "channelsectionStyleUndefined" -> Just ChannelsectionStyleUndefined
-        "horizontalRow" -> Just HorizontalRow
-        "verticalList" -> Just VerticalList
-        _ -> Nothing
+instance FromHttpApiData ChannelSectionSnippetStyle where
+    parseQueryParam = \case
+        "channelsectionStyleUndefined" -> Right ChannelsectionStyleUndefined
+        "horizontalRow" -> Right HorizontalRow
+        "verticalList" -> Right VerticalList
+        x -> Left ("Unable to parse ChannelSectionSnippetStyle from: " <> x)
 
-instance ToText ChannelSectionSnippetStyle where
-    toText = \case
+instance ToHttpApiData ChannelSectionSnippetStyle where
+    toQueryParam = \case
         ChannelsectionStyleUndefined -> "channelsectionStyleUndefined"
         HorizontalRow -> "horizontalRow"
         VerticalList -> "verticalList"
@@ -4684,17 +4684,17 @@ data ContentRatingEirinRating
 
 instance Hashable ContentRatingEirinRating
 
-instance FromText ContentRatingEirinRating where
-    fromText = \case
-        "eirinG" -> Just EirinG
-        "eirinPg12" -> Just EIRINPG12
-        "eirinR15plus" -> Just EirinR15plus
-        "eirinR18plus" -> Just EirinR18plus
-        "eirinUnrated" -> Just EirinUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingEirinRating where
+    parseQueryParam = \case
+        "eirinG" -> Right EirinG
+        "eirinPg12" -> Right EIRINPG12
+        "eirinR15plus" -> Right EirinR15plus
+        "eirinR18plus" -> Right EirinR18plus
+        "eirinUnrated" -> Right EirinUnrated
+        x -> Left ("Unable to parse ContentRatingEirinRating from: " <> x)
 
-instance ToText ContentRatingEirinRating where
-    toText = \case
+instance ToHttpApiData ContentRatingEirinRating where
+    toQueryParam = \case
         EirinG -> "eirinG"
         EIRINPG12 -> "eirinPg12"
         EirinR15plus -> "eirinR15plus"
@@ -4716,14 +4716,14 @@ data VideoSuggestionsProcessingHintsItem
 
 instance Hashable VideoSuggestionsProcessingHintsItem
 
-instance FromText VideoSuggestionsProcessingHintsItem where
-    fromText = \case
-        "nonStreamableMov" -> Just NonStreamableMov
-        "sendBestQualityVideo" -> Just SendBestQualityVideo
-        _ -> Nothing
+instance FromHttpApiData VideoSuggestionsProcessingHintsItem where
+    parseQueryParam = \case
+        "nonStreamableMov" -> Right NonStreamableMov
+        "sendBestQualityVideo" -> Right SendBestQualityVideo
+        x -> Left ("Unable to parse VideoSuggestionsProcessingHintsItem from: " <> x)
 
-instance ToText VideoSuggestionsProcessingHintsItem where
-    toText = \case
+instance ToHttpApiData VideoSuggestionsProcessingHintsItem where
+    toQueryParam = \case
         NonStreamableMov -> "nonStreamableMov"
         SendBestQualityVideo -> "sendBestQualityVideo"
 
@@ -4751,18 +4751,18 @@ data ContentRatingNfrcRating
 
 instance Hashable ContentRatingNfrcRating
 
-instance FromText ContentRatingNfrcRating where
-    fromText = \case
-        "nfrcA" -> Just NfrcA
-        "nfrcB" -> Just NfrcB
-        "nfrcC" -> Just NfrcC
-        "nfrcD" -> Just NfrcD
-        "nfrcUnrated" -> Just NfrcUnrated
-        "nfrcX" -> Just NfrcX
-        _ -> Nothing
+instance FromHttpApiData ContentRatingNfrcRating where
+    parseQueryParam = \case
+        "nfrcA" -> Right NfrcA
+        "nfrcB" -> Right NfrcB
+        "nfrcC" -> Right NfrcC
+        "nfrcD" -> Right NfrcD
+        "nfrcUnrated" -> Right NfrcUnrated
+        "nfrcX" -> Right NfrcX
+        x -> Left ("Unable to parse ContentRatingNfrcRating from: " <> x)
 
-instance ToText ContentRatingNfrcRating where
-    toText = \case
+instance ToHttpApiData ContentRatingNfrcRating where
+    toQueryParam = \case
         NfrcA -> "nfrcA"
         NfrcB -> "nfrcB"
         NfrcC -> "nfrcC"
@@ -4804,23 +4804,23 @@ data ActivitySnippetType
 
 instance Hashable ActivitySnippetType
 
-instance FromText ActivitySnippetType where
-    fromText = \case
-        "bulletin" -> Just ASTBulletin
-        "channelItem" -> Just ASTChannelItem
-        "comment" -> Just ASTComment
-        "favorite" -> Just ASTFavorite
-        "like" -> Just ASTLike
-        "playlistItem" -> Just ASTPlayListItem
-        "promotedItem" -> Just ASTPromotedItem
-        "recommendation" -> Just ASTRecommendation
-        "social" -> Just ASTSocial
-        "subscription" -> Just ASTSubscription
-        "upload" -> Just ASTUpload
-        _ -> Nothing
+instance FromHttpApiData ActivitySnippetType where
+    parseQueryParam = \case
+        "bulletin" -> Right ASTBulletin
+        "channelItem" -> Right ASTChannelItem
+        "comment" -> Right ASTComment
+        "favorite" -> Right ASTFavorite
+        "like" -> Right ASTLike
+        "playlistItem" -> Right ASTPlayListItem
+        "promotedItem" -> Right ASTPromotedItem
+        "recommendation" -> Right ASTRecommendation
+        "social" -> Right ASTSocial
+        "subscription" -> Right ASTSubscription
+        "upload" -> Right ASTUpload
+        x -> Left ("Unable to parse ActivitySnippetType from: " <> x)
 
-instance ToText ActivitySnippetType where
-    toText = \case
+instance ToHttpApiData ActivitySnippetType where
+    toQueryParam = \case
         ASTBulletin -> "bulletin"
         ASTChannelItem -> "channelItem"
         ASTComment -> "comment"
@@ -4863,21 +4863,21 @@ data ContentRatingMocRating
 
 instance Hashable ContentRatingMocRating
 
-instance FromText ContentRatingMocRating where
-    fromText = \case
-        "moc12" -> Just MOC12
-        "moc15" -> Just MOC15
-        "moc18" -> Just MOC18
-        "moc7" -> Just MOC7
-        "mocBanned" -> Just MocBanned
-        "mocE" -> Just MocE
-        "mocT" -> Just MocT
-        "mocUnrated" -> Just MocUnrated
-        "mocX" -> Just MocX
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMocRating where
+    parseQueryParam = \case
+        "moc12" -> Right MOC12
+        "moc15" -> Right MOC15
+        "moc18" -> Right MOC18
+        "moc7" -> Right MOC7
+        "mocBanned" -> Right MocBanned
+        "mocE" -> Right MocE
+        "mocT" -> Right MocT
+        "mocUnrated" -> Right MocUnrated
+        "mocX" -> Right MocX
+        x -> Left ("Unable to parse ContentRatingMocRating from: " <> x)
 
-instance ToText ContentRatingMocRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMocRating where
+    toQueryParam = \case
         MOC12 -> "moc12"
         MOC15 -> "moc15"
         MOC18 -> "moc18"
@@ -4908,14 +4908,14 @@ data SearchListVideoEmbeddable
 
 instance Hashable SearchListVideoEmbeddable
 
-instance FromText SearchListVideoEmbeddable where
-    fromText = \case
-        "any" -> Just SLVEAny
-        "true" -> Just SLVETrue'
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoEmbeddable where
+    parseQueryParam = \case
+        "any" -> Right SLVEAny
+        "true" -> Right SLVETrue'
+        x -> Left ("Unable to parse SearchListVideoEmbeddable from: " <> x)
 
-instance ToText SearchListVideoEmbeddable where
-    toText = \case
+instance ToHttpApiData SearchListVideoEmbeddable where
+    toQueryParam = \case
         SLVEAny -> "any"
         SLVETrue' -> "true"
 
@@ -4942,15 +4942,15 @@ data SearchListEventType
 
 instance Hashable SearchListEventType
 
-instance FromText SearchListEventType where
-    fromText = \case
-        "completed" -> Just SLETCompleted
-        "live" -> Just SLETLive
-        "upcoming" -> Just SLETUpcoming
-        _ -> Nothing
+instance FromHttpApiData SearchListEventType where
+    parseQueryParam = \case
+        "completed" -> Right SLETCompleted
+        "live" -> Right SLETLive
+        "upcoming" -> Right SLETUpcoming
+        x -> Left ("Unable to parse SearchListEventType from: " <> x)
 
-instance ToText SearchListEventType where
-    toText = \case
+instance ToHttpApiData SearchListEventType where
+    toQueryParam = \case
         SLETCompleted -> "completed"
         SLETLive -> "live"
         SLETUpcoming -> "upcoming"
@@ -4975,16 +4975,16 @@ data ActivityContentDetailsRecommendationReason
 
 instance Hashable ActivityContentDetailsRecommendationReason
 
-instance FromText ActivityContentDetailsRecommendationReason where
-    fromText = \case
-        "unspecified" -> Just ACDRRUnspecified
-        "videoFavorited" -> Just ACDRRVideoFavorited
-        "videoLiked" -> Just ACDRRVideoLiked
-        "videoWatched" -> Just ACDRRVideoWatched
-        _ -> Nothing
+instance FromHttpApiData ActivityContentDetailsRecommendationReason where
+    parseQueryParam = \case
+        "unspecified" -> Right ACDRRUnspecified
+        "videoFavorited" -> Right ACDRRVideoFavorited
+        "videoLiked" -> Right ACDRRVideoLiked
+        "videoWatched" -> Right ACDRRVideoWatched
+        x -> Left ("Unable to parse ActivityContentDetailsRecommendationReason from: " <> x)
 
-instance ToText ActivityContentDetailsRecommendationReason where
-    toText = \case
+instance ToHttpApiData ActivityContentDetailsRecommendationReason where
+    toQueryParam = \case
         ACDRRUnspecified -> "unspecified"
         ACDRRVideoFavorited -> "videoFavorited"
         ACDRRVideoLiked -> "videoLiked"
@@ -5016,19 +5016,19 @@ data ContentRatingKijkwijzerRating
 
 instance Hashable ContentRatingKijkwijzerRating
 
-instance FromText ContentRatingKijkwijzerRating where
-    fromText = \case
-        "kijkwijzer12" -> Just KIJKWIJZER12
-        "kijkwijzer16" -> Just KIJKWIJZER16
-        "kijkwijzer18" -> Just KIJKWIJZER18
-        "kijkwijzer6" -> Just KIJKWIJZER6
-        "kijkwijzer9" -> Just KIJKWIJZER9
-        "kijkwijzerAl" -> Just KijkwijzerAl
-        "kijkwijzerUnrated" -> Just KijkwijzerUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingKijkwijzerRating where
+    parseQueryParam = \case
+        "kijkwijzer12" -> Right KIJKWIJZER12
+        "kijkwijzer16" -> Right KIJKWIJZER16
+        "kijkwijzer18" -> Right KIJKWIJZER18
+        "kijkwijzer6" -> Right KIJKWIJZER6
+        "kijkwijzer9" -> Right KIJKWIJZER9
+        "kijkwijzerAl" -> Right KijkwijzerAl
+        "kijkwijzerUnrated" -> Right KijkwijzerUnrated
+        x -> Left ("Unable to parse ContentRatingKijkwijzerRating from: " <> x)
 
-instance ToText ContentRatingKijkwijzerRating where
-    toText = \case
+instance ToHttpApiData ContentRatingKijkwijzerRating where
+    toQueryParam = \case
         KIJKWIJZER12 -> "kijkwijzer12"
         KIJKWIJZER16 -> "kijkwijzer16"
         KIJKWIJZER18 -> "kijkwijzer18"
@@ -5060,18 +5060,18 @@ data VideoSuggestionsProcessingErrorsItem
 
 instance Hashable VideoSuggestionsProcessingErrorsItem
 
-instance FromText VideoSuggestionsProcessingErrorsItem where
-    fromText = \case
-        "archiveFile" -> Just ArchiveFile
-        "audioFile" -> Just AudioFile
-        "docFile" -> Just DocFile
-        "imageFile" -> Just ImageFile
-        "notAVideoFile" -> Just NotAVideoFile
-        "projectFile" -> Just ProjectFile
-        _ -> Nothing
+instance FromHttpApiData VideoSuggestionsProcessingErrorsItem where
+    parseQueryParam = \case
+        "archiveFile" -> Right ArchiveFile
+        "audioFile" -> Right AudioFile
+        "docFile" -> Right DocFile
+        "imageFile" -> Right ImageFile
+        "notAVideoFile" -> Right NotAVideoFile
+        "projectFile" -> Right ProjectFile
+        x -> Left ("Unable to parse VideoSuggestionsProcessingErrorsItem from: " <> x)
 
-instance ToText VideoSuggestionsProcessingErrorsItem where
-    toText = \case
+instance ToHttpApiData VideoSuggestionsProcessingErrorsItem where
+    toQueryParam = \case
         ArchiveFile -> "archiveFile"
         AudioFile -> "audioFile"
         DocFile -> "docFile"
@@ -5107,19 +5107,19 @@ data VideoFileDetailsFileType
 
 instance Hashable VideoFileDetailsFileType
 
-instance FromText VideoFileDetailsFileType where
-    fromText = \case
-        "archive" -> Just VFDFTArchive
-        "audio" -> Just VFDFTAudio
-        "document" -> Just VFDFTDocument
-        "image" -> Just VFDFTImage
-        "other" -> Just VFDFTOther
-        "project" -> Just VFDFTProject
-        "video" -> Just VFDFTVideo
-        _ -> Nothing
+instance FromHttpApiData VideoFileDetailsFileType where
+    parseQueryParam = \case
+        "archive" -> Right VFDFTArchive
+        "audio" -> Right VFDFTAudio
+        "document" -> Right VFDFTDocument
+        "image" -> Right VFDFTImage
+        "other" -> Right VFDFTOther
+        "project" -> Right VFDFTProject
+        "video" -> Right VFDFTVideo
+        x -> Left ("Unable to parse VideoFileDetailsFileType from: " <> x)
 
-instance ToText VideoFileDetailsFileType where
-    toText = \case
+instance ToHttpApiData VideoFileDetailsFileType where
+    toQueryParam = \case
         VFDFTArchive -> "archive"
         VFDFTAudio -> "audio"
         VFDFTDocument -> "document"
@@ -5155,19 +5155,19 @@ data ContentRatingMtrcbRating
 
 instance Hashable ContentRatingMtrcbRating
 
-instance FromText ContentRatingMtrcbRating where
-    fromText = \case
-        "mtrcbG" -> Just MtrcbG
-        "mtrcbPg" -> Just MtrcbPg
-        "mtrcbR13" -> Just MTRCBR13
-        "mtrcbR16" -> Just MTRCBR16
-        "mtrcbR18" -> Just MTRCBR18
-        "mtrcbUnrated" -> Just MtrcbUnrated
-        "mtrcbX" -> Just MtrcbX
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMtrcbRating where
+    parseQueryParam = \case
+        "mtrcbG" -> Right MtrcbG
+        "mtrcbPg" -> Right MtrcbPg
+        "mtrcbR13" -> Right MTRCBR13
+        "mtrcbR16" -> Right MTRCBR16
+        "mtrcbR18" -> Right MTRCBR18
+        "mtrcbUnrated" -> Right MtrcbUnrated
+        "mtrcbX" -> Right MtrcbX
+        x -> Left ("Unable to parse ContentRatingMtrcbRating from: " <> x)
 
-instance ToText ContentRatingMtrcbRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMtrcbRating where
+    toQueryParam = \case
         MtrcbG -> "mtrcbG"
         MtrcbPg -> "mtrcbPg"
         MTRCBR13 -> "mtrcbR13"
@@ -5201,18 +5201,18 @@ data ContentRatingFcoRating
 
 instance Hashable ContentRatingFcoRating
 
-instance FromText ContentRatingFcoRating where
-    fromText = \case
-        "fcoI" -> Just FcoI
-        "fcoIi" -> Just FcoIi
-        "fcoIia" -> Just FcoIia
-        "fcoIib" -> Just FcoIib
-        "fcoIii" -> Just FcoIii
-        "fcoUnrated" -> Just FcoUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingFcoRating where
+    parseQueryParam = \case
+        "fcoI" -> Right FcoI
+        "fcoIi" -> Right FcoIi
+        "fcoIia" -> Right FcoIia
+        "fcoIib" -> Right FcoIib
+        "fcoIii" -> Right FcoIii
+        "fcoUnrated" -> Right FcoUnrated
+        x -> Left ("Unable to parse ContentRatingFcoRating from: " <> x)
 
-instance ToText ContentRatingFcoRating where
-    toText = \case
+instance ToHttpApiData ContentRatingFcoRating where
+    toQueryParam = \case
         FcoI -> "fcoI"
         FcoIi -> "fcoIi"
         FcoIia -> "fcoIia"
@@ -5298,45 +5298,45 @@ data LiveStreamConfigurationIssueType
 
 instance Hashable LiveStreamConfigurationIssueType
 
-instance FromText LiveStreamConfigurationIssueType where
-    fromText = \case
-        "audioBitrateHigh" -> Just AudioBitrateHigh
-        "audioBitrateLow" -> Just AudioBitrateLow
-        "audioBitrateMismatch" -> Just AudioBitrateMismatch
-        "audioCodec" -> Just AudioCodec
-        "audioCodecMismatch" -> Just AudioCodecMismatch
-        "audioSampleRate" -> Just AudioSampleRate
-        "audioSampleRateMismatch" -> Just AudioSampleRateMismatch
-        "audioStereoMismatch" -> Just AudioStereoMismatch
-        "audioTooManyChannels" -> Just AudioTooManyChannels
-        "badContainer" -> Just BadContainer
-        "bitrateHigh" -> Just BitrateHigh
-        "bitrateLow" -> Just BitrateLow
-        "frameRateHigh" -> Just FrameRateHigh
-        "framerateMismatch" -> Just FramerateMismatch
-        "gopMismatch" -> Just GopMismatch
-        "gopSizeLong" -> Just GopSizeLong
-        "gopSizeOver" -> Just GopSizeOver
-        "gopSizeShort" -> Just GopSizeShort
-        "interlacedVideo" -> Just InterlacedVideo
-        "multipleAudioStreams" -> Just MultipleAudioStreams
-        "multipleVideoStreams" -> Just MultipleVideoStreams
-        "noAudioStream" -> Just NoAudioStream
-        "noVideoStream" -> Just NoVideoStream
-        "openGop" -> Just OpenGop
-        "resolutionMismatch" -> Just ResolutionMismatch
-        "videoBitrateMismatch" -> Just VideoBitrateMismatch
-        "videoCodec" -> Just VideoCodec
-        "videoCodecMismatch" -> Just VideoCodecMismatch
-        "videoIngestionStarved" -> Just VideoIngestionStarved
-        "videoInterlaceMismatch" -> Just VideoInterlaceMismatch
-        "videoProfileMismatch" -> Just VideoProFileMismatch
-        "videoResolutionSuboptimal" -> Just VideoResolutionSuboptimal
-        "videoResolutionUnsupported" -> Just VideoResolutionUnsupported
-        _ -> Nothing
+instance FromHttpApiData LiveStreamConfigurationIssueType where
+    parseQueryParam = \case
+        "audioBitrateHigh" -> Right AudioBitrateHigh
+        "audioBitrateLow" -> Right AudioBitrateLow
+        "audioBitrateMismatch" -> Right AudioBitrateMismatch
+        "audioCodec" -> Right AudioCodec
+        "audioCodecMismatch" -> Right AudioCodecMismatch
+        "audioSampleRate" -> Right AudioSampleRate
+        "audioSampleRateMismatch" -> Right AudioSampleRateMismatch
+        "audioStereoMismatch" -> Right AudioStereoMismatch
+        "audioTooManyChannels" -> Right AudioTooManyChannels
+        "badContainer" -> Right BadContainer
+        "bitrateHigh" -> Right BitrateHigh
+        "bitrateLow" -> Right BitrateLow
+        "frameRateHigh" -> Right FrameRateHigh
+        "framerateMismatch" -> Right FramerateMismatch
+        "gopMismatch" -> Right GopMismatch
+        "gopSizeLong" -> Right GopSizeLong
+        "gopSizeOver" -> Right GopSizeOver
+        "gopSizeShort" -> Right GopSizeShort
+        "interlacedVideo" -> Right InterlacedVideo
+        "multipleAudioStreams" -> Right MultipleAudioStreams
+        "multipleVideoStreams" -> Right MultipleVideoStreams
+        "noAudioStream" -> Right NoAudioStream
+        "noVideoStream" -> Right NoVideoStream
+        "openGop" -> Right OpenGop
+        "resolutionMismatch" -> Right ResolutionMismatch
+        "videoBitrateMismatch" -> Right VideoBitrateMismatch
+        "videoCodec" -> Right VideoCodec
+        "videoCodecMismatch" -> Right VideoCodecMismatch
+        "videoIngestionStarved" -> Right VideoIngestionStarved
+        "videoInterlaceMismatch" -> Right VideoInterlaceMismatch
+        "videoProfileMismatch" -> Right VideoProFileMismatch
+        "videoResolutionSuboptimal" -> Right VideoResolutionSuboptimal
+        "videoResolutionUnsupported" -> Right VideoResolutionUnsupported
+        x -> Left ("Unable to parse LiveStreamConfigurationIssueType from: " <> x)
 
-instance ToText LiveStreamConfigurationIssueType where
-    toText = \case
+instance ToHttpApiData LiveStreamConfigurationIssueType where
+    toQueryParam = \case
         AudioBitrateHigh -> "audioBitrateHigh"
         AudioBitrateLow -> "audioBitrateLow"
         AudioBitrateMismatch -> "audioBitrateMismatch"
@@ -5398,15 +5398,15 @@ data SearchListSafeSearch
 
 instance Hashable SearchListSafeSearch
 
-instance FromText SearchListSafeSearch where
-    fromText = \case
-        "moderate" -> Just SLSSModerate
-        "none" -> Just SLSSNone
-        "strict" -> Just SLSSStrict
-        _ -> Nothing
+instance FromHttpApiData SearchListSafeSearch where
+    parseQueryParam = \case
+        "moderate" -> Right SLSSModerate
+        "none" -> Right SLSSNone
+        "strict" -> Right SLSSStrict
+        x -> Left ("Unable to parse SearchListSafeSearch from: " <> x)
 
-instance ToText SearchListSafeSearch where
-    toText = \case
+instance ToHttpApiData SearchListSafeSearch where
+    toQueryParam = \case
         SLSSModerate -> "moderate"
         SLSSNone -> "none"
         SLSSStrict -> "strict"
@@ -5432,14 +5432,14 @@ data SearchListVideoSyndicated
 
 instance Hashable SearchListVideoSyndicated
 
-instance FromText SearchListVideoSyndicated where
-    fromText = \case
-        "any" -> Just SLVSAny
-        "true" -> Just SLVSTrue'
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoSyndicated where
+    parseQueryParam = \case
+        "any" -> Right SLVSAny
+        "true" -> Right SLVSTrue'
+        x -> Left ("Unable to parse SearchListVideoSyndicated from: " <> x)
 
-instance ToText SearchListVideoSyndicated where
-    toText = \case
+instance ToHttpApiData SearchListVideoSyndicated where
+    toQueryParam = \case
         SLVSAny -> "any"
         SLVSTrue' -> "true"
 
@@ -5478,24 +5478,24 @@ data ContentRatingDjctqRatingReasonsItem
 
 instance Hashable ContentRatingDjctqRatingReasonsItem
 
-instance FromText ContentRatingDjctqRatingReasonsItem where
-    fromText = \case
-        "djctqCriminalActs" -> Just DjctqCriminalActs
-        "djctqDrugs" -> Just DjctqDrugs
-        "djctqExplicitSex" -> Just DjctqExplicitSex
-        "djctqExtremeViolence" -> Just DjctqExtremeViolence
-        "djctqIllegalDrugs" -> Just DjctqIllegalDrugs
-        "djctqImpactingContent" -> Just DjctqImpactingContent
-        "djctqInappropriateLanguage" -> Just DjctqInAppropriateLanguage
-        "djctqLegalDrugs" -> Just DjctqLegalDrugs
-        "djctqNudity" -> Just DjctqNudity
-        "djctqSex" -> Just DjctqSex
-        "djctqSexualContent" -> Just DjctqSexualContent
-        "djctqViolence" -> Just DjctqViolence
-        _ -> Nothing
+instance FromHttpApiData ContentRatingDjctqRatingReasonsItem where
+    parseQueryParam = \case
+        "djctqCriminalActs" -> Right DjctqCriminalActs
+        "djctqDrugs" -> Right DjctqDrugs
+        "djctqExplicitSex" -> Right DjctqExplicitSex
+        "djctqExtremeViolence" -> Right DjctqExtremeViolence
+        "djctqIllegalDrugs" -> Right DjctqIllegalDrugs
+        "djctqImpactingContent" -> Right DjctqImpactingContent
+        "djctqInappropriateLanguage" -> Right DjctqInAppropriateLanguage
+        "djctqLegalDrugs" -> Right DjctqLegalDrugs
+        "djctqNudity" -> Right DjctqNudity
+        "djctqSex" -> Right DjctqSex
+        "djctqSexualContent" -> Right DjctqSexualContent
+        "djctqViolence" -> Right DjctqViolence
+        x -> Left ("Unable to parse ContentRatingDjctqRatingReasonsItem from: " <> x)
 
-instance ToText ContentRatingDjctqRatingReasonsItem where
-    toText = \case
+instance ToHttpApiData ContentRatingDjctqRatingReasonsItem where
+    toQueryParam = \case
         DjctqCriminalActs -> "djctqCriminalActs"
         DjctqDrugs -> "djctqDrugs"
         DjctqExplicitSex -> "djctqExplicitSex"
@@ -5525,14 +5525,14 @@ data CdnSettingsIngestionType
 
 instance Hashable CdnSettingsIngestionType
 
-instance FromText CdnSettingsIngestionType where
-    fromText = \case
-        "dash" -> Just Dash
-        "rtmp" -> Just Rtmp
-        _ -> Nothing
+instance FromHttpApiData CdnSettingsIngestionType where
+    parseQueryParam = \case
+        "dash" -> Right Dash
+        "rtmp" -> Right Rtmp
+        x -> Left ("Unable to parse CdnSettingsIngestionType from: " <> x)
 
-instance ToText CdnSettingsIngestionType where
-    toText = \case
+instance ToHttpApiData CdnSettingsIngestionType where
+    toQueryParam = \case
         Dash -> "dash"
         Rtmp -> "rtmp"
 
@@ -5555,14 +5555,14 @@ data InvideoTimingType
 
 instance Hashable InvideoTimingType
 
-instance FromText InvideoTimingType where
-    fromText = \case
-        "offsetFromEnd" -> Just OffSetFromEnd
-        "offsetFromStart" -> Just OffSetFromStart
-        _ -> Nothing
+instance FromHttpApiData InvideoTimingType where
+    parseQueryParam = \case
+        "offsetFromEnd" -> Right OffSetFromEnd
+        "offsetFromStart" -> Right OffSetFromStart
+        x -> Left ("Unable to parse InvideoTimingType from: " <> x)
 
-instance ToText InvideoTimingType where
-    toText = \case
+instance ToHttpApiData InvideoTimingType where
+    toQueryParam = \case
         OffSetFromEnd -> "offsetFromEnd"
         OffSetFromStart -> "offsetFromStart"
 
@@ -5587,16 +5587,16 @@ data ContentRatingAgcomRating
 
 instance Hashable ContentRatingAgcomRating
 
-instance FromText ContentRatingAgcomRating where
-    fromText = \case
-        "agcomT" -> Just AgcomT
-        "agcomUnrated" -> Just AgcomUnrated
-        "agcomVm14" -> Just AGCOMVM14
-        "agcomVm18" -> Just AGCOMVM18
-        _ -> Nothing
+instance FromHttpApiData ContentRatingAgcomRating where
+    parseQueryParam = \case
+        "agcomT" -> Right AgcomT
+        "agcomUnrated" -> Right AgcomUnrated
+        "agcomVm14" -> Right AGCOMVM14
+        "agcomVm18" -> Right AGCOMVM18
+        x -> Left ("Unable to parse ContentRatingAgcomRating from: " <> x)
 
-instance ToText ContentRatingAgcomRating where
-    toText = \case
+instance ToHttpApiData ContentRatingAgcomRating where
+    toQueryParam = \case
         AgcomT -> "agcomT"
         AgcomUnrated -> "agcomUnrated"
         AGCOMVM14 -> "agcomVm14"
@@ -5623,16 +5623,16 @@ data CommentSnippetModerationStatus
 
 instance Hashable CommentSnippetModerationStatus
 
-instance FromText CommentSnippetModerationStatus where
-    fromText = \case
-        "heldForReview" -> Just CSMSHeldForReview
-        "likelySpam" -> Just CSMSLikelySpam
-        "published" -> Just CSMSPublished
-        "rejected" -> Just CSMSRejected
-        _ -> Nothing
+instance FromHttpApiData CommentSnippetModerationStatus where
+    parseQueryParam = \case
+        "heldForReview" -> Right CSMSHeldForReview
+        "likelySpam" -> Right CSMSLikelySpam
+        "published" -> Right CSMSPublished
+        "rejected" -> Right CSMSRejected
+        x -> Left ("Unable to parse CommentSnippetModerationStatus from: " <> x)
 
-instance ToText CommentSnippetModerationStatus where
-    toText = \case
+instance ToHttpApiData CommentSnippetModerationStatus where
+    toQueryParam = \case
         CSMSHeldForReview -> "heldForReview"
         CSMSLikelySpam -> "likelySpam"
         CSMSPublished -> "published"
@@ -5665,15 +5665,15 @@ data SearchListVideoLicense
 
 instance Hashable SearchListVideoLicense
 
-instance FromText SearchListVideoLicense where
-    fromText = \case
-        "any" -> Just SLVLAny
-        "creativeCommon" -> Just SLVLCreativeCommon
-        "youtube" -> Just SLVLYouTube
-        _ -> Nothing
+instance FromHttpApiData SearchListVideoLicense where
+    parseQueryParam = \case
+        "any" -> Right SLVLAny
+        "creativeCommon" -> Right SLVLCreativeCommon
+        "youtube" -> Right SLVLYouTube
+        x -> Left ("Unable to parse SearchListVideoLicense from: " <> x)
 
-instance ToText SearchListVideoLicense where
-    toText = \case
+instance ToHttpApiData SearchListVideoLicense where
+    toQueryParam = \case
         SLVLAny -> "any"
         SLVLCreativeCommon -> "creativeCommon"
         SLVLYouTube -> "youtube"
@@ -5705,19 +5705,19 @@ data LiveChatMessageSnippetType
 
 instance Hashable LiveChatMessageSnippetType
 
-instance FromText LiveChatMessageSnippetType where
-    fromText = \case
-        "chatEndedEvent" -> Just LCMSTChatEndedEvent
-        "fanFundingEvent" -> Just LCMSTFanFundingEvent
-        "newSponsorEvent" -> Just LCMSTNewSponsorEvent
-        "sponsorOnlyModeEndedEvent" -> Just LCMSTSponsorOnlyModeEndedEvent
-        "sponsorOnlyModeStartedEvent" -> Just LCMSTSponsorOnlyModeStartedEvent
-        "textMessageEvent" -> Just LCMSTTextMessageEvent
-        "tombstone" -> Just LCMSTTombstone
-        _ -> Nothing
+instance FromHttpApiData LiveChatMessageSnippetType where
+    parseQueryParam = \case
+        "chatEndedEvent" -> Right LCMSTChatEndedEvent
+        "fanFundingEvent" -> Right LCMSTFanFundingEvent
+        "newSponsorEvent" -> Right LCMSTNewSponsorEvent
+        "sponsorOnlyModeEndedEvent" -> Right LCMSTSponsorOnlyModeEndedEvent
+        "sponsorOnlyModeStartedEvent" -> Right LCMSTSponsorOnlyModeStartedEvent
+        "textMessageEvent" -> Right LCMSTTextMessageEvent
+        "tombstone" -> Right LCMSTTombstone
+        x -> Left ("Unable to parse LiveChatMessageSnippetType from: " <> x)
 
-instance ToText LiveChatMessageSnippetType where
-    toText = \case
+instance ToHttpApiData LiveChatMessageSnippetType where
+    toQueryParam = \case
         LCMSTChatEndedEvent -> "chatEndedEvent"
         LCMSTFanFundingEvent -> "fanFundingEvent"
         LCMSTNewSponsorEvent -> "newSponsorEvent"
@@ -5747,17 +5747,17 @@ data LiveStreamStatusStreamStatus
 
 instance Hashable LiveStreamStatusStreamStatus
 
-instance FromText LiveStreamStatusStreamStatus where
-    fromText = \case
-        "active" -> Just LSSSSActive
-        "created" -> Just LSSSSCreated
-        "error" -> Just LSSSSError'
-        "inactive" -> Just LSSSSInactive
-        "ready" -> Just LSSSSReady
-        _ -> Nothing
+instance FromHttpApiData LiveStreamStatusStreamStatus where
+    parseQueryParam = \case
+        "active" -> Right LSSSSActive
+        "created" -> Right LSSSSCreated
+        "error" -> Right LSSSSError'
+        "inactive" -> Right LSSSSInactive
+        "ready" -> Right LSSSSReady
+        x -> Left ("Unable to parse LiveStreamStatusStreamStatus from: " <> x)
 
-instance ToText LiveStreamStatusStreamStatus where
-    toText = \case
+instance ToHttpApiData LiveStreamStatusStreamStatus where
+    toQueryParam = \case
         LSSSSActive -> "active"
         LSSSSCreated -> "created"
         LSSSSError' -> "error"
@@ -5780,14 +5780,14 @@ data VideoStatusLicense
 
 instance Hashable VideoStatusLicense
 
-instance FromText VideoStatusLicense where
-    fromText = \case
-        "creativeCommon" -> Just CreativeCommon
-        "youtube" -> Just YouTube
-        _ -> Nothing
+instance FromHttpApiData VideoStatusLicense where
+    parseQueryParam = \case
+        "creativeCommon" -> Right CreativeCommon
+        "youtube" -> Right YouTube
+        x -> Left ("Unable to parse VideoStatusLicense from: " <> x)
 
-instance ToText VideoStatusLicense where
-    toText = \case
+instance ToHttpApiData VideoStatusLicense where
+    toQueryParam = \case
         CreativeCommon -> "creativeCommon"
         YouTube -> "youtube"
 
@@ -5820,20 +5820,20 @@ data ContentRatingNfvcbRating
 
 instance Hashable ContentRatingNfvcbRating
 
-instance FromText ContentRatingNfvcbRating where
-    fromText = \case
-        "nfvcb12" -> Just NFVCB12
-        "nfvcb12a" -> Just Nfvcb12a
-        "nfvcb15" -> Just NFVCB15
-        "nfvcb18" -> Just NFVCB18
-        "nfvcbG" -> Just NfvcbG
-        "nfvcbPg" -> Just NfvcbPg
-        "nfvcbRe" -> Just NfvcbRe
-        "nfvcbUnrated" -> Just NfvcbUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingNfvcbRating where
+    parseQueryParam = \case
+        "nfvcb12" -> Right NFVCB12
+        "nfvcb12a" -> Right Nfvcb12a
+        "nfvcb15" -> Right NFVCB15
+        "nfvcb18" -> Right NFVCB18
+        "nfvcbG" -> Right NfvcbG
+        "nfvcbPg" -> Right NfvcbPg
+        "nfvcbRe" -> Right NfvcbRe
+        "nfvcbUnrated" -> Right NfvcbUnrated
+        x -> Left ("Unable to parse ContentRatingNfvcbRating from: " <> x)
 
-instance ToText ContentRatingNfvcbRating where
-    toText = \case
+instance ToHttpApiData ContentRatingNfvcbRating where
+    toQueryParam = \case
         NFVCB12 -> "nfvcb12"
         Nfvcb12a -> "nfvcb12a"
         NFVCB15 -> "nfvcb15"
@@ -5870,19 +5870,19 @@ data ContentRatingMdaRating
 
 instance Hashable ContentRatingMdaRating
 
-instance FromText ContentRatingMdaRating where
-    fromText = \case
-        "mdaG" -> Just MdaG
-        "mdaM18" -> Just MDAM18
-        "mdaNc16" -> Just MDANC16
-        "mdaPg" -> Just MdaPg
-        "mdaPg13" -> Just MDAPG13
-        "mdaR21" -> Just MDAR21
-        "mdaUnrated" -> Just MdaUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingMdaRating where
+    parseQueryParam = \case
+        "mdaG" -> Right MdaG
+        "mdaM18" -> Right MDAM18
+        "mdaNc16" -> Right MDANC16
+        "mdaPg" -> Right MdaPg
+        "mdaPg13" -> Right MDAPG13
+        "mdaR21" -> Right MDAR21
+        "mdaUnrated" -> Right MdaUnrated
+        x -> Left ("Unable to parse ContentRatingMdaRating from: " <> x)
 
-instance ToText ContentRatingMdaRating where
-    toText = \case
+instance ToHttpApiData ContentRatingMdaRating where
+    toQueryParam = \case
         MdaG -> "mdaG"
         MDAM18 -> "mdaM18"
         MDANC16 -> "mdaNc16"
@@ -5923,21 +5923,21 @@ data ContentRatingAcbRating
 
 instance Hashable ContentRatingAcbRating
 
-instance FromText ContentRatingAcbRating where
-    fromText = \case
-        "acbC" -> Just AcbC
-        "acbE" -> Just AcbE
-        "acbG" -> Just AcbG
-        "acbM" -> Just AcbM
-        "acbMa15plus" -> Just AcbMa15plus
-        "acbP" -> Just AcbP
-        "acbPg" -> Just AcbPg
-        "acbR18plus" -> Just AcbR18plus
-        "acbUnrated" -> Just AcbUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingAcbRating where
+    parseQueryParam = \case
+        "acbC" -> Right AcbC
+        "acbE" -> Right AcbE
+        "acbG" -> Right AcbG
+        "acbM" -> Right AcbM
+        "acbMa15plus" -> Right AcbMa15plus
+        "acbP" -> Right AcbP
+        "acbPg" -> Right AcbPg
+        "acbR18plus" -> Right AcbR18plus
+        "acbUnrated" -> Right AcbUnrated
+        x -> Left ("Unable to parse ContentRatingAcbRating from: " <> x)
 
-instance ToText ContentRatingAcbRating where
-    toText = \case
+instance ToHttpApiData ContentRatingAcbRating where
+    toQueryParam = \case
         AcbC -> "acbC"
         AcbE -> "acbE"
         AcbG -> "acbG"
@@ -5975,19 +5975,19 @@ data ContentRatingDjctqRating
 
 instance Hashable ContentRatingDjctqRating
 
-instance FromText ContentRatingDjctqRating where
-    fromText = \case
-        "djctq10" -> Just DJCTQ10
-        "djctq12" -> Just DJCTQ12
-        "djctq14" -> Just DJCTQ14
-        "djctq16" -> Just DJCTQ16
-        "djctq18" -> Just DJCTQ18
-        "djctqL" -> Just DjctqL
-        "djctqUnrated" -> Just DjctqUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingDjctqRating where
+    parseQueryParam = \case
+        "djctq10" -> Right DJCTQ10
+        "djctq12" -> Right DJCTQ12
+        "djctq14" -> Right DJCTQ14
+        "djctq16" -> Right DJCTQ16
+        "djctq18" -> Right DJCTQ18
+        "djctqL" -> Right DjctqL
+        "djctqUnrated" -> Right DjctqUnrated
+        x -> Left ("Unable to parse ContentRatingDjctqRating from: " <> x)
 
-instance ToText ContentRatingDjctqRating where
-    toText = \case
+instance ToHttpApiData ContentRatingDjctqRating where
+    toQueryParam = \case
         DJCTQ10 -> "djctq10"
         DJCTQ12 -> "djctq12"
         DJCTQ14 -> "djctq14"
@@ -6021,18 +6021,18 @@ data VideoStatusFailureReason
 
 instance Hashable VideoStatusFailureReason
 
-instance FromText VideoStatusFailureReason where
-    fromText = \case
-        "codec" -> Just Codec
-        "conversion" -> Just Conversion
-        "emptyFile" -> Just EmptyFile
-        "invalidFile" -> Just InvalidFile
-        "tooSmall" -> Just TooSmall
-        "uploadAborted" -> Just UploadAborted
-        _ -> Nothing
+instance FromHttpApiData VideoStatusFailureReason where
+    parseQueryParam = \case
+        "codec" -> Right Codec
+        "conversion" -> Right Conversion
+        "emptyFile" -> Right EmptyFile
+        "invalidFile" -> Right InvalidFile
+        "tooSmall" -> Right TooSmall
+        "uploadAborted" -> Right UploadAborted
+        x -> Left ("Unable to parse VideoStatusFailureReason from: " <> x)
 
-instance ToText VideoStatusFailureReason where
-    toText = \case
+instance ToHttpApiData VideoStatusFailureReason where
+    toQueryParam = \case
         Codec -> "codec"
         Conversion -> "conversion"
         EmptyFile -> "emptyFile"
@@ -6070,19 +6070,19 @@ data ContentRatingCatvRating
 
 instance Hashable ContentRatingCatvRating
 
-instance FromText ContentRatingCatvRating where
-    fromText = \case
-        "catv14plus" -> Just Catv14plus
-        "catv18plus" -> Just Catv18plus
-        "catvC" -> Just CatvC
-        "catvC8" -> Just CATVC8
-        "catvG" -> Just CatvG
-        "catvPg" -> Just CatvPg
-        "catvUnrated" -> Just CatvUnrated
-        _ -> Nothing
+instance FromHttpApiData ContentRatingCatvRating where
+    parseQueryParam = \case
+        "catv14plus" -> Right Catv14plus
+        "catv18plus" -> Right Catv18plus
+        "catvC" -> Right CatvC
+        "catvC8" -> Right CATVC8
+        "catvG" -> Right CatvG
+        "catvPg" -> Right CatvPg
+        "catvUnrated" -> Right CatvUnrated
+        x -> Left ("Unable to parse ContentRatingCatvRating from: " <> x)
 
-instance ToText ContentRatingCatvRating where
-    toText = \case
+instance ToHttpApiData ContentRatingCatvRating where
+    toQueryParam = \case
         Catv14plus -> "catv14plus"
         Catv18plus -> "catv18plus"
         CatvC -> "catvC"

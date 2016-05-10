@@ -42,21 +42,21 @@ data URLCrawlErrorsSamplesMarkAsFixedCategory
 
 instance Hashable URLCrawlErrorsSamplesMarkAsFixedCategory
 
-instance FromText URLCrawlErrorsSamplesMarkAsFixedCategory where
-    fromText = \case
-        "authPermissions" -> Just AuthPermissions
-        "flashContent" -> Just FlashContent
-        "manyToOneRedirect" -> Just ManyToOneRedirect
-        "notFollowed" -> Just NotFollowed
-        "notFound" -> Just NotFound
-        "other" -> Just Other
-        "roboted" -> Just Roboted
-        "serverError" -> Just ServerError
-        "soft404" -> Just SOFT404
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorsSamplesMarkAsFixedCategory where
+    parseQueryParam = \case
+        "authPermissions" -> Right AuthPermissions
+        "flashContent" -> Right FlashContent
+        "manyToOneRedirect" -> Right ManyToOneRedirect
+        "notFollowed" -> Right NotFollowed
+        "notFound" -> Right NotFound
+        "other" -> Right Other
+        "roboted" -> Right Roboted
+        "serverError" -> Right ServerError
+        "soft404" -> Right SOFT404
+        x -> Left ("Unable to parse URLCrawlErrorsSamplesMarkAsFixedCategory from: " <> x)
 
-instance ToText URLCrawlErrorsSamplesMarkAsFixedCategory where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorsSamplesMarkAsFixedCategory where
+    toQueryParam = \case
         AuthPermissions -> "authPermissions"
         FlashContent -> "flashContent"
         ManyToOneRedirect -> "manyToOneRedirect"
@@ -85,15 +85,15 @@ data URLCrawlErrorsSamplesGetPlatform
 
 instance Hashable URLCrawlErrorsSamplesGetPlatform
 
-instance FromText URLCrawlErrorsSamplesGetPlatform where
-    fromText = \case
-        "mobile" -> Just Mobile
-        "smartphoneOnly" -> Just SmartphoneOnly
-        "web" -> Just Web
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorsSamplesGetPlatform where
+    parseQueryParam = \case
+        "mobile" -> Right Mobile
+        "smartphoneOnly" -> Right SmartphoneOnly
+        "web" -> Right Web
+        x -> Left ("Unable to parse URLCrawlErrorsSamplesGetPlatform from: " <> x)
 
-instance ToText URLCrawlErrorsSamplesGetPlatform where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorsSamplesGetPlatform where
+    toQueryParam = \case
         Mobile -> "mobile"
         SmartphoneOnly -> "smartphoneOnly"
         Web -> "web"
@@ -116,15 +116,15 @@ data URLCrawlErrorsSamplesMarkAsFixedPlatform
 
 instance Hashable URLCrawlErrorsSamplesMarkAsFixedPlatform
 
-instance FromText URLCrawlErrorsSamplesMarkAsFixedPlatform where
-    fromText = \case
-        "mobile" -> Just UCESMAFPMobile
-        "smartphoneOnly" -> Just UCESMAFPSmartphoneOnly
-        "web" -> Just UCESMAFPWeb
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorsSamplesMarkAsFixedPlatform where
+    parseQueryParam = \case
+        "mobile" -> Right UCESMAFPMobile
+        "smartphoneOnly" -> Right UCESMAFPSmartphoneOnly
+        "web" -> Right UCESMAFPWeb
+        x -> Left ("Unable to parse URLCrawlErrorsSamplesMarkAsFixedPlatform from: " <> x)
 
-instance ToText URLCrawlErrorsSamplesMarkAsFixedPlatform where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorsSamplesMarkAsFixedPlatform where
+    toQueryParam = \case
         UCESMAFPMobile -> "mobile"
         UCESMAFPSmartphoneOnly -> "smartphoneOnly"
         UCESMAFPWeb -> "web"
@@ -159,21 +159,21 @@ data URLCrawlErrorsSamplesGetCategory
 
 instance Hashable URLCrawlErrorsSamplesGetCategory
 
-instance FromText URLCrawlErrorsSamplesGetCategory where
-    fromText = \case
-        "authPermissions" -> Just UCESGCAuthPermissions
-        "flashContent" -> Just UCESGCFlashContent
-        "manyToOneRedirect" -> Just UCESGCManyToOneRedirect
-        "notFollowed" -> Just UCESGCNotFollowed
-        "notFound" -> Just UCESGCNotFound
-        "other" -> Just UCESGCOther
-        "roboted" -> Just UCESGCRoboted
-        "serverError" -> Just UCESGCServerError
-        "soft404" -> Just UCESGCSOFT404
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorsSamplesGetCategory where
+    parseQueryParam = \case
+        "authPermissions" -> Right UCESGCAuthPermissions
+        "flashContent" -> Right UCESGCFlashContent
+        "manyToOneRedirect" -> Right UCESGCManyToOneRedirect
+        "notFollowed" -> Right UCESGCNotFollowed
+        "notFound" -> Right UCESGCNotFound
+        "other" -> Right UCESGCOther
+        "roboted" -> Right UCESGCRoboted
+        "serverError" -> Right UCESGCServerError
+        "soft404" -> Right UCESGCSOFT404
+        x -> Left ("Unable to parse URLCrawlErrorsSamplesGetCategory from: " <> x)
 
-instance ToText URLCrawlErrorsSamplesGetCategory where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorsSamplesGetCategory where
+    toQueryParam = \case
         UCESGCAuthPermissions -> "authPermissions"
         UCESGCFlashContent -> "flashContent"
         UCESGCManyToOneRedirect -> "manyToOneRedirect"
@@ -203,15 +203,15 @@ data URLCrawlErrorscountsQueryPlatform
 
 instance Hashable URLCrawlErrorscountsQueryPlatform
 
-instance FromText URLCrawlErrorscountsQueryPlatform where
-    fromText = \case
-        "mobile" -> Just UCEQPMobile
-        "smartphoneOnly" -> Just UCEQPSmartphoneOnly
-        "web" -> Just UCEQPWeb
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorscountsQueryPlatform where
+    parseQueryParam = \case
+        "mobile" -> Right UCEQPMobile
+        "smartphoneOnly" -> Right UCEQPSmartphoneOnly
+        "web" -> Right UCEQPWeb
+        x -> Left ("Unable to parse URLCrawlErrorscountsQueryPlatform from: " <> x)
 
-instance ToText URLCrawlErrorscountsQueryPlatform where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorscountsQueryPlatform where
+    toQueryParam = \case
         UCEQPMobile -> "mobile"
         UCEQPSmartphoneOnly -> "smartphoneOnly"
         UCEQPWeb -> "web"
@@ -246,21 +246,21 @@ data URLCrawlErrorsSamplesListCategory
 
 instance Hashable URLCrawlErrorsSamplesListCategory
 
-instance FromText URLCrawlErrorsSamplesListCategory where
-    fromText = \case
-        "authPermissions" -> Just UCESLCAuthPermissions
-        "flashContent" -> Just UCESLCFlashContent
-        "manyToOneRedirect" -> Just UCESLCManyToOneRedirect
-        "notFollowed" -> Just UCESLCNotFollowed
-        "notFound" -> Just UCESLCNotFound
-        "other" -> Just UCESLCOther
-        "roboted" -> Just UCESLCRoboted
-        "serverError" -> Just UCESLCServerError
-        "soft404" -> Just UCESLCSOFT404
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorsSamplesListCategory where
+    parseQueryParam = \case
+        "authPermissions" -> Right UCESLCAuthPermissions
+        "flashContent" -> Right UCESLCFlashContent
+        "manyToOneRedirect" -> Right UCESLCManyToOneRedirect
+        "notFollowed" -> Right UCESLCNotFollowed
+        "notFound" -> Right UCESLCNotFound
+        "other" -> Right UCESLCOther
+        "roboted" -> Right UCESLCRoboted
+        "serverError" -> Right UCESLCServerError
+        "soft404" -> Right UCESLCSOFT404
+        x -> Left ("Unable to parse URLCrawlErrorsSamplesListCategory from: " <> x)
 
-instance ToText URLCrawlErrorsSamplesListCategory where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorsSamplesListCategory where
+    toQueryParam = \case
         UCESLCAuthPermissions -> "authPermissions"
         UCESLCFlashContent -> "flashContent"
         UCESLCManyToOneRedirect -> "manyToOneRedirect"
@@ -289,15 +289,15 @@ data URLCrawlErrorsSamplesListPlatform
 
 instance Hashable URLCrawlErrorsSamplesListPlatform
 
-instance FromText URLCrawlErrorsSamplesListPlatform where
-    fromText = \case
-        "mobile" -> Just UCESLPMobile
-        "smartphoneOnly" -> Just UCESLPSmartphoneOnly
-        "web" -> Just UCESLPWeb
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorsSamplesListPlatform where
+    parseQueryParam = \case
+        "mobile" -> Right UCESLPMobile
+        "smartphoneOnly" -> Right UCESLPSmartphoneOnly
+        "web" -> Right UCESLPWeb
+        x -> Left ("Unable to parse URLCrawlErrorsSamplesListPlatform from: " <> x)
 
-instance ToText URLCrawlErrorsSamplesListPlatform where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorsSamplesListPlatform where
+    toQueryParam = \case
         UCESLPMobile -> "mobile"
         UCESLPSmartphoneOnly -> "smartphoneOnly"
         UCESLPWeb -> "web"
@@ -333,21 +333,21 @@ data URLCrawlErrorscountsQueryCategory
 
 instance Hashable URLCrawlErrorscountsQueryCategory
 
-instance FromText URLCrawlErrorscountsQueryCategory where
-    fromText = \case
-        "authPermissions" -> Just UCEQCAuthPermissions
-        "flashContent" -> Just UCEQCFlashContent
-        "manyToOneRedirect" -> Just UCEQCManyToOneRedirect
-        "notFollowed" -> Just UCEQCNotFollowed
-        "notFound" -> Just UCEQCNotFound
-        "other" -> Just UCEQCOther
-        "roboted" -> Just UCEQCRoboted
-        "serverError" -> Just UCEQCServerError
-        "soft404" -> Just UCEQCSOFT404
-        _ -> Nothing
+instance FromHttpApiData URLCrawlErrorscountsQueryCategory where
+    parseQueryParam = \case
+        "authPermissions" -> Right UCEQCAuthPermissions
+        "flashContent" -> Right UCEQCFlashContent
+        "manyToOneRedirect" -> Right UCEQCManyToOneRedirect
+        "notFollowed" -> Right UCEQCNotFollowed
+        "notFound" -> Right UCEQCNotFound
+        "other" -> Right UCEQCOther
+        "roboted" -> Right UCEQCRoboted
+        "serverError" -> Right UCEQCServerError
+        "soft404" -> Right UCEQCSOFT404
+        x -> Left ("Unable to parse URLCrawlErrorscountsQueryCategory from: " <> x)
 
-instance ToText URLCrawlErrorscountsQueryCategory where
-    toText = \case
+instance ToHttpApiData URLCrawlErrorscountsQueryCategory where
+    toQueryParam = \case
         UCEQCAuthPermissions -> "authPermissions"
         UCEQCFlashContent -> "flashContent"
         UCEQCManyToOneRedirect -> "manyToOneRedirect"

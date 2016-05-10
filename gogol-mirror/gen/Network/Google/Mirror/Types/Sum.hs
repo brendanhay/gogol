@@ -32,14 +32,14 @@ data TimelineListOrderBy
 
 instance Hashable TimelineListOrderBy
 
-instance FromText TimelineListOrderBy where
-    fromText = \case
-        "displayTime" -> Just DisplayTime
-        "writeTime" -> Just WriteTime
-        _ -> Nothing
+instance FromHttpApiData TimelineListOrderBy where
+    parseQueryParam = \case
+        "displayTime" -> Right DisplayTime
+        "writeTime" -> Right WriteTime
+        x -> Left ("Unable to parse TimelineListOrderBy from: " <> x)
 
-instance ToText TimelineListOrderBy where
-    toText = \case
+instance ToHttpApiData TimelineListOrderBy where
+    toQueryParam = \case
         DisplayTime -> "displayTime"
         WriteTime -> "writeTime"
 

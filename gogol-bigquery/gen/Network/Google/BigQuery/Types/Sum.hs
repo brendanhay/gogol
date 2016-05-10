@@ -30,14 +30,14 @@ data JobsListProjection
 
 instance Hashable JobsListProjection
 
-instance FromText JobsListProjection where
-    fromText = \case
-        "full" -> Just Full
-        "minimal" -> Just Minimal
-        _ -> Nothing
+instance FromHttpApiData JobsListProjection where
+    parseQueryParam = \case
+        "full" -> Right Full
+        "minimal" -> Right Minimal
+        x -> Left ("Unable to parse JobsListProjection from: " <> x)
 
-instance ToText JobsListProjection where
-    toText = \case
+instance ToHttpApiData JobsListProjection where
+    toQueryParam = \case
         Full -> "full"
         Minimal -> "minimal"
 
@@ -62,15 +62,15 @@ data JobsListStateFilter
 
 instance Hashable JobsListStateFilter
 
-instance FromText JobsListStateFilter where
-    fromText = \case
-        "done" -> Just Done
-        "pending" -> Just Pending
-        "running" -> Just Running
-        _ -> Nothing
+instance FromHttpApiData JobsListStateFilter where
+    parseQueryParam = \case
+        "done" -> Right Done
+        "pending" -> Right Pending
+        "running" -> Right Running
+        x -> Left ("Unable to parse JobsListStateFilter from: " <> x)
 
-instance ToText JobsListStateFilter where
-    toText = \case
+instance ToHttpApiData JobsListStateFilter where
+    toQueryParam = \case
         Done -> "done"
         Pending -> "pending"
         Running -> "running"

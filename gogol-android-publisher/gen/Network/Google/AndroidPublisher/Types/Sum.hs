@@ -41,21 +41,21 @@ data EditsImagesDeleteallImageType
 
 instance Hashable EditsImagesDeleteallImageType
 
-instance FromText EditsImagesDeleteallImageType where
-    fromText = \case
-        "featureGraphic" -> Just FeatureGraphic
-        "icon" -> Just Icon
-        "phoneScreenshots" -> Just PhoneScreenshots
-        "promoGraphic" -> Just PromoGraphic
-        "sevenInchScreenshots" -> Just SevenInchScreenshots
-        "tenInchScreenshots" -> Just TenInchScreenshots
-        "tvBanner" -> Just TvBanner
-        "tvScreenshots" -> Just TvScreenshots
-        "wearScreenshots" -> Just WearScreenshots
-        _ -> Nothing
+instance FromHttpApiData EditsImagesDeleteallImageType where
+    parseQueryParam = \case
+        "featureGraphic" -> Right FeatureGraphic
+        "icon" -> Right Icon
+        "phoneScreenshots" -> Right PhoneScreenshots
+        "promoGraphic" -> Right PromoGraphic
+        "sevenInchScreenshots" -> Right SevenInchScreenshots
+        "tenInchScreenshots" -> Right TenInchScreenshots
+        "tvBanner" -> Right TvBanner
+        "tvScreenshots" -> Right TvScreenshots
+        "wearScreenshots" -> Right WearScreenshots
+        x -> Left ("Unable to parse EditsImagesDeleteallImageType from: " <> x)
 
-instance ToText EditsImagesDeleteallImageType where
-    toText = \case
+instance ToHttpApiData EditsImagesDeleteallImageType where
+    toQueryParam = \case
         FeatureGraphic -> "featureGraphic"
         Icon -> "icon"
         PhoneScreenshots -> "phoneScreenshots"
@@ -86,16 +86,16 @@ data EditsTracksPatchTrack
 
 instance Hashable EditsTracksPatchTrack
 
-instance FromText EditsTracksPatchTrack where
-    fromText = \case
-        "alpha" -> Just Alpha
-        "beta" -> Just Beta
-        "production" -> Just Production
-        "rollout" -> Just Rollout
-        _ -> Nothing
+instance FromHttpApiData EditsTracksPatchTrack where
+    parseQueryParam = \case
+        "alpha" -> Right Alpha
+        "beta" -> Right Beta
+        "production" -> Right Production
+        "rollout" -> Right Rollout
+        x -> Left ("Unable to parse EditsTracksPatchTrack from: " <> x)
 
-instance ToText EditsTracksPatchTrack where
-    toText = \case
+instance ToHttpApiData EditsTracksPatchTrack where
+    toQueryParam = \case
         Alpha -> "alpha"
         Beta -> "beta"
         Production -> "production"
@@ -121,16 +121,16 @@ data EditsTracksGetTrack
 
 instance Hashable EditsTracksGetTrack
 
-instance FromText EditsTracksGetTrack where
-    fromText = \case
-        "alpha" -> Just ETGTAlpha
-        "beta" -> Just ETGTBeta
-        "production" -> Just ETGTProduction
-        "rollout" -> Just ETGTRollout
-        _ -> Nothing
+instance FromHttpApiData EditsTracksGetTrack where
+    parseQueryParam = \case
+        "alpha" -> Right ETGTAlpha
+        "beta" -> Right ETGTBeta
+        "production" -> Right ETGTProduction
+        "rollout" -> Right ETGTRollout
+        x -> Left ("Unable to parse EditsTracksGetTrack from: " <> x)
 
-instance ToText EditsTracksGetTrack where
-    toText = \case
+instance ToHttpApiData EditsTracksGetTrack where
+    toQueryParam = \case
         ETGTAlpha -> "alpha"
         ETGTBeta -> "beta"
         ETGTProduction -> "production"
@@ -156,16 +156,16 @@ data EditsTracksUpdateTrack
 
 instance Hashable EditsTracksUpdateTrack
 
-instance FromText EditsTracksUpdateTrack where
-    fromText = \case
-        "alpha" -> Just ETUTAlpha
-        "beta" -> Just ETUTBeta
-        "production" -> Just ETUTProduction
-        "rollout" -> Just ETUTRollout
-        _ -> Nothing
+instance FromHttpApiData EditsTracksUpdateTrack where
+    parseQueryParam = \case
+        "alpha" -> Right ETUTAlpha
+        "beta" -> Right ETUTBeta
+        "production" -> Right ETUTProduction
+        "rollout" -> Right ETUTRollout
+        x -> Left ("Unable to parse EditsTracksUpdateTrack from: " <> x)
 
-instance ToText EditsTracksUpdateTrack where
-    toText = \case
+instance ToHttpApiData EditsTracksUpdateTrack where
+    toQueryParam = \case
         ETUTAlpha -> "alpha"
         ETUTBeta -> "beta"
         ETUTProduction -> "production"
@@ -200,21 +200,21 @@ data EditsImagesListImageType
 
 instance Hashable EditsImagesListImageType
 
-instance FromText EditsImagesListImageType where
-    fromText = \case
-        "featureGraphic" -> Just EILITFeatureGraphic
-        "icon" -> Just EILITIcon
-        "phoneScreenshots" -> Just EILITPhoneScreenshots
-        "promoGraphic" -> Just EILITPromoGraphic
-        "sevenInchScreenshots" -> Just EILITSevenInchScreenshots
-        "tenInchScreenshots" -> Just EILITTenInchScreenshots
-        "tvBanner" -> Just EILITTvBanner
-        "tvScreenshots" -> Just EILITTvScreenshots
-        "wearScreenshots" -> Just EILITWearScreenshots
-        _ -> Nothing
+instance FromHttpApiData EditsImagesListImageType where
+    parseQueryParam = \case
+        "featureGraphic" -> Right EILITFeatureGraphic
+        "icon" -> Right EILITIcon
+        "phoneScreenshots" -> Right EILITPhoneScreenshots
+        "promoGraphic" -> Right EILITPromoGraphic
+        "sevenInchScreenshots" -> Right EILITSevenInchScreenshots
+        "tenInchScreenshots" -> Right EILITTenInchScreenshots
+        "tvBanner" -> Right EILITTvBanner
+        "tvScreenshots" -> Right EILITTvScreenshots
+        "wearScreenshots" -> Right EILITWearScreenshots
+        x -> Left ("Unable to parse EditsImagesListImageType from: " <> x)
 
-instance ToText EditsImagesListImageType where
-    toText = \case
+instance ToHttpApiData EditsImagesListImageType where
+    toQueryParam = \case
         EILITFeatureGraphic -> "featureGraphic"
         EILITIcon -> "icon"
         EILITPhoneScreenshots -> "phoneScreenshots"
@@ -244,16 +244,16 @@ data EditsTestersPatchTrack
 
 instance Hashable EditsTestersPatchTrack
 
-instance FromText EditsTestersPatchTrack where
-    fromText = \case
-        "alpha" -> Just ETPTAlpha
-        "beta" -> Just ETPTBeta
-        "production" -> Just ETPTProduction
-        "rollout" -> Just ETPTRollout
-        _ -> Nothing
+instance FromHttpApiData EditsTestersPatchTrack where
+    parseQueryParam = \case
+        "alpha" -> Right ETPTAlpha
+        "beta" -> Right ETPTBeta
+        "production" -> Right ETPTProduction
+        "rollout" -> Right ETPTRollout
+        x -> Left ("Unable to parse EditsTestersPatchTrack from: " <> x)
 
-instance ToText EditsTestersPatchTrack where
-    toText = \case
+instance ToHttpApiData EditsTestersPatchTrack where
+    toQueryParam = \case
         ETPTAlpha -> "alpha"
         ETPTBeta -> "beta"
         ETPTProduction -> "production"
@@ -278,16 +278,16 @@ data EditsTestersGetTrack
 
 instance Hashable EditsTestersGetTrack
 
-instance FromText EditsTestersGetTrack where
-    fromText = \case
-        "alpha" -> Just EAlpha
-        "beta" -> Just EBeta
-        "production" -> Just EProduction
-        "rollout" -> Just ERollout
-        _ -> Nothing
+instance FromHttpApiData EditsTestersGetTrack where
+    parseQueryParam = \case
+        "alpha" -> Right EAlpha
+        "beta" -> Right EBeta
+        "production" -> Right EProduction
+        "rollout" -> Right ERollout
+        x -> Left ("Unable to parse EditsTestersGetTrack from: " <> x)
 
-instance ToText EditsTestersGetTrack where
-    toText = \case
+instance ToHttpApiData EditsTestersGetTrack where
+    toQueryParam = \case
         EAlpha -> "alpha"
         EBeta -> "beta"
         EProduction -> "production"
@@ -322,21 +322,21 @@ data EditsImagesUploadImageType
 
 instance Hashable EditsImagesUploadImageType
 
-instance FromText EditsImagesUploadImageType where
-    fromText = \case
-        "featureGraphic" -> Just EIUITFeatureGraphic
-        "icon" -> Just EIUITIcon
-        "phoneScreenshots" -> Just EIUITPhoneScreenshots
-        "promoGraphic" -> Just EIUITPromoGraphic
-        "sevenInchScreenshots" -> Just EIUITSevenInchScreenshots
-        "tenInchScreenshots" -> Just EIUITTenInchScreenshots
-        "tvBanner" -> Just EIUITTvBanner
-        "tvScreenshots" -> Just EIUITTvScreenshots
-        "wearScreenshots" -> Just EIUITWearScreenshots
-        _ -> Nothing
+instance FromHttpApiData EditsImagesUploadImageType where
+    parseQueryParam = \case
+        "featureGraphic" -> Right EIUITFeatureGraphic
+        "icon" -> Right EIUITIcon
+        "phoneScreenshots" -> Right EIUITPhoneScreenshots
+        "promoGraphic" -> Right EIUITPromoGraphic
+        "sevenInchScreenshots" -> Right EIUITSevenInchScreenshots
+        "tenInchScreenshots" -> Right EIUITTenInchScreenshots
+        "tvBanner" -> Right EIUITTvBanner
+        "tvScreenshots" -> Right EIUITTvScreenshots
+        "wearScreenshots" -> Right EIUITWearScreenshots
+        x -> Left ("Unable to parse EditsImagesUploadImageType from: " <> x)
 
-instance ToText EditsImagesUploadImageType where
-    toText = \case
+instance ToHttpApiData EditsImagesUploadImageType where
+    toQueryParam = \case
         EIUITFeatureGraphic -> "featureGraphic"
         EIUITIcon -> "icon"
         EIUITPhoneScreenshots -> "phoneScreenshots"
@@ -362,14 +362,14 @@ data EditsExpansionFilesUploadExpansionFileType
 
 instance Hashable EditsExpansionFilesUploadExpansionFileType
 
-instance FromText EditsExpansionFilesUploadExpansionFileType where
-    fromText = \case
-        "main" -> Just Main
-        "patch" -> Just Patch'
-        _ -> Nothing
+instance FromHttpApiData EditsExpansionFilesUploadExpansionFileType where
+    parseQueryParam = \case
+        "main" -> Right Main
+        "patch" -> Right Patch'
+        x -> Left ("Unable to parse EditsExpansionFilesUploadExpansionFileType from: " <> x)
 
-instance ToText EditsExpansionFilesUploadExpansionFileType where
-    toText = \case
+instance ToHttpApiData EditsExpansionFilesUploadExpansionFileType where
+    toQueryParam = \case
         Main -> "main"
         Patch' -> "patch"
 
@@ -388,14 +388,14 @@ data EditsExpansionFilesGetExpansionFileType
 
 instance Hashable EditsExpansionFilesGetExpansionFileType
 
-instance FromText EditsExpansionFilesGetExpansionFileType where
-    fromText = \case
-        "main" -> Just EEFGEFTMain
-        "patch" -> Just EEFGEFTPatch'
-        _ -> Nothing
+instance FromHttpApiData EditsExpansionFilesGetExpansionFileType where
+    parseQueryParam = \case
+        "main" -> Right EEFGEFTMain
+        "patch" -> Right EEFGEFTPatch'
+        x -> Left ("Unable to parse EditsExpansionFilesGetExpansionFileType from: " <> x)
 
-instance ToText EditsExpansionFilesGetExpansionFileType where
-    toText = \case
+instance ToHttpApiData EditsExpansionFilesGetExpansionFileType where
+    toQueryParam = \case
         EEFGEFTMain -> "main"
         EEFGEFTPatch' -> "patch"
 
@@ -414,14 +414,14 @@ data EditsExpansionFilesPatchExpansionFileType
 
 instance Hashable EditsExpansionFilesPatchExpansionFileType
 
-instance FromText EditsExpansionFilesPatchExpansionFileType where
-    fromText = \case
-        "main" -> Just EEFPEFTMain
-        "patch" -> Just EEFPEFTPatch'
-        _ -> Nothing
+instance FromHttpApiData EditsExpansionFilesPatchExpansionFileType where
+    parseQueryParam = \case
+        "main" -> Right EEFPEFTMain
+        "patch" -> Right EEFPEFTPatch'
+        x -> Left ("Unable to parse EditsExpansionFilesPatchExpansionFileType from: " <> x)
 
-instance ToText EditsExpansionFilesPatchExpansionFileType where
-    toText = \case
+instance ToHttpApiData EditsExpansionFilesPatchExpansionFileType where
+    toQueryParam = \case
         EEFPEFTMain -> "main"
         EEFPEFTPatch' -> "patch"
 
@@ -440,14 +440,14 @@ data EditsExpansionFilesUpdateExpansionFileType
 
 instance Hashable EditsExpansionFilesUpdateExpansionFileType
 
-instance FromText EditsExpansionFilesUpdateExpansionFileType where
-    fromText = \case
-        "main" -> Just EEFUEFTMain
-        "patch" -> Just EEFUEFTPatch'
-        _ -> Nothing
+instance FromHttpApiData EditsExpansionFilesUpdateExpansionFileType where
+    parseQueryParam = \case
+        "main" -> Right EEFUEFTMain
+        "patch" -> Right EEFUEFTPatch'
+        x -> Left ("Unable to parse EditsExpansionFilesUpdateExpansionFileType from: " <> x)
 
-instance ToText EditsExpansionFilesUpdateExpansionFileType where
-    toText = \case
+instance ToHttpApiData EditsExpansionFilesUpdateExpansionFileType where
+    toQueryParam = \case
         EEFUEFTMain -> "main"
         EEFUEFTPatch' -> "patch"
 
@@ -480,21 +480,21 @@ data EditsImagesDeleteImageType
 
 instance Hashable EditsImagesDeleteImageType
 
-instance FromText EditsImagesDeleteImageType where
-    fromText = \case
-        "featureGraphic" -> Just EIDITFeatureGraphic
-        "icon" -> Just EIDITIcon
-        "phoneScreenshots" -> Just EIDITPhoneScreenshots
-        "promoGraphic" -> Just EIDITPromoGraphic
-        "sevenInchScreenshots" -> Just EIDITSevenInchScreenshots
-        "tenInchScreenshots" -> Just EIDITTenInchScreenshots
-        "tvBanner" -> Just EIDITTvBanner
-        "tvScreenshots" -> Just EIDITTvScreenshots
-        "wearScreenshots" -> Just EIDITWearScreenshots
-        _ -> Nothing
+instance FromHttpApiData EditsImagesDeleteImageType where
+    parseQueryParam = \case
+        "featureGraphic" -> Right EIDITFeatureGraphic
+        "icon" -> Right EIDITIcon
+        "phoneScreenshots" -> Right EIDITPhoneScreenshots
+        "promoGraphic" -> Right EIDITPromoGraphic
+        "sevenInchScreenshots" -> Right EIDITSevenInchScreenshots
+        "tenInchScreenshots" -> Right EIDITTenInchScreenshots
+        "tvBanner" -> Right EIDITTvBanner
+        "tvScreenshots" -> Right EIDITTvScreenshots
+        "wearScreenshots" -> Right EIDITWearScreenshots
+        x -> Left ("Unable to parse EditsImagesDeleteImageType from: " <> x)
 
-instance ToText EditsImagesDeleteImageType where
-    toText = \case
+instance ToHttpApiData EditsImagesDeleteImageType where
+    toQueryParam = \case
         EIDITFeatureGraphic -> "featureGraphic"
         EIDITIcon -> "icon"
         EIDITPhoneScreenshots -> "phoneScreenshots"
@@ -524,16 +524,16 @@ data EditsTestersUpdateTrack
 
 instance Hashable EditsTestersUpdateTrack
 
-instance FromText EditsTestersUpdateTrack where
-    fromText = \case
-        "alpha" -> Just EDIAlpha
-        "beta" -> Just EDIBeta
-        "production" -> Just EDIProduction
-        "rollout" -> Just EDIRollout
-        _ -> Nothing
+instance FromHttpApiData EditsTestersUpdateTrack where
+    parseQueryParam = \case
+        "alpha" -> Right EDIAlpha
+        "beta" -> Right EDIBeta
+        "production" -> Right EDIProduction
+        "rollout" -> Right EDIRollout
+        x -> Left ("Unable to parse EditsTestersUpdateTrack from: " <> x)
 
-instance ToText EditsTestersUpdateTrack where
-    toText = \case
+instance ToHttpApiData EditsTestersUpdateTrack where
+    toQueryParam = \case
         EDIAlpha -> "alpha"
         EDIBeta -> "beta"
         EDIProduction -> "production"

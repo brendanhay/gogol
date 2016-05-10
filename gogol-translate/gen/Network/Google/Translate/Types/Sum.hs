@@ -30,14 +30,14 @@ data TranslationsListFormat
 
 instance Hashable TranslationsListFormat
 
-instance FromText TranslationsListFormat where
-    fromText = \case
-        "html" -> Just HTML
-        "text" -> Just Text
-        _ -> Nothing
+instance FromHttpApiData TranslationsListFormat where
+    parseQueryParam = \case
+        "html" -> Right HTML
+        "text" -> Right Text
+        x -> Left ("Unable to parse TranslationsListFormat from: " <> x)
 
-instance ToText TranslationsListFormat where
-    toText = \case
+instance ToHttpApiData TranslationsListFormat where
+    toQueryParam = \case
         HTML -> "html"
         Text -> "text"
 

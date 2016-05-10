@@ -29,14 +29,14 @@ data PropertyOrderDirection
 
 instance Hashable PropertyOrderDirection
 
-instance FromText PropertyOrderDirection where
-    fromText = \case
-        "ASCENDING" -> Just Ascending
-        "DESCENDING" -> Just Descending
-        _ -> Nothing
+instance FromHttpApiData PropertyOrderDirection where
+    parseQueryParam = \case
+        "ASCENDING" -> Right Ascending
+        "DESCENDING" -> Right Descending
+        x -> Left ("Unable to parse PropertyOrderDirection from: " <> x)
 
-instance ToText PropertyOrderDirection where
-    toText = \case
+instance ToHttpApiData PropertyOrderDirection where
+    toQueryParam = \case
         Ascending -> "ASCENDING"
         Descending -> "DESCENDING"
 
@@ -60,15 +60,15 @@ data QueryResultBatchEntityResultType
 
 instance Hashable QueryResultBatchEntityResultType
 
-instance FromText QueryResultBatchEntityResultType where
-    fromText = \case
-        "FULL" -> Just Full
-        "KEY_ONLY" -> Just KeyOnly
-        "PROJECTION" -> Just Projection
-        _ -> Nothing
+instance FromHttpApiData QueryResultBatchEntityResultType where
+    parseQueryParam = \case
+        "FULL" -> Right Full
+        "KEY_ONLY" -> Right KeyOnly
+        "PROJECTION" -> Right Projection
+        x -> Left ("Unable to parse QueryResultBatchEntityResultType from: " <> x)
 
-instance ToText QueryResultBatchEntityResultType where
-    toText = \case
+instance ToHttpApiData QueryResultBatchEntityResultType where
+    toQueryParam = \case
         Full -> "FULL"
         KeyOnly -> "KEY_ONLY"
         Projection -> "PROJECTION"
@@ -88,13 +88,13 @@ data CompositeFilterOperator
 
 instance Hashable CompositeFilterOperator
 
-instance FromText CompositeFilterOperator where
-    fromText = \case
-        "AND" -> Just And
-        _ -> Nothing
+instance FromHttpApiData CompositeFilterOperator where
+    parseQueryParam = \case
+        "AND" -> Right And
+        x -> Left ("Unable to parse CompositeFilterOperator from: " <> x)
 
-instance ToText CompositeFilterOperator where
-    toText = \case
+instance ToHttpApiData CompositeFilterOperator where
+    toQueryParam = \case
         And -> "AND"
 
 instance FromJSON CompositeFilterOperator where
@@ -116,15 +116,15 @@ data QueryResultBatchMoreResults
 
 instance Hashable QueryResultBatchMoreResults
 
-instance FromText QueryResultBatchMoreResults where
-    fromText = \case
-        "MORE_RESULTS_AFTER_LIMIT" -> Just MoreResultsAfterLimit
-        "NOT_FINISHED" -> Just NotFinished
-        "NO_MORE_RESULTS" -> Just NoMoreResults
-        _ -> Nothing
+instance FromHttpApiData QueryResultBatchMoreResults where
+    parseQueryParam = \case
+        "MORE_RESULTS_AFTER_LIMIT" -> Right MoreResultsAfterLimit
+        "NOT_FINISHED" -> Right NotFinished
+        "NO_MORE_RESULTS" -> Right NoMoreResults
+        x -> Left ("Unable to parse QueryResultBatchMoreResults from: " <> x)
 
-instance ToText QueryResultBatchMoreResults where
-    toText = \case
+instance ToHttpApiData QueryResultBatchMoreResults where
+    toQueryParam = \case
         MoreResultsAfterLimit -> "MORE_RESULTS_AFTER_LIMIT"
         NotFinished -> "NOT_FINISHED"
         NoMoreResults -> "NO_MORE_RESULTS"
@@ -150,15 +150,15 @@ data ReadOptionsReadConsistency
 
 instance Hashable ReadOptionsReadConsistency
 
-instance FromText ReadOptionsReadConsistency where
-    fromText = \case
-        "DEFAULT" -> Just Default
-        "EVENTUAL" -> Just Eventual
-        "STRONG" -> Just Strong
-        _ -> Nothing
+instance FromHttpApiData ReadOptionsReadConsistency where
+    parseQueryParam = \case
+        "DEFAULT" -> Right Default
+        "EVENTUAL" -> Right Eventual
+        "STRONG" -> Right Strong
+        x -> Left ("Unable to parse ReadOptionsReadConsistency from: " <> x)
 
-instance ToText ReadOptionsReadConsistency where
-    toText = \case
+instance ToHttpApiData ReadOptionsReadConsistency where
+    toQueryParam = \case
         Default -> "DEFAULT"
         Eventual -> "EVENTUAL"
         Strong -> "STRONG"
@@ -188,18 +188,18 @@ data PropertyFilterOperator
 
 instance Hashable PropertyFilterOperator
 
-instance FromText PropertyFilterOperator where
-    fromText = \case
-        "EQUAL" -> Just Equal
-        "GREATER_THAN" -> Just GreaterThan
-        "GREATER_THAN_OR_EQUAL" -> Just GreaterThanOrEqual
-        "HAS_ANCESTOR" -> Just HasAncestor
-        "LESS_THAN" -> Just LessThan
-        "LESS_THAN_OR_EQUAL" -> Just LessThanOrEqual
-        _ -> Nothing
+instance FromHttpApiData PropertyFilterOperator where
+    parseQueryParam = \case
+        "EQUAL" -> Right Equal
+        "GREATER_THAN" -> Right GreaterThan
+        "GREATER_THAN_OR_EQUAL" -> Right GreaterThanOrEqual
+        "HAS_ANCESTOR" -> Right HasAncestor
+        "LESS_THAN" -> Right LessThan
+        "LESS_THAN_OR_EQUAL" -> Right LessThanOrEqual
+        x -> Left ("Unable to parse PropertyFilterOperator from: " <> x)
 
-instance ToText PropertyFilterOperator where
-    toText = \case
+instance ToHttpApiData PropertyFilterOperator where
+    toQueryParam = \case
         Equal -> "EQUAL"
         GreaterThan -> "GREATER_THAN"
         GreaterThanOrEqual -> "GREATER_THAN_OR_EQUAL"
@@ -228,14 +228,14 @@ data BeginTransactionRequestIsolationLevel
 
 instance Hashable BeginTransactionRequestIsolationLevel
 
-instance FromText BeginTransactionRequestIsolationLevel where
-    fromText = \case
-        "SERIALIZABLE" -> Just Serializable
-        "SNAPSHOT" -> Just Snapshot
-        _ -> Nothing
+instance FromHttpApiData BeginTransactionRequestIsolationLevel where
+    parseQueryParam = \case
+        "SERIALIZABLE" -> Right Serializable
+        "SNAPSHOT" -> Right Snapshot
+        x -> Left ("Unable to parse BeginTransactionRequestIsolationLevel from: " <> x)
 
-instance ToText BeginTransactionRequestIsolationLevel where
-    toText = \case
+instance ToHttpApiData BeginTransactionRequestIsolationLevel where
+    toQueryParam = \case
         Serializable -> "SERIALIZABLE"
         Snapshot -> "SNAPSHOT"
 
@@ -256,14 +256,14 @@ data CommitRequestMode
 
 instance Hashable CommitRequestMode
 
-instance FromText CommitRequestMode where
-    fromText = \case
-        "NON_TRANSACTIONAL" -> Just NonTransactional
-        "TRANSACTIONAL" -> Just Transactional
-        _ -> Nothing
+instance FromHttpApiData CommitRequestMode where
+    parseQueryParam = \case
+        "NON_TRANSACTIONAL" -> Right NonTransactional
+        "TRANSACTIONAL" -> Right Transactional
+        x -> Left ("Unable to parse CommitRequestMode from: " <> x)
 
-instance ToText CommitRequestMode where
-    toText = \case
+instance ToHttpApiData CommitRequestMode where
+    toQueryParam = \case
         NonTransactional -> "NON_TRANSACTIONAL"
         Transactional -> "TRANSACTIONAL"
 
@@ -285,13 +285,13 @@ data PropertyExpressionAggregationFunction
 
 instance Hashable PropertyExpressionAggregationFunction
 
-instance FromText PropertyExpressionAggregationFunction where
-    fromText = \case
-        "FIRST" -> Just First
-        _ -> Nothing
+instance FromHttpApiData PropertyExpressionAggregationFunction where
+    parseQueryParam = \case
+        "FIRST" -> Right First
+        x -> Left ("Unable to parse PropertyExpressionAggregationFunction from: " <> x)
 
-instance ToText PropertyExpressionAggregationFunction where
-    toText = \case
+instance ToHttpApiData PropertyExpressionAggregationFunction where
+    toQueryParam = \case
         First -> "FIRST"
 
 instance FromJSON PropertyExpressionAggregationFunction where

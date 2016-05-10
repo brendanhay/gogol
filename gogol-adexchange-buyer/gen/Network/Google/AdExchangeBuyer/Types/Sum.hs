@@ -38,16 +38,16 @@ data CreativesListOpenAuctionStatusFilter
 
 instance Hashable CreativesListOpenAuctionStatusFilter
 
-instance FromText CreativesListOpenAuctionStatusFilter where
-    fromText = \case
-        "approved" -> Just Approved
-        "conditionally_approved" -> Just ConditionallyApproved
-        "disapproved" -> Just DisApproved
-        "not_checked" -> Just NotChecked
-        _ -> Nothing
+instance FromHttpApiData CreativesListOpenAuctionStatusFilter where
+    parseQueryParam = \case
+        "approved" -> Right Approved
+        "conditionally_approved" -> Right ConditionallyApproved
+        "disapproved" -> Right DisApproved
+        "not_checked" -> Right NotChecked
+        x -> Left ("Unable to parse CreativesListOpenAuctionStatusFilter from: " <> x)
 
-instance ToText CreativesListOpenAuctionStatusFilter where
-    toText = \case
+instance ToHttpApiData CreativesListOpenAuctionStatusFilter where
+    toQueryParam = \case
         Approved -> "approved"
         ConditionallyApproved -> "conditionally_approved"
         DisApproved -> "disapproved"
@@ -75,17 +75,17 @@ data ProposalsPatchUpdateAction
 
 instance Hashable ProposalsPatchUpdateAction
 
-instance FromText ProposalsPatchUpdateAction where
-    fromText = \case
-        "accept" -> Just Accept
-        "cancel" -> Just Cancel
-        "propose" -> Just Propose
-        "unknownAction" -> Just UnknownAction
-        "updateFinalized" -> Just UpdateFinalized
-        _ -> Nothing
+instance FromHttpApiData ProposalsPatchUpdateAction where
+    parseQueryParam = \case
+        "accept" -> Right Accept
+        "cancel" -> Right Cancel
+        "propose" -> Right Propose
+        "unknownAction" -> Right UnknownAction
+        "updateFinalized" -> Right UpdateFinalized
+        x -> Left ("Unable to parse ProposalsPatchUpdateAction from: " <> x)
 
-instance ToText ProposalsPatchUpdateAction where
-    toText = \case
+instance ToHttpApiData ProposalsPatchUpdateAction where
+    toQueryParam = \case
         Accept -> "accept"
         Cancel -> "cancel"
         Propose -> "propose"
@@ -117,16 +117,16 @@ data CreativesListDealsStatusFilter
 
 instance Hashable CreativesListDealsStatusFilter
 
-instance FromText CreativesListDealsStatusFilter where
-    fromText = \case
-        "approved" -> Just CLDSFApproved
-        "conditionally_approved" -> Just CLDSFConditionallyApproved
-        "disapproved" -> Just CLDSFDisApproved
-        "not_checked" -> Just CLDSFNotChecked
-        _ -> Nothing
+instance FromHttpApiData CreativesListDealsStatusFilter where
+    parseQueryParam = \case
+        "approved" -> Right CLDSFApproved
+        "conditionally_approved" -> Right CLDSFConditionallyApproved
+        "disapproved" -> Right CLDSFDisApproved
+        "not_checked" -> Right CLDSFNotChecked
+        x -> Left ("Unable to parse CreativesListDealsStatusFilter from: " <> x)
 
-instance ToText CreativesListDealsStatusFilter where
-    toText = \case
+instance ToHttpApiData CreativesListDealsStatusFilter where
+    toQueryParam = \case
         CLDSFApproved -> "approved"
         CLDSFConditionallyApproved -> "conditionally_approved"
         CLDSFDisApproved -> "disapproved"
@@ -154,17 +154,17 @@ data ProposalsUpdateUpdateAction
 
 instance Hashable ProposalsUpdateUpdateAction
 
-instance FromText ProposalsUpdateUpdateAction where
-    fromText = \case
-        "accept" -> Just PUUAAccept
-        "cancel" -> Just PUUACancel
-        "propose" -> Just PUUAPropose
-        "unknownAction" -> Just PUUAUnknownAction
-        "updateFinalized" -> Just PUUAUpdateFinalized
-        _ -> Nothing
+instance FromHttpApiData ProposalsUpdateUpdateAction where
+    parseQueryParam = \case
+        "accept" -> Right PUUAAccept
+        "cancel" -> Right PUUACancel
+        "propose" -> Right PUUAPropose
+        "unknownAction" -> Right PUUAUnknownAction
+        "updateFinalized" -> Right PUUAUpdateFinalized
+        x -> Left ("Unable to parse ProposalsUpdateUpdateAction from: " <> x)
 
-instance ToText ProposalsUpdateUpdateAction where
-    toText = \case
+instance ToHttpApiData ProposalsUpdateUpdateAction where
+    toQueryParam = \case
         PUUAAccept -> "accept"
         PUUACancel -> "cancel"
         PUUAPropose -> "propose"

@@ -55,27 +55,27 @@ data OperationWarningsItemCode
 
 instance Hashable OperationWarningsItemCode
 
-instance FromText OperationWarningsItemCode where
-    fromText = \case
-        "CLEANUP_FAILED" -> Just CleanupFailed
-        "DEPRECATED_RESOURCE_USED" -> Just DeprecatedResourceUsed
-        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Just DiskSizeLargerThanImageSize
-        "INJECTED_KERNELS_DEPRECATED" -> Just InjectedKernelsDeprecated
-        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Just NextHopAddressNotAssigned
-        "NEXT_HOP_CANNOT_IP_FORWARD" -> Just NextHopCannotIPForward
-        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Just NextHopInstanceNotFound
-        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Just NextHopInstanceNotOnNetwork
-        "NEXT_HOP_NOT_RUNNING" -> Just NextHopNotRunning
-        "NOT_CRITICAL_ERROR" -> Just NotCriticalError
-        "NO_RESULTS_ON_PAGE" -> Just NoResultsOnPage
-        "REQUIRED_TOS_AGREEMENT" -> Just RequiredTosAgreement
-        "RESOURCE_NOT_DELETED" -> Just ResourceNotDeleted
-        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Just SingleInstancePropertyTemplate
-        "UNREACHABLE" -> Just Unreachable
-        _ -> Nothing
+instance FromHttpApiData OperationWarningsItemCode where
+    parseQueryParam = \case
+        "CLEANUP_FAILED" -> Right CleanupFailed
+        "DEPRECATED_RESOURCE_USED" -> Right DeprecatedResourceUsed
+        "DISK_SIZE_LARGER_THAN_IMAGE_SIZE" -> Right DiskSizeLargerThanImageSize
+        "INJECTED_KERNELS_DEPRECATED" -> Right InjectedKernelsDeprecated
+        "NEXT_HOP_ADDRESS_NOT_ASSIGNED" -> Right NextHopAddressNotAssigned
+        "NEXT_HOP_CANNOT_IP_FORWARD" -> Right NextHopCannotIPForward
+        "NEXT_HOP_INSTANCE_NOT_FOUND" -> Right NextHopInstanceNotFound
+        "NEXT_HOP_INSTANCE_NOT_ON_NETWORK" -> Right NextHopInstanceNotOnNetwork
+        "NEXT_HOP_NOT_RUNNING" -> Right NextHopNotRunning
+        "NOT_CRITICAL_ERROR" -> Right NotCriticalError
+        "NO_RESULTS_ON_PAGE" -> Right NoResultsOnPage
+        "REQUIRED_TOS_AGREEMENT" -> Right RequiredTosAgreement
+        "RESOURCE_NOT_DELETED" -> Right ResourceNotDeleted
+        "SINGLE_INSTANCE_PROPERTY_TEMPLATE" -> Right SingleInstancePropertyTemplate
+        "UNREACHABLE" -> Right Unreachable
+        x -> Left ("Unable to parse OperationWarningsItemCode from: " <> x)
 
-instance ToText OperationWarningsItemCode where
-    toText = \case
+instance ToHttpApiData OperationWarningsItemCode where
+    toQueryParam = \case
         CleanupFailed -> "CLEANUP_FAILED"
         DeprecatedResourceUsed -> "DEPRECATED_RESOURCE_USED"
         DiskSizeLargerThanImageSize -> "DISK_SIZE_LARGER_THAN_IMAGE_SIZE"
@@ -111,15 +111,15 @@ data OperationStatus
 
 instance Hashable OperationStatus
 
-instance FromText OperationStatus where
-    fromText = \case
-        "DONE" -> Just Done
-        "PENDING" -> Just Pending
-        "RUNNING" -> Just Running
-        _ -> Nothing
+instance FromHttpApiData OperationStatus where
+    parseQueryParam = \case
+        "DONE" -> Right Done
+        "PENDING" -> Right Pending
+        "RUNNING" -> Right Running
+        x -> Left ("Unable to parse OperationStatus from: " <> x)
 
-instance ToText OperationStatus where
-    toText = \case
+instance ToHttpApiData OperationStatus where
+    toQueryParam = \case
         Done -> "DONE"
         Pending -> "PENDING"
         Running -> "RUNNING"
