@@ -13,12 +13,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Cloud Vision API allows developers to easily integrate Google
--- vision features, including image labeling, face, logo, and landmark
--- detection, optical character recognition (OCR), and detection of
--- explicit content, into applications.
+-- Integrates Google Vision features, including image labeling, face, logo,
+-- and landmark detection, optical character recognition (OCR), and
+-- detection of explicit content, into applications.
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference>
+-- /See:/ <https://cloud.google.com/vision/ Google Cloud Vision API Reference>
 module Network.Google.Vision
     (
     -- * Service Configuration
@@ -264,5 +263,5 @@ import           Network.Google.Vision.Types
 TODO
 -}
 
--- | Represents the entirety of the methods and resources available for the Cloud Vision API service.
+-- | Represents the entirety of the methods and resources available for the Google Cloud Vision API service.
 type VisionAPI = ImagesAnnotateResource
