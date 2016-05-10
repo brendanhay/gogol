@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a specific cluster.
+-- Gets the details of a specific cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.get@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
@@ -67,7 +67,7 @@ type ProjectsZonesClustersGetResource =
                                QueryParam "callback" Text :>
                                  QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
--- | Gets a specific cluster.
+-- | Gets the details of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersGet' smart constructor.
 data ProjectsZonesClustersGet = ProjectsZonesClustersGet'
@@ -170,7 +170,7 @@ pzcgClusterId
       (\ s a -> s{_pzcgClusterId = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzcgProjectId :: Lens' ProjectsZonesClustersGet Text
 pzcgProjectId
   = lens _pzcgProjectId

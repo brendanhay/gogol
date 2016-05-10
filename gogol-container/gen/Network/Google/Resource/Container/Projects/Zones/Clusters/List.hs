@@ -161,7 +161,7 @@ pzclBearerToken
       (\ s a -> s{_pzclBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzclProjectId :: Lens' ProjectsZonesClustersList Text
 pzclProjectId
   = lens _pzclProjectId
