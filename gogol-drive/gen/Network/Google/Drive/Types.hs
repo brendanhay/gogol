@@ -294,6 +294,7 @@ module Network.Google.Drive.Types
     , fMD5Checksum
     , fFolderColorRgb
     , fMimeType
+    , fIsAppAuthorized
     , fName
     , fParents
     , fStarred
