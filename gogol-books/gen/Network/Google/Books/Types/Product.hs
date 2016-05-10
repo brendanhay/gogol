@@ -1128,23 +1128,25 @@ instance ToJSON GeolayerDataGeoViewport where
 --
 -- /See:/ 'volumeUserInfo' smart constructor.
 data VolumeUserInfo = VolumeUserInfo'
-    { _vuiIsFamilySharingAllowed :: !(Maybe Bool)
-    , _vuiIsFamilySharedToUser   :: !(Maybe Bool)
-    , _vuiCopy                   :: !(Maybe VolumeUserInfoCopy)
-    , _vuiUserUploadedVolumeInfo :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
-    , _vuiIsPurchased            :: !(Maybe Bool)
-    , _vuiEntitlementType        :: !(Maybe (Textual Int32))
-    , _vuiAcquisitionType        :: !(Maybe (Textual Int32))
-    , _vuiAcquiredTime           :: !(Maybe DateTime')
-    , _vuiRentalState            :: !(Maybe Text)
-    , _vuiIsPreOrdered           :: !(Maybe Bool)
-    , _vuiReview                 :: !(Maybe Review)
-    , _vuiIsFamilySharedFromUser :: !(Maybe Bool)
-    , _vuiRentalPeriod           :: !(Maybe VolumeUserInfoRentalPeriod)
-    , _vuiUpdated                :: !(Maybe DateTime')
-    , _vuiIsUploaded             :: !(Maybe Bool)
-    , _vuiIsInMyBooks            :: !(Maybe Bool)
-    , _vuiReadingPosition        :: !(Maybe ReadingPosition)
+    { _vuiIsFamilySharingAllowed       :: !(Maybe Bool)
+    , _vuiIsFamilySharedToUser         :: !(Maybe Bool)
+    , _vuiCopy                         :: !(Maybe VolumeUserInfoCopy)
+    , _vuiUserUploadedVolumeInfo       :: !(Maybe VolumeUserInfoUserUploadedVolumeInfo)
+    , _vuiIsPurchased                  :: !(Maybe Bool)
+    , _vuiEntitlementType              :: !(Maybe (Textual Int32))
+    , _vuiAcquisitionType              :: !(Maybe (Textual Int32))
+    , _vuiAcquiredTime                 :: !(Maybe DateTime')
+    , _vuiRentalState                  :: !(Maybe Text)
+    , _vuiIsPreOrdered                 :: !(Maybe Bool)
+    , _vuiReview                       :: !(Maybe Review)
+    , _vuiIsFamilySharedFromUser       :: !(Maybe Bool)
+    , _vuiRentalPeriod                 :: !(Maybe VolumeUserInfoRentalPeriod)
+    , _vuiUpdated                      :: !(Maybe DateTime')
+    , _vuiIsUploaded                   :: !(Maybe Bool)
+    , _vuiIsInMyBooks                  :: !(Maybe Bool)
+    , _vuiReadingPosition              :: !(Maybe ReadingPosition)
+    , _vuiFamilySharing                :: !(Maybe VolumeUserInfoFamilySharing)
+    , _vuiIsFamilySharingDisabledByFop :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumeUserInfo' with the minimum fields required to make a request.
@@ -1184,6 +1186,10 @@ data VolumeUserInfo = VolumeUserInfo'
 -- * 'vuiIsInMyBooks'
 --
 -- * 'vuiReadingPosition'
+--
+-- * 'vuiFamilySharing'
+--
+-- * 'vuiIsFamilySharingDisabledByFop'
 volumeUserInfo
     :: VolumeUserInfo
 volumeUserInfo =
@@ -1205,11 +1211,11 @@ volumeUserInfo =
     , _vuiIsUploaded = Nothing
     , _vuiIsInMyBooks = Nothing
     , _vuiReadingPosition = Nothing
+    , _vuiFamilySharing = Nothing
+    , _vuiIsFamilySharingDisabledByFop = Nothing
     }
 
--- | Whether or not this volume can be shared with the family by the user.
--- This includes sharing eligibility of both the volume and the user. If
--- the value is true, the user can initiate a family sharing action.
+-- | Deprecated: Replaced by familySharing.
 vuiIsFamilySharingAllowed :: Lens' VolumeUserInfo (Maybe Bool)
 vuiIsFamilySharingAllowed
   = lens _vuiIsFamilySharingAllowed
@@ -1317,6 +1323,18 @@ vuiReadingPosition
   = lens _vuiReadingPosition
       (\ s a -> s{_vuiReadingPosition = a})
 
+-- | Information on the ability to share with the family.
+vuiFamilySharing :: Lens' VolumeUserInfo (Maybe VolumeUserInfoFamilySharing)
+vuiFamilySharing
+  = lens _vuiFamilySharing
+      (\ s a -> s{_vuiFamilySharing = a})
+
+-- | Deprecated: Replaced by familySharing.
+vuiIsFamilySharingDisabledByFop :: Lens' VolumeUserInfo (Maybe Bool)
+vuiIsFamilySharingDisabledByFop
+  = lens _vuiIsFamilySharingDisabledByFop
+      (\ s a -> s{_vuiIsFamilySharingDisabledByFop = a})
+
 instance FromJSON VolumeUserInfo where
         parseJSON
           = withObject "VolumeUserInfo"
@@ -1338,7 +1356,9 @@ instance FromJSON VolumeUserInfo where
                      <*> (o .:? "updated")
                      <*> (o .:? "isUploaded")
                      <*> (o .:? "isInMyBooks")
-                     <*> (o .:? "readingPosition"))
+                     <*> (o .:? "readingPosition")
+                     <*> (o .:? "familySharing")
+                     <*> (o .:? "isFamilySharingDisabledByFop"))
 
 instance ToJSON VolumeUserInfo where
         toJSON VolumeUserInfo'{..}
@@ -1364,7 +1384,10 @@ instance ToJSON VolumeUserInfo where
                   ("updated" .=) <$> _vuiUpdated,
                   ("isUploaded" .=) <$> _vuiIsUploaded,
                   ("isInMyBooks" .=) <$> _vuiIsInMyBooks,
-                  ("readingPosition" .=) <$> _vuiReadingPosition])
+                  ("readingPosition" .=) <$> _vuiReadingPosition,
+                  ("familySharing" .=) <$> _vuiFamilySharing,
+                  ("isFamilySharingDisabledByFop" .=) <$>
+                    _vuiIsFamilySharingDisabledByFop])
 
 --
 -- /See:/ 'layersummary' smart constructor.
@@ -2291,10 +2314,13 @@ instance ToJSON Bookshelf where
 --
 -- /See:/ 'notification' smart constructor.
 data Notification = Notification'
-    { _nTargetURL                      :: !(Maybe Text)
+    { _nDocType                        :: !(Maybe Text)
+    , _nTargetURL                      :: !(Maybe Text)
     , _nShowNotificationSettingsAction :: !(Maybe Bool)
+    , _nDocId                          :: !(Maybe Text)
     , _nKind                           :: !Text
     , _nBody                           :: !(Maybe Text)
+    , _nCrmExperimentIds               :: !(Maybe [Textual Int64])
     , _nPcampaignId                    :: !(Maybe Text)
     , _nReason                         :: !(Maybe Text)
     , _nDontShowNotification           :: !(Maybe Bool)
@@ -2307,13 +2333,19 @@ data Notification = Notification'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'nDocType'
+--
 -- * 'nTargetURL'
 --
 -- * 'nShowNotificationSettingsAction'
 --
+-- * 'nDocId'
+--
 -- * 'nKind'
 --
 -- * 'nBody'
+--
+-- * 'nCrmExperimentIds'
 --
 -- * 'nPcampaignId'
 --
@@ -2330,10 +2362,13 @@ notification
     :: Notification
 notification =
     Notification'
-    { _nTargetURL = Nothing
+    { _nDocType = Nothing
+    , _nTargetURL = Nothing
     , _nShowNotificationSettingsAction = Nothing
+    , _nDocId = Nothing
     , _nKind = "books#notification"
     , _nBody = Nothing
+    , _nCrmExperimentIds = Nothing
     , _nPcampaignId = Nothing
     , _nReason = Nothing
     , _nDontShowNotification = Nothing
@@ -2341,6 +2376,9 @@ notification =
     , _nIconURL = Nothing
     , _nTitle = Nothing
     }
+
+nDocType :: Lens' Notification (Maybe Text)
+nDocType = lens _nDocType (\ s a -> s{_nDocType = a})
 
 nTargetURL :: Lens' Notification (Maybe Text)
 nTargetURL
@@ -2351,12 +2389,23 @@ nShowNotificationSettingsAction
   = lens _nShowNotificationSettingsAction
       (\ s a -> s{_nShowNotificationSettingsAction = a})
 
+nDocId :: Lens' Notification (Maybe Text)
+nDocId = lens _nDocId (\ s a -> s{_nDocId = a})
+
 -- | Resource type.
 nKind :: Lens' Notification Text
 nKind = lens _nKind (\ s a -> s{_nKind = a})
 
 nBody :: Lens' Notification (Maybe Text)
 nBody = lens _nBody (\ s a -> s{_nBody = a})
+
+-- | The list of crm experiment ids.
+nCrmExperimentIds :: Lens' Notification [Int64]
+nCrmExperimentIds
+  = lens _nCrmExperimentIds
+      (\ s a -> s{_nCrmExperimentIds = a})
+      . _Default
+      . _Coerce
 
 nPcampaignId :: Lens' Notification (Maybe Text)
 nPcampaignId
@@ -2386,10 +2435,12 @@ instance FromJSON Notification where
           = withObject "Notification"
               (\ o ->
                  Notification' <$>
-                   (o .:? "targetUrl") <*>
+                   (o .:? "doc_type") <*> (o .:? "targetUrl") <*>
                      (o .:? "show_notification_settings_action")
+                     <*> (o .:? "doc_id")
                      <*> (o .:? "kind" .!= "books#notification")
                      <*> (o .:? "body")
+                     <*> (o .:? "crmExperimentIds" .!= mempty)
                      <*> (o .:? "pcampaign_id")
                      <*> (o .:? "reason")
                      <*> (o .:? "dont_show_notification")
@@ -2401,10 +2452,13 @@ instance ToJSON Notification where
         toJSON Notification'{..}
           = object
               (catMaybes
-                 [("targetUrl" .=) <$> _nTargetURL,
+                 [("doc_type" .=) <$> _nDocType,
+                  ("targetUrl" .=) <$> _nTargetURL,
                   ("show_notification_settings_action" .=) <$>
                     _nShowNotificationSettingsAction,
-                  Just ("kind" .= _nKind), ("body" .=) <$> _nBody,
+                  ("doc_id" .=) <$> _nDocId, Just ("kind" .= _nKind),
+                  ("body" .=) <$> _nBody,
+                  ("crmExperimentIds" .=) <$> _nCrmExperimentIds,
                   ("pcampaign_id" .=) <$> _nPcampaignId,
                   ("reason" .=) <$> _nReason,
                   ("dont_show_notification" .=) <$>
@@ -7335,6 +7389,71 @@ instance ToJSON VolumeSaleInfoOffersItemRetailPrice
               (catMaybes
                  [("currencyCode" .=) <$> _vsioirpCurrencyCode,
                   ("amountInMicros" .=) <$> _vsioirpAmountInMicros])
+
+-- | Information on the ability to share with the family.
+--
+-- /See:/ 'volumeUserInfoFamilySharing' smart constructor.
+data VolumeUserInfoFamilySharing = VolumeUserInfoFamilySharing'
+    { _vuifsFamilyRole             :: !(Maybe Text)
+    , _vuifsIsSharingAllowed       :: !(Maybe Bool)
+    , _vuifsIsSharingDisabledByFop :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'VolumeUserInfoFamilySharing' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'vuifsFamilyRole'
+--
+-- * 'vuifsIsSharingAllowed'
+--
+-- * 'vuifsIsSharingDisabledByFop'
+volumeUserInfoFamilySharing
+    :: VolumeUserInfoFamilySharing
+volumeUserInfoFamilySharing =
+    VolumeUserInfoFamilySharing'
+    { _vuifsFamilyRole = Nothing
+    , _vuifsIsSharingAllowed = Nothing
+    , _vuifsIsSharingDisabledByFop = Nothing
+    }
+
+-- | The role of the user in the family.
+vuifsFamilyRole :: Lens' VolumeUserInfoFamilySharing (Maybe Text)
+vuifsFamilyRole
+  = lens _vuifsFamilyRole
+      (\ s a -> s{_vuifsFamilyRole = a})
+
+-- | Whether or not this volume can be shared with the family by the user.
+-- This includes sharing eligibility of both the volume and the user. If
+-- the value is true, the user can initiate a family sharing action.
+vuifsIsSharingAllowed :: Lens' VolumeUserInfoFamilySharing (Maybe Bool)
+vuifsIsSharingAllowed
+  = lens _vuifsIsSharingAllowed
+      (\ s a -> s{_vuifsIsSharingAllowed = a})
+
+-- | Whether or not sharing this volume is temporarily disabled due to issues
+-- with the Family Wallet.
+vuifsIsSharingDisabledByFop :: Lens' VolumeUserInfoFamilySharing (Maybe Bool)
+vuifsIsSharingDisabledByFop
+  = lens _vuifsIsSharingDisabledByFop
+      (\ s a -> s{_vuifsIsSharingDisabledByFop = a})
+
+instance FromJSON VolumeUserInfoFamilySharing where
+        parseJSON
+          = withObject "VolumeUserInfoFamilySharing"
+              (\ o ->
+                 VolumeUserInfoFamilySharing' <$>
+                   (o .:? "familyRole") <*> (o .:? "isSharingAllowed")
+                     <*> (o .:? "isSharingDisabledByFop"))
+
+instance ToJSON VolumeUserInfoFamilySharing where
+        toJSON VolumeUserInfoFamilySharing'{..}
+          = object
+              (catMaybes
+                 [("familyRole" .=) <$> _vuifsFamilyRole,
+                  ("isSharingAllowed" .=) <$> _vuifsIsSharingAllowed,
+                  ("isSharingDisabledByFop" .=) <$>
+                    _vuifsIsSharingDisabledByFop])
 
 --
 -- /See:/ 'volumeVolumeInfoIndustryIdentifiersItem' smart constructor.
