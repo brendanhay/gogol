@@ -121,6 +121,13 @@ module Network.Google.GamesManagement.Types
     , pTitle
     , pBannerURLPortrait
     , pPlayerId
+    , pProFileSettings
+
+    -- * ProFileSettings
+    , ProFileSettings
+    , proFileSettings
+    , pfsProFileVisible
+    , pfsKind
 
     -- * AchievementResetResponse
     , AchievementResetResponse
