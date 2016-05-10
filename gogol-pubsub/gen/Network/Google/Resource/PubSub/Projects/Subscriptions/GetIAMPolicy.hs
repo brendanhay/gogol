@@ -20,8 +20,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets the access control policy for a \`resource\`. Is empty if the
--- policy or the resource does not exist.
+-- Gets the access control policy for a \`resource\`. Returns an empty
+-- policy if the resource exists and does not have a policy set.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.getIamPolicy@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
@@ -61,8 +61,8 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
                      QueryParam "callback" Text :>
                        QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
--- | Gets the access control policy for a \`resource\`. Is empty if the
--- policy or the resource does not exist.
+-- | Gets the access control policy for a \`resource\`. Returns an empty
+-- policy if the resource exists and does not have a policy set.
 --
 -- /See:/ 'projectsSubscriptionsGetIAMPolicy' smart constructor.
 data ProjectsSubscriptionsGetIAMPolicy = ProjectsSubscriptionsGetIAMPolicy'
@@ -143,11 +143,11 @@ psgipBearerToken
   = lens _psgipBearerToken
       (\ s a -> s{_psgipBearerToken = a})
 
--- | REQUIRED: The resource for which policy is being requested. \`resource\`
--- is usually specified as a path, such as,
--- \`projects\/{project}\/zones\/{zone}\/disks\/{disk}\`. The format for
+-- | REQUIRED: The resource for which the policy is being requested.
+-- \`resource\` is usually specified as a path, such as
+-- \`projects\/*project*\/zones\/*zone*\/disks\/*disk*\`. The format for
 -- the path specified in this value is resource specific and is specified
--- in the documentation for the respective GetIamPolicy rpc.
+-- in the \`getIamPolicy\` documentation.
 psgipResource :: Lens' ProjectsSubscriptionsGetIAMPolicy Text
 psgipResource
   = lens _psgipResource
