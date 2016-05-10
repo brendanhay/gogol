@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google+ API enables developers to build on top of the Google+
--- platform.
+-- Builds on top of the Google+ platform for Google Apps Domains.
 --
 -- /See:/ <https://developers.google.com/+/domains/ Google+ Domains API Reference>
 module Network.Google.PlusDomains
