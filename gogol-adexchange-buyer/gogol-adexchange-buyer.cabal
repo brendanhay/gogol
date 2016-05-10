@@ -57,6 +57,7 @@ library
         , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
         , Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
         , Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
+        , Network.Google.Resource.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
         , Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
         , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
         , Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
@@ -70,7 +71,9 @@ library
         , Network.Google.Resource.AdExchangeBuyer.Proposals.Insert
         , Network.Google.Resource.AdExchangeBuyer.Proposals.Patch
         , Network.Google.Resource.AdExchangeBuyer.Proposals.Search
+        , Network.Google.Resource.AdExchangeBuyer.Proposals.Setupcomplete
         , Network.Google.Resource.AdExchangeBuyer.Proposals.Update
+        , Network.Google.Resource.AdExchangeBuyer.PubproFiles.List
 
     other-modules:
           Network.Google.AdExchangeBuyer.Types.Product

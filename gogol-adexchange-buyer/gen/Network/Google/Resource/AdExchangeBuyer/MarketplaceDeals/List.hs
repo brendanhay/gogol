@@ -34,6 +34,7 @@ module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
 
     -- * Request Lenses
     , mdlProposalId
+    , mdlPqlQuery
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -47,14 +48,16 @@ type MarketplaceDealsListResource =
          "proposals" :>
            Capture "proposalId" Text :>
              "deals" :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] GetOrderDealsResponse
+               QueryParam "pqlQuery" Text :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] GetOrderDealsResponse
 
 -- | List all the deals for a given proposal
 --
 -- /See:/ 'marketplaceDealsList' smart constructor.
-newtype MarketplaceDealsList = MarketplaceDealsList'
-    { _mdlProposalId :: Text
+data MarketplaceDealsList = MarketplaceDealsList'
+    { _mdlProposalId :: !Text
+    , _mdlPqlQuery   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDealsList' with the minimum fields required to make a request.
@@ -62,26 +65,35 @@ newtype MarketplaceDealsList = MarketplaceDealsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'mdlProposalId'
+--
+-- * 'mdlPqlQuery'
 marketplaceDealsList
     :: Text -- ^ 'mdlProposalId'
     -> MarketplaceDealsList
 marketplaceDealsList pMdlProposalId_ =
     MarketplaceDealsList'
     { _mdlProposalId = pMdlProposalId_
+    , _mdlPqlQuery = Nothing
     }
 
--- | The proposalId to get deals for.
+-- | The proposalId to get deals for. To search across proposals specify
+-- order_id = \'-\' as part of the URL.
 mdlProposalId :: Lens' MarketplaceDealsList Text
 mdlProposalId
   = lens _mdlProposalId
       (\ s a -> s{_mdlProposalId = a})
+
+-- | Query string to retrieve specific deals.
+mdlPqlQuery :: Lens' MarketplaceDealsList (Maybe Text)
+mdlPqlQuery
+  = lens _mdlPqlQuery (\ s a -> s{_mdlPqlQuery = a})
 
 instance GoogleRequest MarketplaceDealsList where
         type Rs MarketplaceDealsList = GetOrderDealsResponse
         type Scopes MarketplaceDealsList =
              '["https://www.googleapis.com/auth/adexchange.buyer"]
         requestClient MarketplaceDealsList'{..}
-          = go _mdlProposalId (Just AltJSON)
+          = go _mdlProposalId _mdlPqlQuery (Just AltJSON)
               adExchangeBuyerService
           where go
                   = buildClient
