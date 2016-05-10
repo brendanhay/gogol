@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'CitiesList' request conforms to.
 type CitiesListResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "cities" :>

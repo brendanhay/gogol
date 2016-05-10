@@ -6824,6 +6824,86 @@ instance ToJSON RemarketingListsListResponse where
                   ("remarketingLists" .=) <$> _rllrRemarketingLists,
                   Just ("kind" .= _rllrKind)])
 
+-- | Contains properties of a dynamic targeting key. Dynamic targeting keys
+-- are unique, user-friendly labels, created at the advertiser level in
+-- DCM, that can be assigned to ads, creatives and placements and used for
+-- targeting with DoubleClick Studio dynamic creatives. Use these labels
+-- instead of numeric DCM IDs (such as placement IDs) to save time and
+-- avoid errors in your dynamic feeds.
+--
+-- /See:/ 'dynamicTargetingKey' smart constructor.
+data DynamicTargetingKey = DynamicTargetingKey'
+    { _dtkObjectType :: !(Maybe DynamicTargetingKeyObjectType)
+    , _dtkKind       :: !Text
+    , _dtkObjectId   :: !(Maybe (Textual Int64))
+    , _dtkName       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DynamicTargetingKey' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtkObjectType'
+--
+-- * 'dtkKind'
+--
+-- * 'dtkObjectId'
+--
+-- * 'dtkName'
+dynamicTargetingKey
+    :: DynamicTargetingKey
+dynamicTargetingKey =
+    DynamicTargetingKey'
+    { _dtkObjectType = Nothing
+    , _dtkKind = "dfareporting#dynamicTargetingKey"
+    , _dtkObjectId = Nothing
+    , _dtkName = Nothing
+    }
+
+-- | Type of the object of this dynamic targeting key. This is a required
+-- field.
+dtkObjectType :: Lens' DynamicTargetingKey (Maybe DynamicTargetingKeyObjectType)
+dtkObjectType
+  = lens _dtkObjectType
+      (\ s a -> s{_dtkObjectType = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#dynamicTargetingKey\".
+dtkKind :: Lens' DynamicTargetingKey Text
+dtkKind = lens _dtkKind (\ s a -> s{_dtkKind = a})
+
+-- | ID of the object of this dynamic targeting key. This is a required
+-- field.
+dtkObjectId :: Lens' DynamicTargetingKey (Maybe Int64)
+dtkObjectId
+  = lens _dtkObjectId (\ s a -> s{_dtkObjectId = a}) .
+      mapping _Coerce
+
+-- | Name of this dynamic targeting key. This is a required field. Must be
+-- less than 256 characters long and cannot contain commas. All characters
+-- are converted to lowercase.
+dtkName :: Lens' DynamicTargetingKey (Maybe Text)
+dtkName = lens _dtkName (\ s a -> s{_dtkName = a})
+
+instance FromJSON DynamicTargetingKey where
+        parseJSON
+          = withObject "DynamicTargetingKey"
+              (\ o ->
+                 DynamicTargetingKey' <$>
+                   (o .:? "objectType") <*>
+                     (o .:? "kind" .!= "dfareporting#dynamicTargetingKey")
+                     <*> (o .:? "objectId")
+                     <*> (o .:? "name"))
+
+instance ToJSON DynamicTargetingKey where
+        toJSON DynamicTargetingKey'{..}
+          = object
+              (catMaybes
+                 [("objectType" .=) <$> _dtkObjectType,
+                  Just ("kind" .= _dtkKind),
+                  ("objectId" .=) <$> _dtkObjectId,
+                  ("name" .=) <$> _dtkName])
+
 -- | Contains properties of a Creative.
 --
 -- /See:/ 'creative' smart constructor.
@@ -9318,6 +9398,71 @@ instance ToJSON Account where
                     _aaDefaultCreativeSizeId,
                   ("description" .=) <$> _aaDescription])
 
+-- | Insert Conversions Request.
+--
+-- /See:/ 'conversionsBatchInsertRequest' smart constructor.
+data ConversionsBatchInsertRequest = ConversionsBatchInsertRequest'
+    { _cbirKind           :: !Text
+    , _cbirConversions    :: !(Maybe [Conversion])
+    , _cbirEncryptionInfo :: !(Maybe EncryptionInfo)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionsBatchInsertRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbirKind'
+--
+-- * 'cbirConversions'
+--
+-- * 'cbirEncryptionInfo'
+conversionsBatchInsertRequest
+    :: ConversionsBatchInsertRequest
+conversionsBatchInsertRequest =
+    ConversionsBatchInsertRequest'
+    { _cbirKind = "dfareporting#conversionsBatchInsertRequest"
+    , _cbirConversions = Nothing
+    , _cbirEncryptionInfo = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionsBatchInsertRequest\".
+cbirKind :: Lens' ConversionsBatchInsertRequest Text
+cbirKind = lens _cbirKind (\ s a -> s{_cbirKind = a})
+
+-- | The set of conversions to insert.
+cbirConversions :: Lens' ConversionsBatchInsertRequest [Conversion]
+cbirConversions
+  = lens _cbirConversions
+      (\ s a -> s{_cbirConversions = a})
+      . _Default
+      . _Coerce
+
+-- | Describes how encryptedUserId is encrypted. This is a required field if
+-- encryptedUserId is used.
+cbirEncryptionInfo :: Lens' ConversionsBatchInsertRequest (Maybe EncryptionInfo)
+cbirEncryptionInfo
+  = lens _cbirEncryptionInfo
+      (\ s a -> s{_cbirEncryptionInfo = a})
+
+instance FromJSON ConversionsBatchInsertRequest where
+        parseJSON
+          = withObject "ConversionsBatchInsertRequest"
+              (\ o ->
+                 ConversionsBatchInsertRequest' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#conversionsBatchInsertRequest")
+                     <*> (o .:? "conversions" .!= mempty)
+                     <*> (o .:? "encryptionInfo"))
+
+instance ToJSON ConversionsBatchInsertRequest where
+        toJSON ConversionsBatchInsertRequest'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cbirKind),
+                  ("conversions" .=) <$> _cbirConversions,
+                  ("encryptionInfo" .=) <$> _cbirEncryptionInfo])
+
 -- | Account User Profile List Response
 --
 -- /See:/ 'accountUserProFilesListResponse' smart constructor.
@@ -9827,6 +9972,62 @@ instance ToJSON RemarketingList where
                   ("id" .=) <$> _rlId,
                   ("subaccountId" .=) <$> _rlSubAccountId,
                   ("description" .=) <$> _rlDescription])
+
+-- | Dynamic Targeting Key List Response
+--
+-- /See:/ 'dynamicTargetingKeysListResponse' smart constructor.
+data DynamicTargetingKeysListResponse = DynamicTargetingKeysListResponse'
+    { _dtklrKind                 :: !Text
+    , _dtklrDynamicTargetingKeys :: !(Maybe [DynamicTargetingKey])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DynamicTargetingKeysListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtklrKind'
+--
+-- * 'dtklrDynamicTargetingKeys'
+dynamicTargetingKeysListResponse
+    :: DynamicTargetingKeysListResponse
+dynamicTargetingKeysListResponse =
+    DynamicTargetingKeysListResponse'
+    { _dtklrKind = "dfareporting#dynamicTargetingKeysListResponse"
+    , _dtklrDynamicTargetingKeys = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#dynamicTargetingKeysListResponse\".
+dtklrKind :: Lens' DynamicTargetingKeysListResponse Text
+dtklrKind
+  = lens _dtklrKind (\ s a -> s{_dtklrKind = a})
+
+-- | Dynamic targeting key collection.
+dtklrDynamicTargetingKeys :: Lens' DynamicTargetingKeysListResponse [DynamicTargetingKey]
+dtklrDynamicTargetingKeys
+  = lens _dtklrDynamicTargetingKeys
+      (\ s a -> s{_dtklrDynamicTargetingKeys = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON DynamicTargetingKeysListResponse
+         where
+        parseJSON
+          = withObject "DynamicTargetingKeysListResponse"
+              (\ o ->
+                 DynamicTargetingKeysListResponse' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#dynamicTargetingKeysListResponse")
+                     <*> (o .:? "dynamicTargetingKeys" .!= mempty))
+
+instance ToJSON DynamicTargetingKeysListResponse
+         where
+        toJSON DynamicTargetingKeysListResponse'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _dtklrKind),
+                  ("dynamicTargetingKeys" .=) <$>
+                    _dtklrDynamicTargetingKeys])
 
 -- | Represents the list of DimensionValue resources.
 --
@@ -10956,6 +11157,68 @@ instance ToJSON CampaignCreativeAssociation where
               (catMaybes
                  [Just ("kind" .= _ccaKind),
                   ("creativeId" .=) <$> _ccaCreativeId])
+
+-- | The original conversion that was inserted and whether there were any
+-- errors.
+--
+-- /See:/ 'conversionStatus' smart constructor.
+data ConversionStatus = ConversionStatus'
+    { _csKind       :: !Text
+    , _csConversion :: !(Maybe Conversion)
+    , _csErrors     :: !(Maybe [ConversionError])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'csKind'
+--
+-- * 'csConversion'
+--
+-- * 'csErrors'
+conversionStatus
+    :: ConversionStatus
+conversionStatus =
+    ConversionStatus'
+    { _csKind = "dfareporting#conversionStatus"
+    , _csConversion = Nothing
+    , _csErrors = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionStatus\".
+csKind :: Lens' ConversionStatus Text
+csKind = lens _csKind (\ s a -> s{_csKind = a})
+
+-- | The original conversion that was inserted.
+csConversion :: Lens' ConversionStatus (Maybe Conversion)
+csConversion
+  = lens _csConversion (\ s a -> s{_csConversion = a})
+
+-- | A list of errors related to this conversion.
+csErrors :: Lens' ConversionStatus [ConversionError]
+csErrors
+  = lens _csErrors (\ s a -> s{_csErrors = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ConversionStatus where
+        parseJSON
+          = withObject "ConversionStatus"
+              (\ o ->
+                 ConversionStatus' <$>
+                   (o .:? "kind" .!= "dfareporting#conversionStatus")
+                     <*> (o .:? "conversion")
+                     <*> (o .:? "errors" .!= mempty))
+
+instance ToJSON ConversionStatus where
+        toJSON ConversionStatus'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _csKind),
+                  ("conversion" .=) <$> _csConversion,
+                  ("errors" .=) <$> _csErrors])
 
 -- | Lookback configuration settings.
 --
@@ -13837,6 +14100,66 @@ instance ToJSON FloodlightActivity where
                   ("floodlightConfigurationIdDimensionValue" .=) <$>
                     _faFloodlightConfigurationIdDimensionValue])
 
+-- | A custom floodlight variable.
+--
+-- /See:/ 'customFloodlightVariable' smart constructor.
+data CustomFloodlightVariable = CustomFloodlightVariable'
+    { _cusKind  :: !Text
+    , _cusValue :: !(Maybe Text)
+    , _cusType  :: !(Maybe CustomFloodlightVariableType)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CustomFloodlightVariable' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cusKind'
+--
+-- * 'cusValue'
+--
+-- * 'cusType'
+customFloodlightVariable
+    :: CustomFloodlightVariable
+customFloodlightVariable =
+    CustomFloodlightVariable'
+    { _cusKind = "dfareporting#customFloodlightVariable"
+    , _cusValue = Nothing
+    , _cusType = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#customFloodlightVariable\".
+cusKind :: Lens' CustomFloodlightVariable Text
+cusKind = lens _cusKind (\ s a -> s{_cusKind = a})
+
+-- | The value of the custom floodlight variable. The length of string must
+-- not exceed 50 characters.
+cusValue :: Lens' CustomFloodlightVariable (Maybe Text)
+cusValue = lens _cusValue (\ s a -> s{_cusValue = a})
+
+-- | The type of custom floodlight variable to supply a value for. These map
+-- to the \"u[1-20]=\" in the tags.
+cusType :: Lens' CustomFloodlightVariable (Maybe CustomFloodlightVariableType)
+cusType = lens _cusType (\ s a -> s{_cusType = a})
+
+instance FromJSON CustomFloodlightVariable where
+        parseJSON
+          = withObject "CustomFloodlightVariable"
+              (\ o ->
+                 CustomFloodlightVariable' <$>
+                   (o .:? "kind" .!=
+                      "dfareporting#customFloodlightVariable")
+                     <*> (o .:? "value")
+                     <*> (o .:? "type"))
+
+instance ToJSON CustomFloodlightVariable where
+        toJSON CustomFloodlightVariable'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _cusKind),
+                  ("value" .=) <$> _cusValue,
+                  ("type" .=) <$> _cusType])
+
 -- | Platform Type List Response
 --
 -- /See:/ 'platformTypesListResponse' smart constructor.
@@ -14465,6 +14788,63 @@ instance ToJSON DirectorySitesListResponse where
                  [("nextPageToken" .=) <$> _dslrNextPageToken,
                   Just ("kind" .= _dslrKind),
                   ("directorySites" .=) <$> _dslrDirectorySites])
+
+-- | The error code and description for a conversion that failed to insert.
+--
+-- /See:/ 'conversionError' smart constructor.
+data ConversionError = ConversionError'
+    { _ceKind    :: !Text
+    , _ceCode    :: !(Maybe ConversionErrorCode)
+    , _ceMessage :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionError' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ceKind'
+--
+-- * 'ceCode'
+--
+-- * 'ceMessage'
+conversionError
+    :: ConversionError
+conversionError =
+    ConversionError'
+    { _ceKind = "dfareporting#conversionError"
+    , _ceCode = Nothing
+    , _ceMessage = Nothing
+    }
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionError\".
+ceKind :: Lens' ConversionError Text
+ceKind = lens _ceKind (\ s a -> s{_ceKind = a})
+
+-- | The error code.
+ceCode :: Lens' ConversionError (Maybe ConversionErrorCode)
+ceCode = lens _ceCode (\ s a -> s{_ceCode = a})
+
+-- | A description of the error.
+ceMessage :: Lens' ConversionError (Maybe Text)
+ceMessage
+  = lens _ceMessage (\ s a -> s{_ceMessage = a})
+
+instance FromJSON ConversionError where
+        parseJSON
+          = withObject "ConversionError"
+              (\ o ->
+                 ConversionError' <$>
+                   (o .:? "kind" .!= "dfareporting#conversionError") <*>
+                     (o .:? "code")
+                     <*> (o .:? "message"))
+
+instance ToJSON ConversionError where
+        toJSON ConversionError'{..}
+          = object
+              (catMaybes
+                 [Just ("kind" .= _ceKind), ("code" .=) <$> _ceCode,
+                  ("message" .=) <$> _ceMessage])
 
 -- | Pricing Period
 --
@@ -15455,6 +15835,189 @@ instance ToJSON FloodlightActivityGroupsListResponse
                   Just ("kind" .= _faglrKind),
                   ("floodlightActivityGroups" .=) <$>
                     _faglrFloodlightActivityGroups])
+
+-- | A Conversion represents when a user successfully performs a desired
+-- action after seeing an ad.
+--
+-- /See:/ 'conversion' smart constructor.
+data Conversion = Conversion'
+    { _conoTimestampMicros           :: !(Maybe (Textual Int64))
+    , _conoLimitAdTracking           :: !(Maybe Bool)
+    , _conoEncryptedUserId           :: !(Maybe Text)
+    , _conoMobileDeviceId            :: !(Maybe Text)
+    , _conoFloodlightConfigurationId :: !(Maybe (Textual Int64))
+    , _conoKind                      :: !Text
+    , _conoFloodlightActivityId      :: !(Maybe (Textual Int64))
+    , _conoQuantity                  :: !(Maybe (Textual Int64))
+    , _conoValue                     :: !(Maybe (Textual Double))
+    , _conoCustomVariables           :: !(Maybe [CustomFloodlightVariable])
+    , _conoChildDirectedTreatment    :: !(Maybe Bool)
+    , _conoOrdinal                   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Conversion' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'conoTimestampMicros'
+--
+-- * 'conoLimitAdTracking'
+--
+-- * 'conoEncryptedUserId'
+--
+-- * 'conoMobileDeviceId'
+--
+-- * 'conoFloodlightConfigurationId'
+--
+-- * 'conoKind'
+--
+-- * 'conoFloodlightActivityId'
+--
+-- * 'conoQuantity'
+--
+-- * 'conoValue'
+--
+-- * 'conoCustomVariables'
+--
+-- * 'conoChildDirectedTreatment'
+--
+-- * 'conoOrdinal'
+conversion
+    :: Conversion
+conversion =
+    Conversion'
+    { _conoTimestampMicros = Nothing
+    , _conoLimitAdTracking = Nothing
+    , _conoEncryptedUserId = Nothing
+    , _conoMobileDeviceId = Nothing
+    , _conoFloodlightConfigurationId = Nothing
+    , _conoKind = "dfareporting#conversion"
+    , _conoFloodlightActivityId = Nothing
+    , _conoQuantity = Nothing
+    , _conoValue = Nothing
+    , _conoCustomVariables = Nothing
+    , _conoChildDirectedTreatment = Nothing
+    , _conoOrdinal = Nothing
+    }
+
+-- | The timestamp of conversion, in Unix epoch micros. This is a required
+-- field.
+conoTimestampMicros :: Lens' Conversion (Maybe Int64)
+conoTimestampMicros
+  = lens _conoTimestampMicros
+      (\ s a -> s{_conoTimestampMicros = a})
+      . mapping _Coerce
+
+-- | Whether the user has Limit Ad Tracking set.
+conoLimitAdTracking :: Lens' Conversion (Maybe Bool)
+conoLimitAdTracking
+  = lens _conoLimitAdTracking
+      (\ s a -> s{_conoLimitAdTracking = a})
+
+-- | The alphanumeric encrypted user ID. When set, encryptionInfo should also
+-- be specified. This field is mutually exclusive with mobileDeviceId. This
+-- or mobileDeviceId is a required field.
+conoEncryptedUserId :: Lens' Conversion (Maybe Text)
+conoEncryptedUserId
+  = lens _conoEncryptedUserId
+      (\ s a -> s{_conoEncryptedUserId = a})
+
+-- | The mobile device ID. This field is mutually exclusive with
+-- encryptedUserId. This or encryptedUserId is a required field.
+conoMobileDeviceId :: Lens' Conversion (Maybe Text)
+conoMobileDeviceId
+  = lens _conoMobileDeviceId
+      (\ s a -> s{_conoMobileDeviceId = a})
+
+-- | Floodlight Configuration ID of this conversion. This is a required
+-- field.
+conoFloodlightConfigurationId :: Lens' Conversion (Maybe Int64)
+conoFloodlightConfigurationId
+  = lens _conoFloodlightConfigurationId
+      (\ s a -> s{_conoFloodlightConfigurationId = a})
+      . mapping _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversion\".
+conoKind :: Lens' Conversion Text
+conoKind = lens _conoKind (\ s a -> s{_conoKind = a})
+
+-- | Floodlight Activity ID of this conversion. This is a required field.
+conoFloodlightActivityId :: Lens' Conversion (Maybe Int64)
+conoFloodlightActivityId
+  = lens _conoFloodlightActivityId
+      (\ s a -> s{_conoFloodlightActivityId = a})
+      . mapping _Coerce
+
+-- | The quantity of the conversion.
+conoQuantity :: Lens' Conversion (Maybe Int64)
+conoQuantity
+  = lens _conoQuantity (\ s a -> s{_conoQuantity = a})
+      . mapping _Coerce
+
+-- | The value of the conversion.
+conoValue :: Lens' Conversion (Maybe Double)
+conoValue
+  = lens _conoValue (\ s a -> s{_conoValue = a}) .
+      mapping _Coerce
+
+-- | Custom floodlight variables.
+conoCustomVariables :: Lens' Conversion [CustomFloodlightVariable]
+conoCustomVariables
+  = lens _conoCustomVariables
+      (\ s a -> s{_conoCustomVariables = a})
+      . _Default
+      . _Coerce
+
+-- | Whether the conversion was directed toward children.
+conoChildDirectedTreatment :: Lens' Conversion (Maybe Bool)
+conoChildDirectedTreatment
+  = lens _conoChildDirectedTreatment
+      (\ s a -> s{_conoChildDirectedTreatment = a})
+
+-- | The ordinal of the conversion. Use this field to control how conversions
+-- of the same user and day are de-duplicated. This is a required field.
+conoOrdinal :: Lens' Conversion (Maybe Text)
+conoOrdinal
+  = lens _conoOrdinal (\ s a -> s{_conoOrdinal = a})
+
+instance FromJSON Conversion where
+        parseJSON
+          = withObject "Conversion"
+              (\ o ->
+                 Conversion' <$>
+                   (o .:? "timestampMicros") <*>
+                     (o .:? "limitAdTracking")
+                     <*> (o .:? "encryptedUserId")
+                     <*> (o .:? "mobileDeviceId")
+                     <*> (o .:? "floodlightConfigurationId")
+                     <*> (o .:? "kind" .!= "dfareporting#conversion")
+                     <*> (o .:? "floodlightActivityId")
+                     <*> (o .:? "quantity")
+                     <*> (o .:? "value")
+                     <*> (o .:? "customVariables" .!= mempty)
+                     <*> (o .:? "childDirectedTreatment")
+                     <*> (o .:? "ordinal"))
+
+instance ToJSON Conversion where
+        toJSON Conversion'{..}
+          = object
+              (catMaybes
+                 [("timestampMicros" .=) <$> _conoTimestampMicros,
+                  ("limitAdTracking" .=) <$> _conoLimitAdTracking,
+                  ("encryptedUserId" .=) <$> _conoEncryptedUserId,
+                  ("mobileDeviceId" .=) <$> _conoMobileDeviceId,
+                  ("floodlightConfigurationId" .=) <$>
+                    _conoFloodlightConfigurationId,
+                  Just ("kind" .= _conoKind),
+                  ("floodlightActivityId" .=) <$>
+                    _conoFloodlightActivityId,
+                  ("quantity" .=) <$> _conoQuantity,
+                  ("value" .=) <$> _conoValue,
+                  ("customVariables" .=) <$> _conoCustomVariables,
+                  ("childDirectedTreatment" .=) <$>
+                    _conoChildDirectedTreatment,
+                  ("ordinal" .=) <$> _conoOrdinal])
 
 -- | Creative Field Value List Response
 --
@@ -16765,6 +17328,72 @@ instance ToJSON MetrosListResponse where
               (catMaybes
                  [Just ("kind" .= _mlrKind),
                   ("metros" .=) <$> _mlrMetros])
+
+-- | Insert Conversions Response.
+--
+-- /See:/ 'conversionsBatchInsertResponse' smart constructor.
+data ConversionsBatchInsertResponse = ConversionsBatchInsertResponse'
+    { _cbirbStatus      :: !(Maybe [ConversionStatus])
+    , _cbirbKind        :: !Text
+    , _cbirbHasFailures :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ConversionsBatchInsertResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cbirbStatus'
+--
+-- * 'cbirbKind'
+--
+-- * 'cbirbHasFailures'
+conversionsBatchInsertResponse
+    :: ConversionsBatchInsertResponse
+conversionsBatchInsertResponse =
+    ConversionsBatchInsertResponse'
+    { _cbirbStatus = Nothing
+    , _cbirbKind = "dfareporting#conversionsBatchInsertResponse"
+    , _cbirbHasFailures = Nothing
+    }
+
+-- | The status of each conversion\'s insertion status. The status is
+-- returned in the same order that conversions are inserted.
+cbirbStatus :: Lens' ConversionsBatchInsertResponse [ConversionStatus]
+cbirbStatus
+  = lens _cbirbStatus (\ s a -> s{_cbirbStatus = a}) .
+      _Default
+      . _Coerce
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#conversionsBatchInsertResponse\".
+cbirbKind :: Lens' ConversionsBatchInsertResponse Text
+cbirbKind
+  = lens _cbirbKind (\ s a -> s{_cbirbKind = a})
+
+-- | Indicates that some or all conversions failed to insert.
+cbirbHasFailures :: Lens' ConversionsBatchInsertResponse (Maybe Bool)
+cbirbHasFailures
+  = lens _cbirbHasFailures
+      (\ s a -> s{_cbirbHasFailures = a})
+
+instance FromJSON ConversionsBatchInsertResponse
+         where
+        parseJSON
+          = withObject "ConversionsBatchInsertResponse"
+              (\ o ->
+                 ConversionsBatchInsertResponse' <$>
+                   (o .:? "status" .!= mempty) <*>
+                     (o .:? "kind" .!=
+                        "dfareporting#conversionsBatchInsertResponse")
+                     <*> (o .:? "hasFailures"))
+
+instance ToJSON ConversionsBatchInsertResponse where
+        toJSON ConversionsBatchInsertResponse'{..}
+          = object
+              (catMaybes
+                 [("status" .=) <$> _cbirbStatus,
+                  Just ("kind" .= _cbirbKind),
+                  ("hasFailures" .=) <$> _cbirbHasFailures])
 
 -- | Order document List Response
 --
@@ -20137,7 +20766,7 @@ p1SiteId
 -- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
 -- allowed for new placement insertions. Instead, use DISPLAY or
 -- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
--- video ads developed with the VAST standard.This field is required on
+-- video ads developed with the VAST standard. This field is required on
 -- insertion.
 p1Compatibility :: Lens' Placement (Maybe PlacementCompatibility)
 p1Compatibility
@@ -20250,6 +20879,84 @@ instance ToJSON Placement where
                   ("paymentApproved" .=) <$> _p1PaymentApproved,
                   ("publisherUpdateInfo" .=) <$>
                     _p1PublisherUpdateInfo])
+
+-- | A description of how user IDs are encrypted.
+--
+-- /See:/ 'encryptionInfo' smart constructor.
+data EncryptionInfo = EncryptionInfo'
+    { _eiEncryptionSource     :: !(Maybe EncryptionInfoEncryptionSource)
+    , _eiKind                 :: !Text
+    , _eiEncryptionEntityType :: !(Maybe EncryptionInfoEncryptionEntityType)
+    , _eiEncryptionEntityId   :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'EncryptionInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eiEncryptionSource'
+--
+-- * 'eiKind'
+--
+-- * 'eiEncryptionEntityType'
+--
+-- * 'eiEncryptionEntityId'
+encryptionInfo
+    :: EncryptionInfo
+encryptionInfo =
+    EncryptionInfo'
+    { _eiEncryptionSource = Nothing
+    , _eiKind = "dfareporting#encryptionInfo"
+    , _eiEncryptionEntityType = Nothing
+    , _eiEncryptionEntityId = Nothing
+    }
+
+-- | Describes whether the encrypted cookie was received from ad serving (the
+-- %m macro) or from Data Transfer.
+eiEncryptionSource :: Lens' EncryptionInfo (Maybe EncryptionInfoEncryptionSource)
+eiEncryptionSource
+  = lens _eiEncryptionSource
+      (\ s a -> s{_eiEncryptionSource = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"dfareporting#encryptionInfo\".
+eiKind :: Lens' EncryptionInfo Text
+eiKind = lens _eiKind (\ s a -> s{_eiKind = a})
+
+-- | The encryption entity type. This should match the encryption
+-- configuration for ad serving or Data Transfer.
+eiEncryptionEntityType :: Lens' EncryptionInfo (Maybe EncryptionInfoEncryptionEntityType)
+eiEncryptionEntityType
+  = lens _eiEncryptionEntityType
+      (\ s a -> s{_eiEncryptionEntityType = a})
+
+-- | The encryption entity ID. This should match the encryption configuration
+-- for ad serving or Data Transfer.
+eiEncryptionEntityId :: Lens' EncryptionInfo (Maybe Int64)
+eiEncryptionEntityId
+  = lens _eiEncryptionEntityId
+      (\ s a -> s{_eiEncryptionEntityId = a})
+      . mapping _Coerce
+
+instance FromJSON EncryptionInfo where
+        parseJSON
+          = withObject "EncryptionInfo"
+              (\ o ->
+                 EncryptionInfo' <$>
+                   (o .:? "encryptionSource") <*>
+                     (o .:? "kind" .!= "dfareporting#encryptionInfo")
+                     <*> (o .:? "encryptionEntityType")
+                     <*> (o .:? "encryptionEntityId"))
+
+instance ToJSON EncryptionInfo where
+        toJSON EncryptionInfo'{..}
+          = object
+              (catMaybes
+                 [("encryptionSource" .=) <$> _eiEncryptionSource,
+                  Just ("kind" .= _eiKind),
+                  ("encryptionEntityType" .=) <$>
+                    _eiEncryptionEntityType,
+                  ("encryptionEntityId" .=) <$> _eiEncryptionEntityId])
 
 -- | Site List Response
 --

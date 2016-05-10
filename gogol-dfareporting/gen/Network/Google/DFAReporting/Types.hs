@@ -21,6 +21,7 @@ module Network.Google.DFAReporting.Types
 
     -- * OAuth Scopes
     , dFAReportingScope
+    , ddmconversionsScope
     , dfatraffickingScope
 
     -- * PlacementsListSortOrder
@@ -130,6 +131,9 @@ module Network.Google.DFAReporting.Types
 
     -- * CreativeAssetRole
     , CreativeAssetRole (..)
+
+    -- * DynamicTargetingKeysListObjectType
+    , DynamicTargetingKeysListObjectType (..)
 
     -- * RecipientDeliveryType
     , RecipientDeliveryType (..)
@@ -499,6 +503,9 @@ module Network.Google.DFAReporting.Types
     , iilrNextPageToken
     , iilrKind
 
+    -- * CustomFloodlightVariableType
+    , CustomFloodlightVariableType (..)
+
     -- * Ad
     , Ad
     , ad
@@ -540,6 +547,9 @@ module Network.Google.DFAReporting.Types
     , aDefaultClickThroughEventTagProperties
     , aPlacementAssignments
 
+    -- * ConversionErrorCode
+    , ConversionErrorCode (..)
+
     -- * FloodlightActivitiesListSortOrder
     , FloodlightActivitiesListSortOrder (..)
 
@@ -570,6 +580,9 @@ module Network.Google.DFAReporting.Types
 
     -- * FileFormat
     , FileFormat (..)
+
+    -- * EncryptionInfoEncryptionEntityType
+    , EncryptionInfoEncryptionEntityType (..)
 
     -- * PricingSchedulePricingType
     , PricingSchedulePricingType (..)
@@ -863,6 +876,14 @@ module Network.Google.DFAReporting.Types
     , rllrRemarketingLists
     , rllrKind
 
+    -- * DynamicTargetingKey
+    , DynamicTargetingKey
+    , dynamicTargetingKey
+    , dtkObjectType
+    , dtkKind
+    , dtkObjectId
+    , dtkName
+
     -- * Creative
     , Creative
     , creative
@@ -1149,6 +1170,13 @@ module Network.Google.DFAReporting.Types
     , aaDefaultCreativeSizeId
     , aaDescription
 
+    -- * ConversionsBatchInsertRequest
+    , ConversionsBatchInsertRequest
+    , conversionsBatchInsertRequest
+    , cbirKind
+    , cbirConversions
+    , cbirEncryptionInfo
+
     -- * AccountActiveAdSummaryActiveAdsLimitTier
     , AccountActiveAdSummaryActiveAdsLimitTier (..)
 
@@ -1215,6 +1243,12 @@ module Network.Google.DFAReporting.Types
 
     -- * FloodlightActivitiesListSortField
     , FloodlightActivitiesListSortField (..)
+
+    -- * DynamicTargetingKeysListResponse
+    , DynamicTargetingKeysListResponse
+    , dynamicTargetingKeysListResponse
+    , dtklrKind
+    , dtklrDynamicTargetingKeys
 
     -- * DimensionValueList
     , DimensionValueList
@@ -1283,6 +1317,9 @@ module Network.Google.DFAReporting.Types
 
     -- * PlacementGroupsListPricingTypes
     , PlacementGroupsListPricingTypes (..)
+
+    -- * DynamicTargetingKeysDeleteObjectType
+    , DynamicTargetingKeysDeleteObjectType (..)
 
     -- * AccountActiveAdsLimitTier
     , AccountActiveAdsLimitTier (..)
@@ -1356,6 +1393,13 @@ module Network.Google.DFAReporting.Types
     , campaignCreativeAssociation
     , ccaKind
     , ccaCreativeId
+
+    -- * ConversionStatus
+    , ConversionStatus
+    , conversionStatus
+    , csKind
+    , csConversion
+    , csErrors
 
     -- * LookbackConfiguration
     , LookbackConfiguration
@@ -1744,6 +1788,13 @@ module Network.Google.DFAReporting.Types
     -- * DayPartTargetingDaysOfWeekItem
     , DayPartTargetingDaysOfWeekItem (..)
 
+    -- * CustomFloodlightVariable
+    , CustomFloodlightVariable
+    , customFloodlightVariable
+    , cusKind
+    , cusValue
+    , cusType
+
     -- * CreativeRotationWeightCalculationStrategy
     , CreativeRotationWeightCalculationStrategy (..)
 
@@ -1844,6 +1895,13 @@ module Network.Google.DFAReporting.Types
     , dslrNextPageToken
     , dslrKind
     , dslrDirectorySites
+
+    -- * ConversionError
+    , ConversionError
+    , conversionError
+    , ceKind
+    , ceCode
+    , ceMessage
 
     -- * PricingPricingType
     , PricingPricingType (..)
@@ -1958,6 +2016,22 @@ module Network.Google.DFAReporting.Types
 
     -- * CreativeGroupAssignmentCreativeGroupNumber
     , CreativeGroupAssignmentCreativeGroupNumber (..)
+
+    -- * Conversion
+    , Conversion
+    , conversion
+    , conoTimestampMicros
+    , conoLimitAdTracking
+    , conoEncryptedUserId
+    , conoMobileDeviceId
+    , conoFloodlightConfigurationId
+    , conoKind
+    , conoFloodlightActivityId
+    , conoQuantity
+    , conoValue
+    , conoCustomVariables
+    , conoChildDirectedTreatment
+    , conoOrdinal
 
     -- * CreativeFieldValuesListResponse
     , CreativeFieldValuesListResponse
@@ -2103,6 +2177,13 @@ module Network.Google.DFAReporting.Types
     -- * AccountAccountProFile
     , AccountAccountProFile (..)
 
+    -- * ConversionsBatchInsertResponse
+    , ConversionsBatchInsertResponse
+    , conversionsBatchInsertResponse
+    , cbirbStatus
+    , cbirbKind
+    , cbirbHasFailures
+
     -- * OrderDocumentsListResponse
     , OrderDocumentsListResponse
     , orderDocumentsListResponse
@@ -2137,6 +2218,9 @@ module Network.Google.DFAReporting.Types
 
     -- * EventTagsListSortOrder
     , EventTagsListSortOrder (..)
+
+    -- * EncryptionInfoEncryptionSource
+    , EncryptionInfoEncryptionSource (..)
 
     -- * DirectorySitesListSortField
     , DirectorySitesListSortField (..)
@@ -2252,6 +2336,9 @@ module Network.Google.DFAReporting.Types
     , creativeSettings
     , csIFrameHeader
     , csIFrameFooter
+
+    -- * DynamicTargetingKeyObjectType
+    , DynamicTargetingKeyObjectType (..)
 
     -- * ReportType
     , ReportType (..)
@@ -2493,6 +2580,14 @@ module Network.Google.DFAReporting.Types
     -- * FloodlightActivityCountingMethod
     , FloodlightActivityCountingMethod (..)
 
+    -- * EncryptionInfo
+    , EncryptionInfo
+    , encryptionInfo
+    , eiEncryptionSource
+    , eiKind
+    , eiEncryptionEntityType
+    , eiEncryptionEntityId
+
     -- * SitesListResponse
     , SitesListResponse
     , sitesListResponse
@@ -2533,15 +2628,19 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.4' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2.5beta1' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v2.4")
+  = defaultService (ServiceId "dfareporting:v2.5beta1")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports
 dFAReportingScope :: Proxy '["https://www.googleapis.com/auth/dfareporting"]
 dFAReportingScope = Proxy;
+
+-- | Manage DoubleClick Digital Marketing conversions
+ddmconversionsScope :: Proxy '["https://www.googleapis.com/auth/ddmconversions"]
+ddmconversionsScope = Proxy;
 
 -- | View and manage your DoubleClick Campaign Manager\'s (DCM) display ad
 -- campaigns

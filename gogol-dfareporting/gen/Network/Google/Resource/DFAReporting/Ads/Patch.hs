@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'AdsPatch' request conforms to.
 type AdsPatchResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "ads" :>

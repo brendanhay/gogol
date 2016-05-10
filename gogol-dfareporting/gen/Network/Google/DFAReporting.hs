@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Manage your DoubleClick Campaign Manager ad campaigns and reports.
+-- Manages your DoubleClick Campaign Manager ad campaigns and reports.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference>
 module Network.Google.DFAReporting
@@ -23,6 +23,7 @@ module Network.Google.DFAReporting
 
     -- * OAuth Scopes
     , dFAReportingScope
+    , ddmconversionsScope
     , dfatraffickingScope
 
     -- * API Declaration
@@ -177,6 +178,9 @@ module Network.Google.DFAReporting
     -- ** dfareporting.contentCategories.update
     , module Network.Google.Resource.DFAReporting.ContentCategories.Update
 
+    -- ** dfareporting.conversions.batchinsert
+    , module Network.Google.Resource.DFAReporting.Conversions.Batchinsert
+
     -- ** dfareporting.countries.get
     , module Network.Google.Resource.DFAReporting.Countries.Get
 
@@ -269,6 +273,15 @@ module Network.Google.DFAReporting
 
     -- ** dfareporting.directorySites.list
     , module Network.Google.Resource.DFAReporting.DirectorySites.List
+
+    -- ** dfareporting.dynamicTargetingKeys.delete
+    , module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
+
+    -- ** dfareporting.dynamicTargetingKeys.insert
+    , module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
+
+    -- ** dfareporting.dynamicTargetingKeys.list
+    , module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
 
     -- ** dfareporting.eventTags.delete
     , module Network.Google.Resource.DFAReporting.EventTags.Delete
@@ -716,6 +729,9 @@ module Network.Google.DFAReporting
     -- ** CreativeAssetRole
     , CreativeAssetRole (..)
 
+    -- ** DynamicTargetingKeysListObjectType
+    , DynamicTargetingKeysListObjectType (..)
+
     -- ** RecipientDeliveryType
     , RecipientDeliveryType (..)
 
@@ -1084,6 +1100,9 @@ module Network.Google.DFAReporting
     , iilrNextPageToken
     , iilrKind
 
+    -- ** CustomFloodlightVariableType
+    , CustomFloodlightVariableType (..)
+
     -- ** Ad
     , Ad
     , ad
@@ -1125,6 +1144,9 @@ module Network.Google.DFAReporting
     , aDefaultClickThroughEventTagProperties
     , aPlacementAssignments
 
+    -- ** ConversionErrorCode
+    , ConversionErrorCode (..)
+
     -- ** FloodlightActivitiesListSortOrder
     , FloodlightActivitiesListSortOrder (..)
 
@@ -1155,6 +1177,9 @@ module Network.Google.DFAReporting
 
     -- ** FileFormat
     , FileFormat (..)
+
+    -- ** EncryptionInfoEncryptionEntityType
+    , EncryptionInfoEncryptionEntityType (..)
 
     -- ** PricingSchedulePricingType
     , PricingSchedulePricingType (..)
@@ -1448,6 +1473,14 @@ module Network.Google.DFAReporting
     , rllrRemarketingLists
     , rllrKind
 
+    -- ** DynamicTargetingKey
+    , DynamicTargetingKey
+    , dynamicTargetingKey
+    , dtkObjectType
+    , dtkKind
+    , dtkObjectId
+    , dtkName
+
     -- ** Creative
     , Creative
     , creative
@@ -1734,6 +1767,13 @@ module Network.Google.DFAReporting
     , aaDefaultCreativeSizeId
     , aaDescription
 
+    -- ** ConversionsBatchInsertRequest
+    , ConversionsBatchInsertRequest
+    , conversionsBatchInsertRequest
+    , cbirKind
+    , cbirConversions
+    , cbirEncryptionInfo
+
     -- ** AccountActiveAdSummaryActiveAdsLimitTier
     , AccountActiveAdSummaryActiveAdsLimitTier (..)
 
@@ -1800,6 +1840,12 @@ module Network.Google.DFAReporting
 
     -- ** FloodlightActivitiesListSortField
     , FloodlightActivitiesListSortField (..)
+
+    -- ** DynamicTargetingKeysListResponse
+    , DynamicTargetingKeysListResponse
+    , dynamicTargetingKeysListResponse
+    , dtklrKind
+    , dtklrDynamicTargetingKeys
 
     -- ** DimensionValueList
     , DimensionValueList
@@ -1868,6 +1914,9 @@ module Network.Google.DFAReporting
 
     -- ** PlacementGroupsListPricingTypes
     , PlacementGroupsListPricingTypes (..)
+
+    -- ** DynamicTargetingKeysDeleteObjectType
+    , DynamicTargetingKeysDeleteObjectType (..)
 
     -- ** AccountActiveAdsLimitTier
     , AccountActiveAdsLimitTier (..)
@@ -1941,6 +1990,13 @@ module Network.Google.DFAReporting
     , campaignCreativeAssociation
     , ccaKind
     , ccaCreativeId
+
+    -- ** ConversionStatus
+    , ConversionStatus
+    , conversionStatus
+    , csKind
+    , csConversion
+    , csErrors
 
     -- ** LookbackConfiguration
     , LookbackConfiguration
@@ -2329,6 +2385,13 @@ module Network.Google.DFAReporting
     -- ** DayPartTargetingDaysOfWeekItem
     , DayPartTargetingDaysOfWeekItem (..)
 
+    -- ** CustomFloodlightVariable
+    , CustomFloodlightVariable
+    , customFloodlightVariable
+    , cusKind
+    , cusValue
+    , cusType
+
     -- ** CreativeRotationWeightCalculationStrategy
     , CreativeRotationWeightCalculationStrategy (..)
 
@@ -2429,6 +2492,13 @@ module Network.Google.DFAReporting
     , dslrNextPageToken
     , dslrKind
     , dslrDirectorySites
+
+    -- ** ConversionError
+    , ConversionError
+    , conversionError
+    , ceKind
+    , ceCode
+    , ceMessage
 
     -- ** PricingPricingType
     , PricingPricingType (..)
@@ -2543,6 +2613,22 @@ module Network.Google.DFAReporting
 
     -- ** CreativeGroupAssignmentCreativeGroupNumber
     , CreativeGroupAssignmentCreativeGroupNumber (..)
+
+    -- ** Conversion
+    , Conversion
+    , conversion
+    , conoTimestampMicros
+    , conoLimitAdTracking
+    , conoEncryptedUserId
+    , conoMobileDeviceId
+    , conoFloodlightConfigurationId
+    , conoKind
+    , conoFloodlightActivityId
+    , conoQuantity
+    , conoValue
+    , conoCustomVariables
+    , conoChildDirectedTreatment
+    , conoOrdinal
 
     -- ** CreativeFieldValuesListResponse
     , CreativeFieldValuesListResponse
@@ -2688,6 +2774,13 @@ module Network.Google.DFAReporting
     -- ** AccountAccountProFile
     , AccountAccountProFile (..)
 
+    -- ** ConversionsBatchInsertResponse
+    , ConversionsBatchInsertResponse
+    , conversionsBatchInsertResponse
+    , cbirbStatus
+    , cbirbKind
+    , cbirbHasFailures
+
     -- ** OrderDocumentsListResponse
     , OrderDocumentsListResponse
     , orderDocumentsListResponse
@@ -2722,6 +2815,9 @@ module Network.Google.DFAReporting
 
     -- ** EventTagsListSortOrder
     , EventTagsListSortOrder (..)
+
+    -- ** EncryptionInfoEncryptionSource
+    , EncryptionInfoEncryptionSource (..)
 
     -- ** DirectorySitesListSortField
     , DirectorySitesListSortField (..)
@@ -2837,6 +2933,9 @@ module Network.Google.DFAReporting
     , creativeSettings
     , csIFrameHeader
     , csIFrameFooter
+
+    -- ** DynamicTargetingKeyObjectType
+    , DynamicTargetingKeyObjectType (..)
 
     -- ** ReportType
     , ReportType (..)
@@ -3078,6 +3177,14 @@ module Network.Google.DFAReporting
     -- ** FloodlightActivityCountingMethod
     , FloodlightActivityCountingMethod (..)
 
+    -- ** EncryptionInfo
+    , EncryptionInfo
+    , encryptionInfo
+    , eiEncryptionSource
+    , eiKind
+    , eiEncryptionEntityType
+    , eiEncryptionEntityId
+
     -- ** SitesListResponse
     , SitesListResponse
     , sitesListResponse
@@ -3165,6 +3272,7 @@ import           Network.Google.Resource.DFAReporting.ContentCategories.Insert
 import           Network.Google.Resource.DFAReporting.ContentCategories.List
 import           Network.Google.Resource.DFAReporting.ContentCategories.Patch
 import           Network.Google.Resource.DFAReporting.ContentCategories.Update
+import           Network.Google.Resource.DFAReporting.Conversions.Batchinsert
 import           Network.Google.Resource.DFAReporting.Countries.Get
 import           Network.Google.Resource.DFAReporting.Countries.List
 import           Network.Google.Resource.DFAReporting.CreativeAssets.Insert
@@ -3196,6 +3304,9 @@ import           Network.Google.Resource.DFAReporting.DirectorySiteContacts.List
 import           Network.Google.Resource.DFAReporting.DirectorySites.Get
 import           Network.Google.Resource.DFAReporting.DirectorySites.Insert
 import           Network.Google.Resource.DFAReporting.DirectorySites.List
+import           Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
+import           Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
+import           Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
 import           Network.Google.Resource.DFAReporting.EventTags.Delete
 import           Network.Google.Resource.DFAReporting.EventTags.Get
 import           Network.Google.Resource.DFAReporting.EventTags.Insert
@@ -3368,6 +3479,9 @@ type DFAReportingAPI =
        :<|> CampaignsPatchResource
        :<|> CampaignsGetResource
        :<|> CampaignsUpdateResource
+       :<|> DynamicTargetingKeysInsertResource
+       :<|> DynamicTargetingKeysListResource
+       :<|> DynamicTargetingKeysDeleteResource
        :<|> AccountUserProFilesInsertResource
        :<|> AccountUserProFilesListResource
        :<|> AccountUserProFilesPatchResource
@@ -3384,6 +3498,7 @@ type DFAReportingAPI =
        :<|> FloodlightConfigurationsPatchResource
        :<|> FloodlightConfigurationsGetResource
        :<|> FloodlightConfigurationsUpdateResource
+       :<|> ConversionsBatchinsertResource
        :<|> FloodlightActivitiesInsertResource
        :<|> FloodlightActivitiesListResource
        :<|> FloodlightActivitiesPatchResource

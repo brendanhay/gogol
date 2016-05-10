@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'AccountPermissionsList' request conforms to.
 type AccountPermissionsListResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountPermissions" :>

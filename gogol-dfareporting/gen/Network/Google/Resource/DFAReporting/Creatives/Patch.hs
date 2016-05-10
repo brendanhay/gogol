@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'CreativesPatch' request conforms to.
 type CreativesPatchResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "creatives" :>

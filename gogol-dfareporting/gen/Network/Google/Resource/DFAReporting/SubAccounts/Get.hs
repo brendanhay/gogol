@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsGet' request conforms to.
 type SubAccountsGetResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>

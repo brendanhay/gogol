@@ -47,7 +47,7 @@ import           Network.Google.Prelude
 -- 'LandingPagesPatch' request conforms to.
 type LandingPagesPatchResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "campaigns" :>
