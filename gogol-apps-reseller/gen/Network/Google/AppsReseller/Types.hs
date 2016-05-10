@@ -59,6 +59,7 @@ module Network.Google.AppsReseller.Types
     , ChangePlanRequest
     , changePlanRequest
     , cprKind
+    , cprDealCode
     , cprPlanName
     , cprPurchaseOrderId
     , cprSeats
@@ -111,6 +112,7 @@ module Network.Google.AppsReseller.Types
     , subKind
     , subSKUId
     , subPlan
+    , subDealCode
     , subCustomerId
     , subCustomerDomain
     , subSuspensionReasons

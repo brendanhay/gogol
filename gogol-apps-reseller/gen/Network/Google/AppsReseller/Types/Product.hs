@@ -334,6 +334,7 @@ instance ToJSON Customer where
 -- /See:/ 'changePlanRequest' smart constructor.
 data ChangePlanRequest = ChangePlanRequest'
     { _cprKind            :: !Text
+    , _cprDealCode        :: !(Maybe Text)
     , _cprPlanName        :: !(Maybe Text)
     , _cprPurchaseOrderId :: !(Maybe Text)
     , _cprSeats           :: !(Maybe Seats)
@@ -345,6 +346,8 @@ data ChangePlanRequest = ChangePlanRequest'
 --
 -- * 'cprKind'
 --
+-- * 'cprDealCode'
+--
 -- * 'cprPlanName'
 --
 -- * 'cprPurchaseOrderId'
@@ -355,6 +358,7 @@ changePlanRequest
 changePlanRequest =
     ChangePlanRequest'
     { _cprKind = "subscriptions#changePlanRequest"
+    , _cprDealCode = Nothing
     , _cprPlanName = Nothing
     , _cprPurchaseOrderId = Nothing
     , _cprSeats = Nothing
@@ -363,6 +367,12 @@ changePlanRequest =
 -- | Identifies the resource as a subscription change plan request.
 cprKind :: Lens' ChangePlanRequest Text
 cprKind = lens _cprKind (\ s a -> s{_cprKind = a})
+
+-- | External name of the deal code applicable for the subscription. This
+-- field is optional. If missing, the deal price plan won\'t be used.
+cprDealCode :: Lens' ChangePlanRequest (Maybe Text)
+cprDealCode
+  = lens _cprDealCode (\ s a -> s{_cprDealCode = a})
 
 -- | Name of the plan to change to.
 cprPlanName :: Lens' ChangePlanRequest (Maybe Text)
@@ -385,6 +395,7 @@ instance FromJSON ChangePlanRequest where
               (\ o ->
                  ChangePlanRequest' <$>
                    (o .:? "kind" .!= "subscriptions#changePlanRequest")
+                     <*> (o .:? "dealCode")
                      <*> (o .:? "planName")
                      <*> (o .:? "purchaseOrderId")
                      <*> (o .:? "seats"))
@@ -394,6 +405,7 @@ instance ToJSON ChangePlanRequest where
           = object
               (catMaybes
                  [Just ("kind" .= _cprKind),
+                  ("dealCode" .=) <$> _cprDealCode,
                   ("planName" .=) <$> _cprPlanName,
                   ("purchaseOrderId" .=) <$> _cprPurchaseOrderId,
                   ("seats" .=) <$> _cprSeats])
@@ -716,6 +728,7 @@ data Subscription = Subscription'
     , _subKind              :: !Text
     , _subSKUId             :: !(Maybe Text)
     , _subPlan              :: !(Maybe SubscriptionPlan)
+    , _subDealCode          :: !(Maybe Text)
     , _subCustomerId        :: !(Maybe Text)
     , _subCustomerDomain    :: !(Maybe Text)
     , _subSuspensionReasons :: !(Maybe [Text])
@@ -746,6 +759,8 @@ data Subscription = Subscription'
 --
 -- * 'subPlan'
 --
+-- * 'subDealCode'
+--
 -- * 'subCustomerId'
 --
 -- * 'subCustomerDomain'
@@ -773,6 +788,7 @@ subscription =
     , _subKind = "reseller#subscription"
     , _subSKUId = Nothing
     , _subPlan = Nothing
+    , _subDealCode = Nothing
     , _subCustomerId = Nothing
     , _subCustomerDomain = Nothing
     , _subSuspensionReasons = Nothing
@@ -825,6 +841,12 @@ subSKUId = lens _subSKUId (\ s a -> s{_subSKUId = a})
 subPlan :: Lens' Subscription (Maybe SubscriptionPlan)
 subPlan = lens _subPlan (\ s a -> s{_subPlan = a})
 
+-- | External name of the deal, if this subscription was provisioned under
+-- one. Otherwise this field will be empty.
+subDealCode :: Lens' Subscription (Maybe Text)
+subDealCode
+  = lens _subDealCode (\ s a -> s{_subDealCode = a})
+
 -- | The id of the customer to whom the subscription belongs.
 subCustomerId :: Lens' Subscription (Maybe Text)
 subCustomerId
@@ -837,17 +859,17 @@ subCustomerDomain
   = lens _subCustomerDomain
       (\ s a -> s{_subCustomerDomain = a})
 
--- | field listing all current reasons the subscription is suspended. It is
--- possible for a subscription to have multiple suspension reasons. A
--- subscription\'s status is SUSPENDED until all pending suspensions are
--- removed. Possible options include: - PENDING_TOS_ACCEPTANCE — The
--- customer has not logged in and accepted the Google Apps Resold Terms of
--- Services. - RENEWAL_WITH_TYPE_CANCEL — The customer\'s commitment ended
--- and their service was cancelled at the end of their term. -
--- RESELLER_INITIATED — A manual suspension invoked by a Reseller. -
--- TRIAL_ENDED — The customer\'s trial expired without a plan selected. -
--- OTHER — The customer is suspended for an internal Google reason (e.g.
--- abuse or otherwise).
+-- | Read-only field containing an enumerable of all the current suspension
+-- reasons for a subscription. It is possible for a subscription to have
+-- many concurrent, overlapping suspension reasons. A subscription\'s
+-- STATUS is SUSPENDED until all pending suspensions are removed. Possible
+-- options include: - PENDING_TOS_ACCEPTANCE - The customer has not logged
+-- in and accepted the Google Apps Resold Terms of Services. -
+-- RENEWAL_WITH_TYPE_CANCEL - The customer\'s commitment ended and their
+-- service was cancelled at the end of their term. - RESELLER_INITIATED - A
+-- manual suspension invoked by a Reseller. - TRIAL_ENDED - The customer\'s
+-- trial expired without a plan selected. - OTHER - The customer is
+-- suspended for an internal Google reason (e.g. abuse or otherwise).
 subSuspensionReasons :: Lens' Subscription [Text]
 subSuspensionReasons
   = lens _subSuspensionReasons
@@ -895,6 +917,7 @@ instance FromJSON Subscription where
                      <*> (o .:? "kind" .!= "reseller#subscription")
                      <*> (o .:? "skuId")
                      <*> (o .:? "plan")
+                     <*> (o .:? "dealCode")
                      <*> (o .:? "customerId")
                      <*> (o .:? "customerDomain")
                      <*> (o .:? "suspensionReasons" .!= mempty)
@@ -915,6 +938,7 @@ instance ToJSON Subscription where
                   ("resourceUiUrl" .=) <$> _subResourceUiURL,
                   Just ("kind" .= _subKind),
                   ("skuId" .=) <$> _subSKUId, ("plan" .=) <$> _subPlan,
+                  ("dealCode" .=) <$> _subDealCode,
                   ("customerId" .=) <$> _subCustomerId,
                   ("customerDomain" .=) <$> _subCustomerDomain,
                   ("suspensionReasons" .=) <$> _subSuspensionReasons,
