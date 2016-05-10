@@ -254,6 +254,7 @@ module Network.Google.DeploymentManager.Types
     , dInsertTime
     , dOperation
     , dFingerprint
+    , dSelfLink
     , dName
     , dManifest
     , dId
