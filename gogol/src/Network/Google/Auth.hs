@@ -79,7 +79,6 @@ module Network.Google.Auth
 import           Control.Concurrent
 import           Control.Monad.Catch                      (MonadCatch)
 import           Control.Monad.IO.Class                   (MonadIO (..))
-import qualified Data.Text.Encoding                       as Text
 import           Data.Time                                (getCurrentTime)
 import           GHC.TypeLits                             (Symbol)
 import           Network.Google.Auth.ApplicationDefault
@@ -184,6 +183,6 @@ authorize rq s l m = bearer <$> getToken s l m
     bearer t = rq
         { Client.requestHeaders =
             ( hAuthorization
-            , "Bearer " <> Text.encodeUtf8 (toText (_tokenAccess t))
+            , toHeader (_tokenAccess t)
             ) : Client.requestHeaders rq
         }

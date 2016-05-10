@@ -40,7 +40,7 @@ formURL c = formURLWith c . allowScopes
 formURLWith :: OAuthClient -> [OAuthScope] -> Text
 formURLWith c ss = accountsURL
     <> "?response_type=code"
-    <> "&client_id="    <> toText (_clientId c)
+    <> "&client_id="    <> toQueryParam (_clientId c)
     <> "&redirect_uri=" <> redirectURI
     <> "&scope="        <> Text.decodeUtf8 (queryEncodeScopes ss)
 
@@ -58,9 +58,9 @@ exchangeCode c n = refreshRequest $
     accountsRequest
         { Client.requestBody = textBody $
                "grant_type=authorization_code"
-            <> "&client_id="     <> toText (_clientId     c)
-            <> "&client_secret=" <> toText (_clientSecret c)
-            <> "&code="          <> toText n
+            <> "&client_id="     <> toQueryParam (_clientId     c)
+            <> "&client_secret=" <> toQueryParam (_clientSecret c)
+            <> "&code="          <> toQueryParam n
             <> "&redirect_uri="  <> redirectURI
         }
 
@@ -77,7 +77,7 @@ refreshToken c t = refreshRequest $
     accountsRequest
         { Client.requestBody = textBody $
                "grant_type=refresh_token"
-            <> "&client_id="     <> toText (_clientId     c)
-            <> "&client_secret=" <> toText (_clientSecret c)
-            <> maybe mempty ("&refresh_token=" <>) (toText <$> _tokenRefresh t)
+            <> "&client_id="     <> toQueryParam (_clientId     c)
+            <> "&client_secret=" <> toQueryParam (_clientSecret c)
+            <> maybe mempty ("&refresh_token=" <>) (toQueryParam <$> _tokenRefresh t)
         }
