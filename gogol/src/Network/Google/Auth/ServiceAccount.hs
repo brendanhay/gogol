@@ -45,7 +45,7 @@ metadataToken :: (MonadIO m, MonadCatch m)
 metadataToken s = refreshRequest $
     metadataRequest
         { Client.path = "instance/service-accounts/"
-            <> Text.encodeUtf8 (toText s)
+            <> Text.encodeUtf8 (toQueryParam s)
             <> "/token"
         }
 
@@ -62,9 +62,9 @@ authorizedUserToken u r = refreshRequest $
     accountsRequest
         { Client.requestBody = textBody $
                "grant_type=refresh_token"
-            <> "&client_id="     <> toText (_userId     u)
-            <> "&client_secret=" <> toText (_userSecret u)
-            <> "&refresh_token=" <> toText (fromMaybe (_userRefresh u) r)
+            <> "&client_id="     <> toQueryParam (_userId     u)
+            <> "&client_secret=" <> toQueryParam (_userSecret u)
+            <> "&refresh_token=" <> toQueryParam (fromMaybe (_userRefresh u) r)
         }
 
 

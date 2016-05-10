@@ -2025,9 +2025,10 @@ datServerCaCert
   = lens _datServerCaCert
       (\ s a -> s{_datServerCaCert = a})
 
--- | The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6.
--- Defaults to MYSQL_5_6. The databaseVersion can not be changed after
--- instance creation.
+-- | The database engine type and version. The databaseVersion can not be
+-- changed after instance creation. Can be MYSQL_5_5, MYSQL_5_6 or
+-- MYSQL_5_7. Defaults to MYSQL_5_6. MYSQL_5_7 is applicable only to Second
+-- Generation instances.
 datDatabaseVersion :: Lens' DatabaseInstance (Maybe Text)
 datDatabaseVersion
   = lens _datDatabaseVersion
@@ -2319,7 +2320,8 @@ fKind :: Lens' Flag Text
 fKind = lens _fKind (\ s a -> s{_fKind = a})
 
 -- | The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6,
--- or both.
+-- or MYSQL_5_7. MYSQL_5_7 is applicable only to Second Generation
+-- instances.
 fAppliesTo :: Lens' Flag [Text]
 fAppliesTo
   = lens _fAppliesTo (\ s a -> s{_fAppliesTo = a}) .

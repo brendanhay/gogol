@@ -22,7 +22,7 @@
 --
 -- Run image detection and annotation for a batch of images.
 --
--- /See:/ <https://cloud.google.com/vision/ Cloud Vision API Reference> for @vision.images.annotate@.
+-- /See:/ <https://cloud.google.com/vision/ Google Cloud Vision API Reference> for @vision.images.annotate@.
 module Network.Google.Resource.Vision.Images.Annotate
     (
     -- * REST Resource

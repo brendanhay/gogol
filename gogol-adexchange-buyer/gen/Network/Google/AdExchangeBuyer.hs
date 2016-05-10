@@ -91,6 +91,9 @@ module Network.Google.AdExchangeBuyer
     -- ** adexchangebuyer.marketplacenotes.list
     , module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
 
+    -- ** adexchangebuyer.marketplaceprivateauction.updateproposal
+    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
+
     -- ** adexchangebuyer.performanceReport.list
     , module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
 
@@ -130,8 +133,14 @@ module Network.Google.AdExchangeBuyer
     -- ** adexchangebuyer.proposals.search
     , module Network.Google.Resource.AdExchangeBuyer.Proposals.Search
 
+    -- ** adexchangebuyer.proposals.setupcomplete
+    , module Network.Google.Resource.AdExchangeBuyer.Proposals.Setupcomplete
+
     -- ** adexchangebuyer.proposals.update
     , module Network.Google.Resource.AdExchangeBuyer.Proposals.Update
+
+    -- ** adexchangebuyer.pubprofiles.list
+    , module Network.Google.Resource.AdExchangeBuyer.PubproFiles.List
 
     -- * Types
 
@@ -167,6 +176,7 @@ module Network.Google.AdExchangeBuyer
     , EditAllOrderDealsResponse
     , editAllOrderDealsResponse
     , eaodrDeals
+    , eaodrOrderRevisionNumber
 
     -- ** CreativesList
     , CreativesList
@@ -194,6 +204,7 @@ module Network.Google.AdExchangeBuyer
     , abliURL
     , abliMaximumQps
     , abliRegion
+    , abliBidProtocol
 
     -- ** PrivateData
     , PrivateData
@@ -251,6 +262,12 @@ module Network.Google.AdExchangeBuyer
     , alKind
     , alItems
 
+    -- ** Dimension
+    , Dimension
+    , dimension
+    , dDimensionValues
+    , dDimensionType
+
     -- ** CreateOrdersRequest
     , CreateOrdersRequest
     , createOrdersRequest
@@ -262,6 +279,11 @@ module Network.Google.AdExchangeBuyer
     , creativeCorrectionsItem
     , cciReason
     , cciDetails
+
+    -- ** DealServingMetadata
+    , DealServingMetadata
+    , dealServingMetadata
+    , dsmDealPauseStatus
 
     -- ** AddOrderDealsResponse
     , AddOrderDealsResponse
@@ -280,6 +302,7 @@ module Network.Google.AdExchangeBuyer
     , PricePerBuyer
     , pricePerBuyer
     , ppbPrice
+    , ppbAuctionTier
     , ppbBuyer
 
     -- ** Creative
@@ -319,6 +342,12 @@ module Network.Google.AdExchangeBuyer
     , tvdptdpStartMinute
     , tvdptdpDayOfWeek
     , tvdptdpEndMinute
+
+    -- ** DimensionDimensionValue
+    , DimensionDimensionValue
+    , dimensionDimensionValue
+    , ddvName
+    , ddvId
 
     -- ** PretargetingConfigList
     , PretargetingConfigList
@@ -456,6 +485,18 @@ module Network.Google.AdExchangeBuyer
     , tvcsCompanionSizes
     , tvcsCreativeSizeType
 
+    -- ** DealTermsGuaranteedFixedPriceTermsBillingInfo
+    , DealTermsGuaranteedFixedPriceTermsBillingInfo
+    , dealTermsGuaranteedFixedPriceTermsBillingInfo
+    , dtgfptbiCurrencyConversionTimeMs
+    , dtgfptbiPrice
+    , dtgfptbiOriginalContractedQuantity
+
+    -- ** GetPublisherProFilesByAccountIdResponse
+    , GetPublisherProFilesByAccountIdResponse
+    , getPublisherProFilesByAccountIdResponse
+    , gppfbairProFiles
+
     -- ** Proposal
     , Proposal
     , proposal
@@ -467,6 +508,7 @@ module Network.Google.AdExchangeBuyer
     , pOriginatorRole
     , pRevisionNumber
     , pBilledBuyer
+    , pPrivateAuctionId
     , pIsRenegotiating
     , pHasSellerSignedOff
     , pSeller
@@ -478,6 +520,7 @@ module Network.Google.AdExchangeBuyer
     , pRevisionTimeMs
     , pProposalState
     , pLastUpdaterOrCommentorRole
+    , pNegotiationId
     , pHasBuyerSignedOff
     , pBuyer
 
@@ -498,11 +541,26 @@ module Network.Google.AdExchangeBuyer
     , tvsHeight
     , tvsWidth
 
+    -- ** UpdatePrivateAuctionProposalRequest
+    , UpdatePrivateAuctionProposalRequest
+    , updatePrivateAuctionProposalRequest
+    , upaprExternalDealId
+    , upaprUpdateAction
+    , upaprNote
+    , upaprProposalRevisionNumber
+
     -- ** PretargetingConfigDimensionsItem
     , PretargetingConfigDimensionsItem
     , pretargetingConfigDimensionsItem
     , pcdiHeight
     , pcdiWidth
+
+    -- ** PublisherProvidedForecast
+    , PublisherProvidedForecast
+    , publisherProvidedForecast
+    , ppfWeeklyImpressions
+    , ppfWeeklyUniques
+    , ppfDimensions
 
     -- ** TargetingValue
     , TargetingValue
@@ -580,6 +638,8 @@ module Network.Google.AdExchangeBuyer
     , proLastUpdateTimeMs
     , proKind
     , proRevisionNumber
+    , proPrivateAuctionId
+    , proDeliveryControl
     , proHasCreatorSignedOff
     , proFlightStartTimeMs
     , proSharedTargetings
@@ -588,7 +648,10 @@ module Network.Google.AdExchangeBuyer
     , proFlightEndTimeMs
     , proName
     , proCreatorContacts
+    , proPublisherProvidedForecast
     , proLabels
+    , proPublisherProFileId
+    , proLegacyOfferId
     , proProductId
 
     -- ** CreativeServingRestrictionsItem
@@ -610,6 +673,33 @@ module Network.Google.AdExchangeBuyer
     , pcpiToken
     , pcpiType
 
+    -- ** PublisherProFileAPIProto
+    , PublisherProFileAPIProto
+    , publisherProFileAPIProto
+    , ppfapAudience
+    , ppfapState
+    , ppfapMediaKitLink
+    , ppfapDirectContact
+    , ppfapSamplePageLink
+    , ppfapLogoURL
+    , ppfapKind
+    , ppfapExchange
+    , ppfapOverview
+    , ppfapGooglePlusLink
+    , ppfapProFileId
+    , ppfapIsParent
+    , ppfapSeller
+    , ppfapAccountId
+    , ppfapName
+    , ppfapBuyerPitchStatement
+    , ppfapPublisherProvidedForecast
+    , ppfapIsPublished
+    , ppfapPublisherDomains
+    , ppfapPublisherProFileId
+    , ppfapRateCardInfoLink
+    , ppfapTopHeadlines
+    , ppfapProgrammaticContact
+
     -- ** MarketplaceDeal
     , MarketplaceDeal
     , marketplaceDeal
@@ -621,6 +711,7 @@ module Network.Google.AdExchangeBuyer
     , mdLastUpdateTimeMs
     , mdKind
     , mdDeliveryControl
+    , mdDealServingMetadata
     , mdFlightStartTimeMs
     , mdSharedTargetings
     , mdProposalId
@@ -630,9 +721,11 @@ module Network.Google.AdExchangeBuyer
     , mdFlightEndTimeMs
     , mdName
     , mdSellerContacts
+    , mdProgrammaticCreativeSource
     , mdCreativePreApprovalPolicy
     , mdProductRevisionNumber
     , mdProductId
+    , mdCreativeSafeFrameCompatibility
 
     -- ** GetOffersResponse
     , GetOffersResponse
@@ -643,7 +736,7 @@ module Network.Google.AdExchangeBuyer
     , DealTermsNonGuaranteedAuctionTerms
     , dealTermsNonGuaranteedAuctionTerms
     , dtngatReservePricePerBuyers
-    , dtngatPrivateAuctionId
+    , dtngatAutoOptimizePrivateAuction
 
     -- ** CreativeFilteringReasonsReasonsItem
     , CreativeFilteringReasonsReasonsItem
@@ -665,6 +758,7 @@ module Network.Google.AdExchangeBuyer
     , dtNonGuaranteedAuctionTerms
     , dtBrandingType
     , dtEstimatedImpressionsPerDay
+    , dtSellerTimeZone
     , dtGuaranteedFixedPriceTerms
     , dtDescription
 
@@ -691,11 +785,18 @@ module Network.Google.AdExchangeBuyer
     , aDeals
     , aProposalRevisionNumber
 
+    -- ** DealServingMetadataDealPauseStatus
+    , DealServingMetadataDealPauseStatus
+    , dealServingMetadataDealPauseStatus
+    , dsmdpsHasBuyerPaused
+    , dsmdpsHasSellerPaused
+
     -- ** DealTermsGuaranteedFixedPriceTerms
     , DealTermsGuaranteedFixedPriceTerms
     , dealTermsGuaranteedFixedPriceTerms
     , dtgfptGuaranteedLooks
     , dtgfptGuaranteedImpressions
+    , dtgfptBillingInfo
     , dtgfptFixedPrices
     ) where
 
@@ -721,6 +822,7 @@ import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
 import           Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
+import           Network.Google.Resource.AdExchangeBuyer.Marketplaceprivateauction.Updateproposal
 import           Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
 import           Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
@@ -734,7 +836,9 @@ import           Network.Google.Resource.AdExchangeBuyer.Proposals.Get
 import           Network.Google.Resource.AdExchangeBuyer.Proposals.Insert
 import           Network.Google.Resource.AdExchangeBuyer.Proposals.Patch
 import           Network.Google.Resource.AdExchangeBuyer.Proposals.Search
+import           Network.Google.Resource.AdExchangeBuyer.Proposals.Setupcomplete
 import           Network.Google.Resource.AdExchangeBuyer.Proposals.Update
+import           Network.Google.Resource.AdExchangeBuyer.PubproFiles.List
 
 {- $resources
 TODO
@@ -746,6 +850,7 @@ type AdExchangeBuyerAPI =
        MarketplaceNotesListResource
        :<|> ProposalsInsertResource
        :<|> ProposalsPatchResource
+       :<|> ProposalsSetupcompleteResource
        :<|> ProposalsGetResource
        :<|> ProposalsSearchResource
        :<|> ProposalsUpdateResource
@@ -768,6 +873,7 @@ type AdExchangeBuyerAPI =
        :<|> PretargetingConfigGetResource
        :<|> PretargetingConfigDeleteResource
        :<|> PretargetingConfigUpdateResource
+       :<|> PubproFilesListResource
        :<|> BillingInfoListResource
        :<|> BillingInfoGetResource
        :<|> ProductsGetResource
@@ -776,3 +882,4 @@ type AdExchangeBuyerAPI =
        :<|> MarketplaceDealsListResource
        :<|> MarketplaceDealsDeleteResource
        :<|> MarketplaceDealsUpdateResource
+       :<|> MarketplaceprivateauctionUpdateproposalResource

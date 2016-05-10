@@ -29,16 +29,25 @@ module Network.Google.Logging.Types
     -- * MonitoredResourceDescriptor
     , MonitoredResourceDescriptor
     , monitoredResourceDescriptor
+    , mrdName
     , mrdDisplayName
     , mrdLabels
     , mrdType
     , mrdDescription
+
+    -- * Status
+    , Status
+    , status
+    , sDetails
+    , sCode
+    , sMessage
 
     -- * ListLogEntriesResponse
     , ListLogEntriesResponse
     , listLogEntriesResponse
     , llerNextPageToken
     , llerEntries
+    , llerProjectIdErrors
 
     -- * MonitoredResourceLabels
     , MonitoredResourceLabels
@@ -55,6 +64,7 @@ module Network.Google.Logging.Types
     , WriteLogEntriesRequest
     , writeLogEntriesRequest
     , wlerEntries
+    , wlerPartialSuccess
     , wlerResource
     , wlerLabels
     , wlerLogName
@@ -88,6 +98,7 @@ module Network.Google.Logging.Types
     , rlTaskName
     , rlPendingTime
     , rlWasLoadingRequest
+    , rlFirst
     , rlStartTime
     , rlLatency
     , rlURLMapEntry
@@ -126,6 +137,11 @@ module Network.Google.Logging.Types
     , lsName
     , lsFilter
 
+    -- * StatusDetailsItem
+    , StatusDetailsItem
+    , statusDetailsItem
+    , sdiAddtional
+
     -- * ListMonitoredResourceDescriptorsResponse
     , ListMonitoredResourceDescriptorsResponse
     , listMonitoredResourceDescriptorsResponse
@@ -137,14 +153,21 @@ module Network.Google.Logging.Types
     , hTTPRequest
     , httprStatus
     , httprRequestURL
+    , httprCacheFillBytes
     , httprRemoteIP
-    , httprValidatedWithOriginServer
     , httprRequestSize
+    , httprCacheValidatedWithOriginServer
     , httprUserAgent
+    , httprCacheLookup
     , httprResponseSize
     , httprRequestMethod
     , httprCacheHit
     , httprReferer
+
+    -- * ListLogEntriesResponseProjectIdErrors
+    , ListLogEntriesResponseProjectIdErrors
+    , listLogEntriesResponseProjectIdErrors
+    , llerpieAddtional
 
     -- * WriteLogEntriesRequestLabels
     , WriteLogEntriesRequestLabels
@@ -176,6 +199,7 @@ module Network.Google.Logging.Types
     , ListLogEntriesRequest
     , listLogEntriesRequest
     , llerOrderBy
+    , llerPartialSuccess
     , llerProjectIds
     , llerFilter
     , llerPageToken

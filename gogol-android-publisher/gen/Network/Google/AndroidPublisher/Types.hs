@@ -175,9 +175,15 @@ module Network.Google.AndroidPublisher.Types
     -- * SubscriptionPurchase
     , SubscriptionPurchase
     , subscriptionPurchase
+    , spPaymentState
     , spKind
     , spExpiryTimeMillis
     , spAutoRenewing
+    , spPriceCurrencyCode
+    , spCancelReason
+    , spCountryCode
+    , spDeveloperPayload
+    , spPriceAmountMicros
     , spStartTimeMillis
 
     -- * AppDetails

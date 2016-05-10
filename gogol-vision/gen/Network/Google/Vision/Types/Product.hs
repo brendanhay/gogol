@@ -94,9 +94,9 @@ instance ToJSON LatLng where
                   ("longitude" .=) <$> _llLongitude])
 
 -- | The /Feature/ indicates what type of image detection task to perform.
--- Users describe the type of Vision tasks to perform over images by using
--- /Feature/s. Features encode the Vision vertical to operate on and the
--- number of top-scoring results to return.
+-- Users describe the type of Google Cloud Vision API tasks to perform over
+-- images by using /Feature/s. Features encode the Cloud Vision API
+-- vertical to operate on and the number of top-scoring results to return.
 --
 -- /See:/ 'feature' smart constructor.
 data Feature = Feature'
@@ -282,7 +282,7 @@ instance ToJSON Property where
               (catMaybes
                  [("value" .=) <$> _pValue, ("name" .=) <$> _pName])
 
--- | Client image to perform Vision tasks over.
+-- | Client image to perform Google Cloud Vision API tasks over.
 --
 -- /See:/ 'image' smart constructor.
 data Image = Image'
@@ -917,7 +917,7 @@ instance ToJSON ImageProperties where
               (catMaybes
                  [("dominantColors" .=) <$> _ipDominantColors])
 
--- | A face annotation contains the results of face detection.
+-- | A face annotation object contains the results of face detection.
 --
 -- /See:/ 'faceAnnotation' smart constructor.
 data FaceAnnotation = FaceAnnotation'
@@ -1216,7 +1216,11 @@ eaTopicality
 eaLocale :: Lens' EntityAnnotation (Maybe Text)
 eaLocale = lens _eaLocale (\ s a -> s{_eaLocale = a})
 
--- | Image region to which this entity belongs.
+-- | Image region to which this entity belongs. Not filled currently for
+-- \`LABEL_DETECTION\` features. For \`TEXT_DETECTION\` (OCR),
+-- \`boundingPoly\`s are produced for the entire text detected in an image
+-- region, followed by \`boundingPoly\`s for each word within the detected
+-- text.
 eaBoundingPoly :: Lens' EntityAnnotation (Maybe BoundingPoly)
 eaBoundingPoly
   = lens _eaBoundingPoly
@@ -1230,8 +1234,9 @@ eaConfidence
   = lens _eaConfidence (\ s a -> s{_eaConfidence = a})
       . mapping _Coerce
 
--- | Knowledge Graph entity ID. Maps to a freebase entity ID. (for example,
--- \"Google\" maps to: mid \/m\/045c7b).
+-- | Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
+-- For more details on KG please see:
+-- https:\/\/developers.google.com\/knowledge-graph\/
 eaMid :: Lens' EntityAnnotation (Maybe Text)
 eaMid = lens _eaMid (\ s a -> s{_eaMid = a})
 
@@ -1288,8 +1293,8 @@ instance ToJSON EntityAnnotation where
                   ("description" .=) <$> _eaDescription,
                   ("properties" .=) <$> _eaProperties])
 
--- | Request for performing Vision tasks over a user-provided image, with
--- user-requested features.
+-- | Request for performing Google Cloud Vision API tasks over a
+-- user-provided image, with user-requested features.
 --
 -- /See:/ 'annotateImageRequest' smart constructor.
 data AnnotateImageRequest = AnnotateImageRequest'
@@ -1349,7 +1354,7 @@ instance ToJSON AnnotateImageRequest where
                   ("features" .=) <$> _airFeatures,
                   ("imageContext" .=) <$> _airImageContext])
 
--- | External image source (i.e. Google Cloud Storage image location).
+-- | External image source (Google Cloud Storage image location).
 --
 -- /See:/ 'imageSource' smart constructor.
 newtype ImageSource = ImageSource'
@@ -1369,7 +1374,7 @@ imageSource =
     }
 
 -- | Google Cloud Storage image URI. It must be in the following form:
--- \"gs:\/\/bucket_name\/object_name\". For more details, please see:
+-- \`gs:\/\/bucket_name\/object_name\`. For more details, please see:
 -- https:\/\/cloud.google.com\/storage\/docs\/reference-uris. NOTE: Cloud
 -- Storage object versioning is not supported!
 isGcsImageURI :: Lens' ImageSource (Maybe Text)

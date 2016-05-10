@@ -799,6 +799,7 @@ data Player = Player'
     , _pTitle              :: !(Maybe Text)
     , _pBannerURLPortrait  :: !(Maybe Text)
     , _pPlayerId           :: !(Maybe Text)
+    , _pProFileSettings    :: !(Maybe ProFileSettings)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Player' with the minimum fields required to make a request.
@@ -826,6 +827,8 @@ data Player = Player'
 -- * 'pBannerURLPortrait'
 --
 -- * 'pPlayerId'
+--
+-- * 'pProFileSettings'
 player
     :: Player
 player =
@@ -841,6 +844,7 @@ player =
     , _pTitle = Nothing
     , _pBannerURLPortrait = Nothing
     , _pPlayerId = Nothing
+    , _pProFileSettings = Nothing
     }
 
 -- | The url to the landscape mode player banner image.
@@ -909,6 +913,13 @@ pPlayerId :: Lens' Player (Maybe Text)
 pPlayerId
   = lens _pPlayerId (\ s a -> s{_pPlayerId = a})
 
+-- | The player\'s profile settings. Controls whether or not the player\'s
+-- profile is visible to other players.
+pProFileSettings :: Lens' Player (Maybe ProFileSettings)
+pProFileSettings
+  = lens _pProFileSettings
+      (\ s a -> s{_pProFileSettings = a})
+
 instance FromJSON Player where
         parseJSON
           = withObject "Player"
@@ -924,7 +935,8 @@ instance FromJSON Player where
                      <*> (o .:? "displayName")
                      <*> (o .:? "title")
                      <*> (o .:? "bannerUrlPortrait")
-                     <*> (o .:? "playerId"))
+                     <*> (o .:? "playerId")
+                     <*> (o .:? "profileSettings"))
 
 instance ToJSON Player where
         toJSON Player'{..}
@@ -940,7 +952,58 @@ instance ToJSON Player where
                   ("displayName" .=) <$> _pDisplayName,
                   ("title" .=) <$> _pTitle,
                   ("bannerUrlPortrait" .=) <$> _pBannerURLPortrait,
-                  ("playerId" .=) <$> _pPlayerId])
+                  ("playerId" .=) <$> _pPlayerId,
+                  ("profileSettings" .=) <$> _pProFileSettings])
+
+-- | This is a JSON template for profile settings
+--
+-- /See:/ 'proFileSettings' smart constructor.
+data ProFileSettings = ProFileSettings'
+    { _pfsProFileVisible :: !(Maybe Bool)
+    , _pfsKind           :: !Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProFileSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pfsProFileVisible'
+--
+-- * 'pfsKind'
+proFileSettings
+    :: ProFileSettings
+proFileSettings =
+    ProFileSettings'
+    { _pfsProFileVisible = Nothing
+    , _pfsKind = "gamesManagement#profileSettings"
+    }
+
+-- | The player\'s current profile visibility. This field is visible to both
+-- 1P and 3P APIs.
+pfsProFileVisible :: Lens' ProFileSettings (Maybe Bool)
+pfsProFileVisible
+  = lens _pfsProFileVisible
+      (\ s a -> s{_pfsProFileVisible = a})
+
+-- | Uniquely identifies the type of this resource. Value is always the fixed
+-- string gamesManagement#profileSettings.
+pfsKind :: Lens' ProFileSettings Text
+pfsKind = lens _pfsKind (\ s a -> s{_pfsKind = a})
+
+instance FromJSON ProFileSettings where
+        parseJSON
+          = withObject "ProFileSettings"
+              (\ o ->
+                 ProFileSettings' <$>
+                   (o .:? "profileVisible") <*>
+                     (o .:? "kind" .!= "gamesManagement#profileSettings"))
+
+instance ToJSON ProFileSettings where
+        toJSON ProFileSettings'{..}
+          = object
+              (catMaybes
+                 [("profileVisible" .=) <$> _pfsProFileVisible,
+                  Just ("kind" .= _pfsKind)])
 
 -- | This is a JSON template for an achievement reset response.
 --

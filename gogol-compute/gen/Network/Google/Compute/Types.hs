@@ -225,6 +225,7 @@ module Network.Google.Compute.Types
     , iSourceDiskId
     , iKind
     , iArchiveSizeBytes
+    , iFamily
     , iRawDisk
     , iSelfLink
     , iName
@@ -835,7 +836,6 @@ module Network.Google.Compute.Types
     , Zone
     , zone
     , zStatus
-    , zMaintenanceWindows
     , zKind
     , zSelfLink
     , zName
@@ -922,14 +922,6 @@ module Network.Google.Compute.Types
     , itId
     , itDescription
     , itProperties
-
-    -- * ZoneMaintenanceWindowsItem
-    , ZoneMaintenanceWindowsItem
-    , zoneMaintenanceWindowsItem
-    , zmwiBeginTime
-    , zmwiName
-    , zmwiEndTime
-    , zmwiDescription
 
     -- * TargetVPNGateway
     , TargetVPNGateway
@@ -1423,6 +1415,11 @@ module Network.Google.Compute.Types
     , salSelfLink
     , salId
 
+    -- * DisksResizeRequest
+    , DisksResizeRequest
+    , disksResizeRequest
+    , drrSizeGb
+
     -- * AutoscalersScopedListWarningDataItem
     , AutoscalersScopedListWarningDataItem
     , autoscalersScopedListWarningDataItem
@@ -1804,6 +1801,7 @@ module Network.Google.Compute.Types
     , bsName
     , bsCreationTimestamp
     , bsId
+    , bsRegion
     , bsTimeoutSec
     , bsDescription
     , bsPortName

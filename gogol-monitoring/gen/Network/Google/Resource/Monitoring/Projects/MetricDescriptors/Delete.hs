@@ -23,7 +23,7 @@
 -- Deletes a metric descriptor. Only user-created [custom
 -- metrics](\/monitoring\/custom-metrics) can be deleted.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.delete@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.delete@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Delete
     (
     -- * REST Resource
@@ -144,7 +144,8 @@ pmddBearerToken
       (\ s a -> s{_pmddBearerToken = a})
 
 -- | The metric descriptor on which to execute the request. The format is
--- \`\"projects\/ \/metricDescriptors\/\"\`. An example of \`\` is:
+-- \`\"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\"\`.
+-- An example of \`{metric_id}\` is:
 -- \`\"custom.googleapis.com\/my_test_metric\"\`.
 pmddName :: Lens' ProjectsMetricDescriptorsDelete Text
 pmddName = lens _pmddName (\ s a -> s{_pmddName = a})

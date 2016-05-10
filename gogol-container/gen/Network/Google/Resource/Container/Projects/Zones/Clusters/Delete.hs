@@ -22,7 +22,9 @@
 --
 -- Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
--- are also deleted.
+-- are also deleted. Other Google Compute Engine resources that might be in
+-- use by the cluster (e.g. load balancer resources) will not be deleted if
+-- they weren\'t present at the initial create time.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.delete@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
@@ -72,7 +74,9 @@ type ProjectsZonesClustersDeleteResource =
 
 -- | Deletes the cluster, including the Kubernetes endpoint and all worker
 -- nodes. Firewalls and routes that were configured during cluster creation
--- are also deleted.
+-- are also deleted. Other Google Compute Engine resources that might be in
+-- use by the cluster (e.g. load balancer resources) will not be deleted if
+-- they weren\'t present at the initial create time.
 --
 -- /See:/ 'projectsZonesClustersDelete' smart constructor.
 data ProjectsZonesClustersDelete = ProjectsZonesClustersDelete'
@@ -175,7 +179,7 @@ pzcdClusterId
       (\ s a -> s{_pzcdClusterId = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzcdProjectId :: Lens' ProjectsZonesClustersDelete Text
 pzcdProjectId
   = lens _pzcdProjectId

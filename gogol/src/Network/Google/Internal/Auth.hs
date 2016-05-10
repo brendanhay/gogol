@@ -174,7 +174,11 @@ instance FromJSON (UTCTime -> OAuthToken) where
         pure (OAuthToken t r . addUTCTime e)
 
 newtype OAuthCode = OAuthCode Text
-    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, ToText, FromJSON, ToJSON)
+    deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromJSON, ToJSON)
+
+instance ToHttpApiData OAuthCode where
+    toQueryParam (OAuthCode c) = c
+    toHeader     (OAuthCode c) = "Bearer " <> Text.encodeUtf8 c
 
 -- | An error thrown when attempting to read AuthN/AuthZ information.
 data AuthError

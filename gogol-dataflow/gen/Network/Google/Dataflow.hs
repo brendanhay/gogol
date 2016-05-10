@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Dataflow API.
+-- Develops and executes data processing patterns like ETL, batch
+-- computation, and continuous computation.
 --
 -- /See:/ <https://cloud.google.com/dataflow Google Dataflow API Reference>
 module Network.Google.Dataflow
@@ -379,6 +380,7 @@ module Network.Google.Dataflow
     , TopologyConfig
     , topologyConfig
     , tcDataDiskAssignments
+    , tcPersistentStateVersion
     , tcForwardingKeyBits
     , tcUserStageToComputationNameMap
     , tcComputations
@@ -573,6 +575,7 @@ module Network.Google.Dataflow
     , WorkerPool
     , workerPool
     , wpAutoscalingSettings
+    , wpNumThreadsPerWorker
     , wpDiskSizeGb
     , wpKind
     , wpTaskrunnerSettings

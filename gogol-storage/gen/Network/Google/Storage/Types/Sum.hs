@@ -26,7 +26,7 @@ data ObjectsInsertProjection
       -- Include all properties.
     | NoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsInsertProjection
@@ -312,7 +312,7 @@ data ObjectsWatchAllProjection
       -- Include all properties.
     | OWAPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsWatchAllProjection
@@ -341,7 +341,7 @@ data BucketsGetProjection
       -- Include all properties.
     | BGPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
+      -- Omit owner, acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable BucketsGetProjection
@@ -370,7 +370,7 @@ data BucketsPatchProjection
       -- Include all properties.
     | BPPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
+      -- Omit owner, acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable BucketsPatchProjection
@@ -399,7 +399,7 @@ data BucketsUpdateProjection
       -- Include all properties.
     | BUPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
+      -- Omit owner, acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable BucketsUpdateProjection
@@ -481,7 +481,7 @@ data ObjectsListProjection
       -- Include all properties.
     | OLPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsListProjection
@@ -716,7 +716,7 @@ data BucketsInsertProjection
       -- Include all properties.
     | BIPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
+      -- Omit owner, acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable BucketsInsertProjection
@@ -745,7 +745,7 @@ data BucketsListProjection
       -- Include all properties.
     | BLPNoACL
       -- ^ @noAcl@
-      -- Omit acl and defaultObjectAcl properties.
+      -- Omit owner, acl and defaultObjectAcl properties.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable BucketsListProjection
@@ -774,7 +774,7 @@ data ObjectsUpdateProjection
       -- Include all properties.
     | OUPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsUpdateProjection
@@ -803,7 +803,7 @@ data ObjectsPatchProjection
       -- Include all properties.
     | OPPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsPatchProjection
@@ -832,7 +832,7 @@ data ObjectsGetProjection
       -- Include all properties.
     | OGPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsGetProjection
@@ -960,7 +960,7 @@ data ObjectsCopyProjection
       -- Include all properties.
     | OCPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsCopyProjection
@@ -990,7 +990,7 @@ data ObjectsRewriteProjection
       -- Include all properties.
     | ORPNoACL
       -- ^ @noAcl@
-      -- Omit the acl property.
+      -- Omit the owner, acl property.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
 instance Hashable ObjectsRewriteProjection

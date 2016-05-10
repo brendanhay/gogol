@@ -14,10 +14,9 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google Cloud Vision API allows developers to easily integrate Google
-    vision features, including image labeling, face, logo, and landmark
-    detection, optical character recognition (OCR), and detection of
-    explicit content, into applications.
+    Integrates Google Vision features, including image labeling, face, logo,
+    and landmark detection, optical character recognition (OCR), and
+    detection of explicit content, into applications.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

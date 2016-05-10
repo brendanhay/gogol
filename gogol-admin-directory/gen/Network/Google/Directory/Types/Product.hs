@@ -2146,7 +2146,7 @@ instance ToJSON DomainAliases where
 data Aliases = Aliases'
     { _aliEtag    :: !(Maybe Text)
     , _aliKind    :: !Text
-    , _aliAliases :: !(Maybe [Alias])
+    , _aliAliases :: !(Maybe [JSONValue])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Aliases' with the minimum fields required to make a request.
@@ -2176,7 +2176,7 @@ aliKind :: Lens' Aliases Text
 aliKind = lens _aliKind (\ s a -> s{_aliKind = a})
 
 -- | List of alias objects.
-aliAliases :: Lens' Aliases [Alias]
+aliAliases :: Lens' Aliases [JSONValue]
 aliAliases
   = lens _aliAliases (\ s a -> s{_aliAliases = a}) .
       _Default

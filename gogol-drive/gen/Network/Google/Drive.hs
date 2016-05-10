@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The API to interact with Drive.
+-- Manages files in Drive including uploading, downloading, searching,
+-- detecting changes, and updating sharing permissions.
 --
 -- /See:/ <https://developers.google.com/drive/ Drive API Reference>
 module Network.Google.Drive
@@ -405,6 +406,7 @@ module Network.Google.Drive
     , fMD5Checksum
     , fFolderColorRgb
     , fMimeType
+    , fIsAppAuthorized
     , fName
     , fParents
     , fStarred

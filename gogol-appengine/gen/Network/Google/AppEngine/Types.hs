@@ -310,6 +310,12 @@ module Network.Google.AppEngine.Types
     , omOperationType
     , omTarget
 
+    -- * ListInstancesResponse
+    , ListInstancesResponse
+    , listInstancesResponse
+    , lirNextPageToken
+    , lirInstances
+
     -- * RequestUtilization
     , RequestUtilization
     , requestUtilization
@@ -331,6 +337,25 @@ module Network.Google.AppEngine.Types
     , ContainerInfo
     , containerInfo
     , ciImage
+
+    -- * Instance
+    , Instance
+    , instance'
+    , iMemoryUsage
+    , iVMStatus
+    , iVMZoneName
+    , iVMId
+    , iAvailability
+    , iVMName
+    , iName
+    , iVMUnlocked
+    , iRequests
+    , iQps
+    , iId
+    , iErrors
+    , iAverageLatency
+    , iStartTimestamp
+    , iAppEngineRelease
 
     -- * Deployment
     , Deployment

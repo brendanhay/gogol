@@ -23,7 +23,7 @@
 -- Creates a new metric descriptor. User-created metric descriptors define
 -- [custom metrics](\/monitoring\/custom-metrics).
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.create@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Create
     (
     -- * REST Resource
@@ -158,7 +158,7 @@ pmdcBearerToken
       (\ s a -> s{_pmdcBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/ \"\`.
+-- \`\"projects\/{project_id_or_number}\"\`.
 pmdcName :: Lens' ProjectsMetricDescriptorsCreate Text
 pmdcName = lens _pmdcName (\ s a -> s{_pmdcName = a})
 

@@ -40,6 +40,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.List
     , pjlUploadType
     , pjlBearerToken
     , pjlView
+    , pjlFilter
     , pjlPageToken
     , pjlProjectId
     , pjlPageSize
@@ -63,11 +64,12 @@ type ProjectsJobsListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
                          QueryParam "view" Text :>
-                           QueryParam "pageToken" Text :>
-                             QueryParam "pageSize" (Textual Int32) :>
-                               QueryParam "callback" Text :>
-                                 QueryParam "alt" AltJSON :>
-                                   Get '[JSON] ListJobsResponse
+                           QueryParam "filter" Text :>
+                             QueryParam "pageToken" Text :>
+                               QueryParam "pageSize" (Textual Int32) :>
+                                 QueryParam "callback" Text :>
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] ListJobsResponse
 
 -- | List the jobs of a project
 --
@@ -80,6 +82,7 @@ data ProjectsJobsList = ProjectsJobsList'
     , _pjlUploadType     :: !(Maybe Text)
     , _pjlBearerToken    :: !(Maybe Text)
     , _pjlView           :: !(Maybe Text)
+    , _pjlFilter         :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlProjectId      :: !Text
     , _pjlPageSize       :: !(Maybe (Textual Int32))
@@ -104,6 +107,8 @@ data ProjectsJobsList = ProjectsJobsList'
 --
 -- * 'pjlView'
 --
+-- * 'pjlFilter'
+--
 -- * 'pjlPageToken'
 --
 -- * 'pjlProjectId'
@@ -123,6 +128,7 @@ projectsJobsList pPjlProjectId_ =
     , _pjlUploadType = Nothing
     , _pjlBearerToken = Nothing
     , _pjlView = Nothing
+    , _pjlFilter = Nothing
     , _pjlPageToken = Nothing
     , _pjlProjectId = pPjlProjectId_
     , _pjlPageSize = Nothing
@@ -165,6 +171,11 @@ pjlBearerToken
 pjlView :: Lens' ProjectsJobsList (Maybe Text)
 pjlView = lens _pjlView (\ s a -> s{_pjlView = a})
 
+-- | The kind of filter to use.
+pjlFilter :: Lens' ProjectsJobsList (Maybe Text)
+pjlFilter
+  = lens _pjlFilter (\ s a -> s{_pjlFilter = a})
+
 -- | Set this to the \'next_page_token\' field of a previous response to
 -- request additional results in a long list.
 pjlPageToken :: Lens' ProjectsJobsList (Maybe Text)
@@ -201,6 +212,7 @@ instance GoogleRequest ProjectsJobsList where
               _pjlUploadType
               _pjlBearerToken
               _pjlView
+              _pjlFilter
               _pjlPageToken
               _pjlPageSize
               _pjlCallback

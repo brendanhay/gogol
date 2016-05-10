@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for Cloud SQL database instance management.
+    Creates and configures Cloud SQL instances, which provide fully-managed
+    MySQL databases.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

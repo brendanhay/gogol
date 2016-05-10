@@ -1316,7 +1316,8 @@ cConversionTimestamp
       (\ s a -> s{_cConversionTimestamp = a})
       . mapping _Coerce
 
--- | This field is ignored.
+-- | Available to advertisers only after contacting DoubleClick Search
+-- customer support.
 cAttributionModel :: Lens' Conversion (Maybe Text)
 cAttributionModel
   = lens _cAttributionModel
@@ -1344,7 +1345,8 @@ cCustomMetric
       . _Default
       . _Coerce
 
--- | This field is ignored.
+-- | Available to advertisers only after contacting DoubleClick Search
+-- customer support.
 cCountMillis :: Lens' Conversion (Maybe Int64)
 cCountMillis
   = lens _cCountMillis (\ s a -> s{_cCountMillis = a})
@@ -1392,8 +1394,8 @@ cFloodlightOrderId
       (\ s a -> s{_cFloodlightOrderId = a})
 
 -- | The revenue amount of this TRANSACTION conversion, in micros (value
--- multiplied by 1000, no decimal). For example, to specify a revenue value
--- of \"10\" enter \"10000\" in your request.
+-- multiplied by 1000000, no decimal). For example, to specify a revenue
+-- value of \"10\" enter \"10000000\" (10 million) in your request.
 cRevenueMicros :: Lens' Conversion (Maybe Int64)
 cRevenueMicros
   = lens _cRevenueMicros

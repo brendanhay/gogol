@@ -155,27 +155,25 @@ pslBearerToken
       (\ s a -> s{_pslBearerToken = a})
 
 -- | Required. The resource name of the project containing the sinks.
--- Example: \`\"projects\/my-logging-project\"\`,
--- \`\"projects\/01234567890\"\`.
+-- Example: \`\"projects\/my-logging-project\"\`.
 pslProjectName :: Lens' ProjectsSinksList Text
 pslProjectName
   = lens _pslProjectName
       (\ s a -> s{_pslProjectName = a})
 
--- | Optional. If the \`pageToken\` request parameter is supplied, then the
--- next page of results in the set are retrieved. The \`pageToken\`
--- parameter must be set with the value of the \`nextPageToken\` result
--- parameter from the previous request. The value of \`projectName\` must
--- be the same as in the previous request.
+-- | Optional. If the \`pageToken\` parameter is supplied, then the next page
+-- of results is retrieved. The \`pageToken\` parameter must be set to the
+-- value of the \`nextPageToken\` from the previous response. The value of
+-- \`projectName\` must be the same as in the previous request.
 pslPageToken :: Lens' ProjectsSinksList (Maybe Text)
 pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
--- | Optional. The maximum number of results to return from this request.
--- Fewer results might be returned. You must check for the
--- \`nextPageToken\` result to determine if additional results are
--- available, which you can retrieve by passing the \`nextPageToken\` value
--- in the \`pageToken\` parameter to the next request.
+-- | Optional. The maximum number of results to return from this request. You
+-- must check for presence of \`nextPageToken\` to determine if additional
+-- results are available, which you can retrieve by passing the
+-- \`nextPageToken\` value as the \`pageToken\` parameter in the next
+-- request.
 pslPageSize :: Lens' ProjectsSinksList (Maybe Int32)
 pslPageSize
   = lens _pslPageSize (\ s a -> s{_pslPageSize = a}) .

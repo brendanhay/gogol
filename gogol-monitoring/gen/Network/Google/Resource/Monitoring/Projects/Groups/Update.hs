@@ -23,7 +23,7 @@
 -- Updates an existing group. You can change any group attributes except
 -- \`name\`.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.groups.update@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.update@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Update
     (
     -- * REST Resource
@@ -166,10 +166,11 @@ pguBearerToken
   = lens _pguBearerToken
       (\ s a -> s{_pguBearerToken = a})
 
--- | The name of this group. The format is \`\"projects\/ \/groups\/\"\`.
--- When creating a group, this field is ignored and a new name is created
+-- | The name of this group. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. When
+-- creating a group, this field is ignored and a new name is created
 -- consisting of the project specified in the call to \`CreateGroup\` and a
--- unique \`\` that is generated automatically. \'OutputOnly
+-- unique \`{group_id}\` that is generated automatically. \'OutputOnly
 pguName :: Lens' ProjectsGroupsUpdate Text
 pguName = lens _pguName (\ s a -> s{_pguName = a})
 

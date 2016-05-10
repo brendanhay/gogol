@@ -22,7 +22,7 @@
 --
 -- Creates a new group.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.groups.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.create@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Create
     (
     -- * REST Resource
@@ -165,8 +165,8 @@ pgcBearerToken
   = lens _pgcBearerToken
       (\ s a -> s{_pgcBearerToken = a})
 
--- | The project in which to create the group. The format is \`\"projects\/
--- \"\`.
+-- | The project in which to create the group. The format is
+-- \`\"projects\/{project_id_or_number}\"\`.
 pgcName :: Lens' ProjectsGroupsCreate Text
 pgcName = lens _pgcName (\ s a -> s{_pgcName = a})
 

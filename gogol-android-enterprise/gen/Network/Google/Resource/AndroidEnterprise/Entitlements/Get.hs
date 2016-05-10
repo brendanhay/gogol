@@ -84,7 +84,8 @@ entitlementsGet pEgEntitlementId_ pEgEnterpriseId_ pEgUserId_ =
     , _egUserId = pEgUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 egEntitlementId :: Lens' EntitlementsGet Text
 egEntitlementId
   = lens _egEntitlementId

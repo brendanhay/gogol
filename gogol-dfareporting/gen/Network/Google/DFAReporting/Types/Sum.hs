@@ -24,7 +24,7 @@ data PlacementsListSortOrder
       -- ^ @ASCENDING@
     | Descending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListSortOrder
 
@@ -77,7 +77,7 @@ data DateRangeRelativeDateRange
       -- ^ @YEAR_TO_DATE@
     | Yesterday
       -- ^ @YESTERDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DateRangeRelativeDateRange
 
@@ -130,7 +130,7 @@ data AdvertisersListSortField
       -- ^ @ID@
     | Name
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListSortField
 
@@ -157,7 +157,7 @@ data CreativeFieldsListSortOrder
       -- ^ @ASCENDING@
     | CFLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldsListSortOrder
 
@@ -184,7 +184,7 @@ data UserRolesListSortField
       -- ^ @ID@
     | URLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserRolesListSortField
 
@@ -212,7 +212,7 @@ data FloodlightActivityTagFormat
       -- ^ @HTML@
     | Xhtml
       -- ^ @XHTML@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityTagFormat
 
@@ -239,7 +239,7 @@ data OrderDocumentsListSortOrder
       -- ^ @ASCENDING@
     | ODLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderDocumentsListSortOrder
 
@@ -297,7 +297,7 @@ data CreativeAssetRole
       -- ^ @PRIMARY@
     | TranscodedVideo
       -- ^ @TRANSCODED_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetRole
 
@@ -330,13 +330,48 @@ instance FromJSON CreativeAssetRole where
 instance ToJSON CreativeAssetRole where
     toJSON = toJSONText
 
+-- | Select only dynamic targeting keys with this object type.
+data DynamicTargetingKeysListObjectType
+    = ObjectAd
+      -- ^ @OBJECT_AD@
+    | ObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | ObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | ObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DynamicTargetingKeysListObjectType
+
+instance FromHttpApiData DynamicTargetingKeysListObjectType where
+    parseQueryParam = \case
+        "OBJECT_AD" -> Right ObjectAd
+        "OBJECT_ADVERTISER" -> Right ObjectAdvertiser
+        "OBJECT_CREATIVE" -> Right ObjectCreative
+        "OBJECT_PLACEMENT" -> Right ObjectPlacement
+        x -> Left ("Unable to parse DynamicTargetingKeysListObjectType from: " <> x)
+
+instance ToHttpApiData DynamicTargetingKeysListObjectType where
+    toQueryParam = \case
+        ObjectAd -> "OBJECT_AD"
+        ObjectAdvertiser -> "OBJECT_ADVERTISER"
+        ObjectCreative -> "OBJECT_CREATIVE"
+        ObjectPlacement -> "OBJECT_PLACEMENT"
+
+instance FromJSON DynamicTargetingKeysListObjectType where
+    parseJSON = parseJSONText "DynamicTargetingKeysListObjectType"
+
+instance ToJSON DynamicTargetingKeysListObjectType where
+    toJSON = toJSONText
+
 -- | The delivery type for the recipient.
 data RecipientDeliveryType
     = Attachment
       -- ^ @ATTACHMENT@
     | Link
       -- ^ @LINK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RecipientDeliveryType
 
@@ -397,7 +432,7 @@ data ThirdPartyTrackingURLThirdPartyURLType
       -- ^ @VIDEO_STOP@
     | VideoThirdQuartile
       -- ^ @VIDEO_THIRD_QUARTILE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ThirdPartyTrackingURLThirdPartyURLType
 
@@ -458,7 +493,7 @@ data TargetableRemarketingListsListSortOrder
       -- ^ @ASCENDING@
     | TRLLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetableRemarketingListsListSortOrder
 
@@ -488,7 +523,7 @@ data CreativeAssetPositionLeftUnit
       -- ^ @OFFSET_UNIT_PIXEL@
     | OffSetUnitPixelFromCenter
       -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetPositionLeftUnit
 
@@ -519,7 +554,7 @@ data PricingScheduleCapCostOption
       -- ^ @CAP_COST_MONTHLY@
     | CapCostNone
       -- ^ @CAP_COST_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingScheduleCapCostOption
 
@@ -554,7 +589,7 @@ data UserRolePermissionAvailability
       -- ^ @SUBACCOUNT_AND_ACCOUNT_ALWAYS@
     | SubAccountAndAccountByDefault
       -- ^ @SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserRolePermissionAvailability
 
@@ -589,7 +624,7 @@ data DirectorySiteContactAssignmentVisibility
       -- ^ @PRIVATE@
     | Public
       -- ^ @PUBLIC@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactAssignmentVisibility
 
@@ -615,7 +650,7 @@ instance ToJSON DirectorySiteContactAssignmentVisibility where
 -- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
 -- allowed for new placement insertions. Instead, use DISPLAY or
 -- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
--- video ads developed with the VAST standard.This field is required on
+-- video ads developed with the VAST standard. This field is required on
 -- insertion.
 data PlacementCompatibility
     = App
@@ -628,7 +663,7 @@ data PlacementCompatibility
       -- ^ @DISPLAY_INTERSTITIAL@
     | InStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementCompatibility
 
@@ -672,7 +707,7 @@ data ListPopulationTermOperator
       -- ^ @STRING_CONTAINS@
     | StringEquals
       -- ^ @STRING_EQUALS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ListPopulationTermOperator
 
@@ -709,7 +744,7 @@ data PlacementsListPaymentSource
       -- ^ @PLACEMENT_AGENCY_PAID@
     | PlacementPublisherPaid
       -- ^ @PLACEMENT_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListPaymentSource
 
@@ -741,7 +776,7 @@ data ReportsListSortField
     | RLSFName
       -- ^ @NAME@
       -- Sort by name of reports.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsListSortField
 
@@ -780,7 +815,7 @@ data AdSlotCompatibility
       -- ^ @DISPLAY_INTERSTITIAL@
     | ASCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdSlotCompatibility
 
@@ -813,7 +848,7 @@ data CampaignsListSortField
       -- ^ @ID@
     | CLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CampaignsListSortField
 
@@ -842,7 +877,7 @@ data AccountUserProFileTraffickerType
       -- ^ @INTERNAL_NON_TRAFFICKER@
     | InternalTrafficker
       -- ^ @INTERNAL_TRAFFICKER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFileTraffickerType
 
@@ -998,7 +1033,7 @@ data CreativeAssetMetadataDetectedFeaturesItem
       -- ^ @WEB_SQL_DATABASE@
     | WebWorkers
       -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetMetadataDetectedFeaturesItem
 
@@ -1164,7 +1199,7 @@ data AdsListCompatibility
       -- ^ @DISPLAY_INTERSTITIAL@
     | ALCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListCompatibility
 
@@ -1198,7 +1233,7 @@ data EventTagStatus
       -- ^ @DISABLED@
     | Enabled
       -- ^ @ENABLED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagStatus
 
@@ -1225,7 +1260,7 @@ data SitesListSortField
       -- ^ @ID@
     | SLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SitesListSortField
 
@@ -1257,7 +1292,7 @@ data EventTagsListEventTagTypes
       -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
     | ImpressionJavascriptEventTag
       -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagsListEventTagTypes
 
@@ -1290,7 +1325,7 @@ data FileStatus
       -- ^ @PROCESSING@
     | ReportAvailable
       -- ^ @REPORT_AVAILABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FileStatus
 
@@ -1325,7 +1360,7 @@ data CreativeCustomEventArtworkType
       -- ^ @ARTWORK_TYPE_IMAGE@
     | ArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCustomEventArtworkType
 
@@ -1358,7 +1393,7 @@ data FloodlightConfigurationNATuralSearchConversionAttributionOption
       -- ^ @INCLUDE_NATURAL_SEARCH_CONVERSION_ATTRIBUTION@
     | IncludeNATuralSearchTieredConversionAttribution
       -- ^ @INCLUDE_NATURAL_SEARCH_TIERED_CONVERSION_ATTRIBUTION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightConfigurationNATuralSearchConversionAttributionOption
 
@@ -1392,7 +1427,7 @@ data CreativeAssetArtworkType
       -- ^ @ARTWORK_TYPE_IMAGE@
     | CAATArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetArtworkType
 
@@ -1417,13 +1452,148 @@ instance FromJSON CreativeAssetArtworkType where
 instance ToJSON CreativeAssetArtworkType where
     toJSON = toJSONText
 
+-- | The type of custom floodlight variable to supply a value for. These map
+-- to the \"u[1-20]=\" in the tags.
+data CustomFloodlightVariableType
+    = U1
+      -- ^ @U1@
+    | U10
+      -- ^ @U10@
+    | U11
+      -- ^ @U11@
+    | U12
+      -- ^ @U12@
+    | U13
+      -- ^ @U13@
+    | U14
+      -- ^ @U14@
+    | U15
+      -- ^ @U15@
+    | U16
+      -- ^ @U16@
+    | U17
+      -- ^ @U17@
+    | U18
+      -- ^ @U18@
+    | U19
+      -- ^ @U19@
+    | U2
+      -- ^ @U2@
+    | U20
+      -- ^ @U20@
+    | U3
+      -- ^ @U3@
+    | U4
+      -- ^ @U4@
+    | U5
+      -- ^ @U5@
+    | U6
+      -- ^ @U6@
+    | U7
+      -- ^ @U7@
+    | U8
+      -- ^ @U8@
+    | U9
+      -- ^ @U9@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable CustomFloodlightVariableType
+
+instance FromHttpApiData CustomFloodlightVariableType where
+    parseQueryParam = \case
+        "U1" -> Right U1
+        "U10" -> Right U10
+        "U11" -> Right U11
+        "U12" -> Right U12
+        "U13" -> Right U13
+        "U14" -> Right U14
+        "U15" -> Right U15
+        "U16" -> Right U16
+        "U17" -> Right U17
+        "U18" -> Right U18
+        "U19" -> Right U19
+        "U2" -> Right U2
+        "U20" -> Right U20
+        "U3" -> Right U3
+        "U4" -> Right U4
+        "U5" -> Right U5
+        "U6" -> Right U6
+        "U7" -> Right U7
+        "U8" -> Right U8
+        "U9" -> Right U9
+        x -> Left ("Unable to parse CustomFloodlightVariableType from: " <> x)
+
+instance ToHttpApiData CustomFloodlightVariableType where
+    toQueryParam = \case
+        U1 -> "U1"
+        U10 -> "U10"
+        U11 -> "U11"
+        U12 -> "U12"
+        U13 -> "U13"
+        U14 -> "U14"
+        U15 -> "U15"
+        U16 -> "U16"
+        U17 -> "U17"
+        U18 -> "U18"
+        U19 -> "U19"
+        U2 -> "U2"
+        U20 -> "U20"
+        U3 -> "U3"
+        U4 -> "U4"
+        U5 -> "U5"
+        U6 -> "U6"
+        U7 -> "U7"
+        U8 -> "U8"
+        U9 -> "U9"
+
+instance FromJSON CustomFloodlightVariableType where
+    parseJSON = parseJSONText "CustomFloodlightVariableType"
+
+instance ToJSON CustomFloodlightVariableType where
+    toJSON = toJSONText
+
+-- | The error code.
+data ConversionErrorCode
+    = Internal
+      -- ^ @INTERNAL@
+    | InvalidArgument
+      -- ^ @INVALID_ARGUMENT@
+    | NotFound
+      -- ^ @NOT_FOUND@
+    | PermissionDenied
+      -- ^ @PERMISSION_DENIED@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable ConversionErrorCode
+
+instance FromHttpApiData ConversionErrorCode where
+    parseQueryParam = \case
+        "INTERNAL" -> Right Internal
+        "INVALID_ARGUMENT" -> Right InvalidArgument
+        "NOT_FOUND" -> Right NotFound
+        "PERMISSION_DENIED" -> Right PermissionDenied
+        x -> Left ("Unable to parse ConversionErrorCode from: " <> x)
+
+instance ToHttpApiData ConversionErrorCode where
+    toQueryParam = \case
+        Internal -> "INTERNAL"
+        InvalidArgument -> "INVALID_ARGUMENT"
+        NotFound -> "NOT_FOUND"
+        PermissionDenied -> "PERMISSION_DENIED"
+
+instance FromJSON ConversionErrorCode where
+    parseJSON = parseJSONText "ConversionErrorCode"
+
+instance ToJSON ConversionErrorCode where
+    toJSON = toJSONText
+
 -- | Order of sorted results, default is ASCENDING.
 data FloodlightActivitiesListSortOrder
     = FALSOAscending
       -- ^ @ASCENDING@
     | FALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivitiesListSortOrder
 
@@ -1451,7 +1621,7 @@ data FileFormat
       -- ^ @CSV@
     | Excel
       -- ^ @EXCEL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FileFormat
 
@@ -1472,6 +1642,50 @@ instance FromJSON FileFormat where
 instance ToJSON FileFormat where
     toJSON = toJSONText
 
+-- | The encryption entity type. This should match the encryption
+-- configuration for ad serving or Data Transfer.
+data EncryptionInfoEncryptionEntityType
+    = AdwordsCustomer
+      -- ^ @ADWORDS_CUSTOMER@
+    | DBmAdvertiser
+      -- ^ @DBM_ADVERTISER@
+    | DBmPartner
+      -- ^ @DBM_PARTNER@
+    | DcmAccount
+      -- ^ @DCM_ACCOUNT@
+    | DcmAdvertiser
+      -- ^ @DCM_ADVERTISER@
+    | EncryptionEntityTypeUnknown
+      -- ^ @ENCRYPTION_ENTITY_TYPE_UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EncryptionInfoEncryptionEntityType
+
+instance FromHttpApiData EncryptionInfoEncryptionEntityType where
+    parseQueryParam = \case
+        "ADWORDS_CUSTOMER" -> Right AdwordsCustomer
+        "DBM_ADVERTISER" -> Right DBmAdvertiser
+        "DBM_PARTNER" -> Right DBmPartner
+        "DCM_ACCOUNT" -> Right DcmAccount
+        "DCM_ADVERTISER" -> Right DcmAdvertiser
+        "ENCRYPTION_ENTITY_TYPE_UNKNOWN" -> Right EncryptionEntityTypeUnknown
+        x -> Left ("Unable to parse EncryptionInfoEncryptionEntityType from: " <> x)
+
+instance ToHttpApiData EncryptionInfoEncryptionEntityType where
+    toQueryParam = \case
+        AdwordsCustomer -> "ADWORDS_CUSTOMER"
+        DBmAdvertiser -> "DBM_ADVERTISER"
+        DBmPartner -> "DBM_PARTNER"
+        DcmAccount -> "DCM_ACCOUNT"
+        DcmAdvertiser -> "DCM_ADVERTISER"
+        EncryptionEntityTypeUnknown -> "ENCRYPTION_ENTITY_TYPE_UNKNOWN"
+
+instance FromJSON EncryptionInfoEncryptionEntityType where
+    parseJSON = parseJSONText "EncryptionInfoEncryptionEntityType"
+
+instance ToJSON EncryptionInfoEncryptionEntityType where
+    toJSON = toJSONText
+
 -- | Placement pricing type. This field is required on insertion.
 data PricingSchedulePricingType
     = PricingTypeCpa
@@ -1484,7 +1698,7 @@ data PricingSchedulePricingType
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PricingTypeFlatRateImpressions
       -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingSchedulePricingType
 
@@ -1523,7 +1737,7 @@ data CreativeCustomEventTargetType
       -- ^ @TARGET_SELF@
     | TargetTop
       -- ^ @TARGET_TOP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCustomEventTargetType
 
@@ -1558,7 +1772,7 @@ data ReportsListScope
     | Mine
       -- ^ @MINE@
       -- My reports.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsListScope
 
@@ -1588,7 +1802,7 @@ data CreativeAssetDurationType
       -- ^ @ASSET_DURATION_TYPE_CUSTOM@
     | AssetDurationTypeNone
       -- ^ @ASSET_DURATION_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetDurationType
 
@@ -1635,7 +1849,7 @@ data TargetableRemarketingListListSource
       -- ^ @REMARKETING_LIST_SOURCE_XFP@
     | RemarketingListSourceYouTube
       -- ^ @REMARKETING_LIST_SOURCE_YOUTUBE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetableRemarketingListListSource
 
@@ -1680,7 +1894,7 @@ data CreativeGroupsListSortField
       -- ^ @ID@
     | CGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeGroupsListSortField
 
@@ -1707,7 +1921,7 @@ data PlacementsListSortField
       -- ^ @ID@
     | PLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListSortField
 
@@ -1861,7 +2075,7 @@ data CreativeBackupImageFeaturesItem
       -- ^ @WEB_SQL_DATABASE@
     | CBIFIWebWorkers
       -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeBackupImageFeaturesItem
 
@@ -2016,7 +2230,7 @@ data AdvertisersListSortOrder
       -- ^ @ASCENDING@
     | ALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListSortOrder
 
@@ -2043,7 +2257,7 @@ data CreativeFieldsListSortField
       -- ^ @ID@
     | CFLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldsListSortField
 
@@ -2066,96 +2280,96 @@ instance ToJSON CreativeFieldsListSortField where
 
 -- | Variable name in the tag. This is a required field.
 data UserDefinedVariableConfigurationVariableType
-    = U1
+    = UDVCVTU1
       -- ^ @U1@
-    | U10
+    | UDVCVTU10
       -- ^ @U10@
-    | U11
+    | UDVCVTU11
       -- ^ @U11@
-    | U12
+    | UDVCVTU12
       -- ^ @U12@
-    | U13
+    | UDVCVTU13
       -- ^ @U13@
-    | U14
+    | UDVCVTU14
       -- ^ @U14@
-    | U15
+    | UDVCVTU15
       -- ^ @U15@
-    | U16
+    | UDVCVTU16
       -- ^ @U16@
-    | U17
+    | UDVCVTU17
       -- ^ @U17@
-    | U18
+    | UDVCVTU18
       -- ^ @U18@
-    | U19
+    | UDVCVTU19
       -- ^ @U19@
-    | U2
+    | UDVCVTU2
       -- ^ @U2@
-    | U20
+    | UDVCVTU20
       -- ^ @U20@
-    | U3
+    | UDVCVTU3
       -- ^ @U3@
-    | U4
+    | UDVCVTU4
       -- ^ @U4@
-    | U5
+    | UDVCVTU5
       -- ^ @U5@
-    | U6
+    | UDVCVTU6
       -- ^ @U6@
-    | U7
+    | UDVCVTU7
       -- ^ @U7@
-    | U8
+    | UDVCVTU8
       -- ^ @U8@
-    | U9
+    | UDVCVTU9
       -- ^ @U9@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserDefinedVariableConfigurationVariableType
 
 instance FromHttpApiData UserDefinedVariableConfigurationVariableType where
     parseQueryParam = \case
-        "U1" -> Right U1
-        "U10" -> Right U10
-        "U11" -> Right U11
-        "U12" -> Right U12
-        "U13" -> Right U13
-        "U14" -> Right U14
-        "U15" -> Right U15
-        "U16" -> Right U16
-        "U17" -> Right U17
-        "U18" -> Right U18
-        "U19" -> Right U19
-        "U2" -> Right U2
-        "U20" -> Right U20
-        "U3" -> Right U3
-        "U4" -> Right U4
-        "U5" -> Right U5
-        "U6" -> Right U6
-        "U7" -> Right U7
-        "U8" -> Right U8
-        "U9" -> Right U9
+        "U1" -> Right UDVCVTU1
+        "U10" -> Right UDVCVTU10
+        "U11" -> Right UDVCVTU11
+        "U12" -> Right UDVCVTU12
+        "U13" -> Right UDVCVTU13
+        "U14" -> Right UDVCVTU14
+        "U15" -> Right UDVCVTU15
+        "U16" -> Right UDVCVTU16
+        "U17" -> Right UDVCVTU17
+        "U18" -> Right UDVCVTU18
+        "U19" -> Right UDVCVTU19
+        "U2" -> Right UDVCVTU2
+        "U20" -> Right UDVCVTU20
+        "U3" -> Right UDVCVTU3
+        "U4" -> Right UDVCVTU4
+        "U5" -> Right UDVCVTU5
+        "U6" -> Right UDVCVTU6
+        "U7" -> Right UDVCVTU7
+        "U8" -> Right UDVCVTU8
+        "U9" -> Right UDVCVTU9
         x -> Left ("Unable to parse UserDefinedVariableConfigurationVariableType from: " <> x)
 
 instance ToHttpApiData UserDefinedVariableConfigurationVariableType where
     toQueryParam = \case
-        U1 -> "U1"
-        U10 -> "U10"
-        U11 -> "U11"
-        U12 -> "U12"
-        U13 -> "U13"
-        U14 -> "U14"
-        U15 -> "U15"
-        U16 -> "U16"
-        U17 -> "U17"
-        U18 -> "U18"
-        U19 -> "U19"
-        U2 -> "U2"
-        U20 -> "U20"
-        U3 -> "U3"
-        U4 -> "U4"
-        U5 -> "U5"
-        U6 -> "U6"
-        U7 -> "U7"
-        U8 -> "U8"
-        U9 -> "U9"
+        UDVCVTU1 -> "U1"
+        UDVCVTU10 -> "U10"
+        UDVCVTU11 -> "U11"
+        UDVCVTU12 -> "U12"
+        UDVCVTU13 -> "U13"
+        UDVCVTU14 -> "U14"
+        UDVCVTU15 -> "U15"
+        UDVCVTU16 -> "U16"
+        UDVCVTU17 -> "U17"
+        UDVCVTU18 -> "U18"
+        UDVCVTU19 -> "U19"
+        UDVCVTU2 -> "U2"
+        UDVCVTU20 -> "U20"
+        UDVCVTU3 -> "U3"
+        UDVCVTU4 -> "U4"
+        UDVCVTU5 -> "U5"
+        UDVCVTU6 -> "U6"
+        UDVCVTU7 -> "U7"
+        UDVCVTU8 -> "U8"
+        UDVCVTU9 -> "U9"
 
 instance FromJSON UserDefinedVariableConfigurationVariableType where
     parseJSON = parseJSONText "UserDefinedVariableConfigurationVariableType"
@@ -2169,7 +2383,7 @@ data FsCommandPositionOption
       -- ^ @CENTERED@
     | DistanceFromTopLeftCorner
       -- ^ @DISTANCE_FROM_TOP_LEFT_CORNER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FsCommandPositionOption
 
@@ -2196,7 +2410,7 @@ data UserRolesListSortOrder
       -- ^ @ASCENDING@
     | URLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserRolesListSortOrder
 
@@ -2220,8 +2434,9 @@ instance ToJSON UserRolesListSortOrder where
 -- | Select only placements that are associated with these compatibilities.
 -- DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or
 -- on mobile devices for regular or interstitial ads respectively. APP and
--- APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers
--- to rendering in in-stream video ads developed with the VAST standard.
+-- APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
+-- refers to rendering in in-stream video ads developed with the VAST
+-- standard.
 data PlacementsListCompatibilities
     = PLCApp
       -- ^ @APP@
@@ -2233,7 +2448,7 @@ data PlacementsListCompatibilities
       -- ^ @DISPLAY_INTERSTITIAL@
     | PLCInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListCompatibilities
 
@@ -2266,7 +2481,7 @@ data OrderDocumentsListSortField
       -- ^ @ID@
     | ODLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderDocumentsListSortField
 
@@ -2298,7 +2513,7 @@ data CreativeCompatibilityItem
       -- ^ @DISPLAY_INTERSTITIAL@
     | CCIInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCompatibilityItem
 
@@ -2331,7 +2546,7 @@ data ReportDeliveryEmailOwnerDeliveryType
       -- ^ @ATTACHMENT@
     | RDEODTLink
       -- ^ @LINK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportDeliveryEmailOwnerDeliveryType
 
@@ -2358,7 +2573,7 @@ data SiteContactContactType
       -- ^ @SALES_PERSON@
     | Trafficker
       -- ^ @TRAFFICKER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SiteContactContactType
 
@@ -2387,7 +2602,7 @@ data ReportsListSortOrder
     | RLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsListSortOrder
 
@@ -2414,7 +2629,7 @@ data TargetableRemarketingListsListSortField
       -- ^ @ID@
     | TRLLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetableRemarketingListsListSortField
 
@@ -2441,7 +2656,7 @@ data CampaignsListSortOrder
       -- ^ @ASCENDING@
     | CLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CampaignsListSortOrder
 
@@ -2469,7 +2684,7 @@ data FloodlightActivityGroupsListType
       -- ^ @COUNTER@
     | Sale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupsListType
 
@@ -2497,7 +2712,7 @@ data FloodlightConfigurationFirstDayOfWeek
       -- ^ @MONDAY@
     | Sunday
       -- ^ @SUNDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightConfigurationFirstDayOfWeek
 
@@ -2553,7 +2768,7 @@ data DeliverySchedulePriority
       -- ^ @AD_PRIORITY_15@
     | AdPriority16
       -- ^ @AD_PRIORITY_16@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeliverySchedulePriority
 
@@ -2609,7 +2824,7 @@ data FloodlightActivitiesListFloodlightActivityGroupType
       -- ^ @COUNTER@
     | FALFAGTSale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivitiesListFloodlightActivityGroupType
 
@@ -2640,7 +2855,7 @@ data CreativeAuthoringSource
       -- ^ @CREATIVE_AUTHORING_SOURCE_DCM@
     | CreativeAuthoringSourceStudio
       -- ^ @CREATIVE_AUTHORING_SOURCE_STUDIO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAuthoringSource
 
@@ -2672,7 +2887,7 @@ data FloodlightConfigurationStandardVariableTypesItem
       -- ^ @TRAN@
     | U
       -- ^ @U@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightConfigurationStandardVariableTypesItem
 
@@ -2704,7 +2919,7 @@ data PlacementPaymentSource
       -- ^ @PLACEMENT_AGENCY_PAID@
     | PPSPlacementPublisherPaid
       -- ^ @PLACEMENT_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementPaymentSource
 
@@ -2733,7 +2948,7 @@ data ReportsFilesListSortOrder
     | RFLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsFilesListSortOrder
 
@@ -2760,7 +2975,7 @@ data InventoryItemsListSortField
       -- ^ @ID@
     | IILSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InventoryItemsListSortField
 
@@ -2791,7 +3006,7 @@ data EventTagType
       -- ^ @IMPRESSION_IMAGE_EVENT_TAG@
     | ETTImpressionJavascriptEventTag
       -- ^ @IMPRESSION_JAVASCRIPT_EVENT_TAG@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagType
 
@@ -2820,7 +3035,7 @@ data CreativesListSortOrder
       -- ^ @ASCENDING@
     | CDescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListSortOrder
 
@@ -2847,7 +3062,7 @@ data InventoryItemsListType
       -- ^ @PLANNING_PLACEMENT_TYPE_CREDIT@
     | PlanningPlacementTypeRegular
       -- ^ @PLANNING_PLACEMENT_TYPE_REGULAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InventoryItemsListType
 
@@ -2874,7 +3089,7 @@ data PopupWindowPropertiesPositionType
       -- ^ @CENTER@
     | Coordinates
       -- ^ @COORDINATES@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PopupWindowPropertiesPositionType
 
@@ -2903,7 +3118,7 @@ data DirectorySiteContactRole
       -- ^ @EDIT@
     | View
       -- ^ @VIEW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactRole
 
@@ -2937,7 +3152,7 @@ data TagSettingKeywordOption
       -- ^ @IGNORE@
     | PlaceholderWithListOfKeywords
       -- ^ @PLACEHOLDER_WITH_LIST_OF_KEYWORDS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagSettingKeywordOption
 
@@ -2967,7 +3182,7 @@ data CreativeAuthoringTool
       -- ^ @NINJA@
     | Swiffy
       -- ^ @SWIFFY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAuthoringTool
 
@@ -2996,7 +3211,7 @@ data OrderContactContactType
       -- ^ @PLANNING_ORDER_CONTACT_BUYER_CONTACT@
     | PlanningOrderContactSellerContact
       -- ^ @PLANNING_ORDER_CONTACT_SELLER_CONTACT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderContactContactType
 
@@ -3032,7 +3247,7 @@ data CreativeAssetIdType
       -- ^ @IMAGE@
     | CAITVideo
       -- ^ @VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetIdType
 
@@ -3065,7 +3280,7 @@ data AccountUserProFilesListSortOrder
       -- ^ @ASCENDING@
     | AUPFLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFilesListSortOrder
 
@@ -3110,7 +3325,7 @@ data RemarketingListListSource
       -- ^ @REMARKETING_LIST_SOURCE_XFP@
     | RLLSRemarketingListSourceYouTube
       -- ^ @REMARKETING_LIST_SOURCE_YOUTUBE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RemarketingListListSource
 
@@ -3156,9 +3371,11 @@ data AccountUserProFileUserAccessType
       -- ^ @INTERNAL_ADMINISTRATOR@
     | NormalUser
       -- ^ @NORMAL_USER@
+    | ReadOnlySuperUser
+      -- ^ @READ_ONLY_SUPER_USER@
     | SuperUser
       -- ^ @SUPER_USER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFileUserAccessType
 
@@ -3166,6 +3383,7 @@ instance FromHttpApiData AccountUserProFileUserAccessType where
     parseQueryParam = \case
         "INTERNAL_ADMINISTRATOR" -> Right InternalAdministrator
         "NORMAL_USER" -> Right NormalUser
+        "READ_ONLY_SUPER_USER" -> Right ReadOnlySuperUser
         "SUPER_USER" -> Right SuperUser
         x -> Left ("Unable to parse AccountUserProFileUserAccessType from: " <> x)
 
@@ -3173,6 +3391,7 @@ instance ToHttpApiData AccountUserProFileUserAccessType where
     toQueryParam = \case
         InternalAdministrator -> "INTERNAL_ADMINISTRATOR"
         NormalUser -> "NORMAL_USER"
+        ReadOnlySuperUser -> "READ_ONLY_SUPER_USER"
         SuperUser -> "SUPER_USER"
 
 instance FromJSON AccountUserProFileUserAccessType where
@@ -3188,7 +3407,7 @@ data CreativeAssetStartTimeType
       -- ^ @ASSET_START_TIME_TYPE_CUSTOM@
     | AssetStartTimeTypeNone
       -- ^ @ASSET_START_TIME_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetStartTimeType
 
@@ -3215,7 +3434,7 @@ data ProjectAudienceGender
       -- ^ @PLANNING_AUDIENCE_GENDER_FEMALE@
     | PlanningAudienceGenderMale
       -- ^ @PLANNING_AUDIENCE_GENDER_MALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectAudienceGender
 
@@ -3242,7 +3461,7 @@ data PlacementStrategiesListSortField
       -- ^ @ID@
     | PSLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementStrategiesListSortField
 
@@ -3269,7 +3488,7 @@ data UserDefinedVariableConfigurationDataType
       -- ^ @NUMBER@
     | String
       -- ^ @STRING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UserDefinedVariableConfigurationDataType
 
@@ -3302,7 +3521,7 @@ data FloodlightActivityCacheBustingType
       -- ^ @JSP@
     | Php
       -- ^ @PHP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityCacheBustingType
 
@@ -3335,7 +3554,7 @@ data CreativeGroupsListSortOrder
       -- ^ @ASCENDING@
     | CGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeGroupsListSortOrder
 
@@ -3362,7 +3581,7 @@ data OrderDocumentType
       -- ^ @PLANNING_ORDER_TYPE_CHANGE_ORDER@
     | PlanningOrderTypeInsertionOrder
       -- ^ @PLANNING_ORDER_TYPE_INSERTION_ORDER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrderDocumentType
 
@@ -3421,7 +3640,7 @@ data TagDataFormat
       -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
     | PlacementTagTrackingJavascript
       -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagDataFormat
 
@@ -3486,7 +3705,7 @@ data AccountActiveAdSummaryActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | ActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountActiveAdSummaryActiveAdsLimitTier
 
@@ -3524,7 +3743,7 @@ data CreativeAssetChildAssetType
       -- ^ @CHILD_ASSET_TYPE_IMAGE@
     | ChildAssetTypeVideo
       -- ^ @CHILD_ASSET_TYPE_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetChildAssetType
 
@@ -3560,7 +3779,7 @@ data PlacementGroupsListPlacementGroupType
       -- ^ @PLACEMENT_PACKAGE@
     | PlacementRoadblock
       -- ^ @PLACEMENT_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListPlacementGroupType
 
@@ -3591,7 +3810,7 @@ data ObjectFilterStatus
       -- ^ @ASSIGNED@
     | OFSNone
       -- ^ @NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectFilterStatus
 
@@ -3620,7 +3839,7 @@ data CampaignCreativeAssociationsListSortOrder
       -- ^ @ASCENDING@
     | CCALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CampaignCreativeAssociationsListSortOrder
 
@@ -3647,7 +3866,7 @@ data FloodlightActivitiesListSortField
       -- ^ @ID@
     | FALSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivitiesListSortField
 
@@ -3718,7 +3937,7 @@ data CreativesListTypes
       -- ^ @VPAID_LINEAR@
     | VpaidNonLinear
       -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListTypes
 
@@ -3792,7 +4011,7 @@ data DirectorySiteInpageTagFormatsItem
       -- ^ @JAVASCRIPT_INPAGE@
     | Standard
       -- ^ @STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteInpageTagFormatsItem
 
@@ -3827,7 +4046,7 @@ data CreativeAssetWindowMode
       -- ^ @TRANSPARENT@
     | Window
       -- ^ @WINDOW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetWindowMode
 
@@ -3861,7 +4080,7 @@ data CreativeAssetAlignment
       -- ^ @ALIGNMENT_RIGHT@
     | AlignmentTop
       -- ^ @ALIGNMENT_TOP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetAlignment
 
@@ -3892,7 +4111,7 @@ data RemarketingListsListSortOrder
       -- ^ @ASCENDING@
     | RLLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RemarketingListsListSortOrder
 
@@ -3925,7 +4144,7 @@ data PlacementGroupsListPricingTypes
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PGLPTPricingTypeFlatRateImpressions
       -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListPricingTypes
 
@@ -3952,6 +4171,42 @@ instance FromJSON PlacementGroupsListPricingTypes where
 instance ToJSON PlacementGroupsListPricingTypes where
     toJSON = toJSONText
 
+-- | Type of the object of this dynamic targeting key. This is a required
+-- field.
+data DynamicTargetingKeysDeleteObjectType
+    = DTKDOTObjectAd
+      -- ^ @OBJECT_AD@
+    | DTKDOTObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | DTKDOTObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | DTKDOTObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DynamicTargetingKeysDeleteObjectType
+
+instance FromHttpApiData DynamicTargetingKeysDeleteObjectType where
+    parseQueryParam = \case
+        "OBJECT_AD" -> Right DTKDOTObjectAd
+        "OBJECT_ADVERTISER" -> Right DTKDOTObjectAdvertiser
+        "OBJECT_CREATIVE" -> Right DTKDOTObjectCreative
+        "OBJECT_PLACEMENT" -> Right DTKDOTObjectPlacement
+        x -> Left ("Unable to parse DynamicTargetingKeysDeleteObjectType from: " <> x)
+
+instance ToHttpApiData DynamicTargetingKeysDeleteObjectType where
+    toQueryParam = \case
+        DTKDOTObjectAd -> "OBJECT_AD"
+        DTKDOTObjectAdvertiser -> "OBJECT_ADVERTISER"
+        DTKDOTObjectCreative -> "OBJECT_CREATIVE"
+        DTKDOTObjectPlacement -> "OBJECT_PLACEMENT"
+
+instance FromJSON DynamicTargetingKeysDeleteObjectType where
+    parseJSON = parseJSONText "DynamicTargetingKeysDeleteObjectType"
+
+instance ToJSON DynamicTargetingKeysDeleteObjectType where
+    toJSON = toJSONText
+
 -- | Maximum number of active ads allowed for this account.
 data AccountActiveAdsLimitTier
     = AAALTActiveAdsTier100K
@@ -3964,7 +4219,7 @@ data AccountActiveAdsLimitTier
       -- ^ @ACTIVE_ADS_TIER_40K@
     | AAALTActiveAdsTier75K
       -- ^ @ACTIVE_ADS_TIER_75K@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountActiveAdsLimitTier
 
@@ -3997,7 +4252,7 @@ data AccountsListSortOrder
       -- ^ @ASCENDING@
     | ADescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsListSortOrder
 
@@ -4024,7 +4279,7 @@ data SubAccountsListSortField
       -- ^ @ID@
     | SALSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubAccountsListSortField
 
@@ -4051,7 +4306,7 @@ data AdsListSortField
       -- ^ @ID@
     | ALSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListSortField
 
@@ -4078,7 +4333,7 @@ data ProjectsListSortField
       -- ^ @ID@
     | PName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectsListSortField
 
@@ -4109,7 +4364,7 @@ data AdsListType
       -- ^ @AD_SERVING_STANDARD_AD@
     | AdServingTracking
       -- ^ @AD_SERVING_TRACKING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListType
 
@@ -4146,7 +4401,7 @@ data CreativeOptimizationConfigurationOptimizationModel
       -- ^ @POST_IMPRESSION@
     | VideoCompletion
       -- ^ @VIDEO_COMPLETION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeOptimizationConfigurationOptimizationModel
 
@@ -4179,7 +4434,7 @@ data AccountPermissionLevel
       -- ^ @ADMINISTRATOR@
     | User
       -- ^ @USER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountPermissionLevel
 
@@ -4213,7 +4468,7 @@ data ListPopulationTermType
       -- ^ @LIST_MEMBERSHIP_TERM@
     | ReferrerTerm
       -- ^ @REFERRER_TERM@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ListPopulationTermType
 
@@ -4242,7 +4497,7 @@ data AdvertiserGroupsListSortOrder
       -- ^ @ASCENDING@
     | AGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertiserGroupsListSortOrder
 
@@ -4269,7 +4524,7 @@ data CreativeFieldValuesListSortOrder
       -- ^ @ASCENDING@
     | CFVLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldValuesListSortOrder
 
@@ -4296,7 +4551,7 @@ data SortedDimensionSortOrder
       -- ^ @ASCENDING@
     | SDSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SortedDimensionSortOrder
 
@@ -4325,7 +4580,7 @@ data FilesListSortField
     | FLSFLastModifiedTime
       -- ^ @LAST_MODIFIED_TIME@
       -- Sort by \'lastmodifiedAt\' field.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListSortField
 
@@ -4353,7 +4608,7 @@ data DirectorySiteInterstitialTagFormatsItem
       -- ^ @INTERNAL_REDIRECT_INTERSTITIAL@
     | JavascriptInterstitial
       -- ^ @JAVASCRIPT_INTERSTITIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteInterstitialTagFormatsItem
 
@@ -4382,7 +4637,7 @@ data EventTagsListSortField
       -- ^ @ID@
     | ETLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagsListSortField
 
@@ -4409,7 +4664,7 @@ data InventoryItemType
       -- ^ @PLANNING_PLACEMENT_TYPE_CREDIT@
     | IITPlanningPlacementTypeRegular
       -- ^ @PLANNING_PLACEMENT_TYPE_REGULAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InventoryItemType
 
@@ -4440,7 +4695,7 @@ data CreativeAssetPositionTopUnit
       -- ^ @OFFSET_UNIT_PIXEL@
     | CAPTUOffSetUnitPixelFromCenter
       -- ^ @OFFSET_UNIT_PIXEL_FROM_CENTER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetPositionTopUnit
 
@@ -4470,7 +4725,7 @@ data FloodlightActivityFloodlightActivityGroupType
       -- ^ @COUNTER@
     | FAFAGTSale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityFloodlightActivityGroupType
 
@@ -4497,7 +4752,7 @@ data DirectorySiteContactsListSortOrder
       -- ^ @ASCENDING@
     | DSCLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactsListSortOrder
 
@@ -4531,7 +4786,7 @@ data PricingGroupType
       -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE@
     | PlanningPlacementGroupTypeRoadblock
       -- ^ @PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingGroupType
 
@@ -4602,7 +4857,7 @@ data AdsListCreativeType
       -- ^ @VPAID_LINEAR@
     | ALCTVpaidNonLinear
       -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListCreativeType
 
@@ -4673,7 +4928,7 @@ data FloodlightActivityGroupsListSortOrder
       -- ^ @ASCENDING@
     | FAGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupsListSortOrder
 
@@ -4701,7 +4956,7 @@ data CreativeRotationType
       -- ^ @CREATIVE_ROTATION_TYPE_RANDOM@
     | CreativeRotationTypeSequential
       -- ^ @CREATIVE_ROTATION_TYPE_SEQUENTIAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeRotationType
 
@@ -4728,7 +4983,7 @@ data OrdersListSortField
       -- ^ @ID@
     | OLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersListSortField
 
@@ -4755,7 +5010,7 @@ data PlacementGroupsListSortField
       -- ^ @ID@
     | PGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListSortField
 
@@ -4782,7 +5037,7 @@ data DirectorySitesListSortOrder
       -- ^ @ASCENDING@
     | DSLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySitesListSortOrder
 
@@ -4936,7 +5191,7 @@ data CreativeAssetDetectedFeaturesItem
       -- ^ @WEB_SQL_DATABASE@
     | CADFIWebWorkers
       -- ^ @WEB_WORKERS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetDetectedFeaturesItem
 
@@ -5092,7 +5347,7 @@ data FloodlightActivityGroupType
       -- ^ @COUNTER@
     | FAGTSale
       -- ^ @SALE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupType
 
@@ -5123,7 +5378,7 @@ data DirectorySiteContactType
       -- ^ @SALES@
     | DSCTTechnical
       -- ^ @TECHNICAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactType
 
@@ -5186,7 +5441,7 @@ data PlacementsGeneratetagsTagFormats
       -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
     | PGTFPlacementTagTrackingJavascript
       -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsGeneratetagsTagFormats
 
@@ -5245,7 +5500,7 @@ data AccountUserProFilesListSortField
       -- ^ @ID@
     | AUPFLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountUserProFilesListSortField
 
@@ -5272,7 +5527,7 @@ data InventoryItemsListSortOrder
       -- ^ @ASCENDING@
     | IILSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InventoryItemsListSortOrder
 
@@ -5299,7 +5554,7 @@ data PlacementStrategiesListSortOrder
       -- ^ @ASCENDING@
     | PSLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementStrategiesListSortOrder
 
@@ -5328,7 +5583,7 @@ data ReportsFilesListSortField
     | RFLSFLastModifiedTime
       -- ^ @LAST_MODIFIED_TIME@
       -- Sort by \'lastmodifiedAt\' field.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsFilesListSortField
 
@@ -5355,7 +5610,7 @@ data CreativesListSortField
       -- ^ @ID@
     | CName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListSortField
 
@@ -5391,7 +5646,7 @@ data DayPartTargetingDaysOfWeekItem
       -- ^ @TUESDAY@
     | DPTDOWIWednesday
       -- ^ @WEDNESDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DayPartTargetingDaysOfWeekItem
 
@@ -5433,7 +5688,7 @@ data CreativeRotationWeightCalculationStrategy
       -- ^ @WEIGHT_STRATEGY_HIGHEST_CTR@
     | WeightStrategyOptimized
       -- ^ @WEIGHT_STRATEGY_OPTIMIZED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeRotationWeightCalculationStrategy
 
@@ -5469,7 +5724,7 @@ data FilesListScope
     | FLSSharedWithMe
       -- ^ @SHARED_WITH_ME@
       -- Files shared with me.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListScope
 
@@ -5498,7 +5753,7 @@ data ContentCategoriesListSortField
       -- ^ @ID@
     | CCLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentCategoriesListSortField
 
@@ -5535,7 +5790,7 @@ data ProjectAudienceAgeGroup
       -- ^ @PLANNING_AUDIENCE_AGE_65_OR_MORE@
     | PlanningAudienceAgeUnknown
       -- ^ @PLANNING_AUDIENCE_AGE_UNKNOWN@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectAudienceAgeGroup
 
@@ -5578,7 +5833,7 @@ data AdType
       -- ^ @AD_SERVING_STANDARD_AD@
     | ATAdServingTracking
       -- ^ @AD_SERVING_TRACKING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdType
 
@@ -5639,7 +5894,7 @@ data ChangeLogsListAction
       -- ^ @ACTION_UNLINK@
     | ActionUpdate
       -- ^ @ACTION_UPDATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeLogsListAction
 
@@ -5702,7 +5957,7 @@ data CreativeArtworkType
       -- ^ @ARTWORK_TYPE_IMAGE@
     | CATArtworkTypeMixed
       -- ^ @ARTWORK_TYPE_MIXED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeArtworkType
 
@@ -5741,7 +5996,7 @@ data PlacementStatus
       -- ^ @PAYMENT_REJECTED@
     | PendingReview
       -- ^ @PENDING_REVIEW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementStatus
 
@@ -5781,7 +6036,7 @@ data ReportScheduleRunsOnDayOfMonth
       -- ^ @DAY_OF_MONTH@
     | WeekOfMonth
       -- ^ @WEEK_OF_MONTH@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportScheduleRunsOnDayOfMonth
 
@@ -5843,7 +6098,7 @@ data FloodlightActivityUserDefinedVariableTypesItem
       -- ^ @U8@
     | FAUDVTIU9
       -- ^ @U9@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityUserDefinedVariableTypesItem
 
@@ -5907,7 +6162,7 @@ data EventTagSiteFilterType
       -- ^ @BLACKLIST@
     | WhiteList
       -- ^ @WHITELIST@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagSiteFilterType
 
@@ -5937,7 +6192,7 @@ data ReportFormat
       -- ^ @CSV@
     | RFExcel
       -- ^ @EXCEL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportFormat
 
@@ -5969,7 +6224,7 @@ data PlacementGroupPlacementGroupType
       -- ^ @PLACEMENT_PACKAGE@
     | PGPGTPlacementRoadblock
       -- ^ @PLACEMENT_ROADBLOCK@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupPlacementGroupType
 
@@ -6006,7 +6261,7 @@ data PricingPricingType
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
     | PlanningPlacementPricingTypeImpressions
       -- ^ @PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingPricingType
 
@@ -6043,7 +6298,7 @@ data SubAccountsListSortOrder
       -- ^ @ASCENDING@
     | SALSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubAccountsListSortOrder
 
@@ -6070,7 +6325,7 @@ data AdsListSortOrder
       -- ^ @ASCENDING@
     | ADSDescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListSortOrder
 
@@ -6097,7 +6352,7 @@ data ProjectsListSortOrder
       -- ^ @ASCENDING@
     | PLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProjectsListSortOrder
 
@@ -6124,7 +6379,7 @@ data RemarketingListsListSortField
       -- ^ @ID@
     | RLLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RemarketingListsListSortField
 
@@ -6160,7 +6415,7 @@ data ReportScheduleRepeatsOnWeekDaysItem
       -- ^ @TUESDAY@
     | RSROWDIWednesday
       -- ^ @WEDNESDAY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportScheduleRepeatsOnWeekDaysItem
 
@@ -6197,7 +6452,7 @@ data CreativeGroupAssignmentCreativeGroupNumber
       -- ^ @CREATIVE_GROUP_ONE@
     | CreativeGroupTwo
       -- ^ @CREATIVE_GROUP_TWO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeGroupAssignmentCreativeGroupNumber
 
@@ -6224,7 +6479,7 @@ data AccountsListSortField
       -- ^ @ID@
     | AName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountsListSortField
 
@@ -6251,7 +6506,7 @@ data AdvertisersListStatus
       -- ^ @APPROVED@
     | OnHold
       -- ^ @ON_HOLD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListStatus
 
@@ -6286,7 +6541,7 @@ data DimensionValueMatchType
       -- ^ @EXACT@
     | WildcardExpression
       -- ^ @WILDCARD_EXPRESSION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DimensionValueMatchType
 
@@ -6317,7 +6572,7 @@ data PlacementGroupsListSortOrder
       -- ^ @ASCENDING@
     | PGLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementGroupsListSortOrder
 
@@ -6357,7 +6612,7 @@ data AdCompatibility
       -- ^ @DISPLAY_INTERSTITIAL@
     | ACInStreamVideo
       -- ^ @IN_STREAM_VIDEO@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdCompatibility
 
@@ -6390,7 +6645,7 @@ data CreativeFieldValuesListSortField
       -- ^ @ID@
     | CFVLSFValue
       -- ^ @VALUE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeFieldValuesListSortField
 
@@ -6417,7 +6672,7 @@ data FloodlightActivityGroupsListSortField
       -- ^ @ID@
     | FAGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityGroupsListSortField
 
@@ -6444,7 +6699,7 @@ data OrdersListSortOrder
       -- ^ @ASCENDING@
     | OLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersListSortOrder
 
@@ -6472,7 +6727,7 @@ data AccountAccountProFile
       -- ^ @ACCOUNT_PROFILE_BASIC@
     | AccountProFileStandard
       -- ^ @ACCOUNT_PROFILE_STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountAccountProFile
 
@@ -6544,7 +6799,7 @@ data CreativeType
       -- ^ @VPAID_LINEAR@
     | CTVpaidNonLinear
       -- ^ @VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeType
 
@@ -6617,7 +6872,7 @@ data FilesListSortOrder
     | FLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListSortOrder
 
@@ -6644,7 +6899,7 @@ data AdvertiserGroupsListSortField
       -- ^ @ID@
     | AGLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertiserGroupsListSortField
 
@@ -6674,7 +6929,7 @@ data TargetWindowTargetWindowOption
       -- ^ @CUSTOM@
     | NewWindow
       -- ^ @NEW_WINDOW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetWindowTargetWindowOption
 
@@ -6703,7 +6958,7 @@ data DirectorySiteContactsListSortField
       -- ^ @ID@
     | DSCLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySiteContactsListSortField
 
@@ -6736,7 +6991,7 @@ data PlacementsListPricingTypes
       -- ^ @PRICING_TYPE_FLAT_RATE_CLICKS@
     | PLPTPricingTypeFlatRateImpressions
       -- ^ @PRICING_TYPE_FLAT_RATE_IMPRESSIONS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementsListPricingTypes
 
@@ -6769,7 +7024,7 @@ data EventTagsListSortOrder
       -- ^ @ASCENDING@
     | ETLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventTagsListSortOrder
 
@@ -6790,13 +7045,45 @@ instance FromJSON EventTagsListSortOrder where
 instance ToJSON EventTagsListSortOrder where
     toJSON = toJSONText
 
+-- | Describes whether the encrypted cookie was received from ad serving (the
+-- %m macro) or from Data Transfer.
+data EncryptionInfoEncryptionSource
+    = AdServing
+      -- ^ @AD_SERVING@
+    | DataTransfer
+      -- ^ @DATA_TRANSFER@
+    | EncryptionScopeUnknown
+      -- ^ @ENCRYPTION_SCOPE_UNKNOWN@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable EncryptionInfoEncryptionSource
+
+instance FromHttpApiData EncryptionInfoEncryptionSource where
+    parseQueryParam = \case
+        "AD_SERVING" -> Right AdServing
+        "DATA_TRANSFER" -> Right DataTransfer
+        "ENCRYPTION_SCOPE_UNKNOWN" -> Right EncryptionScopeUnknown
+        x -> Left ("Unable to parse EncryptionInfoEncryptionSource from: " <> x)
+
+instance ToHttpApiData EncryptionInfoEncryptionSource where
+    toQueryParam = \case
+        AdServing -> "AD_SERVING"
+        DataTransfer -> "DATA_TRANSFER"
+        EncryptionScopeUnknown -> "ENCRYPTION_SCOPE_UNKNOWN"
+
+instance FromJSON EncryptionInfoEncryptionSource where
+    parseJSON = parseJSONText "EncryptionInfoEncryptionSource"
+
+instance ToJSON EncryptionInfoEncryptionSource where
+    toJSON = toJSONText
+
 -- | Field by which to sort the list.
 data DirectorySitesListSortField
     = DSLSFID
       -- ^ @ID@
     | DSLSFName
       -- ^ @NAME@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DirectorySitesListSortField
 
@@ -6827,7 +7114,7 @@ data ReportCrossDimensionReachCriteriaDimension
       -- ^ @SITE_BY_ADVERTISER@
     | RCDRCDSiteByCampaign
       -- ^ @SITE_BY_CAMPAIGN@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportCrossDimensionReachCriteriaDimension
 
@@ -6858,7 +7145,7 @@ data SitesListSortOrder
       -- ^ @ASCENDING@
     | SLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SitesListSortOrder
 
@@ -6916,7 +7203,7 @@ data PlacementTagFormatsItem
       -- ^ @PLACEMENT_TAG_TRACKING_IFRAME@
     | PTFIPlacementTagTrackingJavascript
       -- ^ @PLACEMENT_TAG_TRACKING_JAVASCRIPT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlacementTagFormatsItem
 
@@ -6969,6 +7256,42 @@ instance FromJSON PlacementTagFormatsItem where
 instance ToJSON PlacementTagFormatsItem where
     toJSON = toJSONText
 
+-- | Type of the object of this dynamic targeting key. This is a required
+-- field.
+data DynamicTargetingKeyObjectType
+    = DTKOTObjectAd
+      -- ^ @OBJECT_AD@
+    | DTKOTObjectAdvertiser
+      -- ^ @OBJECT_ADVERTISER@
+    | DTKOTObjectCreative
+      -- ^ @OBJECT_CREATIVE@
+    | DTKOTObjectPlacement
+      -- ^ @OBJECT_PLACEMENT@
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
+
+instance Hashable DynamicTargetingKeyObjectType
+
+instance FromHttpApiData DynamicTargetingKeyObjectType where
+    parseQueryParam = \case
+        "OBJECT_AD" -> Right DTKOTObjectAd
+        "OBJECT_ADVERTISER" -> Right DTKOTObjectAdvertiser
+        "OBJECT_CREATIVE" -> Right DTKOTObjectCreative
+        "OBJECT_PLACEMENT" -> Right DTKOTObjectPlacement
+        x -> Left ("Unable to parse DynamicTargetingKeyObjectType from: " <> x)
+
+instance ToHttpApiData DynamicTargetingKeyObjectType where
+    toQueryParam = \case
+        DTKOTObjectAd -> "OBJECT_AD"
+        DTKOTObjectAdvertiser -> "OBJECT_ADVERTISER"
+        DTKOTObjectCreative -> "OBJECT_CREATIVE"
+        DTKOTObjectPlacement -> "OBJECT_PLACEMENT"
+
+instance FromJSON DynamicTargetingKeyObjectType where
+    parseJSON = parseJSONText "DynamicTargetingKeyObjectType"
+
+instance ToJSON DynamicTargetingKeyObjectType where
+    toJSON = toJSONText
+
 -- | The type of the report.
 data ReportType
     = RTCrossDimensionReach
@@ -6981,7 +7304,7 @@ data ReportType
       -- ^ @REACH@
     | RTStandard
       -- ^ @STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportType
 
@@ -7053,9 +7376,11 @@ data CreativeAssetMetadataWarnedValidationRulesItem
       -- ^ @ORPHANED_ASSET@
     | PrimaryHTMLMissing
       -- ^ @PRIMARY_HTML_MISSING@
+    | SvgInvalid
+      -- ^ @SVG_INVALID@
     | ZipInvalid
       -- ^ @ZIP_INVALID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetMetadataWarnedValidationRulesItem
 
@@ -7083,6 +7408,7 @@ instance FromHttpApiData CreativeAssetMetadataWarnedValidationRulesItem where
         "NOT_SSL_COMPLIANT" -> Right NotSSLCompliant
         "ORPHANED_ASSET" -> Right OrphanedAsset
         "PRIMARY_HTML_MISSING" -> Right PrimaryHTMLMissing
+        "SVG_INVALID" -> Right SvgInvalid
         "ZIP_INVALID" -> Right ZipInvalid
         x -> Left ("Unable to parse CreativeAssetMetadataWarnedValidationRulesItem from: " <> x)
 
@@ -7110,6 +7436,7 @@ instance ToHttpApiData CreativeAssetMetadataWarnedValidationRulesItem where
         NotSSLCompliant -> "NOT_SSL_COMPLIANT"
         OrphanedAsset -> "ORPHANED_ASSET"
         PrimaryHTMLMissing -> "PRIMARY_HTML_MISSING"
+        SvgInvalid -> "SVG_INVALID"
         ZipInvalid -> "ZIP_INVALID"
 
 instance FromJSON CreativeAssetMetadataWarnedValidationRulesItem where
@@ -7124,7 +7451,7 @@ data AdSlotPaymentSourceType
       -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID@
     | PlanningPaymentSourceTypePublisherPaid
       -- ^ @PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdSlotPaymentSourceType
 
@@ -7150,7 +7477,7 @@ data AccountPermissionAccountProFilesItem
       -- ^ @ACCOUNT_PROFILE_BASIC@
     | APAPFIAccountProFileStandard
       -- ^ @ACCOUNT_PROFILE_STANDARD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountPermissionAccountProFilesItem
 
@@ -7179,7 +7506,7 @@ data CreativeCustomEventAdvertiserCustomEventType
       -- ^ @ADVERTISER_EVENT_EXIT@
     | AdvertiserEventTimer
       -- ^ @ADVERTISER_EVENT_TIMER@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeCustomEventAdvertiserCustomEventType
 
@@ -7204,164 +7531,164 @@ instance ToJSON CreativeCustomEventAdvertiserCustomEventType where
 
 -- | Select only change logs with the specified object type.
 data ChangeLogsListObjectType
-    = ObjectAccount
+    = CLLOTObjectAccount
       -- ^ @OBJECT_ACCOUNT@
-    | ObjectAccountBillingFeature
+    | CLLOTObjectAccountBillingFeature
       -- ^ @OBJECT_ACCOUNT_BILLING_FEATURE@
-    | ObjectAd
+    | CLLOTObjectAd
       -- ^ @OBJECT_AD@
-    | ObjectAdvertiser
+    | CLLOTObjectAdvertiser
       -- ^ @OBJECT_ADVERTISER@
-    | ObjectAdvertiserGroup
+    | CLLOTObjectAdvertiserGroup
       -- ^ @OBJECT_ADVERTISER_GROUP@
-    | ObjectBillingAccountGroup
+    | CLLOTObjectBillingAccountGroup
       -- ^ @OBJECT_BILLING_ACCOUNT_GROUP@
-    | ObjectBillingFeature
+    | CLLOTObjectBillingFeature
       -- ^ @OBJECT_BILLING_FEATURE@
-    | ObjectBillingMinimumFee
+    | CLLOTObjectBillingMinimumFee
       -- ^ @OBJECT_BILLING_MINIMUM_FEE@
-    | ObjectBillingProFile
+    | CLLOTObjectBillingProFile
       -- ^ @OBJECT_BILLING_PROFILE@
-    | ObjectCampaign
+    | CLLOTObjectCampaign
       -- ^ @OBJECT_CAMPAIGN@
-    | ObjectContentCategory
+    | CLLOTObjectContentCategory
       -- ^ @OBJECT_CONTENT_CATEGORY@
-    | ObjectCreative
+    | CLLOTObjectCreative
       -- ^ @OBJECT_CREATIVE@
-    | ObjectCreativeAsset
+    | CLLOTObjectCreativeAsset
       -- ^ @OBJECT_CREATIVE_ASSET@
-    | ObjectCreativeBundle
+    | CLLOTObjectCreativeBundle
       -- ^ @OBJECT_CREATIVE_BUNDLE@
-    | ObjectCreativeField
+    | CLLOTObjectCreativeField
       -- ^ @OBJECT_CREATIVE_FIELD@
-    | ObjectCreativeGroup
+    | CLLOTObjectCreativeGroup
       -- ^ @OBJECT_CREATIVE_GROUP@
-    | ObjectDfaSite
+    | CLLOTObjectDfaSite
       -- ^ @OBJECT_DFA_SITE@
-    | ObjectEventTag
+    | CLLOTObjectEventTag
       -- ^ @OBJECT_EVENT_TAG@
-    | ObjectFloodlightActivityGroup
+    | CLLOTObjectFloodlightActivityGroup
       -- ^ @OBJECT_FLOODLIGHT_ACTIVITY_GROUP@
-    | ObjectFloodlightActvity
+    | CLLOTObjectFloodlightActvity
       -- ^ @OBJECT_FLOODLIGHT_ACTVITY@
-    | ObjectFloodlightConfiguration
+    | CLLOTObjectFloodlightConfiguration
       -- ^ @OBJECT_FLOODLIGHT_CONFIGURATION@
-    | ObjectInstreamCreative
+    | CLLOTObjectInstreamCreative
       -- ^ @OBJECT_INSTREAM_CREATIVE@
-    | ObjectLandingPage
+    | CLLOTObjectLandingPage
       -- ^ @OBJECT_LANDING_PAGE@
-    | ObjectMediaOrder
+    | CLLOTObjectMediaOrder
       -- ^ @OBJECT_MEDIA_ORDER@
-    | ObjectPlacement
+    | CLLOTObjectPlacement
       -- ^ @OBJECT_PLACEMENT@
-    | ObjectPlacementStrategy
+    | CLLOTObjectPlacementStrategy
       -- ^ @OBJECT_PLACEMENT_STRATEGY@
-    | ObjectPlaystoreLink
+    | CLLOTObjectPlaystoreLink
       -- ^ @OBJECT_PLAYSTORE_LINK@
-    | ObjectProvidedListClient
+    | CLLOTObjectProvidedListClient
       -- ^ @OBJECT_PROVIDED_LIST_CLIENT@
-    | ObjectRateCard
+    | CLLOTObjectRateCard
       -- ^ @OBJECT_RATE_CARD@
-    | ObjectRemarketingList
+    | CLLOTObjectRemarketingList
       -- ^ @OBJECT_REMARKETING_LIST@
-    | ObjectRichmediaCreative
+    | CLLOTObjectRichmediaCreative
       -- ^ @OBJECT_RICHMEDIA_CREATIVE@
-    | ObjectSdSite
+    | CLLOTObjectSdSite
       -- ^ @OBJECT_SD_SITE@
-    | ObjectSize
+    | CLLOTObjectSize
       -- ^ @OBJECT_SIZE@
-    | ObjectSubAccount
+    | CLLOTObjectSubAccount
       -- ^ @OBJECT_SUBACCOUNT@
-    | ObjectUserProFile
+    | CLLOTObjectUserProFile
       -- ^ @OBJECT_USER_PROFILE@
-    | ObjectUserProFileFilter
+    | CLLOTObjectUserProFileFilter
       -- ^ @OBJECT_USER_PROFILE_FILTER@
-    | ObjectUserRole
+    | CLLOTObjectUserRole
       -- ^ @OBJECT_USER_ROLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeLogsListObjectType
 
 instance FromHttpApiData ChangeLogsListObjectType where
     parseQueryParam = \case
-        "OBJECT_ACCOUNT" -> Right ObjectAccount
-        "OBJECT_ACCOUNT_BILLING_FEATURE" -> Right ObjectAccountBillingFeature
-        "OBJECT_AD" -> Right ObjectAd
-        "OBJECT_ADVERTISER" -> Right ObjectAdvertiser
-        "OBJECT_ADVERTISER_GROUP" -> Right ObjectAdvertiserGroup
-        "OBJECT_BILLING_ACCOUNT_GROUP" -> Right ObjectBillingAccountGroup
-        "OBJECT_BILLING_FEATURE" -> Right ObjectBillingFeature
-        "OBJECT_BILLING_MINIMUM_FEE" -> Right ObjectBillingMinimumFee
-        "OBJECT_BILLING_PROFILE" -> Right ObjectBillingProFile
-        "OBJECT_CAMPAIGN" -> Right ObjectCampaign
-        "OBJECT_CONTENT_CATEGORY" -> Right ObjectContentCategory
-        "OBJECT_CREATIVE" -> Right ObjectCreative
-        "OBJECT_CREATIVE_ASSET" -> Right ObjectCreativeAsset
-        "OBJECT_CREATIVE_BUNDLE" -> Right ObjectCreativeBundle
-        "OBJECT_CREATIVE_FIELD" -> Right ObjectCreativeField
-        "OBJECT_CREATIVE_GROUP" -> Right ObjectCreativeGroup
-        "OBJECT_DFA_SITE" -> Right ObjectDfaSite
-        "OBJECT_EVENT_TAG" -> Right ObjectEventTag
-        "OBJECT_FLOODLIGHT_ACTIVITY_GROUP" -> Right ObjectFloodlightActivityGroup
-        "OBJECT_FLOODLIGHT_ACTVITY" -> Right ObjectFloodlightActvity
-        "OBJECT_FLOODLIGHT_CONFIGURATION" -> Right ObjectFloodlightConfiguration
-        "OBJECT_INSTREAM_CREATIVE" -> Right ObjectInstreamCreative
-        "OBJECT_LANDING_PAGE" -> Right ObjectLandingPage
-        "OBJECT_MEDIA_ORDER" -> Right ObjectMediaOrder
-        "OBJECT_PLACEMENT" -> Right ObjectPlacement
-        "OBJECT_PLACEMENT_STRATEGY" -> Right ObjectPlacementStrategy
-        "OBJECT_PLAYSTORE_LINK" -> Right ObjectPlaystoreLink
-        "OBJECT_PROVIDED_LIST_CLIENT" -> Right ObjectProvidedListClient
-        "OBJECT_RATE_CARD" -> Right ObjectRateCard
-        "OBJECT_REMARKETING_LIST" -> Right ObjectRemarketingList
-        "OBJECT_RICHMEDIA_CREATIVE" -> Right ObjectRichmediaCreative
-        "OBJECT_SD_SITE" -> Right ObjectSdSite
-        "OBJECT_SIZE" -> Right ObjectSize
-        "OBJECT_SUBACCOUNT" -> Right ObjectSubAccount
-        "OBJECT_USER_PROFILE" -> Right ObjectUserProFile
-        "OBJECT_USER_PROFILE_FILTER" -> Right ObjectUserProFileFilter
-        "OBJECT_USER_ROLE" -> Right ObjectUserRole
+        "OBJECT_ACCOUNT" -> Right CLLOTObjectAccount
+        "OBJECT_ACCOUNT_BILLING_FEATURE" -> Right CLLOTObjectAccountBillingFeature
+        "OBJECT_AD" -> Right CLLOTObjectAd
+        "OBJECT_ADVERTISER" -> Right CLLOTObjectAdvertiser
+        "OBJECT_ADVERTISER_GROUP" -> Right CLLOTObjectAdvertiserGroup
+        "OBJECT_BILLING_ACCOUNT_GROUP" -> Right CLLOTObjectBillingAccountGroup
+        "OBJECT_BILLING_FEATURE" -> Right CLLOTObjectBillingFeature
+        "OBJECT_BILLING_MINIMUM_FEE" -> Right CLLOTObjectBillingMinimumFee
+        "OBJECT_BILLING_PROFILE" -> Right CLLOTObjectBillingProFile
+        "OBJECT_CAMPAIGN" -> Right CLLOTObjectCampaign
+        "OBJECT_CONTENT_CATEGORY" -> Right CLLOTObjectContentCategory
+        "OBJECT_CREATIVE" -> Right CLLOTObjectCreative
+        "OBJECT_CREATIVE_ASSET" -> Right CLLOTObjectCreativeAsset
+        "OBJECT_CREATIVE_BUNDLE" -> Right CLLOTObjectCreativeBundle
+        "OBJECT_CREATIVE_FIELD" -> Right CLLOTObjectCreativeField
+        "OBJECT_CREATIVE_GROUP" -> Right CLLOTObjectCreativeGroup
+        "OBJECT_DFA_SITE" -> Right CLLOTObjectDfaSite
+        "OBJECT_EVENT_TAG" -> Right CLLOTObjectEventTag
+        "OBJECT_FLOODLIGHT_ACTIVITY_GROUP" -> Right CLLOTObjectFloodlightActivityGroup
+        "OBJECT_FLOODLIGHT_ACTVITY" -> Right CLLOTObjectFloodlightActvity
+        "OBJECT_FLOODLIGHT_CONFIGURATION" -> Right CLLOTObjectFloodlightConfiguration
+        "OBJECT_INSTREAM_CREATIVE" -> Right CLLOTObjectInstreamCreative
+        "OBJECT_LANDING_PAGE" -> Right CLLOTObjectLandingPage
+        "OBJECT_MEDIA_ORDER" -> Right CLLOTObjectMediaOrder
+        "OBJECT_PLACEMENT" -> Right CLLOTObjectPlacement
+        "OBJECT_PLACEMENT_STRATEGY" -> Right CLLOTObjectPlacementStrategy
+        "OBJECT_PLAYSTORE_LINK" -> Right CLLOTObjectPlaystoreLink
+        "OBJECT_PROVIDED_LIST_CLIENT" -> Right CLLOTObjectProvidedListClient
+        "OBJECT_RATE_CARD" -> Right CLLOTObjectRateCard
+        "OBJECT_REMARKETING_LIST" -> Right CLLOTObjectRemarketingList
+        "OBJECT_RICHMEDIA_CREATIVE" -> Right CLLOTObjectRichmediaCreative
+        "OBJECT_SD_SITE" -> Right CLLOTObjectSdSite
+        "OBJECT_SIZE" -> Right CLLOTObjectSize
+        "OBJECT_SUBACCOUNT" -> Right CLLOTObjectSubAccount
+        "OBJECT_USER_PROFILE" -> Right CLLOTObjectUserProFile
+        "OBJECT_USER_PROFILE_FILTER" -> Right CLLOTObjectUserProFileFilter
+        "OBJECT_USER_ROLE" -> Right CLLOTObjectUserRole
         x -> Left ("Unable to parse ChangeLogsListObjectType from: " <> x)
 
 instance ToHttpApiData ChangeLogsListObjectType where
     toQueryParam = \case
-        ObjectAccount -> "OBJECT_ACCOUNT"
-        ObjectAccountBillingFeature -> "OBJECT_ACCOUNT_BILLING_FEATURE"
-        ObjectAd -> "OBJECT_AD"
-        ObjectAdvertiser -> "OBJECT_ADVERTISER"
-        ObjectAdvertiserGroup -> "OBJECT_ADVERTISER_GROUP"
-        ObjectBillingAccountGroup -> "OBJECT_BILLING_ACCOUNT_GROUP"
-        ObjectBillingFeature -> "OBJECT_BILLING_FEATURE"
-        ObjectBillingMinimumFee -> "OBJECT_BILLING_MINIMUM_FEE"
-        ObjectBillingProFile -> "OBJECT_BILLING_PROFILE"
-        ObjectCampaign -> "OBJECT_CAMPAIGN"
-        ObjectContentCategory -> "OBJECT_CONTENT_CATEGORY"
-        ObjectCreative -> "OBJECT_CREATIVE"
-        ObjectCreativeAsset -> "OBJECT_CREATIVE_ASSET"
-        ObjectCreativeBundle -> "OBJECT_CREATIVE_BUNDLE"
-        ObjectCreativeField -> "OBJECT_CREATIVE_FIELD"
-        ObjectCreativeGroup -> "OBJECT_CREATIVE_GROUP"
-        ObjectDfaSite -> "OBJECT_DFA_SITE"
-        ObjectEventTag -> "OBJECT_EVENT_TAG"
-        ObjectFloodlightActivityGroup -> "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
-        ObjectFloodlightActvity -> "OBJECT_FLOODLIGHT_ACTVITY"
-        ObjectFloodlightConfiguration -> "OBJECT_FLOODLIGHT_CONFIGURATION"
-        ObjectInstreamCreative -> "OBJECT_INSTREAM_CREATIVE"
-        ObjectLandingPage -> "OBJECT_LANDING_PAGE"
-        ObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
-        ObjectPlacement -> "OBJECT_PLACEMENT"
-        ObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
-        ObjectPlaystoreLink -> "OBJECT_PLAYSTORE_LINK"
-        ObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
-        ObjectRateCard -> "OBJECT_RATE_CARD"
-        ObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
-        ObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
-        ObjectSdSite -> "OBJECT_SD_SITE"
-        ObjectSize -> "OBJECT_SIZE"
-        ObjectSubAccount -> "OBJECT_SUBACCOUNT"
-        ObjectUserProFile -> "OBJECT_USER_PROFILE"
-        ObjectUserProFileFilter -> "OBJECT_USER_PROFILE_FILTER"
-        ObjectUserRole -> "OBJECT_USER_ROLE"
+        CLLOTObjectAccount -> "OBJECT_ACCOUNT"
+        CLLOTObjectAccountBillingFeature -> "OBJECT_ACCOUNT_BILLING_FEATURE"
+        CLLOTObjectAd -> "OBJECT_AD"
+        CLLOTObjectAdvertiser -> "OBJECT_ADVERTISER"
+        CLLOTObjectAdvertiserGroup -> "OBJECT_ADVERTISER_GROUP"
+        CLLOTObjectBillingAccountGroup -> "OBJECT_BILLING_ACCOUNT_GROUP"
+        CLLOTObjectBillingFeature -> "OBJECT_BILLING_FEATURE"
+        CLLOTObjectBillingMinimumFee -> "OBJECT_BILLING_MINIMUM_FEE"
+        CLLOTObjectBillingProFile -> "OBJECT_BILLING_PROFILE"
+        CLLOTObjectCampaign -> "OBJECT_CAMPAIGN"
+        CLLOTObjectContentCategory -> "OBJECT_CONTENT_CATEGORY"
+        CLLOTObjectCreative -> "OBJECT_CREATIVE"
+        CLLOTObjectCreativeAsset -> "OBJECT_CREATIVE_ASSET"
+        CLLOTObjectCreativeBundle -> "OBJECT_CREATIVE_BUNDLE"
+        CLLOTObjectCreativeField -> "OBJECT_CREATIVE_FIELD"
+        CLLOTObjectCreativeGroup -> "OBJECT_CREATIVE_GROUP"
+        CLLOTObjectDfaSite -> "OBJECT_DFA_SITE"
+        CLLOTObjectEventTag -> "OBJECT_EVENT_TAG"
+        CLLOTObjectFloodlightActivityGroup -> "OBJECT_FLOODLIGHT_ACTIVITY_GROUP"
+        CLLOTObjectFloodlightActvity -> "OBJECT_FLOODLIGHT_ACTVITY"
+        CLLOTObjectFloodlightConfiguration -> "OBJECT_FLOODLIGHT_CONFIGURATION"
+        CLLOTObjectInstreamCreative -> "OBJECT_INSTREAM_CREATIVE"
+        CLLOTObjectLandingPage -> "OBJECT_LANDING_PAGE"
+        CLLOTObjectMediaOrder -> "OBJECT_MEDIA_ORDER"
+        CLLOTObjectPlacement -> "OBJECT_PLACEMENT"
+        CLLOTObjectPlacementStrategy -> "OBJECT_PLACEMENT_STRATEGY"
+        CLLOTObjectPlaystoreLink -> "OBJECT_PLAYSTORE_LINK"
+        CLLOTObjectProvidedListClient -> "OBJECT_PROVIDED_LIST_CLIENT"
+        CLLOTObjectRateCard -> "OBJECT_RATE_CARD"
+        CLLOTObjectRemarketingList -> "OBJECT_REMARKETING_LIST"
+        CLLOTObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
+        CLLOTObjectSdSite -> "OBJECT_SD_SITE"
+        CLLOTObjectSize -> "OBJECT_SIZE"
+        CLLOTObjectSubAccount -> "OBJECT_SUBACCOUNT"
+        CLLOTObjectUserProFile -> "OBJECT_USER_PROFILE"
+        CLLOTObjectUserProFileFilter -> "OBJECT_USER_PROFILE_FILTER"
+        CLLOTObjectUserRole -> "OBJECT_USER_ROLE"
 
 instance FromJSON ChangeLogsListObjectType where
     parseJSON = parseJSONText "ChangeLogsListObjectType"
@@ -7377,7 +7704,7 @@ data PricingCapCostType
       -- ^ @PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY@
     | PlanningPlacementCapCostTypeNone
       -- ^ @PLANNING_PLACEMENT_CAP_COST_TYPE_NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PricingCapCostType
 
@@ -7421,7 +7748,7 @@ data CreativeAssetDisplayType
       -- ^ @ASSET_DISPLAY_TYPE_VPAID_LINEAR@
     | AssetDisplayTypeVpaidNonLinear
       -- ^ @ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeAssetDisplayType
 
@@ -7469,7 +7796,7 @@ data FloodlightActivityCountingMethod
       -- ^ @TRANSACTIONS_COUNTING@
     | UniqueCounting
       -- ^ @UNIQUE_COUNTING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FloodlightActivityCountingMethod
 
@@ -7502,7 +7829,7 @@ data ContentCategoriesListSortOrder
       -- ^ @ASCENDING@
     | CCLSODescending
       -- ^ @DESCENDING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContentCategoriesListSortOrder
 
@@ -7529,7 +7856,7 @@ data AdvertiserStatus
       -- ^ @APPROVED@
     | ASOnHold
       -- ^ @ON_HOLD@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertiserStatus
 

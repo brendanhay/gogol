@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
-    Android for Work users.
+    Manages the deployment of apps to Android for Work users.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -80,6 +79,7 @@ library
         , Network.Google.Resource.AndroidEnterprise.Products.Get
         , Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
         , Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
+        , Network.Google.Resource.AndroidEnterprise.Products.List
         , Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
         , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
         , Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get

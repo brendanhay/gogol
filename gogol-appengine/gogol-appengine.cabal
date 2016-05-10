@@ -45,6 +45,7 @@ library
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+        , Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.List
         , Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
 

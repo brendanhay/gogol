@@ -20,7 +20,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Update settings of a specific cluster.
+-- Updates the settings of a specific cluster.
 --
 -- /See:/ <https://cloud.google.com/container-engine/ Google Container Engine API Reference> for @container.projects.zones.clusters.update@.
 module Network.Google.Resource.Container.Projects.Zones.Clusters.Update
@@ -70,7 +70,7 @@ type ProjectsZonesClustersUpdateResource =
                                    ReqBody '[JSON] UpdateClusterRequest :>
                                      Put '[JSON] Operation
 
--- | Update settings of a specific cluster.
+-- | Updates the settings of a specific cluster.
 --
 -- /See:/ 'projectsZonesClustersUpdate' smart constructor.
 data ProjectsZonesClustersUpdate = ProjectsZonesClustersUpdate'
@@ -183,7 +183,7 @@ pzcuClusterId
       (\ s a -> s{_pzcuClusterId = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzcuProjectId :: Lens' ProjectsZonesClustersUpdate Text
 pzcuProjectId
   = lens _pzcuProjectId

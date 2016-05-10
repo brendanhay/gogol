@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists metric descriptors that match a filter.
+-- Lists metric descriptors that match a filter. This method does not
+-- require a Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.list@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.List
     (
     -- * REST Resource
@@ -68,7 +69,8 @@ type ProjectsMetricDescriptorsListResource =
                                QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListMetricDescriptorsResponse
 
--- | Lists metric descriptors that match a filter.
+-- | Lists metric descriptors that match a filter. This method does not
+-- require a Stackdriver account.
 --
 -- /See:/ 'projectsMetricDescriptorsList' smart constructor.
 data ProjectsMetricDescriptorsList = ProjectsMetricDescriptorsList'
@@ -162,7 +164,7 @@ pmdlBearerToken
       (\ s a -> s{_pmdlBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/ \"\`.
+-- \`\"projects\/{project_id_or_number}\"\`.
 pmdlName :: Lens' ProjectsMetricDescriptorsList Text
 pmdlName = lens _pmdlName (\ s a -> s{_pmdlName = a})
 

@@ -404,7 +404,7 @@ oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
 -- | [Output Only] Type of the resource. Always compute#operation for
--- operation resources.
+-- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
@@ -1915,6 +1915,7 @@ data Deployment = Deployment'
     { _dInsertTime  :: !(Maybe Text)
     , _dOperation   :: !(Maybe Operation)
     , _dFingerprint :: !(Maybe (Textual Word8))
+    , _dSelfLink    :: !(Maybe Text)
     , _dName        :: !(Maybe Text)
     , _dManifest    :: !(Maybe Text)
     , _dId          :: !(Maybe (Textual Word64))
@@ -1933,6 +1934,8 @@ data Deployment = Deployment'
 -- * 'dOperation'
 --
 -- * 'dFingerprint'
+--
+-- * 'dSelfLink'
 --
 -- * 'dName'
 --
@@ -1954,6 +1957,7 @@ deployment =
     { _dInsertTime = Nothing
     , _dOperation = Nothing
     , _dFingerprint = Nothing
+    , _dSelfLink = Nothing
     , _dName = Nothing
     , _dManifest = Nothing
     , _dId = Nothing
@@ -1987,6 +1991,11 @@ dFingerprint :: Lens' Deployment (Maybe Word8)
 dFingerprint
   = lens _dFingerprint (\ s a -> s{_dFingerprint = a})
       . mapping _Coerce
+
+-- | [Output Only] Self link for the deployment.
+dSelfLink :: Lens' Deployment (Maybe Text)
+dSelfLink
+  = lens _dSelfLink (\ s a -> s{_dSelfLink = a})
 
 -- | Name of the resource; provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -2042,6 +2051,7 @@ instance FromJSON Deployment where
                  Deployment' <$>
                    (o .:? "insertTime") <*> (o .:? "operation") <*>
                      (o .:? "fingerprint")
+                     <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "manifest")
                      <*> (o .:? "id")
@@ -2057,6 +2067,7 @@ instance ToJSON Deployment where
                  [("insertTime" .=) <$> _dInsertTime,
                   ("operation" .=) <$> _dOperation,
                   ("fingerprint" .=) <$> _dFingerprint,
+                  ("selfLink" .=) <$> _dSelfLink,
                   ("name" .=) <$> _dName,
                   ("manifest" .=) <$> _dManifest, ("id" .=) <$> _dId,
                   ("labels" .=) <$> _dLabels,

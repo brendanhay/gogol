@@ -22,7 +22,7 @@
 --
 -- Gets a single group.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.groups.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.get@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Get
     (
     -- * REST Resource
@@ -140,7 +140,8 @@ pggBearerToken
   = lens _pggBearerToken
       (\ s a -> s{_pggBearerToken = a})
 
--- | The group to retrieve. The format is \`\"projects\/ \/groups\/\"\`.
+-- | The group to retrieve. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`.
 pggName :: Lens' ProjectsGroupsGet Text
 pggName = lens _pggName (\ s a -> s{_pggName = a})
 

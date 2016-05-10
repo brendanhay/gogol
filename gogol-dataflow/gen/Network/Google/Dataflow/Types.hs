@@ -343,6 +343,7 @@ module Network.Google.Dataflow.Types
     , TopologyConfig
     , topologyConfig
     , tcDataDiskAssignments
+    , tcPersistentStateVersion
     , tcForwardingKeyBits
     , tcUserStageToComputationNameMap
     , tcComputations
@@ -537,6 +538,7 @@ module Network.Google.Dataflow.Types
     , WorkerPool
     , workerPool
     , wpAutoscalingSettings
+    , wpNumThreadsPerWorker
     , wpDiskSizeGb
     , wpKind
     , wpTaskrunnerSettings

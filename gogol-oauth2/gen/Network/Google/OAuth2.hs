@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you access OAuth2 protocol related APIs.
+-- Obtains end-user authorization grants for use with other Google APIs.
 --
 -- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference>
 module Network.Google.OAuth2

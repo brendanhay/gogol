@@ -147,8 +147,7 @@ pzgscUploadType
       (\ s a -> s{_pzgscUploadType = a})
 
 -- | The name of the Google Compute Engine
--- [zone](\/compute\/docs\/zones#available) to return operations for, or
--- \"-\" for all zones.
+-- [zone](\/compute\/docs\/zones#available) to return operations for.
 pzgscZone :: Lens' ProjectsZonesGetServerConfig Text
 pzgscZone
   = lens _pzgscZone (\ s a -> s{_pzgscZone = a})
@@ -160,7 +159,7 @@ pzgscBearerToken
       (\ s a -> s{_pzgscBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzgscProjectId :: Lens' ProjectsZonesGetServerConfig Text
 pzgscProjectId
   = lens _pzgscProjectId

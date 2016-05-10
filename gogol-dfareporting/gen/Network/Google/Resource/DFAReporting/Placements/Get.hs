@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'PlacementsGet' request conforms to.
 type PlacementsGetResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>

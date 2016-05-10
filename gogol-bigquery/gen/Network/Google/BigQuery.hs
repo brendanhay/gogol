@@ -390,6 +390,12 @@ module Network.Google.BigQuery
     , jljiStatistics
     , jljiConfiguration
 
+    -- ** TimePartitioning
+    , TimePartitioning
+    , timePartitioning
+    , tpExpirationMs
+    , tpType
+
     -- ** JobConfiguration
     , JobConfiguration
     , jobConfiguration
@@ -497,6 +503,7 @@ module Network.Google.BigQuery
     -- ** JobStatistics2
     , JobStatistics2
     , jobStatistics2
+    , jSchema
     , jTotalBytesProcessed
     , jBillingTier
     , jReferencedTables
@@ -542,6 +549,7 @@ module Network.Google.BigQuery
     , tabSchema
     , tabStreamingBuffer
     , tabSelfLink
+    , tabTimePartitioning
     , tabNumRows
     , tabView
     , tabId

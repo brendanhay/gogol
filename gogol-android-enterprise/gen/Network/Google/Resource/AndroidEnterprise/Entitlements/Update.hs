@@ -98,7 +98,8 @@ entitlementsUpdate pEuEntitlementId_ pEuEnterpriseId_ pEuPayload_ pEuUserId_ =
     , _euUserId = pEuUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 euEntitlementId :: Lens' EntitlementsUpdate Text
 euEntitlementId
   = lens _euEntitlementId

@@ -13,9 +13,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API for executing Google Apps Script projects.
+-- Executes Google Apps Script projects.
 --
--- /See:/ <https://developers.google.com/apps-script/execution/rest/v1/run Google Apps Script Execution API Reference>
+-- /See:/ <https://developers.google.com/apps-script/execution/rest/v1/scripts/run Google Apps Script Execution API Reference>
 module Network.Google.Script
     (
     -- * Service Configuration
@@ -31,6 +31,7 @@ module Network.Google.Script
     , adminDirectoryGroupScope
     , calendarFeedsScope
     , formsScope
+    , spreadsheetsScope
     , groupsScope
 
     -- * API Declaration

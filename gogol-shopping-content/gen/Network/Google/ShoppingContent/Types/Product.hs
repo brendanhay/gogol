@@ -289,7 +289,7 @@ tocFullName
 tocEmail :: Lens' TestOrderCustomer (Maybe Text)
 tocEmail = lens _tocEmail (\ s a -> s{_tocEmail = a})
 
--- | If set, this indicates the user had a choice to opt in or out of
+-- | If set, this indicates the user explicitly chose to opt in or out of
 -- providing marketing rights to the merchant. If unset, this indicates the
 -- user has already made this choice in a previous purchase, and was thus
 -- not shown the marketing right opt in\/out checkbox during the Purchases
@@ -6112,7 +6112,7 @@ ocFullName
 ocEmail :: Lens' OrderCustomer (Maybe Text)
 ocEmail = lens _ocEmail (\ s a -> s{_ocEmail = a})
 
--- | If set, this indicates the user had a choice to opt in or out of
+-- | If set, this indicates the user explicitly chose to opt in or out of
 -- providing marketing rights to the merchant. If unset, this indicates the
 -- user has already made this choice in a previous purchase, and was thus
 -- not shown the marketing right opt in\/out checkbox during the Purchases
@@ -8723,7 +8723,7 @@ ppChannel :: Lens' Product (Maybe Text)
 ppChannel
   = lens _ppChannel (\ s a -> s{_ppChannel = a})
 
--- | Your category of the item (formatted as in product feeds specification).
+-- | Your category of the item (formatted as in products feed specification).
 ppProductType :: Lens' Product (Maybe Text)
 ppProductType
   = lens _ppProductType
@@ -8857,8 +8857,8 @@ ppAdwordsGrouping
   = lens _ppAdwordsGrouping
       (\ s a -> s{_ppAdwordsGrouping = a})
 
--- | Date range during which the item is on sale (see product feed
--- specifications).
+-- | Date range during which the item is on sale (see products feed
+-- specification).
 ppSalePriceEffectiveDate :: Lens' Product (Maybe Text)
 ppSalePriceEffectiveDate
   = lens _ppSalePriceEffectiveDate
@@ -8916,7 +8916,10 @@ ppAvailabilityDate
   = lens _ppAvailabilityDate
       (\ s a -> s{_ppAvailabilityDate = a})
 
--- | An identifier of the item.
+-- | An identifier of the item. Leading and trailing whitespaces are stripped
+-- and multiple whitespaces are replaced by a single whitespace upon
+-- submission. Only valid unicode characters are accepted. See the products
+-- feed specification for details.
 ppOfferId :: Lens' Product (Maybe Text)
 ppOfferId
   = lens _ppOfferId (\ s a -> s{_ppOfferId = a})
@@ -11564,7 +11567,10 @@ ocQuantity
 ocActor :: Lens' OrderCancellation (Maybe Text)
 ocActor = lens _ocActor (\ s a -> s{_ocActor = a})
 
--- | The reason for the cancellation.
+-- | The reason for the cancellation. Orders that are cancelled with a
+-- noIventory reason will lead to the removal of the product from POG until
+-- you make an update to that product. This will not affect your Shopping
+-- ads.
 ocReason :: Lens' OrderCancellation (Maybe Text)
 ocReason = lens _ocReason (\ s a -> s{_ocReason = a})
 

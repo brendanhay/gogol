@@ -14,12 +14,12 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Manage your DoubleClick Campaign Manager ad campaigns and reports.
+    Manages your DoubleClick Campaign Manager ad campaigns and reports.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v2.4@
+    This library is compatible with version @v2.5beta1@
     of the API.
 
 source-repository head
@@ -84,6 +84,7 @@ library
         , Network.Google.Resource.DFAReporting.ContentCategories.List
         , Network.Google.Resource.DFAReporting.ContentCategories.Patch
         , Network.Google.Resource.DFAReporting.ContentCategories.Update
+        , Network.Google.Resource.DFAReporting.Conversions.Batchinsert
         , Network.Google.Resource.DFAReporting.Countries.Get
         , Network.Google.Resource.DFAReporting.Countries.List
         , Network.Google.Resource.DFAReporting.CreativeAssets.Insert
@@ -115,6 +116,9 @@ library
         , Network.Google.Resource.DFAReporting.DirectorySites.Get
         , Network.Google.Resource.DFAReporting.DirectorySites.Insert
         , Network.Google.Resource.DFAReporting.DirectorySites.List
+        , Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Delete
+        , Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
+        , Network.Google.Resource.DFAReporting.DynamicTargetingKeys.List
         , Network.Google.Resource.DFAReporting.EventTags.Delete
         , Network.Google.Resource.DFAReporting.EventTags.Get
         , Network.Google.Resource.DFAReporting.EventTags.Insert

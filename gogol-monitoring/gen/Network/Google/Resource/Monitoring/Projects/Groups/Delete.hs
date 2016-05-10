@@ -22,7 +22,7 @@
 --
 -- Deletes an existing group.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.groups.delete@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.delete@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Delete
     (
     -- * REST Resource
@@ -140,7 +140,8 @@ pgdBearerToken
   = lens _pgdBearerToken
       (\ s a -> s{_pgdBearerToken = a})
 
--- | The group to delete. The format is \`\"projects\/ \/groups\/\"\`.
+-- | The group to delete. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`.
 pgdName :: Lens' ProjectsGroupsDelete Text
 pgdName = lens _pgdName (\ s a -> s{_pgdName = a})
 

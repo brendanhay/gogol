@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Programmatic access to YouTube features.
+-- Supports core YouTube features, such as uploading videos, creating and
+-- managing playlists, searching for content, and much more.
 --
 -- /See:/ <https://developers.google.com/youtube/v3 YouTube Data API Reference>
 module Network.Google.YouTube
@@ -327,6 +328,11 @@ module Network.Google.YouTube
     , acdrSeedResourceId
     , acdrReason
 
+    -- ** LiveChatMessageRetractedDetails
+    , LiveChatMessageRetractedDetails
+    , liveChatMessageRetractedDetails
+    , lcmrdRetractedMessageId
+
     -- ** ContentRatingRcnofRating
     , ContentRatingRcnofRating (..)
 
@@ -377,6 +383,9 @@ module Network.Google.YouTube
     , piPromotedByContentOwner
     , piId
     , piTiming
+
+    -- ** LiveChatUserBannedMessageDetailsBanType
+    , LiveChatUserBannedMessageDetailsBanType (..)
 
     -- ** VideoProcessingDetailsProcessingFailureReason
     , VideoProcessingDetailsProcessingFailureReason (..)
@@ -505,6 +514,16 @@ module Network.Google.YouTube
     , varrlrVisitorId
     , varrlrEventId
 
+    -- ** CdnSettingsResolution
+    , CdnSettingsResolution (..)
+
+    -- ** LiveChatUserBannedMessageDetails
+    , LiveChatUserBannedMessageDetails
+    , liveChatUserBannedMessageDetails
+    , lcubmdBanType
+    , lcubmdBannedUserDetails
+    , lcubmdBanDurationSeconds
+
     -- ** SearchResultSnippetLiveBroadcastContent
     , SearchResultSnippetLiveBroadcastContent (..)
 
@@ -516,10 +535,12 @@ module Network.Google.YouTube
     , lbcdClosedCaptionsType
     , lbcdEnableEmbed
     , lbcdStartWithSlate
+    , lbcdProjection
     , lbcdMonitorStream
     , lbcdBoundStreamId
     , lbcdRecordFromStart
     , lbcdEnableClosedCaptions
+    , lbcdBoundStreamLastUpdateTimeMs
     , lbcdEnableDvr
 
     -- ** ContentRatingAnatelRating
@@ -575,6 +596,7 @@ module Network.Google.YouTube
     , vcdDimension
     , vcdCaption
     , vcdRegionRestriction
+    , vcdProjection
     , vcdDuration
     , vcdContentRating
     , vcdLicensedContent
@@ -1075,9 +1097,12 @@ module Network.Google.YouTube
     -- ** LiveChatMessageSnippet
     , LiveChatMessageSnippet
     , liveChatMessageSnippet
+    , lcmsMessageDeletedDetails
     , lcmsLiveChatId
     , lcmsPublishedAt
+    , lcmsUserBannedDetails
     , lcmsTextMessageDetails
+    , lcmsMessageRetractedDetails
     , lcmsType
     , lcmsAuthorChannelId
     , lcmsFanFundingEventDetails
@@ -1307,6 +1332,11 @@ module Network.Google.YouTube
     , sKind
     , sId
 
+    -- ** LiveChatMessageDeletedDetails
+    , LiveChatMessageDeletedDetails
+    , liveChatMessageDeletedDetails
+    , lcmddDeletedMessageId
+
     -- ** ContentRatingYtRating
     , ContentRatingYtRating (..)
 
@@ -1333,7 +1363,9 @@ module Network.Google.YouTube
     , CdnSettings
     , cdnSettings
     , csIngestionInfo
+    , csFrameRate
     , csFormat
+    , csResolution
     , csIngestionType
 
     -- ** VideoContentDetailsCaption
@@ -1401,6 +1433,9 @@ module Network.Google.YouTube
     , ActivityContentDetailsBulletin
     , activityContentDetailsBulletin
     , acdbResourceId
+
+    -- ** LiveBroadcastContentDetailsProjection
+    , LiveBroadcastContentDetailsProjection (..)
 
     -- ** CaptionSnippetStatus
     , CaptionSnippetStatus (..)
@@ -1486,6 +1521,9 @@ module Network.Google.YouTube
 
     -- ** ContentRatingEcbmctRating
     , ContentRatingEcbmctRating (..)
+
+    -- ** VideoContentDetailsProjection
+    , VideoContentDetailsProjection (..)
 
     -- ** ContentRatingGrfilmRating
     , ContentRatingGrfilmRating (..)
@@ -1915,6 +1953,9 @@ module Network.Google.YouTube
     , csIsAutoSynced
     , csIsEasyReader
     , csAudioTrackType
+
+    -- ** CdnSettingsFrameRate
+    , CdnSettingsFrameRate (..)
 
     -- ** Comment
     , Comment

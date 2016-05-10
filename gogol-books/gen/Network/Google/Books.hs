@@ -325,6 +325,8 @@ module Network.Google.Books
     , vuiIsUploaded
     , vuiIsInMyBooks
     , vuiReadingPosition
+    , vuiFamilySharing
+    , vuiIsFamilySharingDisabledByFop
 
     -- ** Layersummary
     , Layersummary
@@ -431,10 +433,13 @@ module Network.Google.Books
     -- ** Notification
     , Notification
     , notification
+    , nDocType
     , nTargetURL
     , nShowNotificationSettingsAction
+    , nDocId
     , nKind
     , nBody
+    , nCrmExperimentIds
     , nPcampaignId
     , nReason
     , nDontShowNotification
@@ -1043,6 +1048,13 @@ module Network.Google.Books
     , volumeSaleInfoOffersItemRetailPrice
     , vsioirpCurrencyCode
     , vsioirpAmountInMicros
+
+    -- ** VolumeUserInfoFamilySharing
+    , VolumeUserInfoFamilySharing
+    , volumeUserInfoFamilySharing
+    , vuifsFamilyRole
+    , vuifsIsSharingAllowed
+    , vuifsIsSharingDisabledByFop
 
     -- ** VolumeVolumeInfoIndustryIdentifiersItem
     , VolumeVolumeInfoIndustryIdentifiersItem

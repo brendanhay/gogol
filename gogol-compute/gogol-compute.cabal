@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for the Google Compute Engine service.
+    Creates and runs virtual machines on Google Cloud Platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -63,6 +63,7 @@ library
         , Network.Google.Resource.Compute.Disks.Get
         , Network.Google.Resource.Compute.Disks.Insert
         , Network.Google.Resource.Compute.Disks.List
+        , Network.Google.Resource.Compute.Disks.Resize
         , Network.Google.Resource.Compute.Firewalls.Delete
         , Network.Google.Resource.Compute.Firewalls.Get
         , Network.Google.Resource.Compute.Firewalls.Insert
@@ -103,6 +104,7 @@ library
         , Network.Google.Resource.Compute.Images.Delete
         , Network.Google.Resource.Compute.Images.Deprecate
         , Network.Google.Resource.Compute.Images.Get
+        , Network.Google.Resource.Compute.Images.GetFromFamily
         , Network.Google.Resource.Compute.Images.Insert
         , Network.Google.Resource.Compute.Images.List
         , Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances

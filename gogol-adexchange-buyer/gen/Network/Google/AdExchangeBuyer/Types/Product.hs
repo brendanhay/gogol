@@ -307,8 +307,9 @@ instance ToJSON CreativeNATiveAd where
 
 --
 -- /See:/ 'editAllOrderDealsResponse' smart constructor.
-newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse'
-    { _eaodrDeals :: Maybe [MarketplaceDeal]
+data EditAllOrderDealsResponse = EditAllOrderDealsResponse'
+    { _eaodrDeals               :: !(Maybe [MarketplaceDeal])
+    , _eaodrOrderRevisionNumber :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EditAllOrderDealsResponse' with the minimum fields required to make a request.
@@ -316,11 +317,14 @@ newtype EditAllOrderDealsResponse = EditAllOrderDealsResponse'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'eaodrDeals'
+--
+-- * 'eaodrOrderRevisionNumber'
 editAllOrderDealsResponse
     :: EditAllOrderDealsResponse
 editAllOrderDealsResponse =
     EditAllOrderDealsResponse'
     { _eaodrDeals = Nothing
+    , _eaodrOrderRevisionNumber = Nothing
     }
 
 -- | List of all deals in the proposal after edit.
@@ -330,16 +334,28 @@ eaodrDeals
       _Default
       . _Coerce
 
+-- | The latest revision number after the update has been applied.
+eaodrOrderRevisionNumber :: Lens' EditAllOrderDealsResponse (Maybe Int64)
+eaodrOrderRevisionNumber
+  = lens _eaodrOrderRevisionNumber
+      (\ s a -> s{_eaodrOrderRevisionNumber = a})
+      . mapping _Coerce
+
 instance FromJSON EditAllOrderDealsResponse where
         parseJSON
           = withObject "EditAllOrderDealsResponse"
               (\ o ->
                  EditAllOrderDealsResponse' <$>
-                   (o .:? "deals" .!= mempty))
+                   (o .:? "deals" .!= mempty) <*>
+                     (o .:? "orderRevisionNumber"))
 
 instance ToJSON EditAllOrderDealsResponse where
         toJSON EditAllOrderDealsResponse'{..}
-          = object (catMaybes [("deals" .=) <$> _eaodrDeals])
+          = object
+              (catMaybes
+                 [("deals" .=) <$> _eaodrDeals,
+                  ("orderRevisionNumber" .=) <$>
+                    _eaodrOrderRevisionNumber])
 
 -- | The creatives feed lists the active creatives for the Ad Exchange buyer
 -- accounts that the user has access to. Each entry in the feed corresponds
@@ -529,9 +545,10 @@ instance ToJSON CreateOrdersResponse where
 --
 -- /See:/ 'accountBidderLocationItem' smart constructor.
 data AccountBidderLocationItem = AccountBidderLocationItem'
-    { _abliURL        :: !(Maybe Text)
-    , _abliMaximumQps :: !(Maybe (Textual Int32))
-    , _abliRegion     :: !(Maybe Text)
+    { _abliURL         :: !(Maybe Text)
+    , _abliMaximumQps  :: !(Maybe (Textual Int32))
+    , _abliRegion      :: !(Maybe Text)
+    , _abliBidProtocol :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountBidderLocationItem' with the minimum fields required to make a request.
@@ -543,6 +560,8 @@ data AccountBidderLocationItem = AccountBidderLocationItem'
 -- * 'abliMaximumQps'
 --
 -- * 'abliRegion'
+--
+-- * 'abliBidProtocol'
 accountBidderLocationItem
     :: AccountBidderLocationItem
 accountBidderLocationItem =
@@ -550,6 +569,7 @@ accountBidderLocationItem =
     { _abliURL = Nothing
     , _abliMaximumQps = Nothing
     , _abliRegion = Nothing
+    , _abliBidProtocol = Nothing
     }
 
 -- | The URL to which the Ad Exchange will send bid requests.
@@ -570,13 +590,25 @@ abliRegion :: Lens' AccountBidderLocationItem (Maybe Text)
 abliRegion
   = lens _abliRegion (\ s a -> s{_abliRegion = a})
 
+-- | The protocol that the bidder endpoint is using. By default, OpenRTB
+-- protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF.
+-- PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB
+-- protocol version, which is 2.3 right now. Allowed values: - PROTOCOL_ADX
+-- - PROTOCOL_OPENRTB_2_2 - PROTOCOL_OPENRTB_2_3 -
+-- PROTOCOL_OPENRTB_PROTOBUF
+abliBidProtocol :: Lens' AccountBidderLocationItem (Maybe Text)
+abliBidProtocol
+  = lens _abliBidProtocol
+      (\ s a -> s{_abliBidProtocol = a})
+
 instance FromJSON AccountBidderLocationItem where
         parseJSON
           = withObject "AccountBidderLocationItem"
               (\ o ->
                  AccountBidderLocationItem' <$>
                    (o .:? "url") <*> (o .:? "maximumQps") <*>
-                     (o .:? "region"))
+                     (o .:? "region")
+                     <*> (o .:? "bidProtocol"))
 
 instance ToJSON AccountBidderLocationItem where
         toJSON AccountBidderLocationItem'{..}
@@ -584,7 +616,8 @@ instance ToJSON AccountBidderLocationItem where
               (catMaybes
                  [("url" .=) <$> _abliURL,
                   ("maximumQps" .=) <$> _abliMaximumQps,
-                  ("region" .=) <$> _abliRegion])
+                  ("region" .=) <$> _abliRegion,
+                  ("bidProtocol" .=) <$> _abliBidProtocol])
 
 --
 -- /See:/ 'privateData' smart constructor.
@@ -1049,6 +1082,58 @@ instance ToJSON AccountsList where
                  [Just ("kind" .= _alKind),
                   ("items" .=) <$> _alItems])
 
+-- | This message carries publisher provided breakdown. E.g. {dimension_type:
+-- \'COUNTRY\', [{dimension_value: {id: 1, name: \'US\'}},
+-- {dimension_value: {id: 2, name: \'UK\'}}]}
+--
+-- /See:/ 'dimension' smart constructor.
+data Dimension = Dimension'
+    { _dDimensionValues :: !(Maybe [DimensionDimensionValue])
+    , _dDimensionType   :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Dimension' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dDimensionValues'
+--
+-- * 'dDimensionType'
+dimension
+    :: Dimension
+dimension =
+    Dimension'
+    { _dDimensionValues = Nothing
+    , _dDimensionType = Nothing
+    }
+
+dDimensionValues :: Lens' Dimension [DimensionDimensionValue]
+dDimensionValues
+  = lens _dDimensionValues
+      (\ s a -> s{_dDimensionValues = a})
+      . _Default
+      . _Coerce
+
+dDimensionType :: Lens' Dimension (Maybe Text)
+dDimensionType
+  = lens _dDimensionType
+      (\ s a -> s{_dDimensionType = a})
+
+instance FromJSON Dimension where
+        parseJSON
+          = withObject "Dimension"
+              (\ o ->
+                 Dimension' <$>
+                   (o .:? "dimensionValues" .!= mempty) <*>
+                     (o .:? "dimensionType"))
+
+instance ToJSON Dimension where
+        toJSON Dimension'{..}
+          = object
+              (catMaybes
+                 [("dimensionValues" .=) <$> _dDimensionValues,
+                  ("dimensionType" .=) <$> _dDimensionType])
+
 --
 -- /See:/ 'createOrdersRequest' smart constructor.
 data CreateOrdersRequest = CreateOrdersRequest'
@@ -1078,6 +1163,7 @@ cProposals
       _Default
       . _Coerce
 
+-- | Web property id of the seller creating these orders
 cWebPropertyCode :: Lens' CreateOrdersRequest (Maybe Text)
 cWebPropertyCode
   = lens _cWebPropertyCode
@@ -1145,6 +1231,43 @@ instance ToJSON CreativeCorrectionsItem where
               (catMaybes
                  [("reason" .=) <$> _cciReason,
                   ("details" .=) <$> _cciDetails])
+
+--
+-- /See:/ 'dealServingMetadata' smart constructor.
+newtype DealServingMetadata = DealServingMetadata'
+    { _dsmDealPauseStatus :: Maybe DealServingMetadataDealPauseStatus
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DealServingMetadata' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsmDealPauseStatus'
+dealServingMetadata
+    :: DealServingMetadata
+dealServingMetadata =
+    DealServingMetadata'
+    { _dsmDealPauseStatus = Nothing
+    }
+
+-- | Tracks which parties (if any) have paused a deal. (readonly, except via
+-- PauseResumeOrderDeals action)
+dsmDealPauseStatus :: Lens' DealServingMetadata (Maybe DealServingMetadataDealPauseStatus)
+dsmDealPauseStatus
+  = lens _dsmDealPauseStatus
+      (\ s a -> s{_dsmDealPauseStatus = a})
+
+instance FromJSON DealServingMetadata where
+        parseJSON
+          = withObject "DealServingMetadata"
+              (\ o ->
+                 DealServingMetadata' <$> (o .:? "dealPauseStatus"))
+
+instance ToJSON DealServingMetadata where
+        toJSON DealServingMetadata'{..}
+          = object
+              (catMaybes
+                 [("dealPauseStatus" .=) <$> _dsmDealPauseStatus])
 
 --
 -- /See:/ 'addOrderDealsResponse' smart constructor.
@@ -1269,8 +1392,9 @@ instance ToJSON DeliveryControl where
 --
 -- /See:/ 'pricePerBuyer' smart constructor.
 data PricePerBuyer = PricePerBuyer'
-    { _ppbPrice :: !(Maybe Price)
-    , _ppbBuyer :: !(Maybe Buyer)
+    { _ppbPrice       :: !(Maybe Price)
+    , _ppbAuctionTier :: !(Maybe Text)
+    , _ppbBuyer       :: !(Maybe Buyer)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PricePerBuyer' with the minimum fields required to make a request.
@@ -1279,18 +1403,27 @@ data PricePerBuyer = PricePerBuyer'
 --
 -- * 'ppbPrice'
 --
+-- * 'ppbAuctionTier'
+--
 -- * 'ppbBuyer'
 pricePerBuyer
     :: PricePerBuyer
 pricePerBuyer =
     PricePerBuyer'
     { _ppbPrice = Nothing
+    , _ppbAuctionTier = Nothing
     , _ppbBuyer = Nothing
     }
 
 -- | The specified price
 ppbPrice :: Lens' PricePerBuyer (Maybe Price)
 ppbPrice = lens _ppbPrice (\ s a -> s{_ppbPrice = a})
+
+-- | Optional access type for this buyer.
+ppbAuctionTier :: Lens' PricePerBuyer (Maybe Text)
+ppbAuctionTier
+  = lens _ppbAuctionTier
+      (\ s a -> s{_ppbAuctionTier = a})
 
 -- | The buyer who will pay this price. If unset, all buyers can pay this
 -- price (if the advertisers match, and there\'s no more specific rule
@@ -1303,13 +1436,15 @@ instance FromJSON PricePerBuyer where
           = withObject "PricePerBuyer"
               (\ o ->
                  PricePerBuyer' <$>
-                   (o .:? "price") <*> (o .:? "buyer"))
+                   (o .:? "price") <*> (o .:? "auctionTier") <*>
+                     (o .:? "buyer"))
 
 instance ToJSON PricePerBuyer where
         toJSON PricePerBuyer'{..}
           = object
               (catMaybes
                  [("price" .=) <$> _ppbPrice,
+                  ("auctionTier" .=) <$> _ppbAuctionTier,
                   ("buyer" .=) <$> _ppbBuyer])
 
 -- | A creative and its classification data.
@@ -1756,6 +1891,52 @@ instance ToJSON TargetingValueDayPartTargetingDayPart
                   ("startMinute" .=) <$> _tvdptdpStartMinute,
                   ("dayOfWeek" .=) <$> _tvdptdpDayOfWeek,
                   ("endMinute" .=) <$> _tvdptdpEndMinute])
+
+-- | Value of the dimension.
+--
+-- /See:/ 'dimensionDimensionValue' smart constructor.
+data DimensionDimensionValue = DimensionDimensionValue'
+    { _ddvName :: !(Maybe Text)
+    , _ddvId   :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DimensionDimensionValue' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddvName'
+--
+-- * 'ddvId'
+dimensionDimensionValue
+    :: DimensionDimensionValue
+dimensionDimensionValue =
+    DimensionDimensionValue'
+    { _ddvName = Nothing
+    , _ddvId = Nothing
+    }
+
+-- | Name of the dimension mainly for debugging purposes.
+ddvName :: Lens' DimensionDimensionValue (Maybe Text)
+ddvName = lens _ddvName (\ s a -> s{_ddvName = a})
+
+-- | Id of the dimension.
+ddvId :: Lens' DimensionDimensionValue (Maybe Int32)
+ddvId
+  = lens _ddvId (\ s a -> s{_ddvId = a}) .
+      mapping _Coerce
+
+instance FromJSON DimensionDimensionValue where
+        parseJSON
+          = withObject "DimensionDimensionValue"
+              (\ o ->
+                 DimensionDimensionValue' <$>
+                   (o .:? "name") <*> (o .:? "id"))
+
+instance ToJSON DimensionDimensionValue where
+        toJSON DimensionDimensionValue'{..}
+          = object
+              (catMaybes
+                 [("name" .=) <$> _ddvName, ("id" .=) <$> _ddvId])
 
 --
 -- /See:/ 'pretargetingConfigList' smart constructor.
@@ -2431,6 +2612,7 @@ deleteOrderDealsRequest =
     , _dodrProposalRevisionNumber = Nothing
     }
 
+-- | Indicates an optional action to take on the proposal
 dodrUpdateAction :: Lens' DeleteOrderDealsRequest (Maybe Text)
 dodrUpdateAction
   = lens _dodrUpdateAction
@@ -2605,8 +2787,6 @@ instance ToJSON GetOrderDealsResponse where
           = object (catMaybes [("deals" .=) <$> _godrDeals])
 
 -- | The configuration data for an Ad Exchange performance report list.
--- https:\/\/sites.google.com\/a\/google.com\/adx-integration\/Home\/engineering\/binary-releases\/rtb-api-release
--- https:\/\/cs.corp.google.com\/#piper\/\/\/depot\/google3\/contentads\/adx\/tools\/rtb_api\/adxrtb.py
 --
 -- /See:/ 'performanceReportList' smart constructor.
 data PerformanceReportList = PerformanceReportList'
@@ -3134,6 +3314,123 @@ instance ToJSON TargetingValueCreativeSize where
                   ("companionSizes" .=) <$> _tvcsCompanionSizes,
                   ("creativeSizeType" .=) <$> _tvcsCreativeSizeType])
 
+--
+-- /See:/ 'dealTermsGuaranteedFixedPriceTermsBillingInfo' smart constructor.
+data DealTermsGuaranteedFixedPriceTermsBillingInfo = DealTermsGuaranteedFixedPriceTermsBillingInfo'
+    { _dtgfptbiCurrencyConversionTimeMs   :: !(Maybe (Textual Int64))
+    , _dtgfptbiPrice                      :: !(Maybe Price)
+    , _dtgfptbiOriginalContractedQuantity :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DealTermsGuaranteedFixedPriceTermsBillingInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtgfptbiCurrencyConversionTimeMs'
+--
+-- * 'dtgfptbiPrice'
+--
+-- * 'dtgfptbiOriginalContractedQuantity'
+dealTermsGuaranteedFixedPriceTermsBillingInfo
+    :: DealTermsGuaranteedFixedPriceTermsBillingInfo
+dealTermsGuaranteedFixedPriceTermsBillingInfo =
+    DealTermsGuaranteedFixedPriceTermsBillingInfo'
+    { _dtgfptbiCurrencyConversionTimeMs = Nothing
+    , _dtgfptbiPrice = Nothing
+    , _dtgfptbiOriginalContractedQuantity = Nothing
+    }
+
+-- | The timestamp (in ms since epoch) when the original reservation price
+-- for the deal was first converted to DFP currency. This is used to
+-- convert the contracted price into advertiser\'s currency without
+-- discrepancy.
+dtgfptbiCurrencyConversionTimeMs :: Lens' DealTermsGuaranteedFixedPriceTermsBillingInfo (Maybe Int64)
+dtgfptbiCurrencyConversionTimeMs
+  = lens _dtgfptbiCurrencyConversionTimeMs
+      (\ s a -> s{_dtgfptbiCurrencyConversionTimeMs = a})
+      . mapping _Coerce
+
+-- | The original reservation price for the deal, if the currency code is
+-- different from the one used in negotiation.
+dtgfptbiPrice :: Lens' DealTermsGuaranteedFixedPriceTermsBillingInfo (Maybe Price)
+dtgfptbiPrice
+  = lens _dtgfptbiPrice
+      (\ s a -> s{_dtgfptbiPrice = a})
+
+-- | The original contracted quantity (# impressions) for this deal. To
+-- ensure delivery, sometimes publisher will book the deal with a
+-- impression buffer, however clients are billed using the original
+-- contracted quantity.
+dtgfptbiOriginalContractedQuantity :: Lens' DealTermsGuaranteedFixedPriceTermsBillingInfo (Maybe Int64)
+dtgfptbiOriginalContractedQuantity
+  = lens _dtgfptbiOriginalContractedQuantity
+      (\ s a -> s{_dtgfptbiOriginalContractedQuantity = a})
+      . mapping _Coerce
+
+instance FromJSON
+         DealTermsGuaranteedFixedPriceTermsBillingInfo where
+        parseJSON
+          = withObject
+              "DealTermsGuaranteedFixedPriceTermsBillingInfo"
+              (\ o ->
+                 DealTermsGuaranteedFixedPriceTermsBillingInfo' <$>
+                   (o .:? "currencyConversionTimeMs") <*>
+                     (o .:? "price")
+                     <*> (o .:? "originalContractedQuantity"))
+
+instance ToJSON
+         DealTermsGuaranteedFixedPriceTermsBillingInfo where
+        toJSON
+          DealTermsGuaranteedFixedPriceTermsBillingInfo'{..}
+          = object
+              (catMaybes
+                 [("currencyConversionTimeMs" .=) <$>
+                    _dtgfptbiCurrencyConversionTimeMs,
+                  ("price" .=) <$> _dtgfptbiPrice,
+                  ("originalContractedQuantity" .=) <$>
+                    _dtgfptbiOriginalContractedQuantity])
+
+--
+-- /See:/ 'getPublisherProFilesByAccountIdResponse' smart constructor.
+newtype GetPublisherProFilesByAccountIdResponse = GetPublisherProFilesByAccountIdResponse'
+    { _gppfbairProFiles :: Maybe [PublisherProFileAPIProto]
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GetPublisherProFilesByAccountIdResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gppfbairProFiles'
+getPublisherProFilesByAccountIdResponse
+    :: GetPublisherProFilesByAccountIdResponse
+getPublisherProFilesByAccountIdResponse =
+    GetPublisherProFilesByAccountIdResponse'
+    { _gppfbairProFiles = Nothing
+    }
+
+-- | Profiles for the requested publisher
+gppfbairProFiles :: Lens' GetPublisherProFilesByAccountIdResponse [PublisherProFileAPIProto]
+gppfbairProFiles
+  = lens _gppfbairProFiles
+      (\ s a -> s{_gppfbairProFiles = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON
+         GetPublisherProFilesByAccountIdResponse where
+        parseJSON
+          = withObject
+              "GetPublisherProFilesByAccountIdResponse"
+              (\ o ->
+                 GetPublisherProFilesByAccountIdResponse' <$>
+                   (o .:? "profiles" .!= mempty))
+
+instance ToJSON
+         GetPublisherProFilesByAccountIdResponse where
+        toJSON GetPublisherProFilesByAccountIdResponse'{..}
+          = object
+              (catMaybes [("profiles" .=) <$> _gppfbairProFiles])
+
 -- | Represents a proposal in the marketplace. A proposal is the unit of
 -- negotiation between a seller and a buyer and contains deals which are
 -- served. Each field in a proposal can have one of the following setting:
@@ -3152,6 +3449,7 @@ data Proposal = Proposal'
     , _pOriginatorRole             :: !(Maybe Text)
     , _pRevisionNumber             :: !(Maybe (Textual Int64))
     , _pBilledBuyer                :: !(Maybe Buyer)
+    , _pPrivateAuctionId           :: !(Maybe Text)
     , _pIsRenegotiating            :: !(Maybe Bool)
     , _pHasSellerSignedOff         :: !(Maybe Bool)
     , _pSeller                     :: !(Maybe Seller)
@@ -3163,6 +3461,7 @@ data Proposal = Proposal'
     , _pRevisionTimeMs             :: !(Maybe (Textual Int64))
     , _pProposalState              :: !(Maybe Text)
     , _pLastUpdaterOrCommentorRole :: !(Maybe Text)
+    , _pNegotiationId              :: !(Maybe Text)
     , _pHasBuyerSignedOff          :: !(Maybe Bool)
     , _pBuyer                      :: !(Maybe Buyer)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3187,6 +3486,8 @@ data Proposal = Proposal'
 --
 -- * 'pBilledBuyer'
 --
+-- * 'pPrivateAuctionId'
+--
 -- * 'pIsRenegotiating'
 --
 -- * 'pHasSellerSignedOff'
@@ -3209,6 +3510,8 @@ data Proposal = Proposal'
 --
 -- * 'pLastUpdaterOrCommentorRole'
 --
+-- * 'pNegotiationId'
+--
 -- * 'pHasBuyerSignedOff'
 --
 -- * 'pBuyer'
@@ -3224,6 +3527,7 @@ proposal =
     , _pOriginatorRole = Nothing
     , _pRevisionNumber = Nothing
     , _pBilledBuyer = Nothing
+    , _pPrivateAuctionId = Nothing
     , _pIsRenegotiating = Nothing
     , _pHasSellerSignedOff = Nothing
     , _pSeller = Nothing
@@ -3235,6 +3539,7 @@ proposal =
     , _pRevisionTimeMs = Nothing
     , _pProposalState = Nothing
     , _pLastUpdaterOrCommentorRole = Nothing
+    , _pNegotiationId = Nothing
     , _pHasBuyerSignedOff = Nothing
     , _pBuyer = Nothing
     }
@@ -3246,7 +3551,7 @@ pBuyerPrivateData
       (\ s a -> s{_pBuyerPrivateData = a})
 
 -- | True, if the buyside inventory setup is complete for this proposal.
--- (readonly)
+-- (readonly, except via OrderSetupCompleted action)
 pIsSetupComplete :: Lens' Proposal (Maybe Bool)
 pIsSetupComplete
   = lens _pIsSetupComplete
@@ -3289,6 +3594,13 @@ pRevisionNumber
 pBilledBuyer :: Lens' Proposal (Maybe Buyer)
 pBilledBuyer
   = lens _pBilledBuyer (\ s a -> s{_pBilledBuyer = a})
+
+-- | Optional private auction id if this proposal is a private auction
+-- proposal.
+pPrivateAuctionId :: Lens' Proposal (Maybe Text)
+pPrivateAuctionId
+  = lens _pPrivateAuctionId
+      (\ s a -> s{_pPrivateAuctionId = a})
 
 -- | True if the proposal is being renegotiated (readonly).
 pIsRenegotiating :: Lens' Proposal (Maybe Bool)
@@ -3356,6 +3668,12 @@ pLastUpdaterOrCommentorRole
   = lens _pLastUpdaterOrCommentorRole
       (\ s a -> s{_pLastUpdaterOrCommentorRole = a})
 
+-- | Optional negotiation id if this proposal is a preferred deal proposal.
+pNegotiationId :: Lens' Proposal (Maybe Text)
+pNegotiationId
+  = lens _pNegotiationId
+      (\ s a -> s{_pNegotiationId = a})
+
 -- | When an proposal is in an accepted state, indicates whether the buyer
 -- has signed off Once both sides have signed off on a deal, the proposal
 -- can be finalized by the seller. (seller-readonly)
@@ -3381,6 +3699,7 @@ instance FromJSON Proposal where
                      <*> (o .:? "originatorRole")
                      <*> (o .:? "revisionNumber")
                      <*> (o .:? "billedBuyer")
+                     <*> (o .:? "privateAuctionId")
                      <*> (o .:? "isRenegotiating")
                      <*> (o .:? "hasSellerSignedOff")
                      <*> (o .:? "seller")
@@ -3392,6 +3711,7 @@ instance FromJSON Proposal where
                      <*> (o .:? "revisionTimeMs")
                      <*> (o .:? "proposalState")
                      <*> (o .:? "lastUpdaterOrCommentorRole")
+                     <*> (o .:? "negotiationId")
                      <*> (o .:? "hasBuyerSignedOff")
                      <*> (o .:? "buyer"))
 
@@ -3407,6 +3727,7 @@ instance ToJSON Proposal where
                   ("originatorRole" .=) <$> _pOriginatorRole,
                   ("revisionNumber" .=) <$> _pRevisionNumber,
                   ("billedBuyer" .=) <$> _pBilledBuyer,
+                  ("privateAuctionId" .=) <$> _pPrivateAuctionId,
                   ("isRenegotiating" .=) <$> _pIsRenegotiating,
                   ("hasSellerSignedOff" .=) <$> _pHasSellerSignedOff,
                   ("seller" .=) <$> _pSeller,
@@ -3419,6 +3740,7 @@ instance ToJSON Proposal where
                   ("proposalState" .=) <$> _pProposalState,
                   ("lastUpdaterOrCommentorRole" .=) <$>
                     _pLastUpdaterOrCommentorRole,
+                  ("negotiationId" .=) <$> _pNegotiationId,
                   ("hasBuyerSignedOff" .=) <$> _pHasBuyerSignedOff,
                   ("buyer" .=) <$> _pBuyer])
 
@@ -3555,6 +3877,81 @@ instance ToJSON TargetingValueSize where
                   ("width" .=) <$> _tvsWidth])
 
 --
+-- /See:/ 'updatePrivateAuctionProposalRequest' smart constructor.
+data UpdatePrivateAuctionProposalRequest = UpdatePrivateAuctionProposalRequest'
+    { _upaprExternalDealId         :: !(Maybe Text)
+    , _upaprUpdateAction           :: !(Maybe Text)
+    , _upaprNote                   :: !(Maybe MarketplaceNote)
+    , _upaprProposalRevisionNumber :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UpdatePrivateAuctionProposalRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'upaprExternalDealId'
+--
+-- * 'upaprUpdateAction'
+--
+-- * 'upaprNote'
+--
+-- * 'upaprProposalRevisionNumber'
+updatePrivateAuctionProposalRequest
+    :: UpdatePrivateAuctionProposalRequest
+updatePrivateAuctionProposalRequest =
+    UpdatePrivateAuctionProposalRequest'
+    { _upaprExternalDealId = Nothing
+    , _upaprUpdateAction = Nothing
+    , _upaprNote = Nothing
+    , _upaprProposalRevisionNumber = Nothing
+    }
+
+-- | The externalDealId of the deal to be updated.
+upaprExternalDealId :: Lens' UpdatePrivateAuctionProposalRequest (Maybe Text)
+upaprExternalDealId
+  = lens _upaprExternalDealId
+      (\ s a -> s{_upaprExternalDealId = a})
+
+-- | The proposed action on the private auction proposal.
+upaprUpdateAction :: Lens' UpdatePrivateAuctionProposalRequest (Maybe Text)
+upaprUpdateAction
+  = lens _upaprUpdateAction
+      (\ s a -> s{_upaprUpdateAction = a})
+
+-- | Optional note to be added.
+upaprNote :: Lens' UpdatePrivateAuctionProposalRequest (Maybe MarketplaceNote)
+upaprNote
+  = lens _upaprNote (\ s a -> s{_upaprNote = a})
+
+-- | The current revision number of the proposal to be updated.
+upaprProposalRevisionNumber :: Lens' UpdatePrivateAuctionProposalRequest (Maybe Int64)
+upaprProposalRevisionNumber
+  = lens _upaprProposalRevisionNumber
+      (\ s a -> s{_upaprProposalRevisionNumber = a})
+      . mapping _Coerce
+
+instance FromJSON UpdatePrivateAuctionProposalRequest
+         where
+        parseJSON
+          = withObject "UpdatePrivateAuctionProposalRequest"
+              (\ o ->
+                 UpdatePrivateAuctionProposalRequest' <$>
+                   (o .:? "externalDealId") <*> (o .:? "updateAction")
+                     <*> (o .:? "note")
+                     <*> (o .:? "proposalRevisionNumber"))
+
+instance ToJSON UpdatePrivateAuctionProposalRequest
+         where
+        toJSON UpdatePrivateAuctionProposalRequest'{..}
+          = object
+              (catMaybes
+                 [("externalDealId" .=) <$> _upaprExternalDealId,
+                  ("updateAction" .=) <$> _upaprUpdateAction,
+                  ("note" .=) <$> _upaprNote,
+                  ("proposalRevisionNumber" .=) <$>
+                    _upaprProposalRevisionNumber])
+
+--
 -- /See:/ 'pretargetingConfigDimensionsItem' smart constructor.
 data PretargetingConfigDimensionsItem = PretargetingConfigDimensionsItem'
     { _pcdiHeight :: !(Maybe (Textual Int64))
@@ -3603,6 +4000,72 @@ instance ToJSON PretargetingConfigDimensionsItem
               (catMaybes
                  [("height" .=) <$> _pcdiHeight,
                   ("width" .=) <$> _pcdiWidth])
+
+-- | This message carries publisher provided forecasting information.
+--
+-- /See:/ 'publisherProvidedForecast' smart constructor.
+data PublisherProvidedForecast = PublisherProvidedForecast'
+    { _ppfWeeklyImpressions :: !(Maybe (Textual Int64))
+    , _ppfWeeklyUniques     :: !(Maybe (Textual Int64))
+    , _ppfDimensions        :: !(Maybe [Dimension])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PublisherProvidedForecast' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppfWeeklyImpressions'
+--
+-- * 'ppfWeeklyUniques'
+--
+-- * 'ppfDimensions'
+publisherProvidedForecast
+    :: PublisherProvidedForecast
+publisherProvidedForecast =
+    PublisherProvidedForecast'
+    { _ppfWeeklyImpressions = Nothing
+    , _ppfWeeklyUniques = Nothing
+    , _ppfDimensions = Nothing
+    }
+
+-- | Publisher provided weekly impressions.
+ppfWeeklyImpressions :: Lens' PublisherProvidedForecast (Maybe Int64)
+ppfWeeklyImpressions
+  = lens _ppfWeeklyImpressions
+      (\ s a -> s{_ppfWeeklyImpressions = a})
+      . mapping _Coerce
+
+-- | Publisher provided weekly uniques.
+ppfWeeklyUniques :: Lens' PublisherProvidedForecast (Maybe Int64)
+ppfWeeklyUniques
+  = lens _ppfWeeklyUniques
+      (\ s a -> s{_ppfWeeklyUniques = a})
+      . mapping _Coerce
+
+-- | Publisher provided dimensions. E.g. geo, sizes etc...
+ppfDimensions :: Lens' PublisherProvidedForecast [Dimension]
+ppfDimensions
+  = lens _ppfDimensions
+      (\ s a -> s{_ppfDimensions = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON PublisherProvidedForecast where
+        parseJSON
+          = withObject "PublisherProvidedForecast"
+              (\ o ->
+                 PublisherProvidedForecast' <$>
+                   (o .:? "weeklyImpressions") <*>
+                     (o .:? "weeklyUniques")
+                     <*> (o .:? "dimensions" .!= mempty))
+
+instance ToJSON PublisherProvidedForecast where
+        toJSON PublisherProvidedForecast'{..}
+          = object
+              (catMaybes
+                 [("weeklyImpressions" .=) <$> _ppfWeeklyImpressions,
+                  ("weeklyUniques" .=) <$> _ppfWeeklyUniques,
+                  ("dimensions" .=) <$> _ppfDimensions])
 
 --
 -- /See:/ 'targetingValue' smart constructor.
@@ -4103,14 +4566,16 @@ sharedTargeting =
 stKey :: Lens' SharedTargeting (Maybe Text)
 stKey = lens _stKey (\ s a -> s{_stKey = a})
 
--- | The list of values to exclude from targeting.
+-- | The list of values to exclude from targeting. Each value is AND\'d
+-- together.
 stExclusions :: Lens' SharedTargeting [TargetingValue]
 stExclusions
   = lens _stExclusions (\ s a -> s{_stExclusions = a})
       . _Default
       . _Coerce
 
--- | The list of value to include as part of the targeting.
+-- | The list of value to include as part of the targeting. Each value is
+-- OR\'d together.
 stInclusions :: Lens' SharedTargeting [TargetingValue]
 stInclusions
   = lens _stInclusions (\ s a -> s{_stInclusions = a})
@@ -4200,24 +4665,29 @@ instance ToJSON CreativeNATiveAdImage where
 --
 -- /See:/ 'product' smart constructor.
 data Product = Product'
-    { _proState               :: !(Maybe Text)
-    , _proInventorySource     :: !(Maybe Text)
-    , _proWebPropertyCode     :: !(Maybe Text)
-    , _proCreationTimeMs      :: !(Maybe (Textual Int64))
-    , _proTerms               :: !(Maybe DealTerms)
-    , _proLastUpdateTimeMs    :: !(Maybe (Textual Int64))
-    , _proKind                :: !Text
-    , _proRevisionNumber      :: !(Maybe (Textual Int64))
-    , _proHasCreatorSignedOff :: !(Maybe Bool)
-    , _proFlightStartTimeMs   :: !(Maybe (Textual Int64))
-    , _proSharedTargetings    :: !(Maybe [SharedTargeting])
-    , _proSeller              :: !(Maybe Seller)
-    , _proSyndicationProduct  :: !(Maybe Text)
-    , _proFlightEndTimeMs     :: !(Maybe (Textual Int64))
-    , _proName                :: !(Maybe Text)
-    , _proCreatorContacts     :: !(Maybe [ContactInformation])
-    , _proLabels              :: !(Maybe [MarketplaceLabel])
-    , _proProductId           :: !(Maybe Text)
+    { _proState                     :: !(Maybe Text)
+    , _proInventorySource           :: !(Maybe Text)
+    , _proWebPropertyCode           :: !(Maybe Text)
+    , _proCreationTimeMs            :: !(Maybe (Textual Int64))
+    , _proTerms                     :: !(Maybe DealTerms)
+    , _proLastUpdateTimeMs          :: !(Maybe (Textual Int64))
+    , _proKind                      :: !Text
+    , _proRevisionNumber            :: !(Maybe (Textual Int64))
+    , _proPrivateAuctionId          :: !(Maybe Text)
+    , _proDeliveryControl           :: !(Maybe DeliveryControl)
+    , _proHasCreatorSignedOff       :: !(Maybe Bool)
+    , _proFlightStartTimeMs         :: !(Maybe (Textual Int64))
+    , _proSharedTargetings          :: !(Maybe [SharedTargeting])
+    , _proSeller                    :: !(Maybe Seller)
+    , _proSyndicationProduct        :: !(Maybe Text)
+    , _proFlightEndTimeMs           :: !(Maybe (Textual Int64))
+    , _proName                      :: !(Maybe Text)
+    , _proCreatorContacts           :: !(Maybe [ContactInformation])
+    , _proPublisherProvidedForecast :: !(Maybe PublisherProvidedForecast)
+    , _proLabels                    :: !(Maybe [MarketplaceLabel])
+    , _proPublisherProFileId        :: !(Maybe Text)
+    , _proLegacyOfferId             :: !(Maybe Text)
+    , _proProductId                 :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
@@ -4240,6 +4710,10 @@ data Product = Product'
 --
 -- * 'proRevisionNumber'
 --
+-- * 'proPrivateAuctionId'
+--
+-- * 'proDeliveryControl'
+--
 -- * 'proHasCreatorSignedOff'
 --
 -- * 'proFlightStartTimeMs'
@@ -4256,7 +4730,13 @@ data Product = Product'
 --
 -- * 'proCreatorContacts'
 --
+-- * 'proPublisherProvidedForecast'
+--
 -- * 'proLabels'
+--
+-- * 'proPublisherProFileId'
+--
+-- * 'proLegacyOfferId'
 --
 -- * 'proProductId'
 product
@@ -4271,6 +4751,8 @@ product =
     , _proLastUpdateTimeMs = Nothing
     , _proKind = "adexchangebuyer#product"
     , _proRevisionNumber = Nothing
+    , _proPrivateAuctionId = Nothing
+    , _proDeliveryControl = Nothing
     , _proHasCreatorSignedOff = Nothing
     , _proFlightStartTimeMs = Nothing
     , _proSharedTargetings = Nothing
@@ -4279,7 +4761,10 @@ product =
     , _proFlightEndTimeMs = Nothing
     , _proName = Nothing
     , _proCreatorContacts = Nothing
+    , _proPublisherProvidedForecast = Nothing
     , _proLabels = Nothing
+    , _proPublisherProFileId = Nothing
+    , _proLegacyOfferId = Nothing
     , _proProductId = Nothing
     }
 
@@ -4293,6 +4778,8 @@ proInventorySource
   = lens _proInventorySource
       (\ s a -> s{_proInventorySource = a})
 
+-- | The web property code for the seller. This field is meant to be copied
+-- over as is when creating deals.
 proWebPropertyCode :: Lens' Product (Maybe Text)
 proWebPropertyCode
   = lens _proWebPropertyCode
@@ -4327,6 +4814,21 @@ proRevisionNumber
   = lens _proRevisionNumber
       (\ s a -> s{_proRevisionNumber = a})
       . mapping _Coerce
+
+-- | Optional private auction id if this offer is a private auction offer.
+proPrivateAuctionId :: Lens' Product (Maybe Text)
+proPrivateAuctionId
+  = lens _proPrivateAuctionId
+      (\ s a -> s{_proPrivateAuctionId = a})
+
+-- | The set of fields around delivery control that are interesting for a
+-- buyer to see but are non-negotiable. These are set by the publisher.
+-- This message is assigned an id of 100 since some day we would want to
+-- model this as a protobuf extension.
+proDeliveryControl :: Lens' Product (Maybe DeliveryControl)
+proDeliveryControl
+  = lens _proDeliveryControl
+      (\ s a -> s{_proDeliveryControl = a})
 
 -- | If the creator has already signed off on the product, then the buyer can
 -- finalize the deal by accepting the product as is. When copying to a
@@ -4388,12 +4890,33 @@ proCreatorContacts
       . _Default
       . _Coerce
 
+-- | Publisher self-provided forecast information.
+proPublisherProvidedForecast :: Lens' Product (Maybe PublisherProvidedForecast)
+proPublisherProvidedForecast
+  = lens _proPublisherProvidedForecast
+      (\ s a -> s{_proPublisherProvidedForecast = a})
+
 -- | Optional List of labels for the product (optional, buyer-readonly).
 proLabels :: Lens' Product [MarketplaceLabel]
 proLabels
   = lens _proLabels (\ s a -> s{_proLabels = a}) .
       _Default
       . _Coerce
+
+-- | Id of the publisher profile for a given seller. A (seller.account_id,
+-- publisher_profile_id) pair uniquely identifies a publisher profile.
+-- Buyers can call the PublisherProfiles::List endpoint to get a list of
+-- publisher profiles for a given seller.
+proPublisherProFileId :: Lens' Product (Maybe Text)
+proPublisherProFileId
+  = lens _proPublisherProFileId
+      (\ s a -> s{_proPublisherProFileId = a})
+
+-- | Optional legacy offer id if this offer is a preferred deal offer.
+proLegacyOfferId :: Lens' Product (Maybe Text)
+proLegacyOfferId
+  = lens _proLegacyOfferId
+      (\ s a -> s{_proLegacyOfferId = a})
 
 -- | The unique id for the product (readonly)
 proProductId :: Lens' Product (Maybe Text)
@@ -4412,6 +4935,8 @@ instance FromJSON Product where
                      <*> (o .:? "lastUpdateTimeMs")
                      <*> (o .:? "kind" .!= "adexchangebuyer#product")
                      <*> (o .:? "revisionNumber")
+                     <*> (o .:? "privateAuctionId")
+                     <*> (o .:? "deliveryControl")
                      <*> (o .:? "hasCreatorSignedOff")
                      <*> (o .:? "flightStartTimeMs")
                      <*> (o .:? "sharedTargetings" .!= mempty)
@@ -4420,7 +4945,10 @@ instance FromJSON Product where
                      <*> (o .:? "flightEndTimeMs")
                      <*> (o .:? "name")
                      <*> (o .:? "creatorContacts" .!= mempty)
+                     <*> (o .:? "publisherProvidedForecast")
                      <*> (o .:? "labels" .!= mempty)
+                     <*> (o .:? "publisherProfileId")
+                     <*> (o .:? "legacyOfferId")
                      <*> (o .:? "productId"))
 
 instance ToJSON Product where
@@ -4435,6 +4963,8 @@ instance ToJSON Product where
                   ("lastUpdateTimeMs" .=) <$> _proLastUpdateTimeMs,
                   Just ("kind" .= _proKind),
                   ("revisionNumber" .=) <$> _proRevisionNumber,
+                  ("privateAuctionId" .=) <$> _proPrivateAuctionId,
+                  ("deliveryControl" .=) <$> _proDeliveryControl,
                   ("hasCreatorSignedOff" .=) <$>
                     _proHasCreatorSignedOff,
                   ("flightStartTimeMs" .=) <$> _proFlightStartTimeMs,
@@ -4444,7 +4974,11 @@ instance ToJSON Product where
                   ("flightEndTimeMs" .=) <$> _proFlightEndTimeMs,
                   ("name" .=) <$> _proName,
                   ("creatorContacts" .=) <$> _proCreatorContacts,
+                  ("publisherProvidedForecast" .=) <$>
+                    _proPublisherProvidedForecast,
                   ("labels" .=) <$> _proLabels,
+                  ("publisherProfileId" .=) <$> _proPublisherProFileId,
+                  ("legacyOfferId" .=) <$> _proLegacyOfferId,
                   ("productId" .=) <$> _proProductId])
 
 --
@@ -4616,31 +5150,343 @@ instance ToJSON PretargetingConfigPlacementsItem
                  [("token" .=) <$> _pcpiToken,
                   ("type" .=) <$> _pcpiType])
 
+--
+-- /See:/ 'publisherProFileAPIProto' smart constructor.
+data PublisherProFileAPIProto = PublisherProFileAPIProto'
+    { _ppfapAudience                  :: !(Maybe Text)
+    , _ppfapState                     :: !(Maybe Text)
+    , _ppfapMediaKitLink              :: !(Maybe Text)
+    , _ppfapDirectContact             :: !(Maybe Text)
+    , _ppfapSamplePageLink            :: !(Maybe Text)
+    , _ppfapLogoURL                   :: !(Maybe Text)
+    , _ppfapKind                      :: !Text
+    , _ppfapExchange                  :: !(Maybe Text)
+    , _ppfapOverview                  :: !(Maybe Text)
+    , _ppfapGooglePlusLink            :: !(Maybe Text)
+    , _ppfapProFileId                 :: !(Maybe (Textual Int32))
+    , _ppfapIsParent                  :: !(Maybe Bool)
+    , _ppfapSeller                    :: !(Maybe Seller)
+    , _ppfapAccountId                 :: !(Maybe Text)
+    , _ppfapName                      :: !(Maybe Text)
+    , _ppfapBuyerPitchStatement       :: !(Maybe Text)
+    , _ppfapPublisherProvidedForecast :: !(Maybe PublisherProvidedForecast)
+    , _ppfapIsPublished               :: !(Maybe Bool)
+    , _ppfapPublisherDomains          :: !(Maybe [Text])
+    , _ppfapPublisherProFileId        :: !(Maybe Text)
+    , _ppfapRateCardInfoLink          :: !(Maybe Text)
+    , _ppfapTopHeadlines              :: !(Maybe [Text])
+    , _ppfapProgrammaticContact       :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PublisherProFileAPIProto' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ppfapAudience'
+--
+-- * 'ppfapState'
+--
+-- * 'ppfapMediaKitLink'
+--
+-- * 'ppfapDirectContact'
+--
+-- * 'ppfapSamplePageLink'
+--
+-- * 'ppfapLogoURL'
+--
+-- * 'ppfapKind'
+--
+-- * 'ppfapExchange'
+--
+-- * 'ppfapOverview'
+--
+-- * 'ppfapGooglePlusLink'
+--
+-- * 'ppfapProFileId'
+--
+-- * 'ppfapIsParent'
+--
+-- * 'ppfapSeller'
+--
+-- * 'ppfapAccountId'
+--
+-- * 'ppfapName'
+--
+-- * 'ppfapBuyerPitchStatement'
+--
+-- * 'ppfapPublisherProvidedForecast'
+--
+-- * 'ppfapIsPublished'
+--
+-- * 'ppfapPublisherDomains'
+--
+-- * 'ppfapPublisherProFileId'
+--
+-- * 'ppfapRateCardInfoLink'
+--
+-- * 'ppfapTopHeadlines'
+--
+-- * 'ppfapProgrammaticContact'
+publisherProFileAPIProto
+    :: PublisherProFileAPIProto
+publisherProFileAPIProto =
+    PublisherProFileAPIProto'
+    { _ppfapAudience = Nothing
+    , _ppfapState = Nothing
+    , _ppfapMediaKitLink = Nothing
+    , _ppfapDirectContact = Nothing
+    , _ppfapSamplePageLink = Nothing
+    , _ppfapLogoURL = Nothing
+    , _ppfapKind = "adexchangebuyer#publisherProfileApiProto"
+    , _ppfapExchange = Nothing
+    , _ppfapOverview = Nothing
+    , _ppfapGooglePlusLink = Nothing
+    , _ppfapProFileId = Nothing
+    , _ppfapIsParent = Nothing
+    , _ppfapSeller = Nothing
+    , _ppfapAccountId = Nothing
+    , _ppfapName = Nothing
+    , _ppfapBuyerPitchStatement = Nothing
+    , _ppfapPublisherProvidedForecast = Nothing
+    , _ppfapIsPublished = Nothing
+    , _ppfapPublisherDomains = Nothing
+    , _ppfapPublisherProFileId = Nothing
+    , _ppfapRateCardInfoLink = Nothing
+    , _ppfapTopHeadlines = Nothing
+    , _ppfapProgrammaticContact = Nothing
+    }
+
+-- | Publisher provided info on its audience.
+ppfapAudience :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapAudience
+  = lens _ppfapAudience
+      (\ s a -> s{_ppfapAudience = a})
+
+-- | State of the publisher profile.
+ppfapState :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapState
+  = lens _ppfapState (\ s a -> s{_ppfapState = a})
+
+-- | The url for additional marketing and sales materials.
+ppfapMediaKitLink :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapMediaKitLink
+  = lens _ppfapMediaKitLink
+      (\ s a -> s{_ppfapMediaKitLink = a})
+
+-- | Direct contact for the publisher profile.
+ppfapDirectContact :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapDirectContact
+  = lens _ppfapDirectContact
+      (\ s a -> s{_ppfapDirectContact = a})
+
+-- | Link for a sample content page.
+ppfapSamplePageLink :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapSamplePageLink
+  = lens _ppfapSamplePageLink
+      (\ s a -> s{_ppfapSamplePageLink = a})
+
+-- | The url to the logo for the publisher.
+ppfapLogoURL :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapLogoURL
+  = lens _ppfapLogoURL (\ s a -> s{_ppfapLogoURL = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"adexchangebuyer#publisherProfileApiProto\".
+ppfapKind :: Lens' PublisherProFileAPIProto Text
+ppfapKind
+  = lens _ppfapKind (\ s a -> s{_ppfapKind = a})
+
+-- | Exchange where this publisher profile is from. E.g. AdX, Rubicon etc...
+ppfapExchange :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapExchange
+  = lens _ppfapExchange
+      (\ s a -> s{_ppfapExchange = a})
+
+-- | Publisher provided overview.
+ppfapOverview :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapOverview
+  = lens _ppfapOverview
+      (\ s a -> s{_ppfapOverview = a})
+
+-- | Link to publisher\'s Google+ page.
+ppfapGooglePlusLink :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapGooglePlusLink
+  = lens _ppfapGooglePlusLink
+      (\ s a -> s{_ppfapGooglePlusLink = a})
+
+-- | The pair of (seller.account_id, profile_id) uniquely identifies a
+-- publisher profile for a given publisher.
+ppfapProFileId :: Lens' PublisherProFileAPIProto (Maybe Int32)
+ppfapProFileId
+  = lens _ppfapProFileId
+      (\ s a -> s{_ppfapProFileId = a})
+      . mapping _Coerce
+
+-- | True, if this is the parent profile, which represents all domains owned
+-- by the publisher.
+ppfapIsParent :: Lens' PublisherProFileAPIProto (Maybe Bool)
+ppfapIsParent
+  = lens _ppfapIsParent
+      (\ s a -> s{_ppfapIsParent = a})
+
+-- | Seller of the publisher profile.
+ppfapSeller :: Lens' PublisherProFileAPIProto (Maybe Seller)
+ppfapSeller
+  = lens _ppfapSeller (\ s a -> s{_ppfapSeller = a})
+
+-- | The account id of the seller.
+ppfapAccountId :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapAccountId
+  = lens _ppfapAccountId
+      (\ s a -> s{_ppfapAccountId = a})
+
+ppfapName :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapName
+  = lens _ppfapName (\ s a -> s{_ppfapName = a})
+
+-- | A pitch statement for the buyer
+ppfapBuyerPitchStatement :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapBuyerPitchStatement
+  = lens _ppfapBuyerPitchStatement
+      (\ s a -> s{_ppfapBuyerPitchStatement = a})
+
+-- | Publisher provided forecasting information.
+ppfapPublisherProvidedForecast :: Lens' PublisherProFileAPIProto (Maybe PublisherProvidedForecast)
+ppfapPublisherProvidedForecast
+  = lens _ppfapPublisherProvidedForecast
+      (\ s a -> s{_ppfapPublisherProvidedForecast = a})
+
+-- | True, if this profile is published. Deprecated for state.
+ppfapIsPublished :: Lens' PublisherProFileAPIProto (Maybe Bool)
+ppfapIsPublished
+  = lens _ppfapIsPublished
+      (\ s a -> s{_ppfapIsPublished = a})
+
+-- | The list of domains represented in this publisher profile. Empty if this
+-- is a parent profile.
+ppfapPublisherDomains :: Lens' PublisherProFileAPIProto [Text]
+ppfapPublisherDomains
+  = lens _ppfapPublisherDomains
+      (\ s a -> s{_ppfapPublisherDomains = a})
+      . _Default
+      . _Coerce
+
+-- | Unique Id for publisher profile.
+ppfapPublisherProFileId :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapPublisherProFileId
+  = lens _ppfapPublisherProFileId
+      (\ s a -> s{_ppfapPublisherProFileId = a})
+
+-- | Link to publisher rate card
+ppfapRateCardInfoLink :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapRateCardInfoLink
+  = lens _ppfapRateCardInfoLink
+      (\ s a -> s{_ppfapRateCardInfoLink = a})
+
+-- | Publisher provided key metrics and rankings.
+ppfapTopHeadlines :: Lens' PublisherProFileAPIProto [Text]
+ppfapTopHeadlines
+  = lens _ppfapTopHeadlines
+      (\ s a -> s{_ppfapTopHeadlines = a})
+      . _Default
+      . _Coerce
+
+-- | Programmatic contact for the publisher profile.
+ppfapProgrammaticContact :: Lens' PublisherProFileAPIProto (Maybe Text)
+ppfapProgrammaticContact
+  = lens _ppfapProgrammaticContact
+      (\ s a -> s{_ppfapProgrammaticContact = a})
+
+instance FromJSON PublisherProFileAPIProto where
+        parseJSON
+          = withObject "PublisherProFileAPIProto"
+              (\ o ->
+                 PublisherProFileAPIProto' <$>
+                   (o .:? "audience") <*> (o .:? "state") <*>
+                     (o .:? "mediaKitLink")
+                     <*> (o .:? "directContact")
+                     <*> (o .:? "samplePageLink")
+                     <*> (o .:? "logoUrl")
+                     <*>
+                     (o .:? "kind" .!=
+                        "adexchangebuyer#publisherProfileApiProto")
+                     <*> (o .:? "exchange")
+                     <*> (o .:? "overview")
+                     <*> (o .:? "googlePlusLink")
+                     <*> (o .:? "profileId")
+                     <*> (o .:? "isParent")
+                     <*> (o .:? "seller")
+                     <*> (o .:? "accountId")
+                     <*> (o .:? "name")
+                     <*> (o .:? "buyerPitchStatement")
+                     <*> (o .:? "publisherProvidedForecast")
+                     <*> (o .:? "isPublished")
+                     <*> (o .:? "publisherDomains" .!= mempty)
+                     <*> (o .:? "publisherProfileId")
+                     <*> (o .:? "rateCardInfoLink")
+                     <*> (o .:? "topHeadlines" .!= mempty)
+                     <*> (o .:? "programmaticContact"))
+
+instance ToJSON PublisherProFileAPIProto where
+        toJSON PublisherProFileAPIProto'{..}
+          = object
+              (catMaybes
+                 [("audience" .=) <$> _ppfapAudience,
+                  ("state" .=) <$> _ppfapState,
+                  ("mediaKitLink" .=) <$> _ppfapMediaKitLink,
+                  ("directContact" .=) <$> _ppfapDirectContact,
+                  ("samplePageLink" .=) <$> _ppfapSamplePageLink,
+                  ("logoUrl" .=) <$> _ppfapLogoURL,
+                  Just ("kind" .= _ppfapKind),
+                  ("exchange" .=) <$> _ppfapExchange,
+                  ("overview" .=) <$> _ppfapOverview,
+                  ("googlePlusLink" .=) <$> _ppfapGooglePlusLink,
+                  ("profileId" .=) <$> _ppfapProFileId,
+                  ("isParent" .=) <$> _ppfapIsParent,
+                  ("seller" .=) <$> _ppfapSeller,
+                  ("accountId" .=) <$> _ppfapAccountId,
+                  ("name" .=) <$> _ppfapName,
+                  ("buyerPitchStatement" .=) <$>
+                    _ppfapBuyerPitchStatement,
+                  ("publisherProvidedForecast" .=) <$>
+                    _ppfapPublisherProvidedForecast,
+                  ("isPublished" .=) <$> _ppfapIsPublished,
+                  ("publisherDomains" .=) <$> _ppfapPublisherDomains,
+                  ("publisherProfileId" .=) <$>
+                    _ppfapPublisherProFileId,
+                  ("rateCardInfoLink" .=) <$> _ppfapRateCardInfoLink,
+                  ("topHeadlines" .=) <$> _ppfapTopHeadlines,
+                  ("programmaticContact" .=) <$>
+                    _ppfapProgrammaticContact])
+
 -- | A proposal can contain multiple deals. A deal contains the terms and
 -- targeting information that is used for serving.
 --
 -- /See:/ 'marketplaceDeal' smart constructor.
 data MarketplaceDeal = MarketplaceDeal'
-    { _mdExternalDealId            :: !(Maybe Text)
-    , _mdBuyerPrivateData          :: !(Maybe PrivateData)
-    , _mdWebPropertyCode           :: !(Maybe Text)
-    , _mdCreationTimeMs            :: !(Maybe (Textual Int64))
-    , _mdTerms                     :: !(Maybe DealTerms)
-    , _mdLastUpdateTimeMs          :: !(Maybe (Textual Int64))
-    , _mdKind                      :: !Text
-    , _mdDeliveryControl           :: !(Maybe DeliveryControl)
-    , _mdFlightStartTimeMs         :: !(Maybe (Textual Int64))
-    , _mdSharedTargetings          :: !(Maybe [SharedTargeting])
-    , _mdProposalId                :: !(Maybe Text)
-    , _mdDealId                    :: !(Maybe Text)
-    , _mdInventoryDescription      :: !(Maybe Text)
-    , _mdSyndicationProduct        :: !(Maybe Text)
-    , _mdFlightEndTimeMs           :: !(Maybe (Textual Int64))
-    , _mdName                      :: !(Maybe Text)
-    , _mdSellerContacts            :: !(Maybe [ContactInformation])
-    , _mdCreativePreApprovalPolicy :: !(Maybe Text)
-    , _mdProductRevisionNumber     :: !(Maybe (Textual Int64))
-    , _mdProductId                 :: !(Maybe Text)
+    { _mdExternalDealId                 :: !(Maybe Text)
+    , _mdBuyerPrivateData               :: !(Maybe PrivateData)
+    , _mdWebPropertyCode                :: !(Maybe Text)
+    , _mdCreationTimeMs                 :: !(Maybe (Textual Int64))
+    , _mdTerms                          :: !(Maybe DealTerms)
+    , _mdLastUpdateTimeMs               :: !(Maybe (Textual Int64))
+    , _mdKind                           :: !Text
+    , _mdDeliveryControl                :: !(Maybe DeliveryControl)
+    , _mdDealServingMetadata            :: !(Maybe DealServingMetadata)
+    , _mdFlightStartTimeMs              :: !(Maybe (Textual Int64))
+    , _mdSharedTargetings               :: !(Maybe [SharedTargeting])
+    , _mdProposalId                     :: !(Maybe Text)
+    , _mdDealId                         :: !(Maybe Text)
+    , _mdInventoryDescription           :: !(Maybe Text)
+    , _mdSyndicationProduct             :: !(Maybe Text)
+    , _mdFlightEndTimeMs                :: !(Maybe (Textual Int64))
+    , _mdName                           :: !(Maybe Text)
+    , _mdSellerContacts                 :: !(Maybe [ContactInformation])
+    , _mdProgrammaticCreativeSource     :: !(Maybe Text)
+    , _mdCreativePreApprovalPolicy      :: !(Maybe Text)
+    , _mdProductRevisionNumber          :: !(Maybe (Textual Int64))
+    , _mdProductId                      :: !(Maybe Text)
+    , _mdCreativeSafeFrameCompatibility :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MarketplaceDeal' with the minimum fields required to make a request.
@@ -4663,6 +5509,8 @@ data MarketplaceDeal = MarketplaceDeal'
 --
 -- * 'mdDeliveryControl'
 --
+-- * 'mdDealServingMetadata'
+--
 -- * 'mdFlightStartTimeMs'
 --
 -- * 'mdSharedTargetings'
@@ -4681,11 +5529,15 @@ data MarketplaceDeal = MarketplaceDeal'
 --
 -- * 'mdSellerContacts'
 --
+-- * 'mdProgrammaticCreativeSource'
+--
 -- * 'mdCreativePreApprovalPolicy'
 --
 -- * 'mdProductRevisionNumber'
 --
 -- * 'mdProductId'
+--
+-- * 'mdCreativeSafeFrameCompatibility'
 marketplaceDeal
     :: MarketplaceDeal
 marketplaceDeal =
@@ -4698,6 +5550,7 @@ marketplaceDeal =
     , _mdLastUpdateTimeMs = Nothing
     , _mdKind = "adexchangebuyer#marketplaceDeal"
     , _mdDeliveryControl = Nothing
+    , _mdDealServingMetadata = Nothing
     , _mdFlightStartTimeMs = Nothing
     , _mdSharedTargetings = Nothing
     , _mdProposalId = Nothing
@@ -4707,9 +5560,11 @@ marketplaceDeal =
     , _mdFlightEndTimeMs = Nothing
     , _mdName = Nothing
     , _mdSellerContacts = Nothing
+    , _mdProgrammaticCreativeSource = Nothing
     , _mdCreativePreApprovalPolicy = Nothing
     , _mdProductRevisionNumber = Nothing
     , _mdProductId = Nothing
+    , _mdCreativeSafeFrameCompatibility = Nothing
     }
 
 -- | The external deal id assigned to this deal once the deal is finalized.
@@ -4762,6 +5617,13 @@ mdDeliveryControl
   = lens _mdDeliveryControl
       (\ s a -> s{_mdDeliveryControl = a})
 
+-- | Metadata about the serving status of this deal (readonly, writes via
+-- custom actions)
+mdDealServingMetadata :: Lens' MarketplaceDeal (Maybe DealServingMetadata)
+mdDealServingMetadata
+  = lens _mdDealServingMetadata
+      (\ s a -> s{_mdDealServingMetadata = a})
+
 -- | Proposed flight start time of the deal (ms since epoch) This will
 -- generally be stored in a granularity of a second. (updatable)
 mdFlightStartTimeMs :: Lens' MarketplaceDeal (Maybe Int64)
@@ -4770,7 +5632,8 @@ mdFlightStartTimeMs
       (\ s a -> s{_mdFlightStartTimeMs = a})
       . mapping _Coerce
 
--- | The shared targeting visible to buyers and sellers. (updatable)
+-- | The shared targeting visible to buyers and sellers. Each shared
+-- targeting entity is AND\'d together. (updatable)
 mdSharedTargetings :: Lens' MarketplaceDeal [SharedTargeting]
 mdSharedTargetings
   = lens _mdSharedTargetings
@@ -4819,6 +5682,14 @@ mdSellerContacts
       . _Default
       . _Coerce
 
+-- | Specifies the creative source for programmatic deals, PUBLISHER means
+-- creative is provided by seller and ADVERTISR means creative is provided
+-- by buyer. (buyer-readonly)
+mdProgrammaticCreativeSource :: Lens' MarketplaceDeal (Maybe Text)
+mdProgrammaticCreativeSource
+  = lens _mdProgrammaticCreativeSource
+      (\ s a -> s{_mdProgrammaticCreativeSource = a})
+
 -- | Specifies the creative pre-approval policy (buyer-readonly)
 mdCreativePreApprovalPolicy :: Lens' MarketplaceDeal (Maybe Text)
 mdCreativePreApprovalPolicy
@@ -4839,6 +5710,12 @@ mdProductId :: Lens' MarketplaceDeal (Maybe Text)
 mdProductId
   = lens _mdProductId (\ s a -> s{_mdProductId = a})
 
+-- | Specifies whether the creative is safeFrame compatible (buyer-readonly)
+mdCreativeSafeFrameCompatibility :: Lens' MarketplaceDeal (Maybe Text)
+mdCreativeSafeFrameCompatibility
+  = lens _mdCreativeSafeFrameCompatibility
+      (\ s a -> s{_mdCreativeSafeFrameCompatibility = a})
+
 instance FromJSON MarketplaceDeal where
         parseJSON
           = withObject "MarketplaceDeal"
@@ -4853,6 +5730,7 @@ instance FromJSON MarketplaceDeal where
                      <*>
                      (o .:? "kind" .!= "adexchangebuyer#marketplaceDeal")
                      <*> (o .:? "deliveryControl")
+                     <*> (o .:? "dealServingMetadata")
                      <*> (o .:? "flightStartTimeMs")
                      <*> (o .:? "sharedTargetings" .!= mempty)
                      <*> (o .:? "proposalId")
@@ -4862,9 +5740,11 @@ instance FromJSON MarketplaceDeal where
                      <*> (o .:? "flightEndTimeMs")
                      <*> (o .:? "name")
                      <*> (o .:? "sellerContacts" .!= mempty)
+                     <*> (o .:? "programmaticCreativeSource")
                      <*> (o .:? "creativePreApprovalPolicy")
                      <*> (o .:? "productRevisionNumber")
-                     <*> (o .:? "productId"))
+                     <*> (o .:? "productId")
+                     <*> (o .:? "creativeSafeFrameCompatibility"))
 
 instance ToJSON MarketplaceDeal where
         toJSON MarketplaceDeal'{..}
@@ -4878,6 +5758,8 @@ instance ToJSON MarketplaceDeal where
                   ("lastUpdateTimeMs" .=) <$> _mdLastUpdateTimeMs,
                   Just ("kind" .= _mdKind),
                   ("deliveryControl" .=) <$> _mdDeliveryControl,
+                  ("dealServingMetadata" .=) <$>
+                    _mdDealServingMetadata,
                   ("flightStartTimeMs" .=) <$> _mdFlightStartTimeMs,
                   ("sharedTargetings" .=) <$> _mdSharedTargetings,
                   ("proposalId" .=) <$> _mdProposalId,
@@ -4888,11 +5770,15 @@ instance ToJSON MarketplaceDeal where
                   ("flightEndTimeMs" .=) <$> _mdFlightEndTimeMs,
                   ("name" .=) <$> _mdName,
                   ("sellerContacts" .=) <$> _mdSellerContacts,
+                  ("programmaticCreativeSource" .=) <$>
+                    _mdProgrammaticCreativeSource,
                   ("creativePreApprovalPolicy" .=) <$>
                     _mdCreativePreApprovalPolicy,
                   ("productRevisionNumber" .=) <$>
                     _mdProductRevisionNumber,
-                  ("productId" .=) <$> _mdProductId])
+                  ("productId" .=) <$> _mdProductId,
+                  ("creativeSafeFrameCompatibility" .=) <$>
+                    _mdCreativeSafeFrameCompatibility])
 
 --
 -- /See:/ 'getOffersResponse' smart constructor.
@@ -4933,8 +5819,8 @@ instance ToJSON GetOffersResponse where
 --
 -- /See:/ 'dealTermsNonGuaranteedAuctionTerms' smart constructor.
 data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms'
-    { _dtngatReservePricePerBuyers :: !(Maybe [PricePerBuyer])
-    , _dtngatPrivateAuctionId      :: !(Maybe Text)
+    { _dtngatReservePricePerBuyers      :: !(Maybe [PricePerBuyer])
+    , _dtngatAutoOptimizePrivateAuction :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealTermsNonGuaranteedAuctionTerms' with the minimum fields required to make a request.
@@ -4943,13 +5829,13 @@ data DealTermsNonGuaranteedAuctionTerms = DealTermsNonGuaranteedAuctionTerms'
 --
 -- * 'dtngatReservePricePerBuyers'
 --
--- * 'dtngatPrivateAuctionId'
+-- * 'dtngatAutoOptimizePrivateAuction'
 dealTermsNonGuaranteedAuctionTerms
     :: DealTermsNonGuaranteedAuctionTerms
 dealTermsNonGuaranteedAuctionTerms =
     DealTermsNonGuaranteedAuctionTerms'
     { _dtngatReservePricePerBuyers = Nothing
-    , _dtngatPrivateAuctionId = Nothing
+    , _dtngatAutoOptimizePrivateAuction = Nothing
     }
 
 -- | Reserve price for the specified buyer.
@@ -4960,11 +5846,12 @@ dtngatReservePricePerBuyers
       . _Default
       . _Coerce
 
--- | Id of the corresponding private auction.
-dtngatPrivateAuctionId :: Lens' DealTermsNonGuaranteedAuctionTerms (Maybe Text)
-dtngatPrivateAuctionId
-  = lens _dtngatPrivateAuctionId
-      (\ s a -> s{_dtngatPrivateAuctionId = a})
+-- | True if open auction buyers are allowed to compete with invited buyers
+-- in this private auction (buyer-readonly).
+dtngatAutoOptimizePrivateAuction :: Lens' DealTermsNonGuaranteedAuctionTerms (Maybe Bool)
+dtngatAutoOptimizePrivateAuction
+  = lens _dtngatAutoOptimizePrivateAuction
+      (\ s a -> s{_dtngatAutoOptimizePrivateAuction = a})
 
 instance FromJSON DealTermsNonGuaranteedAuctionTerms
          where
@@ -4973,7 +5860,7 @@ instance FromJSON DealTermsNonGuaranteedAuctionTerms
               (\ o ->
                  DealTermsNonGuaranteedAuctionTerms' <$>
                    (o .:? "reservePricePerBuyers" .!= mempty) <*>
-                     (o .:? "privateAuctionId"))
+                     (o .:? "autoOptimizePrivateAuction"))
 
 instance ToJSON DealTermsNonGuaranteedAuctionTerms
          where
@@ -4982,7 +5869,8 @@ instance ToJSON DealTermsNonGuaranteedAuctionTerms
               (catMaybes
                  [("reservePricePerBuyers" .=) <$>
                     _dtngatReservePricePerBuyers,
-                  ("privateAuctionId" .=) <$> _dtngatPrivateAuctionId])
+                  ("autoOptimizePrivateAuction" .=) <$>
+                    _dtngatAutoOptimizePrivateAuction])
 
 --
 -- /See:/ 'creativeFilteringReasonsReasonsItem' smart constructor.
@@ -5047,6 +5935,7 @@ data DealTerms = DealTerms'
     , _dtNonGuaranteedAuctionTerms    :: !(Maybe DealTermsNonGuaranteedAuctionTerms)
     , _dtBrandingType                 :: !(Maybe Text)
     , _dtEstimatedImpressionsPerDay   :: !(Maybe (Textual Int64))
+    , _dtSellerTimeZone               :: !(Maybe Text)
     , _dtGuaranteedFixedPriceTerms    :: !(Maybe DealTermsGuaranteedFixedPriceTerms)
     , _dtDescription                  :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5065,6 +5954,8 @@ data DealTerms = DealTerms'
 --
 -- * 'dtEstimatedImpressionsPerDay'
 --
+-- * 'dtSellerTimeZone'
+--
 -- * 'dtGuaranteedFixedPriceTerms'
 --
 -- * 'dtDescription'
@@ -5077,6 +5968,7 @@ dealTerms =
     , _dtNonGuaranteedAuctionTerms = Nothing
     , _dtBrandingType = Nothing
     , _dtEstimatedImpressionsPerDay = Nothing
+    , _dtSellerTimeZone = Nothing
     , _dtGuaranteedFixedPriceTerms = Nothing
     , _dtDescription = Nothing
     }
@@ -5114,6 +6006,13 @@ dtEstimatedImpressionsPerDay
       (\ s a -> s{_dtEstimatedImpressionsPerDay = a})
       . mapping _Coerce
 
+-- | For deals with Cost Per Day billing, defines the timezone used to mark
+-- the boundaries of a day (buyer-readonly)
+dtSellerTimeZone :: Lens' DealTerms (Maybe Text)
+dtSellerTimeZone
+  = lens _dtSellerTimeZone
+      (\ s a -> s{_dtSellerTimeZone = a})
+
 -- | The terms for guaranteed fixed price deals.
 dtGuaranteedFixedPriceTerms :: Lens' DealTerms (Maybe DealTermsGuaranteedFixedPriceTerms)
 dtGuaranteedFixedPriceTerms
@@ -5136,6 +6035,7 @@ instance FromJSON DealTerms where
                      <*> (o .:? "nonGuaranteedAuctionTerms")
                      <*> (o .:? "brandingType")
                      <*> (o .:? "estimatedImpressionsPerDay")
+                     <*> (o .:? "sellerTimeZone")
                      <*> (o .:? "guaranteedFixedPriceTerms")
                      <*> (o .:? "description"))
 
@@ -5152,6 +6052,7 @@ instance ToJSON DealTerms where
                   ("brandingType" .=) <$> _dtBrandingType,
                   ("estimatedImpressionsPerDay" .=) <$>
                     _dtEstimatedImpressionsPerDay,
+                  ("sellerTimeZone" .=) <$> _dtSellerTimeZone,
                   ("guaranteedFixedPriceTerms" .=) <$>
                     _dtGuaranteedFixedPriceTerms,
                   ("description" .=) <$> _dtDescription])
@@ -5323,11 +6224,63 @@ instance ToJSON AddOrderDealsRequest where
                   ("proposalRevisionNumber" .=) <$>
                     _aProposalRevisionNumber])
 
+-- | Tracks which parties (if any) have paused a deal. The deal is considered
+-- paused if has_buyer_paused || has_seller_paused.
+--
+-- /See:/ 'dealServingMetadataDealPauseStatus' smart constructor.
+data DealServingMetadataDealPauseStatus = DealServingMetadataDealPauseStatus'
+    { _dsmdpsHasBuyerPaused  :: !(Maybe Bool)
+    , _dsmdpsHasSellerPaused :: !(Maybe Bool)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DealServingMetadataDealPauseStatus' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsmdpsHasBuyerPaused'
+--
+-- * 'dsmdpsHasSellerPaused'
+dealServingMetadataDealPauseStatus
+    :: DealServingMetadataDealPauseStatus
+dealServingMetadataDealPauseStatus =
+    DealServingMetadataDealPauseStatus'
+    { _dsmdpsHasBuyerPaused = Nothing
+    , _dsmdpsHasSellerPaused = Nothing
+    }
+
+dsmdpsHasBuyerPaused :: Lens' DealServingMetadataDealPauseStatus (Maybe Bool)
+dsmdpsHasBuyerPaused
+  = lens _dsmdpsHasBuyerPaused
+      (\ s a -> s{_dsmdpsHasBuyerPaused = a})
+
+dsmdpsHasSellerPaused :: Lens' DealServingMetadataDealPauseStatus (Maybe Bool)
+dsmdpsHasSellerPaused
+  = lens _dsmdpsHasSellerPaused
+      (\ s a -> s{_dsmdpsHasSellerPaused = a})
+
+instance FromJSON DealServingMetadataDealPauseStatus
+         where
+        parseJSON
+          = withObject "DealServingMetadataDealPauseStatus"
+              (\ o ->
+                 DealServingMetadataDealPauseStatus' <$>
+                   (o .:? "hasBuyerPaused") <*>
+                     (o .:? "hasSellerPaused"))
+
+instance ToJSON DealServingMetadataDealPauseStatus
+         where
+        toJSON DealServingMetadataDealPauseStatus'{..}
+          = object
+              (catMaybes
+                 [("hasBuyerPaused" .=) <$> _dsmdpsHasBuyerPaused,
+                  ("hasSellerPaused" .=) <$> _dsmdpsHasSellerPaused])
+
 --
 -- /See:/ 'dealTermsGuaranteedFixedPriceTerms' smart constructor.
 data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms'
     { _dtgfptGuaranteedLooks       :: !(Maybe (Textual Int64))
     , _dtgfptGuaranteedImpressions :: !(Maybe (Textual Int64))
+    , _dtgfptBillingInfo           :: !(Maybe DealTermsGuaranteedFixedPriceTermsBillingInfo)
     , _dtgfptFixedPrices           :: !(Maybe [PricePerBuyer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5339,6 +6292,8 @@ data DealTermsGuaranteedFixedPriceTerms = DealTermsGuaranteedFixedPriceTerms'
 --
 -- * 'dtgfptGuaranteedImpressions'
 --
+-- * 'dtgfptBillingInfo'
+--
 -- * 'dtgfptFixedPrices'
 dealTermsGuaranteedFixedPriceTerms
     :: DealTermsGuaranteedFixedPriceTerms
@@ -5346,6 +6301,7 @@ dealTermsGuaranteedFixedPriceTerms =
     DealTermsGuaranteedFixedPriceTerms'
     { _dtgfptGuaranteedLooks = Nothing
     , _dtgfptGuaranteedImpressions = Nothing
+    , _dtgfptBillingInfo = Nothing
     , _dtgfptFixedPrices = Nothing
     }
 
@@ -5364,6 +6320,14 @@ dtgfptGuaranteedImpressions
       (\ s a -> s{_dtgfptGuaranteedImpressions = a})
       . mapping _Coerce
 
+-- | External billing info for this Deal. This field is relevant when
+-- external billing info such as price has a different currency code than
+-- DFP\/AdX.
+dtgfptBillingInfo :: Lens' DealTermsGuaranteedFixedPriceTerms (Maybe DealTermsGuaranteedFixedPriceTermsBillingInfo)
+dtgfptBillingInfo
+  = lens _dtgfptBillingInfo
+      (\ s a -> s{_dtgfptBillingInfo = a})
+
 -- | Fixed price for the specified buyer.
 dtgfptFixedPrices :: Lens' DealTermsGuaranteedFixedPriceTerms [PricePerBuyer]
 dtgfptFixedPrices
@@ -5380,6 +6344,7 @@ instance FromJSON DealTermsGuaranteedFixedPriceTerms
                  DealTermsGuaranteedFixedPriceTerms' <$>
                    (o .:? "guaranteedLooks") <*>
                      (o .:? "guaranteedImpressions")
+                     <*> (o .:? "billingInfo")
                      <*> (o .:? "fixedPrices" .!= mempty))
 
 instance ToJSON DealTermsGuaranteedFixedPriceTerms
@@ -5390,4 +6355,5 @@ instance ToJSON DealTermsGuaranteedFixedPriceTerms
                  [("guaranteedLooks" .=) <$> _dtgfptGuaranteedLooks,
                   ("guaranteedImpressions" .=) <$>
                     _dtgfptGuaranteedImpressions,
+                  ("billingInfo" .=) <$> _dtgfptBillingInfo,
                   ("fixedPrices" .=) <$> _dtgfptFixedPrices])

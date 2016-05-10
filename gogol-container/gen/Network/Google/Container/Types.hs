@@ -22,10 +22,16 @@ module Network.Google.Container.Types
     -- * OAuth Scopes
     , cloudPlatformScope
 
+    -- * HorizontalPodAutoscaling
+    , HorizontalPodAutoscaling
+    , horizontalPodAutoscaling
+    , hpaDisabled
+
     -- * ListOperationsResponse
     , ListOperationsResponse
     , listOperationsResponse
     , lorOperations
+    , lorMissingZones
 
     -- * CreateClusterRequest
     , CreateClusterRequest
@@ -36,6 +42,7 @@ module Network.Google.Container.Types
     , Cluster
     , cluster
     , cStatus
+    , cNodePools
     , cNodeConfig
     , cNodeIPv4CIdRSize
     , cClusterIPv4CIdR
@@ -44,13 +51,17 @@ module Network.Google.Container.Types
     , cNetwork
     , cInitialClusterVersion
     , cZone
+    , cAddonsConfig
     , cServicesIPv4CIdR
     , cMasterAuth
     , cSelfLink
     , cName
     , cCurrentMasterVersion
     , cStatusMessage
+    , cSubnetwork
+    , cCurrentNodeCount
     , cEndpoint
+    , cLocations
     , cLoggingService
     , cDescription
     , cInstanceGroupURLs
@@ -68,6 +79,12 @@ module Network.Google.Container.Types
     , ncDiskSizeGb
     , ncOAuthScopes
     , ncMachineType
+    , ncMetadata
+
+    -- * HTTPLoadBalancing
+    , HTTPLoadBalancing
+    , hTTPLoadBalancing
+    , httplbDisabled
 
     -- * Operation
     , Operation
@@ -79,6 +96,25 @@ module Network.Google.Container.Types
     , oStatusMessage
     , oOperationType
     , oTargetLink
+    , oDetail
+
+    -- * AddonsConfig
+    , AddonsConfig
+    , addonsConfig
+    , acHorizontalPodAutoscaling
+    , acHTTPLoadBalancing
+
+    -- * NodePool
+    , NodePool
+    , nodePool
+    , npStatus
+    , npConfig
+    , npInitialNodeCount
+    , npSelfLink
+    , npName
+    , npStatusMessage
+    , npVersion
+    , npInstanceGroupURLs
 
     -- * MasterAuth
     , MasterAuth
@@ -89,21 +125,43 @@ module Network.Google.Container.Types
     , maPassword
     , maClusterCaCertificate
 
+    -- * NodeConfigMetadata
+    , NodeConfigMetadata
+    , nodeConfigMetadata
+    , ncmAddtional
+
     -- * ServerConfig
     , ServerConfig
     , serverConfig
     , scValidNodeVersions
+    , scDefaultImageFamily
+    , scValidImageFamilies
     , scDefaultClusterVersion
 
     -- * ListClustersResponse
     , ListClustersResponse
     , listClustersResponse
     , lcrClusters
+    , lcrMissingZones
 
     -- * ClusterUpdate
     , ClusterUpdate
     , clusterUpdate
+    , cuDesiredAddonsConfig
+    , cuDesiredNodePoolId
     , cuDesiredNodeVersion
+    , cuDesiredMasterVersion
+    , cuDesiredMonitoringService
+
+    -- * ListNodePoolsResponse
+    , ListNodePoolsResponse
+    , listNodePoolsResponse
+    , lnprNodePools
+
+    -- * CreateNodePoolRequest
+    , CreateNodePoolRequest
+    , createNodePoolRequest
+    , cnprNodePool
     ) where
 
 import           Network.Google.Container.Types.Product

@@ -165,7 +165,7 @@ pzogBearerToken
       (\ s a -> s{_pzogBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzogProjectId :: Lens' ProjectsZonesOperationsGet Text
 pzogProjectId
   = lens _pzogProjectId

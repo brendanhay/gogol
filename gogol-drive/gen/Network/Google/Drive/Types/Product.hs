@@ -2236,6 +2236,7 @@ data File = File'
     , _fMD5Checksum           :: !(Maybe Text)
     , _fFolderColorRgb        :: !(Maybe Text)
     , _fMimeType              :: !(Maybe Text)
+    , _fIsAppAuthorized       :: !(Maybe Bool)
     , _fName                  :: !(Maybe Text)
     , _fParents               :: !(Maybe [Text])
     , _fStarred               :: !(Maybe Bool)
@@ -2308,6 +2309,8 @@ data File = File'
 --
 -- * 'fMimeType'
 --
+-- * 'fIsAppAuthorized'
+--
 -- * 'fName'
 --
 -- * 'fParents'
@@ -2374,6 +2377,7 @@ file =
     , _fMD5Checksum = Nothing
     , _fFolderColorRgb = Nothing
     , _fMimeType = Nothing
+    , _fIsAppAuthorized = Nothing
     , _fName = Nothing
     , _fParents = Nothing
     , _fStarred = Nothing
@@ -2550,6 +2554,12 @@ fMimeType :: Lens' File (Maybe Text)
 fMimeType
   = lens _fMimeType (\ s a -> s{_fMimeType = a})
 
+-- | Whether the file was created or opened by the requesting app.
+fIsAppAuthorized :: Lens' File (Maybe Bool)
+fIsAppAuthorized
+  = lens _fIsAppAuthorized
+      (\ s a -> s{_fIsAppAuthorized = a})
+
 -- | The name of the file. This is not necessarily unique within a folder.
 fName :: Lens' File (Maybe Text)
 fName = lens _fName (\ s a -> s{_fName = a})
@@ -2710,6 +2720,7 @@ instance FromJSON File where
                      <*> (o .:? "md5Checksum")
                      <*> (o .:? "folderColorRgb")
                      <*> (o .:? "mimeType")
+                     <*> (o .:? "isAppAuthorized")
                      <*> (o .:? "name")
                      <*> (o .:? "parents" .!= mempty)
                      <*> (o .:? "starred")
@@ -2757,6 +2768,7 @@ instance ToJSON File where
                   ("md5Checksum" .=) <$> _fMD5Checksum,
                   ("folderColorRgb" .=) <$> _fFolderColorRgb,
                   ("mimeType" .=) <$> _fMimeType,
+                  ("isAppAuthorized" .=) <$> _fIsAppAuthorized,
                   ("name" .=) <$> _fName, ("parents" .=) <$> _fParents,
                   ("starred" .=) <$> _fStarred,
                   ("spaces" .=) <$> _fSpaces,

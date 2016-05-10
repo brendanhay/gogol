@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Classroom API
+-- Manages classes, rosters, and invitations in Google Classroom.
 --
 -- /See:/ <https://developers.google.com/classroom/ Google Classroom API Reference>
 module Network.Google.Classroom

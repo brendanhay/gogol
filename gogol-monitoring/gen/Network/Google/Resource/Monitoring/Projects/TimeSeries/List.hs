@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists time series that match a filter.
+-- Lists time series that match a filter. This method does not require a
+-- Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.timeSeries.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.timeSeries.list@.
 module Network.Google.Resource.Monitoring.Projects.TimeSeries.List
     (
     -- * REST Resource
@@ -90,7 +91,8 @@ type ProjectsTimeSeriesListResource =
                                                  Get '[JSON]
                                                    ListTimeSeriesResponse
 
--- | Lists time series that match a filter.
+-- | Lists time series that match a filter. This method does not require a
+-- Stackdriver account.
 --
 -- /See:/ 'projectsTimeSeriesList' smart constructor.
 data ProjectsTimeSeriesList = ProjectsTimeSeriesList'
@@ -182,8 +184,8 @@ projectsTimeSeriesList pPtslName_ =
     , _ptslCallback = Nothing
     }
 
--- | (optional) If omitted, the interval is a point in time, \`endTime\`. If
--- \`startTime\` is present, it must be earlier than (less than)
+-- | If this value is omitted, the interval is a point in time, \`endTime\`.
+-- If \`startTime\` is present, it must be earlier than (less than)
 -- \`endTime\`. The interval begins after \`startTime\`—it does not include
 -- \`startTime\`.
 ptslIntervalStartTime :: Lens' ProjectsTimeSeriesList (Maybe Text)
@@ -202,8 +204,9 @@ ptslUploadProtocol
   = lens _ptslUploadProtocol
       (\ s a -> s{_ptslUploadProtocol = a})
 
--- | By default, results are ordered by time, from earliest to latest.
--- Currently, this field must be left blank.
+-- | Specifies the order in which the points of the time series should be
+-- returned. By default, results are not ordered. Currently, this field
+-- must be left blank.
 ptslOrderBy :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslOrderBy
   = lens _ptslOrderBy (\ s a -> s{_ptslOrderBy = a})
@@ -243,8 +246,8 @@ ptslBearerToken
   = lens _ptslBearerToken
       (\ s a -> s{_ptslBearerToken = a})
 
--- | The project on which to execute the request. The format is \"projects\/
--- \".
+-- | The project on which to execute the request. The format is
+-- \"projects\/{project_id_or_number}\".
 ptslName :: Lens' ProjectsTimeSeriesList Text
 ptslName = lens _ptslName (\ s a -> s{_ptslName = a})
 
@@ -313,7 +316,7 @@ ptslPageToken
   = lens _ptslPageToken
       (\ s a -> s{_ptslPageToken = a})
 
--- | (required) The end of the interval. The interval includes this time.
+-- | Required. The end of the interval. The interval includes this time.
 ptslIntervalEndTime :: Lens' ProjectsTimeSeriesList (Maybe Text)
 ptslIntervalEndTime
   = lens _ptslIntervalEndTime

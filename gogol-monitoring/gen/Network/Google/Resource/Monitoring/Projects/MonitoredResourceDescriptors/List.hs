@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lists monitored resource descriptors that match a filter.
+-- Lists monitored resource descriptors that match a filter. This method
+-- does not require a Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.list@.
 module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.List
     (
     -- * REST Resource
@@ -70,7 +71,8 @@ type ProjectsMonitoredResourceDescriptorsListResource
                                  Get '[JSON]
                                    ListMonitoredResourceDescriptorsResponse
 
--- | Lists monitored resource descriptors that match a filter.
+-- | Lists monitored resource descriptors that match a filter. This method
+-- does not require a Stackdriver account.
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsList' smart constructor.
 data ProjectsMonitoredResourceDescriptorsList = ProjectsMonitoredResourceDescriptorsList'
@@ -164,7 +166,7 @@ pmrdlBearerToken
       (\ s a -> s{_pmrdlBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/ \"\`.
+-- \`\"projects\/{project_id_or_number}\"\`.
 pmrdlName :: Lens' ProjectsMonitoredResourceDescriptorsList Text
 pmrdlName
   = lens _pmrdlName (\ s a -> s{_pmrdlName = a})

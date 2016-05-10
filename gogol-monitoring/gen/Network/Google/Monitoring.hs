@@ -13,10 +13,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Google Monitoring API lets you manage your monitoring data and
--- configurations.
+-- Manages your Stackdriver monitoring data and configurations. Projects
+-- must be associated with a Stackdriver account, except for the following
+-- methods:
+-- [monitoredResourceDescriptors.list](v3\/projects.monitoredResourceDescriptors\/list),
+-- [monitoredResourceDescriptors.get](v3\/projects.monitoredResourceDescriptors\/get),
+-- [metricDescriptors.list](v3\/projects.metricDescriptors\/list),
+-- [metricDescriptors.get](v3\/projects.metricDescriptors\/get), and
+-- [timeSeries.list](v3\/projects.timeSeries\/list).
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference>
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference>
 module Network.Google.Monitoring
     (
     -- * Service Configuration

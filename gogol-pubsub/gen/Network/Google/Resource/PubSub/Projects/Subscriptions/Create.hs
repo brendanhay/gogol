@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns \`ALREADY_EXISTS\`. If the
--- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
--- is not provided in the request, the server will assign a random name for
--- this subscription on the same project as the topic.
+-- Creates a subscription to a given topic. If the subscription already
+-- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
+-- exist, returns \`NOT_FOUND\`. If the name is not provided in the
+-- request, the server will assign a random name for this subscription on
+-- the same project as the topic.
 --
 -- /See:/ <https://cloud.google.com/pubsub/docs Google Cloud Pub/Sub API Reference> for @pubsub.projects.subscriptions.create@.
 module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
@@ -67,11 +67,11 @@ type ProjectsSubscriptionsCreateResource =
                          ReqBody '[JSON] Subscription :>
                            Put '[JSON] Subscription
 
--- | Creates a subscription to a given topic for a given subscriber. If the
--- subscription already exists, returns \`ALREADY_EXISTS\`. If the
--- corresponding topic doesn\'t exist, returns \`NOT_FOUND\`. If the name
--- is not provided in the request, the server will assign a random name for
--- this subscription on the same project as the topic.
+-- | Creates a subscription to a given topic. If the subscription already
+-- exists, returns \`ALREADY_EXISTS\`. If the corresponding topic doesn\'t
+-- exist, returns \`NOT_FOUND\`. If the name is not provided in the
+-- request, the server will assign a random name for this subscription on
+-- the same project as the topic.
 --
 -- /See:/ 'projectsSubscriptionsCreate' smart constructor.
 data ProjectsSubscriptionsCreate = ProjectsSubscriptionsCreate'

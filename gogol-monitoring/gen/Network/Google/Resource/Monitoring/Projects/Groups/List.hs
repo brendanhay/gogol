@@ -22,7 +22,7 @@
 --
 -- Lists the existing groups.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.groups.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.list@.
 module Network.Google.Resource.Monitoring.Projects.Groups.List
     (
     -- * REST Resource
@@ -150,9 +150,10 @@ pglUploadProtocol
   = lens _pglUploadProtocol
       (\ s a -> s{_pglUploadProtocol = a})
 
--- | A group name: \`\"projects\/ \/groups\/\"\`. Returns groups whose
--- \`parentName\` field contains the group name. If no groups have this
--- parent, the results are empty.
+-- | A group name:
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. Returns
+-- groups whose \`parentName\` field contains the group name. If no groups
+-- have this parent, the results are empty.
 pglChildrenOfGroup :: Lens' ProjectsGroupsList (Maybe Text)
 pglChildrenOfGroup
   = lens _pglChildrenOfGroup
@@ -162,10 +163,11 @@ pglChildrenOfGroup
 pglPp :: Lens' ProjectsGroupsList Bool
 pglPp = lens _pglPp (\ s a -> s{_pglPp = a})
 
--- | A group name: \`\"projects\/ \/groups\/\"\`. Returns the descendants of
--- the specified group. This is a superset of the results returned by the
--- \`childrenOfGroup\` filter, and includes children-of-children, and so
--- forth.
+-- | A group name:
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. Returns
+-- the descendants of the specified group. This is a superset of the
+-- results returned by the \`childrenOfGroup\` filter, and includes
+-- children-of-children, and so forth.
 pglDescendantsOfGroup :: Lens' ProjectsGroupsList (Maybe Text)
 pglDescendantsOfGroup
   = lens _pglDescendantsOfGroup
@@ -189,8 +191,8 @@ pglBearerToken
   = lens _pglBearerToken
       (\ s a -> s{_pglBearerToken = a})
 
--- | The project whose groups are to be listed. The format is \`\"projects\/
--- \"\`.
+-- | The project whose groups are to be listed. The format is
+-- \`\"projects\/{project_id_or_number}\"\`.
 pglName :: Lens' ProjectsGroupsList Text
 pglName = lens _pglName (\ s a -> s{_pglName = a})
 
@@ -208,7 +210,12 @@ pglPageSize
   = lens _pglPageSize (\ s a -> s{_pglPageSize = a}) .
       mapping _Coerce
 
--- | A group name: \`\"projects\/ \/groups\/
+-- | A group name:
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. Returns
+-- groups that are ancestors of the specified group. The groups are
+-- returned in order, starting with the immediate parent and ending with
+-- the most distant ancestor. If the specified group has no immediate
+-- parent, the results are empty.
 pglAncestorsOfGroup :: Lens' ProjectsGroupsList (Maybe Text)
 pglAncestorsOfGroup
   = lens _pglAncestorsOfGroup

@@ -45,7 +45,7 @@ import           Network.Google.Prelude
 -- 'ReportsRun' request conforms to.
 type ReportsRunResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "reports" :>

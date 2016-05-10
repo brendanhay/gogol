@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows MDMs\/EMMs and enterprises to manage the deployment of apps to
--- Android for Work users.
+-- Manages the deployment of apps to Android for Work users.
 --
 -- /See:/ <https://developers.google.com/android/work/play/emm-api Google Play EMM API Reference>
 module Network.Google.AndroidEnterprise
@@ -162,6 +161,9 @@ module Network.Google.AndroidEnterprise
     -- ** androidenterprise.products.getPermissions
     , module Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
 
+    -- ** androidenterprise.products.list
+    , module Network.Google.Resource.AndroidEnterprise.Products.List
+
     -- ** androidenterprise.products.updatePermissions
     , module Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
 
@@ -270,6 +272,12 @@ module Network.Google.AndroidEnterprise
     , glulrKind
     , glulrUser
 
+    -- ** TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpPreviousPageToken
+
     -- ** ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
@@ -290,6 +298,13 @@ module Network.Google.AndroidEnterprise
     , scOrderInPage
     , scId
     , scProductId
+
+    -- ** PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultPerPage
+    , piTotalResults
+    , piStartIndex
 
     -- ** ProductPermission
     , ProductPermission
@@ -436,6 +451,7 @@ module Network.Google.AndroidEnterprise
     -- ** Product
     , Product
     , product
+    , pSmallIconURL
     , pAuthorName
     , pKind
     , pWorkDetailsURL
@@ -486,6 +502,14 @@ module Network.Google.AndroidEnterprise
     , eeKind
     , eeReason
     , eeProductId
+
+    -- ** ProductsListResponse
+    , ProductsListResponse
+    , productsListResponse
+    , plrTokenPagination
+    , plrPageInfo
+    , plrKind
+    , plrProduct
     ) where
 
 import           Network.Google.AndroidEnterprise.Types
@@ -534,6 +558,7 @@ import           Network.Google.Resource.AndroidEnterprise.Products.GenerateAppr
 import           Network.Google.Resource.AndroidEnterprise.Products.Get
 import           Network.Google.Resource.AndroidEnterprise.Products.GetAppRestrictionsSchema
 import           Network.Google.Resource.AndroidEnterprise.Products.GetPermissions
+import           Network.Google.Resource.AndroidEnterprise.Products.List
 import           Network.Google.Resource.AndroidEnterprise.Products.UpdatePermissions
 import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Delete
 import           Network.Google.Resource.AndroidEnterprise.Storelayoutclusters.Get
@@ -613,6 +638,7 @@ type AndroidEnterpriseAPI =
        :<|> EntitlementsUpdateResource
        :<|> PermissionsGetResource
        :<|> ProductsGenerateApprovalURLResource
+       :<|> ProductsListResource
        :<|> ProductsGetResource
        :<|> ProductsGetAppRestrictionsSchemaResource
        :<|> ProductsApproveResource

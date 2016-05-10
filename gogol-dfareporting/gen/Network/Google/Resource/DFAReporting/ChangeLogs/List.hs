@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'ChangeLogsList' request conforms to.
 type ChangeLogsListResource =
      "dfareporting" :>
-       "v2.4" :>
+       "v2.5beta1" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "changeLogs" :>

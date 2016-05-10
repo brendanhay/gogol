@@ -105,6 +105,11 @@ module Network.Google.YouTube.Types
     , acdrSeedResourceId
     , acdrReason
 
+    -- * LiveChatMessageRetractedDetails
+    , LiveChatMessageRetractedDetails
+    , liveChatMessageRetractedDetails
+    , lcmrdRetractedMessageId
+
     -- * ContentRatingRcnofRating
     , ContentRatingRcnofRating (..)
 
@@ -155,6 +160,9 @@ module Network.Google.YouTube.Types
     , piPromotedByContentOwner
     , piId
     , piTiming
+
+    -- * LiveChatUserBannedMessageDetailsBanType
+    , LiveChatUserBannedMessageDetailsBanType (..)
 
     -- * VideoProcessingDetailsProcessingFailureReason
     , VideoProcessingDetailsProcessingFailureReason (..)
@@ -283,6 +291,16 @@ module Network.Google.YouTube.Types
     , varrlrVisitorId
     , varrlrEventId
 
+    -- * CdnSettingsResolution
+    , CdnSettingsResolution (..)
+
+    -- * LiveChatUserBannedMessageDetails
+    , LiveChatUserBannedMessageDetails
+    , liveChatUserBannedMessageDetails
+    , lcubmdBanType
+    , lcubmdBannedUserDetails
+    , lcubmdBanDurationSeconds
+
     -- * SearchResultSnippetLiveBroadcastContent
     , SearchResultSnippetLiveBroadcastContent (..)
 
@@ -294,10 +312,12 @@ module Network.Google.YouTube.Types
     , lbcdClosedCaptionsType
     , lbcdEnableEmbed
     , lbcdStartWithSlate
+    , lbcdProjection
     , lbcdMonitorStream
     , lbcdBoundStreamId
     , lbcdRecordFromStart
     , lbcdEnableClosedCaptions
+    , lbcdBoundStreamLastUpdateTimeMs
     , lbcdEnableDvr
 
     -- * ContentRatingAnatelRating
@@ -353,6 +373,7 @@ module Network.Google.YouTube.Types
     , vcdDimension
     , vcdCaption
     , vcdRegionRestriction
+    , vcdProjection
     , vcdDuration
     , vcdContentRating
     , vcdLicensedContent
@@ -853,9 +874,12 @@ module Network.Google.YouTube.Types
     -- * LiveChatMessageSnippet
     , LiveChatMessageSnippet
     , liveChatMessageSnippet
+    , lcmsMessageDeletedDetails
     , lcmsLiveChatId
     , lcmsPublishedAt
+    , lcmsUserBannedDetails
     , lcmsTextMessageDetails
+    , lcmsMessageRetractedDetails
     , lcmsType
     , lcmsAuthorChannelId
     , lcmsFanFundingEventDetails
@@ -1085,6 +1109,11 @@ module Network.Google.YouTube.Types
     , sKind
     , sId
 
+    -- * LiveChatMessageDeletedDetails
+    , LiveChatMessageDeletedDetails
+    , liveChatMessageDeletedDetails
+    , lcmddDeletedMessageId
+
     -- * ContentRatingYtRating
     , ContentRatingYtRating (..)
 
@@ -1111,7 +1140,9 @@ module Network.Google.YouTube.Types
     , CdnSettings
     , cdnSettings
     , csIngestionInfo
+    , csFrameRate
     , csFormat
+    , csResolution
     , csIngestionType
 
     -- * VideoContentDetailsCaption
@@ -1179,6 +1210,9 @@ module Network.Google.YouTube.Types
     , ActivityContentDetailsBulletin
     , activityContentDetailsBulletin
     , acdbResourceId
+
+    -- * LiveBroadcastContentDetailsProjection
+    , LiveBroadcastContentDetailsProjection (..)
 
     -- * CaptionSnippetStatus
     , CaptionSnippetStatus (..)
@@ -1264,6 +1298,9 @@ module Network.Google.YouTube.Types
 
     -- * ContentRatingEcbmctRating
     , ContentRatingEcbmctRating (..)
+
+    -- * VideoContentDetailsProjection
+    , VideoContentDetailsProjection (..)
 
     -- * ContentRatingGrfilmRating
     , ContentRatingGrfilmRating (..)
@@ -1693,6 +1730,9 @@ module Network.Google.YouTube.Types
     , csIsAutoSynced
     , csIsEasyReader
     , csAudioTrackType
+
+    -- * CdnSettingsFrameRate
+    , CdnSettingsFrameRate (..)
 
     -- * Comment
     , Comment

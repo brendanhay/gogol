@@ -244,6 +244,7 @@ instance ToJSON VerifyCustomTokenResponse where
 data IdpConfig = IdpConfig'
     { _icClientId          :: !(Maybe Text)
     , _icEnabled           :: !(Maybe Bool)
+    , _icSecret            :: !(Maybe Text)
     , _icExperimentPercent :: !(Maybe (Textual Int32))
     , _icProvider          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -256,6 +257,8 @@ data IdpConfig = IdpConfig'
 --
 -- * 'icEnabled'
 --
+-- * 'icSecret'
+--
 -- * 'icExperimentPercent'
 --
 -- * 'icProvider'
@@ -265,6 +268,7 @@ idpConfig =
     IdpConfig'
     { _icClientId = Nothing
     , _icEnabled = Nothing
+    , _icSecret = Nothing
     , _icExperimentPercent = Nothing
     , _icProvider = Nothing
     }
@@ -278,6 +282,10 @@ icClientId
 icEnabled :: Lens' IdpConfig (Maybe Bool)
 icEnabled
   = lens _icEnabled (\ s a -> s{_icEnabled = a})
+
+-- | OAuth2 client secret.
+icSecret :: Lens' IdpConfig (Maybe Text)
+icSecret = lens _icSecret (\ s a -> s{_icSecret = a})
 
 -- | Percent of users who will be prompted\/redirected federated login for
 -- this IDP.
@@ -298,7 +306,8 @@ instance FromJSON IdpConfig where
               (\ o ->
                  IdpConfig' <$>
                    (o .:? "clientId") <*> (o .:? "enabled") <*>
-                     (o .:? "experimentPercent")
+                     (o .:? "secret")
+                     <*> (o .:? "experimentPercent")
                      <*> (o .:? "provider"))
 
 instance ToJSON IdpConfig where
@@ -307,6 +316,7 @@ instance ToJSON IdpConfig where
               (catMaybes
                  [("clientId" .=) <$> _icClientId,
                   ("enabled" .=) <$> _icEnabled,
+                  ("secret" .=) <$> _icSecret,
                   ("experimentPercent" .=) <$> _icExperimentPercent,
                   ("provider" .=) <$> _icProvider])
 
@@ -594,6 +604,7 @@ instance ToJSON
 data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProviderUserInfoItem'
     { _sairpuiiProviderId  :: !(Maybe Text)
     , _sairpuiiPhotoURL    :: !(Maybe Text)
+    , _sairpuiiFederatedId :: !(Maybe Text)
     , _sairpuiiDisplayName :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -605,6 +616,8 @@ data SetAccountInfoResponseProviderUserInfoItem = SetAccountInfoResponseProvider
 --
 -- * 'sairpuiiPhotoURL'
 --
+-- * 'sairpuiiFederatedId'
+--
 -- * 'sairpuiiDisplayName'
 setAccountInfoResponseProviderUserInfoItem
     :: SetAccountInfoResponseProviderUserInfoItem
@@ -612,6 +625,7 @@ setAccountInfoResponseProviderUserInfoItem =
     SetAccountInfoResponseProviderUserInfoItem'
     { _sairpuiiProviderId = Nothing
     , _sairpuiiPhotoURL = Nothing
+    , _sairpuiiFederatedId = Nothing
     , _sairpuiiDisplayName = Nothing
     }
 
@@ -629,6 +643,12 @@ sairpuiiPhotoURL
   = lens _sairpuiiPhotoURL
       (\ s a -> s{_sairpuiiPhotoURL = a})
 
+-- | User\'s identifier at IDP.
+sairpuiiFederatedId :: Lens' SetAccountInfoResponseProviderUserInfoItem (Maybe Text)
+sairpuiiFederatedId
+  = lens _sairpuiiFederatedId
+      (\ s a -> s{_sairpuiiFederatedId = a})
+
 -- | The user\'s display name at the IDP.
 sairpuiiDisplayName :: Lens' SetAccountInfoResponseProviderUserInfoItem (Maybe Text)
 sairpuiiDisplayName
@@ -643,7 +663,8 @@ instance FromJSON
               (\ o ->
                  SetAccountInfoResponseProviderUserInfoItem' <$>
                    (o .:? "providerId") <*> (o .:? "photoUrl") <*>
-                     (o .:? "displayName"))
+                     (o .:? "federatedId")
+                     <*> (o .:? "displayName"))
 
 instance ToJSON
          SetAccountInfoResponseProviderUserInfoItem where
@@ -653,6 +674,7 @@ instance ToJSON
               (catMaybes
                  [("providerId" .=) <$> _sairpuiiProviderId,
                   ("photoUrl" .=) <$> _sairpuiiPhotoURL,
+                  ("federatedId" .=) <$> _sairpuiiFederatedId,
                   ("displayName" .=) <$> _sairpuiiDisplayName])
 
 -- | Request to verify the password.
@@ -911,19 +933,24 @@ instance ToJSON SignupNewUserResponse where
 --
 -- /See:/ 'identitytoolkitRelyingPartySetProjectConfigRequest' smart constructor.
 data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelyingPartySetProjectConfigRequest'
-    { _irpspcrAPIKey                 :: !(Maybe Text)
-    , _irpspcrIdpConfig              :: !(Maybe [IdpConfig])
-    , _irpspcrChangeEmailTemplate    :: !(Maybe EmailTemplate)
-    , _irpspcrDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpspcrVerifyEmailTemplate    :: !(Maybe EmailTemplate)
-    , _irpspcrAllowPasswordUser      :: !(Maybe Bool)
-    , _irpspcrResetPasswordTemplate  :: !(Maybe EmailTemplate)
-    , _irpspcrUseEmailSending        :: !(Maybe Bool)
+    { _irpspcrAuthorizedDomains           :: !(Maybe [Text])
+    , _irpspcrAPIKey                      :: !(Maybe Text)
+    , _irpspcrIdpConfig                   :: !(Maybe [IdpConfig])
+    , _irpspcrChangeEmailTemplate         :: !(Maybe EmailTemplate)
+    , _irpspcrDelegatedProjectNumber      :: !(Maybe (Textual Int64))
+    , _irpspcrVerifyEmailTemplate         :: !(Maybe EmailTemplate)
+    , _irpspcrEnableAnonymousUser         :: !(Maybe Bool)
+    , _irpspcrLegacyResetPasswordTemplate :: !(Maybe EmailTemplate)
+    , _irpspcrAllowPasswordUser           :: !(Maybe Bool)
+    , _irpspcrResetPasswordTemplate       :: !(Maybe EmailTemplate)
+    , _irpspcrUseEmailSending             :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySetProjectConfigRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'irpspcrAuthorizedDomains'
 --
 -- * 'irpspcrAPIKey'
 --
@@ -935,6 +962,10 @@ data IdentitytoolkitRelyingPartySetProjectConfigRequest = IdentitytoolkitRelying
 --
 -- * 'irpspcrVerifyEmailTemplate'
 --
+-- * 'irpspcrEnableAnonymousUser'
+--
+-- * 'irpspcrLegacyResetPasswordTemplate'
+--
 -- * 'irpspcrAllowPasswordUser'
 --
 -- * 'irpspcrResetPasswordTemplate'
@@ -944,15 +975,26 @@ identitytoolkitRelyingPartySetProjectConfigRequest
     :: IdentitytoolkitRelyingPartySetProjectConfigRequest
 identitytoolkitRelyingPartySetProjectConfigRequest =
     IdentitytoolkitRelyingPartySetProjectConfigRequest'
-    { _irpspcrAPIKey = Nothing
+    { _irpspcrAuthorizedDomains = Nothing
+    , _irpspcrAPIKey = Nothing
     , _irpspcrIdpConfig = Nothing
     , _irpspcrChangeEmailTemplate = Nothing
     , _irpspcrDelegatedProjectNumber = Nothing
     , _irpspcrVerifyEmailTemplate = Nothing
+    , _irpspcrEnableAnonymousUser = Nothing
+    , _irpspcrLegacyResetPasswordTemplate = Nothing
     , _irpspcrAllowPasswordUser = Nothing
     , _irpspcrResetPasswordTemplate = Nothing
     , _irpspcrUseEmailSending = Nothing
     }
+
+-- | Authorized domains for widget redirect.
+irpspcrAuthorizedDomains :: Lens' IdentitytoolkitRelyingPartySetProjectConfigRequest [Text]
+irpspcrAuthorizedDomains
+  = lens _irpspcrAuthorizedDomains
+      (\ s a -> s{_irpspcrAuthorizedDomains = a})
+      . _Default
+      . _Coerce
 
 -- | Browser API key, needed when making http request to Apiary.
 irpspcrAPIKey :: Lens' IdentitytoolkitRelyingPartySetProjectConfigRequest (Maybe Text)
@@ -988,6 +1030,18 @@ irpspcrVerifyEmailTemplate
   = lens _irpspcrVerifyEmailTemplate
       (\ s a -> s{_irpspcrVerifyEmailTemplate = a})
 
+-- | Whether to enable anonymous user.
+irpspcrEnableAnonymousUser :: Lens' IdentitytoolkitRelyingPartySetProjectConfigRequest (Maybe Bool)
+irpspcrEnableAnonymousUser
+  = lens _irpspcrEnableAnonymousUser
+      (\ s a -> s{_irpspcrEnableAnonymousUser = a})
+
+-- | Legacy reset password email template.
+irpspcrLegacyResetPasswordTemplate :: Lens' IdentitytoolkitRelyingPartySetProjectConfigRequest (Maybe EmailTemplate)
+irpspcrLegacyResetPasswordTemplate
+  = lens _irpspcrLegacyResetPasswordTemplate
+      (\ s a -> s{_irpspcrLegacyResetPasswordTemplate = a})
+
 -- | Whether to allow password user sign in or sign up.
 irpspcrAllowPasswordUser :: Lens' IdentitytoolkitRelyingPartySetProjectConfigRequest (Maybe Bool)
 irpspcrAllowPasswordUser
@@ -1015,10 +1069,14 @@ instance FromJSON
               (\ o ->
                  IdentitytoolkitRelyingPartySetProjectConfigRequest'
                    <$>
-                   (o .:? "apiKey") <*> (o .:? "idpConfig" .!= mempty)
+                   (o .:? "authorizedDomains" .!= mempty) <*>
+                     (o .:? "apiKey")
+                     <*> (o .:? "idpConfig" .!= mempty)
                      <*> (o .:? "changeEmailTemplate")
                      <*> (o .:? "delegatedProjectNumber")
                      <*> (o .:? "verifyEmailTemplate")
+                     <*> (o .:? "enableAnonymousUser")
+                     <*> (o .:? "legacyResetPasswordTemplate")
                      <*> (o .:? "allowPasswordUser")
                      <*> (o .:? "resetPasswordTemplate")
                      <*> (o .:? "useEmailSending"))
@@ -1030,7 +1088,9 @@ instance ToJSON
           IdentitytoolkitRelyingPartySetProjectConfigRequest'{..}
           = object
               (catMaybes
-                 [("apiKey" .=) <$> _irpspcrAPIKey,
+                 [("authorizedDomains" .=) <$>
+                    _irpspcrAuthorizedDomains,
+                  ("apiKey" .=) <$> _irpspcrAPIKey,
                   ("idpConfig" .=) <$> _irpspcrIdpConfig,
                   ("changeEmailTemplate" .=) <$>
                     _irpspcrChangeEmailTemplate,
@@ -1038,6 +1098,10 @@ instance ToJSON
                     _irpspcrDelegatedProjectNumber,
                   ("verifyEmailTemplate" .=) <$>
                     _irpspcrVerifyEmailTemplate,
+                  ("enableAnonymousUser" .=) <$>
+                    _irpspcrEnableAnonymousUser,
+                  ("legacyResetPasswordTemplate" .=) <$>
+                    _irpspcrLegacyResetPasswordTemplate,
                   ("allowPasswordUser" .=) <$>
                     _irpspcrAllowPasswordUser,
                   ("resetPasswordTemplate" .=) <$>
@@ -1605,15 +1669,17 @@ instance ToJSON DownloadAccountResponse where
 --
 -- /See:/ 'identitytoolkitRelyingPartyGetProjectConfigResponse' smart constructor.
 data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyingPartyGetProjectConfigResponse'
-    { _irpgpcrAuthorizedDomains     :: !(Maybe [Text])
-    , _irpgpcrAPIKey                :: !(Maybe Text)
-    , _irpgpcrIdpConfig             :: !(Maybe [IdpConfig])
-    , _irpgpcrChangeEmailTemplate   :: !(Maybe EmailTemplate)
-    , _irpgpcrVerifyEmailTemplate   :: !(Maybe EmailTemplate)
-    , _irpgpcrAllowPasswordUser     :: !(Maybe Bool)
-    , _irpgpcrResetPasswordTemplate :: !(Maybe EmailTemplate)
-    , _irpgpcrProjectId             :: !(Maybe Text)
-    , _irpgpcrUseEmailSending       :: !(Maybe Bool)
+    { _irpgpcrAuthorizedDomains           :: !(Maybe [Text])
+    , _irpgpcrAPIKey                      :: !(Maybe Text)
+    , _irpgpcrIdpConfig                   :: !(Maybe [IdpConfig])
+    , _irpgpcrChangeEmailTemplate         :: !(Maybe EmailTemplate)
+    , _irpgpcrVerifyEmailTemplate         :: !(Maybe EmailTemplate)
+    , _irpgpcrEnableAnonymousUser         :: !(Maybe Bool)
+    , _irpgpcrLegacyResetPasswordTemplate :: !(Maybe EmailTemplate)
+    , _irpgpcrAllowPasswordUser           :: !(Maybe Bool)
+    , _irpgpcrResetPasswordTemplate       :: !(Maybe EmailTemplate)
+    , _irpgpcrProjectId                   :: !(Maybe Text)
+    , _irpgpcrUseEmailSending             :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyGetProjectConfigResponse' with the minimum fields required to make a request.
@@ -1629,6 +1695,10 @@ data IdentitytoolkitRelyingPartyGetProjectConfigResponse = IdentitytoolkitRelyin
 -- * 'irpgpcrChangeEmailTemplate'
 --
 -- * 'irpgpcrVerifyEmailTemplate'
+--
+-- * 'irpgpcrEnableAnonymousUser'
+--
+-- * 'irpgpcrLegacyResetPasswordTemplate'
 --
 -- * 'irpgpcrAllowPasswordUser'
 --
@@ -1646,6 +1716,8 @@ identitytoolkitRelyingPartyGetProjectConfigResponse =
     , _irpgpcrIdpConfig = Nothing
     , _irpgpcrChangeEmailTemplate = Nothing
     , _irpgpcrVerifyEmailTemplate = Nothing
+    , _irpgpcrEnableAnonymousUser = Nothing
+    , _irpgpcrLegacyResetPasswordTemplate = Nothing
     , _irpgpcrAllowPasswordUser = Nothing
     , _irpgpcrResetPasswordTemplate = Nothing
     , _irpgpcrProjectId = Nothing
@@ -1686,6 +1758,18 @@ irpgpcrVerifyEmailTemplate
   = lens _irpgpcrVerifyEmailTemplate
       (\ s a -> s{_irpgpcrVerifyEmailTemplate = a})
 
+-- | Whether anonymous user is enabled.
+irpgpcrEnableAnonymousUser :: Lens' IdentitytoolkitRelyingPartyGetProjectConfigResponse (Maybe Bool)
+irpgpcrEnableAnonymousUser
+  = lens _irpgpcrEnableAnonymousUser
+      (\ s a -> s{_irpgpcrEnableAnonymousUser = a})
+
+-- | Legacy reset password email template.
+irpgpcrLegacyResetPasswordTemplate :: Lens' IdentitytoolkitRelyingPartyGetProjectConfigResponse (Maybe EmailTemplate)
+irpgpcrLegacyResetPasswordTemplate
+  = lens _irpgpcrLegacyResetPasswordTemplate
+      (\ s a -> s{_irpgpcrLegacyResetPasswordTemplate = a})
+
 -- | Whether to allow password user sign in or sign up.
 irpgpcrAllowPasswordUser :: Lens' IdentitytoolkitRelyingPartyGetProjectConfigResponse (Maybe Bool)
 irpgpcrAllowPasswordUser
@@ -1724,6 +1808,8 @@ instance FromJSON
                      <*> (o .:? "idpConfig" .!= mempty)
                      <*> (o .:? "changeEmailTemplate")
                      <*> (o .:? "verifyEmailTemplate")
+                     <*> (o .:? "enableAnonymousUser")
+                     <*> (o .:? "legacyResetPasswordTemplate")
                      <*> (o .:? "allowPasswordUser")
                      <*> (o .:? "resetPasswordTemplate")
                      <*> (o .:? "projectId")
@@ -1744,6 +1830,10 @@ instance ToJSON
                     _irpgpcrChangeEmailTemplate,
                   ("verifyEmailTemplate" .=) <$>
                     _irpgpcrVerifyEmailTemplate,
+                  ("enableAnonymousUser" .=) <$>
+                    _irpgpcrEnableAnonymousUser,
+                  ("legacyResetPasswordTemplate" .=) <$>
+                    _irpgpcrLegacyResetPasswordTemplate,
                   ("allowPasswordUser" .=) <$>
                     _irpgpcrAllowPasswordUser,
                   ("resetPasswordTemplate" .=) <$>
@@ -3087,6 +3177,8 @@ data SetAccountInfoResponse = SetAccountInfoResponse'
     , _sairProviderUserInfo :: !(Maybe [SetAccountInfoResponseProviderUserInfoItem])
     , _sairExpiresIn        :: !(Maybe (Textual Int64))
     , _sairDisplayName      :: !(Maybe Text)
+    , _sairPasswordHash     :: !(Maybe (Textual Word8))
+    , _sairLocalId          :: !(Maybe Text)
     , _sairNewEmail         :: !(Maybe Text)
     , _sairIdToken          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3109,6 +3201,10 @@ data SetAccountInfoResponse = SetAccountInfoResponse'
 --
 -- * 'sairDisplayName'
 --
+-- * 'sairPasswordHash'
+--
+-- * 'sairLocalId'
+--
 -- * 'sairNewEmail'
 --
 -- * 'sairIdToken'
@@ -3123,6 +3219,8 @@ setAccountInfoResponse =
     , _sairProviderUserInfo = Nothing
     , _sairExpiresIn = Nothing
     , _sairDisplayName = Nothing
+    , _sairPasswordHash = Nothing
+    , _sairLocalId = Nothing
     , _sairNewEmail = Nothing
     , _sairIdToken = Nothing
     }
@@ -3169,6 +3267,18 @@ sairDisplayName
   = lens _sairDisplayName
       (\ s a -> s{_sairDisplayName = a})
 
+-- | The user\'s hashed password.
+sairPasswordHash :: Lens' SetAccountInfoResponse (Maybe Word8)
+sairPasswordHash
+  = lens _sairPasswordHash
+      (\ s a -> s{_sairPasswordHash = a})
+      . mapping _Coerce
+
+-- | The local ID of the user.
+sairLocalId :: Lens' SetAccountInfoResponse (Maybe Text)
+sairLocalId
+  = lens _sairLocalId (\ s a -> s{_sairLocalId = a})
+
 -- | The new email the user attempts to change to.
 sairNewEmail :: Lens' SetAccountInfoResponse (Maybe Text)
 sairNewEmail
@@ -3191,6 +3301,8 @@ instance FromJSON SetAccountInfoResponse where
                      <*> (o .:? "providerUserInfo" .!= mempty)
                      <*> (o .:? "expiresIn")
                      <*> (o .:? "displayName")
+                     <*> (o .:? "passwordHash")
+                     <*> (o .:? "localId")
                      <*> (o .:? "newEmail")
                      <*> (o .:? "idToken"))
 
@@ -3205,6 +3317,8 @@ instance ToJSON SetAccountInfoResponse where
                   ("providerUserInfo" .=) <$> _sairProviderUserInfo,
                   ("expiresIn" .=) <$> _sairExpiresIn,
                   ("displayName" .=) <$> _sairDisplayName,
+                  ("passwordHash" .=) <$> _sairPasswordHash,
+                  ("localId" .=) <$> _sairLocalId,
                   ("newEmail" .=) <$> _sairNewEmail,
                   ("idToken" .=) <$> _sairIdToken])
 
@@ -3213,14 +3327,13 @@ instance ToJSON SetAccountInfoResponse where
 --
 -- /See:/ 'identitytoolkitRelyingPartySignupNewUserRequest' smart constructor.
 data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPartySignupNewUserRequest'
-    { _irpsnurEmail             :: !(Maybe Text)
-    , _irpsnurInstanceId        :: !(Maybe Text)
-    , _irpsnurCaptchaChallenge  :: !(Maybe Text)
-    , _irpsnurReturnSecureToken :: !(Maybe Bool)
-    , _irpsnurPassword          :: !(Maybe Text)
-    , _irpsnurCaptchaResponse   :: !(Maybe Text)
-    , _irpsnurDisplayName       :: !(Maybe Text)
-    , _irpsnurIdToken           :: !(Maybe Text)
+    { _irpsnurEmail            :: !(Maybe Text)
+    , _irpsnurInstanceId       :: !(Maybe Text)
+    , _irpsnurCaptchaChallenge :: !(Maybe Text)
+    , _irpsnurPassword         :: !(Maybe Text)
+    , _irpsnurCaptchaResponse  :: !(Maybe Text)
+    , _irpsnurDisplayName      :: !(Maybe Text)
+    , _irpsnurIdToken          :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartySignupNewUserRequest' with the minimum fields required to make a request.
@@ -3232,8 +3345,6 @@ data IdentitytoolkitRelyingPartySignupNewUserRequest = IdentitytoolkitRelyingPar
 -- * 'irpsnurInstanceId'
 --
 -- * 'irpsnurCaptchaChallenge'
---
--- * 'irpsnurReturnSecureToken'
 --
 -- * 'irpsnurPassword'
 --
@@ -3249,7 +3360,6 @@ identitytoolkitRelyingPartySignupNewUserRequest =
     { _irpsnurEmail = Nothing
     , _irpsnurInstanceId = Nothing
     , _irpsnurCaptchaChallenge = Nothing
-    , _irpsnurReturnSecureToken = Nothing
     , _irpsnurPassword = Nothing
     , _irpsnurCaptchaResponse = Nothing
     , _irpsnurDisplayName = Nothing
@@ -3272,12 +3382,6 @@ irpsnurCaptchaChallenge :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest
 irpsnurCaptchaChallenge
   = lens _irpsnurCaptchaChallenge
       (\ s a -> s{_irpsnurCaptchaChallenge = a})
-
--- | Whether return sts id token and refresh token instead of gitkit token.
-irpsnurReturnSecureToken :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Bool)
-irpsnurReturnSecureToken
-  = lens _irpsnurReturnSecureToken
-      (\ s a -> s{_irpsnurReturnSecureToken = a})
 
 -- | The new password of the user.
 irpsnurPassword :: Lens' IdentitytoolkitRelyingPartySignupNewUserRequest (Maybe Text)
@@ -3312,7 +3416,6 @@ instance FromJSON
                  IdentitytoolkitRelyingPartySignupNewUserRequest' <$>
                    (o .:? "email") <*> (o .:? "instanceId") <*>
                      (o .:? "captchaChallenge")
-                     <*> (o .:? "returnSecureToken")
                      <*> (o .:? "password")
                      <*> (o .:? "captchaResponse")
                      <*> (o .:? "displayName")
@@ -3327,8 +3430,6 @@ instance ToJSON
                  [("email" .=) <$> _irpsnurEmail,
                   ("instanceId" .=) <$> _irpsnurInstanceId,
                   ("captchaChallenge" .=) <$> _irpsnurCaptchaChallenge,
-                  ("returnSecureToken" .=) <$>
-                    _irpsnurReturnSecureToken,
                   ("password" .=) <$> _irpsnurPassword,
                   ("captchaResponse" .=) <$> _irpsnurCaptchaResponse,
                   ("displayName" .=) <$> _irpsnurDisplayName,
@@ -3357,6 +3458,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse'
     , _varAction                 :: !(Maybe Text)
     , _varNeedEmail              :: !(Maybe Bool)
     , _varFederatedId            :: !(Maybe Text)
+    , _varOAuthIdToken           :: !(Maybe Text)
     , _varAppScheme              :: !(Maybe Text)
     , _varExpiresIn              :: !(Maybe (Textual Int64))
     , _varInputEmail             :: !(Maybe Text)
@@ -3416,6 +3518,8 @@ data VerifyAssertionResponse = VerifyAssertionResponse'
 --
 -- * 'varFederatedId'
 --
+-- * 'varOAuthIdToken'
+--
 -- * 'varAppScheme'
 --
 -- * 'varExpiresIn'
@@ -3468,6 +3572,7 @@ verifyAssertionResponse =
     , _varAction = Nothing
     , _varNeedEmail = Nothing
     , _varFederatedId = Nothing
+    , _varOAuthIdToken = Nothing
     , _varAppScheme = Nothing
     , _varExpiresIn = Nothing
     , _varInputEmail = Nothing
@@ -3603,6 +3708,12 @@ varFederatedId
   = lens _varFederatedId
       (\ s a -> s{_varFederatedId = a})
 
+-- | The OIDC id token.
+varOAuthIdToken :: Lens' VerifyAssertionResponse (Maybe Text)
+varOAuthIdToken
+  = lens _varOAuthIdToken
+      (\ s a -> s{_varOAuthIdToken = a})
+
 -- | The custom scheme used by mobile app.
 varAppScheme :: Lens' VerifyAssertionResponse (Maybe Text)
 varAppScheme
@@ -3716,6 +3827,7 @@ instance FromJSON VerifyAssertionResponse where
                      <*> (o .:? "action")
                      <*> (o .:? "needEmail")
                      <*> (o .:? "federatedId")
+                     <*> (o .:? "oauthIdToken")
                      <*> (o .:? "appScheme")
                      <*> (o .:? "expiresIn")
                      <*> (o .:? "inputEmail")
@@ -3755,6 +3867,7 @@ instance ToJSON VerifyAssertionResponse where
                   ("action" .=) <$> _varAction,
                   ("needEmail" .=) <$> _varNeedEmail,
                   ("federatedId" .=) <$> _varFederatedId,
+                  ("oauthIdToken" .=) <$> _varOAuthIdToken,
                   ("appScheme" .=) <$> _varAppScheme,
                   ("expiresIn" .=) <$> _varExpiresIn,
                   ("inputEmail" .=) <$> _varInputEmail,

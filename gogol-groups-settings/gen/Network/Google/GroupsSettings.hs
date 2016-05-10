@@ -64,6 +64,7 @@ module Network.Google.GroupsSettings
     , gMessageDisplayFont
     , gCustomReplyTo
     , gWhoCanContactOwner
+    , gWhoCanAdd
     , gWhoCanInvite
     , gWhoCanLeaveGroup
     , gAllowGoogleCommunication

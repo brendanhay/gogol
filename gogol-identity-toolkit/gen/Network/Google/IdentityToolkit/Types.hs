@@ -48,6 +48,7 @@ module Network.Google.IdentityToolkit.Types
     , idpConfig
     , icClientId
     , icEnabled
+    , icSecret
     , icExperimentPercent
     , icProvider
 
@@ -84,6 +85,7 @@ module Network.Google.IdentityToolkit.Types
     , setAccountInfoResponseProviderUserInfoItem
     , sairpuiiProviderId
     , sairpuiiPhotoURL
+    , sairpuiiFederatedId
     , sairpuiiDisplayName
 
     -- * IdentitytoolkitRelyingPartyVerifyPasswordRequest
@@ -113,11 +115,14 @@ module Network.Google.IdentityToolkit.Types
     -- * IdentitytoolkitRelyingPartySetProjectConfigRequest
     , IdentitytoolkitRelyingPartySetProjectConfigRequest
     , identitytoolkitRelyingPartySetProjectConfigRequest
+    , irpspcrAuthorizedDomains
     , irpspcrAPIKey
     , irpspcrIdpConfig
     , irpspcrChangeEmailTemplate
     , irpspcrDelegatedProjectNumber
     , irpspcrVerifyEmailTemplate
+    , irpspcrEnableAnonymousUser
+    , irpspcrLegacyResetPasswordTemplate
     , irpspcrAllowPasswordUser
     , irpspcrResetPasswordTemplate
     , irpspcrUseEmailSending
@@ -183,6 +188,8 @@ module Network.Google.IdentityToolkit.Types
     , irpgpcrIdpConfig
     , irpgpcrChangeEmailTemplate
     , irpgpcrVerifyEmailTemplate
+    , irpgpcrEnableAnonymousUser
+    , irpgpcrLegacyResetPasswordTemplate
     , irpgpcrAllowPasswordUser
     , irpgpcrResetPasswordTemplate
     , irpgpcrProjectId
@@ -333,6 +340,8 @@ module Network.Google.IdentityToolkit.Types
     , sairProviderUserInfo
     , sairExpiresIn
     , sairDisplayName
+    , sairPasswordHash
+    , sairLocalId
     , sairNewEmail
     , sairIdToken
 
@@ -342,7 +351,6 @@ module Network.Google.IdentityToolkit.Types
     , irpsnurEmail
     , irpsnurInstanceId
     , irpsnurCaptchaChallenge
-    , irpsnurReturnSecureToken
     , irpsnurPassword
     , irpsnurCaptchaResponse
     , irpsnurDisplayName
@@ -370,6 +378,7 @@ module Network.Google.IdentityToolkit.Types
     , varAction
     , varNeedEmail
     , varFederatedId
+    , varOAuthIdToken
     , varAppScheme
     , varExpiresIn
     , varInputEmail

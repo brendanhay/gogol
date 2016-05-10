@@ -148,7 +148,7 @@ pzolUploadType
 
 -- | The name of the Google Compute Engine
 -- [zone](\/compute\/docs\/zones#available) to return operations for, or
--- \"-\" for all zones.
+-- \`-\` for all zones.
 pzolZone :: Lens' ProjectsZonesOperationsList Text
 pzolZone = lens _pzolZone (\ s a -> s{_pzolZone = a})
 
@@ -159,7 +159,7 @@ pzolBearerToken
       (\ s a -> s{_pzolBearerToken = a})
 
 -- | The Google Developers Console [project ID or project
--- number](https:\/\/developers.google.com\/console\/help\/new\/#projectnumber).
+-- number](https:\/\/support.google.com\/cloud\/answer\/6158840).
 pzolProjectId :: Lens' ProjectsZonesOperationsList Text
 pzolProjectId
   = lens _pzolProjectId

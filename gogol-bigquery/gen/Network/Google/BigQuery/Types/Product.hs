@@ -979,7 +979,7 @@ dsSelfLink
 dsId :: Lens' DataSet (Maybe Text)
 dsId = lens _dsId (\ s a -> s{_dsId = a})
 
--- | [Experimental] The default lifetime of all tables in the dataset, in
+-- | [Optional] The default lifetime of all tables in the dataset, in
 -- milliseconds. The minimum value is 3600000 milliseconds (one hour). Once
 -- this property is set, all newly-created tables in the dataset will have
 -- an expirationTime property set to the creation time plus the value in
@@ -1369,9 +1369,9 @@ tfsMode = lens _tfsMode (\ s a -> s{_tfsMode = a})
 tfsName :: Lens' TableFieldSchema (Maybe Text)
 tfsName = lens _tfsName (\ s a -> s{_tfsName = a})
 
--- | [Required] The field data type. Possible values include STRING, INTEGER,
--- FLOAT, BOOLEAN, TIMESTAMP or RECORD (where RECORD indicates that the
--- field contains a nested schema).
+-- | [Required] The field data type. Possible values include STRING, BYTES,
+-- INTEGER, FLOAT, BOOLEAN, TIMESTAMP or RECORD (where RECORD indicates
+-- that the field contains a nested schema).
 tfsType :: Lens' TableFieldSchema (Maybe Text)
 tfsType = lens _tfsType (\ s a -> s{_tfsType = a})
 
@@ -1741,10 +1741,10 @@ qrTimeoutMs
 -- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
 -- for this query. The default value is true. If set to false, the query
 -- will use BigQuery\'s updated SQL dialect with improved standards
--- compliance. When using BigQuery\'s updated SQL, the values of
--- allowLargeResults and flattenResults are ignored. Queries with
--- useLegacySql set to false will be run as if allowLargeResults is true
--- and flattenResults is false.
+-- compliance: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When
+-- using BigQuery\'s updated SQL, the values of allowLargeResults and
+-- flattenResults are ignored. Queries with useLegacySql set to false will
+-- be run as if allowLargeResults is true and flattenResults is false.
 qrUseLegacySQL :: Lens' QueryRequest (Maybe Bool)
 qrUseLegacySQL
   = lens _qrUseLegacySQL
@@ -2250,8 +2250,8 @@ jclAllowQuotedNewlines
 
 -- | [Optional] The format of the data files. For CSV files, specify \"CSV\".
 -- For datastore backups, specify \"DATASTORE_BACKUP\". For
--- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\". The default
--- value is CSV.
+-- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\". For Avro,
+-- specify \"AVRO\". The default value is CSV.
 jclSourceFormat :: Lens' JobConfigurationLoad (Maybe Text)
 jclSourceFormat
   = lens _jclSourceFormat
@@ -2933,6 +2933,55 @@ instance ToJSON JobListJobsItem where
                   ("configuration" .=) <$> _jljiConfiguration])
 
 --
+-- /See:/ 'timePartitioning' smart constructor.
+data TimePartitioning = TimePartitioning'
+    { _tpExpirationMs :: !(Maybe (Textual Int64))
+    , _tpType         :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TimePartitioning' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpExpirationMs'
+--
+-- * 'tpType'
+timePartitioning
+    :: TimePartitioning
+timePartitioning =
+    TimePartitioning'
+    { _tpExpirationMs = Nothing
+    , _tpType = Nothing
+    }
+
+-- | [Optional] Number of milliseconds for which to keep the storage for a
+-- partition.
+tpExpirationMs :: Lens' TimePartitioning (Maybe Int64)
+tpExpirationMs
+  = lens _tpExpirationMs
+      (\ s a -> s{_tpExpirationMs = a})
+      . mapping _Coerce
+
+-- | [Required] The only type supported is DAY, which will generate one
+-- partition per day based on data loading time.
+tpType :: Lens' TimePartitioning (Maybe Text)
+tpType = lens _tpType (\ s a -> s{_tpType = a})
+
+instance FromJSON TimePartitioning where
+        parseJSON
+          = withObject "TimePartitioning"
+              (\ o ->
+                 TimePartitioning' <$>
+                   (o .:? "expirationMs") <*> (o .:? "type"))
+
+instance ToJSON TimePartitioning where
+        toJSON TimePartitioning'{..}
+          = object
+              (catMaybes
+                 [("expirationMs" .=) <$> _tpExpirationMs,
+                  ("type" .=) <$> _tpType])
+
+--
 -- /See:/ 'jobConfiguration' smart constructor.
 data JobConfiguration = JobConfiguration'
     { _jcCopy    :: !(Maybe JobConfigurationTableCopy)
@@ -3552,10 +3601,10 @@ jcqFlattenResults
 -- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
 -- for this query. The default value is true. If set to false, the query
 -- will use BigQuery\'s updated SQL dialect with improved standards
--- compliance. When using BigQuery\'s updated SQL, the values of
--- allowLargeResults and flattenResults are ignored. Queries with
--- useLegacySql set to false will be run as if allowLargeResults is true
--- and flattenResults is false.
+-- compliance: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When
+-- using BigQuery\'s updated SQL, the values of allowLargeResults and
+-- flattenResults are ignored. Queries with useLegacySql set to false will
+-- be run as if allowLargeResults is true and flattenResults is false.
 jcqUseLegacySQL :: Lens' JobConfigurationQuery (Maybe Bool)
 jcqUseLegacySQL
   = lens _jcqUseLegacySQL
@@ -3903,7 +3952,8 @@ instance ToJSON UserDefinedFunctionResource where
 --
 -- /See:/ 'jobStatistics2' smart constructor.
 data JobStatistics2 = JobStatistics2'
-    { _jTotalBytesProcessed :: !(Maybe (Textual Int64))
+    { _jSchema              :: !(Maybe TableSchema)
+    , _jTotalBytesProcessed :: !(Maybe (Textual Int64))
     , _jBillingTier         :: !(Maybe (Textual Int32))
     , _jReferencedTables    :: !(Maybe [TableReference])
     , _jQueryPlan           :: !(Maybe [ExplainQueryStage])
@@ -3914,6 +3964,8 @@ data JobStatistics2 = JobStatistics2'
 -- | Creates a value of 'JobStatistics2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jSchema'
 --
 -- * 'jTotalBytesProcessed'
 --
@@ -3930,13 +3982,19 @@ jobStatistics2
     :: JobStatistics2
 jobStatistics2 =
     JobStatistics2'
-    { _jTotalBytesProcessed = Nothing
+    { _jSchema = Nothing
+    , _jTotalBytesProcessed = Nothing
     , _jBillingTier = Nothing
     , _jReferencedTables = Nothing
     , _jQueryPlan = Nothing
     , _jCacheHit = Nothing
     , _jTotalBytesBilled = Nothing
     }
+
+-- | [Output-only, Experimental] The schema of the results. Present only for
+-- successful dry run of non-legacy SQL queries.
+jSchema :: Lens' JobStatistics2 (Maybe TableSchema)
+jSchema = lens _jSchema (\ s a -> s{_jSchema = a})
 
 -- | [Output-only] Total bytes processed for the job.
 jTotalBytesProcessed :: Lens' JobStatistics2 (Maybe Int64)
@@ -3985,8 +4043,8 @@ instance FromJSON JobStatistics2 where
           = withObject "JobStatistics2"
               (\ o ->
                  JobStatistics2' <$>
-                   (o .:? "totalBytesProcessed") <*>
-                     (o .:? "billingTier")
+                   (o .:? "schema") <*> (o .:? "totalBytesProcessed")
+                     <*> (o .:? "billingTier")
                      <*> (o .:? "referencedTables" .!= mempty)
                      <*> (o .:? "queryPlan" .!= mempty)
                      <*> (o .:? "cacheHit")
@@ -3996,8 +4054,8 @@ instance ToJSON JobStatistics2 where
         toJSON JobStatistics2'{..}
           = object
               (catMaybes
-                 [("totalBytesProcessed" .=) <$>
-                    _jTotalBytesProcessed,
+                 [("schema" .=) <$> _jSchema,
+                  ("totalBytesProcessed" .=) <$> _jTotalBytesProcessed,
                   ("billingTier" .=) <$> _jBillingTier,
                   ("referencedTables" .=) <$> _jReferencedTables,
                   ("queryPlan" .=) <$> _jQueryPlan,
@@ -4233,6 +4291,7 @@ data Table = Table'
     , _tabSchema                    :: !(Maybe TableSchema)
     , _tabStreamingBuffer           :: !(Maybe Streamingbuffer)
     , _tabSelfLink                  :: !(Maybe Text)
+    , _tabTimePartitioning          :: !(Maybe TimePartitioning)
     , _tabNumRows                   :: !(Maybe (Textual Word64))
     , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
@@ -4269,6 +4328,8 @@ data Table = Table'
 --
 -- * 'tabSelfLink'
 --
+-- * 'tabTimePartitioning'
+--
 -- * 'tabNumRows'
 --
 -- * 'tabView'
@@ -4296,6 +4357,7 @@ table =
     , _tabSchema = Nothing
     , _tabStreamingBuffer = Nothing
     , _tabSelfLink = Nothing
+    , _tabTimePartitioning = Nothing
     , _tabNumRows = Nothing
     , _tabView = Nothing
     , _tabId = Nothing
@@ -4379,6 +4441,13 @@ tabSelfLink :: Lens' Table (Maybe Text)
 tabSelfLink
   = lens _tabSelfLink (\ s a -> s{_tabSelfLink = a})
 
+-- | [Experimental] If specified, configures time-based partitioning for this
+-- table.
+tabTimePartitioning :: Lens' Table (Maybe TimePartitioning)
+tabTimePartitioning
+  = lens _tabTimePartitioning
+      (\ s a -> s{_tabTimePartitioning = a})
+
 -- | [Output-only] The number of rows of data in this table, excluding any
 -- data in the streaming buffer.
 tabNumRows :: Lens' Table (Maybe Word64)
@@ -4433,6 +4502,7 @@ instance FromJSON Table where
                      <*> (o .:? "schema")
                      <*> (o .:? "streamingBuffer")
                      <*> (o .:? "selfLink")
+                     <*> (o .:? "timePartitioning")
                      <*> (o .:? "numRows")
                      <*> (o .:? "view")
                      <*> (o .:? "id")
@@ -4457,6 +4527,7 @@ instance ToJSON Table where
                   ("schema" .=) <$> _tabSchema,
                   ("streamingBuffer" .=) <$> _tabStreamingBuffer,
                   ("selfLink" .=) <$> _tabSelfLink,
+                  ("timePartitioning" .=) <$> _tabTimePartitioning,
                   ("numRows" .=) <$> _tabNumRows,
                   ("view" .=) <$> _tabView, ("id" .=) <$> _tabId,
                   ("type" .=) <$> _tabType,
