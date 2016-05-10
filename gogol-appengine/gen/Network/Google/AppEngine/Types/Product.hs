@@ -2795,6 +2795,57 @@ instance ToJSON OperationMetadata where
                   ("operationType" .=) <$> _omOperationType,
                   ("target" .=) <$> _omTarget])
 
+-- | Response message for \`Instances.ListInstances\`.
+--
+-- /See:/ 'listInstancesResponse' smart constructor.
+data ListInstancesResponse = ListInstancesResponse'
+    { _lirNextPageToken :: !(Maybe Text)
+    , _lirInstances     :: !(Maybe [Instance])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ListInstancesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lirNextPageToken'
+--
+-- * 'lirInstances'
+listInstancesResponse
+    :: ListInstancesResponse
+listInstancesResponse =
+    ListInstancesResponse'
+    { _lirNextPageToken = Nothing
+    , _lirInstances = Nothing
+    }
+
+-- | Continuation token for fetching the next page of results.
+lirNextPageToken :: Lens' ListInstancesResponse (Maybe Text)
+lirNextPageToken
+  = lens _lirNextPageToken
+      (\ s a -> s{_lirNextPageToken = a})
+
+-- | The instances belonging to the requested version.
+lirInstances :: Lens' ListInstancesResponse [Instance]
+lirInstances
+  = lens _lirInstances (\ s a -> s{_lirInstances = a})
+      . _Default
+      . _Coerce
+
+instance FromJSON ListInstancesResponse where
+        parseJSON
+          = withObject "ListInstancesResponse"
+              (\ o ->
+                 ListInstancesResponse' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "instances" .!= mempty))
+
+instance ToJSON ListInstancesResponse where
+        toJSON ListInstancesResponse'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _lirNextPageToken,
+                  ("instances" .=) <$> _lirInstances])
+
 -- | Target scaling by request utilization (for VM runtimes only).
 --
 -- /See:/ 'requestUtilization' smart constructor.
@@ -2975,6 +3026,206 @@ instance FromJSON ContainerInfo where
 instance ToJSON ContainerInfo where
         toJSON ContainerInfo'{..}
           = object (catMaybes [("image" .=) <$> _ciImage])
+
+-- | Instances are the computing units that App Engine uses to automatically
+-- scale an application.
+--
+-- /See:/ 'instance'' smart constructor.
+data Instance = Instance'
+    { _iMemoryUsage      :: !(Maybe (Textual Int64))
+    , _iVMStatus         :: !(Maybe Text)
+    , _iVMZoneName       :: !(Maybe Text)
+    , _iVMId             :: !(Maybe Text)
+    , _iAvailability     :: !(Maybe Text)
+    , _iVMName           :: !(Maybe Text)
+    , _iName             :: !(Maybe Text)
+    , _iVMUnlocked       :: !(Maybe Bool)
+    , _iRequests         :: !(Maybe (Textual Int32))
+    , _iQps              :: !(Maybe (Textual Double))
+    , _iId               :: !(Maybe Text)
+    , _iErrors           :: !(Maybe (Textual Word32))
+    , _iAverageLatency   :: !(Maybe (Textual Int32))
+    , _iStartTimestamp   :: !(Maybe Text)
+    , _iAppEngineRelease :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Instance' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'iMemoryUsage'
+--
+-- * 'iVMStatus'
+--
+-- * 'iVMZoneName'
+--
+-- * 'iVMId'
+--
+-- * 'iAvailability'
+--
+-- * 'iVMName'
+--
+-- * 'iName'
+--
+-- * 'iVMUnlocked'
+--
+-- * 'iRequests'
+--
+-- * 'iQps'
+--
+-- * 'iId'
+--
+-- * 'iErrors'
+--
+-- * 'iAverageLatency'
+--
+-- * 'iStartTimestamp'
+--
+-- * 'iAppEngineRelease'
+instance'
+    :: Instance
+instance' =
+    Instance'
+    { _iMemoryUsage = Nothing
+    , _iVMStatus = Nothing
+    , _iVMZoneName = Nothing
+    , _iVMId = Nothing
+    , _iAvailability = Nothing
+    , _iVMName = Nothing
+    , _iName = Nothing
+    , _iVMUnlocked = Nothing
+    , _iRequests = Nothing
+    , _iQps = Nothing
+    , _iId = Nothing
+    , _iErrors = Nothing
+    , _iAverageLatency = Nothing
+    , _iStartTimestamp = Nothing
+    , _iAppEngineRelease = Nothing
+    }
+
+-- | Memory usage (in bytes). \'OutputOnly
+iMemoryUsage :: Lens' Instance (Maybe Int64)
+iMemoryUsage
+  = lens _iMemoryUsage (\ s a -> s{_iMemoryUsage = a})
+      . mapping _Coerce
+
+-- | For VMEngines instances, the status of GCE VM where the instance lives.
+-- \'OutputOnly
+iVMStatus :: Lens' Instance (Maybe Text)
+iVMStatus
+  = lens _iVMStatus (\ s a -> s{_iVMStatus = a})
+
+-- | For VMEngines instances, the zone where the GCE VM is located.
+-- \'OutputOnly
+iVMZoneName :: Lens' Instance (Maybe Text)
+iVMZoneName
+  = lens _iVMZoneName (\ s a -> s{_iVMZoneName = a})
+
+-- | For VMEngines instances, the GCE VM ID of the instance. \'OutputOnly
+iVMId :: Lens' Instance (Maybe Text)
+iVMId = lens _iVMId (\ s a -> s{_iVMId = a})
+
+-- | Availability of instance. \'OutputOnly
+iAvailability :: Lens' Instance (Maybe Text)
+iAvailability
+  = lens _iAvailability
+      (\ s a -> s{_iAvailability = a})
+
+-- | For VMEngines instances, the name of GCE VM where the instance lives.
+-- \'OutputOnly
+iVMName :: Lens' Instance (Maybe Text)
+iVMName = lens _iVMName (\ s a -> s{_iVMName = a})
+
+-- | The full path to the Instance resource in the API. Example:
+-- \"apps\/myapp\/services\/default\/versions\/v1\/instances\/instance-1\"
+-- \'OutputOnly
+iName :: Lens' Instance (Maybe Text)
+iName = lens _iName (\ s a -> s{_iName = a})
+
+-- | For VMEngines instances, whether the instance has been unlocked.
+-- \'OutputOnly
+iVMUnlocked :: Lens' Instance (Maybe Bool)
+iVMUnlocked
+  = lens _iVMUnlocked (\ s a -> s{_iVMUnlocked = a})
+
+-- | Number of requests (since the clone was started). \'OutputOnly
+iRequests :: Lens' Instance (Maybe Int32)
+iRequests
+  = lens _iRequests (\ s a -> s{_iRequests = a}) .
+      mapping _Coerce
+
+-- | QPS for this instance (averaged over the last minute). \'OutputOnly
+iQps :: Lens' Instance (Maybe Double)
+iQps
+  = lens _iQps (\ s a -> s{_iQps = a}) .
+      mapping _Coerce
+
+-- | The relative name\/path of the instance within the version. Example:
+-- \"instance-1\" \'OutputOnly
+iId :: Lens' Instance (Maybe Text)
+iId = lens _iId (\ s a -> s{_iId = a})
+
+-- | Number of errors since the instance was started. \'OutputOnly
+iErrors :: Lens' Instance (Maybe Word32)
+iErrors
+  = lens _iErrors (\ s a -> s{_iErrors = a}) .
+      mapping _Coerce
+
+-- | Latency in milliseconds (averaged over the last minute). \'OutputOnly
+iAverageLatency :: Lens' Instance (Maybe Int32)
+iAverageLatency
+  = lens _iAverageLatency
+      (\ s a -> s{_iAverageLatency = a})
+      . mapping _Coerce
+
+-- | Time when instance was started. \'OutputOnly
+iStartTimestamp :: Lens' Instance (Maybe Text)
+iStartTimestamp
+  = lens _iStartTimestamp
+      (\ s a -> s{_iStartTimestamp = a})
+
+-- | The App Engine release the instance is running on. \'OutputOnly
+iAppEngineRelease :: Lens' Instance (Maybe Text)
+iAppEngineRelease
+  = lens _iAppEngineRelease
+      (\ s a -> s{_iAppEngineRelease = a})
+
+instance FromJSON Instance where
+        parseJSON
+          = withObject "Instance"
+              (\ o ->
+                 Instance' <$>
+                   (o .:? "memoryUsage") <*> (o .:? "vmStatus") <*>
+                     (o .:? "vmZoneName")
+                     <*> (o .:? "vmId")
+                     <*> (o .:? "availability")
+                     <*> (o .:? "vmName")
+                     <*> (o .:? "name")
+                     <*> (o .:? "vmUnlocked")
+                     <*> (o .:? "requests")
+                     <*> (o .:? "qps")
+                     <*> (o .:? "id")
+                     <*> (o .:? "errors")
+                     <*> (o .:? "averageLatency")
+                     <*> (o .:? "startTimestamp")
+                     <*> (o .:? "appEngineRelease"))
+
+instance ToJSON Instance where
+        toJSON Instance'{..}
+          = object
+              (catMaybes
+                 [("memoryUsage" .=) <$> _iMemoryUsage,
+                  ("vmStatus" .=) <$> _iVMStatus,
+                  ("vmZoneName" .=) <$> _iVMZoneName,
+                  ("vmId" .=) <$> _iVMId,
+                  ("availability" .=) <$> _iAvailability,
+                  ("vmName" .=) <$> _iVMName, ("name" .=) <$> _iName,
+                  ("vmUnlocked" .=) <$> _iVMUnlocked,
+                  ("requests" .=) <$> _iRequests, ("qps" .=) <$> _iQps,
+                  ("id" .=) <$> _iId, ("errors" .=) <$> _iErrors,
+                  ("averageLatency" .=) <$> _iAverageLatency,
+                  ("startTimestamp" .=) <$> _iStartTimestamp,
+                  ("appEngineRelease" .=) <$> _iAppEngineRelease])
 
 -- | Code and application artifacts used to deploy a version to App Engine.
 --

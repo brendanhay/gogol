@@ -59,6 +59,9 @@ module Network.Google.AppEngine
     -- ** appengine.apps.services.versions.get
     , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
 
+    -- ** appengine.apps.services.versions.instances.list
+    , module Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
+
     -- ** appengine.apps.services.versions.list
     , module Network.Google.Resource.AppEngine.Apps.Services.Versions.List
 
@@ -355,6 +358,12 @@ module Network.Google.AppEngine
     , omOperationType
     , omTarget
 
+    -- ** ListInstancesResponse
+    , ListInstancesResponse
+    , listInstancesResponse
+    , lirNextPageToken
+    , lirInstances
+
     -- ** RequestUtilization
     , RequestUtilization
     , requestUtilization
@@ -377,6 +386,25 @@ module Network.Google.AppEngine
     , containerInfo
     , ciImage
 
+    -- ** Instance
+    , Instance
+    , instance'
+    , iMemoryUsage
+    , iVMStatus
+    , iVMZoneName
+    , iVMId
+    , iAvailability
+    , iVMName
+    , iName
+    , iVMUnlocked
+    , iRequests
+    , iQps
+    , iId
+    , iErrors
+    , iAverageLatency
+    , iStartTimestamp
+    , iAppEngineRelease
+
     -- ** Deployment
     , Deployment
     , deployment
@@ -397,6 +425,7 @@ import           Network.Google.Resource.AppEngine.Apps.Services.Patch
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Create
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Delete
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Get
+import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Instances.List
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.List
 import           Network.Google.Resource.AppEngine.Apps.Services.Versions.Patch
 
@@ -408,6 +437,7 @@ TODO
 type AppEngineAPI =
      AppsOperationsListResource :<|>
        AppsOperationsGetResource
+       :<|> AppsServicesVersionsInstancesListResource
        :<|> AppsServicesVersionsListResource
        :<|> AppsServicesVersionsPatchResource
        :<|> AppsServicesVersionsGetResource
