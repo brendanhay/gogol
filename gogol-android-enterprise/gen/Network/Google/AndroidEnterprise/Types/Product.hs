@@ -502,6 +502,53 @@ instance ToJSON GroupLicenseUsersListResponse where
                  [Just ("kind" .= _glulrKind),
                   ("user" .=) <$> _glulrUser])
 
+--
+-- /See:/ 'tokenPagination' smart constructor.
+data TokenPagination = TokenPagination'
+    { _tpNextPageToken     :: !(Maybe Text)
+    , _tpPreviousPageToken :: !(Maybe Text)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'TokenPagination' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tpNextPageToken'
+--
+-- * 'tpPreviousPageToken'
+tokenPagination
+    :: TokenPagination
+tokenPagination =
+    TokenPagination'
+    { _tpNextPageToken = Nothing
+    , _tpPreviousPageToken = Nothing
+    }
+
+tpNextPageToken :: Lens' TokenPagination (Maybe Text)
+tpNextPageToken
+  = lens _tpNextPageToken
+      (\ s a -> s{_tpNextPageToken = a})
+
+tpPreviousPageToken :: Lens' TokenPagination (Maybe Text)
+tpPreviousPageToken
+  = lens _tpPreviousPageToken
+      (\ s a -> s{_tpPreviousPageToken = a})
+
+instance FromJSON TokenPagination where
+        parseJSON
+          = withObject "TokenPagination"
+              (\ o ->
+                 TokenPagination' <$>
+                   (o .:? "nextPageToken") <*>
+                     (o .:? "previousPageToken"))
+
+instance ToJSON TokenPagination where
+        toJSON TokenPagination'{..}
+          = object
+              (catMaybes
+                 [("nextPageToken" .=) <$> _tpNextPageToken,
+                  ("previousPageToken" .=) <$> _tpPreviousPageToken])
+
 -- | Information on an approval URL.
 --
 -- /See:/ 'approvalURLInfo' smart constructor.
@@ -660,7 +707,7 @@ scName
 -- order of this field. Duplicated values are allowed, but ordering between
 -- elements with duplicate order is undefined. The value of this field is
 -- never visible to a user, it is used solely for the purpose of defining
--- an ordering. Maximum length is 20 characters.
+-- an ordering. Maximum length is 256 characters.
 scOrderInPage :: Lens' StoreCluster (Maybe Text)
 scOrderInPage
   = lens _scOrderInPage
@@ -698,6 +745,65 @@ instance ToJSON StoreCluster where
                   ("orderInPage" .=) <$> _scOrderInPage,
                   ("id" .=) <$> _scId,
                   ("productId" .=) <$> _scProductId])
+
+--
+-- /See:/ 'pageInfo' smart constructor.
+data PageInfo = PageInfo'
+    { _piResultPerPage :: !(Maybe (Textual Int32))
+    , _piTotalResults  :: !(Maybe (Textual Int32))
+    , _piStartIndex    :: !(Maybe (Textual Int32))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'PageInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'piResultPerPage'
+--
+-- * 'piTotalResults'
+--
+-- * 'piStartIndex'
+pageInfo
+    :: PageInfo
+pageInfo =
+    PageInfo'
+    { _piResultPerPage = Nothing
+    , _piTotalResults = Nothing
+    , _piStartIndex = Nothing
+    }
+
+piResultPerPage :: Lens' PageInfo (Maybe Int32)
+piResultPerPage
+  = lens _piResultPerPage
+      (\ s a -> s{_piResultPerPage = a})
+      . mapping _Coerce
+
+piTotalResults :: Lens' PageInfo (Maybe Int32)
+piTotalResults
+  = lens _piTotalResults
+      (\ s a -> s{_piTotalResults = a})
+      . mapping _Coerce
+
+piStartIndex :: Lens' PageInfo (Maybe Int32)
+piStartIndex
+  = lens _piStartIndex (\ s a -> s{_piStartIndex = a})
+      . mapping _Coerce
+
+instance FromJSON PageInfo where
+        parseJSON
+          = withObject "PageInfo"
+              (\ o ->
+                 PageInfo' <$>
+                   (o .:? "resultPerPage") <*> (o .:? "totalResults")
+                     <*> (o .:? "startIndex"))
+
+instance ToJSON PageInfo where
+        toJSON PageInfo'{..}
+          = object
+              (catMaybes
+                 [("resultPerPage" .=) <$> _piResultPerPage,
+                  ("totalResults" .=) <$> _piTotalResults,
+                  ("startIndex" .=) <$> _piStartIndex])
 
 -- | A product permissions resource represents the set of permissions
 -- required by a specific app and whether or not they have been accepted by
@@ -1431,8 +1537,7 @@ uKind = lens _uKind (\ s a -> s{_uKind = a})
 uId :: Lens' User (Maybe Text)
 uId = lens _uId (\ s a -> s{_uId = a})
 
--- | The user\'s primary email, e.g. \"jsmith\'example.com\". Will always be
--- set for Google managed users and not set for EMM managed users.
+-- | The user\'s primary email, e.g. \"jsmith\'example.com\".
 uPrimaryEmail :: Lens' User (Maybe Text)
 uPrimaryEmail
   = lens _uPrimaryEmail
@@ -1888,7 +1993,7 @@ instance ToJSON DevicesListResponse where
                  [Just ("kind" .= _dlrKind),
                   ("device" .=) <$> _dlrDevice])
 
--- | An enterprise resource represents a binding between an organisation and
+-- | An enterprise resource represents a binding between an organization and
 -- their EMM. To create an enterprise, an admin of the enterprise must
 -- first go through a Play for Work sign-up flow. At the end of this the
 -- admin will be presented with a token (a short opaque alphanumeric
@@ -2041,7 +2146,8 @@ instance ToJSON StoreLayout where
 --
 -- /See:/ 'product' smart constructor.
 data Product = Product'
-    { _pAuthorName           :: !(Maybe Text)
+    { _pSmallIconURL         :: !(Maybe Text)
+    , _pAuthorName           :: !(Maybe Text)
     , _pKind                 :: !Text
     , _pWorkDetailsURL       :: !(Maybe Text)
     , _pRequiresContainerApp :: !(Maybe Bool)
@@ -2057,6 +2163,8 @@ data Product = Product'
 -- | Creates a value of 'Product' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pSmallIconURL'
 --
 -- * 'pAuthorName'
 --
@@ -2083,7 +2191,8 @@ product
     :: Product
 product =
     Product'
-    { _pAuthorName = Nothing
+    { _pSmallIconURL = Nothing
+    , _pAuthorName = Nothing
     , _pKind = "androidenterprise#product"
     , _pWorkDetailsURL = Nothing
     , _pRequiresContainerApp = Nothing
@@ -2095,6 +2204,13 @@ product =
     , _pProductId = Nothing
     , _pDetailsURL = Nothing
     }
+
+-- | A link to a smaller image that can be used as an icon for the product.
+-- This image is suitable for use at up to 128px x 128px.
+pSmallIconURL :: Lens' Product (Maybe Text)
+pSmallIconURL
+  = lens _pSmallIconURL
+      (\ s a -> s{_pSmallIconURL = a})
 
 -- | The name of the author of the product (e.g. the app developer).
 pAuthorName :: Lens' Product (Maybe Text)
@@ -2146,7 +2262,8 @@ pDistributionChannel
   = lens _pDistributionChannel
       (\ s a -> s{_pDistributionChannel = a})
 
--- | A link to an image that can be used as an icon for the product.
+-- | A link to an image that can be used as an icon for the product. This
+-- image is suitable for use at up to 512px x 512px.
 pIconURL :: Lens' Product (Maybe Text)
 pIconURL = lens _pIconURL (\ s a -> s{_pIconURL = a})
 
@@ -2170,7 +2287,7 @@ instance FromJSON Product where
           = withObject "Product"
               (\ o ->
                  Product' <$>
-                   (o .:? "authorName") <*>
+                   (o .:? "smallIconUrl") <*> (o .:? "authorName") <*>
                      (o .:? "kind" .!= "androidenterprise#product")
                      <*> (o .:? "workDetailsUrl")
                      <*> (o .:? "requiresContainerApp")
@@ -2186,7 +2303,8 @@ instance ToJSON Product where
         toJSON Product'{..}
           = object
               (catMaybes
-                 [("authorName" .=) <$> _pAuthorName,
+                 [("smallIconUrl" .=) <$> _pSmallIconURL,
+                  ("authorName" .=) <$> _pAuthorName,
                   Just ("kind" .= _pKind),
                   ("workDetailsUrl" .=) <$> _pWorkDetailsURL,
                   ("requiresContainerApp" .=) <$>
@@ -2570,3 +2688,77 @@ instance ToJSON Entitlement where
                  [Just ("kind" .= _eeKind),
                   ("reason" .=) <$> _eeReason,
                   ("productId" .=) <$> _eeProductId])
+
+-- | The matching products.
+--
+-- /See:/ 'productsListResponse' smart constructor.
+data ProductsListResponse = ProductsListResponse'
+    { _plrTokenPagination :: !(Maybe TokenPagination)
+    , _plrPageInfo        :: !(Maybe PageInfo)
+    , _plrKind            :: !Text
+    , _plrProduct         :: !(Maybe [Product])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ProductsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'plrTokenPagination'
+--
+-- * 'plrPageInfo'
+--
+-- * 'plrKind'
+--
+-- * 'plrProduct'
+productsListResponse
+    :: ProductsListResponse
+productsListResponse =
+    ProductsListResponse'
+    { _plrTokenPagination = Nothing
+    , _plrPageInfo = Nothing
+    , _plrKind = "androidenterprise#productsListResponse"
+    , _plrProduct = Nothing
+    }
+
+-- | Pagination information for token pagination.
+plrTokenPagination :: Lens' ProductsListResponse (Maybe TokenPagination)
+plrTokenPagination
+  = lens _plrTokenPagination
+      (\ s a -> s{_plrTokenPagination = a})
+
+-- | General pagination information.
+plrPageInfo :: Lens' ProductsListResponse (Maybe PageInfo)
+plrPageInfo
+  = lens _plrPageInfo (\ s a -> s{_plrPageInfo = a})
+
+-- | Identifies what kind of resource this is. Value: the fixed string
+-- \"androidenterprise#productsListResponse\".
+plrKind :: Lens' ProductsListResponse Text
+plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
+
+-- | Information about a product (e.g. an app) in the Google Play Store, for
+-- display to an enterprise admin.
+plrProduct :: Lens' ProductsListResponse [Product]
+plrProduct
+  = lens _plrProduct (\ s a -> s{_plrProduct = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ProductsListResponse where
+        parseJSON
+          = withObject "ProductsListResponse"
+              (\ o ->
+                 ProductsListResponse' <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "kind" .!=
+                        "androidenterprise#productsListResponse")
+                     <*> (o .:? "product" .!= mempty))
+
+instance ToJSON ProductsListResponse where
+        toJSON ProductsListResponse'{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _plrTokenPagination,
+                  ("pageInfo" .=) <$> _plrPageInfo,
+                  Just ("kind" .= _plrKind),
+                  ("product" .=) <$> _plrProduct])

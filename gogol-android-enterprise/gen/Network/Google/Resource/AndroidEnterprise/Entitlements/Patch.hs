@@ -100,7 +100,8 @@ entitlementsPatch pEpEntitlementId_ pEpEnterpriseId_ pEpPayload_ pEpUserId_ =
     , _epUserId = pEpUserId_
     }
 
--- | The ID of the entitlement, e.g. \"app:com.google.android.gm\".
+-- | The ID of the entitlement (a product ID), e.g.
+-- \"app:com.google.android.gm\".
 epEntitlementId :: Lens' EntitlementsPatch Text
 epEntitlementId
   = lens _epEntitlementId

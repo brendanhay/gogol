@@ -71,6 +71,12 @@ module Network.Google.AndroidEnterprise.Types
     , glulrKind
     , glulrUser
 
+    -- * TokenPagination
+    , TokenPagination
+    , tokenPagination
+    , tpNextPageToken
+    , tpPreviousPageToken
+
     -- * ApprovalURLInfo
     , ApprovalURLInfo
     , approvalURLInfo
@@ -91,6 +97,13 @@ module Network.Google.AndroidEnterprise.Types
     , scOrderInPage
     , scId
     , scProductId
+
+    -- * PageInfo
+    , PageInfo
+    , pageInfo
+    , piResultPerPage
+    , piTotalResults
+    , piStartIndex
 
     -- * ProductPermission
     , ProductPermission
@@ -237,6 +250,7 @@ module Network.Google.AndroidEnterprise.Types
     -- * Product
     , Product
     , product
+    , pSmallIconURL
     , pAuthorName
     , pKind
     , pWorkDetailsURL
@@ -287,6 +301,14 @@ module Network.Google.AndroidEnterprise.Types
     , eeKind
     , eeReason
     , eeProductId
+
+    -- * ProductsListResponse
+    , ProductsListResponse
+    , productsListResponse
+    , plrTokenPagination
+    , plrPageInfo
+    , plrKind
+    , plrProduct
     ) where
 
 import           Network.Google.AndroidEnterprise.Types.Product
