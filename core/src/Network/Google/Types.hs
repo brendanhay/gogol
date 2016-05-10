@@ -54,12 +54,13 @@ import           Network.HTTP.Media                    hiding (Accept)
 import           Network.HTTP.Types                    hiding (Header)
 import qualified Network.HTTP.Types                    as HTTP
 import           Servant.API
+import Web.HttpApiData
 
 data AltJSON  = AltJSON  deriving (Eq, Ord, Show, Read, Generic, Typeable)
 data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
-instance ToText AltJSON  where toText = const "json"
-instance ToText AltMedia where toText = const "multipart"
+instance ToHttpApiData AltJSON  where toQueryParam = const "json"
+instance ToHttpApiData AltMedia where toQueryParam = const "multipart"
 
 newtype OAuthScope = OAuthScope Text
     deriving
@@ -70,8 +71,8 @@ newtype OAuthScope = OAuthScope Text
         , IsString
         , Generic
         , Typeable
-        , FromText
-        , ToText
+        , FromHttpApiData
+        , ToHttpApiData
         , FromJSON
         , ToJSON
         )
@@ -85,8 +86,8 @@ newtype AccessToken = AccessToken Text
         , IsString
         , Generic
         , Typeable
-        , FromText
-        , ToText
+        , FromHttpApiData
+        , ToHttpApiData
         , FromJSON
         , ToJSON
         )
@@ -100,8 +101,8 @@ newtype RefreshToken = RefreshToken Text
         , IsString
         , Generic
         , Typeable
-        , FromText
-        , ToText
+        , FromHttpApiData
+        , ToHttpApiData
         , FromJSON
         , ToJSON
         )
@@ -115,8 +116,8 @@ newtype ClientId = ClientId Text
         , IsString
         , Generic
         , Typeable
-        , FromText
-        , ToText
+        , FromHttpApiData
+        , ToHttpApiData
         , FromJSON
         , ToJSON
         )
@@ -130,8 +131,8 @@ newtype Secret = Secret Text
         , IsString
         , Generic
         , Typeable
-        , FromText
-        , ToText
+        , FromHttpApiData
+        , ToHttpApiData
         , FromJSON
         , ToJSON
         )
@@ -145,8 +146,8 @@ newtype ServiceId = ServiceId Text
         , IsString
         , Generic
         , Typeable
-        , FromText
-        , ToText
+        , FromHttpApiData
+        , ToHttpApiData
         , FromJSON
         , ToJSON
         )
@@ -286,7 +287,7 @@ instance Monoid Request where
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
 
-appendPaths :: ToText a => Request -> [a] -> Request
+appendPaths :: ToHttpApiData a => Request -> [a] -> Request
 appendPaths rq = appendPath rq . foldMap (mappend "/" . buildText)
 
 appendQuery :: Request -> ByteString -> Maybe Text -> Request
@@ -437,9 +438,9 @@ instance (GoogleClient a, GoogleClient b) => GoogleClient (a :<|> b) where
              buildClient (Proxy :: Proxy a) rq
         :<|> buildClient (Proxy :: Proxy b) rq
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (Capture s a :> fn) where
     type Fn (Capture s a :> fn) = a -> Fn fn
 
@@ -447,19 +448,19 @@ instance ( KnownSymbol  s
         . appendPath rq
         . buildText
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (Captures s a :> fn) where
     type Fn (Captures s a :> fn) = [a] -> Fn fn
 
     buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
         . appendPaths rq
 
-instance ( KnownSymbol  s
-         , KnownSymbol  m
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , KnownSymbol   m
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (CaptureMode s m a :> fn) where
     type Fn (CaptureMode s m a :> fn) = a -> Fn fn
 
@@ -467,9 +468,9 @@ instance ( KnownSymbol  s
         . appendPath rq
         $ buildText x <> buildSymbol (Proxy :: Proxy m)
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (QueryParam s a :> fn) where
     type Fn (QueryParam s a :> fn) = Maybe a -> Fn fn
 
@@ -479,23 +480,23 @@ instance ( KnownSymbol  s
             Just x  -> appendQuery rq k v
               where
                 k = byteSymbol (Proxy :: Proxy s)
-                v = Just (toText x)
+                v = Just (toQueryParam x)
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (QueryParams s a :> fn) where
     type Fn (QueryParams s a :> fn) = [a] -> Fn fn
 
     buildClient Proxy rq = buildClient (Proxy :: Proxy fn) . foldl' go rq
       where
-        go r = appendQuery r k . Just . toText
+        go r = appendQuery r k . Just . toQueryParam
 
         k = byteSymbol (Proxy :: Proxy s)
 
-instance ( KnownSymbol  s
-         , ToText       a
-         , GoogleClient fn
+instance ( KnownSymbol   s
+         , ToHttpApiData a
+         , GoogleClient  fn
          ) => GoogleClient (Header s a :> fn) where
     type Fn (Header s a :> fn) = Maybe a -> Fn fn
 
@@ -505,7 +506,7 @@ instance ( KnownSymbol  s
             Just x  -> appendHeader rq (CI.mk k) v
               where
                 k = byteSymbol (Proxy :: Proxy s)
-                v = Just (toText x)
+                v = Just (toQueryParam x)
 
 instance ( ToBody c a
          , GoogleClient fn
@@ -573,7 +574,7 @@ instance {-# OVERLAPPABLE #-}
     buildClient Proxy = mime (Proxy :: Proxy c) methodDelete [200, 202]
 
 instance {-# OVERLAPPING #-}
-   GoogleClient (Delete (c ': cs) ()) where
+  GoogleClient (Delete (c ': cs) ()) where
     type Fn (Delete (c ': cs) ()) = ServiceConfig -> Client ()
 
     buildClient Proxy = discard methodDelete [204]
@@ -581,8 +582,8 @@ instance {-# OVERLAPPING #-}
 sinkLBS :: Stream -> ResourceT IO LBS.ByteString
 sinkLBS = fmap LBS.fromChunks . ($$+- CL.consume)
 
-buildText :: ToText a => a -> Builder
-buildText = Build.fromText . toText
+buildText :: ToHttpApiData a => a -> Builder
+buildText = Build.fromText . toQueryParam
 
 buildSymbol :: forall n proxy. KnownSymbol n => proxy n -> Builder
 buildSymbol = Build.fromString . symbolVal

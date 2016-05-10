@@ -32,3 +32,5 @@ import           Numeric.Natural             as Export (Natural)
 import           Prelude                     as Export hiding (product)
 import           Servant.API                 as Export hiding (getResponse)
 import           Servant.Utils.Links         as Export hiding (Link)
+import           Web.HttpApiData             as Export (FromHttpApiData (..),
+                                                        ToHttpApiData (..))
