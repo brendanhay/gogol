@@ -1158,15 +1158,23 @@ instance ToJSON APKListing where
 --
 -- /See:/ 'subscriptionPurchase' smart constructor.
 data SubscriptionPurchase = SubscriptionPurchase'
-    { _spKind             :: !Text
-    , _spExpiryTimeMillis :: !(Maybe (Textual Int64))
-    , _spAutoRenewing     :: !(Maybe Bool)
-    , _spStartTimeMillis  :: !(Maybe (Textual Int64))
+    { _spPaymentState      :: !(Maybe (Textual Int32))
+    , _spKind              :: !Text
+    , _spExpiryTimeMillis  :: !(Maybe (Textual Int64))
+    , _spAutoRenewing      :: !(Maybe Bool)
+    , _spPriceCurrencyCode :: !(Maybe Text)
+    , _spCancelReason      :: !(Maybe (Textual Int32))
+    , _spCountryCode       :: !(Maybe Text)
+    , _spDeveloperPayload  :: !(Maybe Text)
+    , _spPriceAmountMicros :: !(Maybe (Textual Int64))
+    , _spStartTimeMillis   :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionPurchase' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'spPaymentState'
 --
 -- * 'spKind'
 --
@@ -1174,16 +1182,40 @@ data SubscriptionPurchase = SubscriptionPurchase'
 --
 -- * 'spAutoRenewing'
 --
+-- * 'spPriceCurrencyCode'
+--
+-- * 'spCancelReason'
+--
+-- * 'spCountryCode'
+--
+-- * 'spDeveloperPayload'
+--
+-- * 'spPriceAmountMicros'
+--
 -- * 'spStartTimeMillis'
 subscriptionPurchase
     :: SubscriptionPurchase
 subscriptionPurchase =
     SubscriptionPurchase'
-    { _spKind = "androidpublisher#subscriptionPurchase"
+    { _spPaymentState = Nothing
+    , _spKind = "androidpublisher#subscriptionPurchase"
     , _spExpiryTimeMillis = Nothing
     , _spAutoRenewing = Nothing
+    , _spPriceCurrencyCode = Nothing
+    , _spCancelReason = Nothing
+    , _spCountryCode = Nothing
+    , _spDeveloperPayload = Nothing
+    , _spPriceAmountMicros = Nothing
     , _spStartTimeMillis = Nothing
     }
+
+-- | The payment state of the subscription. Possible values are: - Payment
+-- pending - Payment received
+spPaymentState :: Lens' SubscriptionPurchase (Maybe Int32)
+spPaymentState
+  = lens _spPaymentState
+      (\ s a -> s{_spPaymentState = a})
+      . mapping _Coerce
 
 -- | This kind represents a subscriptionPurchase object in the
 -- androidpublisher service.
@@ -1204,6 +1236,48 @@ spAutoRenewing
   = lens _spAutoRenewing
       (\ s a -> s{_spAutoRenewing = a})
 
+-- | ISO 4217 currency code for the subscription price. For example, if the
+-- price is specified in British pounds sterling, price_currency_code is
+-- \"GBP\".
+spPriceCurrencyCode :: Lens' SubscriptionPurchase (Maybe Text)
+spPriceCurrencyCode
+  = lens _spPriceCurrencyCode
+      (\ s a -> s{_spPriceCurrencyCode = a})
+
+-- | The cancel reason of the subscription, if the subscription is not auto
+-- renewing. Possible values are: - User cancelled the subscription -
+-- Subscription was cancelled by the system, for example because of a
+-- billing problem
+spCancelReason :: Lens' SubscriptionPurchase (Maybe Int32)
+spCancelReason
+  = lens _spCancelReason
+      (\ s a -> s{_spCancelReason = a})
+      . mapping _Coerce
+
+-- | ISO 3166-1 alpha-2 billing country\/region code of the user at the time
+-- the subscription was granted.
+spCountryCode :: Lens' SubscriptionPurchase (Maybe Text)
+spCountryCode
+  = lens _spCountryCode
+      (\ s a -> s{_spCountryCode = a})
+
+-- | A developer-specified string that contains supplemental information
+-- about an order.
+spDeveloperPayload :: Lens' SubscriptionPurchase (Maybe Text)
+spDeveloperPayload
+  = lens _spDeveloperPayload
+      (\ s a -> s{_spDeveloperPayload = a})
+
+-- | Price of the subscription, not including tax. Price is expressed in
+-- micro-units, where 1,000,000 micro-units equal one unit of the currency.
+-- For example, if the subscription price is €1.99, price_amount_micros is
+-- 1990000.
+spPriceAmountMicros :: Lens' SubscriptionPurchase (Maybe Int64)
+spPriceAmountMicros
+  = lens _spPriceAmountMicros
+      (\ s a -> s{_spPriceAmountMicros = a})
+      . mapping _Coerce
+
 -- | Time at which the subscription was granted, in milliseconds since Epoch.
 spStartTimeMillis :: Lens' SubscriptionPurchase (Maybe Int64)
 spStartTimeMillis
@@ -1216,19 +1290,31 @@ instance FromJSON SubscriptionPurchase where
           = withObject "SubscriptionPurchase"
               (\ o ->
                  SubscriptionPurchase' <$>
-                   (o .:? "kind" .!=
-                      "androidpublisher#subscriptionPurchase")
+                   (o .:? "paymentState") <*>
+                     (o .:? "kind" .!=
+                        "androidpublisher#subscriptionPurchase")
                      <*> (o .:? "expiryTimeMillis")
                      <*> (o .:? "autoRenewing")
+                     <*> (o .:? "priceCurrencyCode")
+                     <*> (o .:? "cancelReason")
+                     <*> (o .:? "countryCode")
+                     <*> (o .:? "developerPayload")
+                     <*> (o .:? "priceAmountMicros")
                      <*> (o .:? "startTimeMillis"))
 
 instance ToJSON SubscriptionPurchase where
         toJSON SubscriptionPurchase'{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _spKind),
+                 [("paymentState" .=) <$> _spPaymentState,
+                  Just ("kind" .= _spKind),
                   ("expiryTimeMillis" .=) <$> _spExpiryTimeMillis,
                   ("autoRenewing" .=) <$> _spAutoRenewing,
+                  ("priceCurrencyCode" .=) <$> _spPriceCurrencyCode,
+                  ("cancelReason" .=) <$> _spCancelReason,
+                  ("countryCode" .=) <$> _spCountryCode,
+                  ("developerPayload" .=) <$> _spDeveloperPayload,
+                  ("priceAmountMicros" .=) <$> _spPriceAmountMicros,
                   ("startTimeMillis" .=) <$> _spStartTimeMillis])
 
 --
