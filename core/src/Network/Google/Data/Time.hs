@@ -22,49 +22,53 @@ module Network.Google.Data.Time
 
 import           Control.Lens
 import           Data.Aeson
-import           Data.Aeson.Encode
-import qualified Data.Aeson.Types       as Aeson
+import qualified Data.Aeson.Types     as Aeson
 import           Data.Attoparsec.Text
-import           Data.Bits              ((.&.))
-import           Data.Char              (ord)
-import           Data.Data              (Data, Typeable)
-import           Data.Text              (Text)
-import qualified Data.Text              as Text
-import qualified Data.Text.Lazy         as LText
-import qualified Data.Text.Lazy.Builder as Build
+import           Data.Bifunctor       (first, second)
+import           Data.Bits            ((.&.))
+import           Data.Char            (ord)
+import           Data.Data            (Data, Typeable)
+import           Data.Text            (Text)
+import qualified Data.Text            as Text
 import           Data.Time
 import           GHC.Generics
-import           Servant.Common.Text
+import           Web.HttpApiData      (FromHttpApiData (..), ToHttpApiData (..))
 
 -- | This SHOULD be a time in the format of hh:mm:ss.  It is
 -- recommended that you use the "date-time" format instead of "time"
 -- unless you need to transfer only the time part.
-newtype Time' = Time' TimeOfDay
+newtype Time' = Time' { unTime :: TimeOfDay }
     deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
 
 _Time :: Iso' Time' TimeOfDay
-_Time = iso (\(Time' t) -> t) Time'
+_Time = iso unTime Time'
+
+instance ToHttpApiData Time' where
+    toQueryParam = Text.pack . show . unTime
+
+instance FromHttpApiData Time' where
+    parseQueryParam = second Time' . parseText timeParser
 
 -- | This SHOULD be a date in the format of YYYY-MM-DD.  It is
 -- recommended that you use the "date-time" format instead of "date"
 -- unless you need to transfer only the date part.
-newtype Date' = Date' Day
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+newtype Date' = Date' { unDate :: Day }
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToHttpApiData, FromHttpApiData)
 
 _Date :: Iso' Date' Day
-_Date = iso (\(Date' t) -> t) Date'
+_Date = iso unDate Date'
 
 -- | This SHOULD be a date in ISO 8601 format of YYYY-MM-
 -- DDThh:mm:ssZ in UTC time. This is the recommended form of date/timestamp.
-newtype DateTime' = DateTime' UTCTime
-    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable)
+newtype DateTime' = DateTime' { unDateTime :: UTCTime }
+    deriving (Eq, Ord, Show, Read, Generic, Data, Typeable, ToHttpApiData, FromHttpApiData)
 
 _DateTime :: Iso' DateTime' UTCTime
-_DateTime = iso (\(DateTime' t) -> t) DateTime'
+_DateTime = iso unDateTime DateTime'
 
-instance FromText Time'     where fromText = fmap Time' . parseText timeParser
-instance FromText Date'     where fromText = fmap Date' . parseText dayParser
-instance FromText DateTime' where fromText = Aeson.parseMaybe parseJSON . String
+instance ToJSON Time'     where toJSON = String . toQueryParam
+instance ToJSON Date'     where toJSON = String . toQueryParam
+instance ToJSON DateTime' where toJSON = toJSON . unDateTime
 
 instance FromJSON Time' where
     parseJSON = fmap Time' . withText "time" (run timeParser)
@@ -75,21 +79,8 @@ instance FromJSON Date' where
 instance FromJSON DateTime' where
     parseJSON = fmap DateTime' . parseJSON
 
--- FIXME: Revisit once aeson-0.10 is more widely available.
-instance ToText Time'     where toText = Text.pack . show . view _Time
-instance ToText Date'     where toText = Text.pack . show . view _Date
-instance ToText DateTime' where toText = encodeText
-
--- FIXME: Revisit once aeson-0.10 is more widely available.
-instance ToJSON Time'     where toJSON = String . toText
-instance ToJSON Date'     where toJSON = String . toText
-instance ToJSON DateTime' where toJSON = toJSON . view _DateTime
-
-parseText :: Parser a -> Text -> Maybe a
-parseText p = either (const Nothing) Just . parseOnly p
-
-encodeText :: ToJSON a => a -> Text
-encodeText = LText.toStrict . Build.toLazyText . encodeToTextBuilder . toJSON
+parseText :: Parser a -> Text -> Either Text a
+parseText p = first Text.pack . parseOnly p
 
 -- | Parse a time of the form @HH:MM:SS@.
 timeParser :: Parser TimeOfDay
