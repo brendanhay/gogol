@@ -13,7 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for Cloud SQL database instance management.
+-- Creates and configures Cloud SQL instances, which provide fully-managed
+-- MySQL databases.
 --
 -- /See:/ <https://cloud.google.com/sql/docs/reference/latest Cloud SQL Administration API Reference>
 module Network.Google.SQLAdmin
