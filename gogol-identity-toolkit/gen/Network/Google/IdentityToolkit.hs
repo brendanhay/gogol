@@ -108,6 +108,7 @@ module Network.Google.IdentityToolkit
     , idpConfig
     , icClientId
     , icEnabled
+    , icSecret
     , icExperimentPercent
     , icProvider
 
@@ -144,6 +145,7 @@ module Network.Google.IdentityToolkit
     , setAccountInfoResponseProviderUserInfoItem
     , sairpuiiProviderId
     , sairpuiiPhotoURL
+    , sairpuiiFederatedId
     , sairpuiiDisplayName
 
     -- ** IdentitytoolkitRelyingPartyVerifyPasswordRequest
@@ -173,11 +175,14 @@ module Network.Google.IdentityToolkit
     -- ** IdentitytoolkitRelyingPartySetProjectConfigRequest
     , IdentitytoolkitRelyingPartySetProjectConfigRequest
     , identitytoolkitRelyingPartySetProjectConfigRequest
+    , irpspcrAuthorizedDomains
     , irpspcrAPIKey
     , irpspcrIdpConfig
     , irpspcrChangeEmailTemplate
     , irpspcrDelegatedProjectNumber
     , irpspcrVerifyEmailTemplate
+    , irpspcrEnableAnonymousUser
+    , irpspcrLegacyResetPasswordTemplate
     , irpspcrAllowPasswordUser
     , irpspcrResetPasswordTemplate
     , irpspcrUseEmailSending
@@ -243,6 +248,8 @@ module Network.Google.IdentityToolkit
     , irpgpcrIdpConfig
     , irpgpcrChangeEmailTemplate
     , irpgpcrVerifyEmailTemplate
+    , irpgpcrEnableAnonymousUser
+    , irpgpcrLegacyResetPasswordTemplate
     , irpgpcrAllowPasswordUser
     , irpgpcrResetPasswordTemplate
     , irpgpcrProjectId
@@ -393,6 +400,8 @@ module Network.Google.IdentityToolkit
     , sairProviderUserInfo
     , sairExpiresIn
     , sairDisplayName
+    , sairPasswordHash
+    , sairLocalId
     , sairNewEmail
     , sairIdToken
 
@@ -402,7 +411,6 @@ module Network.Google.IdentityToolkit
     , irpsnurEmail
     , irpsnurInstanceId
     , irpsnurCaptchaChallenge
-    , irpsnurReturnSecureToken
     , irpsnurPassword
     , irpsnurCaptchaResponse
     , irpsnurDisplayName
@@ -430,6 +438,7 @@ module Network.Google.IdentityToolkit
     , varAction
     , varNeedEmail
     , varFederatedId
+    , varOAuthIdToken
     , varAppScheme
     , varExpiresIn
     , varInputEmail
