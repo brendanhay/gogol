@@ -1656,6 +1656,7 @@ data Image = Image'
     , _iSourceDiskId      :: !(Maybe Text)
     , _iKind              :: !Text
     , _iArchiveSizeBytes  :: !(Maybe (Textual Int64))
+    , _iFamily            :: !(Maybe Text)
     , _iRawDisk           :: !(Maybe ImageRawDisk)
     , _iSelfLink          :: !(Maybe Text)
     , _iName              :: !(Maybe Text)
@@ -1682,6 +1683,8 @@ data Image = Image'
 -- * 'iKind'
 --
 -- * 'iArchiveSizeBytes'
+--
+-- * 'iFamily'
 --
 -- * 'iRawDisk'
 --
@@ -1710,6 +1713,7 @@ image =
     , _iSourceDiskId = Nothing
     , _iKind = "compute#image"
     , _iArchiveSizeBytes = Nothing
+    , _iFamily = Nothing
     , _iRawDisk = Nothing
     , _iSelfLink = Nothing
     , _iName = Nothing
@@ -1759,6 +1763,12 @@ iArchiveSizeBytes
   = lens _iArchiveSizeBytes
       (\ s a -> s{_iArchiveSizeBytes = a})
       . mapping _Coerce
+
+-- | The name of the image family to which this image belongs. You can create
+-- disks by specifying an image family instead of a specific image name.
+-- The image family always returns its latest image that is not deprecated.
+iFamily :: Lens' Image (Maybe Text)
+iFamily = lens _iFamily (\ s a -> s{_iFamily = a})
 
 -- | The parameters of the raw disk image.
 iRawDisk :: Lens' Image (Maybe ImageRawDisk)
@@ -1829,6 +1839,7 @@ instance FromJSON Image where
                      <*> (o .:? "sourceDiskId")
                      <*> (o .:? "kind" .!= "compute#image")
                      <*> (o .:? "archiveSizeBytes")
+                     <*> (o .:? "family")
                      <*> (o .:? "rawDisk")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
@@ -1849,6 +1860,7 @@ instance ToJSON Image where
                   ("sourceDiskId" .=) <$> _iSourceDiskId,
                   Just ("kind" .= _iKind),
                   ("archiveSizeBytes" .=) <$> _iArchiveSizeBytes,
+                  ("family" .=) <$> _iFamily,
                   ("rawDisk" .=) <$> _iRawDisk,
                   ("selfLink" .=) <$> _iSelfLink,
                   ("name" .=) <$> _iName,
@@ -3687,7 +3699,7 @@ frName :: Lens' ForwardingRule (Maybe Text)
 frName = lens _frName (\ s a -> s{_frName = a})
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
--- ESP, AH or SCTP.
+-- ESP, AH, SCTP or ICMP.
 frIPProtocol :: Lens' ForwardingRule (Maybe ForwardingRuleIPProtocol)
 frIPProtocol
   = lens _frIPProtocol (\ s a -> s{_frIPProtocol = a})
@@ -4298,7 +4310,7 @@ oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
 -- | [Output Only] Type of the resource. Always compute#operation for
--- operation resources.
+-- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
@@ -4631,22 +4643,17 @@ dUsers
       _Coerce
 
 -- | The source image used to create this disk. If the source image is
--- deleted from the system, this field will not be set, even if an image
--- with the same name has been re-created. When creating a disk, you can
--- provide a private (custom) image using the following input, and Compute
--- Engine will use the corresponding image from your project. For example:
--- global\/images\/my-private-image Or you can provide an image from a
--- publicly-available project. For example, to use a Debian image from the
--- debian-cloud project, make sure to include the project in the URL:
--- projects\/debian-cloud\/global\/images\/debian-7-wheezy-vYYYYMMDD where
--- vYYYYMMDD is the image version. The fully-qualified URL will also work
--- in both cases. You can also specify the latest image for a private image
--- family by replacing the image name suffix with family\/family-name. For
--- example: global\/images\/family\/my-private-family Or you can specify an
--- image family from a publicly-available project. For example, to use the
--- latest Debian 7 from the debian-cloud project, make sure to include the
--- project in the URL:
--- projects\/debian-cloud\/global\/images\/family\/debian-7
+-- deleted, this field will not be set. To create a disk with one of the
+-- public operating system images, specify the image by its family name.
+-- For example, specify family\/debian-8 to use the latest Debian 8 image:
+-- projects\/debian-cloud\/global\/images\/family\/debian-8 Alternatively,
+-- use a specific version of a public operating system image:
+-- projects\/debian-cloud\/global\/images\/debian-8-jessie-vYYYYMMDD To
+-- create a disk with a private image that you created, specify the image
+-- name in the following format: global\/images\/my-private-image You can
+-- also specify a private image by its image family, which returns the
+-- latest version of the image in that family. Replace the image name with
+-- family\/family-name: global\/images\/family\/my-private-family
 dSourceImage :: Lens' Disk (Maybe Text)
 dSourceImage
   = lens _dSourceImage (\ s a -> s{_dSourceImage = a})
@@ -5023,9 +5030,8 @@ instanceGroupManager =
 igmKind :: Lens' InstanceGroupManager Text
 igmKind = lens _igmKind (\ s a -> s{_igmKind = a})
 
--- | [Output Only] The fingerprint of the target pools information. You can
--- use this optional field for optimistic locking when you update the
--- target pool entries.
+-- | [Output Only] The fingerprint of the resource data. You can use this
+-- optional field for optimistic locking when you update the resource.
 igmFingerprint :: Lens' InstanceGroupManager (Maybe Word8)
 igmFingerprint
   = lens _igmFingerprint
@@ -6045,15 +6051,18 @@ attachedDiskInitializeParams =
     , _adipDiskType = Nothing
     }
 
--- | A source image used to create the disk. You can provide a private
--- (custom) image, and Compute Engine will use the corresponding image from
--- your project. For example: global\/images\/my-private-image Or you can
--- provide an image from a publicly-available project. For example, to use
--- a Debian image from the debian-cloud project, make sure to include the
--- project in the URL:
--- projects\/debian-cloud\/global\/images\/debian-7-wheezy-vYYYYMMDD where
--- vYYYYMMDD is the image version. The fully-qualified URL will also work
--- in both cases.
+-- | The source image used to create this disk. If the source image is
+-- deleted, this field will not be set. To create a disk with one of the
+-- public operating system images, specify the image by its family name.
+-- For example, specify family\/debian-8 to use the latest Debian 8 image:
+-- projects\/debian-cloud\/global\/images\/family\/debian-8 Alternatively,
+-- use a specific version of a public operating system image:
+-- projects\/debian-cloud\/global\/images\/debian-8-jessie-vYYYYMMDD To
+-- create a disk with a private image that you created, specify the image
+-- name in the following format: global\/images\/my-private-image You can
+-- also specify a private image by its image family, which returns the
+-- latest version of the image in that family. Replace the image name with
+-- family\/family-name: global\/images\/family\/my-private-family
 adipSourceImage :: Lens' AttachedDiskInitializeParams (Maybe Text)
 adipSourceImage
   = lens _adipSourceImage
@@ -6210,8 +6219,9 @@ niNetwork
 niName :: Lens' NetworkInterface (Maybe Text)
 niName = lens _niName (\ s a -> s{_niName = a})
 
--- | [Output Only] An optional IPV4 internal network address assigned to the
--- instance for this network interface.
+-- | An IPV4 internal network address to assign to the instance for this
+-- network interface. If not specified by user an unused internal IP is
+-- assigned by system.
 niNetworkIP :: Lens' NetworkInterface (Maybe Text)
 niNetworkIP
   = lens _niNetworkIP (\ s a -> s{_niNetworkIP = a})
@@ -6222,8 +6232,8 @@ niNetworkIP
 -- network is in custom subnet mode, then this field should be specified.
 -- If you specify this property, you can specify the subnetwork as a full
 -- or partial URL. For example, the following are all valid URLs: -
--- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/zones\/zone\/subnetworks\/subnetwork
--- - zones\/zone\/subnetworks\/subnetwork
+-- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/regions\/region\/subnetworks\/subnetwork
+-- - regions\/region\/subnetworks\/subnetwork
 niSubnetwork :: Lens' NetworkInterface (Maybe Text)
 niSubnetwork
   = lens _niSubnetwork (\ s a -> s{_niSubnetwork = a})
@@ -7218,16 +7228,15 @@ instance ToJSON Address where
 --
 -- /See:/ 'zone' smart constructor.
 data Zone = Zone'
-    { _zStatus             :: !(Maybe ZoneStatus)
-    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
-    , _zKind               :: !Text
-    , _zSelfLink           :: !(Maybe Text)
-    , _zName               :: !(Maybe Text)
-    , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe (Textual Word64))
-    , _zRegion             :: !(Maybe Text)
-    , _zDescription        :: !(Maybe Text)
-    , _zDeprecated         :: !(Maybe DeprecationStatus)
+    { _zStatus            :: !(Maybe ZoneStatus)
+    , _zKind              :: !Text
+    , _zSelfLink          :: !(Maybe Text)
+    , _zName              :: !(Maybe Text)
+    , _zCreationTimestamp :: !(Maybe Text)
+    , _zId                :: !(Maybe (Textual Word64))
+    , _zRegion            :: !(Maybe Text)
+    , _zDescription       :: !(Maybe Text)
+    , _zDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
@@ -7235,8 +7244,6 @@ data Zone = Zone'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'zStatus'
---
--- * 'zMaintenanceWindows'
 --
 -- * 'zKind'
 --
@@ -7258,7 +7265,6 @@ zone
 zone =
     Zone'
     { _zStatus = Nothing
-    , _zMaintenanceWindows = Nothing
     , _zKind = "compute#zone"
     , _zSelfLink = Nothing
     , _zName = Nothing
@@ -7272,16 +7278,6 @@ zone =
 -- | [Output Only] Status of the zone, either UP or DOWN.
 zStatus :: Lens' Zone (Maybe ZoneStatus)
 zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
-
--- | [Output Only] Any scheduled maintenance windows for this zone. When the
--- zone is in a maintenance window, all resources which reside in the zone
--- will be unavailable. For more information, see Maintenance Windows
-zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindowsItem]
-zMaintenanceWindows
-  = lens _zMaintenanceWindows
-      (\ s a -> s{_zMaintenanceWindows = a})
-      . _Default
-      . _Coerce
 
 -- | [Output Only] Type of the resource. Always compute#zone for zones.
 zKind :: Lens' Zone Text
@@ -7328,8 +7324,7 @@ instance FromJSON Zone where
               (\ o ->
                  Zone' <$>
                    (o .:? "status") <*>
-                     (o .:? "maintenanceWindows" .!= mempty)
-                     <*> (o .:? "kind" .!= "compute#zone")
+                     (o .:? "kind" .!= "compute#zone")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
@@ -7342,9 +7337,7 @@ instance ToJSON Zone where
         toJSON Zone'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _zStatus,
-                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
-                  Just ("kind" .= _zKind),
+                 [("status" .=) <$> _zStatus, Just ("kind" .= _zKind),
                   ("selfLink" .=) <$> _zSelfLink,
                   ("name" .=) <$> _zName,
                   ("creationTimestamp" .=) <$> _zCreationTimestamp,
@@ -8065,76 +8058,6 @@ instance ToJSON InstanceTemplate where
                   ("id" .=) <$> _itId,
                   ("description" .=) <$> _itDescription,
                   ("properties" .=) <$> _itProperties])
-
---
--- /See:/ 'zoneMaintenanceWindowsItem' smart constructor.
-data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem'
-    { _zmwiBeginTime   :: !(Maybe Text)
-    , _zmwiName        :: !(Maybe Text)
-    , _zmwiEndTime     :: !(Maybe Text)
-    , _zmwiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ZoneMaintenanceWindowsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zmwiBeginTime'
---
--- * 'zmwiName'
---
--- * 'zmwiEndTime'
---
--- * 'zmwiDescription'
-zoneMaintenanceWindowsItem
-    :: ZoneMaintenanceWindowsItem
-zoneMaintenanceWindowsItem =
-    ZoneMaintenanceWindowsItem'
-    { _zmwiBeginTime = Nothing
-    , _zmwiName = Nothing
-    , _zmwiEndTime = Nothing
-    , _zmwiDescription = Nothing
-    }
-
--- | [Output Only] Starting time of the maintenance window, in RFC3339
--- format.
-zmwiBeginTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiBeginTime
-  = lens _zmwiBeginTime
-      (\ s a -> s{_zmwiBeginTime = a})
-
--- | [Output Only] Name of the maintenance window.
-zmwiName :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiName = lens _zmwiName (\ s a -> s{_zmwiName = a})
-
--- | [Output Only] Ending time of the maintenance window, in RFC3339 format.
-zmwiEndTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiEndTime
-  = lens _zmwiEndTime (\ s a -> s{_zmwiEndTime = a})
-
--- | [Output Only] Textual description of the maintenance window.
-zmwiDescription :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiDescription
-  = lens _zmwiDescription
-      (\ s a -> s{_zmwiDescription = a})
-
-instance FromJSON ZoneMaintenanceWindowsItem where
-        parseJSON
-          = withObject "ZoneMaintenanceWindowsItem"
-              (\ o ->
-                 ZoneMaintenanceWindowsItem' <$>
-                   (o .:? "beginTime") <*> (o .:? "name") <*>
-                     (o .:? "endTime")
-                     <*> (o .:? "description"))
-
-instance ToJSON ZoneMaintenanceWindowsItem where
-        toJSON ZoneMaintenanceWindowsItem'{..}
-          = object
-              (catMaybes
-                 [("beginTime" .=) <$> _zmwiBeginTime,
-                  ("name" .=) <$> _zmwiName,
-                  ("endTime" .=) <$> _zmwiEndTime,
-                  ("description" .=) <$> _zmwiDescription])
 
 -- | Represents a Target VPN gateway resource.
 --
@@ -11362,7 +11285,7 @@ subId
   = lens _subId (\ s a -> s{_subId = a}) .
       mapping _Coerce
 
--- | [Output Only] URL of the region where the Subnetwork resides.
+-- | URL of the region where the Subnetwork resides.
 subRegion :: Lens' Subnetwork (Maybe Text)
 subRegion
   = lens _subRegion (\ s a -> s{_subRegion = a})
@@ -12446,6 +12369,39 @@ instance ToJSON SubnetworkAggregatedList where
                   ("items" .=) <$> _salItems,
                   ("selfLink" .=) <$> _salSelfLink,
                   ("id" .=) <$> _salId])
+
+--
+-- /See:/ 'disksResizeRequest' smart constructor.
+newtype DisksResizeRequest = DisksResizeRequest'
+    { _drrSizeGb :: Maybe (Textual Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DisksResizeRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'drrSizeGb'
+disksResizeRequest
+    :: DisksResizeRequest
+disksResizeRequest =
+    DisksResizeRequest'
+    { _drrSizeGb = Nothing
+    }
+
+-- | The new size of the persistent disk, which is specified in GB.
+drrSizeGb :: Lens' DisksResizeRequest (Maybe Int64)
+drrSizeGb
+  = lens _drrSizeGb (\ s a -> s{_drrSizeGb = a}) .
+      mapping _Coerce
+
+instance FromJSON DisksResizeRequest where
+        parseJSON
+          = withObject "DisksResizeRequest"
+              (\ o -> DisksResizeRequest' <$> (o .:? "sizeGb"))
+
+instance ToJSON DisksResizeRequest where
+        toJSON DisksResizeRequest'{..}
+          = object (catMaybes [("sizeGb" .=) <$> _drrSizeGb])
 
 --
 -- /See:/ 'autoscalersScopedListWarningDataItem' smart constructor.
@@ -15832,6 +15788,7 @@ data BackendService = BackendService'
     , _bsName              :: !(Maybe Text)
     , _bsCreationTimestamp :: !(Maybe Text)
     , _bsId                :: !(Maybe (Textual Word64))
+    , _bsRegion            :: !(Maybe Text)
     , _bsTimeoutSec        :: !(Maybe (Textual Int32))
     , _bsDescription       :: !(Maybe Text)
     , _bsPortName          :: !(Maybe Text)
@@ -15859,6 +15816,8 @@ data BackendService = BackendService'
 --
 -- * 'bsId'
 --
+-- * 'bsRegion'
+--
 -- * 'bsTimeoutSec'
 --
 -- * 'bsDescription'
@@ -15880,6 +15839,7 @@ backendService =
     , _bsName = Nothing
     , _bsCreationTimestamp = Nothing
     , _bsId = Nothing
+    , _bsRegion = Nothing
     , _bsTimeoutSec = Nothing
     , _bsDescription = Nothing
     , _bsPortName = Nothing
@@ -15943,6 +15903,11 @@ bsId
   = lens _bsId (\ s a -> s{_bsId = a}) .
       mapping _Coerce
 
+-- | [Output Only] URL of the region where the regional backend service
+-- resides. This field is not applicable to global backend services.
+bsRegion :: Lens' BackendService (Maybe Text)
+bsRegion = lens _bsRegion (\ s a -> s{_bsRegion = a})
+
 -- | How many seconds to wait for the backend before considering it a failed
 -- request. Default is 30 seconds.
 bsTimeoutSec :: Lens' BackendService (Maybe Int32)
@@ -15993,6 +15958,7 @@ instance FromJSON BackendService where
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
                      <*> (o .:? "id")
+                     <*> (o .:? "region")
                      <*> (o .:? "timeoutSec")
                      <*> (o .:? "description")
                      <*> (o .:? "portName")
@@ -16010,7 +15976,7 @@ instance ToJSON BackendService where
                   ("selfLink" .=) <$> _bsSelfLink,
                   ("name" .=) <$> _bsName,
                   ("creationTimestamp" .=) <$> _bsCreationTimestamp,
-                  ("id" .=) <$> _bsId,
+                  ("id" .=) <$> _bsId, ("region" .=) <$> _bsRegion,
                   ("timeoutSec" .=) <$> _bsTimeoutSec,
                   ("description" .=) <$> _bsDescription,
                   ("portName" .=) <$> _bsPortName,

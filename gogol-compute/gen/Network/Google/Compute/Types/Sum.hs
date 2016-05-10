@@ -1547,7 +1547,7 @@ instance ToJSON BackendBalancingMode where
     toJSON = toJSONText
 
 -- | The IP protocol to which this rule applies. Valid options are TCP, UDP,
--- ESP, AH or SCTP.
+-- ESP, AH, SCTP or ICMP.
 data ForwardingRuleIPProtocol
     = AH
       -- ^ @AH@

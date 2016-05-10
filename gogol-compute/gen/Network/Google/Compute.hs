@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for the Google Compute Engine service.
+-- Creates and runs virtual machines on Google Cloud Platform.
 --
 -- /See:/ <https://developers.google.com/compute/docs/reference/latest/ Compute Engine API Reference>
 module Network.Google.Compute
@@ -117,6 +117,9 @@ module Network.Google.Compute
 
     -- ** compute.disks.list
     , module Network.Google.Resource.Compute.Disks.List
+
+    -- ** compute.disks.resize
+    , module Network.Google.Resource.Compute.Disks.Resize
 
     -- ** compute.firewalls.delete
     , module Network.Google.Resource.Compute.Firewalls.Delete
@@ -237,6 +240,9 @@ module Network.Google.Compute
 
     -- ** compute.images.get
     , module Network.Google.Resource.Compute.Images.Get
+
+    -- ** compute.images.getFromFamily
+    , module Network.Google.Resource.Compute.Images.GetFromFamily
 
     -- ** compute.images.insert
     , module Network.Google.Resource.Compute.Images.Insert
@@ -822,6 +828,7 @@ module Network.Google.Compute
     , iSourceDiskId
     , iKind
     , iArchiveSizeBytes
+    , iFamily
     , iRawDisk
     , iSelfLink
     , iName
@@ -1432,7 +1439,6 @@ module Network.Google.Compute
     , Zone
     , zone
     , zStatus
-    , zMaintenanceWindows
     , zKind
     , zSelfLink
     , zName
@@ -1519,14 +1525,6 @@ module Network.Google.Compute
     , itId
     , itDescription
     , itProperties
-
-    -- ** ZoneMaintenanceWindowsItem
-    , ZoneMaintenanceWindowsItem
-    , zoneMaintenanceWindowsItem
-    , zmwiBeginTime
-    , zmwiName
-    , zmwiEndTime
-    , zmwiDescription
 
     -- ** TargetVPNGateway
     , TargetVPNGateway
@@ -2020,6 +2018,11 @@ module Network.Google.Compute
     , salSelfLink
     , salId
 
+    -- ** DisksResizeRequest
+    , DisksResizeRequest
+    , disksResizeRequest
+    , drrSizeGb
+
     -- ** AutoscalersScopedListWarningDataItem
     , AutoscalersScopedListWarningDataItem
     , autoscalersScopedListWarningDataItem
@@ -2401,6 +2404,7 @@ module Network.Google.Compute
     , bsName
     , bsCreationTimestamp
     , bsId
+    , bsRegion
     , bsTimeoutSec
     , bsDescription
     , bsPortName
@@ -2535,6 +2539,7 @@ import           Network.Google.Resource.Compute.Disks.Delete
 import           Network.Google.Resource.Compute.Disks.Get
 import           Network.Google.Resource.Compute.Disks.Insert
 import           Network.Google.Resource.Compute.Disks.List
+import           Network.Google.Resource.Compute.Disks.Resize
 import           Network.Google.Resource.Compute.DiskTypes.AggregatedList
 import           Network.Google.Resource.Compute.DiskTypes.Get
 import           Network.Google.Resource.Compute.DiskTypes.List
@@ -2578,6 +2583,7 @@ import           Network.Google.Resource.Compute.HTTPSHealthChecks.Update
 import           Network.Google.Resource.Compute.Images.Delete
 import           Network.Google.Resource.Compute.Images.Deprecate
 import           Network.Google.Resource.Compute.Images.Get
+import           Network.Google.Resource.Compute.Images.GetFromFamily
 import           Network.Google.Resource.Compute.Images.Insert
 import           Network.Google.Resource.Compute.Images.List
 import           Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
@@ -2715,6 +2721,7 @@ TODO
 type ComputeAPI =
      ImagesInsertResource :<|> ImagesListResource :<|>
        ImagesGetResource
+       :<|> ImagesGetFromFamilyResource
        :<|> ImagesDeprecateResource
        :<|> ImagesDeleteResource
        :<|> URLMapsInsertResource
@@ -2870,6 +2877,7 @@ type ComputeAPI =
        :<|> TargetInstancesDeleteResource
        :<|> DisksAggregatedListResource
        :<|> DisksInsertResource
+       :<|> DisksResizeResource
        :<|> DisksListResource
        :<|> DisksGetResource
        :<|> DisksCreateSnapshotResource
