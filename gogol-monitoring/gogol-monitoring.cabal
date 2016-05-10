@@ -14,8 +14,14 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    The Google Monitoring API lets you manage your monitoring data and
-    configurations.
+    Manages your Stackdriver monitoring data and configurations. Projects
+    must be associated with a Stackdriver account, except for the following
+    methods:
+    [monitoredResourceDescriptors.list](v3\/projects.monitoredResourceDescriptors\/list),
+    [monitoredResourceDescriptors.get](v3\/projects.monitoredResourceDescriptors\/get),
+    [metricDescriptors.list](v3\/projects.metricDescriptors\/list),
+    [metricDescriptors.get](v3\/projects.metricDescriptors\/get), and
+    [timeSeries.list](v3\/projects.timeSeries\/list).
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!

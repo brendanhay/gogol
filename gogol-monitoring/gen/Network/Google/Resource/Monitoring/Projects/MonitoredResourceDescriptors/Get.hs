@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a single monitored resource descriptor.
+-- Gets a single monitored resource descriptor. This method does not
+-- require a Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.monitoredResourceDescriptors.get@.
 module Network.Google.Resource.Monitoring.Projects.MonitoredResourceDescriptors.Get
     (
     -- * REST Resource
@@ -62,7 +63,8 @@ type ProjectsMonitoredResourceDescriptorsGetResource
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] MonitoredResourceDescriptor
 
--- | Gets a single monitored resource descriptor.
+-- | Gets a single monitored resource descriptor. This method does not
+-- require a Stackdriver account.
 --
 -- /See:/ 'projectsMonitoredResourceDescriptorsGet' smart constructor.
 data ProjectsMonitoredResourceDescriptorsGet = ProjectsMonitoredResourceDescriptorsGet'
@@ -143,9 +145,10 @@ pmrdgBearerToken
   = lens _pmrdgBearerToken
       (\ s a -> s{_pmrdgBearerToken = a})
 
--- | The monitored resource descriptor to get. The format is \`\"projects\/
--- \/monitoredResourceDescriptors\/\"\`. The \`\` is a predefined type,
--- such as \`cloudsql_database\`.
+-- | The monitored resource descriptor to get. The format is
+-- \`\"projects\/{project_id_or_number}\/monitoredResourceDescriptors\/{resource_type}\"\`.
+-- The \`{resource_type}\` is a predefined type, such as
+-- \`cloudsql_database\`.
 pmrdgName :: Lens' ProjectsMonitoredResourceDescriptorsGet Text
 pmrdgName
   = lens _pmrdgName (\ s a -> s{_pmrdgName = a})

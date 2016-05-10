@@ -22,7 +22,7 @@
 --
 -- Lists the monitored resources that are members of a group.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.groups.members.list@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.groups.members.list@.
 module Network.Google.Resource.Monitoring.Projects.Groups.Members.List
     (
     -- * REST Resource
@@ -140,8 +140,8 @@ projectsGroupsMembersList pPgmlName_ =
     , _pgmlCallback = Nothing
     }
 
--- | (optional) If omitted, the interval is a point in time, \`endTime\`. If
--- \`startTime\` is present, it must be earlier than (less than)
+-- | If this value is omitted, the interval is a point in time, \`endTime\`.
+-- If \`startTime\` is present, it must be earlier than (less than)
 -- \`endTime\`. The interval begins after \`startTime\`—it does not include
 -- \`startTime\`.
 pgmlIntervalStartTime :: Lens' ProjectsGroupsMembersList (Maybe Text)
@@ -182,8 +182,8 @@ pgmlBearerToken
   = lens _pgmlBearerToken
       (\ s a -> s{_pgmlBearerToken = a})
 
--- | The group whose members are listed. The format is \`\"projects\/
--- \/groups\/\"\`.
+-- | The group whose members are listed. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`.
 pgmlName :: Lens' ProjectsGroupsMembersList Text
 pgmlName = lens _pgmlName (\ s a -> s{_pgmlName = a})
 
@@ -205,7 +205,7 @@ pgmlPageToken
   = lens _pgmlPageToken
       (\ s a -> s{_pgmlPageToken = a})
 
--- | (required) The end of the interval. The interval includes this time.
+-- | Required. The end of the interval. The interval includes this time.
 pgmlIntervalEndTime :: Lens' ProjectsGroupsMembersList (Maybe Text)
 pgmlIntervalEndTime
   = lens _pgmlIntervalEndTime

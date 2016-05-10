@@ -63,11 +63,11 @@ monitoredResourceDescriptor =
     }
 
 -- | Optional. The resource name of the monitored resource descriptor:
--- \`\"projects\/ \/monitoredResourceDescriptors\/\"\` where is the value
--- of the \`type\` field in this object and is a project ID that provides
--- API-specific context for accessing the type. APIs that do not use
--- project information can use the resource name format
--- \`\"monitoredResourceDescriptors\/\"\`.
+-- \`\"projects\/{project_id}\/monitoredResourceDescriptors\/{type}\"\`
+-- where {type} is the value of the \`type\` field in this object and
+-- {project_id} is a project ID that provides API-specific context for
+-- accessing the type. APIs that do not use project information can use the
+-- resource name format \`\"monitoredResourceDescriptors\/{type}\"\`.
 mrdName :: Lens' MonitoredResourceDescriptor (Maybe Text)
 mrdName = lens _mrdName (\ s a -> s{_mrdName = a})
 
@@ -386,10 +386,11 @@ group' =
     , _gParentName = Nothing
     }
 
--- | The name of this group. The format is \`\"projects\/ \/groups\/\"\`.
--- When creating a group, this field is ignored and a new name is created
+-- | The name of this group. The format is
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. When
+-- creating a group, this field is ignored and a new name is created
 -- consisting of the project specified in the call to \`CreateGroup\` and a
--- unique \`\` that is generated automatically. \'OutputOnly
+-- unique \`{group_id}\` that is generated automatically. \'OutputOnly
 gName :: Lens' Group (Maybe Text)
 gName = lens _gName (\ s a -> s{_gName = a})
 
@@ -410,8 +411,8 @@ gIsCluster
   = lens _gIsCluster (\ s a -> s{_gIsCluster = a})
 
 -- | The name of the group\'s parent, if it has one. The format is
--- \`\"projects\/ \/groups\/\"\`. For groups with no parent, \`parentName\`
--- is the empty string, \`\"\"\`.
+-- \`\"projects\/{project_id_or_number}\/groups\/{group_id}\"\`. For groups
+-- with no parent, \`parentName\` is the empty string, \`\"\"\`.
 gParentName :: Lens' Group (Maybe Text)
 gParentName
   = lens _gParentName (\ s a -> s{_gParentName = a})
@@ -1768,15 +1769,15 @@ timeInterval =
     , _tiEndTime = Nothing
     }
 
--- | (optional) If omitted, the interval is a point in time, \`endTime\`. If
--- \`startTime\` is present, it must be earlier than (less than)
+-- | If this value is omitted, the interval is a point in time, \`endTime\`.
+-- If \`startTime\` is present, it must be earlier than (less than)
 -- \`endTime\`. The interval begins after \`startTime\`—it does not include
 -- \`startTime\`.
 tiStartTime :: Lens' TimeInterval (Maybe Text)
 tiStartTime
   = lens _tiStartTime (\ s a -> s{_tiStartTime = a})
 
--- | (required) The end of the interval. The interval includes this time.
+-- | Required. The end of the interval. The interval includes this time.
 tiEndTime :: Lens' TimeInterval (Maybe Text)
 tiEndTime
   = lens _tiEndTime (\ s a -> s{_tiEndTime = a})

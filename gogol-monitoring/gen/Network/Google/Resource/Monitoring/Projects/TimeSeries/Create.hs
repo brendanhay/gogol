@@ -25,7 +25,7 @@
 -- not be written, a corresponding failure message is included in the error
 -- response.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.timeSeries.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.timeSeries.create@.
 module Network.Google.Resource.Monitoring.Projects.TimeSeries.Create
     (
     -- * REST Resource
@@ -162,7 +162,7 @@ ptscBearerToken
       (\ s a -> s{_ptscBearerToken = a})
 
 -- | The project on which to execute the request. The format is
--- \`\"projects\/ \"\`.
+-- \`\"projects\/{project_id_or_number}\"\`.
 ptscName :: Lens' ProjectsTimeSeriesCreate Text
 ptscName = lens _ptscName (\ s a -> s{_ptscName = a})
 

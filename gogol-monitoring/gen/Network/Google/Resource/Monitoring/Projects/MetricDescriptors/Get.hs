@@ -20,9 +20,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Gets a single metric descriptor.
+-- Gets a single metric descriptor. This method does not require a
+-- Stackdriver account.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.get@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.metricDescriptors.get@.
 module Network.Google.Resource.Monitoring.Projects.MetricDescriptors.Get
     (
     -- * REST Resource
@@ -61,7 +62,8 @@ type ProjectsMetricDescriptorsGetResource =
                        QueryParam "alt" AltJSON :>
                          Get '[JSON] MetricDescriptor
 
--- | Gets a single metric descriptor.
+-- | Gets a single metric descriptor. This method does not require a
+-- Stackdriver account.
 --
 -- /See:/ 'projectsMetricDescriptorsGet' smart constructor.
 data ProjectsMetricDescriptorsGet = ProjectsMetricDescriptorsGet'
@@ -143,7 +145,8 @@ pmdgBearerToken
       (\ s a -> s{_pmdgBearerToken = a})
 
 -- | The metric descriptor on which to execute the request. The format is
--- \`\"projects\/ \/metricDescriptors\/\"\`. An example value of \`\` is
+-- \`\"projects\/{project_id_or_number}\/metricDescriptors\/{metric_id}\"\`.
+-- An example value of \`{metric_id}\` is
 -- \`\"compute.googleapis.com\/instance\/disk\/read_bytes_count\"\`.
 pmdgName :: Lens' ProjectsMetricDescriptorsGet Text
 pmdgName = lens _pmdgName (\ s a -> s{_pmdgName = a})

@@ -25,7 +25,7 @@
 -- Monitoring Agent. See
 -- [google.monitoring.v3.MetricService.CreateTimeSeries] instead.
 --
--- /See:/ <https://cloud.google.com/monitoring/alpha/ Google Monitoring API Reference> for @monitoring.projects.collectdTimeSeries.create@.
+-- /See:/ <https://cloud.google.com/monitoring/api/ Google Monitoring API Reference> for @monitoring.projects.collectdTimeSeries.create@.
 module Network.Google.Resource.Monitoring.Projects.CollectdTimeSeries.Create
     (
     -- * REST Resource
