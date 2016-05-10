@@ -487,7 +487,7 @@ oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
 -- | [Output Only] Type of the resource. Always compute#operation for
--- operation resources.
+-- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
