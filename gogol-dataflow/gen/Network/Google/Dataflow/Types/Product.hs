@@ -2992,6 +2992,7 @@ instance ToJSON StepProperties where
 -- /See:/ 'topologyConfig' smart constructor.
 data TopologyConfig = TopologyConfig'
     { _tcDataDiskAssignments           :: !(Maybe [DataDiskAssignment])
+    , _tcPersistentStateVersion        :: !(Maybe (Textual Int32))
     , _tcForwardingKeyBits             :: !(Maybe (Textual Int32))
     , _tcUserStageToComputationNameMap :: !(Maybe TopologyConfigUserStageToComputationNameMap)
     , _tcComputations                  :: !(Maybe [ComputationTopology])
@@ -3003,6 +3004,8 @@ data TopologyConfig = TopologyConfig'
 --
 -- * 'tcDataDiskAssignments'
 --
+-- * 'tcPersistentStateVersion'
+--
 -- * 'tcForwardingKeyBits'
 --
 -- * 'tcUserStageToComputationNameMap'
@@ -3013,6 +3016,7 @@ topologyConfig
 topologyConfig =
     TopologyConfig'
     { _tcDataDiskAssignments = Nothing
+    , _tcPersistentStateVersion = Nothing
     , _tcForwardingKeyBits = Nothing
     , _tcUserStageToComputationNameMap = Nothing
     , _tcComputations = Nothing
@@ -3025,6 +3029,13 @@ tcDataDiskAssignments
       (\ s a -> s{_tcDataDiskAssignments = a})
       . _Default
       . _Coerce
+
+-- | Version number for persistent state.
+tcPersistentStateVersion :: Lens' TopologyConfig (Maybe Int32)
+tcPersistentStateVersion
+  = lens _tcPersistentStateVersion
+      (\ s a -> s{_tcPersistentStateVersion = a})
+      . mapping _Coerce
 
 -- | The size (in bits) of keys that will be assigned to source messages.
 tcForwardingKeyBits :: Lens' TopologyConfig (Maybe Int32)
@@ -3053,7 +3064,8 @@ instance FromJSON TopologyConfig where
               (\ o ->
                  TopologyConfig' <$>
                    (o .:? "dataDiskAssignments" .!= mempty) <*>
-                     (o .:? "forwardingKeyBits")
+                     (o .:? "persistentStateVersion")
+                     <*> (o .:? "forwardingKeyBits")
                      <*> (o .:? "userStageToComputationNameMap")
                      <*> (o .:? "computations" .!= mempty))
 
@@ -3063,6 +3075,8 @@ instance ToJSON TopologyConfig where
               (catMaybes
                  [("dataDiskAssignments" .=) <$>
                     _tcDataDiskAssignments,
+                  ("persistentStateVersion" .=) <$>
+                    _tcPersistentStateVersion,
                   ("forwardingKeyBits" .=) <$> _tcForwardingKeyBits,
                   ("userStageToComputationNameMap" .=) <$>
                     _tcUserStageToComputationNameMap,
@@ -4737,6 +4751,7 @@ instance ToJSON SinkSpec where
 -- /See:/ 'workerPool' smart constructor.
 data WorkerPool = WorkerPool'
     { _wpAutoscalingSettings         :: !(Maybe AutoscalingSettings)
+    , _wpNumThreadsPerWorker         :: !(Maybe (Textual Int32))
     , _wpDiskSizeGb                  :: !(Maybe (Textual Int32))
     , _wpKind                        :: !(Maybe Text)
     , _wpTaskrunnerSettings          :: !(Maybe TaskRunnerSettings)
@@ -4762,6 +4777,8 @@ data WorkerPool = WorkerPool'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'wpAutoscalingSettings'
+--
+-- * 'wpNumThreadsPerWorker'
 --
 -- * 'wpDiskSizeGb'
 --
@@ -4803,6 +4820,7 @@ workerPool
 workerPool =
     WorkerPool'
     { _wpAutoscalingSettings = Nothing
+    , _wpNumThreadsPerWorker = Nothing
     , _wpDiskSizeGb = Nothing
     , _wpKind = Nothing
     , _wpTaskrunnerSettings = Nothing
@@ -4828,6 +4846,16 @@ wpAutoscalingSettings :: Lens' WorkerPool (Maybe AutoscalingSettings)
 wpAutoscalingSettings
   = lens _wpAutoscalingSettings
       (\ s a -> s{_wpAutoscalingSettings = a})
+
+-- | The number of threads per worker harness. If empty or unspecified, the
+-- service will choose a number of threads (according to the number of
+-- cores on the selected machine type for batch, or 1 by convention for
+-- streaming).
+wpNumThreadsPerWorker :: Lens' WorkerPool (Maybe Int32)
+wpNumThreadsPerWorker
+  = lens _wpNumThreadsPerWorker
+      (\ s a -> s{_wpNumThreadsPerWorker = a})
+      . mapping _Coerce
 
 -- | Size of root disk for VMs, in GB. If zero or unspecified, the service
 -- will attempt to choose a reasonable default.
@@ -4960,7 +4988,8 @@ instance FromJSON WorkerPool where
               (\ o ->
                  WorkerPool' <$>
                    (o .:? "autoscalingSettings") <*>
-                     (o .:? "diskSizeGb")
+                     (o .:? "numThreadsPerWorker")
+                     <*> (o .:? "diskSizeGb")
                      <*> (o .:? "kind")
                      <*> (o .:? "taskrunnerSettings")
                      <*> (o .:? "numWorkers")
@@ -4985,6 +5014,8 @@ instance ToJSON WorkerPool where
               (catMaybes
                  [("autoscalingSettings" .=) <$>
                     _wpAutoscalingSettings,
+                  ("numThreadsPerWorker" .=) <$>
+                    _wpNumThreadsPerWorker,
                   ("diskSizeGb" .=) <$> _wpDiskSizeGb,
                   ("kind" .=) <$> _wpKind,
                   ("taskrunnerSettings" .=) <$> _wpTaskrunnerSettings,

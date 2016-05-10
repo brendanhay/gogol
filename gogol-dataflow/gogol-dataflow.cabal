@@ -14,7 +14,8 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Google Dataflow API.
+    Develops and executes data processing patterns like ETL, batch
+    computation, and continuous computation.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
