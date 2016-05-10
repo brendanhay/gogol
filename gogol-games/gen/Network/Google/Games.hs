@@ -1002,6 +1002,7 @@ module Network.Google.Games
     , plaTitle
     , plaBannerURLPortrait
     , plaPlayerId
+    , plaProFileSettings
 
     -- ** GamesAchievementIncrement
     , GamesAchievementIncrement
@@ -1055,6 +1056,12 @@ module Network.Google.Games
     , turnBasedMatchDataRequest
     , tbmdrKind
     , tbmdrData
+
+    -- ** ProFileSettings
+    , ProFileSettings
+    , proFileSettings
+    , pfsProFileVisible
+    , pfsKind
 
     -- ** EventPeriodRange
     , EventPeriodRange
