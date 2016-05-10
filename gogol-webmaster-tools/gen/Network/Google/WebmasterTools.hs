@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you view Google Search Console data for your verified sites.
+-- View Google Search Console data for your verified sites.
 --
 -- /See:/ <https://developers.google.com/webmaster-tools/ Search Console API Reference>
 module Network.Google.WebmasterTools
