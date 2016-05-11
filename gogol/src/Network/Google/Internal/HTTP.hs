@@ -19,6 +19,9 @@ import           Control.Lens                      ((%~), (&))
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class            (MonadIO)
 import           Control.Monad.Trans.Resource      (MonadResource (..))
+import qualified Data.ByteString.Lazy              as LBS
+import           Data.Conduit                      (($$+-))
+import qualified Data.Conduit.List                 as Conduit
 import           Data.Default.Class                (Default (..))
 import           Data.Monoid                       (Dual (..), Endo (..), (<>))
 import qualified Data.Text.Encoding                as Text
@@ -64,6 +67,8 @@ perform Env{..} x = catches go handlers
 
         logDebug _envLogger rs -- debug:ClientResponse
 
+        statusCheck rs
+
         r       <- _cliResponse (responseBody rs)
 
         pure $! case r of
@@ -80,7 +85,7 @@ perform Env{..} x = catches go handlers
         { Client.host            = _svcHost
         , Client.port            = _svcPort
         , Client.secure          = _svcSecure
-        , Client.checkStatus     = status
+        , Client.checkStatus     = \_ _ _ -> Nothing
         , Client.responseTimeout = timeout
         , Client.method          = _cliMethod
         , Client.path            = path
@@ -97,14 +102,16 @@ perform Env{..} x = catches go handlers
          . LText.toStrict
          $ Build.toLazyText (_svcPath <> _rqPath)
 
-    status s hs _
-         | _cliCheck s = Nothing
-         | otherwise   = Just . toException . ServiceError $ ServiceError'
-             { _serviceId      = _svcId
-             , _serviceStatus  = s
-             , _serviceHeaders = hs
-             , _serviceBody    = Nothing
-             }
+    statusCheck rs
+        | _cliCheck (responseStatus rs) = pure ()
+        | otherwise                     = do
+                b <- LBS.fromChunks <$> (responseBody rs $$+- Conduit.consume)
+                throwM . toException . ServiceError $ ServiceError'
+                    { _serviceId      = _svcId
+                    , _serviceStatus  = responseStatus rs
+                    , _serviceHeaders = responseHeaders rs
+                    , _serviceBody    = Just b
+                    }
 
     timeout = microseconds <$> _svcTimeout
 
