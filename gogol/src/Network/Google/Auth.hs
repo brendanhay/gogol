@@ -183,6 +183,6 @@ authorize rq s l m = bearer <$> getToken s l m
     bearer t = rq
         { Client.requestHeaders =
             ( hAuthorization
-            , toHeader (_tokenAccess t)
+            , "Bearer " <> toHeader (_tokenAccess t)
             ) : Client.requestHeaders rq
         }

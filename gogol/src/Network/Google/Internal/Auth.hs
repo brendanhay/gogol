@@ -178,7 +178,7 @@ newtype OAuthCode = OAuthCode Text
 
 instance ToHttpApiData OAuthCode where
     toQueryParam (OAuthCode c) = c
-    toHeader     (OAuthCode c) = "Bearer " <> Text.encodeUtf8 c
+    toHeader     (OAuthCode c) = Text.encodeUtf8 c
 
 -- | An error thrown when attempting to read AuthN/AuthZ information.
 data AuthError
