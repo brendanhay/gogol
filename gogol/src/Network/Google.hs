@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds                  #-}
+{-# LANGUAGE RankNTypes                  #-}
 {-# LANGUAGE FlexibleContexts           #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE FunctionalDependencies     #-}
@@ -173,7 +174,7 @@ instance AllowScopes s => MonadGoogle s (Google s) where
 instance MonadBaseControl IO (Google s) where
     type StM (Google s) a = StM (ReaderT (Env s) (ResourceT IO)) a
 
-    liftBaseWith f = Google . liftBaseWith $ \g -> f (g . unGoogle)
+    liftBaseWith f = Google $ liftBaseWith $ \g -> f (g . unGoogle)
     restoreM       = Google . restoreM
 
 instance MonadGoogle s m => MonadGoogle s (IdentityT m) where
