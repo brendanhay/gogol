@@ -106,9 +106,8 @@ uploadAlias sub m
 
     media = case _mRequest m of
         Just b ->
-            TyApp (TyApp (TyApp (TyCon "MultipartRelated") jsonMedia)
-                         (tycon (ref b)))
-                  (TyCon "RequestBody")
+            TyApp (TyApp (TyCon "MultipartRelated") jsonMedia)
+                  (tycon (ref b))
 
         Nothing ->
             TyApp (TyApp (TyCon "ReqBody") streamMedia)
@@ -185,7 +184,7 @@ altParam =
 uploadParam :: Type
 uploadParam =
     TyApp (TyApp (TyCon "QueryParam") (sing "uploadType"))
-          (TyCon "AltMedia")
+          (TyCon "Multipart")
 
 metadataPat, downloadPat, uploadPat :: Method a -> Pat
 metadataPat = pattern 1
@@ -258,7 +257,7 @@ uploadDecl n pre api url fs m =
 
     extras = maybeToList alt ++ [upl] ++ payload ++ [var media]
       where
-        upl = app (var "Just") (var "AltMedia")
+        upl = app (var "Just") (var "Multipart")
         alt = app (var "Just") . var . name . Text.unpack . alternate <$>
              (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 
