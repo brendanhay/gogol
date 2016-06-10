@@ -25,42 +25,46 @@
 module Network.Google.Types where
 
 import           Control.Applicative
-import           Control.Exception.Lens                (exception)
+import           Control.Exception.Lens       (exception)
 import           Control.Lens
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
-import           Data.ByteString                       (ByteString)
-import qualified Data.ByteString.Char8                 as BS8
-import qualified Data.ByteString.Lazy                  as LBS
-import qualified Data.CaseInsensitive                  as CI
+import           Data.ByteString              (ByteString)
+import qualified Data.ByteString.Char8        as BS8
+import qualified Data.ByteString.Lazy         as LBS
+import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
 import           Data.Conduit
-import qualified Data.Conduit.List                     as CL
+import qualified Data.Conduit.List            as CL
 import           Data.Data
-import           Data.DList                            (DList)
-import qualified Data.DList                            as DList
-import           Data.Foldable                         (foldl')
+import           Data.DList                   (DList)
+import qualified Data.DList                   as DList
+import           Data.Foldable                (foldl')
 import           Data.Monoid
 import           Data.String
-import           Data.Text                             (Text)
-import qualified Data.Text.Encoding                    as Text
-import           Data.Text.Lazy.Builder                (Builder)
-import qualified Data.Text.Lazy.Builder                as Build
+import           Data.Text                    (Text)
+import qualified Data.Text.Encoding           as Text
+import           Data.Text.Lazy.Builder       (Builder)
+import qualified Data.Text.Lazy.Builder       as Build
 import           GHC.Generics
 import           GHC.TypeLits
-import           Network.HTTP.Client                   (HttpException, RequestBody (..))
-import           Network.HTTP.Media                    hiding (Accept)
-import           Network.HTTP.Types                    hiding (Header)
-import qualified Network.HTTP.Types                    as HTTP
+import           Network.HTTP.Client          (HttpException, RequestBody (..))
+import           Network.HTTP.Media           hiding (Accept)
+import           Network.HTTP.Types           hiding (Header)
+import qualified Network.HTTP.Types           as HTTP
 import           Servant.API
-import Web.HttpApiData
+import           Web.HttpApiData
 
 data AltJSON  = AltJSON  deriving (Eq, Ord, Show, Read, Generic, Typeable)
 data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
 instance ToHttpApiData AltJSON  where toQueryParam = const "json"
-instance ToHttpApiData AltMedia where toQueryParam = const "multipart"
+instance ToHttpApiData AltMedia where toQueryParam = const "media"
+
+data Multipart = Multipart deriving (Eq, Ord, Show, Read, Generic, Typeable)
+
+instance ToHttpApiData Multipart where toQueryParam = const "multipart"
 
 newtype OAuthScope = OAuthScope Text
     deriving
@@ -153,7 +157,7 @@ newtype ServiceId = ServiceId Text
         )
 
 newtype MediaDownload a = MediaDownload a
-data    MediaUpload   a = MediaUpload   a RequestBody
+data    MediaUpload   a = MediaUpload   a Part
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -407,23 +411,19 @@ data Captures (s :: Symbol) a
 data CaptureMode (s :: Symbol) (m :: Symbol) a
     deriving (Typeable)
 
-data MultipartRelated (cs :: [*]) m b
+data MultipartRelated (cs :: [*]) m
     deriving (Typeable)
 
 instance ( ToBody c m
-         , ToBody OctetStream b
          , GoogleClient fn
-         ) => GoogleClient (MultipartRelated (c ': cs) m b :> fn) where
-    type Fn (MultipartRelated (c ': cs) m b :> fn) = m -> b -> Fn fn
+         ) => GoogleClient (MultipartRelated (c ': cs) m :> fn) where
+    type Fn (MultipartRelated (c ': cs) m :> fn) = m -> Part -> Fn fn
 
-    buildClient Proxy rq m b = buildClient (Proxy :: Proxy fn) $
-        setRelated rq
-            [ Part (contentType mc) [] (toBody mc m)
-            , Part (contentType mb) [] (toBody mb b)
-            ]
-          where
-            mc = Proxy :: Proxy c
-            mb = Proxy :: Proxy OctetStream
+    buildClient Proxy rq m b =
+        buildClient (Proxy :: Proxy fn) $
+           setRelated rq [Part (contentType mc) [] (toBody mc m), b]
+      where
+        mc = Proxy :: Proxy c
 
 instance (KnownSymbol s, GoogleClient fn) => GoogleClient (s :> fn) where
     type Fn (s :> fn) = Fn fn
