@@ -1,4 +1,4 @@
- {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- |
 -- Module      : Network.Google.Internal.Multipart
@@ -12,14 +12,14 @@ module Network.Google.Internal.Multipart where
 
 import           Control.Monad.IO.Class                (MonadIO (..))
 import           Data.ByteString                       (ByteString)
-import qualified Data.ByteString as BS
+import qualified Data.ByteString                       as BS
 import           Data.ByteString.Builder.Extra         (byteStringCopy)
-import qualified Data.CaseInsensitive as CI
+import qualified Data.CaseInsensitive                  as CI
 import           Data.Monoid                           ((<>))
-import           Network.Google.Types                  (Part (..))
+import           Network.Google.Types                  (Body (..))
 import           Network.HTTP.Client
 import           Network.HTTP.Client.MultipartFormData (webkitBoundary)
-import           Network.HTTP.Media                    (RenderHeader(..))
+import           Network.HTTP.Media                    (RenderHeader (..))
 import           Network.HTTP.Types                    (Header, hContentType)
 
 -- POST /upload/drive/v2/files?uploadType=multipart HTTP/1.1
@@ -58,18 +58,13 @@ part (Boundary bs) = copy "--" <> copy bs <> copy "--\r\n"
 copy :: ByteString -> RequestBody
 copy bs = RequestBodyBuilder (fromIntegral (BS.length bs)) (byteStringCopy bs)
 
-renderParts :: Boundary -> [Part] -> RequestBody
+renderParts :: Boundary -> [Body] -> RequestBody
 renderParts b = (<> part b) . foldMap go
   where
-    go (Part ct hs x) =
+    go (Body ct x) =
            start b
         <> copy "Content-Type: "
            <> copy (renderHeader ct)
-        <> foldMap (\(k, v) ->
-              copy "\r\n"
-           <> copy (CI.original k)
-           <> copy ": "
-           <> copy v) hs
         <> copy "\r\n\r\n"
         <> x
         <> copy "\r\n"
