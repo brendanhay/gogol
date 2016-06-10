@@ -3,7 +3,6 @@
 {-# LANGUAGE LambdaCase         #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
-{-# LANGUAGE ViewPatterns       #-}
 
 -- |
 -- Module      : Network.Google.Internal.Logger
@@ -65,22 +64,6 @@ data LogLevel
     | Debug -- ^ Useful debug information + info + error levels.
     | Trace -- ^ Includes potentially credentials metadata, and non-streaming response bodies.
       deriving (Eq, Ord, Enum, Show, Data, Typeable)
-
-instance FromText LogLevel where
-    fromText (Text.toLower -> t) =
-        case t of
-            "info"  -> Just Info
-            "error" -> Just Error
-            "debug" -> Just Debug
-            "trace" -> Just Trace
-            _       -> Nothing
-
-instance ToText LogLevel where
-    toText = \case
-        Info  -> "info"
-        Error -> "error"
-        Debug -> "debug"
-        Trace -> "trace"
 
 -- | This is a primitive logger which can be used to log builds to a 'Handle'.
 --
