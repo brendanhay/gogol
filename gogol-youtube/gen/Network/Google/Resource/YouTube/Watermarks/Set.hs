@@ -61,9 +61,9 @@ type WatermarksSetResource =
                  QueryParam "channelId" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] InvideoBranding RequestBody
-                           :> Post '[JSON] ()
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] InvideoBranding :>
+                           Post '[JSON] ()
 
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 --
@@ -144,7 +144,7 @@ instance GoogleRequest (MediaUpload WatermarksSet)
         requestClient (MediaUpload WatermarksSet'{..} body)
           = go (Just _wsChannelId) _wsOnBehalfOfContentOwner
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _wsPayload
               body
               youTubeService

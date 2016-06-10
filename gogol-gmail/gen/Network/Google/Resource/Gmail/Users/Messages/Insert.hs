@@ -70,8 +70,8 @@ type UsersMessagesInsertResource =
                        UsersMessagesInsertInternalDateSource
                        :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] Message RequestBody :>
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] Message :>
                              Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
@@ -156,7 +156,7 @@ instance GoogleRequest
           = go _uUserId (Just _uDeleted)
               (Just _uInternalDateSource)
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _uPayload
               body
               gmailService

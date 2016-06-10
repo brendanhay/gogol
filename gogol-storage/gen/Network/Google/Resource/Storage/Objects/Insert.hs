@@ -107,10 +107,9 @@ type ObjectsInsertResource =
                                  QueryParam "projection" ObjectsInsertProjection
                                    :>
                                    QueryParam "alt" AltJSON :>
-                                     QueryParam "uploadType" AltMedia :>
-                                       MultipartRelated '[JSON] Object
-                                         RequestBody
-                                         :> Post '[JSON] Object
+                                     QueryParam "uploadType" Multipart :>
+                                       MultipartRelated '[JSON] Object :>
+                                         Post '[JSON] Object
 
 -- | Stores a new object and metadata.
 --
@@ -277,7 +276,7 @@ instance GoogleRequest (MediaUpload ObjectsInsert)
               _oiContentEncoding
               _oiProjection
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _oiPayload
               body
               storageService

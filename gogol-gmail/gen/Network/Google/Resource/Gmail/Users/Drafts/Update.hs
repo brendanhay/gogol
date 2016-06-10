@@ -61,9 +61,8 @@ type UsersDraftsUpdateResource =
                  "drafts" :>
                    Capture "id" Text :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Draft RequestBody :>
-                           Put '[JSON] Draft
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Draft :> Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
 --
@@ -130,7 +129,8 @@ instance GoogleRequest
              Scopes UsersDraftsUpdate
         requestClient
           (MediaUpload UsersDraftsUpdate'{..} body)
-          = go _uduUserId _uduId (Just AltJSON) (Just AltMedia)
+          = go _uduUserId _uduId (Just AltJSON)
+              (Just Multipart)
               _uduPayload
               body
               gmailService

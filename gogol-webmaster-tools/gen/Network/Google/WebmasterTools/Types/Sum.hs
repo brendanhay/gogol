@@ -38,7 +38,7 @@ data URLCrawlErrorsSamplesMarkAsFixedCategory
       -- ^ @serverError@
     | SOFT404
       -- ^ @soft404@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorsSamplesMarkAsFixedCategory
 
@@ -81,7 +81,7 @@ data URLCrawlErrorsSamplesGetPlatform
       -- ^ @smartphoneOnly@
     | Web
       -- ^ @web@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorsSamplesGetPlatform
 
@@ -112,7 +112,7 @@ data URLCrawlErrorsSamplesMarkAsFixedPlatform
       -- ^ @smartphoneOnly@
     | UCESMAFPWeb
       -- ^ @web@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorsSamplesMarkAsFixedPlatform
 
@@ -155,7 +155,7 @@ data URLCrawlErrorsSamplesGetCategory
       -- ^ @serverError@
     | UCESGCSOFT404
       -- ^ @soft404@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorsSamplesGetCategory
 
@@ -199,7 +199,7 @@ data URLCrawlErrorscountsQueryPlatform
       -- ^ @smartphoneOnly@
     | UCEQPWeb
       -- ^ @web@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorscountsQueryPlatform
 
@@ -242,7 +242,7 @@ data URLCrawlErrorsSamplesListCategory
       -- ^ @serverError@
     | UCESLCSOFT404
       -- ^ @soft404@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorsSamplesListCategory
 
@@ -285,7 +285,7 @@ data URLCrawlErrorsSamplesListPlatform
       -- ^ @smartphoneOnly@
     | UCESLPWeb
       -- ^ @web@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorsSamplesListPlatform
 
@@ -329,7 +329,7 @@ data URLCrawlErrorscountsQueryCategory
       -- ^ @serverError@
     | UCEQCSOFT404
       -- ^ @soft404@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLCrawlErrorscountsQueryCategory
 

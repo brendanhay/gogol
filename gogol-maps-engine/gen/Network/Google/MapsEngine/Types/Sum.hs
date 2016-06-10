@@ -30,7 +30,7 @@ data RasterProcessingStatus
       -- ^ @processing@
     | Ready
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterProcessingStatus
 
@@ -69,7 +69,7 @@ data LayerProcessingStatus
       -- ^ @processing@
     | LPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerProcessingStatus
 
@@ -100,7 +100,7 @@ instance ToJSON LayerProcessingStatus where
 data ScaledShapeShape
     = Circle
       -- ^ @circle@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScaledShapeShape
 
@@ -123,7 +123,7 @@ instance ToJSON ScaledShapeShape where
 data GeoJSONMultiLineStringType
     = MultiLineString
       -- ^ @MultiLineString@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONMultiLineStringType
 
@@ -152,7 +152,7 @@ data PermissionRole
       -- ^ @viewer@
     | Writer
       -- ^ @writer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionRole
 
@@ -191,7 +191,7 @@ data AcquisitionTimePrecision
       -- ^ @second@
     | Year
       -- ^ @year@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AcquisitionTimePrecision
 
@@ -227,7 +227,7 @@ data ScalingFunctionScalingType
       -- ^ @linear@
     | Sqrt
       -- ^ @sqrt@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScalingFunctionScalingType
 
@@ -260,7 +260,7 @@ data AssetsListRole
     | ALRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AssetsListRole
 
@@ -299,7 +299,7 @@ data RastersListProcessingStatus
     | RLPSReady
       -- ^ @ready@
       -- The raster is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RastersListProcessingStatus
 
@@ -342,7 +342,7 @@ data LayersListProcessingStatus
     | LLPSReady
       -- ^ @ready@
       -- The layer is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayersListProcessingStatus
 
@@ -381,7 +381,7 @@ data RasterCollectionsRastersListRole
     | RCRLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionsRastersListRole
 
@@ -408,7 +408,7 @@ instance ToJSON RasterCollectionsRastersListRole where
 data GeoJSONMultiPolygonType
     = MultiPolygon
       -- ^ @MultiPolygon@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONMultiPolygonType
 
@@ -431,7 +431,7 @@ instance ToJSON GeoJSONMultiPolygonType where
 data GeoJSONMultiPointType
     = MultiPoint
       -- ^ @MultiPoint@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONMultiPointType
 
@@ -458,7 +458,7 @@ data PublishedLayerLayerType
       -- ^ @image@
     | Vector
       -- ^ @vector@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PublishedLayerLayerType
 
@@ -495,7 +495,7 @@ data TablesListProcessingStatus
     | TLPSReady
       -- ^ @ready@
       -- The table is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesListProcessingStatus
 
@@ -530,7 +530,7 @@ data LayerLayerType
       -- ^ @image@
     | LLTVector
       -- ^ @vector@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerLayerType
 
@@ -559,7 +559,7 @@ data PermissionType
       -- ^ @group@
     | User
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionType
 
@@ -595,7 +595,7 @@ data MapProcessingStatus
       -- ^ @processing@
     | MPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapProcessingStatus
 
@@ -633,7 +633,7 @@ data MapsGetVersion
     | Published
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapsGetVersion
 
@@ -666,7 +666,7 @@ data TablesListRole
     | TLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesListRole
 
@@ -693,7 +693,7 @@ instance ToJSON TablesListRole where
 data VectorStyleType
     = VSTDisplayRule
       -- ^ @displayRule@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VectorStyleType
 
@@ -716,7 +716,7 @@ instance ToJSON VectorStyleType where
 data GeoJSONLineStringType
     = LineString
       -- ^ @LineString@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONLineStringType
 
@@ -741,7 +741,7 @@ data LayerPublishingStatus
       -- ^ @notPublished@
     | LPSPublished
       -- ^ @published@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerPublishingStatus
 
@@ -766,7 +766,7 @@ instance ToJSON LayerPublishingStatus where
 data MapKmlLinkType
     = KmlLink
       -- ^ @kmlLink@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapKmlLinkType
 
@@ -793,7 +793,7 @@ data LayerDatasourceType
       -- ^ @image@
     | LDTTable
       -- ^ @table@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayerDatasourceType
 
@@ -818,7 +818,7 @@ instance ToJSON LayerDatasourceType where
 data GeoJSONGeometryCollectionType
     = GeometryCollection
       -- ^ @GeometryCollection@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONGeometryCollectionType
 
@@ -841,7 +841,7 @@ instance ToJSON GeoJSONGeometryCollectionType where
 data GeoJSONPointType
     = Point
       -- ^ @Point@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONPointType
 
@@ -864,7 +864,7 @@ instance ToJSON GeoJSONPointType where
 data GeoJSONPolygonType
     = Polygon
       -- ^ @Polygon@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable GeoJSONPolygonType
 
@@ -894,7 +894,7 @@ data LayersGetVersion
     | LGVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayersGetVersion
 
@@ -919,7 +919,7 @@ instance ToJSON LayersGetVersion where
 data MapLayerType
     = MLTLayer
       -- ^ @layer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapLayerType
 
@@ -944,7 +944,7 @@ data LabelStyleFontWeight
       -- ^ @bold@
     | Normal
       -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelStyleFontWeight
 
@@ -969,7 +969,7 @@ instance ToJSON LabelStyleFontWeight where
 data MapFolderType
     = Folder
       -- ^ @folder@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapFolderType
 
@@ -1000,7 +1000,7 @@ data RasterCollectionProcessingStatus
       -- ^ @processing@
     | RCPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionProcessingStatus
 
@@ -1035,7 +1035,7 @@ data TablesFeaturesListVersion
     | TFLVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesFeaturesListVersion
 
@@ -1069,7 +1069,7 @@ data MapsListProcessingStatus
     | MLPSProcessing
       -- ^ @processing@
       -- The map is processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapsListProcessingStatus
 
@@ -1100,7 +1100,7 @@ data LabelStyleFontStyle
       -- ^ @italic@
     | LSFSNormal
       -- ^ @normal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelStyleFontStyle
 
@@ -1134,7 +1134,7 @@ data AssetType
       -- ^ @rasterCollection@
     | ATTable
       -- ^ @table@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AssetType
 
@@ -1165,7 +1165,7 @@ instance ToJSON AssetType where
 data RasterRasterType
     = RRTImage
       -- ^ @image@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterRasterType
 
@@ -1196,7 +1196,7 @@ data RasterCollectionsListRole
     | RCLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionsListRole
 
@@ -1239,7 +1239,7 @@ data FilterOperator
       -- ^ @endsWith@
     | StartsWith
       -- ^ @startsWith@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilterOperator
 
@@ -1292,7 +1292,7 @@ data TableColumnType
       -- ^ @polygons@
     | String
       -- ^ @string@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TableColumnType
 
@@ -1341,7 +1341,7 @@ data RasterCollectionsListProcessingStatus
     | RCLPSReady
       -- ^ @ready@
       -- The raster collection is ready for processing.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionsListProcessingStatus
 
@@ -1380,7 +1380,7 @@ data LayersListRole
     | LLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LayersListRole
 
@@ -1411,7 +1411,7 @@ data TablesFeaturesGetVersion
     | TFGVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesFeaturesGetVersion
 
@@ -1436,7 +1436,7 @@ instance ToJSON TablesFeaturesGetVersion where
 data RasterCollectionRasterType
     = RCRTImage
       -- ^ @image@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RasterCollectionRasterType
 
@@ -1467,7 +1467,7 @@ data RastersListRole
     | RLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RastersListRole
 
@@ -1496,7 +1496,7 @@ data MapPublishingStatus
       -- ^ @notPublished@
     | MPSPublished
       -- ^ @published@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapPublishingStatus
 
@@ -1527,7 +1527,7 @@ data FileUploadStatus
       -- ^ @failed@
     | FUSInProgress
       -- ^ @inProgress@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FileUploadStatus
 
@@ -1564,7 +1564,7 @@ data MapsListRole
     | MLRWriter
       -- ^ @writer@
       -- The user can read and write the asset.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MapsListRole
 
@@ -1594,7 +1594,7 @@ data TablesGetVersion
     | TGVPublished
       -- ^ @published@
       -- The published version.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TablesGetVersion
 
@@ -1627,7 +1627,7 @@ data TableProcessingStatus
       -- ^ @processing@
     | TPSReady
       -- ^ @ready@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TableProcessingStatus
 

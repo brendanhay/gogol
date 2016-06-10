@@ -26,7 +26,7 @@ data URLListProjection
     | Full
       -- ^ @FULL@
       -- Returns short URL click counts.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLListProjection
 
@@ -58,7 +58,7 @@ data URLGetProjection
     | UGPFull
       -- ^ @FULL@
       -- Returns the creation timestamp and all available analytics.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable URLGetProjection
 

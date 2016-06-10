@@ -65,9 +65,8 @@ type FilesCreateResource =
                    QueryParam "keepRevisionForever" Bool :>
                      QueryParam "ignoreDefaultVisibility" Bool :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] File RequestBody :>
-                             Post '[JSON] File
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] File :> Post '[JSON] File
 
 -- | Creates a new file.
 --
@@ -168,7 +167,7 @@ instance GoogleRequest (MediaUpload FilesCreate)
               (Just _fcKeepRevisionForever)
               (Just _fcIgnoreDefaultVisibility)
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _fcPayload
               body
               driveService

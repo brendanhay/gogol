@@ -60,8 +60,7 @@ type EditsAPKsUploadResource =
                      "apks" :>
                        QueryParam "alt" AltJSON :>
                          QueryParam "uploadType" AltMedia :>
-                           ReqBody '[OctetStream] RequestBody :>
-                             Post '[JSON] APK
+                           AltMedia :> Post '[JSON] APK
 
 --
 -- /See:/ 'editsAPKsUpload' smart constructor.

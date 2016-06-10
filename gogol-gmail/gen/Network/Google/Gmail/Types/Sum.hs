@@ -28,7 +28,7 @@ data UsersMessagesGetFormat
       -- ^ @minimal@
     | Raw
       -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesGetFormat
 
@@ -66,7 +66,7 @@ data LabelType
       -- ^ @system@
     | User
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelType
 
@@ -97,7 +97,7 @@ data UsersDraftsGetFormat
       -- ^ @minimal@
     | UDGFRaw
       -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersDraftsGetFormat
 
@@ -128,7 +128,7 @@ data UsersMessagesImportInternalDateSource
       -- ^ @dateHeader@
     | ReceivedTime
       -- ^ @receivedTime@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesImportInternalDateSource
 
@@ -156,7 +156,7 @@ data LabelMessageListVisibility
       -- ^ @hide@
     | Show
       -- ^ @show@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelMessageListVisibility
 
@@ -186,7 +186,7 @@ data LabelLabelListVisibility
       -- ^ @labelShow@
     | LabelShowIfUnread
       -- ^ @labelShowIfUnread@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LabelLabelListVisibility
 
@@ -217,7 +217,7 @@ data UsersThreadsGetFormat
       -- ^ @metadata@
     | UTGFMinimal
       -- ^ @minimal@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersThreadsGetFormat
 
@@ -246,7 +246,7 @@ data WatchRequestLabelFilterAction
       -- ^ @exclude@
     | Include
       -- ^ @include@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable WatchRequestLabelFilterAction
 
@@ -273,7 +273,7 @@ data UsersMessagesInsertInternalDateSource
       -- ^ @dateHeader@
     | UMIIDSReceivedTime
       -- ^ @receivedTime@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersMessagesInsertInternalDateSource
 

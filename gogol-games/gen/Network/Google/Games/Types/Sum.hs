@@ -24,7 +24,7 @@ data PlayersListCollection
       -- ^ @played_with@
       -- Retrieve a list of players you have played a multiplayer game (realtime
       -- or turn-based) with recently.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PlayersListCollection
 
@@ -54,7 +54,7 @@ data ScoresListCollection
     | Social1P
       -- ^ @SOCIAL_1P@
       -- List only social scores, not respecting the fACL.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScoresListCollection
 
@@ -88,7 +88,7 @@ data ApplicationsGetPlatformType
     | WebApp
       -- ^ @WEB_APP@
       -- Retrieve applications that can be played on desktop web.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ApplicationsGetPlatformType
 
@@ -122,7 +122,7 @@ data ScoresListWindowCollection
     | SLWCSocial1P
       -- ^ @SOCIAL_1P@
       -- List only social scores, not respecting the fACL.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScoresListWindowCollection
 
@@ -156,7 +156,7 @@ data ScoresListWindowTimeSpan
     | Weekly
       -- ^ @WEEKLY@
       -- List the top scores for the current week.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScoresListWindowTimeSpan
 
@@ -194,7 +194,7 @@ data ScoresGetTimeSpan
     | SGTSWeekly
       -- ^ @WEEKLY@
       -- List the top scores for the current week.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScoresGetTimeSpan
 
@@ -232,7 +232,7 @@ data ScoresGetIncludeRankType
     | SGIRTSocial
       -- ^ @SOCIAL@
       -- Retrieve the social rank.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScoresGetIncludeRankType
 
@@ -266,7 +266,7 @@ data ScoresListTimeSpan
     | SLTSWeekly
       -- ^ @WEEKLY@
       -- List the top scores for the current week.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ScoresListTimeSpan
 
@@ -294,7 +294,7 @@ data MetagameListCategoriesByPlayerCollection
     = All
       -- ^ @all@
       -- Retrieve data for all categories. This is the default.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MetagameListCategoriesByPlayerCollection
 
@@ -328,7 +328,7 @@ data AchievementsListState
     | ALSUnlocked
       -- ^ @UNLOCKED@
       -- List only unlocked achievements.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AchievementsListState
 

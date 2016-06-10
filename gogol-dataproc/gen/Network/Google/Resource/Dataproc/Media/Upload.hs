@@ -76,8 +76,8 @@ type MediaUploadResource =
                          QueryParam "bearer_token" Text :>
                            QueryParam "callback" Text :>
                              QueryParam "alt" AltJSON :>
-                               QueryParam "uploadType" AltMedia :>
-                                 MultipartRelated '[JSON] Media RequestBody :>
+                               QueryParam "uploadType" Multipart :>
+                                 MultipartRelated '[JSON] Media :>
                                    Post '[JSON] Media
 
 -- | Method for media upload. Upload is supported on the URI
@@ -216,7 +216,7 @@ instance GoogleRequest (MediaUpload MediaUpload')
               _muBearerToken
               _muCallback
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _muPayload
               body
               dataprocService

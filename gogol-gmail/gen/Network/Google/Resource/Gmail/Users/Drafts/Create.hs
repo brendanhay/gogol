@@ -58,9 +58,8 @@ type UsersDraftsCreateResource =
                Capture "userId" Text :>
                  "drafts" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] Draft RequestBody :>
-                         Post '[JSON] Draft
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] Draft :> Post '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
 --
@@ -118,7 +117,7 @@ instance GoogleRequest
              Scopes UsersDraftsCreate
         requestClient
           (MediaUpload UsersDraftsCreate'{..} body)
-          = go _udcUserId (Just AltJSON) (Just AltMedia)
+          = go _udcUserId (Just AltJSON) (Just Multipart)
               _udcPayload
               body
               gmailService

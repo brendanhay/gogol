@@ -26,7 +26,7 @@ data TranslationsListFormat
     | Text
       -- ^ @text@
       -- Specifies the input is in plain textual format
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TranslationsListFormat
 

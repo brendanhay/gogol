@@ -67,10 +67,9 @@ type ChannelBannersInsertResource =
                "insert" :>
                  QueryParam "onBehalfOfContentOwner" Text :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] ChannelBannerResource
-                         RequestBody
-                         :> Post '[JSON] ChannelBannerResource
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] ChannelBannerResource :>
+                         Post '[JSON] ChannelBannerResource
 
 -- | Uploads a channel banner image to YouTube. This method represents the
 -- first two steps in a three-step process to update the banner image for a
@@ -148,7 +147,7 @@ instance GoogleRequest
         requestClient
           (MediaUpload ChannelBannersInsert'{..} body)
           = go _cbiOnBehalfOfContentOwner (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _cbiPayload
               body
               youTubeService

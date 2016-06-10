@@ -31,7 +31,7 @@ data AggregateBucketType
       -- ^ @time@
     | ABTUnknown
       -- ^ @unknown@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AggregateBucketType
 
@@ -65,7 +65,7 @@ data DataSourceType
       -- ^ @derived@
     | Raw
       -- ^ @raw@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataSourceType
 
@@ -100,7 +100,7 @@ data DeviceType
       -- ^ @unknown@
     | Watch
       -- ^ @watch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeviceType
 
@@ -145,7 +145,7 @@ data DataTypeFieldFormat
       -- ^ @map@
     | String
       -- ^ @string@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataTypeFieldFormat
 

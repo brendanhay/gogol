@@ -63,8 +63,7 @@ type TableImportTableResource =
                      QueryParam "encoding" Text :>
                        QueryParam "alt" AltJSON :>
                          QueryParam "uploadType" AltMedia :>
-                           ReqBody '[OctetStream] RequestBody :>
-                             Post '[JSON] Table
+                           AltMedia :> Post '[JSON] Table
 
 -- | Imports a new table.
 --

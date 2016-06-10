@@ -35,7 +35,7 @@ data JobsPatchProgress
     | Obsolete
       -- ^ @OBSOLETE@
       -- Obsolete
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobsPatchProgress
 
@@ -79,7 +79,7 @@ data JobsUpdateProgress
     | JUPObsolete
       -- ^ @OBSOLETE@
       -- Obsolete
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobsUpdateProgress
 

@@ -26,7 +26,7 @@ data VolumesListProjection
     | Lite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListProjection
 
@@ -55,7 +55,7 @@ data MyLibraryBookshelvesVolumesListProjection
     | MLBVLPLite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryBookshelvesVolumesListProjection
 
@@ -84,7 +84,7 @@ data VolumesListOrderBy
     | Relevance
       -- ^ @relevance@
       -- Relevance to search terms.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListOrderBy
 
@@ -113,7 +113,7 @@ data VolumesListLibraryRestrict
     | NoRestrict
       -- ^ @no-restrict@
       -- Do not restrict based on user\'s library.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListLibraryRestrict
 
@@ -139,7 +139,7 @@ data MyLibraryBookshelvesRemoveVolumeReason
     = Onboarding
       -- ^ @ONBOARDING@
       -- Samples removed from the Onboarding flow.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryBookshelvesRemoveVolumeReason
 
@@ -167,7 +167,7 @@ data OnboardingListCategoryVolumesMaxAllowedMaturityRating
     | NotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OnboardingListCategoryVolumesMaxAllowedMaturityRating
 
@@ -193,7 +193,7 @@ data VolumesListDownload
     = Epub
       -- ^ @epub@
       -- All volumes with epub.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListDownload
 
@@ -220,7 +220,7 @@ data VolumesGetProjection
     | VGPLite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesGetProjection
 
@@ -252,7 +252,7 @@ data VolumesAssociatedListAssociation
     | RelatedForPlay
       -- ^ @related-for-play@
       -- Related volumes for Play Store.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesAssociatedListAssociation
 
@@ -283,7 +283,7 @@ data VolumesRecommendedRateRating
     | NotInterested
       -- ^ @NOT_INTERESTED@
       -- Rating indicating a negative dismissal of a volume.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesRecommendedRateRating
 
@@ -315,7 +315,7 @@ data VolumesUserUploadedListProcessingState
     | Running
       -- ^ @RUNNING@
       -- The volume processing is not completed.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesUserUploadedListProcessingState
 
@@ -343,7 +343,7 @@ data MyConfigSyncVolumeLicensesFeatures
     = Rentals
       -- ^ @RENTALS@
       -- Client supports rentals.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyConfigSyncVolumeLicensesFeatures
 
@@ -371,7 +371,7 @@ data VolumesAssociatedListMaxAllowedMaturityRating
     | VALMAMRNotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesAssociatedListMaxAllowedMaturityRating
 
@@ -409,7 +409,7 @@ data VolumesListFilter
     | VLFPartial
       -- ^ @partial@
       -- Public able to see parts of text.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListFilter
 
@@ -445,7 +445,7 @@ data VolumesRecommendedListMaxAllowedMaturityRating
     | VRLMAMRNotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesRecommendedListMaxAllowedMaturityRating
 
@@ -477,7 +477,7 @@ data MyLibraryBookshelvesAddVolumeReason
     | MLBAVROnboarding
       -- ^ @ONBOARDING@
       -- Volumes added from the Onboarding flow.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryBookshelvesAddVolumeReason
 
@@ -523,7 +523,7 @@ data VolumesMybooksListAcquireMethod
     | Uploaded
       -- ^ @UPLOADED@
       -- User uploaded books
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesMybooksListAcquireMethod
 
@@ -563,7 +563,7 @@ data PersonalizedstreamGetMaxAllowedMaturityRating
     | PGMAMRNotMature
       -- ^ @not-mature@
       -- Show books which are rated not mature.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PersonalizedstreamGetMaxAllowedMaturityRating
 
@@ -595,7 +595,7 @@ data VolumesListPrintType
     | Magazines
       -- ^ @magazines@
       -- Just magazines.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesListPrintType
 
@@ -630,7 +630,7 @@ data VolumesMybooksListProcessingState
     | VMLPSRunning
       -- ^ @RUNNING@
       -- The volume processing is not completed.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VolumesMybooksListProcessingState
 
@@ -665,7 +665,7 @@ data MyConfigRequestAccessLicenseTypes
     | Download
       -- ^ @DOWNLOAD@
       -- Offline download access license.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyConfigRequestAccessLicenseTypes
 
@@ -708,7 +708,7 @@ data MyLibraryReadingPositionsSetPositionAction
     | Search
       -- ^ @search@
       -- User chose search results within volume.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MyLibraryReadingPositionsSetPositionAction
 

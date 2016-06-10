@@ -28,7 +28,7 @@ data TimelineListOrderBy
       -- ^ @writeTime@
       -- Results will be ordered by the time at which they were last written to
       -- the data store.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TimelineListOrderBy
 

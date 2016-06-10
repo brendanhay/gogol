@@ -78,8 +78,8 @@ type UsersMessagesImportResource =
                              UsersMessagesImportInternalDateSource
                              :>
                              QueryParam "alt" AltJSON :>
-                               QueryParam "uploadType" AltMedia :>
-                                 MultipartRelated '[JSON] Message RequestBody :>
+                               QueryParam "uploadType" Multipart :>
+                                 MultipartRelated '[JSON] Message :>
                                    Post '[JSON] Message
 
 -- | Imports a message into only this user\'s mailbox, with standard email
@@ -193,7 +193,7 @@ instance GoogleRequest
               (Just _umiNeverMarkSpam)
               (Just _umiInternalDateSource)
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _umiPayload
               body
               gmailService

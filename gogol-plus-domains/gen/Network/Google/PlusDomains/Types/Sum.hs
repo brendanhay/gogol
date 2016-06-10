@@ -22,7 +22,7 @@ data MediaInsertCollection
     = Cloud
       -- ^ @cloud@
       -- Upload the media to share on Google+.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MediaInsertCollection
 
@@ -52,7 +52,7 @@ data PeopleListByActivityCollection
     | Sharedto
       -- ^ @sharedto@
       -- List all people who this activity was shared to.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListByActivityCollection
 
@@ -83,7 +83,7 @@ data PeopleListOrderBy
     | Best
       -- ^ @best@
       -- Order people based on the relevence to the viewer.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListOrderBy
 
@@ -110,7 +110,7 @@ data ActivitiesListCollection
       -- ^ @user@
       -- All activities created by the specified user that the authenticated user
       -- is authorized to view.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesListCollection
 
@@ -134,7 +134,7 @@ data PeopleListCollection
     = Circled
       -- ^ @circled@
       -- The list of people who this user has added to one or more circles.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListCollection
 
@@ -161,7 +161,7 @@ data CommentsListSortOrder
     | Descending
       -- ^ @descending@
       -- Sort newest comments first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListSortOrder
 

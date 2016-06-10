@@ -57,8 +57,8 @@ type TimelineUpdateResource =
              "timeline" :>
                Capture "id" Text :>
                  QueryParam "alt" AltJSON :>
-                   QueryParam "uploadType" AltMedia :>
-                     MultipartRelated '[JSON] TimelineItem RequestBody :>
+                   QueryParam "uploadType" Multipart :>
+                     MultipartRelated '[JSON] TimelineItem :>
                        Put '[JSON] TimelineItem
 
 -- | Updates a timeline item in place.
@@ -112,7 +112,7 @@ instance GoogleRequest (MediaUpload TimelineUpdate)
         type Scopes (MediaUpload TimelineUpdate) =
              Scopes TimelineUpdate
         requestClient (MediaUpload TimelineUpdate'{..} body)
-          = go _tuId (Just AltJSON) (Just AltMedia) _tuPayload
+          = go _tuId (Just AltJSON) (Just Multipart) _tuPayload
               body
               mirrorService
           where _ :<|> go

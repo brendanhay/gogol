@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 data ChangesListSortBy
     = ChangeSequence
       -- ^ @changeSequence@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangesListSortBy
 
@@ -47,7 +47,7 @@ data ChangeStatus
       -- ^ @done@
     | Pending
       -- ^ @pending@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChangeStatus
 

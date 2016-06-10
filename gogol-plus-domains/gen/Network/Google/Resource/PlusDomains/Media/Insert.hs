@@ -64,9 +64,8 @@ type MediaInsertResource =
                  "media" :>
                    Capture "collection" MediaInsertCollection :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Media RequestBody :>
-                           Post '[JSON] Media
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Media :> Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
 -- are 36MB for a photo and 1GB for a video. Uploads do not count against
@@ -135,7 +134,7 @@ instance GoogleRequest (MediaUpload MediaInsert)
              Scopes MediaInsert
         requestClient (MediaUpload MediaInsert'{..} body)
           = go _miUserId _miCollection (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _miPayload
               body
               plusDomainsService

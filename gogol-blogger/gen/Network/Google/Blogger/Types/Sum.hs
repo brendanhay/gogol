@@ -26,7 +26,7 @@ data PostsListOrderBy
     | Updated
       -- ^ @updated@
       -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsListOrderBy
 
@@ -59,7 +59,7 @@ data PostsListView
     | Reader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsListView
 
@@ -92,7 +92,7 @@ data PageViewsGetRange
     | PVGRAll
       -- ^ @all@
       -- Total page view counts from all time.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PageViewsGetRange
 
@@ -127,7 +127,7 @@ data CommentsListView
     | CLVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListView
 
@@ -160,7 +160,7 @@ data PostUserInfosListStatus
     | Scheduled
       -- ^ @scheduled@
       -- Posts that are scheduled to publish in future.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostUserInfosListStatus
 
@@ -195,7 +195,7 @@ data PostsGetView
     | PGVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsGetView
 
@@ -226,7 +226,7 @@ data PostsSearchOrderBy
     | PSOBUpdated
       -- ^ @updated@
       -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsSearchOrderBy
 
@@ -260,7 +260,7 @@ data CommentsListByBlogStatus
     | CLBBSSpam
       -- ^ @spam@
       -- Comments marked as spam by the administrator
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListByBlogStatus
 
@@ -295,7 +295,7 @@ data PagesGetView
     | PReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagesGetView
 
@@ -326,7 +326,7 @@ data PostUserInfosListOrderBy
     | PUILOBUpdated
       -- ^ @updated@
       -- Order by the date the post was last updated
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostUserInfosListOrderBy
 
@@ -359,7 +359,7 @@ data BlogsGetView
     | BGVReader
       -- ^ @READER@
       -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsGetView
 
@@ -394,7 +394,7 @@ data BlogsGetByURLView
     | BGBUVReader
       -- ^ @READER@
       -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsGetByURLView
 
@@ -430,7 +430,7 @@ data CommentsListStatus
     | CLSSpam
       -- ^ @spam@
       -- Comments marked as spam by the administrator
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListStatus
 
@@ -464,7 +464,7 @@ data BlogsListByUserStatus
     | BLBUSLive
       -- ^ @LIVE@
       -- Blog is currently live.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsListByUserStatus
 
@@ -497,7 +497,7 @@ data PagesListView
     | PLVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagesListView
 
@@ -531,7 +531,7 @@ data PostsListStatus
     | PLSScheduled
       -- ^ @scheduled@
       -- Posts that are scheduled to publish in the future.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsListStatus
 
@@ -566,7 +566,7 @@ data BlogsListByUserView
     | BLBUVReader
       -- ^ @READER@
       -- Reader level detail.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsListByUserView
 
@@ -601,7 +601,7 @@ data PostUserInfosListView
     | PUILVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostUserInfosListView
 
@@ -638,7 +638,7 @@ data CommentsGetView
     | CGVReader
       -- ^ @READER@
       -- Admin level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsGetView
 
@@ -673,7 +673,7 @@ data PostsGetByPathView
     | PGBPVReader
       -- ^ @READER@
       -- Reader level detail
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PostsGetByPathView
 
@@ -703,7 +703,7 @@ data PagesListStatus
     | PLive
       -- ^ @live@
       -- Pages that are publicly visible
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagesListStatus
 
@@ -738,7 +738,7 @@ data BlogsListByUserRole
       -- ^ @READER@
       -- Reader role - Blogs where the user has Reader level access (to a private
       -- blog).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BlogsListByUserRole
 

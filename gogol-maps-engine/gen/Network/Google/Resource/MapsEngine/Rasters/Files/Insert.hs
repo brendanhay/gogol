@@ -60,7 +60,7 @@ type RastersFilesInsertResource =
                    QueryParam "filename" Text :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
+                         AltMedia :> Post '[JSON] ()
 
 -- | Upload a file to a raster asset.
 --

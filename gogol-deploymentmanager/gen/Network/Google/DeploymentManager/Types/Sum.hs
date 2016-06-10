@@ -24,7 +24,7 @@ data DeploymentsUpdateCreatePolicy
       -- ^ @ACQUIRE@
     | CreateOrAcquire
       -- ^ @CREATE_OR_ACQUIRE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsUpdateCreatePolicy
 
@@ -51,7 +51,7 @@ data DeploymentsUpdateDeletePolicy
       -- ^ @ABANDON@
     | Delete'
       -- ^ @DELETE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsUpdateDeletePolicy
 
@@ -78,7 +78,7 @@ data DeploymentsPatchDeletePolicy
       -- ^ @ABANDON@
     | DPDPDelete'
       -- ^ @DELETE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsPatchDeletePolicy
 
@@ -105,7 +105,7 @@ data DeploymentsPatchCreatePolicy
       -- ^ @ACQUIRE@
     | DPCPCreateOrAcquire
       -- ^ @CREATE_OR_ACQUIRE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeploymentsPatchCreatePolicy
 

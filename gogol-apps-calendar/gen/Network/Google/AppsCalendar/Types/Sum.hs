@@ -28,7 +28,7 @@ data EventsListOrderBy
     | Updated
       -- ^ @updated@
       -- Order by last modification time (ascending).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsListOrderBy
 
@@ -64,7 +64,7 @@ data CalendarListListMinAccessRole
     | Writer
       -- ^ @writer@
       -- The user can read and modify events.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CalendarListListMinAccessRole
 
@@ -99,7 +99,7 @@ data EventsWatchOrderBy
     | EWOBUpdated
       -- ^ @updated@
       -- Order by last modification time (ascending).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsWatchOrderBy
 
@@ -135,7 +135,7 @@ data CalendarListWatchMinAccessRole
     | CLWMARWriter
       -- ^ @writer@
       -- The user can read and modify events.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CalendarListWatchMinAccessRole
 

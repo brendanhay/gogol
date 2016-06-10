@@ -26,7 +26,7 @@ data PeopleListByActivityCollection
     | Resharers
       -- ^ @resharers@
       -- List all people who have reshared this activity.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListByActivityCollection
 
@@ -55,7 +55,7 @@ data PeopleListOrderBy
     | Best
       -- ^ @best@
       -- Order people based on the relevence to the viewer.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListOrderBy
 
@@ -81,7 +81,7 @@ data ActivitiesListCollection
     = Public
       -- ^ @public@
       -- All public activities created by the specified user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesListCollection
 
@@ -111,7 +111,7 @@ data PeopleListCollection
       -- ^ @visible@
       -- The list of people who this user has added to one or more circles,
       -- limited to the circles visible to the requesting application.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PeopleListCollection
 
@@ -140,7 +140,7 @@ data ActivitiesSearchOrderBy
     | ASOBRecent
       -- ^ @recent@
       -- Sort activities by published date, most recent first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesSearchOrderBy
 
@@ -169,7 +169,7 @@ data CommentsListSortOrder
     | Descending
       -- ^ @descending@
       -- Sort newest comments first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CommentsListSortOrder
 

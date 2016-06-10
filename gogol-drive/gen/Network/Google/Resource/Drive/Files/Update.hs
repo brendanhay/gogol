@@ -71,8 +71,8 @@ type FilesUpdateResource =
                        QueryParam "keepRevisionForever" Bool :>
                          QueryParam "addParents" Text :>
                            QueryParam "alt" AltJSON :>
-                             QueryParam "uploadType" AltMedia :>
-                               MultipartRelated '[JSON] File RequestBody :>
+                             QueryParam "uploadType" Multipart :>
+                               MultipartRelated '[JSON] File :>
                                  Patch '[JSON] File
 
 -- | Updates a file\'s metadata and\/or content with patch semantics.
@@ -192,7 +192,7 @@ instance GoogleRequest (MediaUpload FilesUpdate)
               (Just _fuKeepRevisionForever)
               _fuAddParents
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _fuPayload
               body
               driveService

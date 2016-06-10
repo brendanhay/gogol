@@ -70,8 +70,7 @@ type EditsImagesUploadResource =
                          Capture "imageType" EditsImagesUploadImageType :>
                            QueryParam "alt" AltJSON :>
                              QueryParam "uploadType" AltMedia :>
-                               ReqBody '[OctetStream] RequestBody :>
-                                 Post '[JSON] ImagesUploadResponse
+                               AltMedia :> Post '[JSON] ImagesUploadResponse
 
 -- | Uploads a new image and adds it to the list of images for the specified
 -- language and image type.

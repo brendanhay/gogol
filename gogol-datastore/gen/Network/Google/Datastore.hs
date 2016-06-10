@@ -13,16 +13,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- API for accessing Google Cloud Datastore.
+-- Google Cloud Datastore is a schemaless NoSQL datastore providing robust,
+-- scalable storage for your application.
 --
--- /See:/ <https://developers.google.com/datastore/ Google Cloud Datastore API Reference>
+-- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference>
 module Network.Google.Datastore
     (
     -- * Service Configuration
       datastoreService
 
     -- * OAuth Scopes
-    , userInfoEmailScope
     , cloudPlatformScope
     , datastoreScope
 
@@ -31,25 +31,31 @@ module Network.Google.Datastore
 
     -- * Resources
 
-    -- ** datastore.datasets.allocateIds
-    , module Network.Google.Resource.Datastore.DataSets.AllocateIds
+    -- ** datastore.projects.allocateIds
+    , module Network.Google.Resource.Datastore.Projects.AllocateIds
 
-    -- ** datastore.datasets.beginTransaction
-    , module Network.Google.Resource.Datastore.DataSets.BeginTransaction
+    -- ** datastore.projects.beginTransaction
+    , module Network.Google.Resource.Datastore.Projects.BeginTransaction
 
-    -- ** datastore.datasets.commit
-    , module Network.Google.Resource.Datastore.DataSets.Commit
+    -- ** datastore.projects.commit
+    , module Network.Google.Resource.Datastore.Projects.Commit
 
-    -- ** datastore.datasets.lookup
-    , module Network.Google.Resource.Datastore.DataSets.Lookup
+    -- ** datastore.projects.lookup
+    , module Network.Google.Resource.Datastore.Projects.Lookup
 
-    -- ** datastore.datasets.rollback
-    , module Network.Google.Resource.Datastore.DataSets.Rollback
+    -- ** datastore.projects.rollback
+    , module Network.Google.Resource.Datastore.Projects.Rollback
 
-    -- ** datastore.datasets.runQuery
-    , module Network.Google.Resource.Datastore.DataSets.RunQuery
+    -- ** datastore.projects.runQuery
+    , module Network.Google.Resource.Datastore.Projects.RunQuery
 
     -- * Types
+
+    -- ** LatLng
+    , LatLng
+    , latLng
+    , llLatitude
+    , llLongitude
 
     -- ** PropertyOrderDirection
     , PropertyOrderDirection (..)
@@ -59,36 +65,24 @@ module Network.Google.Datastore
     , rollbackRequest
     , rrTransaction
 
-    -- ** Property
-    , Property
-    , property
-    , pKeyValue
-    , pBlobKeyValue
-    , pDateTimeValue
-    , pIntegerValue
-    , pEntityValue
-    , pDoubleValue
-    , pStringValue
-    , pListValue
-    , pIndexed
-    , pBooleanValue
-    , pMeaning
-    , pBlobValue
-
     -- ** PartitionId
     , PartitionId
     , partitionId
-    , piNamespace
-    , piDataSetId
+    , piNamespaceId
+    , piProjectId
 
     -- ** QueryResultBatch
     , QueryResultBatch
     , queryResultBatch
     , qrbSkippedResults
+    , qrbSkippedCursor
     , qrbEntityResultType
     , qrbEntityResults
     , qrbMoreResults
     , qrbEndCursor
+
+    -- ** CompositeFilterOp
+    , CompositeFilterOp (..)
 
     -- ** EntityProperties
     , EntityProperties
@@ -98,7 +92,6 @@ module Network.Google.Datastore
     -- ** BeginTransactionRequest
     , BeginTransactionRequest
     , beginTransactionRequest
-    , btrIsolationLevel
 
     -- ** RunQueryRequest
     , RunQueryRequest
@@ -119,11 +112,8 @@ module Network.Google.Datastore
     -- ** CompositeFilter
     , CompositeFilter
     , compositeFilter
-    , cfOperator
+    , cfOp
     , cfFilters
-
-    -- ** CompositeFilterOperator
-    , CompositeFilterOperator (..)
 
     -- ** QueryResultBatchMoreResults
     , QueryResultBatchMoreResults (..)
@@ -132,49 +122,50 @@ module Network.Google.Datastore
     , BeginTransactionResponse
     , beginTransactionResponse
     , btrTransaction
-    , btrHeader
 
     -- ** MutationResult
     , MutationResult
     , mutationResult
-    , mrInsertAutoIdKeys
-    , mrIndexUpdates
+    , mrKey
 
     -- ** AllocateIdsResponse
     , AllocateIdsResponse
     , allocateIdsResponse
     , aKeys
-    , aHeader
 
     -- ** GqlQuery
     , GqlQuery
     , gqlQuery
-    , gqAllowLiteral
-    , gqNumberArgs
+    , gqPositionalBindings
+    , gqNamedBindings
     , gqQueryString
-    , gqNameArgs
+    , gqAllowLiterals
 
     -- ** RunQueryResponse
     , RunQueryResponse
     , runQueryResponse
-    , rqrBatch
-    , rqrHeader
+    , rBatch
+    , rQuery
 
     -- ** Value
     , Value
     , value
     , vKeyValue
-    , vBlobKeyValue
-    , vDateTimeValue
+    , vGeoPointValue
     , vIntegerValue
+    , vTimestampValue
     , vEntityValue
+    , vExcludeFromIndexes
     , vDoubleValue
     , vStringValue
-    , vListValue
-    , vIndexed
     , vBooleanValue
     , vMeaning
+    , vArrayValue
+    , vNullValue
     , vBlobValue
+
+    -- ** ValueNullValue
+    , ValueNullValue (..)
 
     -- ** LookupRequest
     , LookupRequest
@@ -189,35 +180,19 @@ module Network.Google.Datastore
     , Mutation
     , mutation
     , mInsert
-    , mForce
-    , mInsertAutoId
     , mUpsert
     , mDelete
     , mUpdate
 
-    -- ** ResponseHeader
-    , ResponseHeader
-    , responseHeader
-    , rhKind
-
-    -- ** KeyPathElement
-    , KeyPathElement
-    , keyPathElement
-    , kpeKind
-    , kpeName
-    , kpeId
+    -- ** GqlQueryNamedBindings
+    , GqlQueryNamedBindings
+    , gqlQueryNamedBindings
+    , gqnbAddtional
 
     -- ** PropertyReference
     , PropertyReference
     , propertyReference
     , prName
-
-    -- ** GqlQueryArg
-    , GqlQueryArg
-    , gqlQueryArg
-    , gqaCursor
-    , gqaValue
-    , gqaName
 
     -- ** Key
     , Key
@@ -225,39 +200,45 @@ module Network.Google.Datastore
     , kPartitionId
     , kPath
 
-    -- ** PropertyFilterOperator
-    , PropertyFilterOperator (..)
-
     -- ** PropertyFilter
     , PropertyFilter
     , propertyFilter
     , pfProperty
-    , pfOperator
+    , pfOp
     , pfValue
 
     -- ** Query
     , Query
     , query
-    , qGroupBy
     , qStartCursor
     , qOffSet
+    , qKind
+    , qDistinctOn
     , qEndCursor
     , qLimit
     , qProjection
     , qFilter
-    , qKinds
     , qOrder
+
+    -- ** ArrayValue
+    , ArrayValue
+    , arrayValue
+    , avValues
 
     -- ** EntityResult
     , EntityResult
     , entityResult
+    , erCursor
     , erEntity
+
+    -- ** Xgafv
+    , Xgafv (..)
 
     -- ** CommitResponse
     , CommitResponse
     , commitResponse
-    , crMutationResult
-    , crHeader
+    , crIndexUpdates
+    , crMutationResults
 
     -- ** KindExpression
     , KindExpression
@@ -273,13 +254,11 @@ module Network.Google.Datastore
     -- ** RollbackResponse
     , RollbackResponse
     , rollbackResponse
-    , rrHeader
 
-    -- ** PropertyExpression
-    , PropertyExpression
-    , propertyExpression
-    , peProperty
-    , peAggregationFunction
+    -- ** Projection
+    , Projection
+    , projection
+    , pProperty
 
     -- ** Filter
     , Filter
@@ -287,22 +266,25 @@ module Network.Google.Datastore
     , fCompositeFilter
     , fPropertyFilter
 
-    -- ** BeginTransactionRequestIsolationLevel
-    , BeginTransactionRequestIsolationLevel (..)
+    -- ** PropertyFilterOp
+    , PropertyFilterOp (..)
 
     -- ** CommitRequest
     , CommitRequest
     , commitRequest
+    , crMutations
     , crMode
-    , crMutation
     , crTransaction
-    , crIgnoreReadOnly
 
     -- ** CommitRequestMode
     , CommitRequestMode (..)
 
-    -- ** PropertyExpressionAggregationFunction
-    , PropertyExpressionAggregationFunction (..)
+    -- ** PathElement
+    , PathElement
+    , pathElement
+    , peKind
+    , peName
+    , peId
 
     -- ** Entity
     , Entity
@@ -316,23 +298,28 @@ module Network.Google.Datastore
     , lrDeferred
     , lrFound
     , lrMissing
-    , lrHeader
 
     -- ** PropertyOrder
     , PropertyOrder
     , propertyOrder
     , poProperty
     , poDirection
+
+    -- ** GqlQueryParameter
+    , GqlQueryParameter
+    , gqlQueryParameter
+    , gqpCursor
+    , gqpValue
     ) where
 
 import           Network.Google.Datastore.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Datastore.DataSets.AllocateIds
-import           Network.Google.Resource.Datastore.DataSets.BeginTransaction
-import           Network.Google.Resource.Datastore.DataSets.Commit
-import           Network.Google.Resource.Datastore.DataSets.Lookup
-import           Network.Google.Resource.Datastore.DataSets.Rollback
-import           Network.Google.Resource.Datastore.DataSets.RunQuery
+import           Network.Google.Resource.Datastore.Projects.AllocateIds
+import           Network.Google.Resource.Datastore.Projects.BeginTransaction
+import           Network.Google.Resource.Datastore.Projects.Commit
+import           Network.Google.Resource.Datastore.Projects.Lookup
+import           Network.Google.Resource.Datastore.Projects.Rollback
+import           Network.Google.Resource.Datastore.Projects.RunQuery
 
 {- $resources
 TODO
@@ -340,9 +327,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Datastore API service.
 type DatastoreAPI =
-     DataSetsBeginTransactionResource :<|>
-       DataSetsAllocateIdsResource
-       :<|> DataSetsRunQueryResource
-       :<|> DataSetsRollbackResource
-       :<|> DataSetsLookupResource
-       :<|> DataSetsCommitResource
+     ProjectsBeginTransactionResource :<|>
+       ProjectsAllocateIdsResource
+       :<|> ProjectsRunQueryResource
+       :<|> ProjectsRollbackResource
+       :<|> ProjectsLookupResource
+       :<|> ProjectsCommitResource

@@ -40,7 +40,7 @@ data RepresentativesRepresentativeInfoByDivisionLevels
       -- ^ @subLocality1@
     | SUBLOCALITY2
       -- ^ @subLocality2@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RepresentativesRepresentativeInfoByDivisionLevels
 
@@ -97,7 +97,7 @@ data RepresentativesRepresentativeInfoByAddressLevels
       -- ^ @subLocality1@
     | RRIBALSUBLOCALITY2
       -- ^ @subLocality2@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RepresentativesRepresentativeInfoByAddressLevels
 
@@ -158,7 +158,7 @@ data RepresentativesRepresentativeInfoByDivisionRoles
       -- ^ @schoolBoard@
     | SpecialPurposeOfficer
       -- ^ @specialPurposeOfficer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RepresentativesRepresentativeInfoByDivisionRoles
 
@@ -223,7 +223,7 @@ data RepresentativesRepresentativeInfoByAddressRoles
       -- ^ @schoolBoard@
     | RRIBARSpecialPurposeOfficer
       -- ^ @specialPurposeOfficer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RepresentativesRepresentativeInfoByAddressRoles
 

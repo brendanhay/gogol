@@ -61,8 +61,8 @@ type UsersMessagesSendResource =
                  "messages" :>
                    "send" :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Message RequestBody :>
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Message :>
                            Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
@@ -123,7 +123,7 @@ instance GoogleRequest
              Scopes UsersMessagesSend
         requestClient
           (MediaUpload UsersMessagesSend'{..} body)
-          = go _umsUserId (Just AltJSON) (Just AltMedia)
+          = go _umsUserId (Just AltJSON) (Just Multipart)
               _umsPayload
               body
               gmailService

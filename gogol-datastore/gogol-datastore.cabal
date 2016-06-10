@@ -14,12 +14,13 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    API for accessing Google Cloud Datastore.
+    Google Cloud Datastore is a schemaless NoSQL datastore providing robust,
+    scalable storage for your application.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
     .
-    This library is compatible with version @v1beta2@
+    This library is compatible with version @v1beta3@
     of the API.
 
 source-repository head
@@ -35,12 +36,12 @@ library
     exposed-modules:
           Network.Google.Datastore
         , Network.Google.Datastore.Types
-        , Network.Google.Resource.Datastore.DataSets.AllocateIds
-        , Network.Google.Resource.Datastore.DataSets.BeginTransaction
-        , Network.Google.Resource.Datastore.DataSets.Commit
-        , Network.Google.Resource.Datastore.DataSets.Lookup
-        , Network.Google.Resource.Datastore.DataSets.Rollback
-        , Network.Google.Resource.Datastore.DataSets.RunQuery
+        , Network.Google.Resource.Datastore.Projects.AllocateIds
+        , Network.Google.Resource.Datastore.Projects.BeginTransaction
+        , Network.Google.Resource.Datastore.Projects.Commit
+        , Network.Google.Resource.Datastore.Projects.Lookup
+        , Network.Google.Resource.Datastore.Projects.Rollback
+        , Network.Google.Resource.Datastore.Projects.RunQuery
 
     other-modules:
           Network.Google.Datastore.Types.Product

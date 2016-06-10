@@ -36,7 +36,7 @@ data CSEListImgType
     | Photo
       -- ^ @photo@
       -- photo
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgType
 
@@ -72,7 +72,7 @@ data CSEListSiteSearchFilter
     | I
       -- ^ @i@
       -- include
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSiteSearchFilter
 
@@ -126,7 +126,7 @@ data CSEListImgDominantColor
     | Yellow
       -- ^ @yellow@
       -- yellow
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgDominantColor
 
@@ -174,7 +174,7 @@ data CSEListSafe
     | Off
       -- ^ @off@
       -- Disables safe search filtering.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSafe
 
@@ -209,7 +209,7 @@ data CSEListImgColorType
     | CSELICTMono
       -- ^ @mono@
       -- mono
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgColorType
 
@@ -240,7 +240,7 @@ data CSEListFilter
     | CSELF1
       -- ^ @1@
       -- Turns on duplicate content filter.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListFilter
 
@@ -368,7 +368,7 @@ data CSEListLr
     | LangZhTw
       -- ^ @lang_zh-TW@
       -- Chinese (Traditional)
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListLr
 
@@ -460,7 +460,7 @@ data CSEListSearchType
     = Image
       -- ^ @image@
       -- custom image search
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListSearchType
 
@@ -503,7 +503,7 @@ data CSEListImgSize
     | CSELISXxlarge
       -- ^ @xxlarge@
       -- xxlarge
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CSEListImgSize
 

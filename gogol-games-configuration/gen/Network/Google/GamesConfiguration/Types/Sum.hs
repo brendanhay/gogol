@@ -26,7 +26,7 @@ data ImageConfigurationsUploadImageType
     | LeaderboardIcon
       -- ^ @LEADERBOARD_ICON@
       -- The icon image for a leaderboard resource.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ImageConfigurationsUploadImageType
 

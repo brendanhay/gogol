@@ -61,8 +61,7 @@ type ThumbnailsSetResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :>
-                           Post '[JSON] ThumbnailSetResponse
+                         AltMedia :> Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
 --

@@ -61,8 +61,8 @@ type UsersDraftsSendResource =
                  "drafts" :>
                    "send" :>
                      QueryParam "alt" AltJSON :>
-                       QueryParam "uploadType" AltMedia :>
-                         MultipartRelated '[JSON] Draft RequestBody :>
+                       QueryParam "uploadType" Multipart :>
+                         MultipartRelated '[JSON] Draft :>
                            Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
@@ -121,7 +121,7 @@ instance GoogleRequest (MediaUpload UsersDraftsSend)
         type Scopes (MediaUpload UsersDraftsSend) =
              Scopes UsersDraftsSend
         requestClient (MediaUpload UsersDraftsSend'{..} body)
-          = go _udsUserId (Just AltJSON) (Just AltMedia)
+          = go _udsUserId (Just AltJSON) (Just Multipart)
               _udsPayload
               body
               gmailService

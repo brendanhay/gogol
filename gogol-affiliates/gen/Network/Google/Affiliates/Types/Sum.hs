@@ -27,7 +27,7 @@ data PublishersGetRole
     | PGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PublishersGetRole
 
@@ -60,7 +60,7 @@ data ReportsGetEventType
     | Transaction
       -- ^ @transaction@
       -- Event type is transaction.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsGetEventType
 
@@ -95,7 +95,7 @@ data ReportsGetStatus
     | Invalid
       -- ^ @invalid@
       -- Event is currently invalid.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsGetStatus
 
@@ -130,7 +130,7 @@ data LinksListPromotionType
       -- ^ @percent_off@
     | PriceCut
       -- ^ @price_cut@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksListPromotionType
 
@@ -174,7 +174,7 @@ data EventsListType
       -- A conversion event, typically an e-commerce transaction. Some
       -- advertisers use a transaction to record other types of events, such as
       -- magazine subscriptions.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsListType
 
@@ -206,7 +206,7 @@ data LinksListRole
     | LLRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksListRole
 
@@ -233,7 +233,7 @@ data ReportsGetReportType
     = OrderDelta
       -- ^ @order_delta@
       -- The order delta report type.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsGetReportType
 
@@ -261,7 +261,7 @@ data AdvertisersListRole
     | ALRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListRole
 
@@ -291,7 +291,7 @@ data LinksInsertRole
     | LIRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksInsertRole
 
@@ -321,7 +321,7 @@ data PublishersListRole
     | PLRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PublishersListRole
 
@@ -348,7 +348,7 @@ data LinksListAuthorship
       -- ^ @advertiser@
     | LLAPublisher
       -- ^ @publisher@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksListAuthorship
 
@@ -378,7 +378,7 @@ data LinksGetRole
     | LGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksGetRole
 
@@ -405,7 +405,7 @@ data LinksListLinkType
       -- ^ @banner@
     | Text
       -- ^ @text@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksListLinkType
 
@@ -435,7 +435,7 @@ data EventsListRole
     | ELRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsListRole
 
@@ -477,7 +477,7 @@ data AdvertisersListRelationshipStatus
       -- ^ @pending@
       -- An advertiser program that you\'ve already applied to, but they haven\'t
       -- yet decided to approve or decline your application.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersListRelationshipStatus
 
@@ -512,7 +512,7 @@ data CcOffersListProjection
     | Summary
       -- ^ @summary@
       -- Include only the basic fields needed to display an offer.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CcOffersListProjection
 
@@ -542,7 +542,7 @@ data AdvertisersGetRole
     | AGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdvertisersGetRole
 
@@ -589,7 +589,7 @@ data EventsListChargeType
       -- ^ @tier_bonus@
       -- A payment from an advertiser to a publisher for the publisher
       -- maintaining a high tier level
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsListChargeType
 
@@ -638,7 +638,7 @@ data PublishersListRelationshipStatus
       -- ^ @pending@
       -- Publishers that have applied to your program. We recommend reviewing and
       -- deciding on pending publishers on a weekly basis.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PublishersListRelationshipStatus
 
@@ -674,7 +674,7 @@ data ReportsGetRole
     | RGRPublishers
       -- ^ @publishers@
       -- The requester is requesting as a publisher.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportsGetRole
 
@@ -701,7 +701,7 @@ data LinksListRelationshipStatus
       -- ^ @approved@
     | LLRSAvailable
       -- ^ @available@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LinksListRelationshipStatus
 
@@ -731,7 +731,7 @@ data EventsListStatus
     | ELSCanceled
       -- ^ @canceled@
       -- Event is currently canceled.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventsListStatus
 

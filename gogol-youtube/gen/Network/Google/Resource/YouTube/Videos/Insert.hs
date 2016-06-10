@@ -71,8 +71,8 @@ type VideosInsertResource =
                        QueryParam "notifySubscribers" Bool :>
                          QueryParam "autoLevels" Bool :>
                            QueryParam "alt" AltJSON :>
-                             QueryParam "uploadType" AltMedia :>
-                               MultipartRelated '[JSON] Video RequestBody :>
+                             QueryParam "uploadType" Multipart :>
+                               MultipartRelated '[JSON] Video :>
                                  Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
@@ -228,7 +228,7 @@ instance GoogleRequest (MediaUpload VideosInsert)
               (Just _viNotifySubscribers)
               _viAutoLevels
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _viPayload
               body
               youTubeService

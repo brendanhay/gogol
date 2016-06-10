@@ -32,7 +32,7 @@ data SubscriptionsDeleteDeletionType
     | TransferToDirect
       -- ^ @transfer_to_direct@
       -- Transfers a subscription directly to Google
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubscriptionsDeleteDeletionType
 

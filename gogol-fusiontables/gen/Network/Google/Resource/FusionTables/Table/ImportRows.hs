@@ -72,8 +72,7 @@ type TableImportRowsResource =
                            QueryParam "isStrict" Bool :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
-                                   Post '[JSON] Import
+                                 AltMedia :> Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --

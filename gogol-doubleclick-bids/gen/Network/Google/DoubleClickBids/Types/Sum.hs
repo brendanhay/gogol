@@ -26,7 +26,7 @@ data QueryMetadataFormat
       -- ^ @EXCEL_CSV@
     | Xlsx
       -- ^ @XLSX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QueryMetadataFormat
 
@@ -111,7 +111,7 @@ data ParametersType
       -- ^ @TYPE_VERIFICATION@
     | TypeYouTubeVertical
       -- ^ @TYPE_YOUTUBE_VERTICAL@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ParametersType
 
@@ -196,7 +196,7 @@ data DownloadLineItemsRequestFilterType
       -- ^ @INSERTION_ORDER_ID@
     | LineItemId
       -- ^ @LINE_ITEM_ID@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DownloadLineItemsRequestFilterType
 
@@ -257,7 +257,7 @@ data QueryMetadataDataRange
       -- ^ @WEEK_TO_DATE@
     | YearToDate
       -- ^ @YEAR_TO_DATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QueryMetadataDataRange
 
@@ -855,7 +855,7 @@ data ParametersMetricsItem
       -- ^ @METRIC_VIDEO_COMPANION_IMPRESSIONS@
     | MetricVideoCompletionRate
       -- ^ @METRIC_VIDEO_COMPLETION_RATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ParametersMetricsItem
 
@@ -1430,7 +1430,7 @@ data QueryScheduleFrequency
       -- ^ @SEMI_MONTHLY@
     | Weekly
       -- ^ @WEEKLY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QueryScheduleFrequency
 
@@ -1466,7 +1466,7 @@ data DownloadLineItemsRequestFileSpec
       -- ^ @EWF@
     | Sdf
       -- ^ @SDF@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DownloadLineItemsRequestFileSpec
 
@@ -1491,7 +1491,7 @@ instance ToJSON DownloadLineItemsRequestFileSpec where
 data UploadLineItemsRequestFormat
     = ULIRFCSV
       -- ^ @CSV@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UploadLineItemsRequestFormat
 
@@ -1690,7 +1690,7 @@ data FilterPairType
       -- ^ @FILTER_YOUTUBE_VERTICAL@
     | FilterZipCode
       -- ^ @FILTER_ZIP_CODE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilterPairType
 
@@ -1923,7 +1923,7 @@ data RunQueryRequestDataRange
       -- ^ @WEEK_TO_DATE@
     | RQRDRYearToDate
       -- ^ @YEAR_TO_DATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RunQueryRequestDataRange
 
@@ -1984,7 +1984,7 @@ data ReportStatusState
       -- ^ @FAILED@
     | Running
       -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportStatusState
 
@@ -2186,7 +2186,7 @@ data ParametersGroupBysItem
       -- ^ @FILTER_YOUTUBE_VERTICAL@
     | PGBIFilterZipCode
       -- ^ @FILTER_ZIP_CODE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ParametersGroupBysItem
 
@@ -2419,7 +2419,7 @@ data ReportFailureErrorCode
       -- ^ @UNAUTHORIZED_API_ACCESS@
     | ValidationError
       -- ^ @VALIDATION_ERROR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportFailureErrorCode
 
@@ -2476,7 +2476,7 @@ instance ToJSON ReportFailureErrorCode where
 data DownloadLineItemsRequestFormat
     = DLIRFCSV
       -- ^ @CSV@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DownloadLineItemsRequestFormat
 
@@ -2503,7 +2503,7 @@ data ReportStatusFormat
       -- ^ @EXCEL_CSV@
     | RSFXlsx
       -- ^ @XLSX@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReportStatusFormat
 
