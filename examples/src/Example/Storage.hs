@@ -24,7 +24,7 @@ import           System.IO
 -- {-
 -- import Network.HTTP.Media ((//))
 ----
--- b <- sourceBody f <&> bodyContentType .~ ("application" // "json")
+-- b <- sourceBody f <&> bodyContentType .~ "application" // "json"
 -- ...
 --
 -- -}

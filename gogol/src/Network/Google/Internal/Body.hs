@@ -35,7 +35,7 @@ getMIMEType =
 -- | Construct a 'Body' from a 'FilePath'.
 --
 -- This attempts to guess the MIME type from the file extension,
--- you can use "Network.Google.Types.setMIMEType" to set a MIME type explicitly.
+-- you can use "Network.Google.Types.bodyContentType" to set a MIME type explicitly.
 sourceBody :: MonadIO m => FilePath -> m Body
 sourceBody f = do
     n <- getFileSize f
