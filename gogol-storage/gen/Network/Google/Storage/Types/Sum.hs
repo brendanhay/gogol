@@ -27,7 +27,7 @@ data ObjectsInsertProjection
     | NoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsInsertProjection
 
@@ -72,7 +72,7 @@ data BucketsUpdatePredefinedDefaultObjectACL
     | PublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsUpdatePredefinedDefaultObjectACL
 
@@ -125,7 +125,7 @@ data ObjectsComposeDestinationPredefinedACL
     | OCDPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsComposeDestinationPredefinedACL
 
@@ -172,7 +172,7 @@ data BucketsInsertPredefinedACL
     | BIPAPublicReadWrite
       -- ^ @publicReadWrite@
       -- Project team owners get OWNER access, and allUsers get WRITER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsInsertPredefinedACL
 
@@ -223,7 +223,7 @@ data ObjectsPatchPredefinedACL
     | OPPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsPatchPredefinedACL
 
@@ -276,7 +276,7 @@ data ObjectsRewriteDestinationPredefinedACL
     | ORDPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsRewriteDestinationPredefinedACL
 
@@ -313,7 +313,7 @@ data ObjectsWatchAllProjection
     | OWAPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsWatchAllProjection
 
@@ -342,7 +342,7 @@ data BucketsGetProjection
     | BGPNoACL
       -- ^ @noAcl@
       -- Omit owner, acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsGetProjection
 
@@ -371,7 +371,7 @@ data BucketsPatchProjection
     | BPPNoACL
       -- ^ @noAcl@
       -- Omit owner, acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsPatchProjection
 
@@ -400,7 +400,7 @@ data BucketsUpdateProjection
     | BUPNoACL
       -- ^ @noAcl@
       -- Omit owner, acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsUpdateProjection
 
@@ -445,7 +445,7 @@ data ObjectsInsertPredefinedACL
     | OIPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsInsertPredefinedACL
 
@@ -482,7 +482,7 @@ data ObjectsListProjection
     | OLPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsListProjection
 
@@ -527,7 +527,7 @@ data BucketsInsertPredefinedDefaultObjectACL
     | BIPDOAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsInsertPredefinedDefaultObjectACL
 
@@ -574,7 +574,7 @@ data BucketsUpdatePredefinedACL
     | BUPAPublicReadWrite
       -- ^ @publicReadWrite@
       -- Project team owners get OWNER access, and allUsers get WRITER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsUpdatePredefinedACL
 
@@ -625,7 +625,7 @@ data ObjectsCopyDestinationPredefinedACL
     | OCDPACLPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsCopyDestinationPredefinedACL
 
@@ -678,7 +678,7 @@ data ObjectsUpdatePredefinedACL
     | OUPAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsUpdatePredefinedACL
 
@@ -717,7 +717,7 @@ data BucketsInsertProjection
     | BIPNoACL
       -- ^ @noAcl@
       -- Omit owner, acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsInsertProjection
 
@@ -746,7 +746,7 @@ data BucketsListProjection
     | BLPNoACL
       -- ^ @noAcl@
       -- Omit owner, acl and defaultObjectAcl properties.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsListProjection
 
@@ -775,7 +775,7 @@ data ObjectsUpdateProjection
     | OUPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsUpdateProjection
 
@@ -804,7 +804,7 @@ data ObjectsPatchProjection
     | OPPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsPatchProjection
 
@@ -833,7 +833,7 @@ data ObjectsGetProjection
     | OGPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsGetProjection
 
@@ -878,7 +878,7 @@ data BucketsPatchPredefinedDefaultObjectACL
     | BPPDOAPublicRead
       -- ^ @publicRead@
       -- Object owner gets OWNER access, and allUsers get READER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsPatchPredefinedDefaultObjectACL
 
@@ -925,7 +925,7 @@ data BucketsPatchPredefinedACL
     | BPPAPublicReadWrite
       -- ^ @publicReadWrite@
       -- Project team owners get OWNER access, and allUsers get WRITER access.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BucketsPatchPredefinedACL
 
@@ -961,7 +961,7 @@ data ObjectsCopyProjection
     | OCPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsCopyProjection
 
@@ -991,7 +991,7 @@ data ObjectsRewriteProjection
     | ORPNoACL
       -- ^ @noAcl@
       -- Omit the owner, acl property.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ObjectsRewriteProjection
 

@@ -65,8 +65,8 @@ type CaptionsInsertResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "sync" Bool :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] Caption RequestBody :>
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] Caption :>
                              Post '[JSON] Caption
 
 -- | Uploads a caption track.
@@ -173,7 +173,7 @@ instance GoogleRequest (MediaUpload CaptionsInsert)
               _ciOnBehalfOfContentOwner
               _ciSync
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _ciPayload
               body
               youTubeService

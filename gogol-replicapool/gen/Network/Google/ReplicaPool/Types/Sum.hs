@@ -46,7 +46,7 @@ data OperationWarningsItemCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | Unreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationWarningsItemCode
 
@@ -99,7 +99,7 @@ data ReplicaPoolAutoHealingPolicyActionType
       -- ^ @REBOOT@
     | Recreate
       -- ^ @RECREATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ReplicaPoolAutoHealingPolicyActionType
 
@@ -128,7 +128,7 @@ data OperationStatus
       -- ^ @PENDING@
     | Running
       -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationStatus
 

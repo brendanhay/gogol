@@ -34,7 +34,7 @@ data CreativesListOpenAuctionStatusFilter
     | NotChecked
       -- ^ @not_checked@
       -- Creatives whose open auction status is not yet checked.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListOpenAuctionStatusFilter
 
@@ -71,7 +71,7 @@ data ProposalsPatchUpdateAction
       -- ^ @unknownAction@
     | UpdateFinalized
       -- ^ @updateFinalized@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProposalsPatchUpdateAction
 
@@ -113,7 +113,7 @@ data CreativesListDealsStatusFilter
     | CLDSFNotChecked
       -- ^ @not_checked@
       -- Creatives whose deals status is not yet checked.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListDealsStatusFilter
 
@@ -150,7 +150,7 @@ data ProposalsUpdateUpdateAction
       -- ^ @unknownAction@
     | PUUAUpdateFinalized
       -- ^ @updateFinalized@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ProposalsUpdateUpdateAction
 

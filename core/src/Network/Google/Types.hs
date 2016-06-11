@@ -25,42 +25,44 @@
 module Network.Google.Types where
 
 import           Control.Applicative
-import           Control.Exception.Lens                (exception)
+import           Control.Exception.Lens       (exception)
 import           Control.Lens
 import           Control.Monad.Catch
 import           Control.Monad.Trans.Resource
 import           Data.Aeson
-import           Data.ByteString                       (ByteString)
-import qualified Data.ByteString.Char8                 as BS8
-import qualified Data.ByteString.Lazy                  as LBS
-import qualified Data.CaseInsensitive                  as CI
+import           Data.ByteString              (ByteString)
+import qualified Data.ByteString.Char8        as BS8
+import qualified Data.ByteString.Lazy         as LBS
+import qualified Data.CaseInsensitive         as CI
 import           Data.Coerce
 import           Data.Conduit
-import qualified Data.Conduit.List                     as CL
+import qualified Data.Conduit.List            as CL
 import           Data.Data
-import           Data.DList                            (DList)
-import qualified Data.DList                            as DList
-import           Data.Foldable                         (foldl')
+import           Data.DList                   (DList)
+import qualified Data.DList                   as DList
+import           Data.Foldable                (foldl')
 import           Data.Monoid
 import           Data.String
-import           Data.Text                             (Text)
-import qualified Data.Text.Encoding                    as Text
-import           Data.Text.Lazy.Builder                (Builder)
-import qualified Data.Text.Lazy.Builder                as Build
+import           Data.Text                    (Text)
+import qualified Data.Text.Encoding           as Text
+import           Data.Text.Lazy.Builder       (Builder)
+import qualified Data.Text.Lazy.Builder       as Build
 import           GHC.Generics
 import           GHC.TypeLits
-import           Network.HTTP.Client                   (HttpException, RequestBody (..))
-import           Network.HTTP.Media                    hiding (Accept)
-import           Network.HTTP.Types                    hiding (Header)
-import qualified Network.HTTP.Types                    as HTTP
+import           Network.HTTP.Client          (HttpException, RequestBody (..))
+import           Network.HTTP.Media           hiding (Accept)
+import           Network.HTTP.Types           hiding (Header)
+import qualified Network.HTTP.Types           as HTTP
 import           Servant.API
-import Web.HttpApiData
+import           Web.HttpApiData
 
-data AltJSON  = AltJSON  deriving (Eq, Ord, Show, Read, Generic, Typeable)
-data AltMedia = AltMedia deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltJSON   = AltJSON   deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data AltMedia  = AltMedia  deriving (Eq, Ord, Show, Read, Generic, Typeable)
+data Multipart = Multipart deriving (Eq, Ord, Show, Read, Generic, Typeable)
 
-instance ToHttpApiData AltJSON  where toQueryParam = const "json"
-instance ToHttpApiData AltMedia where toQueryParam = const "multipart"
+instance ToHttpApiData AltJSON   where toQueryParam = const "json"
+instance ToHttpApiData AltMedia  where toQueryParam = const "media"
+instance ToHttpApiData Multipart where toQueryParam = const "multipart"
 
 newtype OAuthScope = OAuthScope Text
     deriving
@@ -153,7 +155,7 @@ newtype ServiceId = ServiceId Text
         )
 
 newtype MediaDownload a = MediaDownload a
-data    MediaUpload   a = MediaUpload   a RequestBody
+data    MediaUpload   a = MediaUpload   a Body
 
 _Coerce :: (Coercible a b, Coercible b a) => Iso' a b
 _Coerce = iso coerce coerce
@@ -261,28 +263,27 @@ serviceSecure = lens _svcSecure (\s a -> s { _svcSecure = a })
 serviceTimeout :: Lens' ServiceConfig (Maybe Seconds)
 serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 
--- | A single part of a multipart message.
-data Part = Part MediaType [(HeaderName, ByteString)] RequestBody
+-- | A single part of a (potentially multipart) request body.
+data Body = Body !MediaType !RequestBody
 
-data Payload
-    = Body    !MediaType !RequestBody
-    | Related ![Part]
+bodyContentType :: Lens' Body MediaType
+bodyContentType = lens (\(Body m _) -> m) (\(Body _ b) m -> Body m b)
 
 -- | An intermediary request builder.
 data Request = Request
     { _rqPath    :: !Builder
     , _rqQuery   :: !(DList (ByteString, Maybe ByteString))
     , _rqHeaders :: !(DList (HeaderName, ByteString))
-    , _rqBody    :: !(Maybe Payload)
+    , _rqBody    :: ![Body]
     }
 
 instance Monoid Request where
-    mempty      = Request mempty mempty mempty Nothing
+    mempty      = Request mempty mempty mempty mempty
     mappend a b = Request
-        (_rqPath    a <>  "/" <> _rqPath b)
-        (_rqQuery   a <>  _rqQuery b)
-        (_rqHeaders a <>  _rqHeaders b)
-        (_rqBody    b <|> _rqBody a)
+        (_rqPath    a <> "/" <> _rqPath b)
+        (_rqQuery   a <> _rqQuery b)
+        (_rqHeaders a <> _rqHeaders b)
+        (_rqBody    b <> _rqBody a)
 
 appendPath :: Request -> Builder -> Request
 appendPath rq x = rq { _rqPath = _rqPath rq <> "/" <> x }
@@ -301,11 +302,8 @@ appendHeader rq k (Just v) = rq
     { _rqHeaders = DList.snoc (_rqHeaders rq) (k, Text.encodeUtf8 v)
     }
 
-setBody :: Request -> MediaType -> RequestBody -> Request
-setBody rq c x = rq { _rqBody = Just (Body c x) }
-
-setRelated :: Request -> [Part] -> Request
-setRelated rq ps = rq { _rqBody = Just (Related ps) }
+setBody :: Request -> [Body] -> Request
+setBody rq bs = rq { _rqBody = bs }
 
 -- | A materialised 'http-client' request and associated response parser.
 data Client a = Client
@@ -353,25 +351,22 @@ client f cs m ns rq s = Client
     }
 
 class Accept c => ToBody c a where
-    toBody :: Proxy c -> a -> RequestBody
-
-instance ToBody OctetStream RequestBody where
-    toBody Proxy = id
+    toBody :: Proxy c -> a -> Body
 
 instance ToBody OctetStream ByteString where
-    toBody Proxy = RequestBodyBS
+    toBody p = Body (contentType p) . RequestBodyBS
 
 instance ToBody OctetStream LBS.ByteString where
-    toBody Proxy = RequestBodyLBS
+    toBody p = Body (contentType p) . RequestBodyLBS
 
 instance ToBody PlainText ByteString where
-    toBody Proxy = RequestBodyBS
+    toBody p = Body (contentType p) . RequestBodyBS
 
 instance ToBody PlainText LBS.ByteString where
-    toBody Proxy = RequestBodyLBS
+    toBody p = Body (contentType p) . RequestBodyLBS
 
 instance ToJSON a => ToBody JSON a where
-    toBody Proxy = RequestBodyLBS . encode
+    toBody p = Body (contentType p) . RequestBodyLBS . encode
 
 class Accept c => FromStream c a where
     fromStream :: Proxy c
@@ -407,23 +402,24 @@ data Captures (s :: Symbol) a
 data CaptureMode (s :: Symbol) (m :: Symbol) a
     deriving (Typeable)
 
-data MultipartRelated (cs :: [*]) m b
+data MultipartRelated (cs :: [*]) m
     deriving (Typeable)
 
 instance ( ToBody c m
-         , ToBody OctetStream b
          , GoogleClient fn
-         ) => GoogleClient (MultipartRelated (c ': cs) m b :> fn) where
-    type Fn (MultipartRelated (c ': cs) m b :> fn) = m -> b -> Fn fn
+         ) => GoogleClient (MultipartRelated (c ': cs) m :> fn) where
+    type Fn (MultipartRelated (c ': cs) m :> fn) = m -> Body -> Fn fn
 
-    buildClient Proxy rq m b = buildClient (Proxy :: Proxy fn) $
-        setRelated rq
-            [ Part (contentType mc) [] (toBody mc m)
-            , Part (contentType mb) [] (toBody mb b)
-            ]
-          where
-            mc = Proxy :: Proxy c
-            mb = Proxy :: Proxy OctetStream
+    buildClient Proxy rq m b =
+        buildClient (Proxy :: Proxy fn) $
+           setBody rq [toBody (Proxy :: Proxy c) m, b]
+
+instance GoogleClient fn => GoogleClient (AltMedia :> fn) where
+    type Fn (AltMedia :> fn) = Body -> Fn fn
+
+    buildClient Proxy rq b =
+        buildClient (Proxy :: Proxy fn) $
+           setBody rq [b]
 
 instance (KnownSymbol s, GoogleClient fn) => GoogleClient (s :> fn) where
     type Fn (s :> fn) = Fn fn
@@ -513,11 +509,9 @@ instance ( ToBody c a
          ) => GoogleClient (ReqBody (c ': cs) a :> fn) where
     type Fn (ReqBody (c ': cs) a :> fn) = a -> Fn fn
 
-    buildClient Proxy rq = buildClient (Proxy :: Proxy fn)
-        . setBody rq (contentType p)
-        . toBody p
-      where
-        p = Proxy :: Proxy c
+    buildClient Proxy rq x =
+        buildClient (Proxy :: Proxy fn) $
+            setBody rq [toBody (Proxy :: Proxy c) x]
 
 instance {-# OVERLAPPABLE #-}
   FromStream c a => GoogleClient (Get (c ': cs) a) where

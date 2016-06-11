@@ -69,8 +69,7 @@ type ManagementUploadsUploadDataResource =
                            "uploads" :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
-                                   Post '[JSON] Upload
+                                 AltMedia :> Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --

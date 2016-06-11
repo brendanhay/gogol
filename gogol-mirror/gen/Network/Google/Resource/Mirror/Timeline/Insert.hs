@@ -54,8 +54,8 @@ type TimelineInsertResource =
            "v1" :>
              "timeline" :>
                QueryParam "alt" AltJSON :>
-                 QueryParam "uploadType" AltMedia :>
-                   MultipartRelated '[JSON] TimelineItem RequestBody :>
+                 QueryParam "uploadType" Multipart :>
+                   MultipartRelated '[JSON] TimelineItem :>
                      Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
@@ -100,7 +100,7 @@ instance GoogleRequest (MediaUpload TimelineInsert)
         type Scopes (MediaUpload TimelineInsert) =
              Scopes TimelineInsert
         requestClient (MediaUpload TimelineInsert'{..} body)
-          = go (Just AltJSON) (Just AltMedia) _tiPayload body
+          = go (Just AltJSON) (Just Multipart) _tiPayload body
               mirrorService
           where _ :<|> go
                   = buildClient (Proxy :: Proxy TimelineInsertResource)

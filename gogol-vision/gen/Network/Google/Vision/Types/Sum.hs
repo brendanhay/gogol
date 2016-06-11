@@ -38,7 +38,7 @@ data FaceAnnotationUnderExposedLikelihood
     | VeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationUnderExposedLikelihood
 
@@ -87,7 +87,7 @@ data FaceAnnotationHeadwearLikelihood
     | FAHLVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationHeadwearLikelihood
 
@@ -136,7 +136,7 @@ data SafeSearchAnnotationAdult
     | SSAAVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationAdult
 
@@ -185,7 +185,7 @@ data FaceAnnotationAngerLikelihood
     | FAALVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationAngerLikelihood
 
@@ -234,7 +234,7 @@ data SafeSearchAnnotationMedical
     | SSAMVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationMedical
 
@@ -283,7 +283,7 @@ data FaceAnnotationBlurredLikelihood
     | FABLVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationBlurredLikelihood
 
@@ -332,7 +332,7 @@ data SafeSearchAnnotationViolence
     | SSAVVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationViolence
 
@@ -389,7 +389,7 @@ data FeatureType
       -- ^ @IMAGE_PROPERTIES@
       -- Compute a set of properties about the image (such as the image\'s
       -- dominant colors).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FeatureType
 
@@ -529,7 +529,7 @@ data LandmarkType
     | ChinRightGonion
       -- ^ @CHIN_RIGHT_GONION@
       -- Chin right gonion.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable LandmarkType
 
@@ -624,7 +624,7 @@ data Xgafv
     | X2
       -- ^ @2@
       -- v2 error format
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable Xgafv
 
@@ -666,7 +666,7 @@ data SafeSearchAnnotationSpoof
     | SSASVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SafeSearchAnnotationSpoof
 
@@ -715,7 +715,7 @@ data FaceAnnotationSurpriseLikelihood
     | FASLVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationSurpriseLikelihood
 
@@ -764,7 +764,7 @@ data FaceAnnotationSorrowLikelihood
     | FVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationSorrowLikelihood
 
@@ -813,7 +813,7 @@ data FaceAnnotationJoyLikelihood
     | FAJLVeryLikely
       -- ^ @VERY_LIKELY@
       -- The image very likely belongs to the vertical specified.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FaceAnnotationJoyLikelihood
 

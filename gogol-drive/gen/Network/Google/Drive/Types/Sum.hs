@@ -26,7 +26,7 @@ data FilesListCorpus
     | FLCUser
       -- ^ @user@
       -- Files owned by or shared to the user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FilesListCorpus
 

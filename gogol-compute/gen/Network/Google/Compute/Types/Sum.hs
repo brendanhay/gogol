@@ -27,7 +27,7 @@ data SchedulingOnHostMaintenance
       -- ^ @MIGRATE@
     | Terminate
       -- ^ @TERMINATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SchedulingOnHostMaintenance
 
@@ -58,7 +58,7 @@ data AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
       -- ^ @DELTA_PER_SECOND@
     | Gauge
       -- ^ @GAUGE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AutoscalingPolicyCustomMetricUtilizationUtilizationTargetType
 
@@ -114,7 +114,7 @@ data OperationWarningsItemCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | Unreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationWarningsItemCode
 
@@ -168,7 +168,7 @@ data BackendServiceProtocol
       -- ^ @HTTP@
     | HTTPS
       -- ^ @HTTPS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BackendServiceProtocol
 
@@ -196,7 +196,7 @@ data AttachedDiskType
       -- ^ @PERSISTENT@
     | Scratch
       -- ^ @SCRATCH@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AttachedDiskType
 
@@ -222,7 +222,7 @@ instance ToJSON AttachedDiskType where
 data ImageSourceType
     = Raw
       -- ^ @RAW@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ImageSourceType
 
@@ -274,7 +274,7 @@ data ForwardingRulesScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | FRSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ForwardingRulesScopedListWarningCode
 
@@ -354,7 +354,7 @@ data OperationsScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | OSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationsScopedListWarningCode
 
@@ -434,7 +434,7 @@ data DisksScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | DSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DisksScopedListWarningCode
 
@@ -514,7 +514,7 @@ data InstanceGroupManagersScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | IGMSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceGroupManagersScopedListWarningCode
 
@@ -594,7 +594,7 @@ data TargetPoolsScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | TPSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetPoolsScopedListWarningCode
 
@@ -651,7 +651,7 @@ data TargetVPNGatewayStatus
       -- ^ @FAILED@
     | Ready
       -- ^ @READY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetVPNGatewayStatus
 
@@ -689,7 +689,7 @@ data SnapshotStatus
       -- ^ @READY@
     | SSUploading
       -- ^ @UPLOADING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SnapshotStatus
 
@@ -749,7 +749,7 @@ data TargetInstancesScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | TISLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetInstancesScopedListWarningCode
 
@@ -829,7 +829,7 @@ data RouteWarningsItemCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | RWICUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RouteWarningsItemCode
 
@@ -885,7 +885,7 @@ data SnapshotStorageBytesStatus
       -- ^ @UPDATING@
     | UpToDate
       -- ^ @UP_TO_DATE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SnapshotStorageBytesStatus
 
@@ -939,7 +939,7 @@ data AddressesScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | ASLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AddressesScopedListWarningCode
 
@@ -997,7 +997,7 @@ data ImageStatus
       -- ^ @PENDING@
     | ISReady
       -- ^ @READY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ImageStatus
 
@@ -1026,7 +1026,7 @@ data HealthStatusHealthState
       -- ^ @HEALTHY@
     | Unhealthy
       -- ^ @UNHEALTHY@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable HealthStatusHealthState
 
@@ -1060,7 +1060,7 @@ data DeprecationStatusState
       -- ^ @DEPRECATED@
     | Obsolete
       -- ^ @OBSOLETE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DeprecationStatusState
 
@@ -1116,7 +1116,7 @@ data ManagedInstanceCurrentAction
       -- ^ @REFRESHING@
     | MICARestarting
       -- ^ @RESTARTING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ManagedInstanceCurrentAction
 
@@ -1152,7 +1152,7 @@ instance ToJSON ManagedInstanceCurrentAction where
 data TargetInstanceNATPolicy
     = NoNAT
       -- ^ @NO_NAT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetInstanceNATPolicy
 
@@ -1176,7 +1176,7 @@ instance ToJSON TargetInstanceNATPolicy where
 data AccessConfigType
     = OneToOneNAT
       -- ^ @ONE_TO_ONE_NAT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccessConfigType
 
@@ -1204,7 +1204,7 @@ data OperationStatus
       -- ^ @PENDING@
     | Running
       -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OperationStatus
 
@@ -1260,7 +1260,7 @@ data TargetVPNGatewaysScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | TVGSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetVPNGatewaysScopedListWarningCode
 
@@ -1318,7 +1318,7 @@ data DiskStatus
       -- ^ @READY@
     | DSRestoring
       -- ^ @RESTORING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DiskStatus
 
@@ -1362,7 +1362,7 @@ data ManagedInstanceInstanceStatus
       -- ^ @SUSPENDING@
     | MIISTerminated
       -- ^ @TERMINATED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ManagedInstanceInstanceStatus
 
@@ -1402,7 +1402,7 @@ data AttachedDiskMode
       -- ^ @READ_ONLY@
     | ReadWrite
       -- ^ @READ_WRITE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AttachedDiskMode
 
@@ -1429,7 +1429,7 @@ data RegionStatus
       -- ^ @DOWN@
     | UP
       -- ^ @UP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable RegionStatus
 
@@ -1476,7 +1476,7 @@ data VPNTunnelStatus
       -- ^ @REJECTED@
     | VTSWaitingForFullConfig
       -- ^ @WAITING_FOR_FULL_CONFIG@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VPNTunnelStatus
 
@@ -1525,7 +1525,7 @@ data BackendBalancingMode
       -- ^ @RATE@
     | Utilization
       -- ^ @UTILIZATION@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable BackendBalancingMode
 
@@ -1559,7 +1559,7 @@ data ForwardingRuleIPProtocol
       -- ^ @TCP@
     | Udp
       -- ^ @UDP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ForwardingRuleIPProtocol
 
@@ -1595,7 +1595,7 @@ data AddressStatus
       -- ^ @IN_USE@
     | Reserved
       -- ^ @RESERVED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AddressStatus
 
@@ -1624,7 +1624,7 @@ data InstanceGroupsListInstancesRequestInstanceState
       -- ^ @ALL@
     | IGLIRISRunning
       -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceGroupsListInstancesRequestInstanceState
 
@@ -1656,7 +1656,7 @@ data AttachedDiskInterface
       -- ^ @NVME@
     | Scsi
       -- ^ @SCSI@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AttachedDiskInterface
 
@@ -1683,7 +1683,7 @@ data ZoneStatus
       -- ^ @DOWN@
     | ZSUP
       -- ^ @UP@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ZoneStatus
 
@@ -1737,7 +1737,7 @@ data SubnetworksScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | SSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable SubnetworksScopedListWarningCode
 
@@ -1842,7 +1842,7 @@ data QuotaMetric
       -- ^ @URL_MAPS@
     | VPNTunnels
       -- ^ @VPN_TUNNELS@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable QuotaMetric
 
@@ -1934,7 +1934,7 @@ data InstanceStatus
       -- ^ @SUSPENDING@
     | ISTerminated
       -- ^ @TERMINATED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceStatus
 
@@ -2000,7 +2000,7 @@ data MachineTypesScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | MTSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MachineTypesScopedListWarningCode
 
@@ -2080,7 +2080,7 @@ data DiskTypesScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | DTSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DiskTypesScopedListWarningCode
 
@@ -2160,7 +2160,7 @@ data AutoscalersScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | AUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AutoscalersScopedListWarningCode
 
@@ -2240,7 +2240,7 @@ data VPNTunnelsScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | VTSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable VPNTunnelsScopedListWarningCode
 
@@ -2320,7 +2320,7 @@ data InstanceGroupsScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | IGSLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceGroupsScopedListWarningCode
 
@@ -2385,7 +2385,7 @@ data InstanceWithNamedPortsStatus
       -- ^ @SUSPENDING@
     | IWNPSTerminated
       -- ^ @TERMINATED@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstanceWithNamedPortsStatus
 
@@ -2451,7 +2451,7 @@ data InstancesScopedListWarningCode
       -- ^ @SINGLE_INSTANCE_PROPERTY_TEMPLATE@
     | ISLWCUnreachable
       -- ^ @UNREACHABLE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable InstancesScopedListWarningCode
 
@@ -2512,7 +2512,7 @@ data TargetPoolSessionAffinity
       -- ^ @CLIENT_IP_PROTO@
     | None
       -- ^ @NONE@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TargetPoolSessionAffinity
 
@@ -2541,7 +2541,7 @@ instance ToJSON TargetPoolSessionAffinity where
 data ImageRawDiskContainerType
     = TAR
       -- ^ @TAR@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ImageRawDiskContainerType
 

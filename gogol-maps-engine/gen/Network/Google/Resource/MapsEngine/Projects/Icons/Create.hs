@@ -58,9 +58,8 @@ type ProjectsIconsCreateResource =
                Capture "projectId" Text :>
                  "icons" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] Icon RequestBody :>
-                         Post '[JSON] Icon
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] Icon :> Post '[JSON] Icon
 
 -- | Create an icon.
 --
@@ -116,7 +115,7 @@ instance GoogleRequest
              Scopes ProjectsIconsCreate
         requestClient
           (MediaUpload ProjectsIconsCreate'{..} body)
-          = go _picProjectId (Just AltJSON) (Just AltMedia)
+          = go _picProjectId (Just AltJSON) (Just Multipart)
               _picPayload
               body
               mapsEngineService

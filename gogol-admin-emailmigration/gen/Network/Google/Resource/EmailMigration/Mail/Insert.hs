@@ -58,9 +58,8 @@ type MailInsertResource =
                Capture "userKey" Text :>
                  "mail" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] MailItem RequestBody :>
-                         Post '[JSON] ()
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] MailItem :> Post '[JSON] ()
 
 -- | Insert Mail into Google\'s Gmail backends
 --
@@ -113,7 +112,7 @@ instance GoogleRequest (MediaUpload MailInsert) where
         type Scopes (MediaUpload MailInsert) =
              Scopes MailInsert
         requestClient (MediaUpload MailInsert'{..} body)
-          = go _miUserKey (Just AltJSON) (Just AltMedia)
+          = go _miUserKey (Just AltJSON) (Just Multipart)
               _miPayload
               body
               emailMigrationService

@@ -17,6 +17,17 @@ import           Network.Google
 import           Network.Google.Storage
 import           System.IO
 
+-- This will calculate the MIME type (and therefore Content-Type) of
+-- the stored object based on the file extension.
+--
+-- You can explicitly set the desired MIME type by using:
+-- {-
+-- import Network.HTTP.Media ((//))
+----
+-- b <- sourceBody f <&> bodyContentType .~ "application" // "json"
+-- ...
+--
+-- -}
 example :: Text -> FilePath -> IO ()
 example bkt f = do
     l <- newLogger Debug stdout
@@ -24,9 +35,8 @@ example bkt f = do
     b <- sourceBody f
 
     let key = Text.pack f
-        obj = object' & objContentType ?~ "application/octet-stream"
 
     runResourceT . runGoogle e $ do
-        _ <- upload   (objectsInsert bkt obj & oiName ?~ key) b
+        _ <- upload (objectsInsert bkt object' & oiName ?~ key) b
         _ <- download (objectsGet bkt key)
         pure ()

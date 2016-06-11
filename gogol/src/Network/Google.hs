@@ -135,6 +135,7 @@ import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.Google.Types
 import           Network.HTTP.Conduit           (newManager, tlsManagerSettings)
+import           Network.HTTP.Media.MediaType   (MediaType)
 
 newtype Google s a = Google { unGoogle :: ReaderT (Env s) (ResourceT IO) a }
     deriving
@@ -242,7 +243,7 @@ upload :: ( MonadGoogle s m
           , GoogleRequest (MediaUpload a)
           )
        => a
-       -> RequestBody
+       -> Body
        -> m (Rs (MediaUpload a))
 upload x = send . MediaUpload x
 

@@ -67,8 +67,8 @@ type CaptionsUpdateResource =
                    QueryParam "onBehalfOfContentOwner" Text :>
                      QueryParam "sync" Bool :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] Caption RequestBody :>
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] Caption :>
                              Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
@@ -179,7 +179,7 @@ instance GoogleRequest (MediaUpload CaptionsUpdate)
               _capOnBehalfOfContentOwner
               _capSync
               (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _capPayload
               body
               youTubeService

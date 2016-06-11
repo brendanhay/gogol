@@ -35,7 +35,7 @@ data WebfontsListSort
     | Trending
       -- ^ @trending@
       -- Sort by trending
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable WebfontsListSort
 

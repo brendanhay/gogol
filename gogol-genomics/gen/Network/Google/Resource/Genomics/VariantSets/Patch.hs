@@ -138,8 +138,8 @@ vspUploadProtocol
       (\ s a -> s{_vspUploadProtocol = a})
 
 -- | An optional mask specifying which fields to update. Supported fields: *
--- metadata. Leaving \`updateMask\` unset is equivalent to specifying all
--- mutable fields.
+-- metadata. * name. * description. Leaving \`updateMask\` unset is
+-- equivalent to specifying all mutable fields.
 vspUpdateMask :: Lens' VariantSetsPatch (Maybe Text)
 vspUpdateMask
   = lens _vspUpdateMask

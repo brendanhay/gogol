@@ -26,7 +26,7 @@ data PagespeedAPIRunPagespeedStrategy
     | Mobile
       -- ^ @mobile@
       -- Fetch and analyze the URL for mobile devices
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PagespeedAPIRunPagespeedStrategy
 

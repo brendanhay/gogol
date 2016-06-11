@@ -64,10 +64,9 @@ type CreativeAssetsInsertResource =
                    Capture "advertiserId" (Textual Int64) :>
                      "creativeAssets" :>
                        QueryParam "alt" AltJSON :>
-                         QueryParam "uploadType" AltMedia :>
-                           MultipartRelated '[JSON] CreativeAssetMetadata
-                             RequestBody
-                             :> Post '[JSON] CreativeAssetMetadata
+                         QueryParam "uploadType" Multipart :>
+                           MultipartRelated '[JSON] CreativeAssetMetadata :>
+                             Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
 --
@@ -139,7 +138,7 @@ instance GoogleRequest
         requestClient
           (MediaUpload CreativeAssetsInsert'{..} body)
           = go _caiProFileId _caiAdvertiserId (Just AltJSON)
-              (Just AltMedia)
+              (Just Multipart)
               _caiPayload
               body
               dFAReportingService

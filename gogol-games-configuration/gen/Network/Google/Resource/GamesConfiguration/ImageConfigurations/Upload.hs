@@ -65,8 +65,7 @@ type ImageConfigurationsUploadResource =
                      :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :>
-                           Post '[JSON] ImageConfiguration
+                         AltMedia :> Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
 --

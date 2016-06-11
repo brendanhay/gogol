@@ -75,7 +75,7 @@ type EditsExpansionFilesUploadResource =
                              :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
+                                 AltMedia :>
                                    Post '[JSON] ExpansionFilesUploadResponse
 
 -- | Uploads and attaches a new Expansion File to the APK specified.

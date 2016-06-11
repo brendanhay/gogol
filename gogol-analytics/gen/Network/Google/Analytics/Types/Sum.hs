@@ -30,7 +30,7 @@ data DataGaGetSamplingLevel
       -- ^ @HIGHER_PRECISION@
       -- Returns a more accurate response using a large sample size, but this may
       -- result in the response being slower.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataGaGetSamplingLevel
 
@@ -62,7 +62,7 @@ data DataGaGetOutput
     | JSON
       -- ^ @json@
       -- Returns the response in standard JSON format.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataGaGetOutput
 
@@ -95,7 +95,7 @@ data DataMcfGetSamplingLevel
       -- ^ @HIGHER_PRECISION@
       -- Returns a more accurate response using a large sample size, but this may
       -- result in the response being slower.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable DataMcfGetSamplingLevel
 

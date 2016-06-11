@@ -35,7 +35,7 @@ data UsersListEvent
     | Update
       -- ^ @update@
       -- User Updated Event
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersListEvent
 
@@ -70,7 +70,7 @@ data UsersAliasesListEvent
     | UALEDelete'
       -- ^ @delete@
       -- Alias Deleted Event
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersAliasesListEvent
 
@@ -99,7 +99,7 @@ data UsersAliasesWatchEvent
     | UAWEDelete'
       -- ^ @delete@
       -- Alias Deleted Event
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersAliasesWatchEvent
 
@@ -137,7 +137,7 @@ data UsersWatchEvent
     | UWEUpdate
       -- ^ @update@
       -- User Updated Event
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersWatchEvent
 
@@ -173,7 +173,7 @@ data ChromeosDevicesPatchProjection
     | Full
       -- ^ @FULL@
       -- Includes all metadata fields
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesPatchProjection
 
@@ -203,7 +203,7 @@ data ChromeosDevicesGetProjection
     | CDGPFull
       -- ^ @FULL@
       -- Includes all metadata fields
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesGetProjection
 
@@ -232,7 +232,7 @@ data UsersListViewType
     | DomainPublic
       -- ^ @domain_public@
       -- Fetches the DOMAIN_PUBLIC view of the user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersListViewType
 
@@ -261,7 +261,7 @@ data OrgUnitsListType
     | Children
       -- ^ @children@
       -- Immediate children only (default).
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrgUnitsListType
 
@@ -291,7 +291,7 @@ data MobileDevicesListSortOrder
     | Descending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MobileDevicesListSortOrder
 
@@ -323,7 +323,7 @@ data UsersListOrderBy
     | GivenName
       -- ^ @givenName@
       -- User\'s given name.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersListOrderBy
 
@@ -354,7 +354,7 @@ data UsersWatchViewType
     | UWVTDomainPublic
       -- ^ @domain_public@
       -- Fetches the DOMAIN_PUBLIC view of the user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersWatchViewType
 
@@ -386,7 +386,7 @@ data UsersGetProjection
     | UGPFull
       -- ^ @full@
       -- Include all fields associated with this user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersGetProjection
 
@@ -418,7 +418,7 @@ data MobileDevicesListProjection
     | MDLPFull
       -- ^ @FULL@
       -- Includes all metadata fields
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MobileDevicesListProjection
 
@@ -465,7 +465,7 @@ data MobileDevicesListOrderBy
     | MDLOBType
       -- ^ @type@
       -- Type of the device.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MobileDevicesListOrderBy
 
@@ -506,7 +506,7 @@ data UsersListSortOrder
     | ULSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersListSortOrder
 
@@ -536,7 +536,7 @@ data ChromeosDevicesListSortOrder
     | CDLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesListSortOrder
 
@@ -565,7 +565,7 @@ data UsersWatchSortOrder
     | UWSODescending
       -- ^ @DESCENDING@
       -- Descending order.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersWatchSortOrder
 
@@ -597,7 +597,7 @@ data UsersListProjection
     | ULPFull
       -- ^ @full@
       -- Include all fields associated with this user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersListProjection
 
@@ -629,7 +629,7 @@ data ChromeosDevicesUpdateProjection
     | CDUPFull
       -- ^ @FULL@
       -- Includes all metadata fields
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesUpdateProjection
 
@@ -659,7 +659,7 @@ data MobileDevicesGetProjection
     | MDGPFull
       -- ^ @FULL@
       -- Includes all metadata fields
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable MobileDevicesGetProjection
 
@@ -703,7 +703,7 @@ data ChromeosDevicesListOrderBy
     | SupportEndDate
       -- ^ @supportEndDate@
       -- Chromebook support end date.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesListOrderBy
 
@@ -745,7 +745,7 @@ data UsersWatchProjection
     | UWPFull
       -- ^ @full@
       -- Include all fields associated with this user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersWatchProjection
 
@@ -779,7 +779,7 @@ data UsersWatchOrderBy
     | UWOBGivenName
       -- ^ @givenName@
       -- User\'s given name.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersWatchOrderBy
 
@@ -811,7 +811,7 @@ data ChromeosDevicesListProjection
     | CDLPFull
       -- ^ @FULL@
       -- Includes all metadata fields
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ChromeosDevicesListProjection
 
@@ -840,7 +840,7 @@ data UsersGetViewType
     | UGVTDomainPublic
       -- ^ @domain_public@
       -- Fetches the DOMAIN_PUBLIC view of the user.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable UsersGetViewType
 

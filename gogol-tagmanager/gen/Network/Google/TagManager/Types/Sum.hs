@@ -46,7 +46,7 @@ data TriggerType
       -- ^ @windowLoaded@
     | YouTube
       -- ^ @youTube@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TriggerType
 
@@ -176,7 +176,7 @@ data ContainerEnabledBuiltInVariableItem
       -- ^ @resolution@
     | CEBIVISdkVersion
       -- ^ @sdkVersion@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerEnabledBuiltInVariableItem
 
@@ -290,7 +290,7 @@ data ContainerUsageContextItem
       -- ^ @iosSdk5@
     | Web
       -- ^ @web@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerUsageContextItem
 
@@ -341,7 +341,7 @@ data ConditionType
       -- ^ @startsWith@
     | URLMatches
       -- ^ @urlMatches@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ConditionType
 
@@ -391,7 +391,7 @@ data AccountAccessPermissionItem
       -- ^ @publish@
     | Read'
       -- ^ @read@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AccountAccessPermissionItem
 
@@ -426,7 +426,7 @@ data TagTagFiringOption
       -- ^ @oncePerLoad@
     | Unlimited
       -- ^ @unlimited@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TagTagFiringOption
 
@@ -467,7 +467,7 @@ data ParameterType
       -- ^ @map@
     | Template
       -- ^ @template@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ParameterType
 
@@ -505,7 +505,7 @@ data ContainerAccessPermissionItem
       -- ^ @publish@
     | CAPIRead'
       -- ^ @read@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ContainerAccessPermissionItem
 
@@ -542,7 +542,7 @@ data EnvironmentType
       -- ^ @live@
     | User
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EnvironmentType
 

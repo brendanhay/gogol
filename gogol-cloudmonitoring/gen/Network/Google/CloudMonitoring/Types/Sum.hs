@@ -30,7 +30,7 @@ data TimeseriesListAggregator
       -- ^ @min@
     | Sum
       -- ^ @sum@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TimeseriesListAggregator
 
@@ -67,7 +67,7 @@ data TimeseriesDescriptorsListAggregator
       -- ^ @min@
     | TDLASum
       -- ^ @sum@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable TimeseriesDescriptorsListAggregator
 

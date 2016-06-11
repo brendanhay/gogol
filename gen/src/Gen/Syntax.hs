@@ -87,7 +87,7 @@ downloadAlias m
     | _mSupportsMediaDownload m = Just download
     | otherwise                 = Nothing
   where
-    download = servantSub (downloadVerb m) (params ++ [altParam])
+    download = servantSub (downloadVerb m) (params ++ [downloadParam])
 
     params = requestQuery m . Map.delete "alt" $ requestQueryParams m
 
@@ -96,7 +96,7 @@ uploadAlias sub m
     | _mSupportsMediaUpload m = Just upload
     | otherwise               = Nothing
   where
-    upload = servantSub (jsonVerb m) (path ++ params ++ [uploadParam, media])
+    upload = servantSub (jsonVerb m) (path ++ params ++ media)
 
     params = requestQuery m (requestQueryParams m)
 
@@ -106,13 +106,15 @@ uploadAlias sub m
 
     media = case _mRequest m of
         Just b ->
-            TyApp (TyApp (TyApp (TyCon "MultipartRelated") jsonMedia)
-                         (tycon (ref b)))
-                  (TyCon "RequestBody")
+            [ multipartParam
+            , TyApp (TyApp (TyCon "MultipartRelated") jsonMedia)
+                    (tycon (ref b))
+            ]
 
         Nothing ->
-            TyApp (TyApp (TyCon "ReqBody") streamMedia)
-                  (TyCon "RequestBody")
+            [ mediaParam
+            , TyCon "AltMedia"
+            ]
 
 requestPath :: Method Solved -> Text -> [Type]
 requestPath m = map go . extractPath
@@ -177,15 +179,20 @@ jsonMedia, streamMedia :: Type
 jsonMedia   = tylist ["JSON"]
 streamMedia = tylist ["OctetStream"]
 
-altParam :: Type
-altParam =
+downloadParam :: Type
+downloadParam =
     TyApp (TyApp (TyCon "QueryParam") (sing "alt"))
           (TyCon "AltMedia")
 
-uploadParam :: Type
-uploadParam =
+mediaParam :: Type
+mediaParam =
     TyApp (TyApp (TyCon "QueryParam") (sing "uploadType"))
           (TyCon "AltMedia")
+
+multipartParam :: Type
+multipartParam =
+    TyApp (TyApp (TyCon "QueryParam") (sing "uploadType"))
+          (TyCon "Multipart")
 
 metadataPat, downloadPat, uploadPat :: Method a -> Pat
 metadataPat = pattern 1
@@ -258,7 +265,11 @@ uploadDecl n pre api url fs m =
 
     extras = maybeToList alt ++ [upl] ++ payload ++ [var media]
       where
-        upl = app (var "Just") (var "AltMedia")
+        upl = app (var "Just") $
+            if isJust (_mRequest m)
+                then var "Multipart"
+                else var "AltMedia"
+
         alt = app (var "Just") . var . name . Text.unpack . alternate <$>
              (Map.lookup "alt" (_mParameters m) >>= view iDefault)
 

@@ -57,8 +57,7 @@ type ArchiveInsertResource =
                  "archive" :>
                    QueryParam "alt" AltJSON :>
                      QueryParam "uploadType" AltMedia :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Groups
+                       AltMedia :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --

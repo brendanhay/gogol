@@ -37,7 +37,7 @@ data EditsImagesDeleteallImageType
       -- ^ @tvScreenshots@
     | WearScreenshots
       -- ^ @wearScreenshots@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsImagesDeleteallImageType
 
@@ -82,7 +82,7 @@ data EditsTracksPatchTrack
       -- ^ @production@
     | Rollout
       -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsTracksPatchTrack
 
@@ -117,7 +117,7 @@ data EditsTracksGetTrack
       -- ^ @production@
     | ETGTRollout
       -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsTracksGetTrack
 
@@ -152,7 +152,7 @@ data EditsTracksUpdateTrack
       -- ^ @production@
     | ETUTRollout
       -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsTracksUpdateTrack
 
@@ -196,7 +196,7 @@ data EditsImagesListImageType
       -- ^ @tvScreenshots@
     | EILITWearScreenshots
       -- ^ @wearScreenshots@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsImagesListImageType
 
@@ -240,7 +240,7 @@ data EditsTestersPatchTrack
       -- ^ @production@
     | ETPTRollout
       -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsTestersPatchTrack
 
@@ -274,7 +274,7 @@ data EditsTestersGetTrack
       -- ^ @production@
     | ERollout
       -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsTestersGetTrack
 
@@ -318,7 +318,7 @@ data EditsImagesUploadImageType
       -- ^ @tvScreenshots@
     | EIUITWearScreenshots
       -- ^ @wearScreenshots@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsImagesUploadImageType
 
@@ -358,7 +358,7 @@ data EditsExpansionFilesUploadExpansionFileType
       -- ^ @main@
     | Patch'
       -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsExpansionFilesUploadExpansionFileType
 
@@ -384,7 +384,7 @@ data EditsExpansionFilesGetExpansionFileType
       -- ^ @main@
     | EEFGEFTPatch'
       -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsExpansionFilesGetExpansionFileType
 
@@ -410,7 +410,7 @@ data EditsExpansionFilesPatchExpansionFileType
       -- ^ @main@
     | EEFPEFTPatch'
       -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsExpansionFilesPatchExpansionFileType
 
@@ -436,7 +436,7 @@ data EditsExpansionFilesUpdateExpansionFileType
       -- ^ @main@
     | EEFUEFTPatch'
       -- ^ @patch@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsExpansionFilesUpdateExpansionFileType
 
@@ -476,7 +476,7 @@ data EditsImagesDeleteImageType
       -- ^ @tvScreenshots@
     | EIDITWearScreenshots
       -- ^ @wearScreenshots@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsImagesDeleteImageType
 
@@ -520,7 +520,7 @@ data EditsTestersUpdateTrack
       -- ^ @production@
     | EDIRollout
       -- ^ @rollout@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EditsTestersUpdateTrack
 

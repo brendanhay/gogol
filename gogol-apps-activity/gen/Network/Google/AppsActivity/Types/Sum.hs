@@ -42,7 +42,7 @@ data EventPrimaryEventType
       -- ^ @untrash@
     | EPETUpload
       -- ^ @upload@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventPrimaryEventType
 
@@ -92,7 +92,7 @@ data PermissionRole
       -- ^ @reader@
     | Writer
       -- ^ @writer@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionRole
 
@@ -127,7 +127,7 @@ data PermissionType
       -- ^ @group@
     | PTUser
       -- ^ @user@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable PermissionType
 
@@ -175,7 +175,7 @@ data EventAdditionalEventTypesItem
       -- ^ @untrash@
     | EAETIUpload
       -- ^ @upload@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable EventAdditionalEventTypesItem
 
@@ -221,7 +221,7 @@ data ActivitiesListGroupingStrategy
       -- ^ @driveUi@
     | None
       -- ^ @none@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ActivitiesListGroupingStrategy
 

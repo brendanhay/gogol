@@ -73,8 +73,7 @@ type TableReplaceRowsResource =
                            QueryParam "isStrict" Bool :>
                              QueryParam "alt" AltJSON :>
                                QueryParam "uploadType" AltMedia :>
-                                 ReqBody '[OctetStream] RequestBody :>
-                                   Post '[JSON] Task
+                                 AltMedia :> Post '[JSON] Task
 
 -- | Replaces rows of an existing table. Current rows remain visible until
 -- all replacement rows are ready.

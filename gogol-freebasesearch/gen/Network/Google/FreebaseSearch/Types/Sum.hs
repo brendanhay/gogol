@@ -38,7 +38,7 @@ data FreebaseSearchFormat
     | Mids
       -- ^ @mids@
       -- Ordered list of freebase mids.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchFormat
 
@@ -78,7 +78,7 @@ data FreebaseSearchScoring
     | FSSSchema
       -- ^ @schema@
       -- Use schema ranking for properties and types.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchScoring
 
@@ -112,7 +112,7 @@ data FreebaseSearchEncode
       -- ^ @off@
       -- No encoding of the response. You should not print the results directly
       -- on an web page without html-escaping the content first.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchEncode
 
@@ -146,7 +146,7 @@ data FreebaseSearchHelp
       -- ^ @predicates@
       -- The predicates and path-terminating properties supported by the filter
       -- and output request parameters.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchHelp
 
@@ -181,7 +181,7 @@ data FreebaseSearchSpell
     | NoSpelling
       -- ^ @no_spelling@
       -- Don\'t request spelling suggestions.
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable FreebaseSearchSpell
 

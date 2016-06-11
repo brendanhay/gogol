@@ -35,7 +35,7 @@ data AssociationSessionsStartProductCode
     | Afv
       -- ^ @AFV@
       -- AdSense For Video
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AssociationSessionsStartProductCode
 

@@ -26,7 +26,7 @@ data JobsListProjection
     | Minimal
       -- ^ @minimal@
       -- Does not include the job configuration
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobsListProjection
 
@@ -58,7 +58,7 @@ data JobsListStateFilter
     | Running
       -- ^ @running@
       -- Running jobs
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable JobsListStateFilter
 

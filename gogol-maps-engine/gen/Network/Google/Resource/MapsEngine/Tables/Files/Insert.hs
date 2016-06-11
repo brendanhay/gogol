@@ -63,7 +63,7 @@ type TablesFilesInsertResource =
                    QueryParam "filename" Text :>
                      QueryParam "alt" AltJSON :>
                        QueryParam "uploadType" AltMedia :>
-                         ReqBody '[OctetStream] RequestBody :> Post '[JSON] ()
+                         AltMedia :> Post '[JSON] ()
 
 -- | Upload a file to a placeholder table asset. See Table Upload in the
 -- Developer\'s Guide for more information. Supported file types are listed

@@ -28,7 +28,7 @@ data OrdersGettestOrdertemplateTemplateName
       -- ^ @template1b@
     | TEMPLATE2
       -- ^ @template2@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersGettestOrdertemplateTemplateName
 
@@ -64,7 +64,7 @@ data OrdersListOrderBy
       -- ^ @placedDate asc@
     | PlacedDateDesc
       -- ^ @placedDate desc@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersListOrderBy
 
@@ -113,7 +113,7 @@ data OrdersListStatuses
       -- ^ @returned@
     | Shipped
       -- ^ @shipped@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable OrdersListStatuses
 

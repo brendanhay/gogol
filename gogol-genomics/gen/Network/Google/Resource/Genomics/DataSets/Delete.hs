@@ -20,8 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes a dataset. For the definitions of datasets and other genomics
--- resources, see [Fundamentals of Google
+-- Deletes a dataset and all of its contents (all read group sets,
+-- reference sets, variant sets, call sets, annotation sets, etc.) This is
+-- reversible (up to one week after the deletion) via the datasets.undelete
+-- operation. For the definitions of datasets and other genomics resources,
+-- see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.datasets.delete@.
@@ -63,8 +66,11 @@ type DataSetsDeleteResource =
                        QueryParam "callback" Text :>
                          QueryParam "alt" AltJSON :> Delete '[JSON] Empty
 
--- | Deletes a dataset. For the definitions of datasets and other genomics
--- resources, see [Fundamentals of Google
+-- | Deletes a dataset and all of its contents (all read group sets,
+-- reference sets, variant sets, call sets, annotation sets, etc.) This is
+-- reversible (up to one week after the deletion) via the datasets.undelete
+-- operation. For the definitions of datasets and other genomics resources,
+-- see [Fundamentals of Google
 -- Genomics](https:\/\/cloud.google.com\/genomics\/fundamentals-of-google-genomics)
 --
 -- /See:/ 'dataSetsDelete' smart constructor.

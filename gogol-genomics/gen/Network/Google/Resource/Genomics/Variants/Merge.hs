@@ -27,8 +27,29 @@
 -- reference sequence, start, end, reference bases, and alternative bases.
 -- If no such variant exists, a new one will be created. When variants are
 -- merged, the call information from the new variant is added to the
--- existing variant, and other fields (such as key\/value pairs) are
--- discarded.
+-- existing variant. Variant info fields are merged as specified in the
+-- infoMergeConfig field of the MergeVariantsRequest. Please exercise
+-- caution when using this method! It is easy to introduce mistakes in
+-- existing variants and difficult to back out of them. For example,
+-- suppose you were trying to merge a new variant with an existing one and
+-- both variants contain calls that belong to callsets with the same
+-- callset ID. \/\/ Existing variant - irrelevant fields trimmed for
+-- clarity { \"variantSetId\": \"10473108253681171589\", \"referenceName\":
+-- \"1\", \"start\": \"10582\", \"referenceBases\": \"G\",
+-- \"alternateBases\": [ \"A\" ], \"calls\": [ { \"callSetId\":
+-- \"10473108253681171589-0\", \"callSetName\": \"CALLSET0\", \"genotype\":
+-- [ 0, 1 ], } ] } \/\/ New variant with conflicting call information {
+-- \"variantSetId\": \"10473108253681171589\", \"referenceName\": \"1\",
+-- \"start\": \"10582\", \"referenceBases\": \"G\", \"alternateBases\": [
+-- \"A\" ], \"calls\": [ { \"callSetId\": \"10473108253681171589-0\",
+-- \"callSetName\": \"CALLSET0\", \"genotype\": [ 1, 1 ], } ] } The
+-- resulting merged variant would overwrite the existing calls with those
+-- from the new variant: { \"variantSetId\": \"10473108253681171589\",
+-- \"referenceName\": \"1\", \"start\": \"10582\", \"referenceBases\":
+-- \"G\", \"alternateBases\": [ \"A\" ], \"calls\": [ { \"callSetId\":
+-- \"10473108253681171589-0\", \"callSetName\": \"CALLSET0\", \"genotype\":
+-- [ 1, 1 ], } ] } This may be the desired outcome, but it is up to the
+-- user to determine if if that is indeed the case.
 --
 -- /See:/ <https://cloud.google.com/genomics/ Genomics API Reference> for @genomics.variants.merge@.
 module Network.Google.Resource.Genomics.Variants.Merge
@@ -77,8 +98,29 @@ type VariantsMergeResource =
 -- reference sequence, start, end, reference bases, and alternative bases.
 -- If no such variant exists, a new one will be created. When variants are
 -- merged, the call information from the new variant is added to the
--- existing variant, and other fields (such as key\/value pairs) are
--- discarded.
+-- existing variant. Variant info fields are merged as specified in the
+-- infoMergeConfig field of the MergeVariantsRequest. Please exercise
+-- caution when using this method! It is easy to introduce mistakes in
+-- existing variants and difficult to back out of them. For example,
+-- suppose you were trying to merge a new variant with an existing one and
+-- both variants contain calls that belong to callsets with the same
+-- callset ID. \/\/ Existing variant - irrelevant fields trimmed for
+-- clarity { \"variantSetId\": \"10473108253681171589\", \"referenceName\":
+-- \"1\", \"start\": \"10582\", \"referenceBases\": \"G\",
+-- \"alternateBases\": [ \"A\" ], \"calls\": [ { \"callSetId\":
+-- \"10473108253681171589-0\", \"callSetName\": \"CALLSET0\", \"genotype\":
+-- [ 0, 1 ], } ] } \/\/ New variant with conflicting call information {
+-- \"variantSetId\": \"10473108253681171589\", \"referenceName\": \"1\",
+-- \"start\": \"10582\", \"referenceBases\": \"G\", \"alternateBases\": [
+-- \"A\" ], \"calls\": [ { \"callSetId\": \"10473108253681171589-0\",
+-- \"callSetName\": \"CALLSET0\", \"genotype\": [ 1, 1 ], } ] } The
+-- resulting merged variant would overwrite the existing calls with those
+-- from the new variant: { \"variantSetId\": \"10473108253681171589\",
+-- \"referenceName\": \"1\", \"start\": \"10582\", \"referenceBases\":
+-- \"G\", \"alternateBases\": [ \"A\" ], \"calls\": [ { \"callSetId\":
+-- \"10473108253681171589-0\", \"callSetName\": \"CALLSET0\", \"genotype\":
+-- [ 1, 1 ], } ] } This may be the desired outcome, but it is up to the
+-- user to determine if if that is indeed the case.
 --
 -- /See:/ 'variantsMerge' smart constructor.
 data VariantsMerge = VariantsMerge'

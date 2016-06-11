@@ -28,7 +28,7 @@ data ZoneViewsListResourcesFormat
       -- ^ @URL@
     | URLPort
       -- ^ @URL_PORT@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ZoneViewsListResourcesFormat
 
@@ -57,7 +57,7 @@ data ZoneViewsListResourcesListState
       -- ^ @ALL@
     | Running
       -- ^ @RUNNING@
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
+      deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable ZoneViewsListResourcesListState
 

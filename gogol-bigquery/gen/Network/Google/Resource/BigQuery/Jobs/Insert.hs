@@ -58,9 +58,8 @@ type JobsInsertResource =
                Capture "projectId" Text :>
                  "jobs" :>
                    QueryParam "alt" AltJSON :>
-                     QueryParam "uploadType" AltMedia :>
-                       MultipartRelated '[JSON] Job RequestBody :>
-                         Post '[JSON] Job
+                     QueryParam "uploadType" Multipart :>
+                       MultipartRelated '[JSON] Job :> Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
@@ -117,7 +116,7 @@ instance GoogleRequest (MediaUpload JobsInsert) where
         type Scopes (MediaUpload JobsInsert) =
              Scopes JobsInsert
         requestClient (MediaUpload JobsInsert'{..} body)
-          = go _jiProjectId (Just AltJSON) (Just AltMedia)
+          = go _jiProjectId (Just AltJSON) (Just Multipart)
               _jiPayload
               body
               bigQueryService

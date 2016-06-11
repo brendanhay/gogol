@@ -57,8 +57,7 @@ type TimelineAttachmentsInsertResource =
                  "attachments" :>
                    QueryParam "alt" AltJSON :>
                      QueryParam "uploadType" AltMedia :>
-                       ReqBody '[OctetStream] RequestBody :>
-                         Post '[JSON] Attachment
+                       AltMedia :> Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
 --
