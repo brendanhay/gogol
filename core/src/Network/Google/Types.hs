@@ -266,8 +266,8 @@ serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 -- | A single part of a (potentially multipart) request body.
 data Body = Body !MediaType !RequestBody
 
-setMIMEType :: MediaType -> Body -> Body
-setMIMEType m (Body _ b) = Body m b
+bodyContentType :: Lens' Body MediaType
+bodyContentType = lens (\(Body m _) -> m) (\(Body _ b) m -> Body m b)
 
 -- | An intermediary request builder.
 data Request = Request

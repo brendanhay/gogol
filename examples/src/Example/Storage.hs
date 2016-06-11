@@ -24,7 +24,7 @@ import           System.IO
 -- {-
 -- import Network.HTTP.Media ((//))
 ----
--- b <- setMIMEType ("application" // "json") <$> sourceBody f
+-- b <- sourceBody f <&> bodyContentType .~ ("application" // "json")
 -- ...
 --
 -- -}
