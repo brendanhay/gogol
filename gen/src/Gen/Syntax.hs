@@ -566,7 +566,7 @@ externalLit = \case
     Nat       -> TyCon "Natural"
     Float     -> TyCon "Double"
     Double    -> TyCon "Double"
-    Byte      -> TyCon "Word8"
+    Byte      -> TyCon "ByteString"
     UInt32    -> TyCon "Word32"
     UInt64    -> TyCon "Word64"
     Int32     -> TyCon "Int32"
@@ -586,7 +586,7 @@ internalLit = \case
     Nat       -> TyApp (TyCon "Textual") (TyCon "Nat")
     Float     -> TyApp (TyCon "Textual") (TyCon "Double")
     Double    -> TyApp (TyCon "Textual") (TyCon "Double")
-    Byte      -> TyApp (TyCon "Textual") (TyCon "Word8")
+    Byte      -> TyCon "Base64"
     UInt32    -> TyApp (TyCon "Textual") (TyCon "Word32")
     UInt64    -> TyApp (TyCon "Textual") (TyCon "Word64")
     Int32     -> TyApp (TyCon "Textual") (TyCon "Int32")
@@ -617,7 +617,7 @@ iso = \case
     TLit DateTime -> Just (var "_DateTime")
     TLit Float    -> Just (var "_Coerce")
     TLit Double   -> Just (var "_Coerce")
-    TLit Byte     -> Just (var "_Coerce")
+    TLit Byte     -> Just (var "_Base64")
     TLit UInt32   -> Just (var "_Coerce")
     TLit UInt64   -> Just (var "_Coerce")
     TLit Int32    -> Just (var "_Coerce")
