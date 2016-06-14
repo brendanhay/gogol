@@ -622,7 +622,7 @@ instance ToJSON AccountBidderLocationItem where
 --
 -- /See:/ 'privateData' smart constructor.
 data PrivateData = PrivateData'
-    { _pdReferencePayload :: !(Maybe (Textual Word8))
+    { _pdReferencePayload :: !(Maybe Base64)
     , _pdReferenceId      :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -641,11 +641,11 @@ privateData =
     , _pdReferenceId = Nothing
     }
 
-pdReferencePayload :: Lens' PrivateData (Maybe Word8)
+pdReferencePayload :: Lens' PrivateData (Maybe ByteString)
 pdReferencePayload
   = lens _pdReferencePayload
       (\ s a -> s{_pdReferencePayload = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 pdReferenceId :: Lens' PrivateData (Maybe Text)
 pdReferenceId

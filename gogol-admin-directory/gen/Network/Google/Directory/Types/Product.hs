@@ -4468,7 +4468,7 @@ instance ToJSON UserPhone where
 --
 -- /See:/ 'userPhoto' smart constructor.
 data UserPhoto = UserPhoto'
-    { _upPhotoData    :: !(Maybe (Textual Word8))
+    { _upPhotoData    :: !(Maybe Base64)
     , _upEtag         :: !(Maybe Text)
     , _upHeight       :: !(Maybe (Textual Int32))
     , _upKind         :: !Text
@@ -4512,10 +4512,10 @@ userPhoto =
     }
 
 -- | Base64 encoded photo data
-upPhotoData :: Lens' UserPhoto (Maybe Word8)
+upPhotoData :: Lens' UserPhoto (Maybe ByteString)
 upPhotoData
   = lens _upPhotoData (\ s a -> s{_upPhotoData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | ETag of the resource.
 upEtag :: Lens' UserPhoto (Maybe Text)

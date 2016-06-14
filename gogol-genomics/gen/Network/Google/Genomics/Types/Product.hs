@@ -5081,7 +5081,7 @@ instance ToJSON CigarUnit where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _polEtag     :: !(Maybe (Textual Word8))
+    { _polEtag     :: !(Maybe Base64)
     , _polVersion  :: !(Maybe (Textual Int32))
     , _polBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -5113,10 +5113,10 @@ policy =
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
 -- version of the policy. If no \`etag\` is provided in the call to
 -- \`setIamPolicy\`, then the existing policy is overwritten blindly.
-polEtag :: Lens' Policy (Maybe Word8)
+polEtag :: Lens' Policy (Maybe ByteString)
 polEtag
   = lens _polEtag (\ s a -> s{_polEtag = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Version of the \`Policy\`. The default version is 0.
 polVersion :: Lens' Policy (Maybe Int32)

@@ -606,7 +606,7 @@ data InstanceGroupManager = InstanceGroupManager'
     { _igmCurrentSize         :: !(Maybe (Textual Int32))
     , _igmGroup               :: !(Maybe Text)
     , _igmKind                :: !Text
-    , _igmFingerprint         :: !(Maybe (Textual Word8))
+    , _igmFingerprint         :: !(Maybe Base64)
     , _igmBaseInstanceName    :: !(Maybe Text)
     , _igmAutoHealingPolicies :: !(Maybe [ReplicaPoolAutoHealingPolicy])
     , _igmInstanceTemplate    :: !(Maybe Text)
@@ -694,11 +694,11 @@ igmKind = lens _igmKind (\ s a -> s{_igmKind = a})
 -- | [Output only] Fingerprint of the instance group manager. This field is
 -- used for optimistic locking. An up-to-date fingerprint must be provided
 -- in order to modify the Instance Group Manager resource.
-igmFingerprint :: Lens' InstanceGroupManager (Maybe Word8)
+igmFingerprint :: Lens' InstanceGroupManager (Maybe ByteString)
 igmFingerprint
   = lens _igmFingerprint
       (\ s a -> s{_igmFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The base instance name to use for instances in this group. The value
 -- must be a valid RFC1035 name. Supported characters are lowercase
@@ -992,7 +992,7 @@ instance ToJSON OperationError where
 --
 -- /See:/ 'instanceGroupManagersSetTargetPoolsRequest' smart constructor.
 data InstanceGroupManagersSetTargetPoolsRequest = InstanceGroupManagersSetTargetPoolsRequest'
-    { _igmstprFingerprint :: !(Maybe (Textual Word8))
+    { _igmstprFingerprint :: !(Maybe Base64)
     , _igmstprTargetPools :: !(Maybe [Text])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1014,11 +1014,11 @@ instanceGroupManagersSetTargetPoolsRequest =
 -- | The current fingerprint of the Instance Group Manager resource. If this
 -- does not match the server-side fingerprint of the resource, then the
 -- request will be rejected.
-igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe Word8)
+igmstprFingerprint :: Lens' InstanceGroupManagersSetTargetPoolsRequest (Maybe ByteString)
 igmstprFingerprint
   = lens _igmstprFingerprint
       (\ s a -> s{_igmstprFingerprint = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | A list of fully-qualified URLs to existing Target Pool resources. New
 -- instances in the Instance Group Manager will be added to the specified

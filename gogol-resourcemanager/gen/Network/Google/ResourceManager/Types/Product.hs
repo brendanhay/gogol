@@ -428,7 +428,7 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _pEtag     :: !(Maybe (Textual Word8))
+    { _pEtag     :: !(Maybe Base64)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -460,10 +460,10 @@ policy =
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
 -- version of the policy. If no \`etag\` is provided in the call to
 -- \`setIamPolicy\`, then the existing policy is overwritten blindly.
-pEtag :: Lens' Policy (Maybe Word8)
+pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)

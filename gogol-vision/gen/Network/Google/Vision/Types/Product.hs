@@ -286,7 +286,7 @@ instance ToJSON Property where
 --
 -- /See:/ 'image' smart constructor.
 data Image = Image'
-    { _iContent :: !(Maybe (Textual Word8))
+    { _iContent :: !(Maybe Base64)
     , _iSource  :: !(Maybe ImageSource)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -306,10 +306,10 @@ image =
     }
 
 -- | Image content, represented as a stream of bytes.
-iContent :: Lens' Image (Maybe Word8)
+iContent :: Lens' Image (Maybe ByteString)
 iContent
   = lens _iContent (\ s a -> s{_iContent = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Google Cloud Storage image location. If both \'content\' and \'source\'
 -- are filled for an image, \'content\' takes precedence and it will be

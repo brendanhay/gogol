@@ -95,7 +95,7 @@ instance ToJSON Empty where
 -- /See:/ 'serviceAccountKey' smart constructor.
 data ServiceAccountKey = ServiceAccountKey'
     { _sakValidAfterTime  :: !(Maybe Text)
-    , _sakPrivateKeyData  :: !(Maybe (Textual Word8))
+    , _sakPrivateKeyData  :: !(Maybe Base64)
     , _sakName            :: !(Maybe Text)
     , _sakPrivateKeyType  :: !(Maybe Text)
     , _sakValidBeforeTime :: !(Maybe Text)
@@ -132,11 +132,11 @@ sakValidAfterTime
       (\ s a -> s{_sakValidAfterTime = a})
 
 -- | The key data.
-sakPrivateKeyData :: Lens' ServiceAccountKey (Maybe Word8)
+sakPrivateKeyData :: Lens' ServiceAccountKey (Maybe ByteString)
 sakPrivateKeyData
   = lens _sakPrivateKeyData
       (\ s a -> s{_sakPrivateKeyData = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The resource name of the service account key in the format
 -- \"projects\/{project}\/serviceAccounts\/{email}\/keys\/{key}\".
@@ -369,7 +369,7 @@ instance ToJSON SetIAMPolicyRequest where
 --
 -- /See:/ 'signBlobRequest' smart constructor.
 newtype SignBlobRequest = SignBlobRequest'
-    { _sbrBytesToSign :: Maybe (Textual Word8)
+    { _sbrBytesToSign :: Maybe Base64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SignBlobRequest' with the minimum fields required to make a request.
@@ -385,11 +385,11 @@ signBlobRequest =
     }
 
 -- | The bytes to sign
-sbrBytesToSign :: Lens' SignBlobRequest (Maybe Word8)
+sbrBytesToSign :: Lens' SignBlobRequest (Maybe ByteString)
 sbrBytesToSign
   = lens _sbrBytesToSign
       (\ s a -> s{_sbrBytesToSign = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON SignBlobRequest where
         parseJSON
@@ -494,7 +494,7 @@ instance ToJSON DataAccessOptions where
 -- /See:/ 'serviceAccount' smart constructor.
 data ServiceAccount = ServiceAccount'
     { _saEmail          :: !(Maybe Text)
-    , _saEtag           :: !(Maybe (Textual Word8))
+    , _saEtag           :: !(Maybe Base64)
     , _saUniqueId       :: !(Maybe Text)
     , _saName           :: !(Maybe Text)
     , _saDisplayName    :: !(Maybe Text)
@@ -537,10 +537,10 @@ saEmail :: Lens' ServiceAccount (Maybe Text)
 saEmail = lens _saEmail (\ s a -> s{_saEmail = a})
 
 -- | Used to perform a consistent read-modify-write.
-saEtag :: Lens' ServiceAccount (Maybe Word8)
+saEtag :: Lens' ServiceAccount (Maybe ByteString)
 saEtag
   = lens _saEtag (\ s a -> s{_saEtag = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | \'OutputOnly unique and stable id of the service account.
 saUniqueId :: Lens' ServiceAccount (Maybe Text)
@@ -697,7 +697,7 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _pEtag     :: !(Maybe (Textual Word8))
+    { _pEtag     :: !(Maybe Base64)
     , _pRules    :: !(Maybe [Rule])
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
@@ -733,10 +733,10 @@ policy =
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
 -- version of the policy. If no \`etag\` is provided in the call to
 -- \`setIamPolicy\`, then the existing policy is overwritten blindly.
-pEtag :: Lens' Policy (Maybe Word8)
+pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 pRules :: Lens' Policy [Rule]
 pRules
@@ -864,7 +864,7 @@ instance ToJSON Condition where
 --
 -- /See:/ 'signBlobResponse' smart constructor.
 data SignBlobResponse = SignBlobResponse'
-    { _sbrSignature :: !(Maybe (Textual Word8))
+    { _sbrSignature :: !(Maybe Base64)
     , _sbrKeyId     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -884,10 +884,10 @@ signBlobResponse =
     }
 
 -- | The signed blob.
-sbrSignature :: Lens' SignBlobResponse (Maybe Word8)
+sbrSignature :: Lens' SignBlobResponse (Maybe ByteString)
 sbrSignature
   = lens _sbrSignature (\ s a -> s{_sbrSignature = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The id of the key used to sign the blob.
 sbrKeyId :: Lens' SignBlobResponse (Maybe Text)

@@ -731,7 +731,7 @@ instance ToJSON HistoryMessageDeleted where
 -- /See:/ 'messagePartBody' smart constructor.
 data MessagePartBody = MessagePartBody'
     { _mpbSize         :: !(Maybe (Textual Int32))
-    , _mpbData         :: !(Maybe (Textual Word8))
+    , _mpbData         :: !(Maybe Base64)
     , _mpbAttachmentId :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -763,10 +763,10 @@ mpbSize
 -- types that have no message body or when the body data is sent as a
 -- separate attachment. An attachment ID is present if the body data is
 -- contained in a separate attachment.
-mpbData :: Lens' MessagePartBody (Maybe Word8)
+mpbData :: Lens' MessagePartBody (Maybe ByteString)
 mpbData
   = lens _mpbData (\ s a -> s{_mpbData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | When present, contains the ID of an external attachment that can be
 -- retrieved in a separate messages.attachments.get request. When not
@@ -1021,7 +1021,7 @@ instance ToJSON WatchRequest where
 --
 -- /See:/ 'message' smart constructor.
 data Message = Message'
-    { _mRaw          :: !(Maybe (Textual Word8))
+    { _mRaw          :: !(Maybe Base64)
     , _mSnippet      :: !(Maybe Text)
     , _mSizeEstimate :: !(Maybe (Textual Int32))
     , _mPayload      :: !(Maybe MessagePart)
@@ -1071,10 +1071,10 @@ message =
 -- | The entire email message in an RFC 2822 formatted and base64url encoded
 -- string. Returned in messages.get and drafts.get responses when the
 -- format=RAW parameter is supplied.
-mRaw :: Lens' Message (Maybe Word8)
+mRaw :: Lens' Message (Maybe ByteString)
 mRaw
   = lens _mRaw (\ s a -> s{_mRaw = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | A short part of the message text.
 mSnippet :: Lens' Message (Maybe Text)

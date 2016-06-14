@@ -404,7 +404,7 @@ instance ToJSON ReviewSource where
 --
 -- /See:/ 'annotationData' smart constructor.
 data AnnotationData = AnnotationData'
-    { _annEncodedData    :: !(Maybe (Textual Word8))
+    { _annEncodedData    :: !(Maybe Base64)
     , _annKind           :: !Text
     , _annData           :: !(Maybe JSONValue)
     , _annSelfLink       :: !(Maybe Text)
@@ -452,11 +452,11 @@ annotationData =
     }
 
 -- | Base64 encoded data for this annotation data.
-annEncodedData :: Lens' AnnotationData (Maybe Word8)
+annEncodedData :: Lens' AnnotationData (Maybe ByteString)
 annEncodedData
   = lens _annEncodedData
       (\ s a -> s{_annEncodedData = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resource Type
 annKind :: Lens' AnnotationData Text

@@ -2590,7 +2590,7 @@ instance ToJSON ProjectListProjectsItem where
 --
 -- /See:/ 'bigtableColumn' smart constructor.
 data BigtableColumn = BigtableColumn'
-    { _bcQualifierEncoded :: !(Maybe (Textual Word8))
+    { _bcQualifierEncoded :: !(Maybe Base64)
     , _bcFieldName        :: !(Maybe Text)
     , _bcQualifierString  :: !(Maybe Text)
     , _bcOnlyReadLatest   :: !(Maybe Bool)
@@ -2633,11 +2633,11 @@ bigtableColumn =
 -- qualifier. However, if the qualifier is not a valid BigQuery field
 -- identifier i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier
 -- must be provided as field_name.
-bcQualifierEncoded :: Lens' BigtableColumn (Maybe Word8)
+bcQualifierEncoded :: Lens' BigtableColumn (Maybe ByteString)
 bcQualifierEncoded
   = lens _bcQualifierEncoded
       (\ s a -> s{_bcQualifierEncoded = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | [Optional] If the qualifier is not a valid BigQuery field identifier
 -- i.e. does not match [a-zA-Z][a-zA-Z0-9_]*, a valid identifier must be

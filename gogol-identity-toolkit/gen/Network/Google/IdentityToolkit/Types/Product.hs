@@ -332,9 +332,9 @@ data UserInfo = UserInfo'
     , _uiPasswordUpdatedAt :: !(Maybe (Textual Double))
     , _uiVersion           :: !(Maybe (Textual Int32))
     , _uiEmailVerified     :: !(Maybe Bool)
-    , _uiSalt              :: !(Maybe (Textual Word8))
+    , _uiSalt              :: !(Maybe Base64)
     , _uiDisplayName       :: !(Maybe Text)
-    , _uiPasswordHash      :: !(Maybe (Textual Word8))
+    , _uiPasswordHash      :: !(Maybe Base64)
     , _uiLocalId           :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -431,10 +431,10 @@ uiEmailVerified
       (\ s a -> s{_uiEmailVerified = a})
 
 -- | The user\'s password salt.
-uiSalt :: Lens' UserInfo (Maybe Word8)
+uiSalt :: Lens' UserInfo (Maybe ByteString)
 uiSalt
   = lens _uiSalt (\ s a -> s{_uiSalt = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | The name of the user.
 uiDisplayName :: Lens' UserInfo (Maybe Text)
@@ -443,11 +443,11 @@ uiDisplayName
       (\ s a -> s{_uiDisplayName = a})
 
 -- | The user\'s hashed password.
-uiPasswordHash :: Lens' UserInfo (Maybe Word8)
+uiPasswordHash :: Lens' UserInfo (Maybe ByteString)
 uiPasswordHash
   = lens _uiPasswordHash
       (\ s a -> s{_uiPasswordHash = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The local ID of the user.
 uiLocalId :: Lens' UserInfo (Maybe Text)
@@ -2397,9 +2397,9 @@ data IdentitytoolkitRelyingPartyUploadAccountRequest = IdentitytoolkitRelyingPar
     { _irpuarUsers                  :: !(Maybe [UserInfo])
     , _irpuarMemoryCost             :: !(Maybe (Textual Int32))
     , _irpuarDelegatedProjectNumber :: !(Maybe (Textual Int64))
-    , _irpuarSaltSeparator          :: !(Maybe (Textual Word8))
+    , _irpuarSaltSeparator          :: !(Maybe Base64)
     , _irpuarHashAlgorithm          :: !(Maybe Text)
-    , _irpuarSignerKey              :: !(Maybe (Textual Word8))
+    , _irpuarSignerKey              :: !(Maybe Base64)
     , _irpuarRounds                 :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2456,11 +2456,11 @@ irpuarDelegatedProjectNumber
       . mapping _Coerce
 
 -- | The salt separator.
-irpuarSaltSeparator :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Word8)
+irpuarSaltSeparator :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe ByteString)
 irpuarSaltSeparator
   = lens _irpuarSaltSeparator
       (\ s a -> s{_irpuarSaltSeparator = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The password hash algorithm.
 irpuarHashAlgorithm :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Text)
@@ -2469,11 +2469,11 @@ irpuarHashAlgorithm
       (\ s a -> s{_irpuarHashAlgorithm = a})
 
 -- | The key for to hash the password.
-irpuarSignerKey :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Word8)
+irpuarSignerKey :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe ByteString)
 irpuarSignerKey
   = lens _irpuarSignerKey
       (\ s a -> s{_irpuarSignerKey = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Rounds for hash calculation. Used by scrypt and similar algorithms.
 irpuarRounds :: Lens' IdentitytoolkitRelyingPartyUploadAccountRequest (Maybe Int32)
@@ -3177,7 +3177,7 @@ data SetAccountInfoResponse = SetAccountInfoResponse'
     , _sairProviderUserInfo :: !(Maybe [SetAccountInfoResponseProviderUserInfoItem])
     , _sairExpiresIn        :: !(Maybe (Textual Int64))
     , _sairDisplayName      :: !(Maybe Text)
-    , _sairPasswordHash     :: !(Maybe (Textual Word8))
+    , _sairPasswordHash     :: !(Maybe Base64)
     , _sairLocalId          :: !(Maybe Text)
     , _sairNewEmail         :: !(Maybe Text)
     , _sairIdToken          :: !(Maybe Text)
@@ -3268,11 +3268,11 @@ sairDisplayName
       (\ s a -> s{_sairDisplayName = a})
 
 -- | The user\'s hashed password.
-sairPasswordHash :: Lens' SetAccountInfoResponse (Maybe Word8)
+sairPasswordHash :: Lens' SetAccountInfoResponse (Maybe ByteString)
 sairPasswordHash
   = lens _sairPasswordHash
       (\ s a -> s{_sairPasswordHash = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The local ID of the user.
 sairLocalId :: Lens' SetAccountInfoResponse (Maybe Text)
