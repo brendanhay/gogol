@@ -97,7 +97,7 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'attachmentInfo' smart constructor.
 data AttachmentInfo = AttachmentInfo'
-    { _aiData           :: !(Maybe (Textual Word8))
+    { _aiData           :: !(Maybe Base64)
     , _aiNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -117,10 +117,10 @@ attachmentInfo =
     }
 
 -- | An opaque data container for client-provided data.
-aiData :: Lens' AttachmentInfo (Maybe Word8)
+aiData :: Lens' AttachmentInfo (Maybe ByteString)
 aiData
   = lens _aiData (\ s a -> s{_aiData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Specifies what kind of attachment this is. Tells a client how to
 -- interpret the \`data\` field. Format is namespace\/type, for example
@@ -820,7 +820,7 @@ instance ToJSON BeaconInfo where
 --
 -- /See:/ 'observation' smart constructor.
 data Observation = Observation'
-    { _oTelemetry    :: !(Maybe (Textual Word8))
+    { _oTelemetry    :: !(Maybe Base64)
     , _oTimestampMs  :: !(Maybe Text)
     , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -846,10 +846,10 @@ observation =
 -- | The array of telemetry bytes received from the beacon. The server is
 -- responsible for parsing it. This field may frequently be empty, as with
 -- a beacon that transmits telemetry only occasionally.
-oTelemetry :: Lens' Observation (Maybe Word8)
+oTelemetry :: Lens' Observation (Maybe ByteString)
 oTelemetry
   = lens _oTelemetry (\ s a -> s{_oTelemetry = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Time when the beacon was observed. Being sourced from a mobile device,
 -- this time may be suspect.
@@ -883,7 +883,7 @@ instance ToJSON Observation where
 --
 -- /See:/ 'beaconAttachment' smart constructor.
 data BeaconAttachment = BeaconAttachment'
-    { _baData           :: !(Maybe (Textual Word8))
+    { _baData           :: !(Maybe Base64)
     , _baAttachmentName :: !(Maybe Text)
     , _baNamespacedType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -910,10 +910,10 @@ beaconAttachment =
 -- [base64](http:\/\/tools.ietf.org\/html\/rfc4648#section-4) encoded in
 -- HTTP requests, and will be so encoded (with padding) in responses.
 -- Required.
-baData :: Lens' BeaconAttachment (Maybe Word8)
+baData :: Lens' BeaconAttachment (Maybe ByteString)
 baData
   = lens _baData (\ s a -> s{_baData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Resource name of this attachment. Attachment names have the format:
 -- beacons\/beacon_id\/attachments\/attachment_id. Leave this empty on
@@ -1006,7 +1006,7 @@ instance ToJSON ListDiagnosticsResponse where
 --
 -- /See:/ 'advertisedId' smart constructor.
 data AdvertisedId = AdvertisedId'
-    { _aiId   :: !(Maybe (Textual Word8))
+    { _aiId   :: !(Maybe Base64)
     , _aiType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1030,10 +1030,10 @@ advertisedId =
 -- HTTP requests, and will be so encoded (with padding) in responses. The
 -- base64 encoding should be of the binary byte-stream and not any textual
 -- (such as hex) representation thereof. Required.
-aiId :: Lens' AdvertisedId (Maybe Word8)
+aiId :: Lens' AdvertisedId (Maybe ByteString)
 aiId
   = lens _aiId (\ s a -> s{_aiId = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Specifies the identifier type. Required.
 aiType :: Lens' AdvertisedId (Maybe Text)

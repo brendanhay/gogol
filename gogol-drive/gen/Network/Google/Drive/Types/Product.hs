@@ -512,7 +512,7 @@ instance ToJSON ReplyList where
 --
 -- /See:/ 'fileContentHintsThumbnail' smart constructor.
 data FileContentHintsThumbnail = FileContentHintsThumbnail'
-    { _fchtImage    :: !(Maybe (Textual Word8))
+    { _fchtImage    :: !(Maybe Base64)
     , _fchtMimeType :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -532,10 +532,10 @@ fileContentHintsThumbnail =
     }
 
 -- | The thumbnail data encoded with URL-safe Base64 (RFC 4648 section 5).
-fchtImage :: Lens' FileContentHintsThumbnail (Maybe Word8)
+fchtImage :: Lens' FileContentHintsThumbnail (Maybe ByteString)
 fchtImage
   = lens _fchtImage (\ s a -> s{_fchtImage = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | The MIME type of the thumbnail.
 fchtMimeType :: Lens' FileContentHintsThumbnail (Maybe Text)

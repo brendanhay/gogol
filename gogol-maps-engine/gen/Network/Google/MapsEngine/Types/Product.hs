@@ -333,7 +333,7 @@ instance ToJSON PermissionsBatchDeleteRequest where
 --
 -- /See:/ 'rasterCollectionsListResponse' smart constructor.
 data RasterCollectionsListResponse = RasterCollectionsListResponse'
-    { _rclrNextPageToken     :: !(Maybe (Textual Word8))
+    { _rclrNextPageToken     :: !(Maybe Base64)
     , _rclrRasterCollections :: !(Maybe [RasterCollection])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -353,11 +353,11 @@ rasterCollectionsListResponse =
     }
 
 -- | Next page token.
-rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe Word8)
+rclrNextPageToken :: Lens' RasterCollectionsListResponse (Maybe ByteString)
 rclrNextPageToken
   = lens _rclrNextPageToken
       (\ s a -> s{_rclrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 rclrRasterCollections :: Lens' RasterCollectionsListResponse [RasterCollection]
@@ -2258,7 +2258,7 @@ instance ToJSON AcquisitionTime where
 --
 -- /See:/ 'tablesListResponse' smart constructor.
 data TablesListResponse = TablesListResponse'
-    { _tlrNextPageToken :: !(Maybe (Textual Word8))
+    { _tlrNextPageToken :: !(Maybe Base64)
     , _tlrTables        :: !(Maybe [Table])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2278,11 +2278,11 @@ tablesListResponse =
     }
 
 -- | Next page token.
-tlrNextPageToken :: Lens' TablesListResponse (Maybe Word8)
+tlrNextPageToken :: Lens' TablesListResponse (Maybe ByteString)
 tlrNextPageToken
   = lens _tlrNextPageToken
       (\ s a -> s{_tlrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 tlrTables :: Lens' TablesListResponse [Table]
@@ -2990,7 +2990,7 @@ instance ToJSON ScalingFunction where
 --
 -- /See:/ 'assetsListResponse' smart constructor.
 data AssetsListResponse = AssetsListResponse'
-    { _alrNextPageToken :: !(Maybe (Textual Word8))
+    { _alrNextPageToken :: !(Maybe Base64)
     , _alrAssets        :: !(Maybe [Asset])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -3010,11 +3010,11 @@ assetsListResponse =
     }
 
 -- | Next page token.
-alrNextPageToken :: Lens' AssetsListResponse (Maybe Word8)
+alrNextPageToken :: Lens' AssetsListResponse (Maybe ByteString)
 alrNextPageToken
   = lens _alrNextPageToken
       (\ s a -> s{_alrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Assets returned.
 alrAssets :: Lens' AssetsListResponse [Asset]
@@ -4805,7 +4805,7 @@ instance ToJSON GeoJSONLineString where
 -- /See:/ 'publishedMapsListResponse' smart constructor.
 data PublishedMapsListResponse = PublishedMapsListResponse'
     { _pmlrMaps          :: !(Maybe [PublishedMap])
-    , _pmlrNextPageToken :: !(Maybe (Textual Word8))
+    , _pmlrNextPageToken :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishedMapsListResponse' with the minimum fields required to make a request.
@@ -4831,11 +4831,11 @@ pmlrMaps
       . _Coerce
 
 -- | Next page token.
-pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe Word8)
+pmlrNextPageToken :: Lens' PublishedMapsListResponse (Maybe ByteString)
 pmlrNextPageToken
   = lens _pmlrNextPageToken
       (\ s a -> s{_pmlrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON PublishedMapsListResponse where
         parseJSON
@@ -4857,7 +4857,7 @@ instance ToJSON PublishedMapsListResponse where
 -- /See:/ 'mapsListResponse' smart constructor.
 data MapsListResponse = MapsListResponse'
     { _mlrMaps          :: !(Maybe [Map])
-    , _mlrNextPageToken :: !(Maybe (Textual Word8))
+    , _mlrNextPageToken :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MapsListResponse' with the minimum fields required to make a request.
@@ -4882,11 +4882,11 @@ mlrMaps
       . _Coerce
 
 -- | Next page token.
-mlrNextPageToken :: Lens' MapsListResponse (Maybe Word8)
+mlrNextPageToken :: Lens' MapsListResponse (Maybe ByteString)
 mlrNextPageToken
   = lens _mlrNextPageToken
       (\ s a -> s{_mlrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON MapsListResponse where
         parseJSON
@@ -5062,7 +5062,7 @@ instance ToJSON GeoJSONPoint where
 --
 -- /See:/ 'layersListResponse' smart constructor.
 data LayersListResponse = LayersListResponse'
-    { _llrNextPageToken :: !(Maybe (Textual Word8))
+    { _llrNextPageToken :: !(Maybe Base64)
     , _llrLayers        :: !(Maybe [Layer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5082,11 +5082,11 @@ layersListResponse =
     }
 
 -- | Next page token.
-llrNextPageToken :: Lens' LayersListResponse (Maybe Word8)
+llrNextPageToken :: Lens' LayersListResponse (Maybe ByteString)
 llrNextPageToken
   = lens _llrNextPageToken
       (\ s a -> s{_llrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 llrLayers :: Lens' LayersListResponse [Layer]
@@ -5272,7 +5272,7 @@ instance ToJSON LineStyle where
 --
 -- /See:/ 'publishedLayersListResponse' smart constructor.
 data PublishedLayersListResponse = PublishedLayersListResponse'
-    { _pllrNextPageToken :: !(Maybe (Textual Word8))
+    { _pllrNextPageToken :: !(Maybe Base64)
     , _pllrLayers        :: !(Maybe [PublishedLayer])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -5292,11 +5292,11 @@ publishedLayersListResponse =
     }
 
 -- | Next page token.
-pllrNextPageToken :: Lens' PublishedLayersListResponse (Maybe Word8)
+pllrNextPageToken :: Lens' PublishedLayersListResponse (Maybe ByteString)
 pllrNextPageToken
   = lens _pllrNextPageToken
       (\ s a -> s{_pllrNextPageToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Resources returned.
 pllrLayers :: Lens' PublishedLayersListResponse [PublishedLayer]

@@ -847,7 +847,7 @@ instance ToJSON TurnBasedMatch where
 -- /See:/ 'turnBasedMatchData' smart constructor.
 data TurnBasedMatchData = TurnBasedMatchData'
     { _tbmdKind          :: !Text
-    , _tbmdData          :: !(Maybe (Textual Word8))
+    , _tbmdData          :: !(Maybe Base64)
     , _tbmdDataAvailable :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -876,10 +876,10 @@ tbmdKind = lens _tbmdKind (\ s a -> s{_tbmdKind = a})
 
 -- | The byte representation of the data (limited to 128 kB), as a
 -- Base64-encoded string with the URL_SAFE encoding option.
-tbmdData :: Lens' TurnBasedMatchData (Maybe Word8)
+tbmdData :: Lens' TurnBasedMatchData (Maybe ByteString)
 tbmdData
   = lens _tbmdData (\ s a -> s{_tbmdData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | True if this match has data available but it wasn\'t returned in a list
 -- response; fetching the match individually will retrieve this data.
@@ -6064,7 +6064,7 @@ instance ToJSON TurnBasedMatchResults where
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
 data PushTokenIdIos = PushTokenIdIos'
-    { _ptiiAPNSDeviceToken :: !(Maybe (Textual Word8))
+    { _ptiiAPNSDeviceToken :: !(Maybe Base64)
     , _ptiiAPNSEnvironment :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6085,11 +6085,11 @@ pushTokenIdIos =
 
 -- | Device token supplied by an iOS system call to register for remote
 -- notifications. Encode this field as web-safe base64.
-ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
+ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe ByteString)
 ptiiAPNSDeviceToken
   = lens _ptiiAPNSDeviceToken
       (\ s a -> s{_ptiiAPNSDeviceToken = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | Indicates whether this token should be used for the production or
 -- sandbox APNS server.
@@ -6664,7 +6664,7 @@ data QuestMilestone = QuestMilestone'
     { _qmState                :: !(Maybe Text)
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
-    , _qmCompletionRewardData :: !(Maybe (Textual Word8))
+    , _qmCompletionRewardData :: !(Maybe Base64)
     , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -6713,11 +6713,11 @@ qmId = lens _qmId (\ s a -> s{_qmId = a})
 -- | The completion reward data of the milestone, represented as a
 -- Base64-encoded string. This is a developer-specified binary blob with
 -- size between 0 and 2 KB before encoding.
-qmCompletionRewardData :: Lens' QuestMilestone (Maybe Word8)
+qmCompletionRewardData :: Lens' QuestMilestone (Maybe ByteString)
 qmCompletionRewardData
   = lens _qmCompletionRewardData
       (\ s a -> s{_qmCompletionRewardData = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The criteria of the milestone.
 qmCriteria :: Lens' QuestMilestone [QuestCriterion]
@@ -8233,7 +8233,7 @@ instance ToJSON PlayerEventListResponse where
 -- /See:/ 'turnBasedMatchDataRequest' smart constructor.
 data TurnBasedMatchDataRequest = TurnBasedMatchDataRequest'
     { _tbmdrKind :: !Text
-    , _tbmdrData :: !(Maybe (Textual Word8))
+    , _tbmdrData :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchDataRequest' with the minimum fields required to make a request.
@@ -8259,10 +8259,10 @@ tbmdrKind
 
 -- | The byte representation of the data (limited to 128 kB), as a
 -- Base64-encoded string with the URL_SAFE encoding option.
-tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe Word8)
+tbmdrData :: Lens' TurnBasedMatchDataRequest (Maybe ByteString)
 tbmdrData
   = lens _tbmdrData (\ s a -> s{_tbmdrData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 instance FromJSON TurnBasedMatchDataRequest where
         parseJSON

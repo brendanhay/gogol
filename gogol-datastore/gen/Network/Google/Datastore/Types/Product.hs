@@ -97,7 +97,7 @@ instance ToJSON LatLng where
 --
 -- /See:/ 'rollbackRequest' smart constructor.
 newtype RollbackRequest = RollbackRequest'
-    { _rrTransaction :: Maybe (Textual Word8)
+    { _rrTransaction :: Maybe Base64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RollbackRequest' with the minimum fields required to make a request.
@@ -114,11 +114,11 @@ rollbackRequest =
 
 -- | The transaction identifier, returned by a call to
 -- google.datastore.v1beta3.Datastore.BeginTransaction.
-rrTransaction :: Lens' RollbackRequest (Maybe Word8)
+rrTransaction :: Lens' RollbackRequest (Maybe ByteString)
 rrTransaction
   = lens _rrTransaction
       (\ s a -> s{_rrTransaction = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON RollbackRequest where
         parseJSON
@@ -193,11 +193,11 @@ instance ToJSON PartitionId where
 -- /See:/ 'queryResultBatch' smart constructor.
 data QueryResultBatch = QueryResultBatch'
     { _qrbSkippedResults   :: !(Maybe (Textual Int32))
-    , _qrbSkippedCursor    :: !(Maybe (Textual Word8))
+    , _qrbSkippedCursor    :: !(Maybe Base64)
     , _qrbEntityResultType :: !(Maybe QueryResultBatchEntityResultType)
     , _qrbEntityResults    :: !(Maybe [EntityResult])
     , _qrbMoreResults      :: !(Maybe QueryResultBatchMoreResults)
-    , _qrbEndCursor        :: !(Maybe (Textual Word8))
+    , _qrbEndCursor        :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryResultBatch' with the minimum fields required to make a request.
@@ -236,11 +236,11 @@ qrbSkippedResults
 
 -- | A cursor that points to the position after the last skipped result. Will
 -- be set when \`skipped_results\` != 0.
-qrbSkippedCursor :: Lens' QueryResultBatch (Maybe Word8)
+qrbSkippedCursor :: Lens' QueryResultBatch (Maybe ByteString)
 qrbSkippedCursor
   = lens _qrbSkippedCursor
       (\ s a -> s{_qrbSkippedCursor = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The result type for every entity in \`entity_results\`.
 qrbEntityResultType :: Lens' QueryResultBatch (Maybe QueryResultBatchEntityResultType)
@@ -263,10 +263,10 @@ qrbMoreResults
       (\ s a -> s{_qrbMoreResults = a})
 
 -- | A cursor that points to the position after the last result in the batch.
-qrbEndCursor :: Lens' QueryResultBatch (Maybe Word8)
+qrbEndCursor :: Lens' QueryResultBatch (Maybe ByteString)
 qrbEndCursor
   = lens _qrbEndCursor (\ s a -> s{_qrbEndCursor = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON QueryResultBatch where
         parseJSON
@@ -506,7 +506,7 @@ instance ToJSON CompositeFilter where
 --
 -- /See:/ 'beginTransactionResponse' smart constructor.
 newtype BeginTransactionResponse = BeginTransactionResponse'
-    { _btrTransaction :: Maybe (Textual Word8)
+    { _btrTransaction :: Maybe Base64
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeginTransactionResponse' with the minimum fields required to make a request.
@@ -522,11 +522,11 @@ beginTransactionResponse =
     }
 
 -- | The transaction identifier (always present).
-btrTransaction :: Lens' BeginTransactionResponse (Maybe Word8)
+btrTransaction :: Lens' BeginTransactionResponse (Maybe ByteString)
 btrTransaction
   = lens _btrTransaction
       (\ s a -> s{_btrTransaction = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON BeginTransactionResponse where
         parseJSON
@@ -756,7 +756,7 @@ data Value = Value'
     , _vMeaning            :: !(Maybe (Textual Int32))
     , _vArrayValue         :: !(Maybe ArrayValue)
     , _vNullValue          :: !(Maybe ValueNullValue)
-    , _vBlobValue          :: !(Maybe (Textual Word8))
+    , _vBlobValue          :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Value' with the minimum fields required to make a request.
@@ -887,10 +887,10 @@ vNullValue
 -- | A blob value. May have at most 1,000,000 bytes. When
 -- \`exclude_from_indexes\` is false, may have at most 1500 bytes. In JSON
 -- requests, must be base64-encoded.
-vBlobValue :: Lens' Value (Maybe Word8)
+vBlobValue :: Lens' Value (Maybe ByteString)
 vBlobValue
   = lens _vBlobValue (\ s a -> s{_vBlobValue = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 instance FromJSON Value where
         parseJSON
@@ -1241,11 +1241,11 @@ instance ToJSON PropertyFilter where
 --
 -- /See:/ 'query' smart constructor.
 data Query = Query'
-    { _qStartCursor :: !(Maybe (Textual Word8))
+    { _qStartCursor :: !(Maybe Base64)
     , _qOffSet      :: !(Maybe (Textual Int32))
     , _qKind        :: !(Maybe [KindExpression])
     , _qDistinctOn  :: !(Maybe [PropertyReference])
-    , _qEndCursor   :: !(Maybe (Textual Word8))
+    , _qEndCursor   :: !(Maybe Base64)
     , _qLimit       :: !(Maybe (Textual Int32))
     , _qProjection  :: !(Maybe [Projection])
     , _qFilter      :: !(Maybe Filter)
@@ -1290,10 +1290,10 @@ query =
 
 -- | A starting point for the query results. Query cursors are returned in
 -- query result batches.
-qStartCursor :: Lens' Query (Maybe Word8)
+qStartCursor :: Lens' Query (Maybe ByteString)
 qStartCursor
   = lens _qStartCursor (\ s a -> s{_qStartCursor = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 -- | The number of results to skip. Applies before limit, but after all other
 -- constraints. Optional. Must be >= 0 if specified.
@@ -1320,10 +1320,10 @@ qDistinctOn
 
 -- | An ending point for the query results. Query cursors are returned in
 -- query result batches.
-qEndCursor :: Lens' Query (Maybe Word8)
+qEndCursor :: Lens' Query (Maybe ByteString)
 qEndCursor
   = lens _qEndCursor (\ s a -> s{_qEndCursor = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | The maximum number of results to return. Applies after all other
 -- constraints. Optional. Unspecified is interpreted as no limit. Must be
@@ -1418,7 +1418,7 @@ instance ToJSON ArrayValue where
 --
 -- /See:/ 'entityResult' smart constructor.
 data EntityResult = EntityResult'
-    { _erCursor :: !(Maybe (Textual Word8))
+    { _erCursor :: !(Maybe Base64)
     , _erEntity :: !(Maybe Entity)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -1439,10 +1439,10 @@ entityResult =
 
 -- | A cursor that points to the position after the result entity. Set only
 -- when the \`EntityResult\` is part of a \`QueryResultBatch\` message.
-erCursor :: Lens' EntityResult (Maybe Word8)
+erCursor :: Lens' EntityResult (Maybe ByteString)
 erCursor
   = lens _erCursor (\ s a -> s{_erCursor = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | The resulting entity.
 erEntity :: Lens' EntityResult (Maybe Entity)
@@ -1554,7 +1554,7 @@ instance ToJSON KindExpression where
 -- /See:/ 'readOptions' smart constructor.
 data ReadOptions = ReadOptions'
     { _roReadConsistency :: !(Maybe ReadOptionsReadConsistency)
-    , _roTransaction     :: !(Maybe (Textual Word8))
+    , _roTransaction     :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadOptions' with the minimum fields required to make a request.
@@ -1580,11 +1580,11 @@ roReadConsistency
       (\ s a -> s{_roReadConsistency = a})
 
 -- | The transaction in which to read.
-roTransaction :: Lens' ReadOptions (Maybe Word8)
+roTransaction :: Lens' ReadOptions (Maybe ByteString)
 roTransaction
   = lens _roTransaction
       (\ s a -> s{_roTransaction = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON ReadOptions where
         parseJSON
@@ -1711,7 +1711,7 @@ instance ToJSON Filter where
 data CommitRequest = CommitRequest'
     { _crMutations   :: !(Maybe [Mutation])
     , _crMode        :: !(Maybe CommitRequestMode)
-    , _crTransaction :: !(Maybe (Textual Word8))
+    , _crTransaction :: !(Maybe Base64)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommitRequest' with the minimum fields required to make a request.
@@ -1751,11 +1751,11 @@ crMode = lens _crMode (\ s a -> s{_crMode = a})
 
 -- | The identifier of the transaction associated with the commit. A
 -- transaction identifier is returned by a call to BeginTransaction.
-crTransaction :: Lens' CommitRequest (Maybe Word8)
+crTransaction :: Lens' CommitRequest (Maybe ByteString)
 crTransaction
   = lens _crTransaction
       (\ s a -> s{_crTransaction = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 instance FromJSON CommitRequest where
         parseJSON
@@ -2009,7 +2009,7 @@ instance ToJSON PropertyOrder where
 --
 -- /See:/ 'gqlQueryParameter' smart constructor.
 data GqlQueryParameter = GqlQueryParameter'
-    { _gqpCursor :: !(Maybe (Textual Word8))
+    { _gqpCursor :: !(Maybe Base64)
     , _gqpValue  :: !(Maybe Value)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -2029,10 +2029,10 @@ gqlQueryParameter =
     }
 
 -- | A query cursor. Query cursors are returned in query result batches.
-gqpCursor :: Lens' GqlQueryParameter (Maybe Word8)
+gqpCursor :: Lens' GqlQueryParameter (Maybe ByteString)
 gqpCursor
   = lens _gqpCursor (\ s a -> s{_gqpCursor = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | A value parameter.
 gqpValue :: Lens' GqlQueryParameter (Maybe Value)

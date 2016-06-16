@@ -10766,7 +10766,7 @@ data InvideoBranding = InvideoBranding'
     { _ibImageURL        :: !(Maybe Text)
     , _ibTargetChannelId :: !(Maybe Text)
     , _ibTiming          :: !(Maybe InvideoTiming)
-    , _ibImageBytes      :: !(Maybe (Textual Word8))
+    , _ibImageBytes      :: !(Maybe Base64)
     , _ibPosition        :: !(Maybe InvideoPosition)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -10806,10 +10806,10 @@ ibTargetChannelId
 ibTiming :: Lens' InvideoBranding (Maybe InvideoTiming)
 ibTiming = lens _ibTiming (\ s a -> s{_ibTiming = a})
 
-ibImageBytes :: Lens' InvideoBranding (Maybe Word8)
+ibImageBytes :: Lens' InvideoBranding (Maybe ByteString)
 ibImageBytes
   = lens _ibImageBytes (\ s a -> s{_ibImageBytes = a})
-      . mapping _Coerce
+      . mapping _Base64
 
 ibPosition :: Lens' InvideoBranding (Maybe InvideoPosition)
 ibPosition

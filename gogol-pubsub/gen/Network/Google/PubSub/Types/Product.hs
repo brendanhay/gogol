@@ -254,7 +254,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'pubsubMessage' smart constructor.
 data PubsubMessage = PubsubMessage'
-    { _pmData        :: !(Maybe (Textual Word8))
+    { _pmData        :: !(Maybe Base64)
     , _pmPublishTime :: !(Maybe Text)
     , _pmAttributes  :: !(Maybe PubsubMessageAttributes)
     , _pmMessageId   :: !(Maybe Text)
@@ -283,10 +283,10 @@ pubsubMessage =
 
 -- | The message payload. For JSON requests, the value of this field must be
 -- base64-encoded.
-pmData :: Lens' PubsubMessage (Maybe Word8)
+pmData :: Lens' PubsubMessage (Maybe ByteString)
 pmData
   = lens _pmData (\ s a -> s{_pmData = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | The time at which the message was published, populated by the server
 -- when it receives the \`Publish\` call. It must not be populated by the
@@ -816,7 +816,7 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-    { _pEtag     :: !(Maybe (Textual Word8))
+    { _pEtag     :: !(Maybe Base64)
     , _pVersion  :: !(Maybe (Textual Int32))
     , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -848,10 +848,10 @@ policy =
 -- \`setIamPolicy\` to ensure that their change will be applied to the same
 -- version of the policy. If no \`etag\` is provided in the call to
 -- \`setIamPolicy\`, then the existing policy is overwritten blindly.
-pEtag :: Lens' Policy (Maybe Word8)
+pEtag :: Lens' Policy (Maybe ByteString)
 pEtag
   = lens _pEtag (\ s a -> s{_pEtag = a}) .
-      mapping _Coerce
+      mapping _Base64
 
 -- | Version of the \`Policy\`. The default version is 0.
 pVersion :: Lens' Policy (Maybe Int32)
