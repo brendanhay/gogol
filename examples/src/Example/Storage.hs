@@ -1,4 +1,5 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings   #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 -- |
 -- Module      : Example.Storage
@@ -10,12 +11,13 @@
 --
 module Example.Storage where
 
-import           Control.Lens
-import           Data.Text              (Text)
-import qualified Data.Text              as Text
-import           Network.Google
-import           Network.Google.Storage
-import           System.IO
+import Control.Lens           ((&), (.~), (<&>), (?~))
+import Data.Text              (Text)
+import Network.Google
+import Network.Google.Storage
+import System.IO              (stdout)
+
+import qualified Data.Text as Text
 
 -- This will calculate the MIME type (and therefore Content-Type) of
 -- the stored object based on the file extension.
@@ -31,7 +33,7 @@ import           System.IO
 example :: Text -> FilePath -> IO ()
 example bkt f = do
     l <- newLogger Debug stdout
-    e <- newEnv <&> (envLogger .~ l) . allow storageReadWriteScope
+    e <- newEnv <&> (envLogger .~ l) . (envScopes .~ storageReadWriteScope)
     b <- sourceBody f
 
     let key = Text.pack f

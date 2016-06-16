@@ -15,7 +15,7 @@ import           Data.Conduit.Binary    (sourceFile)
 import           Data.Maybe             (fromMaybe)
 import qualified Data.Text              as Text
 import           Network.Google.Types   (Body (..))
-import           Network.HTTP.Conduit   (RequestBody, requestBodySource)
+import           Network.HTTP.Conduit   (requestBodySource)
 import           Network.HTTP.Media     (MediaType, parseAccept, (//))
 import qualified Network.Mime           as MIME
 import           System.IO
@@ -24,6 +24,9 @@ import           System.IO
 getFileSize :: MonadIO m => FilePath -> m Integer
 getFileSize f = liftIO (withBinaryFile f ReadMode hFileSize)
 
+-- | Attempt to calculate the MIME type based on file extension.
+--
+-- Defaults to @application/octet-stream@ if no file extension is recognised.
 getMIMEType :: FilePath -> MediaType
 getMIMEType =
       fromMaybe ("application" // "octet-stream")
@@ -34,8 +37,8 @@ getMIMEType =
 
 -- | Construct a 'Body' from a 'FilePath'.
 --
--- This attempts to guess the MIME type from the file extension,
--- you can use "Network.Google.Types.bodyContentType" to set a MIME type explicitly.
+-- This uses 'getMIMEType' to calculate the MIME type from the file extension,
+-- you can use 'bodyContentType' to set a MIME type explicitly.
 sourceBody :: MonadIO m => FilePath -> m Body
 sourceBody f = do
     n <- getFileSize f

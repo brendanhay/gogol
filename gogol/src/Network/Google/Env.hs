@@ -3,6 +3,7 @@
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE KindSignatures         #-}
 {-# LANGUAGE MultiParamTypeClasses  #-}
+{-# LANGUAGE ScopedTypeVariables    #-}
 
 -- |
 -- Module      : Network.Google.Env
@@ -15,17 +16,18 @@
 -- Environment and Google specific configuration for the 'Network.Google' monad.
 module Network.Google.Env where
 
-import           Control.Lens                   (Lens', lens, (<>~), (?~))
-import           Control.Monad.Catch            (MonadCatch)
-import           Control.Monad.IO.Class         (MonadIO (..))
-import           Control.Monad.Reader           (MonadReader (local))
-import           Data.Function                  (on)
-import           Data.Monoid                    (Dual (..), Endo (..))
-import           GHC.TypeLits                   (Symbol)
-import           Network.Google.Auth
-import           Network.Google.Internal.Logger (Logger)
-import           Network.Google.Types
-import           Network.HTTP.Conduit
+import Control.Lens                   (Lens', lens, (<>~), (?~))
+import Control.Monad.Catch            (MonadCatch)
+import Control.Monad.IO.Class         (MonadIO (..))
+import Control.Monad.Reader           (MonadReader (local))
+import Data.Function                  (on)
+import Data.Monoid                    (Dual (..), Endo (..))
+import Data.Proxy                     (Proxy (..))
+import GHC.TypeLits                   (Symbol)
+import Network.Google.Auth
+import Network.Google.Internal.Logger (Logger)
+import Network.Google.Types
+import Network.HTTP.Conduit           (Manager, newManager, tlsManagerSettings)
 
 -- | The environment containing the parameters required to make Google requests.
 data Env (s :: [Symbol]) = Env
@@ -54,45 +56,42 @@ class HasEnv s a | a -> s where
     -- | The credential store used to sign requests for authentication with Google.
     envStore    :: Lens' a (Store s)
 
+    -- | The authorised OAuth2 scopes.
+    --
+    -- /See:/ 'allow', '!', and the related scopes available for each service.
+    envScopes   :: Lens' a (Proxy s)
+
     envOverride = environment . lens _envOverride (\s a -> s { _envOverride = a })
     envLogger   = environment . lens _envLogger   (\s a -> s { _envLogger   = a })
     envManager  = environment . lens _envManager  (\s a -> s { _envManager  = a })
     envStore    = environment . lens _envStore    (\s a -> s { _envStore    = a })
+    envScopes   = environment . lens (\_ -> Proxy :: Proxy s) (flip allow)
 
 instance HasEnv s (Env s) where
     environment = id
 
 -- | Provide a function which will be added to the existing stack
--- of overrides applied to all service configuration.
+-- of overrides which are applied to all service configurations.
 --
--- To override a specific service, it's suggested you use
--- either 'configure' or 'reconfigure' with a modified version of the default
--- service, such as @Network.Google.Gmail.gmailService@.
-override :: HasEnv s a => (ServiceConfig -> ServiceConfig) -> a -> a
-override f = envOverride <>~ Dual (Endo f)
+-- /See:/ 'override'.
+configure :: HasEnv s a => (ServiceConfig -> ServiceConfig) -> a -> a
+configure f = envOverride <>~ Dual (Endo f)
 
--- | Configure a specific service. All requests belonging to the
+-- | Configure a specific 'Service'. All requests belonging to the
 -- supplied service will use this configuration instead of the default.
 --
--- It's suggested you use a modified version of the default service, such
--- as @Network.Google.Gmail.gmailService@.
+-- It's suggested you use a modified version of the default 'Service', such as:
 --
--- /See:/ 'reconfigure'.
-configure :: HasEnv s a => ServiceConfig -> a -> a
-configure s = override f
+-- @
+-- override (Network.Google.Gmail.gmailService & serviceHost .~ "localhost") env
+-- @
+--
+-- /See:/ 'configure'.
+override :: HasEnv s a => ServiceConfig -> a -> a
+override s = configure f
   where
     f x | on (==) _svcId s x = s
         | otherwise          = x
-
--- | Scope an action such that all requests belonging to the supplied service
--- will use this configuration instead of the default.
---
--- It's suggested you use a modified version of the default service, such
--- as @Network.Google.Gmail.gmailService@.
---
--- /See:/ 'configure'.
-reconfigure :: (MonadReader r m, HasEnv s r) => ServiceConfig -> m a -> m a
-reconfigure = local . configure
 
 -- | Scope an action such that any HTTP response will use this timeout value.
 --
@@ -100,16 +99,16 @@ reconfigure = local . configure
 --
 -- * This 'timeout', if set.
 --
--- * The related 'Service' timeout for the sent request if set. (Usually 70s)
+-- * The related 'Service' timeout for the sent request if set. (Default 70s)
 --
--- * The 'envManager' timeout if set.
+-- * The 'envManager' timeout, if set.
 --
--- * The default 'ClientRequest' timeout. (Approximately 30s)
+-- * The 'ClientRequest' timeout. (Default 30s)
 timeout :: (MonadReader r m, HasEnv s r) => Seconds -> m a -> m a
-timeout s = local (override (serviceTimeout ?~ s))
+timeout s = local (configure (serviceTimeout ?~ s))
 
--- | Creates a new environment with a new 'Manager', without logging.
--- Credentials are determined by calling 'getApplicationDefault'.
+-- | Creates a new environment with a newly initialized 'Manager', without logging.
+-- and Credentials that are determined by calling 'getApplicationDefault'.
 -- Use 'newEnvWith' to supply custom credentials such as an 'OAuthClient'
 -- and 'OAuthCode'.
 --
@@ -117,7 +116,6 @@ timeout s = local (override (serviceTimeout ?~ s))
 -- found with the appropriate scopes. See the top-level module of each individual
 -- @gogol-*@ library for a list of available scopes, such as
 -- @Network.Google.Compute.authComputeScope@.
---
 -- Lenses from 'HasEnv' can be used to further configure the resulting 'Env'.
 --
 -- /See:/ 'newEnvWith', 'getApplicationDefault'.
@@ -127,6 +125,8 @@ newEnv = do
     c <- getApplicationDefault m
     newEnvWith c (\_ _ -> pure ()) m
 
+-- | Create a new environment.
+--
 -- /See:/ 'newEnv'.
 newEnvWith :: (MonadIO m, MonadCatch m, AllowScopes s)
            => Credentials s

@@ -8,6 +8,13 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
+-- Credentials for Server to Server communication, such as between a deployed web
+-- application and a Google service.
+--
+-- Typically, an application uses a service account when the application uses
+-- Google services to work with its own data rather than a specific user's data.
+--
+-- /See:/ <https://developers.google.com/identity/protocols/OAuth2ServiceAccount Service Account Documentation>.
 module Network.Google.Auth.ServiceAccount where
 
 import           Control.Monad.Catch

@@ -36,12 +36,11 @@ import           Network.Google.Prelude       (GoogleRequest (..),
 import           Network.HTTP.Types           (urlEncode)
 
 -- | Annotate credentials with the specified scopes.
---
 -- This exists to allow users to choose between using 'getCredentials'
--- with a 'Proxy' type constructed via use of '(!)', or explicitly
+-- with a 'Proxy' type constructed via use of '!', or explicitly
 -- specifying the scopes in a type annotation.
 --
--- /See:/ '!' and the related scopes available for each service.
+-- /See:/ '!' and the scopes available for each service.
 allow :: proxy s -> k s -> k s
 allow _ = id
 

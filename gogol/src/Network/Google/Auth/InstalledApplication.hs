@@ -8,6 +8,14 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
+-- Credentials for applications that are installed on devices such as
+-- computers, cell phones, or a tablet. Installed apps are distributed to
+-- individual machines, and it is assumed that these apps securely store secrets.
+--
+-- These apps might access a Google service while the user is present at the
+-- application, or when the application is running in the background.
+--
+-- /See:/ <https://developers.google.com/identity/protocols/OAuth2InstalledApp Installed Application Documentation>.
 module Network.Google.Auth.InstalledApplication where
 
 import           Control.Monad.Catch            (MonadCatch)
