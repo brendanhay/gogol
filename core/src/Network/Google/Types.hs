@@ -248,24 +248,42 @@ defaultService i h = ServiceConfig
     , _svcTimeout = Just 70
     }
 
+-- | The remote host name, used for both the IP address to connect to and the
+-- host request header.
 serviceHost :: Lens' ServiceConfig ByteString
 serviceHost = lens _svcHost (\s a -> s { _svcHost = a })
 
-servicePath :: Lens' ServiceConfig Builder
-servicePath = lens _svcPath (\s a -> s { _svcPath = a })
-
+-- | The remote port to connect to.
+--
+-- Defaults to @443@.
 servicePort :: Lens' ServiceConfig Int
 servicePort = lens _svcPort (\s a -> s { _svcPort = a })
 
+-- | A path prefix that is prepended to any sent HTTP request.
+--
+-- Defaults to @mempty@.
+servicePath :: Lens' ServiceConfig Builder
+servicePath = lens _svcPath (\s a -> s { _svcPath = a })
+
+-- | Whether to use HTTPS/SSL.
+--
+-- Defaults to @True@.
 serviceSecure :: Lens' ServiceConfig Bool
 serviceSecure = lens _svcSecure (\s a -> s { _svcSecure = a })
 
+-- | Number of seconds to wait for a response.
 serviceTimeout :: Lens' ServiceConfig (Maybe Seconds)
 serviceTimeout = lens _svcTimeout (\s a -> s { _svcTimeout = a })
 
 -- | A single part of a (potentially multipart) request body.
+--
+-- /Note:/ The 'IsString' instance defaults to a @text/plain@ MIME type.
 data Body = Body !MediaType !RequestBody
 
+instance IsString Body where
+    fromString = Body ("text" // "plain") . fromString
+
+-- | A lens into the 'MediaType' of a request 'Body'.
 bodyContentType :: Lens' Body MediaType
 bodyContentType = lens (\(Body m _) -> m) (\(Body _ b) m -> Body m b)
 
