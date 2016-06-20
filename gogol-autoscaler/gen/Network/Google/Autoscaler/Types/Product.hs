@@ -307,6 +307,7 @@ data Operation = Operation'
     , _oId                  :: !(Maybe (Textual Word64))
     , _oOperationType       :: !(Maybe Text)
     , _oRegion              :: !(Maybe Text)
+    , _oDescription         :: !(Maybe Text)
     , _oTargetLink          :: !(Maybe Text)
     , _oClientOperationId   :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -355,6 +356,8 @@ data Operation = Operation'
 --
 -- * 'oRegion'
 --
+-- * 'oDescription'
+--
 -- * 'oTargetLink'
 --
 -- * 'oClientOperationId'
@@ -382,6 +385,7 @@ operation =
     , _oId = Nothing
     , _oOperationType = Nothing
     , _oRegion = Nothing
+    , _oDescription = Nothing
     , _oTargetLink = Nothing
     , _oClientOperationId = Nothing
     }
@@ -407,7 +411,7 @@ oStartTime :: Lens' Operation (Maybe Text)
 oStartTime
   = lens _oStartTime (\ s a -> s{_oStartTime = a})
 
--- | [Output Only] Type of the resource. Always compute#Operation for
+-- | [Output Only] Type of the resource. Always compute#operation for
 -- Operation resources.
 oKind :: Lens' Operation Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
@@ -470,6 +474,10 @@ oOperationType
 oRegion :: Lens' Operation (Maybe Text)
 oRegion = lens _oRegion (\ s a -> s{_oRegion = a})
 
+oDescription :: Lens' Operation (Maybe Text)
+oDescription
+  = lens _oDescription (\ s a -> s{_oDescription = a})
+
 oTargetLink :: Lens' Operation (Maybe Text)
 oTargetLink
   = lens _oTargetLink (\ s a -> s{_oTargetLink = a})
@@ -503,6 +511,7 @@ instance FromJSON Operation where
                      <*> (o .:? "id")
                      <*> (o .:? "operationType")
                      <*> (o .:? "region")
+                     <*> (o .:? "description")
                      <*> (o .:? "targetLink")
                      <*> (o .:? "clientOperationId"))
 
@@ -528,6 +537,7 @@ instance ToJSON Operation where
                   ("endTime" .=) <$> _oEndTime, ("id" .=) <$> _oId,
                   ("operationType" .=) <$> _oOperationType,
                   ("region" .=) <$> _oRegion,
+                  ("description" .=) <$> _oDescription,
                   ("targetLink" .=) <$> _oTargetLink,
                   ("clientOperationId" .=) <$> _oClientOperationId])
 
@@ -582,16 +592,15 @@ instance ToJSON
 --
 -- /See:/ 'zone' smart constructor.
 data Zone = Zone'
-    { _zStatus             :: !(Maybe Text)
-    , _zMaintenanceWindows :: !(Maybe [ZoneMaintenanceWindowsItem])
-    , _zKind               :: !Text
-    , _zSelfLink           :: !(Maybe Text)
-    , _zName               :: !(Maybe Text)
-    , _zCreationTimestamp  :: !(Maybe Text)
-    , _zId                 :: !(Maybe (Textual Word64))
-    , _zRegion             :: !(Maybe Text)
-    , _zDescription        :: !(Maybe Text)
-    , _zDeprecated         :: !(Maybe DeprecationStatus)
+    { _zStatus            :: !(Maybe Text)
+    , _zKind              :: !Text
+    , _zSelfLink          :: !(Maybe Text)
+    , _zName              :: !(Maybe Text)
+    , _zCreationTimestamp :: !(Maybe Text)
+    , _zId                :: !(Maybe (Textual Word64))
+    , _zRegion            :: !(Maybe Text)
+    , _zDescription       :: !(Maybe Text)
+    , _zDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
@@ -599,8 +608,6 @@ data Zone = Zone'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'zStatus'
---
--- * 'zMaintenanceWindows'
 --
 -- * 'zKind'
 --
@@ -622,7 +629,6 @@ zone
 zone =
     Zone'
     { _zStatus = Nothing
-    , _zMaintenanceWindows = Nothing
     , _zKind = "autoscaler#zone"
     , _zSelfLink = Nothing
     , _zName = Nothing
@@ -636,18 +642,10 @@ zone =
 zStatus :: Lens' Zone (Maybe Text)
 zStatus = lens _zStatus (\ s a -> s{_zStatus = a})
 
-zMaintenanceWindows :: Lens' Zone [ZoneMaintenanceWindowsItem]
-zMaintenanceWindows
-  = lens _zMaintenanceWindows
-      (\ s a -> s{_zMaintenanceWindows = a})
-      . _Default
-      . _Coerce
-
--- | [Output Only] Type of the resource. Always kind#zone for zones.
+-- | [Output Only] Type of the resource. Always compute#zone for zones.
 zKind :: Lens' Zone Text
 zKind = lens _zKind (\ s a -> s{_zKind = a})
 
--- | [Output Only] Server defined URL for the resource.
 zSelfLink :: Lens' Zone (Maybe Text)
 zSelfLink
   = lens _zSelfLink (\ s a -> s{_zSelfLink = a})
@@ -681,8 +679,7 @@ instance FromJSON Zone where
               (\ o ->
                  Zone' <$>
                    (o .:? "status") <*>
-                     (o .:? "maintenanceWindows" .!= mempty)
-                     <*> (o .:? "kind" .!= "autoscaler#zone")
+                     (o .:? "kind" .!= "autoscaler#zone")
                      <*> (o .:? "selfLink")
                      <*> (o .:? "name")
                      <*> (o .:? "creationTimestamp")
@@ -695,80 +692,13 @@ instance ToJSON Zone where
         toJSON Zone'{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _zStatus,
-                  ("maintenanceWindows" .=) <$> _zMaintenanceWindows,
-                  Just ("kind" .= _zKind),
+                 [("status" .=) <$> _zStatus, Just ("kind" .= _zKind),
                   ("selfLink" .=) <$> _zSelfLink,
                   ("name" .=) <$> _zName,
                   ("creationTimestamp" .=) <$> _zCreationTimestamp,
                   ("id" .=) <$> _zId, ("region" .=) <$> _zRegion,
                   ("description" .=) <$> _zDescription,
                   ("deprecated" .=) <$> _zDeprecated])
-
---
--- /See:/ 'zoneMaintenanceWindowsItem' smart constructor.
-data ZoneMaintenanceWindowsItem = ZoneMaintenanceWindowsItem'
-    { _zmwiBeginTime   :: !(Maybe Text)
-    , _zmwiName        :: !(Maybe Text)
-    , _zmwiEndTime     :: !(Maybe Text)
-    , _zmwiDescription :: !(Maybe Text)
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'ZoneMaintenanceWindowsItem' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'zmwiBeginTime'
---
--- * 'zmwiName'
---
--- * 'zmwiEndTime'
---
--- * 'zmwiDescription'
-zoneMaintenanceWindowsItem
-    :: ZoneMaintenanceWindowsItem
-zoneMaintenanceWindowsItem =
-    ZoneMaintenanceWindowsItem'
-    { _zmwiBeginTime = Nothing
-    , _zmwiName = Nothing
-    , _zmwiEndTime = Nothing
-    , _zmwiDescription = Nothing
-    }
-
-zmwiBeginTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiBeginTime
-  = lens _zmwiBeginTime
-      (\ s a -> s{_zmwiBeginTime = a})
-
-zmwiName :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiName = lens _zmwiName (\ s a -> s{_zmwiName = a})
-
-zmwiEndTime :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiEndTime
-  = lens _zmwiEndTime (\ s a -> s{_zmwiEndTime = a})
-
-zmwiDescription :: Lens' ZoneMaintenanceWindowsItem (Maybe Text)
-zmwiDescription
-  = lens _zmwiDescription
-      (\ s a -> s{_zmwiDescription = a})
-
-instance FromJSON ZoneMaintenanceWindowsItem where
-        parseJSON
-          = withObject "ZoneMaintenanceWindowsItem"
-              (\ o ->
-                 ZoneMaintenanceWindowsItem' <$>
-                   (o .:? "beginTime") <*> (o .:? "name") <*>
-                     (o .:? "endTime")
-                     <*> (o .:? "description"))
-
-instance ToJSON ZoneMaintenanceWindowsItem where
-        toJSON ZoneMaintenanceWindowsItem'{..}
-          = object
-              (catMaybes
-                 [("beginTime" .=) <$> _zmwiBeginTime,
-                  ("name" .=) <$> _zmwiName,
-                  ("endTime" .=) <$> _zmwiEndTime,
-                  ("description" .=) <$> _zmwiDescription])
 
 --
 -- /See:/ 'zoneList' smart constructor.
@@ -818,7 +748,7 @@ zlItems
   = lens _zlItems (\ s a -> s{_zlItems = a}) . _Default
       . _Coerce
 
--- | Server defined URL for this resource (output only).
+-- | [Output Only] Server-defined URL for this resource.
 zlSelfLink :: Lens' ZoneList (Maybe Text)
 zlSelfLink
   = lens _zlSelfLink (\ s a -> s{_zlSelfLink = a})
@@ -960,8 +890,7 @@ apMaxNumReplicas
       (\ s a -> s{_apMaxNumReplicas = a})
       . mapping _Coerce
 
--- | Exactly one utilization policy should be provided. Configuration
--- parameters of CPU based autoscaling policy.
+-- | Configuration parameters of CPU based autoscaling policy.
 apCPUUtilization :: Lens' AutoscalingPolicy (Maybe AutoscalingPolicyCPUUtilization)
 apCPUUtilization
   = lens _apCPUUtilization

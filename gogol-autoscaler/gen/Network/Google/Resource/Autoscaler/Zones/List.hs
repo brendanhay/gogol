@@ -47,8 +47,8 @@ import           Network.Google.Prelude
 type ZonesListResource =
      "autoscaler" :>
        "v1beta2" :>
-         Capture "project" Text :>
-           "zones" :>
+         "zones" :>
+           QueryParam "project" Text :>
              QueryParam "filter" Text :>
                QueryParam "pageToken" Text :>
                  QueryParam "maxResults" (Textual Word32) :>
@@ -58,7 +58,7 @@ type ZonesListResource =
 --
 -- /See:/ 'zonesList' smart constructor.
 data ZonesList = ZonesList'
-    { _zlProject    :: !Text
+    { _zlProject    :: !(Maybe Text)
     , _zlFilter     :: !(Maybe Text)
     , _zlPageToken  :: !(Maybe Text)
     , _zlMaxResults :: !(Textual Word32)
@@ -76,17 +76,16 @@ data ZonesList = ZonesList'
 --
 -- * 'zlMaxResults'
 zonesList
-    :: Text -- ^ 'zlProject'
-    -> ZonesList
-zonesList pZlProject_ =
+    :: ZonesList
+zonesList =
     ZonesList'
-    { _zlProject = pZlProject_
+    { _zlProject = Nothing
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
     , _zlMaxResults = 500
     }
 
-zlProject :: Lens' ZonesList Text
+zlProject :: Lens' ZonesList (Maybe Text)
 zlProject
   = lens _zlProject (\ s a -> s{_zlProject = a})
 

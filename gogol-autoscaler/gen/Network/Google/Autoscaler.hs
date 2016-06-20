@@ -117,6 +117,7 @@ module Network.Google.Autoscaler
     , oId
     , oOperationType
     , oRegion
+    , oDescription
     , oTargetLink
     , oClientOperationId
 
@@ -129,7 +130,6 @@ module Network.Google.Autoscaler
     , Zone
     , zone
     , zStatus
-    , zMaintenanceWindows
     , zKind
     , zSelfLink
     , zName
@@ -138,14 +138,6 @@ module Network.Google.Autoscaler
     , zRegion
     , zDescription
     , zDeprecated
-
-    -- ** ZoneMaintenanceWindowsItem
-    , ZoneMaintenanceWindowsItem
-    , zoneMaintenanceWindowsItem
-    , zmwiBeginTime
-    , zmwiName
-    , zmwiEndTime
-    , zmwiDescription
 
     -- ** ZoneList
     , ZoneList
