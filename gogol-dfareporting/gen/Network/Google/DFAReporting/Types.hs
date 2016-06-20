@@ -2628,10 +2628,10 @@ import           Network.Google.DFAReporting.Types.Product
 import           Network.Google.DFAReporting.Types.Sum
 import           Network.Google.Prelude
 
--- | Default request referring to version 'v2.5beta1' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
+-- | Default request referring to version 'v2.5' of the DCM/DFA Reporting And Trafficking API. This contains the host and root path used as a starting point for constructing service requests.
 dFAReportingService :: ServiceConfig
 dFAReportingService
-  = defaultService (ServiceId "dfareporting:v2.5beta1")
+  = defaultService (ServiceId "dfareporting:v2.5")
       "www.googleapis.com"
 
 -- | View and manage DoubleClick for Advertisers reports

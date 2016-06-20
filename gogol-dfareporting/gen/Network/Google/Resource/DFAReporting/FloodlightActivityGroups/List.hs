@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivityGroupsList' request conforms to.
 type FloodlightActivityGroupsListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivityGroups" :>

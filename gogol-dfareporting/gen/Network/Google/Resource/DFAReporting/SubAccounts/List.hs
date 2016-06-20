@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'SubAccountsList' request conforms to.
 type SubAccountsListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "subaccounts" :>

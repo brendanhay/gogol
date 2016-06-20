@@ -22,9 +22,9 @@
 --
 -- Inserts a new dynamic targeting key. Keys must be created at the
 -- advertiser level before being assigned to the advertiser\'s ads,
--- creatives or placements. There is a maximum of 1000 keys per advertiser,
--- out of which a maximum of 20 keys can be assigned per ad, creative or
--- placement.
+-- creatives, or placements. There is a maximum of 1000 keys per
+-- advertiser, out of which a maximum of 20 keys can be assigned per ad,
+-- creative, or placement.
 --
 -- /See:/ <https://developers.google.com/doubleclick-advertisers/reporting/ DCM/DFA Reporting And Trafficking API Reference> for @dfareporting.dynamicTargetingKeys.insert@.
 module Network.Google.Resource.DFAReporting.DynamicTargetingKeys.Insert
@@ -48,7 +48,7 @@ import           Network.Google.Prelude
 -- 'DynamicTargetingKeysInsert' request conforms to.
 type DynamicTargetingKeysInsertResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "dynamicTargetingKeys" :>
@@ -58,9 +58,9 @@ type DynamicTargetingKeysInsertResource =
 
 -- | Inserts a new dynamic targeting key. Keys must be created at the
 -- advertiser level before being assigned to the advertiser\'s ads,
--- creatives or placements. There is a maximum of 1000 keys per advertiser,
--- out of which a maximum of 20 keys can be assigned per ad, creative or
--- placement.
+-- creatives, or placements. There is a maximum of 1000 keys per
+-- advertiser, out of which a maximum of 20 keys can be assigned per ad,
+-- creative, or placement.
 --
 -- /See:/ 'dynamicTargetingKeysInsert' smart constructor.
 data DynamicTargetingKeysInsert = DynamicTargetingKeysInsert'

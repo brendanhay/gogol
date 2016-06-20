@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'FloodlightActivitiesDelete' request conforms to.
 type FloodlightActivitiesDeleteResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "floodlightActivities" :>

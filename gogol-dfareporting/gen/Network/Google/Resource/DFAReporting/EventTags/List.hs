@@ -53,7 +53,7 @@ import           Network.Google.Prelude
 -- 'EventTagsList' request conforms to.
 type EventTagsListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "eventTags" :>

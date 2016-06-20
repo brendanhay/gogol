@@ -52,7 +52,7 @@ import           Network.Google.Prelude
 -- 'AccountUserProFilesList' request conforms to.
 type AccountUserProFilesListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "accountUserProfiles" :>

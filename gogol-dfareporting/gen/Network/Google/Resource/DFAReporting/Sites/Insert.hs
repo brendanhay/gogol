@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'SitesInsert' request conforms to.
 type SitesInsertResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "sites" :>

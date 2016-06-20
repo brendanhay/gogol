@@ -6826,7 +6826,7 @@ instance ToJSON RemarketingListsListResponse where
 
 -- | Contains properties of a dynamic targeting key. Dynamic targeting keys
 -- are unique, user-friendly labels, created at the advertiser level in
--- DCM, that can be assigned to ads, creatives and placements and used for
+-- DCM, that can be assigned to ads, creatives, and placements and used for
 -- targeting with DoubleClick Studio dynamic creatives. Use these labels
 -- instead of numeric DCM IDs (such as placement IDs) to save time and
 -- avoid errors in your dynamic feeds.
@@ -7155,14 +7155,16 @@ creative =
 -- automatically converted to HTML5. This flag is enabled by default and
 -- users can choose to disable it if they don\'t want the system to
 -- generate and use HTML5 asset for this creative. Applicable to the
--- following creative types: ENHANCED_BANNER and FLASH_INPAGE.
+-- following creative type: FLASH_INPAGE. Applicable to DISPLAY when the
+-- primary asset type is not HTML_IMAGE.
 creConvertFlashToHTML5 :: Lens' Creative (Maybe Bool)
 creConvertFlashToHTML5
   = lens _creConvertFlashToHTML5
       (\ s a -> s{_creConvertFlashToHTML5 = a})
 
 -- | Target window for backup image. Applicable to the following creative
--- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
+-- types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the
+-- primary asset type is not HTML_IMAGE.
 creBackupImageTargetWindow :: Lens' Creative (Maybe TargetWindow)
 creBackupImageTargetWindow
   = lens _creBackupImageTargetWindow
@@ -7205,7 +7207,7 @@ creRenderingId
       . mapping _Coerce
 
 -- | Third-party URL used to record backup image impressions. Applicable to
--- the following creative types: all RICH_MEDIA
+-- the following creative types: all RICH_MEDIA.
 creThirdPartyBackupImageImpressionsURL :: Lens' Creative (Maybe Text)
 creThirdPartyBackupImageImpressionsURL
   = lens _creThirdPartyBackupImageImpressionsURL
@@ -7254,11 +7256,12 @@ creAuthoringTool
 
 -- | Size associated with this creative. When inserting or updating a
 -- creative either the size ID field or size width and height fields can be
--- used. This is a required field when applicable; however for IMAGE and
--- FLASH_INPAGE creatives, if left blank, this field will be automatically
--- set using the actual size of the associated image assets. Applicable to
--- the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE,
--- FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.
+-- used. This is a required field when applicable; however for IMAGE,
+-- FLASH_INPAGE creatives, and for DISPLAY creatives with a primary asset
+-- of type HTML_IMAGE, if left blank, this field will be automatically set
+-- using the actual size of the associated image assets. Applicable to the
+-- following creative types: DISPLAY, DISPLAY_IMAGE_GALLERY, FLASH_INPAGE,
+-- HTML5_BANNER, IMAGE, and all RICH_MEDIA.
 creSize :: Lens' Creative (Maybe Size)
 creSize = lens _creSize (\ s a -> s{_creSize = a})
 
@@ -7272,10 +7275,10 @@ creThirdPartyURLs
       . _Default
       . _Coerce
 
--- | List of counter events configured for the creative. For ENHANCED_IMAGE
--- creatives, these are read-only and auto-generated from clickTags.
--- Applicable to the following creative types: ENHANCED_IMAGE, all
--- RICH_MEDIA, and all VPAID.
+-- | List of counter events configured for the creative. For
+-- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
+-- from clickTags. Applicable to the following creative types:
+-- DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID.
 creCounterCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creCounterCustomEvents
   = lens _creCounterCustomEvents
@@ -7313,8 +7316,8 @@ creAdvertiserId
 
 -- | The internal Flash version for this creative as calculated by
 -- DoubleClick Studio. This is a read-only field. Applicable to the
--- following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA,
--- and all VPAID.
+-- following creative types: FLASH_INPAGE all RICH_MEDIA, and all VPAID.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 creRequiredFlashVersion :: Lens' Creative (Maybe Int32)
 creRequiredFlashVersion
   = lens _creRequiredFlashVersion
@@ -7361,7 +7364,8 @@ creIdDimensionValue
       (\ s a -> s{_creIdDimensionValue = a})
 
 -- | Reporting label used for HTML5 banner backup image. Applicable to the
--- following creative types: ENHANCED_BANNER.
+-- following creative types: DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 creBackupImageReportingLabel :: Lens' Creative (Maybe Text)
 creBackupImageReportingLabel
   = lens _creBackupImageReportingLabel
@@ -7380,11 +7384,12 @@ creActive :: Lens' Creative (Maybe Bool)
 creActive
   = lens _creActive (\ s a -> s{_creActive = a})
 
--- | List of exit events configured for the creative. For ENHANCED_BANNER and
--- ENHANCED_IMAGE creatives, these are read-only and auto-generated from
--- clickTags, For ENHANCED_BANNER, an event is also created from the
+-- | List of exit events configured for the creative. For DISPLAY and
+-- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
+-- from clickTags, For DISPLAY, an event is also created from the
 -- backupImageReportingLabel. Applicable to the following creative types:
--- ENHANCED_BANNER, ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.
+-- DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to
+-- DISPLAY when the primary asset type is not HTML_IMAGE.
 creExitCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creExitCustomEvents
   = lens _creExitCustomEvents
@@ -7401,7 +7406,8 @@ creAccountId
       . mapping _Coerce
 
 -- | Click-through URL for backup image. Applicable to the following creative
--- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
+-- types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the
+-- primary asset type is not HTML_IMAGE.
 creBackupImageClickThroughURL :: Lens' Creative (Maybe Text)
 creBackupImageClickThroughURL
   = lens _creBackupImageClickThroughURL
@@ -7426,18 +7432,18 @@ creVideoDescription
   = lens _creVideoDescription
       (\ s a -> s{_creVideoDescription = a})
 
--- | Click tags of the creative. For ENHANCED_BANNER, FLASH_INPAGE, and
--- HTML5_BANNER creatives, this is a subset of detected click tags for the
--- assets associated with this creative. After creating a flash asset,
--- detected click tags will be returned in the creativeAssetMetadata. When
--- inserting the creative, populate the creative clickTags field using the
--- creativeAssetMetadata.clickTags field. For ENHANCED_IMAGE creatives,
--- there should be exactly one entry in this list for each image creative
--- asset. A click tag is matched with a corresponding creative asset by
--- matching the clickTag.name field with the
+-- | Click tags of the creative. For DISPLAY, FLASH_INPAGE, and HTML5_BANNER
+-- creatives, this is a subset of detected click tags for the assets
+-- associated with this creative. After creating a flash asset, detected
+-- click tags will be returned in the creativeAssetMetadata. When inserting
+-- the creative, populate the creative clickTags field using the
+-- creativeAssetMetadata.clickTags field. For DISPLAY_IMAGE_GALLERY
+-- creatives, there should be exactly one entry in this list for each image
+-- creative asset. A click tag is matched with a corresponding creative
+-- asset by matching the clickTag.name field with the
 -- creativeAsset.assetIdentifier.name field. Applicable to the following
--- creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE,
--- HTML5_BANNER.
+-- creative types: DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 creClickTags :: Lens' Creative [ClickTag]
 creClickTags
   = lens _creClickTags (\ s a -> s{_creClickTags = a})
@@ -7474,7 +7480,7 @@ creLatestTraffickedCreativeId
       . mapping _Coerce
 
 -- | Third-party URL used to record rich media impressions. Applicable to the
--- following creative types: all RICH_MEDIA
+-- following creative types: all RICH_MEDIA.
 creThirdPartyRichMediaImpressionsURL :: Lens' Creative (Maybe Text)
 creThirdPartyRichMediaImpressionsURL
   = lens _creThirdPartyRichMediaImpressionsURL
@@ -7536,10 +7542,11 @@ creSubAccountId
 creType :: Lens' Creative (Maybe CreativeType)
 creType = lens _creType (\ s a -> s{_creType = a})
 
--- | List of timer events configured for the creative. For ENHANCED_IMAGE
--- creatives, these are read-only and auto-generated from clickTags.
--- Applicable to the following creative types: ENHANCED_IMAGE, all
--- RICH_MEDIA, and all VPAID.
+-- | List of timer events configured for the creative. For
+-- DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated
+-- from clickTags. Applicable to the following creative types:
+-- DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to
+-- DISPLAY when the primary asset is not HTML_IMAGE.
 creTimerCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creTimerCustomEvents
   = lens _creTimerCustomEvents
@@ -7580,8 +7587,8 @@ creCompatibility
 -- initially auto-generated to contain all features detected by DCM for all
 -- the assets of this creative and can then be modified by the client. To
 -- reset this field, copy over all the creativeAssets\' detected features.
--- Applicable to the following creative types: ENHANCED_BANNER and
--- HTML5_BANNER.
+-- Applicable to the following creative types: HTML5_BANNER. Applicable to
+-- DISPLAY when the primary asset type is not HTML_IMAGE.
 creBackupImageFeatures :: Lens' Creative [CreativeBackupImageFeaturesItem]
 creBackupImageFeatures
   = lens _creBackupImageFeatures
@@ -7636,15 +7643,15 @@ creStudioTraffickedCreativeId
 -- URL. The standard for a VAST (Video Ad Serving Template) ad response
 -- allows for a redirect link to another VAST 2.0 or 3.0 call. This is a
 -- required field when applicable. Applicable to the following creative
--- types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, REDIRECT, and
--- INSTREAM_VIDEO_REDIRECT
+-- types: DISPLAY_REDIRECT, INTERNAL_REDIRECT,
+-- INTERSTITIAL_INTERNAL_REDIRECT, and INSTREAM_VIDEO_REDIRECT
 creRedirectURL :: Lens' Creative (Maybe Text)
 creRedirectURL
   = lens _creRedirectURL
       (\ s a -> s{_creRedirectURL = a})
 
 -- | Whether images are automatically advanced for enhanced image creatives.
--- Applicable to the following creative types: ENHANCED_IMAGE.
+-- Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.
 creAutoAdvanceImages :: Lens' Creative (Maybe Bool)
 creAutoAdvanceImages
   = lens _creAutoAdvanceImages
@@ -16539,16 +16546,17 @@ caaOriginalBackup
       (\ s a -> s{_caaOriginalBackup = a})
 
 -- | Window mode options for flash assets. Applicable to the following
--- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
--- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
+-- creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING,
+-- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_DISPLAY_BANNER, and
+-- RICH_MEDIA_INPAGE_FLOATING.
 caaWindowMode :: Lens' CreativeAsset (Maybe CreativeAssetWindowMode)
 caaWindowMode
   = lens _caaWindowMode
       (\ s a -> s{_caaWindowMode = a})
 
 -- | Flash version of the asset. This is a read-only field. Applicable to the
--- following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA,
--- and all VPAID.
+-- following creative types: FLASH_INPAGE, all RICH_MEDIA, and all VPAID.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
 caaFlashVersion :: Lens' CreativeAsset (Maybe Int32)
 caaFlashVersion
   = lens _caaFlashVersion
@@ -16567,11 +16575,12 @@ caaPushdownDuration
       . mapping _Coerce
 
 -- | Size associated with this creative asset. This is a required field when
--- applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank,
+-- applicable; however for IMAGE and FLASH_INPAGE, creatives if left blank,
 -- this field will be automatically set using the actual size of the
 -- associated image asset. Applicable to the following creative types:
--- ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and
--- all RICH_MEDIA.
+-- DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all
+-- RICH_MEDIA. Applicable to DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 caaSize :: Lens' CreativeAsset (Maybe Size)
 caaSize = lens _caaSize (\ s a -> s{_caaSize = a})
 
@@ -16657,32 +16666,33 @@ caaProgressiveServingURL
       (\ s a -> s{_caaProgressiveServingURL = a})
 
 -- | Whether the video asset is active. This is a read-only field for
--- VPAID_NON_LINEAR assets. Applicable to the following creative types:
--- INSTREAM_VIDEO and all VPAID.
+-- VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative
+-- types: INSTREAM_VIDEO and all VPAID.
 caaActive :: Lens' CreativeAsset (Maybe Bool)
 caaActive
   = lens _caaActive (\ s a -> s{_caaActive = a})
 
 -- | Role of the asset in relation to creative. Applicable to all but the
 -- following creative types: all REDIRECT and TRACKING_TEXT. This is a
--- required field. PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE,
--- HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain
--- multiple primary assets), and all VPAID creatives. BACKUP_IMAGE applies
--- to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all
--- VPAID creatives. ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to
--- FLASH_INPAGE creatives. OTHER refers to assets from sources other than
--- DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and
--- all VPAID creatives. PARENT_VIDEO refers to videos uploaded by the user
--- in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+-- required field. PRIMARY applies to DISPLAY, FLASH_INPAGE, HTML5_BANNER,
+-- IMAGE, DISPLAY_IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple
+-- primary assets), and all VPAID creatives. BACKUP_IMAGE applies to
+-- FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
+-- ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
+-- OTHER refers to assets from sources other than DCM, such as Studio
+-- uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
+-- PARENT_VIDEO refers to videos uploaded by the user in DCM and is
+-- applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
 -- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
--- ALTERNATE_VIDEO refers to the DCM representation of child asset videos
--- from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
--- be added or removed within DCM. For VPAID_LINEAR creatives,
--- PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are
--- marked active serve as backup in case the VPAID creative cannot be
--- served. Only PARENT_VIDEO assets can be added or removed for an
--- INSTREAM_VIDEO or VPAID_LINEAR creative.
+-- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO
+-- creatives. ALTERNATE_VIDEO refers to the DCM representation of child
+-- asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO
+-- creatives. These cannot be added or removed within DCM. For
+-- VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
+-- ALTERNATE_VIDEO assets that are marked active serve as backup in case
+-- the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
+-- added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
 caaRole :: Lens' CreativeAsset (Maybe CreativeAssetRole)
 caaRole = lens _caaRole (\ s a -> s{_caaRole = a})
 
@@ -16709,7 +16719,8 @@ caaPositionLeftUnit
       (\ s a -> s{_caaPositionLeftUnit = a})
 
 -- | Possible alignments for an asset. This is a read-only field. Applicable
--- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
+-- to the following creative types:
+-- RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.
 caaAlignment :: Lens' CreativeAsset (Maybe CreativeAssetAlignment)
 caaAlignment
   = lens _caaAlignment (\ s a -> s{_caaAlignment = a})
@@ -16730,8 +16741,9 @@ caaZipFilename
       (\ s a -> s{_caaZipFilename = a})
 
 -- | Whether ActionScript3 is enabled for the flash asset. This is a
--- read-only field. Applicable to the following creative types:
--- FLASH_INPAGE and ENHANCED_BANNER.
+-- read-only field. Applicable to the following creative type:
+-- FLASH_INPAGE. Applicable to DISPLAY when the primary asset type is not
+-- HTML_IMAGE.
 caaActionScript3 :: Lens' CreativeAsset (Maybe Bool)
 caaActionScript3
   = lens _caaActionScript3
@@ -16791,7 +16803,7 @@ caaStartTimeType
       (\ s a -> s{_caaStartTimeType = a})
 
 -- | Duration in seconds for which an asset will be displayed. Applicable to
--- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR.
+-- the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.
 caaDuration :: Lens' CreativeAsset (Maybe Int32)
 caaDuration
   = lens _caaDuration (\ s a -> s{_caaDuration = a}) .
@@ -16815,7 +16827,8 @@ caaHideFlashObjects
 -- DCM. Feature dependencies are features that a browser must be able to
 -- support in order to render your HTML5 creative correctly. This is a
 -- read-only, auto-generated field. Applicable to the following creative
--- types: ENHANCED_BANNER and HTML5_BANNER.
+-- types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type
+-- is not HTML_IMAGE.
 caaDetectedFeatures :: Lens' CreativeAsset [CreativeAssetDetectedFeaturesItem]
 caaDetectedFeatures
   = lens _caaDetectedFeatures
@@ -18784,15 +18797,17 @@ camaClickTags
 
 -- | Rules validated during code generation that generated a warning. This is
 -- a read-only, auto-generated field. Possible values are: -
--- \"CLICK_TAG_NON_TOP_LEVEL\" - \"CLICK_TAG_MISSING\" -
--- \"CLICK_TAG_MORE_THAN_ONE\" - \"CLICK_TAG_INVALID\" - \"ORPHANED_ASSET\"
--- - \"PRIMARY_HTML_MISSING\" - \"EXTERNAL_FILE_REFERENCED\" -
--- \"MRAID_REFERENCED\" - \"ADMOB_REFERENCED\" - \"FILE_TYPE_INVALID\" -
--- \"ZIP_INVALID\" - \"LINKED_FILE_NOT_FOUND\" - \"MAX_FLASH_VERSION_11\" -
--- \"NOT_SSL_COMPLIANT\" - \"FILE_DETAIL_EMPTY\" - \"ASSET_INVALID\" -
--- \"GWD_PROPERTIES_INVALID\" - \"ENABLER_UNSUPPORTED_METHOD_DCM\" -
--- \"ASSET_FORMAT_UNSUPPORTED_DCM\" - \"COMPONENT_UNSUPPORTED_DCM\" -
--- \"HTML5_FEATURE_UNSUPPORTED\' \"
+-- \"ADMOB_REFERENCED\" - \"ASSET_FORMAT_UNSUPPORTED_DCM\" -
+-- \"ASSET_INVALID\" - \"CLICK_TAG_HARD_CODED\" - \"CLICK_TAG_INVALID\" -
+-- \"CLICK_TAG_IN_GWD\" - \"CLICK_TAG_MISSING\" -
+-- \"CLICK_TAG_MORE_THAN_ONE\" - \"CLICK_TAG_NON_TOP_LEVEL\" -
+-- \"COMPONENT_UNSUPPORTED_DCM\" - \"ENABLER_UNSUPPORTED_METHOD_DCM\" -
+-- \"EXTERNAL_FILE_REFERENCED\" - \"FILE_DETAIL_EMPTY\" -
+-- \"FILE_TYPE_INVALID\" - \"GWD_PROPERTIES_INVALID\" -
+-- \"HTML5_FEATURE_UNSUPPORTED\" - \"LINKED_FILE_NOT_FOUND\" -
+-- \"MAX_FLASH_VERSION_11\" - \"MRAID_REFERENCED\" - \"NOT_SSL_COMPLIANT\"
+-- - \"ORPHANED_ASSET\" - \"PRIMARY_HTML_MISSING\" - \"SVG_INVALID\" -
+-- \"ZIP_INVALID\"
 camaWarnedValidationRules :: Lens' CreativeAssetMetadata [CreativeAssetMetadataWarnedValidationRulesItem]
 camaWarnedValidationRules
   = lens _camaWarnedValidationRules
@@ -20762,7 +20777,7 @@ p1SiteId
       mapping _Coerce
 
 -- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
--- rendering on desktop, mobile devices or in mobile apps for regular or
+-- rendering on desktop, on mobile devices or in mobile apps for regular or
 -- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
 -- allowed for new placement insertions. Instead, use DISPLAY or
 -- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream

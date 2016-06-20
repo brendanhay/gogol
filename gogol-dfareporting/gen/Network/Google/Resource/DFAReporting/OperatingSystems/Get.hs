@@ -44,7 +44,7 @@ import           Network.Google.Prelude
 -- 'OperatingSystemsGet' request conforms to.
 type OperatingSystemsGetResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "operatingSystems" :>

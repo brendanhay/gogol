@@ -62,7 +62,7 @@ import           Network.Google.Prelude
 -- 'PlacementGroupsList' request conforms to.
 type PlacementGroupsListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placementGroups" :>

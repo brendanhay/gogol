@@ -43,7 +43,7 @@ import           Network.Google.Prelude
 -- 'PlatformTypesList' request conforms to.
 type PlatformTypesListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "platformTypes" :>

@@ -65,7 +65,7 @@ import           Network.Google.Prelude
 -- 'PlacementsList' request conforms to.
 type PlacementsListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "placements" :>

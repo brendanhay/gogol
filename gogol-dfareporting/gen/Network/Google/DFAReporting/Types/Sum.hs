@@ -262,24 +262,25 @@ instance ToJSON OrderDocumentsListSortOrder where
 
 -- | Role of the asset in relation to creative. Applicable to all but the
 -- following creative types: all REDIRECT and TRACKING_TEXT. This is a
--- required field. PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE,
--- HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain
--- multiple primary assets), and all VPAID creatives. BACKUP_IMAGE applies
--- to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all
--- VPAID creatives. ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to
--- FLASH_INPAGE creatives. OTHER refers to assets from sources other than
--- DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and
--- all VPAID creatives. PARENT_VIDEO refers to videos uploaded by the user
--- in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+-- required field. PRIMARY applies to DISPLAY, FLASH_INPAGE, HTML5_BANNER,
+-- IMAGE, DISPLAY_IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple
+-- primary assets), and all VPAID creatives. BACKUP_IMAGE applies to
+-- FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
+-- Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
+-- ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
+-- OTHER refers to assets from sources other than DCM, such as Studio
+-- uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
+-- PARENT_VIDEO refers to videos uploaded by the user in DCM and is
+-- applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
 -- TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
--- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
--- ALTERNATE_VIDEO refers to the DCM representation of child asset videos
--- from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
--- be added or removed within DCM. For VPAID_LINEAR creatives,
--- PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are
--- marked active serve as backup in case the VPAID creative cannot be
--- served. Only PARENT_VIDEO assets can be added or removed for an
--- INSTREAM_VIDEO or VPAID_LINEAR creative.
+-- assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO
+-- creatives. ALTERNATE_VIDEO refers to the DCM representation of child
+-- asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO
+-- creatives. These cannot be added or removed within DCM. For
+-- VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
+-- ALTERNATE_VIDEO assets that are marked active serve as backup in case
+-- the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
+-- added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
 data CreativeAssetRole
     = AdditionalFlash
       -- ^ @ADDITIONAL_FLASH@
@@ -646,7 +647,7 @@ instance ToJSON DirectorySiteContactAssignmentVisibility where
     toJSON = toJSONText
 
 -- | Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to
--- rendering on desktop, mobile devices or in mobile apps for regular or
+-- rendering on desktop, on mobile devices or in mobile apps for regular or
 -- interstitial ads respectively. APP and APP_INTERSTITIAL are no longer
 -- allowed for new placement insertions. Instead, use DISPLAY or
 -- DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream
@@ -3889,112 +3890,112 @@ instance ToJSON FloodlightActivitiesListSortField where
 
 -- | Select only creatives with these creative types.
 data CreativesListTypes
-    = BrandSafeDefaultInstreamVideo
+    = CLTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | CustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | CustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | EnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | EnhancedImage
-      -- ^ @ENHANCED_IMAGE@
-    | FlashInpage
+    | CLTCustomDisplay
+      -- ^ @CUSTOM_DISPLAY@
+    | CLTCustomDisplayInterstitial
+      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
+    | CLTDisplay
+      -- ^ @DISPLAY@
+    | CLTDisplayImageGallery
+      -- ^ @DISPLAY_IMAGE_GALLERY@
+    | CLTDisplayRedirect
+      -- ^ @DISPLAY_REDIRECT@
+    | CLTFlashInpage
       -- ^ @FLASH_INPAGE@
-    | HTML5Banner
+    | CLTHTML5Banner
       -- ^ @HTML5_BANNER@
-    | Image
+    | CLTImage
       -- ^ @IMAGE@
-    | InstreamVideo
+    | CLTInstreamVideo
       -- ^ @INSTREAM_VIDEO@
-    | InstreamVideoRedirect
+    | CLTInstreamVideoRedirect
       -- ^ @INSTREAM_VIDEO_REDIRECT@
-    | InternalRedirect
+    | CLTInternalRedirect
       -- ^ @INTERNAL_REDIRECT@
-    | InterstitialInternalRedirect
+    | CLTInterstitialInternalRedirect
       -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | Redirect
-      -- ^ @REDIRECT@
-    | RichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
-    | RichMediaImExpand
+    | CLTRichMediaDisplayBanner
+      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
+    | CLTRichMediaDisplayExpanding
+      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
+    | CLTRichMediaDisplayInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
+    | CLTRichMediaDisplayMultiFloatingInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
+    | CLTRichMediaImExpand
       -- ^ @RICH_MEDIA_IM_EXPAND@
-    | RichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
-    | RichMediaInpageFloating
+    | CLTRichMediaInpageFloating
       -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | RichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
-    | RichMediaMobileInApp
+    | CLTRichMediaMobileInApp
       -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | RichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
-    | RichMediaPeelDown
+    | CLTRichMediaPeelDown
       -- ^ @RICH_MEDIA_PEEL_DOWN@
-    | TrackingText
+    | CLTTrackingText
       -- ^ @TRACKING_TEXT@
-    | VpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | VpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
+    | CLTVpaidLinearVideo
+      -- ^ @VPAID_LINEAR_VIDEO@
+    | CLTVpaidNonLinearVideo
+      -- ^ @VPAID_NON_LINEAR_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativesListTypes
 
 instance FromHttpApiData CreativesListTypes where
     parseQueryParam = \case
-        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right BrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Right CustomInpage
-        "CUSTOM_INTERSTITIAL" -> Right CustomInterstitial
-        "ENHANCED_BANNER" -> Right EnhancedBanner
-        "ENHANCED_IMAGE" -> Right EnhancedImage
-        "FLASH_INPAGE" -> Right FlashInpage
-        "HTML5_BANNER" -> Right HTML5Banner
-        "IMAGE" -> Right Image
-        "INSTREAM_VIDEO" -> Right InstreamVideo
-        "INSTREAM_VIDEO_REDIRECT" -> Right InstreamVideoRedirect
-        "INTERNAL_REDIRECT" -> Right InternalRedirect
-        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right InterstitialInternalRedirect
-        "REDIRECT" -> Right Redirect
-        "RICH_MEDIA_EXPANDING" -> Right RichMediaExpanding
-        "RICH_MEDIA_IM_EXPAND" -> Right RichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Right RichMediaInpage
-        "RICH_MEDIA_INPAGE_FLOATING" -> Right RichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Right RichMediaInterstitialFloat
-        "RICH_MEDIA_MOBILE_IN_APP" -> Right RichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Right RichMediaMultiFloating
-        "RICH_MEDIA_PEEL_DOWN" -> Right RichMediaPeelDown
-        "TRACKING_TEXT" -> Right TrackingText
-        "VPAID_LINEAR" -> Right VpaidLinear
-        "VPAID_NON_LINEAR" -> Right VpaidNonLinear
+        "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right CLTBrandSafeDefaultInstreamVideo
+        "CUSTOM_DISPLAY" -> Right CLTCustomDisplay
+        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right CLTCustomDisplayInterstitial
+        "DISPLAY" -> Right CLTDisplay
+        "DISPLAY_IMAGE_GALLERY" -> Right CLTDisplayImageGallery
+        "DISPLAY_REDIRECT" -> Right CLTDisplayRedirect
+        "FLASH_INPAGE" -> Right CLTFlashInpage
+        "HTML5_BANNER" -> Right CLTHTML5Banner
+        "IMAGE" -> Right CLTImage
+        "INSTREAM_VIDEO" -> Right CLTInstreamVideo
+        "INSTREAM_VIDEO_REDIRECT" -> Right CLTInstreamVideoRedirect
+        "INTERNAL_REDIRECT" -> Right CLTInternalRedirect
+        "INTERSTITIAL_INTERNAL_REDIRECT" -> Right CLTInterstitialInternalRedirect
+        "RICH_MEDIA_DISPLAY_BANNER" -> Right CLTRichMediaDisplayBanner
+        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right CLTRichMediaDisplayExpanding
+        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right CLTRichMediaDisplayInterstitial
+        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right CLTRichMediaDisplayMultiFloatingInterstitial
+        "RICH_MEDIA_IM_EXPAND" -> Right CLTRichMediaImExpand
+        "RICH_MEDIA_INPAGE_FLOATING" -> Right CLTRichMediaInpageFloating
+        "RICH_MEDIA_MOBILE_IN_APP" -> Right CLTRichMediaMobileInApp
+        "RICH_MEDIA_PEEL_DOWN" -> Right CLTRichMediaPeelDown
+        "TRACKING_TEXT" -> Right CLTTrackingText
+        "VPAID_LINEAR_VIDEO" -> Right CLTVpaidLinearVideo
+        "VPAID_NON_LINEAR_VIDEO" -> Right CLTVpaidNonLinearVideo
         x -> Left ("Unable to parse CreativesListTypes from: " <> x)
 
 instance ToHttpApiData CreativesListTypes where
     toQueryParam = \case
-        BrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        CustomInpage -> "CUSTOM_INPAGE"
-        CustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        EnhancedBanner -> "ENHANCED_BANNER"
-        EnhancedImage -> "ENHANCED_IMAGE"
-        FlashInpage -> "FLASH_INPAGE"
-        HTML5Banner -> "HTML5_BANNER"
-        Image -> "IMAGE"
-        InstreamVideo -> "INSTREAM_VIDEO"
-        InstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
-        InternalRedirect -> "INTERNAL_REDIRECT"
-        InterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        Redirect -> "REDIRECT"
-        RichMediaExpanding -> "RICH_MEDIA_EXPANDING"
-        RichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        RichMediaInpage -> "RICH_MEDIA_INPAGE"
-        RichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        RichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
-        RichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        RichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
-        RichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
-        TrackingText -> "TRACKING_TEXT"
-        VpaidLinear -> "VPAID_LINEAR"
-        VpaidNonLinear -> "VPAID_NON_LINEAR"
+        CLTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
+        CLTCustomDisplay -> "CUSTOM_DISPLAY"
+        CLTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
+        CLTDisplay -> "DISPLAY"
+        CLTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
+        CLTDisplayRedirect -> "DISPLAY_REDIRECT"
+        CLTFlashInpage -> "FLASH_INPAGE"
+        CLTHTML5Banner -> "HTML5_BANNER"
+        CLTImage -> "IMAGE"
+        CLTInstreamVideo -> "INSTREAM_VIDEO"
+        CLTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
+        CLTInternalRedirect -> "INTERNAL_REDIRECT"
+        CLTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
+        CLTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
+        CLTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
+        CLTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
+        CLTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
+        CLTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
+        CLTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
+        CLTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
+        CLTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
+        CLTTrackingText -> "TRACKING_TEXT"
+        CLTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
+        CLTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
 
 instance FromJSON CreativesListTypes where
     parseJSON = parseJSONText "CreativesListTypes"
@@ -4037,8 +4038,9 @@ instance ToJSON DirectorySiteInpageTagFormatsItem where
     toJSON = toJSONText
 
 -- | Window mode options for flash assets. Applicable to the following
--- creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING,
--- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.
+-- creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING,
+-- RICH_MEDIA_IM_EXPAND, RICH_MEDIA_DISPLAY_BANNER, and
+-- RICH_MEDIA_INPAGE_FLOATING.
 data CreativeAssetWindowMode
     = Opaque
       -- ^ @OPAQUE@
@@ -4070,7 +4072,8 @@ instance ToJSON CreativeAssetWindowMode where
     toJSON = toJSONText
 
 -- | Possible alignments for an asset. This is a read-only field. Applicable
--- to the following creative types: RICH_MEDIA_MULTI_FLOATING.
+-- to the following creative types:
+-- RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.
 data CreativeAssetAlignment
     = AlignmentBottom
       -- ^ @ALIGNMENT_BOTTOM@
@@ -4811,14 +4814,16 @@ instance ToJSON PricingGroupType where
 data AdsListCreativeType
     = ALCTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | ALCTCustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | ALCTCustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | ALCTEnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | ALCTEnhancedImage
-      -- ^ @ENHANCED_IMAGE@
+    | ALCTCustomDisplay
+      -- ^ @CUSTOM_DISPLAY@
+    | ALCTCustomDisplayInterstitial
+      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
+    | ALCTDisplay
+      -- ^ @DISPLAY@
+    | ALCTDisplayImageGallery
+      -- ^ @DISPLAY_IMAGE_GALLERY@
+    | ALCTDisplayRedirect
+      -- ^ @DISPLAY_REDIRECT@
     | ALCTFlashInpage
       -- ^ @FLASH_INPAGE@
     | ALCTHTML5Banner
@@ -4833,30 +4838,28 @@ data AdsListCreativeType
       -- ^ @INTERNAL_REDIRECT@
     | ALCTInterstitialInternalRedirect
       -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | ALCTRedirect
-      -- ^ @REDIRECT@
-    | ALCTRichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
+    | ALCTRichMediaDisplayBanner
+      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
+    | ALCTRichMediaDisplayExpanding
+      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
+    | ALCTRichMediaDisplayInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
+    | ALCTRichMediaDisplayMultiFloatingInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
     | ALCTRichMediaImExpand
       -- ^ @RICH_MEDIA_IM_EXPAND@
-    | ALCTRichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
     | ALCTRichMediaInpageFloating
       -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | ALCTRichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
     | ALCTRichMediaMobileInApp
       -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | ALCTRichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
     | ALCTRichMediaPeelDown
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | ALCTTrackingText
       -- ^ @TRACKING_TEXT@
-    | ALCTVpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | ALCTVpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
+    | ALCTVpaidLinearVideo
+      -- ^ @VPAID_LINEAR_VIDEO@
+    | ALCTVpaidNonLinearVideo
+      -- ^ @VPAID_NON_LINEAR_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable AdsListCreativeType
@@ -4864,10 +4867,11 @@ instance Hashable AdsListCreativeType
 instance FromHttpApiData AdsListCreativeType where
     parseQueryParam = \case
         "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right ALCTBrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Right ALCTCustomInpage
-        "CUSTOM_INTERSTITIAL" -> Right ALCTCustomInterstitial
-        "ENHANCED_BANNER" -> Right ALCTEnhancedBanner
-        "ENHANCED_IMAGE" -> Right ALCTEnhancedImage
+        "CUSTOM_DISPLAY" -> Right ALCTCustomDisplay
+        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right ALCTCustomDisplayInterstitial
+        "DISPLAY" -> Right ALCTDisplay
+        "DISPLAY_IMAGE_GALLERY" -> Right ALCTDisplayImageGallery
+        "DISPLAY_REDIRECT" -> Right ALCTDisplayRedirect
         "FLASH_INPAGE" -> Right ALCTFlashInpage
         "HTML5_BANNER" -> Right ALCTHTML5Banner
         "IMAGE" -> Right ALCTImage
@@ -4875,27 +4879,27 @@ instance FromHttpApiData AdsListCreativeType where
         "INSTREAM_VIDEO_REDIRECT" -> Right ALCTInstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Right ALCTInternalRedirect
         "INTERSTITIAL_INTERNAL_REDIRECT" -> Right ALCTInterstitialInternalRedirect
-        "REDIRECT" -> Right ALCTRedirect
-        "RICH_MEDIA_EXPANDING" -> Right ALCTRichMediaExpanding
+        "RICH_MEDIA_DISPLAY_BANNER" -> Right ALCTRichMediaDisplayBanner
+        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right ALCTRichMediaDisplayExpanding
+        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right ALCTRichMediaDisplayInterstitial
+        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right ALCTRichMediaDisplayMultiFloatingInterstitial
         "RICH_MEDIA_IM_EXPAND" -> Right ALCTRichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Right ALCTRichMediaInpage
         "RICH_MEDIA_INPAGE_FLOATING" -> Right ALCTRichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Right ALCTRichMediaInterstitialFloat
         "RICH_MEDIA_MOBILE_IN_APP" -> Right ALCTRichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Right ALCTRichMediaMultiFloating
         "RICH_MEDIA_PEEL_DOWN" -> Right ALCTRichMediaPeelDown
         "TRACKING_TEXT" -> Right ALCTTrackingText
-        "VPAID_LINEAR" -> Right ALCTVpaidLinear
-        "VPAID_NON_LINEAR" -> Right ALCTVpaidNonLinear
+        "VPAID_LINEAR_VIDEO" -> Right ALCTVpaidLinearVideo
+        "VPAID_NON_LINEAR_VIDEO" -> Right ALCTVpaidNonLinearVideo
         x -> Left ("Unable to parse AdsListCreativeType from: " <> x)
 
 instance ToHttpApiData AdsListCreativeType where
     toQueryParam = \case
         ALCTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        ALCTCustomInpage -> "CUSTOM_INPAGE"
-        ALCTCustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        ALCTEnhancedBanner -> "ENHANCED_BANNER"
-        ALCTEnhancedImage -> "ENHANCED_IMAGE"
+        ALCTCustomDisplay -> "CUSTOM_DISPLAY"
+        ALCTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
+        ALCTDisplay -> "DISPLAY"
+        ALCTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
+        ALCTDisplayRedirect -> "DISPLAY_REDIRECT"
         ALCTFlashInpage -> "FLASH_INPAGE"
         ALCTHTML5Banner -> "HTML5_BANNER"
         ALCTImage -> "IMAGE"
@@ -4903,18 +4907,17 @@ instance ToHttpApiData AdsListCreativeType where
         ALCTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         ALCTInternalRedirect -> "INTERNAL_REDIRECT"
         ALCTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        ALCTRedirect -> "REDIRECT"
-        ALCTRichMediaExpanding -> "RICH_MEDIA_EXPANDING"
+        ALCTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
+        ALCTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
+        ALCTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
+        ALCTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
         ALCTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        ALCTRichMediaInpage -> "RICH_MEDIA_INPAGE"
         ALCTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        ALCTRichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
         ALCTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        ALCTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         ALCTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         ALCTTrackingText -> "TRACKING_TEXT"
-        ALCTVpaidLinear -> "VPAID_LINEAR"
-        ALCTVpaidNonLinear -> "VPAID_NON_LINEAR"
+        ALCTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
+        ALCTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
 
 instance FromJSON AdsListCreativeType where
     parseJSON = parseJSONText "AdsListCreativeType"
@@ -6753,14 +6756,16 @@ instance ToJSON AccountAccountProFile where
 data CreativeType
     = CTBrandSafeDefaultInstreamVideo
       -- ^ @BRAND_SAFE_DEFAULT_INSTREAM_VIDEO@
-    | CTCustomInpage
-      -- ^ @CUSTOM_INPAGE@
-    | CTCustomInterstitial
-      -- ^ @CUSTOM_INTERSTITIAL@
-    | CTEnhancedBanner
-      -- ^ @ENHANCED_BANNER@
-    | CTEnhancedImage
-      -- ^ @ENHANCED_IMAGE@
+    | CTCustomDisplay
+      -- ^ @CUSTOM_DISPLAY@
+    | CTCustomDisplayInterstitial
+      -- ^ @CUSTOM_DISPLAY_INTERSTITIAL@
+    | CTDisplay
+      -- ^ @DISPLAY@
+    | CTDisplayImageGallery
+      -- ^ @DISPLAY_IMAGE_GALLERY@
+    | CTDisplayRedirect
+      -- ^ @DISPLAY_REDIRECT@
     | CTFlashInpage
       -- ^ @FLASH_INPAGE@
     | CTHTML5Banner
@@ -6775,30 +6780,28 @@ data CreativeType
       -- ^ @INTERNAL_REDIRECT@
     | CTInterstitialInternalRedirect
       -- ^ @INTERSTITIAL_INTERNAL_REDIRECT@
-    | CTRedirect
-      -- ^ @REDIRECT@
-    | CTRichMediaExpanding
-      -- ^ @RICH_MEDIA_EXPANDING@
+    | CTRichMediaDisplayBanner
+      -- ^ @RICH_MEDIA_DISPLAY_BANNER@
+    | CTRichMediaDisplayExpanding
+      -- ^ @RICH_MEDIA_DISPLAY_EXPANDING@
+    | CTRichMediaDisplayInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_INTERSTITIAL@
+    | CTRichMediaDisplayMultiFloatingInterstitial
+      -- ^ @RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL@
     | CTRichMediaImExpand
       -- ^ @RICH_MEDIA_IM_EXPAND@
-    | CTRichMediaInpage
-      -- ^ @RICH_MEDIA_INPAGE@
     | CTRichMediaInpageFloating
       -- ^ @RICH_MEDIA_INPAGE_FLOATING@
-    | CTRichMediaInterstitialFloat
-      -- ^ @RICH_MEDIA_INTERSTITIAL_FLOAT@
     | CTRichMediaMobileInApp
       -- ^ @RICH_MEDIA_MOBILE_IN_APP@
-    | CTRichMediaMultiFloating
-      -- ^ @RICH_MEDIA_MULTI_FLOATING@
     | CTRichMediaPeelDown
       -- ^ @RICH_MEDIA_PEEL_DOWN@
     | CTTrackingText
       -- ^ @TRACKING_TEXT@
-    | CTVpaidLinear
-      -- ^ @VPAID_LINEAR@
-    | CTVpaidNonLinear
-      -- ^ @VPAID_NON_LINEAR@
+    | CTVpaidLinearVideo
+      -- ^ @VPAID_LINEAR_VIDEO@
+    | CTVpaidNonLinearVideo
+      -- ^ @VPAID_NON_LINEAR_VIDEO@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
 instance Hashable CreativeType
@@ -6806,10 +6809,11 @@ instance Hashable CreativeType
 instance FromHttpApiData CreativeType where
     parseQueryParam = \case
         "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO" -> Right CTBrandSafeDefaultInstreamVideo
-        "CUSTOM_INPAGE" -> Right CTCustomInpage
-        "CUSTOM_INTERSTITIAL" -> Right CTCustomInterstitial
-        "ENHANCED_BANNER" -> Right CTEnhancedBanner
-        "ENHANCED_IMAGE" -> Right CTEnhancedImage
+        "CUSTOM_DISPLAY" -> Right CTCustomDisplay
+        "CUSTOM_DISPLAY_INTERSTITIAL" -> Right CTCustomDisplayInterstitial
+        "DISPLAY" -> Right CTDisplay
+        "DISPLAY_IMAGE_GALLERY" -> Right CTDisplayImageGallery
+        "DISPLAY_REDIRECT" -> Right CTDisplayRedirect
         "FLASH_INPAGE" -> Right CTFlashInpage
         "HTML5_BANNER" -> Right CTHTML5Banner
         "IMAGE" -> Right CTImage
@@ -6817,27 +6821,27 @@ instance FromHttpApiData CreativeType where
         "INSTREAM_VIDEO_REDIRECT" -> Right CTInstreamVideoRedirect
         "INTERNAL_REDIRECT" -> Right CTInternalRedirect
         "INTERSTITIAL_INTERNAL_REDIRECT" -> Right CTInterstitialInternalRedirect
-        "REDIRECT" -> Right CTRedirect
-        "RICH_MEDIA_EXPANDING" -> Right CTRichMediaExpanding
+        "RICH_MEDIA_DISPLAY_BANNER" -> Right CTRichMediaDisplayBanner
+        "RICH_MEDIA_DISPLAY_EXPANDING" -> Right CTRichMediaDisplayExpanding
+        "RICH_MEDIA_DISPLAY_INTERSTITIAL" -> Right CTRichMediaDisplayInterstitial
+        "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL" -> Right CTRichMediaDisplayMultiFloatingInterstitial
         "RICH_MEDIA_IM_EXPAND" -> Right CTRichMediaImExpand
-        "RICH_MEDIA_INPAGE" -> Right CTRichMediaInpage
         "RICH_MEDIA_INPAGE_FLOATING" -> Right CTRichMediaInpageFloating
-        "RICH_MEDIA_INTERSTITIAL_FLOAT" -> Right CTRichMediaInterstitialFloat
         "RICH_MEDIA_MOBILE_IN_APP" -> Right CTRichMediaMobileInApp
-        "RICH_MEDIA_MULTI_FLOATING" -> Right CTRichMediaMultiFloating
         "RICH_MEDIA_PEEL_DOWN" -> Right CTRichMediaPeelDown
         "TRACKING_TEXT" -> Right CTTrackingText
-        "VPAID_LINEAR" -> Right CTVpaidLinear
-        "VPAID_NON_LINEAR" -> Right CTVpaidNonLinear
+        "VPAID_LINEAR_VIDEO" -> Right CTVpaidLinearVideo
+        "VPAID_NON_LINEAR_VIDEO" -> Right CTVpaidNonLinearVideo
         x -> Left ("Unable to parse CreativeType from: " <> x)
 
 instance ToHttpApiData CreativeType where
     toQueryParam = \case
         CTBrandSafeDefaultInstreamVideo -> "BRAND_SAFE_DEFAULT_INSTREAM_VIDEO"
-        CTCustomInpage -> "CUSTOM_INPAGE"
-        CTCustomInterstitial -> "CUSTOM_INTERSTITIAL"
-        CTEnhancedBanner -> "ENHANCED_BANNER"
-        CTEnhancedImage -> "ENHANCED_IMAGE"
+        CTCustomDisplay -> "CUSTOM_DISPLAY"
+        CTCustomDisplayInterstitial -> "CUSTOM_DISPLAY_INTERSTITIAL"
+        CTDisplay -> "DISPLAY"
+        CTDisplayImageGallery -> "DISPLAY_IMAGE_GALLERY"
+        CTDisplayRedirect -> "DISPLAY_REDIRECT"
         CTFlashInpage -> "FLASH_INPAGE"
         CTHTML5Banner -> "HTML5_BANNER"
         CTImage -> "IMAGE"
@@ -6845,18 +6849,17 @@ instance ToHttpApiData CreativeType where
         CTInstreamVideoRedirect -> "INSTREAM_VIDEO_REDIRECT"
         CTInternalRedirect -> "INTERNAL_REDIRECT"
         CTInterstitialInternalRedirect -> "INTERSTITIAL_INTERNAL_REDIRECT"
-        CTRedirect -> "REDIRECT"
-        CTRichMediaExpanding -> "RICH_MEDIA_EXPANDING"
+        CTRichMediaDisplayBanner -> "RICH_MEDIA_DISPLAY_BANNER"
+        CTRichMediaDisplayExpanding -> "RICH_MEDIA_DISPLAY_EXPANDING"
+        CTRichMediaDisplayInterstitial -> "RICH_MEDIA_DISPLAY_INTERSTITIAL"
+        CTRichMediaDisplayMultiFloatingInterstitial -> "RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL"
         CTRichMediaImExpand -> "RICH_MEDIA_IM_EXPAND"
-        CTRichMediaInpage -> "RICH_MEDIA_INPAGE"
         CTRichMediaInpageFloating -> "RICH_MEDIA_INPAGE_FLOATING"
-        CTRichMediaInterstitialFloat -> "RICH_MEDIA_INTERSTITIAL_FLOAT"
         CTRichMediaMobileInApp -> "RICH_MEDIA_MOBILE_IN_APP"
-        CTRichMediaMultiFloating -> "RICH_MEDIA_MULTI_FLOATING"
         CTRichMediaPeelDown -> "RICH_MEDIA_PEEL_DOWN"
         CTTrackingText -> "TRACKING_TEXT"
-        CTVpaidLinear -> "VPAID_LINEAR"
-        CTVpaidNonLinear -> "VPAID_NON_LINEAR"
+        CTVpaidLinearVideo -> "VPAID_LINEAR_VIDEO"
+        CTVpaidNonLinearVideo -> "VPAID_NON_LINEAR_VIDEO"
 
 instance FromJSON CreativeType where
     parseJSON = parseJSONText "CreativeType"

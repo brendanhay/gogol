@@ -49,7 +49,7 @@ import           Network.Google.Prelude
 -- 'AdvertiserGroupsList' request conforms to.
 type AdvertiserGroupsListResource =
      "dfareporting" :>
-       "v2.5beta1" :>
+       "v2.5" :>
          "userprofiles" :>
            Capture "profileId" (Textual Int64) :>
              "advertiserGroups" :>
