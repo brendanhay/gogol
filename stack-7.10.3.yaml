@@ -48,6 +48,7 @@ packages:
   - gogol-doubleclick-bids
   - gogol-doubleclick-search
   - gogol-drive
+  - gogol-firebase-rules
   - gogol-fitness
   - gogol-fonts
   - gogol-freebasesearch
@@ -83,6 +84,7 @@ packages:
   - gogol-resourcemanager
   - gogol-resourceviews
   - gogol-script
+  - gogol-sheets
   - gogol-shopping-content
   - gogol-siteverification
   - gogol-spectrum
