@@ -1932,7 +1932,7 @@ urlMap =
     }
 
 -- | The list of expected URL mappings. Request to update this UrlMap will
--- succeed only all of the test cases pass.
+-- succeed only if all of the test cases pass.
 umTests :: Lens' URLMap [URLMapTest]
 umTests
   = lens _umTests (\ s a -> s{_umTests = a}) . _Default
@@ -6219,9 +6219,9 @@ niNetwork
 niName :: Lens' NetworkInterface (Maybe Text)
 niName = lens _niName (\ s a -> s{_niName = a})
 
--- | An IPV4 internal network address to assign to the instance for this
--- network interface. If not specified by user an unused internal IP is
--- assigned by system.
+-- | An IPv4 internal network address to assign to the instance for this
+-- network interface. If not specified by the user, an unused internal IP
+-- is assigned by the system.
 niNetworkIP :: Lens' NetworkInterface (Maybe Text)
 niNetworkIP
   = lens _niNetworkIP (\ s a -> s{_niNetworkIP = a})
@@ -14636,7 +14636,11 @@ firewall =
 -- sourceRanges and sourceTags may be set. If both properties are set, an
 -- inbound connection is allowed if the range matches the sourceRanges OR
 -- the tag of the source matches the sourceTags property. The connection
--- does not need to match both properties.
+-- does not need to match both properties. Source tags cannot be used to
+-- allow access to an instance\'s external IP address. Because tags are
+-- associated with an instance, not an IP address, source tags can only be
+-- used to control traffic traveling from an instance inside the same
+-- network as the firewall.
 fSourceTags :: Lens' Firewall [Text]
 fSourceTags
   = lens _fSourceTags (\ s a -> s{_fSourceTags = a}) .
