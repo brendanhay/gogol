@@ -21,7 +21,10 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Given one or more beacon observations, returns any beacon information
--- and attachments accessible to your application.
+-- and attachments accessible to your application. Authorize by using the
+-- [API
+-- key](https:\/\/developers.google.com\/beacons\/proximity\/how-tos\/authorizing#APIKey)
+-- for the application.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beaconinfo.getforobserved@.
 module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
@@ -64,7 +67,10 @@ type BeaconInfoGetforObservedResource =
                            Post '[JSON] GetInfoForObservedBeaconsResponse
 
 -- | Given one or more beacon observations, returns any beacon information
--- and attachments accessible to your application.
+-- and attachments accessible to your application. Authorize by using the
+-- [API
+-- key](https:\/\/developers.google.com\/beacons\/proximity\/how-tos\/authorizing#APIKey)
+-- for the application.
 --
 -- /See:/ 'beaconInfoGetforObserved' smart constructor.
 data BeaconInfoGetforObserved = BeaconInfoGetforObserved'

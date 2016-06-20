@@ -25,7 +25,11 @@
 -- you should follow the \"read, modify, write\" pattern to avoid
 -- inadvertently destroying data. Changes to the beacon status via this
 -- method will be silently ignored. To update beacon status, use the
--- separate methods on this API for (de)activation and decommissioning.
+-- separate methods on this API for activation, deactivation, and
+-- decommissioning. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.update@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Update
@@ -46,6 +50,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     , buUploadType
     , buPayload
     , buBearerToken
+    , buProjectId
     , buCallback
     ) where
 
@@ -63,16 +68,21 @@ type BeaconsUpdateResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
 
 -- | Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so
 -- you should follow the \"read, modify, write\" pattern to avoid
 -- inadvertently destroying data. Changes to the beacon status via this
 -- method will be silently ignored. To update beacon status, use the
--- separate methods on this API for (de)activation and decommissioning.
+-- separate methods on this API for activation, deactivation, and
+-- decommissioning. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsUpdate' smart constructor.
 data BeaconsUpdate = BeaconsUpdate'
@@ -84,6 +94,7 @@ data BeaconsUpdate = BeaconsUpdate'
     , _buUploadType     :: !(Maybe Text)
     , _buPayload        :: !Beacon
     , _buBearerToken    :: !(Maybe Text)
+    , _buProjectId      :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -107,6 +118,8 @@ data BeaconsUpdate = BeaconsUpdate'
 --
 -- * 'buBearerToken'
 --
+-- * 'buProjectId'
+--
 -- * 'buCallback'
 beaconsUpdate
     :: Text -- ^ 'buBeaconName'
@@ -122,6 +135,7 @@ beaconsUpdate pBuBeaconName_ pBuPayload_ =
     , _buUploadType = Nothing
     , _buPayload = pBuPayload_
     , _buBearerToken = Nothing
+    , _buProjectId = Nothing
     , _buCallback = Nothing
     }
 
@@ -171,6 +185,13 @@ buBearerToken
   = lens _buBearerToken
       (\ s a -> s{_buBearerToken = a})
 
+-- | The project id of the beacon to update. If the project id is not
+-- specified then the project making the request is used. The project id
+-- must match the project that owns the beacon. Optional.
+buProjectId :: Lens' BeaconsUpdate (Maybe Text)
+buProjectId
+  = lens _buProjectId (\ s a -> s{_buProjectId = a})
+
 -- | JSONP
 buCallback :: Lens' BeaconsUpdate (Maybe Text)
 buCallback
@@ -178,13 +199,15 @@ buCallback
 
 instance GoogleRequest BeaconsUpdate where
         type Rs BeaconsUpdate = Beacon
-        type Scopes BeaconsUpdate = '[]
+        type Scopes BeaconsUpdate =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsUpdate'{..}
           = go _buBeaconName _buXgafv _buUploadProtocol
               (Just _buPp)
               _buAccessToken
               _buUploadType
               _buBearerToken
+              _buProjectId
               _buCallback
               (Just AltJSON)
               _buPayload

@@ -25,7 +25,10 @@
 -- \`namespacedType\` to choose which attachments should be deleted. If you
 -- do not specify \`namespacedType\`, all your attachments on the given
 -- beacon will be deleted. You also may explicitly specify \`*\/*\` to
--- delete all.
+-- delete all. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.attachments.batchDelete@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
@@ -46,6 +49,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     , babdUploadType
     , babdBearerToken
     , babdNamespacedType
+    , babdProjectId
     , babdCallback
     ) where
 
@@ -65,16 +69,20 @@ type BeaconsAttachmentsBatchDeleteResource =
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
                        QueryParam "namespacedType" Text :>
-                         QueryParam "callback" Text :>
-                           QueryParam "alt" AltJSON :>
-                             Post '[JSON] DeleteAttachmentsResponse
+                         QueryParam "projectId" Text :>
+                           QueryParam "callback" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Post '[JSON] DeleteAttachmentsResponse
 
 -- | Deletes multiple attachments on a given beacon. This operation is
 -- permanent and cannot be undone. You can optionally specify
 -- \`namespacedType\` to choose which attachments should be deleted. If you
 -- do not specify \`namespacedType\`, all your attachments on the given
 -- beacon will be deleted. You also may explicitly specify \`*\/*\` to
--- delete all.
+-- delete all. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsAttachmentsBatchDelete' smart constructor.
 data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete'
@@ -86,6 +94,7 @@ data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete'
     , _babdUploadType     :: !(Maybe Text)
     , _babdBearerToken    :: !(Maybe Text)
     , _babdNamespacedType :: !(Maybe Text)
+    , _babdProjectId      :: !(Maybe Text)
     , _babdCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -109,6 +118,8 @@ data BeaconsAttachmentsBatchDelete = BeaconsAttachmentsBatchDelete'
 --
 -- * 'babdNamespacedType'
 --
+-- * 'babdProjectId'
+--
 -- * 'babdCallback'
 beaconsAttachmentsBatchDelete
     :: Text -- ^ 'babdBeaconName'
@@ -123,6 +134,7 @@ beaconsAttachmentsBatchDelete pBabdBeaconName_ =
     , _babdUploadType = Nothing
     , _babdBearerToken = Nothing
     , _babdNamespacedType = Nothing
+    , _babdProjectId = Nothing
     , _babdCallback = Nothing
     }
 
@@ -147,7 +159,12 @@ babdAccessToken
   = lens _babdAccessToken
       (\ s a -> s{_babdAccessToken = a})
 
--- | The beacon whose attachments are to be deleted. Required.
+-- | The beacon whose attachments should be deleted. A beacon name has the
+-- format \"beacons\/N!beaconId\" where the beaconId is the base16 ID
+-- broadcast by the beacon and N is a code for the beacon\'s type. Possible
+-- values are \`3\` for Eddystone-UID, \`4\` for Eddystone-EID, \`1\` for
+-- iBeacon, or \`5\` for AltBeacon. For Eddystone-EID beacons, you may use
+-- either the current EID or the beacon\'s \"stable\" UID. Required.
 babdBeaconName :: Lens' BeaconsAttachmentsBatchDelete Text
 babdBeaconName
   = lens _babdBeaconName
@@ -173,6 +190,16 @@ babdNamespacedType
   = lens _babdNamespacedType
       (\ s a -> s{_babdNamespacedType = a})
 
+-- | The project id to delete beacon attachments under. This field can be
+-- used when \"*\" is specified to mean all attachment namespaces. Projects
+-- may have multiple attachments with multiple namespaces. If \"*\" is
+-- specified and the projectId string is empty, then the project making the
+-- request is used. Optional.
+babdProjectId :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
+babdProjectId
+  = lens _babdProjectId
+      (\ s a -> s{_babdProjectId = a})
+
 -- | JSONP
 babdCallback :: Lens' BeaconsAttachmentsBatchDelete (Maybe Text)
 babdCallback
@@ -182,7 +209,8 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete
          where
         type Rs BeaconsAttachmentsBatchDelete =
              DeleteAttachmentsResponse
-        type Scopes BeaconsAttachmentsBatchDelete = '[]
+        type Scopes BeaconsAttachmentsBatchDelete =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsAttachmentsBatchDelete'{..}
           = go _babdBeaconName _babdXgafv _babdUploadProtocol
               (Just _babdPp)
@@ -190,6 +218,7 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete
               _babdUploadType
               _babdBearerToken
               _babdNamespacedType
+              _babdProjectId
               _babdCallback
               (Just AltJSON)
               proximityBeaconService

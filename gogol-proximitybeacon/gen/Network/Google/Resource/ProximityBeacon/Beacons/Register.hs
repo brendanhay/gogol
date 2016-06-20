@@ -22,7 +22,10 @@
 --
 -- Registers a previously unregistered beacon given its \`advertisedId\`.
 -- These IDs are unique within the system. An ID can be registered only
--- once.
+-- once. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.register@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Register
@@ -42,6 +45,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
     , brUploadType
     , brPayload
     , brBearerToken
+    , brProjectId
     , brCallback
     ) where
 
@@ -59,13 +63,17 @@ type BeaconsRegisterResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :>
-                         ReqBody '[JSON] Beacon :> Post '[JSON] Beacon
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Beacon :> Post '[JSON] Beacon
 
 -- | Registers a previously unregistered beacon given its \`advertisedId\`.
 -- These IDs are unique within the system. An ID can be registered only
--- once.
+-- once. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsRegister' smart constructor.
 data BeaconsRegister = BeaconsRegister'
@@ -76,6 +84,7 @@ data BeaconsRegister = BeaconsRegister'
     , _brUploadType     :: !(Maybe Text)
     , _brPayload        :: !Beacon
     , _brBearerToken    :: !(Maybe Text)
+    , _brProjectId      :: !(Maybe Text)
     , _brCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -97,6 +106,8 @@ data BeaconsRegister = BeaconsRegister'
 --
 -- * 'brBearerToken'
 --
+-- * 'brProjectId'
+--
 -- * 'brCallback'
 beaconsRegister
     :: Beacon -- ^ 'brPayload'
@@ -110,6 +121,7 @@ beaconsRegister pBrPayload_ =
     , _brUploadType = Nothing
     , _brPayload = pBrPayload_
     , _brBearerToken = Nothing
+    , _brProjectId = Nothing
     , _brCallback = Nothing
     }
 
@@ -149,6 +161,13 @@ brBearerToken
   = lens _brBearerToken
       (\ s a -> s{_brBearerToken = a})
 
+-- | The project id of the project the beacon will be registered to. If the
+-- project id is not specified then the project making the request is used.
+-- Optional.
+brProjectId :: Lens' BeaconsRegister (Maybe Text)
+brProjectId
+  = lens _brProjectId (\ s a -> s{_brProjectId = a})
+
 -- | JSONP
 brCallback :: Lens' BeaconsRegister (Maybe Text)
 brCallback
@@ -156,12 +175,14 @@ brCallback
 
 instance GoogleRequest BeaconsRegister where
         type Rs BeaconsRegister = Beacon
-        type Scopes BeaconsRegister = '[]
+        type Scopes BeaconsRegister =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsRegister'{..}
           = go _brXgafv _brUploadProtocol (Just _brPp)
               _brAccessToken
               _brUploadType
               _brBearerToken
+              _brProjectId
               _brCallback
               (Just AltJSON)
               _brPayload

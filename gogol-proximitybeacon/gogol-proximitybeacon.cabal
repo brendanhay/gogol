@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    This API provides services to register, manage, index, and search
-    beacons.
+    Registers, manages, indexes, and searches beacons.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -49,7 +48,9 @@ library
         , Network.Google.Resource.ProximityBeacon.Beacons.List
         , Network.Google.Resource.ProximityBeacon.Beacons.Register
         , Network.Google.Resource.ProximityBeacon.Beacons.Update
+        , Network.Google.Resource.ProximityBeacon.GetEidparams
         , Network.Google.Resource.ProximityBeacon.Namespaces.List
+        , Network.Google.Resource.ProximityBeacon.Namespaces.Update
 
     other-modules:
           Network.Google.ProximityBeacon.Types.Product

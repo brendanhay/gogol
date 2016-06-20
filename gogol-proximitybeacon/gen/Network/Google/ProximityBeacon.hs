@@ -13,14 +13,16 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- This API provides services to register, manage, index, and search
--- beacons.
+-- Registers, manages, indexes, and searches beacons.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference>
 module Network.Google.ProximityBeacon
     (
     -- * Service Configuration
       proximityBeaconService
+
+    -- * OAuth Scopes
+    , userlocationBeaconRegistryScope
 
     -- * API Declaration
     , ProximityBeaconAPI
@@ -66,8 +68,14 @@ module Network.Google.ProximityBeacon
     -- ** proximitybeacon.beacons.update
     , module Network.Google.Resource.ProximityBeacon.Beacons.Update
 
+    -- ** proximitybeacon.getEidparams
+    , module Network.Google.Resource.ProximityBeacon.GetEidparams
+
     -- ** proximitybeacon.namespaces.list
     , module Network.Google.Resource.ProximityBeacon.Namespaces.List
+
+    -- ** proximitybeacon.namespaces.update
+    , module Network.Google.Resource.ProximityBeacon.Namespaces.Update
 
     -- * Types
 
@@ -109,6 +117,16 @@ module Network.Google.ProximityBeacon
     , nServingVisibility
     , nNamespaceName
 
+    -- ** EphemeralIdRegistration
+    , EphemeralIdRegistration
+    , ephemeralIdRegistration
+    , eirRotationPeriodExponent
+    , eirInitialClockValue
+    , eirBeaconIdentityKey
+    , eirBeaconEcdhPublicKey
+    , eirInitialEid
+    , eirServiceEcdhPublicKey
+
     -- ** ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
@@ -127,8 +145,10 @@ module Network.Google.ProximityBeacon
     , bLatLng
     , bStatus
     , bBeaconName
+    , bEphemeralIdRegistration
     , bIndoorLevel
     , bExpectedStability
+    , bProvisioningKey
     , bDescription
     , bPlaceId
     , bAdvertisedId
@@ -151,12 +171,18 @@ module Network.Google.ProximityBeacon
     , indoorLevel
     , ilName
 
+    -- ** EphemeralIdRegistrationParams
+    , EphemeralIdRegistrationParams
+    , ephemeralIdRegistrationParams
+    , eirpMinRotationPeriodExponent
+    , eirpMaxRotationPeriodExponent
+    , eirpServiceEcdhPublicKey
+
     -- ** BeaconInfo
     , BeaconInfo
     , beaconInfo
     , biAttachments
     , biBeaconName
-    , biDescription
     , biAdvertisedId
 
     -- ** Observation
@@ -213,7 +239,9 @@ import           Network.Google.Resource.ProximityBeacon.Beacons.Get
 import           Network.Google.Resource.ProximityBeacon.Beacons.List
 import           Network.Google.Resource.ProximityBeacon.Beacons.Register
 import           Network.Google.Resource.ProximityBeacon.Beacons.Update
+import           Network.Google.Resource.ProximityBeacon.GetEidparams
 import           Network.Google.Resource.ProximityBeacon.Namespaces.List
+import           Network.Google.Resource.ProximityBeacon.Namespaces.Update
 
 {- $resources
 TODO
@@ -221,8 +249,9 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Proximity Beacon API service.
 type ProximityBeaconAPI =
-     BeaconsAttachmentsListResource :<|>
-       BeaconsAttachmentsCreateResource
+     GetEidparamsResource :<|>
+       BeaconsAttachmentsListResource
+       :<|> BeaconsAttachmentsCreateResource
        :<|> BeaconsAttachmentsBatchDeleteResource
        :<|> BeaconsAttachmentsDeleteResource
        :<|> BeaconsDiagnosticsListResource
@@ -234,4 +263,5 @@ type ProximityBeaconAPI =
        :<|> BeaconsDecommissionResource
        :<|> BeaconsUpdateResource
        :<|> NamespacesListResource
+       :<|> NamespacesUpdateResource
        :<|> BeaconInfoGetforObservedResource

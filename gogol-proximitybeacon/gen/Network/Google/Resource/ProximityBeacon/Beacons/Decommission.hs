@@ -23,7 +23,10 @@
 -- Decommissions the specified beacon in the service. This beacon will no
 -- longer be returned from \`beaconinfo.getforobserved\`. This operation is
 -- permanent -- you will not be able to re-register a beacon with this ID
--- again.
+-- again. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ <https://developers.google.com/beacons/proximity/ Google Proximity Beacon API Reference> for @proximitybeacon.beacons.decommission@.
 module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
@@ -43,6 +46,7 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
     , beaBeaconName
     , beaUploadType
     , beaBearerToken
+    , beaProjectId
     , beaCallback
     ) where
 
@@ -60,13 +64,17 @@ type BeaconsDecommissionResource =
                QueryParam "access_token" Text :>
                  QueryParam "uploadType" Text :>
                    QueryParam "bearer_token" Text :>
-                     QueryParam "callback" Text :>
-                       QueryParam "alt" AltJSON :> Post '[JSON] Empty
+                     QueryParam "projectId" Text :>
+                       QueryParam "callback" Text :>
+                         QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Decommissions the specified beacon in the service. This beacon will no
 -- longer be returned from \`beaconinfo.getforobserved\`. This operation is
 -- permanent -- you will not be able to re-register a beacon with this ID
--- again.
+-- again. Authenticate using an [OAuth access
+-- token](https:\/\/developers.google.com\/identity\/protocols\/OAuth2)
+-- from a signed-in user with **Is owner** or **Can edit** permissions in
+-- the Google Developers Console project.
 --
 -- /See:/ 'beaconsDecommission' smart constructor.
 data BeaconsDecommission = BeaconsDecommission'
@@ -77,6 +85,7 @@ data BeaconsDecommission = BeaconsDecommission'
     , _beaBeaconName     :: !Text
     , _beaUploadType     :: !(Maybe Text)
     , _beaBearerToken    :: !(Maybe Text)
+    , _beaProjectId      :: !(Maybe Text)
     , _beaCallback       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -98,6 +107,8 @@ data BeaconsDecommission = BeaconsDecommission'
 --
 -- * 'beaBearerToken'
 --
+-- * 'beaProjectId'
+--
 -- * 'beaCallback'
 beaconsDecommission
     :: Text -- ^ 'beaBeaconName'
@@ -111,6 +122,7 @@ beaconsDecommission pBeaBeaconName_ =
     , _beaBeaconName = pBeaBeaconName_
     , _beaUploadType = Nothing
     , _beaBearerToken = Nothing
+    , _beaProjectId = Nothing
     , _beaCallback = Nothing
     }
 
@@ -134,7 +146,12 @@ beaAccessToken
   = lens _beaAccessToken
       (\ s a -> s{_beaAccessToken = a})
 
--- | Beacon that should be decommissioned. Required.
+-- | Beacon that should be decommissioned. A beacon name has the format
+-- \"beacons\/N!beaconId\" where the beaconId is the base16 ID broadcast by
+-- the beacon and N is a code for the beacon\'s type. Possible values are
+-- \`3\` for Eddystone-UID, \`4\` for Eddystone-EID, \`1\` for iBeacon, or
+-- \`5\` for AltBeacon. For Eddystone-EID beacons, you may use either the
+-- current EID of the beacon\'s \"stable\" UID. Required.
 beaBeaconName :: Lens' BeaconsDecommission Text
 beaBeaconName
   = lens _beaBeaconName
@@ -152,6 +169,13 @@ beaBearerToken
   = lens _beaBearerToken
       (\ s a -> s{_beaBearerToken = a})
 
+-- | The project id of the beacon to decommission. If the project id is not
+-- specified then the project making the request is used. The project id
+-- must match the project that owns the beacon. Optional.
+beaProjectId :: Lens' BeaconsDecommission (Maybe Text)
+beaProjectId
+  = lens _beaProjectId (\ s a -> s{_beaProjectId = a})
+
 -- | JSONP
 beaCallback :: Lens' BeaconsDecommission (Maybe Text)
 beaCallback
@@ -159,13 +183,15 @@ beaCallback
 
 instance GoogleRequest BeaconsDecommission where
         type Rs BeaconsDecommission = Empty
-        type Scopes BeaconsDecommission = '[]
+        type Scopes BeaconsDecommission =
+             '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
         requestClient BeaconsDecommission'{..}
           = go _beaBeaconName _beaXgafv _beaUploadProtocol
               (Just _beaPp)
               _beaAccessToken
               _beaUploadType
               _beaBearerToken
+              _beaProjectId
               _beaCallback
               (Just AltJSON)
               proximityBeaconService

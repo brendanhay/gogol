@@ -19,6 +19,9 @@ module Network.Google.ProximityBeacon.Types
     -- * Service Configuration
       proximityBeaconService
 
+    -- * OAuth Scopes
+    , userlocationBeaconRegistryScope
+
     -- * LatLng
     , LatLng
     , latLng
@@ -57,6 +60,16 @@ module Network.Google.ProximityBeacon.Types
     , nServingVisibility
     , nNamespaceName
 
+    -- * EphemeralIdRegistration
+    , EphemeralIdRegistration
+    , ephemeralIdRegistration
+    , eirRotationPeriodExponent
+    , eirInitialClockValue
+    , eirBeaconIdentityKey
+    , eirBeaconEcdhPublicKey
+    , eirInitialEid
+    , eirServiceEcdhPublicKey
+
     -- * ListNamespacesResponse
     , ListNamespacesResponse
     , listNamespacesResponse
@@ -75,8 +88,10 @@ module Network.Google.ProximityBeacon.Types
     , bLatLng
     , bStatus
     , bBeaconName
+    , bEphemeralIdRegistration
     , bIndoorLevel
     , bExpectedStability
+    , bProvisioningKey
     , bDescription
     , bPlaceId
     , bAdvertisedId
@@ -99,12 +114,18 @@ module Network.Google.ProximityBeacon.Types
     , indoorLevel
     , ilName
 
+    -- * EphemeralIdRegistrationParams
+    , EphemeralIdRegistrationParams
+    , ephemeralIdRegistrationParams
+    , eirpMinRotationPeriodExponent
+    , eirpMaxRotationPeriodExponent
+    , eirpServiceEcdhPublicKey
+
     -- * BeaconInfo
     , BeaconInfo
     , beaconInfo
     , biAttachments
     , biBeaconName
-    , biDescription
     , biAdvertisedId
 
     -- * Observation
@@ -156,3 +177,7 @@ proximityBeaconService
   = defaultService
       (ServiceId "proximitybeacon:v1beta1")
       "proximitybeacon.googleapis.com"
+
+-- | View and modify your beacons
+userlocationBeaconRegistryScope :: Proxy '["https://www.googleapis.com/auth/userlocation.beacon.registry"]
+userlocationBeaconRegistryScope = Proxy;
