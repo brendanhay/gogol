@@ -38,7 +38,6 @@ module Network.Google.Resource.AndroidEnterprise.Products.List
     , plQuery
     , plLanguage
     , plApproved
-    , plStartIndex
     , plMaxResults
     ) where
 
@@ -57,10 +56,9 @@ type ProductsListResource =
                  QueryParam "query" Text :>
                    QueryParam "language" Text :>
                      QueryParam "approved" Bool :>
-                       QueryParam "startIndex" (Textual Word32) :>
-                         QueryParam "maxResults" (Textual Word32) :>
-                           QueryParam "alt" AltJSON :>
-                             Get '[JSON] ProductsListResponse
+                       QueryParam "maxResults" (Textual Word32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ProductsListResponse
 
 -- | Finds approved products that match a query.
 --
@@ -71,7 +69,6 @@ data ProductsList = ProductsList'
     , _plQuery        :: !(Maybe Text)
     , _plLanguage     :: !(Maybe Text)
     , _plApproved     :: !(Maybe Bool)
-    , _plStartIndex   :: !(Maybe (Textual Word32))
     , _plMaxResults   :: !(Maybe (Textual Word32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -89,8 +86,6 @@ data ProductsList = ProductsList'
 --
 -- * 'plApproved'
 --
--- * 'plStartIndex'
---
 -- * 'plMaxResults'
 productsList
     :: Text -- ^ 'plEnterpriseId'
@@ -102,7 +97,6 @@ productsList pPlEnterpriseId_ =
     , _plQuery = Nothing
     , _plLanguage = Nothing
     , _plApproved = Nothing
-    , _plStartIndex = Nothing
     , _plMaxResults = Nothing
     }
 
@@ -112,31 +106,36 @@ plEnterpriseId
   = lens _plEnterpriseId
       (\ s a -> s{_plEnterpriseId = a})
 
+-- | A pagination token is contained in a request’s response when there are
+-- more products. The token can be used in a subsequent request to obtain
+-- more products, and so forth. This parameter cannot be used in the
+-- initial request.
 plToken :: Lens' ProductsList (Maybe Text)
 plToken = lens _plToken (\ s a -> s{_plToken = a})
 
 -- | The search query as typed in the Google Play Store search box. If
--- omitted, all approved apps will be returned.
+-- omitted, all approved apps will be returned (using the pagination
+-- parameters).
 plQuery :: Lens' ProductsList (Maybe Text)
 plQuery = lens _plQuery (\ s a -> s{_plQuery = a})
 
 -- | The BCP47 tag for the user\'s preferred language (e.g. \"en-US\",
--- \"de\"). Results are returned in the language best matching it.
+-- \"de\"). Results are returned in the language best matching the
+-- preferred language.
 plLanguage :: Lens' ProductsList (Maybe Text)
 plLanguage
   = lens _plLanguage (\ s a -> s{_plLanguage = a})
 
--- | Whether to search amongst all products or only amongst approved ones.
--- Only \"true\" is supported, and should be specified.
+-- | Specifies whether to search among all products (false) or among only
+-- products that have been approved (true). Only \"true\" is supported, and
+-- should be specified.
 plApproved :: Lens' ProductsList (Maybe Bool)
 plApproved
   = lens _plApproved (\ s a -> s{_plApproved = a})
 
-plStartIndex :: Lens' ProductsList (Maybe Word32)
-plStartIndex
-  = lens _plStartIndex (\ s a -> s{_plStartIndex = a})
-      . mapping _Coerce
-
+-- | Specifies the maximum number of products that can be returned per
+-- request. If not specified, uses a default value of 100, which is also
+-- the maximum retrievable within a single response.
 plMaxResults :: Lens' ProductsList (Maybe Word32)
 plMaxResults
   = lens _plMaxResults (\ s a -> s{_plMaxResults = a})
@@ -149,7 +148,6 @@ instance GoogleRequest ProductsList where
         requestClient ProductsList'{..}
           = go _plEnterpriseId _plToken _plQuery _plLanguage
               _plApproved
-              _plStartIndex
               _plMaxResults
               (Just AltJSON)
               androidEnterpriseService

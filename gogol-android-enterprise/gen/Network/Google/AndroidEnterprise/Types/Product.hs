@@ -896,7 +896,8 @@ dKind = lens _dKind (\ s a -> s{_dKind = a})
 -- \"managedProfile\" means that the EMM\'s app is the profile owner (and
 -- there is a separate personal profile which is not managed).
 -- \"containerApp\" means that the EMM\'s app is managing the Android for
--- Work container app on the device.
+-- Work container app on the device. ?unmanagedProfile? means that the
+-- EMM?s app is managing a managed user on an unmanaged device
 dManagementType :: Lens' Device (Maybe Text)
 dManagementType
   = lens _dManagementType
