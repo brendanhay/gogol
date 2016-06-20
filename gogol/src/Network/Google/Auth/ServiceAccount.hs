@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PolyKinds         #-}
 
 -- |
 -- Module      : Network.Google.Auth.ServiceAccount
@@ -27,7 +28,8 @@ import qualified Data.ByteString.Char8           as BS8
 import qualified Data.Text                       as Text
 import qualified Data.Text.Encoding              as Text
 import           Data.Time.Clock.POSIX
-import           Network.Google.Auth.Scope       (concatScopes)
+import           Network.Google.Auth.Scope       (AllowScopes (..),
+                                                  concatScopes)
 import           Network.Google.Compute.Metadata
 import           Network.Google.Internal.Auth
 import           Network.Google.Internal.Logger
@@ -48,7 +50,7 @@ metadataToken :: (MonadIO m, MonadCatch m)
               => ServiceId
               -> Logger
               -> Manager
-              -> m OAuthToken
+              -> m (OAuthToken s)
 metadataToken s = refreshRequest $
     metadataRequest
         { Client.path = "instance/service-accounts/"
@@ -57,14 +59,14 @@ metadataToken s = refreshRequest $
         }
 
 -- | Use the 'AuthorizedUser' to obtain a new 'OAuthToken'. If the supplied
--- 'RefreshToken' is 'Nothing', the original 'RefreshToken' from he user will
+-- 'RefreshToken' is 'Nothing', the original 'RefreshToken' from the user will
 -- be used.
 authorizedUserToken :: (MonadIO m, MonadCatch m)
                     => AuthorizedUser
                     -> Maybe RefreshToken
                     -> Logger
                     -> Manager
-                    -> m OAuthToken
+                    -> m (OAuthToken s)
 authorizedUserToken u r = refreshRequest $
     accountsRequest
         { Client.requestBody = textBody $
@@ -75,16 +77,16 @@ authorizedUserToken u r = refreshRequest $
         }
 
 
--- | Obtain an 'OAuthToken' from 'accountsURL' by signing and
--- sending a JSON Web Token (JWT) using the supplied 'ServiceAccount'.
-serviceAccountToken :: (MonadIO m, MonadCatch m)
+-- | Obtain an 'OAuthToken' from @https://accounts.google.com/o/oauth2/token@
+-- by signing and sending a JSON Web Token (JWT) using the supplied 'ServiceAccount'.
+serviceAccountToken :: (MonadIO m, MonadCatch m, AllowScopes s)
                     => ServiceAccount
-                    -> [OAuthScope]
+                    -> proxy s
                     -> Logger
                     -> Manager
-                    -> m OAuthToken
-serviceAccountToken s ss l m = do
-    b <- encodeBearerJWT s ss
+                    -> m (OAuthToken s)
+serviceAccountToken s p l m = do
+    b <- encodeBearerJWT s p
     let rq = accountsRequest
            { Client.requestBody = RequestBodyBS $
                   "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer"
@@ -95,11 +97,11 @@ serviceAccountToken s ss l m = do
 
 -- | Encode the supplied 'ServiceAccount's key id, email, and scopes using the
 -- private key in the JSON Web Token (JWT) format.
-encodeBearerJWT :: (MonadIO m, MonadThrow m)
+encodeBearerJWT :: (MonadIO m, MonadThrow m, AllowScopes s)
                 => ServiceAccount
-                -> [OAuthScope]
+                -> proxy s
                 -> m ByteString
-encodeBearerJWT s ss = liftIO $ do
+encodeBearerJWT s p = liftIO $ do
     i <- input . truncate <$> getPOSIXTime
     r <- signSafer (Just SHA256) (_servicePrivateKey s) i
     either failure (pure . concat' i) r
@@ -126,7 +128,7 @@ encodeBearerJWT s ss = liftIO $ do
 
         payload = base64Encode
             [ "aud"   .= accountsURL
-            , "scope" .= concatScopes ss
+            , "scope" .= concatScopes (allowScopes p)
             , "iat"   .= n
             , "exp"   .= (n + seconds maxTokenLifetime)
             , "iss"   .= _serviceEmail s

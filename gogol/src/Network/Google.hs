@@ -140,7 +140,6 @@ import           Network.Google.Internal.Logger
 import           Network.Google.Prelude
 import           Network.Google.Types
 import           Network.HTTP.Conduit           (newManager, tlsManagerSettings)
-import           Network.HTTP.Media.MediaType   (MediaType)
 
 -- | The 'Google' monad containing configuration environment and tracks
 -- resource allocation via 'ResourceT'.
@@ -409,12 +408,16 @@ with 'override':
 -}
 
 {- $credentials #credentials#
-If you wish to manually specify 'Credentials' via 'newEnvWith' you can use one
+By default 'newEnv' uses 'getApplicationDefault' to discover credentials
+from the underlying, following Google's official library behaviour.
+If you wish to manually specify 'Credentials' via 'newEnvWith', you can use one
 of the following supported credential mechanisms:
 
 * "Network.Google.Auth.InstalledApplication" - Applications installed on devices.
 * "Network.Google.Auth.ServiceAccount" - Applications deployed to custom environments.
 * "Network.Google.Auth.ApplicationDefault" - Applications deployed to App Engine (GAE) or Compute Engine (GCE).
+
+See "Network.Google.Auth" for more information.
 -}
 
 {- $async

@@ -17,6 +17,7 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
+-- Internal types and helpers for constructing OAuth credentials.
 module Network.Google.Internal.Auth where
 
 import           Control.Exception.Lens         (exception)
@@ -51,7 +52,7 @@ data Credentials (s :: [Symbol])
       -- ^ Obtain and refresh access tokens from the underlying GCE host metadata
       -- at @http:\/\/169.254.169.254@.
 
-    | FromClient !OAuthClient !OAuthCode
+    | FromClient !OAuthClient !(OAuthCode s)
       -- ^ Obtain and refresh access tokens using the specified client secret
       -- and authorization code obtained from.
       --
@@ -154,23 +155,24 @@ data OAuthClient = OAuthClient
 The '_tokenAccess' field will be inserted verbatim into the
 @Authorization: Bearer ...@ header for all HTTP requests.
 -}
-data OAuthToken = OAuthToken
+data OAuthToken (s :: [Symbol]) = OAuthToken
     { _tokenAccess  :: !AccessToken
     , _tokenRefresh :: !(Maybe RefreshToken)
     , _tokenExpiry  :: !UTCTime
     } deriving (Eq, Show)
 
-instance FromJSON (UTCTime -> OAuthToken) where
+instance FromJSON (UTCTime -> OAuthToken s) where
     parseJSON = withObject "bearer" $ \o -> do
         t <- o .:  "access_token"
         r <- o .:? "refresh_token"
         e <- o .:  "expires_in" <&> fromInteger
         pure (OAuthToken t r . addUTCTime e)
 
-newtype OAuthCode = OAuthCode Text
+-- | An OAuth client authorization code.
+newtype OAuthCode (s :: [Symbol]) = OAuthCode Text
     deriving (Eq, Ord, Show, Read, IsString, Generic, Typeable, FromJSON, ToJSON)
 
-instance ToHttpApiData OAuthCode where
+instance ToHttpApiData (OAuthCode s) where
     toQueryParam (OAuthCode c) = c
     toHeader     (OAuthCode c) = Text.encodeUtf8 c
 
@@ -264,7 +266,7 @@ refreshRequest :: (MonadIO m, MonadCatch m)
                => Client.Request
                -> Logger
                -> Manager
-               -> m OAuthToken
+               -> m (OAuthToken s)
 refreshRequest rq l m = do
     logDebug l rq                          -- debug:ClientRequest
 

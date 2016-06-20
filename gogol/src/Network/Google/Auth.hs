@@ -37,6 +37,7 @@ module Network.Google.Auth
     , fromFilePath
 
     -- ** Installed Application Credentials
+    , installedApplication
     , formURL
 
     -- ** Authorizing Requests
@@ -97,7 +98,7 @@ import           Network.HTTP.Types                       (hAuthorization)
 -- credentials that can be used to perform a refresh.
 data Auth (s :: [Symbol]) = Auth
     { _credentials :: !(Credentials s)
-    , _token       :: !OAuthToken
+    , _token       :: !(OAuthToken  s)
     }
 
 -- | Check if the given token is still valid, ie. younger than the projected
@@ -110,6 +111,7 @@ data Auth (s :: [Symbol]) = Auth
 validate :: MonadIO m => Auth s -> m Bool
 validate a = (< _tokenExpiry (_token a)) <$> liftIO getCurrentTime
 
+-- | Data store which ensures thread-safe access of credentials.
 newtype Store (s :: [Symbol]) = Store (MVar (Auth s))
 
 -- | Construct storage containing the credentials which have not yet been
@@ -127,7 +129,7 @@ getToken :: (MonadIO m, MonadCatch m, AllowScopes s)
          => Store s
          -> Logger
          -> Manager
-         -> m OAuthToken
+         -> m (OAuthToken s)
 getToken (Store s) l m = do
     x  <- liftIO (readMVar s)
     mx <- validate x
@@ -143,7 +145,7 @@ getToken (Store s) l m = do
 
 -- | Perform the initial credentials exchange to obtain a valid 'OAuthToken'
 -- suitable for authorizing requests.
-exchange :: (MonadIO m, MonadCatch m, AllowScopes s)
+exchange :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
          => Credentials s
          -> Logger
          -> Manager
@@ -152,12 +154,12 @@ exchange c l = fmap (Auth c) . action l
   where
     action = case c of
         FromMetadata s    -> metadataToken       s
-        FromAccount  a    -> serviceAccountToken a (allowScopes c)
+        FromAccount  a    -> serviceAccountToken a (Proxy :: Proxy s)
         FromClient   x n  -> exchangeCode        x n
         FromUser     u    -> authorizedUserToken u Nothing
 
 -- | Refresh an existing 'OAuthToken' using
-refresh :: (MonadIO m, MonadCatch m, AllowScopes s)
+refresh :: forall m s. (MonadIO m, MonadCatch m, AllowScopes s)
         => Auth s
         -> Logger
         -> Manager
@@ -166,7 +168,7 @@ refresh (Auth c t) l = fmap (Auth c) . action l
   where
     action = case c of
         FromMetadata s   -> metadataToken       s
-        FromAccount  a   -> serviceAccountToken a (allowScopes c)
+        FromAccount  a   -> serviceAccountToken a (Proxy :: Proxy s)
         FromClient   x _ -> refreshToken        x t
         FromUser     u   -> authorizedUserToken u (_tokenRefresh t)
 

@@ -64,6 +64,7 @@ instance ToHttpApiData AltJSON   where toQueryParam = const "json"
 instance ToHttpApiData AltMedia  where toQueryParam = const "media"
 instance ToHttpApiData Multipart where toQueryParam = const "multipart"
 
+-- | An OAuth2 scope.
 newtype OAuthScope = OAuthScope Text
     deriving
         ( Eq
@@ -79,6 +80,7 @@ newtype OAuthScope = OAuthScope Text
         , ToJSON
         )
 
+-- | An OAuth2 access token.
 newtype AccessToken = AccessToken Text
     deriving
         ( Eq
@@ -94,6 +96,7 @@ newtype AccessToken = AccessToken Text
         , ToJSON
         )
 
+-- | An OAuth2 refresh token.
 newtype RefreshToken = RefreshToken Text
     deriving
         ( Eq
@@ -109,6 +112,7 @@ newtype RefreshToken = RefreshToken Text
         , ToJSON
         )
 
+-- | A client identifier.
 newtype ClientId = ClientId Text
     deriving
         ( Eq
@@ -124,21 +128,7 @@ newtype ClientId = ClientId Text
         , ToJSON
         )
 
-newtype Secret = Secret Text
-    deriving
-        ( Eq
-        , Ord
-        , Show
-        , Read
-        , IsString
-        , Generic
-        , Typeable
-        , FromHttpApiData
-        , ToHttpApiData
-        , FromJSON
-        , ToJSON
-        )
-
+-- | A service identifier.
 newtype ServiceId = ServiceId Text
     deriving
         ( Eq
@@ -153,6 +143,24 @@ newtype ServiceId = ServiceId Text
         , FromJSON
         , ToJSON
         )
+
+-- | An opaque client secret.
+newtype Secret = Secret Text
+    deriving
+        ( Eq
+        , Ord
+        , Read
+        , IsString
+        , Generic
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
+
+instance Show Secret where
+    show = const "*****"
 
 newtype MediaDownload a = MediaDownload a
 data    MediaUpload   a = MediaUpload   a Body

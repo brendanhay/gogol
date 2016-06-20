@@ -13,7 +13,7 @@
 -- Stability   : provisional
 -- Portability : non-portable (GHC extensions)
 --
--- Environment and Google specific configuration for the 'Network.Google' monad.
+-- Environment and Google specific configuration for the "Network.Google" monad.
 module Network.Google.Env where
 
 import Control.Lens                   (Lens', lens, (<>~), (?~))
@@ -70,21 +70,28 @@ class HasEnv s a | a -> s where
 instance HasEnv s (Env s) where
     environment = id
 
--- | Provide a function which will be added to the existing stack
--- of overrides which are applied to all service configurations.
+-- | Provide a function which will be added to the stack
+-- of overrides, which are applied to all service configurations.
+-- This provides a way to configure any request that is sent using the
+-- modified 'Env'.
 --
 -- /See:/ 'override'.
 configure :: HasEnv s a => (ServiceConfig -> ServiceConfig) -> a -> a
 configure f = envOverride <>~ Dual (Endo f)
 
--- | Configure a specific 'Service'. All requests belonging to the
+-- | Override a specific 'ServiceConfig'. All requests belonging to the
 -- supplied service will use this configuration instead of the default.
 --
--- It's suggested you use a modified version of the default 'Service', such as:
+-- Typically you would override a modified version of the default 'ServiceConfig'
+-- for the desired service:
 --
--- @
--- override (Network.Google.Gmail.gmailService & serviceHost .~ "localhost") env
--- @
+-- > override (gmailService & serviceHost .~ "localhost") env
+--
+-- Or when using "Network.Google" with "Control.Monad.Reader" or "Control.Lens.Zoom"
+-- and the 'ServiceConfig' lenses:
+--
+-- > local (override (computeService & serviceHost .~ "localhost")) $ do
+-- >    ...
 --
 -- /See:/ 'configure'.
 override :: HasEnv s a => ServiceConfig -> a -> a
