@@ -313,6 +313,7 @@ module Network.Google.AdExchangeBuyer
     , cHeight
     , cBuyerCreativeId
     , cAdvertiserName
+    , cAdChoicesDestinationURL
     , cAgencyId
     , cCorrections
     , cProductCategories
@@ -515,7 +516,6 @@ module Network.Google.AdExchangeBuyer
     , pProposalId
     , pName
     , pSellerContacts
-    , pLastUpdaterRole
     , pLabels
     , pRevisionTimeMs
     , pProposalState
@@ -788,6 +788,7 @@ module Network.Google.AdExchangeBuyer
     -- ** DealServingMetadataDealPauseStatus
     , DealServingMetadataDealPauseStatus
     , dealServingMetadataDealPauseStatus
+    , dsmdpsFirstPausedBy
     , dsmdpsHasBuyerPaused
     , dsmdpsHasSellerPaused
 

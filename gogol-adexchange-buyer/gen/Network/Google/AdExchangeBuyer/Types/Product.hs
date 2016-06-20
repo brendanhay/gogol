@@ -1451,31 +1451,32 @@ instance ToJSON PricePerBuyer where
 --
 -- /See:/ 'creative' smart constructor.
 data Creative = Creative'
-    { _cAttribute             :: !(Maybe [Textual Int32])
-    , _cNATiveAd              :: !(Maybe CreativeNATiveAd)
-    , _cHeight                :: !(Maybe (Textual Int32))
-    , _cBuyerCreativeId       :: !(Maybe Text)
-    , _cAdvertiserName        :: !(Maybe Text)
-    , _cAgencyId              :: !(Maybe (Textual Int64))
-    , _cCorrections           :: !(Maybe [CreativeCorrectionsItem])
-    , _cProductCategories     :: !(Maybe [Textual Int32])
-    , _cKind                  :: !Text
-    , _cHTMLSnippet           :: !(Maybe Text)
-    , _cAdvertiserId          :: !(Maybe [Textual Int64])
-    , _cRestrictedCategories  :: !(Maybe [Textual Int32])
-    , _cDealsStatus           :: !(Maybe Text)
-    , _cWidth                 :: !(Maybe (Textual Int32))
-    , _cClickThroughURL       :: !(Maybe [Text])
-    , _cVendorType            :: !(Maybe [Textual Int32])
-    , _cAccountId             :: !(Maybe (Textual Int32))
-    , _cImpressionTrackingURL :: !(Maybe [Text])
-    , _cFilteringReasons      :: !(Maybe CreativeFilteringReasons)
-    , _cVersion               :: !(Maybe (Textual Int32))
-    , _cSensitiveCategories   :: !(Maybe [Textual Int32])
-    , _cVideoURL              :: !(Maybe Text)
-    , _cAPIUploadTimestamp    :: !(Maybe DateTime')
-    , _cServingRestrictions   :: !(Maybe [CreativeServingRestrictionsItem])
-    , _cOpenAuctionStatus     :: !(Maybe Text)
+    { _cAttribute               :: !(Maybe [Textual Int32])
+    , _cNATiveAd                :: !(Maybe CreativeNATiveAd)
+    , _cHeight                  :: !(Maybe (Textual Int32))
+    , _cBuyerCreativeId         :: !(Maybe Text)
+    , _cAdvertiserName          :: !(Maybe Text)
+    , _cAdChoicesDestinationURL :: !(Maybe Text)
+    , _cAgencyId                :: !(Maybe (Textual Int64))
+    , _cCorrections             :: !(Maybe [CreativeCorrectionsItem])
+    , _cProductCategories       :: !(Maybe [Textual Int32])
+    , _cKind                    :: !Text
+    , _cHTMLSnippet             :: !(Maybe Text)
+    , _cAdvertiserId            :: !(Maybe [Textual Int64])
+    , _cRestrictedCategories    :: !(Maybe [Textual Int32])
+    , _cDealsStatus             :: !(Maybe Text)
+    , _cWidth                   :: !(Maybe (Textual Int32))
+    , _cClickThroughURL         :: !(Maybe [Text])
+    , _cVendorType              :: !(Maybe [Textual Int32])
+    , _cAccountId               :: !(Maybe (Textual Int32))
+    , _cImpressionTrackingURL   :: !(Maybe [Text])
+    , _cFilteringReasons        :: !(Maybe CreativeFilteringReasons)
+    , _cVersion                 :: !(Maybe (Textual Int32))
+    , _cSensitiveCategories     :: !(Maybe [Textual Int32])
+    , _cVideoURL                :: !(Maybe Text)
+    , _cAPIUploadTimestamp      :: !(Maybe DateTime')
+    , _cServingRestrictions     :: !(Maybe [CreativeServingRestrictionsItem])
+    , _cOpenAuctionStatus       :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
@@ -1491,6 +1492,8 @@ data Creative = Creative'
 -- * 'cBuyerCreativeId'
 --
 -- * 'cAdvertiserName'
+--
+-- * 'cAdChoicesDestinationURL'
 --
 -- * 'cAgencyId'
 --
@@ -1540,6 +1543,7 @@ creative =
     , _cHeight = Nothing
     , _cBuyerCreativeId = Nothing
     , _cAdvertiserName = Nothing
+    , _cAdChoicesDestinationURL = Nothing
     , _cAgencyId = Nothing
     , _cCorrections = Nothing
     , _cProductCategories = Nothing
@@ -1591,6 +1595,13 @@ cAdvertiserName :: Lens' Creative (Maybe Text)
 cAdvertiserName
   = lens _cAdvertiserName
       (\ s a -> s{_cAdvertiserName = a})
+
+-- | The link to the Ad Preferences page. This is only supported for native
+-- ads.
+cAdChoicesDestinationURL :: Lens' Creative (Maybe Text)
+cAdChoicesDestinationURL
+  = lens _cAdChoicesDestinationURL
+      (\ s a -> s{_cAdChoicesDestinationURL = a})
 
 -- | The agency id for this creative.
 cAgencyId :: Lens' Creative (Maybe Int64)
@@ -1754,6 +1765,7 @@ instance FromJSON Creative where
                      <*> (o .:? "height")
                      <*> (o .:? "buyerCreativeId")
                      <*> (o .:? "advertiserName")
+                     <*> (o .:? "adChoicesDestinationUrl")
                      <*> (o .:? "agencyId")
                      <*> (o .:? "corrections" .!= mempty)
                      <*> (o .:? "productCategories" .!= mempty)
@@ -1784,6 +1796,8 @@ instance ToJSON Creative where
                   ("height" .=) <$> _cHeight,
                   ("buyerCreativeId" .=) <$> _cBuyerCreativeId,
                   ("advertiserName" .=) <$> _cAdvertiserName,
+                  ("adChoicesDestinationUrl" .=) <$>
+                    _cAdChoicesDestinationURL,
                   ("agencyId" .=) <$> _cAgencyId,
                   ("corrections" .=) <$> _cCorrections,
                   ("productCategories" .=) <$> _cProductCategories,
@@ -3456,7 +3470,6 @@ data Proposal = Proposal'
     , _pProposalId                 :: !(Maybe Text)
     , _pName                       :: !(Maybe Text)
     , _pSellerContacts             :: !(Maybe [ContactInformation])
-    , _pLastUpdaterRole            :: !(Maybe Text)
     , _pLabels                     :: !(Maybe [MarketplaceLabel])
     , _pRevisionTimeMs             :: !(Maybe (Textual Int64))
     , _pProposalState              :: !(Maybe Text)
@@ -3500,8 +3513,6 @@ data Proposal = Proposal'
 --
 -- * 'pSellerContacts'
 --
--- * 'pLastUpdaterRole'
---
 -- * 'pLabels'
 --
 -- * 'pRevisionTimeMs'
@@ -3534,7 +3545,6 @@ proposal =
     , _pProposalId = Nothing
     , _pName = Nothing
     , _pSellerContacts = Nothing
-    , _pLastUpdaterRole = Nothing
     , _pLabels = Nothing
     , _pRevisionTimeMs = Nothing
     , _pProposalState = Nothing
@@ -3637,11 +3647,6 @@ pSellerContacts
       . _Default
       . _Coerce
 
-pLastUpdaterRole :: Lens' Proposal (Maybe Text)
-pLastUpdaterRole
-  = lens _pLastUpdaterRole
-      (\ s a -> s{_pLastUpdaterRole = a})
-
 -- | List of labels associated with the proposal. (readonly)
 pLabels :: Lens' Proposal [MarketplaceLabel]
 pLabels
@@ -3706,7 +3711,6 @@ instance FromJSON Proposal where
                      <*> (o .:? "proposalId")
                      <*> (o .:? "name")
                      <*> (o .:? "sellerContacts" .!= mempty)
-                     <*> (o .:? "lastUpdaterRole")
                      <*> (o .:? "labels" .!= mempty)
                      <*> (o .:? "revisionTimeMs")
                      <*> (o .:? "proposalState")
@@ -3734,7 +3738,6 @@ instance ToJSON Proposal where
                   ("proposalId" .=) <$> _pProposalId,
                   ("name" .=) <$> _pName,
                   ("sellerContacts" .=) <$> _pSellerContacts,
-                  ("lastUpdaterRole" .=) <$> _pLastUpdaterRole,
                   ("labels" .=) <$> _pLabels,
                   ("revisionTimeMs" .=) <$> _pRevisionTimeMs,
                   ("proposalState" .=) <$> _pProposalState,
@@ -6225,17 +6228,21 @@ instance ToJSON AddOrderDealsRequest where
                     _aProposalRevisionNumber])
 
 -- | Tracks which parties (if any) have paused a deal. The deal is considered
--- paused if has_buyer_paused || has_seller_paused.
+-- paused if has_buyer_paused || has_seller_paused. Each of the
+-- has_buyer_paused or the has_seller_paused bits can be set independently.
 --
 -- /See:/ 'dealServingMetadataDealPauseStatus' smart constructor.
 data DealServingMetadataDealPauseStatus = DealServingMetadataDealPauseStatus'
-    { _dsmdpsHasBuyerPaused  :: !(Maybe Bool)
+    { _dsmdpsFirstPausedBy   :: !(Maybe Text)
+    , _dsmdpsHasBuyerPaused  :: !(Maybe Bool)
     , _dsmdpsHasSellerPaused :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealServingMetadataDealPauseStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsmdpsFirstPausedBy'
 --
 -- * 'dsmdpsHasBuyerPaused'
 --
@@ -6244,9 +6251,16 @@ dealServingMetadataDealPauseStatus
     :: DealServingMetadataDealPauseStatus
 dealServingMetadataDealPauseStatus =
     DealServingMetadataDealPauseStatus'
-    { _dsmdpsHasBuyerPaused = Nothing
+    { _dsmdpsFirstPausedBy = Nothing
+    , _dsmdpsHasBuyerPaused = Nothing
     , _dsmdpsHasSellerPaused = Nothing
     }
+
+-- | If the deal is paused, records which party paused the deal first.
+dsmdpsFirstPausedBy :: Lens' DealServingMetadataDealPauseStatus (Maybe Text)
+dsmdpsFirstPausedBy
+  = lens _dsmdpsFirstPausedBy
+      (\ s a -> s{_dsmdpsFirstPausedBy = a})
 
 dsmdpsHasBuyerPaused :: Lens' DealServingMetadataDealPauseStatus (Maybe Bool)
 dsmdpsHasBuyerPaused
@@ -6264,15 +6278,16 @@ instance FromJSON DealServingMetadataDealPauseStatus
           = withObject "DealServingMetadataDealPauseStatus"
               (\ o ->
                  DealServingMetadataDealPauseStatus' <$>
-                   (o .:? "hasBuyerPaused") <*>
-                     (o .:? "hasSellerPaused"))
+                   (o .:? "firstPausedBy") <*> (o .:? "hasBuyerPaused")
+                     <*> (o .:? "hasSellerPaused"))
 
 instance ToJSON DealServingMetadataDealPauseStatus
          where
         toJSON DealServingMetadataDealPauseStatus'{..}
           = object
               (catMaybes
-                 [("hasBuyerPaused" .=) <$> _dsmdpsHasBuyerPaused,
+                 [("firstPausedBy" .=) <$> _dsmdpsFirstPausedBy,
+                  ("hasBuyerPaused" .=) <$> _dsmdpsHasBuyerPaused,
                   ("hasSellerPaused" .=) <$> _dsmdpsHasSellerPaused])
 
 --
