@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Retrieves your YouTube Analytics reports.
+-- Retrieves your YouTube Analytics data.
 --
 -- /See:/ <http://developers.google.com/youtube/analytics/ YouTube Analytics API Reference>
 module Network.Google.YouTubeAnalytics

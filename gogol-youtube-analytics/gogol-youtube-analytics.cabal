@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Retrieves your YouTube Analytics reports.
+    Retrieves your YouTube Analytics data.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
