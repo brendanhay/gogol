@@ -635,3 +635,19 @@ seconds (Seconds n)
 
 microseconds :: Seconds -> Int
 microseconds =  (1000000 *) . seconds
+
+newtype FieldMask = FieldMask Text
+    deriving
+        ( Eq
+        , Ord
+        , Show
+        , Read
+        , IsString
+        , Generic
+        , Data
+        , Typeable
+        , FromHttpApiData
+        , ToHttpApiData
+        , FromJSON
+        , ToJSON
+        )
