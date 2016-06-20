@@ -24,10 +24,17 @@ module Network.Google.Classroom
     -- * OAuth Scopes
     , classroomRostersReadOnlyScope
     , classroomCoursesScope
+    , classroomCourseworkStudentsReadOnlyScope
     , classroomProFileEmailsScope
     , classroomProFilePhotosScope
+    , classroomCourseworkMeScope
+    , classroomCourseWorkReadOnlyScope
+    , classroomStudentSubmissionsStudentsReadOnlyScope
     , classroomRostersScope
     , classroomCoursesReadOnlyScope
+    , classroomCourseworkStudentsScope
+    , classroomCourseworkMeReadOnlyScope
+    , classroomStudentSubmissionsMeReadOnlyScope
 
     -- * API Declaration
     , ClassroomAPI
@@ -42,6 +49,36 @@ module Network.Google.Classroom
 
     -- ** classroom.courses.aliases.list
     , module Network.Google.Resource.Classroom.Courses.Aliases.List
+
+    -- ** classroom.courses.courseWork.create
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.Create
+
+    -- ** classroom.courses.courseWork.get
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.Get
+
+    -- ** classroom.courses.courseWork.list
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.List
+
+    -- ** classroom.courses.courseWork.studentSubmissions.get
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
+
+    -- ** classroom.courses.courseWork.studentSubmissions.list
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
+
+    -- ** classroom.courses.courseWork.studentSubmissions.modifyAttachments
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+
+    -- ** classroom.courses.courseWork.studentSubmissions.patch
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+
+    -- ** classroom.courses.courseWork.studentSubmissions.reclaim
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+
+    -- ** classroom.courses.courseWork.studentSubmissions.return
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
+
+    -- ** classroom.courses.courseWork.studentSubmissions.turnIn
+    , module Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
 
     -- ** classroom.courses.create
     , module Network.Google.Resource.Classroom.Courses.Create
@@ -111,6 +148,49 @@ module Network.Google.Classroom
     , lcarNextPageToken
     , lcarAliases
 
+    -- ** CourseWork
+    , CourseWork
+    , courseWork
+    , cwCreationTime
+    , cwState
+    , cwMaterials
+    , cwCourseId
+    , cwMaxPoints
+    , cwWorkType
+    , cwDueTime
+    , cwAssociatedWithDeveloper
+    , cwUpdateTime
+    , cwMultipleChoiceQuestion
+    , cwId
+    , cwSubmissionModificationMode
+    , cwDueDate
+    , cwTitle
+    , cwAlternateLink
+    , cwAssignment
+    , cwDescription
+
+    -- ** DriveFile
+    , DriveFile
+    , driveFile
+    , dfThumbnailURL
+    , dfId
+    , dfTitle
+    , dfAlternateLink
+
+    -- ** ReturnStudentSubmissionRequest
+    , ReturnStudentSubmissionRequest
+    , returnStudentSubmissionRequest
+
+    -- ** ReclaimStudentSubmissionRequest
+    , ReclaimStudentSubmissionRequest
+    , reclaimStudentSubmissionRequest
+
+    -- ** ListCourseWorkResponse
+    , ListCourseWorkResponse
+    , listCourseWorkResponse
+    , lcwrCourseWork
+    , lcwrNextPageToken
+
     -- ** Empty
     , Empty
     , empty
@@ -120,11 +200,60 @@ module Network.Google.Classroom
     , globalPermission
     , gpPermission
 
+    -- ** Link
+    , Link
+    , link
+    , lThumbnailURL
+    , lURL
+    , lTitle
+
+    -- ** AssignmentSubmission
+    , AssignmentSubmission
+    , assignmentSubmission
+    , asAttachments
+
+    -- ** ModifyAttachmentsRequest
+    , ModifyAttachmentsRequest
+    , modifyAttachmentsRequest
+    , marAddAttachments
+
+    -- ** ListStudentSubmissionsResponse
+    , ListStudentSubmissionsResponse
+    , listStudentSubmissionsResponse
+    , lssrNextPageToken
+    , lssrStudentSubmissions
+
+    -- ** Material
+    , Material
+    , material
+    , mDriveFile
+    , mLink
+    , mYouTubeVideo
+    , mForm
+
+    -- ** MultipleChoiceSubmission
+    , MultipleChoiceSubmission
+    , multipleChoiceSubmission
+    , mcsAnswer
+
     -- ** ListInvitationsResponse
     , ListInvitationsResponse
     , listInvitationsResponse
     , lirNextPageToken
     , lirInvitations
+
+    -- ** CourseMaterial
+    , CourseMaterial
+    , courseMaterial
+    , cmDriveFile
+    , cmLink
+    , cmYouTubeVideo
+    , cmForm
+
+    -- ** ShortAnswerSubmission
+    , ShortAnswerSubmission
+    , shortAnswerSubmission
+    , sasAnswer
 
     -- ** Invitation
     , Invitation
@@ -134,12 +263,61 @@ module Network.Google.Classroom
     , iRole
     , iId
 
+    -- ** Attachment
+    , Attachment
+    , attachment
+    , aDriveFile
+    , aLink
+    , aYouTubeVideo
+    , aForm
+
+    -- ** StudentSubmission
+    , StudentSubmission
+    , studentSubmission
+    , ssCreationTime
+    , ssLate
+    , ssState
+    , ssCourseId
+    , ssMultipleChoiceSubmission
+    , ssAssignmentSubmission
+    , ssShortAnswerSubmission
+    , ssAssociatedWithDeveloper
+    , ssUserId
+    , ssUpdateTime
+    , ssCourseWorkType
+    , ssAssignedGrade
+    , ssId
+    , ssDraftGrade
+    , ssAlternateLink
+    , ssCourseWorkId
+
+    -- ** Date
+    , Date
+    , date
+    , dDay
+    , dYear
+    , dMonth
+
+    -- ** YouTubeVideo
+    , YouTubeVideo
+    , youTubeVideo
+    , ytvThumbnailURL
+    , ytvId
+    , ytvTitle
+    , ytvAlternateLink
+
     -- ** Teacher
     , Teacher
     , teacher
     , tCourseId
     , tProFile
     , tUserId
+
+    -- ** CourseMaterialSet
+    , CourseMaterialSet
+    , courseMaterialSet
+    , cmsMaterials
+    , cmsTitle
 
     -- ** Name
     , Name
@@ -154,6 +332,10 @@ module Network.Google.Classroom
     , lcrNextPageToken
     , lcrCourses
 
+    -- ** TurnInStudentSubmissionRequest
+    , TurnInStudentSubmissionRequest
+    , turnInStudentSubmissionRequest
+
     -- ** UserProFile
     , UserProFile
     , userProFile
@@ -163,11 +345,26 @@ module Network.Google.Classroom
     , upfId
     , upfPermissions
 
+    -- ** DriveFolder
+    , DriveFolder
+    , driveFolder
+    , dId
+    , dTitle
+    , dAlternateLink
+
+    -- ** MultipleChoiceQuestion
+    , MultipleChoiceQuestion
+    , multipleChoiceQuestion
+    , mcqChoices
+
     -- ** Course
     , Course
     , course
     , cCreationTime
     , cRoom
+    , cCourseMaterialSets
+    , cTeacherGroupEmail
+    , cTeacherFolder
     , cCourseState
     , cEnrollmentCode
     , cUpdateTime
@@ -175,9 +372,23 @@ module Network.Google.Classroom
     , cName
     , cId
     , cAlternateLink
+    , cCourseGroupEmail
     , cDescription
     , cDescriptionHeading
     , cSection
+
+    -- ** TimeOfDay'
+    , TimeOfDay'
+    , timeOfDay
+    , todNanos
+    , todHours
+    , todMinutes
+    , todSeconds
+
+    -- ** Assignment
+    , Assignment
+    , assignment
+    , aStudentWorkFolder
 
     -- ** ListStudentsResponse
     , ListStudentsResponse
@@ -185,10 +396,24 @@ module Network.Google.Classroom
     , lsrNextPageToken
     , lsrStudents
 
+    -- ** SharedDriveFile
+    , SharedDriveFile
+    , sharedDriveFile
+    , sdfDriveFile
+    , sdfShareMode
+
     -- ** CourseAlias
     , CourseAlias
     , courseAlias
     , caAlias
+
+    -- ** Form
+    , Form
+    , form
+    , fThumbnailURL
+    , fFormURL
+    , fTitle
+    , fResponseURL
 
     -- ** ListTeachersResponse
     , ListTeachersResponse
@@ -201,6 +426,7 @@ module Network.Google.Classroom
     , student
     , sCourseId
     , sProFile
+    , sStudentWorkFolder
     , sUserId
     ) where
 
@@ -209,6 +435,16 @@ import           Network.Google.Prelude
 import           Network.Google.Resource.Classroom.Courses.Aliases.Create
 import           Network.Google.Resource.Classroom.Courses.Aliases.Delete
 import           Network.Google.Resource.Classroom.Courses.Aliases.List
+import           Network.Google.Resource.Classroom.Courses.CourseWork.Create
+import           Network.Google.Resource.Classroom.Courses.CourseWork.Get
+import           Network.Google.Resource.Classroom.Courses.CourseWork.List
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
+import           Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
 import           Network.Google.Resource.Classroom.Courses.Create
 import           Network.Google.Resource.Classroom.Courses.Delete
 import           Network.Google.Resource.Classroom.Courses.Get
@@ -241,6 +477,20 @@ type ClassroomAPI =
        :<|> InvitationsGetResource
        :<|> InvitationsCreateResource
        :<|> InvitationsDeleteResource
+       :<|>
+       CoursesCourseWorkStudentSubmissionsReturnResource
+       :<|> CoursesCourseWorkStudentSubmissionsListResource
+       :<|>
+       CoursesCourseWorkStudentSubmissionsReclaimResource
+       :<|> CoursesCourseWorkStudentSubmissionsPatchResource
+       :<|> CoursesCourseWorkStudentSubmissionsGetResource
+       :<|>
+       CoursesCourseWorkStudentSubmissionsTurnInResource
+       :<|>
+       CoursesCourseWorkStudentSubmissionsModifyAttachmentsResource
+       :<|> CoursesCourseWorkListResource
+       :<|> CoursesCourseWorkGetResource
+       :<|> CoursesCourseWorkCreateResource
        :<|> CoursesTeachersListResource
        :<|> CoursesTeachersGetResource
        :<|> CoursesTeachersCreateResource

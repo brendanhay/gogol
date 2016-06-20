@@ -38,6 +38,16 @@ library
         , Network.Google.Resource.Classroom.Courses.Aliases.Create
         , Network.Google.Resource.Classroom.Courses.Aliases.Delete
         , Network.Google.Resource.Classroom.Courses.Aliases.List
+        , Network.Google.Resource.Classroom.Courses.CourseWork.Create
+        , Network.Google.Resource.Classroom.Courses.CourseWork.Get
+        , Network.Google.Resource.Classroom.Courses.CourseWork.List
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Get
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.List
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.ModifyAttachments
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Patch
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Reclaim
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.Return
+        , Network.Google.Resource.Classroom.Courses.CourseWork.StudentSubmissions.TurnIn
         , Network.Google.Resource.Classroom.Courses.Create
         , Network.Google.Resource.Classroom.Courses.Delete
         , Network.Google.Resource.Classroom.Courses.Get
