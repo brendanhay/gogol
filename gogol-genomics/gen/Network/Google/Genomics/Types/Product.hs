@@ -4591,10 +4591,12 @@ instance ToJSON AnnotationSet where
 -- /See:/ 'variantSet' smart constructor.
 data VariantSet = VariantSet'
     { _vsReferenceSetId  :: !(Maybe Text)
+    , _vsName            :: !(Maybe Text)
     , _vsDataSetId       :: !(Maybe Text)
     , _vsReferenceBounds :: !(Maybe [ReferenceBound])
     , _vsMetadata        :: !(Maybe [VariantSetMetadata])
     , _vsId              :: !(Maybe Text)
+    , _vsDescription     :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantSet' with the minimum fields required to make a request.
@@ -4603,6 +4605,8 @@ data VariantSet = VariantSet'
 --
 -- * 'vsReferenceSetId'
 --
+-- * 'vsName'
+--
 -- * 'vsDataSetId'
 --
 -- * 'vsReferenceBounds'
@@ -4610,15 +4614,19 @@ data VariantSet = VariantSet'
 -- * 'vsMetadata'
 --
 -- * 'vsId'
+--
+-- * 'vsDescription'
 variantSet
     :: VariantSet
 variantSet =
     VariantSet'
     { _vsReferenceSetId = Nothing
+    , _vsName = Nothing
     , _vsDataSetId = Nothing
     , _vsReferenceBounds = Nothing
     , _vsMetadata = Nothing
     , _vsId = Nothing
+    , _vsDescription = Nothing
     }
 
 -- | The reference set to which the variant set is mapped. The reference set
@@ -4634,6 +4642,10 @@ vsReferenceSetId :: Lens' VariantSet (Maybe Text)
 vsReferenceSetId
   = lens _vsReferenceSetId
       (\ s a -> s{_vsReferenceSetId = a})
+
+-- | User-specified, mutable name.
+vsName :: Lens' VariantSet (Maybe Text)
+vsName = lens _vsName (\ s a -> s{_vsName = a})
 
 -- | The dataset to which this variant set belongs.
 vsDataSetId :: Lens' VariantSet (Maybe Text)
@@ -4660,25 +4672,34 @@ vsMetadata
 vsId :: Lens' VariantSet (Maybe Text)
 vsId = lens _vsId (\ s a -> s{_vsId = a})
 
+-- | A textual description of this variant set.
+vsDescription :: Lens' VariantSet (Maybe Text)
+vsDescription
+  = lens _vsDescription
+      (\ s a -> s{_vsDescription = a})
+
 instance FromJSON VariantSet where
         parseJSON
           = withObject "VariantSet"
               (\ o ->
                  VariantSet' <$>
-                   (o .:? "referenceSetId") <*> (o .:? "datasetId") <*>
-                     (o .:? "referenceBounds" .!= mempty)
+                   (o .:? "referenceSetId") <*> (o .:? "name") <*>
+                     (o .:? "datasetId")
+                     <*> (o .:? "referenceBounds" .!= mempty)
                      <*> (o .:? "metadata" .!= mempty)
-                     <*> (o .:? "id"))
+                     <*> (o .:? "id")
+                     <*> (o .:? "description"))
 
 instance ToJSON VariantSet where
         toJSON VariantSet'{..}
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _vsReferenceSetId,
+                  ("name" .=) <$> _vsName,
                   ("datasetId" .=) <$> _vsDataSetId,
                   ("referenceBounds" .=) <$> _vsReferenceBounds,
-                  ("metadata" .=) <$> _vsMetadata,
-                  ("id" .=) <$> _vsId])
+                  ("metadata" .=) <$> _vsMetadata, ("id" .=) <$> _vsId,
+                  ("description" .=) <$> _vsDescription])
 
 -- | Response message for \`TestIamPermissions\` method.
 --

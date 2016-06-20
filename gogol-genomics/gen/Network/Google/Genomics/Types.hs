@@ -506,10 +506,12 @@ module Network.Google.Genomics.Types
     , VariantSet
     , variantSet
     , vsReferenceSetId
+    , vsName
     , vsDataSetId
     , vsReferenceBounds
     , vsMetadata
     , vsId
+    , vsDescription
 
     -- * TestIAMPermissionsResponse
     , TestIAMPermissionsResponse
