@@ -29,7 +29,7 @@ import           Network.Google.Vision.Types.Sum
 -- degrees longitude to [-180.0, 180.0].\"\"\" q, r = divmod(longitude,
 -- 360.0) if r > 180.0 or (r == 180.0 and q \<= -1.0): return r - 360.0
 -- return r def NormalizeLatLng(latitude, longitude): \"\"\"Wraps decimal
--- degrees latitude and longitude to [-180.0, 180.0] and [-90.0, 90.0],
+-- degrees latitude and longitude to [-90.0, 90.0] and [-180.0, 180.0],
 -- respectively.\"\"\" r = latitude % 360.0 if r \<= 90.0: return r,
 -- NormalizeLongitude(longitude) elif r >= 270.0: return r - 360,
 -- NormalizeLongitude(longitude) else: return 180 - r,
