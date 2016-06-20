@@ -1573,7 +1573,8 @@ objMD5Hash :: Lens' Object (Maybe Text)
 objMD5Hash
   = lens _objMD5Hash (\ s a -> s{_objMD5Hash = a})
 
--- | Content-Type of the object data.
+-- | Content-Type of the object data. If contentType is not specified, object
+-- downloads will be served as application\/octet-stream.
 objContentType :: Lens' Object (Maybe Text)
 objContentType
   = lens _objContentType

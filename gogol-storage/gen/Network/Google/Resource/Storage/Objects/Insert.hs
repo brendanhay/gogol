@@ -45,8 +45,8 @@ module Network.Google.Resource.Storage.Objects.Insert
     , oiProjection
     ) where
 
-import Network.Google.Prelude
-import Network.Google.Storage.Types
+import           Network.Google.Prelude
+import           Network.Google.Storage.Types
 
 -- | A resource alias for @storage.objects.insert@ method which the
 -- 'ObjectsInsert' request conforms to.
