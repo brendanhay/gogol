@@ -35,6 +35,7 @@ module Network.Google.Resource.Games.Achievements.Reveal
 
     -- * Request Lenses
     , arAchievementId
+    , arConsistencyToken
     ) where
 
 import           Network.Google.Games.Types
@@ -48,15 +49,17 @@ type AchievementsRevealResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "reveal" :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] AchievementRevealResponse
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] AchievementRevealResponse
 
 -- | Sets the state of the achievement with the given ID to REVEALED for the
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsReveal' smart constructor.
-newtype AchievementsReveal = AchievementsReveal'
-    { _arAchievementId :: Text
+data AchievementsReveal = AchievementsReveal'
+    { _arAchievementId    :: !Text
+    , _arConsistencyToken :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsReveal' with the minimum fields required to make a request.
@@ -64,12 +67,15 @@ newtype AchievementsReveal = AchievementsReveal'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'arAchievementId'
+--
+-- * 'arConsistencyToken'
 achievementsReveal
     :: Text -- ^ 'arAchievementId'
     -> AchievementsReveal
 achievementsReveal pArAchievementId_ =
     AchievementsReveal'
     { _arAchievementId = pArAchievementId_
+    , _arConsistencyToken = Nothing
     }
 
 -- | The ID of the achievement used by this method.
@@ -78,6 +84,13 @@ arAchievementId
   = lens _arAchievementId
       (\ s a -> s{_arAchievementId = a})
 
+-- | The last-seen mutation timestamp.
+arConsistencyToken :: Lens' AchievementsReveal (Maybe Int64)
+arConsistencyToken
+  = lens _arConsistencyToken
+      (\ s a -> s{_arConsistencyToken = a})
+      . mapping _Coerce
+
 instance GoogleRequest AchievementsReveal where
         type Rs AchievementsReveal =
              AchievementRevealResponse
@@ -85,7 +98,9 @@ instance GoogleRequest AchievementsReveal where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsReveal'{..}
-          = go _arAchievementId (Just AltJSON) gamesService
+          = go _arAchievementId _arConsistencyToken
+              (Just AltJSON)
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsRevealResource)

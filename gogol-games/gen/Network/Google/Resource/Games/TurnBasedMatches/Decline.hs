@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.TurnBasedMatches.Decline
     , TurnBasedMatchesDecline
 
     -- * Request Lenses
+    , tbmdConsistencyToken
     , tbmdLanguage
     , tbmdMatchId
     ) where
@@ -48,21 +49,25 @@ type TurnBasedMatchesDeclineResource =
          "turnbasedmatches" :>
            Capture "matchId" Text :>
              "decline" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   Put '[JSON] TurnBasedMatch
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :>
+                     Put '[JSON] TurnBasedMatch
 
 -- | Decline an invitation to play a turn-based match.
 --
 -- /See:/ 'turnBasedMatchesDecline' smart constructor.
 data TurnBasedMatchesDecline = TurnBasedMatchesDecline'
-    { _tbmdLanguage :: !(Maybe Text)
-    , _tbmdMatchId  :: !Text
+    { _tbmdConsistencyToken :: !(Maybe (Textual Int64))
+    , _tbmdLanguage         :: !(Maybe Text)
+    , _tbmdMatchId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesDecline' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tbmdConsistencyToken'
 --
 -- * 'tbmdLanguage'
 --
@@ -72,9 +77,17 @@ turnBasedMatchesDecline
     -> TurnBasedMatchesDecline
 turnBasedMatchesDecline pTbmdMatchId_ =
     TurnBasedMatchesDecline'
-    { _tbmdLanguage = Nothing
+    { _tbmdConsistencyToken = Nothing
+    , _tbmdLanguage = Nothing
     , _tbmdMatchId = pTbmdMatchId_
     }
+
+-- | The last-seen mutation timestamp.
+tbmdConsistencyToken :: Lens' TurnBasedMatchesDecline (Maybe Int64)
+tbmdConsistencyToken
+  = lens _tbmdConsistencyToken
+      (\ s a -> s{_tbmdConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 tbmdLanguage :: Lens' TurnBasedMatchesDecline (Maybe Text)
@@ -92,7 +105,8 @@ instance GoogleRequest TurnBasedMatchesDecline where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient TurnBasedMatchesDecline'{..}
-          = go _tbmdMatchId _tbmdLanguage (Just AltJSON)
+          = go _tbmdMatchId _tbmdConsistencyToken _tbmdLanguage
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient

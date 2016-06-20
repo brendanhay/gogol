@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.Rooms.List
     , RoomsList
 
     -- * Request Lenses
+    , rConsistencyToken
     , rLanguage
     , rPageToken
     , rMaxResults
@@ -47,23 +48,27 @@ type RoomsListResource =
      "games" :>
        "v1" :>
          "rooms" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (Textual Int32) :>
-                 QueryParam "alt" AltJSON :> Get '[JSON] RoomList
+           QueryParam "consistencyToken" (Textual Int64) :>
+             QueryParam "language" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" (Textual Int32) :>
+                   QueryParam "alt" AltJSON :> Get '[JSON] RoomList
 
 -- | Returns invitations to join rooms.
 --
 -- /See:/ 'roomsList' smart constructor.
 data RoomsList = RoomsList'
-    { _rLanguage   :: !(Maybe Text)
-    , _rPageToken  :: !(Maybe Text)
-    , _rMaxResults :: !(Maybe (Textual Int32))
+    { _rConsistencyToken :: !(Maybe (Textual Int64))
+    , _rLanguage         :: !(Maybe Text)
+    , _rPageToken        :: !(Maybe Text)
+    , _rMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rConsistencyToken'
 --
 -- * 'rLanguage'
 --
@@ -74,10 +79,18 @@ roomsList
     :: RoomsList
 roomsList =
     RoomsList'
-    { _rLanguage = Nothing
+    { _rConsistencyToken = Nothing
+    , _rLanguage = Nothing
     , _rPageToken = Nothing
     , _rMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+rConsistencyToken :: Lens' RoomsList (Maybe Int64)
+rConsistencyToken
+  = lens _rConsistencyToken
+      (\ s a -> s{_rConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 rLanguage :: Lens' RoomsList (Maybe Text)
@@ -103,7 +116,8 @@ instance GoogleRequest RoomsList where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsList'{..}
-          = go _rLanguage _rPageToken _rMaxResults
+          = go _rConsistencyToken _rLanguage _rPageToken
+              _rMaxResults
               (Just AltJSON)
               gamesService
           where go

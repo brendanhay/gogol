@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Snapshots.List
     , SnapshotsList
 
     -- * Request Lenses
+    , slConsistencyToken
     , slLanguage
     , slPageToken
     , slPlayerId
@@ -51,26 +52,30 @@ type SnapshotsListResource =
          "players" :>
            Capture "playerId" Text :>
              "snapshots" :>
-               QueryParam "language" Text :>
-                 QueryParam "pageToken" Text :>
-                   QueryParam "maxResults" (Textual Int32) :>
-                     QueryParam "alt" AltJSON :>
-                       Get '[JSON] SnapshotListResponse
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "maxResults" (Textual Int32) :>
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] SnapshotListResponse
 
 -- | Retrieves a list of snapshots created by your application for the player
 -- corresponding to the player ID.
 --
 -- /See:/ 'snapshotsList' smart constructor.
 data SnapshotsList = SnapshotsList'
-    { _slLanguage   :: !(Maybe Text)
-    , _slPageToken  :: !(Maybe Text)
-    , _slPlayerId   :: !Text
-    , _slMaxResults :: !(Maybe (Textual Int32))
+    { _slConsistencyToken :: !(Maybe (Textual Int64))
+    , _slLanguage         :: !(Maybe Text)
+    , _slPageToken        :: !(Maybe Text)
+    , _slPlayerId         :: !Text
+    , _slMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'slConsistencyToken'
 --
 -- * 'slLanguage'
 --
@@ -84,11 +89,19 @@ snapshotsList
     -> SnapshotsList
 snapshotsList pSlPlayerId_ =
     SnapshotsList'
-    { _slLanguage = Nothing
+    { _slConsistencyToken = Nothing
+    , _slLanguage = Nothing
     , _slPageToken = Nothing
     , _slPlayerId = pSlPlayerId_
     , _slMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+slConsistencyToken :: Lens' SnapshotsList (Maybe Int64)
+slConsistencyToken
+  = lens _slConsistencyToken
+      (\ s a -> s{_slConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 slLanguage :: Lens' SnapshotsList (Maybe Text)
@@ -121,7 +134,8 @@ instance GoogleRequest SnapshotsList where
                "https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient SnapshotsList'{..}
-          = go _slPlayerId _slLanguage _slPageToken
+          = go _slPlayerId _slConsistencyToken _slLanguage
+              _slPageToken
               _slMaxResults
               (Just AltJSON)
               gamesService

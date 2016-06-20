@@ -35,6 +35,7 @@ module Network.Google.Resource.Games.Rooms.ReportStatus
     , RoomsReportStatus
 
     -- * Request Lenses
+    , rrsConsistencyToken
     , rrsPayload
     , rrsRoomId
     , rrsLanguage
@@ -51,10 +52,11 @@ type RoomsReportStatusResource =
          "rooms" :>
            Capture "roomId" Text :>
              "reportstatus" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :>
-                   ReqBody '[JSON] RoomP2PStatuses :>
-                     Post '[JSON] RoomStatus
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] RoomP2PStatuses :>
+                       Post '[JSON] RoomStatus
 
 -- | Updates sent by a client reporting the status of peers in a room. For
 -- internal use by the Games SDK only. Calling this method directly is
@@ -62,14 +64,17 @@ type RoomsReportStatusResource =
 --
 -- /See:/ 'roomsReportStatus' smart constructor.
 data RoomsReportStatus = RoomsReportStatus'
-    { _rrsPayload  :: !RoomP2PStatuses
-    , _rrsRoomId   :: !Text
-    , _rrsLanguage :: !(Maybe Text)
+    { _rrsConsistencyToken :: !(Maybe (Textual Int64))
+    , _rrsPayload          :: !RoomP2PStatuses
+    , _rrsRoomId           :: !Text
+    , _rrsLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsReportStatus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrsConsistencyToken'
 --
 -- * 'rrsPayload'
 --
@@ -82,10 +87,18 @@ roomsReportStatus
     -> RoomsReportStatus
 roomsReportStatus pRrsPayload_ pRrsRoomId_ =
     RoomsReportStatus'
-    { _rrsPayload = pRrsPayload_
+    { _rrsConsistencyToken = Nothing
+    , _rrsPayload = pRrsPayload_
     , _rrsRoomId = pRrsRoomId_
     , _rrsLanguage = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+rrsConsistencyToken :: Lens' RoomsReportStatus (Maybe Int64)
+rrsConsistencyToken
+  = lens _rrsConsistencyToken
+      (\ s a -> s{_rrsConsistencyToken = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 rrsPayload :: Lens' RoomsReportStatus RoomP2PStatuses
@@ -108,7 +121,8 @@ instance GoogleRequest RoomsReportStatus where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsReportStatus'{..}
-          = go _rrsRoomId _rrsLanguage (Just AltJSON)
+          = go _rrsRoomId _rrsConsistencyToken _rrsLanguage
+              (Just AltJSON)
               _rrsPayload
               gamesService
           where go

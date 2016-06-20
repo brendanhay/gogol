@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Achievements.Unlock
 
     -- * Request Lenses
     , auAchievementId
+    , auConsistencyToken
     ) where
 
 import           Network.Google.Games.Types
@@ -47,14 +48,16 @@ type AchievementsUnlockResource =
          "achievements" :>
            Capture "achievementId" Text :>
              "unlock" :>
-               QueryParam "alt" AltJSON :>
-                 Post '[JSON] AchievementUnlockResponse
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "alt" AltJSON :>
+                   Post '[JSON] AchievementUnlockResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
 --
 -- /See:/ 'achievementsUnlock' smart constructor.
-newtype AchievementsUnlock = AchievementsUnlock'
-    { _auAchievementId :: Text
+data AchievementsUnlock = AchievementsUnlock'
+    { _auAchievementId    :: !Text
+    , _auConsistencyToken :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUnlock' with the minimum fields required to make a request.
@@ -62,12 +65,15 @@ newtype AchievementsUnlock = AchievementsUnlock'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'auAchievementId'
+--
+-- * 'auConsistencyToken'
 achievementsUnlock
     :: Text -- ^ 'auAchievementId'
     -> AchievementsUnlock
 achievementsUnlock pAuAchievementId_ =
     AchievementsUnlock'
     { _auAchievementId = pAuAchievementId_
+    , _auConsistencyToken = Nothing
     }
 
 -- | The ID of the achievement used by this method.
@@ -76,6 +82,13 @@ auAchievementId
   = lens _auAchievementId
       (\ s a -> s{_auAchievementId = a})
 
+-- | The last-seen mutation timestamp.
+auConsistencyToken :: Lens' AchievementsUnlock (Maybe Int64)
+auConsistencyToken
+  = lens _auConsistencyToken
+      (\ s a -> s{_auConsistencyToken = a})
+      . mapping _Coerce
+
 instance GoogleRequest AchievementsUnlock where
         type Rs AchievementsUnlock =
              AchievementUnlockResponse
@@ -83,7 +96,9 @@ instance GoogleRequest AchievementsUnlock where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsUnlock'{..}
-          = go _auAchievementId (Just AltJSON) gamesService
+          = go _auAchievementId _auConsistencyToken
+              (Just AltJSON)
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy AchievementsUnlockResource)

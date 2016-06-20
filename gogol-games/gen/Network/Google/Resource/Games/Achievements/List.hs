@@ -35,6 +35,7 @@ module Network.Google.Resource.Games.Achievements.List
 
     -- * Request Lenses
     , alState
+    , alConsistencyToken
     , alLanguage
     , alPageToken
     , alPlayerId
@@ -53,22 +54,24 @@ type AchievementsListResource =
            Capture "playerId" Text :>
              "achievements" :>
                QueryParam "state" AchievementsListState :>
-                 QueryParam "language" Text :>
-                   QueryParam "pageToken" Text :>
-                     QueryParam "maxResults" (Textual Int32) :>
-                       QueryParam "alt" AltJSON :>
-                         Get '[JSON] PlayerAchievementListResponse
+                 QueryParam "consistencyToken" (Textual Int64) :>
+                   QueryParam "language" Text :>
+                     QueryParam "pageToken" Text :>
+                       QueryParam "maxResults" (Textual Int32) :>
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] PlayerAchievementListResponse
 
 -- | Lists the progress for all your application\'s achievements for the
 -- currently authenticated player.
 --
 -- /See:/ 'achievementsList' smart constructor.
 data AchievementsList = AchievementsList'
-    { _alState      :: !(Maybe AchievementsListState)
-    , _alLanguage   :: !(Maybe Text)
-    , _alPageToken  :: !(Maybe Text)
-    , _alPlayerId   :: !Text
-    , _alMaxResults :: !(Maybe (Textual Int32))
+    { _alState            :: !(Maybe AchievementsListState)
+    , _alConsistencyToken :: !(Maybe (Textual Int64))
+    , _alLanguage         :: !(Maybe Text)
+    , _alPageToken        :: !(Maybe Text)
+    , _alPlayerId         :: !Text
+    , _alMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsList' with the minimum fields required to make a request.
@@ -76,6 +79,8 @@ data AchievementsList = AchievementsList'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'alState'
+--
+-- * 'alConsistencyToken'
 --
 -- * 'alLanguage'
 --
@@ -90,6 +95,7 @@ achievementsList
 achievementsList pAlPlayerId_ =
     AchievementsList'
     { _alState = Nothing
+    , _alConsistencyToken = Nothing
     , _alLanguage = Nothing
     , _alPageToken = Nothing
     , _alPlayerId = pAlPlayerId_
@@ -100,6 +106,13 @@ achievementsList pAlPlayerId_ =
 -- If this parameter isn\'t specified, all achievements are returned.
 alState :: Lens' AchievementsList (Maybe AchievementsListState)
 alState = lens _alState (\ s a -> s{_alState = a})
+
+-- | The last-seen mutation timestamp.
+alConsistencyToken :: Lens' AchievementsList (Maybe Int64)
+alConsistencyToken
+  = lens _alConsistencyToken
+      (\ s a -> s{_alConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 alLanguage :: Lens' AchievementsList (Maybe Text)
@@ -132,7 +145,9 @@ instance GoogleRequest AchievementsList where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient AchievementsList'{..}
-          = go _alPlayerId _alState _alLanguage _alPageToken
+          = go _alPlayerId _alState _alConsistencyToken
+              _alLanguage
+              _alPageToken
               _alMaxResults
               (Just AltJSON)
               gamesService

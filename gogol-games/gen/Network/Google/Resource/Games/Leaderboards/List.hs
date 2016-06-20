@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.Leaderboards.List
     , LeaderboardsList
 
     -- * Request Lenses
+    , llConsistencyToken
     , llLanguage
     , llPageToken
     , llMaxResults
@@ -47,24 +48,28 @@ type LeaderboardsListResource =
      "games" :>
        "v1" :>
          "leaderboards" :>
-           QueryParam "language" Text :>
-             QueryParam "pageToken" Text :>
-               QueryParam "maxResults" (Textual Int32) :>
-                 QueryParam "alt" AltJSON :>
-                   Get '[JSON] LeaderboardListResponse
+           QueryParam "consistencyToken" (Textual Int64) :>
+             QueryParam "language" Text :>
+               QueryParam "pageToken" Text :>
+                 QueryParam "maxResults" (Textual Int32) :>
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] LeaderboardListResponse
 
 -- | Lists all the leaderboard metadata for your application.
 --
 -- /See:/ 'leaderboardsList' smart constructor.
 data LeaderboardsList = LeaderboardsList'
-    { _llLanguage   :: !(Maybe Text)
-    , _llPageToken  :: !(Maybe Text)
-    , _llMaxResults :: !(Maybe (Textual Int32))
+    { _llConsistencyToken :: !(Maybe (Textual Int64))
+    , _llLanguage         :: !(Maybe Text)
+    , _llPageToken        :: !(Maybe Text)
+    , _llMaxResults       :: !(Maybe (Textual Int32))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsList' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'llConsistencyToken'
 --
 -- * 'llLanguage'
 --
@@ -75,10 +80,18 @@ leaderboardsList
     :: LeaderboardsList
 leaderboardsList =
     LeaderboardsList'
-    { _llLanguage = Nothing
+    { _llConsistencyToken = Nothing
+    , _llLanguage = Nothing
     , _llPageToken = Nothing
     , _llMaxResults = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+llConsistencyToken :: Lens' LeaderboardsList (Maybe Int64)
+llConsistencyToken
+  = lens _llConsistencyToken
+      (\ s a -> s{_llConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 llLanguage :: Lens' LeaderboardsList (Maybe Text)
@@ -104,7 +117,8 @@ instance GoogleRequest LeaderboardsList where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient LeaderboardsList'{..}
-          = go _llLanguage _llPageToken _llMaxResults
+          = go _llConsistencyToken _llLanguage _llPageToken
+              _llMaxResults
               (Just AltJSON)
               gamesService
           where go

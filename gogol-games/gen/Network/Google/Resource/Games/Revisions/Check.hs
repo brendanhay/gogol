@@ -33,7 +33,8 @@ module Network.Google.Resource.Games.Revisions.Check
     , RevisionsCheck
 
     -- * Request Lenses
-    , rcClientRevision
+    , revClientRevision
+    , revConsistencyToken
     ) where
 
 import           Network.Google.Games.Types
@@ -47,37 +48,49 @@ type RevisionsCheckResource =
          "revisions" :>
            "check" :>
              QueryParam "clientRevision" Text :>
-               QueryParam "alt" AltJSON :>
-                 Get '[JSON] RevisionCheckResponse
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "alt" AltJSON :>
+                   Get '[JSON] RevisionCheckResponse
 
 -- | Checks whether the games client is out of date.
 --
 -- /See:/ 'revisionsCheck' smart constructor.
-newtype RevisionsCheck = RevisionsCheck'
-    { _rcClientRevision :: Text
+data RevisionsCheck = RevisionsCheck'
+    { _revClientRevision   :: !Text
+    , _revConsistencyToken :: !(Maybe (Textual Int64))
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsCheck' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcClientRevision'
+-- * 'revClientRevision'
+--
+-- * 'revConsistencyToken'
 revisionsCheck
-    :: Text -- ^ 'rcClientRevision'
+    :: Text -- ^ 'revClientRevision'
     -> RevisionsCheck
-revisionsCheck pRcClientRevision_ =
+revisionsCheck pRevClientRevision_ =
     RevisionsCheck'
-    { _rcClientRevision = pRcClientRevision_
+    { _revClientRevision = pRevClientRevision_
+    , _revConsistencyToken = Nothing
     }
 
 -- | The revision of the client SDK used by your application. Format:
 -- [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:
 -- - \"ANDROID\" - Client is running the Android SDK. - \"IOS\" - Client is
 -- running the iOS SDK. - \"WEB_APP\" - Client is running as a Web App.
-rcClientRevision :: Lens' RevisionsCheck Text
-rcClientRevision
-  = lens _rcClientRevision
-      (\ s a -> s{_rcClientRevision = a})
+revClientRevision :: Lens' RevisionsCheck Text
+revClientRevision
+  = lens _revClientRevision
+      (\ s a -> s{_revClientRevision = a})
+
+-- | The last-seen mutation timestamp.
+revConsistencyToken :: Lens' RevisionsCheck (Maybe Int64)
+revConsistencyToken
+  = lens _revConsistencyToken
+      (\ s a -> s{_revConsistencyToken = a})
+      . mapping _Coerce
 
 instance GoogleRequest RevisionsCheck where
         type Rs RevisionsCheck = RevisionCheckResponse
@@ -85,7 +98,8 @@ instance GoogleRequest RevisionsCheck where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient RevisionsCheck'{..}
-          = go (Just _rcClientRevision) (Just AltJSON)
+          = go (Just _revClientRevision) _revConsistencyToken
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient (Proxy :: Proxy RevisionsCheckResource)

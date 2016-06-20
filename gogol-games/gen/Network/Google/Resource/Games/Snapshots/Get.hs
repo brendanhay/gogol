@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.Snapshots.Get
     , SnapshotsGet
 
     -- * Request Lenses
+    , sConsistencyToken
     , sLanguage
     , sSnapshotId
     ) where
@@ -47,20 +48,24 @@ type SnapshotsGetResource =
        "v1" :>
          "snapshots" :>
            Capture "snapshotId" Text :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Retrieves the metadata for a given snapshot ID.
 --
 -- /See:/ 'snapshotsGet' smart constructor.
 data SnapshotsGet = SnapshotsGet'
-    { _sLanguage   :: !(Maybe Text)
-    , _sSnapshotId :: !Text
+    { _sConsistencyToken :: !(Maybe (Textual Int64))
+    , _sLanguage         :: !(Maybe Text)
+    , _sSnapshotId       :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsGet' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sConsistencyToken'
 --
 -- * 'sLanguage'
 --
@@ -70,9 +75,17 @@ snapshotsGet
     -> SnapshotsGet
 snapshotsGet pSSnapshotId_ =
     SnapshotsGet'
-    { _sLanguage = Nothing
+    { _sConsistencyToken = Nothing
+    , _sLanguage = Nothing
     , _sSnapshotId = pSSnapshotId_
     }
+
+-- | The last-seen mutation timestamp.
+sConsistencyToken :: Lens' SnapshotsGet (Maybe Int64)
+sConsistencyToken
+  = lens _sConsistencyToken
+      (\ s a -> s{_sConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 sLanguage :: Lens' SnapshotsGet (Maybe Text)
@@ -91,7 +104,8 @@ instance GoogleRequest SnapshotsGet where
                "https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient SnapshotsGet'{..}
-          = go _sSnapshotId _sLanguage (Just AltJSON)
+          = go _sSnapshotId _sConsistencyToken _sLanguage
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient (Proxy :: Proxy SnapshotsGetResource)

@@ -33,6 +33,7 @@ module Network.Google.Resource.Games.Pushtokens.Update
     , PushtokensUpdate
 
     -- * Request Lenses
+    , puConsistencyToken
     , puPayload
     ) where
 
@@ -45,19 +46,23 @@ type PushtokensUpdateResource =
      "games" :>
        "v1" :>
          "pushtokens" :>
-           QueryParam "alt" AltJSON :>
-             ReqBody '[JSON] PushToken :> Put '[JSON] ()
+           QueryParam "consistencyToken" (Textual Int64) :>
+             QueryParam "alt" AltJSON :>
+               ReqBody '[JSON] PushToken :> Put '[JSON] ()
 
 -- | Registers a push token for the current user and application.
 --
 -- /See:/ 'pushtokensUpdate' smart constructor.
-newtype PushtokensUpdate = PushtokensUpdate'
-    { _puPayload :: PushToken
+data PushtokensUpdate = PushtokensUpdate'
+    { _puConsistencyToken :: !(Maybe (Textual Int64))
+    , _puPayload          :: !PushToken
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensUpdate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'puConsistencyToken'
 --
 -- * 'puPayload'
 pushtokensUpdate
@@ -65,8 +70,16 @@ pushtokensUpdate
     -> PushtokensUpdate
 pushtokensUpdate pPuPayload_ =
     PushtokensUpdate'
-    { _puPayload = pPuPayload_
+    { _puConsistencyToken = Nothing
+    , _puPayload = pPuPayload_
     }
+
+-- | The last-seen mutation timestamp.
+puConsistencyToken :: Lens' PushtokensUpdate (Maybe Int64)
+puConsistencyToken
+  = lens _puConsistencyToken
+      (\ s a -> s{_puConsistencyToken = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 puPayload :: Lens' PushtokensUpdate PushToken
@@ -79,7 +92,8 @@ instance GoogleRequest PushtokensUpdate where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient PushtokensUpdate'{..}
-          = go (Just AltJSON) _puPayload gamesService
+          = go _puConsistencyToken (Just AltJSON) _puPayload
+              gamesService
           where go
                   = buildClient
                       (Proxy :: Proxy PushtokensUpdateResource)

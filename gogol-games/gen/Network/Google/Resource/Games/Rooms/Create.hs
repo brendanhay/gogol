@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Rooms.Create
     , RoomsCreate
 
     -- * Request Lenses
+    , rcConsistencyToken
     , rcPayload
     , rcLanguage
     ) where
@@ -48,23 +49,27 @@ type RoomsCreateResource =
        "v1" :>
          "rooms" :>
            "create" :>
-             QueryParam "language" Text :>
-               QueryParam "alt" AltJSON :>
-                 ReqBody '[JSON] RoomCreateRequest :>
-                   Post '[JSON] Room
+             QueryParam "consistencyToken" (Textual Int64) :>
+               QueryParam "language" Text :>
+                 QueryParam "alt" AltJSON :>
+                   ReqBody '[JSON] RoomCreateRequest :>
+                     Post '[JSON] Room
 
 -- | Create a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 --
 -- /See:/ 'roomsCreate' smart constructor.
 data RoomsCreate = RoomsCreate'
-    { _rcPayload  :: !RoomCreateRequest
-    , _rcLanguage :: !(Maybe Text)
+    { _rcConsistencyToken :: !(Maybe (Textual Int64))
+    , _rcPayload          :: !RoomCreateRequest
+    , _rcLanguage         :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsCreate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rcConsistencyToken'
 --
 -- * 'rcPayload'
 --
@@ -74,9 +79,17 @@ roomsCreate
     -> RoomsCreate
 roomsCreate pRcPayload_ =
     RoomsCreate'
-    { _rcPayload = pRcPayload_
+    { _rcConsistencyToken = Nothing
+    , _rcPayload = pRcPayload_
     , _rcLanguage = Nothing
     }
+
+-- | The last-seen mutation timestamp.
+rcConsistencyToken :: Lens' RoomsCreate (Maybe Int64)
+rcConsistencyToken
+  = lens _rcConsistencyToken
+      (\ s a -> s{_rcConsistencyToken = a})
+      . mapping _Coerce
 
 -- | Multipart request metadata.
 rcPayload :: Lens' RoomsCreate RoomCreateRequest
@@ -94,7 +107,8 @@ instance GoogleRequest RoomsCreate where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient RoomsCreate'{..}
-          = go _rcLanguage (Just AltJSON) _rcPayload
+          = go _rcConsistencyToken _rcLanguage (Just AltJSON)
+              _rcPayload
               gamesService
           where go
                   = buildClient (Proxy :: Proxy RoomsCreateResource)

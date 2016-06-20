@@ -34,6 +34,7 @@ module Network.Google.Resource.Games.Quests.Accept
     , QuestsAccept
 
     -- * Request Lenses
+    , qaConsistencyToken
     , qaLanguage
     , qaQuestId
     ) where
@@ -49,21 +50,25 @@ type QuestsAcceptResource =
          "quests" :>
            Capture "questId" Text :>
              "accept" :>
-               QueryParam "language" Text :>
-                 QueryParam "alt" AltJSON :> Post '[JSON] Quest
+               QueryParam "consistencyToken" (Textual Int64) :>
+                 QueryParam "language" Text :>
+                   QueryParam "alt" AltJSON :> Post '[JSON] Quest
 
 -- | Indicates that the currently authorized user will participate in the
 -- quest.
 --
 -- /See:/ 'questsAccept' smart constructor.
 data QuestsAccept = QuestsAccept'
-    { _qaLanguage :: !(Maybe Text)
-    , _qaQuestId  :: !Text
+    { _qaConsistencyToken :: !(Maybe (Textual Int64))
+    , _qaLanguage         :: !(Maybe Text)
+    , _qaQuestId          :: !Text
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsAccept' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'qaConsistencyToken'
 --
 -- * 'qaLanguage'
 --
@@ -73,9 +78,17 @@ questsAccept
     -> QuestsAccept
 questsAccept pQaQuestId_ =
     QuestsAccept'
-    { _qaLanguage = Nothing
+    { _qaConsistencyToken = Nothing
+    , _qaLanguage = Nothing
     , _qaQuestId = pQaQuestId_
     }
+
+-- | The last-seen mutation timestamp.
+qaConsistencyToken :: Lens' QuestsAccept (Maybe Int64)
+qaConsistencyToken
+  = lens _qaConsistencyToken
+      (\ s a -> s{_qaConsistencyToken = a})
+      . mapping _Coerce
 
 -- | The preferred language to use for strings returned by this method.
 qaLanguage :: Lens' QuestsAccept (Maybe Text)
@@ -93,7 +106,8 @@ instance GoogleRequest QuestsAccept where
              '["https://www.googleapis.com/auth/games",
                "https://www.googleapis.com/auth/plus.login"]
         requestClient QuestsAccept'{..}
-          = go _qaQuestId _qaLanguage (Just AltJSON)
+          = go _qaQuestId _qaConsistencyToken _qaLanguage
+              (Just AltJSON)
               gamesService
           where go
                   = buildClient (Proxy :: Proxy QuestsAcceptResource)
