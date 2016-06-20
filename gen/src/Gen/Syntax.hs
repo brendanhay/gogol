@@ -575,6 +575,7 @@ externalLit = \case
     RqBody    -> TyCon "RequestBody"
     RsBody    -> TyCon "Stream"
     JSONValue -> TyCon "JSONValue"
+    FieldMask -> TyCon "FieldMask"
 
 internalLit :: Lit -> Type
 internalLit = \case
@@ -595,6 +596,7 @@ internalLit = \case
     RqBody    -> TyCon "RequestBody"
     RsBody    -> TyCon "Stream"
     JSONValue -> TyCon "JSONValue"
+    FieldMask -> TyCon "FieldMask"
 
 mapping :: TType -> Exp -> Exp
 mapping t e = infixE e "." (go t)

@@ -198,6 +198,8 @@ data Lit
     | Time
     | Date
     | DateTime
+    | FieldMask
+
     -- Core types.
     | RqBody
     | RsBody
@@ -210,21 +212,23 @@ instance FromJSON Lit where
         t <- o .: "format" <|> o .: "type"
         case t of
             -- Types
-            "string"          -> pure Text
-            "boolean"         -> pure Bool
+            "string"           -> pure Text
+            "boolean"          -> pure Bool
 
             -- Formats
-            "float"           -> pure Float
-            "double"          -> pure Double
-            "byte"            -> pure Byte
-            "uint32"          -> pure UInt32
-            "uint64"          -> pure UInt64
-            "int32"           -> pure Int32
-            "int64"           -> pure Int64
-            "time"            -> pure Time
-            "date"            -> pure Date
-            "google-datetime" -> pure DateTime
-            "date-time"       -> pure DateTime
+            "float"            -> pure Float
+            "double"           -> pure Double
+            "byte"             -> pure Byte
+            "uint32"           -> pure UInt32
+            "uint64"           -> pure UInt64
+            "int32"            -> pure Int32
+            "int64"            -> pure Int64
+            "time"             -> pure Time
+            "date"             -> pure Date
+            "date-time"        -> pure DateTime
+
+            "google-datetime"  -> pure DateTime
+            "google-fieldmask" -> pure FieldMask
 
             _                 -> fail $
                 "Unable to parse Literal from: " ++ Text.unpack t

@@ -14,7 +14,6 @@ import           Control.Lens
 import           Data.Hashable
 import qualified Data.HashMap.Strict as Map
 import           Data.Maybe
-import           Data.Text           (Text)
 
 type Map = Map.HashMap
 
