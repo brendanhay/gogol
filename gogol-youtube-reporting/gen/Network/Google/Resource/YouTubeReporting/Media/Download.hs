@@ -135,7 +135,7 @@ mdUploadProtocol
       (\ s a -> s{_mdUploadProtocol = a})
 
 -- | Name of the media that is being downloaded. See
--- ByteStream.ReadRequest.resource_name.
+-- ReadRequest.resource_name.
 mdResourceName :: Lens' MediaDownload' Text
 mdResourceName
   = lens _mdResourceName

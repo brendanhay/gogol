@@ -42,6 +42,7 @@ module Network.Google.YouTubeReporting.Types
     , rEndTime
     , rId
     , rCreateTime
+    , rJobExpireTime
 
     -- * ListReportTypesResponse
     , ListReportTypesResponse
@@ -61,6 +62,7 @@ module Network.Google.YouTubeReporting.Types
     , jId
     , jSystemManaged
     , jReportTypeId
+    , jExpireTime
     , jCreateTime
 
     -- * ListJobsResponse
@@ -74,6 +76,7 @@ module Network.Google.YouTubeReporting.Types
     , reportType
     , rtName
     , rtId
+    , rtDeprecateTime
     , rtSystemManaged
     ) where
 

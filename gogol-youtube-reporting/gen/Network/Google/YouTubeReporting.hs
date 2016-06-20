@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Schedules reporting jobs and downloads the resulting bulk data reports
--- about YouTube channels, videos, etc. in the form of CSV files.
+-- Schedules reporting jobs containing your YouTube Analytics data and
+-- downloads the resulting bulk data reports in the form of CSV files.
 --
 -- /See:/ <https://developers.google.com/youtube/reporting/v1/reports/ YouTube Reporting API Reference>
 module Network.Google.YouTubeReporting
@@ -76,6 +76,7 @@ module Network.Google.YouTubeReporting
     , rEndTime
     , rId
     , rCreateTime
+    , rJobExpireTime
 
     -- ** ListReportTypesResponse
     , ListReportTypesResponse
@@ -95,6 +96,7 @@ module Network.Google.YouTubeReporting
     , jId
     , jSystemManaged
     , jReportTypeId
+    , jExpireTime
     , jCreateTime
 
     -- ** ListJobsResponse
@@ -108,6 +110,7 @@ module Network.Google.YouTubeReporting
     , reportType
     , rtName
     , rtId
+    , rtDeprecateTime
     , rtSystemManaged
     ) where
 

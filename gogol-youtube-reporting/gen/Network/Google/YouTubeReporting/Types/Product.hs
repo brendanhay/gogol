@@ -101,12 +101,13 @@ instance ToJSON Empty where
 --
 -- /See:/ 'report' smart constructor.
 data Report = Report'
-    { _rJobId       :: !(Maybe Text)
-    , _rStartTime   :: !(Maybe Text)
-    , _rDownloadURL :: !(Maybe Text)
-    , _rEndTime     :: !(Maybe Text)
-    , _rId          :: !(Maybe Text)
-    , _rCreateTime  :: !(Maybe Text)
+    { _rJobId         :: !(Maybe Text)
+    , _rStartTime     :: !(Maybe Text)
+    , _rDownloadURL   :: !(Maybe Text)
+    , _rEndTime       :: !(Maybe Text)
+    , _rId            :: !(Maybe Text)
+    , _rCreateTime    :: !(Maybe Text)
+    , _rJobExpireTime :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -124,6 +125,8 @@ data Report = Report'
 -- * 'rId'
 --
 -- * 'rCreateTime'
+--
+-- * 'rJobExpireTime'
 report
     :: Report
 report =
@@ -134,6 +137,7 @@ report =
     , _rEndTime = Nothing
     , _rId = Nothing
     , _rCreateTime = Nothing
+    , _rJobExpireTime = Nothing
     }
 
 -- | The ID of the job that created this report.
@@ -165,6 +169,12 @@ rCreateTime :: Lens' Report (Maybe Text)
 rCreateTime
   = lens _rCreateTime (\ s a -> s{_rCreateTime = a})
 
+-- | The date\/time when the job this report belongs to will expire\/expired.
+rJobExpireTime :: Lens' Report (Maybe Text)
+rJobExpireTime
+  = lens _rJobExpireTime
+      (\ s a -> s{_rJobExpireTime = a})
+
 instance FromJSON Report where
         parseJSON
           = withObject "Report"
@@ -174,7 +184,8 @@ instance FromJSON Report where
                      (o .:? "downloadUrl")
                      <*> (o .:? "endTime")
                      <*> (o .:? "id")
-                     <*> (o .:? "createTime"))
+                     <*> (o .:? "createTime")
+                     <*> (o .:? "jobExpireTime"))
 
 instance ToJSON Report where
         toJSON Report'{..}
@@ -184,7 +195,8 @@ instance ToJSON Report where
                   ("startTime" .=) <$> _rStartTime,
                   ("downloadUrl" .=) <$> _rDownloadURL,
                   ("endTime" .=) <$> _rEndTime, ("id" .=) <$> _rId,
-                  ("createTime" .=) <$> _rCreateTime])
+                  ("createTime" .=) <$> _rCreateTime,
+                  ("jobExpireTime" .=) <$> _rJobExpireTime])
 
 -- | Response message for ReportingService.ListReportTypes.
 --
@@ -283,6 +295,7 @@ data Job = Job'
     , _jId            :: !(Maybe Text)
     , _jSystemManaged :: !(Maybe Bool)
     , _jReportTypeId  :: !(Maybe Text)
+    , _jExpireTime    :: !(Maybe Text)
     , _jCreateTime    :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -298,6 +311,8 @@ data Job = Job'
 --
 -- * 'jReportTypeId'
 --
+-- * 'jExpireTime'
+--
 -- * 'jCreateTime'
 job
     :: Job
@@ -307,6 +322,7 @@ job =
     , _jId = Nothing
     , _jSystemManaged = Nothing
     , _jReportTypeId = Nothing
+    , _jExpireTime = Nothing
     , _jCreateTime = Nothing
     }
 
@@ -332,6 +348,12 @@ jReportTypeId
   = lens _jReportTypeId
       (\ s a -> s{_jReportTypeId = a})
 
+-- | The date\/time when this job will expire\/expired. After a job expired,
+-- no new reports are generated.
+jExpireTime :: Lens' Job (Maybe Text)
+jExpireTime
+  = lens _jExpireTime (\ s a -> s{_jExpireTime = a})
+
 -- | The creation date\/time of the job.
 jCreateTime :: Lens' Job (Maybe Text)
 jCreateTime
@@ -345,6 +367,7 @@ instance FromJSON Job where
                    (o .:? "name") <*> (o .:? "id") <*>
                      (o .:? "systemManaged")
                      <*> (o .:? "reportTypeId")
+                     <*> (o .:? "expireTime")
                      <*> (o .:? "createTime"))
 
 instance ToJSON Job where
@@ -354,6 +377,7 @@ instance ToJSON Job where
                  [("name" .=) <$> _jName, ("id" .=) <$> _jId,
                   ("systemManaged" .=) <$> _jSystemManaged,
                   ("reportTypeId" .=) <$> _jReportTypeId,
+                  ("expireTime" .=) <$> _jExpireTime,
                   ("createTime" .=) <$> _jCreateTime])
 
 -- | Response message for ReportingService.ListJobs.
@@ -414,6 +438,7 @@ instance ToJSON ListJobsResponse where
 data ReportType = ReportType'
     { _rtName          :: !(Maybe Text)
     , _rtId            :: !(Maybe Text)
+    , _rtDeprecateTime :: !(Maybe Text)
     , _rtSystemManaged :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
@@ -425,6 +450,8 @@ data ReportType = ReportType'
 --
 -- * 'rtId'
 --
+-- * 'rtDeprecateTime'
+--
 -- * 'rtSystemManaged'
 reportType
     :: ReportType
@@ -432,6 +459,7 @@ reportType =
     ReportType'
     { _rtName = Nothing
     , _rtId = Nothing
+    , _rtDeprecateTime = Nothing
     , _rtSystemManaged = Nothing
     }
 
@@ -442,6 +470,12 @@ rtName = lens _rtName (\ s a -> s{_rtName = a})
 -- | The ID of the report type (max. 100 characters).
 rtId :: Lens' ReportType (Maybe Text)
 rtId = lens _rtId (\ s a -> s{_rtId = a})
+
+-- | The date\/time when this report type was\/will be deprecated.
+rtDeprecateTime :: Lens' ReportType (Maybe Text)
+rtDeprecateTime
+  = lens _rtDeprecateTime
+      (\ s a -> s{_rtDeprecateTime = a})
 
 -- | True if this a system-managed report type; otherwise false. Reporting
 -- jobs for system-managed report types are created automatically and can
@@ -457,11 +491,13 @@ instance FromJSON ReportType where
               (\ o ->
                  ReportType' <$>
                    (o .:? "name") <*> (o .:? "id") <*>
-                     (o .:? "systemManaged"))
+                     (o .:? "deprecateTime")
+                     <*> (o .:? "systemManaged"))
 
 instance ToJSON ReportType where
         toJSON ReportType'{..}
           = object
               (catMaybes
                  [("name" .=) <$> _rtName, ("id" .=) <$> _rtId,
+                  ("deprecateTime" .=) <$> _rtDeprecateTime,
                   ("systemManaged" .=) <$> _rtSystemManaged])
