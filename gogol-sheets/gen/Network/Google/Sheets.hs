@@ -1002,8 +1002,8 @@ module Network.Google.Sheets
     , bgvrSpreadsheetId
     , bgvrValueRanges
 
-    -- ** Request
-    , Request
+    -- ** Request'
+    , Request'
     , request'
     , reqAddFilterView
     , reqDeleteProtectedRange

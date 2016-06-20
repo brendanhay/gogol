@@ -812,13 +812,13 @@ data CellFormatHorizontalAlignment
     = HorizontalAlignUnspecified
       -- ^ @HORIZONTAL_ALIGN_UNSPECIFIED@
       -- The horizontal alignment is not specified. Do not use this.
-    | Left
+    | Left'
       -- ^ @LEFT@
       -- The text is explicitly aligned to the left of the cell.
     | Center
       -- ^ @CENTER@
       -- The text is explicitly aligned to the center of the cell.
-    | Right
+    | Right'
       -- ^ @RIGHT@
       -- The text is explicitly aligned to the right of the cell.
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
@@ -828,17 +828,17 @@ instance Hashable CellFormatHorizontalAlignment
 instance FromHttpApiData CellFormatHorizontalAlignment where
     parseQueryParam = \case
         "HORIZONTAL_ALIGN_UNSPECIFIED" -> Right HorizontalAlignUnspecified
-        "LEFT" -> Right Left
+        "LEFT" -> Right Left'
         "CENTER" -> Right Center
-        "RIGHT" -> Right Right
+        "RIGHT" -> Right Right'
         x -> Left ("Unable to parse CellFormatHorizontalAlignment from: " <> x)
 
 instance ToHttpApiData CellFormatHorizontalAlignment where
     toQueryParam = \case
         HorizontalAlignUnspecified -> "HORIZONTAL_ALIGN_UNSPECIFIED"
-        Left -> "LEFT"
+        Left' -> "LEFT"
         Center -> "CENTER"
-        Right -> "RIGHT"
+        Right' -> "RIGHT"
 
 instance FromJSON CellFormatHorizontalAlignment where
     parseJSON = parseJSONText "CellFormatHorizontalAlignment"

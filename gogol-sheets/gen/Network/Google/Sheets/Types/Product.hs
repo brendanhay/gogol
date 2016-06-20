@@ -5742,7 +5742,7 @@ instance ToJSON TextToColumnsRequest where
 --
 -- /See:/ 'batchUpdateSpreadsheetRequest' smart constructor.
 newtype BatchUpdateSpreadsheetRequest = BatchUpdateSpreadsheetRequest'
-    { _busrRequests :: Maybe [Request]
+    { _busrRequests :: Maybe [Request']
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchUpdateSpreadsheetRequest' with the minimum fields required to make a request.
@@ -5758,7 +5758,7 @@ batchUpdateSpreadsheetRequest =
     }
 
 -- | A list of updates to apply to the spreadsheet.
-busrRequests :: Lens' BatchUpdateSpreadsheetRequest [Request]
+busrRequests :: Lens' BatchUpdateSpreadsheetRequest [Request']
 busrRequests
   = lens _busrRequests (\ s a -> s{_busrRequests = a})
       . _Default
@@ -7543,7 +7543,7 @@ instance ToJSON BatchGetValuesResponse where
 -- | A single kind of update to apply to a spreadsheet.
 --
 -- /See:/ 'request'' smart constructor.
-data Request = Request'
+data Request' = Request''
     { _reqAddFilterView                :: !(Maybe AddFilterViewRequest)
     , _reqDeleteProtectedRange         :: !(Maybe DeleteProtectedRangeRequest)
     , _reqUpdateProtectedRange         :: !(Maybe UpdateProtectedRangeRequest)
@@ -7682,9 +7682,9 @@ data Request = Request'
 --
 -- * 'reqSetDataValidation'
 request'
-    :: Request
+    :: Request'
 request' =
-    Request'
+    Request''
     { _reqAddFilterView = Nothing
     , _reqDeleteProtectedRange = Nothing
     , _reqUpdateProtectedRange = Nothing
@@ -7732,268 +7732,268 @@ request' =
     }
 
 -- | Adds a filter view.
-reqAddFilterView :: Lens' Request (Maybe AddFilterViewRequest)
+reqAddFilterView :: Lens' Request' (Maybe AddFilterViewRequest)
 reqAddFilterView
   = lens _reqAddFilterView
       (\ s a -> s{_reqAddFilterView = a})
 
 -- | Deletes a protected range.
-reqDeleteProtectedRange :: Lens' Request (Maybe DeleteProtectedRangeRequest)
+reqDeleteProtectedRange :: Lens' Request' (Maybe DeleteProtectedRangeRequest)
 reqDeleteProtectedRange
   = lens _reqDeleteProtectedRange
       (\ s a -> s{_reqDeleteProtectedRange = a})
 
 -- | Updates a protected range.
-reqUpdateProtectedRange :: Lens' Request (Maybe UpdateProtectedRangeRequest)
+reqUpdateProtectedRange :: Lens' Request' (Maybe UpdateProtectedRangeRequest)
 reqUpdateProtectedRange
   = lens _reqUpdateProtectedRange
       (\ s a -> s{_reqUpdateProtectedRange = a})
 
 -- | Updates many cells at once.
-reqUpdateCells :: Lens' Request (Maybe UpdateCellsRequest)
+reqUpdateCells :: Lens' Request' (Maybe UpdateCellsRequest)
 reqUpdateCells
   = lens _reqUpdateCells
       (\ s a -> s{_reqUpdateCells = a})
 
 -- | Duplicates a filter view.
-reqDuplicateFilterView :: Lens' Request (Maybe DuplicateFilterViewRequest)
+reqDuplicateFilterView :: Lens' Request' (Maybe DuplicateFilterViewRequest)
 reqDuplicateFilterView
   = lens _reqDuplicateFilterView
       (\ s a -> s{_reqDuplicateFilterView = a})
 
 -- | Adds a new conditional format rule.
-reqAddConditionalFormatRule :: Lens' Request (Maybe AddConditionalFormatRuleRequest)
+reqAddConditionalFormatRule :: Lens' Request' (Maybe AddConditionalFormatRuleRequest)
 reqAddConditionalFormatRule
   = lens _reqAddConditionalFormatRule
       (\ s a -> s{_reqAddConditionalFormatRule = a})
 
 -- | Sorts data in a range.
-reqSortRange :: Lens' Request (Maybe SortRangeRequest)
+reqSortRange :: Lens' Request' (Maybe SortRangeRequest)
 reqSortRange
   = lens _reqSortRange (\ s a -> s{_reqSortRange = a})
 
 -- | Updates a named range.
-reqUpdateNamedRange :: Lens' Request (Maybe UpdateNamedRangeRequest)
+reqUpdateNamedRange :: Lens' Request' (Maybe UpdateNamedRangeRequest)
 reqUpdateNamedRange
   = lens _reqUpdateNamedRange
       (\ s a -> s{_reqUpdateNamedRange = a})
 
 -- | Deletes a named range.
-reqDeleteNamedRange :: Lens' Request (Maybe DeleteNamedRangeRequest)
+reqDeleteNamedRange :: Lens' Request' (Maybe DeleteNamedRangeRequest)
 reqDeleteNamedRange
   = lens _reqDeleteNamedRange
       (\ s a -> s{_reqDeleteNamedRange = a})
 
 -- | Clears the basic filter on a sheet.
-reqClearBasicFilter :: Lens' Request (Maybe ClearBasicFilterRequest)
+reqClearBasicFilter :: Lens' Request' (Maybe ClearBasicFilterRequest)
 reqClearBasicFilter
   = lens _reqClearBasicFilter
       (\ s a -> s{_reqClearBasicFilter = a})
 
 -- | Appends cells after the last row with data in a sheet.
-reqAppendCells :: Lens' Request (Maybe AppendCellsRequest)
+reqAppendCells :: Lens' Request' (Maybe AppendCellsRequest)
 reqAppendCells
   = lens _reqAppendCells
       (\ s a -> s{_reqAppendCells = a})
 
 -- | Pastes data (HTML or delimited) into a sheet.
-reqPasteData :: Lens' Request (Maybe PasteDataRequest)
+reqPasteData :: Lens' Request' (Maybe PasteDataRequest)
 reqPasteData
   = lens _reqPasteData (\ s a -> s{_reqPasteData = a})
 
 -- | Updates an embedded object\'s (e.g. chart, image) position.
-reqUpdateEmbeddedObjectPosition :: Lens' Request (Maybe UpdateEmbeddedObjectPositionRequest)
+reqUpdateEmbeddedObjectPosition :: Lens' Request' (Maybe UpdateEmbeddedObjectPositionRequest)
 reqUpdateEmbeddedObjectPosition
   = lens _reqUpdateEmbeddedObjectPosition
       (\ s a -> s{_reqUpdateEmbeddedObjectPosition = a})
 
 -- | Copies data from one area and pastes it to another.
-reqCopyPaste :: Lens' Request (Maybe CopyPasteRequest)
+reqCopyPaste :: Lens' Request' (Maybe CopyPasteRequest)
 reqCopyPaste
   = lens _reqCopyPaste (\ s a -> s{_reqCopyPaste = a})
 
 -- | Automatically resizes one or more dimensions based on the contents of
 -- the cells in that dimension.
-reqAutoResizeDimensions :: Lens' Request (Maybe AutoResizeDimensionsRequest)
+reqAutoResizeDimensions :: Lens' Request' (Maybe AutoResizeDimensionsRequest)
 reqAutoResizeDimensions
   = lens _reqAutoResizeDimensions
       (\ s a -> s{_reqAutoResizeDimensions = a})
 
 -- | Adds a sheet.
-reqAddSheet :: Lens' Request (Maybe AddSheetRequest)
+reqAddSheet :: Lens' Request' (Maybe AddSheetRequest)
 reqAddSheet
   = lens _reqAddSheet (\ s a -> s{_reqAddSheet = a})
 
 -- | Finds and replaces occurrences of some text with other text.
-reqFindReplace :: Lens' Request (Maybe FindReplaceRequest)
+reqFindReplace :: Lens' Request' (Maybe FindReplaceRequest)
 reqFindReplace
   = lens _reqFindReplace
       (\ s a -> s{_reqFindReplace = a})
 
 -- | Deletes rows or columns in a sheet.
-reqDeleteDimension :: Lens' Request (Maybe DeleteDimensionRequest)
+reqDeleteDimension :: Lens' Request' (Maybe DeleteDimensionRequest)
 reqDeleteDimension
   = lens _reqDeleteDimension
       (\ s a -> s{_reqDeleteDimension = a})
 
 -- | Cuts data from one area and pastes it to another.
-reqCutPaste :: Lens' Request (Maybe CutPasteRequest)
+reqCutPaste :: Lens' Request' (Maybe CutPasteRequest)
 reqCutPaste
   = lens _reqCutPaste (\ s a -> s{_reqCutPaste = a})
 
 -- | Moves rows or columns to another location in a sheet.
-reqMoveDimension :: Lens' Request (Maybe MoveDimensionRequest)
+reqMoveDimension :: Lens' Request' (Maybe MoveDimensionRequest)
 reqMoveDimension
   = lens _reqMoveDimension
       (\ s a -> s{_reqMoveDimension = a})
 
 -- | Repeats a single cell across a range.
-reqRepeatCell :: Lens' Request (Maybe RepeatCellRequest)
+reqRepeatCell :: Lens' Request' (Maybe RepeatCellRequest)
 reqRepeatCell
   = lens _reqRepeatCell
       (\ s a -> s{_reqRepeatCell = a})
 
 -- | Adds a protected range.
-reqAddProtectedRange :: Lens' Request (Maybe AddProtectedRangeRequest)
+reqAddProtectedRange :: Lens' Request' (Maybe AddProtectedRangeRequest)
 reqAddProtectedRange
   = lens _reqAddProtectedRange
       (\ s a -> s{_reqAddProtectedRange = a})
 
 -- | Updates the properties of a filter view.
-reqUpdateFilterView :: Lens' Request (Maybe UpdateFilterViewRequest)
+reqUpdateFilterView :: Lens' Request' (Maybe UpdateFilterViewRequest)
 reqUpdateFilterView
   = lens _reqUpdateFilterView
       (\ s a -> s{_reqUpdateFilterView = a})
 
 -- | Deletes a filter view from a sheet.
-reqDeleteFilterView :: Lens' Request (Maybe DeleteFilterViewRequest)
+reqDeleteFilterView :: Lens' Request' (Maybe DeleteFilterViewRequest)
 reqDeleteFilterView
   = lens _reqDeleteFilterView
       (\ s a -> s{_reqDeleteFilterView = a})
 
 -- | Inserts new rows or columns in a sheet.
-reqInsertDimension :: Lens' Request (Maybe InsertDimensionRequest)
+reqInsertDimension :: Lens' Request' (Maybe InsertDimensionRequest)
 reqInsertDimension
   = lens _reqInsertDimension
       (\ s a -> s{_reqInsertDimension = a})
 
 -- | Updates a sheet\'s properties.
-reqUpdateSheetProperties :: Lens' Request (Maybe UpdateSheetPropertiesRequest)
+reqUpdateSheetProperties :: Lens' Request' (Maybe UpdateSheetPropertiesRequest)
 reqUpdateSheetProperties
   = lens _reqUpdateSheetProperties
       (\ s a -> s{_reqUpdateSheetProperties = a})
 
 -- | Deletes an existing conditional format rule.
-reqDeleteConditionalFormatRule :: Lens' Request (Maybe DeleteConditionalFormatRuleRequest)
+reqDeleteConditionalFormatRule :: Lens' Request' (Maybe DeleteConditionalFormatRuleRequest)
 reqDeleteConditionalFormatRule
   = lens _reqDeleteConditionalFormatRule
       (\ s a -> s{_reqDeleteConditionalFormatRule = a})
 
 -- | Updates an existing conditional format rule.
-reqUpdateConditionalFormatRule :: Lens' Request (Maybe UpdateConditionalFormatRuleRequest)
+reqUpdateConditionalFormatRule :: Lens' Request' (Maybe UpdateConditionalFormatRuleRequest)
 reqUpdateConditionalFormatRule
   = lens _reqUpdateConditionalFormatRule
       (\ s a -> s{_reqUpdateConditionalFormatRule = a})
 
 -- | Deletes an embedded object (e.g, chart, image) in a sheet.
-reqDeleteEmbeddedObject :: Lens' Request (Maybe DeleteEmbeddedObjectRequest)
+reqDeleteEmbeddedObject :: Lens' Request' (Maybe DeleteEmbeddedObjectRequest)
 reqDeleteEmbeddedObject
   = lens _reqDeleteEmbeddedObject
       (\ s a -> s{_reqDeleteEmbeddedObject = a})
 
 -- | Merges cells together.
-reqMergeCells :: Lens' Request (Maybe MergeCellsRequest)
+reqMergeCells :: Lens' Request' (Maybe MergeCellsRequest)
 reqMergeCells
   = lens _reqMergeCells
       (\ s a -> s{_reqMergeCells = a})
 
 -- | Adds a named range.
-reqAddNamedRange :: Lens' Request (Maybe AddNamedRangeRequest)
+reqAddNamedRange :: Lens' Request' (Maybe AddNamedRangeRequest)
 reqAddNamedRange
   = lens _reqAddNamedRange
       (\ s a -> s{_reqAddNamedRange = a})
 
 -- | Adds a chart.
-reqAddChart :: Lens' Request (Maybe AddChartRequest)
+reqAddChart :: Lens' Request' (Maybe AddChartRequest)
 reqAddChart
   = lens _reqAddChart (\ s a -> s{_reqAddChart = a})
 
 -- | Duplicates a sheet.
-reqDuplicateSheet :: Lens' Request (Maybe DuplicateSheetRequest)
+reqDuplicateSheet :: Lens' Request' (Maybe DuplicateSheetRequest)
 reqDuplicateSheet
   = lens _reqDuplicateSheet
       (\ s a -> s{_reqDuplicateSheet = a})
 
 -- | Automatically fills in more data based on existing data.
-reqAutoFill :: Lens' Request (Maybe AutoFillRequest)
+reqAutoFill :: Lens' Request' (Maybe AutoFillRequest)
 reqAutoFill
   = lens _reqAutoFill (\ s a -> s{_reqAutoFill = a})
 
 -- | Updates dimensions\' properties.
-reqUpdateDimensionProperties :: Lens' Request (Maybe UpdateDimensionPropertiesRequest)
+reqUpdateDimensionProperties :: Lens' Request' (Maybe UpdateDimensionPropertiesRequest)
 reqUpdateDimensionProperties
   = lens _reqUpdateDimensionProperties
       (\ s a -> s{_reqUpdateDimensionProperties = a})
 
 -- | Updates a chart\'s specifications.
-reqUpdateChartSpec :: Lens' Request (Maybe UpdateChartSpecRequest)
+reqUpdateChartSpec :: Lens' Request' (Maybe UpdateChartSpecRequest)
 reqUpdateChartSpec
   = lens _reqUpdateChartSpec
       (\ s a -> s{_reqUpdateChartSpec = a})
 
 -- | Sets the basic filter on a sheet.
-reqSetBasicFilter :: Lens' Request (Maybe SetBasicFilterRequest)
+reqSetBasicFilter :: Lens' Request' (Maybe SetBasicFilterRequest)
 reqSetBasicFilter
   = lens _reqSetBasicFilter
       (\ s a -> s{_reqSetBasicFilter = a})
 
 -- | Converts a column of text into many columns of text.
-reqTextToColumns :: Lens' Request (Maybe TextToColumnsRequest)
+reqTextToColumns :: Lens' Request' (Maybe TextToColumnsRequest)
 reqTextToColumns
   = lens _reqTextToColumns
       (\ s a -> s{_reqTextToColumns = a})
 
 -- | Updates the spreadsheet\'s properties.
-reqUpdateSpreadsheetProperties :: Lens' Request (Maybe UpdateSpreadsheetPropertiesRequest)
+reqUpdateSpreadsheetProperties :: Lens' Request' (Maybe UpdateSpreadsheetPropertiesRequest)
 reqUpdateSpreadsheetProperties
   = lens _reqUpdateSpreadsheetProperties
       (\ s a -> s{_reqUpdateSpreadsheetProperties = a})
 
 -- | Deletes a sheet.
-reqDeleteSheet :: Lens' Request (Maybe DeleteSheetRequest)
+reqDeleteSheet :: Lens' Request' (Maybe DeleteSheetRequest)
 reqDeleteSheet
   = lens _reqDeleteSheet
       (\ s a -> s{_reqDeleteSheet = a})
 
 -- | Unmerges merged cells.
-reqUnmergeCells :: Lens' Request (Maybe UnmergeCellsRequest)
+reqUnmergeCells :: Lens' Request' (Maybe UnmergeCellsRequest)
 reqUnmergeCells
   = lens _reqUnmergeCells
       (\ s a -> s{_reqUnmergeCells = a})
 
 -- | Updates the borders in a range of cells.
-reqUpdateBOrders :: Lens' Request (Maybe UpdateBOrdersRequest)
+reqUpdateBOrders :: Lens' Request' (Maybe UpdateBOrdersRequest)
 reqUpdateBOrders
   = lens _reqUpdateBOrders
       (\ s a -> s{_reqUpdateBOrders = a})
 
 -- | Appends dimensions to the end of a sheet.
-reqAppendDimension :: Lens' Request (Maybe AppendDimensionRequest)
+reqAppendDimension :: Lens' Request' (Maybe AppendDimensionRequest)
 reqAppendDimension
   = lens _reqAppendDimension
       (\ s a -> s{_reqAppendDimension = a})
 
 -- | Sets data validation for one or more cells.
-reqSetDataValidation :: Lens' Request (Maybe SetDataValidationRequest)
+reqSetDataValidation :: Lens' Request' (Maybe SetDataValidationRequest)
 reqSetDataValidation
   = lens _reqSetDataValidation
       (\ s a -> s{_reqSetDataValidation = a})
 
-instance FromJSON Request where
+instance FromJSON Request' where
         parseJSON
           = withObject "Request"
               (\ o ->
-                 Request' <$>
+                 Request'' <$>
                    (o .:? "addFilterView") <*>
                      (o .:? "deleteProtectedRange")
                      <*> (o .:? "updateProtectedRange")
@@ -8039,8 +8039,8 @@ instance FromJSON Request where
                      <*> (o .:? "appendDimension")
                      <*> (o .:? "setDataValidation"))
 
-instance ToJSON Request where
-        toJSON Request'{..}
+instance ToJSON Request' where
+        toJSON Request''{..}
           = object
               (catMaybes
                  [("addFilterView" .=) <$> _reqAddFilterView,
