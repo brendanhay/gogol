@@ -13,7 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Google Cloud Datastore is a schemaless NoSQL datastore providing robust,
+-- Accesses the schemaless NoSQL database to provide fully managed, robust,
 -- scalable storage for your application.
 --
 -- /See:/ <https://cloud.google.com/datastore/ Google Cloud Datastore API Reference>

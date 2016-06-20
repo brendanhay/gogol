@@ -14,7 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    Google Cloud Datastore is a schemaless NoSQL datastore providing robust,
+    Accesses the schemaless NoSQL database to provide fully managed, robust,
     scalable storage for your application.
     .
     /Warning:/ This is an experimental prototype/preview release which is still

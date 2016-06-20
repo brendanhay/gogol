@@ -1289,7 +1289,8 @@ query =
     }
 
 -- | A starting point for the query results. Query cursors are returned in
--- query result batches.
+-- query result batches and [can only be used to continue the same
+-- query](https:\/\/cloud.google.com\/datastore\/docs\/concepts\/queries#cursors_limits_and_offsets).
 qStartCursor :: Lens' Query (Maybe ByteString)
 qStartCursor
   = lens _qStartCursor (\ s a -> s{_qStartCursor = a})
@@ -1319,7 +1320,8 @@ qDistinctOn
       . _Coerce
 
 -- | An ending point for the query results. Query cursors are returned in
--- query result batches.
+-- query result batches and [can only be used to limit the same
+-- query](https:\/\/cloud.google.com\/datastore\/docs\/concepts\/queries#cursors_limits_and_offsets).
 qEndCursor :: Lens' Query (Maybe ByteString)
 qEndCursor
   = lens _qEndCursor (\ s a -> s{_qEndCursor = a}) .
@@ -1579,7 +1581,8 @@ roReadConsistency
   = lens _roReadConsistency
       (\ s a -> s{_roReadConsistency = a})
 
--- | The transaction in which to read.
+-- | The identifier of the transaction in which to read. A transaction
+-- identifier is returned by a call to BeginTransaction.
 roTransaction :: Lens' ReadOptions (Maybe ByteString)
 roTransaction
   = lens _roTransaction
