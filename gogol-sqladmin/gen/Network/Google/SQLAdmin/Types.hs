@@ -91,6 +91,7 @@ module Network.Google.SQLAdmin.Types
     -- * Settings
     , Settings
     , settings
+    , sStorageAutoResize
     , sReplicationType
     , sActivationPolicy
     , sSettingsVersion
@@ -371,6 +372,7 @@ module Network.Google.SQLAdmin.Types
     , SSLCertsInsertResponse
     , sslCertsInsertResponse
     , scirServerCaCert
+    , scirOperation
     , scirKind
     , scirClientCert
 

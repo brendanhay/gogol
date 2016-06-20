@@ -637,7 +637,8 @@ instance ToJSON Operation where
 --
 -- /See:/ 'settings' smart constructor.
 data Settings = Settings'
-    { _sReplicationType             :: !(Maybe Text)
+    { _sStorageAutoResize           :: !(Maybe Bool)
+    , _sReplicationType             :: !(Maybe Text)
     , _sActivationPolicy            :: !(Maybe Text)
     , _sSettingsVersion             :: !(Maybe (Textual Int64))
     , _sDataDiskSizeGb              :: !(Maybe (Textual Int64))
@@ -658,6 +659,8 @@ data Settings = Settings'
 -- | Creates a value of 'Settings' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sStorageAutoResize'
 --
 -- * 'sReplicationType'
 --
@@ -694,7 +697,8 @@ settings
     :: Settings
 settings =
     Settings'
-    { _sReplicationType = Nothing
+    { _sStorageAutoResize = Nothing
+    , _sReplicationType = Nothing
     , _sActivationPolicy = Nothing
     , _sSettingsVersion = Nothing
     , _sDataDiskSizeGb = Nothing
@@ -711,6 +715,13 @@ settings =
     , _sLocationPreference = Nothing
     , _sBackupConfiguration = Nothing
     }
+
+-- | Configuration to increase storage size automatically. The default value
+-- is false. Applies only to Second Generation instances.
+sStorageAutoResize :: Lens' Settings (Maybe Bool)
+sStorageAutoResize
+  = lens _sStorageAutoResize
+      (\ s a -> s{_sStorageAutoResize = a})
 
 -- | The type of replication this instance uses. This can be either
 -- ASYNCHRONOUS or SYNCHRONOUS. This property is only applicable to First
@@ -741,8 +752,8 @@ sSettingsVersion
       (\ s a -> s{_sSettingsVersion = a})
       . mapping _Coerce
 
--- | The size of data disk, in GB. The data disk size minimum is 10GB. This
--- property is only applicable to Second Generation instances.
+-- | The size of data disk, in GB. The data disk size minimum is 10GB.
+-- Applies only to Second Generation instances.
 sDataDiskSizeGb :: Lens' Settings (Maybe Int64)
 sDataDiskSizeGb
   = lens _sDataDiskSizeGb
@@ -778,8 +789,8 @@ sIPConfiguration
       (\ s a -> s{_sIPConfiguration = a})
 
 -- | The maintenance window for this instance. This specifies when the
--- instance may be restarted for maintenance purposes. This property is
--- only applicable to Second Generation instances.
+-- instance may be restarted for maintenance purposes. Applies only to
+-- Second Generation instances.
 sMaintenanceWindow :: Lens' Settings (Maybe MaintenanceWindow)
 sMaintenanceWindow
   = lens _sMaintenanceWindow
@@ -806,8 +817,7 @@ sDatabaseFlags
       . _Coerce
 
 -- | The type of data disk. Only supported for Second Generation instances.
--- The default type is PD_SSD. This property is only applicable to Second
--- Generation instances.
+-- The default type is PD_SSD. Applies only to Second Generation instances.
 sDataDiskType :: Lens' Settings (Maybe Text)
 sDataDiskType
   = lens _sDataDiskType
@@ -841,8 +851,9 @@ instance FromJSON Settings where
           = withObject "Settings"
               (\ o ->
                  Settings' <$>
-                   (o .:? "replicationType") <*>
-                     (o .:? "activationPolicy")
+                   (o .:? "storageAutoResize") <*>
+                     (o .:? "replicationType")
+                     <*> (o .:? "activationPolicy")
                      <*> (o .:? "settingsVersion")
                      <*> (o .:? "dataDiskSizeGb")
                      <*> (o .:? "authorizedGaeApplications" .!= mempty)
@@ -862,7 +873,8 @@ instance ToJSON Settings where
         toJSON Settings'{..}
           = object
               (catMaybes
-                 [("replicationType" .=) <$> _sReplicationType,
+                 [("storageAutoResize" .=) <$> _sStorageAutoResize,
+                  ("replicationType" .=) <$> _sReplicationType,
                   ("activationPolicy" .=) <$> _sActivationPolicy,
                   ("settingsVersion" .=) <$> _sSettingsVersion,
                   ("dataDiskSizeGb" .=) <$> _sDataDiskSizeGb,
@@ -3306,6 +3318,7 @@ instance ToJSON FailoverContext where
 -- /See:/ 'sslCertsInsertResponse' smart constructor.
 data SSLCertsInsertResponse = SSLCertsInsertResponse'
     { _scirServerCaCert :: !(Maybe SSLCert)
+    , _scirOperation    :: !(Maybe Operation)
     , _scirKind         :: !Text
     , _scirClientCert   :: !(Maybe SSLCertDetail)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -3316,6 +3329,8 @@ data SSLCertsInsertResponse = SSLCertsInsertResponse'
 --
 -- * 'scirServerCaCert'
 --
+-- * 'scirOperation'
+--
 -- * 'scirKind'
 --
 -- * 'scirClientCert'
@@ -3324,6 +3339,7 @@ sslCertsInsertResponse
 sslCertsInsertResponse =
     SSLCertsInsertResponse'
     { _scirServerCaCert = Nothing
+    , _scirOperation = Nothing
     , _scirKind = "sql#sslCertsInsert"
     , _scirClientCert = Nothing
     }
@@ -3336,12 +3352,18 @@ scirServerCaCert
   = lens _scirServerCaCert
       (\ s a -> s{_scirServerCaCert = a})
 
+-- | The operation to track the ssl certs insert request.
+scirOperation :: Lens' SSLCertsInsertResponse (Maybe Operation)
+scirOperation
+  = lens _scirOperation
+      (\ s a -> s{_scirOperation = a})
+
 -- | This is always sql#sslCertsInsert.
 scirKind :: Lens' SSLCertsInsertResponse Text
 scirKind = lens _scirKind (\ s a -> s{_scirKind = a})
 
 -- | The new client certificate and private key. The new certificate will not
--- work until the instance is restarted.
+-- work until the instance is restarted for First Generation instances.
 scirClientCert :: Lens' SSLCertsInsertResponse (Maybe SSLCertDetail)
 scirClientCert
   = lens _scirClientCert
@@ -3352,7 +3374,7 @@ instance FromJSON SSLCertsInsertResponse where
           = withObject "SSLCertsInsertResponse"
               (\ o ->
                  SSLCertsInsertResponse' <$>
-                   (o .:? "serverCaCert") <*>
+                   (o .:? "serverCaCert") <*> (o .:? "operation") <*>
                      (o .:? "kind" .!= "sql#sslCertsInsert")
                      <*> (o .:? "clientCert"))
 
@@ -3361,6 +3383,7 @@ instance ToJSON SSLCertsInsertResponse where
           = object
               (catMaybes
                  [("serverCaCert" .=) <$> _scirServerCaCert,
+                  ("operation" .=) <$> _scirOperation,
                   Just ("kind" .= _scirKind),
                   ("clientCert" .=) <$> _scirClientCert])
 
