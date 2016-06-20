@@ -77,6 +77,7 @@ module Network.Google.IdentityToolkit.Types
     , IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
     , identitytoolkitRelyingPartyVerifyCustomTokenRequest
     , irpvctrInstanceId
+    , irpvctrDelegatedProjectNumber
     , irpvctrToken
     , irpvctrReturnSecureToken
 

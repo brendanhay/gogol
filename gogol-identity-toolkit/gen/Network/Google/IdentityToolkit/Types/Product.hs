@@ -535,9 +535,10 @@ instance ToJSON
 --
 -- /See:/ 'identitytoolkitRelyingPartyVerifyCustomTokenRequest' smart constructor.
 data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
-    { _irpvctrInstanceId        :: !(Maybe Text)
-    , _irpvctrToken             :: !(Maybe Text)
-    , _irpvctrReturnSecureToken :: !(Maybe Bool)
+    { _irpvctrInstanceId             :: !(Maybe Text)
+    , _irpvctrDelegatedProjectNumber :: !(Maybe (Textual Int64))
+    , _irpvctrToken                  :: !(Maybe Text)
+    , _irpvctrReturnSecureToken      :: !(Maybe Bool)
     } deriving (Eq,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'IdentitytoolkitRelyingPartyVerifyCustomTokenRequest' with the minimum fields required to make a request.
@@ -545,6 +546,8 @@ data IdentitytoolkitRelyingPartyVerifyCustomTokenRequest = IdentitytoolkitRelyin
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'irpvctrInstanceId'
+--
+-- * 'irpvctrDelegatedProjectNumber'
 --
 -- * 'irpvctrToken'
 --
@@ -554,6 +557,7 @@ identitytoolkitRelyingPartyVerifyCustomTokenRequest
 identitytoolkitRelyingPartyVerifyCustomTokenRequest =
     IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
     { _irpvctrInstanceId = Nothing
+    , _irpvctrDelegatedProjectNumber = Nothing
     , _irpvctrToken = Nothing
     , _irpvctrReturnSecureToken = Nothing
     }
@@ -563,6 +567,14 @@ irpvctrInstanceId :: Lens' IdentitytoolkitRelyingPartyVerifyCustomTokenRequest (
 irpvctrInstanceId
   = lens _irpvctrInstanceId
       (\ s a -> s{_irpvctrInstanceId = a})
+
+-- | GCP project number of the requesting delegated app. Currently only
+-- intended for Firebase V1 migration.
+irpvctrDelegatedProjectNumber :: Lens' IdentitytoolkitRelyingPartyVerifyCustomTokenRequest (Maybe Int64)
+irpvctrDelegatedProjectNumber
+  = lens _irpvctrDelegatedProjectNumber
+      (\ s a -> s{_irpvctrDelegatedProjectNumber = a})
+      . mapping _Coerce
 
 -- | The custom token to verify
 irpvctrToken :: Lens' IdentitytoolkitRelyingPartyVerifyCustomTokenRequest (Maybe Text)
@@ -584,8 +596,10 @@ instance FromJSON
               (\ o ->
                  IdentitytoolkitRelyingPartyVerifyCustomTokenRequest'
                    <$>
-                   (o .:? "instanceId") <*> (o .:? "token") <*>
-                     (o .:? "returnSecureToken"))
+                   (o .:? "instanceId") <*>
+                     (o .:? "delegatedProjectNumber")
+                     <*> (o .:? "token")
+                     <*> (o .:? "returnSecureToken"))
 
 instance ToJSON
          IdentitytoolkitRelyingPartyVerifyCustomTokenRequest
@@ -595,6 +609,8 @@ instance ToJSON
           = object
               (catMaybes
                  [("instanceId" .=) <$> _irpvctrInstanceId,
+                  ("delegatedProjectNumber" .=) <$>
+                    _irpvctrDelegatedProjectNumber,
                   ("token" .=) <$> _irpvctrToken,
                   ("returnSecureToken" .=) <$>
                     _irpvctrReturnSecureToken])
