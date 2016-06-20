@@ -100,7 +100,8 @@ tmuId = lens _tmuId (\ s a -> s{_tmuId = a})
 instance GoogleRequest TrainedModelsUpdate where
         type Rs TrainedModelsUpdate = Insert2
         type Scopes TrainedModelsUpdate =
-             '["https://www.googleapis.com/auth/prediction"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
         requestClient TrainedModelsUpdate'{..}
           = go _tmuProject _tmuId (Just AltJSON) _tmuPayload
               predictionService

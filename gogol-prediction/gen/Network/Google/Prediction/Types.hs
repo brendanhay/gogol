@@ -20,6 +20,7 @@ module Network.Google.Prediction.Types
       predictionService
 
     -- * OAuth Scopes
+    , cloudPlatformScope
     , storageReadOnlyScope
     , storageReadWriteScope
     , predictionScope
@@ -217,6 +218,10 @@ predictionService :: ServiceConfig
 predictionService
   = defaultService (ServiceId "prediction:v1.6")
       "www.googleapis.com"
+
+-- | View and manage your data across Google Cloud Platform services
+cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
+cloudPlatformScope = Proxy;
 
 -- | View your data in Google Cloud Storage
 storageReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/devstorage.read_only"]

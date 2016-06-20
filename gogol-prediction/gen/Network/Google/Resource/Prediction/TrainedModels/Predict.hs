@@ -101,7 +101,8 @@ tmpId = lens _tmpId (\ s a -> s{_tmpId = a})
 instance GoogleRequest TrainedModelsPredict where
         type Rs TrainedModelsPredict = Output
         type Scopes TrainedModelsPredict =
-             '["https://www.googleapis.com/auth/prediction"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/prediction"]
         requestClient TrainedModelsPredict'{..}
           = go _tmpProject _tmpId (Just AltJSON) _tmpPayload
               predictionService

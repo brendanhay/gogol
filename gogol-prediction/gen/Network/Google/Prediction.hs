@@ -23,6 +23,7 @@ module Network.Google.Prediction
       predictionService
 
     -- * OAuth Scopes
+    , cloudPlatformScope
     , storageReadOnlyScope
     , storageReadWriteScope
     , predictionScope
