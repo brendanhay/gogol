@@ -155,9 +155,14 @@ prcpUploadProtocol
 -- the update_mask parameter would be specified as
 -- config.worker_config.num_instances, and the \`PATCH\` request body would
 -- specify the new value, as follows: { \"config\":{ \"workerConfig\":{
--- \"numInstances\":\"5\" } } } Note: Currently,
--- config.worker_config.num_instances is the only field that can be
--- updated.
+-- \"numInstances\":\"5\" } } } Similarly, to change the number of
+-- preemptible workers in a cluster to 5, the update_mask parameter would
+-- be config.secondary_worker_config.num_instances, and the \`PATCH\`
+-- request body would be set as follows: { \"config\":{
+-- \"secondaryWorkerConfig\":{ \"numInstances\":\"5\" } } } Note:
+-- Currently, config.worker_config.num_instances and
+-- config.secondary_worker_config.num_instances are the only fields that
+-- can be updated.
 prcpUpdateMask :: Lens' ProjectsRegionsClustersPatch (Maybe Text)
 prcpUpdateMask
   = lens _prcpUpdateMask

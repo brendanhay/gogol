@@ -13,8 +13,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- An API for managing Hadoop-based clusters and jobs on Google Cloud
--- Platform.
+-- Manages Hadoop-based clusters and jobs on Google Cloud Platform.
 --
 -- /See:/ <https://cloud.google.com/dataproc/ Google Cloud Dataproc API Reference>
 module Network.Google.Dataproc
@@ -23,21 +22,12 @@ module Network.Google.Dataproc
       dataprocService
 
     -- * OAuth Scopes
-    , loggingAdminScope
-    , loggingReadScope
-    , loggingWriteScope
     , cloudPlatformScope
 
     -- * API Declaration
     , DataprocAPI
 
     -- * Resources
-
-    -- ** dataproc.media.download
-    , module Network.Google.Resource.Dataproc.Media.Download
-
-    -- ** dataproc.media.upload
-    , module Network.Google.Resource.Dataproc.Media.Upload
 
     -- ** dataproc.projects.regions.clusters.create
     , module Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
@@ -281,11 +271,6 @@ module Network.Google.Dataproc
     , hiveJobProperties
     , hAddtional
 
-    -- ** Media
-    , Media
-    , media
-    , mResourceName
-
     -- ** DiagnoseClusterOutputLocation
     , DiagnoseClusterOutputLocation
     , diagnoseClusterOutputLocation
@@ -457,8 +442,6 @@ module Network.Google.Dataproc
 
 import           Network.Google.Dataproc.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Dataproc.Media.Download
-import           Network.Google.Resource.Dataproc.Media.Upload
 import           Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
 import           Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
 import           Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose
@@ -481,9 +464,8 @@ TODO
 
 -- | Represents the entirety of the methods and resources available for the Google Cloud Dataproc API service.
 type DataprocAPI =
-     MediaDownloadResource :<|> MediaUploadResource :<|>
-       ProjectsRegionsJobsListResource
-       :<|> ProjectsRegionsJobsGetResource
+     ProjectsRegionsJobsListResource :<|>
+       ProjectsRegionsJobsGetResource
        :<|> ProjectsRegionsJobsSubmitResource
        :<|> ProjectsRegionsJobsCancelResource
        :<|> ProjectsRegionsJobsDeleteResource

@@ -14,8 +14,7 @@ cabal-version:         >= 1.10
 extra-source-files:    README.md
 
 description:
-    An API for managing Hadoop-based clusters and jobs on Google Cloud
-    Platform.
+    Manages Hadoop-based clusters and jobs on Google Cloud Platform.
     .
     /Warning:/ This is an experimental prototype/preview release which is still
     under exploratory development and not intended for public use, caveat emptor!
@@ -36,8 +35,6 @@ library
     exposed-modules:
           Network.Google.Dataproc
         , Network.Google.Dataproc.Types
-        , Network.Google.Resource.Dataproc.Media.Download
-        , Network.Google.Resource.Dataproc.Media.Upload
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Create
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Delete
         , Network.Google.Resource.Dataproc.Projects.Regions.Clusters.Diagnose

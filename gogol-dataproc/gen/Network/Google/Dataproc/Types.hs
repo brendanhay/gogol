@@ -20,9 +20,6 @@ module Network.Google.Dataproc.Types
       dataprocService
 
     -- * OAuth Scopes
-    , loggingAdminScope
-    , loggingReadScope
-    , loggingWriteScope
     , cloudPlatformScope
 
     -- * JobReference
@@ -220,11 +217,6 @@ module Network.Google.Dataproc.Types
     , hiveJobProperties
     , hAddtional
 
-    -- * Media
-    , Media
-    , media
-    , mResourceName
-
     -- * DiagnoseClusterOutputLocation
     , DiagnoseClusterOutputLocation
     , diagnoseClusterOutputLocation
@@ -403,18 +395,6 @@ dataprocService :: ServiceConfig
 dataprocService
   = defaultService (ServiceId "dataproc:v1")
       "dataproc.googleapis.com"
-
--- | Administrate log data for your projects
-loggingAdminScope :: Proxy '["https://www.googleapis.com/auth/logging.admin"]
-loggingAdminScope = Proxy;
-
--- | View log data for your projects
-loggingReadScope :: Proxy '["https://www.googleapis.com/auth/logging.read"]
-loggingReadScope = Proxy;
-
--- | Submit log data for your projects
-loggingWriteScope :: Proxy '["https://www.googleapis.com/auth/logging.write"]
-loggingWriteScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]

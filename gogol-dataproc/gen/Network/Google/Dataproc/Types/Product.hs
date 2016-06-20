@@ -1211,7 +1211,7 @@ ccMasterConfig
   = lens _ccMasterConfig
       (\ s a -> s{_ccMasterConfig = a})
 
--- | [Optional] The shared Google Compute Engine config settings for all
+-- | [Required] The shared Google Compute Engine config settings for all
 -- instances in a cluster.
 ccGceClusterConfig :: Lens' ClusterConfig (Maybe GceClusterConfig)
 ccGceClusterConfig
@@ -1807,41 +1807,6 @@ instance FromJSON HiveJobProperties where
 
 instance ToJSON HiveJobProperties where
         toJSON = toJSON . _hAddtional
-
--- | Media resource.
---
--- /See:/ 'media' smart constructor.
-newtype Media = Media'
-    { _mResourceName :: Maybe Text
-    } deriving (Eq,Show,Data,Typeable,Generic)
-
--- | Creates a value of 'Media' with the minimum fields required to make a request.
---
--- Use one of the following lenses to modify other fields as desired:
---
--- * 'mResourceName'
-media
-    :: Media
-media =
-    Media'
-    { _mResourceName = Nothing
-    }
-
--- | Name of the media resource.
-mResourceName :: Lens' Media (Maybe Text)
-mResourceName
-  = lens _mResourceName
-      (\ s a -> s{_mResourceName = a})
-
-instance FromJSON Media where
-        parseJSON
-          = withObject "Media"
-              (\ o -> Media' <$> (o .:? "resourceName"))
-
-instance ToJSON Media where
-        toJSON Media'{..}
-          = object
-              (catMaybes [("resourceName" .=) <$> _mResourceName])
 
 -- | The location where output from diagnostic command can be found.
 --
