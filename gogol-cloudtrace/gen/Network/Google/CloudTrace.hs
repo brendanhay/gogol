@@ -13,8 +13,10 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Cloud Trace API allows you to send traces to and retrieve traces
--- from Google Cloud Trace.
+-- Send and retrieve trace data from Google Cloud Trace. Data is generated
+-- and available by default for all App Engine applications. Data from
+-- other applications can be written to Cloud Trace for display, reporting,
+-- and analysis.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference>
 module Network.Google.CloudTrace
@@ -23,6 +25,8 @@ module Network.Google.CloudTrace
       cloudTraceService
 
     -- * OAuth Scopes
+    , traceAppendScope
+    , traceReadOnlyScope
     , cloudPlatformScope
 
     -- * API Declaration

@@ -170,10 +170,10 @@ tsKind :: Lens' TraceSpan (Maybe Text)
 tsKind = lens _tsKind (\ s a -> s{_tsKind = a})
 
 -- | Name of the trace. The trace name is sanitized and displayed in the
--- Cloud Trace tool in the Google Developers Console. The name may be a
--- method name or some other per-call site name. For the same executable
--- and the same call point, a best practice is to use a consistent name,
--- which makes it easier to correlate cross-trace spans.
+-- Stackdriver Trace tool in the {% dynamic print site_values.console_name
+-- %}. The name may be a method name or some other per-call site name. For
+-- the same executable and the same call point, a best practice is to use a
+-- consistent name, which makes it easier to correlate cross-trace spans.
 tsName :: Lens' TraceSpan (Maybe Text)
 tsName = lens _tsName (\ s a -> s{_tsName = a})
 

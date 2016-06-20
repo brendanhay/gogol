@@ -246,7 +246,8 @@ ptlCallback
 instance GoogleRequest ProjectsTracesList where
         type Rs ProjectsTracesList = ListTracesResponse
         type Scopes ProjectsTracesList =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/trace.readonly"]
         requestClient ProjectsTracesList'{..}
           = go _ptlProjectId _ptlXgafv _ptlUploadProtocol
               _ptlOrderBy

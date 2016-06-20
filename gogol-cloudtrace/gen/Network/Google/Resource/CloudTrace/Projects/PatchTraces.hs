@@ -20,11 +20,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sends new traces to Cloud Trace or updates existing traces. If the ID of
--- a trace that you send matches that of an existing trace, any fields in
--- the existing trace and its spans are overwritten by the provided values,
--- and any new fields provided are merged with the existing trace data. If
--- the ID does not match, a new trace is created.
+-- Sends new traces to Stackdriver Trace or updates existing traces. If the
+-- ID of a trace that you send matches that of an existing trace, any
+-- fields in the existing trace and its spans are overwritten by the
+-- provided values, and any new fields provided are merged with the
+-- existing trace data. If the ID does not match, a new trace is created.
 --
 -- /See:/ <https://cloud.google.com/tools/cloud-trace Google Cloud Trace API Reference> for @cloudtrace.projects.patchTraces@.
 module Network.Google.Resource.CloudTrace.Projects.PatchTraces
@@ -68,11 +68,11 @@ type ProjectsPatchTracesResource =
                            QueryParam "alt" AltJSON :>
                              ReqBody '[JSON] Traces :> Patch '[JSON] Empty
 
--- | Sends new traces to Cloud Trace or updates existing traces. If the ID of
--- a trace that you send matches that of an existing trace, any fields in
--- the existing trace and its spans are overwritten by the provided values,
--- and any new fields provided are merged with the existing trace data. If
--- the ID does not match, a new trace is created.
+-- | Sends new traces to Stackdriver Trace or updates existing traces. If the
+-- ID of a trace that you send matches that of an existing trace, any
+-- fields in the existing trace and its spans are overwritten by the
+-- provided values, and any new fields provided are merged with the
+-- existing trace data. If the ID does not match, a new trace is created.
 --
 -- /See:/ 'projectsPatchTraces' smart constructor.
 data ProjectsPatchTraces = ProjectsPatchTraces'
@@ -175,7 +175,8 @@ pptCallback
 instance GoogleRequest ProjectsPatchTraces where
         type Rs ProjectsPatchTraces = Empty
         type Scopes ProjectsPatchTraces =
-             '["https://www.googleapis.com/auth/cloud-platform"]
+             '["https://www.googleapis.com/auth/cloud-platform",
+               "https://www.googleapis.com/auth/trace.append"]
         requestClient ProjectsPatchTraces'{..}
           = go _pptProjectId _pptXgafv _pptUploadProtocol
               (Just _pptPp)

@@ -20,6 +20,8 @@ module Network.Google.CloudTrace.Types
       cloudTraceService
 
     -- * OAuth Scopes
+    , traceAppendScope
+    , traceReadOnlyScope
     , cloudPlatformScope
 
     -- * Empty
@@ -70,6 +72,14 @@ cloudTraceService :: ServiceConfig
 cloudTraceService
   = defaultService (ServiceId "cloudtrace:v1")
       "cloudtrace.googleapis.com"
+
+-- | Write Trace data for a project or application
+traceAppendScope :: Proxy '["https://www.googleapis.com/auth/trace.append"]
+traceAppendScope = Proxy;
+
+-- | Read Trace data for a project or application
+traceReadOnlyScope :: Proxy '["https://www.googleapis.com/auth/trace.readonly"]
+traceReadOnlyScope = Proxy;
 
 -- | View and manage your data across Google Cloud Platform services
 cloudPlatformScope :: Proxy '["https://www.googleapis.com/auth/cloud-platform"]
