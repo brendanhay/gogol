@@ -185,6 +185,15 @@ module Network.Google.AndroidPublisher
     -- ** androidpublisher.purchases.subscriptions.revoke
     , module Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
 
+    -- ** androidpublisher.reviews.get
+    , module Network.Google.Resource.AndroidPublisher.Reviews.Get
+
+    -- ** androidpublisher.reviews.list
+    , module Network.Google.Resource.AndroidPublisher.Reviews.List
+
+    -- ** androidpublisher.reviews.reply
+    , module Network.Google.Resource.AndroidPublisher.Reviews.Reply
+
     -- * Types
 
     -- ** InAppProductListings
@@ -253,6 +262,18 @@ module Network.Google.AndroidPublisher
 
     -- ** EditsTracksPatchTrack
     , EditsTracksPatchTrack (..)
+
+    -- ** UserComment
+    , UserComment
+    , userComment
+    , ucAndroidOSVersion
+    , ucText
+    , ucDevice
+    , ucAppVersionCode
+    , ucAppVersionName
+    , ucReviewerLanguage
+    , ucStarRating
+    , ucLastModified
 
     -- ** Testers
     , Testers
@@ -325,6 +346,13 @@ module Network.Google.AndroidPublisher
     , ppKind
     , ppPurchaseTimeMillis
     , ppDeveloperPayload
+
+    -- ** ReviewsListResponse
+    , ReviewsListResponse
+    , reviewsListResponse
+    , rlrTokenPagination
+    , rlrPageInfo
+    , rlrReviews
 
     -- ** SubscriptionPurchasesDeferResponse
     , SubscriptionPurchasesDeferResponse
@@ -433,6 +461,13 @@ module Network.Google.AndroidPublisher
     , apkllrKind
     , apkllrListings
 
+    -- ** Review
+    , Review
+    , review
+    , rReviewId
+    , rAuthorName
+    , rComments
+
     -- ** InAppProductsInsertResponse
     , InAppProductsInsertResponse
     , inAppProductsInsertResponse
@@ -452,11 +487,22 @@ module Network.Google.AndroidPublisher
     -- ** EditsExpansionFilesGetExpansionFileType
     , EditsExpansionFilesGetExpansionFileType (..)
 
+    -- ** ReviewsReplyRequest
+    , ReviewsReplyRequest
+    , reviewsReplyRequest
+    , rrrReplyText
+
     -- ** EditsExpansionFilesPatchExpansionFileType
     , EditsExpansionFilesPatchExpansionFileType (..)
 
     -- ** EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
+
+    -- ** DeveloperComment
+    , DeveloperComment
+    , developerComment
+    , dcText
+    , dcLastModified
 
     -- ** InAppProduct
     , InAppProduct
@@ -500,6 +546,11 @@ module Network.Google.AndroidPublisher
     , apklrKind
     , apklrAPKs
 
+    -- ** ReviewsReplyResponse
+    , ReviewsReplyResponse
+    , reviewsReplyResponse
+    , rrrResult
+
     -- ** ExternallyHostedAPKUsesPermission
     , ExternallyHostedAPKUsesPermission
     , externallyHostedAPKUsesPermission
@@ -529,6 +580,12 @@ module Network.Google.AndroidPublisher
     , elrPageInfo
     , elrResources
 
+    -- ** Comment
+    , Comment
+    , comment
+    , cUserComment
+    , cDeveloperComment
+
     -- ** EditsTestersUpdateTrack
     , EditsTestersUpdateTrack (..)
 
@@ -536,6 +593,18 @@ module Network.Google.AndroidPublisher
     , InAppProductsUpdateRequest
     , inAppProductsUpdateRequest
     , inInAppProduct
+
+    -- ** Timestamp
+    , Timestamp
+    , timestamp
+    , tNanos
+    , tSeconds
+
+    -- ** ReviewReplyResult
+    , ReviewReplyResult
+    , reviewReplyResult
+    , rReplyText
+    , rLastEdited
 
     -- ** Entitlement
     , Entitlement
@@ -606,6 +675,9 @@ import           Network.Google.Resource.AndroidPublisher.Purchases.Subscription
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Get
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Refund
 import           Network.Google.Resource.AndroidPublisher.Purchases.Subscriptions.Revoke
+import           Network.Google.Resource.AndroidPublisher.Reviews.Get
+import           Network.Google.Resource.AndroidPublisher.Reviews.List
+import           Network.Google.Resource.AndroidPublisher.Reviews.Reply
 
 {- $resources
 TODO
@@ -620,6 +692,9 @@ type AndroidPublisherAPI =
        :<|> InAppProductsGetResource
        :<|> InAppProductsDeleteResource
        :<|> InAppProductsUpdateResource
+       :<|> ReviewsReplyResource
+       :<|> ReviewsListResource
+       :<|> ReviewsGetResource
        :<|> EditsImagesListResource
        :<|> EditsImagesDeleteallResource
        :<|> EditsImagesUploadResource

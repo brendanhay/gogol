@@ -89,6 +89,18 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsTracksPatchTrack
     , EditsTracksPatchTrack (..)
 
+    -- * UserComment
+    , UserComment
+    , userComment
+    , ucAndroidOSVersion
+    , ucText
+    , ucDevice
+    , ucAppVersionCode
+    , ucAppVersionName
+    , ucReviewerLanguage
+    , ucStarRating
+    , ucLastModified
+
     -- * Testers
     , Testers
     , testers
@@ -160,6 +172,13 @@ module Network.Google.AndroidPublisher.Types
     , ppKind
     , ppPurchaseTimeMillis
     , ppDeveloperPayload
+
+    -- * ReviewsListResponse
+    , ReviewsListResponse
+    , reviewsListResponse
+    , rlrTokenPagination
+    , rlrPageInfo
+    , rlrReviews
 
     -- * SubscriptionPurchasesDeferResponse
     , SubscriptionPurchasesDeferResponse
@@ -268,6 +287,13 @@ module Network.Google.AndroidPublisher.Types
     , apkllrKind
     , apkllrListings
 
+    -- * Review
+    , Review
+    , review
+    , rReviewId
+    , rAuthorName
+    , rComments
+
     -- * InAppProductsInsertResponse
     , InAppProductsInsertResponse
     , inAppProductsInsertResponse
@@ -287,11 +313,22 @@ module Network.Google.AndroidPublisher.Types
     -- * EditsExpansionFilesGetExpansionFileType
     , EditsExpansionFilesGetExpansionFileType (..)
 
+    -- * ReviewsReplyRequest
+    , ReviewsReplyRequest
+    , reviewsReplyRequest
+    , rrrReplyText
+
     -- * EditsExpansionFilesPatchExpansionFileType
     , EditsExpansionFilesPatchExpansionFileType (..)
 
     -- * EditsExpansionFilesUpdateExpansionFileType
     , EditsExpansionFilesUpdateExpansionFileType (..)
+
+    -- * DeveloperComment
+    , DeveloperComment
+    , developerComment
+    , dcText
+    , dcLastModified
 
     -- * InAppProduct
     , InAppProduct
@@ -335,6 +372,11 @@ module Network.Google.AndroidPublisher.Types
     , apklrKind
     , apklrAPKs
 
+    -- * ReviewsReplyResponse
+    , ReviewsReplyResponse
+    , reviewsReplyResponse
+    , rrrResult
+
     -- * ExternallyHostedAPKUsesPermission
     , ExternallyHostedAPKUsesPermission
     , externallyHostedAPKUsesPermission
@@ -364,6 +406,12 @@ module Network.Google.AndroidPublisher.Types
     , elrPageInfo
     , elrResources
 
+    -- * Comment
+    , Comment
+    , comment
+    , cUserComment
+    , cDeveloperComment
+
     -- * EditsTestersUpdateTrack
     , EditsTestersUpdateTrack (..)
 
@@ -371,6 +419,18 @@ module Network.Google.AndroidPublisher.Types
     , InAppProductsUpdateRequest
     , inAppProductsUpdateRequest
     , inInAppProduct
+
+    -- * Timestamp
+    , Timestamp
+    , timestamp
+    , tNanos
+    , tSeconds
+
+    -- * ReviewReplyResult
+    , ReviewReplyResult
+    , reviewReplyResult
+    , rReplyText
+    , rLastEdited
 
     -- * Entitlement
     , Entitlement

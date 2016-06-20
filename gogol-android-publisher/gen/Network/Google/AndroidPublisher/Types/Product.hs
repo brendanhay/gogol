@@ -504,6 +504,130 @@ instance ToJSON ExpansionFile where
                   ("referencesVersion" .=) <$> _efReferencesVersion])
 
 --
+-- /See:/ 'userComment' smart constructor.
+data UserComment = UserComment'
+    { _ucAndroidOSVersion :: !(Maybe (Textual Int32))
+    , _ucText             :: !(Maybe Text)
+    , _ucDevice           :: !(Maybe Text)
+    , _ucAppVersionCode   :: !(Maybe (Textual Int32))
+    , _ucAppVersionName   :: !(Maybe Text)
+    , _ucReviewerLanguage :: !(Maybe Text)
+    , _ucStarRating       :: !(Maybe (Textual Int32))
+    , _ucLastModified     :: !(Maybe Timestamp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'UserComment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ucAndroidOSVersion'
+--
+-- * 'ucText'
+--
+-- * 'ucDevice'
+--
+-- * 'ucAppVersionCode'
+--
+-- * 'ucAppVersionName'
+--
+-- * 'ucReviewerLanguage'
+--
+-- * 'ucStarRating'
+--
+-- * 'ucLastModified'
+userComment
+    :: UserComment
+userComment =
+    UserComment'
+    { _ucAndroidOSVersion = Nothing
+    , _ucText = Nothing
+    , _ucDevice = Nothing
+    , _ucAppVersionCode = Nothing
+    , _ucAppVersionName = Nothing
+    , _ucReviewerLanguage = Nothing
+    , _ucStarRating = Nothing
+    , _ucLastModified = Nothing
+    }
+
+-- | Integer Android SDK version of the user\'s device at the time the review
+-- was written, e.g. 23 is Marshmallow. May be absent.
+ucAndroidOSVersion :: Lens' UserComment (Maybe Int32)
+ucAndroidOSVersion
+  = lens _ucAndroidOSVersion
+      (\ s a -> s{_ucAndroidOSVersion = a})
+      . mapping _Coerce
+
+-- | The content of the comment, i.e. review body. In some cases users have
+-- been able to write a review with separate title and body; in those cases
+-- the title and body are concatenated and separated by a tab character.
+ucText :: Lens' UserComment (Maybe Text)
+ucText = lens _ucText (\ s a -> s{_ucText = a})
+
+-- | Codename for the reviewer\'s device, e.g. klte, flounder. May be absent.
+ucDevice :: Lens' UserComment (Maybe Text)
+ucDevice = lens _ucDevice (\ s a -> s{_ucDevice = a})
+
+-- | Integer version code of the app as installed at the time the review was
+-- written. May be absent.
+ucAppVersionCode :: Lens' UserComment (Maybe Int32)
+ucAppVersionCode
+  = lens _ucAppVersionCode
+      (\ s a -> s{_ucAppVersionCode = a})
+      . mapping _Coerce
+
+-- | String version name of the app as installed at the time the review was
+-- written. May be absent.
+ucAppVersionName :: Lens' UserComment (Maybe Text)
+ucAppVersionName
+  = lens _ucAppVersionName
+      (\ s a -> s{_ucAppVersionName = a})
+
+-- | Language code for the reviewer. This is taken from the device settings
+-- so is not guaranteed to match the language the review is written in. May
+-- be absent.
+ucReviewerLanguage :: Lens' UserComment (Maybe Text)
+ucReviewerLanguage
+  = lens _ucReviewerLanguage
+      (\ s a -> s{_ucReviewerLanguage = a})
+
+-- | The star rating associated with the review, from 1 to 5.
+ucStarRating :: Lens' UserComment (Maybe Int32)
+ucStarRating
+  = lens _ucStarRating (\ s a -> s{_ucStarRating = a})
+      . mapping _Coerce
+
+-- | The last time at which this comment was updated.
+ucLastModified :: Lens' UserComment (Maybe Timestamp)
+ucLastModified
+  = lens _ucLastModified
+      (\ s a -> s{_ucLastModified = a})
+
+instance FromJSON UserComment where
+        parseJSON
+          = withObject "UserComment"
+              (\ o ->
+                 UserComment' <$>
+                   (o .:? "androidOsVersion") <*> (o .:? "text") <*>
+                     (o .:? "device")
+                     <*> (o .:? "appVersionCode")
+                     <*> (o .:? "appVersionName")
+                     <*> (o .:? "reviewerLanguage")
+                     <*> (o .:? "starRating")
+                     <*> (o .:? "lastModified"))
+
+instance ToJSON UserComment where
+        toJSON UserComment'{..}
+          = object
+              (catMaybes
+                 [("androidOsVersion" .=) <$> _ucAndroidOSVersion,
+                  ("text" .=) <$> _ucText, ("device" .=) <$> _ucDevice,
+                  ("appVersionCode" .=) <$> _ucAppVersionCode,
+                  ("appVersionName" .=) <$> _ucAppVersionName,
+                  ("reviewerLanguage" .=) <$> _ucReviewerLanguage,
+                  ("starRating" .=) <$> _ucStarRating,
+                  ("lastModified" .=) <$> _ucLastModified])
+
+--
 -- /See:/ 'testers' smart constructor.
 data Testers = Testers'
     { _tGooglePlusCommUnities :: !(Maybe [Text])
@@ -1063,6 +1187,63 @@ instance ToJSON ProductPurchase where
                   Just ("kind" .= _ppKind),
                   ("purchaseTimeMillis" .=) <$> _ppPurchaseTimeMillis,
                   ("developerPayload" .=) <$> _ppDeveloperPayload])
+
+--
+-- /See:/ 'reviewsListResponse' smart constructor.
+data ReviewsListResponse = ReviewsListResponse'
+    { _rlrTokenPagination :: !(Maybe TokenPagination)
+    , _rlrPageInfo        :: !(Maybe PageInfo)
+    , _rlrReviews         :: !(Maybe [Review])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewsListResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rlrTokenPagination'
+--
+-- * 'rlrPageInfo'
+--
+-- * 'rlrReviews'
+reviewsListResponse
+    :: ReviewsListResponse
+reviewsListResponse =
+    ReviewsListResponse'
+    { _rlrTokenPagination = Nothing
+    , _rlrPageInfo = Nothing
+    , _rlrReviews = Nothing
+    }
+
+rlrTokenPagination :: Lens' ReviewsListResponse (Maybe TokenPagination)
+rlrTokenPagination
+  = lens _rlrTokenPagination
+      (\ s a -> s{_rlrTokenPagination = a})
+
+rlrPageInfo :: Lens' ReviewsListResponse (Maybe PageInfo)
+rlrPageInfo
+  = lens _rlrPageInfo (\ s a -> s{_rlrPageInfo = a})
+
+rlrReviews :: Lens' ReviewsListResponse [Review]
+rlrReviews
+  = lens _rlrReviews (\ s a -> s{_rlrReviews = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON ReviewsListResponse where
+        parseJSON
+          = withObject "ReviewsListResponse"
+              (\ o ->
+                 ReviewsListResponse' <$>
+                   (o .:? "tokenPagination") <*> (o .:? "pageInfo") <*>
+                     (o .:? "reviews" .!= mempty))
+
+instance ToJSON ReviewsListResponse where
+        toJSON ReviewsListResponse'{..}
+          = object
+              (catMaybes
+                 [("tokenPagination" .=) <$> _rlrTokenPagination,
+                  ("pageInfo" .=) <$> _rlrPageInfo,
+                  ("reviews" .=) <$> _rlrReviews])
 
 --
 -- /See:/ 'subscriptionPurchasesDeferResponse' smart constructor.
@@ -1924,6 +2105,65 @@ instance ToJSON APKListingsListResponse where
                   ("listings" .=) <$> _apkllrListings])
 
 --
+-- /See:/ 'review' smart constructor.
+data Review = Review'
+    { _rReviewId   :: !(Maybe Text)
+    , _rAuthorName :: !(Maybe Text)
+    , _rComments   :: !(Maybe [Comment])
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Review' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rReviewId'
+--
+-- * 'rAuthorName'
+--
+-- * 'rComments'
+review
+    :: Review
+review =
+    Review'
+    { _rReviewId = Nothing
+    , _rAuthorName = Nothing
+    , _rComments = Nothing
+    }
+
+-- | Unique identifier for this review.
+rReviewId :: Lens' Review (Maybe Text)
+rReviewId
+  = lens _rReviewId (\ s a -> s{_rReviewId = a})
+
+-- | The name of the user who wrote the review.
+rAuthorName :: Lens' Review (Maybe Text)
+rAuthorName
+  = lens _rAuthorName (\ s a -> s{_rAuthorName = a})
+
+-- | A repeated field containing comments for the review.
+rComments :: Lens' Review [Comment]
+rComments
+  = lens _rComments (\ s a -> s{_rComments = a}) .
+      _Default
+      . _Coerce
+
+instance FromJSON Review where
+        parseJSON
+          = withObject "Review"
+              (\ o ->
+                 Review' <$>
+                   (o .:? "reviewId") <*> (o .:? "authorName") <*>
+                     (o .:? "comments" .!= mempty))
+
+instance ToJSON Review where
+        toJSON Review'{..}
+          = object
+              (catMaybes
+                 [("reviewId" .=) <$> _rReviewId,
+                  ("authorName" .=) <$> _rAuthorName,
+                  ("comments" .=) <$> _rComments])
+
+--
 -- /See:/ 'inAppProductsInsertResponse' smart constructor.
 newtype InAppProductsInsertResponse = InAppProductsInsertResponse'
     { _iapirInAppProduct :: Maybe InAppProduct
@@ -2056,6 +2296,86 @@ instance ToJSON SubscriptionDeferralInfo where
                     _sdiDesiredExpiryTimeMillis,
                   ("expectedExpiryTimeMillis" .=) <$>
                     _sdiExpectedExpiryTimeMillis])
+
+--
+-- /See:/ 'reviewsReplyRequest' smart constructor.
+newtype ReviewsReplyRequest = ReviewsReplyRequest'
+    { _rrrReplyText :: Maybe Text
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewsReplyRequest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrrReplyText'
+reviewsReplyRequest
+    :: ReviewsReplyRequest
+reviewsReplyRequest =
+    ReviewsReplyRequest'
+    { _rrrReplyText = Nothing
+    }
+
+-- | The text to set as the reply. Replies of more than approximately 350
+-- characters will be rejected. HTML tags will be stripped.
+rrrReplyText :: Lens' ReviewsReplyRequest (Maybe Text)
+rrrReplyText
+  = lens _rrrReplyText (\ s a -> s{_rrrReplyText = a})
+
+instance FromJSON ReviewsReplyRequest where
+        parseJSON
+          = withObject "ReviewsReplyRequest"
+              (\ o -> ReviewsReplyRequest' <$> (o .:? "replyText"))
+
+instance ToJSON ReviewsReplyRequest where
+        toJSON ReviewsReplyRequest'{..}
+          = object
+              (catMaybes [("replyText" .=) <$> _rrrReplyText])
+
+--
+-- /See:/ 'developerComment' smart constructor.
+data DeveloperComment = DeveloperComment'
+    { _dcText         :: !(Maybe Text)
+    , _dcLastModified :: !(Maybe Timestamp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'DeveloperComment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcText'
+--
+-- * 'dcLastModified'
+developerComment
+    :: DeveloperComment
+developerComment =
+    DeveloperComment'
+    { _dcText = Nothing
+    , _dcLastModified = Nothing
+    }
+
+-- | The content of the comment, i.e. reply body.
+dcText :: Lens' DeveloperComment (Maybe Text)
+dcText = lens _dcText (\ s a -> s{_dcText = a})
+
+-- | The last time at which this comment was updated.
+dcLastModified :: Lens' DeveloperComment (Maybe Timestamp)
+dcLastModified
+  = lens _dcLastModified
+      (\ s a -> s{_dcLastModified = a})
+
+instance FromJSON DeveloperComment where
+        parseJSON
+          = withObject "DeveloperComment"
+              (\ o ->
+                 DeveloperComment' <$>
+                   (o .:? "text") <*> (o .:? "lastModified"))
+
+instance ToJSON DeveloperComment where
+        toJSON DeveloperComment'{..}
+          = object
+              (catMaybes
+                 [("text" .=) <$> _dcText,
+                  ("lastModified" .=) <$> _dcLastModified])
 
 --
 -- /See:/ 'inAppProduct' smart constructor.
@@ -2404,6 +2724,37 @@ instance ToJSON APKsListResponse where
                  [Just ("kind" .= _apklrKind),
                   ("apks" .=) <$> _apklrAPKs])
 
+--
+-- /See:/ 'reviewsReplyResponse' smart constructor.
+newtype ReviewsReplyResponse = ReviewsReplyResponse'
+    { _rrrResult :: Maybe ReviewReplyResult
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewsReplyResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rrrResult'
+reviewsReplyResponse
+    :: ReviewsReplyResponse
+reviewsReplyResponse =
+    ReviewsReplyResponse'
+    { _rrrResult = Nothing
+    }
+
+rrrResult :: Lens' ReviewsReplyResponse (Maybe ReviewReplyResult)
+rrrResult
+  = lens _rrrResult (\ s a -> s{_rrrResult = a})
+
+instance FromJSON ReviewsReplyResponse where
+        parseJSON
+          = withObject "ReviewsReplyResponse"
+              (\ o -> ReviewsReplyResponse' <$> (o .:? "result"))
+
+instance ToJSON ReviewsReplyResponse where
+        toJSON ReviewsReplyResponse'{..}
+          = object (catMaybes [("result" .=) <$> _rrrResult])
+
 -- | A permission used by this APK.
 --
 -- /See:/ 'externallyHostedAPKUsesPermission' smart constructor.
@@ -2637,6 +2988,53 @@ instance ToJSON EntitlementsListResponse where
                   ("resources" .=) <$> _elrResources])
 
 --
+-- /See:/ 'comment' smart constructor.
+data Comment = Comment'
+    { _cUserComment      :: !(Maybe UserComment)
+    , _cDeveloperComment :: !(Maybe DeveloperComment)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Comment' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cUserComment'
+--
+-- * 'cDeveloperComment'
+comment
+    :: Comment
+comment =
+    Comment'
+    { _cUserComment = Nothing
+    , _cDeveloperComment = Nothing
+    }
+
+-- | A comment from a user.
+cUserComment :: Lens' Comment (Maybe UserComment)
+cUserComment
+  = lens _cUserComment (\ s a -> s{_cUserComment = a})
+
+-- | A comment from a developer.
+cDeveloperComment :: Lens' Comment (Maybe DeveloperComment)
+cDeveloperComment
+  = lens _cDeveloperComment
+      (\ s a -> s{_cDeveloperComment = a})
+
+instance FromJSON Comment where
+        parseJSON
+          = withObject "Comment"
+              (\ o ->
+                 Comment' <$>
+                   (o .:? "userComment") <*> (o .:? "developerComment"))
+
+instance ToJSON Comment where
+        toJSON Comment'{..}
+          = object
+              (catMaybes
+                 [("userComment" .=) <$> _cUserComment,
+                  ("developerComment" .=) <$> _cDeveloperComment])
+
+--
 -- /See:/ 'inAppProductsUpdateRequest' smart constructor.
 newtype InAppProductsUpdateRequest = InAppProductsUpdateRequest'
     { _inInAppProduct :: Maybe InAppProduct
@@ -2670,6 +3068,97 @@ instance ToJSON InAppProductsUpdateRequest where
         toJSON InAppProductsUpdateRequest'{..}
           = object
               (catMaybes [("inappproduct" .=) <$> _inInAppProduct])
+
+--
+-- /See:/ 'timestamp' smart constructor.
+data Timestamp = Timestamp'
+    { _tNanos   :: !(Maybe (Textual Int32))
+    , _tSeconds :: !(Maybe (Textual Int64))
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'Timestamp' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tNanos'
+--
+-- * 'tSeconds'
+timestamp
+    :: Timestamp
+timestamp =
+    Timestamp'
+    { _tNanos = Nothing
+    , _tSeconds = Nothing
+    }
+
+tNanos :: Lens' Timestamp (Maybe Int32)
+tNanos
+  = lens _tNanos (\ s a -> s{_tNanos = a}) .
+      mapping _Coerce
+
+tSeconds :: Lens' Timestamp (Maybe Int64)
+tSeconds
+  = lens _tSeconds (\ s a -> s{_tSeconds = a}) .
+      mapping _Coerce
+
+instance FromJSON Timestamp where
+        parseJSON
+          = withObject "Timestamp"
+              (\ o ->
+                 Timestamp' <$> (o .:? "nanos") <*> (o .:? "seconds"))
+
+instance ToJSON Timestamp where
+        toJSON Timestamp'{..}
+          = object
+              (catMaybes
+                 [("nanos" .=) <$> _tNanos,
+                  ("seconds" .=) <$> _tSeconds])
+
+--
+-- /See:/ 'reviewReplyResult' smart constructor.
+data ReviewReplyResult = ReviewReplyResult'
+    { _rReplyText  :: !(Maybe Text)
+    , _rLastEdited :: !(Maybe Timestamp)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'ReviewReplyResult' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rReplyText'
+--
+-- * 'rLastEdited'
+reviewReplyResult
+    :: ReviewReplyResult
+reviewReplyResult =
+    ReviewReplyResult'
+    { _rReplyText = Nothing
+    , _rLastEdited = Nothing
+    }
+
+-- | The reply text that was applied.
+rReplyText :: Lens' ReviewReplyResult (Maybe Text)
+rReplyText
+  = lens _rReplyText (\ s a -> s{_rReplyText = a})
+
+-- | The time at which the reply took effect.
+rLastEdited :: Lens' ReviewReplyResult (Maybe Timestamp)
+rLastEdited
+  = lens _rLastEdited (\ s a -> s{_rLastEdited = a})
+
+instance FromJSON ReviewReplyResult where
+        parseJSON
+          = withObject "ReviewReplyResult"
+              (\ o ->
+                 ReviewReplyResult' <$>
+                   (o .:? "replyText") <*> (o .:? "lastEdited"))
+
+instance ToJSON ReviewReplyResult where
+        toJSON ReviewReplyResult'{..}
+          = object
+              (catMaybes
+                 [("replyText" .=) <$> _rReplyText,
+                  ("lastEdited" .=) <$> _rLastEdited])
 
 -- | An Entitlement resource indicates a user\'s current entitlement to an
 -- inapp item or subscription.
