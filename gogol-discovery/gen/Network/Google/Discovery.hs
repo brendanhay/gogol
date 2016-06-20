@@ -13,8 +13,8 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Lets you discover information about other Google APIs, such as what APIs
--- are available, the resource and method details for each API.
+-- Provides information about other Google APIs, such as what APIs are
+-- available, the resource, and method details for each API.
 --
 -- /See:/ <https://developers.google.com/discovery/ APIs Discovery Service Reference>
 module Network.Google.Discovery
