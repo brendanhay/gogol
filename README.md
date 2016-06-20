@@ -3,9 +3,10 @@
 **Warning:** This is an experimental prototype/preview release which is still
 under heavy development and not intended for public consumption, caveat emptor!
 
-[![Build Status](https://travis-ci.org/brendanhay/gogol.svg?branch=develop)](https://travis-ci.org/brendanhay/gogol)
+[![Build Status](https://img.shields.io/travis/brendanhay/gogol/develop.svg?maxAge=2592000)](https://travis-ci.org/brendanhay/gogol)
 [![Hackage Version](https://img.shields.io/hackage/v/gogol.svg)](http://hackage.haskell.org/package/gogol)
-[![Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/brendanhay/gogol)
+[![Gitter Chat](https://img.shields.io/gitter/room/brendanhay/gogol.js.svg?maxAge=2592000)](https://gitter.im/brendanhay/gogol)
+
 
 * [Description](#description)
 * [Documentation](#documentation)
