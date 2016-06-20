@@ -22,6 +22,39 @@ module Network.Google.PlayMoviesPartner.Types
     -- * OAuth Scopes
     , playmoviesPartnerReadOnlyScope
 
+    -- * Component
+    , Component
+    , component
+    , cStatus
+    , cPphName
+    , cStudioName
+    , cElIds
+    , cReceivedTime
+    , cPriority
+    , cCustomIds
+    , cAltCutIds
+    , cProcessingErrors
+    , cPlayableUnitType
+    , cEditLevelEidrs
+    , cApprovedTime
+    , cName
+    , cTitleLevelEidrs
+    , cRejectionNote
+    , cComponentId
+    , cLanguage
+    , cStatusDetail
+    , cType
+    , cNormalizedPriority
+    , cComponentDetailType
+    , cFilename
+
+    -- * ListComponentsResponse
+    , ListComponentsResponse
+    , listComponentsResponse
+    , lcrComponents
+    , lcrNextPageToken
+    , lcrTotalSize
+
     -- * Avail
     , Avail
     , avail
@@ -38,6 +71,7 @@ module Network.Google.PlayMoviesPartner.Types
     , aTerritory
     , aEpisodeTitleInternalAlias
     , aLicenseType
+    , aAvailId
     , aSeasonNumber
     , aWorkType
     , aRatingValue
@@ -63,23 +97,27 @@ module Network.Google.PlayMoviesPartner.Types
     , listAvailsResponse
     , larNextPageToken
     , larAvails
+    , larTotalSize
 
     -- * ListExperienceLocalesResponse
     , ListExperienceLocalesResponse
     , listExperienceLocalesResponse
     , lelrNextPageToken
+    , lelrTotalSize
     , lelrExperienceLocales
 
     -- * ListOrdersResponse
     , ListOrdersResponse
     , listOrdersResponse
     , lorNextPageToken
+    , lorTotalSize
     , lorOrders
 
     -- * ListStoreInfosResponse
     , ListStoreInfosResponse
     , listStoreInfosResponse
     , lsirNextPageToken
+    , lsirTotalSize
     , lsirStoreInfos
 
     -- * Order

@@ -47,6 +47,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     , aalTerritories
     , aalAccountId
     , aalBearerToken
+    , aalAltIds
     , aalPageToken
     , aalTitle
     , aalPageSize
@@ -74,12 +75,14 @@ type AccountsAvailsListResource =
                              QueryParam "uploadType" Text :>
                                QueryParams "territories" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "title" Text :>
-                                       QueryParam "pageSize" (Textual Int32) :>
-                                         QueryParam "callback" Text :>
-                                           QueryParam "alt" AltJSON :>
-                                             Get '[JSON] ListAvailsResponse
+                                   QueryParams "altIds" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "title" Text :>
+                                         QueryParam "pageSize" (Textual Int32)
+                                           :>
+                                           QueryParam "callback" Text :>
+                                             QueryParam "alt" AltJSON :>
+                                               Get '[JSON] ListAvailsResponse
 
 -- | List Avails owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
@@ -99,6 +102,7 @@ data AccountsAvailsList = AccountsAvailsList'
     , _aalTerritories    :: !(Maybe [Text])
     , _aalAccountId      :: !Text
     , _aalBearerToken    :: !(Maybe Text)
+    , _aalAltIds         :: !(Maybe [Text])
     , _aalPageToken      :: !(Maybe Text)
     , _aalTitle          :: !(Maybe Text)
     , _aalPageSize       :: !(Maybe (Textual Int32))
@@ -133,6 +137,8 @@ data AccountsAvailsList = AccountsAvailsList'
 --
 -- * 'aalBearerToken'
 --
+-- * 'aalAltIds'
+--
 -- * 'aalPageToken'
 --
 -- * 'aalTitle'
@@ -157,6 +163,7 @@ accountsAvailsList pAalAccountId_ =
     , _aalTerritories = Nothing
     , _aalAccountId = pAalAccountId_
     , _aalBearerToken = Nothing
+    , _aalAltIds = Nothing
     , _aalPageToken = Nothing
     , _aalTitle = Nothing
     , _aalPageSize = Nothing
@@ -164,6 +171,8 @@ accountsAvailsList pAalAccountId_ =
     }
 
 -- | Filter Avails that match a case-insensitive, partner-specific custom id.
+-- NOTE: this field is deprecated and will be removed on V2; \`alt_ids\`
+-- should be used instead.
 aalAltId :: Lens' AccountsAvailsList (Maybe Text)
 aalAltId = lens _aalAltId (\ s a -> s{_aalAltId = a})
 
@@ -236,13 +245,23 @@ aalBearerToken
   = lens _aalBearerToken
       (\ s a -> s{_aalBearerToken = a})
 
+-- | Filter Avails that match (case-insensitive) any of the given
+-- partner-specific custom ids.
+aalAltIds :: Lens' AccountsAvailsList [Text]
+aalAltIds
+  = lens _aalAltIds (\ s a -> s{_aalAltIds = a}) .
+      _Default
+      . _Coerce
+
 -- | See _List methods rules_ for info about this field.
 aalPageToken :: Lens' AccountsAvailsList (Maybe Text)
 aalPageToken
   = lens _aalPageToken (\ s a -> s{_aalPageToken = a})
 
--- | Filter Avails that match a case-insensitive substring of the default
--- Title name.
+-- | Filter that matches Avails with a \`title_internal_alias\`,
+-- \`series_title_internal_alias\`, \`season_title_internal_alias\`, or
+-- \`episode_title_internal_alias\` that contains the given
+-- case-insensitive title.
 aalTitle :: Lens' AccountsAvailsList (Maybe Text)
 aalTitle = lens _aalTitle (\ s a -> s{_aalTitle = a})
 
@@ -273,6 +292,7 @@ instance GoogleRequest AccountsAvailsList where
               _aalUploadType
               (_aalTerritories ^. _Default)
               _aalBearerToken
+              (_aalAltIds ^. _Default)
               _aalPageToken
               _aalTitle
               _aalPageSize

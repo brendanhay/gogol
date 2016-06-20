@@ -39,6 +39,7 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
     , aolPphNames
     , aolXgafv
     , aolStudioNames
+    , aolVideoIds
     , aolUploadProtocol
     , aolPp
     , aolAccessToken
@@ -66,18 +67,19 @@ type AccountsOrdersListResource =
                QueryParams "pphNames" Text :>
                  QueryParam "$.xgafv" Text :>
                    QueryParams "studioNames" Text :>
-                     QueryParam "upload_protocol" Text :>
-                       QueryParam "pp" Bool :>
-                         QueryParam "access_token" Text :>
-                           QueryParam "uploadType" Text :>
-                             QueryParam "customId" Text :>
-                               QueryParam "bearer_token" Text :>
-                                 QueryParam "name" Text :>
-                                   QueryParam "pageToken" Text :>
-                                     QueryParam "pageSize" (Textual Int32) :>
-                                       QueryParam "callback" Text :>
-                                         QueryParam "alt" AltJSON :>
-                                           Get '[JSON] ListOrdersResponse
+                     QueryParams "videoIds" Text :>
+                       QueryParam "upload_protocol" Text :>
+                         QueryParam "pp" Bool :>
+                           QueryParam "access_token" Text :>
+                             QueryParam "uploadType" Text :>
+                               QueryParam "customId" Text :>
+                                 QueryParam "bearer_token" Text :>
+                                   QueryParam "name" Text :>
+                                     QueryParam "pageToken" Text :>
+                                       QueryParam "pageSize" (Textual Int32) :>
+                                         QueryParam "callback" Text :>
+                                           QueryParam "alt" AltJSON :>
+                                             Get '[JSON] ListOrdersResponse
 
 -- | List Orders owned or managed by the partner. See _Authentication and
 -- Authorization rules_ and _List methods rules_ for more information about
@@ -89,6 +91,7 @@ data AccountsOrdersList = AccountsOrdersList'
     , _aolPphNames       :: !(Maybe [Text])
     , _aolXgafv          :: !(Maybe Text)
     , _aolStudioNames    :: !(Maybe [Text])
+    , _aolVideoIds       :: !(Maybe [Text])
     , _aolUploadProtocol :: !(Maybe Text)
     , _aolPp             :: !Bool
     , _aolAccessToken    :: !(Maybe Text)
@@ -113,6 +116,8 @@ data AccountsOrdersList = AccountsOrdersList'
 -- * 'aolXgafv'
 --
 -- * 'aolStudioNames'
+--
+-- * 'aolVideoIds'
 --
 -- * 'aolUploadProtocol'
 --
@@ -144,6 +149,7 @@ accountsOrdersList pAolAccountId_ =
     , _aolPphNames = Nothing
     , _aolXgafv = Nothing
     , _aolStudioNames = Nothing
+    , _aolVideoIds = Nothing
     , _aolUploadProtocol = Nothing
     , _aolPp = True
     , _aolAccessToken = Nothing
@@ -181,6 +187,13 @@ aolStudioNames
   = lens _aolStudioNames
       (\ s a -> s{_aolStudioNames = a})
       . _Default
+      . _Coerce
+
+-- | Filter Orders that match any of the given \`video_id\`s.
+aolVideoIds :: Lens' AccountsOrdersList [Text]
+aolVideoIds
+  = lens _aolVideoIds (\ s a -> s{_aolVideoIds = a}) .
+      _Default
       . _Coerce
 
 -- | Upload protocol for media (e.g. \"raw\", \"multipart\").
@@ -221,8 +234,8 @@ aolBearerToken
   = lens _aolBearerToken
       (\ s a -> s{_aolBearerToken = a})
 
--- | Filter Orders that match a title name (case-insensitive, sub-string
--- match).
+-- | Filter that matches Orders with a \`name\`, \`show\`, \`season\` or
+-- \`episode\` that contains the given case-insensitive name.
 aolName :: Lens' AccountsOrdersList (Maybe Text)
 aolName = lens _aolName (\ s a -> s{_aolName = a})
 
@@ -251,6 +264,7 @@ instance GoogleRequest AccountsOrdersList where
               (_aolPphNames ^. _Default)
               _aolXgafv
               (_aolStudioNames ^. _Default)
+              (_aolVideoIds ^. _Default)
               _aolUploadProtocol
               (Just _aolPp)
               _aolAccessToken
