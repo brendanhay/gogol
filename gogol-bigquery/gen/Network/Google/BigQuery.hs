@@ -221,6 +221,7 @@ module Network.Google.BigQuery
     , edcSourceFormat
     , edcSchema
     , edcMaxBadRecords
+    , edcGoogleSheetsOptions
     , edcAutodetect
     , edcSourceURIs
     , edcCSVOptions
@@ -324,6 +325,7 @@ module Network.Google.BigQuery
     , jclSchema
     , jclQuote
     , jclMaxBadRecords
+    , jclAutodetect
     , jclSourceURIs
     , jclEncoding
     , jclFieldDelimiter
@@ -464,6 +466,11 @@ module Network.Google.BigQuery
     , jcqUseLegacySQL
     , jcqDefaultDataSet
 
+    -- ** GoogleSheetsOptions
+    , GoogleSheetsOptions
+    , googleSheetsOptions
+    , gsoSkipLeadingRows
+
     -- ** TableDataInsertAllRequestRowsItem
     , TableDataInsertAllRequestRowsItem
     , tableDataInsertAllRequestRowsItem
@@ -554,6 +561,7 @@ module Network.Google.BigQuery
     , tabView
     , tabId
     , tabType
+    , tabNumLongTermBytes
     , tabExpirationTime
     , tabDescription
 

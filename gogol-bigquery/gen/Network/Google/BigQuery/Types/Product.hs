@@ -1105,6 +1105,7 @@ data ExternalDataConfiguration = ExternalDataConfiguration'
     , _edcSourceFormat        :: !(Maybe Text)
     , _edcSchema              :: !(Maybe TableSchema)
     , _edcMaxBadRecords       :: !(Maybe (Textual Int32))
+    , _edcGoogleSheetsOptions :: !(Maybe GoogleSheetsOptions)
     , _edcAutodetect          :: !(Maybe Bool)
     , _edcSourceURIs          :: !(Maybe [Text])
     , _edcCSVOptions          :: !(Maybe CSVOptions)
@@ -1126,6 +1127,8 @@ data ExternalDataConfiguration = ExternalDataConfiguration'
 --
 -- * 'edcMaxBadRecords'
 --
+-- * 'edcGoogleSheetsOptions'
+--
 -- * 'edcAutodetect'
 --
 -- * 'edcSourceURIs'
@@ -1141,6 +1144,7 @@ externalDataConfiguration =
     , _edcSourceFormat = Nothing
     , _edcSchema = Nothing
     , _edcMaxBadRecords = Nothing
+    , _edcGoogleSheetsOptions = Nothing
     , _edcAutodetect = Nothing
     , _edcSourceURIs = Nothing
     , _edcCSVOptions = Nothing
@@ -1175,13 +1179,14 @@ edcCompression
   = lens _edcCompression
       (\ s a -> s{_edcCompression = a})
 
--- | [Required] The data format. For CSV files, specify \"CSV\". For
--- newline-delimited JSON, specify \"NEWLINE_DELIMITED_JSON\". For Avro
--- files, specify \"AVRO\". For Google Cloud Datastore backups, specify
--- \"DATASTORE_BACKUP\". [Experimental] For Google Cloud Bigtable, specify
--- \"BIGTABLE\". Please note that reading from Google Cloud Bigtable is
--- experimental and has to be enabled for your project. Please contact
--- Google Cloud Support to enable this for your project.
+-- | [Required] The data format. For CSV files, specify \"CSV\". For Google
+-- sheets, specify \"GOOGLE_SHEETS\". For newline-delimited JSON, specify
+-- \"NEWLINE_DELIMITED_JSON\". For Avro files, specify \"AVRO\". For Google
+-- Cloud Datastore backups, specify \"DATASTORE_BACKUP\". [Experimental]
+-- For Google Cloud Bigtable, specify \"BIGTABLE\". Please note that
+-- reading from Google Cloud Bigtable is experimental and has to be enabled
+-- for your project. Please contact Google Cloud Support to enable this for
+-- your project.
 edcSourceFormat :: Lens' ExternalDataConfiguration (Maybe Text)
 edcSourceFormat
   = lens _edcSourceFormat
@@ -1205,6 +1210,12 @@ edcMaxBadRecords
       (\ s a -> s{_edcMaxBadRecords = a})
       . mapping _Coerce
 
+-- | [Optional] Additional options if sourceFormat is set to GOOGLE_SHEETS.
+edcGoogleSheetsOptions :: Lens' ExternalDataConfiguration (Maybe GoogleSheetsOptions)
+edcGoogleSheetsOptions
+  = lens _edcGoogleSheetsOptions
+      (\ s a -> s{_edcGoogleSheetsOptions = a})
+
 -- | [Experimental] Try to detect schema and format options automatically.
 -- Any option specified explicitly will be honored.
 edcAutodetect :: Lens' ExternalDataConfiguration (Maybe Bool)
@@ -1215,13 +1226,12 @@ edcAutodetect
 -- | [Required] The fully-qualified URIs that point to your data in Google
 -- Cloud. For Google Cloud Storage URIs: Each URI can contain one \'*\'
 -- wildcard character and it must come after the \'bucket\' name. Size
--- limits related to load jobs apply to external data sources, plus an
--- additional limit of 10 GB maximum size across all URIs. For Google Cloud
--- Bigtable URIs: Exactly one URI can be specified and it has be a fully
--- specified and valid HTTPS URL for a Google Cloud Bigtable table. For
--- Google Cloud Datastore backups, exactly one URI can be specified, and it
--- must end with \'.backup_info\'. Also, the \'*\' wildcard character is
--- not allowed.
+-- limits related to load jobs apply to external data sources. For Google
+-- Cloud Bigtable URIs: Exactly one URI can be specified and it has be a
+-- fully specified and valid HTTPS URL for a Google Cloud Bigtable table.
+-- For Google Cloud Datastore backups, exactly one URI can be specified,
+-- and it must end with \'.backup_info\'. Also, the \'*\' wildcard
+-- character is not allowed.
 edcSourceURIs :: Lens' ExternalDataConfiguration [Text]
 edcSourceURIs
   = lens _edcSourceURIs
@@ -1246,6 +1256,7 @@ instance FromJSON ExternalDataConfiguration where
                      <*> (o .:? "sourceFormat")
                      <*> (o .:? "schema")
                      <*> (o .:? "maxBadRecords")
+                     <*> (o .:? "googleSheetsOptions")
                      <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "csvOptions"))
@@ -1261,6 +1272,8 @@ instance ToJSON ExternalDataConfiguration where
                   ("sourceFormat" .=) <$> _edcSourceFormat,
                   ("schema" .=) <$> _edcSchema,
                   ("maxBadRecords" .=) <$> _edcMaxBadRecords,
+                  ("googleSheetsOptions" .=) <$>
+                    _edcGoogleSheetsOptions,
                   ("autodetect" .=) <$> _edcAutodetect,
                   ("sourceUris" .=) <$> _edcSourceURIs,
                   ("csvOptions" .=) <$> _edcCSVOptions])
@@ -1740,11 +1753,11 @@ qrTimeoutMs
 
 -- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
 -- for this query. The default value is true. If set to false, the query
--- will use BigQuery\'s updated SQL dialect with improved standards
--- compliance: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When
--- using BigQuery\'s updated SQL, the values of allowLargeResults and
--- flattenResults are ignored. Queries with useLegacySql set to false will
--- be run as if allowLargeResults is true and flattenResults is false.
+-- will use BigQuery\'s standard SQL:
+-- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql
+-- is set to false, the values of allowLargeResults and flattenResults are
+-- ignored; query will be run as if allowLargeResults is true and
+-- flattenResults is false.
 qrUseLegacySQL :: Lens' QueryRequest (Maybe Bool)
 qrUseLegacySQL
   = lens _qrUseLegacySQL
@@ -2087,6 +2100,7 @@ data JobConfigurationLoad = JobConfigurationLoad'
     , _jclSchema              :: !(Maybe TableSchema)
     , _jclQuote               :: !Text
     , _jclMaxBadRecords       :: !(Maybe (Textual Int32))
+    , _jclAutodetect          :: !(Maybe Bool)
     , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
@@ -2124,6 +2138,8 @@ data JobConfigurationLoad = JobConfigurationLoad'
 --
 -- * 'jclMaxBadRecords'
 --
+-- * 'jclAutodetect'
+--
 -- * 'jclSourceURIs'
 --
 -- * 'jclEncoding'
@@ -2147,6 +2163,7 @@ jobConfigurationLoad =
     , _jclSchema = Nothing
     , _jclQuote = "\""
     , _jclMaxBadRecords = Nothing
+    , _jclAutodetect = Nothing
     , _jclSourceURIs = Nothing
     , _jclEncoding = Nothing
     , _jclFieldDelimiter = Nothing
@@ -2284,6 +2301,13 @@ jclMaxBadRecords
       (\ s a -> s{_jclMaxBadRecords = a})
       . mapping _Coerce
 
+-- | [Experimental] Indicates if we should automatically infer the options
+-- and schema for CSV and JSON sources.
+jclAutodetect :: Lens' JobConfigurationLoad (Maybe Bool)
+jclAutodetect
+  = lens _jclAutodetect
+      (\ s a -> s{_jclAutodetect = a})
+
 -- | [Required] The fully-qualified URIs that point to your data in Google
 -- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
 -- must come after the \'bucket\' name.
@@ -2333,6 +2357,7 @@ instance FromJSON JobConfigurationLoad where
                      <*> (o .:? "schema")
                      <*> (o .:? "quote" .!= "\"")
                      <*> (o .:? "maxBadRecords")
+                     <*> (o .:? "autodetect")
                      <*> (o .:? "sourceUris" .!= mempty)
                      <*> (o .:? "encoding")
                      <*> (o .:? "fieldDelimiter"))
@@ -2357,6 +2382,7 @@ instance ToJSON JobConfigurationLoad where
                   ("schema" .=) <$> _jclSchema,
                   Just ("quote" .= _jclQuote),
                   ("maxBadRecords" .=) <$> _jclMaxBadRecords,
+                  ("autodetect" .=) <$> _jclAutodetect,
                   ("sourceUris" .=) <$> _jclSourceURIs,
                   ("encoding" .=) <$> _jclEncoding,
                   ("fieldDelimiter" .=) <$> _jclFieldDelimiter])
@@ -3600,11 +3626,11 @@ jcqFlattenResults
 
 -- | [Experimental] Specifies whether to use BigQuery\'s legacy SQL dialect
 -- for this query. The default value is true. If set to false, the query
--- will use BigQuery\'s updated SQL dialect with improved standards
--- compliance: https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When
--- using BigQuery\'s updated SQL, the values of allowLargeResults and
--- flattenResults are ignored. Queries with useLegacySql set to false will
--- be run as if allowLargeResults is true and flattenResults is false.
+-- will use BigQuery\'s standard SQL:
+-- https:\/\/cloud.google.com\/bigquery\/sql-reference\/ When useLegacySql
+-- is set to false, the values of allowLargeResults and flattenResults are
+-- ignored; query will be run as if allowLargeResults is true and
+-- flattenResults is false.
 jcqUseLegacySQL :: Lens' JobConfigurationQuery (Maybe Bool)
 jcqUseLegacySQL
   = lens _jcqUseLegacySQL
@@ -3657,6 +3683,53 @@ instance ToJSON JobConfigurationQuery where
                   Just ("flattenResults" .= _jcqFlattenResults),
                   ("useLegacySql" .=) <$> _jcqUseLegacySQL,
                   ("defaultDataset" .=) <$> _jcqDefaultDataSet])
+
+--
+-- /See:/ 'googleSheetsOptions' smart constructor.
+newtype GoogleSheetsOptions = GoogleSheetsOptions'
+    { _gsoSkipLeadingRows :: Maybe (Textual Int64)
+    } deriving (Eq,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'GoogleSheetsOptions' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'gsoSkipLeadingRows'
+googleSheetsOptions
+    :: GoogleSheetsOptions
+googleSheetsOptions =
+    GoogleSheetsOptions'
+    { _gsoSkipLeadingRows = Nothing
+    }
+
+-- | [Optional] The number of rows at the top of a sheet that BigQuery will
+-- skip when reading the data. The default value is 0. This property is
+-- useful if you have header rows that should be skipped. When autodetect
+-- is on, behavior is the following: * skipLeadingRows unspecified -
+-- Autodetect tries to detect headers in the first row. If they are not
+-- detected, the row is read as data. Otherwise data is read starting from
+-- the second row. * skipLeadingRows is 0 - Instructs autodetect that there
+-- are no headers and data should be read starting from the first row. *
+-- skipLeadingRows = N > 0 - Autodetect skips N-1 rows and tries to detect
+-- headers in row N. If headers are not detected, row N is just skipped.
+-- Otherwise row N is used to extract column names for the detected schema.
+gsoSkipLeadingRows :: Lens' GoogleSheetsOptions (Maybe Int64)
+gsoSkipLeadingRows
+  = lens _gsoSkipLeadingRows
+      (\ s a -> s{_gsoSkipLeadingRows = a})
+      . mapping _Coerce
+
+instance FromJSON GoogleSheetsOptions where
+        parseJSON
+          = withObject "GoogleSheetsOptions"
+              (\ o ->
+                 GoogleSheetsOptions' <$> (o .:? "skipLeadingRows"))
+
+instance ToJSON GoogleSheetsOptions where
+        toJSON GoogleSheetsOptions'{..}
+          = object
+              (catMaybes
+                 [("skipLeadingRows" .=) <$> _gsoSkipLeadingRows])
 
 --
 -- /See:/ 'tableDataInsertAllRequestRowsItem' smart constructor.
@@ -4296,6 +4369,7 @@ data Table = Table'
     , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
     , _tabType                      :: !(Maybe Text)
+    , _tabNumLongTermBytes          :: !(Maybe (Textual Int64))
     , _tabExpirationTime            :: !(Maybe (Textual Int64))
     , _tabDescription               :: !(Maybe Text)
     } deriving (Eq,Show,Data,Typeable,Generic)
@@ -4338,6 +4412,8 @@ data Table = Table'
 --
 -- * 'tabType'
 --
+-- * 'tabNumLongTermBytes'
+--
 -- * 'tabExpirationTime'
 --
 -- * 'tabDescription'
@@ -4362,6 +4438,7 @@ table =
     , _tabView = Nothing
     , _tabId = Nothing
     , _tabType = Nothing
+    , _tabNumLongTermBytes = Nothing
     , _tabExpirationTime = Nothing
     , _tabDescription = Nothing
     }
@@ -4471,6 +4548,14 @@ tabId = lens _tabId (\ s a -> s{_tabId = a})
 tabType :: Lens' Table (Maybe Text)
 tabType = lens _tabType (\ s a -> s{_tabType = a})
 
+-- | [Output-only] The number of bytes in the table that are considered
+-- \"long-term storage\".
+tabNumLongTermBytes :: Lens' Table (Maybe Int64)
+tabNumLongTermBytes
+  = lens _tabNumLongTermBytes
+      (\ s a -> s{_tabNumLongTermBytes = a})
+      . mapping _Coerce
+
 -- | [Optional] The time when this table expires, in milliseconds since the
 -- epoch. If not present, the table will persist indefinitely. Expired
 -- tables will be deleted and their storage reclaimed.
@@ -4507,6 +4592,7 @@ instance FromJSON Table where
                      <*> (o .:? "view")
                      <*> (o .:? "id")
                      <*> (o .:? "type")
+                     <*> (o .:? "numLongTermBytes")
                      <*> (o .:? "expirationTime")
                      <*> (o .:? "description"))
 
@@ -4531,6 +4617,7 @@ instance ToJSON Table where
                   ("numRows" .=) <$> _tabNumRows,
                   ("view" .=) <$> _tabView, ("id" .=) <$> _tabId,
                   ("type" .=) <$> _tabType,
+                  ("numLongTermBytes" .=) <$> _tabNumLongTermBytes,
                   ("expirationTime" .=) <$> _tabExpirationTime,
                   ("description" .=) <$> _tabDescription])
 
@@ -4605,7 +4692,7 @@ instance ToJSON ErrorProto where
 --
 -- /See:/ 'csvOptions' smart constructor.
 data CSVOptions = CSVOptions'
-    { _coSkipLeadingRows     :: !(Maybe (Textual Int32))
+    { _coSkipLeadingRows     :: !(Maybe (Textual Int64))
     , _coAllowJaggedRows     :: !(Maybe Bool)
     , _coAllowQuotedNewlines :: !(Maybe Bool)
     , _coQuote               :: !Text
@@ -4643,7 +4730,7 @@ csvOptions =
 -- | [Optional] The number of rows at the top of a CSV file that BigQuery
 -- will skip when reading the data. The default value is 0. This property
 -- is useful if you have header rows in the file that should be skipped.
-coSkipLeadingRows :: Lens' CSVOptions (Maybe Int32)
+coSkipLeadingRows :: Lens' CSVOptions (Maybe Int64)
 coSkipLeadingRows
   = lens _coSkipLeadingRows
       (\ s a -> s{_coSkipLeadingRows = a})
