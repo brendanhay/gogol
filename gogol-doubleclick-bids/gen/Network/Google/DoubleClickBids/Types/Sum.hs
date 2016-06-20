@@ -221,41 +221,43 @@ instance ToJSON DownloadLineItemsRequestFilterType where
 
 -- | Range of report data.
 data QueryMetadataDataRange
-    = AllTime
+    = QMDRAllTime
       -- ^ @ALL_TIME@
-    | CurrentDay
+    | QMDRCurrentDay
       -- ^ @CURRENT_DAY@
-    | CustomDates
+    | QMDRCustomDates
       -- ^ @CUSTOM_DATES@
-    | Last14Days
+    | QMDRLast14Days
       -- ^ @LAST_14_DAYS@
-    | Last30Days
+    | QMDRLast30Days
       -- ^ @LAST_30_DAYS@
-    | Last365Days
+    | QMDRLast365Days
       -- ^ @LAST_365_DAYS@
-    | Last7Days
+    | QMDRLast7Days
       -- ^ @LAST_7_DAYS@
-    | Last90Days
+    | QMDRLast90Days
       -- ^ @LAST_90_DAYS@
-    | MonthToDate
+    | QMDRMonthToDate
       -- ^ @MONTH_TO_DATE@
-    | PreviousDay
+    | QMDRPreviousDay
       -- ^ @PREVIOUS_DAY@
-    | PreviousHalfMonth
+    | QMDRPreviousHalfMonth
       -- ^ @PREVIOUS_HALF_MONTH@
-    | PreviousMonth
+    | QMDRPreviousMonth
       -- ^ @PREVIOUS_MONTH@
-    | PreviousQuarter
+    | QMDRPreviousQuarter
       -- ^ @PREVIOUS_QUARTER@
-    | PreviousWeek
+    | QMDRPreviousWeek
       -- ^ @PREVIOUS_WEEK@
-    | PreviousYear
+    | QMDRPreviousYear
       -- ^ @PREVIOUS_YEAR@
-    | QuarterToDate
+    | QMDRQuarterToDate
       -- ^ @QUARTER_TO_DATE@
-    | WeekToDate
+    | QMDRTypeNotSupported
+      -- ^ @TYPE_NOT_SUPPORTED@
+    | QMDRWeekToDate
       -- ^ @WEEK_TO_DATE@
-    | YearToDate
+    | QMDRYearToDate
       -- ^ @YEAR_TO_DATE@
       deriving (Eq, Ord, Enum, Read, Show, Data, Typeable, Generic)
 
@@ -263,46 +265,48 @@ instance Hashable QueryMetadataDataRange
 
 instance FromHttpApiData QueryMetadataDataRange where
     parseQueryParam = \case
-        "ALL_TIME" -> Right AllTime
-        "CURRENT_DAY" -> Right CurrentDay
-        "CUSTOM_DATES" -> Right CustomDates
-        "LAST_14_DAYS" -> Right Last14Days
-        "LAST_30_DAYS" -> Right Last30Days
-        "LAST_365_DAYS" -> Right Last365Days
-        "LAST_7_DAYS" -> Right Last7Days
-        "LAST_90_DAYS" -> Right Last90Days
-        "MONTH_TO_DATE" -> Right MonthToDate
-        "PREVIOUS_DAY" -> Right PreviousDay
-        "PREVIOUS_HALF_MONTH" -> Right PreviousHalfMonth
-        "PREVIOUS_MONTH" -> Right PreviousMonth
-        "PREVIOUS_QUARTER" -> Right PreviousQuarter
-        "PREVIOUS_WEEK" -> Right PreviousWeek
-        "PREVIOUS_YEAR" -> Right PreviousYear
-        "QUARTER_TO_DATE" -> Right QuarterToDate
-        "WEEK_TO_DATE" -> Right WeekToDate
-        "YEAR_TO_DATE" -> Right YearToDate
+        "ALL_TIME" -> Right QMDRAllTime
+        "CURRENT_DAY" -> Right QMDRCurrentDay
+        "CUSTOM_DATES" -> Right QMDRCustomDates
+        "LAST_14_DAYS" -> Right QMDRLast14Days
+        "LAST_30_DAYS" -> Right QMDRLast30Days
+        "LAST_365_DAYS" -> Right QMDRLast365Days
+        "LAST_7_DAYS" -> Right QMDRLast7Days
+        "LAST_90_DAYS" -> Right QMDRLast90Days
+        "MONTH_TO_DATE" -> Right QMDRMonthToDate
+        "PREVIOUS_DAY" -> Right QMDRPreviousDay
+        "PREVIOUS_HALF_MONTH" -> Right QMDRPreviousHalfMonth
+        "PREVIOUS_MONTH" -> Right QMDRPreviousMonth
+        "PREVIOUS_QUARTER" -> Right QMDRPreviousQuarter
+        "PREVIOUS_WEEK" -> Right QMDRPreviousWeek
+        "PREVIOUS_YEAR" -> Right QMDRPreviousYear
+        "QUARTER_TO_DATE" -> Right QMDRQuarterToDate
+        "TYPE_NOT_SUPPORTED" -> Right QMDRTypeNotSupported
+        "WEEK_TO_DATE" -> Right QMDRWeekToDate
+        "YEAR_TO_DATE" -> Right QMDRYearToDate
         x -> Left ("Unable to parse QueryMetadataDataRange from: " <> x)
 
 instance ToHttpApiData QueryMetadataDataRange where
     toQueryParam = \case
-        AllTime -> "ALL_TIME"
-        CurrentDay -> "CURRENT_DAY"
-        CustomDates -> "CUSTOM_DATES"
-        Last14Days -> "LAST_14_DAYS"
-        Last30Days -> "LAST_30_DAYS"
-        Last365Days -> "LAST_365_DAYS"
-        Last7Days -> "LAST_7_DAYS"
-        Last90Days -> "LAST_90_DAYS"
-        MonthToDate -> "MONTH_TO_DATE"
-        PreviousDay -> "PREVIOUS_DAY"
-        PreviousHalfMonth -> "PREVIOUS_HALF_MONTH"
-        PreviousMonth -> "PREVIOUS_MONTH"
-        PreviousQuarter -> "PREVIOUS_QUARTER"
-        PreviousWeek -> "PREVIOUS_WEEK"
-        PreviousYear -> "PREVIOUS_YEAR"
-        QuarterToDate -> "QUARTER_TO_DATE"
-        WeekToDate -> "WEEK_TO_DATE"
-        YearToDate -> "YEAR_TO_DATE"
+        QMDRAllTime -> "ALL_TIME"
+        QMDRCurrentDay -> "CURRENT_DAY"
+        QMDRCustomDates -> "CUSTOM_DATES"
+        QMDRLast14Days -> "LAST_14_DAYS"
+        QMDRLast30Days -> "LAST_30_DAYS"
+        QMDRLast365Days -> "LAST_365_DAYS"
+        QMDRLast7Days -> "LAST_7_DAYS"
+        QMDRLast90Days -> "LAST_90_DAYS"
+        QMDRMonthToDate -> "MONTH_TO_DATE"
+        QMDRPreviousDay -> "PREVIOUS_DAY"
+        QMDRPreviousHalfMonth -> "PREVIOUS_HALF_MONTH"
+        QMDRPreviousMonth -> "PREVIOUS_MONTH"
+        QMDRPreviousQuarter -> "PREVIOUS_QUARTER"
+        QMDRPreviousWeek -> "PREVIOUS_WEEK"
+        QMDRPreviousYear -> "PREVIOUS_YEAR"
+        QMDRQuarterToDate -> "QUARTER_TO_DATE"
+        QMDRTypeNotSupported -> "TYPE_NOT_SUPPORTED"
+        QMDRWeekToDate -> "WEEK_TO_DATE"
+        QMDRYearToDate -> "YEAR_TO_DATE"
 
 instance FromJSON QueryMetadataDataRange where
     parseJSON = parseJSONText "QueryMetadataDataRange"
@@ -1640,14 +1644,46 @@ data FilterPairType
       -- ^ @FILTER_TRUEVIEW_AD_GROUP_ID@
     | FilterTrueviewAge
       -- ^ @FILTER_TRUEVIEW_AGE@
+    | FilterTrueviewCategory
+      -- ^ @FILTER_TRUEVIEW_CATEGORY@
     | FilterTrueviewConversionType
       -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | FilterTrueviewCustomAffinity
+      -- ^ @FILTER_TRUEVIEW_CUSTOM_AFFINITY@
     | FilterTrueviewGender
       -- ^ @FILTER_TRUEVIEW_GENDER@
+    | FilterTrueviewIarAge
+      -- ^ @FILTER_TRUEVIEW_IAR_AGE@
+    | FilterTrueviewIarCategory
+      -- ^ @FILTER_TRUEVIEW_IAR_CATEGORY@
+    | FilterTrueviewIarCity
+      -- ^ @FILTER_TRUEVIEW_IAR_CITY@
+    | FilterTrueviewIarCountry
+      -- ^ @FILTER_TRUEVIEW_IAR_COUNTRY@
+    | FilterTrueviewIarGender
+      -- ^ @FILTER_TRUEVIEW_IAR_GENDER@
+    | FilterTrueviewIarInterest
+      -- ^ @FILTER_TRUEVIEW_IAR_INTEREST@
+    | FilterTrueviewIarLanguage
+      -- ^ @FILTER_TRUEVIEW_IAR_LANGUAGE@
+    | FilterTrueviewIarParentalStatus
+      -- ^ @FILTER_TRUEVIEW_IAR_PARENTAL_STATUS@
+    | FilterTrueviewIarRegion
+      -- ^ @FILTER_TRUEVIEW_IAR_REGION@
+    | FilterTrueviewIarRemarketingList
+      -- ^ @FILTER_TRUEVIEW_IAR_REMARKETING_LIST@
+    | FilterTrueviewIarTimeOfDay
+      -- ^ @FILTER_TRUEVIEW_IAR_TIME_OF_DAY@
+    | FilterTrueviewIarZipcode
+      -- ^ @FILTER_TRUEVIEW_IAR_ZIPCODE@
     | FilterTrueviewInterest
       -- ^ @FILTER_TRUEVIEW_INTEREST@
+    | FilterTrueviewKeyword
+      -- ^ @FILTER_TRUEVIEW_KEYWORD@
     | FilterTrueviewParentalStatus
       -- ^ @FILTER_TRUEVIEW_PARENTAL_STATUS@
+    | FilterTrueviewPlacement
+      -- ^ @FILTER_TRUEVIEW_PLACEMENT@
     | FilterTrueviewRemarketingList
       -- ^ @FILTER_TRUEVIEW_REMARKETING_LIST@
     | FilterUnknown
@@ -1760,10 +1796,26 @@ instance FromHttpApiData FilterPairType where
         "FILTER_TRUEVIEW_AD_GROUP_AD_ID" -> Right FilterTrueviewAdGroupAdId
         "FILTER_TRUEVIEW_AD_GROUP_ID" -> Right FilterTrueviewAdGroupId
         "FILTER_TRUEVIEW_AGE" -> Right FilterTrueviewAge
+        "FILTER_TRUEVIEW_CATEGORY" -> Right FilterTrueviewCategory
         "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Right FilterTrueviewConversionType
+        "FILTER_TRUEVIEW_CUSTOM_AFFINITY" -> Right FilterTrueviewCustomAffinity
         "FILTER_TRUEVIEW_GENDER" -> Right FilterTrueviewGender
+        "FILTER_TRUEVIEW_IAR_AGE" -> Right FilterTrueviewIarAge
+        "FILTER_TRUEVIEW_IAR_CATEGORY" -> Right FilterTrueviewIarCategory
+        "FILTER_TRUEVIEW_IAR_CITY" -> Right FilterTrueviewIarCity
+        "FILTER_TRUEVIEW_IAR_COUNTRY" -> Right FilterTrueviewIarCountry
+        "FILTER_TRUEVIEW_IAR_GENDER" -> Right FilterTrueviewIarGender
+        "FILTER_TRUEVIEW_IAR_INTEREST" -> Right FilterTrueviewIarInterest
+        "FILTER_TRUEVIEW_IAR_LANGUAGE" -> Right FilterTrueviewIarLanguage
+        "FILTER_TRUEVIEW_IAR_PARENTAL_STATUS" -> Right FilterTrueviewIarParentalStatus
+        "FILTER_TRUEVIEW_IAR_REGION" -> Right FilterTrueviewIarRegion
+        "FILTER_TRUEVIEW_IAR_REMARKETING_LIST" -> Right FilterTrueviewIarRemarketingList
+        "FILTER_TRUEVIEW_IAR_TIME_OF_DAY" -> Right FilterTrueviewIarTimeOfDay
+        "FILTER_TRUEVIEW_IAR_ZIPCODE" -> Right FilterTrueviewIarZipcode
         "FILTER_TRUEVIEW_INTEREST" -> Right FilterTrueviewInterest
+        "FILTER_TRUEVIEW_KEYWORD" -> Right FilterTrueviewKeyword
         "FILTER_TRUEVIEW_PARENTAL_STATUS" -> Right FilterTrueviewParentalStatus
+        "FILTER_TRUEVIEW_PLACEMENT" -> Right FilterTrueviewPlacement
         "FILTER_TRUEVIEW_REMARKETING_LIST" -> Right FilterTrueviewRemarketingList
         "FILTER_UNKNOWN" -> Right FilterUnknown
         "FILTER_USER_LIST" -> Right FilterUserList
@@ -1853,10 +1905,26 @@ instance ToHttpApiData FilterPairType where
         FilterTrueviewAdGroupAdId -> "FILTER_TRUEVIEW_AD_GROUP_AD_ID"
         FilterTrueviewAdGroupId -> "FILTER_TRUEVIEW_AD_GROUP_ID"
         FilterTrueviewAge -> "FILTER_TRUEVIEW_AGE"
+        FilterTrueviewCategory -> "FILTER_TRUEVIEW_CATEGORY"
         FilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        FilterTrueviewCustomAffinity -> "FILTER_TRUEVIEW_CUSTOM_AFFINITY"
         FilterTrueviewGender -> "FILTER_TRUEVIEW_GENDER"
+        FilterTrueviewIarAge -> "FILTER_TRUEVIEW_IAR_AGE"
+        FilterTrueviewIarCategory -> "FILTER_TRUEVIEW_IAR_CATEGORY"
+        FilterTrueviewIarCity -> "FILTER_TRUEVIEW_IAR_CITY"
+        FilterTrueviewIarCountry -> "FILTER_TRUEVIEW_IAR_COUNTRY"
+        FilterTrueviewIarGender -> "FILTER_TRUEVIEW_IAR_GENDER"
+        FilterTrueviewIarInterest -> "FILTER_TRUEVIEW_IAR_INTEREST"
+        FilterTrueviewIarLanguage -> "FILTER_TRUEVIEW_IAR_LANGUAGE"
+        FilterTrueviewIarParentalStatus -> "FILTER_TRUEVIEW_IAR_PARENTAL_STATUS"
+        FilterTrueviewIarRegion -> "FILTER_TRUEVIEW_IAR_REGION"
+        FilterTrueviewIarRemarketingList -> "FILTER_TRUEVIEW_IAR_REMARKETING_LIST"
+        FilterTrueviewIarTimeOfDay -> "FILTER_TRUEVIEW_IAR_TIME_OF_DAY"
+        FilterTrueviewIarZipcode -> "FILTER_TRUEVIEW_IAR_ZIPCODE"
         FilterTrueviewInterest -> "FILTER_TRUEVIEW_INTEREST"
+        FilterTrueviewKeyword -> "FILTER_TRUEVIEW_KEYWORD"
         FilterTrueviewParentalStatus -> "FILTER_TRUEVIEW_PARENTAL_STATUS"
+        FilterTrueviewPlacement -> "FILTER_TRUEVIEW_PLACEMENT"
         FilterTrueviewRemarketingList -> "FILTER_TRUEVIEW_REMARKETING_LIST"
         FilterUnknown -> "FILTER_UNKNOWN"
         FilterUserList -> "FILTER_USER_LIST"
@@ -1919,6 +1987,8 @@ data RunQueryRequestDataRange
       -- ^ @PREVIOUS_YEAR@
     | RQRDRQuarterToDate
       -- ^ @QUARTER_TO_DATE@
+    | RQRDRTypeNotSupported
+      -- ^ @TYPE_NOT_SUPPORTED@
     | RQRDRWeekToDate
       -- ^ @WEEK_TO_DATE@
     | RQRDRYearToDate
@@ -1945,6 +2015,7 @@ instance FromHttpApiData RunQueryRequestDataRange where
         "PREVIOUS_WEEK" -> Right RQRDRPreviousWeek
         "PREVIOUS_YEAR" -> Right RQRDRPreviousYear
         "QUARTER_TO_DATE" -> Right RQRDRQuarterToDate
+        "TYPE_NOT_SUPPORTED" -> Right RQRDRTypeNotSupported
         "WEEK_TO_DATE" -> Right RQRDRWeekToDate
         "YEAR_TO_DATE" -> Right RQRDRYearToDate
         x -> Left ("Unable to parse RunQueryRequestDataRange from: " <> x)
@@ -1967,6 +2038,7 @@ instance ToHttpApiData RunQueryRequestDataRange where
         RQRDRPreviousWeek -> "PREVIOUS_WEEK"
         RQRDRPreviousYear -> "PREVIOUS_YEAR"
         RQRDRQuarterToDate -> "QUARTER_TO_DATE"
+        RQRDRTypeNotSupported -> "TYPE_NOT_SUPPORTED"
         RQRDRWeekToDate -> "WEEK_TO_DATE"
         RQRDRYearToDate -> "YEAR_TO_DATE"
 
@@ -2136,14 +2208,46 @@ data ParametersGroupBysItem
       -- ^ @FILTER_TRUEVIEW_AD_GROUP_ID@
     | PGBIFilterTrueviewAge
       -- ^ @FILTER_TRUEVIEW_AGE@
+    | PGBIFilterTrueviewCategory
+      -- ^ @FILTER_TRUEVIEW_CATEGORY@
     | PGBIFilterTrueviewConversionType
       -- ^ @FILTER_TRUEVIEW_CONVERSION_TYPE@
+    | PGBIFilterTrueviewCustomAffinity
+      -- ^ @FILTER_TRUEVIEW_CUSTOM_AFFINITY@
     | PGBIFilterTrueviewGender
       -- ^ @FILTER_TRUEVIEW_GENDER@
+    | PGBIFilterTrueviewIarAge
+      -- ^ @FILTER_TRUEVIEW_IAR_AGE@
+    | PGBIFilterTrueviewIarCategory
+      -- ^ @FILTER_TRUEVIEW_IAR_CATEGORY@
+    | PGBIFilterTrueviewIarCity
+      -- ^ @FILTER_TRUEVIEW_IAR_CITY@
+    | PGBIFilterTrueviewIarCountry
+      -- ^ @FILTER_TRUEVIEW_IAR_COUNTRY@
+    | PGBIFilterTrueviewIarGender
+      -- ^ @FILTER_TRUEVIEW_IAR_GENDER@
+    | PGBIFilterTrueviewIarInterest
+      -- ^ @FILTER_TRUEVIEW_IAR_INTEREST@
+    | PGBIFilterTrueviewIarLanguage
+      -- ^ @FILTER_TRUEVIEW_IAR_LANGUAGE@
+    | PGBIFilterTrueviewIarParentalStatus
+      -- ^ @FILTER_TRUEVIEW_IAR_PARENTAL_STATUS@
+    | PGBIFilterTrueviewIarRegion
+      -- ^ @FILTER_TRUEVIEW_IAR_REGION@
+    | PGBIFilterTrueviewIarRemarketingList
+      -- ^ @FILTER_TRUEVIEW_IAR_REMARKETING_LIST@
+    | PGBIFilterTrueviewIarTimeOfDay
+      -- ^ @FILTER_TRUEVIEW_IAR_TIME_OF_DAY@
+    | PGBIFilterTrueviewIarZipcode
+      -- ^ @FILTER_TRUEVIEW_IAR_ZIPCODE@
     | PGBIFilterTrueviewInterest
       -- ^ @FILTER_TRUEVIEW_INTEREST@
+    | PGBIFilterTrueviewKeyword
+      -- ^ @FILTER_TRUEVIEW_KEYWORD@
     | PGBIFilterTrueviewParentalStatus
       -- ^ @FILTER_TRUEVIEW_PARENTAL_STATUS@
+    | PGBIFilterTrueviewPlacement
+      -- ^ @FILTER_TRUEVIEW_PLACEMENT@
     | PGBIFilterTrueviewRemarketingList
       -- ^ @FILTER_TRUEVIEW_REMARKETING_LIST@
     | PGBIFilterUnknown
@@ -2256,10 +2360,26 @@ instance FromHttpApiData ParametersGroupBysItem where
         "FILTER_TRUEVIEW_AD_GROUP_AD_ID" -> Right PGBIFilterTrueviewAdGroupAdId
         "FILTER_TRUEVIEW_AD_GROUP_ID" -> Right PGBIFilterTrueviewAdGroupId
         "FILTER_TRUEVIEW_AGE" -> Right PGBIFilterTrueviewAge
+        "FILTER_TRUEVIEW_CATEGORY" -> Right PGBIFilterTrueviewCategory
         "FILTER_TRUEVIEW_CONVERSION_TYPE" -> Right PGBIFilterTrueviewConversionType
+        "FILTER_TRUEVIEW_CUSTOM_AFFINITY" -> Right PGBIFilterTrueviewCustomAffinity
         "FILTER_TRUEVIEW_GENDER" -> Right PGBIFilterTrueviewGender
+        "FILTER_TRUEVIEW_IAR_AGE" -> Right PGBIFilterTrueviewIarAge
+        "FILTER_TRUEVIEW_IAR_CATEGORY" -> Right PGBIFilterTrueviewIarCategory
+        "FILTER_TRUEVIEW_IAR_CITY" -> Right PGBIFilterTrueviewIarCity
+        "FILTER_TRUEVIEW_IAR_COUNTRY" -> Right PGBIFilterTrueviewIarCountry
+        "FILTER_TRUEVIEW_IAR_GENDER" -> Right PGBIFilterTrueviewIarGender
+        "FILTER_TRUEVIEW_IAR_INTEREST" -> Right PGBIFilterTrueviewIarInterest
+        "FILTER_TRUEVIEW_IAR_LANGUAGE" -> Right PGBIFilterTrueviewIarLanguage
+        "FILTER_TRUEVIEW_IAR_PARENTAL_STATUS" -> Right PGBIFilterTrueviewIarParentalStatus
+        "FILTER_TRUEVIEW_IAR_REGION" -> Right PGBIFilterTrueviewIarRegion
+        "FILTER_TRUEVIEW_IAR_REMARKETING_LIST" -> Right PGBIFilterTrueviewIarRemarketingList
+        "FILTER_TRUEVIEW_IAR_TIME_OF_DAY" -> Right PGBIFilterTrueviewIarTimeOfDay
+        "FILTER_TRUEVIEW_IAR_ZIPCODE" -> Right PGBIFilterTrueviewIarZipcode
         "FILTER_TRUEVIEW_INTEREST" -> Right PGBIFilterTrueviewInterest
+        "FILTER_TRUEVIEW_KEYWORD" -> Right PGBIFilterTrueviewKeyword
         "FILTER_TRUEVIEW_PARENTAL_STATUS" -> Right PGBIFilterTrueviewParentalStatus
+        "FILTER_TRUEVIEW_PLACEMENT" -> Right PGBIFilterTrueviewPlacement
         "FILTER_TRUEVIEW_REMARKETING_LIST" -> Right PGBIFilterTrueviewRemarketingList
         "FILTER_UNKNOWN" -> Right PGBIFilterUnknown
         "FILTER_USER_LIST" -> Right PGBIFilterUserList
@@ -2349,10 +2469,26 @@ instance ToHttpApiData ParametersGroupBysItem where
         PGBIFilterTrueviewAdGroupAdId -> "FILTER_TRUEVIEW_AD_GROUP_AD_ID"
         PGBIFilterTrueviewAdGroupId -> "FILTER_TRUEVIEW_AD_GROUP_ID"
         PGBIFilterTrueviewAge -> "FILTER_TRUEVIEW_AGE"
+        PGBIFilterTrueviewCategory -> "FILTER_TRUEVIEW_CATEGORY"
         PGBIFilterTrueviewConversionType -> "FILTER_TRUEVIEW_CONVERSION_TYPE"
+        PGBIFilterTrueviewCustomAffinity -> "FILTER_TRUEVIEW_CUSTOM_AFFINITY"
         PGBIFilterTrueviewGender -> "FILTER_TRUEVIEW_GENDER"
+        PGBIFilterTrueviewIarAge -> "FILTER_TRUEVIEW_IAR_AGE"
+        PGBIFilterTrueviewIarCategory -> "FILTER_TRUEVIEW_IAR_CATEGORY"
+        PGBIFilterTrueviewIarCity -> "FILTER_TRUEVIEW_IAR_CITY"
+        PGBIFilterTrueviewIarCountry -> "FILTER_TRUEVIEW_IAR_COUNTRY"
+        PGBIFilterTrueviewIarGender -> "FILTER_TRUEVIEW_IAR_GENDER"
+        PGBIFilterTrueviewIarInterest -> "FILTER_TRUEVIEW_IAR_INTEREST"
+        PGBIFilterTrueviewIarLanguage -> "FILTER_TRUEVIEW_IAR_LANGUAGE"
+        PGBIFilterTrueviewIarParentalStatus -> "FILTER_TRUEVIEW_IAR_PARENTAL_STATUS"
+        PGBIFilterTrueviewIarRegion -> "FILTER_TRUEVIEW_IAR_REGION"
+        PGBIFilterTrueviewIarRemarketingList -> "FILTER_TRUEVIEW_IAR_REMARKETING_LIST"
+        PGBIFilterTrueviewIarTimeOfDay -> "FILTER_TRUEVIEW_IAR_TIME_OF_DAY"
+        PGBIFilterTrueviewIarZipcode -> "FILTER_TRUEVIEW_IAR_ZIPCODE"
         PGBIFilterTrueviewInterest -> "FILTER_TRUEVIEW_INTEREST"
+        PGBIFilterTrueviewKeyword -> "FILTER_TRUEVIEW_KEYWORD"
         PGBIFilterTrueviewParentalStatus -> "FILTER_TRUEVIEW_PARENTAL_STATUS"
+        PGBIFilterTrueviewPlacement -> "FILTER_TRUEVIEW_PLACEMENT"
         PGBIFilterTrueviewRemarketingList -> "FILTER_TRUEVIEW_REMARKETING_LIST"
         PGBIFilterUnknown -> "FILTER_UNKNOWN"
         PGBIFilterUserList -> "FILTER_USER_LIST"
