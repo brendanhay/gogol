@@ -1,5 +1,5 @@
 compiler:   ghc-8.0.1
-resolver:   nightly-2016-06-07
+resolver:   nightly-2016-06-20
 flags:      {}
 extra-deps: []
 packages:
