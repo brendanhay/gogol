@@ -1,5 +1,4 @@
 {-# LANGUAGE DataKinds            #-}
-{-# LANGUAGE ExplicitNamespaces   #-}
 {-# LANGUAGE OverloadedStrings    #-}
 {-# LANGUAGE PolyKinds            #-}
 {-# LANGUAGE ScopedTypeVariables  #-}
