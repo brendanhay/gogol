@@ -1,5 +1,5 @@
 name:                  gogol-core
-version:               0.0.1
+version:               0.1.0
 synopsis:              Core data types and functionality for Gogol libraries.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues

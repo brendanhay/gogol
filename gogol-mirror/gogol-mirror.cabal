@@ -1,5 +1,5 @@
 name:                  gogol-mirror
-version:               0.0.1
+version:               0.1.0
 synopsis:              Google Mirror SDK.
 homepage:              https://github.com/brendanhay/gogol
 bug-reports:           https://github.com/brendanhay/gogol/issues
@@ -69,5 +69,5 @@ library
         , Network.Google.Mirror.Types.Sum
 
     build-depends:
-          gogol-core == 0.0.1.*
+          gogol-core == 0.1.0.*
         , base       >= 4.7
